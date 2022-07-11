@@ -1,6 +1,7 @@
 import { Trans } from "@lingui/macro";
 import { Tooltip } from "antd";
 import classNames from "classnames";
+import { MaxUint256 } from "@ethersproject/constants";
 import { BigNumber } from "ethers";
 import { FC, useCallback, useEffect, useRef, useState } from "react";
 import { AddIcon, AddTokenIcon, Chance, SubIcon } from "../../components/Icon";
@@ -8,6 +9,7 @@ import InfoShow from "../../components/InfoShow";
 import MainButton from "../../components/MainButton";
 import MainCard from "../../components/MainCard";
 import { SingleTokenShow } from "../../components/TokenShow";
+import { useERC20Approve } from "../../contracts/hooks/useERC20Approve";
 import { useFortPRCRoll } from "../../contracts/hooks/useFortPRCTransation";
 import { FortPRC, tokenList } from "../../libs/constants/addresses";
 import {
@@ -43,7 +45,7 @@ const Win: FC = () => {
   const classPrefix = "win";
   const { chainId, account, library } = useWeb3();
   const [chance, setChance] = useState<String>("1.10");
-  const [prcNum, setPRCNum] = useState<String>("1.00");
+  const [nestNum, setNESTNum] = useState<String>("1.00");
   const [winPendingList, setWinPendingList] = useState<Array<PRCListType>>([]);
   const [historyList, setHistoryList] = useState<Array<PRCListType>>([]);
   const [allBetsData, setAllBetsData] = useState<Array<PRCListType>>([]);
@@ -51,10 +53,15 @@ const Win: FC = () => {
   const [allBetsShowCount, setAllBetsShowCount] = useState<number>(0);
   const [weeklyData, setWeeklyData] = useState<Array<PRCListType>>([]);
   const [nowBlock, setNowBlock] = useState<number>(0);
-  const [PRCBalance, setPRCBalance] = useState<BigNumber>(BigNumber.from("0"));
+  const [NESTBalance, setNESTBalance] = useState<BigNumber>(
+    BigNumber.from("0")
+  );
   const fortPRCContract = FortPRCContract(FortPRC);
   const { pendingList, txList } = useTransactionListCon();
   const intervalRef = useRef<NodeJS.Timeout>();
+  const [nestAllowance, setNestAllowance] = useState<BigNumber>(
+    BigNumber.from("0")
+  );
 
   const addressBaseUrl = useEtherscanAddressBaseUrl();
 
@@ -62,12 +69,12 @@ const Win: FC = () => {
     if (!chainId || !account || !library) {
       return;
     }
-    const PRCBalance = await getERC20Contract(
-      tokenList["PRC"].addresses[chainId],
+    const NESTBalance = await getERC20Contract(
+      tokenList["NEST"].addresses[chainId],
       library,
       account
     )?.balanceOf(account);
-    setPRCBalance(PRCBalance);
+    setNESTBalance(NESTBalance);
   }, [account, chainId, library]);
 
   useEffect(() => {
@@ -83,17 +90,13 @@ const Win: FC = () => {
     if (!latest) {
       return;
     }
-    const allBets_get = await fetch(
-      "https://api.hedge.red/api/prc/list/0/10"
-    );
+    const allBets_get = await fetch("https://api.hedge.red/api/prc/list/0/10");
     const allBets_data = await allBets_get.json();
     const allBets_data_modol = allBets_data.value.filter(
       (item: PRCListType) => item.owner !== ZERO_ADDRESS
     );
 
-    const weekly_get = await fetch(
-      "https://api.hedge.red/api/prc/weekList/10"
-    );
+    const weekly_get = await fetch("https://api.hedge.red/api/prc/weekList/10");
     const weekly_data = await weekly_get.json();
     const weekly_data_modol = weekly_data.value.filter(
       (item: PRCListType) => item.owner !== ZERO_ADDRESS
@@ -104,7 +107,7 @@ const Win: FC = () => {
     const myBets_data_modol = myBets_data.value.filter(
       (item: PRCListType) => item.owner !== ZERO_ADDRESS
     );
-    
+
     const listResult = await fortPRCContract.find44("0", "200", "200", account);
     const result = listResult.filter(
       (item: PRCListType) => item.owner !== ZERO_ADDRESS
@@ -167,8 +170,6 @@ const Win: FC = () => {
     ) {
       return;
     }
-
-    console.log(111111)
     const id = setInterval(() => {
       getList();
     }, 10 * 1000);
@@ -179,6 +180,26 @@ const Win: FC = () => {
       }
     };
   }, [getList, txList]);
+
+  // approve
+  useEffect(() => {
+    if (!chainId || !account || !library) {
+      return;
+    }
+    const nestToken = getERC20Contract(
+      tokenList["NEST"].addresses[chainId],
+      library,
+      account
+    );
+    if (!nestToken) {
+      setNestAllowance(BigNumber.from("0"));
+      return;
+    }
+    (async () => {
+      const allowance = await nestToken.allowance(account, FortPRC[chainId]);
+      setNestAllowance(allowance);
+    })();
+  }, [account, chainId, library, txList]);
   const { ethereum } = window;
   const addToken = async () => {
     if (!chainId) {
@@ -190,11 +211,11 @@ const Win: FC = () => {
       params: {
         type: "ERC20", // Initially only supports ERC20, but eventually more!
         options: {
-          address: tokenList["PRC"].addresses[chainId], // The address that the token is at.
-          symbol: "PRC", // A ticker symbol or shorthand, up to 5 chars.
+          address: tokenList["NEST"].addresses[chainId], // The address that the token is at.
+          symbol: "NEST", // A ticker symbol or shorthand, up to 5 chars.
           decimals: 18, // The number of decimals in the token
           image:
-            "https://raw.githubusercontent.com/FORT-Protocol/Fort-Web-User-Interface/2e289cd29722576329fae529c2bfaa0a905f0148/src/components/Icon/svg/TokenPRC.svg", // A string url of the token logo
+            "https://raw.githubusercontent.com/FORT-Protocol/Fort-Web-User-Interface/2e289cd29722576329fae529c2bfaa0a905f0148/src/components/Icon/svg/TokenNest.svg", // A string url of the token logo
         },
       },
     });
@@ -248,8 +269,13 @@ const Win: FC = () => {
   };
 
   const confirm = useFortPRCRoll(
-    normalToBigNumber(prcNum.valueOf(), 4),
+    normalToBigNumber(nestNum.valueOf(), 4),
     normalToBigNumber(chance.valueOf(), 4)
+  );
+  const approve = useERC20Approve(
+    'NEST',
+    MaxUint256,
+    chainId ? FortPRC[chainId] : undefined
   );
 
   const mainButtonPending = () => {
@@ -260,18 +286,18 @@ const Win: FC = () => {
   };
   const winChance = (100 / parseFloat(chance.toString())).toFixed(2);
   const payout = (
-    parseFloat(chance.toString()) * parseFloat(prcNum.toString())
+    parseFloat(chance.toString()) * parseFloat(nestNum.toString())
   ).toFixed(2);
   const changePayout = (num: number) => {
     const result =
-      parseFloat(prcNum.valueOf() === "" ? "1" : prcNum.valueOf()) * num;
+      parseFloat(nestNum.valueOf() === "" ? "1" : nestNum.valueOf()) * num;
     const resultString = formatPRCInputNum(result.toFixed(2));
     if (parseFloat(resultString) > 1000) {
-      setPRCNum("1000.00");
+      setNESTNum("1000.00");
     } else if (parseFloat(resultString) < 1) {
-      setPRCNum("1.00");
+      setNESTNum("1.00");
     } else {
-      setPRCNum(resultString);
+      setNESTNum(resultString);
     }
   };
   const checkChance = () => {
@@ -284,7 +310,7 @@ const Win: FC = () => {
     }
   };
   const checkPRCNum = () => {
-    const result = parseFloat(prcNum.valueOf());
+    const result = parseFloat(nestNum.valueOf());
     const resultString = formatPRCInputNum(result.toFixed(2));
     if (parseFloat(resultString) > 1000 || parseFloat(resultString) < 1) {
       return false;
@@ -293,17 +319,40 @@ const Win: FC = () => {
     }
   };
   const checkBalance = () => {
-    if (PRCBalance.gte(normalToBigNumber(prcNum.valueOf(), 18))) {
+    if (NESTBalance.gte(normalToBigNumber(nestNum.valueOf(), 18).mul(101).div(100))) {
       return true;
     } else {
       return false;
     }
   };
+  const checkMainButton = () => {
+    if (!checkAllowance()) {
+      return true;
+    }
+    if (
+      !checkChance() ||
+      !checkPRCNum() ||
+      mainButtonPending() ||
+      !checkBalance()
+    ) {
+      return false;
+    }
+    return true;
+  };
+  const checkAllowance = () => {
+    if (nestNum === '') {
+      return true;
+    }
+    if (nestAllowance.lt(normalToBigNumber(nestNum.valueOf(), 18).mul(101).div(100))) {
+      return false;
+    }
+    return true;
+  };
   return (
     <div className={`${classPrefix}`}>
       <div className={`${classPrefix}-left`}>
         <MainCard classNames={`${classPrefix}-card`}>
-          <p className={`${classPrefix}-card-title`}>Win NEST by PRC</p>
+          <p className={`${classPrefix}-card-title`}>Win NEST</p>
           <InfoShow
             topLeftText={"Multiplier"}
             topRightText={checkChance() ? "" : "Limitation: 1.1-100"}
@@ -344,16 +393,16 @@ const Win: FC = () => {
             topRightText={checkPRCNum() ? "" : "Limitation: 1-1000"}
             popText={"Reward = Multiplier * Bet amount"}
           >
-            <SingleTokenShow tokenNameOne={"PRC"} isBold />
+            <SingleTokenShow tokenNameOne={"NEST"} isBold />
             <input
               type="text"
               placeholder={`Input`}
               className={"input-middle"}
-              value={prcNum.valueOf()}
+              value={nestNum.valueOf()}
               maxLength={7}
               onChange={(e) => {
                 const resultString = formatPRCInputNum(e.target.value);
-                setPRCNum(resultString);
+                setNESTNum(resultString);
               }}
             />
             <button className={"sub-button"} onClick={() => changePayout(0.5)}>
@@ -366,25 +415,19 @@ const Win: FC = () => {
           <MainButton
             className={`${classPrefix}-card-button`}
             onClick={() => {
-              if (
-                !checkChance() ||
-                !checkPRCNum() ||
-                mainButtonPending() ||
-                !checkBalance()
-              ) {
+              if (!checkMainButton()) {
                 return;
               }
-              confirm();
+              if (checkAllowance()) {
+                confirm();
+              } else {
+                approve();
+              }
             }}
-            disable={
-              !checkChance() ||
-              !checkPRCNum() ||
-              mainButtonPending() ||
-              !checkBalance()
-            }
+            disable={!checkMainButton()}
             loading={mainButtonPending()}
           >
-            {<Trans>Roll</Trans>}
+            {checkAllowance() ? (<Trans>Roll</Trans>) : ('Approve')}
           </MainButton>
           <div className={`${classPrefix}-card-bottom`}>
             <p className={`${classPrefix}-card-fairness`}>
@@ -416,11 +459,13 @@ const Win: FC = () => {
                     onClick={() => addToken()}
                   >
                     <AddTokenIcon />
-                    <p>Add PRC to your wallet</p>
+                    <p>Add NEST to your wallet</p>
                   </button>
                 }
               >
-                <span>Balance: {bigNumberToNormal(PRCBalance, 18, 6)} PRC</span>
+                <span>
+                  Balance: {bigNumberToNormal(NESTBalance, 18, 6)} NEST
+                </span>
               </Tooltip>
             </p>
           </div>

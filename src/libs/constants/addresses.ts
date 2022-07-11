@@ -140,5 +140,5 @@ export const CofixSwapAddress: AddressesType = {
 
 export const FortPRC : AddressesType = {
   56: '0xf43A71e4Da398e5731c9580D11014dE5e8fD0530',
-  97: '0xb32e10a774428d47c016eeAc680793a79F1CFD7e'
+  97: '0x9AeE80A1df3cA0c5B859d94bCCf16d0440f1691d'
 }

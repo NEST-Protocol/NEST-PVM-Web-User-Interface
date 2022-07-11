@@ -34,20 +34,20 @@ msgid "1. Users who participate in pledge mining need to pledge the Token suppor
 msgstr "1.参与质押挖矿的用户需要将协议支持的Token质押到智能合约中，并且在锁定期结束后才能取回质押的Token；"
 
 #: src/pages/Farm/FarmNoticeModal/index.tsx
-msgid "2. Participating in pledge mining can get DCU rewards. DCU Token is the only payment voucher for participating in perpetual contracts and European options in the Fort agreement. DCU currently does not have liquidity and price."
-msgstr "2.参与质押挖矿可以获得DCU奖励，DCU Token是Fort协议中参与永续合约和欧式期权的唯一支付凭证，DCU目前尚未具有流动性以及价格。"
+msgid "2. Participating in pledge mining can get NEST rewards. NEST Token is the only payment voucher for participating in perpetual contracts and European options in the Fort agreement. NEST currently does not have liquidity and price."
+msgstr "2.参与质押挖矿可以获得NEST奖励，NEST Token是Fort协议中参与永续合约和欧式期权的唯一支付凭证，NEST目前尚未具有流动性以及价格。"
 
 #: src/pages/Perpetuals/PerpetualsNoticeModal/index.tsx
 msgid "2. Position liquidation risk: Fort perpetual contracts provide leverage of 1-5 times. When your leverage is greater than 1 times leverage, the price fluctuation of the underlying asset may cause liquidation."
 msgstr "2. 持仓清算风险：Fort 永续合约提供1-5倍的杠杆，当您的杠杆大于1倍杠杆时，标的资产的价格波动可能会引起清算。"
 
 #: src/pages/Options/OptionsNoticeModal/index.tsx
-msgid "2. The premium paid for options purchased by Fort Protocol and the income at settlement are all used in DCU Token. DCU itself is also a highly volatile asset. In extreme cases, even if your perpetual contract position is profitable, it is due to the price of DCU itself. Volatility, which may cause you to lose money based on legal currency."
-msgstr "2. Fort Protocol 购买期权支付的权利金和结算时的收益，全部使用DCU Token，DCU本身也是高波动资产，在极端情况下，即使您的永续合约仓位是盈利的，但由于DCU价格本身的波动，可能导致您按照法币来计算是亏损的。"
+msgid "2. The premium paid for options purchased by Fort Protocol and the income at settlement are all used in NEST Token. NEST itself is also a highly volatile asset. In extreme cases, even if your perpetual contract position is profitable, it is due to the price of NEST itself. Volatility, which may cause you to lose money based on legal currency."
+msgstr "2. Fort Protocol 购买期权支付的权利金和结算时的收益，全部使用NEST Token，NEST本身也是高波动资产，在极端情况下，即使您的永续合约仓位是盈利的，但由于NEST价格本身的波动，可能导致您按照法币来计算是亏损的。"
 
 #: src/pages/Perpetuals/PerpetualsNoticeModal/index.tsx
-msgid "3. DCU Token price fluctuation risk: Both the margin and the final profit and loss use DCU Token, and DCU itself is also a highly volatile asset. In extreme cases, even if your perpetual contract position is profitable, However, due to the fluctuation of the DCU price itself, it may cause you to lose money in terms of fiat currency."
-msgstr "3. DCU Token价格波动风险：保证金和最终的盈亏都是使用DCU Token，而DCU本身也是高波动资产，在极端情况下，即使您的永续合约仓位是盈利的，但由于DCU价格本身的波动，可能导致您按照法币来计算是亏损的。"
+msgid "3. NEST Token price fluctuation risk: Both the margin and the final profit and loss use NEST Token, and NEST itself is also a highly volatile asset. In extreme cases, even if your perpetual contract position is profitable, However, due to the fluctuation of the NEST price itself, it may cause you to lose money in terms of fiat currency."
+msgstr "3. NEST Token价格波动风险：保证金和最终的盈亏都是使用NEST Token，而NEST本身也是高波动资产，在极端情况下，即使您的永续合约仓位是盈利的，但由于NEST价格本身的波动，可能导致您按照法币来计算是亏损的。"
 
 #: src/pages/Farm/FarmNoticeModal/index.tsx
 msgid "3. In the process of participating in pledge mining, certain miners’ fees are required for operations such as lock-up, receipt of rewards, and withdrawal of funds. Miners’ fees are collected by Ethereum miners. Pledge mining has a certain cost, and there is no guarantee that there will be income."
@@ -66,8 +66,8 @@ msgid "4. The smart contract of the Fort protocol has not been audited. There ma
 msgstr "4. Fort 协议智能合约尚未进行审计，智能合约中可能存在致命的未知风险导致您的本金受损，请自行评估风险再决定是否参与。"
 
 #: src/pages/Farm/FarmNoticeModal/index.tsx
-msgid "4. There is no upper limit on the total amount of DCU Token. As the result of the game between users and the agreement, additional issuance or destruction will be carried out. If the agreement has been in the state of additional issuance, the DCU you obtained through mining will depreciate and may even return to zero."
-msgstr "4.DCU Token 总量不设上限，随着用户与协议博弈的结果进行增发或销毁，如果协议一直处于增发状态，那么您挖矿获得的DCU将会贬值，甚至会有归零的可能。"
+msgid "4. There is no upper limit on the total amount of NEST Token. As the result of the game between users and the agreement, additional issuance or destruction will be carried out. If the agreement has been in the state of additional issuance, the NEST you obtained through mining will depreciate and may even return to zero."
+msgstr "4.NEST Token 总量不设上限，随着用户与协议博弈的结果进行增发或销毁，如果协议一直处于增发状态，那么您挖矿获得的NEST将会贬值，甚至会有归零的可能。"
 
 #: src/pages/Perpetuals/PerpetualsNoticeModal/index.tsx
 msgid "5. Smart contract risk: The smart contract of the Fort protocol has not been audited. There may be fatal unknown risks in the smart contract that may cause your principal to be damaged. Please evaluate the risk yourself before deciding whether to participate."
@@ -237,8 +237,8 @@ msgid "Lock period"
 msgstr "锁定期"
 
 #: src/pages/Farm/index.tsx
-msgid "Locked position mining has ended, return the locked assets and DCU after taking out the operation"
-msgstr "锁仓挖矿已结束，取出操作后返还锁仓资产与 DCU"
+msgid "Locked position mining has ended, return the locked assets and NEST after taking out the operation"
+msgstr "锁仓挖矿已结束，取出操作后返还锁仓资产与 NEST"
 
 #: src/components/OptionsList/index.tsx
 #: src/components/PerpetualsList/PerpetualsListMobile/index.tsx
