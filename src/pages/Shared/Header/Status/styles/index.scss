@@ -1,0 +1,46 @@
+@use "sass:math";
+@import 'src/styles/shared.scss';
+
+.connectStatus {
+    display: flex;
+    justify-content: space-between;
+
+    .fort-button {
+        font-size: $T3;
+        white-space: nowrap;
+        p {
+            margin: auto 0;
+        }
+
+        .transactionNum {
+            display: none;
+        }
+
+        &.showNum {
+            display: flex;
+            justify-content: space-between;
+
+            .transactionNum {
+                display: flex;
+                justify-content: space-between;
+                margin: auto 0;
+                margin-right: 5px;
+                width: 22px;
+                height: 22px;
+
+                svg {
+                    width: 22px;
+                    height: 22px;
+                }
+
+                p {
+                    position: absolute;
+                    width: 22px;
+                    height: 22px;
+                    line-height: 22px;
+                    font-size: 10px;
+                }
+            }
+        }
+    }
+}

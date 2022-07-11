@@ -1,0 +1,519 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2021-08-20 19:06+0800\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: en-US\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+
+#: src/pages/Options/index.tsx
+msgid "(Spot price - Strike price)*"
+msgstr "(Spot price - Strike price)*"
+
+#: src/pages/Options/index.tsx
+msgid "(Strike price - Spot price)*"
+msgstr "(Strike price - Spot price)*"
+
+#: src/pages/Options/OptionsNoticeModal/index.tsx
+msgid "1. Fort Protocol option pricing is derived from the BS option pricing model. Unlike traditional option pricing methods, Fort options are completely priced by algorithms, while traditional centralized exchanges are freely quoted by users. This pricing method is a bold one. Attempts and innovations, but it may also bring unknown risks."
+msgstr "1. Fort Protocol option pricing is derived from the BS option pricing model. Unlike traditional option pricing methods, Fort options are completely priced by algorithms, while traditional centralized exchanges are freely quoted by users. This pricing method is a bold one. Attempts and innovations, but it may also bring unknown risks."
+
+#: src/pages/Perpetuals/PerpetualsNoticeModal/index.tsx
+msgid "1. Uncertainty risk of income: The calculation method of Fort perpetual contract is different from the calculation method of perpetual contract of traditional centralized exchange. The Fort perpetual contract converts the future price of the asset based on the historical rate of return of the asset. Therefore, the asset price increases by 100% after the user opens a position. The user's income is not 100%. In extreme cases, even if the asset price is rising, your income may be negative."
+msgstr "1. Uncertainty risk of income: The calculation method of Fort perpetual contract is different from the calculation method of perpetual contract of traditional centralized exchange. The Fort perpetual contract converts the future price of the asset based on the historical rate of return of the asset. Therefore, the asset price increases by 100% after the user opens a position. The user's income is not 100%. In extreme cases, even if the asset price is rising, your income may be negative."
+
+#: src/pages/Farm/FarmNoticeModal/index.tsx
+msgid "1. Users who participate in pledge mining need to pledge the Token supported by the agreement to the smart contract, and can retrieve the pledged Token after the lock-up period ends;"
+msgstr "1. Users who participate in pledge mining need to pledge the Token supported by the agreement to the smart contract, and can retrieve the pledged Token after the lock-up period ends;"
+
+#: src/pages/Farm/FarmNoticeModal/index.tsx
+msgid "2. Participating in pledge mining can get DCU rewards. DCU Token is the only payment voucher for participating in perpetual contracts and European options in the Fort agreement. DCU currently does not have liquidity and price."
+msgstr "2. Participating in pledge mining can get DCU rewards. DCU Token is the only payment voucher for participating in perpetual contracts and European options in the Fort agreement. DCU currently does not have liquidity and price."
+
+#: src/pages/Perpetuals/PerpetualsNoticeModal/index.tsx
+msgid "2. Position liquidation risk: Fort perpetual contracts provide leverage of 1-5 times. When your leverage is greater than 1 times leverage, the price fluctuation of the underlying asset may cause liquidation."
+msgstr "2. Position liquidation risk: Fort perpetual contracts provide leverage of 1-5 times. When your leverage is greater than 1 times leverage, the price fluctuation of the underlying asset may cause liquidation."
+
+#: src/pages/Options/OptionsNoticeModal/index.tsx
+msgid "2. The premium paid for options purchased by Fort Protocol and the income at settlement are all used in DCU Token. DCU itself is also a highly volatile asset. In extreme cases, even if your perpetual contract position is profitable, it is due to the price of DCU itself. Volatility, which may cause you to lose money based on legal currency."
+msgstr "2. The premium paid for options purchased by Fort Protocol and the income at settlement are all used in DCU Token. DCU itself is also a highly volatile asset. In extreme cases, even if your perpetual contract position is profitable, it is due to the price of DCU itself. Volatility, which may cause you to lose money based on legal currency."
+
+#: src/pages/Perpetuals/PerpetualsNoticeModal/index.tsx
+msgid "3. DCU Token price fluctuation risk: Both the margin and the final profit and loss use DCU Token, and DCU itself is also a highly volatile asset. In extreme cases, even if your perpetual contract position is profitable, However, due to the fluctuation of the DCU price itself, it may cause you to lose money in terms of fiat currency."
+msgstr "3. DCU Token price fluctuation risk: Both the margin and the final profit and loss use DCU Token, and DCU itself is also a highly volatile asset. In extreme cases, even if your perpetual contract position is profitable, However, due to the fluctuation of the DCU price itself, it may cause you to lose money in terms of fiat currency."
+
+#: src/pages/Farm/FarmNoticeModal/index.tsx
+msgid "3. In the process of participating in pledge mining, certain miners’ fees are required for operations such as lock-up, receipt of rewards, and withdrawal of funds. Miners’ fees are collected by Ethereum miners. Pledge mining has a certain cost, and there is no guarantee that there will be income."
+msgstr "3. In the process of participating in pledge mining, certain miners’ fees are required for operations such as lock-up, receipt of rewards, and withdrawal of funds. Miners’ fees are collected by Ethereum miners. Pledge mining has a certain cost, and there is no guarantee that there will be income."
+
+#: src/pages/Options/OptionsNoticeModal/index.tsx
+msgid "3. The option price of Fort protocol comes from the NEST oracle machine. If the oracle machine is attacked or the price is abnormal due to other reasons, the system may experience settlement abnormalities, resulting in errors in the user's income calculation."
+msgstr "3. The option price of Fort protocol comes from the NEST oracle machine. If the oracle machine is attacked or the price is abnormal due to other reasons, the system may experience settlement abnormalities, resulting in errors in the user's income calculation."
+
+#: src/pages/Perpetuals/PerpetualsNoticeModal/index.tsx
+msgid "4. External oracle risk: Fort protocol's perpetual contract price comes from the NEST oracle. If the oracle is attacked or other reasons cause the price to be abnormal, The system may encounter settlement exceptions, which may cause errors in the user's revenue calculation."
+msgstr "4. External oracle risk: Fort protocol's perpetual contract price comes from the NEST oracle. If the oracle is attacked or other reasons cause the price to be abnormal, The system may encounter settlement exceptions, which may cause errors in the user's revenue calculation."
+
+#: src/pages/Options/OptionsNoticeModal/index.tsx
+msgid "4. The smart contract of the Fort protocol has not been audited. There may be fatal unknown risks in the smart contract that will damage your principal. Please evaluate the risk yourself before deciding whether to participate."
+msgstr "4. The smart contract of the Fort protocol has not been audited. There may be fatal unknown risks in the smart contract that will damage your principal. Please evaluate the risk yourself before deciding whether to participate."
+
+#: src/pages/Farm/FarmNoticeModal/index.tsx
+msgid "4. There is no upper limit on the total amount of DCU Token. As the result of the game between users and the agreement, additional issuance or destruction will be carried out. If the agreement has been in the state of additional issuance, the DCU you obtained through mining will depreciate and may even return to zero."
+msgstr "4. There is no upper limit on the total amount of DCU Token. As the result of the game between users and the agreement, additional issuance or destruction will be carried out. If the agreement has been in the state of additional issuance, the DCU you obtained through mining will depreciate and may even return to zero."
+
+#: src/pages/Perpetuals/PerpetualsNoticeModal/index.tsx
+msgid "5. Smart contract risk: The smart contract of the Fort protocol has not been audited. There may be fatal unknown risks in the smart contract that may cause your principal to be damaged. Please evaluate the risk yourself before deciding whether to participate."
+msgstr "5. Smart contract risk: The smart contract of the Fort protocol has not been audited. There may be fatal unknown risks in the smart contract that may cause your principal to be damaged. Please evaluate the risk yourself before deciding whether to participate."
+
+#: src/pages/Farm/FarmNoticeModal/index.tsx
+msgid "5. The Fort protocol smart contract has not yet been audited. There may be fatal unknown risks in the smart contract that may cause your principal to be damaged. Please evaluate the risk yourself before deciding whether to participate."
+msgstr "5. The Fort protocol smart contract has not yet been audited. There may be fatal unknown risks in the smart contract that may cause your principal to be damaged. Please evaluate the risk yourself before deciding whether to participate."
+
+#: src/pages/Farm/FarmCard/index.tsx
+#: src/pages/Shared/TransactionToast/index.tsx
+#: src/pages/Swap/index.tsx
+msgid "Approve"
+msgstr "Approve"
+
+#: src/pages/Options/index.tsx
+#: src/pages/Perpetuals/index.tsx
+#: src/pages/Swap/index.tsx
+#: src/pages/Swap/index.tsx
+msgid "Balance"
+msgstr "Balance"
+
+#: src/components/OptionsList/index.tsx
+#: src/components/OptionsList/index.tsx
+msgid "Block"
+msgstr "Block"
+
+#: src/pages/Options/index.tsx
+msgid "Block number"
+msgstr "Block number"
+
+#: src/pages/Options/index.tsx
+msgid "Buy Option"
+msgstr "Buy Option"
+
+#: src/pages/Shared/TransactionToast/index.tsx
+msgid "Buy Option"
+msgstr "Buy Option"
+
+#: src/pages/Farm/FarmCard/index.tsx
+msgid "COFI is the governance token of COFIX, a decentralized transaction protocol, and can be buy in COFIX."
+msgstr "COFI is the governance token of COFIX, a decentralized transaction protocol, and can be buy in COFIX."
+
+#: src/components/OptionsList/index.tsx
+#: src/pages/Options/index.tsx
+msgid "Call"
+msgstr "Call"
+
+#: src/pages/Farm/FarmCard/index.tsx
+msgid "Claim"
+msgstr "Claim"
+
+#: src/pages/Shared/TransactionToast/index.tsx
+msgid "Claim reward"
+msgstr "Claim reward"
+
+#: src/components/PerpetualsList/PerpetualsListMobile/index.tsx
+#: src/components/PerpetualsList/index.tsx
+msgid "Close"
+msgstr "Close"
+
+#: src/pages/Shared/TransactionToast/index.tsx
+msgid "Close Future positions"
+msgstr "Close Future positions"
+
+#: src/pages/Farm/FarmCard/index.tsx
+msgid "Confirm"
+msgstr "Confirm"
+
+#: src/pages/Shared/Header/MobileHeader/index.tsx
+#: src/pages/Shared/Header/Status/Modal/index.tsx
+#: src/pages/Shared/Header/Status/index.tsx
+msgid "Connect Wallet"
+msgstr "Connect Wallet"
+
+#: src/pages/Shared/Header/Status/WalletModal/index.tsx
+msgid "Copied"
+msgstr "Copied"
+
+#: src/pages/Farm/FarmCard/index.tsx
+msgid "Current mining rate"
+msgstr "Current mining rate"
+
+#: src/pages/Shared/Header/index.tsx
+msgid "Currently it is a test network, the price fluctuation has increased by 50 times, the slippage is large, and the slippage will be lower in a more realistic scenario."
+msgstr "Currently it is a test network, the price fluctuation has increased by 50 times, the slippage is large, and the slippage will be lower in a more realistic scenario."
+
+#: src/pages/Shared/Header/Status/WalletModal/index.tsx
+msgid "Disconnect"
+msgstr "Disconnect"
+
+#: src/components/PerpetualsList/PerpetualsListMobile/index.tsx
+#: src/pages/Perpetuals/index.tsx
+msgid "Dynamic changes in net assets, less than a certain amount of liquidation will be liquidated, the amount of liquidation is Max'{'margin*leverage*0.02, 10'}'"
+msgstr "Dynamic changes in net assets, less than a certain amount of liquidation will be liquidated, the amount of liquidation is Max'{'margin*leverage*0.02, 10'}'"
+
+#: src/components/OptionsList/index.tsx
+#: src/pages/Options/index.tsx
+#: src/pages/Options/index.tsx
+#: src/pages/Options/index.tsx
+msgid "Exercise time"
+msgstr "Exercise time"
+
+#: src/pages/Options/index.tsx
+#: src/pages/Options/index.tsx
+msgid "Expected get"
+msgstr "Expected get"
+
+#: src/pages/Farm/FarmCard/index.tsx
+msgid "Expected mining"
+msgstr "Expected mining"
+
+#: src/pages/Farm/FarmCard/index.tsx
+#: src/pages/Farm/FarmCard/index.tsx
+#: src/pages/Farm/FarmCard/index.tsx
+#: src/pages/Farm/FarmCard/index.tsx
+#: src/pages/Shared/Header/MobileHeader/index.tsx
+#: src/pages/Shared/Header/index.tsx
+msgid "Farm"
+msgstr "Farm"
+
+#: src/pages/Options/OptionsNoticeModal/index.tsx
+msgid "For users/smart contracts using Fort Protocol European options, when purchasing options, exercising, selling options and other related operations, please understand the rules and the differences of similar products in the market, and fully understand the following possible risks and Participate when you can bear the risk:"
+msgstr "For users/smart contracts using Fort Protocol European options, when purchasing options, exercising, selling options and other related operations, please understand the rules and the differences of similar products in the market, and fully understand the following possible risks and Participate when you can bear the risk:"
+
+#: src/pages/Perpetuals/PerpetualsNoticeModal/index.tsx
+msgid "For users/smart contracts using Fort Protocol perpetual contracts, please understand its rules and the differences of similar products in the market when performing positions, settlement, liquidation and other related operations. After fully understanding the following possible risks and can bear Participate in the risk situation:"
+msgstr "For users/smart contracts using Fort Protocol perpetual contracts, please understand its rules and the differences of similar products in the market when performing positions, settlement, liquidation and other related operations. After fully understanding the following possible risks and can bear Participate in the risk situation:"
+
+#: src/pages/Swap/index.tsx
+msgid "From"
+msgstr "From"
+
+#: src/pages/Shared/Header/MobileHeader/index.tsx
+#: src/pages/Shared/Header/index.tsx
+msgid "Futures"
+msgstr "Futures"
+
+#: src/pages/Farm/FarmNoticeModal/index.tsx
+#: src/pages/Options/OptionsNoticeModal/index.tsx
+#: src/pages/Perpetuals/PerpetualsNoticeModal/index.tsx
+msgid "I have read carefully and fully understand the above risks, and I am willing to bear the losses caused by the risks."
+msgstr "I have read carefully and fully understand the above risks, and I am willing to bear the losses caused by the risks."
+
+#: src/pages/Options/index.tsx
+#: src/pages/Options/index.tsx
+#: src/pages/Perpetuals/index.tsx
+#: src/pages/Swap/index.tsx
+msgid "Input"
+msgstr "Input"
+
+#: src/pages/Options/index.tsx
+msgid "Insufficient balance"
+msgstr "Insufficient balance"
+
+#: src/components/PerpetualsList/PerpetualsListMobile/index.tsx
+#: src/pages/Perpetuals/index.tsx
+msgid "Lever"
+msgstr "Lever"
+
+#: src/components/LeverChoose/index.tsx
+msgid "Leverage"
+msgstr "Leverage"
+
+#: src/pages/Farm/FarmCard/index.tsx
+msgid "Lock period"
+msgstr "Lock period"
+
+#: src/pages/Farm/index.tsx
+msgid "Locked position mining has ended, return the locked assets and DCU after taking out the operation"
+msgstr "Locked position mining has ended, return the locked assets and DCU after taking out the operation"
+
+#: src/components/OptionsList/index.tsx
+#: src/components/PerpetualsList/PerpetualsListMobile/index.tsx
+#: src/components/PerpetualsList/index.tsx
+#: src/pages/Perpetuals/index.tsx
+msgid "Long"
+msgstr "Long"
+
+#: src/components/PerpetualsList/PerpetualsListMobile/index.tsx
+#: src/pages/Perpetuals/index.tsx
+msgid "Margin"
+msgstr "Margin"
+
+#: src/components/PerpetualsList/PerpetualsListMobile/index.tsx
+#: src/pages/Perpetuals/index.tsx
+msgid "Margin assets"
+msgstr "Margin assets"
+
+#: src/pages/Perpetuals/index.tsx
+msgid "Minimum input 100"
+msgstr "Minimum input 100"
+
+#: src/pages/Farm/FarmCard/index.tsx
+msgid "Mining pool number"
+msgstr "Mining pool number"
+
+#: src/pages/Farm/FarmCard/index.tsx
+msgid "My staking"
+msgstr "My staking"
+
+#: src/pages/Farm/FarmCard/index.tsx
+msgid "No"
+msgstr "No"
+
+#: src/pages/Options/index.tsx
+msgid "One option shares to the return of a ETH."
+msgstr "One option shares to the return of a ETH."
+
+#: src/pages/Shared/TransactionToast/index.tsx
+msgid "Open Future positions"
+msgstr "Open Future positions"
+
+#: src/pages/Perpetuals/index.tsx
+msgid "Open Long"
+msgstr "Open Long"
+
+#: src/components/PerpetualsList/PerpetualsListMobile/index.tsx
+#: src/pages/Perpetuals/index.tsx
+msgid "Open price"
+msgstr "Open price"
+
+#: src/pages/Perpetuals/index.tsx
+msgid "Open price:"
+msgstr "Open price:"
+
+#: src/pages/Perpetuals/index.tsx
+msgid "Open Short"
+msgstr "Open Short"
+
+#: src/pages/Options/index.tsx
+#: src/pages/Perpetuals/index.tsx
+msgid "Operate"
+msgstr "Operate"
+
+#: src/components/OptionsList/index.tsx
+#: src/pages/Options/index.tsx
+#: src/pages/Options/index.tsx
+msgid "Option shares"
+msgstr "Option shares"
+
+#: src/pages/Shared/Header/MobileHeader/index.tsx
+#: src/pages/Shared/Header/index.tsx
+msgid "Options"
+msgstr "Options"
+
+#: src/pages/Farm/FarmCard/index.tsx
+msgid "PETH is a collateralized synthetic asset of the Parasset protocol.The 1:1 anchor ETH can be synthesized by collateralizing USDT or NEST."
+msgstr "PETH is a collateralized synthetic asset of the Parasset protocol.The 1:1 anchor ETH can be synthesized by collateralizing USDT or NEST."
+
+#: src/pages/Farm/FarmCard/index.tsx
+msgid "PUSD is a collateralized synthetic asset of the Parasset protocol.USDT is anchored at 1:1 and can be synthesized by collateralizing ETH or NEST."
+msgstr "PUSD is a collateralized synthetic asset of the Parasset protocol.USDT is anchored at 1:1 and can be synthesized by collateralizing ETH or NEST."
+
+#: src/pages/Options/index.tsx
+#: src/pages/Perpetuals/index.tsx
+msgid "Payment"
+msgstr "Payment"
+
+#: src/pages/Shared/Header/Status/Modal/index.tsx
+msgid "Please select the method of connecting to the wallet"
+msgstr "Please select the method of connecting to the wallet"
+
+#: src/pages/Options/index.tsx
+msgid "Position"
+msgstr "Position"
+
+#: src/pages/Perpetuals/index.tsx
+msgid "Positions"
+msgstr "Positions"
+
+#: src/components/OptionsList/index.tsx
+#: src/pages/Options/index.tsx
+msgid "Put"
+msgstr "Put"
+
+#: src/pages/Farm/FarmNoticeModal/index.tsx
+#: src/pages/Options/OptionsNoticeModal/index.tsx
+#: src/pages/Perpetuals/PerpetualsNoticeModal/index.tsx
+msgid "Read more"
+msgstr "Read more"
+
+#: src/pages/Shared/Header/Status/WalletModal/index.tsx
+msgid "Recent transactions"
+msgstr "Recent transactions"
+
+#: src/pages/Farm/FarmCard/index.tsx
+msgid "Reward claim time"
+msgstr "Reward claim time"
+
+#: src/pages/Farm/FarmNoticeModal/index.tsx
+#: src/pages/Options/OptionsNoticeModal/index.tsx
+#: src/pages/Perpetuals/PerpetualsNoticeModal/index.tsx
+msgid "Risk Warning"
+msgstr "Risk Warning"
+
+#: src/components/OptionsList/index.tsx
+#: src/pages/Options/index.tsx
+msgid "Sale earn"
+msgstr "Sale earn"
+
+#: src/components/OptionsList/index.tsx
+#: src/components/OptionsList/index.tsx
+msgid "Sell"
+msgstr "Sell"
+
+#: src/pages/Shared/TransactionToast/index.tsx
+msgid "Sell Option"
+msgstr "Sell Option"
+
+#: src/components/OptionsList/index.tsx
+#: src/components/PerpetualsList/PerpetualsListMobile/index.tsx
+#: src/components/PerpetualsList/index.tsx
+#: src/pages/Perpetuals/index.tsx
+msgid "Short"
+msgstr "Short"
+
+#: src/pages/Options/index.tsx
+#: src/pages/Options/index.tsx
+msgid "Spot price"
+msgstr "Spot price"
+
+#: src/pages/Shared/TransactionToast/index.tsx
+msgid "Staking"
+msgstr "Staking"
+
+#: src/pages/Farm/FarmCard/index.tsx
+msgid "Staking number"
+msgstr "Staking number"
+
+#: src/components/OptionsList/index.tsx
+#: src/components/OptionsList/index.tsx
+msgid "Strike"
+msgstr "Strike"
+
+#: src/pages/Shared/TransactionToast/index.tsx
+msgid "Strike Option"
+msgstr "Strike Option"
+
+#: src/components/OptionsList/index.tsx
+#: src/pages/Options/index.tsx
+msgid "Strike earn"
+msgstr "Strike earn"
+
+#: src/components/OptionsList/index.tsx
+#: src/pages/Options/index.tsx
+#: src/pages/Options/index.tsx
+msgid "Strike price"
+msgstr "Strike price"
+
+#: src/pages/Farm/FarmNoticeModal/index.tsx
+#: src/pages/Options/OptionsNoticeModal/index.tsx
+#: src/pages/Perpetuals/PerpetualsNoticeModal/index.tsx
+msgid "Sure"
+msgstr "Sure"
+
+#: src/pages/Shared/Header/MobileHeader/index.tsx
+#: src/pages/Shared/Header/index.tsx
+#: src/pages/Shared/TransactionToast/index.tsx
+#: src/pages/Swap/index.tsx
+msgid "Swap"
+msgstr "Swap"
+
+#: src/pages/Perpetuals/index.tsx
+msgid "The opening price is based on NEST oracle and corrected according to risk compensation."
+msgstr "The opening price is based on NEST oracle and corrected according to risk compensation."
+
+#: src/libs/hooks/useEagerConnect.ts
+#: src/pages/Shared/Header/Status/Modal/index.tsx
+#: src/pages/Shared/Header/Status/Modal/index.tsx
+msgid "This network is not supported, please switch the network"
+msgstr "This network is not supported, please switch the network"
+
+#: src/pages/Farm/FarmNoticeModal/index.tsx
+msgid "To enter the Fort protocol and participate in pledge mining users/smart contracts, they need to fully understand the mining rules and the following risks. Users who do not understand the rules or cannot bear the risks are not recommended to participate:"
+msgstr "To enter the Fort protocol and participate in pledge mining users/smart contracts, they need to fully understand the mining rules and the following risks. Users who do not understand the rules or cannot bear the risks are not recommended to participate:"
+
+#: src/pages/Swap/index.tsx
+msgid "To(Estimated)"
+msgstr "To(Estimated)"
+
+#: src/components/OptionsList/index.tsx
+#: src/components/PerpetualsList/PerpetualsListMobile/index.tsx
+#: src/pages/Options/index.tsx
+#: src/pages/Options/index.tsx
+#: src/pages/Perpetuals/index.tsx
+#: src/pages/Perpetuals/index.tsx
+msgid "Token pair"
+msgstr "Token pair"
+
+#: src/pages/Swap/index.tsx
+msgid "Trading Price"
+msgstr "Trading Price"
+
+#: src/pages/Swap/index.tsx
+msgid "Trading price displayed on the page will be different from the actual price. If your actual price is 5% higher than the current page, the transaction will be rejected."
+msgstr "Trading price displayed on the page will be different from the actual price. If your actual price is 5% higher than the current page, the transaction will be rejected."
+
+#: src/pages/Shared/TransactionModal/index.tsx
+msgid "Transaction declined"
+msgstr "Transaction declined"
+
+#: src/pages/Shared/TransactionModal/index.tsx
+msgid "Transaction submitted"
+msgstr "Transaction submitted"
+
+#: src/components/OptionsList/index.tsx
+#: src/components/PerpetualsList/PerpetualsListMobile/index.tsx
+#: src/pages/Options/index.tsx
+#: src/pages/Perpetuals/index.tsx
+msgid "Type"
+msgstr "Type"
+
+#: src/pages/Shared/TransactionToast/index.tsx
+msgid "View"
+msgstr "View"
+
+#: src/pages/Shared/TransactionModal/index.tsx
+msgid "View on etherscan"
+msgstr "View on etherscan"
+
+#: src/pages/Shared/TransactionModal/index.tsx
+msgid "Wait for confirm"
+msgstr "Wait for confirm"
+
+#: src/pages/Shared/Header/Status/WalletModal/index.tsx
+msgid "Wallet"
+msgstr "Wallet"
+
+#: src/pages/Farm/FarmCard/index.tsx
+#: src/pages/Shared/TransactionToast/index.tsx
+msgid "Withdraw"
+msgstr "Withdraw"
+
+#: src/pages/Options/index.tsx
+msgid "compare with spot price and strike price"
+msgstr "compare with spot price and strike price"
+
+#: src/pages/Farm/FarmCard/index.tsx
+msgid "get it now"
+msgstr "get it now"
+
+#: src/pages/Farm/FarmCard/index.tsx
+msgid "nHBTC is the quotation mining certificate for HBTC-ETH in the NEST protocol, which can be obtained through quotation mining or buy in Huobi exchange."
+msgstr "nHBTC is the quotation mining certificate for HBTC-ETH in the NEST protocol, which can be obtained through quotation mining or buy in Huobi exchange."
+
+#: src/pages/Farm/FarmCard/index.tsx
+msgid "wallet:"
+msgstr "wallet:"

@@ -1,0 +1,220 @@
+@use "sass:math";
+@import 'src/styles/shared.scss';
+
+.infoView {
+
+    .select-button {
+        &>svg {
+            margin: auto 0
+        }
+    }
+
+    &-top {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &-topLeft {
+        margin: 0 20px;
+        color: $gray-info-text-color;
+        font-size: $T2;
+        text-align: left;
+        height: 20px;
+    }
+
+    &-topRight {
+        margin: 0 20px;
+        color: $gray-info-text-color;
+        font-size: 15px;
+        text-align: right;
+        height: 20px;
+    }
+
+    &-mainView {
+        margin: 20px 0;
+        margin-bottom: 5px;
+        background-color: $gray-info-background-color;
+        border: 1px solid $gray-background-color;
+        box-sizing: border-box;
+        box-shadow: $shadow-inside;
+        border-radius: 22px;
+        height: 44px;
+        display: flex;
+        justify-content: space-between;
+        padding: 0 20px;
+
+        &:hover {
+            border: 1px solid $button-disable-color;
+        }
+
+        &-leftSelect {
+            display: flex;
+            justify-content: space-between;
+
+            &>svg {
+                display: block;
+                margin-top: auto;
+                margin-bottom: auto;
+                margin-left: 14px;
+            }
+        }
+
+        &.noSelect {
+            .infoView-mainView-leftSelect {
+                &>svg {
+                    display: none;
+                }
+            }
+        }
+
+        .input-right,
+        .input-left,
+        .input-middle {
+            font-family: $boldFont;
+            border: 0;
+            font-size: $T2;
+            width: 100%;
+        }
+
+        .showValue {
+            font-family: $boldFont;
+            border: 0;
+            font-size: $T2;
+            width: 100%;
+            line-height: 44px;
+            text-align: right;
+        }
+
+        .input-middle {
+            width: 100%;
+            text-align: right;
+            margin-left: 10px;
+        }
+
+        .input-right {
+            text-align: right;
+            margin-left: 10px;
+        }
+
+        .input-left {
+            margin-right: 10px;
+        }
+
+        .max-button {
+            margin-left: 5px;
+            display: block;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+
+        span {
+            line-height: 44px;
+        }
+    }
+
+    &-bottomRight {
+        margin: 0 20px;
+        margin-top: 15px;
+        color: $gray-info-text-color;
+        font-size: $T4;
+        text-align: right;
+        height: 20px;
+
+        span {
+            padding-bottom: 5px;
+        }
+
+        &.underLine {
+            span {
+                border-bottom: 1px dashed #7D7D7D;
+            }
+        }
+
+        &.balanceRed {
+            color: $wrongAndNotice-color;
+            span {
+                border-bottom: 1px dashed $wrongAndNotice-color;
+            }
+        }
+    }
+
+    &-tokenSelect::-webkit-scrollbar {
+        width: 0 !important;
+        height: 0 !important;
+    }
+
+    &-tokenSelect {
+        position: relative;
+        display: none;
+        background-color: $gray-info-background-color;
+        height: 80px;
+        margin-bottom: -85px;
+        overflow: scroll;
+        border: 1px solid $gray-line-color;
+        box-shadow: $shadow-inside;
+        border-radius: 22px;
+        -ms-overflow-style: none;
+        overflow: -moz-scrollbars-none;
+
+        li {
+            display: flex;
+            justify-content: flex-start;
+            padding: 0 20px;
+            line-height: 40px;
+            height: 40px;
+
+            p {
+                margin-left: 10px;
+            }
+
+            .dataSelect {
+                margin-left: 0px;
+            }
+
+            &:hover {
+                background-color: $gray-line-color;
+                cursor: pointer;
+            }
+
+            svg {
+                margin: auto 0;
+                width: 28px;
+                height: 28px;
+            }
+        }
+
+        &.isShow {
+            display: block;
+        }
+
+        &.hover {
+            display: block;
+        }
+    }
+
+    &-balance-add {
+        display: flex;
+        color: $main-button-color;
+        justify-content: space-between;
+        cursor: pointer;
+
+        p {
+            line-height: 22px;
+            margin-left: 5px;
+        }
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .infoView {
+        &-topRight {
+            margin: 0 20px;
+            color: $gray-info-text-color;
+            font-size: 14px;
+            text-align: right;
+            height: 20px;
+        }
+    }
+}

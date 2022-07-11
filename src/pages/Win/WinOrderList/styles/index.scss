@@ -1,0 +1,61 @@
+@use "sass:math";
+@import 'src/styles/shared.scss';
+
+.winOrderList-card {
+    max-width: $baseWidth;
+    margin: 0 auto;
+    padding: 40px 64px;
+    height: 259px;
+
+    &-title {
+        font-size: $T2;
+        color: $gray-background-text-color;
+        margin-bottom: 17px;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .winOrderList-card {
+        margin: 0 10px;
+        margin-top: 22px;
+        padding: 20px 20px;
+    }
+}
+
+.winOrderList-historyList {
+    margin-top: 17px;
+    height: 153px;
+    overflow: auto;
+    overflow-x: none;
+    overflow-y: none;
+
+    li {
+
+        display: flex;
+        height: 51px;
+        border-top: 1px solid $gray-line-color;
+        justify-content: space-between;
+
+        p {
+            color: $gray-background-text-color;
+            font-size: 15px;
+            font-weight: 500;
+            width: 30%;
+        }
+
+        :first-child+p {
+            color: black;
+        }
+
+        p+span {
+            width: 40%;
+        }
+
+        p {
+            margin: auto 0;
+            font-size: 15px;
+        }
+    }
+}
+
+@media screen and (max-width: 1000px) {}

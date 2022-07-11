@@ -1,0 +1,30 @@
+@use "sass:math";
+@import 'src/styles/shared.scss';
+
+.pendingClock {
+    width: 34px;
+    height: 34px;
+    background: $button-disable-color;
+    border-radius: 17px;
+    overflow: hidden;
+    margin: auto 0;
+
+    &-position {
+        float: left;
+        position: relative;
+        width: 34px;
+        height: 34px;
+        z-index: 99;
+        svg {
+            
+            margin-top: 14px;
+            margin-left: 14px;
+        } 
+    }
+
+    canvas {
+        float: left;
+        position: relative;
+        margin-top: -34px;
+    }
+}
