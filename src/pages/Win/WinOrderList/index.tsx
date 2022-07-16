@@ -1,13 +1,13 @@
 import { FC } from "react";
-import { PRCListType } from "..";
+import { WinListType } from "..";
 import MainCard from "../../../components/MainCard";
 import { WinPendingItem } from "../../../components/WinPendingItem";
 import { bigNumberToNormal } from "../../../libs/utils";
 import "./styles";
 
 type WinOrderListProps = {
-  historyList: Array<PRCListType>;
-  pendingList: Array<PRCListType>;
+  historyList: Array<WinListType>;
+  pendingList: Array<WinListType>;
   nowBlock: number;
 };
 

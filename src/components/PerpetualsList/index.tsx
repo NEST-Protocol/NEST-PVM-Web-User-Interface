@@ -1,13 +1,13 @@
 import { BigNumber } from "@ethersproject/bignumber";
 import { t, Trans } from "@lingui/macro";
 import { FC, useCallback, useEffect, useState } from "react";
-import { useFortLeverSell } from "../../contracts/hooks/useFortLeverTransation";
+import { usePVMLeverSell } from "../../contracts/hooks/usePVMLeverTransation";
 import {
-  FortLeverContract,
+  PVMLeverContract,
   tokenList,
   TokenType,
 } from "../../libs/constants/addresses";
-import { FortLever } from "../../libs/hooks/useContract";
+import { PVMLever } from "../../libs/hooks/useContract";
 import useTransactionListCon, {
   TransactionType,
 } from "../../libs/hooks/useTransactionInfo";
@@ -27,7 +27,7 @@ type Props = {
 const PerpetualsList: FC<Props> = ({ ...props }) => {
   const { pendingList } = useTransactionListCon();
   const { account } = useWeb3();
-  const leverContract = FortLever(FortLeverContract);
+  const leverContract = PVMLever(PVMLeverContract);
   const [marginAssets, setMarginAssets] = useState<BigNumber>();
   const loadingButton = () => {
     const closeTx = pendingList.filter(
@@ -45,7 +45,7 @@ const PerpetualsList: FC<Props> = ({ ...props }) => {
   }, [props.item.tokenAddress]);
   const TokenOneSvg = tokenList[tokenName()].Icon;
   const TokenTwoSvg = tokenList["USDT"].Icon;
-  const active = useFortLeverSell(props.item.index, props.item.balance);
+  const active = usePVMLeverSell(props.item.index, props.item.balance);
   useEffect(() => {
     if (
       !leverContract ||

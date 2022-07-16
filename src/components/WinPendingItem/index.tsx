@@ -2,7 +2,7 @@ import { Tooltip } from "antd";
 import { BigNumber } from "ethers";
 import { FC, useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { useFortPRCClaim } from "../../contracts/hooks/useFortPRCTransation";
+import { usePVMWinClaim } from "../../contracts/hooks/usePVMWinTransation";
 import useTransactionListCon, {
   TransactionType,
 } from "../../libs/hooks/useTransactionInfo";
@@ -25,13 +25,13 @@ export const WinPendingItem: FC<WinPendingItemType> = ({ ...props }) => {
   const [nowBlock, setNowBlock] = useState<number>(0);
   const [leftTimeClock, setLeftTimeClock] = useState<number>(0);
 
-  const claim = useFortPRCClaim(props.index);
+  const claim = usePVMWinClaim(props.index);
   const allTime = 256 * 3;
   const loadingButton = () => {
     const claimTx = pendingList.filter(
       (item) =>
         item.info === props.index.toString() &&
-        item.type === TransactionType.prcclaim
+        item.type === TransactionType.winClaim
     );
     return claimTx.length > 0 ? true : false;
   };

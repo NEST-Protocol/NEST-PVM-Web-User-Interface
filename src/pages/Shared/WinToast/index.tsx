@@ -2,7 +2,7 @@ import { BigNumber } from "ethers";
 import { FC } from "react";
 import { toast } from "react-toastify";
 import MainButton from "../../../components/MainButton";
-import { useFortPRCClaim } from "../../../contracts/hooks/useFortPRCTransation";
+import { usePVMWinClaim } from "../../../contracts/hooks/usePVMWinTransation";
 import { bigNumberToNormal } from "../../../libs/utils";
 import './styles'
 
@@ -12,7 +12,7 @@ export type WinToastProps = {
 };
 export const WinToast: FC<WinToastProps> = ({ ...props }) => {
   const classPrefix = "winToast";
-  const claim = useFortPRCClaim(
+  const claim = usePVMWinClaim(
     props.index
   );
   const titleString = BigNumber.from('0').eq(props.gained) ? 'Lose' : 'Win'

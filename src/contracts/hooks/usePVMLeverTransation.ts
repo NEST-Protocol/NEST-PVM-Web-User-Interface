@@ -1,20 +1,20 @@
-import { TokenType } from './../../libs/constants/addresses';
+import { TokenType } from '../../libs/constants/addresses';
 import { BigNumber } from "ethers";
-import { FortLeverContract } from "../../libs/constants/addresses";
-import { FortLever } from "../../libs/hooks/useContract";
+import { PVMLeverContract } from "../../libs/constants/addresses";
+import { PVMLever } from "../../libs/hooks/useContract";
 import { useSendTransaction } from "../../libs/hooks/useSendTransaction";
 import useWeb3 from "../../libs/hooks/useWeb3";
 import { PRICE_FEE } from "../../libs/utils";
 import { TransactionType } from '../../libs/hooks/useTransactionInfo';
 
-export function useFortLeverBuy(
+export function usePVMLeverBuy(
     token: TokenType,
     leverNum: number,
     isLong: boolean,
-    fortAmount: BigNumber
+    nestAmount: BigNumber
 ) {
     const { account, chainId } = useWeb3()
-    var contract = FortLever(FortLeverContract)
+    var contract = PVMLever(PVMLeverContract)
     var callData: string | undefined
     if (!chainId) {
         contract = null
@@ -23,7 +23,7 @@ export function useFortLeverBuy(
             token.addresses[chainId],
             leverNum,
             isLong,
-            fortAmount]
+            nestAmount]
         )
     }
     const tx = {
@@ -36,12 +36,12 @@ export function useFortLeverBuy(
     return txPromise
 }
 
-export function useFortLeverSell(
+export function usePVMLeverSell(
     index: BigNumber, 
     amount: BigNumber
 ) {
     const { account, chainId } = useWeb3()
-    var contract = FortLever(FortLeverContract)
+    var contract = PVMLever(PVMLeverContract)
     var callData: string | undefined
     if (!chainId) {
         contract = null

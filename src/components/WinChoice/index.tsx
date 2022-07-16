@@ -32,7 +32,7 @@ const WinChoice: FC<WinChoiceProps> = ({ ...props }) => {
           <Tooltip
             placement="top"
             color={"#ffffff"}
-            title={"Amount of NEST that 1 PRC can win"}
+            title={"Amount of NEST that 1 NEST can win"}
           >
             {NESTAmountNormal}
           </Tooltip>

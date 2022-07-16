@@ -134,7 +134,7 @@ export function formatInputNum(value: string): string {
     .replace(/^\./g, "");
 }
 
-export function formatPRCInputNum(value: string): string {
+export function formatPVMWinInputNum(value: string): string {
   return value
     .replace(/[^\d.]/g, "")
     .replace(/\.{2,}/g, ".")

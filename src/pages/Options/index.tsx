@@ -1,7 +1,6 @@
 import { t, Trans } from "@lingui/macro";
 import { BigNumber, Contract } from "ethers";
 import { FC, useCallback, useEffect, useRef, useState } from "react";
-import { MaxUint256 } from "@ethersproject/constants";
 import ChooseType from "../../components/ChooseType";
 import { PutDownIcon, WhiteLoading } from "../../components/Icon";
 import InfoShow from "../../components/InfoShow";
@@ -9,14 +8,13 @@ import MainButton from "../../components/MainButton";
 import MainCard from "../../components/MainCard";
 import { DoubleTokenShow, SingleTokenShow } from "../../components/TokenShow";
 import {
-  FortEuropeanOptionContract,
+  PVMOptionContract,
   tokenList,
   TokenType,
 } from "../../libs/constants/addresses";
 import {
   ERC20Contract,
-  FortEuropeanOption,
-  getERC20Contract,
+  PVMOption,
   NestPriceContract,
 } from "../../libs/hooks/useContract";
 import useWeb3 from "../../libs/hooks/useWeb3";
@@ -26,19 +24,19 @@ import {
   bigNumberToNormal,
   checkWidth,
   formatInputNum,
-  normalToBigNumber,
+  normalToBigNumber
 } from "../../libs/utils";
 import { DatePicker, message, Tooltip } from "antd";
 import "../../styles/ant.css";
 import "./styles";
 import { HoldLine } from "../../components/HoldLine";
 import moment from "moment";
-import { useFortEuropeanOptionOpen } from "../../contracts/hooks/useFortEuropeanOptionTransation";
+import { usePVMOptionOpen } from "../../contracts/hooks/usePVMOptionTransation";
 import OptionsList from "../../components/OptionsList";
 import useTransactionListCon from "../../libs/hooks/useTransactionInfo";
 import { Popup } from "reactjs-popup";
 import OptionsNoticeModal from "./OptionsNoticeModal";
-import { useERC20Approve } from "../../contracts/hooks/useERC20Approve";
+import UpdateNoticeModal from "../Shared/UpdateNoticeModal";
 
 export type OptionsListType = {
   index: BigNumber;
@@ -54,9 +52,10 @@ const MintOptions: FC = () => {
   const classPrefix = "options-mintOptions";
   const { account, chainId, library } = useWeb3();
   const [showNotice, setShowNotice] = useState(false);
+  const [showUpdateNotice, setShowUpdateNotice] = useState(false);
   const modal = useRef<any>();
   const nestPriceContract = NestPriceContract();
-  const nestEuropeanOption = FortEuropeanOption(FortEuropeanOptionContract);
+  const PVMOptionOJ = PVMOption(PVMOptionContract);
   const nestContract = ERC20Contract(tokenList["NEST"].addresses);
   const { pendingList, txList } = useTransactionListCon();
   const [isRefresh, setIsRefresh] = useState<boolean>(false);
@@ -74,17 +73,19 @@ const MintOptions: FC = () => {
   const [priceNow, setPriceNow] = useState<{ [key: string]: TokenType }>();
   const [nestBalance, setNestBalance] = useState(BigNumber.from(0));
   const [optionTokenValue, setOptionTokenValue] = useState<BigNumber>();
-  const [nestAllowance, setNestAllowance] = useState<BigNumber>(
-    BigNumber.from("0")
-  );
 
-  const showNoticeModal = () => {
-    var cache = localStorage.getItem("OptionsFirst");
-    if (cache !== "1") {
-      setShowNotice(true);
-      return true;
-    }
-    return false;
+  // const showNoticeModal = () => {
+  //   var cache = localStorage.getItem("OptionsFirst");
+  //   if (cache !== "1") {
+  //     setShowNotice(true);
+  //     return true;
+  //   }
+  //   return false;
+  // };
+
+  const showUpdateNoticeModal = () => {
+    setShowUpdateNotice(true);
+    return true;
   };
 
   const trList = optionsListState.map((item) => {
@@ -100,11 +101,11 @@ const MintOptions: FC = () => {
   });
 
   const getOptionsList = useCallback(async () => {
-    if (!nestEuropeanOption) {
+    if (!PVMOptionOJ) {
       return;
     }
-    const optionsCount = await nestEuropeanOption.getOptionCount();
-    const optionsList = await nestEuropeanOption.find(
+    const optionsCount = await PVMOptionOJ.getOptionCount();
+    const optionsList = await PVMOptionOJ.find(
       0,
       1000,
       optionsCount,
@@ -115,7 +116,7 @@ const MintOptions: FC = () => {
     );
     setOptionsListState(resultList);
     setIsRefresh(true);
-  }, [account, nestEuropeanOption]);
+  }, [account, PVMOptionOJ]);
 
   useEffect(() => {
     setStrikePrice("");
@@ -206,28 +207,6 @@ const MintOptions: FC = () => {
       })();
     }
   }, [latestBlock.time, library]);
-  // approve
-  useEffect(() => {
-    if (!chainId || !account || !library) {
-      return;
-    }
-    const nestToken = getERC20Contract(
-      tokenList['NEST'].addresses[chainId],
-      library,
-      account
-    );
-    if (!nestToken) {
-      setNestAllowance(BigNumber.from("0"));
-      return;
-    }
-    (async () => {
-      const allowance = await nestToken.allowance(
-        account,
-        FortEuropeanOptionContract[chainId]
-      );
-      setNestAllowance(allowance);
-    })();
-  }, [account, chainId, library, txList]);
 
   const handleType = (isLong: boolean) => {
     setIsLong(isLong);
@@ -260,17 +239,16 @@ const MintOptions: FC = () => {
 
   useEffect(() => {
     if (
-      nestEuropeanOption &&
+      PVMOptionOJ &&
       strikePrice !== "" &&
       nestNum !== "" &&
       priceNow &&
-      exercise.blockNum !== 0 &&
-      chainId
+      exercise.blockNum !== 0 && chainId
     ) {
       (async () => {
         setShowLoading(true);
         try {
-          const value = await nestEuropeanOption.estimate(
+          const value = await PVMOptionOJ.estimate(
             tokenPair.addresses[chainId],
             priceNow[tokenPair.symbol].nowPrice,
             normalToBigNumber(
@@ -290,22 +268,9 @@ const MintOptions: FC = () => {
     } else {
       setOptionTokenValue(undefined);
     }
-  }, [
-    chainId,
-    exercise.blockNum,
-    nestEuropeanOption,
-    nestNum,
-    isLong,
-    priceNow,
-    strikePrice,
-    tokenPair.addresses,
-    tokenPair.symbol,
-  ]);
+  }, [chainId, exercise.blockNum, PVMOptionOJ, nestNum, isLong, priceNow, strikePrice, tokenPair.addresses, tokenPair.symbol]);
 
   const checkButton = () => {
-    if (!checkAllowance()) {
-      return false;
-    }
     if (
       nestNum === "" ||
       strikePrice === "" ||
@@ -320,29 +285,15 @@ const MintOptions: FC = () => {
     }
     return false;
   };
-  const checkAllowance = () => {
-    if (nestNum === '') {
-      return true;
-    }
-    if (nestAllowance.lt(normalToBigNumber(nestNum))) {
-      return false;
-    }
-    return true;
-  };
   function disabledDate(current: any) {
     return current && current < moment().add(30, "days").startOf("day");
   }
-  const active = useFortEuropeanOptionOpen(
+  const active = usePVMOptionOpen(
     tokenPair,
     isLong,
     BigNumber.from(exercise.blockNum),
     normalToBigNumber(nestNum),
     strikePrice ? normalToBigNumber(strikePrice, 18) : undefined
-  );
-  const approve = useERC20Approve(
-    'NEST',
-    MaxUint256,
-    chainId ? FortEuropeanOptionContract[chainId] : undefined
   );
 
   const priceString = () => {
@@ -366,6 +317,17 @@ const MintOptions: FC = () => {
             onClose={() => modal.current.close()}
             action={active}
           ></OptionsNoticeModal>
+        </Popup>
+      ) : null}
+      {showUpdateNotice ? (
+        <Popup
+          ref={modal}
+          open
+          onClose={() => {
+            setShowUpdateNotice(false);
+          }}
+        >
+          <UpdateNoticeModal></UpdateNoticeModal>
         </Popup>
       ) : null}
       <div className={classPrefix}>
@@ -480,25 +442,23 @@ const MintOptions: FC = () => {
             disable={checkButton()}
             loading={loadingButton()}
             onClick={() => {
-              
+              if (normalToBigNumber(nestNum).gt(nestBalance)) {
+                message.error(t`Insufficient balance`);
+                return;
+              }
               if (checkButton()) {
                 return;
               }
-              if (showNoticeModal()) {
+              // if (showNoticeModal()) {
+              //   return;
+              // }
+              if (showUpdateNoticeModal()) {
                 return;
               }
-              if (checkAllowance()) {
-                if (normalToBigNumber(nestNum).gt(nestBalance)) {
-                  message.error(t`Insufficient balance`);
-                  return;
-                }
-                active();
-              } else {
-                approve();
-              }
+              // active();
             }}
           >
-            {checkAllowance() ? (<Trans>Buy Option</Trans>) : ('Approve')}
+            <Trans>Buy Option</Trans>
           </MainButton>
           <div className={`${classPrefix}-rightCard-time`}>
             <p className={`${classPrefix}-rightCard-timeTitle`}>

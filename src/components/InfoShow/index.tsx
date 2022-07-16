@@ -126,9 +126,6 @@ const InfoShow: FC<Props> = ({ children, ...props }) => {
       if (tokenName === "NEST") {
         imageURL =
           "https://raw.githubusercontent.com/FORT-Protocol/Fort-Web-User-Interface/2e289cd29722576329fae529c2bfaa0a905f0148/src/components/Icon/svg/TokenNest.svg";
-      } else if (tokenName === "PRC") {
-        imageURL =
-          "https://raw.githubusercontent.com/FORT-Protocol/Fort-Web-User-Interface/2e289cd29722576329fae529c2bfaa0a905f0148/src/components/Icon/svg/TokenPRC.svg";
       }
       await ethereum.request({
         method: "wallet_watchAsset",
@@ -145,14 +142,11 @@ const InfoShow: FC<Props> = ({ children, ...props }) => {
     };
     if (
       props.bottomRightText.toLowerCase().indexOf("balance") >= 0 &&
-      (props.bottomRightText.toLowerCase().indexOf("nest") >= 0 ||
-        props.bottomRightText.toLowerCase().indexOf("prc") >= 0)
+      (props.bottomRightText.toLowerCase().indexOf("nest") >= 0)
     ) {
       var tokenName: string = "";
       if (props.bottomRightText.toLowerCase().indexOf("nest") >= 0) {
         tokenName = "NEST";
-      } else {
-        tokenName = "PRC";
       }
       return (
         <Tooltip

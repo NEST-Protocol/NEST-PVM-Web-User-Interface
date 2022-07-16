@@ -4,7 +4,6 @@ import {
   TokenETH,
   TokenFORT,
   TokenNest,
-  TokenPRC,
   TokenUSDT,
 } from "../../components/Icon";
 import { ZERO_ADDRESS } from "../utils";
@@ -83,20 +82,6 @@ export const tokenList: { [key: string]: TokenType } = {
     },
     sigmaSQ: BigNumber.from('31708924900')
   },
-  PRC: {
-    symbol: "PRC",
-    Icon: TokenPRC,
-    decimals: 18,
-    addresses: {
-      56: "0xf43A71e4Da398e5731c9580D11014dE5e8fD0530",
-      97: "0xb32e10a774428d47c016eeAc680793a79F1CFD7e"
-    },
-    pairIndex: {
-      56: '',
-      97: ''
-    },
-    sigmaSQ: BigNumber.from('0')
-  },
   NEST: {
     symbol: "NEST",
     Icon: TokenNest,
@@ -113,12 +98,12 @@ export const tokenList: { [key: string]: TokenType } = {
   },
 };
 
-export const FortEuropeanOptionContract: AddressesType = {
+export const PVMOptionContract: AddressesType = {
   56: "0x284935F8C571d054Df98eDA8503ea13cde5fd8Cc",
   97: "0x8bBd5db40F61C628a8F62ba75752227b1BFbF6a8"
 };
 
-export const FortLeverContract: AddressesType = {
+export const PVMLeverContract: AddressesType = {
   56: "0x8c5052f7747D8Ebc2F069286416b6aE8Ad3Cc149",
   97: "0xb8B5b3CDdC5DA7F4B75Bd4B408389b923962ee98"
 };
@@ -128,17 +113,12 @@ export const NestPrice: AddressesType = {
   97: "0xF2f9E62f52389EF223f5Fa8b9926e95386935277"
 };
 
-export const SwapAddress: AddressesType = {
-  56: '0x9484f12044b9d5707AfeaC5BD02b5E0214381801',
-  97: '0xc61409835E6A23e31f2fb06F76ae13A1b4c5fD26'
-};
-
-export const CofixSwapAddress: AddressesType = {
-  56: '0xb29A8d980E1408E487B9968f5E4f7fD7a9B0CaC5',
-  97: '0x4A448cBb12e449D7031f36C8122eCE6dDdf9cc84'
-};
-
-export const FortPRC : AddressesType = {
+export const PVMWinContract : AddressesType = {
   56: '0xf43A71e4Da398e5731c9580D11014dE5e8fD0530',
   97: '0x9AeE80A1df3cA0c5B859d94bCCf16d0440f1691d'
+}
+
+export const PVMPayBackContract : AddressesType = {
+  56: '0xf43A71e4Da398e5731c9580D11014dE5e8fD0530',
+  97: '0x0F1cb2bB372edd39624bf1763FE4830DAFcf9139'
 }

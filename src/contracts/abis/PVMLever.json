@@ -16,7 +16,7 @@
 			{
 				"indexed": false,
 				"internalType": "uint256",
-				"name": "amount",
+				"name": "nestAmount",
 				"type": "uint256"
 			},
 			{
@@ -24,15 +24,9 @@
 				"internalType": "address",
 				"name": "owner",
 				"type": "address"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "gain",
-				"type": "uint256"
 			}
 		],
-		"name": "Exercise",
+		"name": "Buy",
 		"type": "event"
 	},
 	{
@@ -47,7 +41,7 @@
 			{
 				"indexed": false,
 				"internalType": "uint256",
-				"name": "strikePrice",
+				"name": "lever",
 				"type": "uint256"
 			},
 			{
@@ -55,12 +49,6 @@
 				"internalType": "bool",
 				"name": "orientation",
 				"type": "bool"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "exerciseBlock",
-				"type": "uint256"
 			},
 			{
 				"indexed": false,
@@ -84,7 +72,7 @@
 			{
 				"indexed": false,
 				"internalType": "uint256",
-				"name": "dcuAmount",
+				"name": "amount",
 				"type": "uint256"
 			},
 			{
@@ -96,11 +84,11 @@
 			{
 				"indexed": false,
 				"internalType": "uint256",
-				"name": "amount",
+				"name": "value",
 				"type": "uint256"
 			}
 		],
-		"name": "Open",
+		"name": "Sell",
 		"type": "event"
 	},
 	{
@@ -114,24 +102,24 @@
 			},
 			{
 				"indexed": false,
-				"internalType": "uint256",
-				"name": "amount",
-				"type": "uint256"
+				"internalType": "address",
+				"name": "addr",
+				"type": "address"
 			},
 			{
 				"indexed": false,
 				"internalType": "address",
-				"name": "owner",
+				"name": "sender",
 				"type": "address"
 			},
 			{
 				"indexed": false,
 				"internalType": "uint256",
-				"name": "dcuAmount",
+				"name": "reward",
 				"type": "uint256"
 			}
 		],
-		"name": "Sell",
+		"name": "Settle",
 		"type": "event"
 	},
 	{
@@ -152,6 +140,11 @@
 			{
 				"internalType": "uint256",
 				"name": "index",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "oraclePrice",
 				"type": "uint256"
 			},
 			{
@@ -180,12 +173,7 @@
 			},
 			{
 				"internalType": "uint256",
-				"name": "oraclePrice",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "strikePrice",
+				"name": "lever",
 				"type": "uint256"
 			},
 			{
@@ -195,15 +183,66 @@
 			},
 			{
 				"internalType": "uint256",
-				"name": "exerciseBlock",
+				"name": "nestAmount",
 				"type": "uint256"
 			}
 		],
-		"name": "calcV",
+		"name": "buy",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "index",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "nestAmount",
+				"type": "uint256"
+			}
+		],
+		"name": "buyDirect",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "sigmaSQ",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "p0",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "bn0",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "p",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "bn",
+				"type": "uint256"
+			}
+		],
+		"name": "calcRevisedK",
 		"outputs": [
 			{
 				"internalType": "uint256",
-				"name": "v",
+				"name": "k",
 				"type": "uint256"
 			}
 		],
@@ -218,58 +257,19 @@
 				"type": "address"
 			},
 			{
-				"internalType": "uint256",
-				"name": "oraclePrice",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "strikePrice",
-				"type": "uint256"
+				"internalType": "uint256[]",
+				"name": "levers",
+				"type": "uint256[]"
 			},
 			{
 				"internalType": "bool",
 				"name": "orientation",
 				"type": "bool"
-			},
-			{
-				"internalType": "uint256",
-				"name": "exerciseBlock",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "dcuAmount",
-				"type": "uint256"
 			}
 		],
-		"name": "estimate",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "amount",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "index",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "amount",
-				"type": "uint256"
-			}
-		],
-		"name": "exercise",
+		"name": "create",
 		"outputs": [],
-		"stateMutability": "payable",
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -311,7 +311,7 @@
 					},
 					{
 						"internalType": "uint256",
-						"name": "strikePrice",
+						"name": "lever",
 						"type": "uint256"
 					},
 					{
@@ -321,22 +321,22 @@
 					},
 					{
 						"internalType": "uint256",
-						"name": "exerciseBlock",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
 						"name": "balance",
 						"type": "uint256"
 					},
 					{
-						"internalType": "address",
-						"name": "owner",
-						"type": "address"
+						"internalType": "uint256",
+						"name": "basePrice",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "baseBlock",
+						"type": "uint256"
 					}
 				],
-				"internalType": "struct IHedgeOptions.OptionView[]",
-				"name": "optionArray",
+				"internalType": "struct INestFutures.FutureView[]",
+				"name": "futureArray",
 				"type": "tuple[]"
 			}
 		],
@@ -344,44 +344,8 @@
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "tokenAddress",
-				"type": "address"
-			}
-		],
-		"name": "getConfig",
-		"outputs": [
-			{
-				"components": [
-					{
-						"internalType": "uint96",
-						"name": "sigmaSQ",
-						"type": "uint96"
-					},
-					{
-						"internalType": "int128",
-						"name": "miu",
-						"type": "int128"
-					},
-					{
-						"internalType": "uint32",
-						"name": "minPeriod",
-						"type": "uint32"
-					}
-				],
-				"internalType": "struct IHedgeOptions.Config",
-				"name": "",
-				"type": "tuple"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
 		"inputs": [],
-		"name": "getOptionCount",
+		"name": "getFutureCount",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -401,21 +365,16 @@
 			},
 			{
 				"internalType": "uint256",
-				"name": "strikePrice",
+				"name": "lever",
 				"type": "uint256"
 			},
 			{
 				"internalType": "bool",
 				"name": "orientation",
 				"type": "bool"
-			},
-			{
-				"internalType": "uint256",
-				"name": "exerciseBlock",
-				"type": "uint256"
 			}
 		],
-		"name": "getOptionInfo",
+		"name": "getFutureInfo",
 		"outputs": [
 			{
 				"components": [
@@ -431,7 +390,7 @@
 					},
 					{
 						"internalType": "uint256",
-						"name": "strikePrice",
+						"name": "lever",
 						"type": "uint256"
 					},
 					{
@@ -441,21 +400,45 @@
 					},
 					{
 						"internalType": "uint256",
-						"name": "exerciseBlock",
+						"name": "balance",
 						"type": "uint256"
 					},
 					{
 						"internalType": "uint256",
-						"name": "balance",
+						"name": "basePrice",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "baseBlock",
 						"type": "uint256"
 					}
 				],
-				"internalType": "struct IHedgeOptions.OptionView",
+				"internalType": "struct INestFutures.FutureView",
 				"name": "",
 				"type": "tuple"
 			}
 		],
 		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "vol",
+				"type": "uint256"
+			}
+		],
+		"name": "impactCost",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "pure",
 		"type": "function"
 	},
 	{
@@ -505,7 +488,7 @@
 					},
 					{
 						"internalType": "uint256",
-						"name": "strikePrice",
+						"name": "lever",
 						"type": "uint256"
 					},
 					{
@@ -515,17 +498,22 @@
 					},
 					{
 						"internalType": "uint256",
-						"name": "exerciseBlock",
+						"name": "balance",
 						"type": "uint256"
 					},
 					{
 						"internalType": "uint256",
-						"name": "balance",
+						"name": "basePrice",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "baseBlock",
 						"type": "uint256"
 					}
 				],
-				"internalType": "struct IHedgeOptions.OptionView[]",
-				"name": "optionArray",
+				"internalType": "struct INestFutures.FutureView[]",
+				"name": "futureArray",
 				"type": "tuple[]"
 			}
 		],
@@ -540,47 +528,41 @@
 				"type": "address"
 			},
 			{
-				"internalType": "uint256",
-				"name": "value",
-				"type": "uint256"
+				"components": [
+					{
+						"internalType": "uint16",
+						"name": "channelId",
+						"type": "uint16"
+					},
+					{
+						"internalType": "uint16",
+						"name": "pairIndex",
+						"type": "uint16"
+					},
+					{
+						"internalType": "uint64",
+						"name": "sigmaSQ",
+						"type": "uint64"
+					},
+					{
+						"internalType": "uint64",
+						"name": "miuLong",
+						"type": "uint64"
+					},
+					{
+						"internalType": "uint64",
+						"name": "miuShort",
+						"type": "uint64"
+					}
+				],
+				"internalType": "struct NestPriceAdapter.TokenConfig",
+				"name": "tokenConfig",
+				"type": "tuple"
 			}
 		],
-		"name": "migrate",
+		"name": "register",
 		"outputs": [],
 		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "tokenAddress",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "strikePrice",
-				"type": "uint256"
-			},
-			{
-				"internalType": "bool",
-				"name": "orientation",
-				"type": "bool"
-			},
-			{
-				"internalType": "uint256",
-				"name": "exerciseBlock",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "dcuAmount",
-				"type": "uint256"
-			}
-		],
-		"name": "open",
-		"outputs": [],
-		"stateMutability": "payable",
 		"type": "function"
 	},
 	{
@@ -604,36 +586,19 @@
 	{
 		"inputs": [
 			{
-				"internalType": "address",
-				"name": "tokenAddress",
-				"type": "address"
+				"internalType": "uint256",
+				"name": "index",
+				"type": "uint256"
 			},
 			{
-				"components": [
-					{
-						"internalType": "uint96",
-						"name": "sigmaSQ",
-						"type": "uint96"
-					},
-					{
-						"internalType": "int128",
-						"name": "miu",
-						"type": "int128"
-					},
-					{
-						"internalType": "uint32",
-						"name": "minPeriod",
-						"type": "uint32"
-					}
-				],
-				"internalType": "struct IHedgeOptions.Config",
-				"name": "config",
-				"type": "tuple"
+				"internalType": "address[]",
+				"name": "addresses",
+				"type": "address[]"
 			}
 		],
-		"name": "setConfig",
+		"name": "settle",
 		"outputs": [],
-		"stateMutability": "nonpayable",
+		"stateMutability": "payable",
 		"type": "function"
 	},
 	{

@@ -10,10 +10,10 @@ import MainButton from "../../components/MainButton";
 import MainCard from "../../components/MainCard";
 import { SingleTokenShow } from "../../components/TokenShow";
 import { useERC20Approve } from "../../contracts/hooks/useERC20Approve";
-import { useFortPRCRoll } from "../../contracts/hooks/useFortPRCTransation";
-import { FortPRC, tokenList } from "../../libs/constants/addresses";
+import { usePVMWinRoll } from "../../contracts/hooks/usePVMWinTransation";
+import { PVMWinContract, tokenList } from "../../libs/constants/addresses";
 import {
-  FortPRCContract,
+  PVMWin,
   getERC20Contract,
 } from "../../libs/hooks/useContract";
 import { useEtherscanAddressBaseUrl } from "../../libs/hooks/useEtherscanBaseUrl";
@@ -23,7 +23,7 @@ import useTransactionListCon, {
 import useWeb3 from "../../libs/hooks/useWeb3";
 import {
   bigNumberToNormal,
-  formatPRCInputNum,
+  formatPVMWinInputNum,
   normalToBigNumber,
   showEllipsisAddress2,
   ZERO_ADDRESS,
@@ -31,7 +31,7 @@ import {
 import "./styles";
 import WinOrderList from "./WinOrderList";
 
-export type PRCListType = {
+export type WinListType = {
   gained: BigNumber;
   index: BigNumber;
   m: BigNumber;
@@ -46,17 +46,17 @@ const Win: FC = () => {
   const { chainId, account, library } = useWeb3();
   const [chance, setChance] = useState<String>("1.10");
   const [nestNum, setNESTNum] = useState<String>("1.00");
-  const [winPendingList, setWinPendingList] = useState<Array<PRCListType>>([]);
-  const [historyList, setHistoryList] = useState<Array<PRCListType>>([]);
-  const [allBetsData, setAllBetsData] = useState<Array<PRCListType>>([]);
-  const [allBetsShow, setAllBetsShow] = useState<Array<PRCListType>>([]);
+  const [winPendingList, setWinPendingList] = useState<Array<WinListType>>([]);
+  const [historyList, setHistoryList] = useState<Array<WinListType>>([]);
+  const [allBetsData, setAllBetsData] = useState<Array<WinListType>>([]);
+  const [allBetsShow, setAllBetsShow] = useState<Array<WinListType>>([]);
   const [allBetsShowCount, setAllBetsShowCount] = useState<number>(0);
-  const [weeklyData, setWeeklyData] = useState<Array<PRCListType>>([]);
+  const [weeklyData, setWeeklyData] = useState<Array<WinListType>>([]);
   const [nowBlock, setNowBlock] = useState<number>(0);
   const [NESTBalance, setNESTBalance] = useState<BigNumber>(
     BigNumber.from("0")
   );
-  const fortPRCContract = FortPRCContract(FortPRC);
+  const PVMWinOJ = PVMWin(PVMWinContract);
   const { pendingList, txList } = useTransactionListCon();
   const intervalRef = useRef<NodeJS.Timeout>();
   const [nestAllowance, setNestAllowance] = useState<BigNumber>(
@@ -82,7 +82,7 @@ const Win: FC = () => {
   }, [getBalance, txList]);
 
   const getList = useCallback(async () => {
-    if (!fortPRCContract) {
+    if (!PVMWinOJ) {
       return;
     }
 
@@ -93,28 +93,28 @@ const Win: FC = () => {
     const allBets_get = await fetch("https://api.hedge.red/api/prc/list/0/10");
     const allBets_data = await allBets_get.json();
     const allBets_data_modol = allBets_data.value.filter(
-      (item: PRCListType) => item.owner !== ZERO_ADDRESS
+      (item: WinListType) => item.owner !== ZERO_ADDRESS
     );
 
     const weekly_get = await fetch("https://api.hedge.red/api/prc/weekList/10");
     const weekly_data = await weekly_get.json();
     const weekly_data_modol = weekly_data.value.filter(
-      (item: PRCListType) => item.owner !== ZERO_ADDRESS
+      (item: WinListType) => item.owner !== ZERO_ADDRESS
     );
     const myBetsUrl = `https://api.hedge.red/api/prc/userList/${account}/200`;
     const myBets_get = await fetch(myBetsUrl);
     const myBets_data = await myBets_get.json();
     const myBets_data_modol = myBets_data.value.filter(
-      (item: PRCListType) => item.owner !== ZERO_ADDRESS
+      (item: WinListType) => item.owner !== ZERO_ADDRESS
     );
 
-    const listResult = await fortPRCContract.find44("0", "200", "200", account);
+    const listResult = await PVMWinOJ.find44("0", "200", "200", account);
     const result = listResult.filter(
-      (item: PRCListType) => item.owner !== ZERO_ADDRESS
+      (item: WinListType) => item.owner !== ZERO_ADDRESS
     );
     var history = myBets_data_modol;
     const pending = result.filter(
-      (item: PRCListType) =>
+      (item: WinListType) =>
         BigNumber.from(item.n.toString()).gt(BigNumber.from("0")) &&
         BigNumber.from(item.openBlock.toString())
           .add(BigNumber.from(256))
@@ -139,7 +139,7 @@ const Win: FC = () => {
     setNowBlock(latest);
     setAllBetsData(allBets_data_modol.reverse());
     setWeeklyData(weekly_data_modol);
-  }, [account, fortPRCContract, library]);
+  }, [account, PVMWinOJ, library]);
 
   useEffect(() => {
     const time = setTimeout(() => {
@@ -165,7 +165,7 @@ const Win: FC = () => {
       txList.length !== 0 &&
       (!txList ||
         (txList[txList.length - 1].type !== TransactionType.roll &&
-          txList[txList.length - 1].type !== TransactionType.prcclaim) ||
+          txList[txList.length - 1].type !== TransactionType.winClaim) ||
         txList[txList.length - 1].txState !== 1)
     ) {
       return;
@@ -196,7 +196,7 @@ const Win: FC = () => {
       return;
     }
     (async () => {
-      const allowance = await nestToken.allowance(account, FortPRC[chainId]);
+      const allowance = await nestToken.allowance(account, PVMWinContract[chainId]);
       setNestAllowance(allowance);
     })();
   }, [account, chainId, library, txList]);
@@ -268,14 +268,14 @@ const Win: FC = () => {
     );
   };
 
-  const confirm = useFortPRCRoll(
+  const confirm = usePVMWinRoll(
     normalToBigNumber(nestNum.valueOf(), 4),
     normalToBigNumber(chance.valueOf(), 4)
   );
   const approve = useERC20Approve(
     'NEST',
     MaxUint256,
-    chainId ? FortPRC[chainId] : undefined
+    chainId ? PVMWinContract[chainId] : undefined
   );
 
   const mainButtonPending = () => {
@@ -291,7 +291,7 @@ const Win: FC = () => {
   const changePayout = (num: number) => {
     const result =
       parseFloat(nestNum.valueOf() === "" ? "1" : nestNum.valueOf()) * num;
-    const resultString = formatPRCInputNum(result.toFixed(2));
+    const resultString = formatPVMWinInputNum(result.toFixed(2));
     if (parseFloat(resultString) > 1000) {
       setNESTNum("1000.00");
     } else if (parseFloat(resultString) < 1) {
@@ -302,16 +302,16 @@ const Win: FC = () => {
   };
   const checkChance = () => {
     const result = parseFloat(chance.valueOf());
-    const resultString = formatPRCInputNum(result.toFixed(2));
+    const resultString = formatPVMWinInputNum(result.toFixed(2));
     if (parseFloat(resultString) > 100 || parseFloat(resultString) < 1.1) {
       return false;
     } else {
       return true;
     }
   };
-  const checkPRCNum = () => {
+  const checkWinNum = () => {
     const result = parseFloat(nestNum.valueOf());
-    const resultString = formatPRCInputNum(result.toFixed(2));
+    const resultString = formatPVMWinInputNum(result.toFixed(2));
     if (parseFloat(resultString) > 1000 || parseFloat(resultString) < 1) {
       return false;
     } else {
@@ -331,7 +331,7 @@ const Win: FC = () => {
     }
     if (
       !checkChance() ||
-      !checkPRCNum() ||
+      !checkWinNum() ||
       mainButtonPending() ||
       !checkBalance()
     ) {
@@ -368,7 +368,7 @@ const Win: FC = () => {
               value={chance.valueOf()}
               maxLength={6}
               onChange={(e) => {
-                const resultString = formatPRCInputNum(e.target.value);
+                const resultString = formatPVMWinInputNum(e.target.value);
                 setChance(resultString);
               }}
             />
@@ -376,7 +376,7 @@ const Win: FC = () => {
             <button
               onClick={() => {
                 const result = Math.floor(Math.random() * 9890 + 110);
-                const resultString = formatPRCInputNum(
+                const resultString = formatPVMWinInputNum(
                   (parseFloat(result.toString()) / 100).toFixed(2).toString()
                 );
                 setChance(resultString);
@@ -390,7 +390,7 @@ const Win: FC = () => {
             bottomRightText={`${"Reward"}: ${
               payout === "NaN" ? "---" : payout
             } NEST`}
-            topRightText={checkPRCNum() ? "" : "Limitation: 1-1000"}
+            topRightText={checkWinNum() ? "" : "Limitation: 1-1000"}
             popText={"Reward = Multiplier * Bet amount"}
           >
             <SingleTokenShow tokenNameOne={"NEST"} isBold />
@@ -401,7 +401,7 @@ const Win: FC = () => {
               value={nestNum.valueOf()}
               maxLength={7}
               onChange={(e) => {
-                const resultString = formatPRCInputNum(e.target.value);
+                const resultString = formatPVMWinInputNum(e.target.value);
                 setNESTNum(resultString);
               }}
             />

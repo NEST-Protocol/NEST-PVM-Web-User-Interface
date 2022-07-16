@@ -1,4 +1,4 @@
-import { CofixSwapAddress, NestPrice as NestPriceAddress } from './../constants/addresses';
+import { NestPrice as NestPriceAddress } from './../constants/addresses';
 import useWeb3 from '../hooks/useWeb3';
 import { getAddress } from "@ethersproject/address"
 import { Contract } from "@ethersproject/contracts"
@@ -7,11 +7,11 @@ import { AddressZero } from "@ethersproject/constants"
 import { useMemo } from 'react';
 import { AddressesType } from '../constants/addresses';
 import ERC20ABI from '../../contracts/abis/ERC20.json'
-import FortEuropeanOptionABI from '../../contracts/abis/FortEuropeanOption.json';
-import FortLeverABI from '../../contracts/abis/FortLever.json';
+import PVMOptionABI from '../../contracts/abis/PVMOption.json';
+import PVMLeverABI from '../../contracts/abis/PVMLever.json';
 import NestPriceABI from '../../contracts/abis/NestPrice.json';
-import CofixSwapABI from '../../contracts/abis/CofixSwap.json';
-import FortPRCABI from '../../contracts/abis/FortPRC.json';
+import PVMWinABI from '../../contracts/abis/PVMWin.json';
+import PVMPayBackABI from '../../contracts/abis/PVMPayBack.json';
 import { ZERO_ADDRESS } from '../utils';
 
 function isAddress(value: any): string | false {
@@ -66,22 +66,22 @@ export function ERC20Contract(addresses: AddressesType): Contract | null {
     return useContract(addresses, ERC20ABI);
 }
 
-export function FortEuropeanOption(addresses: AddressesType): Contract | null {
-    return useContract(addresses, FortEuropeanOptionABI)
+export function PVMOption(addresses: AddressesType): Contract | null {
+    return useContract(addresses, PVMOptionABI)
 }
 
-export function FortLever(addresses: AddressesType): Contract | null {
-    return useContract(addresses, FortLeverABI)
+export function PVMLever(addresses: AddressesType): Contract | null {
+    return useContract(addresses, PVMLeverABI)
 }
 
 export function NestPriceContract(): Contract | null {
     return useContract(NestPriceAddress, NestPriceABI)
 }
 
-export function CofixSwapContract(): Contract | null {
-    return useContract(CofixSwapAddress,CofixSwapABI)
+export function PVMWin(addresses: AddressesType): Contract | null {
+    return useContract(addresses, PVMWinABI)
 }
 
-export function FortPRCContract(addresses: AddressesType): Contract | null {
-    return useContract(addresses, FortPRCABI)
+export function PVMPayBack(addresses: AddressesType): Contract | null {
+    return useContract(addresses, PVMPayBackABI)
 }

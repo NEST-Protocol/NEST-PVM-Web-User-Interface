@@ -13,7 +13,7 @@ export function useEtherscanBaseUrl(): string {
         return "https://ropsten.etherscan.io/tx/";
       } else if (chainId === 56) {
         return "https://bscscan.com/tx/";
-      } else if (chainId ===97) {
+      } else if (chainId === 97) {
         return "https://testnet.bscscan.com/tx/";
       }
     }
@@ -33,7 +33,7 @@ export function useEtherscanAddressBaseUrl(): string {
         return "https://ropsten.etherscan.io/address/";
       } else if (chainId === 56) {
         return "https://bscscan.com/address/";
-      } else if (chainId ===97) {
+      } else if (chainId === 97) {
         return "https://testnet.bscscan.com/address/";
       }
     }

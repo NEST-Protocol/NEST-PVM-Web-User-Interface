@@ -1,17 +1,17 @@
 import { BigNumber } from "ethers"
-import { FortPRC } from "../../libs/constants/addresses"
-import { FortPRCContract } from "../../libs/hooks/useContract"
+import { PVMWinContract } from "../../libs/constants/addresses"
+import { PVMWin } from "../../libs/hooks/useContract"
 import { useSendTransaction } from "../../libs/hooks/useSendTransaction"
 import { TransactionType } from "../../libs/hooks/useTransactionInfo"
 import useWeb3 from "../../libs/hooks/useWeb3"
 
 
-export function useFortPRCRoll(
+export function usePVMWinRoll(
     n: BigNumber,  
     m: BigNumber | null | undefined
 ) { 
     const { account, chainId } = useWeb3()
-    var contract = FortPRCContract(FortPRC)
+    var contract = PVMWin(PVMWinContract)
     var callData: string | undefined
     if (!chainId || !m) {
         contract = null
@@ -30,11 +30,11 @@ export function useFortPRCRoll(
     return txPromise
 }
 
-export function useFortPRCClaim(
+export function usePVMWinClaim(
     index: BigNumber
 ) { 
     const { account, chainId } = useWeb3()
-    var contract = FortPRCContract(FortPRC)
+    var contract = PVMWin(PVMWinContract)
     var callData: string | undefined
     if (!chainId) {
         contract = null
@@ -49,6 +49,6 @@ export function useFortPRCClaim(
         to: contract?.address,
         data: callData
     }
-    const txPromise = useSendTransaction(contract, tx, {title:`Claim`, info:index.toString(), type: TransactionType.prcclaim})
+    const txPromise = useSendTransaction(contract, tx, {title:`Claim`, info:index.toString(), type: TransactionType.winClaim})
     return txPromise
 }

@@ -11,15 +11,15 @@ import MainButton from "../../components/MainButton";
 import MainCard from "../../components/MainCard";
 import PerpetualsList from "../../components/PerpetualsList";
 import { DoubleTokenShow, SingleTokenShow } from "../../components/TokenShow";
-import { useFortLeverBuy } from "../../contracts/hooks/useFortLeverTransation";
+import { usePVMLeverBuy } from "../../contracts/hooks/usePVMLeverTransation";
 import {
-  FortLeverContract,
+  PVMLeverContract,
   tokenList,
   TokenType,
 } from "../../libs/constants/addresses";
 import {
   ERC20Contract,
-  FortLever,
+  PVMLever,
   getERC20Contract,
   NestPriceContract,
 } from "../../libs/hooks/useContract";
@@ -72,7 +72,7 @@ const Perpetuals: FC = () => {
   const classPrefix = "perpetuals";
   const nestToken = ERC20Contract(tokenList["NEST"].addresses);
   const priceContract = NestPriceContract();
-  const leverContract = FortLever(FortLeverContract);
+  const PVMLeverOJ = PVMLever(PVMLeverContract);
   const { pendingList, txList } = useTransactionListCon();
   const [nestAllowance, setNestAllowance] = useState<BigNumber>(
     BigNumber.from("0")
@@ -157,12 +157,12 @@ const Perpetuals: FC = () => {
   );
   // price
   useEffect(() => {
-    if (!priceContract || !chainId || !leverContract) {
+    if (!priceContract || !chainId || !PVMLeverOJ) {
       return;
     }
-    getPrice(priceContract, leverContract, chainId);
+    getPrice(priceContract, PVMLeverOJ, chainId);
     const id = setInterval(() => {
-      getPrice(priceContract, leverContract, chainId);
+      getPrice(priceContract, PVMLeverOJ, chainId);
     }, 60 * 1000);
     intervalRef.current = id;
     return () => {
@@ -170,7 +170,7 @@ const Perpetuals: FC = () => {
         clearInterval(intervalRef.current);
       }
     };
-  }, [chainId, priceContract, leverContract, getPrice]);
+  }, [chainId, priceContract, PVMLeverOJ, getPrice]);
   // balance
   useEffect(() => {
     if (!nestToken) {
@@ -183,16 +183,16 @@ const Perpetuals: FC = () => {
   }, [nestToken, account]);
   // list
   const getList = useCallback(async () => {
-    if (!leverContract || !account) {
+    if (!PVMLeverOJ || !account) {
       return;
     }
-    const leverList = await leverContract.find("0", "20", "20", account);
+    const leverList = await PVMLeverOJ.find("0", "20", "20", account);
     const resultList = leverList.filter((item: LeverListType) =>
       item.balance.gt(BigNumber.from("0"))
     );
     setLeverListState(resultList);
     setIsRefresh(true);
-  }, [account, leverContract]);
+  }, [account, PVMLeverOJ]);
   // approve
   useEffect(() => {
     if (!chainId || !account || !library) {
@@ -210,7 +210,7 @@ const Perpetuals: FC = () => {
     (async () => {
       const allowance = await nestToken.allowance(
         account,
-        FortLeverContract[chainId]
+        PVMLeverContract[chainId]
       );
       setNestAllowance(allowance);
     })();
@@ -269,7 +269,7 @@ const Perpetuals: FC = () => {
     }
     return true;
   };
-  const active = useFortLeverBuy(
+  const active = usePVMLeverBuy(
     tokenPair,
     leverNum,
     isLong,
@@ -278,7 +278,7 @@ const Perpetuals: FC = () => {
   const approve = useERC20Approve(
     'NEST',
     MaxUint256,
-    chainId ? FortLeverContract[chainId] : undefined
+    chainId ? PVMLeverContract[chainId] : undefined
   );
   const kPrice = useCallback(() => {
     if (!kValue) {

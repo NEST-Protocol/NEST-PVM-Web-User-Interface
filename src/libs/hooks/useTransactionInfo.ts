@@ -9,9 +9,9 @@ import {
 import { notifyTransaction } from "../../pages/Shared/TransactionToast";
 import { normalToBigNumber, ZERO_ADDRESS } from "../utils";
 import { notifyWinToast, WinToastProps } from "../../pages/Shared/WinToast";
-import { FortPRCContract } from "./useContract";
-import { FortPRC } from "../constants/addresses";
-import { PRCListType } from "../../pages/Win";
+import { PVMWin } from "./useContract";
+import { PVMWinContract } from "../constants/addresses";
+import { WinListType } from "../../pages/Win";
 
 export enum TransactionType {
   buyLever = 0,
@@ -25,7 +25,7 @@ export enum TransactionType {
   sellOption = 8,
   swap = 9,
   roll = 10,
-  prcclaim = 11
+  winClaim = 11
 }
 
 export enum TransactionState {
@@ -69,7 +69,7 @@ const useTransactionList = () => {
   });
   const [pendingList, setPendingList] = useState<TransactionInfoType[]>([]);
   const [checking, setChecking] = useState(false);
-  const fortPRCContract = FortPRCContract(FortPRC);
+  const PVMWinOJ = PVMWin(PVMWinContract);
 
   useEffect(() => {
     if (!chainId) {
@@ -96,7 +96,7 @@ const useTransactionList = () => {
         "transactionList" + chainId?.toString(),
         JSON.stringify(txList)
       );
-      // 过滤pending交易
+      // check pending transaction
       var noResultTx: Array<TransactionInfoType> = txList.filter((item) => {
         return item.txState === TransactionState.Pending;
       });
@@ -116,7 +116,7 @@ const useTransactionList = () => {
 
   const getList = useCallback(async () => {
     
-    if (!fortPRCContract) {
+    if (!PVMWinOJ) {
       return;
     }
 
@@ -124,17 +124,12 @@ const useTransactionList = () => {
     if (!latest) {
       return;
     }
-    
-    // const listResult = await fortPRCContract.find44("0", "100", "100", account);
-    // const result = listResult.filter(
-    //   (item: PRCListType) => item.owner !== ZERO_ADDRESS
-    // );
 
     const myBetsUrl = `https://api.hedge.red/api/prc/userList/${account}/50`;
     const myBets_get = await fetch(myBetsUrl);
     const myBets_data = await myBets_get.json();
     const result = myBets_data.value.filter(
-      (item: PRCListType) => item.owner !== ZERO_ADDRESS
+      (item: WinListType) => item.owner !== ZERO_ADDRESS
     );
     
     const latestItem = result[0];
@@ -144,7 +139,7 @@ const useTransactionList = () => {
       index: BigNumber.from(latestItem.index.toString()),
     };
     notifyWinToast(notifyItem);
-  }, [account, fortPRCContract, library]);
+  }, [account, PVMWinOJ, library]);
 
   useEffect(() => {
     if (pendingList.length === 0 || checking) {

@@ -1,21 +1,21 @@
-import { TokenType } from './../../libs/constants/addresses';
+import { TokenType } from '../../libs/constants/addresses';
 import { BigNumber } from "ethers";
-import { FortEuropeanOptionContract } from "../../libs/constants/addresses";
-import { FortEuropeanOption } from "../../libs/hooks/useContract";
+import { PVMOptionContract } from "../../libs/constants/addresses";
+import { PVMOption } from "../../libs/hooks/useContract";
 import { useSendTransaction } from "../../libs/hooks/useSendTransaction";
 import useWeb3 from "../../libs/hooks/useWeb3";
 import { PRICE_FEE } from "../../libs/utils";
 import { TransactionType } from '../../libs/hooks/useTransactionInfo';
 
-export function useFortEuropeanOptionOpen(
+export function usePVMOptionOpen(
     token: TokenType,  
     orientation: boolean, 
     endblock: BigNumber, 
-    fortAmount: BigNumber,
+    nestAmount: BigNumber,
     price?: BigNumber
 ) { 
     const { account, chainId } = useWeb3()
-    var contract = FortEuropeanOption(FortEuropeanOptionContract)
+    var contract = PVMOption(PVMOptionContract)
     var callData: string | undefined
     if (!chainId || !price) {
         contract = null
@@ -25,7 +25,7 @@ export function useFortEuropeanOptionOpen(
             price, 
             orientation, 
             endblock, 
-            fortAmount]
+            nestAmount]
         )
     }
     
@@ -39,12 +39,12 @@ export function useFortEuropeanOptionOpen(
     return txPromise
 }
 
-export function useFortEuropeanOptionExercise(
+export function usePVMOptionExercise(
     index: BigNumber,
     amount: BigNumber
 ) {
     const { account, chainId } = useWeb3()
-    var contract = FortEuropeanOption(FortEuropeanOptionContract)
+    var contract = PVMOption(PVMOptionContract)
     var callData: string | undefined
     if (!chainId) {
         contract = null
@@ -65,12 +65,12 @@ export function useFortEuropeanOptionExercise(
     return txPromise
 }
 
-export function useFortEuropeanOptionSell(
+export function usePVMOptionSell(
     index: BigNumber,
     amount: BigNumber
 ) {
     const { account, chainId } = useWeb3()
-    var contract = FortEuropeanOption(FortEuropeanOptionContract)
+    var contract = PVMOption(PVMOptionContract)
     var callData: string | undefined
     if (!chainId) {
         contract = null

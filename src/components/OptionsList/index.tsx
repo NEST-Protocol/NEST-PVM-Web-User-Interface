@@ -3,16 +3,16 @@ import { t, Trans } from "@lingui/macro";
 import moment from "moment";
 import { FC, useCallback, useEffect, useState } from "react";
 import {
-  useFortEuropeanOptionExercise,
-  useFortEuropeanOptionSell,
-} from "../../contracts/hooks/useFortEuropeanOptionTransation";
+  usePVMOptionExercise,
+  usePVMOptionSell,
+} from "../../contracts/hooks/usePVMOptionTransation";
 import {
-  FortEuropeanOptionContract,
+  PVMOptionContract,
   tokenList,
   TokenType,
 } from "../../libs/constants/addresses";
 import {
-  FortEuropeanOption,
+  PVMOption,
   NestPriceContract,
 } from "../../libs/hooks/useContract";
 import useTransactionListCon, {
@@ -48,7 +48,7 @@ const OptionsList: FC<Props> = ({ ...props }) => {
   const [strikeAmount, setStrikeAmount] = useState<BigNumber>();
   const [saleAmount, setSaleAmount] = useState<BigNumber>();
   const priceContract = NestPriceContract();
-  const optionsContract = FortEuropeanOption(FortEuropeanOptionContract);
+  const optionsContract = PVMOption(PVMOptionContract);
   const loadingButton = () => {
     const closeTx = pendingList.filter(
       (item) =>
@@ -74,11 +74,11 @@ const OptionsList: FC<Props> = ({ ...props }) => {
   }, [props.item.tokenAddress]);
   const TokenOneSvg = tokenList[tokenName()].Icon;
   const TokenTwoSvg = tokenList["USDT"].Icon;
-  const active = useFortEuropeanOptionExercise(
+  const active = usePVMOptionExercise(
     props.item.index,
     props.item.balance
   );
-  const sellActive = useFortEuropeanOptionSell(
+  const sellActive = usePVMOptionSell(
     props.item.index,
     props.item.balance
   );
