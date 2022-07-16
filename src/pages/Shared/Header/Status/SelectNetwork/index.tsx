@@ -28,12 +28,6 @@ const SelectNetwork: FC = () => {
               </a>
             </li>
             <li>
-              <a href={"https://test.fortprotocol.com"}>
-                <LittleETH />
-                <p>Rinkeby</p>
-              </a>
-            </li>
-            <li>
               <a href={"https://bnb.fortprotocol.com"}>
                 <LittleBSC />
                 <p>BNB</p>
