@@ -30,7 +30,7 @@ export function usePVMLeverBuy(
         from: account,
         to: contract?.address,
         data: callData,
-        value: PRICE_FEE
+        value: PRICE_FEE[chainId!]
     }
     const txPromise = useSendTransaction(contract, tx, {title:`Open Future positions`, info:'', type: TransactionType.buyLever})
     return txPromise
@@ -55,7 +55,7 @@ export function usePVMLeverSell(
         from: account,
         to: contract?.address,
         data: callData,
-        value: PRICE_FEE
+        value: PRICE_FEE[chainId!]
     }
     const txPromise = useSendTransaction(contract, tx, {title:`Close Future positions`, info:index.toString(), type: TransactionType.closeLever})
     return txPromise

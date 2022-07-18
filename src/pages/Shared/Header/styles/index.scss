@@ -15,8 +15,15 @@
 
         .header-logo {
             position: relative;
-            margin-left: 40px;
             justify-self: flex-start;
+            margin-top: 13px;
+            margin-left: 40px;
+
+            g {
+                path {
+                    fill: black;
+                }
+            }
         }
     }
 

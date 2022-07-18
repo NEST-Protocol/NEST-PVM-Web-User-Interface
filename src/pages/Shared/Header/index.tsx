@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Link, useLocation } from "react-router-dom";
 import classNames from "classnames";
-import { FortLogo } from "../../../components/Icon";
+import { NESTLogo } from "../../../components/Icon";
 import "./styles";
 import { t } from "@lingui/macro";
 import ConnectStatus from "./Status";
@@ -29,7 +29,7 @@ const Header: FC = () => {
     <header>
       <div className={`${header}-nav`}>
         <a href={"https://www.nestprotocol.org"}>
-          <FortLogo className={`${header}-logo`} />
+          <NESTLogo className={`${header}-logo`} />
         </a>
         <nav>
           <ul>{routes}</ul>

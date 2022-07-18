@@ -1,6 +1,7 @@
 import { t, Trans } from "@lingui/macro";
 import { BigNumber, Contract } from "ethers";
 import { FC, useCallback, useEffect, useRef, useState } from "react";
+import { MaxUint256 } from "@ethersproject/constants";
 import ChooseType from "../../components/ChooseType";
 import { PutDownIcon, WhiteLoading } from "../../components/Icon";
 import InfoShow from "../../components/InfoShow";
@@ -16,15 +17,17 @@ import {
   ERC20Contract,
   PVMOption,
   NestPriceContract,
+  getERC20Contract,
 } from "../../libs/hooks/useContract";
 import useWeb3 from "../../libs/hooks/useWeb3";
 import {
   BASE_2000ETH_AMOUNT,
   BASE_AMOUNT,
   bigNumberToNormal,
+  BLOCK_TIME,
   checkWidth,
   formatInputNum,
-  normalToBigNumber
+  normalToBigNumber,
 } from "../../libs/utils";
 import { DatePicker, message, Tooltip } from "antd";
 import "../../styles/ant.css";
@@ -36,7 +39,7 @@ import OptionsList from "../../components/OptionsList";
 import useTransactionListCon from "../../libs/hooks/useTransactionInfo";
 import { Popup } from "reactjs-popup";
 import OptionsNoticeModal from "./OptionsNoticeModal";
-import UpdateNoticeModal from "../Shared/UpdateNoticeModal";
+import { useERC20Approve } from "../../contracts/hooks/useERC20Approve";
 
 export type OptionsListType = {
   index: BigNumber;
@@ -52,7 +55,6 @@ const MintOptions: FC = () => {
   const classPrefix = "options-mintOptions";
   const { account, chainId, library } = useWeb3();
   const [showNotice, setShowNotice] = useState(false);
-  const [showUpdateNotice, setShowUpdateNotice] = useState(false);
   const modal = useRef<any>();
   const nestPriceContract = NestPriceContract();
   const PVMOptionOJ = PVMOption(PVMOptionContract);
@@ -73,19 +75,17 @@ const MintOptions: FC = () => {
   const [priceNow, setPriceNow] = useState<{ [key: string]: TokenType }>();
   const [nestBalance, setNestBalance] = useState(BigNumber.from(0));
   const [optionTokenValue, setOptionTokenValue] = useState<BigNumber>();
+  const [nestAllowance, setNestAllowance] = useState<BigNumber>(
+    BigNumber.from("0")
+  );
 
-  // const showNoticeModal = () => {
-  //   var cache = localStorage.getItem("OptionsFirst");
-  //   if (cache !== "1") {
-  //     setShowNotice(true);
-  //     return true;
-  //   }
-  //   return false;
-  // };
-
-  const showUpdateNoticeModal = () => {
-    setShowUpdateNotice(true);
-    return true;
+  const showNoticeModal = () => {
+    var cache = localStorage.getItem("OptionsFirst");
+    if (cache !== "1") {
+      setShowNotice(true);
+      return true;
+    }
+    return false;
   };
 
   const trList = optionsListState.map((item) => {
@@ -105,12 +105,7 @@ const MintOptions: FC = () => {
       return;
     }
     const optionsCount = await PVMOptionOJ.getOptionCount();
-    const optionsList = await PVMOptionOJ.find(
-      0,
-      1000,
-      optionsCount,
-      account
-    );
+    const optionsList = await PVMOptionOJ.find(0, 1000, optionsCount, account);
     const resultList = optionsList.filter((item: OptionsListType) =>
       item.balance.gt(BigNumber.from("0"))
     );
@@ -145,7 +140,7 @@ const MintOptions: FC = () => {
         });
       }, 4000);
     }
-  }, [account, nestContract, getOptionsList, isRefresh, txList]);
+  }, [account, nestContract, getOptionsList, isRefresh, txList, chainId]);
 
   const loadingButton = () => {
     const latestTx = pendingList.filter((item) => item.type === 2);
@@ -197,7 +192,11 @@ const MintOptions: FC = () => {
         clearInterval(intervalRef.current);
       }
     };
-  }, [chainId, nestPriceContract]);
+  }, [chainId, latestBlock.blockNum, nestPriceContract]);
+  useEffect(() => {
+    setLatestBlock({ time: 0, blockNum: 0 });
+    setExercise({ time: "", blockNum: 0 });
+  }, [chainId]);
 
   useEffect(() => {
     if (moment().valueOf() - latestBlock.time > 6000 && library) {
@@ -212,9 +211,32 @@ const MintOptions: FC = () => {
     setIsLong(isLong);
   };
 
+  // approve
+  useEffect(() => {
+    if (!chainId || !account || !library) {
+      return;
+    }
+    const nestToken = getERC20Contract(
+      tokenList["NEST"].addresses[chainId],
+      library,
+      account
+    );
+    if (!nestToken) {
+      setNestAllowance(BigNumber.from("0"));
+      return;
+    }
+    (async () => {
+      const allowance = await nestToken.allowance(
+        account,
+        PVMOptionContract[chainId]
+      );
+      setNestAllowance(allowance);
+    })();
+  }, [account, chainId, library, txList]);
+
   const onOk = useCallback(
     async (value: any) => {
-      if (latestBlock.blockNum === 0) {
+      if (latestBlock.blockNum === 0 || !chainId) {
         return;
       }
 
@@ -223,7 +245,7 @@ const MintOptions: FC = () => {
       if (selectTime > nowTime) {
         const timeString = moment(value).format("YYYY[-]MM[-]DD");
         const blockNum = parseFloat(
-          ((selectTime - nowTime) / 3000).toString()
+          ((selectTime - nowTime) / BLOCK_TIME[chainId]).toString()
         ).toFixed(0);
         setExercise({
           time: timeString,
@@ -234,7 +256,7 @@ const MintOptions: FC = () => {
         setExercise({ time: timeString, blockNum: latestBlock.blockNum || 0 });
       }
     },
-    [latestBlock]
+    [chainId, latestBlock.blockNum]
   );
 
   useEffect(() => {
@@ -243,7 +265,8 @@ const MintOptions: FC = () => {
       strikePrice !== "" &&
       nestNum !== "" &&
       priceNow &&
-      exercise.blockNum !== 0 && chainId
+      exercise.blockNum !== 0 &&
+      chainId
     ) {
       (async () => {
         setShowLoading(true);
@@ -268,9 +291,22 @@ const MintOptions: FC = () => {
     } else {
       setOptionTokenValue(undefined);
     }
-  }, [chainId, exercise.blockNum, PVMOptionOJ, nestNum, isLong, priceNow, strikePrice, tokenPair.addresses, tokenPair.symbol]);
+  }, [
+    chainId,
+    exercise.blockNum,
+    PVMOptionOJ,
+    nestNum,
+    isLong,
+    priceNow,
+    strikePrice,
+    tokenPair.addresses,
+    tokenPair.symbol,
+  ]);
 
   const checkButton = () => {
+    if (!checkAllowance()) {
+      return false;
+    }
     if (
       nestNum === "" ||
       strikePrice === "" ||
@@ -285,6 +321,15 @@ const MintOptions: FC = () => {
     }
     return false;
   };
+  const checkAllowance = () => {
+    if (!nestNum) {
+      return true;
+    }
+    if (nestAllowance.lt(normalToBigNumber(nestNum))) {
+      return false;
+    }
+    return true;
+  };
   function disabledDate(current: any) {
     return current && current < moment().add(30, "days").startOf("day");
   }
@@ -294,6 +339,12 @@ const MintOptions: FC = () => {
     BigNumber.from(exercise.blockNum),
     normalToBigNumber(nestNum),
     strikePrice ? normalToBigNumber(strikePrice, 18) : undefined
+  );
+
+  const approve = useERC20Approve(
+    "NEST",
+    MaxUint256,
+    chainId ? PVMOptionContract[chainId] : undefined
   );
 
   const priceString = () => {
@@ -317,17 +368,6 @@ const MintOptions: FC = () => {
             onClose={() => modal.current.close()}
             action={active}
           ></OptionsNoticeModal>
-        </Popup>
-      ) : null}
-      {showUpdateNotice ? (
-        <Popup
-          ref={modal}
-          open
-          onClose={() => {
-            setShowUpdateNotice(false);
-          }}
-        >
-          <UpdateNoticeModal></UpdateNoticeModal>
         </Popup>
       ) : null}
       <div className={classPrefix}>
@@ -449,16 +489,17 @@ const MintOptions: FC = () => {
               if (checkButton()) {
                 return;
               }
-              // if (showNoticeModal()) {
-              //   return;
-              // }
-              if (showUpdateNoticeModal()) {
+              if (showNoticeModal()) {
                 return;
               }
-              // active();
+              if (checkAllowance()) {
+                active();
+              } else {
+                approve();
+              }
             }}
           >
-            <Trans>Buy Option</Trans>
+            {checkAllowance() ? (<Trans>Buy Option</Trans>) : ('Approve')}
           </MainButton>
           <div className={`${classPrefix}-rightCard-time`}>
             <p className={`${classPrefix}-rightCard-timeTitle`}>

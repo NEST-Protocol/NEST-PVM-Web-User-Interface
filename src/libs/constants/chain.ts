@@ -14,25 +14,21 @@ export const BSCTest = {
   tokenName: "BSCTest",
   tokenSymbol: "BNB",
   tokenDecimals: 18,
-  rpc: [
-    `https://data-seed-prebsc-2-s1.binance.org:8545/`
-  ],
+  rpc: [`https://data-seed-prebsc-2-s1.binance.org:8545/`],
   infoURL: "https://testnet.bscscan.com/",
 };
 
 export const BSC = {
   name: "BSC",
-  chainId:56,
+  chainId: 56,
   tokenName: "BSC",
   tokenSymbol: "BNB",
   tokenDecimals: 18,
-  rpc: [
-    `https://bsc-dataseed1.defibit.io/`
-  ],
+  rpc: [`https://bsc-dataseed1.defibit.io/`],
   infoURL: "https://bscscan.com/",
 };
 
-const INFURA_API_KEY = 'be0a9832394640b090fceb2b2107993c';
+const INFURA_API_KEY = "be0a9832394640b090fceb2b2107993c";
 
 export const Rinkeby = {
   name: "Rinkeby",
@@ -59,7 +55,6 @@ export const ETH = {
   ],
   infoURL: "https://etherscan.io/",
 };
-
 
 // export const SupportedChains: Array<Chain> = [Mainnet, Ropsten, Rinkeby, Goerli, Kovan]
 export const SupportedChains: Array<Chain> = [BSCTest, Rinkeby];

@@ -33,7 +33,7 @@ export function usePVMOptionOpen(
         from: account,
         to: contract?.address,
         data: callData,
-        value: PRICE_FEE
+        value: PRICE_FEE[chainId!]
     }
     const txPromise = useSendTransaction(contract, tx, {title:`Buy options`, info:'', type: TransactionType.buyOption})
     return txPromise
@@ -59,7 +59,7 @@ export function usePVMOptionExercise(
         from: account,
         to: contract?.address,
         data: callData,
-        value: PRICE_FEE
+        value: PRICE_FEE[chainId!]
     }
     const txPromise = useSendTransaction(contract, tx, {title:`Strike options`, info:index.toString(), type: TransactionType.closeOption})
     return txPromise
@@ -85,7 +85,7 @@ export function usePVMOptionSell(
         from: account,
         to: contract?.address,
         data: callData,
-        value: PRICE_FEE
+        value: PRICE_FEE[chainId!]
     }
     const txPromise = useSendTransaction(contract, tx, {title:`Sell options`, info:index.toString(), type: TransactionType.sellOption})
     return txPromise

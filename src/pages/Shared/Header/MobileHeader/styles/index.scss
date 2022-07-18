@@ -20,6 +20,11 @@
 
     &-logo {
         margin: auto 0;
+        g {
+            path {
+                fill: black;
+            }
+        }
     }
 
     &-headerList {

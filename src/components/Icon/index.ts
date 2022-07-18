@@ -1,4 +1,4 @@
-export { ReactComponent as FortLogo } from './svg/fort-logo.svg'
+export { ReactComponent as NESTLogo } from './svg/NEST-logo.svg'
 export { ReactComponent as TwitterIcon } from './svg/twitter-icon.svg'
 export { ReactComponent as GithubIcon } from './svg/github-icon.svg'
 export { ReactComponent as MiIcon } from './svg/mi-icon.svg'

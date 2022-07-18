@@ -1,10 +1,29 @@
 import { BigNumber } from "ethers";
 
-export const PRICE_FEE = BigNumber.from(normalToBigNumber("0.002"));
+export type NumberBigNumberType = {
+  [key: number]: BigNumber;
+}
+export type NumberNumberType = {
+  [key: number]: number;
+}
+
+export const PRICE_FEE: NumberBigNumberType = {
+  1: normalToBigNumber("0"),
+  4: normalToBigNumber("0"),
+  56: normalToBigNumber("0"),
+  97: normalToBigNumber("0.002"),
+}
+export const BLOCK_TIME: NumberNumberType = {
+  1: 15000,
+  4: 15000,
+  56: 3000,
+  97: 3000,
+}
+
+
 export const ZERO_ADDRESS = "0x0000000000000000000000000000000000000000";
 export const BASE_AMOUNT = BigNumber.from('1000000000000000000');
 export const BASE_2000ETH_AMOUNT = BigNumber.from('2000000000000000000000');
-export const COFIX_THETA = BigNumber.from('30');
 
 /**
  * BigNumber转为浮点字符串

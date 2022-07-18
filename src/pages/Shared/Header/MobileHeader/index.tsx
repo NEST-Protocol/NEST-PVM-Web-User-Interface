@@ -5,7 +5,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Popup } from "reactjs-popup";
 import {
   DarkIcon,
-  FortLogo,
+  NESTLogo,
   HeaderListMobile,
   LittleBSC,
   WhiteIcon,
@@ -145,7 +145,7 @@ const MobileHeader: FC = () => {
             <HeaderListMobile />
           </button>
         </div>
-        <FortLogo className={`${classPrefix}-logo`} />
+        <NESTLogo className={`${classPrefix}-logo`} />
         <div className={`${classPrefix}-rightButton`}></div>
       </div>
     </header>

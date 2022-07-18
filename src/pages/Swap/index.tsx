@@ -58,17 +58,9 @@ const Swap: FC = () => {
   const [swapTokenBalance, setSwapTokenBalance] =
     useState<SwapTokenBalanceType>();
   const [destValue, setDestValue] = useState<BigNumber>();
-  // const PVMPayBackOJ = PVMPayBack(PVMPayBackContract);
-  // const exchangeSwapTokens = () => {
-  //   if (swapToken.dest === "PRC") {
-  //     return;
-  //   }
-  //   setSwapToken({ src: swapToken.dest, dest: swapToken.src });
-  //   setInputValue("");
-  // };
   const { pendingList, txList } = useTransactionListCon();
   const priceContract = NestPriceContract();
-  // 余额
+  // balance
   const getBalance = useCallback(async () => {
     if (!chainId || !account || !library) {
       return;
@@ -102,7 +94,7 @@ const Swap: FC = () => {
       }, 4000);
     }
   }, [getBalance, txList]);
-  // 授权
+  // approve
   useEffect(() => {
     if (!chainId || !account || !library) {
       return;
