@@ -1,6 +1,6 @@
 import { t, Trans } from "@lingui/macro";
 import classNames from "classnames";
-import { FC, useRef, useState } from "react";
+import { FC, useCallback, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Popup } from "reactjs-popup";
 import {
@@ -11,6 +11,7 @@ import {
   WhiteIcon,
   WhiteLoading,
   XIcon,
+  LittleETH,
 } from "../../../../components/Icon";
 import useTransactionListCon from "../../../../libs/hooks/useTransactionInfo";
 import useWeb3 from "../../../../libs/hooks/useWeb3";
@@ -25,13 +26,8 @@ import useThemes, { ThemeType } from "../../../../libs/hooks/useThemes";
 
 const MobileHeader: FC = () => {
   const classPrefix = "header-mobile";
-  const { account } = useWeb3();
+  const { account, chainId } = useWeb3();
   const [showList, setShowList] = useState(false);
-  // const switchLang = (locale: string) => {
-  //   return () => {
-  //     dynamicActivate(locale);
-  //   };
-  // };
   const location = useLocation();
   const { pendingList } = useTransactionListCon();
   const routes = [
@@ -59,6 +55,26 @@ const MobileHeader: FC = () => {
       return <DarkIcon />;
     }
   };
+  const nowNetwork = useCallback(() => {
+    if (!chainId) {
+      return;
+    }
+    if (chainId === 56 || chainId === 97) {
+      return (
+        <>
+          <LittleBSC />
+          <p>{chainId === 56 ? "BNB" : "BNBTest"}</p>
+        </>
+      );
+    } else if (chainId === 1 || chainId === 4) {
+      return (
+        <>
+          <LittleETH />
+          <p>{chainId === 1 ? "Ethereum" : "Rinkeby"}</p>
+        </>
+      );
+    }
+  }, [chainId]);
 
   const headerListShow = (
     <div className={`${classPrefix}-headerList`}>
@@ -74,8 +90,7 @@ const MobileHeader: FC = () => {
           ref={modal}
           trigger={
             <div className={`${classPrefix}-headerList-top-mid`}>
-              <LittleBSC />
-              <p>BNB</p>
+              {nowNetwork()}
             </div>
           }
         >

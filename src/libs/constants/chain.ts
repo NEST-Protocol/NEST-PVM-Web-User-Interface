@@ -8,18 +8,18 @@ type Chain = {
   infoURL: string;
 };
 
-export const BSCTest = {
-  name: "BSCTest",
+export const BNBTest = {
+  name: "BNBTest",
   chainId: 97,
-  tokenName: "BSCTest",
+  tokenName: "BNBTest",
   tokenSymbol: "BNB",
   tokenDecimals: 18,
   rpc: [`https://data-seed-prebsc-2-s1.binance.org:8545/`],
   infoURL: "https://testnet.bscscan.com/",
 };
 
-export const BSC = {
-  name: "BSC",
+export const BNB = {
+  name: "BNB",
   chainId: 56,
   tokenName: "BSC",
   tokenSymbol: "BNB",
@@ -43,8 +43,8 @@ export const Rinkeby = {
   infoURL: "https://rinkeby.etherscan.io/",
 };
 
-export const ETH = {
-  name: "Mainnet",
+export const Ethereum = {
+  name: "Ethereum",
   chainId: 1,
   tokenName: "Ether",
   tokenSymbol: "ETH",
@@ -57,4 +57,4 @@ export const ETH = {
 };
 
 // export const SupportedChains: Array<Chain> = [Mainnet, Ropsten, Rinkeby, Goerli, Kovan]
-export const SupportedChains: Array<Chain> = [BSCTest, Rinkeby];
+export const SupportedChains: Array<Chain> = [BNBTest, Rinkeby];

@@ -49,35 +49,36 @@
             color: $gray-info-text-color;
         }
 
-        
+
 
         ul {
-            display:contents;
+            display: contents;
 
             li {
                 display: flex;
                 height: 28px;
                 padding: 0 14px;
 
-                a {
-                    display: contents;
-                    svg {
-                        margin: auto 0;
-                        margin-right: 10px;
-                    }
-    
-                    p {
-                        margin: 0;
-                        line-height: 28px;
-                        color: black;
-                    }
-    
-                    p + svg {
-                        text-align: right;
-                        margin-right: 0;
-                    }
+                svg {
+                    margin: auto 0;
+                    margin-right: 10px;
                 }
-                
+
+                p {
+                    margin: 0;
+                    line-height: 28px;
+                    color: black;
+                }
+
+                p+svg {
+                    text-align: right;
+                    margin-right: 0;
+                }
+
+                &:hover {
+                    cursor: pointer;
+                }
+
             }
 
             li:hover {

@@ -23,6 +23,7 @@ import {
   BASE_2000ETH_AMOUNT,
   BASE_AMOUNT,
   bigNumberToNormal,
+  BLOCK_TIME,
   checkWidth,
   ZERO_ADDRESS,
 } from "../../libs/utils";
@@ -95,7 +96,7 @@ const OptionsList: FC<Props> = ({ ...props }) => {
     }
     if (props.item.exerciseBlock.toNumber() >= Number(props.blockNum)) {
       const subTime =
-        (props.item.exerciseBlock.toNumber() - Number(props.blockNum)) * 3000;
+        (props.item.exerciseBlock.toNumber() - Number(props.blockNum)) * BLOCK_TIME[chainId];
       setTimeString(
         moment(moment().valueOf() + subTime).format("YYYY[-]MM[-]DD HH:mm")
       );

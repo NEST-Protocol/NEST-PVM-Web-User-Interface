@@ -26,6 +26,7 @@ import {
   formatPVMWinInputNum,
   normalToBigNumber,
   showEllipsisAddress2,
+  WIN_GET_STRING,
   ZERO_ADDRESS,
 } from "../../libs/utils";
 import "./styles";
@@ -82,7 +83,7 @@ const Win: FC = () => {
   }, [getBalance, txList]);
 
   const getList = useCallback(async () => {
-    if (!PVMWinOJ) {
+    if (!PVMWinOJ || !chainId) {
       return;
     }
 
@@ -90,18 +91,18 @@ const Win: FC = () => {
     if (!latest) {
       return;
     }
-    const allBets_get = await fetch("https://api.hedge.red/api/prc/list/0/10");
+    const allBets_get = await fetch("https://api.hedge.red/api/" + WIN_GET_STRING[chainId] + "/list/0/10");
     const allBets_data = await allBets_get.json();
     const allBets_data_modol = allBets_data.value.filter(
       (item: WinListType) => item.owner !== ZERO_ADDRESS
     );
 
-    const weekly_get = await fetch("https://api.hedge.red/api/prc/weekList/10");
+    const weekly_get = await fetch("https://api.hedge.red/api/" + WIN_GET_STRING[chainId] + "/weekList/10");
     const weekly_data = await weekly_get.json();
     const weekly_data_modol = weekly_data.value.filter(
       (item: WinListType) => item.owner !== ZERO_ADDRESS
     );
-    const myBetsUrl = `https://api.hedge.red/api/prc/userList/${account}/200`;
+    const myBetsUrl = "https://api.hedge.red/api/" + WIN_GET_STRING[chainId] + `/userList/${account}/200`;
     const myBets_get = await fetch(myBetsUrl);
     const myBets_data = await myBets_get.json();
     const myBets_data_modol = myBets_data.value.filter(
@@ -139,7 +140,7 @@ const Win: FC = () => {
     setNowBlock(latest);
     setAllBetsData(allBets_data_modol.reverse());
     setWeeklyData(weekly_data_modol);
-  }, [account, PVMWinOJ, library]);
+  }, [PVMWinOJ, chainId, library, account]);
 
   useEffect(() => {
     const time = setTimeout(() => {

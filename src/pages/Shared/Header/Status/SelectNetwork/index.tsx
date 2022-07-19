@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useCallback } from "react";
 import {
   LittleBSC,
   LittleETH,
@@ -7,44 +7,66 @@ import {
   PolygonIcon,
 } from "../../../../../components/Icon";
 import MainCard from "../../../../../components/MainCard";
+import { SupportedChains } from "../../../../../libs/constants/chain";
+import useWeb3 from "../../../../../libs/hooks/useWeb3";
 import "./styles";
 
 const SelectNetwork: FC = () => {
   const classPrefix = "selectNetwork";
+  const { chainId } = useWeb3();
+  const { ethereum } = window;
+
+  const selectNetwork = async (id: number) => {
+    await ethereum.request({
+      method: "wallet_switchEthereumChain",
+      params: [{ chainId: "0x" + id.toString(16) }],
+    });
+  };
+  const nowNetwork = useCallback(() => {
+    if (!chainId) {
+      return;
+    }
+    if (chainId === 56 || chainId === 97) {
+      return (
+        <>
+          <LittleBSC />
+          <p>{chainId === 56 ? "BNB" : "BNBTest"}</p>
+        </>
+      );
+    } else if (chainId === 1 || chainId === 4) {
+      return (
+        <>
+          <LittleETH />
+          <p>{chainId === 1 ? "Ethereum" : "Rinkeby"}</p>
+        </>
+      );
+    }
+  }, [chainId]);
+
   return (
     <div className={classPrefix}>
-      <div className={`${classPrefix}-chainName`}>
-        <LittleBSC />
-        <p>BNB</p>
-      </div>
+      <div className={`${classPrefix}-chainName`}>{nowNetwork()}</div>
       <div className={`${classPrefix}-hover`}>
         <MainCard classNames={`${classPrefix}-ul`}>
           <p>Select a network</p>
           <ul>
-            <li>
-              <a href={"https://app.fortprotocol.com"}>
-                <LittleETH />
-                <p>Ethereum</p>
-              </a>
+            <li onClick={() => selectNetwork(SupportedChains[1].chainId)}>
+              <LittleETH />
+              <p>{SupportedChains[1].name}</p>
+              {SupportedChains[1].chainId === chainId ? <NetworkNow /> : <></>}
+            </li>
+            <li onClick={() => selectNetwork(SupportedChains[0].chainId)}>
+              <LittleBSC />
+              <p>{SupportedChains[0].name}</p>
+              {SupportedChains[0].chainId === chainId ? <NetworkNow /> : <></>}
             </li>
             <li>
-              <a href={"https://bnb.fortprotocol.com"}>
-                <LittleBSC />
-                <p>BNB</p>
-                <NetworkNow />
-              </a>
+              <PolygonIcon />
+              <p>Polygon</p>
             </li>
             <li>
-              <a href={"https://polygon.fortprotocol.com"}>
-                <PolygonIcon />
-                <p>Polygon</p>
-              </a>
-            </li>
-            <li>
-              <a href={"https://kcc.fortprotocol.com"}>
-                <LittleKCC />
-                <p>KCC</p>
-              </a>
+              <LittleKCC />
+              <p>KCC</p>
             </li>
           </ul>
         </MainCard>

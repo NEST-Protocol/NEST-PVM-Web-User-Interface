@@ -7,6 +7,8 @@ import {
   NetworkNow,
   PolygonIcon,
 } from "../../../../../components/Icon";
+import { SupportedChains } from "../../../../../libs/constants/chain";
+import useWeb3 from "../../../../../libs/hooks/useWeb3";
 import "./styles";
 
 type Props = {
@@ -15,6 +17,15 @@ type Props = {
 
 const SelectNetworkModal: FC<Props> = ({ ...props }) => {
   const classPrefix = "selectNetworkMobile";
+  const { chainId } = useWeb3();
+  const { ethereum } = window;
+
+  const selectNetwork = async (id: number) => {
+    await ethereum.request({
+      method: "wallet_switchEthereumChain",
+      params: [{ chainId: "0x" + id.toString(16) }],
+    });
+  };
   return (
     <BaseModal
       onClose={props.onClose}
@@ -22,36 +33,23 @@ const SelectNetworkModal: FC<Props> = ({ ...props }) => {
       titleName={`Select a network`}
     >
       <ul>
-        <li>
-          <a href={"https://app.fortprotocol.com"}>
-            <LittleETH />
-            <p>Ethereum</p>
-          </a>
+        <li onClick={() => selectNetwork(SupportedChains[1].chainId)}>
+          <LittleETH />
+          <p>{SupportedChains[1].name}</p>
+          {SupportedChains[1].chainId === chainId ? <NetworkNow /> : <></>}
+        </li>
+        <li onClick={() => selectNetwork(SupportedChains[0].chainId)}>
+          <LittleBSC />
+          <p>{SupportedChains[0].name}</p>
+          {SupportedChains[0].chainId === chainId ? <NetworkNow /> : <></>}
         </li>
         <li>
-          <a href={"https://test.fortprotocol.com"}>
-            <LittleETH />
-            <p>Rinkeby</p>
-          </a>
+          <PolygonIcon />
+          <p>Polygon</p>
         </li>
         <li>
-          <a href={"https://bnb.fortprotocol.com"}>
-            <LittleBSC />
-            <p>BNB</p>
-            <NetworkNow />
-          </a>
-        </li>
-        <li>
-          <a href={"https://polygon.fortprotocol.com"}>
-            <PolygonIcon />
-            <p>Polygon</p>
-          </a>
-        </li>
-        <li>
-          <a href={"https://kcc.fortprotocol.com"}>
-            <LittleKCC />
-            <p>KCC</p>
-          </a>
+          <LittleKCC />
+          <p>KCC</p>
         </li>
       </ul>
     </BaseModal>

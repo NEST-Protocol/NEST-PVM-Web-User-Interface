@@ -6,6 +6,9 @@ export type NumberBigNumberType = {
 export type NumberNumberType = {
   [key: number]: number;
 }
+export type NumberStringType = {
+  [key: number]: string;
+}
 
 export const PRICE_FEE: NumberBigNumberType = {
   1: normalToBigNumber("0"),
@@ -14,10 +17,16 @@ export const PRICE_FEE: NumberBigNumberType = {
   97: normalToBigNumber("0.002"),
 }
 export const BLOCK_TIME: NumberNumberType = {
-  1: 15000,
-  4: 15000,
+  1: 14000,
+  4: 14000,
   56: 3000,
   97: 3000,
+}
+export const WIN_GET_STRING: NumberStringType = {
+  1: 'prcEthereum',
+  4: 'prcRinkeby',
+  56: 'prc',
+  97: 'prcTest',
 }
 
 

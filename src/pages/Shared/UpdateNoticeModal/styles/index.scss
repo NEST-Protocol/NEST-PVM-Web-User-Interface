@@ -1,7 +1,7 @@
 @use "sass:math";
 @import 'src/styles/shared.scss';
 
-.notice-card {
+.update-notice-card {
     width: 400px;
     padding-bottom: 20px;
     
@@ -14,7 +14,7 @@
 
     ul {
         margin: 0 20px;
-        height: 350px;
+        height: 310px;
         overflow:auto;
         font-size: $T3;
         color: $gray-info-text-color;
