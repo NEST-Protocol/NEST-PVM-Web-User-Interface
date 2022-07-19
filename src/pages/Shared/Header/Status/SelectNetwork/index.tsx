@@ -2,9 +2,7 @@ import { FC, useCallback } from "react";
 import {
   LittleBSC,
   LittleETH,
-  LittleKCC,
   NetworkNow,
-  PolygonIcon,
 } from "../../../../../components/Icon";
 import MainCard from "../../../../../components/MainCard";
 import { SupportedChains } from "../../../../../libs/constants/chain";
@@ -60,14 +58,7 @@ const SelectNetwork: FC = () => {
               <p>{SupportedChains[0].name}</p>
               {SupportedChains[0].chainId === chainId ? <NetworkNow /> : <></>}
             </li>
-            <li>
-              <PolygonIcon />
-              <p>Polygon</p>
-            </li>
-            <li>
-              <LittleKCC />
-              <p>KCC</p>
-            </li>
+            
           </ul>
         </MainCard>
       </div>

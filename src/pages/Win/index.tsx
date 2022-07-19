@@ -96,7 +96,6 @@ const Win: FC = () => {
     const allBets_data_modol = allBets_data.value.filter(
       (item: WinListType) => item.owner !== ZERO_ADDRESS
     );
-
     const weekly_get = await fetch("https://api.hedge.red/api/" + WIN_GET_STRING[chainId] + "/weekList/10");
     const weekly_data = await weekly_get.json();
     const weekly_data_modol = weekly_data.value.filter(
@@ -145,11 +144,19 @@ const Win: FC = () => {
   useEffect(() => {
     const time = setTimeout(() => {
       if (allBetsData.length > 0) {
-        setAllBetsShow([
-          allBetsData[allBetsShowCount],
-          allBetsData[allBetsShowCount + 1],
-        ]);
-        setAllBetsShowCount(allBetsShowCount + 1);
+        if (allBetsData.length === 1) {
+          setAllBetsShow([
+            allBetsData[0]
+          ]);
+          setAllBetsShowCount(0);
+        } else {
+          setAllBetsShow([
+            allBetsData[allBetsShowCount],
+            allBetsData[allBetsShowCount + 1],
+          ]);
+          setAllBetsShowCount(allBetsShowCount + 1);
+        }
+        
       }
     }, 1500);
     return () => {
@@ -180,7 +187,7 @@ const Win: FC = () => {
         clearInterval(intervalRef.current);
       }
     };
-  }, [getList, txList]);
+  }, [getList, chainId, txList]);
 
   // approve
   useEffect(() => {

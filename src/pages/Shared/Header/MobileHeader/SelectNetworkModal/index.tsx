@@ -3,9 +3,7 @@ import BaseModal from "../../../../../components/BaseModal";
 import {
   LittleBSC,
   LittleETH,
-  LittleKCC,
   NetworkNow,
-  PolygonIcon,
 } from "../../../../../components/Icon";
 import { SupportedChains } from "../../../../../libs/constants/chain";
 import useWeb3 from "../../../../../libs/hooks/useWeb3";
@@ -43,14 +41,14 @@ const SelectNetworkModal: FC<Props> = ({ ...props }) => {
           <p>{SupportedChains[0].name}</p>
           {SupportedChains[0].chainId === chainId ? <NetworkNow /> : <></>}
         </li>
-        <li>
+        {/* <li>
           <PolygonIcon />
           <p>Polygon</p>
         </li>
         <li>
           <LittleKCC />
           <p>KCC</p>
-        </li>
+        </li> */}
       </ul>
     </BaseModal>
   );
