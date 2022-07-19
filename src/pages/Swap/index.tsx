@@ -5,7 +5,7 @@ import { Tooltip } from "antd";
 import classNames from "classnames";
 // import moment from "moment";
 import { FC, useCallback, useEffect, useState } from "react";
-import { ExchangeIcon, PutDownIcon } from "../../components/Icon";
+import { ExchangeIcon } from "../../components/Icon";
 import InfoShow from "../../components/InfoShow";
 import MainButton from "../../components/MainButton";
 import MainCard from "../../components/MainCard";
@@ -283,15 +283,15 @@ const Swap: FC = () => {
     return pendingTransaction.length > 0 ? true : false;
   };
 
-  const specialTop = () => {
-    if (
-      (swapToken.src === "USDT" && swapToken.dest === "DCU") ||
-      (swapToken.src === "DCU" && swapToken.dest === "USDT")
-    ) {
-      return false;
-    }
-    return true;
-  };
+  // const specialTop = () => {
+  //   if (
+  //     (swapToken.src === "USDT" && swapToken.dest === "DCU") ||
+  //     (swapToken.src === "DCU" && swapToken.dest === "USDT")
+  //   ) {
+  //     return false;
+  //   }
+  //   return true;
+  // };
   return (
     <div className={`${classPrefix}`}>
       <MainCard classNames={`${classPrefix}-card`}>
@@ -305,16 +305,16 @@ const Swap: FC = () => {
                 : "---"
             } ${swapToken.src}`
           }
-          tokenSelect={specialTop()}
-          tokenList={tokenListShow(true)}
+          tokenSelect={false}
+          tokenList={tokenListShow(false)}
           getSelectedToken={getSelectedSrcToken}
           balanceRed={!checkBalance()}
         >
           <div className={`${classPrefix}-card-selected`}>
             <SingleTokenShow tokenNameOne={swapToken.src} isBold />
-            <p>
+            {/* <p>
               {specialTop() ? (<PutDownIcon />) : (<></>)}
-            </p>
+            </p> */}
           </div>
 
           <input
