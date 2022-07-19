@@ -7,7 +7,7 @@ import {
   TransactionModalType,
 } from "../../pages/Shared/TransactionModal";
 import { notifyTransaction } from "../../pages/Shared/TransactionToast";
-import { normalToBigNumber, ZERO_ADDRESS } from "../utils";
+import { normalToBigNumber, WIN_GET_STRING, WIN_TOAST_WAIT, ZERO_ADDRESS } from "../utils";
 import { notifyWinToast, WinToastProps } from "../../pages/Shared/WinToast";
 import { PVMWin } from "./useContract";
 import { PVMWinContract } from "../constants/addresses";
@@ -116,7 +116,7 @@ const useTransactionList = () => {
 
   const getList = useCallback(async () => {
     
-    if (!PVMWinOJ) {
+    if (!PVMWinOJ || !chainId) {
       return;
     }
 
@@ -125,7 +125,7 @@ const useTransactionList = () => {
       return;
     }
 
-    const myBetsUrl = `https://api.hedge.red/api/prc/userList/${account}/50`;
+    const myBetsUrl = `https://api.hedge.red/api/` + WIN_GET_STRING[chainId] + `/userList/${account}/50`;
     const myBets_get = await fetch(myBetsUrl);
     const myBets_data = await myBets_get.json();
     const result = myBets_data.value.filter(
@@ -139,10 +139,10 @@ const useTransactionList = () => {
       index: BigNumber.from(latestItem.index.toString()),
     };
     notifyWinToast(notifyItem);
-  }, [account, PVMWinOJ, library]);
+  }, [PVMWinOJ, chainId, library, account]);
 
   useEffect(() => {
-    if (pendingList.length === 0 || checking) {
+    if (pendingList.length === 0 || checking || !chainId) {
       return;
     }
     setChecking(true);
@@ -162,7 +162,7 @@ const useTransactionList = () => {
           if (rec.status && element.type === TransactionType.roll) {
             setTimeout(() => {
               getList()
-            }, 4000);
+            }, WIN_TOAST_WAIT[chainId]);
           }
           return;
         }
@@ -172,7 +172,7 @@ const useTransactionList = () => {
       }, 15000);
     })();
     
-  }, [pendingList, checking, library, updateList, getList]);
+  }, [pendingList, checking, library, updateList, getList, chainId]);
 
   const pushTx = (hash: string, txInfo: TransactionBaseInfoType) => {
     const nowDate = parseInt((new Date().getTime() / 1000).toString());
