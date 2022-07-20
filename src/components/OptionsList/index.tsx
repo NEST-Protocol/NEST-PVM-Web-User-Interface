@@ -186,7 +186,7 @@ const OptionsList: FC<Props> = ({ ...props }) => {
     <li className={`${classPrefix}-mobile`}>
       <MainCard classNames={`${classPrefix}-mobile-card`}>
         <div className={`${classPrefix}-mobile-card-top`}>
-          <MobileListInfo title={t`Token pair`}>
+          <MobileListInfo title={t`Token Pair`}>
             <TokenOneSvg />
             <TokenTwoSvg />
           </MobileListInfo>
@@ -200,21 +200,21 @@ const OptionsList: FC<Props> = ({ ...props }) => {
           </MobileListInfo>
         </div>
         <div className={`${classPrefix}-mobile-card-mid`}>
-          <MobileListInfo title={t`Strike price`}>
+          <MobileListInfo title={t`Strike Price`}>
             <p>{bigNumberToNormal(props.item.strikePrice, 18, 2)} USDT</p>
           </MobileListInfo>
-          <MobileListInfo title={t`Option shares`}>
+          <MobileListInfo title={t`Option Shares`}>
             <p>{bigNumberToNormal(props.item.balance, 18, 2)}</p>
           </MobileListInfo>
         </div>
         <div className={`${classPrefix}-mobile-card-bottom`}>
-          <MobileListInfo title={t`Sale earn`}>
+          <MobileListInfo title={t`Sale Earn`}>
             <p>
               {saleAmount ? bigNumberToNormal(saleAmount, 18, 2) : "---"}
               NEST
             </p>
           </MobileListInfo>
-          <MobileListInfo title={t`Strike earn`}>
+          <MobileListInfo title={t`Strike Earn`}>
             <p>
               {strikeAmount ? bigNumberToNormal(strikeAmount, 18, 2) : "---"}{" "}
               NEST
@@ -222,7 +222,7 @@ const OptionsList: FC<Props> = ({ ...props }) => {
           </MobileListInfo>
         </div>
         <div className={`${classPrefix}-mobile-card-block`}>
-          <MobileListInfo title={t`Exercise time`}>
+          <MobileListInfo title={t`Exercise Time`}>
             <p>
               {t`Block`}:{props.item.exerciseBlock.toString()}
             </p>

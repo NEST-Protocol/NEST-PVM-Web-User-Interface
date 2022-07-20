@@ -102,7 +102,7 @@ const PerpetualsListMobile: FC<Props> = ({ ...props }) => {
     <li className={`${classPrefix}-li`}>
       <MainCard classNames={classPrefix}>
         <div className={`${classPrefix}-top`}>
-          <MobileListInfo title={t`Token pair`}>
+          <MobileListInfo title={t`Token Pair`}>
             <TokenOneSvg />
             <TokenTwoSvg />
           </MobileListInfo>
@@ -124,7 +124,7 @@ const PerpetualsListMobile: FC<Props> = ({ ...props }) => {
           </MobileListInfo>
         </div>
         <div className={`${classPrefix}-bottom`}>
-          <MobileListInfo title={t`Open price`}>
+          <MobileListInfo title={t`Open Price`}>
             <p>
               {bigNumberToNormal(
                 props.item.basePrice,
@@ -135,7 +135,7 @@ const PerpetualsListMobile: FC<Props> = ({ ...props }) => {
             </p>
           </MobileListInfo>
           <MobileListInfo
-            title={t`Margin assets`}
+            title={t`Margin Assets`}
             under={true}
             underText={t`Dynamic changes in net assets, less than a certain amount of liquidation will be liquidated, the amount of liquidation is Max'{'margin*leverage*0.02, 10'}'`}
           >

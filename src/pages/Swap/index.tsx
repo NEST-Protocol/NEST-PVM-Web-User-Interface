@@ -5,22 +5,21 @@ import { Tooltip } from "antd";
 import classNames from "classnames";
 // import moment from "moment";
 import { FC, useCallback, useEffect, useState } from "react";
-import { ExchangeIcon } from "../../components/Icon";
+import { ExchangeIcon, PutDownIcon } from "../../components/Icon";
 import InfoShow from "../../components/InfoShow";
 import MainButton from "../../components/MainButton";
 import MainCard from "../../components/MainCard";
 import { SingleTokenShow } from "../../components/TokenShow";
 import { useERC20Approve } from "../../contracts/hooks/useERC20Approve";
 import { usePVMPayBack } from "../../contracts/hooks/usePVMPayBackTransaction";
+import { useUniSwapV2Swap } from "../../contracts/hooks/useUniSwapV2Transaction";
 import {
   PVMPayBackContract,
   tokenList,
   TokenType,
+  UniSwapV2Contract,
 } from "../../libs/constants/addresses";
-import {
-  getERC20Contract,
-  NestPriceContract,
-} from "../../libs/hooks/useContract";
+import { getERC20Contract, UniSwapV2 } from "../../libs/hooks/useContract";
 import useTransactionListCon, {
   TransactionType,
 } from "../../libs/hooks/useTransactionInfo";
@@ -59,7 +58,25 @@ const Swap: FC = () => {
     useState<SwapTokenBalanceType>();
   const [destValue, setDestValue] = useState<BigNumber>();
   const { pendingList, txList } = useTransactionListCon();
-  const priceContract = NestPriceContract();
+  const uniSwapV2OJ = UniSwapV2(UniSwapV2Contract);
+
+  const exchangeSwapTokens = () => {
+    if (swapToken.src === "DCU") {
+      return;
+    }
+    setSwapToken({ src: swapToken.dest, dest: swapToken.src });
+    setInputValue("");
+  };
+  const approveAddress = useCallback(() => {
+    if (!chainId) {
+      return "";
+    }
+    if (swapToken.src !== "DCU") {
+      return UniSwapV2Contract[chainId];
+    } else {
+      return PVMPayBackContract[chainId];
+    }
+  }, [chainId, swapToken.src]);
   // balance
   const getBalance = useCallback(async () => {
     if (!chainId || !account || !library) {
@@ -77,9 +94,11 @@ const Swap: FC = () => {
     )?.balanceOf(account);
     setSwapTokenBalance({ src: srcTokenBalance, dest: destTokenBalance });
   }, [account, chainId, library, swapToken]);
+
   useEffect(() => {
     getBalance();
   }, [account, chainId, getBalance, library, swapToken]);
+
   useEffect(() => {
     if (!txList || txList.length === 0) {
       return;
@@ -109,29 +128,35 @@ const Swap: FC = () => {
       return;
     }
     (async () => {
-      const allowance = await srcToken.allowance(
-        account,
-        PVMPayBackContract[chainId]
-      );
+      const allowance = await srcToken.allowance(account, approveAddress());
       setSrcAllowance(allowance);
     })();
-  }, [account, chainId, library, swapToken, txList]);
+  }, [account, approveAddress, chainId, library, swapToken, txList]);
 
   const path = useCallback(() => {
-    if (swapToken.src === "USDT") {
-      if (swapToken.dest === "DCU") {
-        return ["USDT", "DCU"];
-      }
-    } else if (swapToken.src === "DCU") {
-      if (swapToken.dest === "USDT") {
-        return ["DCU", "USDT"];
-      } else if (swapToken.dest === "NEST") {
-        return ["DCU", "NEST"];
-      }
+    if (swapToken.src === "DCU") {
+      return ["DCU", "NEST"];
+    } else if (swapToken.src === "NEST") {
+      return ["NEST", "USDT"];
+    } else if (swapToken.src === "USDT") {
+      return ["USDT", "NEST"];
     }
     return [swapToken.src, swapToken.dest];
   }, [swapToken]);
-  // 价格和预估
+  const checkUSDT = useCallback(
+    (token: string) => {
+      if (!chainId) {
+        return;
+      }
+      if ((chainId === 1 || chainId === 4) && token === "USDT") {
+        return 6;
+      } else {
+        return 18;
+      }
+    },
+    [chainId]
+  );
+
   useEffect(() => {
     if (!chainId || !library || !account) {
       return;
@@ -141,80 +166,96 @@ const Swap: FC = () => {
       return amountIn.mul(33).div(10);
     };
 
-    const swapXY = async (
-      srcName: string,
-      destName: string,
-      amountIn: BigNumber
-    ) => {
-      // const k = BigNumber.from("200000000000000000000000").mul(
-      //   BigNumber.from("868616188258191063223411")
-      // );
-      // const srcTokenBalance: BigNumber = await getERC20Contract(
-      //   tokenList[srcName].addresses[chainId],
-      //   library,
-      //   account
-      // )?.balanceOf(SwapAddress[chainId]);
-      // const destTokenBalance: BigNumber = await getERC20Contract(
-      //   tokenList[destName].addresses[chainId],
-      //   library,
-      //   account
-      // )?.balanceOf(SwapAddress[chainId]);
-      // const amountOut = destTokenBalance.sub(
-      //   k.div(srcTokenBalance.add(amountIn))
-      // );
-      return BigNumber.from(0);
+    const swapUniSwapV2 = async (amountIn: BigNumber, path: Array<string>) => {
+      const pathAddress = path.map((item) => {
+        return tokenList[item].addresses[chainId];
+      });
+      const amountOut = await uniSwapV2OJ?.getAmountsOut(amountIn, pathAddress);
+      return amountOut[1];
     };
+
     (async () => {
       const usePath = path();
       const checkInputValue =
-        inputValue && normalToBigNumber(inputValue).gt(BigNumber.from("0"));
+        inputValue &&
+        normalToBigNumber(inputValue, checkUSDT(swapToken.src)).gt(
+          BigNumber.from("0")
+        );
+      const baseAmount = () => {
+        if ((chainId === 1 || chainId === 4) && swapToken.src === "USDT") {
+          return BigNumber.from('1000000')
+        } else {
+          return BASE_AMOUNT
+        }
+      }
       var amount = checkInputValue
-        ? normalToBigNumber(inputValue!)
-        : BASE_AMOUNT;
+        ? normalToBigNumber(inputValue!, checkUSDT(swapToken.src))
+        : baseAmount();
       for (let index = 0; index < usePath.length - 1; index++) {
-        if (
-          (usePath[index] === "USDT" && usePath[index + 1] === "DCU") ||
-          (usePath[index] === "DCU" && usePath[index + 1] === "USDT")
-        ) {
-          amount = await swapXY(usePath[index], usePath[index + 1], amount);
+        if (usePath[index] === "USDT" || usePath[index] === "NEST") {
+          amount = await swapUniSwapV2(amount, [
+            usePath[index],
+            usePath[index + 1],
+          ]);
+          console.log(amount.toString());
         } else if (usePath[index] === "DCU" && usePath[index + 1] === "NEST") {
-          amount = await swapDCUToNEST(amount)
+          amount = await swapDCUToNEST(amount);
         }
       }
       setDestValue(checkInputValue ? amount : undefined);
-      setPriceValue(
-        checkInputValue
-          ? amount
-              .mul(BASE_AMOUNT)
-              .div(inputValue ? normalToBigNumber(inputValue) : BASE_AMOUNT)
-          : amount
-      );
+      const priceValue = () => {
+        if ((chainId === 1 || chainId === 4) && swapToken.src === "USDT") {
+          return checkInputValue
+            ? amount
+                .mul(BASE_AMOUNT)
+                .div(
+                  inputValue
+                    ? normalToBigNumber(inputValue, checkUSDT(swapToken.src))
+                    : BASE_AMOUNT
+                ).div(BigNumber.from("1000000000000"))
+            : amount;
+        } else {
+          return checkInputValue
+            ? amount
+                .mul(BASE_AMOUNT)
+                .div(
+                  inputValue
+                    ? normalToBigNumber(inputValue, checkUSDT(swapToken.src))
+                    : BASE_AMOUNT
+                )
+            : amount;
+        }
+      };
+      setPriceValue(priceValue());
     })();
-  }, [account, chainId, library, swapToken, inputValue, path, priceContract]);
+  }, [
+    account,
+    chainId,
+    library,
+    swapToken,
+    inputValue,
+    path,
+    uniSwapV2OJ,
+    checkUSDT,
+  ]);
 
   const getSelectedSrcToken = (token: TokenType) => {
-    setSwapToken({ src: token.symbol, dest: swapToken.dest });
-  };
-  const getSelectedDestToken = (token: TokenType) => {
-    setSwapToken({ src: swapToken.src, dest: token.symbol });
+    if (token.symbol === "DCU") {
+      setSwapToken({ src: token.symbol, dest: "NEST" });
+    } else if (token.symbol === "NEST") {
+      setSwapToken({ src: token.symbol, dest: "USDT" });
+    } else if (token.symbol === "USDT") {
+      setSwapToken({ src: token.symbol, dest: "NEST" });
+    }
   };
 
   const tokenListShow = (top: boolean) => {
-    const allToken = ["DCU", "NEST",];
-    const showToken = [swapToken.src, swapToken.dest];
+    const allToken = ["DCU", "NEST", "USDT"];
     if (top) {
       const leftToken = allToken.filter(
-        (item: string) => showToken.indexOf(item) === -1
+        (item: string) => [swapToken.src].indexOf(item) === -1
       );
-      const tokenName = [swapToken.src].concat(leftToken);
-      return tokenName.map((item) => {
-        return tokenList[item];
-      });
-    } else {
-      const leftToken = allToken.filter(
-        (item: string) => showToken.indexOf(item) === -1
-      );
-      const tokenName = [swapToken.dest].concat(leftToken);
+      const tokenName = leftToken;
       return tokenName.map((item) => {
         return tokenList[item];
       });
@@ -228,7 +269,11 @@ const Swap: FC = () => {
     if (!inputValue) {
       return true;
     }
-    if (normalToBigNumber(inputValue).gt(swapTokenBalance.src)) {
+    if (
+      normalToBigNumber(inputValue, checkUSDT(swapToken.src)).gt(
+        swapTokenBalance.src
+      )
+    ) {
       return false;
     }
     return true;
@@ -237,7 +282,9 @@ const Swap: FC = () => {
     if (!inputValue) {
       return true;
     }
-    if (srcAllowance.lt(normalToBigNumber(inputValue))) {
+    if (
+      srcAllowance.lt(normalToBigNumber(inputValue, checkUSDT(swapToken.src)))
+    ) {
       return false;
     }
     return true;
@@ -249,7 +296,9 @@ const Swap: FC = () => {
     if (
       !inputValue ||
       !destValue ||
-      normalToBigNumber(inputValue).eq(BigNumber.from("0"))
+      normalToBigNumber(inputValue, checkUSDT(swapToken.src)).eq(
+        BigNumber.from("0")
+      )
     ) {
       return false;
     }
@@ -258,23 +307,23 @@ const Swap: FC = () => {
     }
     return false;
   };
-  const approve = useERC20Approve(
-    swapToken.src,
-    MaxUint256,
-    chainId ? PVMPayBackContract[chainId] : undefined
-  );
-  // const amountOutMin = destValue
-  //   ? destValue.sub(destValue.mul(5).div(100))
-  //   : MaxUint256;
-  // const addressPath = () => {
-  //   if (!chainId) {
-  //     return [];
-  //   }
-  //   return path().map((item) => tokenList[item].addresses[chainId]);
-  // };
-
-  const swap = usePVMPayBack(
-    normalToBigNumber(inputValue ? inputValue : ""),
+  const approve = useERC20Approve(swapToken.src, MaxUint256, approveAddress());
+  const amountOutMin = destValue
+    ? destValue.sub(destValue.mul(5).div(100))
+    : MaxUint256;
+  const addressPath = () => {
+    if (!chainId) {
+      return [];
+    }
+    return path().map((item) => tokenList[item].addresses[chainId]);
+  };
+  const swap = usePVMPayBack(normalToBigNumber(inputValue ? inputValue : ""));
+  const uniswapV2Swap = useUniSwapV2Swap(
+    normalToBigNumber(inputValue ? inputValue : "", checkUSDT(swapToken.src)),
+    amountOutMin,
+    addressPath(),
+    account ? account : "",
+    BigNumber.from(9999999999)
   );
   const mainButtonState = () => {
     const pendingTransaction = pendingList.filter(
@@ -283,15 +332,6 @@ const Swap: FC = () => {
     return pendingTransaction.length > 0 ? true : false;
   };
 
-  // const specialTop = () => {
-  //   if (
-  //     (swapToken.src === "USDT" && swapToken.dest === "DCU") ||
-  //     (swapToken.src === "DCU" && swapToken.dest === "USDT")
-  //   ) {
-  //     return false;
-  //   }
-  //   return true;
-  // };
   return (
     <div className={`${classPrefix}`}>
       <MainCard classNames={`${classPrefix}-card`}>
@@ -301,20 +341,22 @@ const Swap: FC = () => {
             t`Balance` +
             `:${
               swapTokenBalance
-                ? bigNumberToNormal(swapTokenBalance.src, 18, 6)
+                ? bigNumberToNormal(
+                    swapTokenBalance.src,
+                    checkUSDT(swapToken.src),
+                    6
+                  )
                 : "---"
             } ${swapToken.src}`
           }
-          tokenSelect={false}
-          tokenList={tokenListShow(false)}
+          tokenSelect={true}
+          tokenList={tokenListShow(true)}
           getSelectedToken={getSelectedSrcToken}
           balanceRed={!checkBalance()}
         >
           <div className={`${classPrefix}-card-selected`}>
             <SingleTokenShow tokenNameOne={swapToken.src} isBold />
-            {/* <p>
-              {specialTop() ? (<PutDownIcon />) : (<></>)}
-            </p> */}
+            <p>{<PutDownIcon />}</p>
           </div>
 
           <input
@@ -331,7 +373,7 @@ const Swap: FC = () => {
               setInputValue(
                 bigNumberToNormal(
                   swapTokenBalance?.src || BigNumber.from("0"),
-                  18,
+                  checkUSDT(swapToken.src),
                   18
                 )
               )
@@ -343,11 +385,10 @@ const Swap: FC = () => {
         <button
           className={classNames({
             [`${classPrefix}-card-exchange`]: true,
-            [`disable`]: true
+            [`disable`]: swapToken.src === "DCU" ? true : false,
           })}
           onClick={() => {
-            return
-            // exchangeSwapTokens()
+            exchangeSwapTokens();
           }}
         >
           <ExchangeIcon />
@@ -358,22 +399,24 @@ const Swap: FC = () => {
             t`Balance` +
             `:${
               swapTokenBalance
-                ? bigNumberToNormal(swapTokenBalance.dest, 18, 6)
+                ? bigNumberToNormal(
+                    swapTokenBalance.dest,
+                    checkUSDT(swapToken.dest),
+                    6
+                  )
                 : "---"
             } ${swapToken.dest}`
           }
           tokenSelect={false}
           tokenList={tokenListShow(false)}
-          getSelectedToken={getSelectedDestToken}
         >
           <div className={`${classPrefix}-card-selected`}>
             <SingleTokenShow tokenNameOne={swapToken.dest} isBold />
-            {/* <p>
-              <PutDownIcon />
-            </p> */}
           </div>
           <p className={"showValue"}>
-            {destValue ? bigNumberToNormal(destValue, 18, 6) : undefined}
+            {destValue
+              ? bigNumberToNormal(destValue, checkUSDT(swapToken.dest), 6)
+              : undefined}
           </p>
         </InfoShow>
         <div className={`${classPrefix}-card-trading`}>
@@ -387,7 +430,9 @@ const Swap: FC = () => {
             </span>
           </Tooltip>
           <p>{`1 ${swapToken.src} = ${
-            priceValue ? bigNumberToNormal(priceValue, 18, 10) : "---"
+            priceValue
+              ? bigNumberToNormal(priceValue, checkUSDT(swapToken.dest), 10)
+              : "---"
           } ${swapToken.dest}`}</p>
         </div>
         <MainButton
@@ -397,7 +442,14 @@ const Swap: FC = () => {
               return;
             }
             if (checkAllowance()) {
-              swap();
+              if (!chainId) {
+                return;
+              }
+              if (swapToken.src !== "DCU") {
+                uniswapV2Swap();
+              } else {
+                swap();
+              }
             } else {
               approve();
             }
@@ -407,12 +459,6 @@ const Swap: FC = () => {
           {checkAllowance() ? <Trans>Swap</Trans> : <Trans>Approve</Trans>}
         </MainButton>
       </MainCard>
-      {/* <MainCard classNames={`${classPrefix}-card`}>
-        <div className={`${classPrefix}-card-title `}>
-          <p className={`infoView-topLeft`}>Trading Price of DCU</p>
-        </div>
-        <PriceChart />
-      </MainCard> */}
     </div>
   );
 };

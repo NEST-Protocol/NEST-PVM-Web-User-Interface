@@ -8,6 +8,7 @@ import "./styles";
 import { useEtherscanBaseUrl } from "../../../libs/hooks/useEtherscanBaseUrl";
 import useThemes, { ThemeType } from "../../../libs/hooks/useThemes";
 import classNames from "classnames";
+import useWeb3 from "../../../libs/hooks/useWeb3";
 
 export enum TransactionModalType {
   wait = 0,
@@ -26,6 +27,7 @@ const TransactionModal: FC = () => {
   const { showModal, closeModal } = useTransactionListCon();
   const etherscanBase = useEtherscanBaseUrl();
   const { theme } = useThemes();
+  const { chainId } = useWeb3();
 
   const wait = (
     <>
@@ -43,7 +45,7 @@ const TransactionModal: FC = () => {
         <Trans>Transaction submitted</Trans>
       </p>
       <a href={`${etherscanBase}${showModal.hash}`} target="view_window">
-        <Trans>View on bscscan</Trans>
+        {(chainId === 1 || chainId === 4) ? 'View on Etherscan' : 'View on BscScan'}
       </a>
     </>
   );

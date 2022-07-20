@@ -50,7 +50,7 @@ const WinOrderList: FC<WinOrderListProps> = ({ ...props }) => {
   return (
     <div className={classPrefix}>
       <MainCard classNames={`${classPrefix}-card`}>
-        <p className={`${classPrefix}-card-title`}>My bet</p>
+        <p className={`${classPrefix}-card-title`}>My Bet</p>
         <ul className={`${classPrefix}-historyList`}>{pendingLi}{historyLi}</ul>
       </MainCard>
     </div>

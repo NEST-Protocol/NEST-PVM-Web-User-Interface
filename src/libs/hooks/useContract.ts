@@ -12,6 +12,7 @@ import PVMLeverABI from '../../contracts/abis/PVMLever.json';
 import NestPriceABI from '../../contracts/abis/NestPrice.json';
 import PVMWinABI from '../../contracts/abis/PVMWin.json';
 import PVMPayBackABI from '../../contracts/abis/PVMPayBack.json';
+import UniSwapV2ABI from '../../contracts/abis/UNISwap.json';
 import { ZERO_ADDRESS } from '../utils';
 
 function isAddress(value: any): string | false {
@@ -85,3 +86,7 @@ export function PVMWin(addresses: AddressesType): Contract | null {
 export function PVMPayBack(addresses: AddressesType): Contract | null {
     return useContract(addresses, PVMPayBackABI)
 }
+
+export function UniSwapV2(addresses: AddressesType): Contract | null {
+    return useContract(addresses, UniSwapV2ABI)
+} 

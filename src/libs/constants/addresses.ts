@@ -167,3 +167,11 @@ export const PVMPayBackContract : AddressesType = {
   56: '0xf43A71e4Da398e5731c9580D11014dE5e8fD0530',
   97: '0x0F1cb2bB372edd39624bf1763FE4830DAFcf9139'
 }
+
+export const UniSwapV2Contract : AddressesType = {
+  1: '0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D',
+  3: '',
+  4: '0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D',
+  56: '',
+  97: '0xd99d1c33f9fc3444f8101754abc46c52416550d1'
+}

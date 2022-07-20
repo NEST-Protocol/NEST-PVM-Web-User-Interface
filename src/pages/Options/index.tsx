@@ -373,7 +373,7 @@ const MintOptions: FC = () => {
       <div className={classPrefix}>
         <MainCard classNames={`${classPrefix}-leftCard`}>
           <InfoShow
-            topLeftText={t`Token pair`}
+            topLeftText={t`Token Pair`}
             bottomRightText={""}
             tokenSelect={true}
             tokenList={[tokenList["ETH"], tokenList["BTC"]]}
@@ -397,8 +397,8 @@ const MintOptions: FC = () => {
             textArray={[t`Call`, t`Put`]}
           />
           <InfoShow
-            topLeftText={t`Exercise time`}
-            bottomRightText={`${t`Block number`}: ${
+            topLeftText={t`Exercise Time`}
+            bottomRightText={`${t`Block Number`}: ${
               exercise.blockNum === 0 ? "---" : exercise.blockNum
             }`}
           >
@@ -414,7 +414,7 @@ const MintOptions: FC = () => {
           </InfoShow>
 
           <InfoShow
-            topLeftText={t`Strike price`}
+            topLeftText={t`Strike Price`}
             bottomRightText={`1 ETH = ${priceString()} USDT`}
           >
             <input
@@ -464,7 +464,7 @@ const MintOptions: FC = () => {
               title={t`One option shares to the return of a ETH.`}
             >
               <span>
-                <Trans>Option shares</Trans>
+                <Trans>Option Shares</Trans>
               </span>
             </Tooltip>
           </p>
@@ -528,8 +528,8 @@ const MintOptions: FC = () => {
               </div>
               <p className={`${classPrefix}-rightCard-smallCard-value`}>
                 {isLong
-                  ? t`(Spot price - Strike price)*`
-                  : t`(Strike price - Spot price)*`}
+                  ? t`(Spot Price - Strike Price)*`
+                  : t`(Strike Price - Spot Price)*`}
                 {optionTokenValue
                   ? bigNumberToNormal(optionTokenValue, 18, 6)
                   : "---"}
@@ -569,25 +569,25 @@ const MintOptions: FC = () => {
               <thead>
                 <tr className={`${classPrefix}-table-title`}>
                   <th>
-                    <Trans>Token pair</Trans>
+                    <Trans>Token Pair</Trans>
                   </th>
                   <th>
                     <Trans>Type</Trans>
                   </th>
                   <th>
-                    <Trans>Strike price</Trans>
+                    <Trans>Strike Price</Trans>
                   </th>
                   <th className={`exerciseTime`}>
-                    <Trans>Exercise time</Trans>
+                    <Trans>Exercise Time</Trans>
                   </th>
                   <th>
-                    <Trans>Option shares</Trans>
+                    <Trans>Option Shares</Trans>
                   </th>
                   <th>
-                    <Trans>Sale earn</Trans>
+                    <Trans>Sale Earn</Trans>
                   </th>
                   <th>
-                    <Trans>Strike earn</Trans>
+                    <Trans>Strike Earn</Trans>
                   </th>
                   <th>
                     <Trans>Operate</Trans>

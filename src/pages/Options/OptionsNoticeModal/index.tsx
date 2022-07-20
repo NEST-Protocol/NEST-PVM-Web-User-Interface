@@ -22,18 +22,16 @@ const OptionsNoticeModal: FC<Props> = ({ ...props }) => {
       <ul>
         <input />
         <li>
-          <Trans>
-            For users/smart contracts using Fort Protocol European options,
-            when purchasing options, exercising, selling options and other
-            related operations, please understand the rules and the differences
-            of similar products in the market, and fully understand the
-            following possible risks and Participate when you can bear the risk:
-          </Trans>
+          For users/smart contracts using NEST Protocol European options,when
+          purchasing options, exercising, selling options and otherrelated
+          operations, please understand the rules and the differences of similar
+          products in the market, and fully understand the following possible
+          risks and Participate when you can bear the risk:
         </li>
         <li>
           <Trans>
-            1. Fort Protocol option pricing is derived from the BS option
-            pricing model. Unlike traditional option pricing methods, Fort
+            1. NEST Protocol option pricing is derived from the BS option
+            pricing model. Unlike traditional option pricing methods, NEST
             options are completely priced by algorithms, while traditional
             centralized exchanges are freely quoted by users. This pricing
             method is a bold one. Attempts and innovations, but it may also
@@ -42,17 +40,17 @@ const OptionsNoticeModal: FC<Props> = ({ ...props }) => {
         </li>
         <li>
           <Trans>
-            2. The premium paid for options purchased by Fort Protocol and the
-            income at settlement are all used in NEST Token. NEST itself is also a
-            highly volatile asset. In extreme cases, even if your perpetual
-            contract position is profitable, it is due to the price of NEST
-            itself. Volatility, which may cause you to lose money based on legal
+            2. The premium paid for options purchased by NEST Protocol and the
+            income at settlement are all used in NEST Token. NEST itself is also
+            a volatile asset. In extreme cases, even if your perpetual contract
+            position is profitable, it is due to the price of NEST itself.
+            Volatility, which may cause you to lose money based on legal
             currency.
           </Trans>
         </li>
         <li>
           <Trans>
-            3. The option price of Fort protocol comes from the NEST oracle
+            3. The option price of NEST protocol comes from the NEST oracle
             machine. If the oracle machine is attacked or the price is abnormal
             due to other reasons, the system may experience settlement
             abnormalities, resulting in errors in the user's income calculation.
@@ -60,7 +58,7 @@ const OptionsNoticeModal: FC<Props> = ({ ...props }) => {
         </li>
         <li>
           <Trans>
-            4. The smart contract of the Fort protocol has not been audited.
+            4. The smart contract of the NEST protocol has not been audited.
             There may be fatal unknown risks in the smart contract that will
             damage your principal. Please evaluate the risk yourself before
             deciding whether to participate.
@@ -99,7 +97,7 @@ const OptionsNoticeModal: FC<Props> = ({ ...props }) => {
           <Trans>Sure</Trans>
         </MainButton>
         <a
-          href="https://github.com/FORT-Protocol/Docs/blob/main/Fort_Product_Document.pdf"
+          href="https://github.com/NEST-Protocol/NEST-Docs/blob/main/The%20White%20Paper%20of%20NEST%20PVM.pdf"
           target="view_window"
         >
           <button className={`${classPrefix}-card-buttonGroup-more`}>

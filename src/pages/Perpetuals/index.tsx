@@ -315,7 +315,7 @@ const Perpetuals: FC = () => {
       <thead>
         <tr className={`${classPrefix}-table-title`}>
           <th>
-            <Trans>Token pair</Trans>
+            <Trans>Token Pair</Trans>
           </th>
           <th>
             <Trans>Type</Trans>
@@ -327,7 +327,7 @@ const Perpetuals: FC = () => {
             <Trans>Margin</Trans>
           </th>
           <th>
-            <Trans>Open price</Trans>
+            <Trans>Open Price</Trans>
           </th>
           <th className={"th-marginAssets"}>
             <Tooltip
@@ -338,7 +338,7 @@ const Perpetuals: FC = () => {
               }
             >
               <span>
-                <Trans>Margin assets</Trans>
+                <Trans>Margin Assets</Trans>
               </span>
             </Tooltip>
           </th>
@@ -369,7 +369,7 @@ const Perpetuals: FC = () => {
       ) : null}
       <MainCard classNames={`${classPrefix}-card`}>
         <InfoShow
-          topLeftText={t`Token pair`}
+          topLeftText={t`Token Pair`}
           bottomRightText={""}
           tokenSelect={true}
           tokenList={[tokenList["ETH"], tokenList["BTC"]]}
@@ -401,7 +401,7 @@ const Perpetuals: FC = () => {
             color={"#ffffff"}
             title={t`The opening price is based on NEST oracle and corrected according to risk compensation.`}
           >
-            <span>{t`Open price:` + kPrice() + " USDT"}</span>
+            <span>{t`Open Price:` + kPrice() + " USDT"}</span>
           </Tooltip>
         </p>
         <ChooseType

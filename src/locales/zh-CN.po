@@ -14,11 +14,11 @@ msgstr ""
 "Plural-Forms: \n"
 
 #: src/pages/Options/index.tsx
-msgid "(Spot price - Strike price)*"
+msgid "(Spot Price - Strike Price)*"
 msgstr "(现货价 - 行权价)*"
 
 #: src/pages/Options/index.tsx
-msgid "(Strike price - Spot price)*"
+msgid "(Strike Price - Spot Price)*"
 msgstr "(行权价 - 现货价)*"
 
 #: src/pages/Options/OptionsNoticeModal/index.tsx
@@ -96,7 +96,7 @@ msgid "Block"
 msgstr "区块号"
 
 #: src/pages/Options/index.tsx
-msgid "Block number"
+msgid "Block Number"
 msgstr "区块号"
 
 #: src/pages/Options/index.tsx
@@ -168,7 +168,7 @@ msgstr "净资产动态变化，小于一定的清算额将被清算，清算额
 #: src/pages/Options/index.tsx
 #: src/pages/Options/index.tsx
 #: src/pages/Options/index.tsx
-msgid "Exercise time"
+msgid "Exercise Time"
 msgstr "行权时间"
 
 #: src/pages/Options/index.tsx
@@ -254,7 +254,7 @@ msgstr "保证金"
 
 #: src/components/PerpetualsList/PerpetualsListMobile/index.tsx
 #: src/pages/Perpetuals/index.tsx
-msgid "Margin assets"
+msgid "Margin Assets"
 msgstr "保证金净资产"
 
 #: src/pages/Perpetuals/index.tsx
@@ -287,11 +287,11 @@ msgstr "看涨开仓"
 
 #: src/components/PerpetualsList/PerpetualsListMobile/index.tsx
 #: src/pages/Perpetuals/index.tsx
-msgid "Open price"
+msgid "Open Price"
 msgstr "开仓价"
 
 #: src/pages/Perpetuals/index.tsx
-msgid "Open price:"
+msgid "Open Price:"
 msgstr "开仓价："
 
 #: src/pages/Perpetuals/index.tsx
@@ -306,7 +306,7 @@ msgstr "操作"
 #: src/components/OptionsList/index.tsx
 #: src/pages/Options/index.tsx
 #: src/pages/Options/index.tsx
-msgid "Option shares"
+msgid "Option Shares"
 msgstr "期权份数"
 
 #: src/pages/Shared/Header/MobileHeader/index.tsx
@@ -366,7 +366,7 @@ msgstr "风险提示"
 
 #: src/components/OptionsList/index.tsx
 #: src/pages/Options/index.tsx
-msgid "Sale earn"
+msgid "Sale Earn"
 msgstr "卖出收益"
 
 #: src/components/OptionsList/index.tsx
@@ -409,13 +409,13 @@ msgstr "期权行权"
 
 #: src/components/OptionsList/index.tsx
 #: src/pages/Options/index.tsx
-msgid "Strike earn"
+msgid "Strike Earn"
 msgstr "行权收益"
 
 #: src/components/OptionsList/index.tsx
 #: src/pages/Options/index.tsx
 #: src/pages/Options/index.tsx
-msgid "Strike price"
+msgid "Strike Price"
 msgstr "行权价"
 
 #: src/pages/Farm/FarmNoticeModal/index.tsx
@@ -455,7 +455,7 @@ msgstr "获得（预估）"
 #: src/pages/Options/index.tsx
 #: src/pages/Perpetuals/index.tsx
 #: src/pages/Perpetuals/index.tsx
-msgid "Token pair"
+msgid "Token Pair"
 msgstr "交易对"
 
 #: src/pages/Swap/index.tsx

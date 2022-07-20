@@ -14,12 +14,12 @@ msgstr ""
 "Plural-Forms: \n"
 
 #: src/pages/Options/index.tsx
-msgid "(Spot price - Strike price)*"
-msgstr "(Spot price - Strike price)*"
+msgid "(Spot Price - Strike Price)*"
+msgstr "(Spot Price - Strike Price)*"
 
 #: src/pages/Options/index.tsx
-msgid "(Strike price - Spot price)*"
-msgstr "(Strike price - Spot price)*"
+msgid "(Strike Price - Spot Price)*"
+msgstr "(Strike Price - Spot Price)*"
 
 #: src/pages/Options/OptionsNoticeModal/index.tsx
 msgid "1. NEST Protocol option pricing is derived from the BS option pricing model. Unlike traditional option pricing methods, NEST options are completely priced by algorithms, while traditional centralized exchanges are freely quoted by users. This pricing method is a bold one. Attempts and innovations, but it may also bring unknown risks."
@@ -96,8 +96,8 @@ msgid "Block"
 msgstr "Block"
 
 #: src/pages/Options/index.tsx
-msgid "Block number"
-msgstr "Block number"
+msgid "Block Number"
+msgstr "Block Number"
 
 #: src/pages/Options/index.tsx
 msgid "Buy Option"
@@ -168,8 +168,8 @@ msgstr "Dynamic changes in net assets, less than a certain amount of liquidation
 #: src/pages/Options/index.tsx
 #: src/pages/Options/index.tsx
 #: src/pages/Options/index.tsx
-msgid "Exercise time"
-msgstr "Exercise time"
+msgid "Exercise Time"
+msgstr "Exercise Time"
 
 #: src/pages/Options/index.tsx
 #: src/pages/Options/index.tsx
@@ -254,8 +254,8 @@ msgstr "Margin"
 
 #: src/components/PerpetualsList/PerpetualsListMobile/index.tsx
 #: src/pages/Perpetuals/index.tsx
-msgid "Margin assets"
-msgstr "Margin assets"
+msgid "Margin Assets"
+msgstr "Margin Assets"
 
 #: src/pages/Perpetuals/index.tsx
 msgid "Minimum input 100"
@@ -287,12 +287,12 @@ msgstr "Open Long"
 
 #: src/components/PerpetualsList/PerpetualsListMobile/index.tsx
 #: src/pages/Perpetuals/index.tsx
-msgid "Open price"
-msgstr "Open price"
+msgid "Open Price"
+msgstr "Open Price"
 
 #: src/pages/Perpetuals/index.tsx
-msgid "Open price:"
-msgstr "Open price:"
+msgid "Open Price:"
+msgstr "Open Price:"
 
 #: src/pages/Perpetuals/index.tsx
 msgid "Open Short"
@@ -306,8 +306,8 @@ msgstr "Operate"
 #: src/components/OptionsList/index.tsx
 #: src/pages/Options/index.tsx
 #: src/pages/Options/index.tsx
-msgid "Option shares"
-msgstr "Option shares"
+msgid "Option Shares"
+msgstr "Option Shares"
 
 #: src/pages/Shared/Header/MobileHeader/index.tsx
 #: src/pages/Shared/Header/index.tsx
@@ -366,8 +366,8 @@ msgstr "Risk Warning"
 
 #: src/components/OptionsList/index.tsx
 #: src/pages/Options/index.tsx
-msgid "Sale earn"
-msgstr "Sale earn"
+msgid "Sale Earn"
+msgstr "Sale Earn"
 
 #: src/components/OptionsList/index.tsx
 #: src/components/OptionsList/index.tsx
@@ -409,14 +409,14 @@ msgstr "Strike Option"
 
 #: src/components/OptionsList/index.tsx
 #: src/pages/Options/index.tsx
-msgid "Strike earn"
-msgstr "Strike earn"
+msgid "Strike Earn"
+msgstr "Strike Earn"
 
 #: src/components/OptionsList/index.tsx
 #: src/pages/Options/index.tsx
 #: src/pages/Options/index.tsx
-msgid "Strike price"
-msgstr "Strike price"
+msgid "Strike Price"
+msgstr "Strike Price"
 
 #: src/pages/Farm/FarmNoticeModal/index.tsx
 #: src/pages/Options/OptionsNoticeModal/index.tsx
@@ -455,8 +455,8 @@ msgstr "To(Estimated)"
 #: src/pages/Options/index.tsx
 #: src/pages/Perpetuals/index.tsx
 #: src/pages/Perpetuals/index.tsx
-msgid "Token pair"
-msgstr "Token pair"
+msgid "Token Pair"
+msgstr "Token Pair"
 
 #: src/pages/Swap/index.tsx
 msgid "Trading Price"

@@ -246,7 +246,7 @@ const Win: FC = () => {
   const weeklyRanks = () => {
     return (
       <div className={`${classPrefix}-otherList-weekly`}>
-        <p className={`${classPrefix}-otherList-weekly-title`}>Weekly ranks</p>
+        <p className={`${classPrefix}-otherList-weekly-title`}>Weekly Ranks</p>
         <ul>{weekly_li}</ul>
       </div>
     );
@@ -270,7 +270,7 @@ const Win: FC = () => {
   const allBets = () => {
     return (
       <div className={`${classPrefix}-otherList-allBets`}>
-        <p className={`${classPrefix}-otherList-allBets-title`}>Live claim</p>
+        <p className={`${classPrefix}-otherList-allBets-title`}>Live Claim</p>
         <ul>{allBets_li}</ul>
       </div>
     );
@@ -364,10 +364,10 @@ const Win: FC = () => {
           <InfoShow
             topLeftText={"Multiplier"}
             topRightText={checkChance() ? "" : "Limitation: 1.1-100"}
-            bottomRightText={`Win chance: ${
+            bottomRightText={`Win Chance: ${
               winChance === "NaN" ? "---" : winChance
             } %`}
-            popText={"Win chance = 1 / Multiplier"}
+            popText={"Win Chance = 1 / Multiplier"}
           >
             <input
               type="text"
@@ -394,12 +394,12 @@ const Win: FC = () => {
             </button>
           </InfoShow>
           <InfoShow
-            topLeftText={"Bet amount"}
+            topLeftText={"Bet Amount"}
             bottomRightText={`${"Reward"}: ${
               payout === "NaN" ? "---" : payout
             } NEST`}
             topRightText={checkWinNum() ? "" : "Limitation: 1-1000"}
-            popText={"Reward = Multiplier * Bet amount"}
+            popText={"Reward = Multiplier * Bet Amount"}
           >
             <SingleTokenShow tokenNameOne={"NEST"} isBold />
             <input
