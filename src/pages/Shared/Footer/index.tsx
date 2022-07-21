@@ -41,10 +41,10 @@ const Footer: FC = () => {
         </button>
       </div>
       <div className={`${footer}-right`}>
-        <a href="https://app.fortprotocol.com/REP-FORT-2022-01-25.pdf" target="view_window">
+        <a href="./The_White_Paper_of_NEST_PVM.pdf" target="view_window">
           <SafeIcon className={`${footer}-right-safe`} />
         </a>
-        <a href="https://docs.fortprotocol.com/" target="view_window">
+        <a href="http://nestprotocol.org/#/docs/Technical-Reference/NEST-Probability-Virtual-Machine.md" target="view_window">
           <WhitePaper className={`${footer}-right-paper`} />
         </a>
         <a href="https://t.me/fort_DeFi" target="view_window">
@@ -53,10 +53,10 @@ const Footer: FC = () => {
         <a href="https://twitter.com/FortProtocol" target="view_window">
           <TwitterIcon className={`${footer}-right-twitter`} />
         </a>
-        <a href="https://github.com/FORT-Protocol" target="view_window">
+        <a href="https://github.com/NEST-Protocol" target="view_window">
           <GithubIcon className={`${footer}-right-github`} />
         </a>
-        <a href="https://fortprotocol.medium.com/" target="view_window">
+        <a href="https://nest-protocol-82041.medium.com/" target="view_window">
           <MiIcon className={`${footer}-right-mi`} />
         </a>
       </div>

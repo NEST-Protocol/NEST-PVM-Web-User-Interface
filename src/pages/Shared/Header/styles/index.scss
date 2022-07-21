@@ -1,6 +1,40 @@
 @use "sass:math";
 @import 'src/styles/shared.scss';
 
+.header-topNotice {
+    height: 44px;
+    width: 100%;
+    background-color: #EEEEEE;
+    display: flex;
+    justify-content: space-between;
+    p {
+        width: 100%;
+        text-align: center;
+        line-height: 44px;
+        color: #878787;
+        font-size: 12px;
+    }
+    
+    button {
+            
+        width: 58px;
+        height: 14px;
+        margin: auto 0;
+
+        svg {
+            width: 14px;
+            height: 14px;
+            path {
+                fill:#878787;
+            }
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+}
+
 .header-nav {
     position: relative;
     width: 100%;

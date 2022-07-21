@@ -57,20 +57,25 @@ const MobileHeader: FC = () => {
   };
   const nowNetwork = useCallback(() => {
     if (!chainId) {
-      return;
-    }
-    if (chainId === 56 || chainId === 97) {
       return (
         <>
           <LittleBSC />
-          <p>{chainId === 56 ? "BNB" : "BNBTest"}</p>
+          <p>{"BNB"}</p>
         </>
       );
-    } else if (chainId === 1 || chainId === 4) {
+    }
+    if (chainId === 1 || chainId === 4) {
       return (
         <>
           <LittleETH />
           <p>{chainId === 1 ? "Ethereum" : "Rinkeby"}</p>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <LittleBSC />
+          <p>{chainId === 56 ? "BNB" : "BNBTest"}</p>
         </>
       );
     }
