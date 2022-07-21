@@ -398,6 +398,7 @@ const Win: FC = () => {
             bottomRightText={`${"Reward"}: ${
               payout === "NaN" ? "---" : payout
             } NEST`}
+            bottomLeftText={`Rolling Fee: ${bigNumberToNormal(normalToBigNumber(nestNum.valueOf(), 18).div(100), 18, 6)} NEST`}
             topRightText={checkWinNum() ? "" : "Limitation: 1-1000"}
             popText={"Reward = Multiplier * Bet Amount"}
           >

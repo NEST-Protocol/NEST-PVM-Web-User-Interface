@@ -197,7 +197,6 @@ const Swap: FC = () => {
             usePath[index],
             usePath[index + 1],
           ]);
-          console.log(amount.toString());
         } else if (usePath[index] === "DCU" && usePath[index + 1] === "NEST") {
           amount = await swapDCUToNEST(amount);
         }
@@ -317,13 +316,13 @@ const Swap: FC = () => {
     }
     return path().map((item) => tokenList[item].addresses[chainId]);
   };
+
   const swap = usePVMPayBack(normalToBigNumber(inputValue ? inputValue : ""));
   const uniswapV2Swap = useUniSwapV2Swap(
     normalToBigNumber(inputValue ? inputValue : "", checkUSDT(swapToken.src)),
     amountOutMin,
     addressPath(),
-    account ? account : "",
-    BigNumber.from(9999999999)
+    account ? account : ""
   );
   const mainButtonState = () => {
     const pendingTransaction = pendingList.filter(

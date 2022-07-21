@@ -10,6 +10,7 @@ type Props = {
   topLeftText: string;
   topRightText?: string;
   bottomRightText: string;
+  bottomLeftText?: string;
   balanceRed?: boolean;
   tokenSelect?: boolean;
   tokenList?: Array<TokenType>;
@@ -116,6 +117,25 @@ const InfoShow: FC<Props> = ({ children, ...props }) => {
     }
   }
 
+  const bottomLeft = () => {
+    return (
+      <p
+        className={classNames({
+          [`${classPrefix}-bottomLeft`]: true,
+          [`underLine`]: true,
+        })}
+      >
+        <Tooltip
+          placement="right"
+          color={"#ffffff"}
+          title={"Rolling Fee = Bet Amount * 1%"}
+        >
+          <span>{props.bottomLeftText}</span>
+        </Tooltip>
+      </p>
+    );
+  };
+
   const bottomRight = () => {
     const { ethereum } = window;
     const addToken = async (tokenName: string) => {
@@ -142,7 +162,7 @@ const InfoShow: FC<Props> = ({ children, ...props }) => {
     };
     if (
       props.bottomRightText.toLowerCase().indexOf("balance") >= 0 &&
-      (props.bottomRightText.toLowerCase().indexOf("nest") >= 0)
+      props.bottomRightText.toLowerCase().indexOf("nest") >= 0
     ) {
       var tokenName: string = "";
       if (props.bottomRightText.toLowerCase().indexOf("nest") >= 0) {
@@ -221,7 +241,10 @@ const InfoShow: FC<Props> = ({ children, ...props }) => {
         {children}
       </div>
       {props.tokenSelect || props.dataSelect ? tokenSelectUl : null}
-      {bottomRight()}
+      <div className={`${classPrefix}-bottom`}>
+        {bottomLeft()}
+        {bottomRight()}
+      </div>
     </div>
   );
 };

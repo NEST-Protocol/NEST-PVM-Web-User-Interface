@@ -41,11 +41,11 @@ export const BASE_AMOUNT = BigNumber.from('1000000000000000000');
 export const BASE_2000ETH_AMOUNT = BigNumber.from('2000000000000000000000');
 
 /**
- * BigNumber转为浮点字符串
+ * BigNumber->float
  * @param num BigNumber
- * @param decimals token精度（USDT为6位，大部分为18位）
- * @param fix 保留小数点后位数
- * @returns 浮点字符串
+ * @param decimals usdt=6, other=18
+ * @param fix save num
+ * @returns float string
  */
 export function bigNumberToNormal(
   num: BigNumber,
@@ -67,7 +67,7 @@ export function bigNumberToNormal(
     }
     newStr = "0." + baseStr + str;
   }
-  // 除0
+  // /0
   var resultBaseStr = newStr;
   if (resultBaseStr.indexOf(".") !== -1) {
     const resultBaseStrArray = resultBaseStr.split(".");
@@ -87,9 +87,9 @@ export function bigNumberToNormal(
 }
 
 /**
- * 字符串转为BigNumber
- * @param num 数字字符串
- * @param decimals token精度（USDT为6位，大部分为18位）
+ * string -> BigNumber
+ * @param num num string
+ * @param decimals usdt=6, other=18
  * @returns BigNumber
  */
 export function normalToBigNumber(
@@ -100,7 +100,6 @@ export function normalToBigNumber(
   var baseStr: string = "";
   var i = 0;
   if (pointNum !== -1) {
-    // 有小数
     const strArray = num.split(".");
     if (strArray[1].length > 18) {
       throw Error("normalToBigNumber:more decimals");
@@ -110,7 +109,6 @@ export function normalToBigNumber(
     }
     return BigNumber.from(strArray[0] + strArray[1] + baseStr);
   } else {
-    // 没有小数
     for (i; i < decimals; i++) {
       baseStr += "0";
     }
@@ -127,18 +125,18 @@ export function getBaseBigNumber(num: number): BigNumber {
 }
 
 /**
- * gasLimit默认增加
- * @param value 默认gaslImit
- * @returns 默认gaslImit增加10%
+ * gasLimit add
+ * @param value gaslImit
+ * @returns gaslImit + 10%
  */
 export function addGasLimit(value: BigNumber): BigNumber {
   return value.mul(BigNumber.from(10000 + 1000)).div(BigNumber.from(10000));
 }
 
 /**
- * 截取省略地址字符串
- * @param address 完整地址字符串
- * @returns 省略地址字符串
+ * address string
+ * @param address address
+ * @returns .... string
  */
 export function showEllipsisAddress(address: string): string {
   return address.substr(0, 8) + "...." + address.substr(address.length - 6, 6);
