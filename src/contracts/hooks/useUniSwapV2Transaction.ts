@@ -28,7 +28,6 @@ export function useUniSwapV2Swap(
         BigNumber.from(time.toFixed(0).toString()),
       ]
     );
-    console.log(BigNumber.from(time.toFixed(0).toString()).toString())
   }
 
   const tx = {

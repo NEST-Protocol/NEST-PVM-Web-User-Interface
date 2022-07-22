@@ -387,7 +387,7 @@ msgstr "看跌"
 
 #: src/pages/Options/index.tsx
 #: src/pages/Options/index.tsx
-msgid "Spot price"
+msgid "Spot Price"
 msgstr "现货价"
 
 #: src/pages/Shared/TransactionToast/index.tsx

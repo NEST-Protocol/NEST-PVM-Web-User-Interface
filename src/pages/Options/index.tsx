@@ -461,7 +461,7 @@ const MintOptions: FC = () => {
             <Tooltip
               placement="top"
               color={"#ffffff"}
-              title={t`One option shares to the return of a ETH.`}
+              title={t`The shares of NEST an investor expect to receive.`}
             >
               <span>
                 <Trans>Option Shares</Trans>
@@ -514,7 +514,7 @@ const MintOptions: FC = () => {
             <MainCard>
               <div className={`${classPrefix}-rightCard-smallCard-title`}>
                 <p>
-                  <Trans>Spot price</Trans>
+                  <Trans>Spot Price</Trans>
                   {isLong ? " > " : " < "}
                   {bigNumberToNormal(
                     normalToBigNumber(strikePrice || "0"),
@@ -539,7 +539,7 @@ const MintOptions: FC = () => {
             <MainCard>
               <div className={`${classPrefix}-rightCard-smallCard-title`}>
                 <p>
-                  <Trans>Spot price</Trans>
+                  <Trans>Spot Price</Trans>
                   {isLong ? " <= " : " >= "}
                   {bigNumberToNormal(
                     normalToBigNumber(strikePrice || "0"),

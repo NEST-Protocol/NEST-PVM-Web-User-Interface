@@ -387,8 +387,8 @@ msgstr "Short"
 
 #: src/pages/Options/index.tsx
 #: src/pages/Options/index.tsx
-msgid "Spot price"
-msgstr "Spot price"
+msgid "Spot Price"
+msgstr "Spot Price"
 
 #: src/pages/Shared/TransactionToast/index.tsx
 msgid "Staking"
