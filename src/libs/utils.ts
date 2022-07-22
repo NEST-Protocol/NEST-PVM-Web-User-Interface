@@ -23,7 +23,7 @@ export const BLOCK_TIME: NumberNumberType = {
   97: 3000,
 }
 export const WIN_GET_STRING: NumberStringType = {
-  1: 'prcEthereum',
+  1: 'prcEth',
   4: 'prcRinkeby',
   56: 'prc',
   97: 'prcTest',
@@ -34,7 +34,6 @@ export const WIN_TOAST_WAIT: NumberNumberType = {
   56: 4000,
   97: 4000,
 }
-
 
 export const ZERO_ADDRESS = "0x0000000000000000000000000000000000000000";
 export const BASE_AMOUNT = BigNumber.from('1000000000000000000');
