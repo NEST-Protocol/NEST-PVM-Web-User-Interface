@@ -1,0 +1,26 @@
+@use "sass:math";
+@import 'src/styles/shared.scss';
+
+.fort-button {
+    height: 44px;
+    border-radius: 22px;
+    background: $main-button-color;
+    color: $main-button-text-color;
+    font-family: $boldFont;
+    font-weight: bold;
+    text-align: center;
+    font-size: $T2;
+    padding-left: 35px;
+    padding-right: 35px;
+
+    &.disable {
+        background: $button-disable-color;
+        &:hover {
+            cursor: not-allowed;
+        }
+    }
+
+    &:hover {
+        cursor: pointer;
+    }
+}

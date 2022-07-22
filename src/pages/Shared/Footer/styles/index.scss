@@ -1,0 +1,91 @@
+@use "sass:math";
+@import 'src/styles/shared.scss';
+
+footer {
+    $footerHeight: 66px;
+    $iconSize: 28px;
+    $iconMargin: math.div($footerHeight - $iconSize, 2);
+    $footerWidth: 100%;
+    width: $footerWidth;
+    height: $footerHeight;
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid $gray-background-color;
+
+    .footer-left {
+        display: flex;
+        height: $footerHeight;
+        width: 50%;
+
+        &-theme {
+            margin: auto 0;
+            margin-left: 44px;
+            &:hover {
+                cursor: pointer;
+            }
+        }
+
+        &-receive {
+            margin: auto 0;
+            margin-left: 40px;
+            padding: 0 14px;
+            height: 44px;
+            border-radius: 22px;
+            border: 1px solid $gray-line-color;
+            &:hover {
+                border: 1px solid black;
+            }
+        }
+    }
+
+    .footer-right {
+        height: $footerHeight;
+        width: 50%;
+        display: flex;
+        justify-content: flex-end;
+
+        svg {
+            &:hover {
+                & > path:first-child {
+                fill: $main-button-color;
+                }
+            }
+        }
+
+        &-mi {
+            width: $iconSize;
+            height: $iconSize;
+            margin: $iconMargin 40px (-$iconMargin) 0;
+        }
+
+        &-github {
+            width: $iconSize;
+            height: $iconSize;
+            margin: $iconMargin 12px (-$iconMargin) 0;
+        }
+
+        &-twitter {
+            width: $iconSize;
+            height: $iconSize;
+            margin: $iconMargin 12px (-$iconMargin) 0;
+        }
+
+        &-tel {
+            width: $iconSize;
+            height: $iconSize;
+            margin: $iconMargin 12px (-$iconMargin) 0;
+        }
+
+        &-paper {
+            width: $iconSize;
+            height: $iconSize;
+            margin: $iconMargin 12px (-$iconMargin) 0;
+        }
+
+        &-safe {
+            width: $iconSize;
+            height: $iconSize;
+            margin: $iconMargin 12px (-$iconMargin) 0;
+        }
+    }
+}

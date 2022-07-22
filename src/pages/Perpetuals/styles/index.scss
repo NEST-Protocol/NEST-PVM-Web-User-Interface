@@ -1,0 +1,192 @@
+@use "sass:math";
+@import 'src/styles/shared.scss';
+
+.perpetuals-card {
+    max-width: $baseWidth;
+    width: auto;
+    margin: 0 auto;
+    padding: 40px 44px;
+    margin-top: 22px;
+    margin-bottom: 44px;
+
+
+    &-tokenPair {
+        display: flex;
+        justify-content: space-between;
+
+        button {
+            margin-left: 10px;
+        }
+
+        div+svg {
+            margin: auto auto;
+            margin-left: 10px;
+
+            circle {
+                stroke: $gray-background-text-color;
+            }
+
+            path {
+                fill: $gray-background-text-color;
+            }
+        }
+    }
+
+    .kPrice {
+        margin: 0 20px;
+        margin-top: -20px;
+        color: $gray-info-text-color;
+        font-size: $T4;
+        text-align: right;
+        height: 20px;
+
+        span {
+            padding-bottom: 5px;
+            border-bottom: 1px dashed $gray-info-text-color;
+        }
+    }
+
+    .chooseType {
+        margin-top: 20px;
+    }
+
+    &-tokenPair+p {
+        line-height: 44px;
+        font-size: $T2;
+        color: $main-button-color;
+    }
+
+    .leverChoose {
+        margin-top: 20px;
+    }
+
+    .leverChoose+.infoView {
+        margin-top: 30px;
+    }
+
+    &-button {
+        width: 100%;
+        margin-top: 30px;
+    }
+}
+
+.holdLine {
+    margin-top: 40px;
+}
+
+.holdLine+ul {
+    margin-bottom: 20px;
+}
+
+table {
+    width: 1340px;
+    margin: 0 auto;
+    border-collapse: separate;
+    border-spacing: 0px 20px;
+
+
+    .perpetuals-table-title {
+        color: $gray-info-text-color;
+        font-size: $T2;
+        height: 44px;
+        border-radius: 12px;
+        box-shadow: $shadow;
+    }
+
+    .perpetuals-table-normal {
+        color: $gray-info-text-color;
+        font-size: $T2;
+        height: 44px;
+        border-radius: 12px;
+        box-shadow: $shadow;
+        text-align: center;
+        font-size: $T2;
+        font-family: $boldFont;
+        color: $black-text-color;
+
+        svg {
+            margin-top: 3px;
+        }
+
+        .fort-button {
+            height: 28px;
+            width: 90px;
+            padding: 0;
+        }
+
+        .tokenPair {
+            svg {
+                z-index: 1;
+
+            }
+
+            svg+svg {
+                margin-left: -8px;
+                z-index: 0;
+            }
+        }
+    }
+
+    td.td-type {
+        display: flex;
+        justify-content: center;
+
+        svg {
+            margin: auto 0;
+        }
+
+        p.red {
+            margin-left: 5px;
+            line-height: 44px;
+            color: $up-color;
+        }
+
+        p.green {
+            margin-left: 5px;
+            line-height: 44px;
+            color: $down-color;
+        }
+    }
+
+    td.exerciseTime {
+        &>.p:first-child {
+            font-size: 16px;
+        }
+
+        p+p {
+            font-size: 12px;
+        }
+    }
+
+    th.th-marginAssets {
+        span {
+
+            line-height: 28px;
+            padding: 3px 0;
+            border-bottom: 1px dashed $gray-info-text-color;
+        }
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .perpetuals-card {
+        margin: 0 10px;
+        padding: 20px 20px;
+    }
+
+    .leverChoose {
+        margin-left: 0px;
+        margin-right: 0px;
+
+        &-title {
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+
+        &-choose li {
+            width: 52px;
+            height: 32px;
+            line-height: 32px;
+        }
+    }
+}
