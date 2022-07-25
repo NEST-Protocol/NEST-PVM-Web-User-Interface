@@ -60,6 +60,7 @@
         height: 30px;
         line-height: 30px;
         font-weight: bold;
+        user-select:none;
     }
 
     &-title+.infoView+.infoView {
