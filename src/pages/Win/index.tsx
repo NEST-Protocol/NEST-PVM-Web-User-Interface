@@ -363,7 +363,8 @@ const Win: FC = () => {
           <p className={`${classPrefix}-card-title`}>Win NEST</p>
           <InfoShow
             topLeftText={"Multiplier"}
-            topRightText={checkChance() ? "" : "Limitation: 1.1-100"}
+            topRightText={"Limitation: 1.1-100"}
+            topRightRed={!checkChance()}
             bottomRightText={`Win Chance: ${
               winChance === "NaN" ? "---" : winChance
             } %`}
@@ -399,7 +400,8 @@ const Win: FC = () => {
               payout === "NaN" ? "---" : payout
             } NEST`}
             bottomLeftText={`Rolling Fee: ${bigNumberToNormal(normalToBigNumber(nestNum.valueOf(), 18).div(100), 18, 6)} NEST`}
-            topRightText={checkWinNum() ? "" : "Limitation: 1-1000"}
+            topRightText={"Limitation: 1-1000"}
+            topRightRed={!checkWinNum()}
             popText={"Reward = Multiplier * Bet Amount"}
           >
             <SingleTokenShow tokenNameOne={"NEST"} isBold />
