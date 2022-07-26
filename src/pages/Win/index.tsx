@@ -189,6 +189,11 @@ const Win: FC = () => {
     };
   }, [getList, chainId, txList]);
 
+  // update list - chainID
+  useEffect(() => {
+    getList();
+  }, [getList, chainId])
+
   // approve
   useEffect(() => {
     if (!chainId || !account || !library) {
@@ -253,6 +258,7 @@ const Win: FC = () => {
   };
 
   const allBets_li = allBetsShow.map((item) => {
+    if (item === undefined) {return <></>}
     const url = addressBaseUrl + item.owner;
     return (
       <li key={item.owner + item.index.toString() + "all"}>
