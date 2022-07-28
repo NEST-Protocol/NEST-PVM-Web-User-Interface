@@ -29,10 +29,10 @@ export const WIN_GET_STRING: NumberStringType = {
   97: 'prcTest',
 }
 export const WIN_TOAST_WAIT: NumberNumberType = {
-  1: 11000,
-  4: 11000,
-  56: 4000,
-  97: 4000,
+  1: 20000,
+  4: 20000,
+  56: 10000,
+  97: 10000,
 }
 
 export const ZERO_ADDRESS = "0x0000000000000000000000000000000000000000";
