@@ -44,7 +44,7 @@ const Footer: FC = () => {
         <a href="./The_White_Paper_of_NEST_PVM.pdf" target="view_window">
           <SafeIcon className={`${footer}-right-safe`} />
         </a>
-        <a href="https://www.nestprotocol.org/#/docs/Technical-Reference/NEST-Probability-Virtual-Machine.md" target="view_window">
+        <a href="https://finance.docs.nestprotocol.org/#connect-wallet" target="view_window">
           <WhitePaper className={`${footer}-right-paper`} />
         </a>
         <a href="https://t.me/nest_chat" target="view_window">
