@@ -9,6 +9,7 @@ import "./styles";
 type Props = {
   topLeftText: string;
   topRightText?: string;
+  topRightRed?: boolean;
   bottomRightText: string;
   bottomLeftText?: string;
   balanceRed?: boolean;
@@ -225,7 +226,10 @@ const InfoShow: FC<Props> = ({ children, ...props }) => {
     <div className={classPrefix}>
       <div className={`${classPrefix}-top`}>
         <p className={`${classPrefix}-topLeft`}>{props.topLeftText}</p>
-        <p className={`${classPrefix}-topRight`}>{props.topRightText}</p>
+        <p className={classNames({
+          [`${classPrefix}-topRight`]: true,
+          [`topRightRed`]: props.topRightRed
+        })}>{props.topRightText}</p>
       </div>
 
       <div

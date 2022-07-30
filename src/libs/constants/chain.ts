@@ -21,7 +21,7 @@ export const BNBTest = {
 export const BNB = {
   name: "BNB",
   chainId: 56,
-  tokenName: "BSC",
+  tokenName: "BNB",
   tokenSymbol: "BNB",
   tokenDecimals: 18,
   rpc: [`https://bsc-dataseed1.defibit.io/`],

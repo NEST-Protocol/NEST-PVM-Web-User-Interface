@@ -28,6 +28,10 @@
         font-size: 15px;
         text-align: right;
         height: 20px;
+
+        &.topRightRed {
+            color: $wrongAndNotice-color;
+        }
     }
 
     &-mainView {
@@ -125,6 +129,7 @@
             font-size: $T4;
             text-align: left;
             height: 20px;
+
             span {
                 padding-bottom: 5px;
             }
@@ -143,19 +148,20 @@
             font-size: $T4;
             text-align: right;
             height: 20px;
-    
+
             span {
                 padding-bottom: 5px;
             }
-    
+
             &.underLine {
                 span {
                     border-bottom: 1px dashed #7D7D7D;
                 }
             }
-    
+
             &.balanceRed {
                 color: $wrongAndNotice-color;
+
                 span {
                     border-bottom: 1px dashed $wrongAndNotice-color;
                 }
@@ -167,14 +173,14 @@
             color: $main-button-color;
             justify-content: space-between;
             cursor: pointer;
-    
+
             p {
                 line-height: 22px;
                 margin-left: 5px;
             }
         }
     }
-    
+
 
     &-tokenSelect::-webkit-scrollbar {
         width: 0 !important;

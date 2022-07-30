@@ -7,7 +7,7 @@ import {
   TransactionModalType,
 } from "../../pages/Shared/TransactionModal";
 import { notifyTransaction } from "../../pages/Shared/TransactionToast";
-import { normalToBigNumber, WIN_GET_STRING, WIN_TOAST_WAIT, ZERO_ADDRESS } from "../utils";
+import { BLOCK_TIME, normalToBigNumber, WIN_GET_STRING, WIN_TOAST_WAIT, ZERO_ADDRESS } from "../utils";
 import { notifyWinToast, WinToastProps } from "../../pages/Shared/WinToast";
 import { PVMWin } from "./useContract";
 import { PVMWinContract } from "../constants/addresses";
@@ -169,7 +169,7 @@ const useTransactionList = () => {
       }
       setTimeout(() => {
         setChecking(false);
-      }, 15000);
+      }, BLOCK_TIME[chainId] + 6000);
     })();
     
   }, [pendingList, checking, library, updateList, getList, chainId]);

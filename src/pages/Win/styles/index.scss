@@ -60,6 +60,7 @@
         height: 30px;
         line-height: 30px;
         font-weight: bold;
+        user-select:none;
     }
 
     &-title+.infoView+.infoView {
@@ -83,9 +84,9 @@
         }
     }
 
-    .infoView-topRight {
-        color: #FF0000;
-    }
+    // .infoView-topRight {
+    //     color: #FF0000;
+    // }
 
     .infoView-topLeft {
         font-weight: 600;

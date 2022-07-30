@@ -42,6 +42,8 @@ export { ReactComponent as Chance } from './svg/chance.svg'
 export { ReactComponent as SubIcon } from './svg/subIcon.svg'
 export { ReactComponent as AddIcon } from './svg/addIcon.svg'
 export { ReactComponent as ExchangeIcon } from './svg/exchange-icon.svg'
+export { ReactComponent as Provably } from './svg/Provably.svg'
+export { ReactComponent as HowToPlay } from './svg/HowToPlay.svg'
 
 
 

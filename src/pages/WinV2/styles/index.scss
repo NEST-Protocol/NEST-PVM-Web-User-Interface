@@ -1,0 +1,11 @@
+@use "sass:math";
+@import 'src/styles/shared.scss';
+
+.winV2 {
+    margin: 0 auto;
+    margin-bottom: 44px;
+    margin-top: 22px;
+    display: flex;
+    justify-content: center;
+    max-width: 1200px;
+}

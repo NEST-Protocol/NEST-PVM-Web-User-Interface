@@ -20,10 +20,10 @@ const MobileFooter: FC = () => {
         >
           <SafeIcon className={`${footer}-right-safe`} />
         </a>
-        <a href="http://nestprotocol.org/#/docs/Technical-Reference/NEST-Probability-Virtual-Machine.md" target="view_window">
+        <a href="https://finance.docs.nestprotocol.org/#connect-wallet" target="view_window">
           <WhitePaper className={`${footer}-right-paper`} />
         </a>
-        <a href="https://t.me/fort_DeFi" target="view_window">
+        <a href="https://t.me/nest_chat" target="view_window">
           <TelIcon className={`${footer}-right-tel`} />
         </a>
         <a href="https://twitter.com/FortProtocol" target="view_window">

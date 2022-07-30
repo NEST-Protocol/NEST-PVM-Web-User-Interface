@@ -461,7 +461,7 @@ const MintOptions: FC = () => {
             <Tooltip
               placement="top"
               color={"#ffffff"}
-              title={t`The shares of NEST an investor expect to receive.`}
+              title={'The shares of NEST an investor expect to receive.'}
             >
               <span>
                 <Trans>Option Shares</Trans>

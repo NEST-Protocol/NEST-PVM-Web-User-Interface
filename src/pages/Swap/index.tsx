@@ -163,7 +163,7 @@ const Swap: FC = () => {
     }
 
     const swapDCUToNEST = async (amountIn: BigNumber) => {
-      return amountIn.mul(33).div(10);
+      return amountIn.mul(BigNumber.from('7768161615')).div(BigNumber.from('1000000000'));
     };
 
     const swapUniSwapV2 = async (amountIn: BigNumber, path: Array<string>) => {
