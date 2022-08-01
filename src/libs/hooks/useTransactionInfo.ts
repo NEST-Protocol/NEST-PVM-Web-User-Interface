@@ -1,4 +1,3 @@
-import { BigNumber } from '@ethersproject/bignumber';
 import { useCallback, useEffect, useState } from "react";
 import { createContainer } from "unstated-next";
 import useWeb3 from "./useWeb3";
@@ -7,11 +6,7 @@ import {
   TransactionModalType,
 } from "../../pages/Shared/TransactionModal";
 import { notifyTransaction } from "../../pages/Shared/TransactionToast";
-import { BLOCK_TIME, normalToBigNumber, WIN_GET_STRING, WIN_TOAST_WAIT, ZERO_ADDRESS } from "../utils";
-import { notifyWinToast, WinToastProps } from "../../pages/Shared/WinToast";
-import { PVMWin } from "./useContract";
-import { PVMWinContract } from "../constants/addresses";
-import { WinListType } from "../../pages/Win";
+import { BLOCK_TIME } from "../utils";
 
 export enum TransactionType {
   buyLever = 0,
@@ -60,7 +55,7 @@ type ShowModalType = {
 };
 
 const useTransactionList = () => {
-  const { chainId, library, account } = useWeb3();
+  const { chainId, library } = useWeb3();
   const [txList, setTxList] = useState<TransactionInfoType[]>([]);
   const [showModal, setShowModal] = useState<ShowModalType>({
     isShow: false,
@@ -69,7 +64,6 @@ const useTransactionList = () => {
   });
   const [pendingList, setPendingList] = useState<TransactionInfoType[]>([]);
   const [checking, setChecking] = useState(false);
-  const PVMWinOJ = PVMWin(PVMWinContract);
 
   useEffect(() => {
     if (!chainId) {
@@ -114,33 +108,6 @@ const useTransactionList = () => {
     }
   },[txList]);
 
-  const getList = useCallback(async () => {
-    
-    if (!PVMWinOJ || !chainId) {
-      return;
-    }
-
-    const latest = await library?.getBlockNumber();
-    if (!latest) {
-      return;
-    }
-
-    const myBetsUrl = `https://api.hedge.red/api/` + WIN_GET_STRING[chainId] + `/userList/${account}/50`;
-    const myBets_get = await fetch(myBetsUrl);
-    const myBets_data = await myBets_get.json();
-    const result = myBets_data.value.filter(
-      (item: WinListType) => item.owner !== ZERO_ADDRESS
-    );
-    
-    const latestItem = result[0];
-    
-    const notifyItem: WinToastProps = {
-      gained: normalToBigNumber(latestItem.gained.toString(), 18),
-      index: BigNumber.from(latestItem.index.toString()),
-    };
-    notifyWinToast(notifyItem);
-  }, [PVMWinOJ, chainId, library, account]);
-
   useEffect(() => {
     if (pendingList.length === 0 || checking || !chainId) {
       return;
@@ -158,12 +125,6 @@ const useTransactionList = () => {
           updateList(element);
           setChecking(false);
           notifyTransaction(element);
-
-          if (rec.status && element.type === TransactionType.roll) {
-            setTimeout(() => {
-              getList()
-            }, WIN_TOAST_WAIT[chainId]);
-          }
           return;
         }
       }
@@ -172,7 +133,7 @@ const useTransactionList = () => {
       }, BLOCK_TIME[chainId] + 6000);
     })();
     
-  }, [pendingList, checking, library, updateList, getList, chainId]);
+  }, [pendingList, checking, library, updateList, chainId]);
 
   const pushTx = (hash: string, txInfo: TransactionBaseInfoType) => {
     const nowDate = parseInt((new Date().getTime() / 1000).toString());

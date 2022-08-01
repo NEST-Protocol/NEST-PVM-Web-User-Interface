@@ -28,6 +28,12 @@ export const WIN_GET_STRING: NumberStringType = {
   56: 'prc',
   97: 'prcTest',
 }
+export const WINV2_GET_STRING: NumberStringType = {
+  1: 'prcEth',
+  4: 'prcEth',
+  56: 'prc',
+  97: 'prc',
+}
 export const WIN_TOAST_WAIT: NumberNumberType = {
   1: 20000,
   4: 20000,
@@ -138,10 +144,10 @@ export function addGasLimit(value: BigNumber): BigNumber {
  * @returns .... string
  */
 export function showEllipsisAddress(address: string): string {
-  return address.substr(0, 8) + "...." + address.substr(address.length - 6, 6);
+  return address.substring(0, 8) + "...." + address.substring(address.length - 6, address.length);
 }
 export function showEllipsisAddress2(address: string): string {
-  return address.substr(0, 6) + "...." + address.substr(address.length - 4, 4);
+  return address.substring(0, 6) + "...." + address.substring(address.length - 4, address.length);
 }
 
 export function checkWidth():boolean {

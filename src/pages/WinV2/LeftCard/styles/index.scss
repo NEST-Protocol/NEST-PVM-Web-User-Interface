@@ -40,9 +40,11 @@
                     color: $main-button-color;
                     border-bottom: 1px solid $main-button-color;
                 }
+
                 g {
                     stroke: $main-button-color;
                 }
+
                 path {
                     fill: $main-button-color;
                 }
@@ -53,6 +55,7 @@
     &-mainView-play {
         margin-top: 18px;
         width: 484px;
+
         &-top {
             width: 100%;
             text-align: center;
@@ -60,6 +63,10 @@
             &-limit {
                 font-size: 15px;
                 color: #878787;
+
+                &.red {
+                    color: #FF0000;
+                }
             }
 
             &-input {
@@ -72,6 +79,29 @@
                 height: 44px;
                 width: 200px;
                 margin-top: 18px;
+                display: flex;
+                justify-content: center;
+
+
+                input {
+                    height: 100%;
+                    width: 45%;
+                    text-align: right;
+                    border: 0;
+                    font-size: 17px;
+                    font-weight: bold;
+                    color: #000000;
+                }
+
+                p {
+                    text-align: left;
+                    width: 60px;
+                    line-height: 42px;
+                    margin-left: 10px;
+                    font-size: 17px;
+                    font-weight: bold;
+                    color: #000000;
+                }
             }
 
             &-random {
@@ -82,6 +112,10 @@
                 background-color: $main-button-color;
                 margin-top: 18px;
                 padding-top: 36px;
+
+                &:hover {
+                    cursor: pointer;
+                }
 
                 &-text {
                     font-weight: bold;
@@ -129,6 +163,18 @@
                     border-radius: 22px;
                     margin-top: 18px;
                     padding: 0 22px;
+                    display: flex;
+
+                    input {
+                        height: 100%;
+                        width: 45%;
+                        text-align: left;
+                        border: 0;
+                        font-size: 17px;
+                        font-weight: bold;
+                        color: #000000;
+                        margin-left: 5px;
+                    }
                 }
             }
 
@@ -155,6 +201,7 @@
 
         &-mid2 {
             height: 100px;
+
             &-left {
                 &-buttonView {
                     width: 200px;
@@ -171,6 +218,10 @@
                         border: 1px solid #EEEEEE;
                         box-sizing: border-box;
                         box-shadow: inset 0px 0px 10px #C9C9C9;
+
+                        &:hover {
+                            cursor: pointer;
+                        }
                     }
                 }
 
@@ -178,6 +229,10 @@
                     margin-top: 18px;
                     font-size: 15px;
                     color: #878787;
+
+                    &.red {
+                        color: #FF0000;
+                    }
                 }
             }
         }
@@ -195,8 +250,13 @@
             margin-right: 22px;
             margin-top: 22px;
             justify-content: space-between;
+
             &-right {
                 text-align: right;
+
+                &.red {
+                    color: #FF0000;
+                }
             }
         }
     }
