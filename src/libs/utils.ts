@@ -30,9 +30,9 @@ export const WIN_GET_STRING: NumberStringType = {
 }
 export const WINV2_GET_STRING: NumberStringType = {
   1: 'prcEth',
-  4: 'prcEth',
+  4: 'prcRinkeby',
   56: 'prc',
-  97: 'prc',
+  97: 'prcTest',
 }
 export const WIN_TOAST_WAIT: NumberNumberType = {
   1: 20000,

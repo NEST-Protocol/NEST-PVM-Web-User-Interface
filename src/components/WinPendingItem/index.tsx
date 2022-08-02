@@ -1,7 +1,5 @@
-import { Tooltip } from "antd";
 import { BigNumber } from "ethers";
 import { FC, useEffect, useState } from "react";
-import { toast } from "react-toastify";
 import { usePVMWinClaim } from "../../contracts/hooks/usePVMWinTransation";
 import useTransactionListCon, {
   TransactionType,
@@ -20,7 +18,6 @@ type WinPendingItemType = {
 export const WinPendingItem: FC<WinPendingItemType> = ({ ...props }) => {
   const classPrefix = "winPendingItem";
   const { pendingList } = useTransactionListCon();
-  const [timeString, setTimeString] = useState<String>("");
   const [countNum, setCountNum] = useState<number>(0);
   const [nowBlock, setNowBlock] = useState<number>(0);
   const [leftTimeClock, setLeftTimeClock] = useState<number>(0);
@@ -49,24 +46,13 @@ export const WinPendingItem: FC<WinPendingItemType> = ({ ...props }) => {
     var leftTime =
       allTime -
       BigNumber.from(props.nowBlock).sub(props.openBlock).toNumber() * 3;
-    
+
     const thisLeftTime = leftTime - countNum;
     if (thisLeftTime <= 0) {
-      setTimeString("0:00");
       setLeftTimeClock(0);
       return;
     }
     setLeftTimeClock(thisLeftTime);
-    const minTime = parseInt(
-      (parseInt(thisLeftTime.toString()) / 60).toString()
-    );
-    var secondString = (thisLeftTime - minTime * 60).toString();
-    if (secondString.length === 1) {
-      secondString = "0" + secondString;
-    }
-    const time = minTime.toString() + ":" + secondString;
-    setTimeString(time);
-    
   }, [allTime, countNum, nowBlock, props.nowBlock, props.openBlock]);
 
   const buttonState = () => {
@@ -81,12 +67,12 @@ export const WinPendingItem: FC<WinPendingItemType> = ({ ...props }) => {
       <div className={`${classPrefix}-left`}>
         <MainButton
           onClick={() => {
+            console.log(2222)
             if (buttonState()) {
               return;
             }
-
+            
             claim();
-            toast.dismiss(props.index.toNumber());
           }}
           disable={buttonState()}
           loading={loadingButton()}
@@ -95,19 +81,13 @@ export const WinPendingItem: FC<WinPendingItemType> = ({ ...props }) => {
         </MainButton>
       </div>
       <div className={`${classPrefix}-right`}>
-        <Tooltip
-          placement="right"
-          color={"#ffffff"}
-          title={`Remaining claim time:${timeString}`}
-        >
-          <span>
-            <PendingClock
-              leftTime={leftTimeClock}
-              allTime={allTime}
-              index={props.index.toNumber()}
-            />
-          </span>
-        </Tooltip>
+        <span>
+          <PendingClock
+            leftTime={leftTimeClock}
+            allTime={allTime}
+            index={props.index.toNumber()}
+          />
+        </span>
       </div>
     </div>
   );

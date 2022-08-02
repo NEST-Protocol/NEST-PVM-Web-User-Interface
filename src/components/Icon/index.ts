@@ -44,6 +44,6 @@ export { ReactComponent as AddIcon } from './svg/addIcon.svg'
 export { ReactComponent as ExchangeIcon } from './svg/exchange-icon.svg'
 export { ReactComponent as Provably } from './svg/Provably.svg'
 export { ReactComponent as HowToPlay } from './svg/HowToPlay.svg'
-
-
+export { ReactComponent as WinXIcon } from './svg/Win_xIcon.svg'
+export { ReactComponent as WinOKIcon } from './svg/Win_okIcon.svg'
 
