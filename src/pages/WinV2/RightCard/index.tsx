@@ -11,6 +11,7 @@ import {
   BLOCK_TIME,
   checkWidth,
   showEllipsisAddress,
+  showEllipsisAddress2,
   showEllipsisAddress3,
   WINV2_GET_STRING,
   ZERO_ADDRESS,
@@ -260,7 +261,7 @@ const WinV2RightCard: FC = () => {
                 "---"
               ) : (
                 <a href={url} target="view_window">
-                  {showEllipsisAddress(item.hash)}
+                  {showEllipsisAddress2(item.hash)}
                 </a>
               )}
             </td>
@@ -531,7 +532,7 @@ export const WinV2BetList: FC<WinV2BetListData> = ({ ...props }) => {
         ) : (
           <a href={url} target="view_window">
             {checkWidth()
-              ? showEllipsisAddress(props.item.hash)
+              ? showEllipsisAddress2(props.item.hash)
               : showEllipsisAddress3(props.item.hash)}
           </a>
         )}
