@@ -114,6 +114,7 @@
 
                     td.x {
                         text-align: center;
+
                         svg {
                             width: 18px;
                             height: 18px;
@@ -122,6 +123,7 @@
 
                     td.ok {
                         text-align: center;
+
                         svg {
                             width: 25px;
                             height: 19px;
@@ -152,6 +154,63 @@
                             height: 22px;
                             margin: auto 0;
                             margin-left: 10px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .winV2-rightCard {
+        width: 100%;
+        margin: 0;
+        margin-top: 22px;
+
+        &-topTab {
+            width: 100%;
+
+        }
+
+        &-mainView {
+
+            &-myBet,
+            &-allBet,
+            &-week {
+                table {
+                    width: 100%;
+                    border-top: 1px solid rgba(197, 197, 197, 0.1500);
+
+                    tr {
+                        border-bottom: 1px solid rgba(197, 197, 197, 0.1500);
+
+                        th {
+                            font-size: 10px;
+                        }
+
+                        td {
+                            font-size: 10px;
+                        }
+                    }
+                }
+            }
+
+            &-myBet {
+                table {
+                    tr {
+                        td.claim {
+                            height: 43px;
+                            width: 100px;
+
+                            .fort-button {
+                                margin: auto 0;
+                                width: 50px;
+                                height: 24px;
+                                font-size: 10px;
+                                font-weight: 500;
+                                margin-left: 6px;
+                            }
                         }
                     }
                 }

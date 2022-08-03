@@ -8,7 +8,7 @@ import useWeb3 from "../../libs/hooks/useWeb3"
 
 export function usePVMWinRoll(
     n: BigNumber,  
-    m: BigNumber | null | undefined
+    m: BigNumber
 ) { 
     const { account, chainId } = useWeb3()
     var contract = PVMWin(PVMWinContract)
@@ -26,7 +26,7 @@ export function usePVMWinRoll(
         to: contract?.address,
         data: callData
     }
-    const txPromise = useSendTransaction(contract, tx, {title:`Roll`, info:'', type: TransactionType.roll})
+    const txPromise = useSendTransaction(contract, tx, {title:`Roll`, info:`${n.toString()},${m.toString()}`, type: TransactionType.roll})
     return txPromise
 }
 

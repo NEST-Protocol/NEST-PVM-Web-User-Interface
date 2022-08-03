@@ -149,6 +149,9 @@ export function showEllipsisAddress(address: string): string {
 export function showEllipsisAddress2(address: string): string {
   return address.substring(0, 6) + "...." + address.substring(address.length - 4, address.length);
 }
+export function showEllipsisAddress3(address: string): string {
+  return address.substring(0, 4) + "...." + address.substring(address.length - 2, address.length);
+}
 
 export function checkWidth():boolean {
   const width = window.innerWidth;

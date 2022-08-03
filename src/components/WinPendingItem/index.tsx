@@ -67,7 +67,6 @@ export const WinPendingItem: FC<WinPendingItemType> = ({ ...props }) => {
       <div className={`${classPrefix}-left`}>
         <MainButton
           onClick={() => {
-            console.log(2222)
             if (buttonState()) {
               return;
             }

@@ -153,3 +153,21 @@
         }
     }
 }
+
+@media screen and (max-width: 1000px) {
+    .WinV2Modal {
+        width: 100%;
+        margin-left: 15px;
+        &-card {
+            width: 100%;
+            padding: 44px 10px;
+
+            &-mid {
+
+                &-showInfo {
+                    width: 126px;
+                }
+            }
+        }
+    }
+}

@@ -9,3 +9,13 @@
     justify-content: center;
     max-width: 1200px;
 }
+
+@media screen and (max-width: 1000px) {
+    .winV2 {
+        max-width: 100%;
+        display:block;
+        padding: 0 10px;
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+}

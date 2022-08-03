@@ -552,15 +552,18 @@
                 &-allBet,
                 &-week {
                     table {
+                        border-top: 1px solid rgba(197,197,197,0.1500);
                         tr {
                             background: none;
                             box-shadow: none;
                             backdrop-filter: none;
+                            border-bottom: 1px solid rgba(197,197,197,0.1500);
 
                             td {
                                 color: #C5C5C5;
                             }
                         }
+
                         thead {
                             tr {
                                 th {
@@ -568,6 +571,7 @@
                                 }
                             }
                         }
+
                         tbody {
                             tr {
                                 td a {
@@ -734,6 +738,68 @@
             box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
             border: 0;
             color: $main-background-color;
+        }
+    }
+}
+
+.WinV2Modal-dark {
+    .WinV2Modal-card {
+        background: rgba(255, 255, 255, 0.15);
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border: 0px;
+        backdrop-filter: blur(24px);
+
+        .WinV2Modal-card-top {
+            .WinV2Modal-card-top-time {
+                color: #C5C5C5;
+            }
+
+            .WinV2Modal-card-top-random {
+                border: 1px solid rgba(0, 0, 0, 0);
+                background: rgba(255, 255, 255, 0.1500);
+                box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.2500);
+                border-radius: 50%;
+
+                svg {
+                    g {
+                        path {
+                            fill: white;
+                        }
+                    }
+                }
+            }
+        }
+
+        .WinV2Modal-card-mid {
+            .WinV2Modal-card-mid-showInfo {
+                p {
+                    color: #C5C5C5;
+                }
+
+                .WinV2Modal-card-mid-showInfo-bg {
+                    border: 1px solid rgba(0, 0, 0, 0);
+                    background: rgba(255, 255, 255, 0.1500);
+                    box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.2500);
+
+                    p {
+                        color: white;
+                    }
+                }
+            }
+        }
+        .WinV2Modal-card-hash {
+            color: #C5C5C5;
+            a {
+                color: #8BB7FF;
+            }
+        }
+        .fort-button {
+            background: linear-gradient(90deg, #8BB7FF 0%, #0061FF 100%);
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        }
+    
+        .fort-button.disable {
+            background: #BFBFBF;
         }
     }
 }

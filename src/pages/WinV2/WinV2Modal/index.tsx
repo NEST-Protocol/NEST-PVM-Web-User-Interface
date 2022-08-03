@@ -7,6 +7,7 @@ import MainButton from "../../../components/MainButton";
 import MainCard from "../../../components/MainCard";
 import { usePVMWinClaim } from "../../../contracts/hooks/usePVMWinTransation";
 import { useEtherscanBaseUrl } from "../../../libs/hooks/useEtherscanBaseUrl";
+import useThemes, { ThemeType } from "../../../libs/hooks/useThemes";
 import useTransactionListCon, {
   TransactionType,
 } from "../../../libs/hooks/useTransactionInfo";
@@ -29,6 +30,7 @@ const WinV2Modal: FC<Props> = ({ ...props }) => {
   const hashBaseUrl = useEtherscanBaseUrl();
   const [timeString, setTimeString] = useState<string>();
   const claim = usePVMWinClaim(BigNumber.from(props.item.index));
+  const { theme } = useThemes();
   const loadingButton = () => {
     const claimTx = pendingList.filter(
       (item) =>
@@ -114,7 +116,10 @@ const WinV2Modal: FC<Props> = ({ ...props }) => {
   }, [chainId, latestBlock, props.item.openBlock, showButton]);
 
   return (
-    <div className={`${classPrefix}`}>
+    <div className={classNames({
+      [`${classPrefix}`]: true,
+      [`${classPrefix}-dark`]: theme === ThemeType.dark
+    })}>
       <MainCard classNames={`${classPrefix}-card`}>
         <div className={`${classPrefix}-card-top`}>
           <p className={`${classPrefix}-card-top-time`}>

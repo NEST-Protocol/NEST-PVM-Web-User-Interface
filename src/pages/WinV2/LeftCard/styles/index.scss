@@ -261,3 +261,55 @@
         }
     }
 }
+
+@media screen and (max-width: 1000px) {
+    .winV2-leftCard {
+        width: 100%;
+
+        &-topTab {
+            width: 100%;
+        }
+
+        &-mainView-play {
+            width: 100%;
+
+            &-top {
+                &-limit {
+                    font-size: 12px;
+                }
+            }
+
+            &-mid1 {
+                &-bet {
+                    &-text {
+                        font-size: 12px;
+                    }
+                }
+
+                &-show {
+                    width: 100%;
+
+                    &-text {
+                        font-size: 12px;
+                    }
+
+                    &-num {
+                        font-size: 14px;
+                    }
+                }
+            }
+            &-mid2 {
+                height: 100px;
+    
+                &-left {
+                    &-limit {
+                        font-size: 12px;
+                    }
+                }
+            }
+            &-otherInfo {
+                font-size: 11px;
+            }
+        }
+    }
+}

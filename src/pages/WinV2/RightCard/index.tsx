@@ -3,11 +3,15 @@ import "./styles";
 import MainCard from "../../../components/MainCard";
 import classNames from "classnames";
 import MainButton from "../../../components/MainButton";
-import PendingClock from "../../../components/WinPendingItem/PendingClock";
+import PendingClock, {
+  PendingClockSmall,
+} from "../../../components/WinPendingItem/PendingClock";
 import useWeb3 from "../../../libs/hooks/useWeb3";
 import {
   BLOCK_TIME,
+  checkWidth,
   showEllipsisAddress,
+  showEllipsisAddress3,
   WINV2_GET_STRING,
   ZERO_ADDRESS,
 } from "../../../libs/utils";
@@ -50,6 +54,7 @@ const WinV2RightCard: FC = () => {
   const [weeklyData, setWeeklyData] = useState<Array<WinV2WeeklyData>>([]);
   const [allBetData, setAllBetData] = useState<Array<WinV2BetData>>([]);
   const [myBetData, setMyBetData] = useState<Array<WinV2BetData>>([]);
+  const [loadBetData, setLoadBetData] = useState<Array<WinV2BetData>>([]);
   const [latestBlock, setLatestBlock] = useState<number>();
   const chainArray = useMemo(() => {
     return [1, 4, 56, 97];
@@ -97,9 +102,37 @@ const WinV2RightCard: FC = () => {
           account +
           "/200"
       );
-      const myBet_data = await myBet_get.json();
 
-      setMyBetData(myBet_data.value);
+      var cache = localStorage.getItem("winV2Data" + chainId?.toString());
+      const cacheList: Array<WinV2BetData> = cache ? JSON.parse(cache) : [];
+      var loadingList = cacheList;
+      const myBet_data = await myBet_get.json();
+      var myBetList: Array<WinV2BetData> = myBet_data.value;
+      for (var i = 0; i < myBetList.length; i++) {
+        for (var j = 0; j < cacheList.length; j++) {
+          if (myBetList[i].hash !== undefined) {
+            const bStr: string = cacheList[j].hash.toLowerCase();
+            const aStr: string = myBetList[i].hash.toLowerCase();
+
+            if (aStr === bStr) {
+              const h = aStr;
+              loadingList = loadingList.filter((item) => {
+                return item.hash.toLowerCase() !== h;
+              });
+            }
+          }
+        }
+      }
+
+      localStorage.setItem(
+        "winV2Data" + chainId?.toString(),
+        JSON.stringify(loadingList)
+      );
+      const myBetList2 = myBetList.filter((item) => {
+        return item.hash !== undefined
+      })
+      setLoadBetData(loadingList);
+      setMyBetData(myBetList2);
     };
     getList();
     const time = setInterval(() => {
@@ -167,6 +200,30 @@ const WinV2RightCard: FC = () => {
 
   // mainView
   const mainView = () => {
+    const trMyBet_loading = () => {
+      if (loadBetData.length === 0) {
+        return <></>;
+      }
+      return loadBetData.map((item, index) => {
+        return (
+          <tr key={`trLoadBet${index}`}>
+            <td>---</td>
+            <td>{item.bet}</td>
+            <td>{item.chance} X</td>
+            <td>{item.multiplier}%</td>
+            {checkWidth() ? (
+              <td>
+                {moment(Number(item.time) * 1000).format("MM[-]DD HH:mm:ss")}
+              </td>
+            ) : (
+              <></>
+            )}
+            <td>---</td>
+            <td></td>
+          </tr>
+        );
+      });
+    };
     const trMyBet = () => {
       if (myBetData.length === 0) {
         return <></>;
@@ -189,14 +246,24 @@ const WinV2RightCard: FC = () => {
         return (
           <tr key={`trAllBet${index}`}>
             <td className="tdHash">
-              <a href={url} target="view_window">
-                {showEllipsisAddress(item.hash)}
-              </a>
+              {item.hash === undefined ? (
+                "---"
+              ) : (
+                <a href={url} target="view_window">
+                  {showEllipsisAddress(item.hash)}
+                </a>
+              )}
             </td>
             <td>{item.bet}</td>
             <td>{item.multiplier} X</td>
             <td>{item.chance}%</td>
-            <td>{moment(Number(item.time) * 1000).format("MM[-]DD HH:mm")}</td>
+            {checkWidth() ? (
+              <td>
+                {moment(Number(item.time) * 1000).format("MM[-]DD HH:mm:ss")}
+              </td>
+            ) : (
+              <></>
+            )}
             <td
               className={classNames({ [`tdProfit`]: true, [`profit`]: profit })}
             >
@@ -227,9 +294,13 @@ const WinV2RightCard: FC = () => {
               {cup()}
             </td>
             <td>
-              <a href={url} target="view_window">
-                {showEllipsisAddress(item.owner)}
-              </a>
+              {item.owner === undefined ? (
+                "---"
+              ) : (
+                <a href={url} target="view_window">
+                  {showEllipsisAddress(item.owner)}
+                </a>
+              )}
             </td>
             <td>{item.gained}</td>
           </tr>
@@ -246,12 +317,15 @@ const WinV2RightCard: FC = () => {
                 <th>Bet</th>
                 <th>Multiplier</th>
                 <th>Chance</th>
-                <th>Time</th>
+                {checkWidth() ? <th>Time</th> : <></>}
                 <th>Profit</th>
                 <th></th>
               </tr>
             </thead>
-            <tbody>{trMyBet()}</tbody>
+            <tbody>
+              {trMyBet_loading()}
+              {trMyBet()}
+            </tbody>
             <tfoot></tfoot>
           </table>
         </div>
@@ -266,7 +340,7 @@ const WinV2RightCard: FC = () => {
                 <th>Bet</th>
                 <th>Multiplier</th>
                 <th>Chance</th>
-                <th>Time</th>
+                {checkWidth() ? <th>Time</th> : <></>}
                 <th>Profit</th>
               </tr>
             </thead>
@@ -331,7 +405,7 @@ export const WinV2BetList: FC<WinV2BetListData> = ({ ...props }) => {
     return claimTx.length > 0 ? true : false;
   };
   const buttonState = () => {
-    if (props.item.claim === 'true' || loadingButton()) {
+    if (props.item.claim === "true" || loadingButton()) {
       return true;
     }
     return false;
@@ -360,11 +434,20 @@ export const WinV2BetList: FC<WinV2BetListData> = ({ ...props }) => {
           : 0;
       return (
         <td className={`claim`}>
-          <PendingClock
-            allTime={(256 * BLOCK_TIME[chainId ?? 56]) / 1000}
-            leftTime={leftTime}
-            index={props.index}
-          />
+          {checkWidth() ? (
+            <PendingClock
+              allTime={(256 * BLOCK_TIME[chainId ?? 56]) / 1000}
+              leftTime={leftTime}
+              index={props.index}
+            />
+          ) : (
+            <PendingClockSmall
+              allTime={(256 * BLOCK_TIME[chainId ?? 56]) / 1000}
+              leftTime={leftTime}
+              index={props.index}
+            />
+          )}
+
           <MainButton
             onClick={() => {
               if (buttonState() || loadingButton()) {
@@ -405,17 +488,28 @@ export const WinV2BetList: FC<WinV2BetListData> = ({ ...props }) => {
           "---"
         ) : (
           <a href={url} target="view_window">
-            {showEllipsisAddress(props.item.hash)}
+            {checkWidth()
+              ? showEllipsisAddress(props.item.hash)
+              : showEllipsisAddress3(props.item.hash)}
           </a>
         )}
       </td>
       <td onClick={() => setShowModal(props.item)}>{props.item.bet}</td>
-      <td onClick={() => setShowModal(props.item)}>{props.item.multiplier} X</td>
-      <td onClick={() => setShowModal(props.item)}>{props.item.chance}%</td>
       <td onClick={() => setShowModal(props.item)}>
-        {moment(Number(props.item.time) * 1000).format("MM[-]DD HH:mm:ss")}
+        {props.item.multiplier} X
       </td>
-      <td className={classNames({ [`tdProfit`]: true, [`profit`]: profit })} onClick={() => setShowModal(props.item)}>
+      <td onClick={() => setShowModal(props.item)}>{props.item.chance}%</td>
+      {checkWidth() ? (
+        <td onClick={() => setShowModal(props.item)}>
+          {moment(Number(props.item.time) * 1000).format("MM[-]DD HH:mm:ss")}
+        </td>
+      ) : (
+        <></>
+      )}
+      <td
+        className={classNames({ [`tdProfit`]: true, [`profit`]: profit })}
+        onClick={() => setShowModal(props.item)}
+      >
         {props.item.profit}
       </td>
       {lastTr()}
