@@ -44,7 +44,7 @@
         &-allBet,
         &-week {
             overflow: auto;
-            width: 100%;
+            width: 583px;
             height: 540px;
             margin-top: 18px;
             overflow-x: none;
@@ -91,6 +91,26 @@
         }
 
         &-myBet {
+
+            .connect {
+                width: 100%;
+                height: 20px;
+                margin: auto auto;
+                color: #0047BB;
+                margin-top: 200px;
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+            .noList{
+                width: 100%;
+                height: 20px;
+                margin: auto auto;
+                text-align: center;
+                color: #878787;
+                margin-top: 200px;
+            }
             table {
                 tr {
                     td.claim {
@@ -128,6 +148,11 @@
                             width: 25px;
                             height: 19px;
                         }
+                    }
+
+                    td.loading {
+                        width: 20px;
+                        height: 20px;
                     }
                 }
             }
@@ -178,6 +203,7 @@
             &-myBet,
             &-allBet,
             &-week {
+                width: 100%;
                 table {
                     width: 100%;
                     border-top: 1px solid rgba(197, 197, 197, 0.1500);

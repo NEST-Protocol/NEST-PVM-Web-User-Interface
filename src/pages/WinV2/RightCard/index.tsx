@@ -23,11 +23,12 @@ import {
 import Popup from "reactjs-popup";
 import WinV2Modal from "../WinV2Modal";
 import moment from "moment";
-import { WinOKIcon, WinXIcon } from "../../../components/Icon";
+import { WhiteLoading, WinOKIcon, WinXIcon } from "../../../components/Icon";
 import { usePVMWinClaim } from "../../../contracts/hooks/usePVMWinTransation";
 import useTransactionListCon, {
   TransactionType,
 } from "../../../libs/hooks/useTransactionInfo";
+import Modal from "../../Shared/Header/Status/Modal";
 
 export type WinV2WeeklyData = {
   owner: string;
@@ -55,7 +56,10 @@ const WinV2RightCard: FC = () => {
   const [allBetData, setAllBetData] = useState<Array<WinV2BetData>>([]);
   const [myBetData, setMyBetData] = useState<Array<WinV2BetData>>([]);
   const [loadBetData, setLoadBetData] = useState<Array<WinV2BetData>>([]);
+  const [showModal, setShowModal] = useState<WinV2BetData>();
   const [latestBlock, setLatestBlock] = useState<number>();
+  const [firstShow, setFirstShow] = useState<boolean>(true);
+  const modal = useRef<any>();
   const chainArray = useMemo(() => {
     return [1, 4, 56, 97];
   }, []);
@@ -92,8 +96,8 @@ const WinV2RightCard: FC = () => {
 
   // my bet
   useEffect(() => {
-    const chain_id =
-      (chainArray.indexOf(chainId ?? 56) > -1 ? chainId : 56) ?? 56;
+    if (!chainId) {return}
+    const chain_id = chainId;
     const getList = async () => {
       const myBet_get = await fetch(
         "https://api.hedge.red/api/" +
@@ -119,18 +123,22 @@ const WinV2RightCard: FC = () => {
               loadingList = loadingList.filter((item) => {
                 return item.hash.toLowerCase() !== h;
               });
+              setShowModal(myBetList[j]);
             }
           }
         }
       }
-
+      if (myBet_data.value.length === 0 && firstShow) {
+        setTabNum(2);
+        setFirstShow(false);
+      }
       localStorage.setItem(
         "winV2Data" + chainId?.toString(),
         JSON.stringify(loadingList)
       );
       const myBetList2 = myBetList.filter((item) => {
-        return item.hash !== undefined
-      })
+        return item.hash !== undefined;
+      });
       setLoadBetData(loadingList);
       setMyBetData(myBetList2);
     };
@@ -141,7 +149,7 @@ const WinV2RightCard: FC = () => {
     return () => {
       clearTimeout(time);
     };
-  }, [account, chainArray, chainId]);
+  }, [account, chainArray, chainId, firstShow]);
 
   // all bet
   useEffect(() => {
@@ -219,7 +227,9 @@ const WinV2RightCard: FC = () => {
               <></>
             )}
             <td>---</td>
-            <td></td>
+            <td className="loading">
+              <WhiteLoading className={"animation-spin"} />
+            </td>
           </tr>
         );
       });
@@ -307,29 +317,50 @@ const WinV2RightCard: FC = () => {
         );
       });
     };
+
     if (tabNum === 1) {
-      return (
-        <div className={`${classPrefix}-mainView-myBet`}>
-          <table>
-            <thead>
-              <tr>
-                <th>Hash</th>
-                <th>Bet</th>
-                <th>Multiplier</th>
-                <th>Chance</th>
-                {checkWidth() ? <th>Time</th> : <></>}
-                <th>Profit</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              {trMyBet_loading()}
-              {trMyBet()}
-            </tbody>
-            <tfoot></tfoot>
-          </table>
-        </div>
-      );
+      if (library === undefined) {
+        return (
+          <div className={`${classPrefix}-mainView-myBet`}>
+            <Popup
+              modal
+              ref={modal}
+              trigger={<button className="connect">Connect wallet</button>}
+            >
+              <Modal onClose={() => modal.current.close()} />
+            </Popup>
+          </div>
+        );
+      } else if (myBetData.length === 0 && loadBetData.length === 0) {
+        return (
+          <div className={`${classPrefix}-mainView-myBet`}>
+            <p className="noList">You have not participated in the game</p>
+          </div>
+        );
+      } else {
+        return (
+          <div className={`${classPrefix}-mainView-myBet`}>
+            <table>
+              <thead>
+                <tr>
+                  <th>Hash</th>
+                  <th>Bet</th>
+                  <th>Multiplier</th>
+                  <th>Chance</th>
+                  {checkWidth() ? <th>Time</th> : <></>}
+                  <th>Profit</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {trMyBet_loading()}
+                {trMyBet()}
+              </tbody>
+              <tfoot></tfoot>
+            </table>
+          </div>
+        );
+      }
     } else if (tabNum === 2) {
       return (
         <div className={`${classPrefix}-mainView-allBet`}>
@@ -371,6 +402,17 @@ const WinV2RightCard: FC = () => {
 
   return (
     <MainCard classNames={classPrefix}>
+      {showModal ? (
+        <Popup
+          ref={modal}
+          open
+          onClose={() => {
+            setShowModal(undefined);
+          }}
+        >
+          <WinV2Modal onClose={() => modal.current.close()} item={showModal} />
+        </Popup>
+      ) : null}
       {topTab()}
       {mainView()}
     </MainCard>
