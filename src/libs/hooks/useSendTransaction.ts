@@ -63,6 +63,15 @@ export function useSendTransaction(
         JSON.stringify(txList)
       );
     };
+    const winV2ClaimList = (index: string) => {
+      var cache = localStorage.getItem("winV2Claim" + chainId?.toString());
+      var txList: Array<string> = cache ? JSON.parse(cache) : [];
+      txList.push(index);
+      localStorage.setItem(
+        "winV2Claim" + chainId?.toString(),
+        JSON.stringify(txList)
+      );
+    }
     return library
       ?.getSigner()
       .sendTransaction(newTx)
@@ -70,6 +79,9 @@ export function useSendTransaction(
         pushTx(res.hash, txInfo);
         if (txInfo.type === TransactionType.roll) {
           winV2LocalData(res.hash, txInfo.info);
+        }
+        if (txInfo.type === TransactionType.winClaim) {
+          winV2ClaimList(txInfo.info)
         }
         setShowModal({
           isShow: true,

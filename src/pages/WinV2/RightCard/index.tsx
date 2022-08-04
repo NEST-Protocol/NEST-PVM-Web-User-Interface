@@ -25,10 +25,7 @@ import Popup from "reactjs-popup";
 import WinV2Modal from "../WinV2Modal";
 import moment from "moment";
 import { WhiteLoading, WinOKIcon, WinXIcon } from "../../../components/Icon";
-import { usePVMWinClaim } from "../../../contracts/hooks/usePVMWinTransation";
-import useTransactionListCon, {
-  TransactionType,
-} from "../../../libs/hooks/useTransactionInfo";
+import { usePVMWinClaim } from "../../../contracts/hooks/usePVMWinTransaction";
 import Modal from "../../Shared/Header/Status/Modal";
 
 export type WinV2WeeklyData = {
@@ -434,17 +431,22 @@ export const WinV2BetList: FC<WinV2BetListData> = ({ ...props }) => {
   const modal = useRef<any>();
   const [showModal, setShowModal] = useState<WinV2BetData>();
   const hashBaseUrl = useEtherscanBaseUrl();
-  const { pendingList } = useTransactionListCon();
+  // const { pendingList } = useTransactionListCon();
   const url = hashBaseUrl + props.item.hash;
   const profit = Number(props.item.profit) > 0 ? true : false;
   const claimBool = props.item.claim === "true" ? true : false;
   const claim = usePVMWinClaim(BigNumber.from(props.item.index));
   const loadingButton = () => {
-    const claimTx = pendingList.filter(
-      (item) =>
-        item.info === props.item.index.toString() &&
-        item.type === TransactionType.winClaim
-    );
+    var cache = localStorage.getItem("winV2Claim" + chainId?.toString());
+    var txList: Array<string> = cache ? JSON.parse(cache) : [];
+    const claimTx = txList.filter((item) => {
+      return item === props.item.index.toString()
+    })
+    // const claimTx = pendingList.filter(
+    //   (item) =>
+    //     item.info === props.item.index.toString() &&
+    //     item.type === TransactionType.winClaim
+    // );
     return claimTx.length > 0 ? true : false;
   };
   const buttonState = () => {

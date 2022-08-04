@@ -26,6 +26,7 @@
             span {
                 color: #878787;
                 font-size: 17px;
+                font-weight: bold;
             }
 
             svg {
@@ -72,9 +73,9 @@
             &-input {
                 margin: 0 auto;
                 background-color: $gray-info-background-color;
-                border: 1px solid #EEEEEE;
+                border: 1px solid $gray-background-color;
                 box-sizing: border-box;
-                box-shadow: inset 0px 0px 10px #C9C9C9;
+                box-shadow: $shadow-inside;
                 border-radius: 22px;
                 height: 44px;
                 width: 200px;
@@ -82,6 +83,9 @@
                 display: flex;
                 justify-content: center;
 
+                &:hover {
+                    border: 1px solid $button-disable-color;
+                }
 
                 input {
                     height: 100%;
@@ -91,7 +95,7 @@
                     font-size: 17px;
                     font-weight: bold;
                     color: #000000;
-                    user-select:none;
+                    user-select: none;
                 }
 
                 p {
@@ -102,7 +106,7 @@
                     font-size: 17px;
                     font-weight: bold;
                     color: #000000;
-                    user-select:none;
+                    user-select: none;
                 }
             }
 
@@ -144,7 +148,7 @@
             justify-content: space-between;
 
             &-bet {
-                width: 100%;
+                max-width: 200px;
                 height: 73px;
 
                 &-text {
@@ -158,17 +162,22 @@
                     height: 44px;
                     margin: 0 auto;
                     background-color: $gray-info-background-color;
-                    border: 1px solid #EEEEEE;
+                    border: 1px solid $gray-background-color;
                     box-sizing: border-box;
-                    box-shadow: inset 0px 0px 10px #C9C9C9;
+                    box-shadow: $shadow-inside;
                     border-radius: 22px;
                     margin-top: 18px;
                     padding: 0 22px;
                     display: flex;
+                    max-width: 200px;
+
+                    &:hover {
+                        border: 1px solid $button-disable-color;
+                    }
 
                     input {
                         height: 100%;
-                        width: 40px;
+                        width: 65px;
                         text-align: left;
                         border: 0;
                         font-size: 17px;
@@ -219,6 +228,7 @@
                         border: 1px solid #EEEEEE;
                         box-sizing: border-box;
                         box-shadow: inset 0px 0px 10px #C9C9C9;
+                        color: #000000;
 
                         &:hover {
                             cursor: pointer;
@@ -267,8 +277,10 @@
     .winV2-leftCard {
         width: 100%;
         padding: 44px 20px;
+
         &-topTab {
             width: 100%;
+
             li {
                 span {
                     font-size: 15px;
@@ -293,6 +305,9 @@
 
                     &-input {
                         padding: 0 10px;
+                        input {
+                            width: 45px;
+                        }                
                     }
                 }
 
@@ -308,15 +323,17 @@
                     }
                 }
             }
+
             &-mid2 {
                 height: 100px;
-    
+
                 &-left {
                     &-limit {
                         font-size: 12px;
                     }
                 }
             }
+
             &-otherInfo {
                 font-size: 11px;
             }

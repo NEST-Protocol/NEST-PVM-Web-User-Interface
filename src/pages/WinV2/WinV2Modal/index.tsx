@@ -5,7 +5,7 @@ import { FC, useCallback, useEffect, useState } from "react";
 import { Chance, TokenNest, XIcon } from "../../../components/Icon";
 import MainButton from "../../../components/MainButton";
 import MainCard from "../../../components/MainCard";
-import { usePVMWinClaim } from "../../../contracts/hooks/usePVMWinTransation";
+import { usePVMWinClaim } from "../../../contracts/hooks/usePVMWinTransaction";
 import { useEtherscanBaseUrl } from "../../../libs/hooks/useEtherscanBaseUrl";
 import useThemes, { ThemeType } from "../../../libs/hooks/useThemes";
 import useTransactionListCon, {

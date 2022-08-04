@@ -5,7 +5,7 @@ import { FC, useCallback, useEffect, useState } from "react";
 import {
   usePVMOptionExercise,
   usePVMOptionSell,
-} from "../../contracts/hooks/usePVMOptionTransation";
+} from "../../contracts/hooks/usePVMOptionTransaction";
 import {
   PVMOptionContract,
   tokenList,

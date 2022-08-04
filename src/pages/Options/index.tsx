@@ -34,7 +34,7 @@ import "../../styles/ant.css";
 import "./styles";
 import { HoldLine } from "../../components/HoldLine";
 import moment from "moment";
-import { usePVMOptionOpen } from "../../contracts/hooks/usePVMOptionTransation";
+import { usePVMOptionOpen } from "../../contracts/hooks/usePVMOptionTransaction";
 import OptionsList from "../../components/OptionsList";
 import useTransactionListCon from "../../libs/hooks/useTransactionInfo";
 import { Popup } from "reactjs-popup";

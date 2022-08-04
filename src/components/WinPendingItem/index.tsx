@@ -1,6 +1,6 @@
 import { BigNumber } from "ethers";
 import { FC, useEffect, useState } from "react";
-import { usePVMWinClaim } from "../../contracts/hooks/usePVMWinTransation";
+import { usePVMWinClaim } from "../../contracts/hooks/usePVMWinTransaction";
 import useTransactionListCon, {
   TransactionType,
 } from "../../libs/hooks/useTransactionInfo";

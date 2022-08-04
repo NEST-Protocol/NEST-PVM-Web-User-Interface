@@ -7,7 +7,7 @@ import classNames from "classnames";
 import MainButton from "../../../components/MainButton";
 import { SingleTokenShow } from "../../../components/TokenShow";
 import { bigNumberToNormal, formatPVMWinInputNum, normalToBigNumber } from "../../../libs/utils";
-import { usePVMWinRoll } from "../../../contracts/hooks/usePVMWinTransation";
+import { usePVMWinRoll } from "../../../contracts/hooks/usePVMWinTransaction";
 import { getERC20Contract } from "../../../libs/hooks/useContract";
 import { PVMWinContract, tokenList } from "../../../libs/constants/addresses";
 import useWeb3 from "../../../libs/hooks/useWeb3";
@@ -118,6 +118,7 @@ const WinV2LeftCard: FC = () => {
     return pendingTransaction.length > 0 ? true : false;
   };
   const checkMainButton = () => {
+    if (!library) {return false}
     if (!checkAllowance()) {
       return true;
     }
