@@ -8,9 +8,6 @@ import MainCard from "../../../components/MainCard";
 import { usePVMWinClaim } from "../../../contracts/hooks/usePVMWinTransaction";
 import { useEtherscanBaseUrl } from "../../../libs/hooks/useEtherscanBaseUrl";
 import useThemes, { ThemeType } from "../../../libs/hooks/useThemes";
-import useTransactionListCon, {
-  TransactionType,
-} from "../../../libs/hooks/useTransactionInfo";
 import useWeb3 from "../../../libs/hooks/useWeb3";
 import { BLOCK_TIME, showEllipsisAddress } from "../../../libs/utils";
 import { WinV2BetData } from "../RightCard";
@@ -24,7 +21,6 @@ type Props = {
 const WinV2Modal: FC<Props> = ({ ...props }) => {
   const classPrefix = "WinV2Modal";
   const { chainId, library } = useWeb3();
-  const { pendingList } = useTransactionListCon();
   const [latestBlock, setLatestBlock] = useState<number>();
   const result = Number(props.item.profit) > 0 ? true : false;
   const hashBaseUrl = useEtherscanBaseUrl();
@@ -32,11 +28,11 @@ const WinV2Modal: FC<Props> = ({ ...props }) => {
   const claim = usePVMWinClaim(BigNumber.from(props.item.index));
   const { theme } = useThemes();
   const loadingButton = () => {
-    const claimTx = pendingList.filter(
-      (item) =>
-        item.info === props.item.index.toString() &&
-        item.type === TransactionType.winClaim
-    );
+    var cache = localStorage.getItem("winV2Claim" + chainId?.toString());
+    var txList: Array<string> = cache ? JSON.parse(cache) : [];
+    const claimTx = txList.filter((item) => {
+      return item === props.item.index.toString()
+    })
     return claimTx.length > 0 ? true : false;
   };
   const buttonState = () => {

@@ -442,11 +442,6 @@ export const WinV2BetList: FC<WinV2BetListData> = ({ ...props }) => {
     const claimTx = txList.filter((item) => {
       return item === props.item.index.toString()
     })
-    // const claimTx = pendingList.filter(
-    //   (item) =>
-    //     item.info === props.item.index.toString() &&
-    //     item.type === TransactionType.winClaim
-    // );
     return claimTx.length > 0 ? true : false;
   };
   const buttonState = () => {
