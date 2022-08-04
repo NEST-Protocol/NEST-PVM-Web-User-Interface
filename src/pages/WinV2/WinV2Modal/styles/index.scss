@@ -157,7 +157,7 @@
 @media screen and (max-width: 1000px) {
     .WinV2Modal {
         width: 100%;
-        margin-left: 15px;
+        margin-left: 10px;
         &-card {
             width: 100%;
             padding: 44px 10px;
@@ -165,9 +165,21 @@
             &-mid {
 
                 &-showInfo {
-                    width: 126px;
+                    width: 103px;
+                    p {
+                        font-size: 12px;
+                    }
+
+                    &-bg {
+                        p {
+                            font-size: 14px;
+                        }
+                    }
                 }
             }
+        }
+        &-X {
+            margin-left: 0px;
         }
     }
 }

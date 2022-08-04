@@ -6,13 +6,19 @@ import { Chance, HowToPlay, Provably } from "../../../components/Icon";
 import classNames from "classnames";
 import MainButton from "../../../components/MainButton";
 import { SingleTokenShow } from "../../../components/TokenShow";
-import { bigNumberToNormal, formatPVMWinInputNum, normalToBigNumber } from "../../../libs/utils";
+import {
+  bigNumberToNormal,
+  formatPVMWinInputNum,
+  normalToBigNumber,
+} from "../../../libs/utils";
 import { usePVMWinRoll } from "../../../contracts/hooks/usePVMWinTransaction";
 import { getERC20Contract } from "../../../libs/hooks/useContract";
 import { PVMWinContract, tokenList } from "../../../libs/constants/addresses";
 import useWeb3 from "../../../libs/hooks/useWeb3";
 import { BigNumber } from "ethers";
-import useTransactionListCon, { TransactionType } from "../../../libs/hooks/useTransactionInfo";
+import useTransactionListCon, {
+  TransactionType,
+} from "../../../libs/hooks/useTransactionInfo";
 import { useERC20Approve } from "../../../contracts/hooks/useERC20Approve";
 
 const WinV2LeftCard: FC = () => {
@@ -28,15 +34,13 @@ const WinV2LeftCard: FC = () => {
     BigNumber.from("0")
   );
   const { pendingList, txList } = useTransactionListCon();
-  
-  
 
   const confirm = usePVMWinRoll(
     normalToBigNumber(nestNum.valueOf(), 4),
     normalToBigNumber(chance.valueOf(), 4)
   );
   const approve = useERC20Approve(
-    'NEST',
+    "NEST",
     MaxUint256,
     chainId ? PVMWinContract[chainId] : undefined
   );
@@ -67,7 +71,10 @@ const WinV2LeftCard: FC = () => {
       return;
     }
     (async () => {
-      const allowance = await nestToken.allowance(account, PVMWinContract[chainId]);
+      const allowance = await nestToken.allowance(
+        account,
+        PVMWinContract[chainId]
+      );
       setNestAllowance(allowance);
     })();
   }, [account, chainId, library, txList]);
@@ -75,7 +82,7 @@ const WinV2LeftCard: FC = () => {
   useEffect(() => {
     getBalance();
   }, [getBalance, txList]);
-  
+
   const winChance = (100 / parseFloat(chance.toString())).toFixed(2);
   const payout = (
     parseFloat(chance.toString()) * parseFloat(nestNum.toString())
@@ -105,7 +112,11 @@ const WinV2LeftCard: FC = () => {
     }
   };
   const checkBalance = () => {
-    if (NESTBalance.gte(normalToBigNumber(nestNum.valueOf(), 18).mul(101).div(100))) {
+    if (
+      NESTBalance.gte(
+        normalToBigNumber(nestNum.valueOf(), 18).mul(101).div(100)
+      )
+    ) {
       return true;
     } else {
       return false;
@@ -118,7 +129,9 @@ const WinV2LeftCard: FC = () => {
     return pendingTransaction.length > 0 ? true : false;
   };
   const checkMainButton = () => {
-    if (!library) {return false}
+    if (!library) {
+      return false;
+    }
     if (!checkAllowance()) {
       return true;
     }
@@ -133,10 +146,14 @@ const WinV2LeftCard: FC = () => {
     return true;
   };
   const checkAllowance = () => {
-    if (nestNum === '') {
+    if (nestNum === "") {
       return true;
     }
-    if (nestAllowance.lt(normalToBigNumber(nestNum.valueOf(), 18).mul(101).div(100))) {
+    if (
+      nestAllowance.lt(
+        normalToBigNumber(nestNum.valueOf(), 18).mul(101).div(100)
+      )
+    ) {
       return false;
     }
     return true;
@@ -210,6 +227,61 @@ const WinV2LeftCard: FC = () => {
   // choice
   const choice = (title: string, click: () => void) => {
     return <button onClick={click}>{title}</button>;
+  };
+
+  // how to play
+  const howToPlay = () => {
+    return (
+      <div className={`${classPrefix}-mainView-howToPlay`}>
+        <p>You can play the WIN game directly by using NEST.</p>
+        <p>
+          1.Enter the multiplier you want to win, or you can randomise the
+          multiplier with one click, the higher the multiplier the lower the
+          probability of winning. The multiplier has a range of 1.1 - 100.
+          Example: If you enter 2 in the multiplier, the probability of winning
+          is 50%. If you enter 10, the probability of winning is 10%.
+        </p>
+        <img src="/NEST1.png" alt="NEST1" />
+        <p>
+          2.Enter a bet amount in the range of 1 to 1000, which is presently
+          only possible with $NEST. There is a 1% service charge per bet. We
+          will also calculate the amount of reward you can expect to receive
+          when you enter your multiplier and bet amount.
+        </p>
+        <img src="/NEST2.png" alt="NEST2" />
+        <p>
+          3.To approve and roll, first click "approve," then "roll" to start
+          playing the game.
+        </p>
+        <p>
+          4.To claim your reward, you must click the "claim" button within 12
+          minutes of winning; else, your prize will be forfeited.
+        </p>
+        <img src="/NEST3.png" alt="NEST3" />
+      </div>
+    );
+  };
+
+  // provably
+  const provably = () => {
+    return (
+      <div className={`${classPrefix}-mainView-provably`}>
+        <p>1.Submit Roll to obtain the rolling block hash.</p>
+        <p>
+          2.Then join it with the roll number and calculate the hash again to
+          get 32 bytes of data, which you can then convert to an integer of 32
+          bytes length.
+        </p>
+        <p>
+          3.The integer obtained in step #2 is multiplied by the roll multiplier
+          ( multiplier needs to be converted to an integer, multiply by 10000).
+        </p>
+        <p>
+          4.The result in step #3 is less than 10000, and the winner receives a
+          large sum of $NEST as a reward.
+        </p>
+      </div>
+    );
   };
 
   // mainView
@@ -292,7 +364,9 @@ const WinV2LeftCard: FC = () => {
               </p>
             </div>
           </div>
-          <MainButton className={`${classPrefix}-mainView-play-mainButton`} onClick={() => {
+          <MainButton
+            className={`${classPrefix}-mainView-play-mainButton`}
+            onClick={() => {
               if (!checkMainButton()) {
                 return;
               }
@@ -303,26 +377,33 @@ const WinV2LeftCard: FC = () => {
               }
             }}
             disable={!checkMainButton()}
-            loading={mainButtonPending()}>
-          {checkAllowance() ? ('Roll') : ('Approve')}
+            loading={mainButtonPending()}
+          >
+            {checkAllowance() ? "Roll" : "Approve"}
           </MainButton>
           <div className={`${classPrefix}-mainView-play-otherInfo`}>
             <p className={`${classPrefix}-mainView-play-otherInfo-left`}>
-              {`Rolling Fee: ${bigNumberToNormal(normalToBigNumber(nestNum.valueOf(), 18).div(100), 18, 6)} NEST`}
+              {`Rolling Fee: ${bigNumberToNormal(
+                normalToBigNumber(nestNum.valueOf(), 18).div(100),
+                18,
+                6
+              )} NEST`}
             </p>
-            <p className={classNames({
-              [`${classPrefix}-mainView-play-otherInfo-right`]: true,
-              [`red`]: !checkBalance()
-            })}>
+            <p
+              className={classNames({
+                [`${classPrefix}-mainView-play-otherInfo-right`]: true,
+                [`red`]: !checkBalance(),
+              })}
+            >
               Balance: {bigNumberToNormal(NESTBalance, 18, 6)} NEST
             </p>
           </div>
         </div>
       );
     } else if (tabNum === 2) {
-      return <div className={`${classPrefix}-mainView`}></div>;
+      return <div className={`${classPrefix}-mainView`}>{howToPlay()}</div>;
     } else if (tabNum === 3) {
-      return <div className={`${classPrefix}-mainView`}></div>;
+      return <div className={`${classPrefix}-mainView`}>{provably()}</div>;
     }
     return <div className={`${classPrefix}-mainView`}></div>;
   };

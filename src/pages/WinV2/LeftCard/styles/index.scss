@@ -34,6 +34,7 @@
                 margin-left: 5px;
                 width: 14px;
                 height: 14px;
+                margin-top: 3px;
             }
 
             &.selected {
@@ -273,6 +274,26 @@
             }
         }
     }
+
+    &-mainView-provably,
+    &-mainView-howToPlay {
+        margin-top: 18px;
+        width: 484px;
+        height: 540px;
+        overflow: auto;
+        overflow-x: none;
+        overflow-y: none;
+
+        p {
+            font-size: 13px;
+            color: #878787;
+            line-height: 25px;
+        }
+
+        img {
+            width: 100%;
+        }
+    }
 }
 
 @media screen and (max-width: 1000px) {
@@ -286,6 +307,10 @@
             li {
                 span {
                     font-size: 15px;
+                }
+
+                svg {
+                    margin-top: 2px;
                 }
             }
         }
@@ -307,14 +332,14 @@
 
                     &-input {
                         padding: 0 10px;
+
                         input {
-                            width: 45px;
-                        }                
+                            width: 35px;
+                        }
                     }
                 }
 
                 &-show {
-                    width: 100%;
 
                     &-text {
                         font-size: 12px;
@@ -340,5 +365,10 @@
                 font-size: 11px;
             }
         }
+
+        &-mainView-provably,
+    &-mainView-howToPlay {
+        width: 100%;
+    }
     }
 }

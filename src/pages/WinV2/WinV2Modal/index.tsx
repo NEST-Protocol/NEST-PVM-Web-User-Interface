@@ -175,7 +175,7 @@ const WinV2Modal: FC<Props> = ({ ...props }) => {
           {props.item.hash === undefined ? (
             "---"
           ) : (
-            <a href={url}>{showEllipsisAddress(props.item.hash)}</a>
+            <a href={url} target="view_window">{showEllipsisAddress(props.item.hash)}</a>
           )}
         </p>
         {showButton() ? (
