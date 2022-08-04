@@ -82,6 +82,7 @@
                 margin-top: 18px;
                 display: flex;
                 justify-content: center;
+                user-select: none;
 
                 &:hover {
                     border: 1px solid $button-disable-color;
@@ -170,6 +171,7 @@
                     padding: 0 22px;
                     display: flex;
                     max-width: 200px;
+                    user-select: none;
 
                     &:hover {
                         border: 1px solid $button-disable-color;

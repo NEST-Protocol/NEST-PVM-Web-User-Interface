@@ -431,7 +431,6 @@ export const WinV2BetList: FC<WinV2BetListData> = ({ ...props }) => {
   const modal = useRef<any>();
   const [showModal, setShowModal] = useState<WinV2BetData>();
   const hashBaseUrl = useEtherscanBaseUrl();
-  // const { pendingList } = useTransactionListCon();
   const url = hashBaseUrl + props.item.hash;
   const profit = Number(props.item.profit) > 0 ? true : false;
   const claimBool = props.item.claim === "true" ? true : false;

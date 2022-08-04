@@ -27,12 +27,16 @@ const WinV2Modal: FC<Props> = ({ ...props }) => {
   const [timeString, setTimeString] = useState<string>();
   const claim = usePVMWinClaim(BigNumber.from(props.item.index));
   const { theme } = useThemes();
+
+  const [lastLeftTime, setLastLeftTime] = useState<number>(0);
+  const [lastLeftTimeNum, setLastLeftTimeNum] = useState<number>();
+
   const loadingButton = () => {
     var cache = localStorage.getItem("winV2Claim" + chainId?.toString());
     var txList: Array<string> = cache ? JSON.parse(cache) : [];
     const claimTx = txList.filter((item) => {
-      return item === props.item.index.toString()
-    })
+      return item === props.item.index.toString();
+    });
     return claimTx.length > 0 ? true : false;
   };
   const buttonState = () => {
@@ -98,9 +102,18 @@ const WinV2Modal: FC<Props> = ({ ...props }) => {
                 BLOCK_TIME[chainId ?? 56]) /
               1000
             : 0;
-        const min = (leftTime / 60).toFixed(0);
-        const second = (leftTime - Number(min) * 60).toString();
-        setTimeString(`${min}:${second}`);
+        if (leftTime !== lastLeftTime) {
+          setLastLeftTime(leftTime);
+          setLastLeftTimeNum(leftTime);
+        }
+        if (lastLeftTimeNum) {
+          const min = parseInt((lastLeftTimeNum / 60).toString());
+          const second = (lastLeftTimeNum - min * 60).toString();
+          setTimeString(`${min}:${second.length === 1 ? ('0' + second ): second}`);
+          setLastLeftTimeNum(
+            lastLeftTimeNum - 1 >= 0 ? lastLeftTimeNum - 1 : 0
+          );
+        }
       };
       const time = setInterval(() => {
         setTime();
@@ -109,13 +122,22 @@ const WinV2Modal: FC<Props> = ({ ...props }) => {
         clearTimeout(time);
       };
     }
-  }, [chainId, latestBlock, props.item.openBlock, showButton]);
+  }, [
+    chainId,
+    lastLeftTime,
+    lastLeftTimeNum,
+    latestBlock,
+    props.item.openBlock,
+    showButton,
+  ]);
 
   return (
-    <div className={classNames({
-      [`${classPrefix}`]: true,
-      [`${classPrefix}-dark`]: theme === ThemeType.dark
-    })}>
+    <div
+      className={classNames({
+        [`${classPrefix}`]: true,
+        [`${classPrefix}-dark`]: theme === ThemeType.dark,
+      })}
+    >
       <MainCard classNames={`${classPrefix}-card`}>
         <div className={`${classPrefix}-card-top`}>
           <p className={`${classPrefix}-card-top-time`}>
