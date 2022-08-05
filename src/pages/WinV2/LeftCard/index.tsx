@@ -2,10 +2,9 @@ import { FC, useCallback, useEffect, useState } from "react";
 import "./styles";
 import { MaxUint256 } from "@ethersproject/constants";
 import MainCard from "../../../components/MainCard";
-import { Chance, HowToPlay, Provably } from "../../../components/Icon";
+import { Chance, HowToPlay, Provably, TokenNest } from "../../../components/Icon";
 import classNames from "classnames";
 import MainButton from "../../../components/MainButton";
-import { SingleTokenShow } from "../../../components/TokenShow";
 import {
   bigNumberToNormal,
   formatPVMWinInputNum,
@@ -198,7 +197,7 @@ const WinV2LeftCard: FC = () => {
       <div className={`${classPrefix}-mainView-play-mid1-bet`}>
         <p className={`${classPrefix}-mainView-play-mid1-bet-text`}>BET</p>
         <div className={`${classPrefix}-mainView-play-mid1-bet-input`}>
-          <SingleTokenShow tokenNameOne={"NEST"} isBold />
+        <TokenNest />
           <input
             type="text"
             placeholder={`Input`}

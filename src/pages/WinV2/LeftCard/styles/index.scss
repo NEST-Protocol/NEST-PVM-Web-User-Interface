@@ -188,6 +188,12 @@
                         color: #000000;
                         margin-left: 5px;
                     }
+
+                    svg {
+                        width: 30px;
+                        height: 30px;
+                        margin: auto 0;
+                    }
                 }
             }
 
@@ -332,10 +338,6 @@
 
                     &-input {
                         padding: 0 10px;
-
-                        input {
-                            width: 35px;
-                        }
                     }
                 }
 
