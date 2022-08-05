@@ -7,11 +7,9 @@ const useInactiveListener = (suppress = false) => {
 
   useEffect(() => {
     const { ethereum } = window;
-
     if (!ethereum || !ethereum.on) {
       return;
     }
-
     if (active || error || suppress) {
       return;
     }

@@ -13,6 +13,6 @@ export const connector = new WalletConnectConnector({
 export const id = "wallet-connect";
 export const Icon = "";
 export const name = "Wallet Connect";
-export const result = { id, connector, Icon, name };
+export const result = { id, name, Icon, connector };
 
 export default result;
