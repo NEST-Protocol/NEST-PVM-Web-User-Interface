@@ -233,7 +233,7 @@ const WinV2RightCard: FC = () => {
       });
     };
     const trMyBet = () => {
-      if (myBetData.length === 0) {
+      if (myBetData.length === 0 || !latestBlock) {
         return <></>;
       }
       return myBetData.map((item, index) => {
@@ -242,7 +242,7 @@ const WinV2RightCard: FC = () => {
             key={`trMyBet${index}`}
             item={item}
             index={index}
-            latestBlock={latestBlock ?? 0}
+            latestBlock={latestBlock}
           />
         );
       });
@@ -463,11 +463,11 @@ export const WinV2BetList: FC<WinV2BetListData> = ({ ...props }) => {
     if (
       profit &&
       !claimBool &&
-      Number(props.item.openBlock) + 256 > (props.latestBlock ?? 0)
+      Number(props.item.openBlock) + 256 > props.latestBlock
     ) {
       const leftTime =
-        Number(props.item.openBlock) + 256 - (props.latestBlock ?? 0) > 0
-          ? ((Number(props.item.openBlock) + 256 - (props.latestBlock ?? 0)) *
+        Number(props.item.openBlock) + 256 - props.latestBlock > 0
+          ? ((Number(props.item.openBlock) + 256 - props.latestBlock) *
               BLOCK_TIME[chainId ?? 56]) /
             1000
           : 0;
