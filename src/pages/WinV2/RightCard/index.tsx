@@ -97,6 +97,7 @@ const WinV2RightCard: FC = () => {
     if (!chainId) {return}
     const chain_id = chainId;
     const getList = async () => {
+      
       const myBet_get = await fetch(
         "https://api.hedge.red/api/" +
           WINV2_GET_STRING[chain_id] +
@@ -449,6 +450,13 @@ export const WinV2BetList: FC<WinV2BetListData> = ({ ...props }) => {
     }
     return false;
   };
+  useEffect(() => {
+    if (showModal) {
+      if (showModal.claim !== props.item.claim) {
+        setShowModal(props.item)
+      }
+    }
+  }, [props.item, showModal])
   const lastTr = () => {
     if (!profit) {
       return <td></td>;
