@@ -11,7 +11,7 @@ import MainButton from "../../components/MainButton";
 import MainCard from "../../components/MainCard";
 import PerpetualsList from "../../components/PerpetualsList";
 import { DoubleTokenShow, SingleTokenShow } from "../../components/TokenShow";
-import { usePVMLeverBuy } from "../../contracts/hooks/usePVMLeverTransation";
+import { usePVMLeverBuy } from "../../contracts/hooks/usePVMLeverTransaction";
 import {
   PVMLeverContract,
   tokenList,

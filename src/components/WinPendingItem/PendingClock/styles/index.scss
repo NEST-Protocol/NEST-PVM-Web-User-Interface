@@ -28,3 +28,32 @@
         margin-top: -34px;
     }
 }
+
+.pendingClock-small {
+    width: 24px;
+    height: 24px;
+    background: $button-disable-color;
+    border-radius: 12px;
+    overflow: hidden;
+    margin: auto 0;
+
+    &-position {
+        float: left;
+        position: relative;
+        width: 24px;
+        height: 24px;
+        z-index: 99;
+        svg {
+            width: 14px;
+            height: 7px;
+            margin-top: 9px;
+            margin-left: 10px;
+        } 
+    }
+
+    canvas {
+        float: left;
+        position: relative;
+        margin-top: -24px;
+    }
+}

@@ -1,7 +1,7 @@
 import { t, Trans } from "@lingui/macro";
 import { BigNumber } from "ethers";
 import { FC, useCallback, useEffect, useState } from "react";
-import { usePVMLeverSell } from "../../../contracts/hooks/usePVMLeverTransation";
+import { usePVMLeverSell } from "../../../contracts/hooks/usePVMLeverTransaction";
 import {
   PVMLeverContract,
   tokenList,

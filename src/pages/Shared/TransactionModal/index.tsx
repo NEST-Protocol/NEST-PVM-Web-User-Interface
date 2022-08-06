@@ -28,7 +28,6 @@ const TransactionModal: FC = () => {
   const etherscanBase = useEtherscanBaseUrl();
   const { theme } = useThemes();
   const { chainId } = useWeb3();
-
   const wait = (
     <>
       <Loading className={"animation-spin"} />
@@ -45,7 +44,9 @@ const TransactionModal: FC = () => {
         <Trans>Transaction submitted</Trans>
       </p>
       <a href={`${etherscanBase}${showModal.hash}`} target="view_window">
-        {(chainId === 1 || chainId === 4) ? 'View on Etherscan' : 'View on BscScan'}
+        {chainId === 1 || chainId === 4
+          ? "View on Etherscan"
+          : "View on BscScan"}
       </a>
     </>
   );
@@ -55,7 +56,8 @@ const TransactionModal: FC = () => {
       <Refuse />
       <p className={`${classPrefix}-text`}>
         <Trans>Transaction declined</Trans>
-        <p className={`${classPrefix}-text-error`}>{showModal.info}</p>
+        <br/>
+        <span className={`${classPrefix}-text-error`}>{showModal.info}</span>
       </p>
     </>
   );
@@ -72,9 +74,8 @@ const TransactionModal: FC = () => {
         return <></>;
     }
   })();
-
   return (
-    <Popup open={showModal.isShow}>
+    <Popup open={showModal.isShow} onClose={closeModal}>
       <BaseModal
         onClose={closeModal}
         classNames={classNames({

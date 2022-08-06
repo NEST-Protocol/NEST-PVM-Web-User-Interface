@@ -2,7 +2,7 @@ import { BigNumber } from "ethers";
 import { FC } from "react";
 import { toast } from "react-toastify";
 import MainButton from "../../../components/MainButton";
-import { usePVMWinClaim } from "../../../contracts/hooks/usePVMWinTransation";
+import { usePVMWinClaim } from "../../../contracts/hooks/usePVMWinTransaction";
 import { bigNumberToNormal } from "../../../libs/utils";
 import './styles'
 

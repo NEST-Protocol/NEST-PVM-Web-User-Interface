@@ -10,7 +10,7 @@ import MainButton from "../../components/MainButton";
 import MainCard from "../../components/MainCard";
 import { SingleTokenShow } from "../../components/TokenShow";
 import { useERC20Approve } from "../../contracts/hooks/useERC20Approve";
-import { usePVMWinRoll } from "../../contracts/hooks/usePVMWinTransation";
+import { usePVMWinRoll } from "../../contracts/hooks/usePVMWinTransaction";
 import { PVMWinContract, tokenList } from "../../libs/constants/addresses";
 import {
   PVMWin,

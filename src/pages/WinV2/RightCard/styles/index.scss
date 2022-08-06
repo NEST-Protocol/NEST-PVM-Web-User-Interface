@@ -1,0 +1,255 @@
+@use "sass:math";
+@import 'src/styles/shared.scss';
+
+.winV2-rightCard {
+    width: 671px;
+    height: 657px;
+    margin-left: 22px;
+    padding: 44px;
+
+    &-topTab {
+        width: 70%;
+        height: 22px;
+        margin: 0 auto;
+        list-style: none;
+        justify-self: center;
+        justify-content: space-between;
+        display: flex;
+
+        li {
+            justify-content: space-between;
+            display: flex;
+
+            &:hover {
+                cursor: pointer;
+            }
+
+            span {
+                color: #878787;
+                font-size: 17px;
+                font-weight: bold;
+            }
+
+            &.selected {
+                span {
+                    color: $main-button-color;
+                    border-bottom: 1px solid $main-button-color;
+                }
+            }
+        }
+    }
+
+    &-mainView {
+
+        &-myBet,
+        &-allBet,
+        &-week {
+            width: 583px;
+            height: 540px;
+            margin-top: 18px;
+            overflow: auto;
+            overflow-x: none;
+            overflow-y: none;
+
+            table {
+                width: 583px;
+                border-collapse: collapse;
+                border-top: 1px solid #EEEEEE;
+
+                tr {
+                    text-align: left;
+                    height: 44px;
+                    border-bottom: 1px solid #EEEEEE;
+
+                    th {
+                        font-size: 13px;
+                        font-weight: 600;
+                        color: #878787;
+                    }
+
+                    td {
+                        font-weight: 500;
+                        color: #000000;
+                        font-size: 13px;
+                        font-weight: 500;
+                    }
+
+                    td.tdHash {
+                        a {
+                            color: #0047BB;
+                        }
+                    }
+
+                    td.tdProfit {
+                        color: #FF0000;
+
+                        &.profit {
+                            color: #22AC38;
+                        }
+                    }
+                }
+            }
+        }
+
+        &-myBet {
+
+            .connect {
+                width: 100%;
+                height: 20px;
+                margin: auto auto;
+                color: #0047BB;
+                margin-top: 200px;
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+
+            .noList {
+                width: 100%;
+                height: 20px;
+                margin: auto auto;
+                text-align: center;
+                color: #878787;
+                margin-top: 200px;
+            }
+
+            table {
+                tr {
+                    td.claim {
+                        height: 43px;
+                        display: flex;
+                        justify-content: flex-end;
+                        width: 120px;
+
+                        .fort-button {
+                            margin: auto 0;
+                            width: 68px;
+                            height: 28px;
+                            padding: 0px;
+                            font-size: 13px;
+                            font-weight: bold;
+                            margin-left: 14px;
+                        }
+                    }
+
+                    td.x {
+                        text-align: center;
+
+                        svg {
+                            width: 18px;
+                            height: 18px;
+                        }
+                    }
+
+                    td.ok {
+                        text-align: center;
+
+                        svg {
+                            width: 25px;
+                            height: 19px;
+                        }
+                    }
+
+                    td.loading {
+                        text-align: center;
+                        width: 20px;
+                        height: 20px;
+                    }
+                }
+            }
+        }
+
+        &-week {
+            table {
+                tr {
+                    td {
+                        a {
+                            color: #0047BB;
+                        }
+                    }
+
+                    td.weeklyFirst {
+                        display: flex;
+
+                        p {
+                            line-height: 43px;
+                            width: 20px;
+                        }
+
+                        img {
+                            width: 33px;
+                            height: 22px;
+                            margin: auto 0;
+                            margin-left: 10px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .winV2-rightCard {
+        width: 100%;
+        margin: 0;
+        margin-top: 22px;
+        padding: 44px 20px;
+
+        &-topTab {
+            width: 100%;
+
+            li {
+                span {
+                    font-size: 15px;
+                }
+            }
+        }
+
+        &-mainView {
+
+            &-myBet,
+            &-allBet,
+            &-week {
+                width: 100%;
+
+                table {
+                    width: 100%;
+                    border-top: 1px solid rgba(197, 197, 197, 0.1500);
+
+                    tr {
+                        border-bottom: 1px solid rgba(197, 197, 197, 0.1500);
+
+                        th {
+                            font-size: 10px;
+                        }
+
+                        td {
+                            font-size: 10px;
+                        }
+                    }
+                }
+            }
+
+            &-myBet {
+                table {
+                    tr {
+                        td.claim {
+                            width: 100%;
+
+                            .fort-button {
+                                margin: auto 0;
+                                width: 50px;
+                                height: 24px;
+                                font-size: 10px;
+                                font-weight: 500;
+                                margin-left: 6px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

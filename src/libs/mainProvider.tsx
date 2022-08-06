@@ -9,8 +9,18 @@ import "../../src/styles/ant.css";
 import useEagerConnect from "./hooks/useEagerConnect";
 import useInactiveListener from "./hooks/useInactiveListener";
 import { Provider as ThemesProvider } from "./hooks/useThemes";
+import { SupportedChains } from "./constants/chain";
 
 function getLibrary(provider: any): TypeWeb3Provider {
+  if (provider.signer) {
+    const chainId = provider.signer.connection.chainId;
+    if (chainId === 4 || chainId === 1) {
+      provider.http.connection.url = SupportedChains[1].rpc[0];
+    } else {
+      provider.http.connection.url = SupportedChains[0].rpc[0];
+    }
+  }
+
   const library = new ethers.providers.Web3Provider(provider);
   return library;
 }
@@ -28,9 +38,7 @@ const MainProvider: FC = ({ children }) => {
         <Web3Provider>
           <I18nProvider>
             <TransactionProvider>
-              <Inner>
-                {children}
-              </Inner>
+              <Inner>{children}</Inner>
             </TransactionProvider>
           </I18nProvider>
         </Web3Provider>

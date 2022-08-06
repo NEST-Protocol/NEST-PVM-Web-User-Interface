@@ -1,0 +1,375 @@
+@use "sass:math";
+@import 'src/styles/shared.scss';
+
+.winV2-leftCard {
+    width: 572px;
+    height: 657px;
+    padding: 44px;
+
+    &-topTab {
+        width: 80%;
+        height: 22px;
+        margin: 0 auto;
+        list-style: none;
+        justify-self: center;
+        justify-content: space-between;
+        display: flex;
+
+        li {
+            justify-content: space-between;
+            display: flex;
+
+            &:hover {
+                cursor: pointer;
+            }
+
+            span {
+                color: #878787;
+                font-size: 17px;
+                font-weight: bold;
+            }
+
+            svg {
+                margin: auto 0;
+                margin-left: 5px;
+                width: 14px;
+                height: 14px;
+                margin-top: 3px;
+            }
+
+            &.selected {
+                span {
+                    color: $main-button-color;
+                    border-bottom: 1px solid $main-button-color;
+                }
+
+                g {
+                    stroke: $main-button-color;
+                }
+
+                path {
+                    fill: $main-button-color;
+                }
+            }
+        }
+    }
+
+    &-mainView-play {
+        margin-top: 18px;
+        width: 484px;
+
+        &-top {
+            width: 100%;
+            text-align: center;
+
+            &-limit {
+                font-size: 15px;
+                color: #878787;
+
+                &.red {
+                    color: #FF0000;
+                }
+            }
+
+            &-input {
+                margin: 0 auto;
+                background-color: $gray-info-background-color;
+                border: 1px solid $gray-background-color;
+                box-sizing: border-box;
+                box-shadow: $shadow-inside;
+                border-radius: 22px;
+                height: 44px;
+                width: 200px;
+                margin-top: 18px;
+                display: flex;
+                justify-content: center;
+                user-select: none;
+
+                &:hover {
+                    border: 1px solid $button-disable-color;
+                }
+
+                input {
+                    height: 100%;
+                    width: 45%;
+                    text-align: right;
+                    border: 0;
+                    font-size: 17px;
+                    font-weight: bold;
+                    color: #000000;
+                }
+
+                p {
+                    text-align: left;
+                    width: 60px;
+                    line-height: 42px;
+                    margin-left: 10px;
+                    font-size: 17px;
+                    font-weight: bold;
+                    color: #000000;
+                    user-select: none;
+                }
+            }
+
+            &-random {
+                margin: 0 auto;
+                width: 110px;
+                height: 110px;
+                border-radius: 55px;
+                background-color: $main-button-color;
+                margin-top: 18px;
+                padding-top: 36px;
+
+                &:hover {
+                    cursor: pointer;
+                }
+
+                &-text {
+                    font-weight: bold;
+                    width: 110px;
+                    color: #FFFFFF;
+                    font-size: 17px;
+                }
+
+                svg {
+                    g {
+                        path {
+                            fill: white;
+                        }
+                    }
+                }
+            }
+        }
+
+        &-mid1 {
+            width: 100%;
+            height: 73px;
+            margin-top: 50px;
+            display: flex;
+            justify-content: space-between;
+
+            &-bet {
+                max-width: 200px;
+                height: 73px;
+
+                &-text {
+                    font-size: 15px;
+                    text-align: center;
+                    color: #878787;
+                    font-weight: 600;
+                }
+
+                &-input {
+                    height: 44px;
+                    margin: 0 auto;
+                    background-color: $gray-info-background-color;
+                    border: 1px solid $gray-background-color;
+                    box-sizing: border-box;
+                    box-shadow: $shadow-inside;
+                    border-radius: 22px;
+                    margin-top: 18px;
+                    padding: 0 22px;
+                    display: flex;
+                    max-width: 200px;
+                    user-select: none;
+
+                    &:hover {
+                        border: 1px solid $button-disable-color;
+                    }
+
+                    input {
+                        height: 100%;
+                        width: 65px;
+                        text-align: left;
+                        border: 0;
+                        font-size: 17px;
+                        font-weight: bold;
+                        color: #000000;
+                        margin-left: 5px;
+                    }
+
+                    svg {
+                        width: 30px;
+                        height: 30px;
+                        margin: auto 0;
+                    }
+                }
+            }
+
+            &-show {
+                width: 124px;
+
+                &-text {
+                    font-size: 15px;
+                    text-align: center;
+                    color: #878787;
+                    font-weight: 600;
+                }
+
+                &-num {
+                    text-align: center;
+                    font-size: 17px;
+                    font-weight: bold;
+                    color: #000000;
+                    line-height: 44px;
+                    margin-top: 18px;
+                }
+            }
+        }
+
+        &-mid2 {
+            height: 100px;
+
+            &-left {
+                &-buttonView {
+                    width: 200px;
+                    height: 22px;
+                    margin-top: 18px;
+                    display: flex;
+                    justify-content: space-between;
+
+                    button {
+                        width: 44px;
+                        height: 22px;
+                        border-radius: 11px;
+                        background-color: $gray-info-background-color;
+                        border: 1px solid #EEEEEE;
+                        box-sizing: border-box;
+                        box-shadow: inset 0px 0px 10px #C9C9C9;
+                        color: #000000;
+
+                        &:hover {
+                            cursor: pointer;
+                        }
+                    }
+                }
+
+                &-limit {
+                    margin-top: 18px;
+                    font-size: 15px;
+                    color: #878787;
+
+                    &.red {
+                        color: #FF0000;
+                    }
+                }
+            }
+        }
+
+        &-mainButton {
+            width: 100%;
+        }
+
+        &-otherInfo {
+            font-size: 15px;
+            font-weight: 500;
+            color: #878787;
+            display: flex;
+            margin-left: 22px;
+            margin-right: 22px;
+            margin-top: 22px;
+            justify-content: space-between;
+
+            &-right {
+                text-align: right;
+
+                &.red {
+                    color: #FF0000;
+                }
+            }
+        }
+    }
+
+    &-mainView-provably,
+    &-mainView-howToPlay {
+        margin-top: 18px;
+        width: 484px;
+        height: 540px;
+        overflow: auto;
+        overflow-x: none;
+        overflow-y: none;
+
+        p {
+            font-size: 13px;
+            color: #878787;
+            line-height: 25px;
+        }
+
+        img {
+            width: 100%;
+        }
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .winV2-leftCard {
+        width: 100%;
+        padding: 44px 20px;
+
+        &-topTab {
+            width: 100%;
+
+            li {
+                span {
+                    font-size: 15px;
+                }
+
+                svg {
+                    margin-top: 2px;
+                }
+            }
+        }
+
+        &-mainView-play {
+            width: 100%;
+
+            &-top {
+                &-limit {
+                    font-size: 12px;
+                }
+            }
+
+            &-mid1 {
+                &-bet {
+                    &-text {
+                        font-size: 12px;
+                    }
+
+                    &-input {
+                        padding: 0 10px;
+                    }
+                }
+
+                &-show {
+
+                    &-text {
+                        font-size: 12px;
+                    }
+
+                    &-num {
+                        font-size: 14px;
+                    }
+                }
+            }
+
+            &-mid2 {
+                height: 100px;
+
+                &-left {
+                    &-limit {
+                        font-size: 12px;
+                    }
+                }
+            }
+
+            &-otherInfo {
+                font-size: 11px;
+            }
+        }
+
+        &-mainView-provably,
+    &-mainView-howToPlay {
+        width: 100%;
+    }
+    }
+}

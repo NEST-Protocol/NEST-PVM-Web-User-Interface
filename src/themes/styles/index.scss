@@ -10,7 +10,7 @@
 
     .swap-card-exchange {
         &.disable {
-            svg path{
+            svg path {
                 fill: white;
             }
         }
@@ -77,7 +77,8 @@
             color: #FFFFFF;
         }
 
-        &-balance span , &-fairness span{
+        &-balance span,
+        &-fairness span {
             color: #C5C5C5;
             border-bottom: 1px dashed #C5C5C5;
         }
@@ -105,12 +106,13 @@
     .winOrderList-historyList {
         li {
             border-top: 1px solid rgba(197, 197, 197, 0.15);
+
             p {
                 color: #C5C5C5;
                 font-size: 15px;
                 font-weight: 500;
             }
-    
+
             :first-child+p {
                 color: white;
             }
@@ -130,7 +132,7 @@
             li {
                 border-top: 1px solid rgba(197, 197, 197, 0.15);
 
-                :first-child + p {
+                :first-child+p {
                     color: #C5C5C5;
                 }
 
@@ -149,12 +151,15 @@
         ul {
             li {
                 border-top: 1px solid rgba(197, 197, 197, 0.15);
+
                 p {
                     color: #C5C5C5;
                 }
-                :first-child+p > a {
+
+                :first-child+p>a {
                     color: #8BB7FF;
                 }
+
                 :first-child+p+p {
                     color: #C5C5C5;
                 }
@@ -324,12 +329,16 @@
     }
 
     .infoView {
-        &-topLeft, &-topRight {
+
+        &-topLeft,
+        &-topRight {
             color: #C5C5C5;
         }
 
-        .infoView-bottomRight, .infoView-bottomLeft {
+        .infoView-bottomRight,
+        .infoView-bottomLeft {
             color: #C5C5C5;
+
             &.underLine {
                 span {
                     border-bottom: 1px dashed #C5C5C5;
@@ -351,18 +360,20 @@
         span {
             color: #BDD6FF;
         }
+
         p.win-card-x {
             color: #FFFFFF;
         }
 
-        .win-card-x + button {
-            svg > g > path{
+        .win-card-x+button {
+            svg>g>path {
                 fill: #8BB7FF;
             }
         }
 
-        .sub-button, .add-button {
-            svg > rect {
+        .sub-button,
+        .add-button {
+            svg>rect {
                 fill: #8BB7FF;
             }
         }
@@ -405,6 +416,185 @@
 
             circle {
                 stroke: #BDD6FF;
+            }
+        }
+    }
+
+    .winV2 {
+        &-leftCard {
+            &-topTab {
+                li {
+                    span {
+                        color: #C5C5C5;
+                    }
+                    g {
+                        stroke: #C5C5C5;
+                    }
+                    path {
+                        fill: #C5C5C5;
+                    }
+
+                    &.selected {
+                        span {
+                            color: #8BB7FF;
+                            border-bottom: 1px solid #8BB7FF;
+                        }
+
+                        g {
+                            stroke: #8BB7FF;
+                        }
+
+                        path {
+                            fill: #8BB7FF;
+                        }
+                    }
+                }
+            }
+
+            &-mainView-play {
+                &-top {
+                    &-limit {
+                        color: #C5C5C5;
+                    }
+
+                    &-input {
+                        background: rgba(255, 255, 255, 0.1500);
+                        box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.2500);
+                        border: 0px;
+
+                        input {
+                            color: #FFFFFF;
+                        }
+
+                        p {
+                            color: #FFFFFF;
+                        }
+                    }
+
+                    &-random {
+                        background: linear-gradient(90deg, #8BB7FF 0%, #0061FF 100%);
+                        box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.2500);
+                    }
+                }
+
+                &-mid1 {
+                    &-bet {
+                        &-text {
+                            color: #C5C5C5;
+                        }
+
+                        &-input {
+                            background: rgba(255, 255, 255, 0.1500);
+                            box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.2500);
+                            border: 0px;
+
+                            .TokenShow {
+                                p {
+                                    color: #FFFFFF;
+                                }
+                            }
+
+                            input {
+                                color: #FFFFFF;
+                            }
+                        }
+                    }
+
+                    &-show {
+                        &-text {
+                            color: #C5C5C5;
+                        }
+
+                        &-num {
+                            color: #FFFFFF;
+                        }
+                    }
+                }
+
+                &-mid2 {
+                    &-left {
+                        &-buttonView {
+                            button {
+                                background: rgba(255, 255, 255, 0.1500);
+                                box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.2500);
+                                border: 0;
+                                color: #FFFFFF;
+                            }
+                        }
+
+                        &-limit {
+                            color: #C5C5C5;
+                        }
+                    }
+                }
+
+                &-otherInfo {
+                    p {
+                        color: #C5C5C5;
+                    }
+                }
+            }
+        }
+
+        &-rightCard {
+            &-topTab {
+                li {
+                    span {
+                        color: #C5C5C5;
+                    }
+
+                    &.selected {
+                        span {
+                            color: #8BB7FF;
+                            border-bottom: 1px solid #8BB7FF;
+                        }
+                    }
+                }
+            }
+
+            &-mainView {
+                &-myBet {
+                    .connect {
+                        color: #8BB7FF;
+                    }
+                    .noList {
+                        color: #C5C5C5;
+                    }
+                }
+
+                &-myBet,
+                &-allBet,
+                &-week {
+                    table {
+                        border-top: 1px solid rgba(197,197,197,0.1500);
+                        tr {
+                            background: none;
+                            box-shadow: none;
+                            backdrop-filter: none;
+                            border-bottom: 1px solid rgba(197,197,197,0.1500);
+
+                            td {
+                                color: #C5C5C5;
+                            }
+                        }
+
+                        thead {
+                            tr {
+                                th {
+                                    color: #C5C5C5;
+                                }
+                            }
+                        }
+
+                        tbody {
+                            tr {
+                                td a {
+                                    color: #8BB7FF;
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }
@@ -478,7 +668,7 @@
             }
 
             ul li {
-                
+
                 &:hover {
                     background: rgba(255, 255, 255, 0.15);
                     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
@@ -562,6 +752,68 @@
             box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
             border: 0;
             color: $main-background-color;
+        }
+    }
+}
+
+.WinV2Modal-dark {
+    .WinV2Modal-card {
+        background: rgba(255, 255, 255, 0.15);
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border: 0px;
+        backdrop-filter: blur(24px);
+
+        .WinV2Modal-card-top {
+            .WinV2Modal-card-top-time {
+                color: #C5C5C5;
+            }
+
+            .WinV2Modal-card-top-random {
+                border: 1px solid rgba(0, 0, 0, 0);
+                background: rgba(255, 255, 255, 0.1500);
+                box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.2500);
+                border-radius: 50%;
+
+                svg {
+                    g {
+                        path {
+                            fill: white;
+                        }
+                    }
+                }
+            }
+        }
+
+        .WinV2Modal-card-mid {
+            .WinV2Modal-card-mid-showInfo {
+                p {
+                    color: #C5C5C5;
+                }
+
+                .WinV2Modal-card-mid-showInfo-bg {
+                    border: 1px solid rgba(0, 0, 0, 0);
+                    background: rgba(255, 255, 255, 0.1500);
+                    box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.2500);
+
+                    p {
+                        color: white;
+                    }
+                }
+            }
+        }
+        .WinV2Modal-card-hash {
+            color: #C5C5C5;
+            a {
+                color: #8BB7FF;
+            }
+        }
+        .fort-button {
+            background: linear-gradient(90deg, #8BB7FF 0%, #0061FF 100%);
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        }
+    
+        .fort-button.disable {
+            background: #BFBFBF;
         }
     }
 }
