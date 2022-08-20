@@ -836,7 +836,7 @@
         color: #C5C5C5;
     }
 
-    .modal-status-walletSelect {
+    .modal-status-walletSelect, .modal-status-walletSelect2 {
         .mainCard {
             background: rgba(255, 255, 255, 0.15);
             box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -846,6 +846,10 @@
                 color: $main-background-color;
             }
         }
+    }
+
+    .modal-status-more {
+        color: #8BB7FF;
     }
 
 }

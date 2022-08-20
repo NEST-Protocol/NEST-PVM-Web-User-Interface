@@ -11,7 +11,7 @@
         text-align: center;
     }
 
-    &-walletSelect {
+    &-walletSelect, &-walletSelect2 {
         display: flex;
         justify-content: space-between;
         margin-top: 40px;
@@ -37,6 +37,22 @@
                 font-family: $boldFont;
             }
 
+        }
+    }
+    &-walletSelect2 {
+        margin-top: 20px;
+    }
+
+    &-more {
+        display: block;
+        width: 22px;
+        width: 60px;
+        margin: 0 auto;
+        margin-top: 30px;
+        color: #0047BB;
+        font-size: 18px;
+        &:hover {
+            cursor: pointer;
         }
     }
 }

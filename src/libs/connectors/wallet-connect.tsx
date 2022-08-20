@@ -10,9 +10,9 @@ export const connector = new WalletConnectConnector({
   qrcode: true,
 });
 
-export const id = "wallet-connect";
+export const id = "walletConnect";
 export const Icon = "";
-export const name = "Wallet Connect";
+export const name = "walletConnect";
 export const result = { id, name, Icon, connector };
 
 export default result;
