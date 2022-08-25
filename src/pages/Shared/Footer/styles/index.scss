@@ -58,6 +58,17 @@ footer {
             margin: $iconMargin 40px (-$iconMargin) 0;
         }
 
+        &-disIcon {
+            width: $iconSize;
+            height: $iconSize;
+            margin: $iconMargin 12px (-$iconMargin) 0;
+            &:hover {
+                 & > g > path:first-child {
+                    fill: $main-button-color;
+                }
+            }
+        }
+
         &-github {
             width: $iconSize;
             height: $iconSize;

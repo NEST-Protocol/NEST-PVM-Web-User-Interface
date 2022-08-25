@@ -1,5 +1,6 @@
 import { FC } from "react";
 import {
+  DisIcon,
   GithubIcon,
   MiIcon,
   SafeIcon,
@@ -22,6 +23,9 @@ const MobileFooter: FC = () => {
         </a>
         <a href="https://finance.docs.nestprotocol.org/#connect-wallet" target="view_window">
           <WhitePaper className={`${footer}-right-paper`} />
+        </a>
+        <a href="https://discord.com/invite/nestprotocol" target="view_window">
+          <DisIcon className={`${footer}-right-disIcon`} />
         </a>
         <a href="https://t.me/nest_chat" target="view_window">
           <TelIcon className={`${footer}-right-tel`} />

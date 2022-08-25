@@ -1,6 +1,7 @@
 import { FC } from "react";
 import {
   DarkIcon,
+  DisIcon,
   GithubIcon,
   MiIcon,
   SafeIcon,
@@ -43,6 +44,9 @@ const Footer: FC = () => {
       <div className={`${footer}-right`}>
         <a href="./The_White_Paper_of_NEST_PVM.pdf" target="view_window">
           <SafeIcon className={`${footer}-right-safe`} />
+        </a>
+        <a href="https://discord.com/invite/nestprotocol" target="view_window">
+          <DisIcon className={`${footer}-right-disIcon`} />
         </a>
         <a href="https://finance.docs.nestprotocol.org/#connect-wallet" target="view_window">
           <WhitePaper className={`${footer}-right-paper`} />

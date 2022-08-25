@@ -217,6 +217,14 @@
                 }
             }
         }
+
+        .footer-right-disIcon {
+            &:hover {
+                & > g > path:first-child {
+                    fill: url(#paint0_linear_2217_205);
+                }
+            }
+        }
     }
 
     .options-mintOptions-rightCard-smallCard-title {
