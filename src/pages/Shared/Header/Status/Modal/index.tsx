@@ -85,7 +85,7 @@ const Modal: FC<Props> = ({ ...props }) => {
                 }}
               >
                 <CoinbaseIcon />
-                <p>Coinbase</p>
+                <p>Coinbase Wallet</p>
               </MainCard>
               <MainCard
                 onClick={() => {
