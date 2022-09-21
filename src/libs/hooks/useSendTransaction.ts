@@ -1,4 +1,4 @@
-import { WinV2BetData } from "./../../pages/WinV2/RightCard/index";
+// import { WinV2BetData } from "./../../pages/WinV2/RightCard/index";
 import { useCallback } from "react";
 import { Contract } from "ethers";
 import useWeb3 from "./useWeb3";
@@ -43,26 +43,26 @@ export function useSendTransaction(
       return;
     }
     const newTx = { ...tx, gasLimit: addGasLimit(estimateGas) };
-    const winV2LocalData = (hash: string, data: string) => {
-      var cache = localStorage.getItem("winV2Data" + chainId?.toString());
-      var txList: Array<WinV2BetData> = cache ? JSON.parse(cache) : [];
-      const newData: WinV2BetData = {
-        bet: (Number(data.split(",")[0]) / 10000).toString(),
-        chance: (Number(data.split(",")[1]) / 10000).toString(),
-        multiplier: (1000000 / parseFloat(data.split(",")[1])).toFixed(2),
-        index: "---",
-        claim: "false",
-        time: (Date.now() / 1000).toString(),
-        openBlock: "---",
-        profit: "---",
-        hash: hash,
-      };
-      txList.push(newData);
-      localStorage.setItem(
-        "winV2Data" + chainId?.toString(),
-        JSON.stringify(txList)
-      );
-    };
+    // const winV2LocalData = (hash: string, data: string) => {
+    //   var cache = localStorage.getItem("winV2Data" + chainId?.toString());
+    //   var txList: Array<WinV2BetData> = cache ? JSON.parse(cache) : [];
+    //   const newData: WinV2BetData = {
+    //     bet: (Number(data.split(",")[0]) / 10000).toString(),
+    //     chance: (Number(data.split(",")[1]) / 10000).toString(),
+    //     multiplier: (1000000 / parseFloat(data.split(",")[1])).toFixed(2),
+    //     index: "---",
+    //     claim: "false",
+    //     time: (Date.now() / 1000).toString(),
+    //     openBlock: "---",
+    //     profit: "---",
+    //     hash: hash,
+    //   };
+    //   txList.push(newData);
+    //   localStorage.setItem(
+    //     "winV2Data" + chainId?.toString(),
+    //     JSON.stringify(txList)
+    //   );
+    // };
     const winV2ClaimList = (index: string) => {
       var cache = localStorage.getItem("winV2Claim" + chainId?.toString());
       var txList: Array<string> = cache ? JSON.parse(cache) : [];
@@ -78,7 +78,7 @@ export function useSendTransaction(
       .then((res) => {
         pushTx(res.hash, txInfo);
         if (txInfo.type === TransactionType.roll) {
-          winV2LocalData(res.hash, txInfo.info);
+          // winV2LocalData(res.hash, txInfo.info);
         }
         if (txInfo.type === TransactionType.winClaim) {
           winV2ClaimList(txInfo.info)
