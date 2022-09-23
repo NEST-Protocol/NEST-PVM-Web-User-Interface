@@ -16,7 +16,7 @@ const Perpetuals = loadable(() => import("./Perpetuals"));
 const Option = loadable(() => import("./Options"));
 // const Mining = loadable(() => import("./Farm"));
 const Swap = loadable(() => import("./Swap"));
-const WinV2 = loadable(() => import("./WinV2"));
+// const WinV2 = loadable(() => import("./WinV2"));
 
 const App: FC = () => {
   const { theme } = useThemes();
@@ -38,9 +38,9 @@ const App: FC = () => {
             {/* <Route path="/farm">
               <Mining />
             </Route> */}
-            <Route path="/win">
+            {/* <Route path="/win">
               <WinV2 />
-            </Route>
+            </Route> */}
             <Route path="/swap">
               <Swap />
             </Route>
