@@ -43,6 +43,8 @@ import PerpetualsNoticeModal from "./PerpetualsNoticeModal";
 import PerpetualsListMobile from "../../components/PerpetualsList/PerpetualsListMobile";
 import { PutDownIcon } from "../../components/Icon";
 import { useERC20Approve } from "../../contracts/hooks/useERC20Approve";
+import { formatUnits, parseUnits } from "ethers/lib/utils";
+import useLiquidationPrice from "../../libs/hooks/useLiquidationPrice";
 
 export type LeverListType = {
   index: BigNumber;
@@ -199,7 +201,7 @@ const Perpetuals: FC = () => {
       return;
     }
     const nestToken = getERC20Contract(
-      tokenList['NEST'].addresses[chainId],
+      tokenList["NEST"].addresses[chainId],
       library,
       account
     );
@@ -276,7 +278,7 @@ const Perpetuals: FC = () => {
     normalToBigNumber(nestInput)
   );
   const approve = useERC20Approve(
-    'NEST',
+    "NEST",
     MaxUint256,
     chainId ? PVMLeverContract[chainId] : undefined
   );
@@ -324,10 +326,13 @@ const Perpetuals: FC = () => {
             <Trans>Lever</Trans>
           </th>
           <th>
-            <Trans>Margin</Trans>
+            Initial<br/>Margin
           </th>
           <th>
-            <Trans>Open Price</Trans>
+            Open Price
+          </th>
+          <th className={`liquidation`}>
+            <Trans>Liquidation<br/>Price</Trans>
           </th>
           <th className={"th-marginAssets"}>
             <Tooltip
@@ -338,7 +343,7 @@ const Perpetuals: FC = () => {
               }
             >
               <span>
-                <Trans>Margin Assets</Trans>
+                <Trans>Actual<br/>Margin</Trans>
               </span>
             </Tooltip>
           </th>
@@ -350,6 +355,18 @@ const Perpetuals: FC = () => {
       <tbody>{trList}</tbody>
     </table>
   );
+  const getLiquidationPrice = useLiquidationPrice(parseUnits(nestInput === "" ? "0" : nestInput, "ether"),
+  BigNumber.from(leverNum.toString()),
+  isLong,
+  parseUnits(kPrice() === "---" ? "0" : kPrice(), "ether"),chainId)
+
+  const getLiquidationRate = useCallback(() => {
+    const str = getLiquidationPrice
+    return (
+      (Number(kPrice()) - Number(formatUnits(str.toString(), 18))) * 100 /
+      Number(kPrice())
+    );
+  }, [getLiquidationPrice, kPrice]);
 
   return (
     <div>
@@ -395,7 +412,7 @@ const Perpetuals: FC = () => {
             )} USDT`}
           </p>
         </InfoShow>
-        <p className={"kPrice"}>
+        {/* <p className={"kPrice"}>
           <Tooltip
             placement="right"
             color={"#ffffff"}
@@ -403,7 +420,7 @@ const Perpetuals: FC = () => {
           >
             <span>{t`Open Price:` + kPrice() + " USDT"}</span>
           </Tooltip>
-        </p>
+        </p> */}
         <ChooseType
           callBack={handleType}
           isLong={isLong}
@@ -412,10 +429,12 @@ const Perpetuals: FC = () => {
         <LeverChoose selected={leverNum} callBack={handleLeverNum} />
         <InfoShow
           topLeftText={t`Payment`}
-          bottomRightText={`${t`Balance`}: ${
+          bottomRightText={""}
+          // balanceRed={checkNESTBalance}
+          topRightText={`Balance: ${
             nestBalance ? bigNumberToNormal(nestBalance, 18, 6) : "----"
           } NEST`}
-          balanceRed={checkNESTBalance}
+          topRightRed={checkNESTBalance}
         >
           <SingleTokenShow tokenNameOne={"NEST"} isBold />
           <input
@@ -437,6 +456,33 @@ const Perpetuals: FC = () => {
             MAX
           </button>
         </InfoShow>
+        <div className={`${classPrefix}-card-info`}>
+          <div className={`${classPrefix}-card-info-one`}>
+            <Tooltip
+              placement="right"
+              color={"#ffffff"}
+              title={t`The opening price is based on NEST oracle and corrected according to risk compensation.`}
+            >
+              <p className="title">Open Price:</p>
+            </Tooltip>
+            <p>{kPrice() + " USDT"}</p>
+          </div>
+          <div className={`${classPrefix}-card-info-two`}>
+            <p className="title">Liquidation Price:</p>
+            <p>
+              {Number(
+                formatUnits(
+                  getLiquidationPrice,
+                  18
+                )
+              ).toFixed(2) + " USDT"}
+            </p>
+          </div>
+          <div className={`${classPrefix}-card-info-three`}>
+            <p className="title">Liquidation Rate:</p>
+            <p>{getLiquidationRate().toFixed(2) + " %"}</p>
+          </div>
+        </div>
         <MainButton
           className={`${classPrefix}-card-button`}
           onClick={() => {
@@ -455,12 +501,19 @@ const Perpetuals: FC = () => {
             } else {
               approve();
             }
-            
           }}
           disable={!checkMainButton()}
           loading={mainButtonState()}
         >
-          {checkAllowance() ? (isLong ? <Trans>Open Long</Trans> : <Trans>Open Short</Trans>) : ('Approve')}
+          {checkAllowance() ? (
+            isLong ? (
+              <Trans>Open Long</Trans>
+            ) : (
+              <Trans>Open Short</Trans>
+            )
+          ) : (
+            "Approve"
+          )}
         </MainButton>
       </MainCard>
       {leverListState.length > 0 ? (

@@ -46,4 +46,7 @@ export { ReactComponent as Provably } from './svg/Provably.svg'
 export { ReactComponent as HowToPlay } from './svg/HowToPlay.svg'
 export { ReactComponent as WinXIcon } from './svg/Win_xIcon.svg'
 export { ReactComponent as WinOKIcon } from './svg/Win_okIcon.svg'
-
+export { ReactComponent as Coin98Icon } from './svg/Coin98Icon.svg'
+export { ReactComponent as TokenPocketIcon } from './svg/TokenPocketIcon.svg'
+export { ReactComponent as DisIcon } from './svg/DisIcon.svg'
+export { ReactComponent as CoinbaseIcon } from './svg/CoinbaseIcon.svg'

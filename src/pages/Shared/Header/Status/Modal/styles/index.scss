@@ -10,11 +10,14 @@
         color: $gray-info-text-color;
         text-align: center;
     }
-
-    &-walletSelect {
+    &-showView {
+        height: 300px;
+        overflow: auto;
+        margin-top: 20px;
+    }
+    &-walletSelect, &-walletSelect2, &-walletSelect3 {
         display: flex;
         justify-content: space-between;
-        margin-top: 40px;
 
         &>.mainCard:first-child {
             margin-right: 20px;
@@ -22,7 +25,7 @@
 
         .mainCard {
             height: 220px;
-            width: 100%;
+            width: 256px;
             display: flex;
             justify-content: center;
             flex-direction: column;
@@ -39,6 +42,22 @@
 
         }
     }
+    &-walletSelect2,&-walletSelect3 {
+        margin-top: 20px;
+    }
+
+    &-more {
+        display: block;
+        width: 22px;
+        width: 60px;
+        margin: 0 auto;
+        margin-top: 30px;
+        color: #0047BB;
+        font-size: 18px;
+        &:hover {
+            cursor: pointer;
+        }
+    }
 }
 @media screen and (max-width: 1000px) {
     .baseModal {
@@ -48,6 +67,12 @@
         .modal-status {
             width: 100%;
             padding: 20px 20px;
+
+            &-walletSelect, &-walletSelect2, &-walletSelect3 {
+                .mainCard {
+                    width: 47%;
+                }
+            }
         }
     }
 }

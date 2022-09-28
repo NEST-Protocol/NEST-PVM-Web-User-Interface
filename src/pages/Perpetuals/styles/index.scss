@@ -9,6 +9,10 @@
     margin-top: 22px;
     margin-bottom: 44px;
 
+    .infoView-topRight {
+        font-size: 13px;
+        line-height: 20px;
+    }
 
     &-tokenPair {
         display: flex;
@@ -32,24 +36,6 @@
         }
     }
 
-    .kPrice {
-        margin: 0 20px;
-        margin-top: -20px;
-        color: $gray-info-text-color;
-        font-size: $T4;
-        text-align: right;
-        height: 20px;
-
-        span {
-            padding-bottom: 5px;
-            border-bottom: 1px dashed $gray-info-text-color;
-        }
-    }
-
-    .chooseType {
-        margin-top: 20px;
-    }
-
     &-tokenPair+p {
         line-height: 44px;
         font-size: $T2;
@@ -62,6 +48,28 @@
 
     .leverChoose+.infoView {
         margin-top: 30px;
+    }
+
+    &-info {
+        padding:0 20px;
+        div {
+            display: flex;
+            justify-content: space-between;
+            color: $gray-info-text-color;
+        }
+        p.title {
+            font-size: 17px;
+            font-weight: 600;
+        }
+
+        p {
+            line-height: 30px;
+        }
+
+        p + p {
+            font-size: 13px;
+            font-weight: 500;
+        }
     }
 
     &-button {
@@ -79,16 +87,15 @@
 }
 
 table {
-    width: 1340px;
+    width: 1276px;
     margin: 0 auto;
     border-collapse: separate;
     border-spacing: 0px 20px;
 
-
     .perpetuals-table-title {
         color: $gray-info-text-color;
         font-size: $T2;
-        height: 44px;
+        height: 60px;
         border-radius: 12px;
         box-shadow: $shadow;
     }
@@ -96,7 +103,7 @@ table {
     .perpetuals-table-normal {
         color: $gray-info-text-color;
         font-size: $T2;
-        height: 44px;
+        height: 60px;
         border-radius: 12px;
         box-shadow: $shadow;
         text-align: center;
@@ -126,6 +133,12 @@ table {
             }
         }
     }
+    td.button {
+        width: 250px;
+        button + button {
+            margin-left: 10px;
+        }
+    }
 
     td.td-type {
         display: flex;
@@ -137,13 +150,13 @@ table {
 
         p.red {
             margin-left: 5px;
-            line-height: 44px;
+            line-height: 60px;
             color: $up-color;
         }
 
         p.green {
             margin-left: 5px;
-            line-height: 44px;
+            line-height: 60px;
             color: $down-color;
         }
     }
@@ -165,6 +178,11 @@ table {
             padding: 3px 0;
             border-bottom: 1px dashed $gray-info-text-color;
         }
+    }
+
+    th.liquidation {
+        font-family: MontserratBold;
+        color: black;
     }
 }
 

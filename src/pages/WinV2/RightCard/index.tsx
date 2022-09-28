@@ -94,10 +94,11 @@ const WinV2RightCard: FC = () => {
 
   // my bet
   useEffect(() => {
-    if (!chainId) {return}
+    if (!chainId) {
+      return;
+    }
     const chain_id = chainId;
     const getList = async () => {
-      
       const myBet_get = await fetch(
         "https://api.hedge.red/api/" +
           WINV2_GET_STRING[chain_id] +
@@ -135,11 +136,13 @@ const WinV2RightCard: FC = () => {
         "winV2Data" + chainId?.toString(),
         JSON.stringify(loadingList)
       );
-      const myBetList2 = myBetList.filter((item) => {
-        return item.hash !== undefined;
-      });
-      setLoadBetData(loadingList);
-      setMyBetData(myBetList2);
+      // const myBetList2 = myBetList.filter((item) => {
+      //   return item.hash !== undefined;
+      // });
+      // setLoadBetData(loadingList);
+      // setMyBetData(myBetList2);
+      setLoadBetData([]);
+      setMyBetData(myBetList);
     };
     getList();
     const time = setInterval(() => {
@@ -440,8 +443,8 @@ export const WinV2BetList: FC<WinV2BetListData> = ({ ...props }) => {
     var cache = localStorage.getItem("winV2Claim" + chainId?.toString());
     var txList: Array<string> = cache ? JSON.parse(cache) : [];
     const claimTx = txList.filter((item) => {
-      return item === props.item.index.toString()
-    })
+      return item === props.item.index.toString();
+    });
     return claimTx.length > 0 ? true : false;
   };
   const buttonState = () => {
@@ -453,10 +456,10 @@ export const WinV2BetList: FC<WinV2BetListData> = ({ ...props }) => {
   useEffect(() => {
     if (showModal) {
       if (showModal.claim !== props.item.claim) {
-        setShowModal(props.item)
+        setShowModal(props.item);
       }
     }
-  }, [props.item, showModal])
+  }, [props.item, showModal]);
   const lastTr = () => {
     if (!profit) {
       return <td></td>;

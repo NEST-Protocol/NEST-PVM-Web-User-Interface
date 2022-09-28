@@ -76,4 +76,5 @@ export const Ethereum = {
 };
 
 // export const SupportedChains: Array<Chain> = [Ethereum, BNB]
-export const SupportedChains: Array<Chain> = [BNBTest, Rinkeby];
+// export const SupportedChains: Array<Chain> = [BNB, Ethereum];
+export const SupportedChains: Array<Chain> = [Rinkeby, Ethereum];

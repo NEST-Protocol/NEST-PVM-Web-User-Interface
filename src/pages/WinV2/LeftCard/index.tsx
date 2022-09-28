@@ -106,7 +106,7 @@ const WinV2LeftCard: FC = () => {
     }
     const result = parseFloat(nestNum.valueOf());
     const resultString = formatPVMWinInputNum(result.toFixed(2));
-    if (parseFloat(resultString) > 1000 || parseFloat(resultString) < 1) {
+    if (parseFloat(resultString) > 5000 || parseFloat(resultString) < 1) {
       return false;
     } else {
       return true;
@@ -244,7 +244,7 @@ const WinV2LeftCard: FC = () => {
         </p>
         <img src="/NEST1.png" alt="NEST1" />
         <p>
-          2.Enter a bet amount in the range of 1 to 1000, which is presently
+          2.Enter a bet amount in the range of 1 to 5000, which is presently
           only possible with $NEST. There is a 1% service charge per bet. We
           will also calculate the amount of reward you can expect to receive
           when you enter your multiplier and bet amount.
@@ -352,7 +352,7 @@ const WinV2LeftCard: FC = () => {
                   setNESTNum(resultString);
                 })}
                 {choice("max", () => {
-                  setNESTNum("1000.00");
+                  setNESTNum("5000.00");
                 })}
               </div>
               <p
@@ -361,7 +361,7 @@ const WinV2LeftCard: FC = () => {
                   [`red`]: !checkWinNum(),
                 })}
               >
-                Limitation: 1-1000
+                Limitation: 1-5000
               </p>
             </div>
           </div>

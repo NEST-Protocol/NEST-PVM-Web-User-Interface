@@ -1,5 +1,6 @@
 import injected from "./injected";
 import walletConnect from "./wallet-connect";
+import coinbase from "./coinbase-connect";
 import { AbstractConnector } from "@web3-react/abstract-connector";
 
 export type Connector = {
@@ -9,4 +10,4 @@ export type Connector = {
   connector: AbstractConnector;
 };
 
-export const SupportedConnectors: Array<Connector> = [injected, walletConnect];
+export const SupportedConnectors: Array<Connector> = [injected, walletConnect, coinbase];
