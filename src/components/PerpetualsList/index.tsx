@@ -138,7 +138,7 @@ const PerpetualsList: FC<Props> = ({ ...props }) => {
       </td>
       <td className="button">
         <Popup modal ref={modal} trigger={<button className="fort-button">Add</button>}>
-          <PerpetualsAdd item={props.item} />
+          <PerpetualsAdd item={props.item} kValue={props.kValue} />
         </Popup>
 
         <MainButton

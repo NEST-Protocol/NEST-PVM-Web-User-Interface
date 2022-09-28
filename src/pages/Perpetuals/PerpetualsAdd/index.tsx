@@ -7,13 +7,17 @@ import MainButton from "../../../components/MainButton";
 import MainCard from "../../../components/MainCard";
 import { SingleTokenShow } from "../../../components/TokenShow";
 import { usePVMLeverBuy } from "../../../contracts/hooks/usePVMLeverTransaction";
-import { tokenList } from "../../../libs/constants/addresses";
+import { tokenList, TokenType } from "../../../libs/constants/addresses";
 import { ERC20Contract } from "../../../libs/hooks/useContract";
 import useLiquidationPrice from "../../../libs/hooks/useLiquidationPrice";
-import useTransactionListCon, { TransactionType } from "../../../libs/hooks/useTransactionInfo";
+import useTransactionListCon, {
+  TransactionType,
+} from "../../../libs/hooks/useTransactionInfo";
 import useWeb3 from "../../../libs/hooks/useWeb3";
 import {
+  BASE_AMOUNT,
   bigNumberToNormal,
+  BLOCK_TIME,
   formatInputNum,
   normalToBigNumber,
   ZERO_ADDRESS,
@@ -21,13 +25,15 @@ import {
 import "./styles";
 
 type PerpetualsAddType = {
-item: LeverListType;
-}
+  item: LeverListType;
+  kValue?: { [key: string]: TokenType };
+};
 
-const PerpetualsAdd: FC<PerpetualsAddType> = ({...props}) => {
+const PerpetualsAdd: FC<PerpetualsAddType> = ({ ...props }) => {
   const className = "PerpetualsAdd";
   const { account, chainId, library } = useWeb3();
   const { pendingList, txList } = useTransactionListCon();
+  const [nowBlock, setNowBlock] = useState<number>();
   const [nestInput, setNestInput] = useState<string>("");
   const [nestBalance, setNestBalance] = useState<BigNumber>();
   const nestToken = ERC20Contract(tokenList["NEST"].addresses);
@@ -51,22 +57,108 @@ const PerpetualsAdd: FC<PerpetualsAddType> = ({...props}) => {
     }
     return true;
   };
-//   const getLiquidationPrice = useLiquidationPrice(parseUnits(nestInput === "" ? "0" : nestInput, "ether"),
-//   BigNumber.from(props.item.lever.toString()),
-//   props.item.orientation,
-//   parseUnits(kPrice() === "---" ? "0" : kPrice(), "ether"),chainId)
   const tokenName = useCallback(() => {
     if (props.item.tokenAddress === ZERO_ADDRESS) {
       return "ETH";
     }
     return "BTC";
   }, [props.item.tokenAddress]);
+  const kPrice = useCallback(() => {
+    if (!props.kValue) {
+      return BigNumber.from("0");
+    }
+    var price: BigNumber;
+    const inputNum = normalToBigNumber(nestInput);
+    const tokenKValue = props.kValue[tokenName()];
+    if (!tokenKValue || !tokenKValue.nowPrice || !tokenKValue.k) {
+      return BigNumber.from("0");
+    }
+    if (props.item.orientation) {
+      price = tokenKValue.nowPrice
+        .mul(
+          BASE_AMOUNT.add(tokenKValue.k).add(
+            inputNum.div(BigNumber.from("10000000"))
+          )
+        )
+        .div(BASE_AMOUNT);
+    } else {
+      price = tokenKValue.nowPrice
+        .mul(BASE_AMOUNT)
+        .div(
+          BASE_AMOUNT.add(tokenKValue.k).add(
+            inputNum.div(BigNumber.from("10000000"))
+          )
+        );
+    }
+    return price;
+  }, [nestInput, props.item.orientation, props.kValue, tokenName]);
+
+  const newBalance = props.item.balance.add(
+    parseUnits(nestInput === "" ? "0" : nestInput, 18)
+  );
+
+  useEffect(() => {
+    (async () => {
+      const latestBlock = await library?.getBlockNumber();
+      setNowBlock(latestBlock);
+    })();
+  }, [library]);
+
+  const newBasePrice = useCallback(() => {
+    if (
+      !chainId ||
+      !nowBlock ||
+      nestInput === "" ||
+      kPrice().eq(BigNumber.from("0"))
+    ) {
+      return props.item.basePrice;
+    }
+    const expMiuT = (miu: BigNumber, chainId: number) => {
+      return miu
+        .mul(nowBlock - props.item.baseBlock.toNumber())
+        .mul(BLOCK_TIME[chainId] / 1000)
+        .div(1000)
+        .add(BigNumber.from("18446744073709552000"));
+    };
+    const top = newBalance.mul(kPrice()).mul(props.item.basePrice);
+    const bottom = props.item.basePrice.mul(parseUnits(nestInput, 18)).add(
+      kPrice()
+        .mul(props.item.balance.mul(BigNumber.from("2").pow(64)))
+        .div(
+          expMiuT(
+            props.item.orientation
+              ? BigNumber.from("64051194700")
+              : BigNumber.from("0"),
+            chainId
+          )
+        )
+    );
+    return top.div(bottom);
+  },[chainId, kPrice, nestInput, newBalance, nowBlock, props.item.balance, props.item.baseBlock, props.item.basePrice, props.item.orientation]);
+
   const active = usePVMLeverBuy(
     tokenList[tokenName()],
     props.item.lever.toNumber(),
     props.item.orientation,
     normalToBigNumber(nestInput)
   );
+  const getLiquidationPrice = useLiquidationPrice(
+    parseUnits(nestInput === "" ? "0" : nestInput, "ether").add(
+      props.item.balance
+    ),
+    props.item.lever,
+    props.item.orientation,
+    newBasePrice(),
+    chainId
+  );
+  const getLiquidationRate = useCallback(() => {
+    const strLprice = getLiquidationPrice
+    const strBprice = newBasePrice()
+    return (
+      (Number(formatUnits(strBprice, 18)) - Number(formatUnits(strLprice.toString(), 18))) * 100 /
+      Number(formatUnits(strBprice.toString(), 18))
+    );
+  }, [getLiquidationPrice, newBasePrice]);
   // balance
   useEffect(() => {
     if (!nestToken) {
@@ -112,24 +204,26 @@ const PerpetualsAdd: FC<PerpetualsAddType> = ({...props}) => {
       <div className={`${className}-info`}>
         <div className={`${className}-info-one`}>
           <p className="title">Position:</p>
-          <p>{`${props.item.lever.toString()}X ${props.item.orientation ? 'long' : 'short'}`}</p>
+          <p>{`${props.item.lever.toString()}X ${
+            props.item.orientation ? "long" : "short"
+          }`}</p>
         </div>
         <div className={`${className}-info-two`}>
           <p className="title">Open Price:</p>
-          <p>{`${Number(
-                formatUnits(
-                  props.item.basePrice,
-                  18
-                )
-              ).toFixed(2)} USDT`}</p>
+          <p>{`${Number(formatUnits(newBasePrice(), 18)).toFixed(2)} USDT`}</p>
         </div>
         <div className={`${className}-info-three`}>
           <p className="title">Liquidation Price:</p>
-          <p>{" USDT"}</p>
+          <p>{Number(
+                formatUnits(
+                  getLiquidationPrice,
+                  18
+                )
+              ).toFixed(2) + " USDT"}</p>
         </div>
         <div className={`${className}-info-four`}>
           <p className="title">Liquidation Rate:</p>
-          <p>{"10 %"}</p>
+          <p>{getLiquidationRate().toFixed(2) + " %"}</p>
         </div>
       </div>
       <div className={`${className}-des`}>
@@ -138,18 +232,18 @@ const PerpetualsAdd: FC<PerpetualsAddType> = ({...props}) => {
         on how to use.
       </div>
       <MainButton
-          className={`${className}-button`}
-          onClick={() => {
-            if (!checkMainButton()) {
-              return;
-            }
-            active();
-          }}
-          disable={!checkMainButton()}
-          loading={mainButtonState()}
-        >
-          Add
-        </MainButton>
+        className={`${className}-button`}
+        onClick={() => {
+          if (!checkMainButton()) {
+            return;
+          }
+          active();
+        }}
+        disable={!checkMainButton()}
+        loading={mainButtonState()}
+      >
+        Add
+      </MainButton>
     </MainCard>
   );
 };

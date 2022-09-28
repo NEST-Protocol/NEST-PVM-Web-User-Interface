@@ -36,7 +36,6 @@ const useLiquidationPrice = (
       .mul(expMiuT(BigNumber.from("64051194700"), chainId))
       .div(baseBalance)
       .div(lever.mul(BigNumber.from("2").pow(64)));
-    console.log(1 << 64);
   } else {
     left = baseBalance.mul(lever.add(BigNumber.from("1")));
     right = left.sub(minBalance);
