@@ -4,7 +4,6 @@ import { message } from "antd";
 import { MaxUint256 } from "@ethersproject/constants";
 import { FC, useCallback, useEffect, useRef, useState } from "react";
 import ChooseType from "../../components/ChooseType";
-import { HoldLine } from "../../components/HoldLine";
 import InfoShow from "../../components/InfoShow";
 import { LeverChoose } from "../../components/LeverChoose";
 import MainButton from "../../components/MainButton";
@@ -35,7 +34,6 @@ import {
   formatInputNum,
   normalToBigNumber,
 } from "../../libs/utils";
-import "./styles";
 import { Tooltip } from "antd";
 import { Contract } from "@ethersproject/contracts";
 import { Popup } from "reactjs-popup";
@@ -45,6 +43,8 @@ import { PutDownIcon } from "../../components/Icon";
 import { useERC20Approve } from "../../contracts/hooks/useERC20Approve";
 import { formatUnits, parseUnits } from "ethers/lib/utils";
 import useLiquidationPrice from "../../libs/hooks/useLiquidationPrice";
+import { Stock } from "@ant-design/charts";
+import "./styles";
 
 export type LeverListType = {
   index: BigNumber;
@@ -326,26 +326,24 @@ const Perpetuals: FC = () => {
             <Trans>Lever</Trans>
           </th>
           <th>
-            Initial<br/>Margin
+            Initial
+            <br />
+            Margin
           </th>
-          <th>
-            Open Price
-          </th>
+          <th>Open Price</th>
           <th className={`liquidation`}>
-            <Trans>Liquidation<br/>Price</Trans>
+            <Trans>
+              Liquidation
+              <br />
+              Price
+            </Trans>
           </th>
           <th className={"th-marginAssets"}>
-            <Tooltip
-              placement="top"
-              color={"#ffffff"}
-              title={
-                "Dynamic changes in net assets, less than a certain amount of liquidation will be liquidated, the amount of liquidation is Max'{'margin*leverage*0.02, 10'}'"
-              }
-            >
               <span>
-                <Trans>Actual<br/>Margin</Trans>
+                  Actual
+                  <br />
+                  Margin
               </span>
-            </Tooltip>
           </th>
           <th>
             <Trans>Operate</Trans>
@@ -355,18 +353,28 @@ const Perpetuals: FC = () => {
       <tbody>{trList}</tbody>
     </table>
   );
-  const getLiquidationPrice = useLiquidationPrice(parseUnits(nestInput === "" ? "0" : nestInput, "ether"),
-  BigNumber.from(leverNum.toString()),
-  isLong,
-  parseUnits(kPrice() === "---" ? "0" : kPrice(), "ether"),chainId)
+  const getLiquidationPrice = useLiquidationPrice(
+    parseUnits(nestInput === "" ? "0" : nestInput, "ether"),
+    BigNumber.from(leverNum.toString()),
+    isLong,
+    parseUnits(kPrice() === "---" ? "0" : kPrice(), "ether"),
+    chainId
+  );
 
   const getLiquidationRate = useCallback(() => {
-    const str = getLiquidationPrice
+    const str = getLiquidationPrice;
     return (
-      (Number(kPrice()) - Number(formatUnits(str.toString(), 18))) * 100 /
+      ((Number(kPrice()) - Number(formatUnits(str.toString(), 18))) * 100) /
       Number(kPrice())
     );
   }, [getLiquidationPrice, kPrice]);
+
+  const ktype = [
+    { index: 0, label: "15M", value: "K_15M", step: 75 },
+    { index: 1, label: "1H", value: "K_1H", step: 300 },
+    { index: 2, label: "4H", value: "K_4H", step: 1200 },
+    { index: 3, label: "1D", value: "K_DAY", step: 7200 },
+  ];
 
   return (
     <div>
@@ -384,35 +392,36 @@ const Perpetuals: FC = () => {
           ></PerpetualsNoticeModal>
         </Popup>
       ) : null}
-      <MainCard classNames={`${classPrefix}-card`}>
-        <InfoShow
-          topLeftText={t`Token Pair`}
-          bottomRightText={""}
-          tokenSelect={true}
-          tokenList={[tokenList["ETH"], tokenList["BTC"]]}
-          showUSDT={true}
-          getSelectedToken={setTokenPair}
-        >
-          <div className={`${classPrefix}-card-tokenPair`}>
-            <DoubleTokenShow
-              tokenNameOne={tokenPair.symbol}
-              tokenNameTwo={"USDT"}
-            />
-            <PutDownIcon />
-          </div>
-          <p>
-            {`${
-              checkWidth() ? "1 " + tokenPair.symbol + " = " : ""
-            }${bigNumberToNormal(
-              kValue
-                ? kValue[tokenPair.symbol].nowPrice || BigNumber.from("0")
-                : BigNumber.from("0"),
-              tokenList["USDT"].decimals,
-              2
-            )} USDT`}
-          </p>
-        </InfoShow>
-        {/* <p className={"kPrice"}>
+      <div className={`${classPrefix}-base`}>
+        <MainCard classNames={`${classPrefix}-card`}>
+          <InfoShow
+            topLeftText={t`Token Pair`}
+            bottomRightText={""}
+            tokenSelect={true}
+            tokenList={[tokenList["ETH"], tokenList["BTC"]]}
+            showUSDT={true}
+            getSelectedToken={setTokenPair}
+          >
+            <div className={`${classPrefix}-card-tokenPair`}>
+              <DoubleTokenShow
+                tokenNameOne={tokenPair.symbol}
+                tokenNameTwo={"USDT"}
+              />
+              <PutDownIcon />
+            </div>
+            <p>
+              {`${
+                checkWidth() ? "1 " + tokenPair.symbol + " = " : ""
+              }${bigNumberToNormal(
+                kValue
+                  ? kValue[tokenPair.symbol].nowPrice || BigNumber.from("0")
+                  : BigNumber.from("0"),
+                tokenList["USDT"].decimals,
+                2
+              )} USDT`}
+            </p>
+          </InfoShow>
+          {/* <p className={"kPrice"}>
           <Tooltip
             placement="right"
             color={"#ffffff"}
@@ -421,106 +430,151 @@ const Perpetuals: FC = () => {
             <span>{t`Open Price:` + kPrice() + " USDT"}</span>
           </Tooltip>
         </p> */}
-        <ChooseType
-          callBack={handleType}
-          isLong={isLong}
-          textArray={[t`Long`, t`Short`]}
-        />
-        <LeverChoose selected={leverNum} callBack={handleLeverNum} />
-        <InfoShow
-          topLeftText={t`Payment`}
-          bottomRightText={""}
-          // balanceRed={checkNESTBalance}
-          topRightText={`Balance: ${
-            nestBalance ? bigNumberToNormal(nestBalance, 18, 6) : "----"
-          } NEST`}
-          topRightRed={checkNESTBalance}
-        >
-          <SingleTokenShow tokenNameOne={"NEST"} isBold />
-          <input
-            placeholder={t`Input`}
-            className={"input-middle"}
-            value={nestInput}
-            maxLength={32}
-            onChange={(e) => setNestInput(formatInputNum(e.target.value))}
-            onBlur={(e: any) => {}}
+          <ChooseType
+            callBack={handleType}
+            isLong={isLong}
+            textArray={[t`Long`, t`Short`]}
           />
-          <button
-            className={"max-button"}
-            onClick={() =>
-              setNestInput(
-                bigNumberToNormal(nestBalance || BigNumber.from("0"), 18, 18)
-              )
-            }
+          <LeverChoose selected={leverNum} callBack={handleLeverNum} />
+          <InfoShow
+            topLeftText={t`Payment`}
+            bottomRightText={""}
+            // balanceRed={checkNESTBalance}
+            topRightText={`Balance: ${
+              nestBalance ? bigNumberToNormal(nestBalance, 18, 6) : "----"
+            } NEST`}
+            topRightRed={checkNESTBalance}
           >
-            MAX
-          </button>
-        </InfoShow>
-        <div className={`${classPrefix}-card-info`}>
-          <div className={`${classPrefix}-card-info-one`}>
-            <Tooltip
-              placement="right"
-              color={"#ffffff"}
-              title={t`The opening price is based on NEST oracle and corrected according to risk compensation.`}
-            >
-              <p className="title">Open Price:</p>
-            </Tooltip>
-            <p>{kPrice() + " USDT"}</p>
-          </div>
-          <div className={`${classPrefix}-card-info-two`}>
-            <p className="title">Liquidation Price:</p>
-            <p>
-              {Number(
-                formatUnits(
-                  getLiquidationPrice,
-                  18
+            <SingleTokenShow tokenNameOne={"NEST"} isBold />
+            <input
+              placeholder={t`Input`}
+              className={"input-middle"}
+              value={nestInput}
+              maxLength={32}
+              onChange={(e) => setNestInput(formatInputNum(e.target.value))}
+              onBlur={(e: any) => {}}
+            />
+            <button
+              className={"max-button"}
+              onClick={() =>
+                setNestInput(
+                  bigNumberToNormal(nestBalance || BigNumber.from("0"), 18, 18)
                 )
-              ).toFixed(2) + " USDT"}
-            </p>
+              }
+            >
+              MAX
+            </button>
+          </InfoShow>
+          <div className={`${classPrefix}-card-info`}>
+            <div className={`${classPrefix}-card-info-one`}>
+              <Tooltip
+                placement="right"
+                color={"#ffffff"}
+                title={t`The opening price is based on NEST oracle and corrected according to risk compensation.`}
+              >
+                <p className="title">Open Price:</p>
+              </Tooltip>
+              <p>{kPrice() + " USDT"}</p>
+            </div>
+            <div className={`${classPrefix}-card-info-two`}>
+              <p className="title">Liquidation Price:</p>
+              <p>
+                {Number(formatUnits(getLiquidationPrice, 18)).toFixed(2) +
+                  " USDT"}
+              </p>
+            </div>
+            <div className={`${classPrefix}-card-info-three`}>
+              <p className="title">Liquidation Rate:</p>
+              <p>{getLiquidationRate().toFixed(2) + " %"}</p>
+            </div>
           </div>
-          <div className={`${classPrefix}-card-info-three`}>
-            <p className="title">Liquidation Rate:</p>
-            <p>{getLiquidationRate().toFixed(2) + " %"}</p>
-          </div>
-        </div>
-        <MainButton
-          className={`${classPrefix}-card-button`}
-          onClick={() => {
-            if (!checkMainButton()) {
-              return;
-            }
-            if (showNoticeModal()) {
-              return;
-            }
-            if (checkAllowance()) {
-              if (normalToBigNumber(nestInput).lt(normalToBigNumber("50"))) {
-                message.error(t`Minimum input 50`);
+          <MainButton
+            className={`${classPrefix}-card-button`}
+            onClick={() => {
+              if (!checkMainButton()) {
                 return;
               }
-              active();
-            } else {
-              approve();
-            }
-          }}
-          disable={!checkMainButton()}
-          loading={mainButtonState()}
-        >
-          {checkAllowance() ? (
-            isLong ? (
-              <Trans>Open Long</Trans>
+              if (showNoticeModal()) {
+                return;
+              }
+              if (checkAllowance()) {
+                if (normalToBigNumber(nestInput).lt(normalToBigNumber("50"))) {
+                  message.error(t`Minimum input 50`);
+                  return;
+                }
+                active();
+              } else {
+                approve();
+              }
+            }}
+            disable={!checkMainButton()}
+            loading={mainButtonState()}
+          >
+            {checkAllowance() ? (
+              isLong ? (
+                <Trans>Open Long</Trans>
+              ) : (
+                <Trans>Open Short</Trans>
+              )
             ) : (
-              <Trans>Open Short</Trans>
-            )
-          ) : (
-            "Approve"
-          )}
-        </MainButton>
-      </MainCard>
+              "Approve"
+            )}
+          </MainButton>
+        </MainCard>
+
+        <MainCard classNames={`${classPrefix}-right`}>
+          <p>NEST Oracle Kline Demo</p>
+          <div>
+            {ktype.map((item) => (
+              <button
+                key={item.value}
+                style={{
+                  margin: "0 4px",
+                  padding: "4px 8px",
+                  border: "1px solid #ccc",
+                  borderRadius: "4px",
+                  cursor: "pointer",
+                }}
+              >
+                {item.label}
+              </button>
+            ))}
+          </div>
+          <div style={{ width: "569px" }}>
+            <Stock
+              data={[
+                {
+                  ts_code: '000001.SH',
+                  trade_date: '2020-03-13',
+                  close: 2887.4265,
+                  open: 2804.2322,
+                  high: 2910.8812,
+                  low: 2799.9841,
+                  vol: 366450436,
+                  amount: 393019665.2,
+                },
+                {
+                  ts_code: '000001.SH',
+                  trade_date: '2020-03-12',
+                  close: 2923.4856,
+                  open: 2936.0163,
+                  high: 2944.4651,
+                  low: 2906.2838,
+                  vol: 307778457,
+                  amount: 328209202.4,
+                },
+              ]}
+              xField={"trade_date"}
+              yField={["open", "close", "high", "low"]}
+            />
+          </div>
+          <p>HBTC/PUSD (network: mainnet, channel: 0, pair: 0, )</p>
+        </MainCard>
+      </div>
+
       {leverListState.length > 0 ? (
         <div>
-          <HoldLine>
-            <Trans>Positions</Trans>
-          </HoldLine>
+          <p className={`${classPrefix}-positions`}>Positions</p>
           {checkWidth() ? pcTable : <ul>{trList}</ul>}
         </div>
       ) : null}

@@ -32,7 +32,7 @@ type PerpetualsAddType = {
 const PerpetualsAdd: FC<PerpetualsAddType> = ({ ...props }) => {
   const className = "PerpetualsAdd";
   const { account, chainId, library } = useWeb3();
-  const { pendingList, txList } = useTransactionListCon();
+  const { pendingList } = useTransactionListCon();
   const [nowBlock, setNowBlock] = useState<number>();
   const [nestInput, setNestInput] = useState<string>("");
   const [nestBalance, setNestBalance] = useState<BigNumber>();
