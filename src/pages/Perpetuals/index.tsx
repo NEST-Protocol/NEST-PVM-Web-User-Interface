@@ -581,7 +581,7 @@ const Perpetuals: FC = () => {
               </button>
             ))}
           </div>
-          <div style={{ width: "569px" }}>
+          <div className={`${classPrefix}-right-stock`}>
             <Stock
               data={kData}
               xField={"time"}
