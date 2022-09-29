@@ -45,6 +45,7 @@ import { formatUnits, parseUnits } from "ethers/lib/utils";
 import useLiquidationPrice from "../../libs/hooks/useLiquidationPrice";
 import { Stock } from "@ant-design/charts";
 import "./styles";
+import classNames from "classnames";
 
 export type LeverListType = {
   index: BigNumber;
@@ -67,6 +68,8 @@ const Perpetuals: FC = () => {
   const [tokenPair, setTokenPair] = useState<TokenType>(tokenList["ETH"]);
   const [nestInput, setNestInput] = useState<string>("");
   const [isRefresh, setIsRefresh] = useState<boolean>(false);
+  const [kTypeValue, setKTypeValue] = useState<string>("K_DAY");
+  const [kData, setKData] = useState([]);
   const [leverListState, setLeverListState] = useState<Array<LeverListType>>(
     []
   );
@@ -217,6 +220,21 @@ const Perpetuals: FC = () => {
       setNestAllowance(allowance);
     })();
   }, [account, chainId, library, txList]);
+  // getKData
+  useEffect(() => {
+    if (!chainId) {
+      return;
+    }
+    (async () => {
+      const k_data = await fetch(
+        `https://api.hedge.red/api/oracle/get_cur_kline/${chainId?.toString()}/0/${
+          tokenPair.symbol.toLocaleLowerCase() + "usdt"
+        }/${kTypeValue}/20`
+      );
+      const k_data_value = await k_data.json();
+      setKData(k_data_value["value"]);
+    })();
+  }, [chainId, kTypeValue, tokenPair.symbol]);
   useEffect(() => {
     if (!isRefresh) {
       getList();
@@ -339,11 +357,11 @@ const Perpetuals: FC = () => {
             </Trans>
           </th>
           <th className={"th-marginAssets"}>
-              <span>
-                  Actual
-                  <br />
-                  Margin
-              </span>
+            <span>
+              Actual
+              <br />
+              Margin
+            </span>
           </th>
           <th>
             <Trans>Operate</Trans>
@@ -369,12 +387,35 @@ const Perpetuals: FC = () => {
     );
   }, [getLiquidationPrice, kPrice]);
 
-  const ktype = [
+  const kType = [
     { index: 0, label: "15M", value: "K_15M", step: 75 },
     { index: 1, label: "1H", value: "K_1H", step: 300 },
     { index: 2, label: "4H", value: "K_4H", step: 1200 },
     { index: 3, label: "1D", value: "K_DAY", step: 7200 },
   ];
+
+  const tooltipConfig = {
+    crosshairs: {
+      text: (type: any, defaultContent: any, items: any[]) => {
+        let textContent;
+
+        if (type === "x") {
+          const item = items[0];
+          textContent = item ? item.title : defaultContent;
+        } else {
+          textContent = `${defaultContent.toFixed(2)}`;
+        }
+
+        return {
+          position: type === "y" ? "start" : "end",
+          content: textContent,
+          style: {
+            fill: "#dfdfdf",
+          },
+        };
+      },
+    },
+  };
 
   return (
     <div>
@@ -523,18 +564,18 @@ const Perpetuals: FC = () => {
         </MainCard>
 
         <MainCard classNames={`${classPrefix}-right`}>
-          <p>NEST Oracle Kline Demo</p>
-          <div>
-            {ktype.map((item) => (
+          <p
+            className={`${classPrefix}-right-title`}
+          >{`${tokenPair.symbol}/USDT`}</p>
+          <div className={`${classPrefix}-right-buttonDiv`}>
+            {kType.map((item) => (
               <button
                 key={item.value}
-                style={{
-                  margin: "0 4px",
-                  padding: "4px 8px",
-                  border: "1px solid #ccc",
-                  borderRadius: "4px",
-                  cursor: "pointer",
-                }}
+                className={classNames({
+                  [`kType`]: true,
+                  [`selected`]: item.value === kTypeValue,
+                })}
+                onClick={() => setKTypeValue(item.value)}
               >
                 {item.label}
               </button>
@@ -542,33 +583,12 @@ const Perpetuals: FC = () => {
           </div>
           <div style={{ width: "569px" }}>
             <Stock
-              data={[
-                {
-                  ts_code: '000001.SH',
-                  trade_date: '2020-03-13',
-                  close: 2887.4265,
-                  open: 2804.2322,
-                  high: 2910.8812,
-                  low: 2799.9841,
-                  vol: 366450436,
-                  amount: 393019665.2,
-                },
-                {
-                  ts_code: '000001.SH',
-                  trade_date: '2020-03-12',
-                  close: 2923.4856,
-                  open: 2936.0163,
-                  high: 2944.4651,
-                  low: 2906.2838,
-                  vol: 307778457,
-                  amount: 328209202.4,
-                },
-              ]}
-              xField={"trade_date"}
+              data={kData}
+              xField={"time"}
               yField={["open", "close", "high", "low"]}
+              tooltip={tooltipConfig}
             />
           </div>
-          <p>HBTC/PUSD (network: mainnet, channel: 0, pair: 0, )</p>
         </MainCard>
       </div>
 
