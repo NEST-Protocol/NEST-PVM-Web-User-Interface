@@ -65,11 +65,17 @@
         padding-bottom: 10px;
     }
 
-    .fort-button {
-        width: 100%;
-        margin-top: 10px;
+    &-button {
+        display: flex;
+        justify-content: space-between;
+        .fort-button {
+            width: 100%;
+            margin-top: 10px;
+        }
+        .fort-button + .fort-button {
+            margin-left: 20px;
+        }
     }
-
 }
 
 .perListMobile-li {
