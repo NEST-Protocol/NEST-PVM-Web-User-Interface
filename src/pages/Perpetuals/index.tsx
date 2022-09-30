@@ -1,16 +1,16 @@
-import { BigNumber } from "@ethersproject/bignumber";
-import { t, Trans } from "@lingui/macro";
-import { message } from "antd";
-import { MaxUint256 } from "@ethersproject/constants";
-import { FC, useCallback, useEffect, useRef, useState } from "react";
+import {BigNumber} from "@ethersproject/bignumber";
+import {t, Trans} from "@lingui/macro";
+import {message} from "antd";
+import {MaxUint256} from "@ethersproject/constants";
+import {FC, useCallback, useEffect, useMemo, useRef, useState} from "react";
 import ChooseType from "../../components/ChooseType";
 import InfoShow from "../../components/InfoShow";
-import { LeverChoose } from "../../components/LeverChoose";
+import {LeverChoose} from "../../components/LeverChoose";
 import MainButton from "../../components/MainButton";
 import MainCard from "../../components/MainCard";
 import PerpetualsList from "../../components/PerpetualsList";
-import { DoubleTokenShow, SingleTokenShow } from "../../components/TokenShow";
-import { usePVMLeverBuy } from "../../contracts/hooks/usePVMLeverTransaction";
+import {DoubleTokenShow, SingleTokenShow} from "../../components/TokenShow";
+import {usePVMLeverBuy} from "../../contracts/hooks/usePVMLeverTransaction";
 import {
   PVMLeverContract,
   tokenList,
@@ -34,18 +34,18 @@ import {
   formatInputNum,
   normalToBigNumber,
 } from "../../libs/utils";
-import { Tooltip } from "antd";
-import { Contract } from "@ethersproject/contracts";
-import { Popup } from "reactjs-popup";
+import {Tooltip} from "antd";
+import {Contract} from "@ethersproject/contracts";
+import {Popup} from "reactjs-popup";
 import PerpetualsNoticeModal from "./PerpetualsNoticeModal";
 import PerpetualsListMobile from "../../components/PerpetualsList/PerpetualsListMobile";
-import { PutDownIcon } from "../../components/Icon";
-import { useERC20Approve } from "../../contracts/hooks/useERC20Approve";
-import { formatUnits, parseUnits } from "ethers/lib/utils";
+import {PutDownIcon} from "../../components/Icon";
+import {useERC20Approve} from "../../contracts/hooks/useERC20Approve";
+import {formatUnits, parseUnits} from "ethers/lib/utils";
 import useLiquidationPrice from "../../libs/hooks/useLiquidationPrice";
-import { Stock } from "@ant-design/charts";
 import "./styles";
 import classNames from "classnames";
+import ReactECharts from 'echarts-for-react';
 
 export type LeverListType = {
   index: BigNumber;
@@ -58,7 +58,7 @@ export type LeverListType = {
 };
 
 const Perpetuals: FC = () => {
-  const { account, chainId, library } = useWeb3();
+  const {account, chainId, library} = useWeb3();
   const [showNotice, setShowNotice] = useState(false);
   const modal = useRef<any>();
   const [isLong, setIsLong] = useState(true);
@@ -78,7 +78,7 @@ const Perpetuals: FC = () => {
   const nestToken = ERC20Contract(tokenList["NEST"].addresses);
   const priceContract = NestPriceContract();
   const PVMLeverOJ = PVMLever(PVMLeverContract);
-  const { pendingList, txList } = useTransactionListCon();
+  const {pendingList, txList} = useTransactionListCon();
   const [nestAllowance, setNestAllowance] = useState<BigNumber>(
     BigNumber.from("0")
   );
@@ -96,6 +96,64 @@ const Perpetuals: FC = () => {
     }
     return false;
   };
+
+  const option = useMemo(() => {
+    const data0 = splitData(kData.map((item: any) => [item?.time, item?.open, item?.close, item?.low, item?.high]))
+    return {
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'cross'
+        }
+      },
+      grid: {
+        left: '10%',
+        right: '0%',
+        bottom: '20%'
+      },
+      xAxis: {
+        type: 'category',
+        data: data0.categoryData,
+      },
+      yAxis: {
+        scale: true,
+        splitArea: {
+          show: true
+        }
+      },
+      dataZoom: [
+        {
+          type: 'inside',
+          start: 50,
+          end: 100
+        },
+        {
+          show: true,
+          type: 'slider',
+          top: '90%',
+          start: 50,
+          end: 100
+        }
+      ],
+      series: {
+        type: 'candlestick',
+        data: data0.values,
+      }
+    }
+  }, [kData])
+
+  function splitData(rawData: any) {
+    const categoryData = [];
+    const values = [];
+    for (let i = 0; i < rawData.length; i++) {
+      categoryData.push(rawData[i].splice(0, 1)[0]);
+      values.push(rawData[i]);
+    }
+    return {
+      categoryData: categoryData,
+      values: values
+    };
+  }
 
   const trList = leverListState.map((item) => {
     return checkWidth() ? (
@@ -229,7 +287,7 @@ const Perpetuals: FC = () => {
       const k_data = await fetch(
         `https://api.hedge.red/api/oracle/get_cur_kline/${chainId?.toString()}/0/${
           tokenPair.symbol.toLocaleLowerCase() + "usdt"
-        }/${kTypeValue}/20`
+        }/${kTypeValue}/1000`
       );
       const k_data_value = await k_data.json();
       setKData(k_data_value["value"]);
@@ -333,40 +391,40 @@ const Perpetuals: FC = () => {
   const pcTable = (
     <table>
       <thead>
-        <tr className={`${classPrefix}-table-title`}>
-          <th>
-            <Trans>Token Pair</Trans>
-          </th>
-          <th>
-            <Trans>Type</Trans>
-          </th>
-          <th>
-            <Trans>Lever</Trans>
-          </th>
-          <th>
-            Initial
-            <br />
-            Margin
-          </th>
-          <th>Open Price</th>
-          <th className={`liquidation`}>
-            <Trans>
-              Liquidation
-              <br />
-              Price
-            </Trans>
-          </th>
-          <th className={"th-marginAssets"}>
+      <tr className={`${classPrefix}-table-title`}>
+        <th>
+          <Trans>Token Pair</Trans>
+        </th>
+        <th>
+          <Trans>Type</Trans>
+        </th>
+        <th>
+          <Trans>Lever</Trans>
+        </th>
+        <th>
+          Initial
+          <br/>
+          Margin
+        </th>
+        <th>Open Price</th>
+        <th className={`liquidation`}>
+          <Trans>
+            Liquidation
+            <br/>
+            Price
+          </Trans>
+        </th>
+        <th className={"th-marginAssets"}>
             <span>
               Actual
-              <br />
+              <br/>
               Margin
             </span>
-          </th>
-          <th>
-            <Trans>Operate</Trans>
-          </th>
-        </tr>
+        </th>
+        <th>
+          <Trans>Operate</Trans>
+        </th>
+      </tr>
       </thead>
       <tbody>{trList}</tbody>
     </table>
@@ -388,34 +446,11 @@ const Perpetuals: FC = () => {
   }, [getLiquidationPrice, kPrice]);
 
   const kType = [
-    { index: 0, label: "15M", value: "K_15M", step: 75 },
-    { index: 1, label: "1H", value: "K_1H", step: 300 },
-    { index: 2, label: "4H", value: "K_4H", step: 1200 },
-    { index: 3, label: "1D", value: "K_DAY", step: 7200 },
+    {index: 0, label: "15M", value: "K_15M"},
+    {index: 1, label: "1H", value: "K_1H"},
+    {index: 2, label: "4H", value: "K_4H"},
+    {index: 3, label: "1D", value: "K_DAY"},
   ];
-
-  const tooltipConfig = {
-    crosshairs: {
-      text: (type: any, defaultContent: any, items: any[]) => {
-        let textContent;
-
-        if (type === "x") {
-          const item = items[0];
-          textContent = item ? item.title : defaultContent;
-        } else {
-          textContent = `${defaultContent.toFixed(2)}`;
-        }
-
-        return {
-          position: type === "y" ? "start" : "end",
-          content: textContent,
-          style: {
-            fill: "#dfdfdf",
-          },
-        };
-      },
-    },
-  };
 
   return (
     <div>
@@ -448,7 +483,7 @@ const Perpetuals: FC = () => {
                 tokenNameOne={tokenPair.symbol}
                 tokenNameTwo={"USDT"}
               />
-              <PutDownIcon />
+              <PutDownIcon/>
             </div>
             <p>
               {`${
@@ -476,7 +511,7 @@ const Perpetuals: FC = () => {
             isLong={isLong}
             textArray={[t`Long`, t`Short`]}
           />
-          <LeverChoose selected={leverNum} callBack={handleLeverNum} />
+          <LeverChoose selected={leverNum} callBack={handleLeverNum}/>
           <InfoShow
             topLeftText={t`Payment`}
             bottomRightText={""}
@@ -486,14 +521,15 @@ const Perpetuals: FC = () => {
             } NEST`}
             topRightRed={checkNESTBalance}
           >
-            <SingleTokenShow tokenNameOne={"NEST"} isBold />
+            <SingleTokenShow tokenNameOne={"NEST"} isBold/>
             <input
               placeholder={t`Input`}
               className={"input-middle"}
               value={nestInput}
               maxLength={32}
               onChange={(e) => setNestInput(formatInputNum(e.target.value))}
-              onBlur={(e: any) => {}}
+              onBlur={(e: any) => {
+              }}
             />
             <button
               className={"max-button"}
@@ -581,12 +617,11 @@ const Perpetuals: FC = () => {
               </button>
             ))}
           </div>
-          <div style={{ width: "569px" }}>
-            <Stock
-              data={kData}
-              xField={"time"}
-              yField={["open", "close", "high", "low"]}
-              tooltip={tooltipConfig}
+          <div style={{width: "569px", height: '600px'}}>
+            <ReactECharts
+              option={option}
+              style={{height: '100%'}}
+              lazyUpdate={true}
             />
           </div>
         </MainCard>
