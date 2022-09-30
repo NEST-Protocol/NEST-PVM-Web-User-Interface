@@ -101,7 +101,7 @@ const Perpetuals: FC = () => {
   const downColor = '#ec0000';
 
   const option = useMemo(() => {
-    const data0 = splitData(kData.map((item: any) => [item?.time, item?.open, item?.close, item?.low, item?.high]))
+    const data0 = splitData(kData.map((item: any) => [item?.time, item?.open, item?.close, Math.min(item?.open, item?.close), Math.max(item?.open, item?.close)]))
     return {
       tooltip: {
         trigger: 'axis',
