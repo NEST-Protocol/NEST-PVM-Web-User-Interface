@@ -97,6 +97,9 @@ const Perpetuals: FC = () => {
     return false;
   };
 
+  const upColor = '#00da3c';
+  const downColor = '#ec0000';
+
   const option = useMemo(() => {
     const data0 = splitData(kData.map((item: any) => [item?.time, item?.open, item?.close, item?.low, item?.high]))
     return {
@@ -138,6 +141,12 @@ const Perpetuals: FC = () => {
       series: {
         type: 'candlestick',
         data: data0.values,
+        itemStyle: {
+          color: upColor,
+          color0: downColor,
+          borderColor: upColor,
+          borderColor0: downColor
+        }
       }
     }
   }, [kData])
