@@ -191,7 +191,7 @@ const Perpetuals: FC = () => {
     if (!PVMLeverOJ || !account) {
       return;
     }
-    const leverList = await PVMLeverOJ.find("0", "20", "20", account);
+    const leverList = await PVMLeverOJ.find("0", "32", "32", account);
     const resultList = leverList.filter((item: LeverListType) =>
       item.balance.gt(BigNumber.from("0"))
     );
