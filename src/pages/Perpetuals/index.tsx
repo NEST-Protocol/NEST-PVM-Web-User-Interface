@@ -124,14 +124,14 @@ const Perpetuals: FC = () => {
       dataZoom: [
         {
           type: 'inside',
-          start: 50,
+          start: 100 - 50 / kData.length * 100,
           end: 100
         },
         {
           show: true,
           type: 'slider',
           top: '90%',
-          start: 50,
+          start: 100 - 50 / kData.length * 100,
           end: 100
         }
       ],
