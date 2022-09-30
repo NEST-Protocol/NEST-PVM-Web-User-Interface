@@ -121,8 +121,8 @@ const Perpetuals: FC = () => {
       yAxis: {
         scale: true,
         splitArea: {
-          show: true
-        }
+          show: false
+        },
       },
       dataZoom: [
         {
