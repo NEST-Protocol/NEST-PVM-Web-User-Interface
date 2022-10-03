@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import { BigNumber } from "ethers";
 import { formatUnits, parseUnits } from "ethers/lib/utils";
 import { FC, useCallback, useEffect, useState } from "react";
@@ -9,6 +10,7 @@ import { SingleTokenShow } from "../../../components/TokenShow";
 import { usePVMLeverBuy } from "../../../contracts/hooks/usePVMLeverTransaction";
 import { tokenList, TokenType } from "../../../libs/constants/addresses";
 import { ERC20Contract } from "../../../libs/hooks/useContract";
+import useThemes, { ThemeType } from "../../../libs/hooks/useThemes";
 import useTransactionListCon, {
   TransactionType,
 } from "../../../libs/hooks/useTransactionInfo";
@@ -36,6 +38,7 @@ const PerpetualsAdd: FC<PerpetualsAddType> = ({ ...props }) => {
   const [nestInput, setNestInput] = useState<string>("");
   const [nestBalance, setNestBalance] = useState<BigNumber>();
   const nestToken = ERC20Contract(tokenList["NEST"].addresses);
+  const { theme } = useThemes();
   const checkNESTBalance = normalToBigNumber(nestInput).gt(
     nestBalance || BigNumber.from("0")
   );
@@ -152,7 +155,10 @@ const PerpetualsAdd: FC<PerpetualsAddType> = ({ ...props }) => {
     })();
   }, [nestToken, account]);
   return (
-    <MainCard classNames={className}>
+    <MainCard classNames={classNames({
+      [`${className}`]: true,
+      [`${className}-dark`]: theme === ThemeType.dark,
+    })}>
       <div className={`${className}-title`}>Add Position</div>
       <InfoShow
         topLeftText={`Payment`}
