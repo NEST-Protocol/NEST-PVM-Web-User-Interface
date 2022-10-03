@@ -1,6 +1,5 @@
 import { t, Trans } from "@lingui/macro";
 import { BigNumber } from "ethers";
-import { formatUnits } from "ethers/lib/utils";
 import { FC, useCallback, useEffect, useRef, useState } from "react";
 import Popup from "reactjs-popup";
 import { usePVMLeverSell } from "../../../contracts/hooks/usePVMLeverTransaction";
@@ -10,7 +9,6 @@ import {
   TokenType,
 } from "../../../libs/constants/addresses";
 import { PVMLever } from "../../../libs/hooks/useContract";
-import useLiquidationPrice from "../../../libs/hooks/useLiquidationPrice";
 import useTransactionListCon, {
   TransactionType,
 } from "../../../libs/hooks/useTransactionInfo";
@@ -38,7 +36,7 @@ type Props = {
 const PerpetualsListMobile: FC<Props> = ({ ...props }) => {
   const classPrefix = "perListMobile";
   const { pendingList } = useTransactionListCon();
-  const { account, chainId } = useWeb3();
+  const { account } = useWeb3();
   const modal = useRef<any>();
   const leverContract = PVMLever(PVMLeverContract);
   const [marginAssets, setMarginAssets] = useState<BigNumber>();
@@ -111,6 +109,15 @@ const PerpetualsListMobile: FC<Props> = ({ ...props }) => {
             <TokenOneSvg />
             <TokenTwoSvg />
           </MobileListInfo>
+          
+          <MobileListInfo title={t`Lever`}>
+            <p>{props.item.lever.toString()}X</p>
+          </MobileListInfo>
+        </div>
+        <div className={`${classPrefix}-mid`}>
+          <MobileListInfo title={`Initial Margin`}>
+            <p>{bigNumberToNormal(props.item.balance, 18, 2)} NEST</p>
+          </MobileListInfo>
           <MobileListInfo title={t`Type`}>
             <div className={`${classPrefix}-top-type`}>
               {props.item.orientation ? <LongIcon /> : <ShortIcon />}
@@ -119,13 +126,13 @@ const PerpetualsListMobile: FC<Props> = ({ ...props }) => {
               </p>
             </div>
           </MobileListInfo>
-          <MobileListInfo title={t`Lever`}>
-            <p>{props.item.lever.toString()}X</p>
-          </MobileListInfo>
         </div>
-        <div className={`${classPrefix}-mid`}>
-          <MobileListInfo title={`Initial Margin`}>
-            <p>{bigNumberToNormal(props.item.balance, 18, 2)} NEST</p>
+        <div className={`${classPrefix}-bottom`}>
+        
+          <MobileListInfo
+            title={`Actual Margin`}
+          >
+            <p>{`${marginAssetsStr} NEST`}</p>
           </MobileListInfo>
           <MobileListInfo title={t`Open Price`}>
             <p>
@@ -136,30 +143,6 @@ const PerpetualsListMobile: FC<Props> = ({ ...props }) => {
               )}{" "}
               USDT
             </p>
-          </MobileListInfo>
-        </div>
-        <div className={`${classPrefix}-bottom`}>
-        <MobileListInfo title={`Liquidation Price`}>
-            <p>
-            {Number(
-          formatUnits(
-            useLiquidationPrice(
-              props.item.balance,
-              props.item.lever,
-              props.item.orientation,
-              props.item.basePrice,
-              chainId
-            ),
-            18
-          )
-        ).toFixed(2)}{" "}
-              USDT
-            </p>
-          </MobileListInfo>
-          <MobileListInfo
-            title={`Actual Margin`}
-          >
-            <p>{`${marginAssetsStr} NEST`}</p>
           </MobileListInfo>
         </div>
         <div className={`${classPrefix}-button`}>

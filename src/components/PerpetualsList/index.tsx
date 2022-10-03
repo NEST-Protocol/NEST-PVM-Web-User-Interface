@@ -1,6 +1,5 @@
 import { BigNumber } from "@ethersproject/bignumber";
 import { t, Trans } from "@lingui/macro";
-import { formatUnits } from "ethers/lib/utils";
 import { FC, useCallback, useEffect, useRef, useState } from "react";
 import Popup from "reactjs-popup";
 import { usePVMLeverSell } from "../../contracts/hooks/usePVMLeverTransaction";
@@ -10,7 +9,6 @@ import {
   TokenType,
 } from "../../libs/constants/addresses";
 import { PVMLever } from "../../libs/hooks/useContract";
-import useLiquidationPrice from "../../libs/hooks/useLiquidationPrice";
 import useTransactionListCon, {
   TransactionType,
 } from "../../libs/hooks/useTransactionInfo";
@@ -30,7 +28,7 @@ type Props = {
 
 const PerpetualsList: FC<Props> = ({ ...props }) => {
   const { pendingList } = useTransactionListCon();
-  const { account, chainId } = useWeb3();
+  const { account } = useWeb3();
   const modal = useRef<any>();
   const leverContract = PVMLever(PVMLeverContract);
   const [marginAssets, setMarginAssets] = useState<BigNumber>();
@@ -112,22 +110,6 @@ const PerpetualsList: FC<Props> = ({ ...props }) => {
       </td>
       <td>
         {bigNumberToNormal(props.item.basePrice, tokenList["USDT"].decimals, 2)}
-        <br />
-        USDT
-      </td>
-      <td>
-        {Number(
-          formatUnits(
-            useLiquidationPrice(
-              props.item.balance,
-              props.item.lever,
-              props.item.orientation,
-              props.item.basePrice,
-              chainId
-            ),
-            18
-          )
-        ).toFixed(2)}
         <br />
         USDT
       </td>

@@ -41,8 +41,6 @@ import PerpetualsNoticeModal from "./PerpetualsNoticeModal";
 import PerpetualsListMobile from "../../components/PerpetualsList/PerpetualsListMobile";
 import {PutDownIcon} from "../../components/Icon";
 import {useERC20Approve} from "../../contracts/hooks/useERC20Approve";
-import {formatUnits, parseUnits} from "ethers/lib/utils";
-import useLiquidationPrice from "../../libs/hooks/useLiquidationPrice";
 import "./styles";
 import classNames from "classnames";
 import ReactECharts from 'echarts-for-react';
@@ -131,7 +129,7 @@ const Perpetuals: FC = () => {
           end: 100
         },
         {
-          show: true,
+          show: false,
           type: 'slider',
           top: '90%',
           start: 100 - 50 / kData.length * 100,
@@ -258,7 +256,7 @@ const Perpetuals: FC = () => {
     if (!PVMLeverOJ || !account) {
       return;
     }
-    const leverList = await PVMLeverOJ.find("0", "20", "20", account);
+    const leverList = await PVMLeverOJ.find("0", "38", "38", account);
     const resultList = leverList.filter((item: LeverListType) =>
       item.balance.gt(BigNumber.from("0"))
     );
@@ -416,13 +414,6 @@ const Perpetuals: FC = () => {
           Margin
         </th>
         <th>Open Price</th>
-        <th className={`liquidation`}>
-          <Trans>
-            Liquidation
-            <br/>
-            Price
-          </Trans>
-        </th>
         <th className={"th-marginAssets"}>
             <span>
               Actual
@@ -438,21 +429,6 @@ const Perpetuals: FC = () => {
       <tbody>{trList}</tbody>
     </table>
   );
-  const getLiquidationPrice = useLiquidationPrice(
-    parseUnits(nestInput === "" ? "0" : nestInput, "ether"),
-    BigNumber.from(leverNum.toString()),
-    isLong,
-    parseUnits(kPrice() === "---" ? "0" : kPrice(), "ether"),
-    chainId
-  );
-
-  const getLiquidationRate = useCallback(() => {
-    const str = getLiquidationPrice;
-    return (
-      ((Number(kPrice()) - Number(formatUnits(str.toString(), 18))) * 100) /
-      Number(kPrice())
-    );
-  }, [getLiquidationPrice, kPrice]);
 
   const kType = [
     {index: 0, label: "15M", value: "K_15M"},
@@ -562,17 +538,7 @@ const Perpetuals: FC = () => {
               </Tooltip>
               <p>{kPrice() + " USDT"}</p>
             </div>
-            <div className={`${classPrefix}-card-info-two`}>
-              <p className="title">Liquidation Price:</p>
-              <p>
-                {Number(formatUnits(getLiquidationPrice, 18)).toFixed(2) +
-                  " USDT"}
-              </p>
-            </div>
-            <div className={`${classPrefix}-card-info-three`}>
-              <p className="title">Liquidation Rate:</p>
-              <p>{getLiquidationRate().toFixed(2) + " %"}</p>
-            </div>
+            
           </div>
           <MainButton
             className={`${classPrefix}-card-button`}
@@ -626,7 +592,7 @@ const Perpetuals: FC = () => {
               </button>
             ))}
           </div>
-          <div style={{width: "569px", height: '600px'}}>
+          <div className={`${classPrefix}-right-stock`}>
             <ReactECharts
               option={option}
               style={{height: '100%'}}

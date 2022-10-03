@@ -9,7 +9,6 @@ import { SingleTokenShow } from "../../../components/TokenShow";
 import { usePVMLeverBuy } from "../../../contracts/hooks/usePVMLeverTransaction";
 import { tokenList, TokenType } from "../../../libs/constants/addresses";
 import { ERC20Contract } from "../../../libs/hooks/useContract";
-import useLiquidationPrice from "../../../libs/hooks/useLiquidationPrice";
 import useTransactionListCon, {
   TransactionType,
 } from "../../../libs/hooks/useTransactionInfo";
@@ -142,23 +141,6 @@ const PerpetualsAdd: FC<PerpetualsAddType> = ({ ...props }) => {
     props.item.orientation,
     normalToBigNumber(nestInput)
   );
-  const getLiquidationPrice = useLiquidationPrice(
-    parseUnits(nestInput === "" ? "0" : nestInput, "ether").add(
-      props.item.balance
-    ),
-    props.item.lever,
-    props.item.orientation,
-    newBasePrice(),
-    chainId
-  );
-  const getLiquidationRate = useCallback(() => {
-    const strLprice = getLiquidationPrice
-    const strBprice = newBasePrice()
-    return (
-      (Number(formatUnits(strBprice, 18)) - Number(formatUnits(strLprice.toString(), 18))) * 100 /
-      Number(formatUnits(strBprice.toString(), 18))
-    );
-  }, [getLiquidationPrice, newBasePrice]);
   // balance
   useEffect(() => {
     if (!nestToken) {
@@ -211,19 +193,6 @@ const PerpetualsAdd: FC<PerpetualsAddType> = ({ ...props }) => {
         <div className={`${className}-info-two`}>
           <p className="title">Open Price:</p>
           <p>{`${Number(formatUnits(newBasePrice(), 18)).toFixed(2)} USDT`}</p>
-        </div>
-        <div className={`${className}-info-three`}>
-          <p className="title">Liquidation Price:</p>
-          <p>{Number(
-                formatUnits(
-                  getLiquidationPrice,
-                  18
-                )
-              ).toFixed(2) + " USDT"}</p>
-        </div>
-        <div className={`${className}-info-four`}>
-          <p className="title">Liquidation Rate:</p>
-          <p>{getLiquidationRate().toFixed(2) + " %"}</p>
         </div>
       </div>
       <div className={`${className}-des`}>
