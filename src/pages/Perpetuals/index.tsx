@@ -110,7 +110,7 @@ const Perpetuals: FC = () => {
       grid: {
         left: '10%',
         right: '0%',
-        bottom: '20%'
+        bottom: '10%'
       },
       xAxis: {
         type: 'category',
@@ -122,20 +122,20 @@ const Perpetuals: FC = () => {
           show: false
         },
       },
-      dataZoom: [
-        {
-          type: 'inside',
-          start: 100 - 50 / kData.length * 100,
-          end: 100
-        },
-        {
-          show: false,
-          type: 'slider',
-          top: '90%',
-          start: 100 - 50 / kData.length * 100,
-          end: 100
-        }
-      ],
+      // dataZoom: [
+      //   {
+      //     type: 'inside',
+      //     start: 100 - 50 / kData.length * 100,
+      //     end: 100
+      //   },
+      //   {
+      //     show: false,
+      //     type: 'slider',
+      //     top: '90%',
+      //     start: 100 - 50 / kData.length * 100,
+      //     end: 100
+      //   }
+      // ],
       series: {
         type: 'candlestick',
         data: data0.values,
@@ -294,7 +294,7 @@ const Perpetuals: FC = () => {
       const k_data = await fetch(
         `https://api.hedge.red/api/oracle/get_cur_kline/${chainId?.toString()}/0/${
           tokenPair.symbol.toLocaleLowerCase() + "usdt"
-        }/${kTypeValue}/1000`
+        }/${kTypeValue}/50`
       );
       const k_data_value = await k_data.json();
       setKData(k_data_value["value"]);
@@ -538,7 +538,7 @@ const Perpetuals: FC = () => {
               </Tooltip>
               <p>{kPrice() + " USDT"}</p>
             </div>
-            
+
           </div>
           <MainButton
             className={`${classPrefix}-card-button`}
