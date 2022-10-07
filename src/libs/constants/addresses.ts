@@ -44,7 +44,7 @@ export const tokenList: { [key: string]: TokenType } = {
       1: '1',
       3: '1',
       4: '1',
-      5: '1',
+      5: '0',
       56: '0',
       97: '0'
     },
@@ -108,7 +108,7 @@ export const tokenList: { [key: string]: TokenType } = {
       1: "0",
       3: "0",
       4: "0",
-      5: '0',
+      5: '1',
       56: '2',
       97: '2'
     },

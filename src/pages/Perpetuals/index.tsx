@@ -221,6 +221,7 @@ const Perpetuals: FC = () => {
       const tokenListNew = tokenList;
       tokenListNew["ETH"] = ETH;
       tokenListNew["BTC"] = BTC;
+      console.log(tokenListNew)
       setKValue(tokenListNew);
     },
     []
