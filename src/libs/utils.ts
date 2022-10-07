@@ -13,12 +13,14 @@ export type NumberStringType = {
 export const PRICE_FEE: NumberBigNumberType = {
   1: normalToBigNumber("0"),
   4: normalToBigNumber("0"),
+  5: normalToBigNumber("0"),
   56: normalToBigNumber("0"),
   97: normalToBigNumber("0.002"),
 }
 export const BLOCK_TIME: NumberNumberType = {
   1: 14000,
   4: 14000,
+  5: 13000,
   56: 3000,
   97: 3000,
 }
