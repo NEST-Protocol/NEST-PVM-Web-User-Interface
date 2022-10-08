@@ -1,3 +1,4 @@
+import message from "antd/lib/message";
 import classNames from "classnames";
 import { BigNumber } from "ethers";
 import { formatUnits, parseUnits } from "ethers/lib/utils";
@@ -216,6 +217,10 @@ const PerpetualsAdd: FC<PerpetualsAddType> = ({ ...props }) => {
         className={`${className}-button`}
         onClick={() => {
           if (!checkMainButton()) {
+            return;
+          }
+          if (normalToBigNumber(nestInput).lt(normalToBigNumber("50"))) {
+            message.error(`Minimum input 50`);
             return;
           }
           active();
