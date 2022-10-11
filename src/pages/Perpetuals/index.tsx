@@ -192,7 +192,7 @@ const Perpetuals: FC = () => {
       2
     );
     const priceValue = BASE_2000ETH_AMOUNT.mul(BASE_AMOUNT).div(priceList[1]);
-    
+
     const baseK = parseUnits('0.003', 18)
     const tokenNew = token;
     tokenNew.nowPrice = priceValue;
@@ -438,7 +438,7 @@ const Perpetuals: FC = () => {
   );
 
   const kType = useMemo(() => {
-    if (chainId === 5) {
+    if (chainId === 5 || chainId === 97) {
       return [
         {index: 0, label: "1M", value: "K_1M"},
         {index: 0, label: "5M", value: "K_5M"},
