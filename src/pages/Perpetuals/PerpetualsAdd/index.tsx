@@ -124,12 +124,6 @@ const PerpetualsAdd: FC<PerpetualsAddType> = ({ ...props }) => {
         .add(BigNumber.from("18446744073709552000"));
     };
     const top = newBalance.mul(kPrice()).mul(props.item.basePrice);
-    console.log(expMiuT(
-      props.item.orientation
-        ? BigNumber.from("64051194700")
-        : BigNumber.from("0"),
-      chainId
-    ).toString())
     const bottom = props.item.basePrice.mul(parseUnits(nestInput, 18)).add(
       kPrice()
         .mul(props.item.balance.mul(BigNumber.from("2").pow(64)))

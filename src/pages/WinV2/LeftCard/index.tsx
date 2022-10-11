@@ -48,8 +48,6 @@ const WinV2LeftCard: FC = () => {
     if (!chainId || !account || !library) {
       return;
     }
-    // console.log(connector?.getAccount())
-    // console.log(connector?.getProvider())
     const NESTBalance = await getERC20Contract(
       tokenList["NEST"].addresses[chainId],
       library,

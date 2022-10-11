@@ -44,6 +44,7 @@ import {useERC20Approve} from "../../contracts/hooks/useERC20Approve";
 import "./styles";
 import classNames from "classnames";
 import ReactECharts from 'echarts-for-react';
+import { parseUnits } from "ethers/lib/utils";
 
 export type LeverListType = {
   index: BigNumber;
@@ -191,16 +192,22 @@ const Perpetuals: FC = () => {
       2
     );
     const priceValue = BASE_2000ETH_AMOUNT.mul(BASE_AMOUNT).div(priceList[1]);
-    const k = await leverContract.calcRevisedK(
-      token.sigmaSQ,
-      BASE_2000ETH_AMOUNT.mul(BASE_AMOUNT).div(priceList[3]),
-      priceList[2],
-      priceValue,
-      priceList[0]
-    );
+    
+    const baseK = parseUnits('0.003', 18)
     const tokenNew = token;
     tokenNew.nowPrice = priceValue;
-    tokenNew.k = k;
+    if (chainId === 56 || chainId === 97) {
+      tokenNew.k = baseK
+    } else {
+      const k = await leverContract.calcRevisedK(
+        token.sigmaSQ,
+        BASE_2000ETH_AMOUNT.mul(BASE_AMOUNT).div(priceList[3]),
+        priceList[2],
+        priceValue,
+        priceList[0]
+      );
+      tokenNew.k = k
+    }
     return tokenNew;
   };
 
@@ -221,7 +228,6 @@ const Perpetuals: FC = () => {
       const tokenListNew = tokenList;
       tokenListNew["ETH"] = ETH;
       tokenListNew["BTC"] = BTC;
-      console.log(tokenListNew)
       setKValue(tokenListNew);
     },
     []
