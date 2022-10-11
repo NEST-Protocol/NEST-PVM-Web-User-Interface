@@ -431,12 +431,25 @@ const Perpetuals: FC = () => {
     </table>
   );
 
-  const kType = [
-    {index: 0, label: "15M", value: "K_15M"},
-    {index: 1, label: "1H", value: "K_1H"},
-    {index: 2, label: "4H", value: "K_4H"},
-    {index: 3, label: "1D", value: "K_DAY"},
-  ];
+  const kType = useMemo(() => {
+    if (chainId === 5) {
+      return [
+        {index: 0, label: "1M", value: "K_1M"},
+        {index: 0, label: "5M", value: "K_5M"},
+        {index: 0, label: "15M", value: "K_15M"},
+        {index: 1, label: "1H", value: "K_1H"},
+        {index: 2, label: "4H", value: "K_4H"},
+        {index: 3, label: "1D", value: "K_DAY"},
+      ]
+    } else {
+      return [
+        {index: 0, label: "15M", value: "K_15M"},
+        {index: 1, label: "1H", value: "K_1H"},
+        {index: 2, label: "4H", value: "K_4H"},
+        {index: 3, label: "1D", value: "K_DAY"},
+      ]
+    }
+  }, [chainId]);
 
   return (
     <div>
