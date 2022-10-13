@@ -186,19 +186,20 @@ const Perpetuals: FC = () => {
     token: TokenType,
     chainId: number
   ) => {
-    const priceList = await contract.lastPriceList(
-      0,
-      token.pairIndex[chainId],
-      2
-    );
-    const priceValue = BASE_2000ETH_AMOUNT.mul(BASE_AMOUNT).div(priceList[1]);
-
-    const baseK = parseUnits('0.003', 18)
     const tokenNew = token;
-    tokenNew.nowPrice = priceValue;
     if (chainId === 56 || chainId === 97) {
+      const basePriceList = await leverContract.find(token.pairIndex[chainId],0,1,0)
+      const baseK = parseUnits('0.003', 18)
       tokenNew.k = baseK
+      const priceValue = BASE_2000ETH_AMOUNT.mul(BASE_AMOUNT).div(basePriceList);
+      tokenNew.nowPrice = priceValue;
     } else {
+      const priceList = await contract.lastPriceList(
+        0,
+        token.pairIndex[chainId],
+        2
+      );
+      const priceValue = BASE_2000ETH_AMOUNT.mul(BASE_AMOUNT).div(priceList[1]);
       const k = await leverContract.calcRevisedK(
         token.sigmaSQ,
         BASE_2000ETH_AMOUNT.mul(BASE_AMOUNT).div(priceList[3]),
@@ -207,6 +208,7 @@ const Perpetuals: FC = () => {
         priceList[0]
       );
       tokenNew.k = k
+      tokenNew.nowPrice = priceValue;
     }
     return tokenNew;
   };
@@ -437,25 +439,13 @@ const Perpetuals: FC = () => {
     </table>
   );
 
-  const kType = useMemo(() => {
-    if (chainId === 5 || chainId === 97) {
-      return [
-        {index: 0, label: "1M", value: "K_1M"},
-        {index: 0, label: "5M", value: "K_5M"},
-        {index: 0, label: "15M", value: "K_15M"},
-        {index: 1, label: "1H", value: "K_1H"},
-        {index: 2, label: "4H", value: "K_4H"},
-        {index: 3, label: "1D", value: "K_DAY"},
-      ]
-    } else {
-      return [
-        {index: 0, label: "15M", value: "K_15M"},
-        {index: 1, label: "1H", value: "K_1H"},
-        {index: 2, label: "4H", value: "K_4H"},
-        {index: 3, label: "1D", value: "K_DAY"},
-      ]
-    }
-  }, [chainId]);
+  const kType = [
+    {index: 0, label: "5M", value: "K_5M"},
+    {index: 1, label: "15M", value: "K_15M"},
+    {index: 2, label: "1H", value: "K_1H"},
+    {index: 3, label: "4H", value: "K_4H"},
+    {index: 4, label: "1D", value: "K_DAY"},
+  ];
 
   return (
     <div>

@@ -613,5 +613,60 @@
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
+	},{
+		"inputs": [{
+			"internalType": "uint256",
+			"name": "start",
+			"type": "uint256"
+		}, {
+			"internalType": "uint256",
+			"name": "count",
+			"type": "uint256"
+		}, {
+			"internalType": "uint256",
+			"name": "maxFindCount",
+			"type": "uint256"
+		}, {
+			"internalType": "address",
+			"name": "owner",
+			"type": "address"
+		}],
+		"name": "find",
+		"outputs": [{
+			"components": [{
+				"internalType": "uint256",
+				"name": "index",
+				"type": "uint256"
+			}, {
+				"internalType": "address",
+				"name": "tokenAddress",
+				"type": "address"
+			}, {
+				"internalType": "uint256",
+				"name": "lever",
+				"type": "uint256"
+			}, {
+				"internalType": "bool",
+				"name": "orientation",
+				"type": "bool"
+			}, {
+				"internalType": "uint256",
+				"name": "balance",
+				"type": "uint256"
+			}, {
+				"internalType": "uint256",
+				"name": "basePrice",
+				"type": "uint256"
+			}, {
+				"internalType": "uint256",
+				"name": "baseBlock",
+				"type": "uint256"
+			}],
+			"internalType": "struct INestFuturesWithPrice.FutureView[]",
+			"name": "futureArray",
+			"type": "tuple[]"
+		}],
+		"stateMutability": "view",
+		"type": "function"
 	}
 ]
