@@ -204,8 +204,7 @@ const PerpetualsAdd: FC<PerpetualsAddType> = ({ ...props }) => {
       </div>
       <div className={`${className}-des`}>
         The calculated result is for reference only. Please expect some
-        deviation due to trading fees or changes in the funding rate. Read tips
-        on how to use.
+        deviation due to trading fees or changes in the funding rate.
       </div>
       <MainButton
         className={`${className}-button`}

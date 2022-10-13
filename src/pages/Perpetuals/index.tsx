@@ -1,16 +1,16 @@
-import {BigNumber} from "@ethersproject/bignumber";
-import {t, Trans} from "@lingui/macro";
-import {message} from "antd";
-import {MaxUint256} from "@ethersproject/constants";
-import {FC, useCallback, useEffect, useMemo, useRef, useState} from "react";
+import { BigNumber } from "@ethersproject/bignumber";
+import { t, Trans } from "@lingui/macro";
+import { message } from "antd";
+import { MaxUint256 } from "@ethersproject/constants";
+import { FC, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import ChooseType from "../../components/ChooseType";
 import InfoShow from "../../components/InfoShow";
-import {LeverChoose} from "../../components/LeverChoose";
+import { LeverChoose } from "../../components/LeverChoose";
 import MainButton from "../../components/MainButton";
 import MainCard from "../../components/MainCard";
 import PerpetualsList from "../../components/PerpetualsList";
-import {DoubleTokenShow, SingleTokenShow} from "../../components/TokenShow";
-import {usePVMLeverBuy} from "../../contracts/hooks/usePVMLeverTransaction";
+import { DoubleTokenShow, SingleTokenShow } from "../../components/TokenShow";
+import { usePVMLeverBuy } from "../../contracts/hooks/usePVMLeverTransaction";
 import {
   PVMLeverContract,
   tokenList,
@@ -34,16 +34,16 @@ import {
   formatInputNum,
   normalToBigNumber,
 } from "../../libs/utils";
-import {Tooltip} from "antd";
-import {Contract} from "@ethersproject/contracts";
-import {Popup} from "reactjs-popup";
+import { Tooltip } from "antd";
+import { Contract } from "@ethersproject/contracts";
+import { Popup } from "reactjs-popup";
 import PerpetualsNoticeModal from "./PerpetualsNoticeModal";
 import PerpetualsListMobile from "../../components/PerpetualsList/PerpetualsListMobile";
-import {PutDownIcon} from "../../components/Icon";
-import {useERC20Approve} from "../../contracts/hooks/useERC20Approve";
+import { PutDownIcon } from "../../components/Icon";
+import { useERC20Approve } from "../../contracts/hooks/useERC20Approve";
 import "./styles";
 import classNames from "classnames";
-import ReactECharts from 'echarts-for-react';
+import ReactECharts from "echarts-for-react";
 import { parseUnits } from "ethers/lib/utils";
 
 export type LeverListType = {
@@ -57,7 +57,7 @@ export type LeverListType = {
 };
 
 const Perpetuals: FC = () => {
-  const {account, chainId, library} = useWeb3();
+  const { account, chainId, library } = useWeb3();
   const [showNotice, setShowNotice] = useState(false);
   const modal = useRef<any>();
   const [isLong, setIsLong] = useState(true);
@@ -77,7 +77,7 @@ const Perpetuals: FC = () => {
   const nestToken = ERC20Contract(tokenList["NEST"].addresses);
   const priceContract = NestPriceContract();
   const PVMLeverOJ = PVMLever(PVMLeverContract);
-  const {pendingList, txList} = useTransactionListCon();
+  const { pendingList, txList } = useTransactionListCon();
   const [nestAllowance, setNestAllowance] = useState<BigNumber>(
     BigNumber.from("0")
   );
@@ -96,31 +96,39 @@ const Perpetuals: FC = () => {
     return false;
   };
 
-  const upColor = '#00da3c';
-  const downColor = '#ec0000';
+  const upColor = "#00da3c";
+  const downColor = "#ec0000";
 
   const option = useMemo(() => {
-    const data0 = splitData(kData.map((item: any) => [item?.time, item?.open, item?.close, Math.min(item?.open, item?.close), Math.max(item?.open, item?.close)]))
+    const data0 = splitData(
+      kData.map((item: any) => [
+        item?.time,
+        item?.open,
+        item?.close,
+        Math.min(item?.open, item?.close),
+        Math.max(item?.open, item?.close),
+      ])
+    );
     return {
       tooltip: {
-        trigger: 'axis',
+        trigger: "axis",
         axisPointer: {
-          type: 'cross'
-        }
+          type: "cross",
+        },
       },
       grid: {
-        left: '10%',
-        right: '0%',
-        bottom: '10%'
+        left: "10%",
+        right: "0%",
+        bottom: "10%",
       },
       xAxis: {
-        type: 'category',
+        type: "category",
         data: data0.categoryData,
       },
       yAxis: {
         scale: true,
         splitArea: {
-          show: false
+          show: false,
         },
       },
       // dataZoom: [
@@ -138,17 +146,17 @@ const Perpetuals: FC = () => {
       //   }
       // ],
       series: {
-        type: 'candlestick',
+        type: "candlestick",
         data: data0.values,
         itemStyle: {
           color: upColor,
           color0: downColor,
           borderColor: upColor,
-          borderColor0: downColor
-        }
-      }
-    }
-  }, [kData])
+          borderColor0: downColor,
+        },
+      },
+    };
+  }, [kData]);
 
   function splitData(rawData: any) {
     const categoryData = [];
@@ -159,7 +167,7 @@ const Perpetuals: FC = () => {
     }
     return {
       categoryData: categoryData,
-      values: values
+      values: values,
     };
   }
 
@@ -188,10 +196,17 @@ const Perpetuals: FC = () => {
   ) => {
     const tokenNew = token;
     if (chainId === 56 || chainId === 97) {
-      const basePriceList = await leverContract.find(token.pairIndex[chainId],0,1,0)
-      const baseK = parseUnits('0.003', 18)
-      tokenNew.k = baseK
-      const priceValue = BASE_2000ETH_AMOUNT.mul(BASE_AMOUNT).div(basePriceList);
+      const basePriceList = await leverContract.listPrice(
+        token.pairIndex[chainId],
+        0,
+        1,
+        0
+      );
+      const baseK = parseUnits("0.003", 18);
+      tokenNew.k = baseK;
+      const priceValue = BASE_2000ETH_AMOUNT.mul(BASE_AMOUNT).div(
+        basePriceList[1]
+      );
       tokenNew.nowPrice = priceValue;
     } else {
       const priceList = await contract.lastPriceList(
@@ -207,7 +222,7 @@ const Perpetuals: FC = () => {
         priceValue,
         priceList[0]
       );
-      tokenNew.k = k
+      tokenNew.k = k;
       tokenNew.nowPrice = priceValue;
     }
     return tokenNew;
@@ -407,44 +422,48 @@ const Perpetuals: FC = () => {
   const pcTable = (
     <table>
       <thead>
-      <tr className={`${classPrefix}-table-title`}>
-        <th>
-          <Trans>Token Pair</Trans>
-        </th>
-        <th>
-          <Trans>Type</Trans>
-        </th>
-        <th>
-          <Trans>Lever</Trans>
-        </th>
-        <th>
-          Initial
-          <br/>
-          Margin
-        </th>
-        <th>Open Price</th>
-        <th className={"th-marginAssets"}>
-            <span>
-              Actual
-              <br/>
-              Margin
-            </span>
-        </th>
-        <th>
-          <Trans>Operate</Trans>
-        </th>
-      </tr>
+        <tr className={`${classPrefix}-table-title`}>
+          <th>
+            <Trans>Token Pair</Trans>
+          </th>
+          <th>
+            <Trans>Type</Trans>
+          </th>
+          <th>
+            <Trans>Lever</Trans>
+          </th>
+          <th>
+            Initial
+            <br />
+            Margin
+          </th>
+          <th>Open Price</th>
+          <th className={"marginAssets"}>
+            <Tooltip
+              placement="top"
+              color={"#ffffff"}
+              title={
+                "Dynamic changes in net assets, less than a certain amount of liquidation will be liquidated, the amount of liquidation is Max{margin * leverage * 0.02, 10}"
+              }
+            >
+              <span>Actual Margin</span>
+            </Tooltip>
+          </th>
+          <th>
+            <Trans>Operate</Trans>
+          </th>
+        </tr>
       </thead>
       <tbody>{trList}</tbody>
     </table>
   );
 
   const kType = [
-    {index: 0, label: "5M", value: "K_5M"},
-    {index: 1, label: "15M", value: "K_15M"},
-    {index: 2, label: "1H", value: "K_1H"},
-    {index: 3, label: "4H", value: "K_4H"},
-    {index: 4, label: "1D", value: "K_DAY"},
+    { index: 0, label: "5M", value: "K_5M" },
+    { index: 1, label: "15M", value: "K_15M" },
+    { index: 2, label: "1H", value: "K_1H" },
+    { index: 3, label: "4H", value: "K_4H" },
+    { index: 4, label: "1D", value: "K_DAY" },
   ];
 
   return (
@@ -478,7 +497,7 @@ const Perpetuals: FC = () => {
                 tokenNameOne={tokenPair.symbol}
                 tokenNameTwo={"USDT"}
               />
-              <PutDownIcon/>
+              <PutDownIcon />
             </div>
             <p>
               {`${
@@ -506,7 +525,7 @@ const Perpetuals: FC = () => {
             isLong={isLong}
             textArray={[t`Long`, t`Short`]}
           />
-          <LeverChoose selected={leverNum} callBack={handleLeverNum}/>
+          <LeverChoose selected={leverNum} callBack={handleLeverNum} />
           <InfoShow
             topLeftText={t`Payment`}
             bottomRightText={""}
@@ -516,15 +535,14 @@ const Perpetuals: FC = () => {
             } NEST`}
             topRightRed={checkNESTBalance}
           >
-            <SingleTokenShow tokenNameOne={"NEST"} isBold/>
+            <SingleTokenShow tokenNameOne={"NEST"} isBold />
             <input
               placeholder={t`Input`}
               className={"input-middle"}
               value={nestInput}
               maxLength={32}
               onChange={(e) => setNestInput(formatInputNum(e.target.value))}
-              onBlur={(e: any) => {
-              }}
+              onBlur={(e: any) => {}}
             />
             <button
               className={"max-button"}
@@ -542,13 +560,16 @@ const Perpetuals: FC = () => {
               <Tooltip
                 placement="right"
                 color={"#ffffff"}
-                title={t`The opening price is based on NEST oracle and corrected according to risk compensation.`}
+                title={
+                  "The open price is the fixed price with the trading slippage (0.003) that aim to forbid arbitrages related to trading on the difference between spot price in exchange and the delayed quoted price on NEST."
+                }
               >
-                <p className="title">Open Price:</p>
+                <p className="title">
+                  <span>Open Price:</span>
+                </p>
               </Tooltip>
               <p>{kPrice() + " USDT"}</p>
             </div>
-
           </div>
           <MainButton
             className={`${classPrefix}-card-button`}
@@ -605,7 +626,7 @@ const Perpetuals: FC = () => {
           <div className={`${classPrefix}-right-stock`}>
             <ReactECharts
               option={option}
-              style={{height: '100%'}}
+              style={{ height: "100%" }}
               lazyUpdate={true}
             />
           </div>

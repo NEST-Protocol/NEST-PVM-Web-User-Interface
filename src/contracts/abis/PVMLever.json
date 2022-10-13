@@ -616,7 +616,11 @@
 	},{
 		"inputs": [{
 			"internalType": "uint256",
-			"name": "start",
+			"name": "pairIndex",
+			"type": "uint256"
+		}, {
+			"internalType": "uint256",
+			"name": "offset",
 			"type": "uint256"
 		}, {
 			"internalType": "uint256",
@@ -624,47 +628,14 @@
 			"type": "uint256"
 		}, {
 			"internalType": "uint256",
-			"name": "maxFindCount",
+			"name": "order",
 			"type": "uint256"
-		}, {
-			"internalType": "address",
-			"name": "owner",
-			"type": "address"
 		}],
-		"name": "find",
+		"name": "listPrice",
 		"outputs": [{
-			"components": [{
-				"internalType": "uint256",
-				"name": "index",
-				"type": "uint256"
-			}, {
-				"internalType": "address",
-				"name": "tokenAddress",
-				"type": "address"
-			}, {
-				"internalType": "uint256",
-				"name": "lever",
-				"type": "uint256"
-			}, {
-				"internalType": "bool",
-				"name": "orientation",
-				"type": "bool"
-			}, {
-				"internalType": "uint256",
-				"name": "balance",
-				"type": "uint256"
-			}, {
-				"internalType": "uint256",
-				"name": "basePrice",
-				"type": "uint256"
-			}, {
-				"internalType": "uint256",
-				"name": "baseBlock",
-				"type": "uint256"
-			}],
-			"internalType": "struct INestFuturesWithPrice.FutureView[]",
-			"name": "futureArray",
-			"type": "tuple[]"
+			"internalType": "uint256[]",
+			"name": "priceArray",
+			"type": "uint256[]"
 		}],
 		"stateMutability": "view",
 		"type": "function"
