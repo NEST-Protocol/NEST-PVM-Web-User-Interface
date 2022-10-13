@@ -58,6 +58,23 @@ export const Rinkeby = {
   explorers: [],
 };
 
+export const Goerli = {
+  name: "Goerli",
+  chain: 'ETH',
+  chainId: 5,
+  network: 'Goerli',
+  networkId: 5,
+  tokenName: "Ether",
+  tokenSymbol: "ETH",
+  tokenDecimals: 18,
+  rpc: [
+    `https://goerli.infura.io/v3/${INFURA_API_KEY}`,
+    `wss://goerli.infura.io/ws/v3/${INFURA_API_KEY}`,
+  ],
+  infoURL: "https://goerli.etherscan.io/",
+  explorers: [],
+};
+
 export const Ethereum = {
   name: "Ethereum",
   chain: 'ETH',
@@ -75,5 +92,5 @@ export const Ethereum = {
   explorers: [],
 };
 
-// export const SupportedChains: Array<Chain> = [Ethereum, BNB]
 export const SupportedChains: Array<Chain> = [BNB, Ethereum];
+// export const SupportedChains: Array<Chain> = [BNBTest,Ethereum];

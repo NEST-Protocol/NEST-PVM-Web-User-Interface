@@ -613,5 +613,31 @@
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
+	},{
+		"inputs": [{
+			"internalType": "uint256",
+			"name": "pairIndex",
+			"type": "uint256"
+		}, {
+			"internalType": "uint256",
+			"name": "offset",
+			"type": "uint256"
+		}, {
+			"internalType": "uint256",
+			"name": "count",
+			"type": "uint256"
+		}, {
+			"internalType": "uint256",
+			"name": "order",
+			"type": "uint256"
+		}],
+		"name": "listPrice",
+		"outputs": [{
+			"internalType": "uint256[]",
+			"name": "priceArray",
+			"type": "uint256[]"
+		}],
+		"stateMutability": "view",
+		"type": "function"
 	}
 ]

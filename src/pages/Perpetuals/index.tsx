@@ -2,9 +2,8 @@ import { BigNumber } from "@ethersproject/bignumber";
 import { t, Trans } from "@lingui/macro";
 import { message } from "antd";
 import { MaxUint256 } from "@ethersproject/constants";
-import { FC, useCallback, useEffect, useRef, useState } from "react";
+import { FC, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import ChooseType from "../../components/ChooseType";
-import { HoldLine } from "../../components/HoldLine";
 import InfoShow from "../../components/InfoShow";
 import { LeverChoose } from "../../components/LeverChoose";
 import MainButton from "../../components/MainButton";
@@ -35,7 +34,6 @@ import {
   formatInputNum,
   normalToBigNumber,
 } from "../../libs/utils";
-import "./styles";
 import { Tooltip } from "antd";
 import { Contract } from "@ethersproject/contracts";
 import { Popup } from "reactjs-popup";
@@ -43,6 +41,10 @@ import PerpetualsNoticeModal from "./PerpetualsNoticeModal";
 import PerpetualsListMobile from "../../components/PerpetualsList/PerpetualsListMobile";
 import { PutDownIcon } from "../../components/Icon";
 import { useERC20Approve } from "../../contracts/hooks/useERC20Approve";
+import "./styles";
+import classNames from "classnames";
+import ReactECharts from "echarts-for-react";
+import { parseUnits } from "ethers/lib/utils";
 
 export type LeverListType = {
   index: BigNumber;
@@ -65,6 +67,8 @@ const Perpetuals: FC = () => {
   const [tokenPair, setTokenPair] = useState<TokenType>(tokenList["ETH"]);
   const [nestInput, setNestInput] = useState<string>("");
   const [isRefresh, setIsRefresh] = useState<boolean>(false);
+  const [kTypeValue, setKTypeValue] = useState<string>("K_DAY");
+  const [kData, setKData] = useState([]);
   const [leverListState, setLeverListState] = useState<Array<LeverListType>>(
     []
   );
@@ -92,6 +96,81 @@ const Perpetuals: FC = () => {
     return false;
   };
 
+  const upColor = "#00da3c";
+  const downColor = "#ec0000";
+
+  const option = useMemo(() => {
+    const data0 = splitData(
+      kData.map((item: any) => [
+        item?.time,
+        item?.open,
+        item?.close,
+        Math.min(item?.open, item?.close),
+        Math.max(item?.open, item?.close),
+      ])
+    );
+    return {
+      tooltip: {
+        trigger: "axis",
+        axisPointer: {
+          type: "cross",
+        },
+      },
+      grid: {
+        left: "10%",
+        right: "0%",
+        bottom: "10%",
+      },
+      xAxis: {
+        type: "category",
+        data: data0.categoryData,
+      },
+      yAxis: {
+        scale: true,
+        splitArea: {
+          show: false,
+        },
+      },
+      // dataZoom: [
+      //   {
+      //     type: 'inside',
+      //     start: 100 - 50 / kData.length * 100,
+      //     end: 100
+      //   },
+      //   {
+      //     show: false,
+      //     type: 'slider',
+      //     top: '90%',
+      //     start: 100 - 50 / kData.length * 100,
+      //     end: 100
+      //   }
+      // ],
+      series: {
+        type: "candlestick",
+        data: data0.values,
+        itemStyle: {
+          color: upColor,
+          color0: downColor,
+          borderColor: upColor,
+          borderColor0: downColor,
+        },
+      },
+    };
+  }, [kData]);
+
+  function splitData(rawData: any) {
+    const categoryData = [];
+    const values = [];
+    for (let i = 0; i < rawData.length; i++) {
+      categoryData.push(rawData[i].splice(0, 1)[0]);
+      values.push(rawData[i]);
+    }
+    return {
+      categoryData: categoryData,
+      values: values,
+    };
+  }
+
   const trList = leverListState.map((item) => {
     return checkWidth() ? (
       <PerpetualsList
@@ -115,22 +194,37 @@ const Perpetuals: FC = () => {
     token: TokenType,
     chainId: number
   ) => {
-    const priceList = await contract.lastPriceList(
-      0,
-      token.pairIndex[chainId],
-      2
-    );
-    const priceValue = BASE_2000ETH_AMOUNT.mul(BASE_AMOUNT).div(priceList[1]);
-    const k = await leverContract.calcRevisedK(
-      token.sigmaSQ,
-      BASE_2000ETH_AMOUNT.mul(BASE_AMOUNT).div(priceList[3]),
-      priceList[2],
-      priceValue,
-      priceList[0]
-    );
     const tokenNew = token;
-    tokenNew.nowPrice = priceValue;
-    tokenNew.k = k;
+    if (chainId === 56 || chainId === 97) {
+      const basePriceList = await leverContract.listPrice(
+        token.pairIndex[chainId],
+        0,
+        1,
+        0
+      );
+      const baseK = parseUnits("0.003", 18);
+      tokenNew.k = baseK;
+      const priceValue = BASE_2000ETH_AMOUNT.mul(BASE_AMOUNT).div(
+        basePriceList[1]
+      );
+      tokenNew.nowPrice = priceValue;
+    } else {
+      const priceList = await contract.lastPriceList(
+        0,
+        token.pairIndex[chainId],
+        2
+      );
+      const priceValue = BASE_2000ETH_AMOUNT.mul(BASE_AMOUNT).div(priceList[1]);
+      const k = await leverContract.calcRevisedK(
+        token.sigmaSQ,
+        BASE_2000ETH_AMOUNT.mul(BASE_AMOUNT).div(priceList[3]),
+        priceList[2],
+        priceValue,
+        priceList[0]
+      );
+      tokenNew.k = k;
+      tokenNew.nowPrice = priceValue;
+    }
     return tokenNew;
   };
 
@@ -186,7 +280,7 @@ const Perpetuals: FC = () => {
     if (!PVMLeverOJ || !account) {
       return;
     }
-    const leverList = await PVMLeverOJ.find("0", "20", "20", account);
+    const leverList = await PVMLeverOJ.find("0", "38", "38", account);
     const resultList = leverList.filter((item: LeverListType) =>
       item.balance.gt(BigNumber.from("0"))
     );
@@ -199,7 +293,7 @@ const Perpetuals: FC = () => {
       return;
     }
     const nestToken = getERC20Contract(
-      tokenList['NEST'].addresses[chainId],
+      tokenList["NEST"].addresses[chainId],
       library,
       account
     );
@@ -215,6 +309,21 @@ const Perpetuals: FC = () => {
       setNestAllowance(allowance);
     })();
   }, [account, chainId, library, txList]);
+  // getKData
+  useEffect(() => {
+    if (!chainId) {
+      return;
+    }
+    (async () => {
+      const k_data = await fetch(
+        `https://api.hedge.red/api/oracle/get_cur_kline/${chainId?.toString()}/0/${
+          tokenPair.symbol.toLocaleLowerCase() + "usdt"
+        }/${kTypeValue}/50`
+      );
+      const k_data_value = await k_data.json();
+      setKData(k_data_value["value"]);
+    })();
+  }, [chainId, kTypeValue, tokenPair.symbol]);
   useEffect(() => {
     if (!isRefresh) {
       getList();
@@ -276,7 +385,7 @@ const Perpetuals: FC = () => {
     normalToBigNumber(nestInput)
   );
   const approve = useERC20Approve(
-    'NEST',
+    "NEST",
     MaxUint256,
     chainId ? PVMLeverContract[chainId] : undefined
   );
@@ -324,22 +433,20 @@ const Perpetuals: FC = () => {
             <Trans>Lever</Trans>
           </th>
           <th>
-            <Trans>Margin</Trans>
+            Initial
+            <br />
+            Margin
           </th>
-          <th>
-            <Trans>Open Price</Trans>
-          </th>
-          <th className={"th-marginAssets"}>
+          <th>Open Price</th>
+          <th className={"marginAssets"}>
             <Tooltip
               placement="top"
               color={"#ffffff"}
               title={
-                "Dynamic changes in net assets, less than a certain amount of liquidation will be liquidated, the amount of liquidation is Max'{'margin*leverage*0.02, 10'}'"
+                "Dynamic changes in net assets, less than a certain amount of liquidation will be liquidated, the amount of liquidation is Max{margin * leverage * 0.02, 10}"
               }
             >
-              <span>
-                <Trans>Margin Assets</Trans>
-              </span>
+              <span>Actual Margin</span>
             </Tooltip>
           </th>
           <th>
@@ -350,6 +457,14 @@ const Perpetuals: FC = () => {
       <tbody>{trList}</tbody>
     </table>
   );
+
+  const kType = [
+    { index: 0, label: "5M", value: "K_5M" },
+    { index: 1, label: "15M", value: "K_15M" },
+    { index: 2, label: "1H", value: "K_1H" },
+    { index: 3, label: "4H", value: "K_4H" },
+    { index: 4, label: "1D", value: "K_DAY" },
+  ];
 
   return (
     <div>
@@ -367,35 +482,36 @@ const Perpetuals: FC = () => {
           ></PerpetualsNoticeModal>
         </Popup>
       ) : null}
-      <MainCard classNames={`${classPrefix}-card`}>
-        <InfoShow
-          topLeftText={t`Token Pair`}
-          bottomRightText={""}
-          tokenSelect={true}
-          tokenList={[tokenList["ETH"], tokenList["BTC"]]}
-          showUSDT={true}
-          getSelectedToken={setTokenPair}
-        >
-          <div className={`${classPrefix}-card-tokenPair`}>
-            <DoubleTokenShow
-              tokenNameOne={tokenPair.symbol}
-              tokenNameTwo={"USDT"}
-            />
-            <PutDownIcon />
-          </div>
-          <p>
-            {`${
-              checkWidth() ? "1 " + tokenPair.symbol + " = " : ""
-            }${bigNumberToNormal(
-              kValue
-                ? kValue[tokenPair.symbol].nowPrice || BigNumber.from("0")
-                : BigNumber.from("0"),
-              tokenList["USDT"].decimals,
-              2
-            )} USDT`}
-          </p>
-        </InfoShow>
-        <p className={"kPrice"}>
+      <div className={`${classPrefix}-base`}>
+        <MainCard classNames={`${classPrefix}-card`}>
+          <InfoShow
+            topLeftText={t`Token Pair`}
+            bottomRightText={""}
+            tokenSelect={true}
+            tokenList={[tokenList["ETH"], tokenList["BTC"]]}
+            showUSDT={true}
+            getSelectedToken={setTokenPair}
+          >
+            <div className={`${classPrefix}-card-tokenPair`}>
+              <DoubleTokenShow
+                tokenNameOne={tokenPair.symbol}
+                tokenNameTwo={"USDT"}
+              />
+              <PutDownIcon />
+            </div>
+            <p>
+              {`${
+                checkWidth() ? "1 " + tokenPair.symbol + " = " : ""
+              }${bigNumberToNormal(
+                kValue
+                  ? kValue[tokenPair.symbol].nowPrice || BigNumber.from("0")
+                  : BigNumber.from("0"),
+                tokenList["USDT"].decimals,
+                2
+              )} USDT`}
+            </p>
+          </InfoShow>
+          {/* <p className={"kPrice"}>
           <Tooltip
             placement="right"
             color={"#ffffff"}
@@ -403,71 +519,123 @@ const Perpetuals: FC = () => {
           >
             <span>{t`Open Price:` + kPrice() + " USDT"}</span>
           </Tooltip>
-        </p>
-        <ChooseType
-          callBack={handleType}
-          isLong={isLong}
-          textArray={[t`Long`, t`Short`]}
-        />
-        <LeverChoose selected={leverNum} callBack={handleLeverNum} />
-        <InfoShow
-          topLeftText={t`Payment`}
-          bottomRightText={`${t`Balance`}: ${
-            nestBalance ? bigNumberToNormal(nestBalance, 18, 6) : "----"
-          } NEST`}
-          balanceRed={checkNESTBalance}
-        >
-          <SingleTokenShow tokenNameOne={"NEST"} isBold />
-          <input
-            placeholder={t`Input`}
-            className={"input-middle"}
-            value={nestInput}
-            maxLength={32}
-            onChange={(e) => setNestInput(formatInputNum(e.target.value))}
-            onBlur={(e: any) => {}}
+        </p> */}
+          <ChooseType
+            callBack={handleType}
+            isLong={isLong}
+            textArray={[t`Long`, t`Short`]}
           />
-          <button
-            className={"max-button"}
-            onClick={() =>
-              setNestInput(
-                bigNumberToNormal(nestBalance || BigNumber.from("0"), 18, 18)
-              )
-            }
+          <LeverChoose selected={leverNum} callBack={handleLeverNum} />
+          <InfoShow
+            topLeftText={t`Payment`}
+            bottomRightText={""}
+            // balanceRed={checkNESTBalance}
+            topRightText={`Balance: ${
+              nestBalance ? bigNumberToNormal(nestBalance, 18, 6) : "----"
+            } NEST`}
+            topRightRed={checkNESTBalance}
           >
-            MAX
-          </button>
-        </InfoShow>
-        <MainButton
-          className={`${classPrefix}-card-button`}
-          onClick={() => {
-            if (!checkMainButton()) {
-              return;
-            }
-            if (showNoticeModal()) {
-              return;
-            }
-            if (checkAllowance()) {
-              if (normalToBigNumber(nestInput).lt(normalToBigNumber("50"))) {
-                message.error(t`Minimum input 50`);
+            <SingleTokenShow tokenNameOne={"NEST"} isBold />
+            <input
+              placeholder={t`Input`}
+              className={"input-middle"}
+              value={nestInput}
+              maxLength={32}
+              onChange={(e) => setNestInput(formatInputNum(e.target.value))}
+              onBlur={(e: any) => {}}
+            />
+            <button
+              className={"max-button"}
+              onClick={() =>
+                setNestInput(
+                  bigNumberToNormal(nestBalance || BigNumber.from("0"), 18, 18)
+                )
+              }
+            >
+              MAX
+            </button>
+          </InfoShow>
+          <div className={`${classPrefix}-card-info`}>
+            <div className={`${classPrefix}-card-info-one`}>
+              <Tooltip
+                placement="right"
+                color={"#ffffff"}
+                title={
+                  "The open price is the fixed price with the trading slippage (0.003) that aim to forbid arbitrages related to trading on the difference between spot price in exchange and the delayed quoted price on NEST."
+                }
+              >
+                <p className="title">
+                  <span>Open Price:</span>
+                </p>
+              </Tooltip>
+              <p>{kPrice() + " USDT"}</p>
+            </div>
+          </div>
+          <MainButton
+            className={`${classPrefix}-card-button`}
+            onClick={() => {
+              if (!checkMainButton()) {
                 return;
               }
-              active();
-            } else {
-              approve();
-            }
-            
-          }}
-          disable={!checkMainButton()}
-          loading={mainButtonState()}
-        >
-          {checkAllowance() ? (isLong ? <Trans>Open Long</Trans> : <Trans>Open Short</Trans>) : ('Approve')}
-        </MainButton>
-      </MainCard>
+              if (showNoticeModal()) {
+                return;
+              }
+              if (checkAllowance()) {
+                if (normalToBigNumber(nestInput).lt(normalToBigNumber("50"))) {
+                  message.error(t`Minimum input 50`);
+                  return;
+                }
+                active();
+              } else {
+                approve();
+              }
+            }}
+            disable={!checkMainButton()}
+            loading={mainButtonState()}
+          >
+            {checkAllowance() ? (
+              isLong ? (
+                <Trans>Open Long</Trans>
+              ) : (
+                <Trans>Open Short</Trans>
+              )
+            ) : (
+              "Approve"
+            )}
+          </MainButton>
+        </MainCard>
+
+        <MainCard classNames={`${classPrefix}-right`}>
+          <p
+            className={`${classPrefix}-right-title`}
+          >{`${tokenPair.symbol}/USDT`}</p>
+          <div className={`${classPrefix}-right-buttonDiv`}>
+            {kType.map((item) => (
+              <button
+                key={item.value}
+                className={classNames({
+                  [`kType`]: true,
+                  [`selected`]: item.value === kTypeValue,
+                })}
+                onClick={() => setKTypeValue(item.value)}
+              >
+                {item.label}
+              </button>
+            ))}
+          </div>
+          <div className={`${classPrefix}-right-stock`}>
+            <ReactECharts
+              option={option}
+              style={{ height: "100%" }}
+              lazyUpdate={true}
+            />
+          </div>
+        </MainCard>
+      </div>
+
       {leverListState.length > 0 ? (
         <div>
-          <HoldLine>
-            <Trans>Positions</Trans>
-          </HoldLine>
+          <p className={`${classPrefix}-positions`}>Positions</p>
           {checkWidth() ? pcTable : <ul>{trList}</ul>}
         </div>
       ) : null}

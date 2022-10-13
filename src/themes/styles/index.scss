@@ -173,7 +173,6 @@
                 color: #C5C5C5;
             }
         }
-
         .OptionsList-mobile-card-mid .mobileListInfo,
         .OptionsList-mobile-card-bottom .mobileListInfo,
         .OptionsList-mobile-card-block .mobileListInfo {
@@ -195,7 +194,7 @@
                 color: #C5C5C5;
             }
         }
-
+        .perListMobile-top .mobileListInfo,
         .perListMobile-mid .mobileListInfo,
         .perListMobile-bottom .mobileListInfo {
             p {
@@ -220,7 +219,7 @@
 
         .footer-right-disIcon {
             &:hover {
-                & > g > path:first-child {
+                &>g>path:first-child {
                     fill: url(#paint0_linear_2217_205);
                 }
             }
@@ -283,7 +282,6 @@
         }
     }
 
-    .th-marginAssets,
     .options-mintOptions-rightCard-tokenTitle,
     .swap-card-trading {
         span {
@@ -300,11 +298,6 @@
     .chooseType div.selected {
         background: linear-gradient(90deg, #8BB7FF 0%, #0061FF 100%);
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    }
-
-    .perpetuals-card .kPrice span {
-        color: #C5C5C5;
-        border-bottom: 1px dashed $main-background-color;
     }
 
     .leverChoose {
@@ -353,6 +346,10 @@
                 }
             }
         }
+    }
+
+    .perpetuals-positions {
+        color: #C5C5C5;
     }
 
     .infoView-mainView {
@@ -428,6 +425,33 @@
         }
     }
 
+    .perpetuals-card-info div,
+    .perpetuals-right-title {
+        color: #C5C5C5;
+    }
+
+    .perpetuals-right-buttonDiv {
+        button.kType {
+            color: $main-background-color;
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+            &:hover {
+                border: 0px;
+            }
+
+            &.selected {
+                background: linear-gradient(90deg, #8BB7FF 0%, #0061FF 100%);
+                color: $main-background-color;
+                border: 0px;
+
+                &:hover {
+                    border: 0px;
+                }
+            }
+        }
+    }
+
     .winV2 {
         &-leftCard {
             &-topTab {
@@ -435,9 +459,11 @@
                     span {
                         color: #C5C5C5;
                     }
+
                     g {
                         stroke: #C5C5C5;
                     }
+
                     path {
                         fill: #C5C5C5;
                     }
@@ -565,6 +591,7 @@
                     .connect {
                         color: #8BB7FF;
                     }
+
                     .noList {
                         color: #C5C5C5;
                     }
@@ -574,12 +601,13 @@
                 &-allBet,
                 &-week {
                     table {
-                        border-top: 1px solid rgba(197,197,197,0.1500);
+                        border-top: 1px solid rgba(197, 197, 197, 0.1500);
+
                         tr {
                             background: none;
                             box-shadow: none;
                             backdrop-filter: none;
-                            border-bottom: 1px solid rgba(197,197,197,0.1500);
+                            border-bottom: 1px solid rgba(197, 197, 197, 0.1500);
 
                             td {
                                 color: #C5C5C5;
@@ -809,17 +837,20 @@
                 }
             }
         }
+
         .WinV2Modal-card-hash {
             color: #C5C5C5;
+
             a {
                 color: #8BB7FF;
             }
         }
+
         .fort-button {
             background: linear-gradient(90deg, #8BB7FF 0%, #0061FF 100%);
             box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
         }
-    
+
         .fort-button.disable {
             background: #BFBFBF;
         }
@@ -844,7 +875,9 @@
         color: #C5C5C5;
     }
 
-    .modal-status-walletSelect, .modal-status-walletSelect2, .modal-status-walletSelect3 {
+    .modal-status-walletSelect,
+    .modal-status-walletSelect2,
+    .modal-status-walletSelect3 {
         .mainCard {
             background: rgba(255, 255, 255, 0.15);
             box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -860,6 +893,85 @@
         color: #8BB7FF;
     }
 
+}
+
+.PerpetualsAdd-dark {
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border: 0px;
+    backdrop-filter: blur(24px);
+
+    .PerpetualsAdd-title {
+        color: white;
+    }
+
+    .PerpetualsAdd-info div,
+    .PerpetualsAdd-des {
+        color: #C5C5C5;
+    }
+
+    .PerpetualsAdd-button {
+        background: linear-gradient(90deg, #8BB7FF 0%, #0061FF 100%);
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+
+    .PerpetualsAdd-button.disable {
+        background: #BFBFBF;
+    }
+
+    .infoView {
+
+        &-topLeft,
+        &-topRight {
+            color: #C5C5C5;
+        }
+
+        .infoView-bottomRight,
+        .infoView-bottomLeft {
+            color: #C5C5C5;
+
+            &.underLine {
+                span {
+                    border-bottom: 1px dashed #C5C5C5;
+                }
+            }
+        }
+
+        .infoView-mainView {
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            border: 0px;
+
+            &:hover {
+                border: 1px solid #8BB7FF;
+            }
+
+            p,
+            span {
+                color: #BDD6FF;
+            }
+
+            input {
+                color: $main-background-color;
+            }
+
+            .TokenShow {
+
+                p {
+                    color: $main-background-color;
+                }
+
+                .icon_prc {
+                    fill: white;
+                }
+
+            }
+
+            .max-button {
+                color: #BDD6FF;
+            }
+        }
+    }
 }
 
 .modal-wallet-dark {

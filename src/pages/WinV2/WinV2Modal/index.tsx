@@ -109,7 +109,6 @@ const WinV2Modal: FC<Props> = ({ ...props }) => {
         if (lastLeftTimeNum) {
           const min = parseInt((lastLeftTimeNum / 60).toString());
           const second = (lastLeftTimeNum - min * 60).toString();
-          console.log(`${leftTime}-${min}-${second}`)
           setTimeString(`${min}:${second.length === 1 ? ('0' + second ): second}`);
           setLastLeftTimeNum(
             lastLeftTimeNum - 1 >= 0 ? lastLeftTimeNum - 1 : 0

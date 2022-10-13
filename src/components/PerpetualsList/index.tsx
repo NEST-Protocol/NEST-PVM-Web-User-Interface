@@ -1,6 +1,7 @@
 import { BigNumber } from "@ethersproject/bignumber";
 import { t, Trans } from "@lingui/macro";
-import { FC, useCallback, useEffect, useState } from "react";
+import { FC, useCallback, useEffect, useRef, useState } from "react";
+import Popup from "reactjs-popup";
 import { usePVMLeverSell } from "../../contracts/hooks/usePVMLeverTransaction";
 import {
   PVMLeverContract,
@@ -14,6 +15,7 @@ import useTransactionListCon, {
 import useWeb3 from "../../libs/hooks/useWeb3";
 import { BASE_AMOUNT, bigNumberToNormal, ZERO_ADDRESS } from "../../libs/utils";
 import { LeverListType } from "../../pages/Perpetuals";
+import PerpetualsAdd from "../../pages/Perpetuals/PerpetualsAdd";
 import { LongIcon, ShortIcon } from "../Icon";
 import MainButton from "../MainButton";
 
@@ -27,6 +29,7 @@ type Props = {
 const PerpetualsList: FC<Props> = ({ ...props }) => {
   const { pendingList } = useTransactionListCon();
   const { account } = useWeb3();
+  const modal = useRef<any>();
   const leverContract = PVMLever(PVMLeverContract);
   const [marginAssets, setMarginAssets] = useState<BigNumber>();
   const loadingButton = () => {
@@ -47,10 +50,7 @@ const PerpetualsList: FC<Props> = ({ ...props }) => {
   const TokenTwoSvg = tokenList["USDT"].Icon;
   const active = usePVMLeverSell(props.item.index, props.item.balance);
   useEffect(() => {
-    if (
-      !leverContract ||
-      !account
-    ) {
+    if (!leverContract || !account) {
       return;
     }
     (async () => {
@@ -103,13 +103,26 @@ const PerpetualsList: FC<Props> = ({ ...props }) => {
         </p>
       </td>
       <td>{props.item.lever.toString()}X</td>
-      <td>{bigNumberToNormal(props.item.balance, 18, 2)} NEST</td>
       <td>
-        {bigNumberToNormal(props.item.basePrice, tokenList["USDT"].decimals, 2)}{" "}
+        {bigNumberToNormal(props.item.balance, 18, 2)}
+        <br />
+        NEST
+      </td>
+      <td>
+        {bigNumberToNormal(props.item.basePrice, tokenList["USDT"].decimals, 2)}
+        <br />
         USDT
       </td>
-      <td>{`${marginAssetsStr} NEST`}</td>
       <td>
+        {`${marginAssetsStr}`}
+        <br />
+        NEST
+      </td>
+      <td className="button">
+        <Popup modal ref={modal} trigger={<button className="fort-button">Add</button>}>
+          <PerpetualsAdd item={props.item} kValue={props.kValue} />
+        </Popup>
+
         <MainButton
           onClick={() => {
             return loadingButton() ? null : active();
