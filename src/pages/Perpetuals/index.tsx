@@ -95,7 +95,6 @@ const Perpetuals: FC = () => {
     }
     return false;
   };
-
   const upColor = "#00da3c";
   const downColor = "#ec0000";
 

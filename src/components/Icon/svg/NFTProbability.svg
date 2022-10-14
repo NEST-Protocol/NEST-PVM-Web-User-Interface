@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="46" height="44" viewBox="0 0 46 44">
+  <g id="概率公式" transform="translate(59 -114)">
+    <path id="矩形_84" data-name="矩形 84" d="M2,0H22a2,2,0,0,1,2,2V2a0,0,0,0,1,0,0H0A0,0,0,0,1,0,2V2A2,2,0,0,1,2,0Z" transform="translate(-48 156)" fill="#878787"/>
+    <rect id="矩形_82" data-name="矩形 82" width="44" height="2" rx="1" transform="translate(-58 120)" fill="#878787"/>
+    <rect id="矩形_83" data-name="矩形 83" width="2" height="44" rx="1" transform="translate(-37 114)" fill="#878787"/>
+    <g id="组_106" data-name="组 106" transform="translate(0)">
+      <g id="left" transform="translate(-59 121.059)">
+        <path id="路径_501" data-name="路径 501" d="M-219.529-538.529A8.48,8.48,0,0,1-228-547h16.941A8.48,8.48,0,0,1-219.529-538.529Z" transform="translate(228 568.177)" fill="#878787"/>
+        <path id="路径_502" data-name="路径 502" d="M8.963,5.073,2.71,22.215H15.216L8.963,5.073m0-3.447a1.289,1.289,0,0,1,1.2.91l7.168,19.65a1.46,1.46,0,0,1-1.2,2.029H1.8a1.46,1.46,0,0,1-1.2-2.029L7.759,2.536A1.289,1.289,0,0,1,8.963,1.626Z" transform="translate(-0.492 -1.626)" fill="#878787"/>
+      </g>
+      <g id="right" transform="translate(-29.941 121.059)">
+        <path id="路径_503" data-name="路径 503" d="M-219.529-538.529A8.48,8.48,0,0,1-228-547h16.941A8.48,8.48,0,0,1-219.529-538.529Z" transform="translate(228 568.177)" fill="#878787"/>
+        <path id="路径_504" data-name="路径 504" d="M8.963,5.073,2.71,22.215H15.216L8.963,5.073m0-3.447a1.289,1.289,0,0,1,1.2.91l7.168,19.65a1.46,1.46,0,0,1-1.2,2.029H1.8a1.46,1.46,0,0,1-1.2-2.029L7.759,2.536A1.289,1.289,0,0,1,8.963,1.626Z" transform="translate(-0.492 -1.626)" fill="#878787"/>
+      </g>
+    </g>
+  </g>
+</svg>

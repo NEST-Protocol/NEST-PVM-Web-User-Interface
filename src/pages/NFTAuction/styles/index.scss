@@ -1,2 +1,151 @@
 @use "sass:math";
 @import 'src/styles/shared.scss';
+
+.NFTAuction {
+
+    &-top {
+        margin: 0 auto;
+        margin-bottom: 22px;
+        margin-top: 22px;
+        display: flex;
+        justify-content: space-between;
+        width: 1276px;
+
+        &-left {
+            width: 572px;
+            height: 572px;
+
+            .TabItemArray {
+                margin: 0 auto;
+                margin-top: 40px;
+                width: 423px;
+            }
+
+            &-main {
+                &-buy {
+                    padding: 0 44px;
+
+                    &-image {
+                        margin: 0 auto;
+                        width: 230px;
+                        height: 230px;
+                        border-radius: 20px;
+                        overflow: hidden;
+                        position: relative;
+                        margin-top: 70px;
+
+                        img {
+                            height: 100%;
+                            display: inline-block;
+                            position: absolute;
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%, -50%);
+                        }
+
+                        &-lever {
+                            width: 48px;
+                            height: 48px;
+                            background: #ffffff;
+                            border-radius: 50%;
+                            position: absolute;
+                            margin-top:10px;
+                            margin-left: 10px;
+
+                            svg {
+                                display: block;
+                                margin: 0 auto;
+                                margin-top: 10px;
+                            }
+                        }
+                    }
+
+                    .fort-button {
+                        width: 100%;
+                        margin-top: 70px;
+                    }
+
+                    &-balance {
+                        width: 100%;
+                        text-align: center;
+                        margin-top: 22px;
+                        font-size: 15px;
+                        color: #878787;
+                    }
+                }
+            }
+        }
+
+        &-right {
+            width: 682px;
+            height: 572px;
+            display: block;
+
+            &-title {
+                display: flex;
+                width: 90px;
+                justify-content: space-between;
+                margin: 0 auto;
+                margin-top: 40px;
+
+                svg {
+                    width: 20px;
+                    height: 20px;
+                }
+
+                p {
+                    font-size: 17px;
+                    font-weight: bold;
+                    color: #878787;
+                }
+            }
+
+            ul.line {
+                margin: 0 auto;
+                margin-top: 35px;
+                width: 628px;
+                height: 474px;
+                overflow: auto;
+
+                li+li {
+                    margin-top: 15px;
+                }
+
+                li {
+                    width: 100%;
+                    height: 240px;
+
+                    ul {
+                        width: 100%;
+                        height: 100%;
+                        display: flex;
+                        justify-content: space-between;
+
+                        li {
+                            margin-top: 0;
+                            width: 200px;
+                            height: 240px;
+                        }
+                    }
+                }
+            }
+
+
+        }
+    }
+
+    &-bottom {
+        margin: 0 auto;
+        width: 1276px;
+
+        &-main {
+            width: 1276px;
+
+            .TabItemArray {
+                margin: 0 auto;
+                margin-top: 40px;
+                width: 500px;
+            }
+        }
+    }
+}

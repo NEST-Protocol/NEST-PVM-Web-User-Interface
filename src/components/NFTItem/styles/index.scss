@@ -1,0 +1,61 @@
+@use "sass:math";
+@import 'src/styles/shared.scss';
+
+.NFTItem {
+    border-radius: 20px;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+
+    &-image {
+        height: 66%;
+        overflow: hidden;
+        position: relative;
+
+        img {
+            height: 100%;
+            display: inline-block;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+
+    &-info {
+        width: 100%;
+        height: 34%;
+        border: 1px solid #EEEEEE;
+        border-top: none;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+        display: flex;
+        justify-content: space-between;
+
+        &-base {
+            margin-top: 19px;
+            margin-left: 14px;
+            p {
+                font-size: 15px;
+                color: #000000;
+            }
+            &-price {
+                margin-top: 10px;
+                display: flex;
+                justify-content: space-between;
+                width: 100%;
+
+                svg {
+                    width: 20px;
+                    height: 20px;
+                    margin-right: 8px;
+                }
+            }
+        }
+
+        .NFTLeverIcon {
+            margin-top: 19px;
+            margin-right: 14px;
+        }
+    }
+}
