@@ -5,40 +5,42 @@ import useWeb3 from "./useWeb3";
 const useInactiveListener = (suppress = false) => {
   const { active, error, activate } = useWeb3();
 
-  useEffect(() => {
-    const { ethereum } = window;
-    if (!ethereum || !ethereum.on) {
-      return;
+  useEffect((): any => {
+    const { ethereum } = window as any;
+    if (ethereum && ethereum.on && !active && !error && !suppress) {
+      const handleConnect = () => {
+        console.log("Handling 'connect' event");
+        activate(injected.connector);
+      };
+      const handleChainChanged = (chainId: string | number) => {
+        console.log("Handling 'chainChanged' event with payload", chainId);
+        activate(injected.connector);
+      };
+      const handleAccountsChanged = (accounts: string[]) => {
+        console.log("Handling 'accountsChanged' event with payload", accounts);
+        if (accounts.length > 0) {
+          activate(injected.connector);
+        }
+      };
+      const handleNetworkChanged = (networkId: string | number) => {
+        console.log("Handling 'networkChanged' event with payload", networkId);
+        activate(injected.connector);
+      };
+
+      ethereum.on("connect", handleConnect);
+      ethereum.on("chainChanged", handleChainChanged);
+      ethereum.on("accountsChanged", handleAccountsChanged);
+      ethereum.on("networkChanged", handleNetworkChanged);
+
+      return () => {
+        if (ethereum.removeListener) {
+          ethereum.removeListener("connect", handleConnect);
+          ethereum.removeListener("chainChanged", handleChainChanged);
+          ethereum.removeListener("accountsChanged", handleAccountsChanged);
+          ethereum.removeListener("networkChanged", handleNetworkChanged);
+        }
+      };
     }
-    if (active || error || suppress) {
-      return;
-    }
-
-    const handleChainChanged = () => {
-      // eat errors
-      activate(injected.connector, undefined, true).catch((error) => {
-        console.error("Failed to activate after chain changed", error);
-      });
-    };
-
-    const handleAccountsChanged = (accounts: string[]) => {
-      if (accounts.length > 0) {
-        // eat errors
-        activate(injected.connector, undefined, true).catch((error) => {
-          console.error("Failed to activate after accounts changed", error);
-        });
-      }
-    };
-
-    ethereum.on("chainChanged", handleChainChanged);
-    ethereum.on("accountsChanged", handleAccountsChanged);
-
-    return () => {
-      if (ethereum.removeListener) {
-        ethereum.removeListener("chainChanged", handleChainChanged);
-        ethereum.removeListener("accountsChanged", handleAccountsChanged);
-      }
-    };
   }, [active, error, suppress, activate]);
 };
 

@@ -205,7 +205,7 @@ const Perpetuals: FC = () => {
       const baseK = parseUnits("0.003", 18);
       tokenNew.k = baseK;
       const priceValue = BASE_2000ETH_AMOUNT.mul(BASE_AMOUNT).div(
-        basePriceList[1]
+        basePriceList[2]
       );
       tokenNew.nowPrice = priceValue;
     } else {

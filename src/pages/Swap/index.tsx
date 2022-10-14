@@ -148,7 +148,7 @@ const Swap: FC = () => {
       if (!chainId) {
         return;
       }
-      if ((chainId === 1 || chainId === 4) && token === "USDT") {
+      if ((chainId === 1 || chainId === 5) && token === "USDT") {
         return 6;
       } else {
         return 18;
@@ -182,7 +182,7 @@ const Swap: FC = () => {
           BigNumber.from("0")
         );
       const baseAmount = () => {
-        if ((chainId === 1 || chainId === 4) && swapToken.src === "USDT") {
+        if ((chainId === 1 || chainId === 5) && swapToken.src === "USDT") {
           return BigNumber.from('1000000')
         } else {
           return BASE_AMOUNT
@@ -203,7 +203,7 @@ const Swap: FC = () => {
       }
       setDestValue(checkInputValue ? amount : undefined);
       const priceValue = () => {
-        if ((chainId === 1 || chainId === 4) && swapToken.src === "USDT") {
+        if ((chainId === 1 || chainId === 5) && swapToken.src === "USDT") {
           return checkInputValue
             ? amount
                 .mul(BASE_AMOUNT)

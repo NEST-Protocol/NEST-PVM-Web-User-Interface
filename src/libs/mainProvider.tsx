@@ -14,7 +14,7 @@ import { SupportedChains } from "./constants/chain";
 function getLibrary(provider: any): TypeWeb3Provider {
   if (provider.signer) {
     const chainId = provider.signer.connection.chainId;
-    if (chainId === 4 || chainId === 1) {
+    if (chainId === 5 || chainId === 1) {
       provider.http.connection.url = SupportedChains[1].rpc[0];
     } else {
       provider.http.connection.url = SupportedChains[0].rpc[0];
