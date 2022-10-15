@@ -1,4 +1,5 @@
-import { FC, useState } from "react";
+import { FC, useRef, useState } from "react";
+import Popup from "reactjs-popup";
 import {
   NFTAuctionIcon,
   NFTBuy,
@@ -10,18 +11,56 @@ import {
 } from "../../components/Icon";
 import MainButton from "../../components/MainButton";
 import MainCard from "../../components/MainCard";
-import NFTAuctionStatus from "../../components/NFTAuctionStatus";
 import NFTItem from "../../components/NFTItem";
 import NFTLeverIcon from "../../components/NFTLeverIcon";
 import TabItem from "../../components/TabItem";
+import NFTAuctionView from "./NFTAuctionView";
+import { NFTDigModal } from "./NFTModal";
+import NFTOfferView from "./NFTOfferView";
+import NFTReceived from "./NFTReceived";
 import "./styles";
+import { MyDig } from "./testDaata";
 
 const NFTAuction: FC = () => {
   const classPrefix = "NFTAuction";
   const [digTabSelected, setDigTabSelected] = useState(0);
   const [auctionTabSelected, setAuctionTabSelected] = useState(0);
-  const testImage =
-    "https://ipfs.io/ipns/k51qzi5uqu5djiekvrfwa8xi63010iqktc1lqzxkgchz0i3v1yyz690yyf62yr";
+  const modal = useRef<any>();
+  const dataArray = () => {
+    var result = [];
+    for (var i = 0; i < MyDig.length; i += 3) {
+      result.push(MyDig.slice(i, i + 3));
+    }
+    return result;
+  };
+  const testLiData = dataArray().map((item, index) => {
+    const ul = item.map((itemData, indexData) => {
+      return (
+        <Popup
+          modal
+          ref={modal}
+          trigger={
+            <li key={`${NFTAuction}+li+${index}+${indexData}`}>
+              <NFTItem
+                width={200}
+                src={itemData.img}
+                name={itemData.name}
+                lever={itemData.lever}
+              />
+            </li>
+          }
+        >
+          <NFTDigModal title={'Dig Up / Auctioned'}/>
+        </Popup>
+      );
+    });
+    return (
+      <li key={`${NFTAuction}+li+${index}`}>
+        <ul>{ul}</ul>
+      </li>
+    );
+  });
+
   // dig tab item data
   const digTabItemArray = [
     { icon: <NFTBuy />, text: "Buy" },
@@ -47,7 +86,7 @@ const NFTAuction: FC = () => {
       return (
         <div className={`${topLeftViewClass}-buy`}>
           <div className={`${topLeftViewClass}-buy-image`}>
-            <img src={testImage} alt="img" />
+            <img src={MyDig[0].img} alt="img" />
             <div className={`${topLeftViewClass}-buy-image-lever`}>
               <NFTLeverIcon lever={2} />
             </div>
@@ -68,16 +107,12 @@ const NFTAuction: FC = () => {
   };
   // bottom main view
   const bottomMainView = () => {
-    const topLeftViewClass = `${classPrefix}-bottom-main`;
-    
     if (auctionTabSelected === 0) {
-      return (
-        <></>
-      );
+      return <NFTAuctionView />;
     } else if (auctionTabSelected === 1) {
-      return <>1</>;
+      return <NFTOfferView />;
     } else {
-      return <>2</>;
+      return <NFTReceived />;
     }
   };
   return (
@@ -92,92 +127,7 @@ const NFTAuction: FC = () => {
             <NFTMyMint />
             <p>My Dig</p>
           </div>
-          <ul className="line">
-            <li>
-              <ul>
-                <li>
-                  <NFTItem
-                    width={200}
-                    src={testImage}
-                    name={"hahah"}
-                    lever={2}
-                  />
-                </li>
-                <li>
-                  <NFTItem
-                    width={200}
-                    src={testImage}
-                    name={"hahah"}
-                    lever={2}
-                  />
-                </li>
-                <li>
-                  <NFTItem
-                    width={200}
-                    src={testImage}
-                    name={"hahah"}
-                    lever={2}
-                  />
-                </li>
-              </ul>
-            </li>
-            <li>
-              <ul>
-                <li>
-                  <NFTItem
-                    width={200}
-                    src={testImage}
-                    name={"hahah"}
-                    lever={2}
-                  />
-                </li>
-                <li>
-                  <NFTItem
-                    width={200}
-                    src={testImage}
-                    name={"hahah"}
-                    lever={2}
-                  />
-                </li>
-                <li>
-                  <NFTItem
-                    width={200}
-                    src={testImage}
-                    name={"hahah"}
-                    lever={2}
-                  />
-                </li>
-              </ul>
-            </li>
-            <li>
-              <ul>
-                <li>
-                  <NFTItem
-                    width={200}
-                    src={testImage}
-                    name={"hahah"}
-                    lever={2}
-                  />
-                </li>
-                <li>
-                  <NFTItem
-                    width={200}
-                    src={testImage}
-                    name={"hahah"}
-                    lever={2}
-                  />
-                </li>
-                <li>
-                  <NFTItem
-                    width={200}
-                    src={testImage}
-                    name={"hahah"}
-                    lever={2}
-                  />
-                </li>
-              </ul>
-            </li>
-          </ul>
+          <ul className="line">{testLiData}</ul>
         </MainCard>
       </div>
       <div className={`${classPrefix}-bottom`}>

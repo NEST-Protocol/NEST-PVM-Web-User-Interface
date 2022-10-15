@@ -1,7 +1,8 @@
 @use "sass:math";
 @import 'src/styles/shared.scss';
 
-.NFTItem {
+.NFTItem,
+.NFTAuctionItem {
     border-radius: 20px;
     overflow: hidden;
     width: 100%;
@@ -29,33 +30,52 @@
         border-top: none;
         border-bottom-left-radius: 20px;
         border-bottom-right-radius: 20px;
-        display: flex;
-        justify-content: space-between;
+        padding-top: 19px;
 
         &-base {
-            margin-top: 19px;
-            margin-left: 14px;
+            display: flex;
+            justify-content: space-between;
+            margin-left: 13px;
+            margin-right: 13px;
             p {
                 font-size: 15px;
                 color: #000000;
             }
-            &-price {
-                margin-top: 10px;
-                display: flex;
-                justify-content: space-between;
-                width: 100%;
-
-                svg {
-                    width: 20px;
-                    height: 20px;
-                    margin-right: 8px;
-                }
-            }
         }
 
-        .NFTLeverIcon {
-            margin-top: 19px;
-            margin-right: 14px;
+        &-price {
+            display: flex;
+            margin-left: 13px;
+            margin-right: 13px;
+            
+            svg {
+                width: 20px;
+                height: 20px;
+                margin-right: 8px;
+            }
+        }
+    }
+}
+
+.NFTAuctionItem {
+    &-image {
+        height: 60%;
+    }
+    &-info {
+        height: 40%;
+        &-price {
+            margin-top: 15px;
+        }
+        &-time {
+            width: 230px;
+            height: 40px;
+            background: #EEEEEE;
+            border-radius: 20px;
+            margin-top: 20px;
+            line-height: 40px;
+            text-align: center;
+            color: #E60012;
+            font-size: 15px;
         }
     }
 }

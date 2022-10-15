@@ -1,2 +1,24 @@
 @use "sass:math";
 @import 'src/styles/shared.scss';
+
+.NFTAuctionStatus {
+    display: flex;
+    font-size: 17px;
+    color: #878787;
+    height: 100%;
+    line-height: 60px;
+
+    ul {
+        display: flex;
+        justify-content: space-between;
+        width:400px;
+        margin-left:40px;
+
+        li {
+            &.selected {
+                color: #0047BB;
+                font-weight: bold;
+            }
+        }
+    }
+}

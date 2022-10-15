@@ -24,7 +24,7 @@ const NFTAuctionStatus: FC<NFTAuctionStatusType> = ({ ...props }) => {
   });
   return (
     <div className={"NFTAuctionStatus"}>
-      <p>Status:</p>
+      <p className="NFTAuctionStatus-title">Status:</p>
       <ul>{statusLi}</ul>
     </div>
   );

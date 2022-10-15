@@ -1,17 +1,87 @@
-import { FC } from "react";
+import classNames from "classnames";
+import { FC, useRef, useState } from "react";
+import Popup from "reactjs-popup";
 import NFTAuctionStatus from "../../../components/NFTAuctionStatus";
+import { NFTAuctionItem } from "../../../components/NFTItem";
+import NFTLeverIcon from "../../../components/NFTLeverIcon";
+import { NFTAuctionModal } from "../NFTModal";
+import { MyDig } from "../testDaata";
 import "./styles";
 
 const NFTAuctionView: FC = () => {
   const classPrefix = "NFTAuctionView";
   const auctionChoice = ["All", "Ending soon", "Recently start"];
+  const modal = useRef<any>();
+  const [lever, setLever] = useState(0);
+  const leverLi = [
+    <NFTLeverIcon lever={0} />,
+    <NFTLeverIcon lever={1} />,
+    <NFTLeverIcon lever={2} />,
+    <NFTLeverIcon lever={3} />,
+    <NFTLeverIcon lever={4} />,
+  ].map((item, index) => {
+    return (
+      <li
+        key={`${index}+NFTAuctionView-lever`}
+        className={classNames({
+          [`selected`]: lever === index,
+        })}
+        onClick={() => setLever(index)}
+      >
+        {item}
+      </li>
+    );
+  });
+  const dataArray = () => {
+    var result = [];
+    for (var i = 0; i < MyDig.length; i += 5) {
+      result.push(MyDig.slice(i, i + 5));
+    }
+    return result;
+  };
+  const testLiData = dataArray().map((item, index) => {
+    const ul = item.map((itemData, indexData) => {
+      return (
+        <Popup
+          modal
+          ref={modal}
+          trigger={
+            <li key={`${NFTAuctionView}+li+${index}+${indexData}`}>
+          <NFTAuctionItem
+            width={230}
+            src={itemData.img}
+            name={itemData.name}
+            lever={itemData.lever}
+            leftTime={itemData.leftTime}
+          />
+        </li>
+          }
+        >
+          <NFTAuctionModal title={'In Auction'}/>
+        </Popup>
+        
+      );
+    });
+    return (
+      <li key={`${NFTAuctionView}+li+${index}`}>
+        <ul>{ul}</ul>
+      </li>
+    );
+  });
   return (
     <div className={`${classPrefix}`}>
       <div className={`${classPrefix}-choice`}>
-        <div className={`${classPrefix}choice-top`}>
+        <div className={`${classPrefix}-choice-top`}>
           <NFTAuctionStatus data={auctionChoice} classString={"auction"} />
+          <div className={`${classPrefix}-choice-top-lever`}>
+            <p className={`${classPrefix}-choice-top-lever-title`}>Rarity</p>
+            <ul>{leverLi}</ul>
+          </div>
         </div>
       </div>
+      <ul className="line">
+        {testLiData}
+      </ul>
     </div>
   );
 };
