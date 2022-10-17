@@ -14,6 +14,7 @@ import MainCard from "../../components/MainCard";
 import NFTItem from "../../components/NFTItem";
 import NFTLeverIcon from "../../components/NFTLeverIcon";
 import TabItem from "../../components/TabItem";
+import { checkWidth } from "../../libs/utils";
 import NFTAuctionView from "./NFTAuctionView";
 import { NFTDigModal } from "./NFTModal";
 import NFTOfferView from "./NFTOfferView";
@@ -26,14 +27,14 @@ const NFTAuction: FC = () => {
   const [digTabSelected, setDigTabSelected] = useState(0);
   const [auctionTabSelected, setAuctionTabSelected] = useState(0);
   const modal = useRef<any>();
-  const dataArray = () => {
+  const dataArray = (num: number) => {
     var result = [];
-    for (var i = 0; i < MyDig.length; i += 3) {
-      result.push(MyDig.slice(i, i + 3));
+    for (var i = 0; i < MyDig.length; i += num) {
+      result.push(MyDig.slice(i, i + num));
     }
     return result;
   };
-  const testLiData = dataArray().map((item, index) => {
+  const testLiData = dataArray(checkWidth() ? 3 : 2).map((item, index) => {
     const ul = item.map((itemData, indexData) => {
       return (
         <Popup
@@ -42,10 +43,10 @@ const NFTAuction: FC = () => {
           trigger={
             <li key={`${NFTAuction}+li+${index}+${indexData}`}>
               <NFTItem
-                width={200}
                 src={itemData.img}
                 name={itemData.name}
                 lever={itemData.lever}
+                isDig={true}
               />
             </li>
           }

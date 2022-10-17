@@ -4,6 +4,7 @@ import { TokenNest } from "../../../components/Icon";
 import MainButton from "../../../components/MainButton";
 import MainCard from "../../../components/MainCard";
 import NFTLeverIcon from "../../../components/NFTLeverIcon";
+import useThemes, { ThemeType } from "../../../libs/hooks/useThemes";
 import { showEllipsisAddress } from "../../../libs/utils";
 import { MyDig } from "../testDaata";
 import "./styles";
@@ -16,8 +17,14 @@ export type NFTModalType = {
 };
 const classPrefix = "NFTModal";
 const NFTModal: FC<NFTModalType> = ({ ...props }) => {
+
+  const { theme } = useThemes();
+  
   return (
-    <div className={classPrefix}>
+    <div className={classNames({
+      [`${classPrefix}`]: true,
+      [`${classPrefix}-dark`]: theme === ThemeType.dark,
+    })}>
       <MainCard>
         <div className={`${classPrefix}-title`}>{props.title}</div>
         <div className={`${classPrefix}-info`}>
@@ -160,7 +167,7 @@ export const NFTAuctionModal: FC<NFTAuctionModalType> = ({ ...props }) => {
             <tr>
               <th>Bidding price</th>
               <th>Extra refund</th>
-              <th>Extra refund</th>
+              <th>Total refund</th>
             </tr>
           </thead>
           <tbody>

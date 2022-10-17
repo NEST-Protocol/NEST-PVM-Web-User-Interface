@@ -1,12 +1,15 @@
 @use "sass:math";
 @import 'src/styles/shared.scss';
 
-.NFTItem,
-.NFTAuctionItem {
+.NFTItem {
     border-radius: 20px;
     overflow: hidden;
-    width: 100%;
     height: 100%;
+    width: 200px;
+
+    &.auctionWidth {
+        width: 230px;
+    }
 
     &-image {
         height: 66%;
@@ -37,9 +40,18 @@
             justify-content: space-between;
             margin-left: 13px;
             margin-right: 13px;
-            p {
-                font-size: 15px;
-                color: #000000;
+
+            &-name {
+                &-name {
+                    font-size: 15px;
+                    color: #000000;
+                }
+                &-time {
+                    font-size: 15px;
+                    margin-top: 5px;
+                    margin-bottom: 5px;
+                    color: #E60012;
+                }
             }
         }
 
@@ -47,7 +59,7 @@
             display: flex;
             margin-left: 13px;
             margin-right: 13px;
-            
+
             svg {
                 width: 20px;
                 height: 20px;
@@ -57,25 +69,53 @@
     }
 }
 
-.NFTAuctionItem {
-    &-image {
-        height: 60%;
-    }
-    &-info {
-        height: 40%;
-        &-price {
-            margin-top: 15px;
+.main-dark {
+
+    .NFTItem {
+        background: rgba(255, 255, 255, 0.15);
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+        &-info {
+            border: none;
+
+            &-base {
+                &-name {
+                    &-name {
+                        color: white;
+                    }
+                    &-time {
+                        color: #E60012;
+                    }
+                }
+            }
+
+            &-price {
+                color: white;
+            }
         }
-        &-time {
-            width: 230px;
-            height: 40px;
-            background: #EEEEEE;
-            border-radius: 20px;
-            margin-top: 20px;
-            line-height: 40px;
-            text-align: center;
-            color: #E60012;
-            font-size: 15px;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .NFTItem {
+        width: 147px;
+
+        &-info {
+            width: 100%;
+            height: 34%;
+            padding-top: 10px;
+    
+            &-base {
+                &-name {
+                    &-name {
+                        margin: 0;
+                    }
+                    &-time {
+                        margin-top: 0px;
+                        margin-bottom: 0px;
+                    }
+                }
+            }
         }
     }
 }

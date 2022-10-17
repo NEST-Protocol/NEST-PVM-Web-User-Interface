@@ -1,10 +1,10 @@
-import { FC } from "react"
+import { FC } from "react";
 import NFTAuctionStatus from "../../../components/NFTAuctionStatus";
 import NFTItem from "../../../components/NFTItem";
 import "./styles";
 
 const NFTReceived: FC = () => {
-    const testImage =
+  const testImage =
     "https://ipfs.io/ipns/k51qzi5uqu5djiekvrfwa8xi63010iqktc1lqzxkgchz0i3v1yyz690yyf62yr";
   const classPrefix = "NFTReceived";
   const auctionChoice = ["All", "In progress", "No auctioned"];
@@ -16,66 +16,66 @@ const NFTReceived: FC = () => {
         </div>
       </div>
       <ul className="line">
-      <li>
+        <li>
           <ul>
             <li>
-              <NFTItem width={230} src={testImage} name={"hahah"} lever={2} />
+              <NFTItem src={testImage} name={"hahah"} lever={2} />
             </li>
             <li>
-              <NFTItem width={230} src={testImage} name={"hahah"} lever={2} />
+              <NFTItem src={testImage} name={"hahah"} lever={2} />
             </li>
             <li>
-              <NFTItem width={230} src={testImage} name={"hahah"} lever={2} />
+              <NFTItem src={testImage} name={"hahah"} lever={2} />
             </li>
             <li>
-              <NFTItem width={230} src={testImage} name={"hahah"} lever={2} />
+              <NFTItem src={testImage} name={"hahah"} lever={2} />
             </li>
             <li>
-              <NFTItem width={230} src={testImage} name={"hahah"} lever={2} />
+              <NFTItem src={testImage} name={"hahah"} lever={2} />
             </li>
           </ul>
         </li>
         <li>
           <ul>
             <li>
-              <NFTItem width={230} src={testImage} name={"hahah"} lever={2} />
+              <NFTItem src={testImage} name={"hahah"} lever={2} />
             </li>
             <li>
-              <NFTItem width={230} src={testImage} name={"hahah"} lever={2} />
+              <NFTItem src={testImage} name={"hahah"} lever={2} />
             </li>
             <li>
-              <NFTItem width={230} src={testImage} name={"hahah"} lever={2} />
+              <NFTItem src={testImage} name={"hahah"} lever={2} />
             </li>
             <li>
-              <NFTItem width={230} src={testImage} name={"hahah"} lever={2} />
+              <NFTItem src={testImage} name={"hahah"} lever={2} />
             </li>
             <li>
-              <NFTItem width={230} src={testImage} name={"hahah"} lever={2} />
+              <NFTItem src={testImage} name={"hahah"} lever={2} />
             </li>
           </ul>
         </li>
         <li>
           <ul>
             <li>
-              <NFTItem width={230} src={testImage} name={"hahah"} lever={2} />
+              <NFTItem src={testImage} name={"hahah"} lever={2} />
             </li>
             <li>
-              <NFTItem width={230} src={testImage} name={"hahah"} lever={2} />
+              <NFTItem src={testImage} name={"hahah"} lever={2} />
             </li>
             <li>
-              <NFTItem width={230} src={testImage} name={"hahah"} lever={2} />
+              <NFTItem src={testImage} name={"hahah"} lever={2} />
             </li>
             <li>
-              <NFTItem width={230} src={testImage} name={"hahah"} lever={2} />
+              <NFTItem src={testImage} name={"hahah"} lever={2} />
             </li>
             <li>
-              <NFTItem width={230} src={testImage} name={"hahah"} lever={2} />
+              <NFTItem src={testImage} name={"hahah"} lever={2} />
             </li>
           </ul>
         </li>
       </ul>
     </div>
   );
-}
+};
 
-export default NFTReceived
+export default NFTReceived;

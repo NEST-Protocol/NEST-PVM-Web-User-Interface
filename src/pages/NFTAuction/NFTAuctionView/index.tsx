@@ -1,12 +1,16 @@
+import { Slider } from "antd";
 import classNames from "classnames";
 import { FC, useRef, useState } from "react";
 import Popup from "reactjs-popup";
 import NFTAuctionStatus from "../../../components/NFTAuctionStatus";
-import { NFTAuctionItem } from "../../../components/NFTItem";
+import NFTItem from "../../../components/NFTItem";
 import NFTLeverIcon from "../../../components/NFTLeverIcon";
 import { NFTAuctionModal } from "../NFTModal";
 import { MyDig } from "../testDaata";
+import 'antd/dist/antd.css';
 import "./styles";
+import { checkWidth } from "../../../libs/utils";
+
 
 const NFTAuctionView: FC = () => {
   const classPrefix = "NFTAuctionView";
@@ -32,14 +36,14 @@ const NFTAuctionView: FC = () => {
       </li>
     );
   });
-  const dataArray = () => {
+  const dataArray = (num: number) => {
     var result = [];
-    for (var i = 0; i < MyDig.length; i += 5) {
-      result.push(MyDig.slice(i, i + 5));
+    for (var i = 0; i < MyDig.length; i += num) {
+      result.push(MyDig.slice(i, i + num));
     }
     return result;
   };
-  const testLiData = dataArray().map((item, index) => {
+  const testLiData = dataArray(checkWidth() ? 5 : 2).map((item, index) => {
     const ul = item.map((itemData, indexData) => {
       return (
         <Popup
@@ -47,19 +51,17 @@ const NFTAuctionView: FC = () => {
           ref={modal}
           trigger={
             <li key={`${NFTAuctionView}+li+${index}+${indexData}`}>
-          <NFTAuctionItem
-            width={230}
-            src={itemData.img}
-            name={itemData.name}
-            lever={itemData.lever}
-            leftTime={itemData.leftTime}
-          />
-        </li>
+              <NFTItem
+                src={itemData.img}
+                name={itemData.name}
+                lever={itemData.lever}
+                leftTime={itemData.leftTime}
+              />
+            </li>
           }
         >
-          <NFTAuctionModal title={'In Auction'}/>
+          <NFTAuctionModal title={"In Auction"} />
         </Popup>
-        
       );
     });
     return (
@@ -78,10 +80,12 @@ const NFTAuctionView: FC = () => {
             <ul>{leverLi}</ul>
           </div>
         </div>
+        <div className={`${classPrefix}-choice-bottom`}>
+          <p>Price:<span>NEST</span></p>
+          <Slider range={{ draggableTrack: true }} defaultValue={[20, 50]} />
+        </div>
       </div>
-      <ul className="line">
-        {testLiData}
-      </ul>
+      <ul className="line">{testLiData}</ul>
     </div>
   );
 };

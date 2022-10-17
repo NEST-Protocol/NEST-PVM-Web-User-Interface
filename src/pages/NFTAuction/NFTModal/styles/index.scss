@@ -255,3 +255,138 @@
         }
     }
 }
+
+.NFTModal-dark {
+    .mainCard {
+        background: rgba(255, 255, 255, 0.15);
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border: 0px;
+        backdrop-filter: blur(24px);
+    }
+
+    .NFTModal {
+        &-title {
+            color: white;
+        }
+
+        &-info {
+            &-text {
+                &-leftTime {
+                    color: #C5C5C5;
+                }
+                &-name {
+                    p {
+                        color: white;
+                    }
+                }
+
+                &-string {
+                    color: #C5C5C5;
+                }
+
+                &-contract {
+                    color: #C5C5C5;
+
+                    a {
+                        color: #BDD6FF;
+                    }
+                }
+
+                &-chain {
+                    color: #C5C5C5;
+                }
+
+                &-confirmation,
+                &-bid {
+                    &-value {
+                        p {
+                            color: #C5C5C5;
+                        }
+
+                        span {
+                            color: white;
+                        }
+                    }
+
+                    .fort-button {
+                        background: linear-gradient(90deg, #8BB7FF 0%, #0061FF 100%);
+                        box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+                        color: #FFFFFF;
+                    }
+                }
+
+                &-bid {
+                    input {
+                        background: rgba(255, 255, 255, 0.15);
+                        border: 1px solid #8BB7FF;
+                        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+                    }
+                }
+            }
+        }
+
+        &-auction {
+            &-time {
+                &-title {
+                    color: white;
+                }
+
+                &-choice {
+                    button {
+                        background: rgba(255, 255, 255, 0.15);
+                        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+                        color: white;
+                        border: none;
+                    }
+
+                    button.selected {
+                        background: linear-gradient(90deg, #8BB7FF 0%, #0061FF 100%);
+                        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+                    }
+                }
+            }
+
+            &-price {
+                &-title {
+                    color: white;
+                }
+
+                &-input {
+                    input {
+                        background: rgba(255, 255, 255, 0.15);
+                        border: 1px solid #8BB7FF;
+                        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+                    }
+
+                    .fort-button {
+                        background: linear-gradient(90deg, #8BB7FF 0%, #0061FF 100%);
+                        box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+                        color: #FFFFFF;
+                    }
+                }
+            }
+        }
+
+        &-biddingHistory {
+            &-title {
+                font-size: 17px;
+                color: white;
+            }
+
+            table {
+                thead {
+                    tr {
+                        border-top: 1px solid rgba(197, 197, 197, 0.15);
+                        border-bottom: 1px solid rgba(197, 197, 197, 0.15);
+                        color: #C5C5C5;
+                    }
+                }
+
+                tr {
+                    border-bottom: 1px solid rgba(197, 197, 197, 0.15);
+                    color: white;
+                }
+            }
+        }
+    }
+}

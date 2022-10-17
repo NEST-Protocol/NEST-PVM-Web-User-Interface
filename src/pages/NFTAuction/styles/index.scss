@@ -2,7 +2,6 @@
 @import 'src/styles/shared.scss';
 
 .NFTAuction {
-
     &-top {
         margin: 0 auto;
         margin-bottom: 22px;
@@ -142,11 +141,119 @@
 
         &-main {
             width: 1276px;
+            padding-top: 40px;
 
             .TabItemArray {
                 margin: 0 auto;
-                margin-top: 40px;
                 width: 500px;
+            }
+        }
+    }
+}
+
+.main-dark {
+    .NFTAuction {
+        &-top {
+            &-left {
+                &-main {
+                    &-buy {
+                        &-balance {
+                            color: #C5C5C5;
+                        }
+                    }
+                }
+            }
+            &-right {
+                &-title {
+    
+                    svg {
+                        path {
+                            fill: #C5C5C5;
+                        }
+                    }
+    
+                    p {
+                        color: #C5C5C5;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .NFTAuction {
+        &-top {
+            display: block;
+            width: 100%;
+
+            &-left {
+                width: 100%;
+                padding-top: 20px;
+                .TabItemArray {
+                    width: 80%;
+                    margin-top: 0;
+                }
+            }
+
+            &-right {
+                margin-top: 20px;
+                width: 100%;
+                height: 410px;
+                padding: 0 20px;
+                padding-top: 20px;
+                &-title {
+                    margin: 0 auto;
+                    margin-top: 0px;
+                }
+
+                ul.line {
+                    margin: 0 auto;
+                    width: 100%;
+                    height: 345px;
+                    overflow: auto;
+    
+                    li+li {
+                        margin-top: 20px;
+                    }
+    
+                    li {
+                        width: 100%;
+                        height: 200px;
+    
+                        ul {
+                            width: 100%;
+                            height: 100%;
+                            display: flex;
+                            justify-content: center;
+    
+                            li {
+                                margin-top: 0;
+                                width: 147px;
+                                height: 200px;
+                            }
+    
+                            li+li {
+                                margin-left: 20px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        &-bottom {
+            margin: 0 auto;
+            width: 100%;
+    
+            &-main {
+                width: 100%;
+                padding-top: 40px;
+    
+                .TabItemArray {
+                    width: 80%;
+                    margin-top: 0;
+                }
             }
         }
     }
