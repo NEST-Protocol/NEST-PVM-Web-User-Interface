@@ -1,4 +1,7 @@
-import { FC, useRef, useState } from "react";
+import { BigNumber } from "ethers";
+import { formatUnits, parseUnits } from "ethers/lib/utils";
+import { MaxUint256 } from "@ethersproject/constants";
+import { FC, useCallback, useEffect, useRef, useState } from "react";
 import Popup from "reactjs-popup";
 import {
   NFTAuctionIcon,
@@ -14,6 +17,13 @@ import MainCard from "../../components/MainCard";
 import NFTItem from "../../components/NFTItem";
 import NFTLeverIcon from "../../components/NFTLeverIcon";
 import TabItem from "../../components/TabItem";
+import { useERC20Approve } from "../../contracts/hooks/useERC20Approve";
+import { NESTNFTContract, tokenList } from "../../libs/constants/addresses";
+import { getERC20Contract } from "../../libs/hooks/useContract";
+import useTransactionListCon, {
+  TransactionType,
+} from "../../libs/hooks/useTransactionInfo";
+import useWeb3 from "../../libs/hooks/useWeb3";
 import { checkWidth } from "../../libs/utils";
 import NFTAuctionView from "./NFTAuctionView";
 import { NFTDigModal } from "./NFTModal";
@@ -21,11 +31,18 @@ import NFTOfferView from "./NFTOfferView";
 import NFTReceived from "./NFTReceived";
 import "./styles";
 import { MyDig } from "./testDaata";
+import { useNESTNFTMint } from "../../contracts/hooks/useNFTTransaction";
 
 const NFTAuction: FC = () => {
   const classPrefix = "NFTAuction";
   const [digTabSelected, setDigTabSelected] = useState(0);
   const [auctionTabSelected, setAuctionTabSelected] = useState(0);
+  const [NESTBalance, setNESTBalance] = useState<BigNumber>();
+  const [NESTAllowance, setNESTAllowance] = useState<BigNumber>(
+    BigNumber.from("0")
+  );
+  const { pendingList, txList } = useTransactionListCon();
+  const { chainId, account, library } = useWeb3();
   const modal = useRef<any>();
   const dataArray = (num: number) => {
     var result = [];
@@ -51,7 +68,7 @@ const NFTAuction: FC = () => {
             </li>
           }
         >
-          <NFTDigModal title={'Dig Up / Auctioned'}/>
+          <NFTDigModal title={"Dig Up / Auctioned"} />
         </Popup>
       );
     });
@@ -61,6 +78,77 @@ const NFTAuction: FC = () => {
       </li>
     );
   });
+  // balance
+  const getBalance = useCallback(async () => {
+    if (!chainId || !account || !library) {
+      return;
+    }
+    const NESTBalance = await getERC20Contract(
+      tokenList["NEST"].addresses[chainId],
+      library,
+      account
+    )?.balanceOf(account);
+    setNESTBalance(NESTBalance);
+  }, [account, chainId, library]);
+  useEffect(() => {
+    getBalance();
+  }, [getBalance, txList]);
+  // approve
+  useEffect(() => {
+    if (!chainId || !account || !library) {
+      return;
+    }
+    const nestToken = getERC20Contract(
+      tokenList["NEST"].addresses[chainId],
+      library,
+      account
+    );
+    if (!nestToken) {
+      return;
+    }
+    (async () => {
+      const allowance = await nestToken.allowance(
+        account,
+        NESTNFTContract[chainId]
+      );
+      setNESTAllowance(allowance);
+    })();
+  }, [account, chainId, library, txList]);
+  // check
+  const checkBalance = () => {
+    if (
+      NESTBalance &&
+      NESTBalance.gte(parseUnits("100", 18).mul(101).div(100))
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+  const checkAllowance = () => {
+    if (NESTAllowance.lt(parseUnits("100", 18).mul(101).div(100))) {
+      return false;
+    }
+    return true;
+  };
+  const mainButtonPending = () => {
+    const pendingTransaction = pendingList.filter(
+      (item) => item.type === TransactionType.NESTNFTMint
+    );
+    return pendingTransaction.length > 0 ? true : false;
+  };
+  const checkMainButton = () => {
+    if (!library) {
+      return false;
+    }
+    if (!checkAllowance()) {
+      return true;
+    }
+    if (mainButtonPending() || !checkBalance()) {
+      return false;
+    }
+    return true;
+  };
 
   // dig tab item data
   const digTabItemArray = [
@@ -92,9 +180,28 @@ const NFTAuction: FC = () => {
               <NFTLeverIcon lever={2} />
             </div>
           </div>
-          <MainButton>Dig</MainButton>
+          <MainButton
+            onClick={() => {
+              if (!checkMainButton()) {
+                return;
+              }
+              if (checkAllowance()) {
+                dig();
+              } else {
+                approve();
+              }
+            }}
+            disable={!checkMainButton()}
+            loading={mainButtonPending()}
+          >
+            {checkAllowance() ? "Dig" : "Approve"}
+          </MainButton>
           <p className={`${topLeftViewClass}-buy-balance`}>
-            Balance: 10.00 NEST
+            Balance:{" "}
+            {parseFloat(formatUnits(NESTBalance ?? 0, 18))
+              .toFixed(2)
+              .toString()}{" "}
+            NEST
           </p>
         </div>
       );
@@ -116,6 +223,13 @@ const NFTAuction: FC = () => {
       return <NFTReceived />;
     }
   };
+  // transaction
+  const approve = useERC20Approve(
+    "NEST",
+    MaxUint256,
+    chainId ? NESTNFTContract[chainId] : undefined
+  );
+  const dig = useNESTNFTMint()
   return (
     <div className={`${classPrefix}`}>
       <div className={`${classPrefix}-top`}>

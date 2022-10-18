@@ -13,7 +13,7 @@ export function useNESTNFTMint() {
   if (!chainId) {
     contract = null;
   } else {
-    callData = contract?.interface.encodeFunctionData("mint", []);
+    callData = contract?.interface.encodeFunctionData("mint");
   }
   const tx = {
     from: account,
