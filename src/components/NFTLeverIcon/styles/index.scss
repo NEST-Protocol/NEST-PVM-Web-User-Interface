@@ -4,6 +4,7 @@
 .NFTLeverIcon {
     width: 15px;
     height: 30px;
+
     &.lever1 {
         g {
             .cls-1 {
@@ -11,6 +12,7 @@
             }
         }
     }
+
     &.lever2 {
         g {
             .cls-1 {
@@ -18,6 +20,7 @@
             }
         }
     }
+
     &.lever3 {
         g {
             .cls-1 {
@@ -25,11 +28,19 @@
             }
         }
     }
+
     &.lever4 {
         g {
             .cls-1 {
                 fill: rgb(0, 0, 0)
             }
         }
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .NFTLeverIcon {
+        width: 12px;
+        height: 24px;
     }
 }

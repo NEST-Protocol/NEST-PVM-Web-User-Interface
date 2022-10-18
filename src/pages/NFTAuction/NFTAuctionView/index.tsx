@@ -76,7 +76,7 @@ const NFTAuctionView: FC = () => {
         <div className={`${classPrefix}-choice-top`}>
           <NFTAuctionStatus data={auctionChoice} classString={"auction"} />
           <div className={`${classPrefix}-choice-top-lever`}>
-            <p className={`${classPrefix}-choice-top-lever-title`}>Rarity</p>
+            <p className={`${classPrefix}-choice-top-lever-title`}>Rarity:</p>
             <ul>{leverLi}</ul>
           </div>
         </div>
