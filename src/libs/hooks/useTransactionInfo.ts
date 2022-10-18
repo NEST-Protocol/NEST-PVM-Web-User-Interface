@@ -20,7 +20,12 @@ export enum TransactionType {
   sellOption = 8,
   swap = 9,
   roll = 10,
-  winClaim = 11
+  winClaim = 11,
+  NESTNFTMint = 12,
+  NESTNFTClaim = 13,
+  NESTNFTAuctionStart = 14,
+  NESTNFTAuction = 15,
+  NESTNFTAuctionEnd = 16
 }
 
 export enum TransactionState {

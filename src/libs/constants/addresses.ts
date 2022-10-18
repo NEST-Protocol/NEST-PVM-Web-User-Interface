@@ -191,3 +191,21 @@ export const UniSwapV2Contract : AddressesType = {
   56: '0x10ED43C718714eb63d5aA57B78B54704E256024E',
   97: '0xd99d1c33f9fc3444f8101754abc46c52416550d1'
 }
+
+export const NESTNFTContract : AddressesType = {
+  1: '',
+  3: '',
+  4: '',
+  5: '',
+  56: '',
+  97: '0xbD520484Ec9D78Ad6827A2a7DFC4F3DCBB514DBc'
+}
+
+export const NESTNFTAuctionContract : AddressesType = {
+  1: '',
+  3: '',
+  4: '',
+  5: '',
+  56: '',
+  97: '0xf669c02139e54C5D3b020DB8ba24c1bC66ebad87'
+}
