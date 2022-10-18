@@ -1,5 +1,5 @@
 const testImage =
-"https://ipfs.io/ipns/k51qzi5uqu5djiekvrfwa8xi63010iqktc1lqzxkgchz0i3v1yyz690yyf62yr";
+"https://bafybeift23ootqbxpkgizxvqh6s3oah6gpqehlc6agwrlctihcqedxlosq.ipfs.w3s.link/WX20221014-165310.png";
 export const MyDig = [
     {
         img: testImage,

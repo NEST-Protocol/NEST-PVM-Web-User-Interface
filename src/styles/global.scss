@@ -113,6 +113,11 @@ li {
 
 .ant-tooltip-inner {
     color: $gray-info-text-color;
+    background: white;
+}
+
+.ant-tooltip-arrow-content {
+    --antd-arrow-background-color: linear-gradient(to right bottom, rgba(255, 255, 255, 1), rgba(255, 255, 255, 1));
 }
 
 .ant-picker-input input {

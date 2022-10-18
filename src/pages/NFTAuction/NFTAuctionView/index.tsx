@@ -7,7 +7,7 @@ import NFTItem from "../../../components/NFTItem";
 import NFTLeverIcon from "../../../components/NFTLeverIcon";
 import { NFTAuctionModal } from "../NFTModal";
 import { MyDig } from "../testDaata";
-import 'antd/dist/antd.css';
+// import '../../../styles/ant.css';
 import "./styles";
 import { checkWidth } from "../../../libs/utils";
 
