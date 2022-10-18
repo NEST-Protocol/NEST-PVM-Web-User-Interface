@@ -183,13 +183,17 @@
 
 @media screen and (max-width: 1000px) {
     .NFTAuction {
+        padding: 0 10px;
         &-top {
             display: block;
             width: 100%;
+            margin-top: 0px;
+            
 
             &-left {
                 width: 100%;
                 padding-top: 20px;
+                height: 530px;
                 .TabItemArray {
                     width: 80%;
                     margin-top: 0;
@@ -248,7 +252,7 @@
     
             &-main {
                 width: 100%;
-                padding-top: 40px;
+                padding-top: 20px;
     
                 .TabItemArray {
                     width: 80%;
