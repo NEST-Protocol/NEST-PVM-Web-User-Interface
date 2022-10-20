@@ -15,7 +15,7 @@ export const PRICE_FEE: NumberBigNumberType = {
   4: normalToBigNumber("0"),
   5: normalToBigNumber("0"),
   56: normalToBigNumber("0"),
-  97: normalToBigNumber("0.002"),
+  97: normalToBigNumber("0"),
 }
 export const BLOCK_TIME: NumberNumberType = {
   1: 14000,

@@ -64,7 +64,7 @@ const MobileHeader: FC = () => {
         </>
       );
     }
-    if (chainId === 1 || chainId === 4) {
+    if (chainId === 1 || chainId === 5) {
       return (
         <>
           <LittleETH />

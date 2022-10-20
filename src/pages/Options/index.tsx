@@ -30,7 +30,7 @@ import {
   normalToBigNumber,
 } from "../../libs/utils";
 import { DatePicker, message, Tooltip } from "antd";
-import "../../styles/ant.css";
+// import "../../styles/ant.css";
 import "./styles";
 import { HoldLine } from "../../components/HoldLine";
 import moment from "moment";

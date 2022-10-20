@@ -14,6 +14,7 @@ const Header: FC = () => {
     { path: "/futures", content: t`Futures` },
     { path: "/options", content: t`Options` },
     // { path: "/win", content: t`Win` },
+    // { path: "/NFTAuction", content: 'NFT' },
     { path: "/swap", content: t`Swap` },
     // { path: "/farm", content: t`Farm` },
   ].map((item) => (

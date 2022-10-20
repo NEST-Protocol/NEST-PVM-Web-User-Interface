@@ -63,25 +63,31 @@ export function useSendTransaction(
     //     JSON.stringify(txList)
     //   );
     // };
-    const winV2ClaimList = (index: string) => {
-      var cache = localStorage.getItem("winV2Claim" + chainId?.toString());
-      var txList: Array<string> = cache ? JSON.parse(cache) : [];
-      txList.push(index);
-      localStorage.setItem(
-        "winV2Claim" + chainId?.toString(),
-        JSON.stringify(txList)
-      );
-    }
+    // const winV2ClaimList = (index: string) => {
+    //   var cache = localStorage.getItem("winV2Claim" + chainId?.toString());
+    //   var txList: Array<string> = cache ? JSON.parse(cache) : [];
+    //   txList.push(index);
+    //   localStorage.setItem(
+    //     "winV2Claim" + chainId?.toString(),
+    //     JSON.stringify(txList)
+    //   );
+    // }
+    const digNFTLocal = (hash: string) => {
+      localStorage.setItem("NFTDig" + chainId?.toString(), hash);
+    };
     return library
       ?.getSigner()
       .sendTransaction(newTx)
       .then((res) => {
         pushTx(res.hash, txInfo);
-        if (txInfo.type === TransactionType.roll) {
-          // winV2LocalData(res.hash, txInfo.info);
-        }
-        if (txInfo.type === TransactionType.winClaim) {
-          winV2ClaimList(txInfo.info)
+        // if (txInfo.type === TransactionType.roll) {
+        // winV2LocalData(res.hash, txInfo.info);
+        // }
+        // if (txInfo.type === TransactionType.winClaim) {
+        //   winV2ClaimList(txInfo.info)
+        // }
+        if (txInfo.type === TransactionType.NESTNFTMint) {
+          digNFTLocal(res.hash);
         }
         setShowModal({
           isShow: true,

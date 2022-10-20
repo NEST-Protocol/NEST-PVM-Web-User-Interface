@@ -1,4 +1,4 @@
-import { NestPrice as NestPriceAddress } from './../constants/addresses';
+import { NESTNFTAuctionContract, NESTNFTContract, NestPrice as NestPriceAddress } from './../constants/addresses';
 import useWeb3 from '../hooks/useWeb3';
 import { getAddress } from "@ethersproject/address"
 import { Contract } from "@ethersproject/contracts"
@@ -13,6 +13,8 @@ import NestPriceABI from '../../contracts/abis/NestPrice.json';
 import PVMWinABI from '../../contracts/abis/PVMWin.json';
 import PVMPayBackABI from '../../contracts/abis/PVMPayBack.json';
 import UniSwapV2ABI from '../../contracts/abis/UNISwap.json';
+import NESTNFTABI from '../../contracts/abis/NESTNFT.json';
+import NESTNFTAuctionABI from '../../contracts/abis/NESTNFTAuction.json';
 import { ZERO_ADDRESS } from '../utils';
 
 function isAddress(value: any): string | false {
@@ -89,4 +91,12 @@ export function PVMPayBack(addresses: AddressesType): Contract | null {
 
 export function UniSwapV2(addresses: AddressesType): Contract | null {
     return useContract(addresses, UniSwapV2ABI)
+} 
+
+export function NESTNFT(): Contract | null {
+    return useContract(NESTNFTContract, NESTNFTABI)
+} 
+
+export function NESTNFTAuction(): Contract | null {
+    return useContract(NESTNFTAuctionContract, NESTNFTAuctionABI)
 } 

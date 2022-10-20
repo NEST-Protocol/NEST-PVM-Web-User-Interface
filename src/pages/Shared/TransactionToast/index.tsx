@@ -80,11 +80,21 @@ export const transactionTitle = (type: TransactionType) => {
     case 8:
       return t`Sell options`;
     case 9:
-    return t`Swap`;
+      return t`Swap`;
     case 10:
-    return 'Roll';
+      return "Roll";
     case 11:
-    return 'Claim';
+      return "Claim";
+    case 12:
+      return "NFT Dig";
+    case 13:
+      return "NFT Claim";
+    case 14:
+      return "Start Auction";
+    case 15:
+      return "bid";
+    case 16:
+      return "End Auction";
     default:
       break;
   }

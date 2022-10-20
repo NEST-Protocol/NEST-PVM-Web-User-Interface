@@ -153,7 +153,7 @@ export const PVMLeverContract: AddressesType = {
   4: "0x56a07c76f6F91a97851013BF23ED8590070B656E",
   5: "0x3713Ac1FF40a191905D568E4Db65cb392474BCEC",
   56: "0x8e32C33814271bD64D5138bE9d47Cd55025074CD",
-  97: "0xA2D58989ef9981065f749C217984DB21970fF0b7"
+  97: "0xb8B5b3CDdC5DA7F4B75Bd4B408389b923962ee98"
 };
 
 export const NestPrice: AddressesType = {
@@ -190,4 +190,22 @@ export const UniSwapV2Contract : AddressesType = {
   5: '0x68b3465833fb72A70ecDF485E0e4C7bD8665Fc45',
   56: '0x10ED43C718714eb63d5aA57B78B54704E256024E',
   97: '0xd99d1c33f9fc3444f8101754abc46c52416550d1'
+}
+
+export const NESTNFTContract : AddressesType = {
+  1: '',
+  3: '',
+  4: '',
+  5: '',
+  56: '',
+  97: '0xc926b1dc291507A96c2919a3662Cc8EAC1141700'
+}
+
+export const NESTNFTAuctionContract : AddressesType = {
+  1: '',
+  3: '',
+  4: '',
+  5: '',
+  56: '',
+  97: '0xFe864063e10e5f7D99803765f28d2676A582A816'
 }

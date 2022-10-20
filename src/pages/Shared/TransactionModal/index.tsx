@@ -44,7 +44,7 @@ const TransactionModal: FC = () => {
         <Trans>Transaction submitted</Trans>
       </p>
       <a href={`${etherscanBase}${showModal.hash}`} target="view_window">
-        {chainId === 1 || chainId === 4
+        {chainId === 1 || chainId === 5
           ? "View on Etherscan"
           : "View on BscScan"}
       </a>
