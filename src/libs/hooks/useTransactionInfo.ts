@@ -25,7 +25,7 @@ export enum TransactionType {
   NESTNFTClaim = 13,
   NESTNFTAuctionStart = 14,
   NESTNFTAuction = 15,
-  NESTNFTAuctionEnd = 16
+  NESTNFTAuctionEnd = 16,
 }
 
 export enum TransactionState {
@@ -56,7 +56,7 @@ type ShowModalType = {
   hash: string;
   txType: TransactionModalType;
   tokenInfo?: TransactionModalTokenInfo;
-  info?: string
+  info?: string;
 };
 
 const useTransactionList = () => {
@@ -101,17 +101,19 @@ const useTransactionList = () => {
       });
       setPendingList(noResultTx);
     })();
-    
   }, [chainId, txList]);
-  const updateList = useCallback((item: TransactionInfoType) => {
-    const index = txList.findIndex((t) => t.hash === item.hash);
-    if (index > -1) {
-      txList[index] = item;
-      setTxList([...txList]);
-    } else {
-      setTxList(txList.concat(item));
-    }
-  },[txList]);
+  const updateList = useCallback(
+    (item: TransactionInfoType) => {
+      const index = txList.findIndex((t) => t.hash === item.hash);
+      if (index > -1) {
+        txList[index] = item;
+        setTxList([...txList]);
+      } else {
+        setTxList(txList.concat(item));
+      }
+    },
+    [txList]
+  );
 
   useEffect(() => {
     if (pendingList.length === 0 || checking || !chainId) {
@@ -127,6 +129,14 @@ const useTransactionList = () => {
             ? TransactionState.Success
             : TransactionState.Fail;
           element.txState = status;
+
+          if (
+            status === TransactionState.Success &&
+            element.type === TransactionType.NESTNFTClaim
+          ) {
+            localStorage.setItem("NFTDig" + chainId?.toString(), "");
+          }
+
           updateList(element);
           setChecking(false);
           notifyTransaction(element);
@@ -137,7 +147,6 @@ const useTransactionList = () => {
         setChecking(false);
       }, BLOCK_TIME[chainId] + 6000);
     })();
-    
   }, [pendingList, checking, library, updateList, chainId]);
 
   const pushTx = (hash: string, txInfo: TransactionBaseInfoType) => {

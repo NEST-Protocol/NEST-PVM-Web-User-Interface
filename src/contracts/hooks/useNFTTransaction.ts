@@ -1,5 +1,4 @@
 import { BigNumber } from 'ethers';
-import { NESTNFTContract } from "./../../libs/constants/addresses";
 import { useSendTransaction } from "../../libs/hooks/useSendTransaction";
 import useWeb3 from "../../libs/hooks/useWeb3";
 import { PRICE_FEE } from "../../libs/utils";
@@ -8,7 +7,7 @@ import { NESTNFT } from "../../libs/hooks/useContract";
 
 export function useNESTNFTMint() {
   const { account, chainId } = useWeb3();
-  var contract = NESTNFT(NESTNFTContract);
+  var contract = NESTNFT();
   var callData: string | undefined;
   if (!chainId) {
     contract = null;
@@ -29,11 +28,11 @@ export function useNESTNFTMint() {
   return txPromise;
 }
 
-export function useNESTNFclaim(index: BigNumber) {
+export function useNESTNFclaim(index?: BigNumber) {
     const { account, chainId } = useWeb3();
-    var contract = NESTNFT(NESTNFTContract);
+    var contract = NESTNFT();
     var callData: string | undefined;
-    if (!chainId) {
+    if (!chainId || !index) {
       contract = null;
     } else {
       callData = contract?.interface.encodeFunctionData("claim", [index]);

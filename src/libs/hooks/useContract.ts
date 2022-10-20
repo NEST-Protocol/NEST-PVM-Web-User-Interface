@@ -1,4 +1,4 @@
-import { NestPrice as NestPriceAddress } from './../constants/addresses';
+import { NESTNFTAuctionContract, NESTNFTContract, NestPrice as NestPriceAddress } from './../constants/addresses';
 import useWeb3 from '../hooks/useWeb3';
 import { getAddress } from "@ethersproject/address"
 import { Contract } from "@ethersproject/contracts"
@@ -93,10 +93,10 @@ export function UniSwapV2(addresses: AddressesType): Contract | null {
     return useContract(addresses, UniSwapV2ABI)
 } 
 
-export function NESTNFT(addresses: AddressesType): Contract | null {
-    return useContract(addresses, NESTNFTABI)
+export function NESTNFT(): Contract | null {
+    return useContract(NESTNFTContract, NESTNFTABI)
 } 
 
-export function NESTNFTAuction(addresses: AddressesType): Contract | null {
-    return useContract(addresses, NESTNFTAuctionABI)
+export function NESTNFTAuction(): Contract | null {
+    return useContract(NESTNFTAuctionContract, NESTNFTAuctionABI)
 } 

@@ -19,7 +19,7 @@ import NFTLeverIcon from "../../components/NFTLeverIcon";
 import TabItem from "../../components/TabItem";
 import { useERC20Approve } from "../../contracts/hooks/useERC20Approve";
 import { NESTNFTContract, tokenList } from "../../libs/constants/addresses";
-import { getERC20Contract } from "../../libs/hooks/useContract";
+import { getERC20Contract, NESTNFT } from "../../libs/hooks/useContract";
 import useTransactionListCon, {
   TransactionType,
 } from "../../libs/hooks/useTransactionInfo";
@@ -31,7 +31,10 @@ import NFTOfferView from "./NFTOfferView";
 import NFTReceived from "./NFTReceived";
 import "./styles";
 import { MyDig } from "./testDaata";
-import { useNESTNFTMint } from "../../contracts/hooks/useNFTTransaction";
+import {
+  useNESTNFclaim,
+  useNESTNFTMint,
+} from "../../contracts/hooks/useNFTTransaction";
 
 const NFTAuction: FC = () => {
   const classPrefix = "NFTAuction";
@@ -41,6 +44,8 @@ const NFTAuction: FC = () => {
   const [NESTAllowance, setNESTAllowance] = useState<BigNumber>(
     BigNumber.from("0")
   );
+  const [buttonShowClaim, setButtonShowClaim] = useState(false);
+  const [claimIndex, setClaimIndex] = useState<BigNumber>();
   const { pendingList, txList } = useTransactionListCon();
   const { chainId, account, library } = useWeb3();
   const modal = useRef<any>();
@@ -51,6 +56,7 @@ const NFTAuction: FC = () => {
     }
     return result;
   };
+  const NFTContract = NESTNFT();
   const testLiData = dataArray(checkWidth() ? 3 : 2).map((item, index) => {
     const ul = item.map((itemData, indexData) => {
       return (
@@ -133,7 +139,9 @@ const NFTAuction: FC = () => {
   };
   const mainButtonPending = () => {
     const pendingTransaction = pendingList.filter(
-      (item) => item.type === TransactionType.NESTNFTMint
+      (item) =>
+        item.type === TransactionType.NESTNFTMint ||
+        item.type === TransactionType.NESTNFTClaim
     );
     return pendingTransaction.length > 0 ? true : false;
   };
@@ -141,14 +149,40 @@ const NFTAuction: FC = () => {
     if (!library) {
       return false;
     }
-    if (!checkAllowance()) {
-      return true;
-    }
-    if (mainButtonPending() || !checkBalance()) {
-      return false;
+    if (!buttonShowClaim) {
+      if (!checkAllowance()) {
+        return true;
+      }
+      if (mainButtonPending() || !checkBalance()) {
+        return false;
+      }
+    } else {
+      if (mainButtonPending()) {
+        return false;
+      }
     }
     return true;
   };
+  const checkClaimIndex = useCallback(
+    async (hash: string) => {
+      if (NFTContract) {
+        const digList = await NFTContract.find("0", "256", "256", account);
+        const result = await library?.getTransactionReceipt(hash);
+        if (result) {
+          const startBlock = result.blockNumber;
+          for (let index = 0; index < digList.length; index++) {
+            const element = digList[index];
+            if (parseInt(element[1].toString()) === startBlock) {
+              setClaimIndex(BigNumber.from(element[2].toString()));
+              setButtonShowClaim(true);
+            }
+          }
+        }
+        console.log(result?.blockNumber);
+      }
+    },
+    [NFTContract, account, library]
+  );
 
   // dig tab item data
   const digTabItemArray = [
@@ -168,6 +202,26 @@ const NFTAuction: FC = () => {
   const auctionTabNum = (index: number) => {
     setAuctionTabSelected(index);
   };
+  // Dig or Claim
+  useEffect(() => {
+    var cache = localStorage.getItem("NFTDig" + chainId?.toString());
+    if (
+      txList.length > 0 &&
+      txList[txList.length - 1].type === TransactionType.NESTNFTMint
+    ) {
+      if (cache && cache !== "") {
+        checkClaimIndex(cache.toString());
+      }
+    } else if (
+      txList.length > 0 &&
+      txList[txList.length - 1].type === TransactionType.NESTNFTClaim
+    ) {
+      if (!cache && cache === "") {
+        setButtonShowClaim(false);
+      }
+    }
+  }, [chainId, checkClaimIndex, txList]);
+
   // top left view
   const topLeftView = () => {
     const topLeftViewClass = `${classPrefix}-top-left-main`;
@@ -185,16 +239,20 @@ const NFTAuction: FC = () => {
               if (!checkMainButton()) {
                 return;
               }
-              if (checkAllowance()) {
-                dig();
+              if (!buttonShowClaim) {
+                if (checkAllowance()) {
+                  dig();
+                } else {
+                  approve();
+                }
               } else {
-                approve();
+                claim();
               }
             }}
             disable={!checkMainButton()}
             loading={mainButtonPending()}
           >
-            {checkAllowance() ? "Dig" : "Approve"}
+            {buttonShowClaim ? "Claim" : checkAllowance() ? "Dig" : "Approve"}
           </MainButton>
           <p className={`${topLeftViewClass}-buy-balance`}>
             Balance:{" "}
@@ -229,7 +287,8 @@ const NFTAuction: FC = () => {
     MaxUint256,
     chainId ? NESTNFTContract[chainId] : undefined
   );
-  const dig = useNESTNFTMint()
+  const dig = useNESTNFTMint();
+  const claim = useNESTNFclaim(claimIndex);
   return (
     <div className={`${classPrefix}`}>
       <div className={`${classPrefix}-top`}>

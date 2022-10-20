@@ -1,8 +1,5 @@
 import { BigNumber } from "ethers";
-import {
-  NESTNFTAuctionContract,
-  NESTNFTContract,
-} from "./../../libs/constants/addresses";
+import { NESTNFTContract } from "./../../libs/constants/addresses";
 import { useSendTransaction } from "../../libs/hooks/useSendTransaction";
 import useWeb3 from "../../libs/hooks/useWeb3";
 import { PRICE_FEE } from "../../libs/utils";
@@ -15,7 +12,7 @@ export function useNESTNFTAuctionStart(
   cycle: BigNumber
 ) {
   const { account, chainId } = useWeb3();
-  var contract = NESTNFTAuction(NESTNFTAuctionContract);
+  var contract = NESTNFTAuction();
   var callData: string | undefined;
   if (!chainId) {
     contract = null;
@@ -43,7 +40,7 @@ export function useNESTNFTAuctionStart(
 
 export function useNESTNFTAuction(index: BigNumber, price: BigNumber) {
   const { account, chainId } = useWeb3();
-  var contract = NESTNFTAuction(NESTNFTAuctionContract);
+  var contract = NESTNFTAuction();
   var callData: string | undefined;
   if (!chainId) {
     contract = null;
@@ -65,24 +62,24 @@ export function useNESTNFTAuction(index: BigNumber, price: BigNumber) {
 }
 
 export function useNESTNFTAuctionEnd(index: BigNumber) {
-    const { account, chainId } = useWeb3();
-    var contract = NESTNFTAuction(NESTNFTAuctionContract);
-    var callData: string | undefined;
-    if (!chainId) {
-      contract = null;
-    } else {
-      callData = contract?.interface.encodeFunctionData("endAuction", [index]);
-    }
-    const tx = {
-      from: account,
-      to: contract?.address,
-      data: callData,
-      value: PRICE_FEE[chainId!],
-    };
-    const txPromise = useSendTransaction(contract, tx, {
-      title: `NFT end auction`,
-      info: "",
-      type: TransactionType.NESTNFTAuctionEnd,
-    });
-    return txPromise;
+  const { account, chainId } = useWeb3();
+  var contract = NESTNFTAuction();
+  var callData: string | undefined;
+  if (!chainId) {
+    contract = null;
+  } else {
+    callData = contract?.interface.encodeFunctionData("endAuction", [index]);
   }
+  const tx = {
+    from: account,
+    to: contract?.address,
+    data: callData,
+    value: PRICE_FEE[chainId!],
+  };
+  const txPromise = useSendTransaction(contract, tx, {
+    title: `NFT end auction`,
+    info: "",
+    type: TransactionType.NESTNFTAuctionEnd,
+  });
+  return txPromise;
+}

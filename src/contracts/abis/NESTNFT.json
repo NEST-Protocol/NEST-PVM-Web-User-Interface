@@ -145,19 +145,52 @@
     {
         "inputs": [
             {
-                "internalType": "address",
-                "name": "to",
-                "type": "address"
+                "internalType": "uint256",
+                "name": "start",
+                "type": "uint256"
             },
             {
                 "internalType": "uint256",
-                "name": "tokenId",
+                "name": "count",
                 "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "maxFindCount",
+                "type": "uint256"
+            },
+            {
+                "internalType": "address",
+                "name": "owner",
+                "type": "address"
             }
         ],
-        "name": "directMint",
-        "outputs": [],
-        "stateMutability": "nonpayable",
+        "name": "find",
+        "outputs": [
+            {
+                "components": [
+                    {
+                        "internalType": "address",
+                        "name": "owner",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint32",
+                        "name": "openBlock",
+                        "type": "uint32"
+                    },
+                    {
+                        "internalType": "uint64",
+                        "name": "index",
+                        "type": "uint64"
+                    }
+                ],
+                "internalType": "struct NestBlindBox.MintRequest[]",
+                "name": "requestArray",
+                "type": "tuple[]"
+            }
+        ],
+        "stateMutability": "view",
         "type": "function"
     },
     {
@@ -217,6 +250,52 @@
         "type": "function"
     },
     {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "offset",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "count",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "order",
+                "type": "uint256"
+            }
+        ],
+        "name": "list",
+        "outputs": [
+            {
+                "components": [
+                    {
+                        "internalType": "address",
+                        "name": "owner",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint32",
+                        "name": "openBlock",
+                        "type": "uint32"
+                    },
+                    {
+                        "internalType": "uint64",
+                        "name": "index",
+                        "type": "uint64"
+                    }
+                ],
+                "internalType": "struct NestBlindBox.MintRequest[]",
+                "name": "requestArray",
+                "type": "tuple[]"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
         "inputs": [],
         "name": "mint",
         "outputs": [],
@@ -253,6 +332,24 @@
             }
         ],
         "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "to",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256[]",
+                "name": "tokenIdArray",
+                "type": "uint256[]"
+            }
+        ],
+        "name": "release",
+        "outputs": [],
+        "stateMutability": "nonpayable",
         "type": "function"
     },
     {
