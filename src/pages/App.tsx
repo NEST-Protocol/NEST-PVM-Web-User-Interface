@@ -11,11 +11,12 @@ import MobileFooter from "./Shared/Footer/MobileFooter";
 import MobileHeader from "./Shared/Header/MobileHeader";
 import useThemes from "../libs/hooks/useThemes";
 import "../themes/styles";
+import NFTAuction from "./NFTAuction";
 
 const Perpetuals = loadable(() => import("./Perpetuals"));
 const Option = loadable(() => import("./Options"));
 // const Mining = loadable(() => import("./Farm"));
-const NFTAuction = loadable(() => import("./NFTAuction"));
+// const NFTAuction = loadable(() => import("./NFTAuction"));
 const Swap = loadable(() => import("./Swap"));
 // const WinV2 = loadable(() => import("./WinV2"));
 

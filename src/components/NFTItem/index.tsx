@@ -8,18 +8,20 @@ export type NFTItemType = {
   src: string;
   name: string;
   lever: number;
+  value: string;
   isDig?: boolean;
   leftTime?: number;
 };
 
 const NFTItem: FC<NFTItemType> = ({ ...props }) => {
+  const src = 'https://' + props.src.substring(7, props.src.length) + '.ipfs.w3s.link'
   return (
     <div className={classNames({
       [`NFTItem`]: true,
       [`auctionWidth`]: !props.isDig
     })}>
       <div className="NFTItem-image">
-        <img src={props.src} alt="NEST NFT" />
+        <img src={src} alt="NEST NFT" />
       </div>
       <div className="NFTItem-info">
         <div className="NFTItem-info-base">
@@ -36,7 +38,7 @@ const NFTItem: FC<NFTItemType> = ({ ...props }) => {
         </div>
         <div className="NFTItem-info-price">
           <TokenNest />
-          <p>100.00</p>
+          <p>{props.value}</p>
         </div>
       </div>
     </div>

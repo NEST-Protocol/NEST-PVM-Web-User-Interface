@@ -1,16 +1,17 @@
 import classNames from "classnames";
 import { FC, useState } from "react";
+import { NFTMyDigDataType } from "..";
 import { TokenNest } from "../../../components/Icon";
 import MainButton from "../../../components/MainButton";
 import MainCard from "../../../components/MainCard";
 import NFTLeverIcon from "../../../components/NFTLeverIcon";
 import useThemes, { ThemeType } from "../../../libs/hooks/useThemes";
 import { showEllipsisAddress } from "../../../libs/utils";
-import { MyDig } from "../testDaata";
 import "./styles";
 
 export type NFTModalType = {
   title: string;
+  info?: NFTMyDigDataType;
   children1?: JSX.Element;
   children2?: JSX.Element;
   children3?: JSX.Element;
@@ -19,7 +20,8 @@ const classPrefix = "NFTModal";
 const NFTModal: FC<NFTModalType> = ({ ...props }) => {
 
   const { theme } = useThemes();
-  
+  if (!props.info) {return (<></>)}
+  const NFTData = props.info;
   return (
     <div className={classNames({
       [`${classPrefix}`]: true,
@@ -29,29 +31,23 @@ const NFTModal: FC<NFTModalType> = ({ ...props }) => {
         <div className={`${classPrefix}-title`}>{props.title}</div>
         <div className={`${classPrefix}-info`}>
           <div className={`${classPrefix}-info-img`}>
-            <img src={MyDig[0].img} alt="NEST NFT" />
+            <img src={'https://' + NFTData.thumbnail.substring(7, NFTData.thumbnail.length) + '.ipfs.w3s.link'} alt="NEST NFT" />
           </div>
           <div className={`${classPrefix}-info-text`}>
             <div className={`${classPrefix}-info-text-leftTime`}>
               {props.children1}
             </div>
             <div className={`${classPrefix}-info-text-name`}>
-              <p>what's wrong?</p>
-              <NFTLeverIcon lever={5} />
+              <p>{NFTData.token_name}</p>
+              <NFTLeverIcon lever={parseInt(NFTData.rarity)} />
             </div>
             <div className={`${classPrefix}-info-text-string`}>
-              sdfksjhfjksd sjhdfjsdhfj shjkfhks sdfjjasd ajkasdh fajsdhj a
-              sjdfjhssdfksjhfjksd sjhdfjsdhfj shjkfhks sdfjjasd ajkasdh fajsdhj
-              a sjdfjhssdfksjhfjksd sjhdfjsdhfj shjkfhks sdfjjasd ajkasdh
-              fajsdhj a sjdfjhssdfksjhfjksd sjhdfjsdhfj shjkfhks sdfjjasd
-              ajkasdh fajsdhj a sjdfjhssdfksjhfjksd sjhdfjsdhfj shjkfhks
-              sdfjjasd ajkasdh fajsdhj a sjdfjhssdfksjhfjksd sjhdfjsdhfj
-              shjkfhks sdfjjasd ajkasdh fajsdhj a sjdfjhs
+              {NFTData.description}
             </div>
             <div className={`${classPrefix}-info-text-contract`}>
               <p>Contract address:</p>
               <a href="w">
-                {showEllipsisAddress("0x34276452834523645264572342" || "")}
+                {showEllipsisAddress(NFTData.token_address || "")}
               </a>
             </div>
             <div className={`${classPrefix}-info-text-chain`}>
@@ -66,11 +62,11 @@ const NFTModal: FC<NFTModalType> = ({ ...props }) => {
   );
 };
 
-export type NFTDigModalType = {
-  title: string;
-};
+type NFTDigModalProps = {
+  info: NFTMyDigDataType
+}
 
-export const NFTDigModal: FC<NFTDigModalType> = ({ ...props }) => {
+export const NFTDigModal: FC<NFTDigModalProps> = ({ ...props }) => {
   const [showChildren3, setShowChildren3] = useState(false);
   const [timeNum, setTimeNum] = useState(0);
   const children2 = () => {
@@ -79,7 +75,7 @@ export const NFTDigModal: FC<NFTDigModalType> = ({ ...props }) => {
         <div className={`${classPrefix}-info-text-confirmation-value`}>
           <p>Value:</p>
           <TokenNest />
-          <span>1000.00</span>
+          <span>{props.info.value}</span>
         </div>
         <MainButton onClick={() => setShowChildren3(true)}>
           Confirmation
@@ -119,7 +115,7 @@ export const NFTDigModal: FC<NFTDigModalType> = ({ ...props }) => {
             Starting Price
           </div>
           <div className={`${classPrefix}-auction-price-input`}>
-            <input />
+            <input placeholder={props.info.starting_price}/>
             <MainButton>Confirmation</MainButton>
           </div>
         </div>
@@ -128,7 +124,8 @@ export const NFTDigModal: FC<NFTDigModalType> = ({ ...props }) => {
   };
   return (
     <NFTModal
-      title={props.title}
+      title={"My Dig"}
+      info={props.info}
       children2={children2()}
       children3={children3()}
     />

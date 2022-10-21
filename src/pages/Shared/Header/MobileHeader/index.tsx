@@ -34,6 +34,7 @@ const MobileHeader: FC = () => {
     { path: "/futures", content: t`Futures` },
     { path: "/options", content: t`Options` },
     // { path: "/win", content: t`Win` },
+    { path: "/NFTAuction", content: 'NFT' },
     { path: "/swap", content: t`Swap` },
   ].map((item) => (
     <li

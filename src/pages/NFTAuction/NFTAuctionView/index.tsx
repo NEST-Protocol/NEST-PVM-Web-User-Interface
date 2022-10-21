@@ -55,8 +55,7 @@ const NFTAuctionView: FC = () => {
                 src={itemData.img}
                 name={itemData.name}
                 lever={itemData.lever}
-                leftTime={itemData.leftTime}
-              />
+                leftTime={itemData.leftTime} value={"200"}              />
             </li>
           }
         >

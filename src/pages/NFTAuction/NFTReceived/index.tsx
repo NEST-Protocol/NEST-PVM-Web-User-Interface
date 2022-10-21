@@ -30,8 +30,7 @@ const NFTReceived: FC = () => {
                 src={itemData.img}
                 name={itemData.name}
                 lever={itemData.lever}
-                leftTime={itemData.leftTime}
-              />
+                leftTime={itemData.leftTime} value={"400"}              />
             </li>
           }
         >

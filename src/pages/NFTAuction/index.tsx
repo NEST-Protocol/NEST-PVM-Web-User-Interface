@@ -36,6 +36,18 @@ import {
   useNESTNFTMint,
 } from "../../contracts/hooks/useNFTTransaction";
 
+export type NFTMyDigDataType = {
+  thumbnail: string;
+  description: string;
+  token_address: string;
+  token_id: string;
+  starting_price: string;
+  token_name: string;
+  value: string;
+  hash: string;
+  rarity: string;
+};
+
 const NFTAuction: FC = () => {
   const classPrefix = "NFTAuction";
   const [digTabSelected, setDigTabSelected] = useState(0);
@@ -47,17 +59,18 @@ const NFTAuction: FC = () => {
   const [buttonShowClaim, setButtonShowClaim] = useState(false);
   const [claimIndex, setClaimIndex] = useState<BigNumber>();
   const { pendingList, txList } = useTransactionListCon();
+  const [NFTMyDigData, setNFTMyDigData] = useState<Array<NFTMyDigDataType>>([]);
   const { chainId, account, library } = useWeb3();
   const modal = useRef<any>();
   const dataArray = (num: number) => {
     var result = [];
-    for (var i = 0; i < MyDig.length; i += num) {
-      result.push(MyDig.slice(i, i + num));
+    for (var i = 0; i < NFTMyDigData.length; i += num) {
+      result.push(NFTMyDigData.slice(i, i + num));
     }
     return result;
   };
   const NFTContract = NESTNFT();
-  const testLiData = dataArray(checkWidth() ? 3 : 2).map((item, index) => {
+  const liData = dataArray(checkWidth() ? 3 : 2).map((item, index) => {
     const ul = item.map((itemData, indexData) => {
       return (
         <Popup
@@ -66,15 +79,14 @@ const NFTAuction: FC = () => {
           trigger={
             <li key={`${NFTAuction}+li+${index}+${indexData}`}>
               <NFTItem
-                src={itemData.img}
-                name={itemData.name}
-                lever={itemData.lever}
-                isDig={true}
-              />
+                src={itemData.thumbnail}
+                name={itemData.token_id}
+                lever={parseInt(itemData.rarity)}
+                isDig={true} value={itemData.value}              />
             </li>
           }
         >
-          <NFTDigModal title={"Dig Up / Auctioned"} />
+          <NFTDigModal info={itemData}/>
         </Popup>
       );
     });
@@ -120,6 +132,19 @@ const NFTAuction: FC = () => {
       setNESTAllowance(allowance);
     })();
   }, [account, chainId, library, txList]);
+  // get dig data
+  useEffect(() => {
+    if (!account || !chainId) {
+      return;
+    }
+    (async () => {
+      const data = await fetch(
+        `https://api.hedge.red/api/nft/mymint/${account}/1000/${chainId?.toString()}`
+      );
+      const data_json = await data.json();
+      setNFTMyDigData(data_json["value"]);
+    })();
+  }, [account, chainId]);
   // check
   const checkBalance = () => {
     if (
@@ -301,7 +326,7 @@ const NFTAuction: FC = () => {
             <NFTMyMint />
             <p>My Dig</p>
           </div>
-          <ul className="line">{testLiData}</ul>
+          <ul className="line">{liData}</ul>
         </MainCard>
       </div>
       <div className={`${classPrefix}-bottom`}>

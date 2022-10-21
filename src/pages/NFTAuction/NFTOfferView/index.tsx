@@ -30,8 +30,7 @@ const NFTOfferView: FC = () => {
                 src={itemData.img}
                 name={itemData.name}
                 lever={itemData.lever}
-                leftTime={itemData.leftTime}
-              />
+                leftTime={itemData.leftTime} value={"300"}              />
             </li>
           }
         >
