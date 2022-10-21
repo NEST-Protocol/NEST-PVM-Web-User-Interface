@@ -1,16 +1,16 @@
-import { BigNumber } from "@ethersproject/bignumber";
-import { t, Trans } from "@lingui/macro";
-import { message } from "antd";
-import { MaxUint256 } from "@ethersproject/constants";
-import { FC, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import {BigNumber} from "@ethersproject/bignumber";
+import {t, Trans} from "@lingui/macro";
+import {message} from "antd";
+import {MaxUint256} from "@ethersproject/constants";
+import {FC, useCallback, useEffect, useMemo, useRef, useState} from "react";
 import ChooseType from "../../components/ChooseType";
 import InfoShow from "../../components/InfoShow";
-import { LeverChoose } from "../../components/LeverChoose";
+import {LeverChoose} from "../../components/LeverChoose";
 import MainButton from "../../components/MainButton";
 import MainCard from "../../components/MainCard";
 import PerpetualsList from "../../components/PerpetualsList";
-import { DoubleTokenShow, SingleTokenShow } from "../../components/TokenShow";
-import { usePVMLeverBuy } from "../../contracts/hooks/usePVMLeverTransaction";
+import {DoubleTokenShow, SingleTokenShow} from "../../components/TokenShow";
+import {usePVMLeverBuy} from "../../contracts/hooks/usePVMLeverTransaction";
 import {
   PVMLeverContract,
   tokenList,
@@ -34,17 +34,17 @@ import {
   formatInputNum,
   normalToBigNumber,
 } from "../../libs/utils";
-import { Tooltip } from "antd";
-import { Contract } from "@ethersproject/contracts";
-import { Popup } from "reactjs-popup";
+import {Tooltip} from "antd";
+import {Contract} from "@ethersproject/contracts";
+import {Popup} from "reactjs-popup";
 import PerpetualsNoticeModal from "./PerpetualsNoticeModal";
 import PerpetualsListMobile from "../../components/PerpetualsList/PerpetualsListMobile";
-import { PutDownIcon } from "../../components/Icon";
-import { useERC20Approve } from "../../contracts/hooks/useERC20Approve";
+import {PutDownIcon} from "../../components/Icon";
+import {useERC20Approve} from "../../contracts/hooks/useERC20Approve";
 import "./styles";
 import classNames from "classnames";
 import ReactECharts from "echarts-for-react";
-import { parseUnits } from "ethers/lib/utils";
+import {parseUnits} from "ethers/lib/utils";
 
 export type LeverListType = {
   index: BigNumber;
@@ -57,7 +57,7 @@ export type LeverListType = {
 };
 
 const Perpetuals: FC = () => {
-  const { account, chainId, library } = useWeb3();
+  const {account, chainId, library} = useWeb3();
   const [showNotice, setShowNotice] = useState(false);
   const modal = useRef<any>();
   const [isLong, setIsLong] = useState(true);
@@ -77,7 +77,7 @@ const Perpetuals: FC = () => {
   const nestToken = ERC20Contract(tokenList["NEST"].addresses);
   const priceContract = NestPriceContract();
   const PVMLeverOJ = PVMLever(PVMLeverContract);
-  const { pendingList, txList } = useTransactionListCon();
+  const {pendingList, txList} = useTransactionListCon();
   const [nestAllowance, setNestAllowance] = useState<BigNumber>(
     BigNumber.from("0")
   );
@@ -320,7 +320,14 @@ const Perpetuals: FC = () => {
         }/${kTypeValue}/50`
       );
       const k_data_value = await k_data.json();
-      setKData(k_data_value["value"]);
+      setKData(k_data_value["value"].map((item: any) => ({
+          close: item.close.toFixed(2),
+          high: item.high.toFixed(2),
+          low: item.low.toFixed(2),
+          open: item.open.toFixed(2),
+          time: item.time,
+        })
+      ));
     })();
   }, [chainId, kTypeValue, tokenPair.symbol]);
   useEffect(() => {
@@ -421,48 +428,48 @@ const Perpetuals: FC = () => {
   const pcTable = (
     <table>
       <thead>
-        <tr className={`${classPrefix}-table-title`}>
-          <th>
-            <Trans>Token Pair</Trans>
-          </th>
-          <th>
-            <Trans>Type</Trans>
-          </th>
-          <th>
-            <Trans>Lever</Trans>
-          </th>
-          <th>
-            Initial
-            <br />
-            Margin
-          </th>
-          <th>Open Price</th>
-          <th className={"marginAssets"}>
-            <Tooltip
-              placement="top"
-              color={"#ffffff"}
-              title={
-                "Dynamic changes in net assets, less than a certain amount of liquidation will be liquidated, the amount of liquidation is Max{margin * leverage * 0.02, 10}"
-              }
-            >
-              <span>Actual Margin</span>
-            </Tooltip>
-          </th>
-          <th>
-            <Trans>Operate</Trans>
-          </th>
-        </tr>
+      <tr className={`${classPrefix}-table-title`}>
+        <th>
+          <Trans>Token Pair</Trans>
+        </th>
+        <th>
+          <Trans>Type</Trans>
+        </th>
+        <th>
+          <Trans>Lever</Trans>
+        </th>
+        <th>
+          Initial
+          <br/>
+          Margin
+        </th>
+        <th>Open Price</th>
+        <th className={"marginAssets"}>
+          <Tooltip
+            placement="top"
+            color={"#ffffff"}
+            title={
+              "Dynamic changes in net assets, less than a certain amount of liquidation will be liquidated, the amount of liquidation is Max{margin * leverage * 0.02, 10}"
+            }
+          >
+            <span>Actual Margin</span>
+          </Tooltip>
+        </th>
+        <th>
+          <Trans>Operate</Trans>
+        </th>
+      </tr>
       </thead>
       <tbody>{trList}</tbody>
     </table>
   );
 
   const kType = [
-    { index: 0, label: "5M", value: "K_5M" },
-    { index: 1, label: "15M", value: "K_15M" },
-    { index: 2, label: "1H", value: "K_1H" },
-    { index: 3, label: "4H", value: "K_4H" },
-    { index: 4, label: "1D", value: "K_DAY" },
+    {index: 0, label: "5M", value: "K_5M"},
+    {index: 1, label: "15M", value: "K_15M"},
+    {index: 2, label: "1H", value: "K_1H"},
+    {index: 3, label: "4H", value: "K_4H"},
+    {index: 4, label: "1D", value: "K_DAY"},
   ];
 
   return (
@@ -496,7 +503,7 @@ const Perpetuals: FC = () => {
                 tokenNameOne={tokenPair.symbol}
                 tokenNameTwo={"USDT"}
               />
-              <PutDownIcon />
+              <PutDownIcon/>
             </div>
             <p>
               {`${
@@ -524,7 +531,7 @@ const Perpetuals: FC = () => {
             isLong={isLong}
             textArray={[t`Long`, t`Short`]}
           />
-          <LeverChoose selected={leverNum} callBack={handleLeverNum} />
+          <LeverChoose selected={leverNum} callBack={handleLeverNum}/>
           <InfoShow
             topLeftText={t`Payment`}
             bottomRightText={""}
@@ -534,14 +541,15 @@ const Perpetuals: FC = () => {
             } NEST`}
             topRightRed={checkNESTBalance}
           >
-            <SingleTokenShow tokenNameOne={"NEST"} isBold />
+            <SingleTokenShow tokenNameOne={"NEST"} isBold/>
             <input
               placeholder={t`Input`}
               className={"input-middle"}
               value={nestInput}
               maxLength={32}
               onChange={(e) => setNestInput(formatInputNum(e.target.value))}
-              onBlur={(e: any) => {}}
+              onBlur={(e: any) => {
+              }}
             />
             <button
               className={"max-button"}
@@ -625,7 +633,7 @@ const Perpetuals: FC = () => {
           <div className={`${classPrefix}-right-stock`}>
             <ReactECharts
               option={option}
-              style={{ height: "100%" }}
+              style={{height: "100%"}}
               lazyUpdate={true}
             />
           </div>
