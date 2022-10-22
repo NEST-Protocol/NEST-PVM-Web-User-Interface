@@ -180,9 +180,14 @@
                         "type": "uint32"
                     },
                     {
-                        "internalType": "uint64",
+                        "internalType": "uint32",
+                        "name": "claimBlock",
+                        "type": "uint32"
+                    },
+                    {
+                        "internalType": "uint32",
                         "name": "index",
-                        "type": "uint64"
+                        "type": "uint32"
                     }
                 ],
                 "internalType": "struct NestBlindBox.MintRequest[]",
@@ -282,9 +287,14 @@
                         "type": "uint32"
                     },
                     {
-                        "internalType": "uint64",
+                        "internalType": "uint32",
+                        "name": "claimBlock",
+                        "type": "uint32"
+                    },
+                    {
+                        "internalType": "uint32",
                         "name": "index",
-                        "type": "uint64"
+                        "type": "uint32"
                     }
                 ],
                 "internalType": "struct NestBlindBox.MintRequest[]",
@@ -480,6 +490,25 @@
                 "internalType": "string",
                 "name": "",
                 "type": "string"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "level",
+                "type": "uint256"
+            }
+        ],
+        "name": "totalSupply",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
             }
         ],
         "stateMutability": "view",

@@ -198,7 +198,7 @@ export const NESTNFTContract : AddressesType = {
   4: '',
   5: '',
   56: '',
-  97: '0xb631a22cddbc9d33a927a61387efe9c2ef5990dd'
+  97: '0xfb9Da3d9B76577CAc3616D5d0cf6b7d51B98870F'
 }
 
 export const NESTNFTAuctionContract : AddressesType = {
@@ -207,5 +207,5 @@ export const NESTNFTAuctionContract : AddressesType = {
   4: '',
   5: '',
   56: '',
-  97: '0xFe864063e10e5f7D99803765f28d2676A582A816'
+  97: '0x78CF500328F81955714bFD7213E83487560A29dE'
 }

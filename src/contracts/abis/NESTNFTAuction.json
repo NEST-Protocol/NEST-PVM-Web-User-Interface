@@ -101,9 +101,9 @@
                 "type": "uint256"
             },
             {
-                "internalType": "uint96",
+                "internalType": "uint48",
                 "name": "price",
-                "type": "uint96"
+                "type": "uint48"
             }
         ],
         "name": "bid",
@@ -161,18 +161,28 @@
                 "components": [
                     {
                         "internalType": "address",
-                        "name": "nftAddress",
+                        "name": "owner",
                         "type": "address"
                     },
                     {
                         "internalType": "uint32",
-                        "name": "endBlock",
+                        "name": "startBlock",
                         "type": "uint32"
                     },
                     {
-                        "internalType": "uint256",
+                        "internalType": "uint64",
+                        "name": "endTime",
+                        "type": "uint64"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "nftAddress",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint96",
                         "name": "tokenId",
-                        "type": "uint256"
+                        "type": "uint96"
                     },
                     {
                         "internalType": "address",
@@ -180,9 +190,14 @@
                         "type": "address"
                     },
                     {
-                        "internalType": "uint96",
+                        "internalType": "uint48",
                         "name": "price",
-                        "type": "uint96"
+                        "type": "uint48"
+                    },
+                    {
+                        "internalType": "uint48",
+                        "name": "reward",
+                        "type": "uint48"
                     }
                 ],
                 "internalType": "struct NestNFTAuction.Auction[]",
@@ -206,9 +221,9 @@
                 "type": "uint256"
             },
             {
-                "internalType": "uint96",
+                "internalType": "uint48",
                 "name": "price",
-                "type": "uint96"
+                "type": "uint48"
             },
             {
                 "internalType": "uint256",

@@ -48,6 +48,12 @@ export type NFTMyDigDataType = {
   rarity: string;
 };
 
+// enum DigStatus {
+//   firstDig = 1,
+//   digging = 2,
+//   digAgain = 3,
+// }
+
 const NFTAuction: FC = () => {
   const classPrefix = "NFTAuction";
   const [digTabSelected, setDigTabSelected] = useState(0);
@@ -59,6 +65,7 @@ const NFTAuction: FC = () => {
   const [buttonShowClaim, setButtonShowClaim] = useState(false);
   const [claimIndex, setClaimIndex] = useState<BigNumber>();
   const { pendingList, txList } = useTransactionListCon();
+  // const [digStep, setDigStep] = useState<DigStatus>(1)
   const [NFTMyDigData, setNFTMyDigData] = useState<Array<NFTMyDigDataType>>([]);
   const { chainId, account, library } = useWeb3();
   const modal = useRef<any>();
@@ -74,24 +81,27 @@ const NFTAuction: FC = () => {
     const ul = item.map((itemData, indexData) => {
       return (
         <Popup
+          key={`${classPrefix}+pop+${index}+${indexData}`}
           modal
           ref={modal}
           trigger={
-            <li key={`${NFTAuction}+li+${index}+${indexData}`}>
+            <li>
               <NFTItem
                 src={itemData.thumbnail}
                 name={itemData.token_id}
                 lever={parseInt(itemData.rarity)}
-                isDig={true} value={itemData.value}              />
+                isDig={true}
+                value={itemData.value}
+              />
             </li>
           }
         >
-          <NFTDigModal info={itemData}/>
+          <NFTDigModal info={itemData} />
         </Popup>
       );
     });
     return (
-      <li key={`${NFTAuction}+li+${index}`}>
+      <li key={`${classPrefix}+li+${index}`}>
         <ul>{ul}</ul>
       </li>
     );
@@ -198,7 +208,7 @@ const NFTAuction: FC = () => {
           for (let index = 0; index < digList.length; index++) {
             const element = digList[index];
             if (parseInt(element[1].toString()) === startBlock) {
-              setClaimIndex(BigNumber.from(element[2].toString()));
+              setClaimIndex(BigNumber.from(element[3].toString()));
               setButtonShowClaim(true);
             }
           }

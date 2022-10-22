@@ -11,7 +11,6 @@ import { MyDig } from "../testDaata";
 import "./styles";
 import { checkWidth } from "../../../libs/utils";
 
-
 const NFTAuctionView: FC = () => {
   const classPrefix = "NFTAuctionView";
   const auctionChoice = ["All", "Ending soon", "Recently start"];
@@ -47,15 +46,18 @@ const NFTAuctionView: FC = () => {
     const ul = item.map((itemData, indexData) => {
       return (
         <Popup
+          key={`${classPrefix}+li+${index}+${indexData}`}
           modal
           ref={modal}
           trigger={
-            <li key={`${NFTAuctionView}+li+${index}+${indexData}`}>
+            <li>
               <NFTItem
                 src={itemData.img}
                 name={itemData.name}
                 lever={itemData.lever}
-                leftTime={itemData.leftTime} value={"200"}              />
+                leftTime={itemData.leftTime}
+                value={"200"}
+              />
             </li>
           }
         >
@@ -64,7 +66,7 @@ const NFTAuctionView: FC = () => {
       );
     });
     return (
-      <li key={`${NFTAuctionView}+li+${index}`}>
+      <li key={`${classPrefix}+li+${index}`}>
         <ul>{ul}</ul>
       </li>
     );
@@ -80,7 +82,9 @@ const NFTAuctionView: FC = () => {
           </div>
         </div>
         <div className={`${classPrefix}-choice-bottom`}>
-          <p>Price:<span>NEST</span></p>
+          <p>
+            Price:<span>NEST</span>
+          </p>
           <Slider range={{ draggableTrack: true }} defaultValue={[20, 50]} />
         </div>
       </div>

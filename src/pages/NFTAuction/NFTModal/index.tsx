@@ -116,8 +116,8 @@ export const NFTDigModal: FC<NFTDigModalProps> = ({ ...props }) => {
   );
   const startAuction = useNESTNFTAuctionStart(
     BigNumber.from(props.info.token_id),
-    BigNumber.from((timeNum * 1200).toString()),
-    inputValue ? parseUnits(inputValue, 18) : undefined
+    BigNumber.from((timeNum * 3600).toString()),
+    inputValue ? parseUnits(inputValue, 4) : undefined
   );
   const children2 = () => {
     return (
