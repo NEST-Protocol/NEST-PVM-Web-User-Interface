@@ -8,13 +8,13 @@ import { NESTNFTAuction } from "../../libs/hooks/useContract";
 
 export function useNESTNFTAuctionStart(
   tokenId: BigNumber,
-  price: BigNumber,
-  cycle: BigNumber
+  cycle: BigNumber,
+  price?: BigNumber
 ) {
   const { account, chainId } = useWeb3();
   var contract = NESTNFTAuction();
   var callData: string | undefined;
-  if (!chainId) {
+  if (!chainId || !price) {
     contract = null;
   } else {
     callData = contract?.interface.encodeFunctionData("startAuction", [

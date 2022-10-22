@@ -50,3 +50,26 @@ export function useNESTNFclaim(index?: BigNumber) {
     });
     return txPromise;
   }
+
+  export function useNESTNFTApprove(to?: string, tokenId?: BigNumber) {
+    const { account, chainId } = useWeb3();
+    var contract = NESTNFT();
+    var callData: string | undefined;
+    if (!chainId || !to || !tokenId) {
+      contract = null;
+    } else {
+      callData = contract?.interface.encodeFunctionData("approve", [to, tokenId]);
+    }
+    const tx = {
+      from: account,
+      to: contract?.address,
+      data: callData,
+      value: PRICE_FEE[chainId!],
+    };
+    const txPromise = useSendTransaction(contract, tx, {
+      title: `NFT approve`,
+      info: "",
+      type: TransactionType.approve,
+    });
+    return txPromise;
+  }
