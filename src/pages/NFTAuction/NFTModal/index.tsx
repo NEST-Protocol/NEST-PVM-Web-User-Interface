@@ -106,8 +106,8 @@ export const NFTDigModal: FC<NFTDigModalProps> = ({ ...props }) => {
   }, [NFTAuctionContract, NFTContract, props.info.token_id]);
 
   useEffect(() => {
-    checkNFTApprove()
-  }, [checkNFTApprove, txList])
+    checkNFTApprove();
+  }, [checkNFTApprove, txList]);
 
   // transaction
   const approve = useNESTNFTApprove(
@@ -165,20 +165,24 @@ export const NFTDigModal: FC<NFTDigModalProps> = ({ ...props }) => {
             Starting Price
           </div>
           <div className={`${classPrefix}-auction-price-input`}>
-            <input
-              placeholder={props.info.starting_price}
-              value={inputValue}
-              onChange={(e) => {
-                setInputValue(e.target.value);
-              }}
-            />
+            <div className={`${classPrefix}-auction-price-input-input`}>
+              <input
+                placeholder={props.info.starting_price}
+                value={inputValue}
+                onChange={(e) => {
+                  setInputValue(e.target.value);
+                }}
+              />
+            </div>
             <MainButton
               onClick={() => {
                 if (!NFTAllow) {
                   approve();
                 } else {
-                  if (!inputValue) {return}
-                  startAuction()
+                  if (!inputValue) {
+                    return;
+                  }
+                  startAuction();
                 }
               }}
             >

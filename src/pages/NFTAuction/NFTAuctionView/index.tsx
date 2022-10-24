@@ -17,11 +17,9 @@ const NFTAuctionView: FC = () => {
   const modal = useRef<any>();
   const [lever, setLever] = useState(0);
   const leverLi = [
-    <NFTLeverIcon lever={0} />,
     <NFTLeverIcon lever={1} />,
-    <NFTLeverIcon lever={2} />,
-    <NFTLeverIcon lever={3} />,
-    <NFTLeverIcon lever={4} />,
+    <NFTLeverIcon lever={5} />,
+    <NFTLeverIcon lever={10} />
   ].map((item, index) => {
     return (
       <li

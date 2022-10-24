@@ -57,6 +57,7 @@ type ShowModalType = {
   txType: TransactionModalType;
   tokenInfo?: TransactionModalTokenInfo;
   info?: string;
+  transactionInfo?:TransactionBaseInfoType;
 };
 
 const useTransactionList = () => {

@@ -35,6 +35,7 @@ import {
   useNESTNFclaim,
   useNESTNFTMint,
 } from "../../contracts/hooks/useNFTTransaction";
+import { TransactionModalType } from "../Shared/TransactionModal";
 
 export type NFTMyDigDataType = {
   thumbnail: string;
@@ -48,11 +49,12 @@ export type NFTMyDigDataType = {
   rarity: string;
 };
 
-// enum DigStatus {
-//   firstDig = 1,
-//   digging = 2,
-//   digAgain = 3,
-// }
+enum DigStatus {
+  firstDig = 1,
+  digging = 2,
+  open = 3,
+  digAgain = 4,
+}
 
 const NFTAuction: FC = () => {
   const classPrefix = "NFTAuction";
@@ -64,15 +66,17 @@ const NFTAuction: FC = () => {
   );
   const [buttonShowClaim, setButtonShowClaim] = useState(false);
   const [claimIndex, setClaimIndex] = useState<BigNumber>();
-  const { pendingList, txList } = useTransactionListCon();
-  // const [digStep, setDigStep] = useState<DigStatus>(1)
+  const { pendingList, txList, showModal } = useTransactionListCon();
+  const [digStep, setDigStep] = useState<DigStatus>(1);
   const [NFTMyDigData, setNFTMyDigData] = useState<Array<NFTMyDigDataType>>([]);
   const { chainId, account, library } = useWeb3();
   const modal = useRef<any>();
   const dataArray = (num: number) => {
     var result = [];
-    for (var i = 0; i < NFTMyDigData.length; i += num) {
-      result.push(NFTMyDigData.slice(i, i + num));
+    if (NFTMyDigData.length > 0) {
+      for (var i = 0; i < NFTMyDigData.length; i += num) {
+        result.push(NFTMyDigData.slice(i, i + num));
+      }
     }
     return result;
   };
@@ -143,7 +147,7 @@ const NFTAuction: FC = () => {
     })();
   }, [account, chainId, library, txList]);
   // get dig data
-  useEffect(() => {
+  const getDigData = useCallback(() => {
     if (!account || !chainId) {
       return;
     }
@@ -172,13 +176,31 @@ const NFTAuction: FC = () => {
     }
     return true;
   };
-  const mainButtonPending = () => {
-    const pendingTransaction = pendingList.filter(
-      (item) =>
-        item.type === TransactionType.NESTNFTMint ||
-        item.type === TransactionType.NESTNFTClaim
+  useEffect(() => {
+    const mintPending = pendingList.filter(
+      (item) => item.type === TransactionType.NESTNFTMint
     );
-    return pendingTransaction.length > 0 ? true : false;
+    if (mintPending.length > 0) {
+      setDigStep(2);
+    } else if (digStep === 2 && mintPending.length === 0) {
+      setDigStep(3);
+    }
+  }, [digStep, pendingList]);
+  const mainButtonPending = () => {
+    const type = showModal.txType;
+    const isShow = showModal.isShow;
+
+    if (type === TransactionModalType.wait && isShow) {
+      return true;
+    } else {
+      // pending
+      const pendingTransaction = pendingList.filter(
+        (item) =>
+          item.type === TransactionType.NESTNFTMint ||
+          item.type === TransactionType.NESTNFTClaim
+      );
+      return pendingTransaction.length > 0 ? true : false;
+    }
   };
   const checkMainButton = () => {
     if (!library) {
@@ -218,6 +240,17 @@ const NFTAuction: FC = () => {
     },
     [NFTContract, account, library]
   );
+
+  // update
+  useEffect(() => {
+    getDigData();
+    const time = setInterval(() => {
+      getDigData();
+    }, 10000);
+    return () => {
+      clearTimeout(time);
+    };
+  }, [getDigData]);
 
   // dig tab item data
   const digTabItemArray = [
@@ -260,15 +293,47 @@ const NFTAuction: FC = () => {
   // top left view
   const topLeftView = () => {
     const topLeftViewClass = `${classPrefix}-top-left-main`;
-    if (digTabSelected === 0) {
-      return (
-        <div className={`${topLeftViewClass}-buy`}>
+    // show dig image
+    const digImage = () => {
+      if (digStep === 1) {
+        return (
+          <div className={`${topLeftViewClass}-buy-otherImage`}>
+            <img src="./Dig.jpg" alt="img" />
+          </div>
+        );
+      } else if (digStep === 2) {
+        return (
+          <div className={`${topLeftViewClass}-buy-otherImage`}>
+            <img src="./dig-unscreen.gif" alt="img" />
+          </div>
+        );
+      } else if (digStep === 3) {
+        return (
+          <div className={`${topLeftViewClass}-buy-otherImage`}>
+            <img src="./OpenPrize.jpg" alt="img" />
+          </div>
+        );
+      } else if (digStep === 4) {
+        return (
+          <div className={`${topLeftViewClass}-buy-otherImage`}>
+            <img src="./Dig again.jpg" alt="img" />
+          </div>
+        );
+      } else {
+        return (
           <div className={`${topLeftViewClass}-buy-image`}>
             <img src={MyDig[0].img} alt="img" />
             <div className={`${topLeftViewClass}-buy-image-lever`}>
               <NFTLeverIcon lever={2} />
             </div>
           </div>
+        );
+      }
+    };
+    if (digTabSelected === 0) {
+      return (
+        <div className={`${topLeftViewClass}-buy`}>
+          {digImage()}
           <MainButton
             onClick={() => {
               if (!checkMainButton()) {

@@ -21,6 +21,7 @@ export function useSendTransaction(
       isShow: true,
       hash: "0x0",
       txType: TransactionModalType.wait,
+      transactionInfo: txInfo
     });
     const failModal = (info: string) => {
       setShowModal({
@@ -28,6 +29,7 @@ export function useSendTransaction(
         hash: "0x0",
         txType: TransactionModalType.fail,
         info: info,
+        transactionInfo: txInfo
       });
     };
 
@@ -93,6 +95,7 @@ export function useSendTransaction(
           isShow: true,
           hash: res.hash,
           txType: TransactionModalType.success,
+          transactionInfo: txInfo
         });
       })
       .catch((error) => {
