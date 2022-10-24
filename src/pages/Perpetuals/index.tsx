@@ -325,7 +325,7 @@ const Perpetuals: FC = () => {
           high: item.high.toFixed(2),
           low: item.low.toFixed(2),
           open: item.open.toFixed(2),
-          time: item.time,
+          time: new Date(item.timestamp * 1000).toLocaleString(),
         })
       ));
     })();
