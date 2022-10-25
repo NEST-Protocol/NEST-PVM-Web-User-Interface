@@ -47,6 +47,15 @@ export type NFTMyDigDataType = {
   value: string;
   hash: string;
   rarity: string;
+
+  bidder: string;
+  end_time: string;
+  index: string;
+  start_price: string;
+  start_block: string;
+  start_time: string;
+  price: string;
+  end_auction: string;
 };
 
 enum DigStatus {
@@ -152,11 +161,16 @@ const NFTAuction: FC = () => {
       return;
     }
     (async () => {
-      const data = await fetch(
-        `https://api.hedge.red/api/nft/mymint/${account}/1000/${chainId?.toString()}`
-      );
-      const data_json = await data.json();
-      setNFTMyDigData(data_json["value"]);
+      try {
+        const data = await fetch(
+          `https://api.hedge.red/api/nft/mymint/${account}/1000/${chainId?.toString()}`
+        );
+        const data_json = await data.json();
+        setNFTMyDigData(data_json["value"]);
+      } catch (error) {
+        console.log(error);
+        setNFTMyDigData([]);
+      }
     })();
   }, [account, chainId]);
   // check

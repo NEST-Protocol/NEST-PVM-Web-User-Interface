@@ -1,7 +1,8 @@
 import classNames from "classnames";
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { TokenNest } from "../Icon";
 import NFTLeverIcon from "../NFTLeverIcon";
+import moment from "moment";
 import "./styles";
 
 export type NFTItemType = {
@@ -10,16 +11,44 @@ export type NFTItemType = {
   lever: number;
   value: string;
   isDig?: boolean;
-  leftTime?: number;
+  endTime?: string;
 };
 
 const NFTItem: FC<NFTItemType> = ({ ...props }) => {
-  const src = 'https://' + props.src.substring(7, props.src.length) + '.ipfs.w3s.link'
+  const src =
+    "https://" + props.src.substring(7, props.src.length) + ".ipfs.w3s.link";
+  const [timeString, setTimeString] = useState<string>();
+  // time
+  useEffect(() => {
+    const getTime = () => {
+      if (!props.isDig && props.endTime) {
+        const nowTime = Date.now() / 1000;
+        const endTime = parseInt(props.endTime);
+        if (nowTime > endTime) {
+          // end
+          setTimeString('Closed')
+        } else {
+          // show
+          const timeData = moment((endTime - nowTime - 32*3600) * 1000)
+          setTimeString(timeData.format("D") + 'D ' + timeData.format("H:mm:ss"));
+        }
+      }
+    };
+    getTime();
+    const time = setInterval(() => {
+      getTime();
+    }, 5000);
+    return () => {
+      clearTimeout(time);
+    };
+  }, [props.endTime, props.isDig]);
   return (
-    <div className={classNames({
-      [`NFTItem`]: true,
-      [`auctionWidth`]: !props.isDig
-    })}>
+    <div
+      className={classNames({
+        [`NFTItem`]: true,
+        [`auctionWidth`]: !props.isDig,
+      })}
+    >
       <div className="NFTItem-image">
         <img src={src} alt="NEST NFT" />
       </div>
@@ -30,7 +59,7 @@ const NFTItem: FC<NFTItemType> = ({ ...props }) => {
             {props.isDig ? (
               <></>
             ) : (
-              <p className="NFTItem-info-base-name-time">12:33:56</p>
+              <p className="NFTItem-info-base-name-time">{timeString}</p>
             )}
           </div>
 

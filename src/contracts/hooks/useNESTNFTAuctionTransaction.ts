@@ -38,11 +38,11 @@ export function useNESTNFTAuctionStart(
   return txPromise;
 }
 
-export function useNESTNFTAuction(index: BigNumber, price: BigNumber) {
+export function useNESTNFTAuction(index: BigNumber, price?: BigNumber) {
   const { account, chainId } = useWeb3();
   var contract = NESTNFTAuction();
   var callData: string | undefined;
-  if (!chainId) {
+  if (!chainId || !price) {
     contract = null;
   } else {
     callData = contract?.interface.encodeFunctionData("bid", [index, price]);

@@ -1,18 +1,34 @@
 import classNames from "classnames";
 import { BigNumber } from "ethers";
-import { parseUnits } from "ethers/lib/utils";
+import { MaxUint256 } from "@ethersproject/constants";
+import { formatUnits, parseUnits } from "ethers/lib/utils";
 import { FC, useCallback, useEffect, useState } from "react";
 import { NFTMyDigDataType } from "..";
 import { TokenNest } from "../../../components/Icon";
 import MainButton from "../../../components/MainButton";
 import MainCard from "../../../components/MainCard";
 import NFTLeverIcon from "../../../components/NFTLeverIcon";
-import { useNESTNFTAuctionStart } from "../../../contracts/hooks/useNESTNFTAuctionTransaction";
+import { useERC20Approve } from "../../../contracts/hooks/useERC20Approve";
+import {
+  useNESTNFTAuction,
+  useNESTNFTAuctionEnd,
+  useNESTNFTAuctionStart,
+} from "../../../contracts/hooks/useNESTNFTAuctionTransaction";
 import { useNESTNFTApprove } from "../../../contracts/hooks/useNFTTransaction";
-import { NESTNFT, NESTNFTAuction } from "../../../libs/hooks/useContract";
+import {
+  NESTNFTAuctionContract,
+  tokenList,
+} from "../../../libs/constants/addresses";
+import {
+  getERC20Contract,
+  NESTNFT,
+  NESTNFTAuction,
+} from "../../../libs/hooks/useContract";
 import useThemes, { ThemeType } from "../../../libs/hooks/useThemes";
 import useTransactionListCon from "../../../libs/hooks/useTransactionInfo";
+import useWeb3 from "../../../libs/hooks/useWeb3";
 import { showEllipsisAddress } from "../../../libs/utils";
+import moment from "moment";
 import "./styles";
 
 export type NFTModalType = {
@@ -83,12 +99,12 @@ type NFTDigModalProps = {
 export const NFTDigModal: FC<NFTDigModalProps> = ({ ...props }) => {
   const [showChildren3, setShowChildren3] = useState(false);
   const [timeNum, setTimeNum] = useState(0);
-  const [inputValue, setInputValue] = useState<string>();
+  const [inputValue, setInputValue] = useState<string>("");
   const [NFTAllow, setNFTAllow] = useState<boolean>(false);
   const { txList } = useTransactionListCon();
   const NFTContract = NESTNFT();
   const NFTAuctionContract = NESTNFTAuction();
-
+  const timeArray = [24, 48, 78];
   // check
   const checkNFTApprove = useCallback(() => {
     if (!NFTContract || !NFTAuctionContract) {
@@ -116,7 +132,7 @@ export const NFTDigModal: FC<NFTDigModalProps> = ({ ...props }) => {
   );
   const startAuction = useNESTNFTAuctionStart(
     BigNumber.from(props.info.token_id),
-    BigNumber.from((timeNum * 3600).toString()),
+    BigNumber.from((timeArray[timeNum] * 3600).toString()),
     inputValue ? parseUnits(inputValue, 4) : undefined
   );
   const children2 = () => {
@@ -134,7 +150,6 @@ export const NFTDigModal: FC<NFTDigModalProps> = ({ ...props }) => {
     );
   };
   const children3 = () => {
-    const timeArray = [24, 48, 78];
     const timeButton = timeArray.map((item, index) => {
       return (
         <button
@@ -203,28 +218,164 @@ export const NFTDigModal: FC<NFTDigModalProps> = ({ ...props }) => {
   );
 };
 
-export type NFTAuctionModalType = {
-  title: string;
-};
+export const NFTAuctionModal: FC<NFTDigModalProps> = ({ ...props }) => {
+  const [inputValue, setInputValue] = useState<string>("");
+  const { chainId, account, library } = useWeb3();
+  const [nestAllowance, setNestAllowance] = useState<BigNumber>(
+    BigNumber.from("0")
+  );
+  const [timeString, setTimeString] = useState<string>();
+  const [endAuction, setEndAuction] = useState<boolean>(true);
+  const nowTime = Date.now() / 1000;
+  // transaction
+  const auctionTransaction = useNESTNFTAuction(
+    BigNumber.from(props.info.index),
+    inputValue ? parseUnits(inputValue, 4) : undefined
+  );
+  const approve = useERC20Approve(
+    "NEST",
+    MaxUint256,
+    chainId ? NESTNFTAuctionContract[chainId] : undefined
+  );
+  const endAuctionTransaction = useNESTNFTAuctionEnd(
+    BigNumber.from(props.info.index)
+  );
 
-export const NFTAuctionModal: FC<NFTAuctionModalType> = ({ ...props }) => {
+  // approve
+  useEffect(() => {
+    if (!chainId || !account || !library) {
+      return;
+    }
+    const nestToken = getERC20Contract(
+      tokenList["NEST"].addresses[chainId],
+      library,
+      account
+    );
+    if (!nestToken) {
+      setNestAllowance(BigNumber.from("0"));
+      return;
+    }
+    (async () => {
+      const allowance = await nestToken.allowance(
+        account,
+        NESTNFTAuctionContract[chainId]
+      );
+      setNestAllowance(allowance);
+    })();
+  }, [account, chainId, library]);
+  // time
+  useEffect(() => {
+    const getTime = () => {
+      if (props.info.end_time) {
+        const endTime = parseInt(props.info.end_time);
+        if (nowTime > endTime) {
+          // end
+          setTimeString("---");
+          setEndAuction(true);
+        } else {
+          // show
+          const timeData = moment((endTime - nowTime - 32 * 3600) * 1000);
+          setTimeString(
+            `${timeData.format("D")}D ${timeData.format(
+              "H"
+            )}h ${timeData.format("m")}min ${timeData.format("s")}s`
+          );
+          setEndAuction(false);
+        }
+      }
+    };
+    getTime();
+    const time = setInterval(() => {
+      getTime();
+    }, 5000);
+    return () => {
+      clearTimeout(time);
+    };
+  }, [nowTime, props.info.end_time]);
   const children1 = () => {
-    return (
+    return endAuction ? (
+      <></>
+    ) : (
       <p>
-        Auction End Time<span>11h 2min 60s</span>
+        Auction End Time<span>{timeString}</span>
       </p>
     );
   };
   const children2 = () => {
+    if (!account) {
+      return <></>;
+    }
+    const checkAllowance = () => {
+      if (!inputValue) {
+        return true;
+      }
+      if (nestAllowance.lt(parseUnits(inputValue, 18))) {
+        return false;
+      }
+      return true;
+    };
+    const checkMainButton = () => {
+      if (!checkAllowance()) {
+        return true;
+      }
+      if (
+        inputValue === "" ||
+        parseUnits(inputValue, 18).eq(BigNumber.from("0"))
+      ) {
+        return false;
+      }
+      return true;
+    };
+    const checkBidder = () => {
+      if (
+        props.info.bidder.toLocaleLowerCase() === account.toLocaleLowerCase()
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    };
     return (
       <div className={`${classPrefix}-info-text-bid`}>
         <div className={`${classPrefix}-info-text-bid-value`}>
-          <p>Highest bid:</p>
+          {endAuction ? (
+            <p>{checkBidder() ? "Transaction price" : "Claim price"}</p>
+          ) : (
+            <p>Highest bid:</p>
+          )}
           <TokenNest />
-          <span>1000.00</span>
+          <span>{formatUnits(props.info.price, 4)}</span>
         </div>
-        <input />
-        <MainButton>Confirmation</MainButton>
+        {endAuction ? (
+          <></>
+        ) : (
+          <div className={`${classPrefix}-info-text-bid-input`}>
+            <input
+              value={inputValue}
+              onChange={(e) => {
+                setInputValue(e.target.value);
+              }}
+            />
+          </div>
+        )}
+        {endAuction ? (
+          <MainButton onClick={() => endAuctionTransaction()}>
+            {"claim"}
+          </MainButton>
+        ) : (
+          <MainButton
+            disable={!checkMainButton()}
+            onClick={() => {
+              if (checkAllowance()) {
+                auctionTransaction();
+              } else {
+                approve();
+              }
+            }}
+          >
+            {checkAllowance() ? "Confirmation" : "Approve"}
+          </MainButton>
+        )}
       </div>
     );
   };
@@ -290,7 +441,8 @@ export const NFTAuctionModal: FC<NFTAuctionModalType> = ({ ...props }) => {
   };
   return (
     <NFTModal
-      title={props.title}
+      title={"Auction"}
+      info={props.info}
       children1={children1()}
       children2={children2()}
       children3={children3()}
