@@ -2,8 +2,8 @@ import classNames from "classnames";
 import { FC, useEffect, useState } from "react";
 import { TokenNest } from "../Icon";
 import NFTLeverIcon from "../NFTLeverIcon";
-import moment from "moment";
 import "./styles";
+import { downTime } from "../../libs/utils";
 
 export type NFTItemType = {
   src: string;
@@ -29,8 +29,7 @@ const NFTItem: FC<NFTItemType> = ({ ...props }) => {
           setTimeString('Closed')
         } else {
           // show
-          const timeData = moment((endTime - nowTime - 32*3600) * 1000)
-          setTimeString(timeData.format("D") + 'D ' + timeData.format("H:mm:ss"));
+          setTimeString(downTime(endTime - nowTime));
         }
       }
     };

@@ -32,7 +32,7 @@ const NFTReceived: FC = () => {
           `https://api.hedge.red/api/nft/mynft/${account}/1000/${chainId?.toString()}`
         );
         const data_json = await data.json();
-        setNFTAuctionData(data_json["value"]);
+        setNFTAuctionData(data_json["value"] ?? []);
       } catch (error) {
         console.log(error);
         setNFTAuctionData([]);
@@ -51,9 +51,11 @@ const NFTReceived: FC = () => {
       return (
         <Popup
           modal
+          key={`${classPrefix}+li+${index}+${indexData}`}
           ref={modal}
+          nested
           trigger={
-            <li key={`${classPrefix}+li+${index}+${indexData}`}>
+            <li>
               <NFTItem
                 src={itemData.thumbnail}
                 name={itemData.token_id}

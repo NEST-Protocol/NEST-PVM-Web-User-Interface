@@ -2,9 +2,9 @@ import classNames from "classnames";
 import { BigNumber } from "ethers";
 import { MaxUint256 } from "@ethersproject/constants";
 import { formatUnits, parseUnits } from "ethers/lib/utils";
-import { FC, useCallback, useEffect, useState } from "react";
+import { FC, useCallback, useEffect, useRef, useState } from "react";
 import { NFTMyDigDataType } from "..";
-import { TokenNest } from "../../../components/Icon";
+import { NFTDownIcon, NFTUpIcon, TokenNest } from "../../../components/Icon";
 import MainButton from "../../../components/MainButton";
 import MainCard from "../../../components/MainCard";
 import NFTLeverIcon from "../../../components/NFTLeverIcon";
@@ -27,9 +27,10 @@ import {
 import useThemes, { ThemeType } from "../../../libs/hooks/useThemes";
 import useTransactionListCon from "../../../libs/hooks/useTransactionInfo";
 import useWeb3 from "../../../libs/hooks/useWeb3";
-import { showEllipsisAddress } from "../../../libs/utils";
-import moment from "moment";
+import { downTime, showEllipsisAddress } from "../../../libs/utils";
 import "./styles";
+import Popup from "reactjs-popup";
+import NFTAuctionTips from "../NFTAuctionTips";
 
 export type NFTModalType = {
   title: string;
@@ -103,6 +104,7 @@ export const NFTDigModal: FC<NFTDigModalProps> = ({ ...props }) => {
   const [NFTAllow, setNFTAllow] = useState<boolean>(false);
   const { txList } = useTransactionListCon();
   const NFTContract = NESTNFT();
+  const modal = useRef<any>();
   const NFTAuctionContract = NESTNFTAuction();
   const timeArray = [24, 48, 78];
   // check
@@ -135,6 +137,9 @@ export const NFTDigModal: FC<NFTDigModalProps> = ({ ...props }) => {
     BigNumber.from((timeArray[timeNum] * 3600).toString()),
     inputValue ? parseUnits(inputValue, 4) : undefined
   );
+  const clickShowChildren3 = () => {
+    setShowChildren3(true)
+  }
   const children2 = () => {
     return (
       <div className={`${classPrefix}-info-text-confirmation`}>
@@ -143,9 +148,36 @@ export const NFTDigModal: FC<NFTDigModalProps> = ({ ...props }) => {
           <TokenNest />
           <span>{props.info.value}</span>
         </div>
-        <MainButton onClick={() => setShowChildren3(true)}>
-          Confirmation
-        </MainButton>
+        {showChildren3 ? (
+          <div
+            className={`${classPrefix}-info-text-confirmation-auction`}
+            onClick={() => setShowChildren3(!showChildren3)}
+          >
+            <p>Go to auction</p>
+            {<NFTUpIcon />}
+          </div>
+        ) : (
+          <Popup
+            modal
+            ref={modal}
+            nested
+            trigger={
+              <div className={`${classPrefix}-info-text-confirmation-auction`}>
+                <p>Go to auction</p>
+                {<NFTDownIcon />}
+              </div>
+            }
+          >
+            <NFTAuctionTips onClose={() => modal.current.close()} click={clickShowChildren3}/>
+          </Popup>
+        )}
+        {/* <div
+          className={`${classPrefix}-info-text-confirmation-auction`}
+          onClick={() => setShowChildren3(!showChildren3)}
+        >
+          <p>Go to auction</p>
+          {showChildren3 ? <NFTUpIcon /> : <NFTDownIcon />}
+        </div> */}
       </div>
     );
   };
@@ -218,6 +250,13 @@ export const NFTDigModal: FC<NFTDigModalProps> = ({ ...props }) => {
   );
 };
 
+type NFTAuctionHistoryType = {
+  address: string;
+  time: string;
+  bid: string;
+  refund: string;
+};
+
 export const NFTAuctionModal: FC<NFTDigModalProps> = ({ ...props }) => {
   const [inputValue, setInputValue] = useState<string>("");
   const { chainId, account, library } = useWeb3();
@@ -226,7 +265,9 @@ export const NFTAuctionModal: FC<NFTDigModalProps> = ({ ...props }) => {
   );
   const [timeString, setTimeString] = useState<string>();
   const [endAuction, setEndAuction] = useState<boolean>(true);
-  const nowTime = Date.now() / 1000;
+  const [historyData, setHistoryData] = useState<Array<NFTAuctionHistoryType>>(
+    []
+  );
   // transaction
   const auctionTransaction = useNESTNFTAuction(
     BigNumber.from(props.info.index),
@@ -268,18 +309,14 @@ export const NFTAuctionModal: FC<NFTDigModalProps> = ({ ...props }) => {
     const getTime = () => {
       if (props.info.end_time) {
         const endTime = parseInt(props.info.end_time);
+        const nowTime = Date.now() / 1000;
         if (nowTime > endTime) {
           // end
           setTimeString("---");
           setEndAuction(true);
         } else {
           // show
-          const timeData = moment((endTime - nowTime - 32 * 3600) * 1000);
-          setTimeString(
-            `${timeData.format("D")}D ${timeData.format(
-              "H"
-            )}h ${timeData.format("m")}min ${timeData.format("s")}s`
-          );
+          setTimeString(downTime(endTime - nowTime));
           setEndAuction(false);
         }
       }
@@ -287,11 +324,63 @@ export const NFTAuctionModal: FC<NFTDigModalProps> = ({ ...props }) => {
     getTime();
     const time = setInterval(() => {
       getTime();
-    }, 5000);
+    }, 1000);
     return () => {
       clearTimeout(time);
     };
-  }, [nowTime, props.info.end_time]);
+  }, [props.info.end_time]);
+  // history
+  const getHistory = useCallback(() => {
+    (async () => {
+      try {
+        const data = await fetch(
+          `https://api.hedge.red/api/nft/auction/history/0xfb9Da3d9B76577CAc3616D5d0cf6b7d51B98870F/${
+            props.info.token_id
+          }/${chainId?.toString()}`
+        );
+        const data_json = await data.json();
+        setHistoryData(data_json["value"] ?? []);
+      } catch (error) {
+        console.log(error);
+        setHistoryData([]);
+      }
+    })();
+  }, [chainId, props.info.token_id]);
+  useEffect(() => {
+    getHistory();
+  }, [getHistory]);
+  const historyTr = () => {
+    const nowTime = Date.now() / 1000;
+    const showData = [...historyData];
+    return showData.reverse().map((item, index) => {
+      var showHighLight =
+        account?.toLocaleLowerCase() === item.address.toLocaleLowerCase();
+
+      return (
+        <tr
+          key={`history+nft+${index}`}
+          className={classNames({
+            [`high`]: showHighLight,
+          })}
+        >
+          <td>{showEllipsisAddress(item.address)}</td>
+          <td>{formatUnits(item.bid, 4)}</td>
+          <td>{`${((nowTime - parseInt(item.time)) / 3600).toFixed(
+            2
+          )} hours ago`}</td>
+          <td>{index === 0 ? "/" : formatUnits(item.refund, 4)}</td>
+          <td>
+            {index === 0
+              ? "Highest bid"
+              : formatUnits(
+                  BigNumber.from(item.refund).add(BigNumber.from(item.bid)),
+                  4
+                )}
+          </td>
+        </tr>
+      );
+    });
+  };
   const children1 = () => {
     return endAuction ? (
       <></>
@@ -302,6 +391,45 @@ export const NFTAuctionModal: FC<NFTDigModalProps> = ({ ...props }) => {
     );
   };
   const children2 = () => {
+    const addPriceButton = () => {
+      const buttonText = ["+10%", "+50%", "MAX"];
+      return buttonText.map((item, index) => {
+        return (
+          <button
+            key={`${index}+addPriceButton`}
+            value={index}
+            onClick={(e) => {
+              const buttonValue = e.currentTarget.value;
+              var newInputValue: string = "";
+              const nowPrice = BigNumber.from(props.info.price);
+              if (buttonValue === "0") {
+                newInputValue = formatUnits(
+                  nowPrice.add(nowPrice.div(BigNumber.from("10"))),
+                  4
+                ).toString();
+              } else if (buttonValue === "1") {
+                newInputValue = formatUnits(
+                  nowPrice.add(nowPrice.div(BigNumber.from("2"))),
+                  4
+                ).toString();
+              } else if (buttonValue === "2") {
+                newInputValue = formatUnits(
+                  nowPrice.add(
+                    nowPrice
+                      .mul(BigNumber.from("70"))
+                      .div(BigNumber.from("100"))
+                  ),
+                  4
+                ).toString();
+              }
+              setInputValue(newInputValue);
+            }}
+          >
+            {item}
+          </button>
+        );
+      });
+    };
     if (!account) {
       return <></>;
     }
@@ -335,6 +463,25 @@ export const NFTAuctionModal: FC<NFTDigModalProps> = ({ ...props }) => {
         return false;
       }
     };
+    const checkNoMe = () => {
+      if (
+        props.info.initiator.toLocaleLowerCase() !==
+          account.toLocaleLowerCase() &&
+        props.info.bidder.toLocaleLowerCase() !== account.toLocaleLowerCase()
+      ) {
+        return true;
+      }
+      return false;
+    };
+    const shwClaimButton = () => {
+      return checkNoMe() ? (
+        <></>
+      ) : (
+        <MainButton onClick={() => endAuctionTransaction()}>
+          {"claim"}
+        </MainButton>
+      );
+    };
     return (
       <div className={`${classPrefix}-info-text-bid`}>
         <div className={`${classPrefix}-info-text-bid-value`}>
@@ -359,9 +506,15 @@ export const NFTAuctionModal: FC<NFTDigModalProps> = ({ ...props }) => {
           </div>
         )}
         {endAuction ? (
-          <MainButton onClick={() => endAuctionTransaction()}>
-            {"claim"}
-          </MainButton>
+          <></>
+        ) : (
+          <div className={`${classPrefix}-info-text-bid-addPrice`}>
+            {addPriceButton()}
+          </div>
+        )}
+
+        {endAuction ? (
+          shwClaimButton()
         ) : (
           <MainButton
             disable={!checkMainButton()}
@@ -373,7 +526,7 @@ export const NFTAuctionModal: FC<NFTDigModalProps> = ({ ...props }) => {
               }
             }}
           >
-            {checkAllowance() ? "Confirmation" : "Approve"}
+            {checkAllowance() ? "Bid" : "Approve"}
           </MainButton>
         )}
       </div>
@@ -388,53 +541,14 @@ export const NFTAuctionModal: FC<NFTDigModalProps> = ({ ...props }) => {
         <table>
           <thead>
             <tr>
-              <th>Bidding price</th>
+              <th>Address</th>
+              <th>Bid</th>
+              <th>Time</th>
               <th>Extra refund</th>
               <th>Total refund</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>2000</td>
-              <td>190</td>
-              <td>3000</td>
-            </tr>
-            <tr>
-              <td>2000</td>
-              <td>190</td>
-              <td>3000</td>
-            </tr>
-            <tr>
-              <td>2000</td>
-              <td>190</td>
-              <td>3000</td>
-            </tr>
-            <tr>
-              <td>2000</td>
-              <td>190</td>
-              <td>3000</td>
-            </tr>
-            <tr>
-              <td>2000</td>
-              <td>190</td>
-              <td>3000</td>
-            </tr>
-            <tr>
-              <td>2000</td>
-              <td>190</td>
-              <td>3000</td>
-            </tr>
-            <tr>
-              <td>2000</td>
-              <td>190</td>
-              <td>3000</td>
-            </tr>
-            <tr>
-              <td>2000</td>
-              <td>190</td>
-              <td>3000</td>
-            </tr>
-          </tbody>
+          <tbody>{historyTr()}</tbody>
         </table>
       </div>
     );

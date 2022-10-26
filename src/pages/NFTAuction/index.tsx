@@ -47,6 +47,7 @@ export type NFTMyDigDataType = {
   value: string;
   hash: string;
   rarity: string;
+  initiator: string;
 
   bidder: string;
   end_time: string;
@@ -97,6 +98,7 @@ const NFTAuction: FC = () => {
           key={`${classPrefix}+pop+${index}+${indexData}`}
           modal
           ref={modal}
+          nested
           trigger={
             <li>
               <NFTItem
@@ -166,7 +168,7 @@ const NFTAuction: FC = () => {
           `https://api.hedge.red/api/nft/mymint/${account}/1000/${chainId?.toString()}`
         );
         const data_json = await data.json();
-        setNFTMyDigData(data_json["value"]);
+        setNFTMyDigData(data_json["value"] ?? []);
       } catch (error) {
         console.log(error);
         setNFTMyDigData([]);

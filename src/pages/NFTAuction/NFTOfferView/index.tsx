@@ -32,7 +32,7 @@ const NFTOfferView: FC = () => {
           `https://api.hedge.red/api/nft/myauction/${account}/1000/${chainId?.toString()}`
         );
         const data_json = await data.json();
-        setNFTAuctionData(data_json["value"]);
+        setNFTAuctionData(data_json["value"] ?? []);
       } catch (error) {
         console.log(error);
         setNFTAuctionData([]);
@@ -51,9 +51,11 @@ const NFTOfferView: FC = () => {
       return (
         <Popup
           modal
+          key={`${classPrefix}+li+${index}+${indexData}`}
           ref={modal}
+          nested
           trigger={
-            <li key={`${classPrefix}+li+${index}+${indexData}`}>
+            <li>
               <NFTItem
                 src={itemData.thumbnail}
                 name={itemData.token_id}
@@ -105,8 +107,7 @@ const NFTOfferView: FC = () => {
     } else if (auctionStatus === 3) {
       newArray = NFTAuctionData.filter((item) => {
         return (
-          parseInt(item.end_time) <= nowTime &&
-          item.bidder.toLocaleLowerCase() !== account?.toLocaleLowerCase()
+          parseInt(item.end_time) <= nowTime
         );
       });
     } else {

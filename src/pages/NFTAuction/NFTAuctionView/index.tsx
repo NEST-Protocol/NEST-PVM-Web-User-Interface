@@ -55,7 +55,7 @@ const NFTAuctionView: FC = () => {
           `https://api.hedge.red/api/nft/auction/list/1000/${chainId?.toString()}`
         );
         const data_json = await data.json();
-        setNFTAuctionData(data_json["value"]);
+        setNFTAuctionData(data_json["value"] ?? []);
       } catch (error) {
         console.log(error);
         setNFTAuctionData([]);
@@ -76,6 +76,7 @@ const NFTAuctionView: FC = () => {
           key={`${classPrefix}+li+${index}+${indexData}`}
           modal
           ref={modal}
+          nested
           trigger={
             <li>
               <NFTItem
@@ -155,7 +156,19 @@ const NFTAuctionView: FC = () => {
         }
         return newArray;
       } else if (auctionStatus === 2) {
-        return array;
+        const len = newArray.length;
+        if (len >= 1) {
+          for (let i = 0; i < len - 1; i++) {
+            for (let j = 0; j < len - 1 - i; j++) {
+              if (newArray[j].start_time > newArray[j + 1].start_time) {
+                let temp = newArray[j + 1];
+                newArray[j + 1] = newArray[j];
+                newArray[j] = temp;
+              }
+            }
+          }
+        }
+        return newArray;
       } else {
         return array;
       }
