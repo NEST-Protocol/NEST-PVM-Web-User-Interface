@@ -26,7 +26,7 @@ const NFTItem: FC<NFTItemType> = ({ ...props }) => {
         const endTime = parseInt(props.endTime);
         if (nowTime > endTime) {
           // end
-          setTimeString('Closed')
+          setTimeString('')
         } else {
           // show
           setTimeString(downTime(endTime - nowTime));

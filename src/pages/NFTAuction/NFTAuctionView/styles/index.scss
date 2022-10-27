@@ -5,6 +5,14 @@
     padding: 0 20px;
     padding-bottom: 20px;
 
+    &-noData {
+        width: 100%;
+        line-height: 100px;
+        text-align: center;
+        font-size: 12px;
+        color: #878787;
+    }
+
     &-choice {
         width: 100%;
         height: 121px;
@@ -128,6 +136,10 @@
 
 .main-dark {
     .NFTAuctionView {
+
+        &-noData {
+            color: #C5C5C5;
+        }
 
         &-choice {
             border: none;

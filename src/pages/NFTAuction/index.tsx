@@ -417,7 +417,11 @@ const NFTAuction: FC = () => {
             <NFTMyMint />
             <p>My Dig</p>
           </div>
-          <ul className="line">{liData}</ul>
+          {NFTMyDigData.length > 0 ? (
+            <ul className="line">{liData}</ul>
+          ) : (
+            <div className={`${classPrefix}-top-right-noData`}>No offers to display</div>
+          )}
         </MainCard>
       </div>
       <div className={`${classPrefix}-bottom`}>

@@ -25,7 +25,9 @@ import {
   NESTNFTAuction,
 } from "../../../libs/hooks/useContract";
 import useThemes, { ThemeType } from "../../../libs/hooks/useThemes";
-import useTransactionListCon from "../../../libs/hooks/useTransactionInfo";
+import useTransactionListCon, {
+  TransactionType,
+} from "../../../libs/hooks/useTransactionInfo";
 import useWeb3 from "../../../libs/hooks/useWeb3";
 import { downTime, showEllipsisAddress } from "../../../libs/utils";
 import "./styles";
@@ -138,8 +140,8 @@ export const NFTDigModal: FC<NFTDigModalProps> = ({ ...props }) => {
     inputValue ? parseUnits(inputValue, 4) : undefined
   );
   const clickShowChildren3 = () => {
-    setShowChildren3(true)
-  }
+    setShowChildren3(true);
+  };
   const children2 = () => {
     return (
       <div className={`${classPrefix}-info-text-confirmation`}>
@@ -168,7 +170,10 @@ export const NFTDigModal: FC<NFTDigModalProps> = ({ ...props }) => {
               </div>
             }
           >
-            <NFTAuctionTips onClose={() => modal.current.close()} click={clickShowChildren3}/>
+            <NFTAuctionTips
+              onClose={() => modal.current.close()}
+              click={clickShowChildren3}
+            />
           </Popup>
         )}
         {/* <div
@@ -268,6 +273,7 @@ export const NFTAuctionModal: FC<NFTDigModalProps> = ({ ...props }) => {
   const [historyData, setHistoryData] = useState<Array<NFTAuctionHistoryType>>(
     []
   );
+  const { pendingList, txList } = useTransactionListCon();
   // transaction
   const auctionTransaction = useNESTNFTAuction(
     BigNumber.from(props.info.index),
@@ -303,7 +309,7 @@ export const NFTAuctionModal: FC<NFTDigModalProps> = ({ ...props }) => {
       );
       setNestAllowance(allowance);
     })();
-  }, [account, chainId, library]);
+  }, [account, chainId, library, txList]);
   // time
   useEffect(() => {
     const getTime = () => {
@@ -348,6 +354,12 @@ export const NFTAuctionModal: FC<NFTDigModalProps> = ({ ...props }) => {
   }, [chainId, props.info.token_id]);
   useEffect(() => {
     getHistory();
+    const time = setInterval(() => {
+      getHistory();
+    }, 30000);
+    return () => {
+      clearTimeout(time);
+    };
   }, [getHistory]);
   const historyTr = () => {
     const nowTime = Date.now() / 1000;
@@ -380,6 +392,16 @@ export const NFTAuctionModal: FC<NFTDigModalProps> = ({ ...props }) => {
         </tr>
       );
     });
+  };
+  // mainButton pending
+  const mainButtonState = () => {
+    const pendingTransaction = pendingList.filter(
+      (item) =>
+        item.type === TransactionType.NESTNFTAuctionEnd ||
+        item.type === TransactionType.NESTNFTAuction ||
+        item.type === TransactionType.approve
+    );
+    return pendingTransaction.length > 0 ? true : false;
   };
   const children1 = () => {
     return endAuction ? (
@@ -448,7 +470,8 @@ export const NFTAuctionModal: FC<NFTDigModalProps> = ({ ...props }) => {
       }
       if (
         inputValue === "" ||
-        parseUnits(inputValue, 18).eq(BigNumber.from("0"))
+        parseUnits(inputValue, 18).eq(BigNumber.from("0")) ||
+        mainButtonState()
       ) {
         return false;
       }
@@ -482,6 +505,11 @@ export const NFTAuctionModal: FC<NFTDigModalProps> = ({ ...props }) => {
         </MainButton>
       );
     };
+    const claimPrice = () => {
+      const firstPrice = parseInt(historyData[0].bid);
+      const lastPrice = parseInt(historyData[historyData.length - 1].bid);
+      return firstPrice + (lastPrice - firstPrice) / 2;
+    };
     return (
       <div className={`${classPrefix}-info-text-bid`}>
         <div className={`${classPrefix}-info-text-bid-value`}>
@@ -491,7 +519,11 @@ export const NFTAuctionModal: FC<NFTDigModalProps> = ({ ...props }) => {
             <p>Highest bid:</p>
           )}
           <TokenNest />
-          <span>{formatUnits(props.info.price, 4)}</span>
+          <span>
+            {checkBidder()
+              ? formatUnits(props.info.price, 4)
+              : formatUnits(claimPrice(), 4)}
+          </span>
         </div>
         {endAuction ? (
           <></>
@@ -518,6 +550,7 @@ export const NFTAuctionModal: FC<NFTDigModalProps> = ({ ...props }) => {
         ) : (
           <MainButton
             disable={!checkMainButton()}
+            loading={mainButtonState()}
             onClick={() => {
               if (checkAllowance()) {
                 auctionTransaction();
@@ -550,6 +583,13 @@ export const NFTAuctionModal: FC<NFTDigModalProps> = ({ ...props }) => {
           </thead>
           <tbody>{historyTr()}</tbody>
         </table>
+        {historyData.length === 0 ? (
+          <div className={`${classPrefix}-biddingHistory-noData`}>
+            No offers to display
+          </div>
+        ) : (
+          <></>
+        )}
       </div>
     );
   };

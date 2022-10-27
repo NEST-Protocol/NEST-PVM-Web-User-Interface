@@ -126,7 +126,11 @@ const NFTOfferView: FC = () => {
           />
         </div>
       </div>
-      <ul className="line">{liData}</ul>
+      {NFTAuctionShowData.length > 0 ? (
+        <ul className="line">{liData}</ul>
+      ) : (
+        <div className={`${classPrefix}-noData`}>No offers to display</div>
+      )}
     </div>
   );
 };
