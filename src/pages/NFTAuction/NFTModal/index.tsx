@@ -376,7 +376,7 @@ export const NFTAuctionModal: FC<NFTDigModalProps> = ({ ...props }) => {
           })}
         >
           <td>{showEllipsisAddress(item.address)}</td>
-          <td>{formatUnits(item.bid, 4)}</td>
+          <td>{formatUnits(item.bid ?? 0, 4)}</td>
           <td>{`${((nowTime - parseInt(item.time)) / 3600).toFixed(
             2
           )} hours ago`}</td>
@@ -506,9 +506,12 @@ export const NFTAuctionModal: FC<NFTDigModalProps> = ({ ...props }) => {
       );
     };
     const claimPrice = () => {
-      const firstPrice = parseInt(historyData[0].bid);
-      const lastPrice = parseInt(historyData[historyData.length - 1].bid);
-      return firstPrice + (lastPrice - firstPrice) / 2;
+      if (historyData.length > 0) {
+        const firstPrice = parseInt(historyData[0].bid);
+        const lastPrice = parseInt(historyData[historyData.length - 1].bid);
+        return firstPrice + (lastPrice - firstPrice) / 2;
+      }
+      return 0
     };
     return (
       <div className={`${classPrefix}-info-text-bid`}>
