@@ -77,6 +77,9 @@ export function useSendTransaction(
     const digNFTLocal = (hash: string) => {
       localStorage.setItem("NFTDig" + chainId?.toString(), hash);
     };
+    const claimNFTLocal = (hash: string) => {
+      localStorage.setItem("NFTClaim" + chainId?.toString(), hash);
+    }
     return library
       ?.getSigner()
       .sendTransaction(newTx)
@@ -90,6 +93,9 @@ export function useSendTransaction(
         // }
         if (txInfo.type === TransactionType.NESTNFTMint) {
           digNFTLocal(res.hash);
+        }
+        if (txInfo.type === TransactionType.NESTNFTClaim) {
+          claimNFTLocal(res.hash)
         }
         setShowModal({
           isShow: true,

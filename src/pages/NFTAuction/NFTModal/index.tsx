@@ -104,11 +104,20 @@ export const NFTDigModal: FC<NFTDigModalProps> = ({ ...props }) => {
   const [timeNum, setTimeNum] = useState(0);
   const [inputValue, setInputValue] = useState<string>("");
   const [NFTAllow, setNFTAllow] = useState<boolean>(false);
-  const { txList } = useTransactionListCon();
+  const { pendingList, txList } = useTransactionListCon();
   const NFTContract = NESTNFT();
   const modal = useRef<any>();
   const NFTAuctionContract = NESTNFTAuction();
   const timeArray = [24, 48, 78];
+  // mainButton pending
+  const mainButtonState = () => {
+    const pendingTransaction = pendingList.filter(
+      (item) =>
+        item.type === TransactionType.NESTNFTAuctionStart ||
+        item.type === TransactionType.approve
+    );
+    return pendingTransaction.length > 0 ? true : false;
+  };
   // check
   const checkNFTApprove = useCallback(() => {
     if (!NFTContract || !NFTAuctionContract) {
@@ -124,6 +133,15 @@ export const NFTDigModal: FC<NFTDigModalProps> = ({ ...props }) => {
       }
     })();
   }, [NFTAuctionContract, NFTContract, props.info.token_id]);
+  const checkMainButton = () => {
+    if (!NFTAllow) {
+      return true;
+    }
+    if (inputValue === "" || mainButtonState()) {
+      return false;
+    }
+    return true;
+  };
 
   useEffect(() => {
     checkNFTApprove();
@@ -227,6 +245,8 @@ export const NFTDigModal: FC<NFTDigModalProps> = ({ ...props }) => {
               />
             </div>
             <MainButton
+              disable={!checkMainButton()}
+              loading={mainButtonState()}
               onClick={() => {
                 if (!NFTAllow) {
                   approve();
@@ -511,7 +531,7 @@ export const NFTAuctionModal: FC<NFTDigModalProps> = ({ ...props }) => {
         const lastPrice = parseInt(historyData[historyData.length - 1].bid);
         return firstPrice + (lastPrice - firstPrice) / 2;
       }
-      return 0
+      return 0;
     };
     return (
       <div className={`${classPrefix}-info-text-bid`}>
@@ -523,9 +543,11 @@ export const NFTAuctionModal: FC<NFTDigModalProps> = ({ ...props }) => {
           )}
           <TokenNest />
           <span>
-            {checkBidder()
-              ? formatUnits(props.info.price, 4)
-              : formatUnits(claimPrice(), 4)}
+            {endAuction
+              ? checkBidder()
+                ? formatUnits(props.info.price, 4)
+                : formatUnits(parseInt(claimPrice().toString()), 4)
+              : formatUnits(props.info.price, 4)}
           </span>
         </div>
         {endAuction ? (

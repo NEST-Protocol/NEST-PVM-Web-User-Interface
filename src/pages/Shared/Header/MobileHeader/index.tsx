@@ -30,13 +30,22 @@ const MobileHeader: FC = () => {
   const [showList, setShowList] = useState(false);
   const location = useLocation();
   const { pendingList } = useTransactionListCon();
-  const routes = [
-    { path: "/futures", content: t`Futures` },
-    { path: "/options", content: t`Options` },
-    // { path: "/win", content: t`Win` },
-    { path: "/NFTAuction", content: 'NFT' },
-    { path: "/swap", content: t`Swap` },
-  ].map((item) => (
+  const routes = (
+    chainId === 97 || chainId === 56
+      ? [
+          { path: "/futures", content: t`Futures` },
+          { path: "/options", content: t`Options` },
+          // { path: "/win", content: t`Win` },
+          { path: "/NFTAuction", content: "NFT" },
+          { path: "/swap", content: t`Swap` },
+          // { path: "/farm", content: t`Farm` },
+        ]
+      : [
+          { path: "/futures", content: t`Futures` },
+          { path: "/options", content: t`Options` },
+          { path: "/swap", content: t`Swap` },
+        ]
+  ).map((item) => (
     <li
       key={item.path}
       className={classNames({

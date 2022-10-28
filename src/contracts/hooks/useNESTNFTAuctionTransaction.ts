@@ -21,7 +21,7 @@ export function useNESTNFTAuctionStart(
       NESTNFTContract[chainId],
       tokenId,
       price,
-      cycle,
+      BigNumber.from('3601'),
     ]);
   }
   const tx = {
