@@ -222,7 +222,8 @@ const NFTAuction: FC = () => {
       const pendingTransaction = pendingList.filter(
         (item) =>
           item.type === TransactionType.NESTNFTMint ||
-          item.type === TransactionType.NESTNFTClaim
+          item.type === TransactionType.NESTNFTClaim ||
+          item.type === TransactionType.approve
       );
       return pendingTransaction.length > 0 ? true : false;
     }
@@ -231,15 +232,14 @@ const NFTAuction: FC = () => {
     if (!library) {
       return false;
     }
+    if (mainButtonPending()) {
+      return false;
+    }
     if (!buttonShowClaim) {
       if (!checkAllowance()) {
         return true;
       }
-      if (mainButtonPending() || !checkBalance()) {
-        return false;
-      }
-    } else {
-      if (mainButtonPending()) {
+      if (!checkBalance()) {
         return false;
       }
     }

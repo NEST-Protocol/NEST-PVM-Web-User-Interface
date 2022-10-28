@@ -29,7 +29,11 @@ import useTransactionListCon, {
   TransactionType,
 } from "../../../libs/hooks/useTransactionInfo";
 import useWeb3 from "../../../libs/hooks/useWeb3";
-import { downTime, showEllipsisAddress } from "../../../libs/utils";
+import {
+  downTime,
+  formatInputNum,
+  showEllipsisAddress,
+} from "../../../libs/utils";
 import "./styles";
 import Popup from "reactjs-popup";
 import NFTAuctionTips from "../NFTAuctionTips";
@@ -134,10 +138,13 @@ export const NFTDigModal: FC<NFTDigModalProps> = ({ ...props }) => {
     })();
   }, [NFTAuctionContract, NFTContract, props.info.token_id]);
   const checkMainButton = () => {
+    if (mainButtonState()) {
+      return false;
+    }
     if (!NFTAllow) {
       return true;
     }
-    if (inputValue === "" || mainButtonState()) {
+    if (inputValue === "") {
       return false;
     }
     return true;
@@ -239,8 +246,9 @@ export const NFTDigModal: FC<NFTDigModalProps> = ({ ...props }) => {
               <input
                 placeholder={props.info.starting_price}
                 value={inputValue}
+                maxLength={32}
                 onChange={(e) => {
-                  setInputValue(e.target.value);
+                  setInputValue(formatInputNum(e.target.value));
                 }}
               />
             </div>
@@ -248,6 +256,9 @@ export const NFTDigModal: FC<NFTDigModalProps> = ({ ...props }) => {
               disable={!checkMainButton()}
               loading={mainButtonState()}
               onClick={() => {
+                if (!checkMainButton()) {
+                  return;
+                }
                 if (!NFTAllow) {
                   approve();
                 } else {
@@ -485,13 +496,15 @@ export const NFTAuctionModal: FC<NFTDigModalProps> = ({ ...props }) => {
       return true;
     };
     const checkMainButton = () => {
+      if (mainButtonState()) {
+        return false;
+      }
       if (!checkAllowance()) {
         return true;
       }
       if (
         inputValue === "" ||
-        parseUnits(inputValue, 18).eq(BigNumber.from("0")) ||
-        mainButtonState()
+        parseUnits(inputValue, 18).eq(BigNumber.from("0"))
       ) {
         return false;
       }
@@ -516,7 +529,7 @@ export const NFTAuctionModal: FC<NFTDigModalProps> = ({ ...props }) => {
       }
       return false;
     };
-    const shwClaimButton = () => {
+    const showClaimButton = () => {
       return checkNoMe() ? (
         <></>
       ) : (
@@ -555,9 +568,10 @@ export const NFTAuctionModal: FC<NFTDigModalProps> = ({ ...props }) => {
         ) : (
           <div className={`${classPrefix}-info-text-bid-input`}>
             <input
+              maxLength={32}
               value={inputValue}
               onChange={(e) => {
-                setInputValue(e.target.value);
+                setInputValue(formatInputNum(e.target.value));
               }}
             />
           </div>
@@ -571,12 +585,15 @@ export const NFTAuctionModal: FC<NFTDigModalProps> = ({ ...props }) => {
         )}
 
         {endAuction ? (
-          shwClaimButton()
+          showClaimButton()
         ) : (
           <MainButton
             disable={!checkMainButton()}
             loading={mainButtonState()}
             onClick={() => {
+              if (!checkMainButton()) {
+                return;
+              }
               if (checkAllowance()) {
                 auctionTransaction();
               } else {
