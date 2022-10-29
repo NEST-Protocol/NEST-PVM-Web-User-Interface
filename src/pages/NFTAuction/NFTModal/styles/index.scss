@@ -8,12 +8,32 @@
     }
 
     &-title {
+        display: flex;
+        justify-content: space-between;
         width: 100%;
         height: 96px;
-        line-height: 96px;
-        text-align: center;
-        font-size: 17px;
-        color: #000000;
+
+        &-title {
+            font-size: 17px;
+            color: #000000;
+            font-family: $boldFont;
+            text-align: center;
+            line-height: 96px;
+        }
+
+        &-rightButton {
+            padding: 10px 10px;
+            margin: auto 0;
+        }
+
+        button {
+            width: 40px;
+            height: 40px;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
     }
 
     &-info {
@@ -50,9 +70,10 @@
 
                 p {
                     line-height: 30px;
+                    display: flex;
                 }
 
-                span {
+                span+span {
                     font-size: 20px;
                     color: #E60012;
                     margin-left: 5px;
@@ -92,6 +113,7 @@
             }
 
             &-chain {
+                display: flex;
                 margin-top: 20px;
                 font-size: 15px;
                 color: #878787;
@@ -103,6 +125,10 @@
 
                 &-value {
                     display: flex;
+
+                    div {
+                        display: flex;
+                    }
 
                     p {
                         line-height: 40px;
@@ -323,6 +349,40 @@
             }
         }
 
+        ul {
+            li {
+                border-bottom: 1px solid #EEEEEE;
+
+                ul {
+                    padding: 10px 0;
+
+                    li {
+                        border: none;
+                        display: flex;
+                        justify-content: space-between;
+
+                        p {
+                            font-weight: 700;
+                            font-size: 16px;
+                            color: #878787;
+                        }
+
+                        span {
+                            font-weight: 500;
+                            font-size: 16px;
+                            color: #000000;
+                        }
+                    }
+                }
+
+                &.high {
+                    span {
+                        color: #0047BB;
+                    }
+                }
+            }
+        }
+
         &-noData {
             width: 100%;
             line-height: 100px;
@@ -343,7 +403,17 @@
 
     .NFTModal {
         &-title {
-            color: white;
+            &-title {
+                color: white;
+            }
+
+            &-rightButton {
+                svg {
+                    path {
+                        fill: white;
+                    }
+                }
+            }
         }
 
         &-info {
@@ -510,9 +580,187 @@
                 }
             }
 
+            ul {
+                li {
+                    border-bottom: 1px solid rgba(197, 197, 197, 0.15);
+    
+                    ul {
+                        li {
+                            border: none;
+    
+                            p {
+                                color: #C5C5C5;
+                            }
+    
+                            span {
+                                color: white;
+                            }
+                        }
+                    }
+    
+                    &.high {
+                        span {
+                            color: #8BB7FF;
+                        }
+                    }
+                }
+            }
+
             &-noData {
                 color: #C5C5C5;
             }
         }
     }
+}
+
+@media screen and (max-width: 1000px) {
+    .NFTAuction-content {
+        width: 100%;
+        height: 100%;
+
+        .NFTModal {
+            width: 100%;
+            height: 100%;
+            padding: 0 10px;
+
+            .mainCard {
+                width: 100%;
+                height: 100%;
+                padding-bottom: 40px;
+                overflow: auto;
+            }
+
+            &-info {
+                display: block;
+                padding: 0 10px;
+
+                &-img {
+                    width: 100%;
+                    height: 370px;
+                    margin: 0;
+                }
+
+                &-text {
+                    width: auto;
+                    padding: 0 10px;
+
+                    &-leftTime {
+                        margin-top: 20px;
+
+                        p {
+                            justify-content: space-between;
+                        }
+                    }
+
+                    &-name {
+                        font-size: 25px;
+                        font-weight: 700;
+                        margin-top: 10px;
+
+                        p {
+                            line-height: 40px;
+                        }
+
+                        svg {
+                            margin: auto 0;
+                        }
+                    }
+
+                    &-string {
+                        font-weight: 500;
+                        font-size: 12px;
+                        line-height: 15px;
+                        letter-spacing: 0.05em;
+                        margin-top: 10px;
+                    }
+
+                    &-contract {
+                        width: 100%;
+                        justify-content: space-between;
+                        font-size: 12px;
+                    }
+
+                    &-chain {
+                        width: 100%;
+                        justify-content: space-between;
+                        font-size: 12px;
+                    }
+
+                    &-confirmation,
+                    &-bid {
+                        margin-top: 10px;
+
+                        &-value {
+                            justify-content: space-between;
+
+                            p {
+                                font-size: 12px;
+                            }
+
+                            span {
+                                font-weight: 700;
+                                font-size: 24px;
+                                line-height: 40px;
+                            }
+                        }
+
+                        &-auction {
+                            justify-content: center;
+
+                            p {
+                                font-weight: 700;
+                                font-size: 16px;
+                            }
+                        }
+                    }
+                }
+            }
+
+            &-auction {
+                padding: 0 20px;
+
+                &-time {
+                    &-choice {
+                        display: flex;
+                        justify-content: space-between;
+
+                        button {
+                            width: 95px;
+                            height: 32px;
+                            font-weight: 700;
+                            font-size: 16px;
+                        }
+
+                        button+button {
+                            margin-left: 0px;
+                        }
+                    }
+                }
+
+                &-price {
+                    &-input {
+                        display: block;
+
+                        &-input {
+                            width: 100%;
+                        }
+
+                        button {
+                            margin-top: 20px;
+                        }
+                    }
+                }
+            }
+
+            &-biddingHistory {
+                padding: 0 20px;
+
+                &-title {
+                    line-height: 40px;
+                    text-align: center;
+                }
+            }
+        }
+    }
+
 }

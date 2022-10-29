@@ -1,6 +1,13 @@
 import { Slider } from "antd";
 import classNames from "classnames";
-import { FC, useCallback, useEffect, useRef, useState } from "react";
+import {
+  FC,
+  MouseEventHandler,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import Popup from "reactjs-popup";
 import NFTAuctionStatus from "../../../components/NFTAuctionStatus";
 import NFTItem from "../../../components/NFTItem";
@@ -76,6 +83,7 @@ const NFTAuctionView: FC = () => {
           key={`${classPrefix}+li+${index}+${indexData}`}
           modal
           ref={modal}
+          className={"NFTAuction"}
           nested
           trigger={
             <li>
@@ -89,7 +97,9 @@ const NFTAuctionView: FC = () => {
             </li>
           }
         >
-          <NFTAuctionModal info={itemData} />
+          {(close: MouseEventHandler<HTMLButtonElement>) => (
+            <NFTAuctionModal info={itemData} onClose={close} />
+          )}
         </Popup>
       );
     });

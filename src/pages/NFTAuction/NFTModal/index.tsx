@@ -2,9 +2,21 @@ import classNames from "classnames";
 import { BigNumber } from "ethers";
 import { MaxUint256 } from "@ethersproject/constants";
 import { formatUnits, parseUnits } from "ethers/lib/utils";
-import { FC, useCallback, useEffect, useRef, useState } from "react";
+import {
+  FC,
+  MouseEventHandler,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { NFTMyDigDataType } from "..";
-import { NFTDownIcon, NFTUpIcon, TokenNest } from "../../../components/Icon";
+import {
+  NFTDownIcon,
+  NFTUpIcon,
+  TokenNest,
+  XIcon,
+} from "../../../components/Icon";
 import MainButton from "../../../components/MainButton";
 import MainCard from "../../../components/MainCard";
 import NFTLeverIcon from "../../../components/NFTLeverIcon";
@@ -30,6 +42,7 @@ import useTransactionListCon, {
 } from "../../../libs/hooks/useTransactionInfo";
 import useWeb3 from "../../../libs/hooks/useWeb3";
 import {
+  checkWidth,
   downTime,
   formatInputNum,
   showEllipsisAddress,
@@ -44,6 +57,7 @@ export type NFTModalType = {
   children1?: JSX.Element;
   children2?: JSX.Element;
   children3?: JSX.Element;
+  onClose: MouseEventHandler<HTMLButtonElement>;
 };
 const classPrefix = "NFTModal";
 const NFTModal: FC<NFTModalType> = ({ ...props }) => {
@@ -52,6 +66,7 @@ const NFTModal: FC<NFTModalType> = ({ ...props }) => {
     return <></>;
   }
   const NFTData = props.info;
+  console.log(props.onClose);
   return (
     <div
       className={classNames({
@@ -60,7 +75,16 @@ const NFTModal: FC<NFTModalType> = ({ ...props }) => {
       })}
     >
       <MainCard>
-        <div className={`${classPrefix}-title`}>{props.title}</div>
+        <div className={`${classPrefix}-title`}>
+          <button className={`${classPrefix}-title-leftButton`}></button>
+          <p className={`${classPrefix}-title-title`}>{props.title}</p>
+          <button
+            className={`${classPrefix}-title-rightButton`}
+            onClick={props.onClose}
+          >
+            {checkWidth() ? <></> : <XIcon />}
+          </button>
+        </div>
         <div className={`${classPrefix}-info`}>
           <div className={`${classPrefix}-info-img`}>
             <img
@@ -88,7 +112,8 @@ const NFTModal: FC<NFTModalType> = ({ ...props }) => {
               <a href="w">{showEllipsisAddress(NFTData.token_address || "")}</a>
             </div>
             <div className={`${classPrefix}-info-text-chain`}>
-              Blockchain: BNB
+              <p>Blockchain:</p>
+              <span>BNB</span>
             </div>
             {props.children2}
           </div>
@@ -101,6 +126,7 @@ const NFTModal: FC<NFTModalType> = ({ ...props }) => {
 
 type NFTDigModalProps = {
   info: NFTMyDigDataType;
+  onClose: MouseEventHandler<HTMLButtonElement>;
 };
 
 export const NFTDigModal: FC<NFTDigModalProps> = ({ ...props }) => {
@@ -172,8 +198,10 @@ export const NFTDigModal: FC<NFTDigModalProps> = ({ ...props }) => {
       <div className={`${classPrefix}-info-text-confirmation`}>
         <div className={`${classPrefix}-info-text-confirmation-value`}>
           <p>Value:</p>
-          <TokenNest />
-          <span>{props.info.value}</span>
+          <div>
+            <TokenNest />
+            <span>{props.info.value}</span>
+          </div>
         </div>
         {showChildren3 ? (
           <div
@@ -187,6 +215,7 @@ export const NFTDigModal: FC<NFTDigModalProps> = ({ ...props }) => {
           <Popup
             modal
             ref={modal}
+            className={"NFTAuctionTips"}
             nested
             trigger={
               <div className={`${classPrefix}-info-text-confirmation-auction`}>
@@ -282,6 +311,7 @@ export const NFTDigModal: FC<NFTDigModalProps> = ({ ...props }) => {
       info={props.info}
       children2={children2()}
       children3={children3()}
+      onClose={props.onClose}
     />
   );
 };
@@ -424,6 +454,54 @@ export const NFTAuctionModal: FC<NFTDigModalProps> = ({ ...props }) => {
       );
     });
   };
+  const historyLi = () => {
+    const nowTime = Date.now() / 1000;
+    const showData = [...historyData];
+    return showData.reverse().map((item, index) => {
+      var showHighLight =
+        account?.toLocaleLowerCase() === item.address.toLocaleLowerCase();
+      return (
+        <li
+          key={`history+nft+${index}+li`}
+          className={classNames({
+            [`high`]: showHighLight,
+          })}
+        >
+          <ul>
+            <li>
+              <p>Address</p>
+              <span>{showEllipsisAddress(item.address)}</span>
+            </li>
+            <li>
+              <p>Bid</p>
+              <span>{formatUnits(item.bid ?? 0, 4)}</span>
+            </li>
+            <li>
+              <p>Time</p>
+              <span>{`${((nowTime - parseInt(item.time)) / 3600).toFixed(
+                2
+              )} hours ago`}</span>
+            </li>
+            <li>
+              <p>Extra refund</p>
+              <span>{index === 0 ? "/" : formatUnits(item.refund, 4)}</span>
+            </li>
+            <li>
+              <p>Total refund</p>
+              <span>
+                {index === 0
+                  ? "Highest bid"
+                  : formatUnits(
+                      BigNumber.from(item.refund).add(BigNumber.from(item.bid)),
+                      4
+                    )}
+              </span>
+            </li>
+          </ul>
+        </li>
+      );
+    });
+  };
   // mainButton pending
   const mainButtonState = () => {
     const pendingTransaction = pendingList.filter(
@@ -439,7 +517,8 @@ export const NFTAuctionModal: FC<NFTDigModalProps> = ({ ...props }) => {
       <></>
     ) : (
       <p>
-        Auction End Time<span>{timeString}</span>
+        <span>Auction End Time</span>
+        <span>{timeString}</span>
       </p>
     );
   };
@@ -510,9 +589,9 @@ export const NFTAuctionModal: FC<NFTDigModalProps> = ({ ...props }) => {
       }
       return true;
     };
-    const checkBidder = () => {
+    const checkInitiator = () => {
       if (
-        props.info.bidder.toLocaleLowerCase() === account.toLocaleLowerCase()
+        props.info.initiator.toLocaleLowerCase() === account.toLocaleLowerCase()
       ) {
         return true;
       } else {
@@ -550,18 +629,20 @@ export const NFTAuctionModal: FC<NFTDigModalProps> = ({ ...props }) => {
       <div className={`${classPrefix}-info-text-bid`}>
         <div className={`${classPrefix}-info-text-bid-value`}>
           {endAuction ? (
-            <p>{checkBidder() ? "Transaction price" : "Claim price"}</p>
+            <p>{!checkInitiator() ? "Transaction price" : "Claim price"}</p>
           ) : (
             <p>Highest bid:</p>
           )}
-          <TokenNest />
-          <span>
-            {endAuction
-              ? checkBidder()
-                ? formatUnits(props.info.price, 4)
-                : formatUnits(parseInt(claimPrice().toString()), 4)
-              : formatUnits(props.info.price, 4)}
-          </span>
+          <div>
+            <TokenNest />
+            <span>
+              {endAuction
+                ? !checkInitiator()
+                  ? formatUnits(props.info.price, 4)
+                  : formatUnits(parseInt(claimPrice().toString()), 4)
+                : formatUnits(props.info.price, 4)}
+            </span>
+          </div>
         </div>
         {endAuction ? (
           <></>
@@ -569,6 +650,7 @@ export const NFTAuctionModal: FC<NFTDigModalProps> = ({ ...props }) => {
           <div className={`${classPrefix}-info-text-bid-input`}>
             <input
               maxLength={32}
+              placeholder={"Input"}
               value={inputValue}
               onChange={(e) => {
                 setInputValue(formatInputNum(e.target.value));
@@ -613,18 +695,22 @@ export const NFTAuctionModal: FC<NFTDigModalProps> = ({ ...props }) => {
         <div className={`${classPrefix}-biddingHistory-title`}>
           Bidding History
         </div>
-        <table>
-          <thead>
-            <tr>
-              <th>Address</th>
-              <th>Bid</th>
-              <th>Time</th>
-              <th>Extra refund</th>
-              <th>Total refund</th>
-            </tr>
-          </thead>
-          <tbody>{historyTr()}</tbody>
-        </table>
+        {checkWidth() ? (
+          <table>
+            <thead>
+              <tr>
+                <th>Address</th>
+                <th>Bid</th>
+                <th>Time</th>
+                <th>Extra refund</th>
+                <th>Total refund</th>
+              </tr>
+            </thead>
+            <tbody>{historyTr()}</tbody>
+          </table>
+        ) : (
+          <ul>{historyLi()}</ul>
+        )}
         {historyData.length === 0 ? (
           <div className={`${classPrefix}-biddingHistory-noData`}>
             No offers to display
@@ -642,6 +728,7 @@ export const NFTAuctionModal: FC<NFTDigModalProps> = ({ ...props }) => {
       children1={children1()}
       children2={children2()}
       children3={children3()}
+      onClose={props.onClose}
     />
   );
 };

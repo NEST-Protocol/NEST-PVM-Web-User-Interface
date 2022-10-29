@@ -1,5 +1,12 @@
 import { formatUnits } from "ethers/lib/utils";
-import { FC, useCallback, useEffect, useRef, useState } from "react";
+import {
+  FC,
+  MouseEventHandler,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import Popup from "reactjs-popup";
 import { NFTMyDigDataType } from "..";
 import NFTAuctionStatus from "../../../components/NFTAuctionStatus";
@@ -53,6 +60,7 @@ const NFTReceived: FC = () => {
           modal
           key={`${classPrefix}+li+${index}+${indexData}`}
           ref={modal}
+          className={"NFTAuction"}
           nested
           trigger={
             <li>
@@ -66,11 +74,13 @@ const NFTReceived: FC = () => {
             </li>
           }
         >
-          {parseInt(itemData.end_auction) === 0 ? (
-            <NFTAuctionModal info={itemData} />
-          ) : (
-            <NFTDigModal info={itemData} />
-          )}
+          {(close: MouseEventHandler<HTMLButtonElement>) =>
+            parseInt(itemData.end_auction) === 0 ? (
+              <NFTAuctionModal info={itemData} onClose={close} />
+            ) : (
+              <NFTDigModal info={itemData} onClose={close} />
+            )
+          }
         </Popup>
       );
     });

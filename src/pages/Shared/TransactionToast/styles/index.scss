@@ -1,40 +1,46 @@
 @use "sass:math";
 @import 'src/styles/shared.scss';
 
-.transactionToast {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-
-    &-left {
+.Toastify__toast-body {
+    div {
+        width: 100%;
+    }
+    .transactionToast {
         display: flex;
         align-items: center;
-        margin-left: 10px;
-        width: 200px;
-
-        svg {
-            margin: auto 0;
-            width: 22px;
-            height: 22px;
+        justify-content: space-between;
+        width: 100%;
+        
+    
+        &-left {
+            display: flex;
+            align-items: center;
+            margin-left: 10px;
+            width: 200px;
+    
+            svg {
+                margin: auto 0;
+                width: 22px;
+                height: 22px;
+            }
+    
+            &-info {
+                margin: auto 10px;
+                font-size: $T4;
+                color: $gray-info-text-color;
+            }
         }
-
-        &-info {
-            margin: auto 10px;
+    
+        a {
+            color: $main-button-text-color;
+            text-align: center;
             font-size: $T4;
-            color: $gray-info-text-color;
+            width: 60px;
+            line-height: 20px;
+            height: 20px;
+            padding: 0 10px;
+            border-radius: 10px;
+            background-color: $main-button-color;
         }
-    }
-
-    a {
-        color: $main-button-text-color;
-        text-align: center;
-        font-size: $T4;
-        width: 60px;
-        line-height: 20px;
-        height: 20px;
-        padding: 0 10px;
-        border-radius: 10px;
-        background-color: $main-button-color;
     }
 }

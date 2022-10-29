@@ -1,7 +1,14 @@
 import { BigNumber } from "ethers";
 import { formatUnits, parseUnits } from "ethers/lib/utils";
 import { MaxUint256 } from "@ethersproject/constants";
-import { FC, useCallback, useEffect, useRef, useState } from "react";
+import {
+  FC,
+  MouseEventHandler,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import Popup from "reactjs-popup";
 import {
   NFTAuctionIcon,
@@ -113,6 +120,7 @@ const NFTAuction: FC = () => {
           key={`${classPrefix}+pop+${index}+${indexData}`}
           modal
           ref={modal}
+          className={"NFTAuction"}
           nested
           trigger={
             <li>
@@ -126,7 +134,9 @@ const NFTAuction: FC = () => {
             </li>
           }
         >
-          <NFTDigModal info={itemData} />
+          {(close: MouseEventHandler<HTMLButtonElement>) => (
+            <NFTDigModal info={itemData} onClose={close} />
+          )}
         </Popup>
       );
     });
