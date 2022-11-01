@@ -129,14 +129,7 @@ const useTransactionList = () => {
           const status = rec.status
             ? TransactionState.Success
             : TransactionState.Fail;
-          element.txState = status;
-
-          if (
-            status === TransactionState.Success &&
-            element.type === TransactionType.NESTNFTClaim
-          ) {
-            localStorage.setItem("NFTDig" + chainId?.toString(), "");
-          }
+          element.txState = status
 
           updateList(element);
           setChecking(false);

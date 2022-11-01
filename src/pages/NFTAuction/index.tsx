@@ -260,39 +260,6 @@ const NFTAuction: FC = () => {
     }
     return true;
   };
-  const checkClaimIndex = useCallback(
-    async (hash: string) => {
-      if (NFTContract && chainId) {
-        const digList = await NFTContract.find("0", "256", "256", account);
-        const result = await library?.getTransactionReceipt(hash);
-        if (result) {
-          const startBlock = result.blockNumber;
-          for (let index = 0; index < digList.length; index++) {
-            const element = digList[index];
-            if (parseInt(element[1].toString()) === startBlock) {
-              const nowBlock = await library?.getBlockNumber();
-              if (nowBlock && nowBlock - startBlock < 256) {
-                const nowTime = Date.now() / 1000;
-                setClaimIndex(BigNumber.from(element[3].toString()));
-                setDigStep(3);
-                setEndBlock({
-                  nowBlock: nowBlock,
-                  endBlock: startBlock + 256,
-                  nowBlockTime: nowTime,
-                });
-              } else {
-                localStorage.setItem("NFTDig" + chainId.toString(), "");
-                setClaimIndex(undefined);
-                setDigStep(1);
-                setEndBlock(undefined);
-              }
-            }
-          }
-        }
-      }
-    },
-    [NFTContract, account, chainId, library]
-  );
 
   // update
   useEffect(() => {
@@ -304,27 +271,6 @@ const NFTAuction: FC = () => {
       clearTimeout(time);
     };
   }, [getDigData]);
-
-  useEffect(() => {
-    if (digStep === 3 && endBlock && chainId) {
-      const time = setInterval(() => {
-        var leftTime = (endBlock.endBlock - endBlock.nowBlock) * 3;
-        const nowTime = Date.now() / 1000;
-        leftTime = leftTime - (nowTime - endBlock.nowBlockTime);
-        if (leftTime > 0) {
-          setTimeString(downTime(leftTime));
-        } else {
-          localStorage.setItem("NFTDig" + chainId.toString(), "");
-          setClaimIndex(undefined);
-          setEndBlock(undefined);
-          setDigStep(1);
-        }
-      }, 1000);
-      return () => {
-        clearTimeout(time);
-      };
-    }
-  }, [chainId, digStep, endBlock]);
 
   // dig tab item data
   const digTabItemArray = [
@@ -345,24 +291,63 @@ const NFTAuction: FC = () => {
     setAuctionTabSelected(index);
   };
   // Dig or Claim
-  useEffect(() => {
-    var cache = localStorage.getItem("NFTDig" + chainId?.toString());
-    if (
-      txList.length > 0 &&
-      txList[txList.length - 1].type === TransactionType.NESTNFTMint
-    ) {
-      if (cache && cache !== "") {
-        checkClaimIndex(cache.toString());
+  const noClaim = useCallback(() => {
+    if (!NFTContract) {
+      return;
+    }
+    (async () => {
+      const digList = await NFTContract.find("0", "256", "256", account);
+      const nowBlock = await library?.getBlockNumber();
+      if (!nowBlock) {
+        return;
       }
-    } else if (
-      txList.length > 0 &&
-      txList[txList.length - 1].type === TransactionType.NESTNFTClaim
-    ) {
-      if (!cache && cache === "") {
+      const noClaimList = digList.filter((item: any) => {
+        return (
+          item[3].toString() !== "0" &&
+          parseInt(item[2].toString()) <= 1 &&
+          nowBlock - parseInt(item[1].toString()) < 256
+        );
+      });
+      const nowTime = Date.now() / 1000;
+      if (noClaimList.length > 0) {
+        setDigStep(3);
+        const lastItem = noClaimList[noClaimList.length - 1];
+        setEndBlock({
+          nowBlock: nowBlock,
+          endBlock: parseInt(lastItem[1].toString()) + 256,
+          nowBlockTime: nowTime,
+        });
+        setClaimIndex(lastItem[3])
+      } else {
         setDigStep(1);
       }
+    })();
+  }, [NFTContract, account, library]);
+  useEffect(() => {
+    if (txList[txList.length - 1].txState !== 0) {
+      console.log('check')
+      noClaim();
     }
-  }, [chainId, checkClaimIndex, txList]);
+  }, [noClaim, txList]);
+  useEffect(() => {
+    if (digStep === 3 && endBlock && chainId) {
+      const time = setInterval(() => {
+        var leftTime = (endBlock.endBlock - endBlock.nowBlock) * 3;
+        const nowTime = Date.now() / 1000;
+        leftTime = leftTime - (nowTime - endBlock.nowBlockTime);
+        if (leftTime > 0) {
+          setTimeString(downTime(leftTime));
+        } else {
+          setClaimIndex(undefined);
+          setEndBlock(undefined);
+          noClaim();
+        }
+      }, 1000);
+      return () => {
+        clearTimeout(time);
+      };
+    }
+  }, [chainId, digStep, endBlock, noClaim]);
   // update dig step
   useEffect(() => {
     if (digStep === 3) {
@@ -395,10 +380,10 @@ const NFTAuction: FC = () => {
             const baseUrl = data_json["thumbnail"];
             const src =
               "https://" +
-              (baseUrl.length > 7 ? baseUrl.substring(7, baseUrl.length) : '') +
+              (baseUrl.length > 7 ? baseUrl.substring(7, baseUrl.length) : "") +
               ".ipfs.w3s.link";
             // lever
-            const uriArray = uri.split('/')
+            const uriArray = uri.split("/");
             const lever = uriArray[uriArray.length - 2];
             setShowImageId({
               id: tokenId,
