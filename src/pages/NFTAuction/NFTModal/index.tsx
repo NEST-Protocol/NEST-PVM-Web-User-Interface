@@ -44,7 +44,7 @@ import useWeb3 from "../../../libs/hooks/useWeb3";
 import {
   checkWidth,
   downTime,
-  formatInputNum,
+  formatPVMWinInputNum,
   showEllipsisAddress,
 } from "../../../libs/utils";
 import "./styles";
@@ -277,7 +277,7 @@ export const NFTDigModal: FC<NFTDigModalProps> = ({ ...props }) => {
                 value={inputValue}
                 maxLength={32}
                 onChange={(e) => {
-                  setInputValue(formatInputNum(e.target.value));
+                  setInputValue(formatPVMWinInputNum(e.target.value));
                 }}
               />
             </div>
@@ -653,7 +653,7 @@ export const NFTAuctionModal: FC<NFTDigModalProps> = ({ ...props }) => {
               placeholder={"Input"}
               value={inputValue}
               onChange={(e) => {
-                setInputValue(formatInputNum(e.target.value));
+                setInputValue(formatPVMWinInputNum(e.target.value));
               }}
             />
           </div>

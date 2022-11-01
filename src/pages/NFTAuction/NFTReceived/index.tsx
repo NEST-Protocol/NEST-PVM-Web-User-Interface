@@ -69,7 +69,7 @@ const NFTReceived: FC = () => {
                 name={itemData.token_id}
                 lever={parseInt(itemData.rarity)}
                 endTime={itemData.end_time}
-                value={formatUnits(itemData.price, 4)}
+                value={formatUnits(itemData.price, 2)}
               />
             </li>
           }

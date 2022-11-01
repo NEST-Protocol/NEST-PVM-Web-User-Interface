@@ -92,7 +92,7 @@ const NFTAuctionView: FC = () => {
                 name={itemData.token_id}
                 lever={parseInt(itemData.rarity)}
                 endTime={itemData.end_time}
-                value={formatUnits(itemData.price, 4)}
+                value={formatUnits(itemData.price, 2)}
               />
             </li>
           }
@@ -140,8 +140,8 @@ const NFTAuctionView: FC = () => {
     };
     const nestValueArray = (array: Array<NFTMyDigDataType>) => {
       const newArray = array.filter((item) => {
-        const min = parseUnits(nestValue[0].toString(), 4);
-        const max = parseUnits(nestValue[1].toString(), 4);
+        const min = parseUnits(nestValue[0].toString(), 2);
+        const max = parseUnits(nestValue[1].toString(), 2);
         return (
           BigNumber.from(item.price).lte(max) &&
           BigNumber.from(item.price).gte(min)
