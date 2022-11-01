@@ -289,7 +289,6 @@ const NFTAuction: FC = () => {
             }
           }
         }
-        console.log(result?.blockNumber);
       }
     },
     [NFTContract, account, chainId, library]
@@ -386,7 +385,6 @@ const NFTAuction: FC = () => {
             setDigStep(4);
           } else if (rec && rec.logs.length > 0) {
             const tokenId = BigNumber.from(rec.logs[0].topics[3]);
-            console.log(tokenId.toString());
             setDigStep(5);
             // get token uri
             const uri = await NFTContract.tokenURI(tokenId.toString());

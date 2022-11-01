@@ -35,11 +35,22 @@ const NFTAuctionView: FC = () => {
   const modal = useRef<any>();
   const [lever, setLever] = useState(0);
   const leverLi = [
+    "All",
     <NFTLeverIcon lever={1} />,
     <NFTLeverIcon lever={5} />,
     <NFTLeverIcon lever={10} />,
   ].map((item, index) => {
-    return (
+    return index === 1 ? (
+      <li
+        key={`${index}+NFTAuctionView-lever`}
+        className={classNames({
+          [`selected`]: lever === index,
+        })}
+        onClick={() => setLever(index)}
+      >
+        {item}
+      </li>
+    ) : (
       <li
         key={`${index}+NFTAuctionView-lever`}
         className={classNames({
@@ -124,13 +135,14 @@ const NFTAuctionView: FC = () => {
   };
   useEffect(() => {
     const rarityArray = (array: Array<NFTMyDigDataType>) => {
+      if (lever === 0) {return array}
       const newArray = array.filter((item) => {
         const leverToRarity = () => {
-          if (lever === 0) {
+          if (lever === 1) {
             return 1;
-          } else if (lever === 1) {
+          } else if (lever === 2) {
             return 5;
-          } else {
+          } else if (lever === 3) {
             return 10;
           }
         };

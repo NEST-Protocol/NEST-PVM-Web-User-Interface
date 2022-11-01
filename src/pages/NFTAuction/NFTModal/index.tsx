@@ -66,7 +66,6 @@ const NFTModal: FC<NFTModalType> = ({ ...props }) => {
     return <></>;
   }
   const NFTData = props.info;
-  console.log(props.onClose);
   return (
     <div
       className={classNames({
@@ -612,7 +611,16 @@ export const NFTAuctionModal: FC<NFTDigModalProps> = ({ ...props }) => {
       return checkNoMe() ? (
         <></>
       ) : (
-        <MainButton onClick={() => endAuctionTransaction()}>
+        <MainButton
+          disable={!checkMainButton()}
+          loading={mainButtonState()}
+          onClick={() => {
+            if (!checkMainButton()) {
+              return;
+            }
+            endAuctionTransaction();
+          }}
+        >
           {"claim"}
         </MainButton>
       );
