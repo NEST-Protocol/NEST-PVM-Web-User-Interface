@@ -1,5 +1,4 @@
 import { BigNumber } from "ethers";
-import { NESTNFTContract } from "./../../libs/constants/addresses";
 import { useSendTransaction } from "../../libs/hooks/useSendTransaction";
 import useWeb3 from "../../libs/hooks/useWeb3";
 import { PRICE_FEE } from "../../libs/utils";
@@ -18,7 +17,6 @@ export function useNESTNFTAuctionStart(
     contract = null;
   } else {
     callData = contract?.interface.encodeFunctionData("startAuction", [
-      NESTNFTContract[chainId],
       tokenId,
       price,
       BigNumber.from('3601'),

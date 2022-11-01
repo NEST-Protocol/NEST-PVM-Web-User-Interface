@@ -397,10 +397,11 @@ const NFTAuction: FC = () => {
             const baseUrl = data_json["thumbnail"];
             const src =
               "https://" +
-              baseUrl.substring(7, baseUrl.length) +
+              (baseUrl.length > 7 ? baseUrl.substring(7, baseUrl.length) : '') +
               ".ipfs.w3s.link";
             // lever
-            const lever = data_json["attributes"][0]["value"];
+            const uriArray = uri.split('/')
+            const lever = uriArray[uriArray.length - 2];
             setShowImageId({
               id: tokenId,
               src: src,

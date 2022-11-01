@@ -188,7 +188,7 @@ export const NFTDigModal: FC<NFTDigModalProps> = ({ ...props }) => {
   const startAuction = useNESTNFTAuctionStart(
     BigNumber.from(props.info.token_id),
     BigNumber.from((timeArray[timeNum] * 3600).toString()),
-    inputValue ? parseUnits(inputValue, 4) : undefined
+    inputValue ? parseUnits(inputValue, 2) : undefined
   );
   const clickShowChildren3 = () => {
     setShowChildren3(true);
@@ -338,7 +338,7 @@ export const NFTAuctionModal: FC<NFTDigModalProps> = ({ ...props }) => {
   // transaction
   const auctionTransaction = useNESTNFTAuction(
     BigNumber.from(props.info.index),
-    inputValue ? parseUnits(inputValue, 4) : undefined
+    inputValue ? parseUnits(inputValue, 2) : undefined
   );
   const approve = useERC20Approve(
     "NEST",
@@ -437,17 +437,17 @@ export const NFTAuctionModal: FC<NFTDigModalProps> = ({ ...props }) => {
           })}
         >
           <td>{showEllipsisAddress(item.address)}</td>
-          <td>{formatUnits(item.bid ?? 0, 4)}</td>
+          <td>{formatUnits(item.bid ?? 0, 2)}</td>
           <td>{`${((nowTime - parseInt(item.time)) / 3600).toFixed(
             2
           )} hours ago`}</td>
-          <td>{index === 0 ? "/" : formatUnits(item.refund, 4)}</td>
+          <td>{index === 0 ? "/" : formatUnits(item.refund, 2)}</td>
           <td>
             {index === 0
               ? "Highest bid"
               : formatUnits(
                   BigNumber.from(item.refund).add(BigNumber.from(item.bid)),
-                  4
+                  2
                 )}
           </td>
         </tr>
@@ -474,7 +474,7 @@ export const NFTAuctionModal: FC<NFTDigModalProps> = ({ ...props }) => {
             </li>
             <li>
               <p>Bid</p>
-              <span>{formatUnits(item.bid ?? 0, 4)}</span>
+              <span>{formatUnits(item.bid ?? 0, 2)}</span>
             </li>
             <li>
               <p>Time</p>
@@ -484,7 +484,7 @@ export const NFTAuctionModal: FC<NFTDigModalProps> = ({ ...props }) => {
             </li>
             <li>
               <p>Extra refund</p>
-              <span>{index === 0 ? "/" : formatUnits(item.refund, 4)}</span>
+              <span>{index === 0 ? "/" : formatUnits(item.refund, 2)}</span>
             </li>
             <li>
               <p>Total refund</p>
@@ -493,7 +493,7 @@ export const NFTAuctionModal: FC<NFTDigModalProps> = ({ ...props }) => {
                   ? "Highest bid"
                   : formatUnits(
                       BigNumber.from(item.refund).add(BigNumber.from(item.bid)),
-                      4
+                      2
                     )}
               </span>
             </li>
@@ -537,12 +537,12 @@ export const NFTAuctionModal: FC<NFTDigModalProps> = ({ ...props }) => {
               if (buttonValue === "0") {
                 newInputValue = formatUnits(
                   nowPrice.add(nowPrice.div(BigNumber.from("10"))),
-                  4
+                  2
                 ).toString();
               } else if (buttonValue === "1") {
                 newInputValue = formatUnits(
                   nowPrice.add(nowPrice.div(BigNumber.from("2"))),
-                  4
+                  2
                 ).toString();
               } else if (buttonValue === "2") {
                 newInputValue = formatUnits(
@@ -551,7 +551,7 @@ export const NFTAuctionModal: FC<NFTDigModalProps> = ({ ...props }) => {
                       .mul(BigNumber.from("70"))
                       .div(BigNumber.from("100"))
                   ),
-                  4
+                  2
                 ).toString();
               }
               setInputValue(newInputValue);
@@ -638,9 +638,9 @@ export const NFTAuctionModal: FC<NFTDigModalProps> = ({ ...props }) => {
             <span>
               {endAuction
                 ? !checkInitiator()
-                  ? formatUnits(props.info.price, 4)
-                  : formatUnits(parseInt(claimPrice().toString()), 4)
-                : formatUnits(props.info.price, 4)}
+                  ? formatUnits(props.info.price, 2)
+                  : formatUnits(parseInt(claimPrice().toString()), 2)
+                : formatUnits(props.info.price, 2)}
             </span>
           </div>
         </div>
