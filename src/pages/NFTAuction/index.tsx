@@ -43,6 +43,8 @@ import {
   useNESTNFTMint,
 } from "../../contracts/hooks/useNFTTransaction";
 import { TransactionModalType } from "../Shared/TransactionModal";
+import NFTWhiteList from "./NFTWhiteList";
+import { whiteList } from "../../contracts/hooks/useNESTNFTMarket";
 
 export type NFTMyDigDataType = {
   thumbnail: string;
@@ -146,6 +148,13 @@ const NFTAuction: FC = () => {
       </li>
     );
   });
+  // whiteList
+  const checkWhiteList = () => {
+    const inList = whiteList.filter((item) => {
+      return account?.toLocaleLowerCase() === item.toLocaleLowerCase();
+    });
+    return inList.length > 0 ? true : false;
+  };
   // balance
   const getBalance = useCallback(async () => {
     if (!chainId || !account || !library) {
@@ -282,11 +291,18 @@ const NFTAuction: FC = () => {
     setDigTabSelected(index);
   };
   // auction tab item data
-  const auctionTabItemArray = [
-    { icon: <NFTAuctionIcon />, text: "Auction" },
-    { icon: <NFTMyAuction />, text: "Offers Made" },
-    { icon: <NFTMyDig />, text: "My Received" },
-  ];
+  const auctionTabItemArray = checkWhiteList()
+    ? [
+        { icon: <NFTAuctionIcon />, text: "Auction" },
+        { icon: <NFTMyAuction />, text: "Offers Made" },
+        { icon: <NFTMyDig />, text: "My Received" },
+        { icon: <NFTMyDig />, text: "White List" },
+      ]
+    : [
+        { icon: <NFTAuctionIcon />, text: "Auction" },
+        { icon: <NFTMyAuction />, text: "Offers Made" },
+        { icon: <NFTMyDig />, text: "My Received" },
+      ];
   const auctionTabNum = (index: number) => {
     setAuctionTabSelected(index);
   };
@@ -317,7 +333,7 @@ const NFTAuction: FC = () => {
           endBlock: parseInt(lastItem[1].toString()) + 256,
           nowBlockTime: nowTime,
         });
-        setClaimIndex(lastItem[3])
+        setClaimIndex(lastItem[3]);
       } else {
         setDigStep(1);
       }
@@ -325,7 +341,7 @@ const NFTAuction: FC = () => {
   }, [NFTContract, account, library]);
   useEffect(() => {
     if (txList[txList.length - 1].txState !== 0) {
-      console.log('check')
+      console.log("check");
       noClaim();
     }
   }, [noClaim, txList]);
@@ -489,8 +505,10 @@ const NFTAuction: FC = () => {
       return <NFTAuctionView />;
     } else if (auctionTabSelected === 1) {
       return <NFTOfferView />;
-    } else {
+    } else if (auctionTabSelected === 2) {
       return <NFTReceived />;
+    } else {
+      return <NFTWhiteList />;
     }
   };
   // transaction
@@ -524,7 +542,11 @@ const NFTAuction: FC = () => {
       </div>
       <div className={`${classPrefix}-bottom`}>
         <MainCard classNames={`${classPrefix}-bottom-main`}>
-          <TabItem data={auctionTabItemArray} selectedVoid={auctionTabNum} />
+          <TabItem
+            className={checkWhiteList() ? "whiteList" : ""}
+            data={auctionTabItemArray}
+            selectedVoid={auctionTabNum}
+          />
           {bottomMainView()}
         </MainCard>
       </div>

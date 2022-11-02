@@ -126,6 +126,7 @@ const NFTModal: FC<NFTModalType> = ({ ...props }) => {
 type NFTDigModalProps = {
   info: NFTMyDigDataType;
   onClose: MouseEventHandler<HTMLButtonElement>;
+  isReceive?: boolean;
 };
 
 export const NFTDigModal: FC<NFTDigModalProps> = ({ ...props }) => {
@@ -137,6 +138,7 @@ export const NFTDigModal: FC<NFTDigModalProps> = ({ ...props }) => {
   const NFTContract = NESTNFT();
   const modal = useRef<any>();
   const NFTAuctionContract = NESTNFTAuction();
+  const [inputErrorString, setInputErrorString] = useState<string>();
   const timeArray = [24, 48, 78];
   // mainButton pending
   const mainButtonState = () => {
@@ -169,7 +171,7 @@ export const NFTDigModal: FC<NFTDigModalProps> = ({ ...props }) => {
     if (!NFTAllow) {
       return true;
     }
-    if (inputValue === "") {
+    if (inputValue === "" || Number(inputValue) < 9.9) {
       return false;
     }
     return true;
@@ -199,7 +201,7 @@ export const NFTDigModal: FC<NFTDigModalProps> = ({ ...props }) => {
           <p>Value:</p>
           <div>
             <TokenNest />
-            <span>{props.info.value}</span>
+            <span>{props.isReceive ? props.info.price : props.info.value}</span>
           </div>
         </div>
         {showChildren3 ? (
@@ -229,13 +231,6 @@ export const NFTDigModal: FC<NFTDigModalProps> = ({ ...props }) => {
             />
           </Popup>
         )}
-        {/* <div
-          className={`${classPrefix}-info-text-confirmation-auction`}
-          onClick={() => setShowChildren3(!showChildren3)}
-        >
-          <p>Go to auction</p>
-          {showChildren3 ? <NFTUpIcon /> : <NFTDownIcon />}
-        </div> */}
       </div>
     );
   };
@@ -267,7 +262,8 @@ export const NFTDigModal: FC<NFTDigModalProps> = ({ ...props }) => {
         </div>
         <div className={`${classPrefix}-auction-price`}>
           <div className={`${classPrefix}-auction-price-title`}>
-            Starting Price
+            <p>Starting Price</p>
+            <span>{inputErrorString}</span>
           </div>
           <div className={`${classPrefix}-auction-price-input`}>
             <div className={`${classPrefix}-auction-price-input-input`}>
@@ -277,6 +273,13 @@ export const NFTDigModal: FC<NFTDigModalProps> = ({ ...props }) => {
                 maxLength={32}
                 onChange={(e) => {
                   setInputValue(formatPVMWinInputNum(e.target.value));
+                  if (Number(e.target.value) < 9.9) {
+                    setInputErrorString(
+                      "Minimum starting price cannot be less than 9.9 NEST"
+                    );
+                  } else {
+                    setInputErrorString(undefined);
+                  }
                 }}
               />
             </div>
@@ -290,7 +293,7 @@ export const NFTDigModal: FC<NFTDigModalProps> = ({ ...props }) => {
                 if (!NFTAllow) {
                   approve();
                 } else {
-                  if (!inputValue) {
+                  if (!inputValue || Number(inputValue) < 9.9) {
                     return;
                   }
                   startAuction();

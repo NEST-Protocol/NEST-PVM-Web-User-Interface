@@ -6,6 +6,7 @@ ul.TabItemArray {
     justify-self: center;
     justify-content: space-between;
     display: flex;
+    overflow: auto;
     
     li {
         height: 30px;

@@ -166,6 +166,10 @@
             .TabItemArray {
                 margin: 0 auto;
                 width: 500px;
+
+                &.whiteList {
+                    width: 700px;
+                }
             }
         }
     }
@@ -298,6 +302,18 @@
                 .TabItemArray {
                     width: 80%;
                     margin-top: 0;
+
+                    &.whiteList {
+                        justify-content:first baseline;
+                        width: 80%;
+                        overflow: hidden;
+                        overflow-x: auto;
+                        white-space: nowrap;
+
+                        li + li {
+                            margin-left: 10px;
+                        }
+                    }
                 }
             }
         }

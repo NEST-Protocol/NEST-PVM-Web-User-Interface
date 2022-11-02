@@ -30,7 +30,6 @@ import {
   normalToBigNumber,
 } from "../../libs/utils";
 import { DatePicker, message, Tooltip } from "antd";
-// import "../../styles/ant.css";
 import "./styles";
 import { HoldLine } from "../../components/HoldLine";
 import moment from "moment";
@@ -461,7 +460,7 @@ const MintOptions: FC = () => {
             <Tooltip
               placement="top"
               color={"#ffffff"}
-              title={'The shares of NEST an investor expect to receive.'}
+              title={"The shares of NEST an investor expect to receive."}
             >
               <span>
                 <Trans>Option Shares</Trans>
@@ -499,7 +498,7 @@ const MintOptions: FC = () => {
               }
             }}
           >
-            {checkAllowance() ? (<Trans>Buy Option</Trans>) : ('Approve')}
+            {checkAllowance() ? <Trans>Buy Option</Trans> : "Approve"}
           </MainButton>
           <div className={`${classPrefix}-rightCard-time`}>
             <p className={`${classPrefix}-rightCard-timeTitle`}>

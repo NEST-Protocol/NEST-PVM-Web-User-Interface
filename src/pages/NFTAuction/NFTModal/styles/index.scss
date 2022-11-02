@@ -277,6 +277,14 @@
             &-title {
                 font-size: 17px;
                 color: #878787;
+                display: flex;
+                justify-content: space-between;
+
+                span {
+                    color: $wrongAndNotice-color;
+                    text-align: right;
+                    font-size: 12px;
+                }
             }
 
             &-input {

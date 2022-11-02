@@ -10,6 +10,7 @@ export type TabItemBaseData = {
 export type TabItemArray = {
   data: Array<TabItemBaseData>;
   selectedVoid: (index: number) => void;
+  className?: string;
 };
 
 const TabItem: FC<TabItemArray> = ({ ...props }) => {
@@ -32,7 +33,16 @@ const TabItem: FC<TabItemArray> = ({ ...props }) => {
       </li>
     );
   });
-  return <ul className="TabItemArray">{buttonLi}</ul>;
+  return (
+    <ul
+      className={classNames({
+        [`TabItemArray`]: true,
+        [`${props.className}`]: true,
+      })}
+    >
+      {buttonLi}
+    </ul>
+  );
 };
 
 export default TabItem;

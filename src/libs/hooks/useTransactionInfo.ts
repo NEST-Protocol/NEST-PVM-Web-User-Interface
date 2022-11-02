@@ -26,6 +26,7 @@ export enum TransactionType {
   NESTNFTAuctionStart = 14,
   NESTNFTAuction = 15,
   NESTNFTAuctionEnd = 16,
+  NESTNFTWhiteListBuy = 17
 }
 
 export enum TransactionState {
