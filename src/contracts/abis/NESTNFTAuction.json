@@ -100,9 +100,9 @@
                 "type": "uint256"
             },
             {
-                "internalType": "uint32",
+                "internalType": "uint256",
                 "name": "price",
-                "type": "uint32"
+                "type": "uint256"
             }
         ],
         "name": "bid",
@@ -192,9 +192,14 @@
                         "internalType": "uint32",
                         "name": "startBlock",
                         "type": "uint32"
+                    },
+                    {
+                        "internalType": "uint32",
+                        "name": "index",
+                        "type": "uint32"
                     }
                 ],
-                "internalType": "struct NestNFTAuction.Auction[]",
+                "internalType": "struct INestNFTAuction.AuctionView[]",
                 "name": "auctionArray",
                 "type": "tuple[]"
             }
@@ -210,9 +215,9 @@
                 "type": "uint256"
             },
             {
-                "internalType": "uint32",
+                "internalType": "uint256",
                 "name": "price",
-                "type": "uint32"
+                "type": "uint256"
             },
             {
                 "internalType": "uint256",

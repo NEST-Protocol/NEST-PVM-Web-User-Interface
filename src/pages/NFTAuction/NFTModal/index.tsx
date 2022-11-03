@@ -32,6 +32,7 @@ import {
   tokenList,
 } from "../../../libs/constants/addresses";
 import {
+  ERC20Contract,
   getERC20Contract,
   NESTNFT,
   NESTNFTAuction,
@@ -201,7 +202,11 @@ export const NFTDigModal: FC<NFTDigModalProps> = ({ ...props }) => {
           <p>Value:</p>
           <div>
             <TokenNest />
-            <span>{props.isReceive ? props.info.price : props.info.value}</span>
+            <span>
+              {props.isReceive
+                ? formatUnits(props.info.price, 2)
+                : props.info.value}
+            </span>
           </div>
         </div>
         {showChildren3 ? (
@@ -263,7 +268,7 @@ export const NFTDigModal: FC<NFTDigModalProps> = ({ ...props }) => {
         <div className={`${classPrefix}-auction-price`}>
           <div className={`${classPrefix}-auction-price-title`}>
             <p>Starting Price</p>
-            <span>{inputErrorString}</span>
+            {checkWidth() ? (<span>{inputErrorString}</span>) : (<></>)}
           </div>
           <div className={`${classPrefix}-auction-price-input`}>
             <div className={`${classPrefix}-auction-price-input-input`}>
@@ -302,6 +307,7 @@ export const NFTDigModal: FC<NFTDigModalProps> = ({ ...props }) => {
             >
               {NFTAllow ? "Confirmation" : "Approve"}
             </MainButton>
+            {checkWidth() ? (<></>) : (<p className="errorString">{inputErrorString}</p>)}
           </div>
         </div>
       </div>
@@ -331,12 +337,15 @@ export const NFTAuctionModal: FC<NFTDigModalProps> = ({ ...props }) => {
   const [nestAllowance, setNestAllowance] = useState<BigNumber>(
     BigNumber.from("0")
   );
+  const [nestBalance, setNestBalance] = useState<BigNumber>();
   const [timeString, setTimeString] = useState<string>();
   const [endAuction, setEndAuction] = useState<boolean>(true);
   const [historyData, setHistoryData] = useState<Array<NFTAuctionHistoryType>>(
     []
   );
   const { pendingList, txList } = useTransactionListCon();
+  const [inputErrorString, setInputErrorString] = useState<string>();
+  const nestToken = ERC20Contract(tokenList["NEST"].addresses);
   // transaction
   const auctionTransaction = useNESTNFTAuction(
     BigNumber.from(props.info.index),
@@ -373,6 +382,16 @@ export const NFTAuctionModal: FC<NFTDigModalProps> = ({ ...props }) => {
       setNestAllowance(allowance);
     })();
   }, [account, chainId, library, txList]);
+  // balance
+  useEffect(() => {
+    if (!nestToken || !endAuction) {
+      return;
+    }
+    (async () => {
+      const balance = await nestToken.balanceOf(account);
+      setNestBalance(balance);
+    })();
+  }, [account, endAuction, nestToken]);
   // time
   useEffect(() => {
     const getTime = () => {
@@ -526,7 +545,7 @@ export const NFTAuctionModal: FC<NFTDigModalProps> = ({ ...props }) => {
   };
   const children2 = () => {
     const addPriceButton = () => {
-      const buttonText = ["+10%", "+50%", "MAX"];
+      const buttonText = ["+10%", "+50%", "+100%"];
       return buttonText.map((item, index) => {
         return (
           <button
@@ -548,11 +567,7 @@ export const NFTAuctionModal: FC<NFTDigModalProps> = ({ ...props }) => {
                 ).toString();
               } else if (buttonValue === "2") {
                 newInputValue = formatUnits(
-                  nowPrice.add(
-                    nowPrice
-                      .mul(BigNumber.from("70"))
-                      .div(BigNumber.from("100"))
-                  ),
+                  nowPrice.add(nowPrice),
                   2
                 ).toString();
               }
@@ -615,10 +630,10 @@ export const NFTAuctionModal: FC<NFTDigModalProps> = ({ ...props }) => {
         <></>
       ) : (
         <MainButton
-          disable={!checkMainButton()}
+          disable={mainButtonState()}
           loading={mainButtonState()}
           onClick={() => {
-            if (!checkMainButton()) {
+            if (checkMainButton()) {
               return;
             }
             endAuctionTransaction();
@@ -665,6 +680,23 @@ export const NFTAuctionModal: FC<NFTDigModalProps> = ({ ...props }) => {
               value={inputValue}
               onChange={(e) => {
                 setInputValue(formatPVMWinInputNum(e.target.value));
+                if (
+                  e.target.value !== "" &&
+                  parseUnits(e.target.value, 2).lt(
+                    BigNumber.from(props.info.price).add(BigNumber.from("100"))
+                  )
+                ) {
+                  setInputErrorString(
+                    "Bid must be more than 1NEST above the highest bid"
+                  );
+                } else if (
+                  nestBalance &&
+                  nestBalance.lt(parseUnits(e.target.value, 18))
+                ) {
+                  setInputErrorString(`Balance: ${nestBalance}`);
+                } else {
+                  setInputErrorString(undefined);
+                }
               }}
             />
           </div>
@@ -696,6 +728,14 @@ export const NFTAuctionModal: FC<NFTDigModalProps> = ({ ...props }) => {
           >
             {checkAllowance() ? "Bid" : "Approve"}
           </MainButton>
+        )}
+
+        {endAuction ? (
+          <></>
+        ) : (
+          <div className={`${classPrefix}-info-text-bid-errorString`}>
+            {inputErrorString}
+          </div>
         )}
       </div>
     );

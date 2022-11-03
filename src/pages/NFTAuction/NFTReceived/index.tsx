@@ -78,7 +78,7 @@ const NFTReceived: FC = () => {
             parseInt(itemData.end_auction) === 0 ? (
               <NFTAuctionModal info={itemData} onClose={close} />
             ) : (
-              <NFTDigModal info={itemData} onClose={close} />
+              <NFTDigModal info={itemData} onClose={close} isReceive/>
             )
           }
         </Popup>

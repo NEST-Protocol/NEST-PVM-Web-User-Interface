@@ -104,6 +104,7 @@ const NFTAuction: FC = () => {
   const [showImageId, setShowImageId] = useState<ShowImageType>();
   const [endBlock, setEndBlock] = useState<EndBlock>();
   const [timeString, setTimeString] = useState<string>("---");
+  const [firstShow, setFirstShow] = useState<boolean>(true);
   const modal = useRef<any>();
   const dataArray = (num: number) => {
     var result = [];
@@ -340,8 +341,7 @@ const NFTAuction: FC = () => {
     })();
   }, [NFTContract, account, library]);
   useEffect(() => {
-    if (txList[txList.length - 1].txState !== 0) {
-      console.log("check");
+    if (txList.length > 0 && txList[txList.length - 1].txState !== 0) {
       noClaim();
     }
   }, [noClaim, txList]);
@@ -438,7 +438,7 @@ const NFTAuction: FC = () => {
             <img src="./OpenPrize.png" alt="img" />
           </div>
         );
-      } else if (digStep === 4) {
+      } else if (digStep === 4 || (!firstShow && digStep === 1)) {
         return (
           <div className={`${topLeftViewClass}-buy-otherImage`}>
             <img src="./Dig-again.png" alt="img" />
@@ -469,6 +469,7 @@ const NFTAuction: FC = () => {
                 }
               } else {
                 claim();
+                setFirstShow(false);
               }
             }}
             disable={!checkMainButton()}
@@ -477,7 +478,7 @@ const NFTAuction: FC = () => {
             {digStep === 3
               ? `Claim (${timeString})`
               : checkAllowance()
-              ? digStep === 4
+              ? digStep === 4 || (digStep === 1 && !firstShow)
                 ? "Dig again"
                 : "Dig"
               : "Approve"}
