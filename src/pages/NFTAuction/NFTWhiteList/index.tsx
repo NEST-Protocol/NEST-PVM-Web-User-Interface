@@ -1,11 +1,25 @@
 import classNames from "classnames";
-import { FC, useState } from "react";
+import { FC, MouseEventHandler, useCallback, useEffect, useRef, useState } from "react";
+import Popup from "reactjs-popup";
+import { NFTMyDigDataType } from "..";
+import NFTItem from "../../../components/NFTItem";
 import NFTLeverIcon from "../../../components/NFTLeverIcon";
+import useWeb3 from "../../../libs/hooks/useWeb3";
+import { checkWidth } from "../../../libs/utils";
+import { NFTMarketModal } from "../NFTModal";
 import "./styles";
 
 const NFTWhiteList: FC = () => {
   const classPrefix = "NFTWhiteList";
+  const { chainId } = useWeb3();
   const [lever, setLever] = useState(0);
+  const [NFTMarketData, setNFTMarketData] = useState<Array<NFTMyDigDataType>>(
+    []
+  );
+  const [NFTMarketShowData, setNFTMarketShowData] = useState<
+    Array<NFTMyDigDataType>
+  >([]);
+  const modal = useRef<any>();
   const leverLi = [
     "All",
     <NFTLeverIcon lever={1} />,
@@ -14,7 +28,7 @@ const NFTWhiteList: FC = () => {
   ].map((item, index) => {
     return index === 1 ? (
       <li
-        key={`${index}+NFTAuctionView-lever`}
+        key={`${index}+NFTMarketView-lever`}
         className={classNames({
           [`selected`]: lever === index,
         })}
@@ -24,7 +38,7 @@ const NFTWhiteList: FC = () => {
       </li>
     ) : (
       <li
-        key={`${index}+NFTAuctionView-lever`}
+        key={`${index}+NFTMarketView-lever`}
         className={classNames({
           [`selected`]: lever === index,
         })}
@@ -34,6 +48,95 @@ const NFTWhiteList: FC = () => {
       </li>
     );
   });
+  // get auction data
+  const getMarketData = useCallback(() => {
+    if (!chainId) {
+      return;
+    }
+    (async () => {
+      try {
+        const data = await fetch(
+          `https://api.hedge.red/api/nft/whitelist/market/${chainId?.toString()}`
+        );
+        const data_json = await data.json();
+        setNFTMarketData(data_json["value"] ?? []);
+      } catch (error) {
+        console.log(error);
+        setNFTMarketData([]);
+      }
+    })();
+  }, [chainId]);
+  const dataArray = (num: number) => {
+    var result = [];
+    for (var i = 0; i < NFTMarketShowData.length; i += num) {
+      result.push(NFTMarketShowData.slice(i, i + num));
+    }
+    return result;
+  };
+  const liData = dataArray(checkWidth() ? 5 : 2).map((item, index) => {
+    const ul = item.map((itemData, indexData) => {
+      return (
+        <Popup
+          key={`${classPrefix}+li+${index}+${indexData}`}
+          modal
+          ref={modal}
+          className={"NFTAuction"}
+          nested
+          trigger={
+            <li>
+              <NFTItem
+                src={itemData.thumbnail}
+                name={itemData.token_id}
+                lever={parseInt(itemData.rarity)}
+                endTime={itemData.end_time}
+                value={itemData.value}
+              />
+            </li>
+          }
+        >
+          {(close: MouseEventHandler<HTMLButtonElement>) => (
+            <NFTMarketModal info={itemData} onClose={close} />
+          )}
+        </Popup>
+      );
+    });
+    return (
+      <li key={`${classPrefix}+li+${index}`}>
+        <ul>{ul}</ul>
+      </li>
+    );
+  });
+  // update
+  useEffect(() => {
+    getMarketData();
+    const time = setInterval(() => {
+        getMarketData();
+    }, 10000);
+    return () => {
+      clearTimeout(time);
+    };
+  }, [getMarketData]);
+  useEffect(() => {
+    const rarityArray = (array: Array<NFTMyDigDataType>) => {
+      if (lever === 0) {return array}
+      const newArray = array.filter((item) => {
+        const leverToRarity = () => {
+          if (lever === 1) {
+            return 1;
+          } else if (lever === 2) {
+            return 5;
+          } else if (lever === 3) {
+            return 10;
+          }
+        };
+        return parseInt(item.rarity) === leverToRarity();
+      });
+      return newArray;
+    };
+    setNFTMarketShowData(
+        rarityArray(NFTMarketData)
+    );
+  }, [NFTMarketData, lever]);
   return (
     <div className={`${classPrefix}`}>
       <div className={`${classPrefix}-choice`}>
@@ -44,6 +147,11 @@ const NFTWhiteList: FC = () => {
           </div>
         </div>
       </div>
+      {NFTMarketShowData.length > 0 ? (
+        <ul className="line">{liData}</ul>
+      ) : (
+        <div className={`${classPrefix}-noData`}>No offers to display</div>
+      )}
     </div>
   );
 };

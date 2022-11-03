@@ -29,6 +29,7 @@ import {
 import { useNESTNFTApprove } from "../../../contracts/hooks/useNFTTransaction";
 import {
   NESTNFTAuctionContract,
+  NESTNFTMarketContract,
   tokenList,
 } from "../../../libs/constants/addresses";
 import {
@@ -51,6 +52,7 @@ import {
 import "./styles";
 import Popup from "reactjs-popup";
 import NFTAuctionTips from "../NFTAuctionTips";
+import { useNESTNFTWhiteListBuy } from "../../../contracts/hooks/useNESTNFTMarket";
 
 export type NFTModalType = {
   title: string;
@@ -268,7 +270,7 @@ export const NFTDigModal: FC<NFTDigModalProps> = ({ ...props }) => {
         <div className={`${classPrefix}-auction-price`}>
           <div className={`${classPrefix}-auction-price-title`}>
             <p>Starting Price</p>
-            {checkWidth() ? (<span>{inputErrorString}</span>) : (<></>)}
+            {checkWidth() ? <span>{inputErrorString}</span> : <></>}
           </div>
           <div className={`${classPrefix}-auction-price-input`}>
             <div className={`${classPrefix}-auction-price-input-input`}>
@@ -307,7 +309,11 @@ export const NFTDigModal: FC<NFTDigModalProps> = ({ ...props }) => {
             >
               {NFTAllow ? "Confirmation" : "Approve"}
             </MainButton>
-            {checkWidth() ? (<></>) : (<p className="errorString">{inputErrorString}</p>)}
+            {checkWidth() ? (
+              <></>
+            ) : (
+              <p className="errorString">{inputErrorString}</p>
+            )}
           </div>
         </div>
       </div>
@@ -785,3 +791,116 @@ export const NFTAuctionModal: FC<NFTDigModalProps> = ({ ...props }) => {
 };
 
 export default NFTModal;
+
+export const NFTMarketModal: FC<NFTDigModalProps> = ({ ...props }) => {
+  const { chainId, account, library } = useWeb3();
+  const { pendingList, txList } = useTransactionListCon();
+  const [nestBalance, setNestBalance] = useState<BigNumber>();
+  const [nestAllowance, setNestAllowance] = useState<BigNumber>(
+    BigNumber.from("0")
+  );
+  const normalValue = parseUnits(props.info.value.toString(), 2)
+  const trueValue = normalValue.mul(BigNumber.from('70')).div(BigNumber.from('100'))
+  const nestToken = ERC20Contract(tokenList["NEST"].addresses);
+  const approve = useERC20Approve(
+    "NEST",
+    MaxUint256,
+    chainId ? NESTNFTMarketContract[chainId] : undefined
+  );
+  const whitelistBuy = useNESTNFTWhiteListBuy(BigNumber.from(props.info.token_id))
+  // approve
+  useEffect(() => {
+    if (!chainId || !account || !library) {
+      return;
+    }
+    const nestToken = getERC20Contract(
+      tokenList["NEST"].addresses[chainId],
+      library,
+      account
+    );
+    if (!nestToken) {
+      setNestAllowance(BigNumber.from("0"));
+      return;
+    }
+    (async () => {
+      const allowance = await nestToken.allowance(
+        account,
+        NESTNFTMarketContract[chainId]
+      );
+      setNestAllowance(allowance);
+    })();
+  }, [account, chainId, library, txList]);
+  // balance
+  useEffect(() => {
+    if (!nestToken) {
+      return;
+    }
+    (async () => {
+      const balance = await nestToken.balanceOf(account);
+      setNestBalance(balance);
+    })();
+  }, [account, nestToken, txList]);
+  
+  // mainButton pending
+  const mainButtonState = () => {
+    const pendingTransaction = pendingList.filter(
+      (item) =>
+        item.type === TransactionType.NESTNFTWhiteListBuy ||
+        item.type === TransactionType.approve
+    );
+    return pendingTransaction.length > 0 ? true : false;
+  };
+  const checkAllowance = () => {
+    if (nestAllowance.lt(trueValue)) {
+      return false;
+    }
+    return true;
+  };
+  const checkMainButton = () => {
+    if (mainButtonState()) {
+      return false;
+    }
+    if (!checkAllowance()) {
+      return true;
+    }
+    return true;
+  };
+  
+  const children2 = () => {
+    return (
+      <div className={`${classPrefix}-info-text-bid`}>
+        <div className={`${classPrefix}-info-text-bid-value`}>
+          <p>Whitelist Price:</p>
+          <div>
+            <TokenNest />
+            <span>{formatUnits(trueValue, 2)}</span>
+          </div>
+        </div>
+        <MainButton
+            disable={!checkMainButton()}
+            loading={mainButtonState()}
+            onClick={() => {
+              if (!checkMainButton()) {
+                return;
+              }
+              if (checkAllowance()) {
+                whitelistBuy();
+              } else {
+                approve();
+              }
+            }}
+          >
+            {checkAllowance() ? "Buy" : "Approve"}
+          </MainButton>
+      </div>
+    );
+  };
+  return (
+    <NFTModal
+      title={"WhiteList"}
+      info={props.info}
+      children2={children2()}
+      onClose={props.onClose}
+    />
+  );
+};
