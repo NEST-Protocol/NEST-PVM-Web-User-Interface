@@ -69,6 +69,12 @@ const NFTModal: FC<NFTModalType> = ({ ...props }) => {
     return <></>;
   }
   const NFTData = props.info;
+  const imgSrc =
+    NFTData.thumbnail && NFTData.thumbnail.length > 7
+      ? "https://" +
+        NFTData.thumbnail.substring(7, NFTData.thumbnail.length) +
+        ".ipfs.w3s.link"
+      : "";
   return (
     <div
       className={classNames({
@@ -89,14 +95,7 @@ const NFTModal: FC<NFTModalType> = ({ ...props }) => {
         </div>
         <div className={`${classPrefix}-info`}>
           <div className={`${classPrefix}-info-img`}>
-            <img
-              src={
-                "https://" +
-                NFTData.thumbnail.substring(7, NFTData.thumbnail.length) +
-                ".ipfs.w3s.link"
-              }
-              alt="NEST NFT"
-            />
+            <img src={imgSrc} alt="NEST NFT" />
           </div>
           <div className={`${classPrefix}-info-text`}>
             <div className={`${classPrefix}-info-text-leftTime`}>
