@@ -144,9 +144,12 @@ const NFTAuctionView: FC = () => {
       return newArray;
     };
     const nestValueArray = (array: Array<NFTMyDigDataType>) => {
+      const min = parseUnits(nestValue[0].toString(), 2);
+      const max = parseUnits(nestValue[1].toString(), 2);
+      if (nestValue[0] === 0.01 && nestValue[1] === 99999) {
+        return array;
+      }
       const newArray = array.filter((item) => {
-        const min = parseUnits(nestValue[0].toString(), 2);
-        const max = parseUnits(nestValue[1].toString(), 2);
         return (
           BigNumber.from(item.price).lte(max) &&
           BigNumber.from(item.price).gte(min)
@@ -227,9 +230,9 @@ const NFTAuctionView: FC = () => {
           </p>
           <Slider
             range={{ draggableTrack: true }}
-            max={999999}
+            max={99999}
             min={0.01}
-            defaultValue={[0.01, 999999]}
+            defaultValue={[0.01, 99999]}
             onAfterChange={(e: any) => {
               setNestValue(e);
             }}

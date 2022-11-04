@@ -428,9 +428,9 @@ export const NFTAuctionModal: FC<NFTDigModalProps> = ({ ...props }) => {
     (async () => {
       try {
         const data = await fetch(
-          `https://api.hedge.red/api/nft/auction/history/${props.info.token_address}/${
-            props.info.token_id
-          }/${chainId?.toString()}`
+          `https://api.hedge.red/api/nft/auction/history/${
+            props.info.token_address
+          }/${props.info.token_id}/${chainId?.toString()}`
         );
         const data_json = await data.json();
         setHistoryData(data_json["value"] ?? []);
@@ -578,6 +578,16 @@ export const NFTAuctionModal: FC<NFTDigModalProps> = ({ ...props }) => {
                 ).toString();
               }
               setInputValue(newInputValue);
+              if (
+                nestBalance &&
+                nestBalance.lt(parseUnits(newInputValue, 18))
+              ) {
+                setInputErrorString(
+                  `Balance: ${parseFloat(formatUnits(nestBalance, 18)).toFixed(
+                    2
+                  )}`
+                );
+              }
             }}
           >
             {item}
@@ -699,7 +709,11 @@ export const NFTAuctionModal: FC<NFTDigModalProps> = ({ ...props }) => {
                   nestBalance &&
                   nestBalance.lt(parseUnits(e.target.value, 18))
                 ) {
-                  setInputErrorString(`Balance: ${nestBalance}`);
+                  setInputErrorString(
+                    `Balance: ${parseFloat(
+                      formatUnits(nestBalance, 18)
+                    ).toFixed(2)}`
+                  );
                 } else {
                   setInputErrorString(undefined);
                 }
