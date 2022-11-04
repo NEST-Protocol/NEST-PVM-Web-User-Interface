@@ -52,7 +52,11 @@ import {
 import "./styles";
 import Popup from "reactjs-popup";
 import NFTAuctionTips from "../NFTAuctionTips";
-import { useNESTNFTWhiteListBuy } from "../../../contracts/hooks/useNESTNFTMarket";
+import {
+  checkWhiteList,
+  useNESTNFTWhiteListBuy
+} from "../../../contracts/hooks/useNESTNFTMarket";
+import message from "antd/lib/message";
 
 export type NFTModalType = {
   title: string;
@@ -905,6 +909,11 @@ export const NFTMarketModal: FC<NFTDigModalProps> = ({ ...props }) => {
           loading={mainButtonState()}
           onClick={() => {
             if (!checkMainButton()) {
+              return;
+            }
+
+            if (!checkWhiteList(account)) {
+              message.error("You are not yet whitelisted");
               return;
             }
             if (checkAllowance()) {

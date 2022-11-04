@@ -20,6 +20,14 @@ export const whiteList = [
   "0x0B306BF915C4d645ff596e518fAf3F9669b97016",
 ];
 
+// whiteList
+export const checkWhiteList = (account: string | null | undefined) => {
+  const inList = whiteList.filter((item) => {
+    return account?.toLocaleLowerCase() === item.toLocaleLowerCase();
+  });
+  return inList.length > 0 ? true : false;
+};
+
 export function useNESTNFTWhiteListBuy(tokenId: BigNumber) {
   const { account, chainId } = useWeb3();
   var contract = NESTNFTMarket();

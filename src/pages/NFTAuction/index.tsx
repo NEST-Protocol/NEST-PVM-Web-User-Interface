@@ -45,7 +45,7 @@ import {
 } from "../../contracts/hooks/useNFTTransaction";
 import { TransactionModalType } from "../Shared/TransactionModal";
 import NFTWhiteList from "./NFTWhiteList";
-import { whiteList } from "../../contracts/hooks/useNESTNFTMarket";
+import { checkWhiteList } from "../../contracts/hooks/useNESTNFTMarket";
 
 export type NFTMyDigDataType = {
   thumbnail: string;
@@ -141,13 +141,6 @@ const NFTAuction: FC = () => {
       </li>
     );
   });
-  // whiteList
-  const checkWhiteList = () => {
-    const inList = whiteList.filter((item) => {
-      return account?.toLocaleLowerCase() === item.toLocaleLowerCase();
-    });
-    return inList.length > 0 ? true : false;
-  };
   // balance
   const getBalance = useCallback(async () => {
     if (!chainId || !account || !library) {
@@ -284,18 +277,12 @@ const NFTAuction: FC = () => {
     setDigTabSelected(index);
   };
   // auction tab item data
-  const auctionTabItemArray = checkWhiteList()
-    ? [
-        { icon: <NFTAuctionIcon />, text: "Auction" },
-        { icon: <NFTMyAuction />, text: "Offers Made" },
-        { icon: <NFTMyDig />, text: "My Received" },
-        { icon: <NFTWhiteListIcon />, text: "White List" },
-      ]
-    : [
-        { icon: <NFTAuctionIcon />, text: "Auction" },
-        { icon: <NFTMyAuction />, text: "Offers Made" },
-        { icon: <NFTMyDig />, text: "My Received" },
-      ];
+  const auctionTabItemArray = [
+    { icon: <NFTAuctionIcon />, text: "Auction" },
+    { icon: <NFTMyAuction />, text: "In Progress" },
+    { icon: <NFTMyDig />, text: "My items" },
+    { icon: <NFTWhiteListIcon />, text: "White List" },
+  ];
   const auctionTabNum = (index: number) => {
     setAuctionTabSelected(index);
   };
@@ -537,7 +524,7 @@ const NFTAuction: FC = () => {
         <MainCard classNames={`${classPrefix}-top-right`}>
           <div className={`${classPrefix}-top-right-title`}>
             <NFTMyMint />
-            <p>My Dig</p>
+            <p>My Collection</p>
           </div>
           {NFTMyDigData.length > 0 ? (
             <ul className="line">{liData}</ul>
@@ -551,7 +538,7 @@ const NFTAuction: FC = () => {
       <div className={`${classPrefix}-bottom`}>
         <MainCard classNames={`${classPrefix}-bottom-main`}>
           <TabItem
-            className={checkWhiteList() ? "whiteList" : ""}
+            className={checkWhiteList(account) ? "whiteList" : ""}
             data={auctionTabItemArray}
             selectedVoid={auctionTabNum}
           />

@@ -27,7 +27,7 @@ const NFTOfferView: FC = () => {
   const [NFTAuctionShowData, setNFTAuctionShowData] = useState<
     Array<NFTMyDigDataType>
   >([]);
-  const auctionChoice = ["All", "Bid made", "No auction", "Closed"];
+  const auctionChoice = ["All", "Leading Bids", "Losing Bids"];
   // get auction data
   const getAuctionData = useCallback(() => {
     if (!account || !chainId) {
@@ -113,10 +113,6 @@ const NFTOfferView: FC = () => {
           parseInt(item.end_time) > nowTime &&
           item.bidder.toLocaleLowerCase() !== account?.toLocaleLowerCase()
         );
-      });
-    } else if (auctionStatus === 3) {
-      newArray = NFTAuctionData.filter((item) => {
-        return parseInt(item.end_time) <= nowTime;
       });
     } else {
       newArray = NFTAuctionData;
