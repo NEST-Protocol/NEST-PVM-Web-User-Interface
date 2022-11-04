@@ -16,7 +16,7 @@ export type NFTItemType = {
 
 const NFTItem: FC<NFTItemType> = ({ ...props }) => {
   const src =
-    props.src.length > 7
+  (props.src && props.src.length > 7)
       ? "https://" + props.src.substring(7, props.src.length) + ".ipfs.w3s.link"
       : "";
   const [timeString, setTimeString] = useState<string>();
