@@ -18,6 +18,7 @@ import {
   NFTMyDig,
   NFTMyMint,
   NFTProbability,
+  NFTWhiteListIcon,
 } from "../../components/Icon";
 import MainButton from "../../components/MainButton";
 import MainCard from "../../components/MainCard";
@@ -297,7 +298,7 @@ const NFTAuction: FC = () => {
         { icon: <NFTAuctionIcon />, text: "Auction" },
         { icon: <NFTMyAuction />, text: "Offers Made" },
         { icon: <NFTMyDig />, text: "My Received" },
-        { icon: <NFTMyDig />, text: "White List" },
+        { icon: <NFTWhiteListIcon />, text: "White List" },
       ]
     : [
         { icon: <NFTAuctionIcon />, text: "Auction" },

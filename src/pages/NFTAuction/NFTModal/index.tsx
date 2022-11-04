@@ -795,19 +795,23 @@ export default NFTModal;
 export const NFTMarketModal: FC<NFTDigModalProps> = ({ ...props }) => {
   const { chainId, account, library } = useWeb3();
   const { pendingList, txList } = useTransactionListCon();
-  const [nestBalance, setNestBalance] = useState<BigNumber>();
+  // const [nestBalance, setNestBalance] = useState<BigNumber>();
   const [nestAllowance, setNestAllowance] = useState<BigNumber>(
     BigNumber.from("0")
   );
-  const normalValue = parseUnits(props.info.value.toString(), 2)
-  const trueValue = normalValue.mul(BigNumber.from('70')).div(BigNumber.from('100'))
-  const nestToken = ERC20Contract(tokenList["NEST"].addresses);
+  const normalValue = parseUnits(props.info.value.toString(), 2);
+  const trueValue = normalValue
+    .mul(BigNumber.from("70"))
+    .div(BigNumber.from("100"));
+  // const nestToken = ERC20Contract(tokenList["NEST"].addresses);
   const approve = useERC20Approve(
     "NEST",
     MaxUint256,
     chainId ? NESTNFTMarketContract[chainId] : undefined
   );
-  const whitelistBuy = useNESTNFTWhiteListBuy(BigNumber.from(props.info.token_id))
+  const whitelistBuy = useNESTNFTWhiteListBuy(
+    BigNumber.from(props.info.token_id)
+  );
   // approve
   useEffect(() => {
     if (!chainId || !account || !library) {
@@ -831,16 +835,16 @@ export const NFTMarketModal: FC<NFTDigModalProps> = ({ ...props }) => {
     })();
   }, [account, chainId, library, txList]);
   // balance
-  useEffect(() => {
-    if (!nestToken) {
-      return;
-    }
-    (async () => {
-      const balance = await nestToken.balanceOf(account);
-      setNestBalance(balance);
-    })();
-  }, [account, nestToken, txList]);
-  
+  // useEffect(() => {
+  //   if (!nestToken) {
+  //     return;
+  //   }
+  //   (async () => {
+  //     const balance = await nestToken.balanceOf(account);
+  //     setNestBalance(balance);
+  //   })();
+  // }, [account, nestToken, txList]);
+
   // mainButton pending
   const mainButtonState = () => {
     const pendingTransaction = pendingList.filter(
@@ -865,10 +869,17 @@ export const NFTMarketModal: FC<NFTDigModalProps> = ({ ...props }) => {
     }
     return true;
   };
-  
+
   const children2 = () => {
     return (
       <div className={`${classPrefix}-info-text-bid`}>
+        <div className={`${classPrefix}-info-text-bid-value`}>
+          <p>Price:</p>
+          <div>
+            <TokenNest />
+            <span className="normalPrice">{formatUnits(normalValue, 2)}</span>
+          </div>
+        </div>
         <div className={`${classPrefix}-info-text-bid-value`}>
           <p>Whitelist Price:</p>
           <div>
@@ -877,21 +888,21 @@ export const NFTMarketModal: FC<NFTDigModalProps> = ({ ...props }) => {
           </div>
         </div>
         <MainButton
-            disable={!checkMainButton()}
-            loading={mainButtonState()}
-            onClick={() => {
-              if (!checkMainButton()) {
-                return;
-              }
-              if (checkAllowance()) {
-                whitelistBuy();
-              } else {
-                approve();
-              }
-            }}
-          >
-            {checkAllowance() ? "Buy" : "Approve"}
-          </MainButton>
+          disable={!checkMainButton()}
+          loading={mainButtonState()}
+          onClick={() => {
+            if (!checkMainButton()) {
+              return;
+            }
+            if (checkAllowance()) {
+              whitelistBuy();
+            } else {
+              approve();
+            }
+          }}
+        >
+          {checkAllowance() ? "Buy" : "Approve"}
+        </MainButton>
       </div>
     );
   };
