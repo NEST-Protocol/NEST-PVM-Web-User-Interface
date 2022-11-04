@@ -428,7 +428,7 @@ export const NFTAuctionModal: FC<NFTDigModalProps> = ({ ...props }) => {
     (async () => {
       try {
         const data = await fetch(
-          `https://api.hedge.red/api/nft/auction/history/0xfb9Da3d9B76577CAc3616D5d0cf6b7d51B98870F/${
+          `https://api.hedge.red/api/nft/auction/history/${props.info.token_address}/${
             props.info.token_id
           }/${chainId?.toString()}`
         );
@@ -439,7 +439,7 @@ export const NFTAuctionModal: FC<NFTDigModalProps> = ({ ...props }) => {
         setHistoryData([]);
       }
     })();
-  }, [chainId, props.info.token_id]);
+  }, [chainId, props.info.token_address, props.info.token_id]);
   useEffect(() => {
     getHistory();
     const time = setInterval(() => {

@@ -23,6 +23,7 @@ import { BigNumber } from "ethers";
 const NFTAuctionView: FC = () => {
   const classPrefix = "NFTAuctionView";
   const { chainId } = useWeb3();
+  const [showNFTModal, setShowNFTModal] = useState<NFTMyDigDataType>();
   const auctionChoice = ["All", "Ending soon", "Recently start"];
   const [NFTAuctionData, setNFTAuctionData] = useState<Array<NFTMyDigDataType>>(
     []
@@ -90,28 +91,18 @@ const NFTAuctionView: FC = () => {
   const liData = dataArray(checkWidth() ? 5 : 2).map((item, index) => {
     const ul = item.map((itemData, indexData) => {
       return (
-        <Popup
+        <li
           key={`${classPrefix}+li+${index}+${indexData}`}
-          modal
-          ref={modal}
-          className={"NFTAuction"}
-          nested
-          trigger={
-            <li>
-              <NFTItem
-                src={itemData.thumbnail}
-                name={itemData.token_id}
-                lever={parseInt(itemData.rarity)}
-                endTime={itemData.end_time}
-                value={formatUnits(itemData.price, 2)}
-              />
-            </li>
-          }
+          onClick={() => setShowNFTModal(itemData)}
         >
-          {(close: MouseEventHandler<HTMLButtonElement>) => (
-            <NFTAuctionModal info={itemData} onClose={close} />
-          )}
-        </Popup>
+          <NFTItem
+            src={itemData.thumbnail}
+            name={itemData.token_id}
+            lever={parseInt(itemData.rarity)}
+            endTime={itemData.end_time}
+            value={formatUnits(itemData.price, 2)}
+          />
+        </li>
       );
     });
     return (
@@ -135,7 +126,9 @@ const NFTAuctionView: FC = () => {
   };
   useEffect(() => {
     const rarityArray = (array: Array<NFTMyDigDataType>) => {
-      if (lever === 0) {return array}
+      if (lever === 0) {
+        return array;
+      }
       const newArray = array.filter((item) => {
         const leverToRarity = () => {
           if (lever === 1) {
@@ -201,6 +194,21 @@ const NFTAuctionView: FC = () => {
   }, [auctionStatus, nestValue, lever, NFTAuctionData]);
   return (
     <div className={`${classPrefix}`}>
+      {showNFTModal ? (
+        <Popup
+          ref={modal}
+          className={"NFTAuction"}
+          open
+          nested
+          onClose={() => {
+            setShowNFTModal(undefined);
+          }}
+        >
+          {(close: MouseEventHandler<HTMLButtonElement>) => (
+            <NFTAuctionModal info={showNFTModal} onClose={close} />
+          )}
+        </Popup>
+      ) : null}
       <div className={`${classPrefix}-choice`}>
         <div className={`${classPrefix}-choice-top`}>
           <NFTAuctionStatus

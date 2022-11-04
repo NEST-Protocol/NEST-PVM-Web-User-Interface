@@ -91,6 +91,7 @@ type EndBlock = {
 
 const NFTAuction: FC = () => {
   const classPrefix = "NFTAuction";
+  const [showNFTModal, setShowNFTModal] = useState<NFTMyDigDataType>();
   const [digTabSelected, setDigTabSelected] = useState(0);
   const [auctionTabSelected, setAuctionTabSelected] = useState(0);
   const [NESTBalance, setNESTBalance] = useState<BigNumber>();
@@ -120,28 +121,18 @@ const NFTAuction: FC = () => {
   const liData = dataArray(checkWidth() ? 3 : 2).map((item, index) => {
     const ul = item.map((itemData, indexData) => {
       return (
-        <Popup
+        <li
           key={`${classPrefix}+pop+${index}+${indexData}`}
-          modal
-          ref={modal}
-          className={"NFTAuction"}
-          nested
-          trigger={
-            <li>
-              <NFTItem
-                src={itemData.thumbnail}
-                name={itemData.token_id}
-                lever={parseInt(itemData.rarity)}
-                isDig={true}
-                value={itemData.value}
-              />
-            </li>
-          }
+          onClick={() => setShowNFTModal(itemData)}
         >
-          {(close: MouseEventHandler<HTMLButtonElement>) => (
-            <NFTDigModal info={itemData} onClose={close} />
-          )}
-        </Popup>
+          <NFTItem
+            src={itemData.thumbnail}
+            name={itemData.token_id}
+            lever={parseInt(itemData.rarity)}
+            isDig={true}
+            value={itemData.value}
+          />
+        </li>
       );
     });
     return (
@@ -523,6 +514,21 @@ const NFTAuction: FC = () => {
   const claim = useNESTNFclaim(claimIndex);
   return (
     <div className={`${classPrefix}`}>
+      {showNFTModal ? (
+        <Popup
+          ref={modal}
+          className={"NFTAuction"}
+          open
+          nested
+          onClose={() => {
+            setShowNFTModal(undefined);
+          }}
+        >
+          {(close: MouseEventHandler<HTMLButtonElement>) => (
+            <NFTDigModal info={showNFTModal} onClose={close} />
+          )}
+        </Popup>
+      ) : null}
       <div className={`${classPrefix}-top`}>
         <MainCard classNames={`${classPrefix}-top-left`}>
           <TabItem data={digTabItemArray} selectedVoid={digTabNum} />

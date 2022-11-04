@@ -1,5 +1,12 @@
 import classNames from "classnames";
-import { FC, MouseEventHandler, useCallback, useEffect, useRef, useState } from "react";
+import {
+  FC,
+  MouseEventHandler,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import Popup from "reactjs-popup";
 import { NFTMyDigDataType } from "..";
 import NFTItem from "../../../components/NFTItem";
@@ -12,6 +19,7 @@ import "./styles";
 const NFTWhiteList: FC = () => {
   const classPrefix = "NFTWhiteList";
   const { chainId } = useWeb3();
+  const [showModal, setShowModal] = useState<NFTMyDigDataType>();
   const [lever, setLever] = useState(0);
   const [NFTMarketData, setNFTMarketData] = useState<Array<NFTMyDigDataType>>(
     []
@@ -76,28 +84,18 @@ const NFTWhiteList: FC = () => {
   const liData = dataArray(checkWidth() ? 5 : 2).map((item, index) => {
     const ul = item.map((itemData, indexData) => {
       return (
-        <Popup
+        <li
           key={`${classPrefix}+li+${index}+${indexData}`}
-          modal
-          ref={modal}
-          className={"NFTAuction"}
-          nested
-          trigger={
-            <li>
-              <NFTItem
-                src={itemData.thumbnail}
-                name={itemData.token_id}
-                lever={parseInt(itemData.rarity)}
-                endTime={itemData.end_time}
-                value={itemData.value}
-              />
-            </li>
-          }
+          onClick={() => setShowModal(itemData)}
         >
-          {(close: MouseEventHandler<HTMLButtonElement>) => (
-            <NFTMarketModal info={itemData} onClose={close} />
-          )}
-        </Popup>
+          <NFTItem
+            src={itemData.thumbnail}
+            name={itemData.token_id}
+            lever={parseInt(itemData.rarity)}
+            endTime={itemData.end_time}
+            value={itemData.value}
+          />
+        </li>
       );
     });
     return (
@@ -110,7 +108,7 @@ const NFTWhiteList: FC = () => {
   useEffect(() => {
     getMarketData();
     const time = setInterval(() => {
-        getMarketData();
+      getMarketData();
     }, 10000);
     return () => {
       clearTimeout(time);
@@ -118,7 +116,9 @@ const NFTWhiteList: FC = () => {
   }, [getMarketData]);
   useEffect(() => {
     const rarityArray = (array: Array<NFTMyDigDataType>) => {
-      if (lever === 0) {return array}
+      if (lever === 0) {
+        return array;
+      }
       const newArray = array.filter((item) => {
         const leverToRarity = () => {
           if (lever === 1) {
@@ -133,12 +133,25 @@ const NFTWhiteList: FC = () => {
       });
       return newArray;
     };
-    setNFTMarketShowData(
-        rarityArray(NFTMarketData)
-    );
+    setNFTMarketShowData(rarityArray(NFTMarketData));
   }, [NFTMarketData, lever]);
   return (
     <div className={`${classPrefix}`}>
+      {showModal ? (
+        <Popup
+          ref={modal}
+          className={"NFTAuction"}
+          open
+          nested
+          onClose={() => {
+            setShowModal(undefined);
+          }}
+        >
+          {(close: MouseEventHandler<HTMLButtonElement>) => (
+            <NFTMarketModal info={showModal} onClose={close} />
+          )}
+        </Popup>
+      ) : null}
       <div className={`${classPrefix}-choice`}>
         <div className={`${classPrefix}-choice-top`}>
           <div className={`${classPrefix}-choice-top-lever`}>
