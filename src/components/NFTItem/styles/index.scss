@@ -16,6 +16,10 @@
         overflow: hidden;
         position: relative;
 
+        :hover {
+            cursor: pointer;
+        }
+
         img {
             width: 100%;
             display: inline-block;

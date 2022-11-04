@@ -227,9 +227,9 @@ const NFTAuctionView: FC = () => {
           </p>
           <Slider
             range={{ draggableTrack: true }}
-            max={99999}
+            max={999999}
             min={0.01}
-            defaultValue={[0.01, 99999]}
+            defaultValue={[0.01, 999999]}
             onAfterChange={(e: any) => {
               setNestValue(e);
             }}
