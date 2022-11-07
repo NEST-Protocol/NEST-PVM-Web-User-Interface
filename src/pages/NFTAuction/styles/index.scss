@@ -30,6 +30,15 @@
                         height: 230px;
                         margin-top: 70px;
 
+                        p {
+                            width: 100%;
+                            line-height: 23px;
+                            font-size: 23px;
+                            color: #878787;
+                            font-weight: bold;
+                            text-align: center;
+                        }
+
                         img {
                             display: block;
                             margin: 0 auto;
@@ -182,6 +191,11 @@
             &-left {
                 &-main {
                     &-buy {
+                        &-otherImage {
+                            p {
+                                color: #C5C5C5;
+                            }
+                        }
                         &-balance {
                             color: #C5C5C5;
                         }

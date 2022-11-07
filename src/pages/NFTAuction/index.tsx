@@ -420,6 +420,7 @@ const NFTAuction: FC = () => {
       } else if (digStep === 4 || (!firstShow && digStep === 1)) {
         return (
           <div className={`${topLeftViewClass}-buy-otherImage`}>
+            <p>No digging</p>
             <img src="./Dig-again.png" alt="img" />
           </div>
         );
@@ -427,6 +428,8 @@ const NFTAuction: FC = () => {
         return (
           <div className={`${topLeftViewClass}-buy-otherImage`}>
             <img src="./Dig.png" alt="img" />
+            <br/>
+            <p>NEST 99.9</p>
           </div>
         );
       }
