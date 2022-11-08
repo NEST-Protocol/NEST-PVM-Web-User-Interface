@@ -321,9 +321,11 @@ const NFTAuction: FC = () => {
   }, [NFTContract, account, library]);
   useEffect(() => {
     if (txList.length > 0 && txList[txList.length - 1].txState !== 0) {
-      noClaim();
+      if (digStep === 1 || digStep === 2 || digStep === 4) {
+        noClaim();
+      }
     }
-  }, [noClaim, txList]);
+  }, [digStep, noClaim, txList]);
   useEffect(() => {
     if (digStep === 3 && endBlock && chainId) {
       const time = setInterval(() => {
@@ -365,7 +367,6 @@ const NFTAuction: FC = () => {
             setDigStep(4);
           } else if (rec && rec.logs.length > 0) {
             const tokenId = BigNumber.from(rec.logs[0].topics[3]);
-            setDigStep(5);
             // get token uri
             const uri = await NFTContract.tokenURI(tokenId.toString());
             // get json
@@ -385,12 +386,17 @@ const NFTAuction: FC = () => {
               src: src,
               lever: lever,
             });
+            setDigStep(5);
+
+            setTimeout(() => {
+              noClaim()
+            }, 30000);
           }
           localStorage.setItem("NFTClaim" + chainId?.toString(), "");
         })();
       }
     }
-  }, [NFTContract, chainId, digStep, library, txList]);
+  }, [NFTContract, chainId, digStep, library, noClaim, txList]);
   // top left view
   const topLeftView = () => {
     const topLeftViewClass = `${classPrefix}-top-left-main`;
