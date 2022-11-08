@@ -389,6 +389,7 @@ const NFTAuction: FC = () => {
             setDigStep(5);
 
             setTimeout(() => {
+              setFirstShow(true)
               noClaim()
             }, 30000);
           }
