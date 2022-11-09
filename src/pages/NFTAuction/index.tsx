@@ -490,31 +490,31 @@ const NFTAuction: FC = () => {
             You can try to dig a Cyber Ink NFT with a cost of 99.9 NEST. There
             is a chance to get a Cyber Ink NFT(worth 300-3000 $NEST) directly.
           </p>
-          <img src="./OpenPrize.png" alt="img" />
+          <img src="./NFTHowImage/howtoplay1.png" alt="img" />
           <p>
             After the dig, you will get a mystery box, please open (claim) it
             within 12 minutes.
           </p>
-          <img src="./OpenPrize.png" alt="img" />
+          <img src="./NFTHowImage/howtoplay2.png" alt="img" />
           <p>
             After opening the mystery box, you can dig again at the same cost.
           </p>
-          <img src="./OpenPrize.png" alt="img" />
+          <img src="./NFTHowImage/howtoplay3.png" alt="img" />
           <p>
             After winning an NFT, you can see it in “My Collection”, and you can
             initiate an auction for the NFT here.
           </p>
-          <img src="./OpenPrize.png" alt="img" />
+          <img src="./NFTHowImage/howtoplay4.png" alt="img" />
           <h3 className={`${topLeftViewClass}-how-h3`}>
             How to initiate an auction?
           </h3>
           <p>Open NFT detail in My Collection, click “Go to auction”</p>
-          <img src="./OpenPrize.png" alt="img" />
+          <img src="./NFTHowImage/howtoplay5.png" alt="img" />
           <p>
             Watch out our auction rules, it shows every time you click it,
             please read carefully.
           </p>
-          <img src="./OpenPrize.png" alt="img" />
+          <img src="./NFTHowImage/howtoplay6.png" alt="img" />
           <h3 className={`${topLeftViewClass}-how-h3`}>Auction rule:</h3>
           <p>
             You can set any amount as the starting price and the auction will be
@@ -537,12 +537,12 @@ const NFTAuction: FC = () => {
             minimum must not be less than 9.9 NEST, the input box also provides
             the suggested starting price range for reference
           </p>
-          <img src="./OpenPrize.png" alt="img" />
+          <img src="./NFTHowImage/howtoplay7.png" alt="img" />
           <p>
             After approval of the auction, your CyberInk NFT will be seen by
             everyone in the auction.
           </p>
-          <img src="./OpenPrize.png" alt="img" />
+          <img src="./NFTHowImage/howtoplay8.png" alt="img" />
           <h3 className={`${topLeftViewClass}-how-h3`}>How to auction?</h3>
           <p>
             Auction: All those that are being auctioned will be displayed here.
@@ -557,7 +557,7 @@ const NFTAuction: FC = () => {
             here, you can initiate another auction again here.
           </p>
           <h4 className={`${topLeftViewClass}-how-h4`}>Start Auction</h4>
-          <img src="./OpenPrize.png" alt="img" />
+          <img src="./NFTHowImage/howtoplay9.png" alt="img" />
           <p>1. You can make bids after approval</p>
           <p>
             2. Custom bids are available, as well as shortcuts of +10%, +50%,
@@ -578,7 +578,7 @@ const NFTAuction: FC = () => {
             The final auction price will be given to the initiator after
             deducting all rewards.
           </p>
-          <img src="./OpenPrize.png" alt="img" />
+          <img src="./NFTHowImage/howtoplay10.png" alt="img" />
           <h4 className={`${topLeftViewClass}-how-h4`}>Auction Success</h4>
           <p>1. At the end of the countdown, the highest bidder wins</p>
           <p>
@@ -590,7 +590,7 @@ const NFTAuction: FC = () => {
             auction amount, and the highest bidder can get NFT. After the
             withdrawal is triggered by either one party, the auction ends
           </p>
-          <img src="./OpenPrize.png" alt="img" />
+          <img src="./NFTHowImage/howtoplay11.png" alt="img" />
           <p>
             PS: NEST NFTs are BSC minted and you can sell them on any BSC
             NFT-enabled platform. The NEST NFT you purchased in any secondary
