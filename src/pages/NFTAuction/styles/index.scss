@@ -94,6 +94,36 @@
                         color: #878787;
                     }
                 }
+
+                &-how {
+                    padding: 0px 44px;
+                    overflow: auto;
+                    height: 470px;
+                    color: #878787;
+
+                    &-h3 {
+                        margin-top: 5px;
+                        font-weight: bolder;
+                        font-size: 20px;
+                    }
+
+                    &-h4 {
+                        margin-top: 5px;
+                        font-weight: bold;
+                        font-size: 16px;
+                    }
+                    p {
+                        margin-top: 5px;
+                        line-height: 20px;
+                        font-size: 16px;
+                    }
+
+                    img {
+                        margin-top: 5px;
+                        display: block;
+                        margin: 0 auto;
+                    }
+                }
             }
         }
 
@@ -200,6 +230,10 @@
                             color: #C5C5C5;
                         }
                     }
+
+                    &-how {
+                        color: #C5C5C5;
+                    }
                 }
             }
 
@@ -252,6 +286,15 @@
                             img {
                                 width: 100%;
                             }
+                        }
+                    }
+
+                    &-how {
+                        padding: 0 22px;
+                        height: 400px;
+
+                        img {
+                            width: 100%;
                         }
                     }
                 }

@@ -389,8 +389,8 @@ const NFTAuction: FC = () => {
             setDigStep(5);
 
             setTimeout(() => {
-              setFirstShow(true)
-              noClaim()
+              setFirstShow(true);
+              noClaim();
             }, 30000);
           }
           localStorage.setItem("NFTClaim" + chainId?.toString(), "");
@@ -435,7 +435,7 @@ const NFTAuction: FC = () => {
         return (
           <div className={`${topLeftViewClass}-buy-otherImage`}>
             <img src="./Dig.png" alt="img" />
-            <br/>
+            <br />
             <p>NEST 99.9</p>
           </div>
         );
@@ -482,7 +482,123 @@ const NFTAuction: FC = () => {
         </div>
       );
     } else if (digTabSelected === 1) {
-      return <div className={`${topLeftViewClass}-how`}>how</div>;
+      return (
+        <div className={`${topLeftViewClass}-how`}>
+          <h3 className={`${topLeftViewClass}-how-h3`}>How to play?</h3>
+          <h4 className={`${topLeftViewClass}-how-h4`}>How to dig?</h4>
+          <p>
+            You can try to dig a Cyber Ink NFT with a cost of 99.9 NEST. There
+            is a chance to get a Cyber Ink NFT(worth 300-3000 $NEST) directly.
+          </p>
+          <img src="./OpenPrize.png" alt="img" />
+          <p>
+            After the dig, you will get a mystery box, please open (claim) it
+            within 12 minutes.
+          </p>
+          <img src="./OpenPrize.png" alt="img" />
+          <p>
+            After opening the mystery box, you can dig again at the same cost.
+          </p>
+          <img src="./OpenPrize.png" alt="img" />
+          <p>
+            After winning an NFT, you can see it in “My Collection”, and you can
+            initiate an auction for the NFT here.
+          </p>
+          <img src="./OpenPrize.png" alt="img" />
+          <h3 className={`${topLeftViewClass}-how-h3`}>
+            How to initiate an auction?
+          </h3>
+          <p>Open NFT detail in My Collection, click “Go to auction”</p>
+          <img src="./OpenPrize.png" alt="img" />
+          <p>
+            Watch out our auction rules, it shows every time you click it,
+            please read carefully.
+          </p>
+          <img src="./OpenPrize.png" alt="img" />
+          <h3 className={`${topLeftViewClass}-how-h3`}>Auction rule:</h3>
+          <p>
+            You can set any amount as the starting price and the auction will be
+            an ascending auction.
+          </p>
+          <p>
+            To encourage bidding, 50% of the bid difference will be rewarded to
+            the previous failed bidder, the reward amount will be borne by the
+            auction sponsor, and the cost will be deducted directly from the
+            final sale price, with no additional service fee.
+          </p>
+          <h3 className={`${topLeftViewClass}-how-h3`}>Auction setting:</h3>
+          <h4 className={`${topLeftViewClass}-how-h4`}>Range:</h4>
+          <p>
+            1. Auction time: you can choose, 24 Hours, 48 Hours, or 78 Hours.
+            Countdown begins as soon as the auction takes effect
+          </p>
+          <p>
+            2. Starting price: you are free to define the starting price, the
+            minimum must not be less than 9.9 NEST, the input box also provides
+            the suggested starting price range for reference
+          </p>
+          <img src="./OpenPrize.png" alt="img" />
+          <p>
+            After approval of the auction, your CyberInk NFT will be seen by
+            everyone in the auction.
+          </p>
+          <img src="./OpenPrize.png" alt="img" />
+          <h3 className={`${topLeftViewClass}-how-h3`}>How to auction?</h3>
+          <p>
+            Auction: All those that are being auctioned will be displayed here.
+            You can quickly browse the NFT you want to get by filtering.
+          </p>
+          <p>
+            In Progress: All the in-progress auctions you bid on are displayed
+            here.
+          </p>
+          <p>
+            My Items: All the items I have auctioned successfully are shown
+            here, you can initiate another auction again here.
+          </p>
+          <h4 className={`${topLeftViewClass}-how-h4`}>Start Auction</h4>
+          <img src="./OpenPrize.png" alt="img" />
+          <p>1. You can make bids after approval</p>
+          <p>
+            2. Custom bids are available, as well as shortcuts of +10%, +50%,
+            and +100%. Bids must be higher than the starting bid or the current
+            highest bid, and the minimum bid price must be greater than 1.
+          </p>
+          <h4 className={`${topLeftViewClass}-how-h4`}>Auction Reward</h4>
+          <p>
+            1. 50% of the price difference between the latter and the former
+            auctioneer will be given to the former auctioneer as a bonus
+          </p>
+          <p>
+            2. After the latter person's bid is successful, the previous
+            auctioneer will directly get back the auction principal + additional
+            bonus part.
+          </p>
+          <p>
+            The final auction price will be given to the initiator after
+            deducting all rewards.
+          </p>
+          <img src="./OpenPrize.png" alt="img" />
+          <h4 className={`${topLeftViewClass}-how-h4`}>Auction Success</h4>
+          <p>1. At the end of the countdown, the highest bidder wins</p>
+          <p>
+            2. The initiator receives the highest amount minus the additional
+            bonus amount to complete the auction
+          </p>
+          <p>
+            3. After completing the auction, the initiator can collect the
+            auction amount, and the highest bidder can get NFT. After the
+            withdrawal is triggered by either one party, the auction ends
+          </p>
+          <img src="./OpenPrize.png" alt="img" />
+          <p>
+            PS: NEST NFTs are BSC minted and you can sell them on any BSC
+            NFT-enabled platform. The NEST NFT you purchased in any secondary
+            platform that supports BSC NFT can also be listed in the NESTFi APP
+            for auction.
+          </p>
+        </div>
+      );
     } else {
       return (
         <div className={`${topLeftViewClass}-probability`}>probability</div>

@@ -255,6 +255,13 @@ table {
         .options-mintOptions-leftCard {
             margin-right: 0px;
             margin-bottom: 10px;
+            &-tokenPair {
+                .TokenShow {
+                    .TokenShow-text {
+                        display: none;
+                    }
+                }
+            }
         }
 
         .options-mintOptions-rightCard {
