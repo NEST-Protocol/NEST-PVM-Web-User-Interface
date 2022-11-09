@@ -54,9 +54,10 @@ import Popup from "reactjs-popup";
 import NFTAuctionTips from "../NFTAuctionTips";
 import {
   checkWhiteList,
-  useNESTNFTWhiteListBuy
+  useNESTNFTWhiteListBuy,
 } from "../../../contracts/hooks/useNESTNFTMarket";
 import message from "antd/lib/message";
+import { useEtherscanTokenBaseUrl } from "../../../libs/hooks/useEtherscanBaseUrl";
 
 export type NFTModalType = {
   title: string;
@@ -69,6 +70,7 @@ export type NFTModalType = {
 const classPrefix = "NFTModal";
 const NFTModal: FC<NFTModalType> = ({ ...props }) => {
   const { theme } = useThemes();
+  const etherscanToken = useEtherscanTokenBaseUrl();
   if (!props.info) {
     return <></>;
   }
@@ -79,6 +81,7 @@ const NFTModal: FC<NFTModalType> = ({ ...props }) => {
         NFTData.thumbnail.substring(7, NFTData.thumbnail.length) +
         ".ipfs.w3s.link"
       : "";
+  
   return (
     <div
       className={classNames({
@@ -114,7 +117,9 @@ const NFTModal: FC<NFTModalType> = ({ ...props }) => {
             </div>
             <div className={`${classPrefix}-info-text-contract`}>
               <p>Contract address:</p>
-              <a href="w">{showEllipsisAddress(NFTData.token_address || "")}</a>
+              <a href={`${etherscanToken}${NFTData.token_address}`}>
+                {showEllipsisAddress(NFTData.token_address || "")}
+              </a>
             </div>
             <div className={`${classPrefix}-info-text-chain`}>
               <p>Blockchain:</p>
