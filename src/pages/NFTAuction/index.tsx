@@ -313,6 +313,7 @@ const NFTAuction: FC = () => {
           endBlock: parseInt(lastItem[1].toString()) + 256,
           nowBlockTime: nowTime,
         });
+        console.log(lastItem[3]);
         setClaimIndex(lastItem[3]);
       } else {
         setDigStep(1);
@@ -367,31 +368,42 @@ const NFTAuction: FC = () => {
             setDigStep(4);
           } else if (rec && rec.logs.length > 0) {
             const tokenId = BigNumber.from(rec.logs[0].topics[3]);
-            // get token uri
-            const uri = await NFTContract.tokenURI(tokenId.toString());
-            // get json
-            const data = await fetch(uri);
-            const data_json = await data.json();
-            // image url
-            const baseUrl = data_json["thumbnail"];
-            const src =
-              "https://" +
-              (baseUrl.length > 7 ? baseUrl.substring(7, baseUrl.length) : "") +
-              ".ipfs.w3s.link";
-            // lever
-            const uriArray = uri.split("/");
-            const lever = uriArray[uriArray.length - 2];
-            setShowImageId({
-              id: tokenId,
-              src: src,
-              lever: lever,
-            });
-            setDigStep(5);
+            try {
+              // get token uri
+              const uri: string = await NFTContract.tokenURI(
+                tokenId.toString()
+              );
+              // get json
+              const cloudUri =
+                "https://cloudflare-ipfs.com/" + uri.substring(16, uri.length);
+              const data = await fetch(cloudUri);
+              const data_json = await data.json();
+              // image url
+              const baseUrl = data_json["thumbnail"];
+              const src =
+                "https://" +
+                (baseUrl.length > 7
+                  ? baseUrl.substring(7, baseUrl.length)
+                  : "") +
+                ".ipfs.w3s.link";
+              // lever
+              const uriArray = uri.split("/");
+              const lever = uriArray[uriArray.length - 2];
+              setShowImageId({
+                id: tokenId,
+                src: src,
+                lever: lever,
+              });
+              setDigStep(5);
 
-            setTimeout(() => {
+              setTimeout(() => {
+                setFirstShow(true);
+                noClaim();
+              }, 30000);
+            } catch (error) {
               setFirstShow(true);
               noClaim();
-            }, 30000);
+            }
           }
           localStorage.setItem("NFTClaim" + chainId?.toString(), "");
         })();

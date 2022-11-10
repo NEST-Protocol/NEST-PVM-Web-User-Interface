@@ -77,9 +77,8 @@ const NFTModal: FC<NFTModalType> = ({ ...props }) => {
   const NFTData = props.info;
   const imgSrc =
     NFTData.thumbnail && NFTData.thumbnail.length > 7
-      ? "https://" +
-        NFTData.thumbnail.substring(7, NFTData.thumbnail.length) +
-        ".ipfs.w3s.link"
+      ? "https://cloudflare-ipfs.com/ipfs/" +
+        NFTData.thumbnail.substring(7, NFTData.thumbnail.length)
       : "";
   
   return (
