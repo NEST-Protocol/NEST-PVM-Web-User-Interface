@@ -613,7 +613,91 @@ const NFTAuction: FC = () => {
       );
     } else {
       return (
-        <div className={`${topLeftViewClass}-probability`}>probability</div>
+        <div className={`${topLeftViewClass}-probability`}>
+          <p>
+          <NFTLeverIcon lever={1} /> 1% winning rate, worth about 3000 $NEST, total supply 120 in the
+            first round
+          </p>
+          <div className={`${topLeftViewClass}-probability-image`}>
+            <img src="./NFTProbabilityImage/1-1.png" alt="img" />
+            <img src="./NFTProbabilityImage/1-2.png" alt="img" />
+          </div>
+          <div className={`${topLeftViewClass}-probability-image`}>
+            <img src="./NFTProbabilityImage/1-3.png" alt="img" />
+            <img src="./NFTProbabilityImage/1-4.png" alt="img" />
+          </div>
+          <div className={`${topLeftViewClass}-probability-image`}>
+            <img src="./NFTProbabilityImage/1-5.png" alt="img" />
+          </div>
+          <p>ETC...</p>
+          <p>
+          <NFTLeverIcon lever={5} /> 5% winning rate, worth about 600 $NEST, total supply 600 in the
+            first round
+          </p>
+          <div className={`${topLeftViewClass}-probability-image`}>
+            <img src="./NFTProbabilityImage/2-1.png" alt="img" />
+            <img src="./NFTProbabilityImage/2-2.png" alt="img" />
+          </div>
+          <div className={`${topLeftViewClass}-probability-image`}>
+            <img src="./NFTProbabilityImage/2-3.png" alt="img" />
+            <img src="./NFTProbabilityImage/2-4.png" alt="img" />
+          </div>
+          <div className={`${topLeftViewClass}-probability-image`}>
+            <img src="./NFTProbabilityImage/2-5.png" alt="img" />
+          </div>
+          <p>ETC...</p>
+          <p>
+          <NFTLeverIcon lever={10} /> 10% winning rate, worth about 300 $NEST, total supply 1200 in the
+            first round
+          </p>
+          <div className={`${topLeftViewClass}-probability-image`}>
+            <img src="./NFTProbabilityImage/3-1.png" alt="img" />
+            <img src="./NFTProbabilityImage/3-2.png" alt="img" />
+          </div>
+          <div className={`${topLeftViewClass}-probability-image`}>
+            <img src="./NFTProbabilityImage/3-3.png" alt="img" />
+            <img src="./NFTProbabilityImage/3-4.png" alt="img" />
+          </div>
+          <div className={`${topLeftViewClass}-probability-image`}>
+            <img src="./NFTProbabilityImage/3-5.png" alt="img" />
+          </div>
+          <p>ETC...</p>
+          <h1>REGIONAL LIMITATIONS</h1>
+          <p>
+            Citizens, nationals, residents (tax or otherwise) and/or green card
+            holders of the following countries: (i) the United States of
+            America; (ii) the People’s Republic of China; (iii) South Korea;
+            (iv) Vietnam; and (v) any other jurisdiction that prohibits the
+            possession, dissemination or communication of the information
+            available on the Website (all information in the White Paper, the
+            Presentations and all information available on the Website are
+            hereinafter referred to as the “Available Information”) and/or
+            prohibits participation in the Token Sale or the purchase of Tokens
+            or the offer for sale of the Tokens or similar activities or
+            products (collectively, the “Restricted Jurisdictions”) or other
+            Restricted Persons from participating in the Token Sale & NFT
+            Minting. The term “Restricted Persons” refers to any firm, company,
+            partnership, trust, corporation, institution, government, state or
+            agency of a state or any other incorporated or unincorporated body
+            or association, union or partnership (whether or not having separate
+            legal personality) formed and/or lawfully existing under the laws of
+            any Restricted Jurisdiction (including, in the case of the United
+            States of America, under the federal laws of the United States of
+            America or the laws of any state thereof).
+          </p>
+          <p>
+            The Tokens do not and will not constitute securities in any
+            jurisdiction. The NEST Protocol Project Documentation does not
+            constitute a prospectus or offering document of any kind and the
+            information available is not intended as an offer of securities or a
+            solicitation of investment in securities in any jurisdiction. The
+            Company does not express any opinion or give any advice on the
+            purchase, sale or other transaction of any Token, and the
+            presentation, publication or transmission of all or any part of the
+            available information shall not be used or relied upon in connection
+            with any contract or investment decision.
+          </p>
+        </div>
       );
     }
   };

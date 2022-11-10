@@ -118,13 +118,41 @@
                         line-height: 20px;
                         font-size: 16px;
                     }
-
                     img {
                         display: block;
                         margin: 0 auto;
-                        width: 100%;
+                        width: 50%;
                         margin-top: 5px;
                     }
+                    
+                }
+
+                &-probability {
+                    margin-top: 5px;
+                    padding: 0px 44px;
+                    overflow: auto;
+                    height: 470px;
+                    color: #878787;
+                    h1 {
+                        margin-top: 10px;
+                    }
+                    p {
+                        margin-top: 5px;
+                        line-height: 20px;
+                        font-size: 16px;
+                    }
+                    &-image {
+                        display: flex;
+                        justify-content:flex-start;
+
+                        img {
+                            display: block;
+                            margin: 0 auto;
+                            width: 50%;
+                            margin-top: 5px;
+                        }
+                    }
+                    
                 }
             }
         }
@@ -236,6 +264,10 @@
                     &-how {
                         color: #C5C5C5;
                     }
+
+                    &-probability{
+                        color: #C5C5C5;
+                    }
                 }
             }
 
@@ -298,6 +330,11 @@
                         img {
                             width: 100%;
                         }
+                    }
+
+                    &-probability{
+                        padding: 0 22px;
+                        height: 400px;
                     }
                 }
                 
