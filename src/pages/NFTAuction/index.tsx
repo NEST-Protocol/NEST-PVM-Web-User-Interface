@@ -292,7 +292,7 @@ const NFTAuction: FC = () => {
       return;
     }
     (async () => {
-      const digList = await NFTContract.find("0", "256", "256", account);
+      const digList = await NFTContract.find("0", "1000", "1000", account);
       const nowBlock = await library?.getBlockNumber();
       if (!nowBlock) {
         return;
@@ -322,7 +322,7 @@ const NFTAuction: FC = () => {
   }, [NFTContract, account, library]);
   useEffect(() => {
     if (txList.length > 0 && txList[txList.length - 1].txState !== 0) {
-      if (digStep === 1 || digStep === 2 || digStep === 4) {
+      if (digStep !== 5) {
         noClaim();
       }
     }
