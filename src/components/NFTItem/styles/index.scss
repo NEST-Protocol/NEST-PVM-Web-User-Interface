@@ -9,6 +9,13 @@
 
     &.auctionWidth {
         width: 230px;
+
+        .NFTItem-image{
+            &-skeleton {
+                width: 230px;
+                height: 230px;
+            }
+        }
     }
 
     &-image {
