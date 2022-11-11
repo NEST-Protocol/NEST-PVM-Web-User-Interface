@@ -13,7 +13,7 @@ const Header: FC = () => {
   const header = "header";
   const [showTopNotice, setShowTopNotice] = useState(false);
   const routes = (
-    chainId === 97 || chainId === 56
+    chainId === 97 || chainId === 56 || !chainId
       ? [
           { path: "/futures", content: t`Futures` },
           { path: "/options", content: t`Options` },

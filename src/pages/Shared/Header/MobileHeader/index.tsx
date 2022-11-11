@@ -31,7 +31,7 @@ const MobileHeader: FC = () => {
   const location = useLocation();
   const { pendingList } = useTransactionListCon();
   const routes = (
-    chainId === 97 || chainId === 56
+    chainId === 97 || chainId === 56 || !chainId
       ? [
           { path: "/futures", content: t`Futures` },
           { path: "/options", content: t`Options` },

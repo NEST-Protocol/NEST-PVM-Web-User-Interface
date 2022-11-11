@@ -45,7 +45,7 @@ const App: FC = () => {
             {/* <Route path="/win">
               <WinV2 />
             </Route> */}
-            {chainId === 97 || chainId === 56 ? (
+            {chainId === 97 || chainId === 56 || !chainId ? (
               <>
                 <Route path="/NFTAuction">
                   <NFTAuction />
