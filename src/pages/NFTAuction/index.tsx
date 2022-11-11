@@ -46,6 +46,7 @@ import {
 import { TransactionModalType } from "../Shared/TransactionModal";
 import NFTWhiteList from "./NFTWhiteList";
 import { checkWhiteList } from "../../contracts/hooks/useNESTNFTMarket";
+import { message } from "antd";
 
 export type NFTMyDigDataType = {
   thumbnail: string;
@@ -108,6 +109,7 @@ const NFTAuction: FC = () => {
   const [timeString, setTimeString] = useState<string>("---");
   const [firstShow, setFirstShow] = useState<boolean>(true);
   const modal = useRef<any>();
+  
   const dataArray = (num: number) => {
     var result = [];
     if (NFTMyDigData.length > 0) {
@@ -772,3 +774,21 @@ const NFTAuction: FC = () => {
 };
 
 export default NFTAuction;
+
+export const NFTAuctionWrongChain: FC = () => {
+  const [showMessage, setShowMessage] = useState(true)
+  const { ethereum } = window;
+  const selectNetwork = async (id: number) => {
+    await ethereum.request({
+      method: "wallet_switchEthereumChain",
+      params: [{ chainId: "0x" + id.toString(16) }],
+    });
+  };
+  selectNetwork(56)
+  if (showMessage) {
+    message.warning('NEST NFT only supports BNB chain')
+    setShowMessage(false)
+  }
+  
+  return <></>
+}
