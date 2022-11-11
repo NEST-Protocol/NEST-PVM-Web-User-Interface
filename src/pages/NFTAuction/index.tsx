@@ -292,7 +292,7 @@ const NFTAuction: FC = () => {
       return;
     }
     (async () => {
-      const digList = await NFTContract.find("0", "1000", "1000", account);
+      const digList = await NFTContract.find("0", "256", "256", account);
       const nowBlock = await library?.getBlockNumber();
       if (!nowBlock) {
         return;
