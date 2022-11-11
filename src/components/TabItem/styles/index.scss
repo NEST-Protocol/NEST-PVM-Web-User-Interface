@@ -71,9 +71,16 @@ ul.TabItemArray {
 @media screen and (max-width: 1000px) {
 
     ul.TabItemArray {
+        white-space: nowrap;
+        overflow-x: scroll;
+        -webkit-overflow-scrolling: touch;
+        overflow-y: hidden;
+
         li {
+            width: 200px;
             height: 30px;
             display: flex;
+            
             svg {
                 width: 13px;
                 height: 13px;

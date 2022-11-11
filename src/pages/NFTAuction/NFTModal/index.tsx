@@ -149,7 +149,7 @@ export const NFTDigModal: FC<NFTDigModalProps> = ({ ...props }) => {
   const modal = useRef<any>();
   const NFTAuctionContract = NESTNFTAuction();
   const [inputErrorString, setInputErrorString] = useState<string>();
-  const timeArray = [24, 48, 78];
+  const timeArray = [24, 48, 72];
   // mainButton pending
   const mainButtonState = () => {
     const pendingTransaction = pendingList.filter(
