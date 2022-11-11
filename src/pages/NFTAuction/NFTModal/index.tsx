@@ -108,7 +108,7 @@ const NFTModal: FC<NFTModalType> = ({ ...props }) => {
               {props.children1}
             </div>
             <div className={`${classPrefix}-info-text-name`}>
-              <p>{NFTData.token_name}</p>
+              <p>{`${NFTData.token_name} #${NFTData.token_id}`}</p>
               <NFTLeverIcon lever={parseInt(NFTData.rarity)} />
             </div>
             <div className={`${classPrefix}-info-text-string`}>
