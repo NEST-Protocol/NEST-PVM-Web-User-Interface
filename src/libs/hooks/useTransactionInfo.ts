@@ -26,6 +26,7 @@ export enum TransactionType {
   NESTNFTAuctionStart = 14,
   NESTNFTAuction = 15,
   NESTNFTAuctionEnd = 16,
+  NESTNFTWhiteListBuy = 17
 }
 
 export enum TransactionState {
@@ -57,6 +58,7 @@ type ShowModalType = {
   txType: TransactionModalType;
   tokenInfo?: TransactionModalTokenInfo;
   info?: string;
+  transactionInfo?:TransactionBaseInfoType;
 };
 
 const useTransactionList = () => {
@@ -128,14 +130,7 @@ const useTransactionList = () => {
           const status = rec.status
             ? TransactionState.Success
             : TransactionState.Fail;
-          element.txState = status;
-
-          if (
-            status === TransactionState.Success &&
-            element.type === TransactionType.NESTNFTClaim
-          ) {
-            localStorage.setItem("NFTDig" + chainId?.toString(), "");
-          }
+          element.txState = status
 
           updateList(element);
           setChecking(false);

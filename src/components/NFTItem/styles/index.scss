@@ -16,8 +16,12 @@
         overflow: hidden;
         position: relative;
 
+        :hover {
+            cursor: pointer;
+        }
+
         img {
-            height: 100%;
+            width: 100%;
             display: inline-block;
             position: absolute;
             top: 50%;
@@ -40,15 +44,19 @@
             justify-content: space-between;
             margin-left: 13px;
             margin-right: 13px;
-            
+
             &-name {
                 &-name {
                     font-size: 15px;
                     color: #000000;
                     height: 15px;
+                    width: 150px;
                 }
+
                 &-time {
+                    height: 25px;
                     font-size: 15px;
+                    line-height: 25px;
                     margin-top: 5px;
                     margin-bottom: 5px;
                     color: #E60012;
@@ -84,6 +92,7 @@
                     &-name {
                         color: white;
                     }
+
                     &-time {
                         color: #E60012;
                     }
@@ -105,17 +114,30 @@
             width: 147px;
         }
 
+        &-image {
+            img {
+                height: 100%;
+                display: inline-block;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+        }
+
         &-info {
             width: 100%;
             height: 34%;
             padding-top: 10px;
-    
+
             &-base {
                 &-name {
                     &-name {
                         margin: 0;
                         height: 17px;
+                        width: auto;
                     }
+
                     &-time {
                         margin-top: 0px;
                         margin-bottom: 0px;

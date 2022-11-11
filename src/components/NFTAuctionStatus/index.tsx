@@ -5,6 +5,7 @@ import "./styles";
 export type NFTAuctionStatusType = {
   data: Array<string>;
   classString: string;
+  selectedVoid: (index: number) => void;
 };
 
 const NFTAuctionStatus: FC<NFTAuctionStatusType> = ({ ...props }) => {
@@ -13,7 +14,10 @@ const NFTAuctionStatus: FC<NFTAuctionStatusType> = ({ ...props }) => {
     return (
       <li
         key={`${props.classString}+${item}+${index}`}
-        onClick={() => setSelectedIndex(index)}
+        onClick={() => {
+          setSelectedIndex(index)
+          props.selectedVoid(index)
+        }}
         className={classNames({
             [`selected`]: selectedIndex === index
         })}

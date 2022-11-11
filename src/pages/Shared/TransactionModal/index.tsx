@@ -75,7 +75,7 @@ const TransactionModal: FC = () => {
     }
   })();
   return (
-    <Popup open={showModal.isShow} onClose={closeModal}>
+    <Popup open={showModal.isShow} onClose={closeModal} nested>
       <BaseModal
         onClose={closeModal}
         classNames={classNames({

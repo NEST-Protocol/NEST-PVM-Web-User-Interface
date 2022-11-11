@@ -1,5 +1,10 @@
 [
     {
+        "inputs": [],
+        "stateMutability": "nonpayable",
+        "type": "constructor"
+    },
+    {
         "anonymous": false,
         "inputs": [
             {
@@ -49,13 +54,7 @@
             {
                 "indexed": false,
                 "internalType": "address",
-                "name": "sender",
-                "type": "address"
-            },
-            {
-                "indexed": false,
-                "internalType": "address",
-                "name": "nftAddress",
+                "name": "owner",
                 "type": "address"
             },
             {
@@ -101,9 +100,9 @@
                 "type": "uint256"
             },
             {
-                "internalType": "uint96",
+                "internalType": "uint256",
                 "name": "price",
-                "type": "uint96"
+                "type": "uint256"
             }
         ],
         "name": "bid",
@@ -161,31 +160,46 @@
                 "components": [
                     {
                         "internalType": "address",
-                        "name": "nftAddress",
-                        "type": "address"
-                    },
-                    {
-                        "internalType": "uint32",
-                        "name": "endBlock",
-                        "type": "uint32"
-                    },
-                    {
-                        "internalType": "uint256",
-                        "name": "tokenId",
-                        "type": "uint256"
-                    },
-                    {
-                        "internalType": "address",
                         "name": "bidder",
                         "type": "address"
                     },
                     {
-                        "internalType": "uint96",
+                        "internalType": "uint32",
                         "name": "price",
-                        "type": "uint96"
+                        "type": "uint32"
+                    },
+                    {
+                        "internalType": "uint32",
+                        "name": "reward",
+                        "type": "uint32"
+                    },
+                    {
+                        "internalType": "uint32",
+                        "name": "endTime",
+                        "type": "uint32"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "owner",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint32",
+                        "name": "tokenId",
+                        "type": "uint32"
+                    },
+                    {
+                        "internalType": "uint32",
+                        "name": "startBlock",
+                        "type": "uint32"
+                    },
+                    {
+                        "internalType": "uint32",
+                        "name": "index",
+                        "type": "uint32"
                     }
                 ],
-                "internalType": "struct NestNFTAuction.Auction[]",
+                "internalType": "struct INestNFTAuction.AuctionView[]",
                 "name": "auctionArray",
                 "type": "tuple[]"
             }
@@ -196,19 +210,14 @@
     {
         "inputs": [
             {
-                "internalType": "address",
-                "name": "nftAddress",
-                "type": "address"
-            },
-            {
                 "internalType": "uint256",
                 "name": "tokenId",
                 "type": "uint256"
             },
             {
-                "internalType": "uint96",
+                "internalType": "uint256",
                 "name": "price",
-                "type": "uint96"
+                "type": "uint256"
             },
             {
                 "internalType": "uint256",

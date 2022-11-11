@@ -1,5 +1,4 @@
 import { BigNumber } from "ethers";
-import { NESTNFTContract } from "./../../libs/constants/addresses";
 import { useSendTransaction } from "../../libs/hooks/useSendTransaction";
 import useWeb3 from "../../libs/hooks/useWeb3";
 import { PRICE_FEE } from "../../libs/utils";
@@ -8,17 +7,16 @@ import { NESTNFTAuction } from "../../libs/hooks/useContract";
 
 export function useNESTNFTAuctionStart(
   tokenId: BigNumber,
-  price: BigNumber,
-  cycle: BigNumber
+  cycle: BigNumber,
+  price?: BigNumber
 ) {
   const { account, chainId } = useWeb3();
   var contract = NESTNFTAuction();
   var callData: string | undefined;
-  if (!chainId) {
+  if (!chainId || !price) {
     contract = null;
   } else {
     callData = contract?.interface.encodeFunctionData("startAuction", [
-      NESTNFTContract[chainId],
       tokenId,
       price,
       cycle,
@@ -38,11 +36,11 @@ export function useNESTNFTAuctionStart(
   return txPromise;
 }
 
-export function useNESTNFTAuction(index: BigNumber, price: BigNumber) {
+export function useNESTNFTAuction(index: BigNumber, price?: BigNumber) {
   const { account, chainId } = useWeb3();
   var contract = NESTNFTAuction();
   var callData: string | undefined;
-  if (!chainId) {
+  if (!chainId || !price) {
     contract = null;
   } else {
     callData = contract?.interface.encodeFunctionData("bid", [index, price]);

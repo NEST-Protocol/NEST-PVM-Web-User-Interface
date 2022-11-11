@@ -197,8 +197,8 @@ export const NESTNFTContract : AddressesType = {
   3: '',
   4: '',
   5: '',
-  56: '',
-  97: '0xc926b1dc291507A96c2919a3662Cc8EAC1141700'
+  56: '0xCBB79049675F06AFF618CFEB74c2B0Bf411E064a',
+  97: '0x0b933B3a74ADd67e0690f7962e2AbbE975048326'
 }
 
 export const NESTNFTAuctionContract : AddressesType = {
@@ -206,6 +206,15 @@ export const NESTNFTAuctionContract : AddressesType = {
   3: '',
   4: '',
   5: '',
-  56: '',
-  97: '0xFe864063e10e5f7D99803765f28d2676A582A816'
+  56: '0x84DC9B49b09d2eB07Cb2D78D2F11bA5b04CeaDf3',
+  97: '0xF61Dd2B661184FAE507475d03ED561593f1882d4'
+}
+
+export const NESTNFTMarketContract : AddressesType = {
+  1: '',
+  3: '',
+  4: '',
+  5: '',
+  56: '0x8b2bc5A2B20acd6a2A71E1dc8D78F6964C65a472',
+  97: '0xd435489F3BB3b6004230b67bb122bac22419Fdfd'
 }

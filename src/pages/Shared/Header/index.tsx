@@ -5,19 +5,29 @@ import { NESTLogo, XIcon } from "../../../components/Icon";
 import "./styles";
 import { t } from "@lingui/macro";
 import ConnectStatus from "./Status";
+import useWeb3 from "../../../libs/hooks/useWeb3";
 
 const Header: FC = () => {
+  const { chainId } = useWeb3();
   const location = useLocation();
   const header = "header";
   const [showTopNotice, setShowTopNotice] = useState(false);
-  const routes = [
-    { path: "/futures", content: t`Futures` },
-    { path: "/options", content: t`Options` },
-    // { path: "/win", content: t`Win` },
-    // { path: "/NFTAuction", content: 'NFT' },
-    { path: "/swap", content: t`Swap` },
-    // { path: "/farm", content: t`Farm` },
-  ].map((item) => (
+  const routes = (
+    chainId === 97 || chainId === 56
+      ? [
+          { path: "/futures", content: t`Futures` },
+          { path: "/options", content: t`Options` },
+          // { path: "/win", content: t`Win` },
+          { path: "/NFTAuction", content: "NFT" },
+          { path: "/swap", content: t`Swap` },
+          // { path: "/farm", content: t`Farm` },
+        ]
+      : [
+          { path: "/futures", content: t`Futures` },
+          { path: "/options", content: t`Options` },
+          { path: "/swap", content: t`Swap` },
+        ]
+  ).map((item) => (
     <li
       key={item.path}
       className={classNames({
@@ -46,7 +56,9 @@ const Header: FC = () => {
       {showTopNotice ? (
         <div className={`${header}-topNotice`}>
           <p>
-          The technical teams of the FORT protocol and NEST protocol worked together to advance the merger, and the merger is completed ahead of schedule on July 22nd.
+            The technical teams of the FORT protocol and NEST protocol worked
+            together to advance the merger, and the merger is completed ahead of
+            schedule on July 22nd.
           </p>
           <button onClick={closeTopNotice}>
             <XIcon />

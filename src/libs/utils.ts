@@ -202,3 +202,10 @@ export function forMoney(value: string) {
   }
   return t.split("").reverse().join("") + "." + r;
 }
+
+export const downTime = (num: number) => {
+  const hours = parseInt((num / 3600).toString());
+  const mins = parseInt(((num - hours * 3600) / 60).toString());
+  const seconds = parseInt((num - hours * 3600 - mins * 60).toString());
+  return `${hours}h ${mins}m ${seconds}s`
+};

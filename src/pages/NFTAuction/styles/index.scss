@@ -24,6 +24,27 @@
                 &-buy {
                     padding: 0 44px;
 
+                    &-otherImage {
+                        margin: 0 auto;
+                        width: 100%;
+                        height: 230px;
+                        margin-top: 70px;
+
+                        p {
+                            width: 100%;
+                            line-height: 23px;
+                            font-size: 23px;
+                            color: #878787;
+                            font-weight: bold;
+                            text-align: center;
+                        }
+
+                        img {
+                            display: block;
+                            margin: 0 auto;
+                        }
+                    }
+
                     &-image {
                         margin: 0 auto;
                         width: 230px;
@@ -32,6 +53,7 @@
                         overflow: hidden;
                         position: relative;
                         margin-top: 70px;
+                        background-color: #EEEEEE;
 
                         img {
                             height: 100%;
@@ -72,6 +94,66 @@
                         color: #878787;
                     }
                 }
+
+                &-how {
+                    margin-top: 5px;
+                    padding: 0px 44px;
+                    overflow: auto;
+                    height: 470px;
+                    color: #878787;
+
+                    &-h3 {
+                        margin-top: 5px;
+                        font-weight: bolder;
+                        font-size: 20px;
+                    }
+
+                    &-h4 {
+                        margin-top: 5px;
+                        font-weight: bold;
+                        font-size: 16px;
+                    }
+                    p {
+                        margin-top: 5px;
+                        line-height: 20px;
+                        font-size: 16px;
+                    }
+                    img {
+                        display: block;
+                        margin: 0 auto;
+                        width: 50%;
+                        margin-top: 5px;
+                    }
+                    
+                }
+
+                &-probability {
+                    margin-top: 5px;
+                    padding: 0px 44px;
+                    overflow: auto;
+                    height: 470px;
+                    color: #878787;
+                    h1 {
+                        margin-top: 10px;
+                    }
+                    p {
+                        margin-top: 5px;
+                        line-height: 20px;
+                        font-size: 16px;
+                    }
+                    &-image {
+                        display: flex;
+                        justify-content:flex-start;
+
+                        img {
+                            display: block;
+                            margin: 0 auto;
+                            width: 50%;
+                            margin-top: 5px;
+                        }
+                    }
+                    
+                }
             }
         }
 
@@ -80,9 +162,17 @@
             height: 572px;
             display: block;
 
+            &-noData {
+                width: 100%;
+                line-height: 100px;
+                text-align: center;
+                font-size: 12px;
+                color: #878787;
+            }
+
             &-title {
                 display: flex;
-                width: 90px;
+                width: 150px;
                 justify-content: space-between;
                 margin: 0 auto;
                 margin-top: 40px;
@@ -146,6 +236,10 @@
             .TabItemArray {
                 margin: 0 auto;
                 width: 500px;
+
+                &.whiteList {
+                    width: 700px;
+                }
             }
         }
     }
@@ -157,21 +251,39 @@
             &-left {
                 &-main {
                     &-buy {
+                        &-otherImage {
+                            p {
+                                color: #C5C5C5;
+                            }
+                        }
                         &-balance {
                             color: #C5C5C5;
                         }
                     }
+
+                    &-how {
+                        color: #C5C5C5;
+                    }
+
+                    &-probability{
+                        color: #C5C5C5;
+                    }
                 }
             }
+
             &-right {
+                &-noData {
+                    color: #C5C5C5;
+                }
+
                 &-title {
-    
+
                     svg {
                         path {
                             fill: #C5C5C5;
                         }
                     }
-    
+
                     p {
                         color: #C5C5C5;
                     }
@@ -184,20 +296,48 @@
 @media screen and (max-width: 1000px) {
     .NFTAuction {
         padding: 0 10px;
+
         &-top {
             display: block;
             width: 100%;
             margin-top: 0px;
-            
+
 
             &-left {
                 width: 100%;
                 padding-top: 20px;
-                height: 530px;
+                height: 470px;
+
                 .TabItemArray {
                     width: 80%;
                     margin-top: 0;
                 }
+
+                &-main {
+                    &-buy {
+                        &-otherImage {
+                            height: 160px;
+                            img {
+                                width: 100%;
+                            }
+                        }
+                    }
+
+                    &-how {
+                        padding: 0 22px;
+                        height: 400px;
+
+                        img {
+                            width: 100%;
+                        }
+                    }
+
+                    &-probability{
+                        padding: 0 22px;
+                        height: 400px;
+                    }
+                }
+                
             }
 
             &-right {
@@ -206,6 +346,7 @@
                 height: 410px;
                 padding: 0 20px;
                 padding-top: 20px;
+
                 &-title {
                     margin: 0 auto;
                     margin-top: 0px;
@@ -213,30 +354,31 @@
 
                 ul.line {
                     margin: 0 auto;
+                    margin-top: 15px;
                     width: 100%;
                     height: 345px;
                     overflow: auto;
-    
+
                     li+li {
                         margin-top: 20px;
                     }
-    
+
                     li {
                         width: 100%;
                         height: 200px;
-    
+
                         ul {
                             width: 100%;
                             height: 100%;
                             display: flex;
                             justify-content: center;
-    
+
                             li {
                                 margin-top: 0;
                                 width: 147px;
                                 height: 200px;
                             }
-    
+
                             li+li {
                                 margin-left: 20px;
                             }
@@ -249,14 +391,26 @@
         &-bottom {
             margin: 0 auto;
             width: 100%;
-    
+
             &-main {
                 width: 100%;
                 padding-top: 20px;
-    
+
                 .TabItemArray {
                     width: 80%;
                     margin-top: 0;
+
+                    &.whiteList {
+                        justify-content:first baseline;
+                        width: 80%;
+                        overflow: hidden;
+                        overflow-x: auto;
+                        white-space: nowrap;
+
+                        li + li {
+                            margin-left: 10px;
+                        }
+                    }
                 }
             }
         }

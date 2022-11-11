@@ -5,10 +5,16 @@
     width: 15px;
     height: 30px;
 
+    g {
+        .cls-1 {
+            fill: white;
+        }
+    }
+
     &.lever1 {
         g {
             .cls-1 {
-                fill: rgb(52, 220, 254)
+                fill: black;
             }
         }
     }
@@ -16,7 +22,7 @@
     &.lever2 {
         g {
             .cls-1 {
-                fill: rgb(243, 9, 7)
+                fill: yellow;
             }
         }
     }
@@ -24,15 +30,7 @@
     &.lever3 {
         g {
             .cls-1 {
-                fill: rgb(246, 210, 47)
-            }
-        }
-    }
-
-    &.lever4 {
-        g {
-            .cls-1 {
-                fill: rgb(0, 0, 0)
+                fill: red;
             }
         }
     }
