@@ -82,8 +82,8 @@ ul.TabItemArray {
             display: flex;
             
             svg {
-                width: 13px;
-                height: 13px;
+                width: 20px;
+                height: 20px;
                 margin: auto 0;
                 display: block;
             }
@@ -91,8 +91,11 @@ ul.TabItemArray {
                 color: #878787;
                 font-size: 12px;
                 font-weight: 600;
-                margin-left: 10px;
+                margin-left: 5px;
             }
+        }
+        li + li {
+            margin-left: 10px;
         }
     }
 }
