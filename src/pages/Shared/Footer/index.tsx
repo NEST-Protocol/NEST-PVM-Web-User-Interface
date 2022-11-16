@@ -60,7 +60,7 @@ const Footer: FC = () => {
         <a href="https://github.com/NEST-Protocol" target="view_window">
           <GithubIcon className={`${footer}-right-github`} />
         </a>
-        <a href="https://nest-protocol-82041.medium.com/" target="view_window">
+        <a href="https://nest-protocol.medium.com/" target="view_window">
           <MiIcon className={`${footer}-right-mi`} />
         </a>
       </div>
