@@ -8946,8 +8946,8 @@ span.ant-radio + * {
   justify-content: center;
   vertical-align: top;
   background: rgba(190, 190, 190, 0.2);
-  width: 96px;
-  height: 96px;
+  /* width: 96px;
+  height: 96px; */
   line-height: 96px;
 }
 .ant-skeleton-element .ant-skeleton-image.ant-skeleton-image-circle {

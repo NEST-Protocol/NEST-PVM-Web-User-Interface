@@ -477,6 +477,23 @@ const Perpetuals: FC = () => {
     { index: 4, label: "1D", value: "K_DAY" },
   ];
 
+  const leverList = chainId === 1
+  ? [
+      { text: "1X", value: 1 },
+      { text: "2X", value: 2 },
+      { text: "3X", value: 3 },
+      { text: "4X", value: 4 },
+      { text: "5X", value: 5 },
+    ]
+  : [
+      { text: "1X", value: 1 },
+      { text: "2X", value: 2 },
+      { text: "5X", value: 5 },
+      { text: "10X", value: 10 },
+      { text: "15X", value: 15 },
+      { text: "20X", value: 20 },
+    ]
+
   return (
     <div>
       {showNotice ? (
@@ -536,7 +553,7 @@ const Perpetuals: FC = () => {
             isLong={isLong}
             textArray={[t`Long`, t`Short`]}
           />
-          <LeverChoose selected={leverNum} callBack={handleLeverNum} />
+          <LeverChoose selected={leverNum} list={leverList} callBack={handleLeverNum} title={'Leverage'}/>
           <InfoShow
             topLeftText={t`Payment`}
             bottomRightText={""}

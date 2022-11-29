@@ -8,7 +8,7 @@
     margin-top: 22px;
     margin-bottom: 22px;
 
-    &-trading {
+    &-trading, &-limit {
         display: flex;
         justify-content: space-between;
         margin-top: 20px;
@@ -23,6 +23,28 @@
             color: $gray-info-text-color;
             border-bottom: 1px dashed $gray-info-text-color;
         }
+    }
+
+    &-limit {
+        div {
+            display: flex;
+            button {
+                display: block;
+                height: 25px;
+                width: 25px;
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+
+            svg {
+                path {
+                    fill: $main-button-color;
+                }
+            }
+        }
+        
     }
 
     .max-button {

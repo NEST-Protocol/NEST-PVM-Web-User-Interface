@@ -19,7 +19,7 @@ const useEagerConnect = () => {
             message.error(
               t`This network is not supported, please switch the network`
             );
-          });
+          })
         }
       } finally {
         setTried(true);

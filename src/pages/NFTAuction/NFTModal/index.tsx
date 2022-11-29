@@ -108,7 +108,7 @@ const NFTModal: FC<NFTModalType> = ({ ...props }) => {
               {props.children1}
             </div>
             <div className={`${classPrefix}-info-text-name`}>
-              <p>{NFTData.token_name}</p>
+              <p>{`${NFTData.token_name} #${NFTData.token_id}`}</p>
               <NFTLeverIcon lever={parseInt(NFTData.rarity)} />
             </div>
             <div className={`${classPrefix}-info-text-string`}>
@@ -149,7 +149,7 @@ export const NFTDigModal: FC<NFTDigModalProps> = ({ ...props }) => {
   const modal = useRef<any>();
   const NFTAuctionContract = NESTNFTAuction();
   const [inputErrorString, setInputErrorString] = useState<string>();
-  const timeArray = [24, 48, 78];
+  const timeArray = [24, 48, 72];
   // mainButton pending
   const mainButtonState = () => {
     const pendingTransaction = pendingList.filter(

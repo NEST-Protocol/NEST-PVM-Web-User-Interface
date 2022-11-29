@@ -62,3 +62,5 @@ export { ReactComponent as NFTGreenPencil } from './svg/NFTGreenPencil.svg'
 export { ReactComponent as NFTDownIcon } from './svg/NFTDownIcon.svg'
 export { ReactComponent as NFTUpIcon } from './svg/NFTUpIcon.svg'
 export { ReactComponent as NFTWhiteListIcon } from './svg/NFTWhiteList.svg'
+export { ReactComponent as SwapLimitIcon } from './svg/swapLimitIcon.svg'
+

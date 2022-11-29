@@ -19,7 +19,7 @@ export function useNESTNFTAuctionStart(
     callData = contract?.interface.encodeFunctionData("startAuction", [
       tokenId,
       price,
-      BigNumber.from('3601'),
+      cycle,
     ]);
   }
   const tx = {

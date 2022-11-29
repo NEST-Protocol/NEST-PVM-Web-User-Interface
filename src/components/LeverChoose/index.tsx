@@ -1,35 +1,21 @@
 import { Trans } from "@lingui/macro";
 import classNames from "classnames";
 import { FC } from "react";
-import useWeb3 from "../../libs/hooks/useWeb3";
 import "./styles";
 
 type Props = {
   callBack: (selected: number) => void;
+  list: {
+    text: string;
+    value: number;
+  }[];
   selected: number;
+  title?: string;
 };
 
 export const LeverChoose: FC<Props> = ({ ...props }) => {
-  const { chainId } = useWeb3();
   const classPrefix = "leverChoose";
-  const liList = (
-    chainId === 1
-      ? [
-          { text: "1X", value: 1 },
-          { text: "2X", value: 2 },
-          { text: "3X", value: 3 },
-          { text: "4X", value: 4 },
-          { text: "5X", value: 5 },
-        ]
-      : [
-          { text: "1X", value: 1 },
-          { text: "2X", value: 2 },
-          { text: "5X", value: 5 },
-          { text: "10X", value: 10 },
-          { text: "15X", value: 15 },
-          { text: "20X", value: 20 },
-        ]
-  ).map((item, index) => {
+  const liList = props.list.map((item, index) => {
     return (
       <li
         key={index.toString() + item.text}
@@ -46,9 +32,13 @@ export const LeverChoose: FC<Props> = ({ ...props }) => {
   });
   return (
     <div className={classPrefix}>
-      <div className={`${classPrefix}-title`}>
-        <Trans>Leverage</Trans>
-      </div>
+      {props.title ? (
+        <div className={`${classPrefix}-title`}>
+          <Trans>{props.title}</Trans>
+        </div>
+      ) : (
+        <></>
+      )}
       <ul className={`${classPrefix}-choose`}>{liList}</ul>
     </div>
   );
