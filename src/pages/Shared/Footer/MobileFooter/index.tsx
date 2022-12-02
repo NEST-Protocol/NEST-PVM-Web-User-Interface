@@ -16,7 +16,7 @@ const MobileFooter: FC = () => {
     <footer>
       <div className={`${footer}`}>
         <a
-          href="./The_White_Paper_of_NEST_PVM.pdf"
+          href="https://nestprotocol.org/doc/ennestwhitepaper.pdf"
           target="view_window"
         >
           <SafeIcon className={`${footer}-right-safe`} />
@@ -30,7 +30,7 @@ const MobileFooter: FC = () => {
         <a href="https://t.me/nest_chat" target="view_window">
           <TelIcon className={`${footer}-right-tel`} />
         </a>
-        <a href="https://twitter.com/FortProtocol" target="view_window">
+        <a href="https://twitter.com/NEST_protocol" target="view_window">
           <TwitterIcon className={`${footer}-right-twitter`} />
         </a>
         <a href="https://github.com/NEST-Protocol" target="view_window">
