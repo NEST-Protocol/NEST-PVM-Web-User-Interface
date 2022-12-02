@@ -42,7 +42,7 @@ const Footer: FC = () => {
         </button>
       </div>
       <div className={`${footer}-right`}>
-        <a href="./The_White_Paper_of_NEST_PVM.pdf" target="view_window">
+        <a href="https://nestprotocol.org/doc/ennestwhitepaper.pdf" target="view_window">
           <SafeIcon className={`${footer}-right-safe`} />
         </a>
         <a href="https://discord.com/invite/nestprotocol" target="view_window">
@@ -54,7 +54,7 @@ const Footer: FC = () => {
         <a href="https://t.me/nest_chat" target="view_window">
           <TelIcon className={`${footer}-right-tel`} />
         </a>
-        <a href="https://twitter.com/FortProtocol" target="view_window">
+        <a href="https://twitter.com/NEST_protocol" target="view_window">
           <TwitterIcon className={`${footer}-right-twitter`} />
         </a>
         <a href="https://github.com/NEST-Protocol" target="view_window">
