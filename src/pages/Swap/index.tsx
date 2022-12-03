@@ -60,7 +60,7 @@ const Swap: FC = () => {
   const [srcAllowance, setSrcAllowance] = useState<BigNumber>(
     BigNumber.from("0")
   );
-  const [limitOut, setLimitOut] = useState<number>(30);
+  const [limitOut, setLimitOut] = useState<number>(5);
   const [swapTokenBalance, setSwapTokenBalance] =
     useState<SwapTokenBalanceType>();
   const [destValue, setDestValue] = useState<BigNumber>();
@@ -464,15 +464,9 @@ const Swap: FC = () => {
           <p>{`${(limitOut / 10).toFixed(1)} %`}</p>
         </div>
         <div className={`${classPrefix}-card-trading`}>
-          <Tooltip
-            placement="leftBottom"
-            color={"#ffffff"}
-            title={"Slippage Tolerance  0.5%"}
-          >
             <span>
               <Trans>Trading Price</Trans>
             </span>
-          </Tooltip>
           <p>{`1 ${swapToken.src} = ${
             priceValue
               ? bigNumberToNormal(priceValue, checkUSDT(swapToken.dest), 10)

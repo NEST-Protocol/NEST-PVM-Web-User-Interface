@@ -16,7 +16,7 @@ const MobileFooter: FC = () => {
     <footer>
       <div className={`${footer}`}>
         <a
-          href="./The_White_Paper_of_NEST_PVM.pdf"
+          href="https://nestprotocol.org/doc/ennestwhitepaper.pdf"
           target="view_window"
         >
           <SafeIcon className={`${footer}-right-safe`} />

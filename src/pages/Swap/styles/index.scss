@@ -19,14 +19,16 @@
         }
 
         span {
-            padding-bottom: 5px;
-            color: $gray-info-text-color;
-            border-bottom: 1px dashed $gray-info-text-color;
+            color: $gray-info-text-color
         }
     }
 
     &-limit {
         div {
+            span {
+                padding-bottom: 5px;
+                border-bottom: 1px dashed $gray-info-text-color;
+            }
             display: flex;
             button {
                 display: block;
