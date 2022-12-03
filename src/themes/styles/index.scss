@@ -173,6 +173,7 @@
                 color: #C5C5C5;
             }
         }
+
         .OptionsList-mobile-card-mid .mobileListInfo,
         .OptionsList-mobile-card-bottom .mobileListInfo,
         .OptionsList-mobile-card-block .mobileListInfo {
@@ -194,6 +195,7 @@
                 color: #C5C5C5;
             }
         }
+
         .perListMobile-top .mobileListInfo,
         .perListMobile-mid .mobileListInfo,
         .perListMobile-bottom .mobileListInfo {
@@ -262,13 +264,24 @@
         color: #C5C5C5;
     }
 
-    .swap-card-trading {
+    .swap-card-trading,
+    .swap-card-limit {
         span {
             color: #C5C5C5;
         }
 
         p {
             color: $main-background-color;
+        }
+    }
+
+    .swap-card-limit {
+        div {
+            svg {
+                path {
+                    fill: #BDD6FF;
+                }
+            }
         }
     }
 
@@ -283,7 +296,7 @@
     }
 
     .options-mintOptions-rightCard-tokenTitle,
-    .swap-card-trading {
+    .swap-card-limit {
         span {
             border-color: $main-background-color;
         }

@@ -1,0 +1,84 @@
+@use "sass:math";
+@import 'src/styles/shared.scss';
+
+.swapLimitModal {
+    width: 572px;
+    height: 230px;
+    padding-top: 1px;
+
+    &-title {
+        width: 100%;
+        text-align: center;
+        color: #000000;
+        font-weight: 700;
+        font-size: 20px;
+        margin-top: 40px;
+    }
+
+    .leverChoose {
+        margin-top: 40px;
+    }
+
+    &-wrong {
+        margin-top: 30px;
+        width: 100%;
+        text-align: center;
+        color: $wrongAndNotice-color;
+        font-size: 12px;
+    }
+}
+
+.swapLimitModal-dark {
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border: 0px;
+    backdrop-filter: blur(24px);
+
+    .swapLimitModal {
+        &-title {
+            color: white;
+        }
+    }
+
+    .leverChoose {
+        &-title {
+            color: #C5C5C5;
+        }
+
+        &-choose {
+            li {
+                color: $main-background-color;
+                background: rgba(255, 255, 255, 0.15);
+                box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+                &:hover {
+                    border: 0px;
+                }
+
+                &.selected {
+                    background: linear-gradient(90deg, #8BB7FF 0%, #0061FF 100%);
+                    color: $main-background-color;
+                    border: 0px;
+
+                    &:hover {
+                        border: 0px;
+                    }
+                }
+            }
+
+        }
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .popup-content {
+        width: 100%;
+        .border {
+            padding: 0 10px;
+            .swapLimitModal {
+                width: 100%;
+            }
+        }
+    }
+    
+}

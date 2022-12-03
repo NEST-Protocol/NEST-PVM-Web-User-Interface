@@ -4,8 +4,13 @@ import { t, Trans } from "@lingui/macro";
 import { Tooltip } from "antd";
 import classNames from "classnames";
 // import moment from "moment";
-import { FC, useCallback, useEffect, useState } from "react";
-import { ExchangeIcon, PutDownIcon } from "../../components/Icon";
+import { FC, useCallback, useEffect, useRef, useState } from "react";
+import Popup from "reactjs-popup";
+import {
+  ExchangeIcon,
+  PutDownIcon,
+  SwapLimitIcon,
+} from "../../components/Icon";
 import InfoShow from "../../components/InfoShow";
 import MainButton from "../../components/MainButton";
 import MainCard from "../../components/MainCard";
@@ -31,6 +36,7 @@ import {
   normalToBigNumber,
 } from "../../libs/utils";
 import "./styles";
+import SwapLimitModal from "./SwapLimitModal";
 
 type SwapTokenType = {
   src: string;
@@ -54,11 +60,13 @@ const Swap: FC = () => {
   const [srcAllowance, setSrcAllowance] = useState<BigNumber>(
     BigNumber.from("0")
   );
+  const [limitOut, setLimitOut] = useState<number>(5);
   const [swapTokenBalance, setSwapTokenBalance] =
     useState<SwapTokenBalanceType>();
   const [destValue, setDestValue] = useState<BigNumber>();
   const { pendingList, txList } = useTransactionListCon();
   const uniSwapV2OJ = UniSwapV2(UniSwapV2Contract);
+  const modal = useRef<any>();
 
   const exchangeSwapTokens = () => {
     if (swapToken.src === "DCU") {
@@ -163,7 +171,9 @@ const Swap: FC = () => {
     }
 
     const swapDCUToNEST = async (amountIn: BigNumber) => {
-      return amountIn.mul(BigNumber.from('7768161615')).div(BigNumber.from('1000000000'));
+      return amountIn
+        .mul(BigNumber.from("7768161615"))
+        .div(BigNumber.from("1000000000"));
     };
 
     const swapUniSwapV2 = async (amountIn: BigNumber, path: Array<string>) => {
@@ -183,11 +193,11 @@ const Swap: FC = () => {
         );
       const baseAmount = () => {
         if ((chainId === 1 || chainId === 5) && swapToken.src === "USDT") {
-          return BigNumber.from('1000000')
+          return BigNumber.from("1000000");
         } else {
-          return BASE_AMOUNT
+          return BASE_AMOUNT;
         }
-      }
+      };
       var amount = checkInputValue
         ? normalToBigNumber(inputValue!, checkUSDT(swapToken.src))
         : baseAmount();
@@ -211,7 +221,8 @@ const Swap: FC = () => {
                   inputValue
                     ? normalToBigNumber(inputValue, checkUSDT(swapToken.src))
                     : BASE_AMOUNT
-                ).div(BigNumber.from("1000000000000"))
+                )
+                .div(BigNumber.from("1000000000000"))
             : amount;
         } else {
           return checkInputValue
@@ -308,7 +319,7 @@ const Swap: FC = () => {
   };
   const approve = useERC20Approve(swapToken.src, MaxUint256, approveAddress());
   const amountOutMin = destValue
-    ? destValue.sub(destValue.mul(5).div(100))
+    ? destValue.sub(destValue.mul(limitOut).div(1000))
     : MaxUint256;
   const addressPath = () => {
     if (!chainId) {
@@ -418,16 +429,44 @@ const Swap: FC = () => {
               : undefined}
           </p>
         </InfoShow>
+        <div className={`${classPrefix}-card-limit`}>
+          <div>
+            <Tooltip
+              placement="leftBottom"
+              color={"#ffffff"}
+              title={
+                "Setting a high slippage tolerance can help transactions succeed ,but you may not get such a good price .use with caution"
+              }
+            >
+              <span>
+                <Trans>Slippage Tolerance</Trans>
+              </span>
+            </Tooltip>
+            <Popup
+              modal
+              ref={modal}
+              nested
+              trigger={
+                <button>
+                  <SwapLimitIcon />
+                </button>
+              }
+            >
+              <SwapLimitModal
+                selected={limitOut}
+                callBack={(value: number) => {
+                  setLimitOut(value);
+                }}
+              />
+            </Popup>
+          </div>
+
+          <p>{`${(limitOut / 10).toFixed(1)} %`}</p>
+        </div>
         <div className={`${classPrefix}-card-trading`}>
-          <Tooltip
-            placement="leftBottom"
-            color={"#ffffff"}
-            title={t`Trading price displayed on the page will be different from the actual price. If your actual price is 5% higher than the current page, the transaction will be rejected.`}
-          >
             <span>
               <Trans>Trading Price</Trans>
             </span>
-          </Tooltip>
           <p>{`1 ${swapToken.src} = ${
             priceValue
               ? bigNumberToNormal(priceValue, checkUSDT(swapToken.dest), 10)
