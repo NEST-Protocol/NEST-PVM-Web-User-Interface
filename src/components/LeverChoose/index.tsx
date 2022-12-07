@@ -1,4 +1,3 @@
-import { Trans } from "@lingui/macro";
 import classNames from "classnames";
 import { FC } from "react";
 import "./styles";
@@ -34,7 +33,7 @@ export const LeverChoose: FC<Props> = ({ ...props }) => {
     <div className={classPrefix}>
       {props.title ? (
         <div className={`${classPrefix}-title`}>
-          <Trans>{props.title}</Trans>
+          {props.title}
         </div>
       ) : (
         <></>
