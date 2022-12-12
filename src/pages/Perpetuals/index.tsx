@@ -331,6 +331,7 @@ const Perpetuals: FC = () => {
     getKData()
     const id = setInterval(() => {
       getKData()
+      getList()
     }, 60 * 1000);
     intervalRef2.current = id;
     return () => {
@@ -338,7 +339,7 @@ const Perpetuals: FC = () => {
         clearInterval(intervalRef2.current);
       }
     };
-  }, [chainId, kTypeValue, tokenPair.symbol, getKData]);
+  }, [chainId, kTypeValue, tokenPair.symbol, getKData, getList]);
   useEffect(() => {
     if (!isRefresh) {
       getList();
