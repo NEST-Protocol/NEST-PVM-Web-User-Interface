@@ -73,6 +73,7 @@ const Perpetuals: FC = () => {
     []
   );
   const intervalRef = useRef<NodeJS.Timeout>();
+  const intervalRef2 = useRef<NodeJS.Timeout>();
   const classPrefix = "perpetuals";
   const nestToken = ERC20Contract(tokenList["NEST"].addresses);
   const priceContract = NestPriceContract();
@@ -309,28 +310,36 @@ const Perpetuals: FC = () => {
     })();
   }, [account, chainId, library, txList]);
   // getKData
+  const getKData = useCallback(async () => {
+    const k_data = await fetch(
+      `https://api.hedge.red/api/oracle/get_cur_kline/${chainId?.toString() || 56}/0/${
+        tokenPair.symbol.toLocaleLowerCase() + "usdt"
+      }/${kTypeValue}/50`
+    );
+    const k_data_value = await k_data.json();
+    setKData(
+      k_data_value["value"].map((item: any) => ({
+        close: item.close.toFixed(2),
+        high: item.high.toFixed(2),
+        low: item.low.toFixed(2),
+        open: item.open.toFixed(2),
+        time: new Date(item.timestamp * 1000).toLocaleString(),
+      }))
+    );
+  }, [chainId, tokenPair.symbol, kTypeValue])
   useEffect(() => {
-    if (!chainId) {
-      return;
-    }
-    (async () => {
-      const k_data = await fetch(
-        `https://api.hedge.red/api/oracle/get_cur_kline/${chainId?.toString()}/0/${
-          tokenPair.symbol.toLocaleLowerCase() + "usdt"
-        }/${kTypeValue}/50`
-      );
-      const k_data_value = await k_data.json();
-      setKData(
-        k_data_value["value"].map((item: any) => ({
-          close: item.close.toFixed(2),
-          high: item.high.toFixed(2),
-          low: item.low.toFixed(2),
-          open: item.open.toFixed(2),
-          time: new Date(item.timestamp * 1000).toLocaleString(),
-        }))
-      );
-    })();
-  }, [chainId, kTypeValue, tokenPair.symbol]);
+    getKData()
+    const id = setInterval(() => {
+      getKData()
+      getList()
+    }, 60 * 1000);
+    intervalRef2.current = id;
+    return () => {
+      if (intervalRef2.current) {
+        clearInterval(intervalRef2.current);
+      }
+    };
+  }, [chainId, kTypeValue, tokenPair.symbol, getKData, getList]);
   useEffect(() => {
     if (!isRefresh) {
       getList();

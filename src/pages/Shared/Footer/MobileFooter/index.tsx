@@ -30,7 +30,7 @@ const MobileFooter: FC = () => {
         <a href="https://t.me/nest_chat" target="view_window">
           <TelIcon className={`${footer}-right-tel`} />
         </a>
-        <a href="https://twitter.com/FortProtocol" target="view_window">
+        <a href="https://twitter.com/NEST_protocol" target="view_window">
           <TwitterIcon className={`${footer}-right-twitter`} />
         </a>
         <a href="https://github.com/NEST-Protocol" target="view_window">
