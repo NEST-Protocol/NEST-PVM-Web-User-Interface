@@ -109,7 +109,7 @@ const NFTAuction: FC = () => {
   const [timeString, setTimeString] = useState<string>("---");
   const [firstShow, setFirstShow] = useState<boolean>(true);
   const modal = useRef<any>();
-  
+
   const dataArray = (num: number) => {
     var result = [];
     if (NFTMyDigData.length > 0) {
@@ -535,10 +535,11 @@ const NFTAuction: FC = () => {
             an ascending auction.
           </p>
           <p>
-            To encourage bidding, 50% of the bid difference will be rewarded to
-            the previous failed bidder, the reward amount will be borne by the
-            auction sponsor, and the cost will be deducted directly from the
-            final sale price, with no additional service fee.
+            To encourage bidding, 40% of the bid spread will be rewarded to the
+            previous failed bidder, and 10% of the bid spread will be destroyed,
+            the reward amount will be borne by the auction sponsor, and the cost
+            will be deducted directly from the final sale price, without any
+            additional service fee.
           </p>
           <h3 className={`${topLeftViewClass}-how-h3`}>Auction setting:</h3>
           <h4 className={`${topLeftViewClass}-how-h4`}>Range:</h4>
@@ -580,7 +581,7 @@ const NFTAuction: FC = () => {
           </p>
           <h4 className={`${topLeftViewClass}-how-h4`}>Auction Reward</h4>
           <p>
-            1. 50% of the price difference between the latter and the former
+            1. 40% of the price difference between the latter and the former
             auctioneer will be given to the former auctioneer as a bonus
           </p>
           <p>
@@ -617,8 +618,8 @@ const NFTAuction: FC = () => {
       return (
         <div className={`${topLeftViewClass}-probability`}>
           <p>
-          <NFTLeverIcon lever={1} /> 1% winning rate, worth about 3000 $NEST, total supply 120 in the
-            first round
+            <NFTLeverIcon lever={1} /> 1% winning rate, worth about 3000 $NEST,
+            total supply 120 in the first round
           </p>
           <div className={`${topLeftViewClass}-probability-image`}>
             <img src="./NFTProbabilityImage/1-1.png" alt="img" />
@@ -633,8 +634,8 @@ const NFTAuction: FC = () => {
           </div>
           <p>ETC...</p>
           <p>
-          <NFTLeverIcon lever={5} /> 5% winning rate, worth about 600 $NEST, total supply 600 in the
-            first round
+            <NFTLeverIcon lever={5} /> 5% winning rate, worth about 600 $NEST,
+            total supply 600 in the first round
           </p>
           <div className={`${topLeftViewClass}-probability-image`}>
             <img src="./NFTProbabilityImage/2-1.png" alt="img" />
@@ -649,8 +650,8 @@ const NFTAuction: FC = () => {
           </div>
           <p>ETC...</p>
           <p>
-          <NFTLeverIcon lever={10} /> 10% winning rate, worth about 300 $NEST, total supply 1200 in the
-            first round
+            <NFTLeverIcon lever={10} /> 10% winning rate, worth about 300 $NEST,
+            total supply 1200 in the first round
           </p>
           <div className={`${topLeftViewClass}-probability-image`}>
             <img src="./NFTProbabilityImage/3-1.png" alt="img" />
@@ -776,7 +777,7 @@ const NFTAuction: FC = () => {
 export default NFTAuction;
 
 export const NFTAuctionWrongChain: FC = () => {
-  const [showMessage, setShowMessage] = useState(true)
+  const [showMessage, setShowMessage] = useState(true);
   const { ethereum } = window;
   const selectNetwork = async (id: number) => {
     await ethereum.request({
@@ -784,11 +785,11 @@ export const NFTAuctionWrongChain: FC = () => {
       params: [{ chainId: "0x" + id.toString(16) }],
     });
   };
-  selectNetwork(56)
+  selectNetwork(56);
   if (showMessage) {
-    message.warning('NEST NFT only supports BNB chain')
-    setShowMessage(false)
+    message.warning("NEST NFT only supports BNB chain");
+    setShowMessage(false);
   }
-  
-  return <></>
-}
+
+  return <></>;
+};
