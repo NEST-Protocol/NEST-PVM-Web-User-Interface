@@ -369,6 +369,7 @@ const NFTAuction: FC = () => {
           if (rec && rec.logs.length === 0) {
             setDigStep(4);
           } else if (rec && rec.logs.length > 0) {
+            
             const tokenId = BigNumber.from(rec.logs[0].topics[3]);
             try {
               // get token uri
@@ -377,7 +378,7 @@ const NFTAuction: FC = () => {
               );
               // get json
               const cloudUri =
-                "https://cloudflare-ipfs.com/" + uri.substring(16, uri.length);
+                "https://ipfs.io/" + uri.substring(16, uri.length);
               const data = await fetch(cloudUri);
               const data_json = await data.json();
               // image url
