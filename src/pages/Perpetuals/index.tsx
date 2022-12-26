@@ -73,7 +73,6 @@ const Perpetuals: FC = () => {
     []
   );
   const intervalRef = useRef<NodeJS.Timeout>();
-  const intervalRef2 = useRef<NodeJS.Timeout>();
   const classPrefix = "perpetuals";
   const nestToken = ERC20Contract(tokenList["NEST"].addresses);
   const priceContract = NestPriceContract();
@@ -257,7 +256,7 @@ const Perpetuals: FC = () => {
     getPrice(priceContract, PVMLeverOJ, chainId);
     const id = setInterval(() => {
       getPrice(priceContract, PVMLeverOJ, chainId);
-    }, 60 * 1000);
+    }, 30 * 1000);
     intervalRef.current = id;
     return () => {
       if (intervalRef.current) {
@@ -329,16 +328,10 @@ const Perpetuals: FC = () => {
   }, [chainId, tokenPair.symbol, kTypeValue])
   useEffect(() => {
     getKData()
-    const id = setInterval(() => {
+    const getData = setInterval(() => {
       getKData()
-      getList()
-    }, 60 * 1000);
-    intervalRef2.current = id;
-    return () => {
-      if (intervalRef2.current) {
-        clearInterval(intervalRef2.current);
-      }
-    };
+    }, 30 * 1000);
+    return () => clearInterval(getData);
   }, [chainId, kTypeValue, tokenPair.symbol, getKData, getList]);
   useEffect(() => {
     if (!isRefresh) {
