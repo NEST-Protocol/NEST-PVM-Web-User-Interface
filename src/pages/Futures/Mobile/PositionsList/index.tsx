@@ -1,5 +1,6 @@
 import Stack from "@mui/material/Stack";
-import { FC } from "react";
+import Drawer from "@mui/material/Drawer";
+import { FC, useState } from "react";
 import { LongIcon } from "../../../../components/Icon";
 import MainButton from "../../../../components/MainButton";
 import { tokenList } from "../../../../libs/constants/addresses";
@@ -7,7 +8,8 @@ import "./styles";
 
 const PositionsList: FC = () => {
   const classPrefix = "positionsList";
-  const TokenOneSvg = tokenList['ETH'].Icon;
+  const [showDrawer, setShowDrawer] = useState(false);
+  const TokenOneSvg = tokenList["ETH"].Icon;
   const TokenTwoSvg = tokenList["USDT"].Icon;
   return (
     <Stack spacing={0} className={`${classPrefix}`}>
@@ -20,8 +22,10 @@ const PositionsList: FC = () => {
       >
         <div className="left">
           <p className="title">Token Pair</p>
-          <div className="pairIcon"><TokenOneSvg />
-        <TokenTwoSvg className="USDT"/></div>
+          <div className="pairIcon">
+            <TokenOneSvg />
+            <TokenTwoSvg className="USDT" />
+          </div>
         </div>
         <div className="right">
           <p className="title">Lever</p>
@@ -41,7 +45,10 @@ const PositionsList: FC = () => {
         </div>
         <div className="right">
           <p className="title">Type</p>
-          <div className="longShort"><LongIcon />Long</div>
+          <div className="longShort">
+            <LongIcon />
+            Long
+          </div>
         </div>
       </Stack>
       <Stack
@@ -68,9 +75,16 @@ const PositionsList: FC = () => {
         className={`${classPrefix}-button`}
       >
         <MainButton>Add</MainButton>
-        <MainButton>Edit</MainButton>
+        <MainButton onClick={() => setShowDrawer(true)}>Edit</MainButton>
         <MainButton>Close</MainButton>
       </Stack>
+      <Drawer
+        anchor={"bottom"}
+        open={showDrawer}
+        onClose={() => setShowDrawer(false)}
+      >
+        <input/>
+      </Drawer>
     </Stack>
   );
 };
