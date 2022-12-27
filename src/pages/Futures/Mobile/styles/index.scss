@@ -1,0 +1,238 @@
+@use "sass:math";
+@import 'src/styles/shared.scss';
+
+.FuturesMobile {
+    &-tokenPairAndPrice {
+        margin: 0 8px;
+        padding: 0 15px;
+        height: 34px;
+        background: #F7F8FA;
+        border: 1px solid #EEEEEE;
+        box-shadow: 0px 0px 10px 0px #EEEEEE;
+        border-radius: 17px;
+
+        svg {
+            width: 20px;
+            height: 20px;
+            z-index: 10;
+        }
+
+        svg.USDT {
+            margin-left: -7px;
+            margin-right: 10px;
+            z-index: 1;
+        }
+
+        p {
+            color: #0047BB;
+            font-family: $boldFont;
+            font-size: 12.5px;
+        }
+    }
+
+    &-KPrice {
+        margin: 8px 8px;
+        height: 214px;
+        background: #F7F8FA;
+        border: 1px solid #EEEEEE;
+        box-shadow: 0px 0px 10px 0px #EEEEEE;
+        border-radius: 14px;
+    }
+
+    &-mainView {
+        margin: 0 8px;
+        background: #F7F8FA;
+        border: 1px solid #EEEEEE;
+        box-shadow: 0px 0px 10px 0px #EEEEEE;
+        border-radius: 14px;
+        padding: 0 15px;
+
+        .LongAndShort {
+            margin-top: 25px;
+        }
+
+        .leverChoose {
+            width: 100%;
+            padding: 0 15px;
+            margin-top: 22px;
+
+            &-title {
+                font-size: 12.5px;
+            }
+
+            ul {
+                margin-top: 11px;
+
+                li {
+                    width: 40px;
+                    height: 24px;
+                    font-size: 12.5px;
+                    line-height: 24px;
+                    border-radius: 12px;
+
+                    &.selected {
+                        border: 1px solid $main-button-color;
+                        line-height: 22px;
+
+                        &:hover {
+                            border: 1px solid $main-button-color;
+                            line-height: 22px;
+                        }
+                    }
+                }
+            }
+        }
+
+        .infoView {
+            margin-top: 22.5px;
+
+            &-top {
+                p {
+                    margin: 0 15px;
+                }
+            }
+            &-topLeft, &-topRight {
+                font-size: 12.5px;
+            }
+
+            &-mainView {
+                margin-top: 11.5px;
+                margin-bottom: 0px;
+                padding: 0 15px;
+
+                .TokenShow {
+                    svg {
+                        width: 19.5px;
+                        height: 19.5px;
+                    }
+                }
+            }
+
+            &-bottom {
+                height: 0px;
+            }
+        }
+
+        .mainButton {
+            margin: 25px 0;
+            width: 157px;
+            height: 34px;
+            border-radius: 17px;
+            background-color: #0047BB;
+            color: white;
+            font-size: 12.5px;
+            font-family: $boldFont;
+        }
+    }
+
+    &-infoShow {
+        width: 100%;
+        font-size: 12.5px;
+        color: #878787;
+        padding: 0 15px;
+        margin-top: 10px;
+
+        p {
+            font-family: $boldFont;
+        }
+
+        p+p {
+            font-family: Montserrat;
+        }
+    }
+    &-showHid{
+        margin-top: 22px;
+        margin-bottom: 7px;
+    }
+
+    &-limitPrice {
+        width: 100%;
+        height: 34px;
+        border-radius: 17px;
+        background-color: #F7F8FA;
+        border: 1px solid #EEEEEE;
+        box-sizing: border-box;
+        box-shadow: $shadow-inside;
+        padding: 0 15px;
+        margin-top: 15px;
+
+        &-title {
+            width: 31%;
+            font-size: 12.5px;
+            color: black;
+            font-family: $boldFont;
+        }
+
+        button {
+            width: 90px;
+            height: 28px;
+            border-radius: 14px;
+            background-color: #0047BB;
+            color: white;
+            font-size: 10px;
+        }
+
+        .rightInput {
+            width: 31%;
+
+            input {
+                width: 100%;
+                font-family: $boldFont;
+                border: 0;
+                text-align: right;
+                margin-right: 5px;
+            }
+
+            p {
+                font-size: 12.5px;
+                color: black;
+                font-family: $boldFont;
+            }
+        }
+    }
+    &-stopLimit1, &-stopLimit2{
+        width: 100%;
+        height: 34px;
+        border-radius: 17px;
+        background-color: #F7F8FA;
+        border: 1px solid #EEEEEE;
+        box-sizing: border-box;
+        box-shadow: $shadow-inside;
+        padding: 0 15px;
+        margin-top: 15px;
+
+        &-title {
+            font-size: 12.5px;
+            color: black;
+            font-family: $boldFont;
+        }
+
+        .rightInput {
+            input {
+                width: 100%;
+                font-family: $boldFont;
+                border: 0;
+                text-align: right;
+                margin-right: 5px;
+            }
+
+            p {
+                font-size: 12.5px;
+                color: black;
+                font-family: $boldFont;
+            }
+        }
+    }
+    &-listTab{
+        margin: 20px 0;
+        button {
+            color:#878787;
+            font-size: 12.5px;
+            font-family: $boldFont;
+            margin-left: 23px;
+            &.selected {
+                color: #0047BB;
+            }
+        }
+    }
+}

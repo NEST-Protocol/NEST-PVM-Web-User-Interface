@@ -15,7 +15,7 @@ import useWeb3 from "../libs/hooks/useWeb3";
 import { NFTAuctionWrongChain } from "./NFTAuction";
 // import NFTAuction from "./NFTAuction";
 
-const Perpetuals = loadable(() => import("./Perpetuals"));
+const Perpetuals = loadable(() => import("./Futures"));
 const Option = loadable(() => import("./Options"));
 // const Mining = loadable(() => import("./Farm"));
 const NFTAuction = loadable(() => import("./NFTAuction"));

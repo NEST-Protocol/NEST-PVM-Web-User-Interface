@@ -1,0 +1,66 @@
+@use "sass:math";
+@import 'src/styles/shared.scss';
+
+.LongAndShort {
+    width: 100%;
+
+    svg {
+        width: 17px;
+        height:9.5px;
+        margin: auto 0;
+        margin-right: 5px;
+    }
+    p{
+        font-weight: bold;
+        font-size: 12.5px;
+    }
+    &-left {
+        display: flex;
+        text-align: center;
+        width: 157px;
+        height: 34px;
+        border-radius: 17px;
+        box-shadow: $shadow;
+
+        div {
+            margin: auto auto;
+            display: flex;
+            p {
+                color: $up-color;
+            }
+        }
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    &-right {
+        display: flex;
+        text-align: center;
+        width: 157px;
+        height: 34px;
+        border-radius: 17px;
+        box-shadow: $shadow;
+
+        div {
+            margin: auto auto;
+            display: flex;
+            p {
+                color: $down-color;
+            }
+        }
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    div.selected {
+        background-color: $main-button-color;
+        p {
+            color: white;
+        }
+        box-shadow: none;
+    }
+}

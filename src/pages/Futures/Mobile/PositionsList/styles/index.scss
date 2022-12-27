@@ -1,0 +1,84 @@
+@use "sass:math";
+@import 'src/styles/shared.scss';
+
+.positionsList {
+    width: 100%;
+    padding: 25px 30px;
+    background-color: #FDFDFD;
+    border: 1px solid #EEEEEE;
+    border-radius: 14px;
+
+    &-one,
+    &-two {
+        border-bottom: 1px solid #DCDCDC;
+    }
+
+    &-one,
+    &-two,
+    &-three {
+        p.title {
+            color: #878787;
+            font-size: 12.5px;
+            font-family: $boldFont;
+        }
+
+        p.value {
+            color: black;
+            font-size: 12.5px;
+            font-family: $boldFont;
+            margin: 11.5px 0;
+            height: 20px;
+        }
+
+        .right {
+            p {
+                text-align: right;
+            }
+        }
+    }
+
+    &-two,
+    &-three {
+        margin-top: 14px;
+    }
+
+    .pairIcon {
+        margin: 11.5px 0;
+
+        svg {
+            position: relative;
+            width: 20px;
+            height: 20px;
+            z-index: 10;
+            margin-right: -7px;
+        }
+
+        svg.USDT {
+            position: relative;
+            z-index: 1;
+        }
+    }
+
+    .longShort {
+        height: 20px;
+        color: #DD8751;
+        font-size: 12.5px;
+        margin: 11.5px 0;
+
+        svg {
+            width: 17px;
+            height: 9.5px;
+            margin-right: 3px;
+        }
+    }
+
+    &-button {
+        button {
+            width: 90px;
+            height: 34px;
+            border-radius: 17px;
+            font-size: 12.5px;
+            padding: 0;
+        }
+    }
+}
