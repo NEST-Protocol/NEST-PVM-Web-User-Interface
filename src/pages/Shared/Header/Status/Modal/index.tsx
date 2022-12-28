@@ -121,6 +121,22 @@ const Modal: FC<Props> = ({ ...props }) => {
                 <Coin98Icon />
                 <p>Coin98</p>
               </MainCard>
+              <MainCard
+                onClick={() => {
+                  activate(
+                    SupportedConnectors[3].connector,
+                    undefined,
+                    true
+                  ).catch(() => {
+                    message.error(
+                      t`This network is not supported, please switch the network`
+                    );
+                  });
+                }}
+              >
+                <img src="OKXWallet.png" alt="NEST IMG"/>
+                <p>OKX Wallet</p>
+              </MainCard>
             </div>
           </div>
         ) : (

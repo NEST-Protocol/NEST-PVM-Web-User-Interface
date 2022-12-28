@@ -40,6 +40,13 @@
                 font-family: $boldFont;
             }
 
+            img {
+                height: 64px;
+                width: 120px;
+                margin: 0 auto;
+                margin-top: 12px;
+                margin-bottom: 12px;
+            }
         }
     }
     &-walletSelect2,&-walletSelect3 {
