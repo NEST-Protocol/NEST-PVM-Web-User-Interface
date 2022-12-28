@@ -14,6 +14,8 @@ import { formatUnits, parseUnits } from "ethers/lib/utils";
 import OpenShow from "../../../components/OpenShow";
 import classNames from "classnames";
 import PositionsList from "./PositionsList";
+import MainButton from "../../../components/MainButton";
+import { Popover } from "@mui/material";
 
 const FuturesMobile: FC = () => {
   const { chainId } = useWeb3();
@@ -21,12 +23,16 @@ const FuturesMobile: FC = () => {
   const [nestBalance, setNestBalance] = useState<BigNumber>(
     BigNumber.from("0")
   );
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
   const [limit, setLimit] = useState(false);
   const [stop, setStop] = useState(false);
   const [isPositions, setIsPositions] = useState(true);
   const [nestInput, setNestInput] = useState<string>("");
   const [leverNum, setLeverNum] = useState<number>(1);
   const classPrefix = "FuturesMobile";
+  const BTCIcon = tokenList["BTC"].Icon;
+  const ETHIcon = tokenList["ETH"].Icon;
+  const USDTIcon = tokenList["USDT"].Icon;
 
   const handleLeverNum = (selected: number) => {
     setLeverNum(selected);
@@ -41,7 +47,7 @@ const FuturesMobile: FC = () => {
 
   const tokenPairAndPrice = () => {
     const TokenIcon = tokenList["ETH"].Icon;
-    const USDTIcon = tokenList["USDT"].Icon;
+    
     return (
       <Stack
         direction="row"
@@ -49,17 +55,13 @@ const FuturesMobile: FC = () => {
         alignItems="center"
         spacing={0}
         className={`${classPrefix}-tokenPairAndPrice`}
+        id={"qwer"}
       >
-        <Stack
-          direction="row"
-          justifyContent="space-between"
-          alignItems="center"
-          spacing={0}
-        >
+        <button onClick={(e) => setAnchorEl(e.currentTarget)}>
           <TokenIcon />
           <USDTIcon className="USDT" />
           <PutDownIcon />
-        </Stack>
+        </button>
         <p>1 ETH = 3116.6 USDT</p>
       </Stack>
     );
@@ -103,7 +105,7 @@ const FuturesMobile: FC = () => {
           className={`${classPrefix}-limitPrice`}
         >
           <p className={`${classPrefix}-limitPrice-title`}>Limit Price</p>
-          <button>Current Price</button>
+          <MainButton>Current Price</MainButton>
           <Stack
             direction="row"
             justifyContent="space-between"
@@ -254,7 +256,7 @@ const FuturesMobile: FC = () => {
           <p>Total Pay</p>
           <p>1266.6 USDT</p>
         </Stack>
-        <button className="mainButton">Open Long</button>
+        <MainButton className="mainButton">Open Long</MainButton>
       </Stack>
     );
   };
@@ -287,13 +289,33 @@ const FuturesMobile: FC = () => {
     );
   };
   return (
-    <Stack spacing={0}>
+    <Stack spacing={0} className={`${classPrefix}`}>
       {tokenPairAndPrice()}
+      <Popover
+        open={Boolean(anchorEl)}
+        anchorEl={anchorEl}
+        onClose={() => setAnchorEl(null)}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "left",
+        }}
+        className={"selectToken"}
+      >
+        <ul>
+          <li onClick={() => {
+            console.log(111)
+            setAnchorEl(null)
+          }}><ETHIcon /><USDTIcon className="USDT" /><p>ETH/USDT</p></li>
+          <li><BTCIcon /><USDTIcon className="USDT" /><p>BTC/USDT</p></li>
+        </ul>
+      </Popover>
       {KPrice()}
       {mainView()}
       {listTab()}
-      <ul>
-        <li><PositionsList/></li>
+      <ul className="list">
+        <li>
+          <PositionsList />
+        </li>
       </ul>
     </Stack>
   );

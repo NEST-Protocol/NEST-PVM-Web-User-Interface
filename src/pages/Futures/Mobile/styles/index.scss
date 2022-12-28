@@ -12,6 +12,7 @@
         border-radius: 17px;
 
         svg {
+            position: relative;
             width: 20px;
             height: 20px;
             z-index: 10;
@@ -85,7 +86,7 @@
 
         .infoView {
             margin-top: 22.5px;
-
+            width: 100%;
             &-top {
                 p {
                     margin: 0 15px;
@@ -99,12 +100,28 @@
                 margin-top: 11.5px;
                 margin-bottom: 0px;
                 padding: 0 15px;
+                height: 34px;
+                border-radius: 17px;
 
                 .TokenShow {
+                    &-text {
+                        font-size: 12.5px;
+                    }
                     svg {
                         width: 19.5px;
                         height: 19.5px;
                     }
+                }
+
+                .input-middle{
+                    font-size: 12.5px;
+                    &::placeholder {
+                        font-size: 12.5px;
+                    }
+                }
+
+                .max-button{
+                    font-size: 12.5px;
                 }
             }
 
@@ -118,10 +135,8 @@
             width: 157px;
             height: 34px;
             border-radius: 17px;
-            background-color: #0047BB;
-            color: white;
             font-size: 12.5px;
-            font-family: $boldFont;
+            padding: 0;
         }
     }
 
@@ -167,9 +182,8 @@
             width: 90px;
             height: 28px;
             border-radius: 14px;
-            background-color: #0047BB;
-            color: white;
             font-size: 10px;
+            padding: 0;
         }
 
         .rightInput {
@@ -233,6 +247,45 @@
             &.selected {
                 color: #0047BB;
             }
+        }
+    }
+
+    ul.list {
+        padding: 0 8px;
+    }
+}
+
+.selectToken {
+    margin-left: -5px;
+    svg {
+        position: relative;
+        width: 20px;
+        height: 20px;
+        z-index: 10;
+    }
+
+    svg.USDT {
+        margin-left: -7px;
+        margin-right: 10px;
+        z-index: 1;
+    }
+    ul {
+        padding: 5px 0;
+        li {
+            padding: 0 5px;
+            display: flex;
+            font-size: 12.5px;
+            p {
+                line-height: 20px;
+            }
+
+            &:hover {
+                background-color: #EEEEEE;
+            }
+        }
+
+        li + li {
+            margin-top: 5px;
         }
     }
 }

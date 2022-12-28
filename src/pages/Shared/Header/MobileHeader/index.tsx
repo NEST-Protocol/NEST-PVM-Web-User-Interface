@@ -1,8 +1,7 @@
 import { t, Trans } from "@lingui/macro";
 import classNames from "classnames";
-import { FC, useCallback, useRef, useState } from "react";
+import { FC, useCallback, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Popup } from "reactjs-popup";
 import {
   DarkIcon,
   NESTLogo,
@@ -18,16 +17,21 @@ import useWeb3 from "../../../../libs/hooks/useWeb3";
 // import { dynamicActivate } from "../../../../libs/i18nConfig";
 import { showEllipsisAddress } from "../../../../libs/utils";
 import Modal from "../Status/Modal";
+import { Modal as MUIModal } from "@mui/material";
 import WalletModal from "../Status/WalletModal";
 import "../Status/styles";
 import "./styles";
 import SelectNetworkModal from "./SelectNetworkModal";
 import useThemes, { ThemeType } from "../../../../libs/hooks/useThemes";
+import Drawer from "@mui/material/Drawer";
 
 const MobileHeader: FC = () => {
   const classPrefix = "header-mobile";
   const { account, chainId } = useWeb3();
   const [showList, setShowList] = useState(false);
+  const [selectNet, setSelectNet] = useState(false);
+  const [showWallet, setShowWallet] = useState(false);
+  const [showCon, setShowCon] = useState(false);
   const location = useLocation();
   const { pendingList } = useTransactionListCon();
   const routes = [
@@ -48,7 +52,6 @@ const MobileHeader: FC = () => {
       <Link to={item.path}>{item.content}</Link>
     </li>
   ));
-  const modal = useRef<any>();
   const { theme, setTheme } = useThemes();
   const themeIcon = () => {
     if (theme === ThemeType.dark) {
@@ -83,84 +86,93 @@ const MobileHeader: FC = () => {
     }
   }, [chainId]);
 
-  const headerListShow = (
-    <div className={`${classPrefix}-headerList`}>
-      <div className={`${classPrefix}-headerList-top`}>
-        <div className={`${classPrefix}-headerList-top-left`}>
-          <button onClick={() => setShowList(false)}>
-            <XIcon />
-          </button>
-        </div>
-
-        <Popup
-          modal
-          ref={modal}
-          trigger={
-            <div className={`${classPrefix}-headerList-top-mid`}>
-              {nowNetwork()}
-            </div>
-          }
-        >
-          <SelectNetworkModal onClose={() => modal.current.close()} />
-        </Popup>
-
-        <div className={`${classPrefix}-headerList-top-right`}>
-          <button
-            onClick={() => {
-              if (theme === ThemeType.dark) {
-                setTheme(ThemeType.white);
-              } else {
-                setTheme(ThemeType.dark);
-              }
-            }}
+  const headerListShow = () => {
+    return (
+      <div className={`${classPrefix}-headerList`}>
+        <div className={`${classPrefix}-headerList-top`}>
+          <div className={`${classPrefix}-headerList-top-left`}>
+            <button onClick={() => setShowList(false)}>
+              <XIcon />
+            </button>
+          </div>
+          <div
+            className={`${classPrefix}-headerList-top-mid`}
+            onClick={() => setSelectNet(true)}
           >
-            {themeIcon()}
-          </button>
+            {nowNetwork()}
+          </div>
+
+          <div className={`${classPrefix}-headerList-top-right`}>
+            <button
+              onClick={() => {
+                if (theme === ThemeType.dark) {
+                  setTheme(ThemeType.white);
+                } else {
+                  setTheme(ThemeType.dark);
+                }
+              }}
+            >
+              {themeIcon()}
+            </button>
+          </div>
+        </div>
+        <ul>{routes}</ul>
+        <div className={"connectStatus"}>
+          {account === undefined ? (
+            <button className={"fort-button fort-button-mobile"}
+            onClick={() => setShowCon(true)}>
+              <Trans>Connect Wallet</Trans>
+            </button>
+          ) : (
+            <button
+              className={classNames({
+                [`fort-button`]: true,
+                [`fort-button-mobile`]: true,
+                [`showNum`]: pendingList.length > 0,
+              })}
+              onClick={() => setShowWallet(true)}
+            >
+              <div className={"transactionNum"}>
+                <WhiteLoading className={"animation-spin"} />
+                <p>{pendingList.length}</p>
+              </div>
+              <p>{showEllipsisAddress(account || "")}</p>
+            </button>
+          )}
         </div>
       </div>
-      <ul>{routes}</ul>
-      <div className={"connectStatus"}>
-        {account === undefined ? (
-          <Popup
-            modal
-            ref={modal}
-            trigger={
-              <button className={"fort-button fort-button-mobile"}>
-                <Trans>Connect Wallet</Trans>
-              </button>
-            }
-          >
-            <Modal onClose={() => modal.current.close()} />
-          </Popup>
-        ) : (
-          <Popup
-            modal
-            ref={modal}
-            trigger={
-              <button
-                className={classNames({
-                  [`fort-button`]: true,
-                  [`fort-button-mobile`]: true,
-                  [`showNum`]: pendingList.length > 0,
-                })}
-              >
-                <div className={"transactionNum"}>
-                  <WhiteLoading className={"animation-spin"} />
-                  <p>{pendingList.length}</p>
-                </div>
-                <p>{showEllipsisAddress(account || "")}</p>
-              </button>
-            }
-          >
-            <WalletModal onClose={() => modal.current.close()} />
-          </Popup>
-        )}
-      </div>
-    </div>
-  );
+    );
+  };
   return (
     <header>
-      {showList ? headerListShow : <></>}
+      {/* {showList ? headerListShow : <></>} */}
+      <Drawer anchor={"top"} open={showList} onClose={() => setShowList(false)}>
+        {headerListShow()}
+      </Drawer>
+      <MUIModal
+        open={selectNet}
+        onClose={() => setSelectNet(false)}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <SelectNetworkModal onClose={() => setSelectNet(false)} />
+      </MUIModal>
+      <MUIModal
+        open={showCon}
+        onClose={() => setShowCon(false)}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Modal onClose={() => setShowCon(false)} />
+      </MUIModal>
+      <MUIModal
+        open={showWallet}
+        onClose={() => setShowWallet(false)}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <WalletModal onClose={() => setShowWallet(false)} />
+      </MUIModal>
       <div className={classPrefix}>
         <div className={`${classPrefix}-leftButton`}>
           <button onClick={() => setShowList(true)}>
