@@ -1,6 +1,8 @@
 /// <reference types="react-scripts" />
 
 type ethereum = {
+    enable(): unknown
+    send: Send
     isMetaMask?: true
   
     isConnected: () => boolean

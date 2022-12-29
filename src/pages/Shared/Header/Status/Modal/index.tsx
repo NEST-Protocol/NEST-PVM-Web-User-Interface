@@ -22,7 +22,6 @@ type Props = {
 
 const Modal: FC<Props> = ({ ...props }) => {
   const { activate } = useWeb3();
-  // const { okxwallet } = window as any;
   const classPrefix = "modal-status";
   const { theme } = useThemes();
   const [isMore, setIsMore] = useState<boolean>(false);
@@ -42,7 +41,6 @@ const Modal: FC<Props> = ({ ...props }) => {
         <div className={`${classPrefix}-walletSelect`}>
           <MainCard
             onClick={() => {
-              // const res = okxwallet.request({ method: 'eth_requestAccounts' });
               activate(SupportedConnectors[0].connector, undefined, true).catch(
                 () => {
                   message.error(
@@ -122,6 +120,22 @@ const Modal: FC<Props> = ({ ...props }) => {
               >
                 <Coin98Icon />
                 <p>Coin98</p>
+              </MainCard>
+              <MainCard
+                onClick={() => {
+                  activate(
+                    SupportedConnectors[3].connector,
+                    undefined,
+                    true
+                  ).catch(() => {
+                    message.error(
+                      t`This network is not supported, please switch the network`
+                    );
+                  });
+                }}
+              >
+                <img src="OKXWallet.png" alt="NEST IMG"/>
+                <p>OKX Wallet</p>
               </MainCard>
             </div>
           </div>

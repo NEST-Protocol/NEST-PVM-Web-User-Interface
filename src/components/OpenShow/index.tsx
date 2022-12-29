@@ -27,7 +27,9 @@ const OpenShow: FC<Props> = ({ ...props }) => {
           })}
         ></div>
       </div>
-      <p>{props.title}</p>
+      <p className={classNames({
+        [`high`]: props.isOn,
+      })}>{props.title}</p>
     </Stack>
   );
 };

@@ -82,6 +82,13 @@
         }
     }
 
+    &-des {
+        font-size: 12.5px;
+        color: #878787;
+        padding: 0 15px;
+        margin-top: 20px;
+    }
+
     &-drawer {
         .MuiPaper-root {
             margin: 0 8px;
@@ -96,6 +103,57 @@
                 font-size: 12.5px;
                 text-align: center;
                 color: #878787;
+            }
+
+            .infoView {
+                margin-top: 22.5px;
+                width: 100%;
+
+                &-top {
+                    p {
+                        margin: 0 15px;
+                    }
+                }
+
+                &-topLeft,
+                &-topRight {
+                    font-size: 12.5px;
+                }
+
+                &-mainView {
+                    margin-top: 11.5px;
+                    margin-bottom: 10px;
+                    padding: 0 15px;
+                    height: 34px;
+                    border-radius: 17px;
+
+                    .TokenShow {
+                        &-text {
+                            font-size: 12.5px;
+                        }
+
+                        svg {
+                            width: 19.5px;
+                            height: 19.5px;
+                        }
+                    }
+
+                    .input-middle {
+                        font-size: 12.5px;
+
+                        &::placeholder {
+                            font-size: 12.5px;
+                        }
+                    }
+
+                    .max-button {
+                        font-size: 12.5px;
+                    }
+                }
+
+                &-bottom {
+                    height: 0px;
+                }
             }
 
             button.action {
@@ -119,23 +177,12 @@
         margin-top: 15px;
 
         &-title {
-            width: 31%;
             font-size: 12.5px;
             color: black;
             font-family: $boldFont;
         }
 
-        button {
-            width: 90px;
-            height: 28px;
-            border-radius: 14px;
-            font-size: 10px;
-            padding: 0;
-        }
-
         .rightInput {
-            width: 31%;
-
             input {
                 width: 100%;
                 font-family: $boldFont;
@@ -151,7 +198,9 @@
             }
         }
     }
-    &-stopLimit1, &-stopLimit2{
+
+    &-stopLimit1,
+    &-stopLimit2 {
         width: 100%;
         height: 34px;
         border-radius: 17px;
@@ -198,6 +247,118 @@
 
         p+p {
             font-family: Montserrat;
+        }
+    }
+
+    &-drawer-dark {
+        .MuiPaper-root {
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+            border: 0px;
+            -webkit-backdrop-filter: blur(24px);
+            backdrop-filter: blur(24px);
+
+            p.title {
+                color: white;
+            }
+
+            button.action {
+                background: linear-gradient(90deg, #8BB7FF 0%, #0061FF 100%);
+                box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+                &.disable {
+                    background: #BFBFBF;
+                }
+            }
+
+            .infoView {
+                &-top {
+                    p {
+                        color: #C5C5C5;
+                    }
+                }
+
+                &-mainView {
+                    background: rgba(255, 255, 255, 0.15);
+                    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+                    border: 0;
+
+                    &:hover {
+                        border: 1px solid #8BB7FF;
+                    }
+
+                    .TokenShow {
+                        p {
+                            color: white;
+                        }
+                    }
+
+                    input {
+                        color: white;
+                    }
+
+                    .max-button {
+                        color: #BDD6FF;
+                    }
+                }
+            }
+
+            .positionsList {
+
+                &-limitPrice,
+                &-stopLimit1,
+                &-stopLimit2 {
+                    background: rgba(255, 255, 255, 0.15);
+                    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+                    border: 0;
+
+                    &:hover {
+                        border: 1px solid #8BB7FF;
+                    }
+
+                    p {
+                        color: white;
+                    }
+
+                    input {
+                        color: white;
+                    }
+                }
+
+                &-infoShow {
+                    color: #C5C5C5;
+                }
+
+                &-des {
+                    color: #C5C5C5;
+                }
+            }
+        }
+    }
+}
+
+.main-dark {
+    .positionsList {
+        background: rgba(255, 255, 255, 0.15);
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        backdrop-filter: blur(12px);
+        border: 0;
+
+        &-one,
+        &-two {
+            border-bottom: 1px solid rgba(197, 197, 197, 0.15);
+        }
+
+        &-one,
+        &-two,
+        &-three {
+            p.title {
+                color: #C5C5C5;
+            }
+
+            p.value {
+                color: white;
+            }
         }
     }
 }

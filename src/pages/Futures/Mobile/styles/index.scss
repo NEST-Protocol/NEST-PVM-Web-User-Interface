@@ -54,10 +54,10 @@
 
         .leverChoose {
             width: 100%;
-            padding: 0 15px;
             margin-top: 22px;
 
             &-title {
+                margin: 0 15px;
                 font-size: 12.5px;
             }
 
@@ -87,12 +87,15 @@
         .infoView {
             margin-top: 22.5px;
             width: 100%;
+
             &-top {
                 p {
                     margin: 0 15px;
                 }
             }
-            &-topLeft, &-topRight {
+
+            &-topLeft,
+            &-topRight {
                 font-size: 12.5px;
             }
 
@@ -107,20 +110,22 @@
                     &-text {
                         font-size: 12.5px;
                     }
+
                     svg {
                         width: 19.5px;
                         height: 19.5px;
                     }
                 }
 
-                .input-middle{
+                .input-middle {
                     font-size: 12.5px;
+
                     &::placeholder {
                         font-size: 12.5px;
                     }
                 }
 
-                .max-button{
+                .max-button {
                     font-size: 12.5px;
                 }
             }
@@ -155,7 +160,8 @@
             font-family: Montserrat;
         }
     }
-    &-showHid{
+
+    &-showHid {
         margin-top: 22px;
         margin-bottom: 7px;
     }
@@ -172,18 +178,9 @@
         margin-top: 15px;
 
         &-title {
-            width: 31%;
             font-size: 12.5px;
             color: black;
             font-family: $boldFont;
-        }
-
-        button {
-            width: 90px;
-            height: 28px;
-            border-radius: 14px;
-            font-size: 10px;
-            padding: 0;
         }
 
         .rightInput {
@@ -204,7 +201,9 @@
             }
         }
     }
-    &-stopLimit1, &-stopLimit2{
+
+    &-stopLimit1,
+    &-stopLimit2 {
         width: 100%;
         height: 34px;
         border-radius: 17px;
@@ -237,13 +236,16 @@
             }
         }
     }
-    &-listTab{
+
+    &-listTab {
         margin: 20px 0;
+
         button {
-            color:#878787;
+            color: #878787;
             font-size: 12.5px;
             font-family: $boldFont;
             margin-left: 23px;
+
             &.selected {
                 color: #0047BB;
             }
@@ -253,39 +255,126 @@
     ul.list {
         padding: 0 8px;
     }
+
+    &-selectToken {
+        margin-left: -5px;
+
+        svg {
+            position: relative;
+            width: 20px;
+            height: 20px;
+            z-index: 10;
+        }
+
+        svg.USDT {
+            margin-left: -7px;
+            margin-right: 10px;
+            z-index: 1;
+        }
+
+        ul {
+            padding: 5px 0;
+
+            li {
+                padding: 0 5px;
+                display: flex;
+                font-size: 12.5px;
+
+                p {
+                    line-height: 20px;
+                }
+
+                &:hover {
+                    background-color: #EEEEEE;
+                }
+            }
+
+            li+li {
+                margin-top: 5px;
+            }
+        }
+    }
 }
 
-.selectToken {
-    margin-left: -5px;
-    svg {
-        position: relative;
-        width: 20px;
-        height: 20px;
-        z-index: 10;
-    }
+.main-dark {
+    .FuturesMobile {
+        &-tokenPairAndPrice {
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            backdrop-filter: blur(12px);
+            border: 0;
 
-    svg.USDT {
-        margin-left: -7px;
-        margin-right: 10px;
-        z-index: 1;
-    }
-    ul {
-        padding: 5px 0;
-        li {
-            padding: 0 5px;
-            display: flex;
-            font-size: 12.5px;
             p {
-                line-height: 20px;
+                color: #BDD6FF;
+            }
+
+            button {
+                p {
+                    color: white;
+                }
+            }
+
+            svg.putDown {
+                circle {
+                    stroke: #BDD6FF;
+                }
+
+                path {
+                    fill: #BDD6FF;
+                }
             }
 
             &:hover {
-                background-color: #EEEEEE;
+                border: 1px solid #8BB7FF;
             }
         }
 
-        li + li {
-            margin-top: 5px;
+        &-KPrice {
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            backdrop-filter: blur(12px);
+            border: 0;
+        }
+
+        &-mainView {
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            backdrop-filter: blur(12px);
+            border: 0;
+        }
+
+        &-limitPrice,
+        &-stopLimit1,
+        &-stopLimit2 {
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            border: 0;
+
+            &:hover {
+                border: 1px solid #8BB7FF;
+            }
+
+            p {
+                color: white;
+            }
+
+            input {
+                color: white;
+            }
+        }
+
+        &-infoShow {
+            color: #C5C5C5;
+        }
+
+        &-listTab {
+            button {
+                color: #C5C5C5;
+
+                &.selected {
+                    color: #BDD6FF;
+                }
+            }
         }
     }
 }

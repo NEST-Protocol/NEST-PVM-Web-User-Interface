@@ -5,8 +5,13 @@ import { LongIcon } from "../../../../components/Icon";
 import MainButton from "../../../../components/MainButton";
 import { tokenList } from "../../../../libs/constants/addresses";
 import "./styles";
+import classNames from "classnames";
+import useThemes, { ThemeType } from "../../../../libs/hooks/useThemes";
+import InfoShow from "../../../../components/InfoShow";
+import { SingleTokenShow } from "../../../../components/TokenShow";
 
 enum DrawerType {
+  add = 0,
   trigger = 1,
   triggerEdit = 2,
   orderEdit = 3,
@@ -16,6 +21,7 @@ const PositionsList: FC = () => {
   const classPrefix = "positionsList";
   const [showDrawer, setShowDrawer] = useState(false);
   const [drawerType, setDrawerType] = useState<DrawerType>(DrawerType.trigger);
+  const { theme } = useThemes();
   const TokenOneSvg = tokenList["ETH"].Icon;
   const TokenTwoSvg = tokenList["USDT"].Icon;
 
@@ -29,7 +35,6 @@ const PositionsList: FC = () => {
         className={`${classPrefix}-limitPrice`}
       >
         <p className={`${classPrefix}-limitPrice-title`}>Limit Price</p>
-        <MainButton>Current Price</MainButton>
         <Stack
           direction="row"
           justifyContent="space-between"
@@ -93,6 +98,8 @@ const PositionsList: FC = () => {
   const drawerView = () => {
     const titleString = () => {
       switch (drawerType) {
+        case DrawerType.add:
+          return "Add Position";
         case DrawerType.trigger:
           return "Trigger Position";
         case DrawerType.triggerEdit:
@@ -103,6 +110,8 @@ const PositionsList: FC = () => {
     };
     const buttonString = () => {
       switch (drawerType) {
+        case DrawerType.add:
+          return "Add";
         case DrawerType.trigger:
           return "Confirm";
         case DrawerType.triggerEdit:
@@ -113,6 +122,64 @@ const PositionsList: FC = () => {
     };
     const mainView = () => {
       switch (drawerType) {
+        case DrawerType.add:
+          return (
+            <Stack spacing={0}>
+              <InfoShow
+                topLeftText={`Payment`}
+                bottomRightText={""}
+                topRightText={`Balance: --- NEST`}
+              >
+                <SingleTokenShow tokenNameOne={"NEST"} isBold />
+                <input
+                  placeholder={`Input`}
+                  className={"input-middle"}
+                  // value={nestInput}
+                  maxLength={32}
+                  // onChange={(e) => setNestInput(formatInputNum(e.target.value))}
+                  // onBlur={(e: any) => {}}
+                />
+                <button
+                  className={"max-button"}
+                  // onClick={() =>
+                  //   setNestInput(
+                  //     bigNumberToNormal(
+                  //       nestBalance || BigNumber.from("0"),
+                  //       18,
+                  //       18
+                  //     )
+                  //   )
+                  // }
+                >
+                  MAX
+                </button>
+              </InfoShow>
+              <Stack
+                direction="row"
+                justifyContent="space-between"
+                alignItems="center"
+                spacing={0}
+                className={`${classPrefix}-infoShow`}
+              >
+                <p>Position</p>
+                <p>5X Long</p>
+              </Stack>
+              <Stack
+                direction="row"
+                justifyContent="space-between"
+                alignItems="center"
+                spacing={0}
+                className={`${classPrefix}-infoShow`}
+              >
+                <p>Open price</p>
+                <p>1000 USDT</p>
+              </Stack>
+              <div className={`${classPrefix}-des`}>
+                The calculated result is for reference only. Please expect some
+                deviation due to trading fees or changes in the funding rate.
+              </div>
+            </Stack>
+          );
         case DrawerType.trigger:
           return (
             <Stack spacing={0}>
@@ -232,24 +299,39 @@ const PositionsList: FC = () => {
         spacing={0}
         className={`${classPrefix}-button`}
       >
-        <MainButton onClick={() => {
-            setShowDrawer(true)
-            setDrawerType(DrawerType.trigger)
-        }}>Add</MainButton>
-        <MainButton onClick={() => {
-            setShowDrawer(true)
-            setDrawerType(DrawerType.triggerEdit)
-        }}>Edit</MainButton>
-        <MainButton onClick={() => {
-            setShowDrawer(true)
-            setDrawerType(DrawerType.orderEdit)
-        }}>Close</MainButton>
+        <MainButton
+          onClick={() => {
+            setShowDrawer(true);
+            setDrawerType(DrawerType.add);
+          }}
+        >
+          Add
+        </MainButton>
+        <MainButton
+          onClick={() => {
+            setShowDrawer(true);
+            setDrawerType(DrawerType.triggerEdit);
+          }}
+        >
+          Edit
+        </MainButton>
+        <MainButton
+          onClick={() => {
+            setShowDrawer(true);
+            setDrawerType(DrawerType.orderEdit);
+          }}
+        >
+          Close
+        </MainButton>
       </Stack>
       <Drawer
         anchor={"bottom"}
         open={showDrawer}
         onClose={() => setShowDrawer(false)}
-        className={`${classPrefix}-drawer`}
+        className={classNames({
+          [`${classPrefix}-drawer`]: true,
+          [`${classPrefix}-drawer-dark`]: theme === ThemeType.dark,
+        })}
       >
         {drawerView()}
       </Drawer>

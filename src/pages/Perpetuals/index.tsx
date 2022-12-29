@@ -73,7 +73,6 @@ const Perpetuals: FC = () => {
     []
   );
   const intervalRef = useRef<NodeJS.Timeout>();
-  const intervalRef2 = useRef<NodeJS.Timeout>();
   const classPrefix = "perpetuals";
   const nestToken = ERC20Contract(tokenList["NEST"].addresses);
   const priceContract = NestPriceContract();
@@ -257,7 +256,7 @@ const Perpetuals: FC = () => {
     getPrice(priceContract, PVMLeverOJ, chainId);
     const id = setInterval(() => {
       getPrice(priceContract, PVMLeverOJ, chainId);
-    }, 60 * 1000);
+    }, 30 * 1000);
     intervalRef.current = id;
     return () => {
       if (intervalRef.current) {
@@ -329,16 +328,10 @@ const Perpetuals: FC = () => {
   }, [chainId, tokenPair.symbol, kTypeValue])
   useEffect(() => {
     getKData()
-    const id = setInterval(() => {
+    const getData = setInterval(() => {
       getKData()
-      getList()
-    }, 60 * 1000);
-    intervalRef2.current = id;
-    return () => {
-      if (intervalRef2.current) {
-        clearInterval(intervalRef2.current);
-      }
-    };
+    }, 30 * 1000);
+    return () => clearInterval(getData);
   }, [chainId, kTypeValue, tokenPair.symbol, getKData, getList]);
   useEffect(() => {
     if (!isRefresh) {
@@ -479,11 +472,12 @@ const Perpetuals: FC = () => {
   );
 
   const kType = [
-    { index: 0, label: "5M", value: "K_5M" },
-    { index: 1, label: "15M", value: "K_15M" },
-    { index: 2, label: "1H", value: "K_1H" },
-    { index: 3, label: "4H", value: "K_4H" },
-    { index: 4, label: "1D", value: "K_DAY" },
+    { index: 0, label: "1M", value: "K_1M" },
+    { index: 1, label: "5M", value: "K_5M" },
+    { index: 2, label: "15M", value: "K_15M" },
+    { index: 3, label: "1H", value: "K_1H" },
+    { index: 4, label: "4H", value: "K_4H" },
+    { index: 5, label: "1D", value: "K_DAY" },
   ];
 
   const leverList = chainId === 1

@@ -60,7 +60,7 @@ const FuturesMobile: FC = () => {
         <button onClick={(e) => setAnchorEl(e.currentTarget)}>
           <TokenIcon />
           <USDTIcon className="USDT" />
-          <PutDownIcon />
+          <PutDownIcon className="putDown"/>
         </button>
         <p>1 ETH = 3116.6 USDT</p>
       </Stack>
@@ -105,7 +105,6 @@ const FuturesMobile: FC = () => {
           className={`${classPrefix}-limitPrice`}
         >
           <p className={`${classPrefix}-limitPrice-title`}>Limit Price</p>
-          <MainButton>Current Price</MainButton>
           <Stack
             direction="row"
             justifyContent="space-between"
@@ -299,11 +298,10 @@ const FuturesMobile: FC = () => {
           vertical: "bottom",
           horizontal: "left",
         }}
-        className={"selectToken"}
+        className={`${classPrefix}-selectToken`}
       >
         <ul>
           <li onClick={() => {
-            console.log(111)
             setAnchorEl(null)
           }}><ETHIcon /><USDTIcon className="USDT" /><p>ETH/USDT</p></li>
           <li><BTCIcon /><USDTIcon className="USDT" /><p>BTC/USDT</p></li>

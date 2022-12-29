@@ -15,25 +15,18 @@
 
 .selectNetworkMobile {
     width: 240px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
 
     .baseModal-top {
         justify-content: space-between;
-
         &-leftButton {
             width: 0px;
         }
-
         &-title {
             width: 100%;
             text-align: left;
             margin-left: 14px;
         }
     }
-
     ul {
         display: contents;
 

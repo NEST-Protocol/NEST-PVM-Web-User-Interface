@@ -2,13 +2,13 @@
 @import 'src/styles/shared.scss';
 
 .leverChoose {
-    margin: 0 20px;
 
     &-title {
         color: $gray-info-text-color;
         font-size: $T2;
         text-align: left;
         height: 20px;
+        margin: 0 20px;
     }
 
     &-choose {
@@ -30,14 +30,17 @@
                 color: $main-button-color;
                 border: 2px solid $main-button-color;
                 font-family: $boldFont;
+                line-height: 40px;
 
                 &:hover {
                     border: 2px solid $main-button-color;
+                    line-height: 40px;
                 }
             }
 
             &:hover {
                 border: 1px solid $gray-line-color;
+                line-height: 42px;
                 cursor: pointer;
             }
         }

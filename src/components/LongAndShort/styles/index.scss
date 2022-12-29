@@ -6,14 +6,16 @@
 
     svg {
         width: 17px;
-        height:9.5px;
+        height: 9.5px;
         margin: auto 0;
         margin-right: 5px;
     }
-    p{
+
+    p {
         font-weight: bold;
         font-size: 12.5px;
     }
+
     &-left {
         display: flex;
         text-align: center;
@@ -25,6 +27,7 @@
         div {
             margin: auto auto;
             display: flex;
+
             p {
                 color: $up-color;
             }
@@ -46,6 +49,7 @@
         div {
             margin: auto auto;
             display: flex;
+
             p {
                 color: $down-color;
             }
@@ -58,9 +62,27 @@
 
     div.selected {
         background-color: $main-button-color;
+
         p {
             color: white;
         }
+
         box-shadow: none;
+    }
+}
+
+.main-dark {
+    .LongAndShort {
+
+        &-left,
+        &-right {
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        }
+
+        div.selected {
+            background: linear-gradient(90deg, #8BB7FF 0%, #0061FF 100%);
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        }
     }
 }
