@@ -28,6 +28,7 @@
     "echarts": "^5.4.0",
     "echarts-for-react": "^3.0.2",
     "ethers": "^5.4.3",
+    "lightweight-charts": "^3.8.0",
     "lodash": "^4.17.21",
     "merkletreejs": "^0.3.0",
     "moment": "^2.29.1",

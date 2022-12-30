@@ -390,14 +390,16 @@
 
                 &:hover {
                     border: 0px;
+                    line-height: 44px;
                 }
 
                 &.selected {
                     background: linear-gradient(90deg, #8BB7FF 0%, #0061FF 100%);
                     color: $main-background-color;
                     border: 0px;
-
+                    line-height: 44px;
                     &:hover {
+                        line-height: 44px;
                         border: 0px;
                     }
                 }

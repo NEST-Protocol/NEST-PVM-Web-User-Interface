@@ -16,6 +16,7 @@ import classNames from "classnames";
 import PositionsList from "./PositionsList";
 import MainButton from "../../../components/MainButton";
 import { Popover } from "@mui/material";
+import TVChart from "../../../components/TVChart";
 
 const FuturesMobile: FC = () => {
   const { chainId } = useWeb3();
@@ -74,7 +75,9 @@ const FuturesMobile: FC = () => {
         alignItems="center"
         spacing={0}
         className={`${classPrefix}-KPrice`}
-      ></Stack>
+      >
+        <TVChart chainId={56} tokenPair={"ETH"}/>
+      </Stack>
     );
   };
   const mainView = () => {

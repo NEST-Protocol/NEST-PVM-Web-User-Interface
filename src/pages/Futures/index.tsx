@@ -17,6 +17,7 @@ import { PutDownIcon } from "../../components/Icon";
 import { Popover } from "@mui/material";
 import classNames from "classnames";
 import PerpetualsList, { PerpetualsList2 } from "../../components/PerpetualsList";
+import TVChart from "../../components/TVChart";
 
 const Futures: FC = () => {
   const classPrefix = "Futures";
@@ -277,7 +278,10 @@ const Futures: FC = () => {
           </Stack>
           <MainButton className="mainButton">Open Long</MainButton>
         </Stack>
-        <Stack spacing={0} className={`${classPrefix}-topView-right`}></Stack>
+        <Stack spacing={0} className={`${classPrefix}-topView-right`}>
+          <p className="title">ETH/USDT</p>
+          <TVChart chainId={56} tokenPair={"ETH"}/>
+        </Stack>
       </Stack>
     );
   };
