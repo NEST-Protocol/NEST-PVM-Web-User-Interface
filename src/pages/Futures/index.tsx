@@ -280,7 +280,7 @@ const Futures: FC = () => {
         </Stack>
         <Stack spacing={0} className={`${classPrefix}-topView-right`}>
           <p className="title">ETH/USDT</p>
-          <TVChart chainId={56} tokenPair={"ETH"}/>
+          <TVChart chainId={56} tokenPair={"ETH"} update1={stop} update2={limit}/>
         </Stack>
       </Stack>
     );

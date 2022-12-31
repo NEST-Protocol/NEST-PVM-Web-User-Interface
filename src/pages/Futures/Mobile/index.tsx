@@ -76,7 +76,7 @@ const FuturesMobile: FC = () => {
         spacing={0}
         className={`${classPrefix}-KPrice`}
       >
-        <TVChart chainId={56} tokenPair={"ETH"}/>
+        <TVChart chainId={56} tokenPair={"ETH"} update1={stop} update2={limit}/>
       </Stack>
     );
   };

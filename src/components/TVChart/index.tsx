@@ -3,10 +3,13 @@ import { createChart, UTCTimestamp } from "lightweight-charts";
 import { format as formatDateFn } from "date-fns";
 import "./styles";
 import classNames from "classnames";
+import useThemes, { ThemeType } from "../../libs/hooks/useThemes";
 
 type TVChartProps = {
   chainId: number;
   tokenPair: string;
+  update1: boolean;
+  update2: boolean;
 };
 
 const PERIOD_TYPE = [
@@ -30,7 +33,7 @@ export function formatDateTime(time: number) {
   return formatDateFn(time * 1000, "dd MMM yyyy, h:mm a");
 }
 
-const TVChart: FC<TVChartProps> = ({ chainId, tokenPair }) => {
+const TVChart: FC<TVChartProps> = ({ chainId, tokenPair, update1, update2}) => {
   const ref = useRef(null);
   const chartRef = useRef(null);
   const [currentChart, setCurrentChart] = useState<any>();
@@ -39,6 +42,7 @@ const TVChart: FC<TVChartProps> = ({ chainId, tokenPair }) => {
   const [priceData, setPriceData] = useState<any[]>([]);
   const [currentSeries, setCurrentSeries] = useState<any>();
   const [chartInited, setChartInited] = useState(false);
+  const { theme } = useThemes();
 
   const getPriceData = useCallback(async () => {
     const k_data = await fetch(
@@ -86,53 +90,57 @@ const TVChart: FC<TVChartProps> = ({ chainId, tokenPair }) => {
     currentChart.timeScale().setVisibleRange({ from, to });
   }, [currentChart, period]);
 
-  const getChartOptions = (width: number, height: number) => ({
-    width,
-    height,
-    layout: {
-      backgroundColor: "transparent",
-      textColor: "black",
-      fontFamily: "Montserrat",
-    },
-    localization: {
-      timeFormatter: (timestamp: number) => {
-        return formatDateTime(timestamp);
+  const getChartOptions = useCallback(
+    (width: number, height: number) => ({
+      width,
+      height,
+      layout: {
+        backgroundColor: "transparent",
+        textColor:
+          theme === ThemeType.dark ? "rgba(197, 197, 197, 1)" : "black",
+        fontFamily: "Montserrat",
       },
-    },
-    grid: {
-      vertLines: {
-        visible: false,
-        color: "rgba(35, 38, 59, 1)",
-        style: 2,
+      localization: {
+        timeFormatter: (timestamp: number) => {
+          return formatDateTime(timestamp);
+        },
       },
-      horzLines: {
-        visible: false,
-        color: "rgba(35, 38, 59, 1)",
-        style: 2,
+      grid: {
+        vertLines: {
+          visible: false,
+          color: "rgba(35, 38, 59, 1)",
+          style: 2,
+        },
+        horzLines: {
+          visible: false,
+          color: "rgba(35, 38, 59, 1)",
+          style: 2,
+        },
       },
-    },
-    timeScale: {
-      visible: true,
-      rightOffset: 5,
-      borderVisible: true,
-      barSpacing: 5,
-      timeVisible: true,
-      secondsVisible: true,
-      fixLeftEdge: true,
-    },
-    priceScale: {
-      borderVisible: false
-    },
-    crosshair: {
-      horzLine: {
-        color: "black",
+      timeScale: {
+        visible: true,
+        rightOffset: 5,
+        borderVisible: true,
+        barSpacing: 5,
+        timeVisible: true,
+        secondsVisible: true,
+        fixLeftEdge: true,
       },
-      vertLine: {
-        color: "black",
+      priceScale: {
+        borderVisible: false,
       },
-      mode: 0,
-    },
-  });
+      crosshair: {
+        horzLine: {
+          color: "black",
+        },
+        vertLine: {
+          color: "black",
+        },
+        mode: 0,
+      },
+    }),
+    [theme]
+  );
 
   const onCrosshairMove = useCallback(
     (evt) => {
@@ -177,7 +185,8 @@ const TVChart: FC<TVChartProps> = ({ chainId, tokenPair }) => {
       // @ts-ignore
       chartRef.current,
       // @ts-ignore
-      getChartOptions(chartRef.current.offsetWidth, chartRef.current.offsetHeight)
+      getChartOptions(chartRef.current.offsetWidth, chartRef.current.offsetHeight
+      )
     );
 
     chart.subscribeCrosshairMove(onCrosshairMove);
@@ -186,7 +195,17 @@ const TVChart: FC<TVChartProps> = ({ chainId, tokenPair }) => {
 
     setCurrentChart(chart);
     setCurrentSeries(series);
-  }, [ref, priceData, currentChart, onCrosshairMove]);
+  }, [ref, priceData, currentChart, onCrosshairMove, getChartOptions]);
+
+  useEffect(() => {
+    if (currentChart) {
+      currentChart.applyOptions(
+        // @ts-ignore
+        getChartOptions(chartRef.current.offsetWidth, chartRef.current.offsetHeight
+        )
+      );
+    }
+  }, [currentChart, getChartOptions, update1, update2]);
 
   const candlestick = useMemo(() => {
     if (!priceData) {
