@@ -54,8 +54,8 @@ const TVChart: FC<TVChartProps> = ({ chainId, tokenPair, update1, update2}) => {
     setPriceData(
       k_data_value["value"].map((item: any) => ({
         close: Number(item.close.toFixed(2)),
-        high: Number(item.high.toFixed(2)),
-        low: Number(item.low.toFixed(2)),
+        high: Math.max(Number(item.open.toFixed(2)), Number(item.close.toFixed(2))),
+        low: Math.min(Number(item.open.toFixed(2)), Number(item.close.toFixed(2))),
         open: Number(item.open.toFixed(2)),
         time: item.timestamp as UTCTimestamp,
       }))
