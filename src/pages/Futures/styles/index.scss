@@ -6,6 +6,7 @@
 
     &-topView {
         width: 1276px;
+
         &-left {
             width: 572px;
             height: 100%;
@@ -247,6 +248,7 @@
 
                 &:hover {
                     background-color: #EEEEEE;
+                    cursor: pointer;
                 }
             }
 
@@ -261,7 +263,7 @@
         margin: 0 auto;
         border-collapse: separate;
         border-spacing: 0px 20px;
-    
+
         .Futures-table-title {
             color: $gray-info-text-color;
             font-size: $T2;
@@ -269,7 +271,7 @@
             border-radius: 12px;
             box-shadow: $shadow;
         }
-    
+
         .Futures-table-normal {
             color: $gray-info-text-color;
             font-size: $T2;
@@ -280,52 +282,52 @@
             font-size: $T2;
             font-family: $boldFont;
             color: $black-text-color;
-    
+
             svg {
                 margin-top: 3px;
             }
-    
+
             .fort-button {
                 height: 28px;
                 width: 90px;
                 padding: 0;
             }
-    
+
             .tokenPair {
                 svg {
                     position: relative;
                     z-index: 1;
                 }
-    
+
                 svg+svg {
                     margin-left: -8px;
                     z-index: 0;
                 }
             }
         }
-    
+
         td.button {
             width: 350px;
-    
+
             button+button {
                 margin-left: 10px;
             }
         }
-    
+
         td.td-type {
             display: flex;
             justify-content: center;
-    
+
             svg {
                 margin: auto 0;
             }
-    
+
             p.red {
                 margin-left: 5px;
                 line-height: 44px;
                 color: $up-color;
             }
-    
+
             p.green {
                 margin-left: 5px;
                 line-height: 44px;
@@ -424,12 +426,13 @@
                 }
             }
         }
+
         &-table {
             .Futures-table-title {
                 color: #C5C5C5;
                 box-shadow: none;
             }
-        
+
             .Futures-table-normal {
                 box-shadow: none;
             }

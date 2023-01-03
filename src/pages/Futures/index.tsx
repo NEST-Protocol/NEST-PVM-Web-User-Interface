@@ -3,7 +3,6 @@ import { checkWidth, formatInputNum } from "../../libs/utils";
 import FuturesMobile from "./Mobile";
 import "./styles";
 import Stack from "@mui/material/Stack";
-import useWeb3 from "../../libs/hooks/useWeb3";
 import { BigNumber } from "ethers";
 import { tokenList } from "../../libs/constants/addresses";
 import { formatUnits, parseUnits } from "ethers/lib/utils";
@@ -16,35 +15,47 @@ import MainButton from "../../components/MainButton";
 import { PutDownIcon } from "../../components/Icon";
 import { Popover } from "@mui/material";
 import classNames from "classnames";
-import PerpetualsList, { PerpetualsList2 } from "../../components/PerpetualsList";
+import PerpetualsList, {
+  PerpetualsList2,
+} from "../../components/PerpetualsList";
 import TVChart from "../../components/TVChart";
+import { useFutures } from "../../libs/hooks/useFutures";
 
 const Futures: FC = () => {
   const classPrefix = "Futures";
   const isPC = checkWidth();
-  const { chainId } = useWeb3();
-  const [isLong, setIsLong] = useState(true);
-  const [nestBalance, setNestBalance] = useState<BigNumber>(
-    BigNumber.from("0")
-  );
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
-  const [limit, setLimit] = useState(false);
-  const [stop, setStop] = useState(false);
-  const [isPositions, setIsPositions] = useState(true);
-  const [nestInput, setNestInput] = useState<string>("");
-  const [leverNum, setLeverNum] = useState<number>(1);
+  const {
+    chainId,
+    isLong,
+    setIsLong,
+    nestBalance,
+    limit,
+    setLimit,
+    stop,
+    setStop,
+    isPositions,
+    setIsPositions,
+    nestInput,
+    setNestInput,
+    leverNum,
+    setLeverNum,
+    setTokenPair,
+    limitInput,
+    defaultLimit,
+    setLimitInput,
+    takeInput,
+    setTakeInput,
+    tokenPrice,
+    checkNESTBalance,
+    fee,
+  } = useFutures();
   const BTCIcon = tokenList["BTC"].Icon;
   const ETHIcon = tokenList["ETH"].Icon;
   const USDTIcon = tokenList["USDT"].Icon;
 
   const handleLeverNum = (selected: number) => {
     setLeverNum(selected);
-  };
-  const checkNESTBalance = () => {
-    if (nestInput === "") {
-      return false;
-    }
-    return parseUnits(nestInput, 18).gt(nestBalance || BigNumber.from("0"));
   };
 
   const topView = () => {
@@ -82,7 +93,12 @@ const Futures: FC = () => {
             spacing={0}
             className={`rightInput`}
           >
-            <input />
+            <input
+              placeholder={"Input"}
+              value={limitInput === "" ? defaultLimit : limitInput}
+              maxLength={32}
+              onChange={(e) => setLimitInput(formatInputNum(e.target.value))}
+            />
             <p>USDT</p>
           </Stack>
         </Stack>
@@ -97,7 +113,7 @@ const Futures: FC = () => {
           spacing={0}
           className={`${classPrefix}-stopLimit1`}
         >
-          <p className={`${classPrefix}-stopLimit1-title`}>Take Profit</p>
+          <p className={`${classPrefix}-stopLimit1-title`}>Trigger</p>
           <Stack
             direction="row"
             justifyContent="space-between"
@@ -105,35 +121,29 @@ const Futures: FC = () => {
             spacing={0}
             className={`rightInput`}
           >
-            <input />
-            <p>USDT</p>
+            <input
+              placeholder={"Input"}
+              value={takeInput}
+              maxLength={32}
+              onChange={(e) => setTakeInput(formatInputNum(e.target.value))}
+            />
+            <p>NEST</p>
           </Stack>
         </Stack>
       );
     };
-    const stopLimit2 = () => {
-      return (
-        <Stack
-          direction="row"
-          justifyContent="space-between"
-          alignItems="center"
-          spacing={0}
-          className={`${classPrefix}-stopLimit2`}
-        >
-          <p className={`${classPrefix}-stopLimit2-title`}>Stop Loss</p>
-          <Stack
-            direction="row"
-            justifyContent="space-between"
-            alignItems="center"
-            spacing={0}
-            className={`rightInput`}
-          >
-            <input />
-            <p>USDT</p>
-          </Stack>
-        </Stack>
-      );
+    const chartHeight = () => {
+      if (stop && limit) {
+        return 593;
+      } else if (!stop && !limit) {
+        return 475;
+      } else if (stop && !limit) {
+        return 534;
+      } else if (!stop && limit) {
+        return 534;
+      }
     };
+    const LeftIcon = tokenPrice.leftIcon;
     return (
       <Stack
         direction="row"
@@ -150,15 +160,14 @@ const Futures: FC = () => {
             alignItems="center"
             spacing={0}
             className={`${classPrefix}-tokenPairAndPrice`}
-            id={"qwer"}
           >
             <button onClick={(e) => setAnchorEl(e.currentTarget)}>
-              <ETHIcon />
+              <LeftIcon />
               <USDTIcon className="USDT" />
-              <p>ETH/USDT</p>
+              <p>{tokenPrice ? tokenPrice.tokenName : "---"}/USDT</p>
               <PutDownIcon className="putDown" />
             </button>
-            <p>1 ETH = 3116.6 USDT</p>
+            <p>1 ETH = {tokenPrice ? tokenPrice.price : "---"} USDT</p>
           </Stack>
           <Popover
             open={Boolean(anchorEl)}
@@ -173,6 +182,7 @@ const Futures: FC = () => {
             <ul>
               <li
                 onClick={() => {
+                  setTokenPair("ETH");
                   setAnchorEl(null);
                 }}
               >
@@ -180,7 +190,12 @@ const Futures: FC = () => {
                 <USDTIcon className="USDT" />
                 <p>ETH/USDT</p>
               </li>
-              <li>
+              <li
+                onClick={() => {
+                  setTokenPair("BTC");
+                  setAnchorEl(null);
+                }}
+              >
                 <BTCIcon />
                 <USDTIcon className="USDT" />
                 <p>BTC/USDT</p>
@@ -202,7 +217,9 @@ const Futures: FC = () => {
             topLeftText={"Payment"}
             bottomRightText={""}
             topRightText={`Balance: ${
-              nestBalance ? formatUnits(nestBalance, 18) : "----"
+              nestBalance
+                ? parseFloat(formatUnits(nestBalance, 18)).toFixed(2).toString()
+                : "----"
             } NEST`}
             topRightRed={checkNESTBalance()}
           >
@@ -245,7 +262,6 @@ const Futures: FC = () => {
 
           {limit ? limitPrice() : <></>}
           {stop ? stopLimit1() : <></>}
-          {stop ? stopLimit2() : <></>}
           <Stack
             direction="row"
             justifyContent="space-between"
@@ -254,7 +270,7 @@ const Futures: FC = () => {
             className={`${classPrefix}-infoShow`}
           >
             <p>Open Price</p>
-            <p>1266.6 USDT</p>
+            <p>{tokenPrice ? tokenPrice.price : "---"} USDT</p>
           </Stack>
           <Stack
             direction="row"
@@ -264,7 +280,7 @@ const Futures: FC = () => {
             className={`${classPrefix}-infoShow`}
           >
             <p>Service Fee</p>
-            <p>1266.6 USDT</p>
+            <p>{parseFloat(formatUnits(fee, 18)).toFixed(2).toString()} NEST</p>
           </Stack>
           <Stack
             direction="row"
@@ -274,13 +290,23 @@ const Futures: FC = () => {
             className={`${classPrefix}-infoShow`}
           >
             <p>Total Pay</p>
-            <p>1266.6 USDT</p>
+            <p>
+              {parseFloat(
+                formatUnits(
+                  fee.add(parseUnits(nestInput === "" ? "0" : nestInput, 18)),
+                  18
+                )
+              )
+                .toFixed(2)
+                .toString()}{" "}
+              NEST
+            </p>
           </Stack>
           <MainButton className="mainButton">Open Long</MainButton>
         </Stack>
         <Stack spacing={0} className={`${classPrefix}-topView-right`}>
           <p className="title">ETH/USDT</p>
-          <TVChart chainId={56} tokenPair={"ETH"} update1={stop} update2={limit}/>
+          <TVChart chainId={56} tokenPair={"ETH"} chartHeight={chartHeight()} />
         </Stack>
       </Stack>
     );
@@ -320,34 +346,34 @@ const Futures: FC = () => {
   };
   const listView2 = () => {
     return (
-        <table className={`${classPrefix}-table`}>
-          <thead>
-            <tr className={`${classPrefix}-table-title`}>
-              <th>Token Pair</th>
-              <th>Type</th>
-              <th>Lever</th>
-              <th>Initial Margin</th>
-              <th>Limit Price</th>
-              <th>Operate</th>
-            </tr>
-          </thead>
-          <tbody>
-            <PerpetualsList2
-              key={"q2"}
-              item={{
-                index: BigNumber.from("1"),
-                tokenAddress: "",
-                lever: BigNumber.from("2"),
-                orientation: false,
-                balance: parseUnits("23", 18),
-                basePrice: parseUnits("23", 18),
-                baseBlock: parseUnits("23", 18),
-              }}
-              className={classPrefix}
-            />
-          </tbody>
-        </table>
-      );
+      <table className={`${classPrefix}-table`}>
+        <thead>
+          <tr className={`${classPrefix}-table-title`}>
+            <th>Token Pair</th>
+            <th>Type</th>
+            <th>Lever</th>
+            <th>Initial Margin</th>
+            <th>Limit Price</th>
+            <th>Operate</th>
+          </tr>
+        </thead>
+        <tbody>
+          <PerpetualsList2
+            key={"q2"}
+            item={{
+              index: BigNumber.from("1"),
+              tokenAddress: "",
+              lever: BigNumber.from("2"),
+              orientation: false,
+              balance: parseUnits("23", 18),
+              basePrice: parseUnits("23", 18),
+              baseBlock: parseUnits("23", 18),
+            }}
+            className={classPrefix}
+          />
+        </tbody>
+      </table>
+    );
   };
   return !isPC ? (
     <FuturesMobile />

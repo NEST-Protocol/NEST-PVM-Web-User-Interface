@@ -8,8 +8,7 @@ import useThemes, { ThemeType } from "../../libs/hooks/useThemes";
 type TVChartProps = {
   chainId: number;
   tokenPair: string;
-  update1: boolean;
-  update2: boolean;
+  chartHeight?: number;
 };
 
 const PERIOD_TYPE = [
@@ -33,7 +32,7 @@ export function formatDateTime(time: number) {
   return formatDateFn(time * 1000, "dd MMM yyyy, h:mm a");
 }
 
-const TVChart: FC<TVChartProps> = ({ chainId, tokenPair, update1, update2}) => {
+const TVChart: FC<TVChartProps> = ({ chainId, tokenPair, chartHeight}) => {
   const ref = useRef(null);
   const chartRef = useRef(null);
   const [currentChart, setCurrentChart] = useState<any>();
@@ -198,14 +197,13 @@ const TVChart: FC<TVChartProps> = ({ chainId, tokenPair, update1, update2}) => {
   }, [ref, priceData, currentChart, onCrosshairMove, getChartOptions]);
 
   useEffect(() => {
-    if (currentChart) {
+    if (currentChart && chartHeight) {
       currentChart.applyOptions(
         // @ts-ignore
-        getChartOptions(chartRef.current.offsetWidth, chartRef.current.offsetHeight
-        )
+        getChartOptions(chartRef.current.offsetWidth, chartHeight)
       );
     }
-  }, [currentChart, getChartOptions, update1, update2]);
+  }, [currentChart, getChartOptions, chartHeight]);
 
   const candlestick = useMemo(() => {
     if (!priceData) {

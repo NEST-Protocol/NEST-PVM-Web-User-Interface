@@ -56,7 +56,6 @@ const FuturesMobile: FC = () => {
         alignItems="center"
         spacing={0}
         className={`${classPrefix}-tokenPairAndPrice`}
-        id={"qwer"}
       >
         <button onClick={(e) => setAnchorEl(e.currentTarget)}>
           <TokenIcon />
@@ -76,7 +75,7 @@ const FuturesMobile: FC = () => {
         spacing={0}
         className={`${classPrefix}-KPrice`}
       >
-        <TVChart chainId={56} tokenPair={"ETH"} update1={stop} update2={limit}/>
+        <TVChart chainId={56} tokenPair={"ETH"}/>
       </Stack>
     );
   };
@@ -130,30 +129,7 @@ const FuturesMobile: FC = () => {
           spacing={0}
           className={`${classPrefix}-stopLimit1`}
         >
-          <p className={`${classPrefix}-stopLimit1-title`}>Take Profit</p>
-          <Stack
-            direction="row"
-            justifyContent="space-between"
-            alignItems="center"
-            spacing={0}
-            className={`rightInput`}
-          >
-            <input />
-            <p>USDT</p>
-          </Stack>
-        </Stack>
-      );
-    };
-    const stopLimit2 = () => {
-      return (
-        <Stack
-          direction="row"
-          justifyContent="space-between"
-          alignItems="center"
-          spacing={0}
-          className={`${classPrefix}-stopLimit2`}
-        >
-          <p className={`${classPrefix}-stopLimit2-title`}>Stop Loss</p>
+          <p className={`${classPrefix}-stopLimit1-title`}>Trigger</p>
           <Stack
             direction="row"
             justifyContent="space-between"
@@ -227,7 +203,6 @@ const FuturesMobile: FC = () => {
 
         {limit ? limitPrice() : <></>}
         {stop ? stopLimit1() : <></>}
-        {stop ? stopLimit2() : <></>}
         <Stack
           direction="row"
           justifyContent="space-between"

@@ -32,29 +32,6 @@ const Trigger: FC = () => {
       </Stack>
     );
   };
-  const stopLimit2 = () => {
-    return (
-      <Stack
-        direction="row"
-        justifyContent="space-between"
-        alignItems="center"
-        spacing={0}
-        className={`${classPrefix}-stopLimit2`}
-      >
-        <p className={`${classPrefix}-stopLimit2-title`}>Stop Loss</p>
-        <Stack
-          direction="row"
-          justifyContent="space-between"
-          alignItems="center"
-          spacing={0}
-          className={`rightInput`}
-        >
-          <input />
-          <p>USDT</p>
-        </Stack>
-      </Stack>
-    );
-  };
   const info = () => {
     return (
       <>
@@ -99,7 +76,6 @@ const Trigger: FC = () => {
       <Stack spacing={0} alignItems="center">
         <p className="title">Trigger Position</p>
         {stopLimit1()}
-        {stopLimit2()}
         {info()}
         <MainButton className="mainButton">Confirm</MainButton>
       </Stack>
