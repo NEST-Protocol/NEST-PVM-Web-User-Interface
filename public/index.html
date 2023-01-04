@@ -6,7 +6,8 @@
   <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#000000" />
-  <meta name="description" content="The NEST Protocol is designed to unify and provide unlimited liquidity to all financial applications." />
+  <meta name="description"
+    content="The NEST Protocol is designed to unify and provide unlimited liquidity to all financial applications." />
   <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
@@ -26,11 +27,26 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-211007349-1"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
     gtag('js', new Date());
 
     gtag('config', 'UA-211007349-1');
   </script>
+  <!-- Twitter conversion tracking base code -->
+  <script>
+    ! function (e, t, n, s, u, a) {
+      e.twq || (s = e.twq = function () {
+          s.exe ? s.exe.apply(s, arguments) : s.queue.push(arguments);
+        }, s.version = '1.1', s.queue = [], u = t.createElement(n), u.async = !0, u.src =
+        'https://static.ads-twitter.com/uwt.js',
+        a = t.getElementsByTagName(n)[0], a.parentNode.insertBefore(u, a))
+    }(window, document, 'script');
+    twq('config', 'o68km');
+  </script>
+  <!-- End Twitter conversion tracking base code -->
 </head>
 
 <body>
