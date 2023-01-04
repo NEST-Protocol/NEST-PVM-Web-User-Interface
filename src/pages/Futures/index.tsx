@@ -1,9 +1,12 @@
 import { FC, useState } from "react";
-import { checkWidth, formatInputNum } from "../../libs/utils";
+import {
+  checkWidth,
+  formatInputNum,
+  formatInputNumWithFour,
+} from "../../libs/utils";
 import FuturesMobile from "./Mobile";
 import "./styles";
 import Stack from "@mui/material/Stack";
-import { BigNumber } from "ethers";
 import { tokenList } from "../../libs/constants/addresses";
 import { formatUnits, parseUnits } from "ethers/lib/utils";
 import ChooseType from "../../components/ChooseType";
@@ -15,11 +18,9 @@ import MainButton from "../../components/MainButton";
 import { PutDownIcon } from "../../components/Icon";
 import { Popover } from "@mui/material";
 import classNames from "classnames";
-import PerpetualsList, {
-  PerpetualsList2,
-} from "../../components/PerpetualsList";
 import TVChart from "../../components/TVChart";
 import { useFutures } from "../../libs/hooks/useFutures";
+import FuturesList, { FuturesList2 } from "./List/FuturesList";
 
 const Futures: FC = () => {
   const classPrefix = "Futures";
@@ -49,6 +50,13 @@ const Futures: FC = () => {
     tokenPrice,
     checkNESTBalance,
     fee,
+    mainButtonTitle,
+    mainButtonDis,
+    mainButtonAction,
+    mainButtonLoading,
+    orderList,
+    limitOrderList,
+    kValue,
   } = useFutures();
   const BTCIcon = tokenList["BTC"].Icon;
   const ETHIcon = tokenList["ETH"].Icon;
@@ -125,7 +133,9 @@ const Futures: FC = () => {
               placeholder={"Input"}
               value={takeInput}
               maxLength={32}
-              onChange={(e) => setTakeInput(formatInputNum(e.target.value))}
+              onChange={(e) =>
+                setTakeInput(formatInputNumWithFour(e.target.value))
+              }
             />
             <p>NEST</p>
           </Stack>
@@ -221,7 +231,7 @@ const Futures: FC = () => {
                 ? parseFloat(formatUnits(nestBalance, 18)).toFixed(2).toString()
                 : "----"
             } NEST`}
-            topRightRed={checkNESTBalance()}
+            topRightRed={!checkNESTBalance()}
           >
             <SingleTokenShow tokenNameOne={"NEST"} isBold />
             <input
@@ -302,7 +312,14 @@ const Futures: FC = () => {
               NEST
             </p>
           </Stack>
-          <MainButton className="mainButton">Open Long</MainButton>
+          <MainButton
+            className="mainButton"
+            disable={mainButtonDis()}
+            onClick={mainButtonAction}
+            loading={mainButtonLoading()}
+          >
+            {mainButtonTitle()}
+          </MainButton>
         </Stack>
         <Stack spacing={0} className={`${classPrefix}-topView-right`}>
           <p className="title">ETH/USDT</p>
@@ -313,6 +330,18 @@ const Futures: FC = () => {
   };
 
   const listView1 = () => {
+    const orderListView = () => {
+      return orderList.map((item) => {
+        return (
+          <FuturesList
+            key={"f"}
+            item={item}
+            kValue={kValue}
+            className={classPrefix}
+          />
+        );
+      });
+    };
     return (
       <table className={`${classPrefix}-table`}>
         <thead>
@@ -326,25 +355,16 @@ const Futures: FC = () => {
             <th>Operate</th>
           </tr>
         </thead>
-        <tbody>
-          <PerpetualsList
-            key={"q"}
-            item={{
-              index: BigNumber.from("1"),
-              tokenAddress: "",
-              lever: BigNumber.from("2"),
-              orientation: false,
-              balance: parseUnits("23", 18),
-              basePrice: parseUnits("23", 18),
-              baseBlock: parseUnits("23", 18),
-            }}
-            className={classPrefix}
-          />
-        </tbody>
+        <tbody>{orderListView()}</tbody>
       </table>
     );
   };
   const listView2 = () => {
+    const limitOrderListView = () => {
+      return limitOrderList.map((item) => {
+        return <FuturesList2 key={"f2"} item={item} className={classPrefix} />;
+      });
+    };
     return (
       <table className={`${classPrefix}-table`}>
         <thead>
@@ -357,21 +377,7 @@ const Futures: FC = () => {
             <th>Operate</th>
           </tr>
         </thead>
-        <tbody>
-          <PerpetualsList2
-            key={"q2"}
-            item={{
-              index: BigNumber.from("1"),
-              tokenAddress: "",
-              lever: BigNumber.from("2"),
-              orientation: false,
-              balance: parseUnits("23", 18),
-              basePrice: parseUnits("23", 18),
-              baseBlock: parseUnits("23", 18),
-            }}
-            className={classPrefix}
-          />
-        </tbody>
+        <tbody>{limitOrderListView()}</tbody>
       </table>
     );
   };

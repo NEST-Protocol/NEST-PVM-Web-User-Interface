@@ -176,6 +176,21 @@ export function formatInputNum(value: string): string {
     .replace(/^\./g, "");
 }
 
+export function formatInputNumWithFour(value: string): string {
+  return value
+    .replace(/[^\d.]/g, "")
+    .replace(/\.{2,}/g, ".")
+    .replace(".", "$#$")
+    .replace(/\./g, "")
+    .replace("$#$", ".")
+    .replace(
+      // eslint-disable-next-line no-useless-escape
+      /^(\-)*(\d+)\.(\d\d\d\d).*$/,
+      "$1$2.$3"
+    )
+    .replace(/^\./g, "");
+}
+
 export function formatPVMWinInputNum(value: string): string {
   return value
     .replace(/[^\d.]/g, "")

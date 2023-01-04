@@ -95,6 +95,18 @@ export const transactionTitle = (type: TransactionType) => {
       return "bid";
     case 16:
       return "End Auction";
+    case 17:
+      return "Buy NFT";
+    case 18:
+      return "Add Future positions";
+    case 19:
+      return "Edit Trigger";
+    case 20:
+      return "Cancel Limit Order";
+    case 21:
+      return "Edit Limit Order";
+    case 22:
+      return "New Limit Order";
     default:
       break;
   }
