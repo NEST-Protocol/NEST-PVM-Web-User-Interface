@@ -1,240 +1,48 @@
 import Stack from "@mui/material/Stack";
 import Drawer from "@mui/material/Drawer";
 import { FC, useState } from "react";
-import { LongIcon } from "../../../../components/Icon";
+import { LongIcon, ShortIcon } from "../../../../components/Icon";
 import MainButton from "../../../../components/MainButton";
-import { tokenList } from "../../../../libs/constants/addresses";
 import "./styles";
 import classNames from "classnames";
 import useThemes, { ThemeType } from "../../../../libs/hooks/useThemes";
-import InfoShow from "../../../../components/InfoShow";
-import { SingleTokenShow } from "../../../../components/TokenShow";
+import {
+  useFuturesLimitOrderList,
+  useFuturesOrderList,
+} from "../../../../libs/hooks/useFutures";
+import { FuturesList2Props, FuturesListProps } from "../../List/FuturesList";
+import { DraweLimitEdit, DrawerAdd, DrawerClose, DrawerTrigger } from "./DrawerView";
 
 enum DrawerType {
   add = 0,
   trigger = 1,
-  triggerEdit = 2,
-  orderEdit = 3,
+  orderEdit = 2,
+  close = 3,
 }
 
-const PositionsList: FC = () => {
+const PositionsList: FC<FuturesListProps> = ({ ...props }) => {
   const classPrefix = "positionsList";
   const [showDrawer, setShowDrawer] = useState(false);
   const [drawerType, setDrawerType] = useState<DrawerType>(DrawerType.trigger);
   const { theme } = useThemes();
-  const TokenOneSvg = tokenList["ETH"].Icon;
-  const TokenTwoSvg = tokenList["USDT"].Icon;
-
-  const limitPrice = () => {
-    return (
-      <Stack
-        direction="row"
-        justifyContent="space-between"
-        alignItems="center"
-        spacing={0}
-        className={`${classPrefix}-limitPrice`}
-      >
-        <p className={`${classPrefix}-limitPrice-title`}>Limit Price</p>
-        <Stack
-          direction="row"
-          justifyContent="space-between"
-          alignItems="center"
-          spacing={0}
-          className={`rightInput`}
-        >
-          <input />
-          <p>USDT</p>
-        </Stack>
-      </Stack>
-    );
-  };
-  const stopLimit1 = () => {
-    return (
-      <Stack
-        direction="row"
-        justifyContent="space-between"
-        alignItems="center"
-        spacing={0}
-        className={`${classPrefix}-stopLimit1`}
-      >
-        <p className={`${classPrefix}-stopLimit1-title`}>Take Profit</p>
-        <Stack
-          direction="row"
-          justifyContent="space-between"
-          alignItems="center"
-          spacing={0}
-          className={`rightInput`}
-        >
-          <input />
-          <p>USDT</p>
-        </Stack>
-      </Stack>
-    );
-  };
-  const stopLimit2 = () => {
-    return (
-      <Stack
-        direction="row"
-        justifyContent="space-between"
-        alignItems="center"
-        spacing={0}
-        className={`${classPrefix}-stopLimit2`}
-      >
-        <p className={`${classPrefix}-stopLimit2-title`}>Stop Loss</p>
-        <Stack
-          direction="row"
-          justifyContent="space-between"
-          alignItems="center"
-          spacing={0}
-          className={`rightInput`}
-        >
-          <input />
-          <p>USDT</p>
-        </Stack>
-      </Stack>
-    );
-  };
+  const {
+    TokenOneSvg,
+    TokenTwoSvg,
+    showBalance,
+    showBasePrice,
+    showMarginAssets,
+    showTriggerTitle,
+  } = useFuturesOrderList(props.item, props.kValue);
 
   const drawerView = () => {
-    const titleString = () => {
-      switch (drawerType) {
-        case DrawerType.add:
-          return "Add Position";
-        case DrawerType.trigger:
-          return "Trigger Position";
-        case DrawerType.triggerEdit:
-          return "Edit Trigger";
-        case DrawerType.orderEdit:
-          return "Edit Order";
-      }
-    };
-    const buttonString = () => {
-      switch (drawerType) {
-        case DrawerType.add:
-          return "Add";
-        case DrawerType.trigger:
-          return "Confirm";
-        case DrawerType.triggerEdit:
-          return "Confirm New Trigger";
-        case DrawerType.orderEdit:
-          return "Confirm New Price";
-      }
-    };
-    const mainView = () => {
-      switch (drawerType) {
-        case DrawerType.add:
-          return (
-            <Stack spacing={0}>
-              <InfoShow
-                topLeftText={`Payment`}
-                bottomRightText={""}
-                topRightText={`Balance: --- NEST`}
-              >
-                <SingleTokenShow tokenNameOne={"NEST"} isBold />
-                <input
-                  placeholder={`Input`}
-                  className={"input-middle"}
-                  // value={nestInput}
-                  maxLength={32}
-                  // onChange={(e) => setNestInput(formatInputNum(e.target.value))}
-                  // onBlur={(e: any) => {}}
-                />
-                <button
-                  className={"max-button"}
-                  // onClick={() =>
-                  //   setNestInput(
-                  //     bigNumberToNormal(
-                  //       nestBalance || BigNumber.from("0"),
-                  //       18,
-                  //       18
-                  //     )
-                  //   )
-                  // }
-                >
-                  MAX
-                </button>
-              </InfoShow>
-              <Stack
-                direction="row"
-                justifyContent="space-between"
-                alignItems="center"
-                spacing={0}
-                className={`${classPrefix}-infoShow`}
-              >
-                <p>Position</p>
-                <p>5X Long</p>
-              </Stack>
-              <Stack
-                direction="row"
-                justifyContent="space-between"
-                alignItems="center"
-                spacing={0}
-                className={`${classPrefix}-infoShow`}
-              >
-                <p>Open price</p>
-                <p>1000 USDT</p>
-              </Stack>
-              <div className={`${classPrefix}-des`}>
-                The calculated result is for reference only. Please expect some
-                deviation due to trading fees or changes in the funding rate.
-              </div>
-            </Stack>
-          );
-        case DrawerType.trigger:
-          return (
-            <Stack spacing={0}>
-              {stopLimit1()}
-              {stopLimit2()}
-              <Stack
-                direction="row"
-                justifyContent="space-between"
-                alignItems="center"
-                spacing={0}
-                className={`${classPrefix}-infoShow`}
-              >
-                <p>Position</p>
-                <p>5X Long 5000 NEST</p>
-              </Stack>
-              <Stack
-                direction="row"
-                justifyContent="space-between"
-                alignItems="center"
-                spacing={0}
-                className={`${classPrefix}-infoShow`}
-              >
-                <p>Open price</p>
-                <p>1000 USDT</p>
-              </Stack>
-              <Stack
-                direction="row"
-                justifyContent="space-between"
-                alignItems="center"
-                spacing={0}
-                className={`${classPrefix}-infoShow`}
-              >
-                <p>Fees</p>
-                <p>300 USDT</p>
-              </Stack>
-            </Stack>
-          );
-        case DrawerType.triggerEdit:
-          return (
-            <Stack spacing={0}>
-              {stopLimit1()}
-              {stopLimit2()}
-            </Stack>
-          );
-        case DrawerType.orderEdit:
-          return <Stack spacing={0}>{limitPrice()}</Stack>;
-      }
-    };
-    return (
-      <Stack spacing={0}>
-        <p className="title">{titleString()}</p>
-        {mainView()}
-        <MainButton className="action">{buttonString()}</MainButton>
-      </Stack>
-    );
+    switch (drawerType) {
+      case DrawerType.add:
+        return <DrawerAdd order={props.item} hideSelf={() => setShowDrawer(false)} />;
+      case DrawerType.trigger:
+        return <DrawerTrigger order={props.item} hideSelf={() => setShowDrawer(false)}/>;
+      case DrawerType.close:
+        return <DrawerClose order={props.item} hideSelf={() => setShowDrawer(false)} kValue={props.kValue}/>
+    }
   };
   return (
     <Stack spacing={0} className={`${classPrefix}`}>
@@ -254,7 +62,7 @@ const PositionsList: FC = () => {
         </div>
         <div className="right">
           <p className="title">Lever</p>
-          <p className="value">5X</p>
+          <p className="value">{props.item.lever.toString()}X</p>
         </div>
       </Stack>
       <Stack
@@ -266,13 +74,15 @@ const PositionsList: FC = () => {
       >
         <div className="left">
           <p className="title">Initial Margin</p>
-          <p className="value">500 NEST</p>
+          <p className="value">{showBalance()} NEST</p>
         </div>
         <div className="right">
           <p className="title">Type</p>
           <div className="longShort">
-            <LongIcon />
-            Long
+            {props.item.orientation ? <LongIcon /> : <ShortIcon />}
+            <p className={props.item.orientation ? "red" : "green"}>
+              {props.item.orientation ? "Long" : "Short"}
+            </p>
           </div>
         </div>
       </Stack>
@@ -285,11 +95,11 @@ const PositionsList: FC = () => {
       >
         <div className="left">
           <p className="title">Actual Margin</p>
-          <p className="value">3232.45 NEST</p>
+          <p className="value">{showMarginAssets()} NEST</p>
         </div>
         <div className="right">
           <p className="title">Open Price</p>
-          <p className="value">1234.4 NEST</p>
+          <p className="value">{showBasePrice()} NEST</p>
         </div>
       </Stack>
       <Stack
@@ -310,15 +120,15 @@ const PositionsList: FC = () => {
         <MainButton
           onClick={() => {
             setShowDrawer(true);
-            setDrawerType(DrawerType.triggerEdit);
+            setDrawerType(DrawerType.trigger);
           }}
         >
-          Edit
+          {showTriggerTitle()}
         </MainButton>
         <MainButton
           onClick={() => {
             setShowDrawer(true);
-            setDrawerType(DrawerType.orderEdit);
+            setDrawerType(DrawerType.close);
           }}
         >
           Close
@@ -340,3 +150,117 @@ const PositionsList: FC = () => {
 };
 
 export default PositionsList;
+
+export const PositionsList2: FC<FuturesList2Props> = ({ ...props }) => {
+  const classPrefix = "positionsList";
+  const [showDrawer, setShowDrawer] = useState(false);
+  const [drawerType, setDrawerType] = useState<DrawerType>(DrawerType.orderEdit);
+  const { theme } = useThemes();
+  const {
+    TokenOneSvg,
+    TokenTwoSvg,
+    showBalance,
+    showLimitPrice,
+    closeButtonLoading,
+    closeButtonDis,
+    closeButtonAction,
+  } = useFuturesLimitOrderList(props.item);
+
+  const drawerView = () => {
+    switch (drawerType) {
+      case DrawerType.orderEdit:
+        return <DraweLimitEdit order={props.item} hideSelf={() => setShowDrawer(false)}/>
+    }
+  };
+
+  return (
+    <Stack spacing={0} className={`${classPrefix}`}>
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+        spacing={0}
+        className={`${classPrefix}-one`}
+      >
+        <div className="left">
+          <p className="title">Token Pair</p>
+          <div className="pairIcon">
+            <TokenOneSvg />
+            <TokenTwoSvg className="USDT" />
+          </div>
+        </div>
+        <div className="right">
+          <p className="title">Lever</p>
+          <p className="value">{props.item.lever.toString()}X</p>
+        </div>
+      </Stack>
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+        spacing={0}
+        className={`${classPrefix}-two`}
+      >
+        <div className="left">
+          <p className="title">Initial Margin</p>
+          <p className="value">{showBalance()} NEST</p>
+        </div>
+        <div className="right">
+          <p className="title">Type</p>
+          <div className="longShort">
+            {props.item.orientation ? <LongIcon /> : <ShortIcon />}
+            <p className={props.item.orientation ? "red" : "green"}>
+              {props.item.orientation ? "Long" : "Short"}
+            </p>
+          </div>
+        </div>
+      </Stack>
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+        spacing={0}
+        className={`${classPrefix}-three`}
+      >
+        <div className="left">
+          <p className="title">Limit Price</p>
+          <p className="value">{showLimitPrice()} NEST</p>
+        </div>
+      </Stack>
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+        spacing={0}
+        className={`${classPrefix}-button`}
+      >
+        <MainButton
+          onClick={() => {
+            setShowDrawer(true);
+            setDrawerType(DrawerType.orderEdit);
+          }}
+        >
+          Edit
+        </MainButton>
+        <MainButton
+          loading={closeButtonLoading()}
+          disable={closeButtonDis()}
+          onClick={closeButtonAction}
+        >
+          Close
+        </MainButton>
+      </Stack>
+      <Drawer
+        anchor={"bottom"}
+        open={showDrawer}
+        onClose={() => setShowDrawer(false)}
+        className={classNames({
+          [`${classPrefix}-drawer`]: true,
+          [`${classPrefix}-drawer-dark`]: theme === ThemeType.dark,
+        })}
+      >
+        {drawerView()}
+      </Drawer>
+    </Stack>
+  );
+};

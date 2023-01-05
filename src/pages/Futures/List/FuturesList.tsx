@@ -9,16 +9,18 @@ import {
   useFuturesLimitOrderList,
   useFuturesOrderList,
 } from "../../../libs/hooks/useFutures";
+import FuturesAdd from "../Add";
+import FuturesClose from "../Close";
 import LimitPrice from "../LimitPrice";
 import Trigger from "../Trigger";
 
-type FuturesListProps = {
+export type FuturesListProps = {
   item: OrderView;
   key: string;
   className: string;
   kValue?: { [key: string]: TokenType };
 };
-type FuturesList2Props = {
+export type FuturesList2Props = {
   item: LimitOrderView;
   key: string;
   className: string;
@@ -32,6 +34,7 @@ const FuturesList: FC<FuturesListProps> = ({ ...props }) => {
     showBalance,
     showBasePrice,
     showMarginAssets,
+    showTriggerTitle,
   } = useFuturesOrderList(props.item, props.kValue);
 
   return (
@@ -55,17 +58,28 @@ const FuturesList: FC<FuturesListProps> = ({ ...props }) => {
           modal
           ref={modal}
           trigger={<button className="fort-button">Add</button>}
+          nested
         >
-          {/* <PerpetualsAdd item={props.item} kValue={props.kValue} /> */}
+         <FuturesAdd order={props.item} />
         </Popup>
         <Popup
           modal
           ref={modal}
-          trigger={<button className="fort-button">Edit</button>}
+          trigger={
+            <button className="fort-button">{showTriggerTitle()}</button>
+          }
+          nested
         >
-          <Trigger />
+          <Trigger order={props.item} />
         </Popup>
-        <MainButton>Close</MainButton>
+        <Popup
+          modal
+          ref={modal}
+          trigger={<button className="fort-button">Close</button>}
+          nested
+        >
+         <FuturesClose order={props.item} kValue={props.kValue}/>
+        </Popup>
       </td>
     </tr>
   );
@@ -75,8 +89,15 @@ export default FuturesList;
 
 export const FuturesList2: FC<FuturesList2Props> = ({ ...props }) => {
   const modal = useRef<any>();
-  const { TokenOneSvg, TokenTwoSvg, showBalance, showLimitPrice } =
-    useFuturesLimitOrderList(props.item);
+  const {
+    TokenOneSvg,
+    TokenTwoSvg,
+    showBalance,
+    showLimitPrice,
+    closeButtonLoading,
+    closeButtonDis,
+    closeButtonAction,
+  } = useFuturesLimitOrderList(props.item);
 
   return (
     <tr key={props.key} className={`${props.className}-table-normal`}>
@@ -99,10 +120,16 @@ export const FuturesList2: FC<FuturesList2Props> = ({ ...props }) => {
           ref={modal}
           trigger={<button className="fort-button">Edit</button>}
         >
-          <LimitPrice />
+          <LimitPrice order={props.item} />
         </Popup>
 
-        <MainButton>Close</MainButton>
+        <MainButton
+          disable={closeButtonDis()}
+          loading={closeButtonLoading()}
+          onClick={closeButtonAction}
+        >
+          Close
+        </MainButton>
       </td>
     </tr>
   );

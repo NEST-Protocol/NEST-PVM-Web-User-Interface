@@ -3,12 +3,31 @@ import classNames from "classnames";
 import { FC } from "react";
 import MainButton from "../../../components/MainButton";
 import MainCard from "../../../components/MainCard";
+import { OrderView, useFuturesTrigger } from "../../../libs/hooks/useFutures";
 import useThemes, { ThemeType } from "../../../libs/hooks/useThemes";
+import { formatInputNumWithFour } from "../../../libs/utils";
 import "./styles";
 
-const Trigger: FC = () => {
+type TriggerProp = {
+  order: OrderView;
+};
+
+const Trigger: FC<TriggerProp> = ({ ...props }) => {
   const classPrefix = "Trigger";
   const { theme } = useThemes();
+  const {
+    triggerInput,
+    setTriggerInput,
+    showPosition,
+    showOpenPrice,
+    showTriggerFee,
+    showTitle,
+    actionClose,
+    buttonDis,
+    buttonLoading,
+    buttonAction,
+    isEdit,
+  } = useFuturesTrigger(props.order);
   const stopLimit1 = () => {
     return (
       <Stack
@@ -18,7 +37,7 @@ const Trigger: FC = () => {
         spacing={0}
         className={`${classPrefix}-stopLimit1`}
       >
-        <p className={`${classPrefix}-stopLimit1-title`}>Take Profit</p>
+        <p className={`${classPrefix}-stopLimit1-title`}>Trigger</p>
         <Stack
           direction="row"
           justifyContent="space-between"
@@ -26,7 +45,14 @@ const Trigger: FC = () => {
           spacing={0}
           className={`rightInput`}
         >
-          <input />
+          <input
+            placeholder={"Input"}
+            value={triggerInput}
+            maxLength={32}
+            onChange={(e) =>
+              setTriggerInput(formatInputNumWithFour(e.target.value))
+            }
+          />
           <p>USDT</p>
         </Stack>
       </Stack>
@@ -43,7 +69,7 @@ const Trigger: FC = () => {
           className={`${classPrefix}-infoShow`}
         >
           <p>Position</p>
-          <p>5X Long 10000NEST</p>
+          <p>{showPosition()}</p>
         </Stack>
         <Stack
           direction="row"
@@ -53,31 +79,44 @@ const Trigger: FC = () => {
           className={`${classPrefix}-infoShow`}
         >
           <p>Open Price</p>
-          <p>1266.6 USDT</p>
+          <p>{showOpenPrice()}</p>
         </Stack>
-        <Stack
-          direction="row"
-          justifyContent="space-between"
-          alignItems="center"
-          spacing={0}
-          className={`${classPrefix}-infoShow`}
-        >
-          <p>Fees</p>
-          <p>1266.6 USDT</p>
-        </Stack>
+        {isEdit() ? (
+          <></>
+        ) : (
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+            spacing={0}
+            className={`${classPrefix}-infoShow`}
+          >
+            <p>Fees</p>
+            <p>{showTriggerFee()}</p>
+          </Stack>
+        )}
       </>
     );
   };
   return (
-    <MainCard classNames={classNames({
+    <MainCard
+      classNames={classNames({
         [`${classPrefix}`]: true,
         [`${classPrefix}-dark`]: theme === ThemeType.dark,
-      })}>
+      })}
+    >
       <Stack spacing={0} alignItems="center">
-        <p className="title">Trigger Position</p>
+        <p className="title">{showTitle()}</p>
         {stopLimit1()}
         {info()}
-        <MainButton className="mainButton">Confirm</MainButton>
+        <MainButton
+          className="mainButton"
+          disable={buttonDis()}
+          loading={buttonLoading()}
+          onClick={buttonAction}
+        >
+          Confirm
+        </MainButton>
       </Stack>
     </MainCard>
   );

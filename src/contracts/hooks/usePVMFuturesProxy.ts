@@ -59,7 +59,7 @@ export function usePVMFuturesProxyCancel(index: BigNumber) {
   };
   const txPromise = useSendTransaction(contract, tx, {
     title: `Cancel Limit Order`,
-    info: "",
+    info: index.toString(),
     type: TransactionType.PVMFuturesProxyCancel,
   });
   return txPromise;

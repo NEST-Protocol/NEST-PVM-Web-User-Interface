@@ -44,21 +44,25 @@ const TVChart: FC<TVChartProps> = ({ chainId, tokenPair, chartHeight}) => {
   const { theme } = useThemes();
 
   const getPriceData = useCallback(async () => {
-    const k_data = await fetch(
-      `https://api.hedge.red/api/oracle/get_cur_kline/${
-        chainId?.toString() || 56
-      }/0/${tokenPair.toLocaleLowerCase() + "usdt"}/${period}/1000`
-    );
-    const k_data_value = await k_data.json();
-    setPriceData(
-      k_data_value["value"].map((item: any) => ({
-        close: Number(item.close.toFixed(2)),
-        high: Math.max(Number(item.open.toFixed(2)), Number(item.close.toFixed(2))),
-        low: Math.min(Number(item.open.toFixed(2)), Number(item.close.toFixed(2))),
-        open: Number(item.open.toFixed(2)),
-        time: item.timestamp as UTCTimestamp,
-      }))
-    );
+    try {
+      const k_data = await fetch(
+        `https://api.hedge.red/api/oracle/get_cur_kline/${
+          chainId?.toString() || 56
+        }/0/${tokenPair.toLocaleLowerCase() + "usdt"}/${period}/1000`
+      );
+      const k_data_value = await k_data.json();
+      setPriceData(
+        k_data_value["value"].map((item: any) => ({
+          close: Number(item.close.toFixed(2)),
+          high: Math.max(Number(item.open.toFixed(2)), Number(item.close.toFixed(2))),
+          low: Math.min(Number(item.open.toFixed(2)), Number(item.close.toFixed(2))),
+          open: Number(item.open.toFixed(2)),
+          time: item.timestamp as UTCTimestamp,
+        }))
+      );
+    } catch (error) {
+      console.log(error)
+    }
   }, [chainId, tokenPair, period]);
 
   useEffect(() => {

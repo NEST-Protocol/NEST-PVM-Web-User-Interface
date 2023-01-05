@@ -5,9 +5,16 @@ import MainButton from "../../../components/MainButton";
 import MainCard from "../../../components/MainCard";
 import "./styles";
 import useThemes, { ThemeType } from "../../../libs/hooks/useThemes";
+import { formatInputNumWithFour } from "../../../libs/utils";
+import { LimitOrderView, useFuturesSetLimitOrder } from "../../../libs/hooks/useFutures";
 
-const LimitPrice: FC = () => {
+export type LimitPriceProp = {
+  order: LimitOrderView;
+};
+
+const LimitPrice: FC<LimitPriceProp> = ({...props}) => {
   const classPrefix = "LimitPrice";
+  const {limitInput, setLimitInput} = useFuturesSetLimitOrder(props.order)
   const { theme } = useThemes();
   const limitPrice = () => {
     return (
@@ -26,7 +33,14 @@ const LimitPrice: FC = () => {
           spacing={0}
           className={`rightInput`}
         >
-          <input />
+          <input
+            placeholder={"Input"}
+            value={limitInput}
+            maxLength={32}
+            onChange={(e) =>
+              setLimitInput(formatInputNumWithFour(e.target.value))
+            }
+          />
           <p>USDT</p>
         </Stack>
       </Stack>

@@ -2,6 +2,7 @@ import { Tooltip } from "antd";
 import classNames from "classnames";
 import { FC, useEffect, useRef, useState } from "react";
 import { tokenList, TokenType } from "../../libs/constants/addresses";
+import useThemes, { ThemeType } from "../../libs/hooks/useThemes";
 import useWeb3 from "../../libs/hooks/useWeb3";
 import { AddTokenIcon } from "../Icon";
 import "./styles";
@@ -33,6 +34,7 @@ const InfoShow: FC<Props> = ({ children, ...props }) => {
   const selectRef = useRef(null);
   const [isShowSelect, setIsShowSelect] = useState(false);
   const { chainId } = useWeb3();
+  const { theme } = useThemes();
   var dataLi: JSX.Element[] | undefined;
   if (props.tokenSelect) {
     dataLi = props.tokenList?.map((item) => {
@@ -223,7 +225,10 @@ const InfoShow: FC<Props> = ({ children, ...props }) => {
   };
 
   return (
-    <div className={classPrefix}>
+    <div className={classNames({
+      [`${classPrefix}`]: true,
+      [`${classPrefix}-dark`]: theme === ThemeType.dark
+    })}>
       <div className={`${classPrefix}-top`}>
         <p className={`${classPrefix}-topLeft`}>{props.topLeftText}</p>
         <p className={classNames({

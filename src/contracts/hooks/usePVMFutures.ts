@@ -55,7 +55,7 @@ export function usePVMFuturesAdd2(index: BigNumber, amount: BigNumber) {
   };
   const txPromise = useSendTransaction(contract, tx, {
     title: `Add Future positions`,
-    info: "",
+    info: index.toString(),
     type: TransactionType.PVMFuturesAdd,
   });
   return txPromise;

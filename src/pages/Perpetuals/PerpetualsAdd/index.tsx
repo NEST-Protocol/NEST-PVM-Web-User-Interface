@@ -3,7 +3,7 @@ import classNames from "classnames";
 import { BigNumber } from "ethers";
 import { formatUnits, parseUnits } from "ethers/lib/utils";
 import { FC, useCallback, useEffect, useState } from "react";
-import { LeverListType } from "../../Perpetuals";
+import { LeverListType } from "..";
 import InfoShow from "../../../components/InfoShow";
 import MainButton from "../../../components/MainButton";
 import MainCard from "../../../components/MainCard";

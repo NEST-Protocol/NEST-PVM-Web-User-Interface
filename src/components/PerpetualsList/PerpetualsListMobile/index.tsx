@@ -19,7 +19,7 @@ import {
   ZERO_ADDRESS,
 } from "../../../libs/utils";
 import { LeverListType } from "../../../pages/Perpetuals";
-import PerpetualsAdd from "../../../pages/Futures/PerpetualsAdd";
+import PerpetualsAdd from "../../../pages/Perpetuals/PerpetualsAdd";
 import { LongIcon, ShortIcon } from "../../Icon";
 import MainButton from "../../MainButton";
 import MainCard from "../../MainCard";

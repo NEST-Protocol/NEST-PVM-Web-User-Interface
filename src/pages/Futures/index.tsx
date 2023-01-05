@@ -48,6 +48,7 @@ const Futures: FC = () => {
     takeInput,
     setTakeInput,
     tokenPrice,
+    tokenPair,
     checkNESTBalance,
     fee,
     mainButtonTitle,
@@ -134,10 +135,10 @@ const Futures: FC = () => {
               value={takeInput}
               maxLength={32}
               onChange={(e) =>
-                setTakeInput(formatInputNumWithFour(e.target.value))
+                setTakeInput(formatInputNum(e.target.value))
               }
             />
-            <p>NEST</p>
+            <p>USDT</p>
           </Stack>
         </Stack>
       );
@@ -229,7 +230,7 @@ const Futures: FC = () => {
             topRightText={`Balance: ${
               nestBalance
                 ? parseFloat(formatUnits(nestBalance, 18)).toFixed(2).toString()
-                : "----"
+                : "---"
             } NEST`}
             topRightRed={!checkNESTBalance()}
           >
@@ -239,7 +240,7 @@ const Futures: FC = () => {
               className={"input-middle"}
               value={nestInput}
               maxLength={32}
-              onChange={(e) => setNestInput(formatInputNum(e.target.value))}
+              onChange={(e) => setNestInput(formatInputNumWithFour(e.target.value))}
               onBlur={(e: any) => {}}
             />
             <button
@@ -322,8 +323,8 @@ const Futures: FC = () => {
           </MainButton>
         </Stack>
         <Stack spacing={0} className={`${classPrefix}-topView-right`}>
-          <p className="title">ETH/USDT</p>
-          <TVChart chainId={56} tokenPair={"ETH"} chartHeight={chartHeight()} />
+          <p className="title">{tokenPair}/USDT</p>
+          <TVChart chainId={56} tokenPair={tokenPair} chartHeight={chartHeight()} />
         </Stack>
       </Stack>
     );

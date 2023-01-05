@@ -1,36 +1,58 @@
 import { FC, useState } from "react";
 import "./styles";
-import { BigNumber } from "@ethersproject/bignumber";
 import Stack from "@mui/material/Stack";
 import { tokenList } from "../../../libs/constants/addresses";
 import { PutDownIcon } from "../../../components/Icon";
 import LongAndShort from "../../../components/LongAndShort";
 import { LeverChoose } from "../../../components/LeverChoose";
-import useWeb3 from "../../../libs/hooks/useWeb3";
 import InfoShow from "../../../components/InfoShow";
 import { SingleTokenShow } from "../../../components/TokenShow";
-import { formatInputNum } from "../../../libs/utils";
+import { formatInputNum, formatInputNumWithFour } from "../../../libs/utils";
 import { formatUnits, parseUnits } from "ethers/lib/utils";
 import OpenShow from "../../../components/OpenShow";
 import classNames from "classnames";
-import PositionsList from "./PositionsList";
+import PositionsList, { PositionsList2 } from "./PositionsList";
 import MainButton from "../../../components/MainButton";
 import { Popover } from "@mui/material";
 import TVChart from "../../../components/TVChart";
+import { useFutures } from "../../../libs/hooks/useFutures";
 
 const FuturesMobile: FC = () => {
-  const { chainId } = useWeb3();
-  const [isLong, setIsLong] = useState(true);
-  const [nestBalance, setNestBalance] = useState<BigNumber>(
-    BigNumber.from("0")
-  );
-  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
-  const [limit, setLimit] = useState(false);
-  const [stop, setStop] = useState(false);
-  const [isPositions, setIsPositions] = useState(true);
-  const [nestInput, setNestInput] = useState<string>("");
-  const [leverNum, setLeverNum] = useState<number>(1);
   const classPrefix = "FuturesMobile";
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
+  const {
+    chainId,
+    isLong,
+    setIsLong,
+    nestBalance,
+    limit,
+    setLimit,
+    stop,
+    setStop,
+    isPositions,
+    setIsPositions,
+    nestInput,
+    setNestInput,
+    leverNum,
+    setLeverNum,
+    setTokenPair,
+    limitInput,
+    defaultLimit,
+    setLimitInput,
+    takeInput,
+    setTakeInput,
+    tokenPrice,
+    tokenPair,
+    checkNESTBalance,
+    fee,
+    mainButtonTitle,
+    mainButtonDis,
+    mainButtonAction,
+    mainButtonLoading,
+    orderList,
+    limitOrderList,
+    kValue,
+  } = useFutures();
   const BTCIcon = tokenList["BTC"].Icon;
   const ETHIcon = tokenList["ETH"].Icon;
   const USDTIcon = tokenList["USDT"].Icon;
@@ -39,16 +61,8 @@ const FuturesMobile: FC = () => {
     setLeverNum(selected);
   };
 
-  const checkNESTBalance = () => {
-    if (nestInput === "") {
-      return false;
-    }
-    return parseUnits(nestInput, 18).gt(nestBalance || BigNumber.from("0"));
-  };
-
   const tokenPairAndPrice = () => {
-    const TokenIcon = tokenList["ETH"].Icon;
-    
+    const LeftIcon = tokenPrice.leftIcon;
     return (
       <Stack
         direction="row"
@@ -58,11 +72,11 @@ const FuturesMobile: FC = () => {
         className={`${classPrefix}-tokenPairAndPrice`}
       >
         <button onClick={(e) => setAnchorEl(e.currentTarget)}>
-          <TokenIcon />
+          <LeftIcon />
           <USDTIcon className="USDT" />
-          <PutDownIcon className="putDown"/>
+          <PutDownIcon className="putDown" />
         </button>
-        <p>1 ETH = 3116.6 USDT</p>
+        <p>1 ETH = {tokenPrice ? tokenPrice.price : "---"} USDT</p>
       </Stack>
     );
   };
@@ -75,7 +89,7 @@ const FuturesMobile: FC = () => {
         spacing={0}
         className={`${classPrefix}-KPrice`}
       >
-        <TVChart chainId={56} tokenPair={"ETH"}/>
+        <TVChart chainId={56} tokenPair={tokenPair} />
       </Stack>
     );
   };
@@ -114,7 +128,12 @@ const FuturesMobile: FC = () => {
             spacing={0}
             className={`rightInput`}
           >
-            <input />
+            <input
+              placeholder={"Input"}
+              value={limitInput === "" ? defaultLimit : limitInput}
+              maxLength={32}
+              onChange={(e) => setLimitInput(formatInputNum(e.target.value))}
+            />
             <p>USDT</p>
           </Stack>
         </Stack>
@@ -137,7 +156,12 @@ const FuturesMobile: FC = () => {
             spacing={0}
             className={`rightInput`}
           >
-            <input />
+            <input
+              placeholder={"Input"}
+              value={takeInput}
+              maxLength={32}
+              onChange={(e) => setTakeInput(formatInputNum(e.target.value))}
+            />
             <p>USDT</p>
           </Stack>
         </Stack>
@@ -160,9 +184,11 @@ const FuturesMobile: FC = () => {
           topLeftText={"Payment"}
           bottomRightText={""}
           topRightText={`Balance: ${
-            nestBalance ? formatUnits(nestBalance, 18) : "----"
+            nestBalance
+              ? parseFloat(formatUnits(nestBalance, 18)).toFixed(2).toString()
+              : "---"
           } NEST`}
-          topRightRed={checkNESTBalance()}
+          topRightRed={!checkNESTBalance()}
         >
           <SingleTokenShow tokenNameOne={"NEST"} isBold />
           <input
@@ -170,7 +196,9 @@ const FuturesMobile: FC = () => {
             className={"input-middle"}
             value={nestInput}
             maxLength={32}
-            onChange={(e) => setNestInput(formatInputNum(e.target.value))}
+            onChange={(e) =>
+              setNestInput(formatInputNumWithFour(e.target.value))
+            }
             onBlur={(e: any) => {}}
           />
           <button
@@ -211,7 +239,7 @@ const FuturesMobile: FC = () => {
           className={`${classPrefix}-infoShow`}
         >
           <p>Open Price</p>
-          <p>1266.6 USDT</p>
+          <p>{tokenPrice ? tokenPrice.price : "---"} USDT</p>
         </Stack>
         <Stack
           direction="row"
@@ -221,7 +249,7 @@ const FuturesMobile: FC = () => {
           className={`${classPrefix}-infoShow`}
         >
           <p>Service Fee</p>
-          <p>1266.6 USDT</p>
+          <p>{parseFloat(formatUnits(fee, 18)).toFixed(2).toString()} NEST</p>
         </Stack>
         <Stack
           direction="row"
@@ -231,9 +259,26 @@ const FuturesMobile: FC = () => {
           className={`${classPrefix}-infoShow`}
         >
           <p>Total Pay</p>
-          <p>1266.6 USDT</p>
+          <p>
+            {parseFloat(
+              formatUnits(
+                fee.add(parseUnits(nestInput === "" ? "0" : nestInput, 18)),
+                18
+              )
+            )
+              .toFixed(2)
+              .toString()}{" "}
+            NEST
+          </p>
         </Stack>
-        <MainButton className="mainButton">Open Long</MainButton>
+        <MainButton
+          className="mainButton"
+          disable={mainButtonDis()}
+          onClick={mainButtonAction}
+          loading={mainButtonLoading()}
+        >
+          {mainButtonTitle()}
+        </MainButton>
       </Stack>
     );
   };
@@ -265,6 +310,39 @@ const FuturesMobile: FC = () => {
       </Stack>
     );
   };
+
+  const orderListView = () => {
+    return orderList.map((item, index) => {
+      return (
+        <li key={`f+${index}`}>
+          <PositionsList
+            key={"f"}
+            item={item}
+            className={classPrefix}
+            kValue={kValue}
+          />
+        </li>
+      );
+    });
+  };
+
+  const limitOrderListView = () => {
+    return limitOrderList.map((item, index) => {
+      return (
+        <li key={`f2+${index}`}>
+          <PositionsList2 key={"f2"} item={item} className={classPrefix} />
+        </li>
+      );
+    });
+  };
+
+  const listView = () => {
+    if (isPositions) {
+      return orderListView();
+    } else {
+      return limitOrderListView();
+    }
+  };
   return (
     <Stack spacing={0} className={`${classPrefix}`}>
       {tokenPairAndPrice()}
@@ -279,20 +357,32 @@ const FuturesMobile: FC = () => {
         className={`${classPrefix}-selectToken`}
       >
         <ul>
-          <li onClick={() => {
-            setAnchorEl(null)
-          }}><ETHIcon /><USDTIcon className="USDT" /><p>ETH/USDT</p></li>
-          <li><BTCIcon /><USDTIcon className="USDT" /><p>BTC/USDT</p></li>
+          <li
+            onClick={() => {
+              setTokenPair("ETH");
+              setAnchorEl(null);
+            }}
+          >
+            <ETHIcon />
+            <USDTIcon className="USDT" />
+            <p>ETH/USDT</p>
+          </li>
+          <li
+            onClick={() => {
+              setTokenPair("BTC");
+              setAnchorEl(null);
+            }}
+          >
+            <BTCIcon />
+            <USDTIcon className="USDT" />
+            <p>BTC/USDT</p>
+          </li>
         </ul>
       </Popover>
       {KPrice()}
       {mainView()}
       {listTab()}
-      <ul className="list">
-        <li>
-          <PositionsList />
-        </li>
-      </ul>
+      <ul className="list">{listView()}</ul>
     </Stack>
   );
 };
