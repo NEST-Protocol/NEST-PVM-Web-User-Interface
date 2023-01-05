@@ -50,6 +50,8 @@ export { ReactComponent as Coin98Icon } from './svg/Coin98Icon.svg'
 export { ReactComponent as TokenPocketIcon } from './svg/TokenPocketIcon.svg'
 export { ReactComponent as DisIcon } from './svg/DisIcon.svg'
 export { ReactComponent as CoinbaseIcon } from './svg/CoinbaseIcon.svg'
+export { ReactComponent as TokenNHBTC } from './svg/TokenNHBTC.svg'
+
 
 export { ReactComponent as NFTBuy } from './svg/NFTBuy.svg'
 export { ReactComponent as NFTHow } from './svg/NFTHow.svg'

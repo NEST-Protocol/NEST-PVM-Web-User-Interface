@@ -4,6 +4,7 @@ import {
   TokenETH,
   TokenFORT,
   TokenNest,
+  TokenNHBTC,
   TokenUSDT,
 } from "../../components/Icon";
 import { ZERO_ADDRESS } from "../utils";
@@ -114,6 +115,19 @@ export const tokenList: { [key: string]: TokenType } = {
       56: '',
       97: ''
     },
+    sigmaSQ: BigNumber.from('0')
+  },
+  NHBTC: {
+    symbol: "NHBTC",
+    Icon: TokenNHBTC,
+    decimals: 18,
+    addresses: {
+      1: "0xDda3801487a8Bb5ec19dD1E3510b6340BA435863",
+      5: "",
+      56: "",
+      97: "0xDda3801487a8Bb5ec19dD1E3510b6340BA435863"
+    },
+    pairIndex: {},
     sigmaSQ: BigNumber.from('0')
   },
 };

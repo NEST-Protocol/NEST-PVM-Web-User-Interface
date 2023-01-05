@@ -16,9 +16,11 @@ import MainButton from "../../components/MainButton";
 import MainCard from "../../components/MainCard";
 import { SingleTokenShow } from "../../components/TokenShow";
 import { useERC20Approve } from "../../contracts/hooks/useERC20Approve";
+import { useNESTRedeemRedeem } from "../../contracts/hooks/useNESTRedeem";
 import { usePVMPayBack } from "../../contracts/hooks/usePVMPayBackTransaction";
 import { useUniSwapV2Swap } from "../../contracts/hooks/useUniSwapV2Transaction";
 import {
+  NESTRedeemContract,
   PVMPayBackContract,
   tokenList,
   TokenType,
@@ -69,7 +71,7 @@ const Swap: FC = () => {
   const modal = useRef<any>();
 
   const exchangeSwapTokens = () => {
-    if (swapToken.src === "DCU") {
+    if (swapToken.src === "DCU" || swapToken.src === "NHBTC") {
       return;
     }
     setSwapToken({ src: swapToken.dest, dest: swapToken.src });
@@ -79,10 +81,12 @@ const Swap: FC = () => {
     if (!chainId) {
       return "";
     }
-    if (swapToken.src !== "DCU") {
-      return UniSwapV2Contract[chainId];
-    } else {
+    if (swapToken.src === "DCU") {
       return PVMPayBackContract[chainId];
+    } else if (swapToken.src === "NHBTC") {
+      return NESTRedeemContract[chainId]
+    } else {
+      return UniSwapV2Contract[chainId];
     }
   }, [chainId, swapToken.src]);
   // balance
@@ -148,6 +152,8 @@ const Swap: FC = () => {
       return ["NEST", "USDT"];
     } else if (swapToken.src === "USDT") {
       return ["USDT", "NEST"];
+    } else if (swapToken.src === "NHBTC") {
+      return ["NHBTC", "NEST"]
     }
     return [swapToken.src, swapToken.dest];
   }, [swapToken]);
@@ -168,6 +174,10 @@ const Swap: FC = () => {
   useEffect(() => {
     if (!chainId || !library || !account) {
       return;
+    }
+
+    const swapHBTCToNEST = (amountIn: BigNumber) => {
+      return amountIn.div(BigNumber.from("2"))
     }
 
     const swapDCUToNEST = async (amountIn: BigNumber) => {
@@ -209,6 +219,8 @@ const Swap: FC = () => {
           ]);
         } else if (usePath[index] === "DCU" && usePath[index + 1] === "NEST") {
           amount = await swapDCUToNEST(amount);
+        } else if (usePath[index] === "NHBTC" && usePath[index + 1] === "NEST") {
+          amount = swapHBTCToNEST(amount);
         }
       }
       setDestValue(checkInputValue ? amount : undefined);
@@ -256,11 +268,13 @@ const Swap: FC = () => {
       setSwapToken({ src: token.symbol, dest: "USDT" });
     } else if (token.symbol === "USDT") {
       setSwapToken({ src: token.symbol, dest: "NEST" });
+    } else if (token.symbol === "NHBTC") {
+      setSwapToken({ src: token.symbol, dest: "NEST" });
     }
   };
 
   const tokenListShow = (top: boolean) => {
-    const allToken = ["DCU", "NEST", "USDT"];
+    const allToken = chainId === 56 ? ["DCU", "NEST", "USDT"] : ["DCU", "NEST", "USDT", "NHBTC"];
     if (top) {
       const leftToken = allToken.filter(
         (item: string) => [swapToken.src].indexOf(item) === -1
@@ -335,6 +349,7 @@ const Swap: FC = () => {
     addressPath(),
     account ? account : ""
   );
+  const redeem = useNESTRedeemRedeem(normalToBigNumber(inputValue ? inputValue : ""))
   const mainButtonState = () => {
     const pendingTransaction = pendingList.filter(
       (item) => item.type === TransactionType.swap
@@ -395,7 +410,7 @@ const Swap: FC = () => {
         <button
           className={classNames({
             [`${classPrefix}-card-exchange`]: true,
-            [`disable`]: swapToken.src === "DCU" ? true : false,
+            [`disable`]: (swapToken.src === "DCU" || swapToken.src === "NHBTC") ? true : false,
           })}
           onClick={() => {
             exchangeSwapTokens();
@@ -483,10 +498,12 @@ const Swap: FC = () => {
               if (!chainId) {
                 return;
               }
-              if (swapToken.src !== "DCU") {
-                uniswapV2Swap();
-              } else {
+              if (swapToken.src === "DCU") {
                 swap();
+              } else if (swapToken.src === "NHBTC") {
+                redeem()
+              } else {
+                uniswapV2Swap();
               }
             } else {
               approve();
