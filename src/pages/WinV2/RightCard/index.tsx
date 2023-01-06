@@ -70,7 +70,7 @@ const WinV2RightCard: FC = () => {
       (chainArray.indexOf(chainId ?? 56) > -1 ? chainId : 56) ?? 56;
     const getList = async () => {
       const weekly_get = await fetch(
-        "https://api.hedge.red/api/" +
+        "https://api.nestfi.net/api/" +
           WINV2_GET_STRING[chain_id] +
           "/weekList/50"
       );
@@ -100,7 +100,7 @@ const WinV2RightCard: FC = () => {
     const chain_id = chainId;
     const getList = async () => {
       const myBet_get = await fetch(
-        "https://api.hedge.red/api/" +
+        "https://api.nestfi.net/api/" +
           WINV2_GET_STRING[chain_id] +
           "/mybet/" +
           account +
@@ -160,7 +160,7 @@ const WinV2RightCard: FC = () => {
 
     const getList = async () => {
       const allBet_get = await fetch(
-        "https://api.hedge.red/api/" +
+        "https://api.nestfi.net/api/" +
           WINV2_GET_STRING[chain_id] +
           "/allBet/200"
       );

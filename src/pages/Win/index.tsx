@@ -91,17 +91,17 @@ const Win: FC = () => {
     if (!latest) {
       return;
     }
-    const allBets_get = await fetch("https://api.hedge.red/api/" + WIN_GET_STRING[chainId] + "/list/0/10");
+    const allBets_get = await fetch("https://api.nestfi.net/api/" + WIN_GET_STRING[chainId] + "/list/0/10");
     const allBets_data = await allBets_get.json();
     const allBets_data_modol = allBets_data.value.filter(
       (item: WinListType) => item.owner !== ZERO_ADDRESS
     );
-    const weekly_get = await fetch("https://api.hedge.red/api/" + WIN_GET_STRING[chainId] + "/weekList/10");
+    const weekly_get = await fetch("https://api.nestfi.net/api/" + WIN_GET_STRING[chainId] + "/weekList/10");
     const weekly_data = await weekly_get.json();
     const weekly_data_modol = weekly_data.value.filter(
       (item: WinListType) => item.owner !== ZERO_ADDRESS
     );
-    const myBetsUrl = "https://api.hedge.red/api/" + WIN_GET_STRING[chainId] + `/userList/${account}/200`;
+    const myBetsUrl = "https://api.nestfi.net/api/" + WIN_GET_STRING[chainId] + `/userList/${account}/200`;
     const myBets_get = await fetch(myBetsUrl);
     const myBets_data = await myBets_get.json();
     const myBets_data_modol = myBets_data.value.filter(

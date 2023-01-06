@@ -311,7 +311,7 @@ const Perpetuals: FC = () => {
   // getKData
   const getKData = useCallback(async () => {
     const k_data = await fetch(
-      `https://api.hedge.red/api/oracle/get_cur_kline/${chainId?.toString() || 56}/0/${
+      `https://api.nestfi.net/api/oracle/get_cur_kline/${chainId?.toString() || 56}/0/${
         tokenPair.symbol.toLocaleLowerCase() + "usdt"
       }/${kTypeValue}/50`
     );

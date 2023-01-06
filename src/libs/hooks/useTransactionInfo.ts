@@ -26,7 +26,12 @@ export enum TransactionType {
   NESTNFTAuctionStart = 14,
   NESTNFTAuction = 15,
   NESTNFTAuctionEnd = 16,
-  NESTNFTWhiteListBuy = 17
+  NESTNFTWhiteListBuy = 17,
+  PVMFuturesAdd = 18,
+  PVMFuturesEditTrigger = 19,
+  PVMFuturesProxyCancel = 20,
+  PVMFuturesProxyEdit = 21,
+  PVMFuturesProxyNew = 22,
 }
 
 export enum TransactionState {

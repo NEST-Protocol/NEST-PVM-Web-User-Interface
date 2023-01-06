@@ -64,7 +64,7 @@ const NFTWhiteList: FC = () => {
     (async () => {
       try {
         const data = await fetch(
-          `https://api.hedge.red/api/nft/whitelist/market/${chainId?.toString()}`
+          `https://api.nestfi.net/api/nft/whitelist/market/${chainId?.toString()}`
         );
         const data_json = await data.json();
         setNFTMarketData(data_json["value"] ?? []);

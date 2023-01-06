@@ -10,7 +10,7 @@ const useInactiveListener = (suppress = false) => {
     const setWallet = async (account: string) => {
       try {
         await fetch(
-          `https://api.hedge.red/api/users/users/setwallet?address=${account}`,
+          `https://api.nestfi.net/api/users/users/setwallet?address=${account}`,
           {
             method: "POST",
           }

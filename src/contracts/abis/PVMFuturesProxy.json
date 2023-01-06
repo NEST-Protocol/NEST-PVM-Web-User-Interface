@@ -1,0 +1,295 @@
+[
+    {
+        "inputs": [],
+        "name": "_governance",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "index",
+                "type": "uint256"
+            }
+        ],
+        "name": "cancelLimitOrder",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256[]",
+                "name": "indices",
+                "type": "uint256[]"
+            }
+        ],
+        "name": "executeLimitOrder",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256[]",
+                "name": "indices",
+                "type": "uint256[]"
+            }
+        ],
+        "name": "executeStopOrder",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "start",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "count",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "maxFindCount",
+                "type": "uint256"
+            },
+            {
+                "internalType": "address",
+                "name": "owner",
+                "type": "address"
+            }
+        ],
+        "name": "find",
+        "outputs": [
+            {
+                "components": [
+                    {
+                        "internalType": "uint32",
+                        "name": "index",
+                        "type": "uint32"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "owner",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint16",
+                        "name": "tokenIndex",
+                        "type": "uint16"
+                    },
+                    {
+                        "internalType": "uint8",
+                        "name": "lever",
+                        "type": "uint8"
+                    },
+                    {
+                        "internalType": "bool",
+                        "name": "orientation",
+                        "type": "bool"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "limitPrice",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "stopPrice",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint48",
+                        "name": "balance",
+                        "type": "uint48"
+                    },
+                    {
+                        "internalType": "uint48",
+                        "name": "fee",
+                        "type": "uint48"
+                    },
+                    {
+                        "internalType": "uint48",
+                        "name": "stopFee",
+                        "type": "uint48"
+                    },
+                    {
+                        "internalType": "uint8",
+                        "name": "status",
+                        "type": "uint8"
+                    }
+                ],
+                "internalType": "struct NestFuturesProxy.LimitOrderView[]",
+                "name": "orderArray",
+                "type": "tuple[]"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "governance",
+                "type": "address"
+            }
+        ],
+        "name": "initialize",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "offset",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "count",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "order",
+                "type": "uint256"
+            }
+        ],
+        "name": "list",
+        "outputs": [
+            {
+                "components": [
+                    {
+                        "internalType": "uint32",
+                        "name": "index",
+                        "type": "uint32"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "owner",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint16",
+                        "name": "tokenIndex",
+                        "type": "uint16"
+                    },
+                    {
+                        "internalType": "uint8",
+                        "name": "lever",
+                        "type": "uint8"
+                    },
+                    {
+                        "internalType": "bool",
+                        "name": "orientation",
+                        "type": "bool"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "limitPrice",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "stopPrice",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint48",
+                        "name": "balance",
+                        "type": "uint48"
+                    },
+                    {
+                        "internalType": "uint48",
+                        "name": "fee",
+                        "type": "uint48"
+                    },
+                    {
+                        "internalType": "uint48",
+                        "name": "stopFee",
+                        "type": "uint48"
+                    },
+                    {
+                        "internalType": "uint8",
+                        "name": "status",
+                        "type": "uint8"
+                    }
+                ],
+                "internalType": "struct NestFuturesProxy.LimitOrderView[]",
+                "name": "orderArray",
+                "type": "tuple[]"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint16",
+                "name": "tokenIndex",
+                "type": "uint16"
+            },
+            {
+                "internalType": "uint8",
+                "name": "lever",
+                "type": "uint8"
+            },
+            {
+                "internalType": "bool",
+                "name": "orientation",
+                "type": "bool"
+            },
+            {
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "limitPrice",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "stopPrice",
+                "type": "uint256"
+            }
+        ],
+        "name": "newLimitOrder",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "newGovernance",
+                "type": "address"
+            }
+        ],
+        "name": "update",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    }
+]
