@@ -29,7 +29,7 @@ import {
   formatInputNum,
   normalToBigNumber,
 } from "../../libs/utils";
-import { DatePicker, message, Tooltip } from "antd";
+import { DatePicker, message } from "antd";
 import "./styles";
 import { HoldLine } from "../../components/HoldLine";
 import moment from "moment";
@@ -39,6 +39,7 @@ import useTransactionListCon from "../../libs/hooks/useTransactionInfo";
 import { Popup } from "reactjs-popup";
 import OptionsNoticeModal from "./OptionsNoticeModal";
 import { useERC20Approve } from "../../contracts/hooks/useERC20Approve";
+import { LightTooltip } from "../../styles/MUI";
 
 export type OptionsListType = {
   index: BigNumber;
@@ -457,15 +458,15 @@ const MintOptions: FC = () => {
 
         <MainCard classNames={`${classPrefix}-rightCard`}>
           <p className={`${classPrefix}-rightCard-tokenTitle`}>
-            <Tooltip
+            <LightTooltip
+              title="The shares of NEST an investor expect to receive."
               placement="top"
-              color={"#ffffff"}
-              title={"The shares of NEST an investor expect to receive."}
+              arrow
             >
               <span>
                 <Trans>Option Shares</Trans>
               </span>
-            </Tooltip>
+            </LightTooltip>
           </p>
           {showLoading ? (
             <WhiteLoading className={"animation-spin"} />

@@ -84,7 +84,7 @@ const Swap: FC = () => {
     if (swapToken.src === "DCU") {
       return PVMPayBackContract[chainId];
     } else if (swapToken.src === "NHBTC") {
-      return NESTRedeemContract[chainId]
+      return NESTRedeemContract[chainId];
     } else {
       return UniSwapV2Contract[chainId];
     }
@@ -153,7 +153,7 @@ const Swap: FC = () => {
     } else if (swapToken.src === "USDT") {
       return ["USDT", "NEST"];
     } else if (swapToken.src === "NHBTC") {
-      return ["NHBTC", "NEST"]
+      return ["NHBTC", "NEST"];
     }
     return [swapToken.src, swapToken.dest];
   }, [swapToken]);
@@ -177,8 +177,8 @@ const Swap: FC = () => {
     }
 
     const swapHBTCToNEST = (amountIn: BigNumber) => {
-      return amountIn.div(BigNumber.from("2"))
-    }
+      return amountIn.div(BigNumber.from("2"));
+    };
 
     const swapDCUToNEST = async (amountIn: BigNumber) => {
       return amountIn
@@ -219,7 +219,10 @@ const Swap: FC = () => {
           ]);
         } else if (usePath[index] === "DCU" && usePath[index + 1] === "NEST") {
           amount = await swapDCUToNEST(amount);
-        } else if (usePath[index] === "NHBTC" && usePath[index + 1] === "NEST") {
+        } else if (
+          usePath[index] === "NHBTC" &&
+          usePath[index + 1] === "NEST"
+        ) {
           amount = swapHBTCToNEST(amount);
         }
       }
@@ -274,7 +277,10 @@ const Swap: FC = () => {
   };
 
   const tokenListShow = (top: boolean) => {
-    const allToken = chainId === 56 ? ["DCU", "NEST", "USDT"] : ["DCU", "NEST", "USDT", "NHBTC"];
+    const allToken =
+      chainId === 56
+        ? ["DCU", "NEST", "USDT"]
+        : ["DCU", "NEST", "USDT", "NHBTC"];
     if (top) {
       const leftToken = allToken.filter(
         (item: string) => [swapToken.src].indexOf(item) === -1
@@ -349,12 +355,20 @@ const Swap: FC = () => {
     addressPath(),
     account ? account : ""
   );
-  const redeem = useNESTRedeemRedeem(normalToBigNumber(inputValue ? inputValue : ""))
+  const redeem = useNESTRedeemRedeem(
+    normalToBigNumber(inputValue ? inputValue : "")
+  );
   const mainButtonState = () => {
     const pendingTransaction = pendingList.filter(
       (item) => item.type === TransactionType.swap
     );
     return pendingTransaction.length > 0 ? true : false;
+  };
+  const hideSlippage = () => {
+    if (swapToken.src === "DCU" || swapToken.src === "NHBTC") {
+      return true;
+    }
+    return false;
   };
 
   return (
@@ -410,7 +424,10 @@ const Swap: FC = () => {
         <button
           className={classNames({
             [`${classPrefix}-card-exchange`]: true,
-            [`disable`]: (swapToken.src === "DCU" || swapToken.src === "NHBTC") ? true : false,
+            [`disable`]:
+              swapToken.src === "DCU" || swapToken.src === "NHBTC"
+                ? true
+                : false,
           })}
           onClick={() => {
             exchangeSwapTokens();
@@ -444,44 +461,49 @@ const Swap: FC = () => {
               : undefined}
           </p>
         </InfoShow>
-        <div className={`${classPrefix}-card-limit`}>
-          <div>
-            <Tooltip
-              placement="leftBottom"
-              color={"#ffffff"}
-              title={
-                "Setting a high slippage tolerance can help transactions succeed ,but you may not get such a good price .use with caution"
-              }
-            >
-              <span>
-                <Trans>Slippage Tolerance</Trans>
-              </span>
-            </Tooltip>
-            <Popup
-              modal
-              ref={modal}
-              nested
-              trigger={
-                <button>
-                  <SwapLimitIcon />
-                </button>
-              }
-            >
-              <SwapLimitModal
-                selected={limitOut}
-                callBack={(value: number) => {
-                  setLimitOut(value);
-                }}
-              />
-            </Popup>
-          </div>
+        {hideSlippage() ? (
+          <></>
+        ) : (
+          <div className={`${classPrefix}-card-limit`}>
+            <div>
+              <Tooltip
+                placement="leftBottom"
+                color={"#ffffff"}
+                title={
+                  "Setting a high slippage tolerance can help transactions succeed ,but you may not get such a good price .use with caution"
+                }
+              >
+                <span>
+                  <Trans>Slippage Tolerance</Trans>
+                </span>
+              </Tooltip>
+              <Popup
+                modal
+                ref={modal}
+                nested
+                trigger={
+                  <button>
+                    <SwapLimitIcon />
+                  </button>
+                }
+              >
+                <SwapLimitModal
+                  selected={limitOut}
+                  callBack={(value: number) => {
+                    setLimitOut(value);
+                  }}
+                />
+              </Popup>
+            </div>
 
-          <p>{`${(limitOut / 10).toFixed(1)} %`}</p>
-        </div>
+            <p>{`${(limitOut / 10).toFixed(1)} %`}</p>
+          </div>
+        )}
+
         <div className={`${classPrefix}-card-trading`}>
-            <span>
-              <Trans>Trading Price</Trans>
-            </span>
+          <span>
+            <Trans>Trading Price</Trans>
+          </span>
           <p>{`1 ${swapToken.src} = ${
             priceValue
               ? bigNumberToNormal(priceValue, checkUSDT(swapToken.dest), 10)
@@ -501,7 +523,7 @@ const Swap: FC = () => {
               if (swapToken.src === "DCU") {
                 swap();
               } else if (swapToken.src === "NHBTC") {
-                redeem()
+                redeem();
               } else {
                 uniswapV2Swap();
               }
