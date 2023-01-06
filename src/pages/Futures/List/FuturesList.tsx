@@ -38,7 +38,7 @@ const FuturesList: FC<FuturesListProps> = ({ ...props }) => {
   } = useFuturesOrderList(props.item, props.kValue);
 
   return (
-    <tr key={props.key} className={`${props.className}-table-normal`}>
+    <tr className={`${props.className}-table-normal`}>
       <td className={"tokenPair"}>
         <TokenOneSvg />
         <TokenTwoSvg />
@@ -100,7 +100,7 @@ export const FuturesList2: FC<FuturesList2Props> = ({ ...props }) => {
   } = useFuturesLimitOrderList(props.item);
 
   return (
-    <tr key={props.key} className={`${props.className}-table-normal`}>
+    <tr className={`${props.className}-table-normal`}>
       <td className={"tokenPair"}>
         <TokenOneSvg />
         <TokenTwoSvg />

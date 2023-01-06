@@ -335,7 +335,7 @@ const Futures: FC = () => {
       return orderList.map((item) => {
         return (
           <FuturesList
-            key={"f"}
+            key={`f+${item.index}`}
             item={item}
             kValue={kValue}
             className={classPrefix}
@@ -363,7 +363,7 @@ const Futures: FC = () => {
   const listView2 = () => {
     const limitOrderListView = () => {
       return limitOrderList.map((item) => {
-        return <FuturesList2 key={"f2"} item={item} className={classPrefix} />;
+        return <FuturesList2 key={`f2+${item.index}`} item={item} className={classPrefix} />;
       });
     };
     return (
