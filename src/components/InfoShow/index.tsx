@@ -76,6 +76,7 @@ const InfoShow: FC<Props> = ({ children, ...props }) => {
       className={classNames({
         [`${classPrefix}-tokenSelect`]: true,
         [`isShow`]: isShowSelect,
+        [`three`]: props.tokenList?.length === 3,
       })}
     >
       {dataLi}

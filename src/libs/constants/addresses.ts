@@ -158,7 +158,7 @@ export const PVMFuturesProxyContract: AddressesType = {
   97: "0xd6C4BE39748510BB5b8B2eF0b0aF71B860691bcb"
 }
 export const NESTRedeemContract: AddressesType = {
-  1: "",
+  1: "0xaf22d05095d09cb6cb4f18cb7aefd94cb39eb113",
   5: "",
   56: "",
   97: "0x6E9c1edACe6Fc03f9666769f09D557b1383f7F57"
