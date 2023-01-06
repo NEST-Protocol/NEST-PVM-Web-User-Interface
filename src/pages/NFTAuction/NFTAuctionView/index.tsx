@@ -71,7 +71,7 @@ const NFTAuctionView: FC = () => {
     (async () => {
       try {
         const data = await fetch(
-          `https://api.hedge.red/api/nft/auction/list/1000/${chainId?.toString()}`
+          `https://api.nestfi.net/api/nft/auction/list/1000/${chainId?.toString()}`
         );
         const data_json = await data.json();
         setNFTAuctionData(data_json["value"] ?? []);

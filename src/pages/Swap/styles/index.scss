@@ -88,8 +88,12 @@
     }
 
     .infoView-tokenSelect {
-        height: 120px;
-        margin-bottom: -125px;
+        height: 80px;
+        margin-bottom: -85px;
+        &.three {
+            height: 120px;
+            margin-bottom: -125px;
+        }
     }
 
     &-selected {

@@ -15,6 +15,7 @@ import {
 import {
   usePVMFuturesProxyCancel,
   usePVMFuturesProxyNew,
+  usePVMFuturesProxyUpdate,
 } from "../../contracts/hooks/usePVMFuturesProxy";
 import { tokenList, TokenType } from "../constants/addresses";
 import { BASE_2000ETH_AMOUNT, BASE_AMOUNT, ZERO_ADDRESS } from "../utils";
@@ -56,7 +57,6 @@ export type LimitOrderView = {
 const UPDATE_PRICE_TIME = 10;
 const UPDATE_LIST_TIME = 10;
 const UPDATE_BALANCE_TIME = 60;
-const TRIGGER_FEE = BigNumber.from("0");
 const BASE_NEST_FEE = "15";
 
 const tokenArray = [tokenList["ETH"], tokenList["BTC"]];
@@ -193,7 +193,7 @@ export function useFutures() {
       });
       setOrderList(result);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }, [PVMFuturesOJ, account]);
 
@@ -213,7 +213,7 @@ export function useFutures() {
       });
       setLimitOrderList(result);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }, [PVMFuturesProxyOJ, account]);
 
@@ -246,15 +246,11 @@ export function useFutures() {
       .mul(BigNumber.from("2"))
       .div(BigNumber.from("1000"));
     var limitFee = BigNumber.from("0");
-    var triggerFee = BigNumber.from("0");
     if (limit) {
       limitFee = baseFee;
     }
-    if (stop) {
-      triggerFee = TRIGGER_FEE;
-    }
-    return baseFee.add(limitFee).add(triggerFee);
-  }, [leverNum, limit, nestInput, stop]);
+    return baseFee.add(limitFee).add(parseUnits(BASE_NEST_FEE, 18));
+  }, [leverNum, limit, nestInput]);
 
   const getBalance = useCallback(async () => {
     try {
@@ -264,7 +260,7 @@ export function useFutures() {
       const balance = await nestToken.balanceOf(account);
       setNestBalance(balance);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }, [account, nestToken]);
   const getAllowance = useCallback(async () => {
@@ -283,7 +279,7 @@ export function useFutures() {
       setNestAllowance(allowance1);
       setNestAllowance2(allowance2);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }, [account, chainId, nestToken]);
 
@@ -478,7 +474,7 @@ export function useFuturesOrderList(
       const value = await PVMFuturesOJ.valueOf2(order.index, price);
       setMarginAssets(value);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }, [PVMFuturesOJ, kValue, order.index, tokenName]);
 
@@ -651,8 +647,35 @@ export function useFuturesTrigger(order: OrderView) {
 
 export function useFuturesSetLimitOrder(order: LimitOrderView) {
   const [limitInput, setLimitInput] = useState<string>("");
+  const { pendingList } = useTransactionListCon();
+  const action = usePVMFuturesProxyUpdate(
+    order.index,
+    parseUnits(limitInput === "" ? "0" : limitInput, 18)
+  );
 
-  return { limitInput, setLimitInput };
+  const buttonLoading = () => {
+    const pendingTransaction = pendingList.filter(
+      (item) =>
+        item.type === TransactionType.PVMFuturesProxyEdit &&
+        item.info === order.index.toString()
+    );
+    return pendingTransaction.length > 0 ? true : false;
+  };
+
+  const buttonDis = () => {
+    if (limitInput === "" || buttonLoading()) {
+      return true;
+    }
+    return false;
+  };
+
+  const buttonAction = () => {
+    if (buttonDis()) {
+      return;
+    }
+    action();
+  };
+  return { limitInput, setLimitInput, buttonLoading, buttonDis, buttonAction };
 }
 
 export function useFuturesAdd(order: OrderView) {
@@ -692,7 +715,7 @@ export function useFuturesAdd(order: OrderView) {
       const balance = await nestToken.balanceOf(account);
       setNestBalance(balance);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }, [account, nestToken]);
 
@@ -796,7 +819,11 @@ export function useFuturesCloseOrder(
   };
 
   const showFee = () => {
-    return parseFloat(formatUnits("66", 18)).toFixed(2).toString();
+    const fee = BigNumber.from("2")
+      .mul(order.lever)
+      .mul(order.balance)
+      .div(BigNumber.from("1000"));
+    return parseFloat(formatUnits(fee, 4)).toFixed(2).toString();
   };
 
   const action = usePVMFuturesSell2(order.index);

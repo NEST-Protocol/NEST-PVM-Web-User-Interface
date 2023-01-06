@@ -16,6 +16,10 @@
         padding: 0 15px;
         margin-top: 10px;
 
+        p.underLine {
+            border-bottom: 1px dashed #878787;
+        }
+
         p+p {
             font-size: 12px;
         }
@@ -50,6 +54,10 @@
     .FuturesClose {
         &-infoShow {
             color: #C5C5C5;
+
+            p.underLine {
+                border-bottom: 1px dashed #C5C5C5;
+            }
         }
     }
 }

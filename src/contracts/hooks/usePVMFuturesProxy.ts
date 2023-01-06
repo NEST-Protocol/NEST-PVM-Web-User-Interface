@@ -41,6 +41,30 @@ export function usePVMFuturesProxyNew(
   return txPromise;
 }
 
+export function usePVMFuturesProxyUpdate(index: BigNumber, limitPrice: BigNumber) {
+  const { account, chainId } = useWeb3();
+  var contract = PVMFuturesProxy();
+  var callData: string | undefined;
+  if (!chainId) {
+    contract = null;
+  } else {
+    callData = contract?.interface.encodeFunctionData("updateLimitOrder", [
+      index, limitPrice
+    ]);
+  }
+  const tx = {
+    from: account,
+    to: contract?.address,
+    data: callData,
+  };
+  const txPromise = useSendTransaction(contract, tx, {
+    title: `Update Limit Order`,
+    info: "",
+    type: TransactionType.PVMFuturesProxyEdit,
+  });
+  return txPromise;
+}
+
 export function usePVMFuturesProxyCancel(index: BigNumber) {
   const { account, chainId } = useWeb3();
   var contract = PVMFuturesProxy();

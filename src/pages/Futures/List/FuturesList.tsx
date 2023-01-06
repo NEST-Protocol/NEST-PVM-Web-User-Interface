@@ -119,6 +119,7 @@ export const FuturesList2: FC<FuturesList2Props> = ({ ...props }) => {
           modal
           ref={modal}
           trigger={<button className="fort-button">Edit</button>}
+          nested
         >
           <LimitPrice order={props.item} />
         </Popup>

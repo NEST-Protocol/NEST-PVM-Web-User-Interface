@@ -14,6 +14,7 @@ import {
   useFuturesTrigger,
 } from "../../../../libs/hooks/useFutures";
 import { formatInputNumWithFour } from "../../../../libs/utils";
+import { LightTooltip } from "../../../../styles/MUI";
 
 const classPrefix = "positionsList";
 
@@ -107,13 +108,15 @@ export const DrawerAdd: FC<DrawerBaseType> = ({ ...props }) => {
           spacing={0}
           className={`${classPrefix}-infoShow`}
         >
-          <p>Fees</p>
+          <LightTooltip
+            placement="top-start"
+            title={"open positions fee: cost x leverage x 0.2% "}
+            arrow
+          >
+            <p className="underLine">Fees</p>
+          </LightTooltip>
           <p>{showFee()} NEST</p>
         </Stack>
-        <div className={`${classPrefix}-des`}>
-          The calculated result is for reference only. Please expect some
-          deviation due to trading fees or changes in the funding rate.
-        </div>
       </Stack>
       <MainButton
         className="action"
@@ -212,7 +215,18 @@ export const DrawerTrigger: FC<DrawerBaseType> = ({ ...props }) => {
             spacing={0}
             className={`${classPrefix}-infoShow`}
           >
-            <p>Fees</p>
+            <LightTooltip
+              placement="top-start"
+              title={
+                <div>
+                  <p>Trigger fee: cost × leverage × 0.2% </p>
+                  <p>Execution fee : 15NEST</p>
+                </div>
+              }
+              arrow
+            >
+              <p className="underLine">Fees</p>
+            </LightTooltip>
             <p>{showTriggerFee()}</p>
           </Stack>
         )}
@@ -274,7 +288,13 @@ export const DrawerClose: FC<DrawerCloseType> = ({ ...props }) => {
         spacing={0}
         className={`${classPrefix}-infoShow`}
       >
-        <p>Fees</p>
+        <LightTooltip
+          placement="top-start"
+          title={"Close positions fee: cost x leverage x 0.2%"}
+          arrow
+        >
+          <p className="underLine">Fees</p>
+        </LightTooltip>
         <p>{showFee()} NEST</p>
       </Stack>
       <MainButton
@@ -289,8 +309,9 @@ export const DrawerClose: FC<DrawerCloseType> = ({ ...props }) => {
   );
 };
 
-export const DraweLimitEdit: FC<DrawerLimitEditType> = ({ ...props }) => {
-    const {limitInput, setLimitInput} = useFuturesSetLimitOrder(props.order)
+export const DrawerLimitEdit: FC<DrawerLimitEditType> = ({ ...props }) => {
+  const { limitInput, setLimitInput, buttonLoading, buttonDis, buttonAction } =
+    useFuturesSetLimitOrder(props.order);
   return (
     <Stack spacing={0}>
       <p className="title">Limit Price</p>
@@ -320,7 +341,20 @@ export const DraweLimitEdit: FC<DrawerLimitEditType> = ({ ...props }) => {
           <p>USDT</p>
         </Stack>
       </Stack>
-      <MainButton className="action">Confirm</MainButton>
+      <MainButton
+        className="action"
+        loading={buttonLoading()}
+        disable={buttonDis()}
+        onClick={() => {
+          if (buttonDis()) {
+            return;
+          }
+          props.hideSelf();
+          buttonAction();
+        }}
+      >
+        Confirm
+      </MainButton>
     </Stack>
   );
 };

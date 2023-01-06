@@ -21,6 +21,7 @@ import classNames from "classnames";
 import TVChart from "../../components/TVChart";
 import { useFutures } from "../../libs/hooks/useFutures";
 import FuturesList, { FuturesList2 } from "./List/FuturesList";
+import { LightTooltip } from "../../styles/MUI";
 
 const Futures: FC = () => {
   const classPrefix = "Futures";
@@ -134,9 +135,7 @@ const Futures: FC = () => {
               placeholder={"Input"}
               value={takeInput}
               maxLength={32}
-              onChange={(e) =>
-                setTakeInput(formatInputNum(e.target.value))
-              }
+              onChange={(e) => setTakeInput(formatInputNum(e.target.value))}
             />
             <p>USDT</p>
           </Stack>
@@ -240,7 +239,9 @@ const Futures: FC = () => {
               className={"input-middle"}
               value={nestInput}
               maxLength={32}
-              onChange={(e) => setNestInput(formatInputNumWithFour(e.target.value))}
+              onChange={(e) =>
+                setNestInput(formatInputNumWithFour(e.target.value))
+              }
               onBlur={(e: any) => {}}
             />
             <button
@@ -290,7 +291,19 @@ const Futures: FC = () => {
             spacing={0}
             className={`${classPrefix}-infoShow`}
           >
-            <p>Service Fee</p>
+            <LightTooltip
+              placement="right"
+              title={
+                <div>
+                  <p>open positions fee: cost x leverage x 0.2% </p>
+                  <p>Limit order fee: cost × leverage × 0.2% </p>
+                  <p>Execution fee : 15NEST</p>
+                </div>
+              }
+              arrow
+            >
+              <p className="underLine">Service Fee</p>
+            </LightTooltip>
             <p>{parseFloat(formatUnits(fee, 18)).toFixed(2).toString()} NEST</p>
           </Stack>
           <Stack
@@ -301,6 +314,7 @@ const Futures: FC = () => {
             className={`${classPrefix}-infoShow`}
           >
             <p>Total Pay</p>
+
             <p>
               {parseFloat(
                 formatUnits(
@@ -324,7 +338,11 @@ const Futures: FC = () => {
         </Stack>
         <Stack spacing={0} className={`${classPrefix}-topView-right`}>
           <p className="title">{tokenPair}/USDT</p>
-          <TVChart chainId={56} tokenPair={tokenPair} chartHeight={chartHeight()} />
+          <TVChart
+            chainId={56}
+            tokenPair={tokenPair}
+            chartHeight={chartHeight()}
+          />
         </Stack>
       </Stack>
     );
@@ -363,7 +381,13 @@ const Futures: FC = () => {
   const listView2 = () => {
     const limitOrderListView = () => {
       return limitOrderList.map((item) => {
-        return <FuturesList2 key={`f2+${item.index}`} item={item} className={classPrefix} />;
+        return (
+          <FuturesList2
+            key={`f2+${item.index}`}
+            item={item}
+            className={classPrefix}
+          />
+        );
       });
     };
     return (

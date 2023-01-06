@@ -435,7 +435,7 @@ export const NFTAuctionModal: FC<NFTDigModalProps> = ({ ...props }) => {
     (async () => {
       try {
         const data = await fetch(
-          `https://api.hedge.red/api/nft/auction/history/${
+          `https://api.nestfi.net/api/nft/auction/history/${
             props.info.token_address
           }/${props.info.token_id}/${chainId?.toString()}`
         );

@@ -91,13 +91,6 @@
         }
     }
 
-    &-des {
-        font-size: 12.5px;
-        color: #878787;
-        padding: 0 15px;
-        margin-top: 20px;
-    }
-
     &-drawer {
         .MuiPaper-root {
             margin: 0 8px;
@@ -261,6 +254,10 @@
             font-family: $boldFont;
         }
 
+        p.underLine {
+            border-bottom: 1px dashed #7D7D7D;
+        }
+
         p+p {
             font-family: Montserrat;
         }
@@ -342,10 +339,10 @@
 
                 &-infoShow {
                     color: #C5C5C5;
-                }
 
-                &-des {
-                    color: #C5C5C5;
+                    p.underLine {
+                        border-bottom: 1px dashed #C5C5C5;
+                    }
                 }
             }
         }

@@ -6,6 +6,7 @@ import MainCard from "../../../components/MainCard";
 import { OrderView, useFuturesTrigger } from "../../../libs/hooks/useFutures";
 import useThemes, { ThemeType } from "../../../libs/hooks/useThemes";
 import { formatInputNumWithFour } from "../../../libs/utils";
+import { LightTooltip } from "../../../styles/MUI";
 import "./styles";
 
 type TriggerProp = {
@@ -91,7 +92,18 @@ const Trigger: FC<TriggerProp> = ({ ...props }) => {
             spacing={0}
             className={`${classPrefix}-infoShow`}
           >
-            <p>Fees</p>
+            <LightTooltip
+              placement="right"
+              title={
+                <div>
+                  <p>Trigger fee: cost × leverage × 0.2% </p>
+                  <p>Execution fee : 15NEST</p>
+                </div>
+              }
+              arrow
+            >
+              <p className="underLine">Fees</p>
+            </LightTooltip>
             <p>{showTriggerFee()}</p>
           </Stack>
         )}

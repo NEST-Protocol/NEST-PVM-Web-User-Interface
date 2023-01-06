@@ -9,7 +9,8 @@ import {
   useFuturesCloseOrder,
 } from "../../../libs/hooks/useFutures";
 import useThemes, { ThemeType } from "../../../libs/hooks/useThemes";
-import "./styles"
+import { LightTooltip } from "../../../styles/MUI";
+import "./styles";
 
 export type FuturesCloseProps = {
   order: OrderView;
@@ -63,7 +64,14 @@ const FuturesClose: FC<FuturesCloseProps> = ({ ...props }) => {
           spacing={0}
           className={`${classPrefix}-infoShow`}
         >
-          <p>Fees</p>
+          <LightTooltip
+            placement="right"
+            title={"Close positions fee: cost x leverage x 0.2%"}
+            arrow
+          >
+            <p className="underLine">Fees</p>
+          </LightTooltip>
+
           <p>{showFee()} NEST</p>
         </Stack>
         <MainButton

@@ -10,7 +10,6 @@ import ERC20ABI from '../../contracts/abis/ERC20.json'
 import PVMOptionABI from '../../contracts/abis/PVMOption.json';
 import PVMLeverABI from '../../contracts/abis/PVMLever.json';
 import NestPriceABI from '../../contracts/abis/NestPrice.json';
-import PVMWinABI from '../../contracts/abis/PVMWin.json';
 import PVMPayBackABI from '../../contracts/abis/PVMPayBack.json';
 import UniSwapV2ABI from '../../contracts/abis/UNISwap.json';
 import NESTNFTABI from '../../contracts/abis/NESTNFT.json';
@@ -83,10 +82,6 @@ export function PVMLever(addresses: AddressesType): Contract | null {
 
 export function NestPriceContract(): Contract | null {
     return useContract(NestPriceAddress, NestPriceABI)
-}
-
-export function PVMWin(addresses: AddressesType): Contract | null {
-    return useContract(addresses, PVMWinABI)
 }
 
 export function PVMPayBack(addresses: AddressesType): Contract | null {

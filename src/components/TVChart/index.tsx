@@ -46,7 +46,7 @@ const TVChart: FC<TVChartProps> = ({ chainId, tokenPair, chartHeight}) => {
   const getPriceData = useCallback(async () => {
     try {
       const k_data = await fetch(
-        `https://api.hedge.red/api/oracle/get_cur_kline/${
+        `https://api.nestfi.net/api/oracle/get_cur_kline/${
           chainId?.toString() || 56
         }/0/${tokenPair.toLocaleLowerCase() + "usdt"}/${period}/1000`
       );

@@ -1,9 +1,7 @@
 import { BigNumber } from "@ethersproject/bignumber";
 import { MaxUint256 } from "@ethersproject/constants";
 import { t, Trans } from "@lingui/macro";
-import { Tooltip } from "antd";
 import classNames from "classnames";
-// import moment from "moment";
 import { FC, useCallback, useEffect, useRef, useState } from "react";
 import Popup from "reactjs-popup";
 import {
@@ -37,6 +35,7 @@ import {
   formatInputNum,
   normalToBigNumber,
 } from "../../libs/utils";
+import { LightTooltip } from "../../styles/MUI";
 import "./styles";
 import SwapLimitModal from "./SwapLimitModal";
 
@@ -466,17 +465,17 @@ const Swap: FC = () => {
         ) : (
           <div className={`${classPrefix}-card-limit`}>
             <div>
-              <Tooltip
-                placement="leftBottom"
-                color={"#ffffff"}
+              <LightTooltip
+                placement="bottom-start"
                 title={
                   "Setting a high slippage tolerance can help transactions succeed ,but you may not get such a good price .use with caution"
                 }
+                arrow
               >
                 <span>
                   <Trans>Slippage Tolerance</Trans>
                 </span>
-              </Tooltip>
+              </LightTooltip>
               <Popup
                 modal
                 ref={modal}

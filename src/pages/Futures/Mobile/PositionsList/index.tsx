@@ -11,7 +11,7 @@ import {
   useFuturesOrderList,
 } from "../../../../libs/hooks/useFutures";
 import { FuturesList2Props, FuturesListProps } from "../../List/FuturesList";
-import { DraweLimitEdit, DrawerAdd, DrawerClose, DrawerTrigger } from "./DrawerView";
+import { DrawerLimitEdit, DrawerAdd, DrawerClose, DrawerTrigger } from "./DrawerView";
 
 enum DrawerType {
   add = 0,
@@ -169,7 +169,7 @@ export const PositionsList2: FC<FuturesList2Props> = ({ ...props }) => {
   const drawerView = () => {
     switch (drawerType) {
       case DrawerType.orderEdit:
-        return <DraweLimitEdit order={props.item} hideSelf={() => setShowDrawer(false)}/>
+        return <DrawerLimitEdit order={props.item} hideSelf={() => setShowDrawer(false)}/>
     }
   };
 

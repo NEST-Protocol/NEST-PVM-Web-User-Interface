@@ -9,7 +9,8 @@ import { SingleTokenShow } from "../../../components/TokenShow";
 import { OrderView, useFuturesAdd } from "../../../libs/hooks/useFutures";
 import useThemes, { ThemeType } from "../../../libs/hooks/useThemes";
 import { formatInputNumWithFour } from "../../../libs/utils";
-import "./styles"
+import { LightTooltip } from "../../../styles/MUI";
+import "./styles";
 
 type FuturesAddProps = {
   order: OrderView;
@@ -60,7 +61,14 @@ const FuturesAdd: FC<FuturesAddProps> = ({ ...props }) => {
           spacing={0}
           className={`${classPrefix}-infoShow`}
         >
-          <p>Fees</p>
+          <LightTooltip
+            placement="right"
+            title={"open positions fee: cost x leverage x 0.2% "}
+            arrow
+          >
+            <p className="underLine">Fees</p>
+          </LightTooltip>
+
           <p>{showFee()} NEST</p>
         </Stack>
       </>

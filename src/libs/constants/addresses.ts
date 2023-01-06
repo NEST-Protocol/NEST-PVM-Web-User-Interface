@@ -122,7 +122,7 @@ export const tokenList: { [key: string]: TokenType } = {
     Icon: TokenNHBTC,
     decimals: 18,
     addresses: {
-      1: "0xDda3801487a8Bb5ec19dD1E3510b6340BA435863",
+      1: "0x1F832091fAf289Ed4f50FE7418cFbD2611225d46",
       5: "",
       56: "",
       97: "0xDda3801487a8Bb5ec19dD1E3510b6340BA435863"
@@ -158,7 +158,7 @@ export const PVMFuturesProxyContract: AddressesType = {
   97: "0xd6C4BE39748510BB5b8B2eF0b0aF71B860691bcb"
 }
 export const NESTRedeemContract: AddressesType = {
-  1: "",
+  1: "0xaf22d05095d09cb6cb4f18cb7aefd94cb39eb113",
   5: "",
   56: "",
   97: "0x6E9c1edACe6Fc03f9666769f09D557b1383f7F57"
@@ -170,13 +170,6 @@ export const NestPrice: AddressesType = {
   56: "0x09CE0e021195BA2c1CDE62A8B187abf810951540",
   97: "0xF2f9E62f52389EF223f5Fa8b9926e95386935277"
 };
-
-export const PVMWinContract : AddressesType = {
-  1: "0x0ef5A21Aa062BA49c9c429b256d618d68FD2e008",
-  5: "0x6E9c56E319feb8050e6dB2E597eEaBE529fa84A2",
-  56: '0xCA52f25f37d213CeD3dDE81a539e64464dEa8f3C',
-  97: '0x9AeE80A1df3cA0c5B859d94bCCf16d0440f1691d'
-}
 
 export const PVMPayBackContract : AddressesType = {
   1: "0x7b65629A811eBB0d6CC99bDc4d1d606f8F707125",

@@ -104,7 +104,7 @@ export const transactionTitle = (type: TransactionType) => {
     case 20:
       return "Cancel Limit Order";
     case 21:
-      return "Edit Limit Order";
+      return "Update Limit Order";
     case 22:
       return "New Limit Order";
     default:

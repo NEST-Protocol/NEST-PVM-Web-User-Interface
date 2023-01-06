@@ -16,6 +16,7 @@ import MainButton from "../../../components/MainButton";
 import { Popover } from "@mui/material";
 import TVChart from "../../../components/TVChart";
 import { useFutures } from "../../../libs/hooks/useFutures";
+import { LightTooltip } from "../../../styles/MUI";
 
 const FuturesMobile: FC = () => {
   const classPrefix = "FuturesMobile";
@@ -248,7 +249,19 @@ const FuturesMobile: FC = () => {
           spacing={0}
           className={`${classPrefix}-infoShow`}
         >
-          <p>Service Fee</p>
+          <LightTooltip
+              placement="top-start"
+              title={
+                <div>
+                  <p>open positions fee: cost x leverage x 0.2% </p>
+                  <p>Limit order fee: cost × leverage × 0.2% </p>
+                  <p>Execution fee : 15NEST</p>
+                </div>
+              }
+              arrow
+            >
+              <p className="underLine">Service Fee</p>
+            </LightTooltip>
           <p>{parseFloat(formatUnits(fee, 18)).toFixed(2).toString()} NEST</p>
         </Stack>
         <Stack

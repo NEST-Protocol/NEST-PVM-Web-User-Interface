@@ -36,6 +36,7 @@ const InfoShow: FC<Props> = ({ children, ...props }) => {
   const { chainId } = useWeb3();
   const { theme } = useThemes();
   var dataLi: JSX.Element[] | undefined;
+
   if (props.tokenSelect) {
     dataLi = props.tokenList?.map((item) => {
       const TokenIcon = item.Icon;
@@ -78,6 +79,7 @@ const InfoShow: FC<Props> = ({ children, ...props }) => {
       className={classNames({
         [`${classPrefix}-tokenSelect`]: true,
         [`isShow`]: isShowSelect,
+        [`three`]: props.tokenList?.length === 3,
       })}
     >
       {dataLi}
@@ -173,7 +175,7 @@ const InfoShow: FC<Props> = ({ children, ...props }) => {
       }
       return (
         <LightTooltip
-          placement="right"
+          placement="bottom"
           title={
             <button
               className={`${classPrefix}-balance-add`}

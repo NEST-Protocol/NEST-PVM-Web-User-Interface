@@ -125,7 +125,7 @@
                     },
                     {
                         "internalType": "uint48",
-                        "name": "stopFee",
+                        "name": "limitFee",
                         "type": "uint48"
                     },
                     {
@@ -224,7 +224,7 @@
                     },
                     {
                         "internalType": "uint48",
-                        "name": "stopFee",
+                        "name": "limitFee",
                         "type": "uint48"
                     },
                     {
@@ -239,6 +239,24 @@
             }
         ],
         "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "tokenAddress",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "value",
+                "type": "uint256"
+            }
+        ],
+        "name": "migrate",
+        "outputs": [],
+        "stateMutability": "nonpayable",
         "type": "function"
     },
     {
@@ -288,6 +306,24 @@
             }
         ],
         "name": "update",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "index",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "limitPrice",
+                "type": "uint256"
+            }
+        ],
+        "name": "updateLimitOrder",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
