@@ -68,6 +68,7 @@ const UPDATE_PRICE_TIME = 10;
 const UPDATE_LIST_TIME = 10;
 const UPDATE_BALANCE_TIME = 60;
 const BASE_NEST_FEE = "15";
+const MIN_NEST = 50;
 
 const tokenArray = [tokenList["ETH"], tokenList["BTC"]];
 
@@ -88,7 +89,6 @@ export function useFutures() {
   const [isPositions, setIsPositions] = useState(true);
   const [nestInput, setNestInput] = useState<string>("");
   const [limitInput, setLimitInput] = useState<string>("");
-  const [defaultLimit, setDefaultLimit] = useState<string>("");
   const [takeInput, setTakeInput] = useState<string>("");
   const [leverNum, setLeverNum] = useState<number>(1);
   const [tokenPair, setTokenPair] = useState<string>("ETH");
@@ -356,13 +356,6 @@ export function useFutures() {
   useEffect(() => {
     getAllowance();
   }, [getAllowance, txList]);
-  // default limit
-  useEffect(() => {
-    if (tokenPrice && tokenPrice.price === "---") {
-      return;
-    }
-    setDefaultLimit(tokenPrice.price);
-  }, [tokenPrice, txList]);
   // list
   useEffect(() => {
     getOrderList();
@@ -391,14 +384,7 @@ export function useFutures() {
     BigNumber.from(leverNum.toString()),
     isLong,
     parseUnits(nestInput === "" ? "0" : nestInput, 4),
-    parseUnits(
-      limitInput === ""
-        ? defaultLimit === ""
-          ? "0"
-          : defaultLimit
-        : limitInput,
-      18
-    ),
+    parseUnits(limitInput === "" ? "0" : limitInput, 18),
     parseUnits(takeInput === "" ? "0" : takeInput, 18)
   );
   const approveToPVMFutures = useERC20Approve(
@@ -421,12 +407,19 @@ export function useFutures() {
     if (mainButtonLoading()) {
       return true;
     }
+    if (nestInput === "" || parseFloat(nestInput) <= MIN_NEST) {
+      return true;
+    }
     if (!checkAllowance()) {
       return false;
     }
-    if (nestInput === "") {
+    if (limitInput === "" && limit) {
       return true;
     }
+    if (takeInput === "" && stop) {
+      return true;
+    }
+    return false;
   };
   const mainButtonAction = () => {
     if (mainButtonDis()) {
@@ -474,7 +467,6 @@ export function useFutures() {
     tokenPair,
     setTokenPair,
     limitInput,
-    defaultLimit,
     setLimitInput,
     takeInput,
     setTakeInput,
@@ -898,7 +890,7 @@ export function useFuturesAdd(order: OrderView) {
   };
 
   const buttonDis = () => {
-    if (nestInput === "" || buttonLoading() || !checkNESTBalance()) {
+    if (nestInput === "" || buttonLoading() || !checkNESTBalance() || parseFloat(nestInput) <= MIN_NEST) {
       return true;
     }
     return false;

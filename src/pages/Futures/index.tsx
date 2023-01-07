@@ -44,7 +44,6 @@ const Futures: FC = () => {
     setLeverNum,
     setTokenPair,
     limitInput,
-    defaultLimit,
     setLimitInput,
     takeInput,
     setTakeInput,
@@ -111,8 +110,8 @@ const Futures: FC = () => {
             className={`rightInput`}
           >
             <input
-              placeholder={"Input"}
-              value={limitInput === "" ? defaultLimit : limitInput}
+              placeholder={tokenPrice.price}
+              value={limitInput}
               maxLength={32}
               onChange={(e) => setLimitInput(formatInputNum(e.target.value))}
             />
@@ -139,7 +138,7 @@ const Futures: FC = () => {
             className={`rightInput`}
           >
             <input
-              placeholder={"Input"}
+              placeholder={`>${tokenPrice.price}`}
               value={takeInput}
               maxLength={32}
               onChange={(e) => setTakeInput(formatInputNum(e.target.value))}
@@ -269,12 +268,12 @@ const Futures: FC = () => {
           >
             <OpenShow
               isOn={limit}
-              title={"Limit Price"}
+              title={"Limit Order"}
               onclick={() => setLimit(!limit)}
             />
             <OpenShow
               isOn={stop}
-              title={"Stop-Limit"}
+              title={"Stop Order"}
               onclick={() => setStop(!stop)}
             />
           </Stack>
