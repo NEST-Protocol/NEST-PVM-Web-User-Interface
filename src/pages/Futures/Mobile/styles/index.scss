@@ -302,13 +302,27 @@
     ul.list {
         padding: 0 8px;
 
+        p.emptyOrder {
+            font-size: 12.5px;
+            color: #7D7D7D;
+            width: 100%;
+            text-align: center;
+        }
+
         li+li {
             margin-top: 5px;
         }
     }
 
     &-selectToken {
-        margin-left: -5px;
+        
+        .css-3bmhjh-MuiPaper-root-MuiPopover-paper{
+            width: 100%;
+            border-radius: 22px;
+            margin-top: 6px;
+            max-width: calc(100% - 16px);
+            margin-left: 8px;
+        }
 
         svg {
             position: relative;
@@ -324,10 +338,10 @@
         }
 
         ul {
-            padding: 5px 0;
+            width: 100%;
 
             li {
-                padding: 0 5px;
+                padding: 4px 15px;
                 display: flex;
                 font-size: 12.5px;
 
@@ -448,5 +462,10 @@
                 }
             }
         }
+        ul.list {
+            p.emptyOrder {
+                color: #C5C5C5;
+            }
+        } 
     }
 }

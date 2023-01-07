@@ -111,6 +111,12 @@
         }
     }
 
+    .emptyOrder {
+        color: #7D7D7D;
+        font-size: 16px;
+        margin-top: 15px;
+    }
+
     &-infoShow {
         width: 100%;
         font-size: 16px;
@@ -220,8 +226,12 @@
     }
 
     &-selectToken {
-        margin-top: 5px;
-        margin-left: -5px;
+        .css-3bmhjh-MuiPaper-root-MuiPopover-paper {
+            width: 484px;
+            border-radius: 22px;
+            margin-left: -15px;
+            margin-top: 10px;
+        }
 
         svg {
             position: relative;
@@ -237,13 +247,12 @@
         }
 
         ul {
-            padding: 5px 0;
+            width: 100%;
 
             li {
-                padding: 0 5px;
+                padding: 4px 15px;
                 display: flex;
                 font-size: 16px;
-                padding-right: 35px;
 
                 p {
                     line-height: 28px;
@@ -314,6 +323,34 @@
 
             button+button {
                 margin-left: 10px;
+            }
+
+            button.endOrder {
+                height: 28px;
+                margin: 0 auto;
+                display: flex;
+                justify-content: center;
+                line-height: 28px;
+                font-size: 12px;
+                font-family: $boldFont;
+                color: #878787;
+                border: 1px solid #0047BB;
+                border-radius: 14px;
+                padding: 0 20px;
+
+                p {
+                    margin-right: 15px;
+                }
+
+                svg {
+                    width: 17px;
+                    height: 17px;
+                    margin-top: 4.5px;
+
+                    path {
+                        fill: #878787;
+                    }
+                }
             }
         }
 
@@ -397,7 +434,7 @@
         }
 
         &-limitPrice,
-        &-stopLimit1{
+        &-stopLimit1 {
             background: rgba(255, 255, 255, 0.15);
             box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
             border: 0;
@@ -445,6 +482,19 @@
 
             td {
                 color: white;
+            }
+
+            td.button {
+                button.endOrder {
+                    color: #C5C5C5;
+                    border: 1px solid #8BB7FF;
+
+                    svg {
+                        path {
+                            fill: #C5C5C5;
+                        }
+                    }
+                }
             }
         }
     }

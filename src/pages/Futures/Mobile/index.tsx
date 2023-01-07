@@ -11,7 +11,7 @@ import { formatInputNum, formatInputNumWithFour } from "../../../libs/utils";
 import { formatUnits, parseUnits } from "ethers/lib/utils";
 import OpenShow from "../../../components/OpenShow";
 import classNames from "classnames";
-import PositionsList, { PositionsList2 } from "./PositionsList";
+import PositionsList, { PositionsList2, PositionsOldList } from "./PositionsList";
 import MainButton from "../../../components/MainButton";
 import { Popover } from "@mui/material";
 import TVChart from "../../../components/TVChart";
@@ -52,7 +52,10 @@ const FuturesMobile: FC = () => {
     mainButtonLoading,
     orderList,
     limitOrderList,
+    oldOrderList,
     kValue,
+    orderEmpty,
+    limitEmpty
   } = useFutures();
   const BTCIcon = tokenList["BTC"].Icon;
   const ETHIcon = tokenList["ETH"].Icon;
@@ -61,6 +64,10 @@ const FuturesMobile: FC = () => {
   const handleLeverNum = (selected: number) => {
     setLeverNum(selected);
   };
+
+  const noOrders = () => {
+    return <p className="emptyOrder">No Orders</p>
+  }
 
   const tokenPairAndPrice = () => {
     const LeftIcon = tokenPrice.leftIcon;
@@ -349,13 +356,40 @@ const FuturesMobile: FC = () => {
     });
   };
 
+  const oldOrderListView = () => {
+    return oldOrderList.map((item, index) => {
+      return (
+        <li key={`f2+${index}`}>
+          <PositionsOldList
+            key={`fOld+${item.index}`}
+            item={item}
+            className={classPrefix}
+            kValue={kValue}
+          />
+        </li>
+      );
+    });
+  };
+
   const listView = () => {
     if (isPositions) {
+      if(orderEmpty()) {
+        return noOrders()
+      }
       return orderListView();
     } else {
+      if(limitEmpty()) {
+        return noOrders()
+      }
       return limitOrderListView();
     }
   };
+  const oldListView = () => {
+    if (isPositions) {
+      return oldOrderListView()
+    }
+    return <></>
+  }
   return (
     <Stack spacing={0} className={`${classPrefix}`}>
       {tokenPairAndPrice()}
@@ -395,7 +429,7 @@ const FuturesMobile: FC = () => {
       {KPrice()}
       {mainView()}
       {listTab()}
-      <ul className="list">{listView()}</ul>
+      <ul className="list">{listView()}{oldListView()}</ul>
     </Stack>
   );
 };

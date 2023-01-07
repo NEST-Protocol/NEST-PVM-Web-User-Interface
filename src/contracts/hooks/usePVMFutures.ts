@@ -77,7 +77,7 @@ export function usePVMFuturesSell2(index: BigNumber) {
   };
   const txPromise = useSendTransaction(contract, tx, {
     title: `Close Future positions`,
-    info: "",
+    info: index.toString(),
     type: TransactionType.closeLever,
   });
   return txPromise;
@@ -102,8 +102,30 @@ export function usePVMFuturesSet(index: BigNumber, stopPrice: BigNumber) {
   };
   const txPromise = useSendTransaction(contract, tx, {
     title: `Edit Trigger`,
-    info: "",
+    info: index.toString(),
     type: TransactionType.PVMFuturesEditTrigger,
+  });
+  return txPromise;
+}
+
+export function usePVMFuturesSell(index: BigNumber, amount: BigNumber) {
+  const { account, chainId } = useWeb3();
+  var contract = PVMFutures();
+  var callData: string | undefined;
+  if (!chainId) {
+    contract = null;
+  } else {
+    callData = contract?.interface.encodeFunctionData("sell", [index, amount]);
+  }
+  const tx = {
+    from: account,
+    to: contract?.address,
+    data: callData,
+  };
+  const txPromise = useSendTransaction(contract, tx, {
+    title: `Close Future positions`,
+    info: index.toString(),
+    type: TransactionType.closeLever,
   });
   return txPromise;
 }

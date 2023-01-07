@@ -83,11 +83,38 @@
 
     &-button {
         button {
-            width: 90px;
+            width: 100%;
             height: 34px;
             border-radius: 17px;
             font-size: 12.5px;
             padding: 0;
+        }
+
+        button.endOrder {
+            width: auto;
+            display: flex;
+            height: 34px;
+            padding: 0 21px;
+            margin: 0 auto;
+            border: 1px solid #0047BB;
+            border-radius: 17px;
+            line-height: 34px;
+            font-size: 12.5px;
+            color:#878787;
+            font-family: $boldFont;
+
+            p {
+                margin-right: 20px;
+            }
+
+            svg {
+                width: 17px;
+                height: 17px;
+                margin-top: 7px;
+                path {
+                    fill: #878787;
+                }
+            }
         }
     }
 
@@ -370,6 +397,19 @@
 
             p.value {
                 color: white;
+            }
+        }
+
+        &-button {
+            button.endOrder {
+                color: #C5C5C5;
+                border: 1px solid #8BB7FF;
+
+                svg {
+                    path {
+                        fill: #C5C5C5;
+                    }
+                }
             }
         }
     }

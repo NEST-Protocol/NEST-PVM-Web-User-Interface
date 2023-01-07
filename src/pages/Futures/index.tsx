@@ -20,7 +20,7 @@ import { Popover } from "@mui/material";
 import classNames from "classnames";
 import TVChart from "../../components/TVChart";
 import { useFutures } from "../../libs/hooks/useFutures";
-import FuturesList, { FuturesList2 } from "./List/FuturesList";
+import FuturesList, { FuturesList2, FuturesListOld } from "./List/FuturesList";
 import { LightTooltip } from "../../styles/MUI";
 
 const Futures: FC = () => {
@@ -58,7 +58,10 @@ const Futures: FC = () => {
     mainButtonLoading,
     orderList,
     limitOrderList,
+    oldOrderList,
     kValue,
+    orderEmpty,
+    limitEmpty,
   } = useFutures();
   const BTCIcon = tokenList["BTC"].Icon;
   const ETHIcon = tokenList["ETH"].Icon;
@@ -67,6 +70,10 @@ const Futures: FC = () => {
   const handleLeverNum = (selected: number) => {
     setLeverNum(selected);
   };
+
+  const noOrders = () => {
+    return <p className="emptyOrder">No Orders</p>
+  }
 
   const topView = () => {
     const leverList =
@@ -361,6 +368,21 @@ const Futures: FC = () => {
         );
       });
     };
+    const oldOrderListView = () => {
+      return oldOrderList.map((item) => {
+        return (
+          <FuturesListOld
+            key={`fOld+${item.index}`}
+            item={item}
+            kValue={kValue}
+            className={classPrefix}
+          />
+        );
+      });
+    };
+    if (orderEmpty()) {
+      return noOrders()
+    }
     return (
       <table className={`${classPrefix}-table`}>
         <thead>
@@ -374,7 +396,7 @@ const Futures: FC = () => {
             <th>Operate</th>
           </tr>
         </thead>
-        <tbody>{orderListView()}</tbody>
+        <tbody>{orderListView()}{oldOrderListView()}</tbody>
       </table>
     );
   };
@@ -390,6 +412,9 @@ const Futures: FC = () => {
         );
       });
     };
+    if (limitEmpty()) {
+      return noOrders()
+    }
     return (
       <table className={`${classPrefix}-table`}>
         <thead>
