@@ -57,6 +57,19 @@
                 color: black;
                 font-family: $boldFont;
             }
+
+            .TriggerClose {
+                width: 68px;
+                height: 28px;
+                padding:0 10px;
+                margin: 0;
+                margin-left: 10px;
+                p {
+                    font-family: $boldFont;
+                    font-size: 16px;
+                    color: white;
+                }
+            }
         }
     }
 

@@ -59,7 +59,7 @@ export function usePVMFuturesProxyUpdate(index: BigNumber, limitPrice: BigNumber
   };
   const txPromise = useSendTransaction(contract, tx, {
     title: `Update Limit Order`,
-    info: "",
+    info: index.toString(),
     type: TransactionType.PVMFuturesProxyEdit,
   });
   return txPromise;

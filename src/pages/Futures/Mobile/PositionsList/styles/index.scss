@@ -267,6 +267,19 @@
                 color: black;
                 font-family: $boldFont;
             }
+
+            .TriggerClose {
+                width: 68px;
+                height: 28px;
+                padding:0 10px;
+                margin: 0;
+                margin-left: 10px;
+                p {
+                    font-family: $boldFont;
+                    font-size: 12.5px;
+                    color: white;
+                }
+            }
         }
     }
 
@@ -361,6 +374,13 @@
 
                     input {
                         color: white;
+                    }
+
+                    .TriggerClose {
+                        background: linear-gradient(90deg, #8BB7FF 0%, #0061FF 100%);
+                        p {
+                            color: white;
+                        }
                     }
                 }
 

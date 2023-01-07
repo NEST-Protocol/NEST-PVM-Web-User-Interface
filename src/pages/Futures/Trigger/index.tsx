@@ -55,6 +55,16 @@ const Trigger: FC<TriggerProp> = ({ ...props }) => {
             }
           />
           <p>USDT</p>
+          {isEdit() ? (
+            <MainButton
+              className="TriggerClose"
+              onClick={actionClose}
+            >
+              <p>Close</p>
+            </MainButton>
+          ) : (
+            <></>
+          )}
         </Stack>
       </Stack>
     );
