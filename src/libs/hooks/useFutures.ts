@@ -86,6 +86,9 @@ export function useFutures() {
   );
   const [limit, setLimit] = useState(false);
   const [stop, setStop] = useState(false);
+  const [showNotice, setShowNotice] = useState(false);
+  const [hadTriggerRisk, setHadTriggerRisk] = useState(false);
+  const [showTriggerRisk, setShowTriggerRisk] = useState(false);
   const [isPositions, setIsPositions] = useState(true);
   const [nestInput, setNestInput] = useState<string>("");
   const [limitInput, setLimitInput] = useState<string>("");
@@ -122,6 +125,10 @@ export function useFutures() {
     } else {
       return parseUnits(nestInput, 18).add(fee).lte(nestAllowance);
     }
+  };
+  const checkShowNotice = () => {
+    const isShow = localStorage.getItem("PerpetualsFirst");
+    return isShow === "1" ? false : true;
   };
   const orderEmpty = () => {
     if (orderList.length === 0 && oldOrderList.length === 0) {
@@ -370,6 +377,11 @@ export function useFutures() {
       clearInterval(time);
     };
   }, [getLimitOrderList, getOldOrderList, getOrderList]);
+  
+  useEffect(() => {
+    const triggerRiskModal = localStorage.getItem("TriggerRiskModal");
+    setHadTriggerRisk(triggerRiskModal === "1" ? true : false);
+  }, []);
 
   // action
   const buy1 = usePVMFuturesBuy2(
@@ -407,7 +419,7 @@ export function useFutures() {
     if (mainButtonLoading()) {
       return true;
     }
-    if (nestInput === "" || parseFloat(nestInput) <= MIN_NEST) {
+    if (nestInput === "" || parseFloat(nestInput) < MIN_NEST) {
       return true;
     }
     if (!checkAllowance()) {
@@ -426,11 +438,20 @@ export function useFutures() {
       return;
     }
     if (!checkAllowance()) {
+      if (checkShowNotice()) {
+        setShowNotice(true);
+        return;
+      }
       if (limit) {
         approveToPVMFuturesProxy();
       } else {
         approveToPVMFutures();
       }
+      return;
+    }
+    if ((limit || stop) && !hadTriggerRisk) {
+      setShowTriggerRisk(true);
+      setHadTriggerRisk(true);
       return;
     }
     if (limit) {
@@ -483,6 +504,10 @@ export function useFutures() {
     kValue,
     orderEmpty,
     limitEmpty,
+    showNotice,
+    setShowNotice,
+    showTriggerRisk,
+    setShowTriggerRisk,
   };
 }
 
@@ -890,7 +915,12 @@ export function useFuturesAdd(order: OrderView) {
   };
 
   const buttonDis = () => {
-    if (nestInput === "" || buttonLoading() || !checkNESTBalance() || parseFloat(nestInput) <= MIN_NEST) {
+    if (
+      nestInput === "" ||
+      buttonLoading() ||
+      !checkNESTBalance() ||
+      parseFloat(nestInput) < MIN_NEST
+    ) {
       return true;
     }
     return false;

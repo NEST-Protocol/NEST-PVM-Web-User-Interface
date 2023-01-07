@@ -94,6 +94,7 @@ li {
 }
 
 .popup-overlay {
+    z-index: 1201 !important;
     background: rgba(0, 0, 0, 0.5);
 }
 

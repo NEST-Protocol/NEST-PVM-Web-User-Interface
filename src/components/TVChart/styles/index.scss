@@ -11,8 +11,16 @@
             }
 
             a+a {
-                color: #FF0000;
+                color: #fa3c58;
                 margin-left: 5px;
+            }
+        }
+
+        &-green {
+            div {
+                a+a {
+                    color: #0ecc83;
+                }
             }
         }
     }
@@ -77,7 +85,15 @@
                 }
 
                 a+a {
-                    color: #FF0000;
+                    color: #fa3c58;
+                }
+            }
+
+            &-green {
+                div {
+                    a+a {
+                        color: #0ecc83;
+                    }
                 }
             }
         }

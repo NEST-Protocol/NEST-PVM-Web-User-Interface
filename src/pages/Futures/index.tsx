@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useRef, useState } from "react";
 import {
   checkWidth,
   formatInputNum,
@@ -22,10 +22,14 @@ import TVChart from "../../components/TVChart";
 import { useFutures } from "../../libs/hooks/useFutures";
 import FuturesList, { FuturesList2, FuturesListOld } from "./List/FuturesList";
 import { LightTooltip } from "../../styles/MUI";
+import PerpetualsNoticeModal from "./PerpetualsNoticeModal";
+import Popup from "reactjs-popup";
+import TriggerRiskModal from "./TriggerRisk";
 
 const Futures: FC = () => {
   const classPrefix = "Futures";
   const isPC = checkWidth();
+  const modal = useRef<any>();
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
   const {
     chainId,
@@ -61,6 +65,10 @@ const Futures: FC = () => {
     kValue,
     orderEmpty,
     limitEmpty,
+    showNotice,
+    setShowNotice,
+    showTriggerRisk, 
+    setShowTriggerRisk,
   } = useFutures();
   const BTCIcon = tokenList["BTC"].Icon;
   const ETHIcon = tokenList["ETH"].Icon;
@@ -71,8 +79,8 @@ const Futures: FC = () => {
   };
 
   const noOrders = () => {
-    return <p className="emptyOrder">No Orders</p>
-  }
+    return <p className="emptyOrder">No Orders</p>;
+  };
 
   const topView = () => {
     const leverList =
@@ -380,7 +388,7 @@ const Futures: FC = () => {
       });
     };
     if (orderEmpty()) {
-      return noOrders()
+      return noOrders();
     }
     return (
       <table className={`${classPrefix}-table`}>
@@ -395,7 +403,10 @@ const Futures: FC = () => {
             <th>Operate</th>
           </tr>
         </thead>
-        <tbody>{orderListView()}{oldOrderListView()}</tbody>
+        <tbody>
+          {orderListView()}
+          {oldOrderListView()}
+        </tbody>
       </table>
     );
   };
@@ -412,7 +423,7 @@ const Futures: FC = () => {
       });
     };
     if (limitEmpty()) {
-      return noOrders()
+      return noOrders();
     }
     return (
       <table className={`${classPrefix}-table`}>
@@ -434,6 +445,22 @@ const Futures: FC = () => {
     <FuturesMobile />
   ) : (
     <Stack spacing={0} alignItems="center" className={`${classPrefix}`}>
+      <Popup
+        open={showNotice}
+        modal
+        ref={modal}
+        onClose={() => setShowNotice(false)}
+      >
+        <PerpetualsNoticeModal onClose={() => setShowNotice(false)} />
+      </Popup>
+      <Popup
+        open={showTriggerRisk}
+        modal
+        ref={modal}
+        onClose={() => setShowTriggerRisk(false)}
+      >
+        <TriggerRiskModal onClose={() => setShowTriggerRisk(false)} />
+      </Popup>
       {topView()}
       <Stack
         direction="row"

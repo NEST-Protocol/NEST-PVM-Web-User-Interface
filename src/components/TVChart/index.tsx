@@ -239,7 +239,10 @@ const TVChart: FC<TVChartProps> = ({ chainId, tokenPair, chartHeight}) => {
           flexDirection: "row",
           justifyContent: "space-between",
         }}
-        className="TVChart-topView"
+        className={classNames({
+          [`TVChart-topView`]: true,
+          [`TVChart-topView-green`]: parseFloat(candlestick?.close) > parseFloat(candlestick?.open)
+        })}
       >
         <div>
           <a>O:</a>

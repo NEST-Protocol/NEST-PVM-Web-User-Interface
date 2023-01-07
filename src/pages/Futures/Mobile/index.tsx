@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useRef, useState } from "react";
 import "./styles";
 import Stack from "@mui/material/Stack";
 import { tokenList } from "../../../libs/constants/addresses";
@@ -17,10 +17,14 @@ import { Popover } from "@mui/material";
 import TVChart from "../../../components/TVChart";
 import { useFutures } from "../../../libs/hooks/useFutures";
 import { LightTooltip } from "../../../styles/MUI";
+import PerpetualsNoticeModal from "../PerpetualsNoticeModal";
+import Popup from "reactjs-popup";
+import TriggerRiskModal from "../TriggerRisk";
 
 const FuturesMobile: FC = () => {
   const classPrefix = "FuturesMobile";
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
+  const modal = useRef<any>();
   const {
     chainId,
     isLong,
@@ -54,7 +58,11 @@ const FuturesMobile: FC = () => {
     oldOrderList,
     kValue,
     orderEmpty,
-    limitEmpty
+    limitEmpty,
+    showNotice,
+    setShowNotice,
+    showTriggerRisk, 
+    setShowTriggerRisk,
   } = useFutures();
   const BTCIcon = tokenList["BTC"].Icon;
   const ETHIcon = tokenList["ETH"].Icon;
@@ -391,6 +399,22 @@ const FuturesMobile: FC = () => {
   }
   return (
     <Stack spacing={0} className={`${classPrefix}`}>
+      <Popup
+        open={showNotice}
+        modal
+        ref={modal}
+        onClose={() => setShowNotice(false)}
+      >
+        <PerpetualsNoticeModal onClose={() => setShowNotice(false)} />
+      </Popup>
+      <Popup
+        open={showTriggerRisk}
+        modal
+        ref={modal}
+        onClose={() => setShowTriggerRisk(false)}
+      >
+        <TriggerRiskModal onClose={() => setShowTriggerRisk(false)} />
+      </Popup>
       {tokenPairAndPrice()}
       <Popover
         open={Boolean(anchorEl)}

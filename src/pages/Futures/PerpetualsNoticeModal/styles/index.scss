@@ -73,3 +73,12 @@
         }
     }
 }
+
+@media screen and (max-width: 1000px) {
+    .ModalBorder {
+        padding: 0 8px;
+    }
+    .notice-card {
+        width: 100%;
+    }
+}
