@@ -244,7 +244,7 @@ table {
 @media screen and (max-width: 1000px) {
     .options-mintOptions {
         flex-flow: column;
-        padding: 0 10px;
+        padding: 0 8px;
         margin-top: 0px;
 
         .mainCard {
@@ -255,28 +255,66 @@ table {
         .options-mintOptions-leftCard {
             margin-right: 0px;
             margin-bottom: 10px;
+            padding: 25px 15px;
+
             &-tokenPair {
                 .TokenShow {
                     .TokenShow-text {
                         display: none;
                     }
                 }
+
+                div+svg {
+                    width: 18px;
+                    height: 18px;
+                    margin-top: 8px;
+                    margin-left: 5px;
+
+                    &:hover {
+                        cursor: pointer;
+                    }
+                }
+            }
+
+            &-tokenPair+p {
+                font-size: 12.5px;
+                line-height: 34px;
+            }
+
+            .infoView+.infoView,
+            .chooseType+.infoView {
+                margin-top: 15px;
             }
         }
 
         .options-mintOptions-rightCard {
+            padding: 25px 15px;
+
+            &-tokenTitle{
+                font-size: 12.5px;
+            }
             &-tokenValue {
-                margin: 20px auto;
+                margin: 15px auto;
+                font-size: 12.5px;
+            }
+
+            &-timeTitle{
+                margin-top: 15px;
+                font-size: 12.5px;
             }
 
             &-timeValue {
-                margin: 20px auto;
+                margin: 15px auto;
+                font-size: 12.5px;
             }
 
             &-smallCard {
                 .mainCard {
-                    padding: 20px 20px;
+                    padding: 15px 15px;
                     margin-right: 20px;
+                    p {
+                        font-size: 12.5px;
+                    }
                 }
 
                 .mainCard+.mainCard {
@@ -284,15 +322,31 @@ table {
                 }
             }
         }
+
+        .ant-picker {
+            .ant-picker-input {
+                input {
+                    font-size: 12.5px;
+
+                    &::placeholder {
+                        font-size: 12.5px;
+                    }
+                }
+            }
+        }
+
+        .ant-picker-suffix {
+            &>svg {
+                margin: auto 0;
+                width: 18px;
+                height: 18px;
+            }
+        }
     }
 
     .OptionsList-mobile {
         margin-top: 20px;
-        padding: 0 10px;
-    }
-
-    .options-mintOptions {
-        padding: 0 10px;
+        padding: 0 8px;
     }
 
     .options-mintOptions+div>ul {

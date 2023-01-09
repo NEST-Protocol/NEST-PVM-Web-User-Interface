@@ -221,7 +221,12 @@ export function useFutures() {
         account
       );
       const result = list.filter((item) => {
-        return item.owner.toLocaleLowerCase() !== ZERO_ADDRESS;
+        return (
+          item.owner.toLocaleLowerCase() !== ZERO_ADDRESS &&
+          (item.balance.toString() !== "0" ||
+            (item.balance.toString() === "0" &&
+              item.baseBlock.toString() === "0"))
+        );
       });
       const notShow = await fetch(
         `https://api.nestfi.net/api/order/list/${chainId}?address=${account}&type=0`

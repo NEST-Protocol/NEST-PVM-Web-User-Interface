@@ -269,7 +269,9 @@
             border-radius: 17px;
             padding: 0 14.5px;
 
-            .input-middle {
+            .input-middle,
+            .input-right,
+            .input-left {
                 font-size: 12.5px;
 
                 &::placeholder {
@@ -284,6 +286,11 @@
 
             .max-button {
                 font-size: 12.5px;
+            }
+
+            span {
+                font-size: 12.5px;
+                line-height: 34px;
             }
         }
     }
