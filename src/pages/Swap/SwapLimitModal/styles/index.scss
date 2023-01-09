@@ -62,20 +62,36 @@
                     background: linear-gradient(90deg, #8BB7FF 0%, #0061FF 100%);
                     color: $main-background-color;
                     border: 0px;
-                    line-height: 44px;
 
                     &:hover {
                         border: 0px;
-                        line-height: 44px;
                     }
                 }
             }
-
         }
     }
 }
 
 @media screen and (max-width: 1000px) {
+    .swapLimitModal {
+        height: auto;
+        &-title {
+            font-size: 12.5px;
+        }
+    
+        .leverChoose {
+            margin-top: 40px;
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+    
+        &-wrong {
+            margin-top: 30px;
+            font-size: 12.5px;
+            padding-bottom: 30px;
+        }
+    }
+
     .popup-content {
         width: 100%;
         .border {
@@ -85,5 +101,4 @@
             }
         }
     }
-    
 }

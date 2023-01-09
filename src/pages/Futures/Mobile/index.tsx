@@ -11,7 +11,10 @@ import { formatInputNum, formatInputNumWithFour } from "../../../libs/utils";
 import { formatUnits, parseUnits } from "ethers/lib/utils";
 import OpenShow from "../../../components/OpenShow";
 import classNames from "classnames";
-import PositionsList, { PositionsList2, PositionsOldList } from "./PositionsList";
+import PositionsList, {
+  PositionsList2,
+  PositionsOldList,
+} from "./PositionsList";
 import MainButton from "../../../components/MainButton";
 import { Popover } from "@mui/material";
 import TVChart from "../../../components/TVChart";
@@ -61,8 +64,9 @@ const FuturesMobile: FC = () => {
     limitEmpty,
     showNotice,
     setShowNotice,
-    showTriggerRisk, 
+    showTriggerRisk,
     setShowTriggerRisk,
+    hideOrder,
   } = useFutures();
   const BTCIcon = tokenList["BTC"].Icon;
   const ETHIcon = tokenList["ETH"].Icon;
@@ -73,8 +77,8 @@ const FuturesMobile: FC = () => {
   };
 
   const noOrders = () => {
-    return <p className="emptyOrder">No Orders</p>
-  }
+    return <p className="emptyOrder">No Orders</p>;
+  };
 
   const tokenPairAndPrice = () => {
     const LeftIcon = tokenPrice.leftIcon;
@@ -264,18 +268,18 @@ const FuturesMobile: FC = () => {
           className={`${classPrefix}-infoShow`}
         >
           <LightTooltip
-              placement="top-start"
-              title={
-                <div>
-                  <p>open positions fee: cost x leverage x 0.2% </p>
-                  <p>Limit order fee: cost × leverage × 0.2% </p>
-                  <p>Execution fee : 15NEST</p>
-                </div>
-              }
-              arrow
-            >
-              <p className="underLine">Service Fee</p>
-            </LightTooltip>
+            placement="top-start"
+            title={
+              <div>
+                <p>open positions fee: cost x leverage x 0.2% </p>
+                <p>Limit order fee: cost × leverage × 0.2% </p>
+                <p>Execution fee : 15NEST</p>
+              </div>
+            }
+            arrow
+          >
+            <p className="underLine">Service Fee</p>
+          </LightTooltip>
           <p>{parseFloat(formatUnits(fee, 18)).toFixed(2).toString()} NEST</p>
         </Stack>
         <Stack
@@ -347,6 +351,7 @@ const FuturesMobile: FC = () => {
             item={item}
             className={classPrefix}
             kValue={kValue}
+            hideOrder={hideOrder}
           />
         </li>
       );
@@ -357,7 +362,12 @@ const FuturesMobile: FC = () => {
     return limitOrderList.map((item, index) => {
       return (
         <li key={`f2+${index}`}>
-          <PositionsList2 key={"f2"} item={item} className={classPrefix} />
+          <PositionsList2
+            key={"f2"}
+            item={item}
+            className={classPrefix}
+            hideOrder={hideOrder}
+          />
         </li>
       );
     });
@@ -380,23 +390,23 @@ const FuturesMobile: FC = () => {
 
   const listView = () => {
     if (isPositions) {
-      if(orderEmpty()) {
-        return noOrders()
+      if (orderEmpty()) {
+        return noOrders();
       }
       return orderListView();
     } else {
-      if(limitEmpty()) {
-        return noOrders()
+      if (limitEmpty()) {
+        return noOrders();
       }
       return limitOrderListView();
     }
   };
   const oldListView = () => {
     if (isPositions) {
-      return oldOrderListView()
+      return oldOrderListView();
     }
-    return <></>
-  }
+    return <></>;
+  };
   return (
     <Stack spacing={0} className={`${classPrefix}`}>
       <Popup
@@ -452,7 +462,10 @@ const FuturesMobile: FC = () => {
       {KPrice()}
       {mainView()}
       {listTab()}
-      <ul className="list">{listView()}{oldListView()}</ul>
+      <ul className="list">
+        {listView()}
+        {oldListView()}
+      </ul>
     </Stack>
   );
 };

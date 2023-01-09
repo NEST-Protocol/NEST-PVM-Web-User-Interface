@@ -1,6 +1,7 @@
 import { BigNumber } from "@ethersproject/bignumber";
 import { MaxUint256 } from "@ethersproject/constants";
 import { t, Trans } from "@lingui/macro";
+import Popover from "@mui/material/Popover";
 import classNames from "classnames";
 import { FC, useCallback, useEffect, useRef, useState } from "react";
 import Popup from "reactjs-popup";
@@ -52,6 +53,7 @@ type SwapTokenBalanceType = {
 const Swap: FC = () => {
   const classPrefix = "swap";
   const { chainId, account, library } = useWeb3();
+  const [anchorEl, setAnchorEl] = useState<HTMLDivElement | null>(null);
   const [inputValue, setInputValue] = useState<string>();
   const [priceValue, setPriceValue] = useState<BigNumber>();
   const [swapToken, setSwapToken] = useState<SwapTokenType>({
@@ -68,6 +70,7 @@ const Swap: FC = () => {
   const { pendingList, txList } = useTransactionListCon();
   const uniSwapV2OJ = UniSwapV2(UniSwapV2Contract);
   const modal = useRef<any>();
+  const USDTIcon = tokenList["USDT"].Icon;
 
   const exchangeSwapTokens = () => {
     if (swapToken.src === "DCU" || swapToken.src === "NHBTC") {
@@ -370,6 +373,24 @@ const Swap: FC = () => {
     return false;
   };
 
+  const selectTokenLi = (tokenList: TokenType[]) => {
+    return tokenList.map((item, index) => {
+      const TokenIcon = item.Icon
+      return (
+        <li
+          onClick={() => {
+            getSelectedSrcToken(item)
+            setAnchorEl(null);
+          }}
+          key={`selectTokenLi+${index}`}
+        >
+          <TokenIcon />
+          <p>{`${item.symbol}`}</p>
+        </li>
+      );
+    });
+  };
+
   return (
     <div className={`${classPrefix}`}>
       <MainCard classNames={`${classPrefix}-card`}>
@@ -387,15 +408,29 @@ const Swap: FC = () => {
                 : "---"
             } ${swapToken.src}`
           }
-          tokenSelect={true}
+          tokenSelect={false}
           tokenList={tokenListShow(true)}
           getSelectedToken={getSelectedSrcToken}
           balanceRed={!checkBalance()}
         >
-          <div className={`${classPrefix}-card-selected`}>
+          <div className={`${classPrefix}-card-selected`} onClick={(e) => setAnchorEl(e.currentTarget)}>
             <SingleTokenShow tokenNameOne={swapToken.src} isBold />
             <p>{<PutDownIcon />}</p>
           </div>
+          <Popover
+            open={Boolean(anchorEl)}
+            anchorEl={anchorEl}
+            onClose={() => setAnchorEl(null)}
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "left",
+            }}
+            className={`${classPrefix}-card-selectToken`}
+          >
+            <ul>
+              {selectTokenLi(tokenListShow(true) ?? [])}
+            </ul>
+          </Popover>
 
           <input
             placeholder={t`Input`}

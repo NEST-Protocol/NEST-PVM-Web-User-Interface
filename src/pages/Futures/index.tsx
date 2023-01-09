@@ -69,6 +69,7 @@ const Futures: FC = () => {
     setShowNotice,
     showTriggerRisk, 
     setShowTriggerRisk,
+    hideOrder
   } = useFutures();
   const BTCIcon = tokenList["BTC"].Icon;
   const ETHIcon = tokenList["ETH"].Icon;
@@ -371,6 +372,7 @@ const Futures: FC = () => {
             item={item}
             kValue={kValue}
             className={classPrefix}
+            hideOrder={hideOrder}
           />
         );
       });
@@ -418,6 +420,7 @@ const Futures: FC = () => {
             key={`f2+${item.index}`}
             item={item}
             className={classPrefix}
+            hideOrder={hideOrder}
           />
         );
       });

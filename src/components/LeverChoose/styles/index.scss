@@ -60,21 +60,53 @@
 
                 &:hover {
                     border: 0px;
-                    line-height: 44px;
                 }
 
                 &.selected {
                     background: linear-gradient(90deg, #8BB7FF 0%, #0061FF 100%);
                     color: $main-background-color;
                     border: 0px;
-                    line-height: 44px;
                     &:hover {
-                        line-height: 44px;
                         border: 0px;
                     }
                 }
             }
 
+        }
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .leverChoose {
+        width: 100%;
+        margin-top: 22px;
+        max-width: calc(100% - 46px);
+
+        &-title {
+            margin: 0 15px;
+            font-size: 12.5px;
+        }
+
+        ul {
+            margin-top: 11px;
+
+            li {
+                width: 40px;
+                height: 24px;
+                font-size: 12.5px;
+                line-height: 24px;
+                border-radius: 12px;
+
+                &.selected {
+                    border: 1px solid $main-button-color;
+                    line-height: 22px;
+
+                    &:hover {
+                        border: 1px solid $main-button-color;
+                        line-height: 22px;
+                    }
+                }
+            }
         }
     }
 }

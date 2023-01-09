@@ -62,9 +62,11 @@
 
                     &.selected {
                         line-height: 20px;
+                        border: 1px solid $main-button-color;
 
                         &:hover {
                             line-height: 20px;
+                            border:1px solid $main-button-color;
                         }
                     }
 
@@ -86,38 +88,6 @@
 
         .LongAndShort {
             margin-top: 25px;
-        }
-
-        .leverChoose {
-            width: 100%;
-            margin-top: 22px;
-
-            &-title {
-                margin: 0 15px;
-                font-size: 12.5px;
-            }
-
-            ul {
-                margin-top: 11px;
-
-                li {
-                    width: 40px;
-                    height: 24px;
-                    font-size: 12.5px;
-                    line-height: 24px;
-                    border-radius: 12px;
-
-                    &.selected {
-                        border: 1px solid $main-button-color;
-                        line-height: 22px;
-
-                        &:hover {
-                            border: 1px solid $main-button-color;
-                            line-height: 22px;
-                        }
-                    }
-                }
-            }
         }
 
         .infoView {

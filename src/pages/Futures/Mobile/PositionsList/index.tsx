@@ -70,7 +70,10 @@ const PositionsList: FC<FuturesListProps> = ({ ...props }) => {
 
   const endButton = () => {
     return (
-      <button className="endOrder">
+      <button
+        className="endOrder"
+        onClick={() => props.hideOrder(true, props.item.index)}
+      >
         <p>Liquidated</p>
         <XIcon />
       </button>
@@ -225,7 +228,10 @@ export const PositionsList2: FC<FuturesList2Props> = ({ ...props }) => {
 
   const endButton = () => {
     return (
-      <button className="endOrder">
+      <button
+        className="endOrder"
+        onClick={() => props.hideOrder(false, props.item.index)}
+      >
         <p>Implemented take profit</p>
         <XIcon />
       </button>

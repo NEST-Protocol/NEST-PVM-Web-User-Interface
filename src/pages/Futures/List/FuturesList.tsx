@@ -1,3 +1,4 @@
+import { BigNumber } from "ethers/lib/ethers";
 import { FC, useRef } from "react";
 import Popup from "reactjs-popup";
 import { LongIcon, ShortIcon, XIcon } from "../../../components/Icon";
@@ -20,12 +21,14 @@ export type FuturesListProps = {
   item: OrderView;
   key: string;
   className: string;
+  hideOrder: (isPosition: boolean, index: BigNumber) => void;
   kValue?: { [key: string]: TokenType };
 };
 export type FuturesList2Props = {
   item: LimitOrderView;
   key: string;
   className: string;
+  hideOrder: (isPosition: boolean, index: BigNumber) => void;
 };
 export type FuturesOldListProps = {
   item: OldOrderView;
@@ -47,7 +50,7 @@ const FuturesList: FC<FuturesListProps> = ({ ...props }) => {
 
   const endButton = () => {
     return (
-      <button className="endOrder">
+      <button className="endOrder" onClick={() => props.hideOrder(true, props.item.index)}>
         <p>Liquidated</p>
         <XIcon />
       </button>
@@ -126,7 +129,7 @@ export const FuturesList2: FC<FuturesList2Props> = ({ ...props }) => {
 
   const endButton = () => {
     return (
-      <button className="endOrder">
+      <button className="endOrder" onClick={() => props.hideOrder(false, props.item.index)}>
         <p>Implemented take profit</p>
         <XIcon />
       </button>

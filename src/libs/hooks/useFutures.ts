@@ -100,6 +100,8 @@ export function useFutures() {
   const [limitOrderList, setLimitOrderList] = useState<Array<LimitOrderView>>(
     []
   );
+  const [orderNotShow, setOrderNotShow] = useState<BigNumber[]>([]);
+  const [limitOrderNotShow, setLimitOrderNotShow] = useState<BigNumber[]>([]);
   const [oldOrderList, setOldOrderList] = useState<Array<OldOrderView>>([]);
   const { pendingList, txList } = useTransactionListCon();
   const nestToken = ERC20Contract(tokenList["NEST"].addresses);
@@ -377,7 +379,7 @@ export function useFutures() {
       clearInterval(time);
     };
   }, [getLimitOrderList, getOldOrderList, getOrderList]);
-  
+
   useEffect(() => {
     const triggerRiskModal = localStorage.getItem("TriggerRiskModal");
     setHadTriggerRisk(triggerRiskModal === "1" ? true : false);
@@ -470,6 +472,27 @@ export function useFutures() {
     return pendingTransaction.length > 0 ? true : false;
   };
 
+  // hide order
+  const hideOrder = (isPosition: boolean, index: BigNumber) => {
+    if (isPosition) {
+      setOrderNotShow([...orderNotShow, index])
+    } else {
+      setLimitOrderNotShow([...limitOrderNotShow, index])
+    }
+  }
+  useEffect(() => {
+    const newOrder = orderList.filter((item) => {
+      return !orderNotShow.includes(item.index)
+    })
+    setOrderList(newOrder)
+  }, [orderList, orderNotShow])
+  useEffect(() => {
+    const newLimitOrder = limitOrderList.filter((item) => {
+      return !limitOrderNotShow.includes(item.index)
+    })
+    setLimitOrderList(newLimitOrder)
+  }, [limitOrderList, limitOrderNotShow])
+
   return {
     chainId,
     isLong,
@@ -508,6 +531,7 @@ export function useFutures() {
     setShowNotice,
     showTriggerRisk,
     setShowTriggerRisk,
+    hideOrder
   };
 }
 
