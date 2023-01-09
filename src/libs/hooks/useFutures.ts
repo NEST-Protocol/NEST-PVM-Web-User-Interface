@@ -223,11 +223,16 @@ export function useFutures() {
       const result = list.filter((item) => {
         return item.owner.toLocaleLowerCase() !== ZERO_ADDRESS;
       });
+      const notShow = await fetch(
+        `https://api.nestfi.net/api/order/list/${chainId}?address=${account}&type=0`
+      );
+      const notShowJson = await notShow.json();
+      setOrderNotShow(notShowJson["value"]);
       setOrderList(result);
     } catch (error) {
       console.log(error);
     }
-  }, [PVMFuturesOJ, account]);
+  }, [PVMFuturesOJ, account, chainId]);
 
   const getLimitOrderList = useCallback(async () => {
     try {
@@ -246,11 +251,16 @@ export function useFutures() {
           item.status.toString().toLocaleUpperCase() !== "2"
         );
       });
+      const notShow = await fetch(
+        `https://api.nestfi.net/api/order/list/${chainId}?address=${account}&type=1`
+      );
+      const notShowJson = await notShow.json();
+      setLimitOrderNotShow(notShowJson["value"]);
       setLimitOrderList(result);
     } catch (error) {
       console.log(error);
     }
-  }, [PVMFuturesProxyOJ, account]);
+  }, [PVMFuturesProxyOJ, account, chainId]);
 
   const getOldOrderList = useCallback(async () => {
     try {
@@ -475,23 +485,35 @@ export function useFutures() {
   // hide order
   const hideOrder = (isPosition: boolean, index: BigNumber) => {
     if (isPosition) {
-      setOrderNotShow([...orderNotShow, index])
+      setOrderNotShow([...orderNotShow, index]);
     } else {
-      setLimitOrderNotShow([...limitOrderNotShow, index])
+      setLimitOrderNotShow([...limitOrderNotShow, index]);
     }
-  }
-  useEffect(() => {
+    fetch(
+      `https://api.nestfi.net/api/order/save/${chainId}?address=${account}&index=${index.toString()}&type=${
+        isPosition ? 0 : 1
+      }`,
+      {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+  };
+
+  const showOrder = useMemo(() => {
     const newOrder = orderList.filter((item) => {
-      return !orderNotShow.includes(item.index)
-    })
-    setOrderList(newOrder)
-  }, [orderList, orderNotShow])
-  useEffect(() => {
-    const newLimitOrder = limitOrderList.filter((item) => {
-      return !limitOrderNotShow.includes(item.index)
-    })
-    setLimitOrderList(newLimitOrder)
-  }, [limitOrderList, limitOrderNotShow])
+      return !orderNotShow.includes(item.index);
+    });
+    return newOrder;
+  }, [orderList, orderNotShow]);
+  const showLimitOrder = useMemo(() => {
+    const newOrder = limitOrderList.filter((item) => {
+      return !limitOrderNotShow.includes(item.index);
+    });
+    return newOrder;
+  }, [limitOrderList, limitOrderNotShow]);
 
   return {
     chainId,
@@ -521,8 +543,8 @@ export function useFutures() {
     mainButtonDis,
     mainButtonAction,
     mainButtonLoading,
-    orderList,
-    limitOrderList,
+    showOrder,
+    showLimitOrder,
     oldOrderList,
     kValue,
     orderEmpty,
@@ -531,7 +553,7 @@ export function useFutures() {
     setShowNotice,
     showTriggerRisk,
     setShowTriggerRisk,
-    hideOrder
+    hideOrder,
   };
 }
 

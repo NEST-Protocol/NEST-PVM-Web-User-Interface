@@ -70,7 +70,6 @@ const Swap: FC = () => {
   const { pendingList, txList } = useTransactionListCon();
   const uniSwapV2OJ = UniSwapV2(UniSwapV2Contract);
   const modal = useRef<any>();
-  const USDTIcon = tokenList["USDT"].Icon;
 
   const exchangeSwapTokens = () => {
     if (swapToken.src === "DCU" || swapToken.src === "NHBTC") {

@@ -59,8 +59,8 @@ const Futures: FC = () => {
     mainButtonDis,
     mainButtonAction,
     mainButtonLoading,
-    orderList,
-    limitOrderList,
+    showOrder,
+    showLimitOrder,
     oldOrderList,
     kValue,
     orderEmpty,
@@ -262,7 +262,7 @@ const Futures: FC = () => {
             <button
               className={"max-button"}
               onClick={() =>
-                setNestInput(nestBalance ? formatUnits(nestBalance, 18) : "")
+                setNestInput(nestBalance ? parseFloat(formatUnits(nestBalance, 18)).toFixed(2).toString() : "")
               }
             >
               MAX
@@ -365,7 +365,7 @@ const Futures: FC = () => {
 
   const listView1 = () => {
     const orderListView = () => {
-      return orderList.map((item) => {
+      return showOrder.map((item) => {
         return (
           <FuturesList
             key={`f+${item.index}`}
@@ -414,7 +414,7 @@ const Futures: FC = () => {
   };
   const listView2 = () => {
     const limitOrderListView = () => {
-      return limitOrderList.map((item) => {
+      return showLimitOrder.map((item) => {
         return (
           <FuturesList2
             key={`f2+${item.index}`}
