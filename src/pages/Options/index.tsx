@@ -40,6 +40,7 @@ import { Popup } from "reactjs-popup";
 import OptionsNoticeModal from "./OptionsNoticeModal";
 import { useERC20Approve } from "../../contracts/hooks/useERC20Approve";
 import { LightTooltip } from "../../styles/MUI";
+import Popover from "@mui/material/Popover";
 
 export type OptionsListType = {
   index: BigNumber;
@@ -55,6 +56,7 @@ const MintOptions: FC = () => {
   const classPrefix = "options-mintOptions";
   const { account, chainId, library } = useWeb3();
   const [showNotice, setShowNotice] = useState(false);
+  const [anchorEl, setAnchorEl] = useState<HTMLDivElement | null>(null);
   const modal = useRef<any>();
   const nestPriceContract = NestPriceContract();
   const PVMOptionOJ = PVMOption(PVMOptionContract);
@@ -354,6 +356,25 @@ const MintOptions: FC = () => {
         : "---"
       : "---";
   };
+  const selectTokenLi = () => {
+    const USDTIcon = tokenList["USDT"].Icon;
+    return [tokenList["ETH"], tokenList["BTC"]].map((item, index) => {
+      const TokenIcon = item.Icon;
+      return (
+        <li
+          onClick={() => {
+            setTokenPair(item);
+            setAnchorEl(null);
+          }}
+          key={`selectTokenLi+${index}`}
+        >
+          <TokenIcon />
+          <USDTIcon className="USDT" />
+          <p>{`${item.symbol}`}/USDT</p>
+        </li>
+      );
+    });
+  };
   return (
     <div>
       {showNotice ? (
@@ -375,18 +396,30 @@ const MintOptions: FC = () => {
           <InfoShow
             topLeftText={t`Token Pair`}
             bottomRightText={""}
-            tokenSelect={true}
-            tokenList={[tokenList["ETH"], tokenList["BTC"]]}
             showUSDT={true}
-            getSelectedToken={setTokenPair}
           >
-            <div className={`${classPrefix}-leftCard-tokenPair`}>
+            <div
+              className={`${classPrefix}-leftCard-tokenPair`}
+              onClick={(e) => setAnchorEl(e.currentTarget)}
+            >
               <DoubleTokenShow
                 tokenNameOne={tokenPair.symbol}
                 tokenNameTwo={"USDT"}
               />
               <PutDownIcon />
             </div>
+            <Popover
+              open={Boolean(anchorEl)}
+              anchorEl={anchorEl}
+              onClose={() => setAnchorEl(null)}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "left",
+              }}
+              className={`${classPrefix}-card-selectToken`}
+            >
+              <ul>{selectTokenLi()}</ul>
+            </Popover>
             <p>{`${
               checkWidth() ? "1 " + tokenPair.symbol + " = " : ""
             }${priceString()} USDT`}</p>

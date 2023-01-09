@@ -374,11 +374,11 @@ const Swap: FC = () => {
 
   const selectTokenLi = (tokenList: TokenType[]) => {
     return tokenList.map((item, index) => {
-      const TokenIcon = item.Icon
+      const TokenIcon = item.Icon;
       return (
         <li
           onClick={() => {
-            getSelectedSrcToken(item)
+            getSelectedSrcToken(item);
             setAnchorEl(null);
           }}
           key={`selectTokenLi+${index}`}
@@ -412,7 +412,10 @@ const Swap: FC = () => {
           getSelectedToken={getSelectedSrcToken}
           balanceRed={!checkBalance()}
         >
-          <div className={`${classPrefix}-card-selected`} onClick={(e) => setAnchorEl(e.currentTarget)}>
+          <div
+            className={`${classPrefix}-card-selected`}
+            onClick={(e) => setAnchorEl(e.currentTarget)}
+          >
             <SingleTokenShow tokenNameOne={swapToken.src} isBold />
             <p>{<PutDownIcon />}</p>
           </div>
@@ -426,9 +429,7 @@ const Swap: FC = () => {
             }}
             className={`${classPrefix}-card-selectToken`}
           >
-            <ul>
-              {selectTokenLi(tokenListShow(true) ?? [])}
-            </ul>
+            <ul>{selectTokenLi(tokenListShow(true) ?? [])}</ul>
           </Popover>
 
           <input
