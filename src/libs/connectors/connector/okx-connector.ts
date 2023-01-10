@@ -29,6 +29,9 @@ export class UserRejectedRequestError extends Error {
 }
 
 export class OKXConnector extends AbstractConnector {
+  get [Symbol.toStringTag]() {
+    return "OKX"
+  }
   constructor(kwargs: AbstractConnectorArguments) {
     super(kwargs)
 
