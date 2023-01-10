@@ -104,6 +104,7 @@ const TVChart: FC<TVChartProps> = ({ chainId, tokenPair, chartHeight}) => {
         fontFamily: "Montserrat",
       },
       localization: {
+        locale: "en-US",
         timeFormatter: (timestamp: number) => {
           return formatDateTime(timestamp);
         },

@@ -334,9 +334,9 @@ export function useFutures() {
       .div(BigNumber.from("1000"));
     var limitFee = BigNumber.from("0");
     if (limit) {
-      limitFee = baseFee;
+      limitFee = parseUnits(BASE_NEST_FEE, 18);
     }
-    return baseFee.add(limitFee).add(parseUnits(BASE_NEST_FEE, 18));
+    return baseFee.add(limitFee);
   }, [leverNum, limit, nestInput]);
 
   const getBalance = useCallback(async () => {
