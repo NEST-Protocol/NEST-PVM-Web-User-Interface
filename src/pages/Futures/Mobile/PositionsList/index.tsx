@@ -69,19 +69,23 @@ const PositionsList: FC<FuturesListProps> = ({ ...props }) => {
   };
 
   const endButton = () => {
+    const text =
+      props.item.baseBlock.toString() === "0"
+        ? "Liquidated"
+        : "Trigger executed";
     return (
       <button
         className="endOrder"
         onClick={() => props.hideOrder(props.item.index)}
       >
-        <p>Liquidated</p>
+        <p>{text}</p>
         <XIcon />
       </button>
     );
   };
 
   const isEnd = () => {
-    return props.item.baseBlock.toString() === "0" ? true : false;
+    return props.item.actualMargin !== undefined;
   };
 
   return (

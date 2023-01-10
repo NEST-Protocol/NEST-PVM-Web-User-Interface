@@ -40,6 +40,7 @@ export type OrderView = {
   orientation: boolean;
   basePrice: BigNumber;
   stopPrice: BigNumber;
+  actualMargin: string;
 };
 export type LimitOrderView = {
   index: BigNumber;
@@ -278,18 +279,30 @@ export function useFutures() {
   const getClosedOrderList = useCallback(async () => {
     try {
       const data = await fetch(
-        `curl -X GET "https://api.nestfi.net/api/order/position/list/${chainId}?address=${account}`
+        `https://api.nestfi.net/api/order/position/list/${chainId}?address=${account}`
       );
       const data_json = await data.json();
-      const list: Array<OrderView> = data_json["value"];
-      const result = list.filter((item) => {
-        return !orderNotShow.includes(item.index);
-      });
-      setClosedOrder(result);
+      const list: Array<OrderView> = data_json["value"].map(
+        (item: { [x: string]: any }) => {
+          return {
+            index: BigNumber.from(item["index"].toString()),
+            owner: item["owner"],
+            balance: parseUnits(item["balance"].toString(), 4),
+            tokenIndex: BigNumber.from(item["tokenIndex"].toString()),
+            baseBlock: BigNumber.from(item["baseBlock"].toString()),
+            lever: BigNumber.from(item["level"].toString()),
+            orientation: item["orientation"],
+            basePrice: parseUnits(item["basePrice"].toString(), 18),
+            stopPrice: parseUnits(item["stopPrice"].toString(), 18),
+            actualMargin: item["actualMargin"],
+          };
+        }
+      );
+      setClosedOrder(list);
     } catch (error) {
       console.log(error);
     }
-  }, [account, chainId, orderNotShow]);
+  }, [account, chainId]);
 
   const tokenPrice = useMemo(() => {
     if (!kValue) {
@@ -510,6 +523,13 @@ export function useFutures() {
     //   console.log(error);
     // }
   };
+  const showClosedOrder = useMemo(() => {
+    return closedOrder.filter((item) => {
+      return !orderNotShow
+        .map((item) => item.toString())
+        .includes(item.index.toString());
+    });
+  }, [closedOrder, orderNotShow]);
 
   return {
     chainId,
@@ -550,7 +570,7 @@ export function useFutures() {
     showTriggerRisk,
     setShowTriggerRisk,
     hideOrder,
-    closedOrder,
+    showClosedOrder,
   };
 }
 
@@ -589,9 +609,10 @@ export function useFuturesOrderList(
   }, [PVMFuturesOJ, kValue, order.index, tokenName]);
 
   const showMarginAssets = () => {
-    return marginAssets
+    const normalOrder = marginAssets
       ? parseFloat(formatUnits(marginAssets, 18)).toFixed(2).toString()
       : "---";
+    return order.actualMargin === undefined ? normalOrder : order.actualMargin;
   };
   const showBalance = () => {
     return parseFloat(formatUnits(order.balance, 4)).toFixed(2).toString();
@@ -606,8 +627,10 @@ export function useFuturesOrderList(
   const TokenTwoSvg = tokenList["USDT"].Icon;
 
   useEffect(() => {
-    orderValue();
-  }, [orderValue]);
+    if (order.actualMargin === undefined) {
+      orderValue();
+    }
+  }, [order.actualMargin, orderValue]);
 
   return {
     TokenOneSvg,

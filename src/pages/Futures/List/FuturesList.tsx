@@ -48,9 +48,15 @@ const FuturesList: FC<FuturesListProps> = ({ ...props }) => {
   } = useFuturesOrderList(props.item, props.kValue);
 
   const endButton = () => {
-    const text = props.item.baseBlock.toString() === "0" ? "Liquidated" : "Trigger executed"
+    const text =
+      props.item.baseBlock.toString() === "0"
+        ? "Liquidated"
+        : "Trigger executed";
     return (
-      <button className="endOrder" onClick={() => props.hideOrder(props.item.index)}>
+      <button
+        className="endOrder"
+        onClick={() => props.hideOrder(props.item.index)}
+      >
         <p>{text}</p>
         <XIcon />
       </button>
@@ -58,8 +64,7 @@ const FuturesList: FC<FuturesListProps> = ({ ...props }) => {
   };
 
   const isEnd = () => {
-    const baseBlock = props.item.baseBlock.toString()
-    return (baseBlock === "0" || baseBlock === "1") ? true : false;
+    return props.item.actualMargin !== undefined;
   };
 
   return (
@@ -144,23 +149,23 @@ export const FuturesList2: FC<FuturesList2Props> = ({ ...props }) => {
       <td>{showBalance()} NEST</td>
       <td>{showLimitPrice()} USDT</td>
       <td className="button">
-          <Popup
-            modal
-            ref={modal}
-            trigger={<button className="fort-button">Edit</button>}
-            nested
-          >
-            <LimitPrice order={props.item} />
-          </Popup>
+        <Popup
+          modal
+          ref={modal}
+          trigger={<button className="fort-button">Edit</button>}
+          nested
+        >
+          <LimitPrice order={props.item} />
+        </Popup>
 
-          <MainButton
-            disable={closeButtonDis()}
-            loading={closeButtonLoading()}
-            onClick={closeButtonAction}
-          >
-            Close
-          </MainButton>
-        </td>
+        <MainButton
+          disable={closeButtonDis()}
+          loading={closeButtonLoading()}
+          onClick={closeButtonAction}
+        >
+          Close
+        </MainButton>
+      </td>
     </tr>
   );
 };
