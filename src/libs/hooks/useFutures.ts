@@ -29,6 +29,7 @@ import {
 import { MaxUint256 } from "@ethersproject/constants";
 import useWeb3 from "./useWeb3";
 import useTransactionListCon, { TransactionType } from "./useTransactionInfo";
+import { lt } from "lodash";
 
 export type OrderView = {
   index: BigNumber;
@@ -100,9 +101,11 @@ export function useFutures() {
   const [limitOrderList, setLimitOrderList] = useState<Array<LimitOrderView>>(
     []
   );
-  const [orderNotShow, setOrderNotShow] = useState<BigNumber[]>([]);
-  const [limitOrderNotShow, setLimitOrderNotShow] = useState<BigNumber[]>([]);
   const [oldOrderList, setOldOrderList] = useState<Array<OldOrderView>>([]);
+  const [closedOrder, setClosedOrder] = useState<Array<LimitOrderView>>(
+    []
+  );
+  const [orderNotShow, setOrderNotShow] = useState<BigNumber[]>([]);
   const { pendingList, txList } = useTransactionListCon();
   const nestToken = ERC20Contract(tokenList["NEST"].addresses);
 
@@ -220,24 +223,15 @@ export function useFutures() {
         "500",
         account
       );
+      // TODO
       const result = list.filter((item) => {
-        return (
-          item.owner.toLocaleLowerCase() !== ZERO_ADDRESS &&
-          (item.balance.toString() !== "0" ||
-            (item.balance.toString() === "0" &&
-              item.baseBlock.toString() === "0"))
-        );
-      });
-      const notShow = await fetch(
-        `https://api.nestfi.net/api/order/list/${chainId}?address=${account}&type=0`
-      );
-      const notShowJson = await notShow.json();
-      setOrderNotShow(notShowJson["value"]);
+        return item.balance.toString() !== "0" && BigNumber.from("30").lt(item.index)
+      })
       setOrderList(result);
     } catch (error) {
       console.log(error);
     }
-  }, [PVMFuturesOJ, account, chainId]);
+  }, [PVMFuturesOJ, account]);
 
   const getLimitOrderList = useCallback(async () => {
     try {
@@ -251,21 +245,13 @@ export function useFutures() {
         account
       );
       const result = list.filter((item) => {
-        return (
-          item.owner.toLocaleLowerCase() !== ZERO_ADDRESS &&
-          item.status.toString().toLocaleUpperCase() !== "2"
-        );
-      });
-      const notShow = await fetch(
-        `https://api.nestfi.net/api/order/list/${chainId}?address=${account}&type=1`
-      );
-      const notShowJson = await notShow.json();
-      setLimitOrderNotShow(notShowJson["value"]);
+        return item.status.toString() === "1"
+      })
       setLimitOrderList(result);
     } catch (error) {
       console.log(error);
     }
-  }, [PVMFuturesProxyOJ, account, chainId]);
+  }, [PVMFuturesProxyOJ, account]);
 
   const getOldOrderList = useCallback(async () => {
     try {
@@ -488,37 +474,24 @@ export function useFutures() {
   };
 
   // hide order
-  const hideOrder = (isPosition: boolean, index: BigNumber) => {
-    if (isPosition) {
-      setOrderNotShow([...orderNotShow, index]);
-    } else {
-      setLimitOrderNotShow([...limitOrderNotShow, index]);
-    }
-    fetch(
-      `https://api.nestfi.net/api/order/save/${chainId}?address=${account}&index=${index.toString()}&type=${
-        isPosition ? 0 : 1
-      }`,
-      {
-        method: "post",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+  const hideOrder = (index: BigNumber) => {
+    // if (isPosition) {
+    //   setOrderNotShow([...orderNotShow, index]);
+    // } else {
+    //   setLimitOrderNotShow([...limitOrderNotShow, index]);
+    // }
+    // fetch(
+    //   `https://api.nestfi.net/api/order/save/${chainId}?address=${account}&index=${index.toString()}&type=${
+    //     isPosition ? 0 : 1
+    //   }`,
+    //   {
+    //     method: "post",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //   }
+    // );
   };
-
-  const showOrder = useMemo(() => {
-    const newOrder = orderList.filter((item) => {
-      return !orderNotShow.includes(item.index);
-    });
-    return newOrder;
-  }, [orderList, orderNotShow]);
-  const showLimitOrder = useMemo(() => {
-    const newOrder = limitOrderList.filter((item) => {
-      return !limitOrderNotShow.includes(item.index);
-    });
-    return newOrder;
-  }, [limitOrderList, limitOrderNotShow]);
 
   return {
     chainId,
@@ -548,8 +521,8 @@ export function useFutures() {
     mainButtonDis,
     mainButtonAction,
     mainButtonLoading,
-    showOrder,
-    showLimitOrder,
+    orderList,
+    limitOrderList,
     oldOrderList,
     kValue,
     orderEmpty,
@@ -575,7 +548,6 @@ export function useFuturesOrderList(
     if (!chainId) {
       return;
     }
-
     const thisToken = tokenArray.filter((item) => {
       return item.pairIndex[chainId] === order.tokenIndex.toString();
     });

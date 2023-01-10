@@ -41,19 +41,6 @@
     {
         "inputs": [
             {
-                "internalType": "uint256[]",
-                "name": "indices",
-                "type": "uint256[]"
-            }
-        ],
-        "name": "executeStopOrder",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
                 "internalType": "uint256",
                 "name": "start",
                 "type": "uint256"

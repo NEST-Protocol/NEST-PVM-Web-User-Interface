@@ -56,8 +56,8 @@ const FuturesMobile: FC = () => {
     mainButtonDis,
     mainButtonAction,
     mainButtonLoading,
-    showOrder,
-    showLimitOrder,
+    orderList,
+    limitOrderList,
     oldOrderList,
     kValue,
     orderEmpty,
@@ -343,7 +343,7 @@ const FuturesMobile: FC = () => {
   };
 
   const orderListView = () => {
-    return showOrder.map((item, index) => {
+    return orderList.map((item, index) => {
       return (
         <li key={`f+${index}`}>
           <PositionsList
@@ -359,15 +359,10 @@ const FuturesMobile: FC = () => {
   };
 
   const limitOrderListView = () => {
-    return showLimitOrder.map((item, index) => {
+    return limitOrderList.map((item, index) => {
       return (
         <li key={`f2+${index}`}>
-          <PositionsList2
-            key={"f2"}
-            item={item}
-            className={classPrefix}
-            hideOrder={hideOrder}
-          />
+          <PositionsList2 key={"f2"} item={item} className={classPrefix} />
         </li>
       );
     });

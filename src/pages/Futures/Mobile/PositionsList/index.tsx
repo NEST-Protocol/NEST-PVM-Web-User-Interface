@@ -72,7 +72,7 @@ const PositionsList: FC<FuturesListProps> = ({ ...props }) => {
     return (
       <button
         className="endOrder"
-        onClick={() => props.hideOrder(true, props.item.index)}
+        onClick={() => props.hideOrder(props.item.index)}
       >
         <p>Liquidated</p>
         <XIcon />
@@ -226,22 +226,6 @@ export const PositionsList2: FC<FuturesList2Props> = ({ ...props }) => {
     }
   };
 
-  const endButton = () => {
-    return (
-      <button
-        className="endOrder"
-        onClick={() => props.hideOrder(false, props.item.index)}
-      >
-        <p>Implemented take profit</p>
-        <XIcon />
-      </button>
-    );
-  };
-
-  const isEnd = () => {
-    return props.item.status.toString() === "0" ? true : false;
-  };
-
   return (
     <Stack spacing={0} className={`${classPrefix}`}>
       <Stack
@@ -303,27 +287,21 @@ export const PositionsList2: FC<FuturesList2Props> = ({ ...props }) => {
         spacing={1}
         className={`${classPrefix}-button`}
       >
-        {isEnd() ? (
-          endButton()
-        ) : (
-          <>
-            <MainButton
-              onClick={() => {
-                setShowDrawer(true);
-                setDrawerType(DrawerType.orderEdit);
-              }}
-            >
-              Edit
-            </MainButton>
-            <MainButton
-              loading={closeButtonLoading()}
-              disable={closeButtonDis()}
-              onClick={closeButtonAction}
-            >
-              Close
-            </MainButton>
-          </>
-        )}
+        <MainButton
+          onClick={() => {
+            setShowDrawer(true);
+            setDrawerType(DrawerType.orderEdit);
+          }}
+        >
+          Edit
+        </MainButton>
+        <MainButton
+          loading={closeButtonLoading()}
+          disable={closeButtonDis()}
+          onClick={closeButtonAction}
+        >
+          Close
+        </MainButton>
       </Stack>
       <Drawer
         anchor={"bottom"}

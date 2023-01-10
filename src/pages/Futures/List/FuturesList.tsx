@@ -21,14 +21,13 @@ export type FuturesListProps = {
   item: OrderView;
   key: string;
   className: string;
-  hideOrder: (isPosition: boolean, index: BigNumber) => void;
+  hideOrder: (index: BigNumber) => void;
   kValue?: { [key: string]: TokenType };
 };
 export type FuturesList2Props = {
   item: LimitOrderView;
   key: string;
   className: string;
-  hideOrder: (isPosition: boolean, index: BigNumber) => void;
 };
 export type FuturesOldListProps = {
   item: OldOrderView;
@@ -50,7 +49,7 @@ const FuturesList: FC<FuturesListProps> = ({ ...props }) => {
 
   const endButton = () => {
     return (
-      <button className="endOrder" onClick={() => props.hideOrder(true, props.item.index)}>
+      <button className="endOrder" onClick={() => props.hideOrder(props.item.index)}>
         <p>Liquidated</p>
         <XIcon />
       </button>
@@ -127,19 +126,6 @@ export const FuturesList2: FC<FuturesList2Props> = ({ ...props }) => {
     closeButtonAction,
   } = useFuturesLimitOrderList(props.item);
 
-  const endButton = () => {
-    return (
-      <button className="endOrder" onClick={() => props.hideOrder(false, props.item.index)}>
-        <p>Implemented take profit</p>
-        <XIcon />
-      </button>
-    );
-  };
-
-  const isEnd = () => {
-    return props.item.status.toString() === "0" ? true : false;
-  };
-
   return (
     <tr className={`${props.className}-table-normal`}>
       <td className={"tokenPair"}>
@@ -155,10 +141,7 @@ export const FuturesList2: FC<FuturesList2Props> = ({ ...props }) => {
       <td>{props.item.lever.toString()}X</td>
       <td>{showBalance()} NEST</td>
       <td>{showLimitPrice()} USDT</td>
-      {isEnd() ? (
-        <td className="button">{endButton()}</td>
-      ) : (
-        <td className="button">
+      <td className="button">
           <Popup
             modal
             ref={modal}
@@ -176,7 +159,6 @@ export const FuturesList2: FC<FuturesList2Props> = ({ ...props }) => {
             Close
           </MainButton>
         </td>
-      )}
     </tr>
   );
 };

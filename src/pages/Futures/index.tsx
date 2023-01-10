@@ -59,8 +59,8 @@ const Futures: FC = () => {
     mainButtonDis,
     mainButtonAction,
     mainButtonLoading,
-    showOrder,
-    showLimitOrder,
+    orderList,
+    limitOrderList,
     oldOrderList,
     kValue,
     orderEmpty,
@@ -365,7 +365,7 @@ const Futures: FC = () => {
 
   const listView1 = () => {
     const orderListView = () => {
-      return showOrder.map((item) => {
+      return orderList.map((item) => {
         return (
           <FuturesList
             key={`f+${item.index}`}
@@ -414,13 +414,12 @@ const Futures: FC = () => {
   };
   const listView2 = () => {
     const limitOrderListView = () => {
-      return showLimitOrder.map((item) => {
+      return limitOrderList.map((item) => {
         return (
           <FuturesList2
             key={`f2+${item.index}`}
             item={item}
             className={classPrefix}
-            hideOrder={hideOrder}
           />
         );
       });
