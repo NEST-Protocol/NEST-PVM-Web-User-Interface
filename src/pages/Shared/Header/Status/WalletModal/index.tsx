@@ -24,12 +24,12 @@ type Props = {
 };
 
 const WalletModal: FC<Props> = ({ ...props }) => {
-  const { account, chainId, deactivate } = useWeb3();
+  const { account, chainId, deactivate, connector } = useWeb3();
   const [transactionList, setTransactionList] = useState<Array<any>>();
   const classPrefix = "modal-wallet";
   const etherscanBase = useEtherscanBaseUrl();
   const { theme } = useThemes();
-
+  const walletString = Object.prototype.toString.call(connector).slice(8, -1)
   useEffect(() => {
     if (chainId) {
       var cache = localStorage.getItem("transactionList" + chainId.toString());
@@ -93,7 +93,7 @@ const WalletModal: FC<Props> = ({ ...props }) => {
       titleName={t`Wallet`}
     >
       <div className={`${classPrefix}-metamask`}>
-        <MetamaskIconSmall />
+        {walletString === "OKX" ? (<img src="OKXWalletSmall.png" alt="NEST IMG"/>) : (<MetamaskIconSmall />)}
         <div className={`${classPrefix}-metamask-address`}>
           <p>{showEllipsisAddress(account || "")}</p>
           <button
