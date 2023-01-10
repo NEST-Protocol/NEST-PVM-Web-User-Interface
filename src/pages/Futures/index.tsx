@@ -69,7 +69,8 @@ const Futures: FC = () => {
     setShowNotice,
     showTriggerRisk, 
     setShowTriggerRisk,
-    hideOrder
+    hideOrder,
+    closedOrder
   } = useFutures();
   const BTCIcon = tokenList["BTC"].Icon;
   const ETHIcon = tokenList["ETH"].Icon;
@@ -365,7 +366,7 @@ const Futures: FC = () => {
 
   const listView1 = () => {
     const orderListView = () => {
-      return orderList.map((item) => {
+      return [...orderList, ...closedOrder].map((item) => {
         return (
           <FuturesList
             key={`f+${item.index}`}

@@ -29,7 +29,6 @@ import {
 import { MaxUint256 } from "@ethersproject/constants";
 import useWeb3 from "./useWeb3";
 import useTransactionListCon, { TransactionType } from "./useTransactionInfo";
-import { lt } from "lodash";
 
 export type OrderView = {
   index: BigNumber;
@@ -102,9 +101,7 @@ export function useFutures() {
     []
   );
   const [oldOrderList, setOldOrderList] = useState<Array<OldOrderView>>([]);
-  const [closedOrder, setClosedOrder] = useState<Array<LimitOrderView>>(
-    []
-  );
+  const [closedOrder, setClosedOrder] = useState<Array<OrderView>>([]);
   const [orderNotShow, setOrderNotShow] = useState<BigNumber[]>([]);
   const { pendingList, txList } = useTransactionListCon();
   const nestToken = ERC20Contract(tokenList["NEST"].addresses);
@@ -136,7 +133,11 @@ export function useFutures() {
     return isShow === "1" ? false : true;
   };
   const orderEmpty = () => {
-    if (orderList.length === 0 && oldOrderList.length === 0) {
+    if (
+      orderList.length === 0 &&
+      closedOrder.length === 0 &&
+      oldOrderList.length === 0
+    ) {
       return true;
     }
     return false;
@@ -225,8 +226,10 @@ export function useFutures() {
       );
       // TODO
       const result = list.filter((item) => {
-        return item.balance.toString() !== "0" && BigNumber.from("30").lt(item.index)
-      })
+        return (
+          item.balance.toString() !== "0" && BigNumber.from("30").lt(item.index)
+        );
+      });
       setOrderList(result);
     } catch (error) {
       console.log(error);
@@ -245,8 +248,8 @@ export function useFutures() {
         account
       );
       const result = list.filter((item) => {
-        return item.status.toString() === "1"
-      })
+        return item.status.toString() === "1";
+      });
       setLimitOrderList(result);
     } catch (error) {
       console.log(error);
@@ -272,6 +275,21 @@ export function useFutures() {
       console.log(error);
     }
   }, [PVMFuturesOJ, account]);
+  const getClosedOrderList = useCallback(async () => {
+    try {
+      const data = await fetch(
+        `curl -X GET "https://api.nestfi.net/api/order/position/list/${chainId}?address=${account}`
+      );
+      const data_json = await data.json();
+      const list: Array<OrderView> = data_json["value"];
+      const result = list.filter((item) => {
+        return !orderNotShow.includes(item.index);
+      });
+      setClosedOrder(result);
+    } catch (error) {
+      console.log(error);
+    }
+  }, [account, chainId, orderNotShow]);
 
   const tokenPrice = useMemo(() => {
     if (!kValue) {
@@ -371,15 +389,17 @@ export function useFutures() {
     getOrderList();
     getLimitOrderList();
     getOldOrderList();
+    getClosedOrderList();
     const time = setInterval(() => {
       getOrderList();
       getLimitOrderList();
       getOldOrderList();
+      getClosedOrderList();
     }, UPDATE_LIST_TIME * 1000);
     return () => {
       clearInterval(time);
     };
-  }, [getLimitOrderList, getOldOrderList, getOrderList]);
+  }, [getClosedOrderList, getLimitOrderList, getOldOrderList, getOrderList]);
 
   useEffect(() => {
     const triggerRiskModal = localStorage.getItem("TriggerRiskModal");
@@ -474,23 +494,21 @@ export function useFutures() {
   };
 
   // hide order
-  const hideOrder = (index: BigNumber) => {
-    // if (isPosition) {
-    //   setOrderNotShow([...orderNotShow, index]);
-    // } else {
-    //   setLimitOrderNotShow([...limitOrderNotShow, index]);
+  const hideOrder = async (index: BigNumber) => {
+    setOrderNotShow([...orderNotShow, index]);
+    // try {
+    //   fetch(
+    //     `https://api.nestfi.net/api/order/save/${chainId}?address=${account}&index=${index.toString()}`,
+    //     {
+    //       method: "post",
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //       },
+    //     }
+    //   );
+    // } catch (error) {
+    //   console.log(error);
     // }
-    // fetch(
-    //   `https://api.nestfi.net/api/order/save/${chainId}?address=${account}&index=${index.toString()}&type=${
-    //     isPosition ? 0 : 1
-    //   }`,
-    //   {
-    //     method: "post",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //   }
-    // );
   };
 
   return {
@@ -532,6 +550,7 @@ export function useFutures() {
     showTriggerRisk,
     setShowTriggerRisk,
     hideOrder,
+    closedOrder,
   };
 }
 

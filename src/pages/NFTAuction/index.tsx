@@ -271,7 +271,7 @@ const NFTAuction: FC = () => {
 
   // dig tab item data
   const digTabItemArray = [
-    { icon: <NFTBuy />, text: "Buy" },
+    { icon: <NFTBuy />, text: "Dig" },
     { icon: <NFTHow />, text: "How To Play" },
     { icon: <NFTProbability />, text: "Probability" },
   ];

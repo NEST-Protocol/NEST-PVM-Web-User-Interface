@@ -48,16 +48,18 @@ const FuturesList: FC<FuturesListProps> = ({ ...props }) => {
   } = useFuturesOrderList(props.item, props.kValue);
 
   const endButton = () => {
+    const text = props.item.baseBlock.toString() === "0" ? "Liquidated" : "Trigger executed"
     return (
       <button className="endOrder" onClick={() => props.hideOrder(props.item.index)}>
-        <p>Liquidated</p>
+        <p>{text}</p>
         <XIcon />
       </button>
     );
   };
 
   const isEnd = () => {
-    return props.item.baseBlock.toString() === "0" ? true : false;
+    const baseBlock = props.item.baseBlock.toString()
+    return (baseBlock === "0" || baseBlock === "1") ? true : false;
   };
 
   return (
