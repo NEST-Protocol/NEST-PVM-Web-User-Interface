@@ -13,11 +13,12 @@ import "./styles";
 
 type TriggerProp = {
   order: OrderView;
+  onClose: () => void;
 };
 
 const Trigger: FC<TriggerProp> = ({ ...props }) => {
   const classPrefix = "Trigger";
-  const modal = useRef<any>();
+  const modalRisk = useRef<any>();
   const { theme } = useThemes();
   const {
     triggerInput,
@@ -65,7 +66,10 @@ const Trigger: FC<TriggerProp> = ({ ...props }) => {
           {isEdit() ? (
             <MainButton
               className="TriggerClose"
-              onClick={actionClose}
+              onClick={() => {
+                props.onClose();
+                actionClose();
+              }}
             >
               <p>Close</p>
             </MainButton>
@@ -136,11 +140,17 @@ const Trigger: FC<TriggerProp> = ({ ...props }) => {
       <Popup
         open={showTriggerRisk}
         modal
-        ref={modal}
+        ref={modalRisk}
         onClose={() => setShowTriggerRisk(false)}
         nested
       >
-        <TriggerRiskModal onClose={() => setShowTriggerRisk(false)} action={baseAction} />
+        <TriggerRiskModal
+          onClose={() => setShowTriggerRisk(false)}
+          action={() => {
+            baseAction();
+            props.onClose();
+          }}
+        />
       </Popup>
       <Stack spacing={0} alignItems="center">
         <p className="title">{showTitle()}</p>
@@ -150,7 +160,16 @@ const Trigger: FC<TriggerProp> = ({ ...props }) => {
           className="mainButton"
           disable={buttonDis()}
           loading={buttonLoading()}
-          onClick={buttonAction}
+          onClick={() => {
+            if (buttonDis()) {
+              return;
+            }
+            buttonAction();
+            const triggerRiskModal = localStorage.getItem("TriggerRiskModal");
+            if (triggerRiskModal === "1") {
+              props.onClose();
+            }
+          }}
         >
           Confirm
         </MainButton>

@@ -15,6 +15,7 @@ import "./styles";
 export type FuturesCloseProps = {
   order: OrderView;
   kValue?: { [key: string]: TokenType };
+  onClose: () => void;
 };
 
 const FuturesClose: FC<FuturesCloseProps> = ({ ...props }) => {
@@ -64,11 +65,7 @@ const FuturesClose: FC<FuturesCloseProps> = ({ ...props }) => {
           spacing={0}
           className={`${classPrefix}-infoShow`}
         >
-          <LightTooltip
-            placement="right"
-            title={"margin*leverage*0.2%"}
-            arrow
-          >
+          <LightTooltip placement="right" title={"margin*leverage*0.2%"} arrow>
             <p className="underLine">Fees</p>
           </LightTooltip>
 
@@ -78,7 +75,13 @@ const FuturesClose: FC<FuturesCloseProps> = ({ ...props }) => {
           className="mainButton"
           loading={buttonLoading()}
           disable={buttonDis()}
-          onClick={buttonAction}
+          onClick={() => {
+            if (buttonDis()) {
+              return;
+            }
+            props.onClose();
+            buttonAction();
+          }}
         >
           Confirm
         </MainButton>

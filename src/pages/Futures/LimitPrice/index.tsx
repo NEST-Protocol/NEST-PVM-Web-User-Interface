@@ -13,6 +13,7 @@ import {
 
 export type LimitPriceProp = {
   order: LimitOrderView;
+  onClose: () => void;
 };
 
 const LimitPrice: FC<LimitPriceProp> = ({ ...props }) => {
@@ -70,7 +71,13 @@ const LimitPrice: FC<LimitPriceProp> = ({ ...props }) => {
           className="mainButton"
           loading={buttonLoading()}
           disable={buttonDis()}
-          onClick={buttonAction}
+          onClick={() => {
+            if (buttonDis()) {
+              return
+            }
+            props.onClose()
+            buttonAction()
+          }}
         >
           Confirm
         </MainButton>

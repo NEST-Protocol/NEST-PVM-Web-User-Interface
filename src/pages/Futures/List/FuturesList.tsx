@@ -37,7 +37,9 @@ export type FuturesOldListProps = {
 };
 
 const FuturesList: FC<FuturesListProps> = ({ ...props }) => {
-  const modal = useRef<any>();
+  const modalAdd = useRef<any>();
+  const modalTrigger = useRef<any>();
+  const modalClose= useRef<any>();
   const {
     TokenOneSvg,
     TokenTwoSvg,
@@ -89,29 +91,29 @@ const FuturesList: FC<FuturesListProps> = ({ ...props }) => {
         <td className="button">
           <Popup
             modal
-            ref={modal}
+            ref={modalAdd}
             trigger={<button className="fort-button">Add</button>}
             nested
           >
-            <FuturesAdd order={props.item} />
+            <FuturesAdd order={props.item} onClose={() => modalAdd.current.close()}/>
           </Popup>
           <Popup
             modal
-            ref={modal}
+            ref={modalTrigger}
             trigger={
               <button className="fort-button">{showTriggerTitle()}</button>
             }
             nested
           >
-            <Trigger order={props.item} />
+            <Trigger order={props.item}  onClose={() => modalTrigger.current.close()}/>
           </Popup>
           <Popup
             modal
-            ref={modal}
+            ref={modalClose}
             trigger={<button className="fort-button">Close</button>}
             nested
           >
-            <FuturesClose order={props.item} kValue={props.kValue} />
+            <FuturesClose order={props.item} kValue={props.kValue}  onClose={() => modalClose.current.close()}/>
           </Popup>
         </td>
       )}
@@ -122,7 +124,7 @@ const FuturesList: FC<FuturesListProps> = ({ ...props }) => {
 export default FuturesList;
 
 export const FuturesList2: FC<FuturesList2Props> = ({ ...props }) => {
-  const modal = useRef<any>();
+  const modalLimit = useRef<any>();
   const {
     TokenOneSvg,
     TokenTwoSvg,
@@ -151,11 +153,11 @@ export const FuturesList2: FC<FuturesList2Props> = ({ ...props }) => {
       <td className="button">
         <Popup
           modal
-          ref={modal}
+          ref={modalLimit}
           trigger={<button className="fort-button">Edit</button>}
           nested
         >
-          <LimitPrice order={props.item} />
+          <LimitPrice order={props.item} onClose={() => modalLimit.current.close()}/>
         </Popup>
 
         <MainButton

@@ -14,6 +14,7 @@ import "./styles";
 
 type FuturesAddProps = {
   order: OrderView;
+  onClose: () => void;
 };
 
 const FuturesAdd: FC<FuturesAddProps> = ({ ...props }) => {
@@ -61,11 +62,7 @@ const FuturesAdd: FC<FuturesAddProps> = ({ ...props }) => {
           spacing={0}
           className={`${classPrefix}-infoShow`}
         >
-          <LightTooltip
-            placement="right"
-            title={"margin*leverage*0.2%"}
-            arrow
-          >
+          <LightTooltip placement="right" title={"margin*leverage*0.2%"} arrow>
             <p className="underLine">Fees</p>
           </LightTooltip>
 
@@ -118,7 +115,13 @@ const FuturesAdd: FC<FuturesAddProps> = ({ ...props }) => {
           className="mainButton"
           loading={buttonLoading()}
           disable={buttonDis()}
-          onClick={buttonAction}
+          onClick={() => {
+            if (buttonDis()) {
+              return;
+            }
+            props.onClose();
+            buttonAction();
+          }}
         >
           Confirm
         </MainButton>
