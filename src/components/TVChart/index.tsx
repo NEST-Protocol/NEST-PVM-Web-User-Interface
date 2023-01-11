@@ -208,7 +208,7 @@ const TVChart: FC<TVChartProps> = ({ chainId, tokenPair, chartHeight}) => {
         getChartOptions(chartRef.current.offsetWidth, chartHeight)
       );
     }
-  }, [currentChart, getChartOptions, chartHeight]);
+  }, [currentChart, getChartOptions, chartHeight, theme]);
 
   const candlestick = useMemo(() => {
     if (!priceData) {

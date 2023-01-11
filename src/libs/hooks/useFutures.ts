@@ -905,7 +905,7 @@ export function useFuturesTrigger(order: OrderView) {
   };
 
   const baseAction = () => {
-    actionClose();
+    action();
   };
 
   return {
