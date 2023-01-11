@@ -184,7 +184,10 @@ export const DrawerTrigger: FC<DrawerBaseType> = ({ ...props }) => {
           />
           <p>USDT</p>
           {isEdit() ? (
-            <MainButton className="TriggerClose" onClick={actionClose}>
+            <MainButton className="TriggerClose" onClick={() => {
+              props.hideSelf()
+              actionClose()
+            }}>
               <p>Close</p>
             </MainButton>
           ) : (
@@ -205,7 +208,10 @@ export const DrawerTrigger: FC<DrawerBaseType> = ({ ...props }) => {
       >
         <TriggerRiskModal
           onClose={() => setShowTriggerRisk(false)}
-          action={baseAction}
+          action={() => {
+            baseAction();
+            props.hideSelf();
+          }}
         />
       </Popup>
       <p className="title">{showTitle()}</p>
@@ -329,7 +335,13 @@ export const DrawerClose: FC<DrawerCloseType> = ({ ...props }) => {
         className="action"
         loading={buttonLoading()}
         disable={buttonDis()}
-        onClick={buttonAction}
+        onClick={() => {
+          if (buttonDis()) {
+            return;
+          }
+          props.hideSelf();
+          buttonAction();
+        }}
       >
         Confirm
       </MainButton>

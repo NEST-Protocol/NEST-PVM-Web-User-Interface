@@ -36,6 +36,7 @@ const TriggerRiskModal: FC<Props> = ({ ...props }) => {
               })}
               onClick={() => {
                 setSelected(!selected);
+                localStorage.setItem("TriggerRiskModal", !selected ? "1" : "0");
               }}
             >
               <NoticeSelected />
@@ -44,9 +45,6 @@ const TriggerRiskModal: FC<Props> = ({ ...props }) => {
           </p>
           <MainButton
             onClick={() => {
-              if (selected) {
-                localStorage.setItem("TriggerRiskModal", "1");
-              }
               props.onClose();
               props.action();
             }}
