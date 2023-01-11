@@ -55,6 +55,7 @@ const Futures: FC = () => {
     tokenPair,
     checkNESTBalance,
     fee,
+    showFee,
     mainButtonTitle,
     mainButtonDis,
     mainButtonAction,
@@ -67,11 +68,12 @@ const Futures: FC = () => {
     limitEmpty,
     showNotice,
     setShowNotice,
-    showTriggerRisk, 
+    showTriggerRisk,
     setShowTriggerRisk,
     hideOrder,
     showClosedOrder,
-    baseAction
+    baseAction,
+    feeHoverText,
   } = useFutures();
   const BTCIcon = tokenList["BTC"].Icon;
   const ETHIcon = tokenList["ETH"].Icon;
@@ -152,7 +154,9 @@ const Futures: FC = () => {
               placeholder={`>${tokenPrice.price}`}
               value={takeInput !== "" ? `>${takeInput}` : takeInput}
               maxLength={32}
-              onChange={(e) => setTakeInput(`${formatInputNum(e.target.value)}`)}
+              onChange={(e) =>
+                setTakeInput(`${formatInputNum(e.target.value)}`)
+              }
             />
             <p>USDT</p>
           </Stack>
@@ -161,13 +165,13 @@ const Futures: FC = () => {
     };
     const chartHeight = () => {
       if (stop && limit) {
-        return 593;
+        return 565;
       } else if (!stop && !limit) {
         return 475;
       } else if (stop && !limit) {
         return 534;
       } else if (!stop && limit) {
-        return 534;
+        return 506;
       }
     };
     const LeftIcon = tokenPrice.leftIcon;
@@ -264,7 +268,13 @@ const Futures: FC = () => {
             <button
               className={"max-button"}
               onClick={() =>
-                setNestInput(nestBalance ? parseFloat(formatUnits(nestBalance, 18)).toFixed(2).toString() : "")
+                setNestInput(
+                  nestBalance
+                    ? parseFloat(formatUnits(nestBalance, 18))
+                        .toFixed(2)
+                        .toString()
+                    : ""
+                )
               }
             >
               MAX
@@ -291,16 +301,20 @@ const Futures: FC = () => {
 
           {limit ? limitPrice() : <></>}
           {stop ? stopLimit1() : <></>}
-          <Stack
-            direction="row"
-            justifyContent="space-between"
-            alignItems="center"
-            spacing={0}
-            className={`${classPrefix}-infoShow`}
-          >
-            <p>Open Price</p>
-            <p>{tokenPrice ? tokenPrice.price : "---"} USDT</p>
-          </Stack>
+          {limit ? (
+            <></>
+          ) : (
+            <Stack
+              direction="row"
+              justifyContent="space-between"
+              alignItems="center"
+              spacing={0}
+              className={`${classPrefix}-infoShow`}
+            >
+              <p>Open Price</p>
+              <p>{tokenPrice ? tokenPrice.price : "---"} USDT</p>
+            </Stack>
+          )}
           <Stack
             direction="row"
             justifyContent="space-between"
@@ -312,16 +326,14 @@ const Futures: FC = () => {
               placement="right"
               title={
                 <div>
-                  <p>open positions fee: cost x leverage x 0.2% </p>
-                  <p>Limit order fee: cost × leverage × 0.2% </p>
-                  <p>Execution fee : 15NEST</p>
+                  <p>{feeHoverText()}</p>
                 </div>
               }
               arrow
             >
               <p className="underLine">Service Fee</p>
             </LightTooltip>
-            <p>{parseFloat(formatUnits(fee, 18)).toFixed(2).toString()} NEST</p>
+            <p>{showFee()} NEST</p>
           </Stack>
           <Stack
             direction="row"
@@ -463,7 +475,10 @@ const Futures: FC = () => {
         ref={modal}
         onClose={() => setShowTriggerRisk(false)}
       >
-        <TriggerRiskModal onClose={() => setShowTriggerRisk(false)} action={baseAction} />
+        <TriggerRiskModal
+          onClose={() => setShowTriggerRisk(false)}
+          action={baseAction}
+        />
       </Popup>
       {topView()}
       <Stack

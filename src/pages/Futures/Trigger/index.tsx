@@ -113,15 +113,14 @@ const Trigger: FC<TriggerProp> = ({ ...props }) => {
               placement="right"
               title={
                 <div>
-                  <p>Trigger fee: cost × leverage × 0.2% </p>
-                  <p>Execution fee : 15NEST</p>
+                  <p>margin*leverage*0.2%, trigger fee 15 NEST</p>
                 </div>
               }
               arrow
             >
               <p className="underLine">Fees</p>
             </LightTooltip>
-            <p>{showTriggerFee()}</p>
+            <p>{`Execution Collect after ${showTriggerFee()}`}</p>
           </Stack>
         )}
       </>

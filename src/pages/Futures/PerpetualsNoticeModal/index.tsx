@@ -46,7 +46,7 @@ const PerpetualsNoticeModal: FC<Props> = ({ ...props }) => {
           <li>
             <Trans>
               2. Position liquidation risk: NEST perpetual contracts provide
-              leverage of 1-5 times. When your leverage is greater than 1 times
+              leverage of 1-20 times. When your leverage is greater than 1 times
               leverage, the price fluctuation of the underlying asset may cause
               liquidation.
             </Trans>

@@ -66,7 +66,7 @@ const FuturesClose: FC<FuturesCloseProps> = ({ ...props }) => {
         >
           <LightTooltip
             placement="right"
-            title={"Close positions fee: cost x leverage x 0.2%"}
+            title={"margin*leverage*0.2%"}
             arrow
           >
             <p className="underLine">Fees</p>

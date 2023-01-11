@@ -19,7 +19,12 @@ import {
   usePVMFuturesProxyUpdate,
 } from "../../contracts/hooks/usePVMFuturesProxy";
 import { tokenList, TokenType } from "../constants/addresses";
-import { BASE_2000ETH_AMOUNT, BASE_AMOUNT, ZERO_ADDRESS } from "../utils";
+import {
+  BASE_2000ETH_AMOUNT,
+  BASE_AMOUNT,
+  BLOCK_TIME,
+  ZERO_ADDRESS,
+} from "../utils";
 import {
   ERC20Contract,
   NestPriceContract,
@@ -413,11 +418,6 @@ export function useFutures() {
     };
   }, [getClosedOrderList, getLimitOrderList, getOldOrderList, getOrderList]);
 
-  // useEffect(() => {
-  //   const triggerRiskModal = localStorage.getItem("TriggerRiskModal");
-  //   setHadTriggerRisk(triggerRiskModal === "1" ? true : false);
-  // }, []);
-
   // action
   const buy1 = usePVMFuturesBuy2(
     tokenList[tokenPair],
@@ -537,6 +537,28 @@ export function useFutures() {
     });
   }, [closedOrder, orderNotShow]);
 
+  const feeHoverText = () => {
+    if (!limit && !stop) {
+      return "margin*leverage*0.2%";
+    } else if (limit && !stop) {
+      return "margin*leverage*0.2%, trigger fee 15NEST";
+    } else if (!limit && stop) {
+      return "margin*leverage*0.2%, trigger fee 15NEST";
+    } else {
+      return "Limit order now charging: margin*leverage*0.2%, trigger fee 15 NEST; Stop order execution collect after: margin*leverage*0.2%, trigger fee 15 NEST";
+    }
+  };
+  const showFee = () => {
+    if (!limit && stop) {
+      return `Execution Collect after ${parseFloat(
+        formatUnits(fee.add(parseUnits(BASE_NEST_FEE, 18)), 18)
+      )
+        .toFixed(2)
+        .toString()}`;
+    }
+    return parseFloat(formatUnits(fee, 18)).toFixed(2).toString();
+  };
+
   return {
     chainId,
     isLong,
@@ -561,6 +583,7 @@ export function useFutures() {
     tokenPrice,
     checkNESTBalance,
     fee,
+    showFee,
     mainButtonTitle,
     mainButtonDis,
     mainButtonAction,
@@ -578,6 +601,7 @@ export function useFutures() {
     hideOrder,
     showClosedOrder,
     baseAction,
+    feeHoverText,
   };
 }
 
@@ -619,7 +643,9 @@ export function useFuturesOrderList(
     const normalOrder = marginAssets
       ? parseFloat(formatUnits(marginAssets, 18)).toFixed(2).toString()
       : "---";
-    return order.actualMargin === undefined ? normalOrder : order.actualMargin;
+    return order.actualMargin === undefined
+      ? normalOrder
+      : parseFloat(order.actualMargin).toFixed(2).toString();
   };
   const showBalance = () => {
     return parseFloat(formatUnits(order.balance, 4)).toFixed(2).toString();
@@ -931,15 +957,19 @@ export function useFuturesSetLimitOrder(order: LimitOrderView) {
     }
     action();
   };
-  return { limitInput, setLimitInput, buttonLoading, buttonDis, buttonAction };
+  const showPlaceHolder = () => {
+    return parseFloat(formatUnits(order.limitPrice, 18)).toFixed(2).toString()
+  }
+  return { limitInput, setLimitInput, buttonLoading, buttonDis, buttonAction, showPlaceHolder };
 }
 
 export function useFuturesAdd(order: OrderView) {
-  const { account } = useWeb3();
+  const { account, chainId, library } = useWeb3();
   const [nestInput, setNestInput] = useState<string>("");
   const [nestBalance, setNestBalance] = useState<BigNumber>(
     BigNumber.from("0")
   );
+  const [nowBlock, setNowBlock] = useState<number>();
   const nestToken = ERC20Contract(tokenList["NEST"].addresses);
   const { pendingList } = useTransactionListCon();
 
@@ -974,17 +1004,23 @@ export function useFuturesAdd(order: OrderView) {
       console.log(error);
     }
   }, [account, nestToken]);
+  const getNowBlock = useCallback(async () => {
+    const latestBlock = await library?.getBlockNumber();
+    setNowBlock(latestBlock);
+  }, [library]);
 
   // balance
   useEffect(() => {
     getBalance();
+    getNowBlock();
     const time = setInterval(() => {
       getBalance();
+      getNowBlock();
     }, UPDATE_BALANCE_TIME * 1000);
     return () => {
       clearInterval(time);
     };
-  }, [getBalance]);
+  }, [getBalance, getNowBlock]);
 
   const showPosition = () => {
     const lever = order.lever.toString();
@@ -996,10 +1032,60 @@ export function useFuturesAdd(order: OrderView) {
   };
 
   const showOpenPrice = () => {
-    return `${parseFloat(formatUnits(order.basePrice, 18))
+    return `${parseFloat(formatUnits(newBasePrice(), 18))
       .toFixed(2)
       .toString()} USDT`;
   };
+
+  const newBasePrice = useCallback(() => {
+    if (!chainId || nestInput === "" || !nowBlock) {
+      return order.basePrice;
+    }
+    const thisToken = tokenArray.filter((item) => {
+      return item.pairIndex[chainId] === order.tokenIndex.toString();
+    });
+    if (!thisToken[0].nowPrice) {
+      return order.basePrice;
+    }
+    const newBalance = BigNumber.from(order.balance.toString()).add(
+      parseUnits(nestInput === "" ? "0" : nestInput, 4)
+    );
+
+    const expMiuT = (miu: BigNumber, chainId: number) => {
+      return miu
+        .mul(nowBlock - Number(order.baseBlock.toString()))
+        .mul(BLOCK_TIME[chainId] / 1000)
+        .div(1000)
+        .add(BigNumber.from("18446744073709552000"));
+    };
+    const top = newBalance.mul(thisToken[0].nowPrice).mul(order.basePrice);
+    const bottom = order.basePrice.mul(parseUnits(nestInput, 4)).add(
+      BigNumber.from(thisToken[0].nowPrice.toString())
+        .mul(
+          BigNumber.from(order.balance.toString()).mul(
+            BigNumber.from("2").pow(64)
+          )
+        )
+        .div(
+          expMiuT(
+            order.orientation
+              ? BigNumber.from("64051194700")
+              : BigNumber.from("0"),
+            chainId
+          )
+        )
+    );
+    return top.div(bottom);
+  }, [
+    chainId,
+    nestInput,
+    nowBlock,
+    order.balance,
+    order.baseBlock,
+    order.basePrice,
+    order.orientation,
+    order.tokenIndex,
+  ]);
 
   const showFee = () => {
     return parseFloat(formatUnits(fee, 18)).toFixed(2).toString();
@@ -1080,10 +1166,20 @@ export function useFuturesCloseOrder(
   };
 
   const showFee = () => {
+    if (!chainId) {
+      return "---";
+    }
+    const thisToken = tokenArray.filter((item) => {
+      return item.pairIndex[chainId] === order.tokenIndex.toString();
+    });
+    if (!thisToken[0].nowPrice) {
+      return "---";
+    }
     const fee = BigNumber.from("2")
       .mul(order.lever)
       .mul(order.balance)
-      .div(BigNumber.from("1000"));
+      .mul(thisToken[0].nowPrice)
+      .div(BigNumber.from("1000").mul(order.basePrice));
     return parseFloat(formatUnits(fee, 4)).toFixed(2).toString();
   };
 

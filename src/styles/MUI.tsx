@@ -6,6 +6,7 @@ export const LightTooltip = styled(({ className, ...props }: TooltipProps) => (
   <Tooltip {...props} classes={{ popper: className }} />
 ))(({ theme }) => {
   const fontSize = checkWidth() ? 14 : 12.5
+  const maxWidth = checkWidth() ? 300 : 200
   return ({
     [`& .${tooltipClasses.arrow}`]: {
       color: theme.palette.common.white,
@@ -15,7 +16,7 @@ export const LightTooltip = styled(({ className, ...props }: TooltipProps) => (
       color: "#7D7D7D",
       boxShadow: theme.shadows[1],
       fontSize: fontSize,
-      maxWidth: "none"
+      maxWidth: maxWidth
     },
   })
 });

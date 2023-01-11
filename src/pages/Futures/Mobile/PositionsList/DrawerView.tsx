@@ -112,7 +112,7 @@ export const DrawerAdd: FC<DrawerBaseType> = ({ ...props }) => {
         >
           <LightTooltip
             placement="top-start"
-            title={"open positions fee: cost x leverage x 0.2% "}
+            title={"margin*leverage*0.2%"}
             arrow
           >
             <p className="underLine">Fees</p>
@@ -245,15 +245,14 @@ export const DrawerTrigger: FC<DrawerBaseType> = ({ ...props }) => {
               placement="top-start"
               title={
                 <div>
-                  <p>Trigger fee: cost × leverage × 0.2% </p>
-                  <p>Execution fee : 15NEST</p>
+                  <p>margin*leverage*0.2%, trigger fee 15 NEST</p>
                 </div>
               }
               arrow
             >
               <p className="underLine">Fees</p>
             </LightTooltip>
-            <p>{showTriggerFee()}</p>
+            <p>{`Execution Collect after ${showTriggerFee()}`}</p>
           </Stack>
         )}
       </Stack>
@@ -269,7 +268,6 @@ export const DrawerTrigger: FC<DrawerBaseType> = ({ ...props }) => {
           if (triggerRiskModal === "1") {
             props.hideSelf();
           }
-
           buttonAction();
         }}
       >
@@ -320,7 +318,7 @@ export const DrawerClose: FC<DrawerCloseType> = ({ ...props }) => {
       >
         <LightTooltip
           placement="top-start"
-          title={"Close positions fee: cost x leverage x 0.2%"}
+          title={"margin*leverage*0.2%"}
           arrow
         >
           <p className="underLine">Fees</p>
@@ -340,8 +338,14 @@ export const DrawerClose: FC<DrawerCloseType> = ({ ...props }) => {
 };
 
 export const DrawerLimitEdit: FC<DrawerLimitEditType> = ({ ...props }) => {
-  const { limitInput, setLimitInput, buttonLoading, buttonDis, buttonAction } =
-    useFuturesSetLimitOrder(props.order);
+  const {
+    limitInput,
+    setLimitInput,
+    buttonLoading,
+    buttonDis,
+    buttonAction,
+    showPlaceHolder,
+  } = useFuturesSetLimitOrder(props.order);
   return (
     <Stack spacing={0}>
       <p className="title">Limit Price</p>
@@ -361,7 +365,7 @@ export const DrawerLimitEdit: FC<DrawerLimitEditType> = ({ ...props }) => {
           className={`rightInput`}
         >
           <input
-            placeholder={"Input"}
+            placeholder={showPlaceHolder()}
             value={limitInput}
             maxLength={32}
             onChange={(e) =>

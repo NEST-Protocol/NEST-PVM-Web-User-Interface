@@ -17,8 +17,14 @@ export type LimitPriceProp = {
 
 const LimitPrice: FC<LimitPriceProp> = ({ ...props }) => {
   const classPrefix = "LimitPrice";
-  const { limitInput, setLimitInput, buttonLoading, buttonDis, buttonAction } =
-    useFuturesSetLimitOrder(props.order);
+  const {
+    limitInput,
+    setLimitInput,
+    buttonLoading,
+    buttonDis,
+    buttonAction,
+    showPlaceHolder,
+  } = useFuturesSetLimitOrder(props.order);
   const { theme } = useThemes();
   const limitPrice = () => {
     return (
@@ -38,7 +44,7 @@ const LimitPrice: FC<LimitPriceProp> = ({ ...props }) => {
           className={`rightInput`}
         >
           <input
-            placeholder={"Input"}
+            placeholder={showPlaceHolder()}
             value={limitInput}
             maxLength={32}
             onChange={(e) =>

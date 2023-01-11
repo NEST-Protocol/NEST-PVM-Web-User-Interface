@@ -52,6 +52,7 @@ const FuturesMobile: FC = () => {
     tokenPair,
     checkNESTBalance,
     fee,
+    showFee,
     mainButtonTitle,
     mainButtonDis,
     mainButtonAction,
@@ -68,7 +69,8 @@ const FuturesMobile: FC = () => {
     setShowTriggerRisk,
     hideOrder,
     showClosedOrder,
-    baseAction
+    baseAction,
+    feeHoverText,
   } = useFutures();
   const BTCIcon = tokenList["BTC"].Icon;
   const ETHIcon = tokenList["ETH"].Icon;
@@ -252,16 +254,20 @@ const FuturesMobile: FC = () => {
 
         {limit ? limitPrice() : <></>}
         {stop ? stopLimit1() : <></>}
-        <Stack
-          direction="row"
-          justifyContent="space-between"
-          alignItems="center"
-          spacing={0}
-          className={`${classPrefix}-infoShow`}
-        >
-          <p>Open Price</p>
-          <p>{tokenPrice ? tokenPrice.price : "---"} USDT</p>
-        </Stack>
+        {limit ? (
+          <></>
+        ) : (
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+            spacing={0}
+            className={`${classPrefix}-infoShow`}
+          >
+            <p>Open Price</p>
+            <p>{tokenPrice ? tokenPrice.price : "---"} USDT</p>
+          </Stack>
+        )}
         <Stack
           direction="row"
           justifyContent="space-between"
@@ -273,16 +279,14 @@ const FuturesMobile: FC = () => {
             placement="top-start"
             title={
               <div>
-                <p>open positions fee: cost x leverage x 0.2% </p>
-                <p>Limit order fee: cost × leverage × 0.2% </p>
-                <p>Execution fee : 15NEST</p>
+                <p>{feeHoverText()}</p>
               </div>
             }
             arrow
           >
             <p className="underLine">Service Fee</p>
           </LightTooltip>
-          <p>{parseFloat(formatUnits(fee, 18)).toFixed(2).toString()} NEST</p>
+          <p>{showFee()} NEST</p>
         </Stack>
         <Stack
           direction="row"
@@ -420,7 +424,10 @@ const FuturesMobile: FC = () => {
         ref={modal}
         onClose={() => setShowTriggerRisk(false)}
       >
-        <TriggerRiskModal onClose={() => setShowTriggerRisk(false)} action={baseAction} />
+        <TriggerRiskModal
+          onClose={() => setShowTriggerRisk(false)}
+          action={baseAction}
+        />
       </Popup>
       {tokenPairAndPrice()}
       <Popover
