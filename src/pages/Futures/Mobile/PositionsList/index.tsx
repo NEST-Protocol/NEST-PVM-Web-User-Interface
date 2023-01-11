@@ -22,6 +22,7 @@ import {
   DrawerClose,
   DrawerTrigger,
 } from "./DrawerView";
+import { LightTooltip } from "../../../../styles/MUI";
 
 enum DrawerType {
   add = 0,
@@ -138,7 +139,29 @@ const PositionsList: FC<FuturesListProps> = ({ ...props }) => {
         className={`${classPrefix}-three`}
       >
         <div className="left">
-          <p className="title">Actual Margin</p>
+          <LightTooltip
+            placement="top"
+            title={
+              <div>
+                <p>
+                  Dynamic changes in net assets, less than a certain amount of
+                  liquidation will be liquidated, the amount of liquidation is
+                  margin*leverage*return(current price/initial price)*0.002
+                </p>
+              </div>
+            }
+            arrow
+          >
+            <p
+              className={classNames({
+                [`title`]: true,
+                [`underLine`]: true,
+              })}
+            >
+              Actual Margin
+            </p>
+          </LightTooltip>
+
           <p className="value">{showMarginAssets()} NEST</p>
         </div>
         <div className="right">
