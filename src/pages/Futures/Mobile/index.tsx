@@ -68,6 +68,7 @@ const FuturesMobile: FC = () => {
     setShowTriggerRisk,
     hideOrder,
     showClosedOrder,
+    baseAction
   } = useFutures();
   const BTCIcon = tokenList["BTC"].Icon;
   const ETHIcon = tokenList["ETH"].Icon;
@@ -178,7 +179,7 @@ const FuturesMobile: FC = () => {
           >
             <input
               placeholder={`>${tokenPrice.price}`}
-              value={takeInput}
+              value={takeInput !== "" ? `>${takeInput}` : takeInput}
               maxLength={32}
               onChange={(e) => setTakeInput(formatInputNum(e.target.value))}
             />
@@ -419,7 +420,7 @@ const FuturesMobile: FC = () => {
         ref={modal}
         onClose={() => setShowTriggerRisk(false)}
       >
-        <TriggerRiskModal onClose={() => setShowTriggerRisk(false)} />
+        <TriggerRiskModal onClose={() => setShowTriggerRisk(false)} action={baseAction} />
       </Popup>
       {tokenPairAndPrice()}
       <Popover

@@ -1,6 +1,7 @@
 import Stack from "@mui/material/Stack";
 import { formatUnits } from "ethers/lib/utils";
-import { FC } from "react";
+import { FC, useRef } from "react";
+import Popup from "reactjs-popup";
 import InfoShow from "../../../../components/InfoShow";
 import MainButton from "../../../../components/MainButton";
 import { SingleTokenShow } from "../../../../components/TokenShow";
@@ -15,6 +16,7 @@ import {
 } from "../../../../libs/hooks/useFutures";
 import { formatInputNumWithFour } from "../../../../libs/utils";
 import { LightTooltip } from "../../../../styles/MUI";
+import TriggerRiskModal from "../../TriggerRisk";
 
 const classPrefix = "positionsList";
 
@@ -137,6 +139,7 @@ export const DrawerAdd: FC<DrawerBaseType> = ({ ...props }) => {
 };
 
 export const DrawerTrigger: FC<DrawerBaseType> = ({ ...props }) => {
+  const modal = useRef<any>();
   const {
     triggerInput,
     setTriggerInput,
@@ -149,6 +152,10 @@ export const DrawerTrigger: FC<DrawerBaseType> = ({ ...props }) => {
     buttonLoading,
     buttonAction,
     isEdit,
+    showPlaceHolder,
+    showTriggerRisk,
+    setShowTriggerRisk,
+    baseAction,
   } = useFuturesTrigger(props.order);
   const stopLimit1 = () => {
     return (
@@ -168,8 +175,8 @@ export const DrawerTrigger: FC<DrawerBaseType> = ({ ...props }) => {
           className={`rightInput`}
         >
           <input
-            placeholder={"Input"}
-            value={triggerInput}
+            placeholder={showPlaceHolder()}
+            value={triggerInput !== "" ? `>${triggerInput}` : triggerInput}
             maxLength={32}
             onChange={(e) =>
               setTriggerInput(formatInputNumWithFour(e.target.value))
@@ -177,10 +184,7 @@ export const DrawerTrigger: FC<DrawerBaseType> = ({ ...props }) => {
           />
           <p>USDT</p>
           {isEdit() ? (
-            <MainButton
-              className="TriggerClose"
-              onClick={actionClose}
-            >
+            <MainButton className="TriggerClose" onClick={actionClose}>
               <p>Close</p>
             </MainButton>
           ) : (
@@ -192,6 +196,18 @@ export const DrawerTrigger: FC<DrawerBaseType> = ({ ...props }) => {
   };
   return (
     <Stack spacing={0}>
+      <Popup
+        open={showTriggerRisk}
+        modal
+        ref={modal}
+        onClose={() => setShowTriggerRisk(false)}
+        nested
+      >
+        <TriggerRiskModal
+          onClose={() => setShowTriggerRisk(false)}
+          action={baseAction}
+        />
+      </Popup>
       <p className="title">{showTitle()}</p>
       <Stack spacing={0}>
         {stopLimit1()}
@@ -249,7 +265,11 @@ export const DrawerTrigger: FC<DrawerBaseType> = ({ ...props }) => {
           if (buttonDis()) {
             return;
           }
-          props.hideSelf();
+          const triggerRiskModal = localStorage.getItem("TriggerRiskModal");
+          if (triggerRiskModal === "1") {
+            props.hideSelf();
+          }
+
           buttonAction();
         }}
       >

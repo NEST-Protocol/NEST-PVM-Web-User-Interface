@@ -1,12 +1,14 @@
 import Stack from "@mui/material/Stack";
 import classNames from "classnames";
-import { FC } from "react";
+import { FC, useRef } from "react";
+import Popup from "reactjs-popup";
 import MainButton from "../../../components/MainButton";
 import MainCard from "../../../components/MainCard";
 import { OrderView, useFuturesTrigger } from "../../../libs/hooks/useFutures";
 import useThemes, { ThemeType } from "../../../libs/hooks/useThemes";
 import { formatInputNumWithFour } from "../../../libs/utils";
 import { LightTooltip } from "../../../styles/MUI";
+import TriggerRiskModal from "../TriggerRisk";
 import "./styles";
 
 type TriggerProp = {
@@ -15,6 +17,7 @@ type TriggerProp = {
 
 const Trigger: FC<TriggerProp> = ({ ...props }) => {
   const classPrefix = "Trigger";
+  const modal = useRef<any>();
   const { theme } = useThemes();
   const {
     triggerInput,
@@ -28,6 +31,10 @@ const Trigger: FC<TriggerProp> = ({ ...props }) => {
     buttonLoading,
     buttonAction,
     isEdit,
+    showPlaceHolder,
+    showTriggerRisk,
+    setShowTriggerRisk,
+    baseAction,
   } = useFuturesTrigger(props.order);
   const stopLimit1 = () => {
     return (
@@ -47,8 +54,8 @@ const Trigger: FC<TriggerProp> = ({ ...props }) => {
           className={`rightInput`}
         >
           <input
-            placeholder={"Input"}
-            value={triggerInput}
+            placeholder={showPlaceHolder()}
+            value={triggerInput !== "" ? `>${triggerInput}` : triggerInput}
             maxLength={32}
             onChange={(e) =>
               setTriggerInput(formatInputNumWithFour(e.target.value))
@@ -127,6 +134,15 @@ const Trigger: FC<TriggerProp> = ({ ...props }) => {
         [`${classPrefix}-dark`]: theme === ThemeType.dark,
       })}
     >
+      <Popup
+        open={showTriggerRisk}
+        modal
+        ref={modal}
+        onClose={() => setShowTriggerRisk(false)}
+        nested
+      >
+        <TriggerRiskModal onClose={() => setShowTriggerRisk(false)} action={baseAction} />
+      </Popup>
       <Stack spacing={0} alignItems="center">
         <p className="title">{showTitle()}</p>
         {stopLimit1()}

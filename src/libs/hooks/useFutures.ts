@@ -88,7 +88,6 @@ export function useFutures() {
   const [limit, setLimit] = useState(false);
   const [stop, setStop] = useState(false);
   const [showNotice, setShowNotice] = useState(false);
-  const [hadTriggerRisk, setHadTriggerRisk] = useState(false);
   const [showTriggerRisk, setShowTriggerRisk] = useState(false);
   const [isPositions, setIsPositions] = useState(true);
   const [nestInput, setNestInput] = useState<string>("");
@@ -414,10 +413,10 @@ export function useFutures() {
     };
   }, [getClosedOrderList, getLimitOrderList, getOldOrderList, getOrderList]);
 
-  useEffect(() => {
-    const triggerRiskModal = localStorage.getItem("TriggerRiskModal");
-    setHadTriggerRisk(triggerRiskModal === "1" ? true : false);
-  }, []);
+  // useEffect(() => {
+  //   const triggerRiskModal = localStorage.getItem("TriggerRiskModal");
+  //   setHadTriggerRisk(triggerRiskModal === "1" ? true : false);
+  // }, []);
 
   // action
   const buy1 = usePVMFuturesBuy2(
@@ -485,9 +484,9 @@ export function useFutures() {
       }
       return;
     }
-    if ((limit || stop) && !hadTriggerRisk) {
+    const triggerRiskModal = localStorage.getItem("TriggerRiskModal");
+    if ((limit || stop) && triggerRiskModal !== "1") {
       setShowTriggerRisk(true);
-      setHadTriggerRisk(true);
       return;
     }
     if (limit) {
@@ -504,6 +503,13 @@ export function useFutures() {
         item.type === TransactionType.PVMFuturesProxyNew
     );
     return pendingTransaction.length > 0 ? true : false;
+  };
+  const baseAction = () => {
+    if (limit) {
+      buy2();
+    } else {
+      buy1();
+    }
   };
 
   // hide order
@@ -571,6 +577,7 @@ export function useFutures() {
     setShowTriggerRisk,
     hideOrder,
     showClosedOrder,
+    baseAction,
   };
 }
 
@@ -784,6 +791,8 @@ export function useFuturesLimitOrderList(order: LimitOrderView) {
 
 export function useFuturesTrigger(order: OrderView) {
   const [triggerInput, setTriggerInput] = useState<string>("");
+  const [showTriggerRisk, setShowTriggerRisk] = useState(false);
+  const { chainId } = useWeb3();
   const { pendingList } = useTransactionListCon();
   const showPosition = () => {
     const lever = order.lever.toString();
@@ -815,6 +824,24 @@ export function useFuturesTrigger(order: OrderView) {
       : "Edit Position";
   };
 
+  const showPlaceHolder = () => {
+    if (order.stopPrice.toString() === "0") {
+      if (!chainId) {
+        return "---";
+      }
+      const thisToken = tokenArray.filter((item) => {
+        return item.pairIndex[chainId] === order.tokenIndex.toString();
+      });
+      return thisToken[0].nowPrice
+        ? parseFloat(formatUnits(thisToken[0].nowPrice, 18))
+            .toFixed(2)
+            .toString()
+        : "---";
+    } else {
+      return parseFloat(formatUnits(order.stopPrice, 18)).toFixed(2).toString();
+    }
+  };
+
   const isEdit = () => {
     return !BigNumber.from("0").eq(order.stopPrice);
   };
@@ -843,7 +870,16 @@ export function useFuturesTrigger(order: OrderView) {
     if (buttonDis()) {
       return;
     }
+    const triggerRiskModal = localStorage.getItem("TriggerRiskModal");
+    if (triggerRiskModal !== "1") {
+      setShowTriggerRisk(true);
+      return;
+    }
     action();
+  };
+
+  const baseAction = () => {
+    actionClose();
   };
 
   return {
@@ -858,6 +894,10 @@ export function useFuturesTrigger(order: OrderView) {
     buttonLoading,
     buttonAction,
     isEdit,
+    showPlaceHolder,
+    showTriggerRisk,
+    setShowTriggerRisk,
+    baseAction,
   };
 }
 

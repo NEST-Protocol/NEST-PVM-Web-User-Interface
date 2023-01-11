@@ -7,6 +7,7 @@ import MainCard from "../../../components/MainCard";
 import "./styles";
 type Props = {
   onClose: () => void;
+  action: () => void;
 };
 
 const TriggerRiskModal: FC<Props> = ({ ...props }) => {
@@ -41,6 +42,7 @@ const TriggerRiskModal: FC<Props> = ({ ...props }) => {
                 localStorage.setItem("TriggerRiskModal", "1");
               }
               props.onClose();
+              props.action();
             }}
           >
             Accept
