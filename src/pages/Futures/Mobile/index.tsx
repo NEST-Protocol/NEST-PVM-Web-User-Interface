@@ -180,8 +180,8 @@ const FuturesMobile: FC = () => {
             className={`rightInput`}
           >
             <input
-              placeholder={`>${tokenPrice.price}`}
-              value={takeInput !== "" ? `>${takeInput}` : takeInput}
+              placeholder={`${tokenPrice.price}`}
+              value={takeInput}
               maxLength={32}
               onChange={(e) => setTakeInput(formatInputNum(e.target.value))}
             />
@@ -290,7 +290,7 @@ const FuturesMobile: FC = () => {
             }
             arrow
           >
-            <p className="underLine">Service Fee</p>
+            <p className="underLine">Service Fee {stop ? "(after execution)" : ""}</p>
           </LightTooltip>
           <p>{showFee()} NEST</p>
         </Stack>

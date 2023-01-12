@@ -144,9 +144,10 @@ const PositionsList: FC<FuturesListProps> = ({ ...props }) => {
             title={
               <div>
                 <p>
-                  Dynamic changes in net assets, less than a certain amount of
-                  liquidation will be liquidated, the amount of liquidation is
-                  margin*leverage*return(current price/initial price)*0.002
+                  The net asset value, if this value is lower than liquidation
+                  amount, the position will be liquidated. Liquidation ratio =
+                  0.2% Liquidation amount = margin * leverage * (current
+                  price/initial price)*Liquidation ratio
                 </p>
               </div>
             }

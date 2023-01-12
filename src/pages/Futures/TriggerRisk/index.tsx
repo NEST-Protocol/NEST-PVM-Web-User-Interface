@@ -26,7 +26,7 @@ const TriggerRiskModal: FC<Props> = ({ ...props }) => {
             1. The trigger price has been reached but there is not enough time
             to execute.<br />
             2. No one picks up the execution order There may be slippage to
-            execute at the trigger price
+            execute at the trigger price.
           </p>
           <p className={`${classPrefix}-main-select`}>
             <button

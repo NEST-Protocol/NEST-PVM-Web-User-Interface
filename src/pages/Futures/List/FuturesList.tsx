@@ -164,6 +164,7 @@ export const FuturesList2: FC<FuturesList2Props> = ({ ...props }) => {
           disable={closeButtonDis()}
           loading={closeButtonLoading()}
           onClick={closeButtonAction}
+          className={"listCloseButton"}
         >
           Close
         </MainButton>
@@ -205,6 +206,7 @@ export const FuturesListOld: FC<FuturesOldListProps> = ({ ...props }) => {
           disable={closeButtonDis()}
           loading={closeButtonLoading()}
           onClick={closeButtonAction}
+          className={"listCloseButton"}
         >
           Close
         </MainButton>

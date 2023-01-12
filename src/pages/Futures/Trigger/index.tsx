@@ -56,7 +56,7 @@ const Trigger: FC<TriggerProp> = ({ ...props }) => {
         >
           <input
             placeholder={showPlaceHolder()}
-            value={triggerInput !== "" ? `>${triggerInput}` : triggerInput}
+            value={triggerInput}
             maxLength={32}
             onChange={(e) =>
               setTriggerInput(formatInputNumWithFour(e.target.value))
@@ -122,9 +122,9 @@ const Trigger: FC<TriggerProp> = ({ ...props }) => {
               }
               arrow
             >
-              <p className="underLine">Fees</p>
+              <p className="underLine">Fees(after execution)</p>
             </LightTooltip>
-            <p>{`Execution Collect after ${showTriggerFee()}`}</p>
+            <p>{`${showTriggerFee()}`}</p>
           </Stack>
         )}
       </>

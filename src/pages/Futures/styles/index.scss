@@ -332,6 +332,13 @@
                 margin-left: 10px;
             }
 
+            button.listCloseButton {
+                svg {
+                    width: 17px;
+                    height: 17px;
+                }
+            }
+
             button.endOrder {
                 height: 28px;
                 margin: 0 auto;

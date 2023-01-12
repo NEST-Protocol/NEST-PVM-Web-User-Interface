@@ -151,8 +151,8 @@ const Futures: FC = () => {
             className={`rightInput`}
           >
             <input
-              placeholder={`>${tokenPrice.price}`}
-              value={takeInput !== "" ? `>${takeInput}` : takeInput}
+              placeholder={`${tokenPrice.price}`}
+              value={takeInput}
               maxLength={32}
               onChange={(e) =>
                 setTakeInput(`${formatInputNum(e.target.value)}`)
@@ -331,7 +331,7 @@ const Futures: FC = () => {
               }
               arrow
             >
-              <p className="underLine">Service Fee</p>
+              <p className="underLine">Service Fee {stop ? "(after execution)" : ""}</p>
             </LightTooltip>
             <p>{showFee()} NEST</p>
           </Stack>
@@ -421,10 +421,10 @@ const Futures: FC = () => {
                 title={
                   <div>
                     <p>
-                      Dynamic changes in net assets, less than a certain amount
-                      of liquidation will be liquidated, the amount of
-                      liquidation is margin*leverage*return(current
-                      price/initial price)*0.002
+                      The net asset value, if this value is lower than
+                      liquidation amount, the position will be liquidated.
+                      Liquidation ratio = 0.2% Liquidation amount = margin *
+                      leverage * (current price/initial price)*Liquidation ratio
                     </p>
                   </div>
                 }

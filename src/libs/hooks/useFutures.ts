@@ -297,7 +297,10 @@ export function useFutures() {
             lever: BigNumber.from(item["level"].toString()),
             orientation: item["orientation"],
             basePrice: parseUnits(item["basePrice"].toString(), 18),
-            stopPrice: parseUnits(item["stopPrice"] ? item["stopPrice"].toString() : "0", 18),
+            stopPrice: parseUnits(
+              item["stopPrice"] ? item["stopPrice"].toString() : "0",
+              18
+            ),
             actualMargin: item["actualMargin"],
           };
         }
@@ -550,7 +553,7 @@ export function useFutures() {
   };
   const showFee = () => {
     if (!limit && stop) {
-      return `Execution Collect after ${parseFloat(
+      return `${parseFloat(
         formatUnits(fee.add(parseUnits(BASE_NEST_FEE, 18)), 18)
       )
         .toFixed(2)
@@ -958,9 +961,16 @@ export function useFuturesSetLimitOrder(order: LimitOrderView) {
     action();
   };
   const showPlaceHolder = () => {
-    return parseFloat(formatUnits(order.limitPrice, 18)).toFixed(2).toString()
-  }
-  return { limitInput, setLimitInput, buttonLoading, buttonDis, buttonAction, showPlaceHolder };
+    return parseFloat(formatUnits(order.limitPrice, 18)).toFixed(2).toString();
+  };
+  return {
+    limitInput,
+    setLimitInput,
+    buttonLoading,
+    buttonDis,
+    buttonAction,
+    showPlaceHolder,
+  };
 }
 
 export function useFuturesAdd(order: OrderView) {
