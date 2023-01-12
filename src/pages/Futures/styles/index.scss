@@ -344,6 +344,9 @@
                 border: 1px solid #0047BB;
                 border-radius: 14px;
                 padding: 0 20px;
+                &:hover {
+                    cursor: pointer;
+                }
 
                 p {
                     margin-right: 15px;

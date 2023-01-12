@@ -515,19 +515,19 @@ export function useFutures() {
   // hide order
   const hideOrder = async (index: BigNumber) => {
     setOrderNotShow([...orderNotShow, index]);
-    // try {
-    //   fetch(
-    //     `https://api.nestfi.net/api/order/save/${chainId}?address=${account}&index=${index.toString()}`,
-    //     {
-    //       method: "post",
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //       },
-    //     }
-    //   );
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    try {
+      await fetch(
+        `https://api.nestfi.net/api/order/save/${chainId}?address=${account}&index=${index.toString()}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+    } catch (error) {
+      console.log(error);
+    }
   };
   const showClosedOrder = useMemo(() => {
     return closedOrder.filter((item) => {
