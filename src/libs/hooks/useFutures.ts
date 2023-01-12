@@ -297,7 +297,7 @@ export function useFutures() {
             lever: BigNumber.from(item["level"].toString()),
             orientation: item["orientation"],
             basePrice: parseUnits(item["basePrice"].toString(), 18),
-            stopPrice: parseUnits(item["stopPrice"].toString(), 18),
+            stopPrice: parseUnits(item["stopPrice"] ? item["stopPrice"].toString() : "0", 18),
             actualMargin: item["actualMargin"],
           };
         }
