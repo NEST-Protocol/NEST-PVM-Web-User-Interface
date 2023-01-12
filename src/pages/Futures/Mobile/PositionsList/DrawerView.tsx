@@ -251,12 +251,13 @@ export const DrawerTrigger: FC<DrawerBaseType> = ({ ...props }) => {
               placement="top-start"
               title={
                 <div>
-                  <p>margin*leverage*0.2%, trigger fee 15 NEST</p>
+                  <p>Position fee = Position*0.2%</p>
+                  <p>Stop order fee(after execution) = 15 NEST</p>
                 </div>
               }
               arrow
             >
-              <p className="underLine">Fees(after execution)</p>
+              <p className="underLine">Fees</p>
             </LightTooltip>
             <p>{`${showTriggerFee()}`}</p>
           </Stack>

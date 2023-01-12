@@ -542,13 +542,17 @@ export function useFutures() {
 
   const feeHoverText = () => {
     if (!limit && !stop) {
-      return "margin*leverage*0.2%";
+      return ["Position fee = Position*0.2%"];
     } else if (limit && !stop) {
-      return "margin*leverage*0.2%, trigger fee 15NEST";
+      return ["Position fee = Position*0.2%", "Limit order fee = 15 NEST"];
     } else if (!limit && stop) {
-      return "margin*leverage*0.2%, trigger fee 15NEST";
+      return ["Position fee = Position*0.2%", "Stop order fee(after execution) = 15 NEST"];
     } else {
-      return "Limit order now charging: margin*leverage*0.2%, trigger fee 15 NEST; Stop order execution collect after: margin*leverage*0.2%, trigger fee 15 NEST";
+      return [
+        "Position fee = Position*0.2%",
+        "Limit order fee = 15 NEST",
+        "Stop order fee(after execution) = 15 NEST",
+      ];
     }
   };
   const showFee = () => {

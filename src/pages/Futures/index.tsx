@@ -326,12 +326,14 @@ const Futures: FC = () => {
               placement="right"
               title={
                 <div>
-                  <p>{feeHoverText()}</p>
+                  {feeHoverText().map((item, index) => {
+                    return <p key={`hover+${index}`}>{item}</p>;
+                  })}
                 </div>
               }
               arrow
             >
-              <p className="underLine">Service Fee {stop ? "(after execution)" : ""}</p>
+              <p className="underLine">Service Fee</p>
             </LightTooltip>
             <p>{showFee()} NEST</p>
           </Stack>
