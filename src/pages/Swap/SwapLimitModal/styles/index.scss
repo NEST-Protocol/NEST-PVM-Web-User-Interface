@@ -62,9 +62,11 @@
                     background: linear-gradient(90deg, #8BB7FF 0%, #0061FF 100%);
                     color: $main-background-color;
                     border: 0px;
+                    line-height: 44px;
 
                     &:hover {
                         border: 0px;
+                        line-height: 44px;
                     }
                 }
             }
@@ -90,6 +92,29 @@
             margin-top: 30px;
             font-size: 12.5px;
             padding-bottom: 30px;
+        }
+    }
+
+    .swapLimitModal-dark {
+        .leverChoose {
+            &-choose {
+                li {
+                    &:hover {
+                        border: 0px;
+                        line-height: 24px;
+                    }
+    
+                    &.selected {
+                        border: 0px;
+                        line-height: 24px;
+    
+                        &:hover {
+                            border: 0px;
+                            line-height: 24px;
+                        }
+                    }
+                }
+            }
         }
     }
 
