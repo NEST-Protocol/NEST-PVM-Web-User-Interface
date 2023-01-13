@@ -48,7 +48,7 @@ const TVChart: FC<TVChartProps> = ({ chainId, tokenPair, chartHeight}) => {
       const k_data = await fetch(
         `https://api.nestfi.net/api/oracle/get_cur_kline/${
           chainId?.toString() || 56
-        }/0/${tokenPair.toLocaleLowerCase() + "usdt"}/${period}/1000`
+        }/0/${tokenPair.toLocaleLowerCase() + "usdt"}/${period}/100`
       );
       const k_data_value = await k_data.json();
       setPriceData(

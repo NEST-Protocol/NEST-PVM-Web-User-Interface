@@ -230,16 +230,20 @@ export function useFutures() {
         account
       );
       const result = list.filter((item) => {
-        return (
-          item.balance.toString() !== "0"
-          // item.balance.toString() !== "0" && BigNumber.from("30").lt(item.index)
-        );
+        if (chainId === 56) {
+          return item.balance.toString() !== "0";
+        } else {
+          return (
+            item.balance.toString() !== "0" &&
+            BigNumber.from("30").lt(item.index)
+          );
+        }
       });
       setOrderList(result);
     } catch (error) {
       console.log(error);
     }
-  }, [PVMFuturesOJ, account]);
+  }, [PVMFuturesOJ, account, chainId]);
 
   const getLimitOrderList = useCallback(async () => {
     try {
@@ -283,7 +287,7 @@ export function useFutures() {
   const getClosedOrderList = useCallback(async () => {
     try {
       if (!chainId || !account) {
-        return
+        return;
       }
       const data = await fetch(
         `https://api.nestfi.net/api/order/position/list/${chainId}?address=${account}`
@@ -549,7 +553,10 @@ export function useFutures() {
     } else if (limit && !stop) {
       return ["Position fee = Position*0.2%", "Limit order fee = 15 NEST"];
     } else if (!limit && stop) {
-      return ["Position fee = Position*0.2%", "Stop order fee(after execution) = 15 NEST"];
+      return [
+        "Position fee = Position*0.2%",
+        "Stop order fee(after execution) = 15 NEST",
+      ];
     } else {
       return [
         "Position fee = Position*0.2%",
