@@ -231,8 +231,8 @@ export function useFutures() {
       );
       const result = list.filter((item) => {
         return (
-          // item.balance.toString() !== "0"
-          item.balance.toString() !== "0" && BigNumber.from("30").lt(item.index)
+          item.balance.toString() !== "0"
+          // item.balance.toString() !== "0" && BigNumber.from("30").lt(item.index)
         );
       });
       setOrderList(result);
