@@ -21,7 +21,7 @@ type Props = {
 };
 
 const Modal: FC<Props> = ({ ...props }) => {
-  const { activate } = useWeb3();
+  const { activate} = useWeb3();
   const classPrefix = "modal-status";
   const { theme } = useThemes();
   const [isMore, setIsMore] = useState<boolean>(false);
@@ -71,10 +71,10 @@ const Modal: FC<Props> = ({ ...props }) => {
         {isMore ? (
           <div className={`${classPrefix}-moreView`}>
             <div className={`${classPrefix}-walletSelect2`}>
-              <MainCard
+            <MainCard
                 onClick={() => {
                   activate(
-                    SupportedConnectors[2].connector,
+                    SupportedConnectors[3].connector,
                     undefined,
                     true
                   ).catch(() => {
@@ -84,8 +84,8 @@ const Modal: FC<Props> = ({ ...props }) => {
                   });
                 }}
               >
-                <CoinbaseIcon />
-                <p>Coinbase Wallet</p>
+                <img src="OKXWallet.png" alt="NEST IMG"/>
+                <p>OKX Wallet</p>
               </MainCard>
               <MainCard
                 onClick={() => {
@@ -124,7 +124,7 @@ const Modal: FC<Props> = ({ ...props }) => {
               <MainCard
                 onClick={() => {
                   activate(
-                    SupportedConnectors[3].connector,
+                    SupportedConnectors[2].connector,
                     undefined,
                     true
                   ).catch(() => {
@@ -134,8 +134,8 @@ const Modal: FC<Props> = ({ ...props }) => {
                   });
                 }}
               >
-                <img src="OKXWallet.png" alt="NEST IMG"/>
-                <p>OKX Wallet</p>
+                <CoinbaseIcon />
+                <p>Coinbase Wallet</p>
               </MainCard>
             </div>
           </div>

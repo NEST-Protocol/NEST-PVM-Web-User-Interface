@@ -1,6 +1,6 @@
-import { Tooltip } from "antd";
 import classNames from "classnames";
 import { FC } from "react";
+import { LightTooltip } from "../../styles/MUI";
 import "./styles";
 
 type Props = {
@@ -15,9 +15,8 @@ const MobileListInfo: FC<Props> = ({ children, ...props }) => {
     <div className={classPrefix}>
       <div className={`${classPrefix}-title`}>
         {props.under ? (
-          <Tooltip
-            placement="topRight"
-            color={"#ffffff"}
+          <LightTooltip
+            placement="top-end"
             title={props.underText}
           >
             <span
@@ -27,7 +26,7 @@ const MobileListInfo: FC<Props> = ({ children, ...props }) => {
             >
               {props.title}
             </span>
-          </Tooltip>
+          </LightTooltip>
         ) : (
           <span
             className={classNames({

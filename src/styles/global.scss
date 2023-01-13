@@ -94,7 +94,12 @@ li {
 }
 
 .popup-overlay {
+    z-index: 1201 !important;
     background: rgba(0, 0, 0, 0.5);
+}
+
+.ant-message {
+    z-index: 1300 !important;
 }
 
 .animation-spin {
@@ -109,15 +114,6 @@ li {
             transform: rotate(360deg);
         }
     }
-}
-
-.ant-tooltip-inner {
-    color: $gray-info-text-color;
-    background: white;
-}
-
-.ant-tooltip-arrow-content {
-    --antd-arrow-background-color: linear-gradient(to right bottom, rgba(255, 255, 255, 1), rgba(255, 255, 255, 1));
 }
 
 .ant-picker-input input {

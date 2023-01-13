@@ -8,7 +8,8 @@
     margin-top: 22px;
     margin-bottom: 22px;
 
-    &-trading, &-limit {
+    &-trading,
+    &-limit {
         display: flex;
         justify-content: space-between;
         margin-top: 20px;
@@ -29,7 +30,9 @@
                 padding-bottom: 5px;
                 border-bottom: 1px dashed $gray-info-text-color;
             }
+
             display: flex;
+
             button {
                 display: block;
                 height: 25px;
@@ -46,7 +49,7 @@
                 }
             }
         }
-        
+
     }
 
     .max-button {
@@ -68,6 +71,7 @@
 
         &.disable {
             background: $button-disable-color;
+
             &:hover {
                 cursor: not-allowed;
             }
@@ -90,6 +94,7 @@
     .infoView-tokenSelect {
         height: 80px;
         margin-bottom: -85px;
+
         &.three {
             height: 120px;
             margin-bottom: -125px;
@@ -101,16 +106,55 @@
         justify-content: space-between;
 
         p {
-            line-height: 44px;
-            margin-left: 10px;
             svg {
                 width: 22px;
                 height: 22px;
                 margin-top: 11px;
+                margin-left: 10px;
 
                 &:hover {
                     cursor: pointer;
                 }
+            }
+        }
+    }
+
+    &-selectToken {
+        .css-3bmhjh-MuiPaper-root-MuiPopover-paper {
+            width: 482px;
+            border-radius: 22px;
+            margin-left: -20px;
+            margin-top: 10px;
+        }
+
+        svg {
+            position: relative;
+            width: 28px;
+            height: 28px;
+            z-index: 10;
+            margin-right: 10px;
+        }
+
+        ul {
+            width: 100%;
+
+            li {
+                padding: 4px 20px;
+                display: flex;
+                font-size: 16px;
+
+                p {
+                    line-height: 28px;
+                }
+
+                &:hover {
+                    background-color: #EEEEEE;
+                    cursor: pointer;
+                }
+            }
+
+            li+li {
+                margin-top: 5px;
             }
         }
     }
@@ -122,11 +166,89 @@
 
 @media screen and (max-width: 1000px) {
     .swap-card {
-        margin: 0 10px;
-        padding: 20px 20px;
+        margin: 0 8px;
+        padding: 25px 15px;
+
+        &-selected {
+            p {
+                svg {
+                    width: 18px;
+                    height: 18px;
+                    margin-top: 8px;
+                    margin-left: 5px;
+
+                    &:hover {
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+
+        &-trading {
+            font-size: 12.5px;
+            padding: 0 15px;
+            margin-top: 15px;
+        }
+
+        .fort-button {
+            margin-top: 22px;
+        }
+
+        &-limit {
+            font-size: 12.5px;
+            padding: 0 15px;
+            margin-top: 15px;
+            div {
+                span {
+                    margin-top: 2px;
+                    padding-bottom: 3px;
+                }
+
+                button {
+                    height: 22px;
+                    width: 22px;
+    
+                    &:hover {
+                        cursor: pointer;
+                    }
+                }
+            }
+            p {
+                margin-top: 2px;
+            }
+        }
+
+        &-selectToken {
+            .css-3bmhjh-MuiPaper-root-MuiPopover-paper {
+                border-radius: 22px;
+                margin-top: 6px;
+                max-width: calc(100% - 46px);
+                margin-left:-5px;
+            }
+
+            svg {
+                width: 20px;
+                height: 20px;
+                margin-right: 5px;
+            }
+
+            ul {
+                li {
+                    font-size: 12.5px;
+                    padding: 4px 14.5px;
+                    p {
+                        line-height: 20px;
+                    }
+
+                    &:hover {
+                        background-color: #EEEEEE;
+                    }
+                }
+            }
+        }
     }
 
-    .swap-card + .swap-card {
+    .swap-card+.swap-card {
         margin-top: 10px;
     }
 }

@@ -167,18 +167,6 @@
                 }
             }
         }
-
-        .infoView-balance-add {
-            display: flex;
-            color: $main-button-color;
-            justify-content: space-between;
-            cursor: pointer;
-
-            p {
-                line-height: 22px;
-                margin-left: 5px;
-            }
-        }
     }
 
 
@@ -235,17 +223,169 @@
             display: block;
         }
     }
+}
 
+.infoView-balance-add {
+    display: flex;
+    color: $main-button-color;
+    justify-content: space-between;
+    cursor: pointer;
+
+    p {
+        line-height: 22px;
+        margin-left: 5px;
+    }
 }
 
 @media screen and (max-width: 1000px) {
     .infoView {
+        &-topLeft {
+            margin: 0 14.5px;
+            font-size: 12.5px;
+            height: auto;
+        }
+
         &-topRight {
-            margin: 0 20px;
-            color: $gray-info-text-color;
-            font-size: 14px;
-            text-align: right;
-            height: 20px;
+            margin: 0 14.5px;
+            font-size: 12.5px;
+            height: auto;
+        }
+
+        .infoView-bottom {
+            .infoView-bottomLeft {
+                margin: 0 14.5px;
+                font-size: 12.5px;
+            }
+
+            .infoView-bottomRight {
+                margin: 0 14.5px;
+                font-size: 12.5px;
+            }
+        }
+
+        &-mainView {
+            margin: 11.5px 0;
+            height: 34px;
+            border-radius: 17px;
+            padding: 0 14.5px;
+
+            .input-middle,
+            .input-right,
+            .input-left {
+                font-size: 12.5px;
+
+                &::placeholder {
+                    font-size: 12.5px;
+                }
+            }
+
+            .showValue {
+                font-size: 12.5px;
+                line-height: 34px
+            }
+
+            .max-button {
+                font-size: 12.5px;
+            }
+
+            span {
+                font-size: 12.5px;
+                line-height: 34px;
+            }
+        }
+    }
+}
+
+.infoView-dark {
+    .infoView {
+
+        &-topLeft,
+        &-topRight {
+            color: #C5C5C5;
+        }
+
+        &-bottomRight,
+        &-bottomLeft {
+            color: #C5C5C5;
+
+            &.underLine {
+                span {
+                    border-bottom: 1px dashed #C5C5C5;
+                }
+            }
+        }
+
+        &-mainView {
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            border: 0px;
+
+            &:hover {
+                border: 1px solid #8BB7FF;
+            }
+
+            p,
+            span {
+                color: #BDD6FF;
+            }
+
+            p.win-card-x {
+                color: #FFFFFF;
+            }
+
+            .win-card-x+button {
+                svg>g>path {
+                    fill: #8BB7FF;
+                }
+            }
+
+            .sub-button,
+            .add-button {
+                svg>rect {
+                    fill: #8BB7FF;
+                }
+            }
+
+            input {
+                color: $main-background-color;
+            }
+
+            .TokenShow {
+
+                p {
+                    color: $main-background-color;
+                }
+
+                .icon_prc {
+                    fill: white;
+                }
+
+            }
+
+            .max-button {
+                color: #BDD6FF;
+            }
+
+            .ant-picker-suffix,
+            .swap-card-selected p {
+                svg path {
+                    fill: #BDD6FF;
+                }
+
+                svg circle {
+                    stroke: #BDD6FF;
+                }
+            }
+
+            div+svg {
+                path {
+                    fill: #BDD6FF;
+                }
+
+                circle {
+                    stroke: #BDD6FF;
+                }
+            }
         }
     }
 }

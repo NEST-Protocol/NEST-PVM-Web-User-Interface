@@ -7,3 +7,9 @@
     border: 1px solid $gray-background-color;
     border-radius: 20px;
 }
+
+@media screen and (max-width: 1000px) {
+    .mainCard {
+        border-radius: 14px;
+    }
+}

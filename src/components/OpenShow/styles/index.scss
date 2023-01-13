@@ -1,0 +1,56 @@
+@use "sass:math";
+@import 'src/styles/shared.scss';
+
+.OpenShow {
+    .out {
+        width: 34px;
+        height: 34px;
+        border-radius: 17px;
+        background-color: #F7F8FA;
+        border: 1px solid #EEEEEE;
+        box-sizing: border-box;
+        box-shadow: $shadow-inside;
+        display: flex;
+
+        .in {
+            margin: auto auto;
+            width: 20px;
+            height: 20px;
+            border-radius: 10px;
+            background-color: #0047BB;
+
+            &.hidden {
+                display: none;
+            }
+        }
+    }
+
+    p {
+        color: #878787;
+        font-size: 12.5px;
+        margin-left: 12px;
+    }
+}
+
+.main-dark {
+    .OpenShow {
+        .out {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid #8BB7FF;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+            .in {
+                background: #BDD6FF;
+                box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            }
+        }
+
+        p {
+            color: #C5C5C5;
+            &.high {
+                font-family: $boldFont;
+                color: #BDD6FF;
+            }
+        }
+    }
+}

@@ -1,0 +1,524 @@
+@use "sass:math";
+@import 'src/styles/shared.scss';
+
+.Futures {
+    margin-top: 22px;
+
+    &-topView {
+        width: 1276px;
+
+        &-left {
+            width: 572px;
+            height: 100%;
+            background: #F7F8FA;
+            border: 1px solid #EEEEEE;
+            box-shadow: 0px 0px 10px 0px #EEEEEE;
+            border-radius: 14px;
+            padding: 40px 44px;
+
+            .mainButton {
+                margin-top: 25px;
+            }
+        }
+
+        &-right {
+            width: 682px;
+            height: auto;
+            background: #F7F8FA;
+            border: 1px solid #EEEEEE;
+            box-shadow: 0px 0px 10px 0px #EEEEEE;
+            border-radius: 14px;
+            margin-left: 22px;
+            padding: 40px 44px;
+
+            p.title {
+                font-size: 16px;
+                color: #7D7D7D;
+                margin-bottom: 30px;
+            }
+        }
+    }
+
+    &-tokenPair {
+        color: #7D7D7D;
+        font-size: 16px;
+        text-align: left;
+        height: 20px;
+        margin: 0 20px;
+        margin-bottom: 20px;
+    }
+
+    &-tokenPairAndPrice {
+        padding: 0 15px;
+        height: 44px;
+        background: #F7F8FA;
+        border: 1px solid #EEEEEE;
+        box-shadow: 0px 0px 10px 0px #EEEEEE;
+        border-radius: 22px;
+
+        button {
+            display: flex;
+
+            p {
+                line-height: 28px;
+                font-size: 16px;
+            }
+        }
+
+        svg {
+            position: relative;
+            width: 28px;
+            height: 28px;
+            z-index: 10;
+        }
+
+        svg.USDT {
+            margin-left: -7px;
+            margin-right: 10px;
+            z-index: 1;
+        }
+
+        svg.putDown {
+            margin: auto 0;
+            width: 22px;
+            height: 22px;
+            margin-left: 10px;
+        }
+
+        p {
+            color: #0047BB;
+            font-family: $boldFont;
+            font-size: 16px;
+        }
+    }
+
+    .chooseType {
+        margin-top: 30px;
+        margin-bottom: 10px;
+    }
+
+    .infoView {
+        margin-top: 30px;
+
+        &-bottom {
+            height: 0;
+        }
+    }
+
+    .OpenShow {
+        p {
+            font-size: 16px;
+        }
+    }
+
+    .emptyOrder {
+        color: #7D7D7D;
+        font-size: 16px;
+        margin-top: 15px;
+    }
+
+    &-infoShow {
+        width: 100%;
+        font-size: 16px;
+        color: #878787;
+        padding: 0 15px;
+        margin-top: 10px;
+
+        p.underLine {
+            border-bottom: 1px dashed #7D7D7D;
+        }
+
+        p+p {
+            font-size: 12px;
+        }
+    }
+
+    &-showHid {
+        margin-top: 20px;
+        margin-bottom: 7px;
+    }
+
+    &-limitPrice {
+        width: 100%;
+        height: 44px;
+        border-radius: 22px;
+        background-color: #F7F8FA;
+        border: 1px solid #EEEEEE;
+        box-sizing: border-box;
+        box-shadow: $shadow-inside;
+        padding: 0 15px;
+        margin-top: 15px;
+
+        &-title {
+            font-size: 16px;
+            color: black;
+            font-family: $boldFont;
+        }
+
+        .rightInput {
+            input {
+                width: 100%;
+                font-family: $boldFont;
+                font-size: 16px;
+                border: 0;
+                text-align: right;
+                margin-right: 5px;
+            }
+
+            p {
+                font-size: 16px;
+                color: black;
+                font-family: $boldFont;
+            }
+        }
+    }
+
+    &-stopLimit1 {
+        width: 100%;
+        height: 44px;
+        border-radius: 22px;
+        background-color: #F7F8FA;
+        border: 1px solid #EEEEEE;
+        box-sizing: border-box;
+        box-shadow: $shadow-inside;
+        padding: 0 15px;
+        margin-top: 15px;
+
+        &-title {
+            font-size: 16px;
+            color: black;
+            font-family: $boldFont;
+        }
+
+        .rightInput {
+            input {
+                width: 100%;
+                font-family: $boldFont;
+                font-size: 16px;
+                border: 0;
+                text-align: right;
+                margin-right: 5px;
+            }
+
+            p {
+                font-size: 16px;
+                color: black;
+                font-family: $boldFont;
+            }
+        }
+    }
+
+    &-listTab {
+        width: 1276px;
+        margin: 20px;
+        margin-bottom: 0;
+
+        button {
+            color: #878787;
+            font-size: 16px;
+            font-family: $boldFont;
+            margin-left: 23px;
+
+            &.selected {
+                color: #0047BB;
+            }
+        }
+    }
+
+    &-selectToken {
+        .css-3bmhjh-MuiPaper-root-MuiPopover-paper {
+            width: 484px;
+            border-radius: 22px;
+            margin-left: -15px;
+            margin-top: 10px;
+        }
+
+        svg {
+            position: relative;
+            width: 28px;
+            height: 28px;
+            z-index: 10;
+        }
+
+        svg.USDT {
+            margin-left: -7px;
+            margin-right: 10px;
+            z-index: 1;
+        }
+
+        ul {
+            width: 100%;
+
+            li {
+                padding: 4px 15px;
+                display: flex;
+                font-size: 16px;
+
+                p {
+                    line-height: 28px;
+                }
+
+                &:hover {
+                    background-color: #EEEEEE;
+                    cursor: pointer;
+                }
+            }
+
+            li+li {
+                margin-top: 5px;
+            }
+        }
+    }
+
+    &-table {
+        width: 1276px;
+        margin: 0 auto;
+        border-collapse: separate;
+        border-spacing: 0px 20px;
+
+        .Futures-table-title {
+            color: $gray-info-text-color;
+            font-size: $T2;
+            height: 44px;
+            border-radius: 12px;
+            box-shadow: $shadow;
+        }
+
+        .Futures-table-normal {
+            color: $gray-info-text-color;
+            font-size: $T2;
+            height: 44px;
+            border-radius: 12px;
+            box-shadow: $shadow;
+            text-align: center;
+            font-size: $T2;
+            font-family: $boldFont;
+            color: $black-text-color;
+
+            svg {
+                margin-top: 3px;
+            }
+
+            .fort-button {
+                height: 28px;
+                width: 90px;
+                padding: 0;
+            }
+
+            .tokenPair {
+                svg {
+                    position: relative;
+                    z-index: 1;
+                }
+
+                svg+svg {
+                    margin-left: -8px;
+                    z-index: 0;
+                }
+            }
+        }
+
+        th {
+            span {
+                border-bottom: 1px dashed #7D7D7D;
+                padding-bottom: 3px;
+            }
+        }
+
+        td.button {
+            width: 350px;
+
+            button+button {
+                margin-left: 10px;
+            }
+
+            button.listCloseButton {
+                svg {
+                    width: 17px;
+                    height: 17px;
+                }
+            }
+
+            button.endOrder {
+                height: 28px;
+                margin: 0 auto;
+                display: flex;
+                justify-content: center;
+                line-height: 28px;
+                font-size: 12px;
+                font-family: $boldFont;
+                color: #878787;
+                border: 1px solid #0047BB;
+                border-radius: 14px;
+                padding: 0 20px;
+                &:hover {
+                    cursor: pointer;
+                }
+
+                p {
+                    margin-right: 15px;
+                }
+
+                svg {
+                    width: 17px;
+                    height: 17px;
+                    margin-top: 4.5px;
+
+                    path {
+                        fill: #878787;
+                    }
+                }
+            }
+        }
+
+        td.td-type {
+            display: flex;
+            justify-content: center;
+
+            svg {
+                margin: auto 0;
+            }
+
+            p.red {
+                margin-left: 5px;
+                line-height: 44px;
+                color: $up-color;
+            }
+
+            p.green {
+                margin-left: 5px;
+                line-height: 44px;
+                color: $down-color;
+            }
+        }
+    }
+}
+
+.main-dark {
+    .Futures {
+        &-topView {
+            &-left {
+                background: rgba(255, 255, 255, 0.15);
+                box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+                backdrop-filter: blur(12px);
+                border: 0;
+            }
+
+            &-right {
+                background: rgba(255, 255, 255, 0.15);
+                box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+                backdrop-filter: blur(12px);
+                border: 0;
+
+                p.title {
+                    color: #C5C5C5;
+                }
+            }
+        }
+
+        &-tokenPair {
+            color: #C5C5C5;
+        }
+
+        &-tokenPairAndPrice {
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            border: 0;
+
+            p {
+                color: #BDD6FF;
+            }
+
+            button {
+                p {
+                    color: white;
+                }
+            }
+
+            svg.putDown {
+                circle {
+                    stroke: #BDD6FF;
+                }
+
+                path {
+                    fill: #BDD6FF;
+                }
+            }
+
+            &:hover {
+                border: 1px solid #8BB7FF;
+            }
+        }
+
+        &-limitPrice,
+        &-stopLimit1 {
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            border: 0;
+
+            &:hover {
+                border: 1px solid #8BB7FF;
+            }
+
+            p {
+                color: white;
+            }
+
+            input {
+                color: white;
+            }
+        }
+
+        &-infoShow {
+            color: #C5C5C5;
+
+            p.underLine {
+                border-bottom: 1px dashed #C5C5C5;
+            }
+        }
+
+        &-listTab {
+            button {
+                color: #C5C5C5;
+
+                &.selected {
+                    color: #BDD6FF;
+                }
+            }
+        }
+
+        &-table {
+            .Futures-table-title {
+                color: #C5C5C5;
+                box-shadow: none;
+            }
+
+            .Futures-table-normal {
+                box-shadow: none;
+            }
+
+            td {
+                color: white;
+            }
+
+            th {
+                span {
+                    border-bottom: 1px dashed #C5C5C5;
+                }
+            }
+
+            td.button {
+                button.endOrder {
+                    color: #C5C5C5;
+                    border: 1px solid #8BB7FF;
+
+                    svg {
+                        path {
+                            fill: #C5C5C5;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

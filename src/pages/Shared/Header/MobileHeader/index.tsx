@@ -1,4 +1,3 @@
-import { t, Trans } from "@lingui/macro";
 import classNames from "classnames";
 import { FC, useCallback, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
@@ -23,20 +22,24 @@ import "../Status/styles";
 import "./styles";
 import SelectNetworkModal from "./SelectNetworkModal";
 import useThemes, { ThemeType } from "../../../../libs/hooks/useThemes";
+import Drawer from "@mui/material/Drawer";
 
 const MobileHeader: FC = () => {
   const classPrefix = "header-mobile";
   const { account, chainId } = useWeb3();
   const [showList, setShowList] = useState(false);
+  const [showNet, setShowNet] = useState(false);
+  const [showCon, setShowCon] = useState(false);
+  const [showWallet, setShowWallet] = useState(false);
   const location = useLocation();
   const { pendingList } = useTransactionListCon();
   const routes = [
-    { path: "/futures", content: t`Futures` },
-    { path: "/options", content: t`Options` },
-    // { path: "/win", content: t`Win` },
+    { path: "/futures", content: `Futures` },
+    // { path: "/options", content: `Options` },
+    // { path: "/win", content: `Win` },
     { path: "/NFTAuction", content: "NFT" },
-    { path: "/swap", content: t`Swap` },
-    // { path: "/farm", content: t`Farm` },
+    { path: "/swap", content: `Swap` },
+    // { path: "/farm", content: `Farm` },
   ].map((item) => (
     <li
       key={item.path}
@@ -83,84 +86,87 @@ const MobileHeader: FC = () => {
     }
   }, [chainId]);
 
-  const headerListShow = (
-    <div className={`${classPrefix}-headerList`}>
-      <div className={`${classPrefix}-headerList-top`}>
-        <div className={`${classPrefix}-headerList-top-left`}>
-          <button onClick={() => setShowList(false)}>
-            <XIcon />
-          </button>
-        </div>
-
-        <Popup
-          modal
-          ref={modal}
-          trigger={
-            <div className={`${classPrefix}-headerList-top-mid`}>
-              {nowNetwork()}
-            </div>
-          }
-        >
-          <SelectNetworkModal onClose={() => modal.current.close()} />
-        </Popup>
-
-        <div className={`${classPrefix}-headerList-top-right`}>
-          <button
+  const headerListShow = () => {
+    return (
+      <div className={`${classPrefix}-headerList`}>
+        <div className={`${classPrefix}-headerList-top`}>
+          <div className={`${classPrefix}-headerList-top-left`}>
+            <button onClick={() => setShowList(false)}>
+              <XIcon />
+            </button>
+          </div>
+          <div
+            className={`${classPrefix}-headerList-top-mid`}
             onClick={() => {
-              if (theme === ThemeType.dark) {
-                setTheme(ThemeType.white);
-              } else {
-                setTheme(ThemeType.dark);
-              }
+              setShowList(false);
+              setShowNet(true);
             }}
           >
-            {themeIcon()}
-          </button>
+            {nowNetwork()}
+          </div>
+          <div className={`${classPrefix}-headerList-top-right`}>
+            <button
+              onClick={() => {
+                if (theme === ThemeType.dark) {
+                  setTheme(ThemeType.white);
+                } else {
+                  setTheme(ThemeType.dark);
+                }
+              }}
+            >
+              {themeIcon()}
+            </button>
+          </div>
+        </div>
+        <ul>{routes}</ul>
+        <div className={"connectStatus"}>
+          {account === undefined ? (
+            <button
+              className={"fort-button fort-button-mobile"}
+              onClick={() => {
+                setShowList(false);
+                setShowCon(true);
+              }}
+            >
+              Connect Wallet
+            </button>
+          ) : (
+            <button
+              className={classNames({
+                [`fort-button`]: true,
+                [`fort-button-mobile`]: true,
+                [`showNum`]: pendingList.length > 0,
+              })}
+              onClick={() => {
+                setShowList(false);
+                setShowWallet(true);
+              }}
+            >
+              <div className={"transactionNum"}>
+                <WhiteLoading className={"animation-spin"} />
+                <p>{pendingList.length}</p>
+              </div>
+              <p>{showEllipsisAddress(account || "")}</p>
+            </button>
+          )}
         </div>
       </div>
-      <ul>{routes}</ul>
-      <div className={"connectStatus"}>
-        {account === undefined ? (
-          <Popup
-            modal
-            ref={modal}
-            trigger={
-              <button className={"fort-button fort-button-mobile"}>
-                <Trans>Connect Wallet</Trans>
-              </button>
-            }
-          >
-            <Modal onClose={() => modal.current.close()} />
-          </Popup>
-        ) : (
-          <Popup
-            modal
-            ref={modal}
-            trigger={
-              <button
-                className={classNames({
-                  [`fort-button`]: true,
-                  [`fort-button-mobile`]: true,
-                  [`showNum`]: pendingList.length > 0,
-                })}
-              >
-                <div className={"transactionNum"}>
-                  <WhiteLoading className={"animation-spin"} />
-                  <p>{pendingList.length}</p>
-                </div>
-                <p>{showEllipsisAddress(account || "")}</p>
-              </button>
-            }
-          >
-            <WalletModal onClose={() => modal.current.close()} />
-          </Popup>
-        )}
-      </div>
-    </div>
-  );
+    );
+  };
   return (
     <header>
-      {showList ? headerListShow : <></>}
+      <Drawer anchor={"top"} open={showList} onClose={() => setShowList(false)}>
+        {headerListShow()}
+      </Drawer>
+      <Popup modal ref={modal} open={showNet}>
+        <SelectNetworkModal onClose={() => setShowNet(false)} />
+      </Popup>
+      <Popup modal ref={modal} open={showCon}>
+        <Modal onClose={() => setShowCon(false)} />
+      </Popup>
+      <Popup modal ref={modal} open={showWallet}>
+        <WalletModal onClose={() => setShowWallet(false)} />
+      </Popup>
       <div className={classPrefix}>
         <div className={`${classPrefix}-leftButton`}>
           <button onClick={() => setShowList(true)}>

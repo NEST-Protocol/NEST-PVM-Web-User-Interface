@@ -24,3 +24,11 @@
         cursor: pointer;
     }
 }
+
+@media screen and (max-width: 1000px) {
+    .fort-button {
+        height: 34px;
+        border-radius: 17px;
+        font-size: 12.5px;
+    }
+}

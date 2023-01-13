@@ -1,8 +1,9 @@
-import { Tooltip } from "antd";
 import classNames from "classnames";
 import { FC, useEffect, useRef, useState } from "react";
 import { tokenList, TokenType } from "../../libs/constants/addresses";
+import useThemes, { ThemeType } from "../../libs/hooks/useThemes";
 import useWeb3 from "../../libs/hooks/useWeb3";
+import { LightTooltip } from "../../styles/MUI";
 import { AddTokenIcon } from "../Icon";
 import "./styles";
 
@@ -33,7 +34,9 @@ const InfoShow: FC<Props> = ({ children, ...props }) => {
   const selectRef = useRef(null);
   const [isShowSelect, setIsShowSelect] = useState(false);
   const { chainId } = useWeb3();
+  const { theme } = useThemes();
   var dataLi: JSX.Element[] | undefined;
+
   if (props.tokenSelect) {
     dataLi = props.tokenList?.map((item) => {
       const TokenIcon = item.Icon;
@@ -127,13 +130,13 @@ const InfoShow: FC<Props> = ({ children, ...props }) => {
           [`underLine`]: true,
         })}
       >
-        <Tooltip
+        <LightTooltip
           placement="right"
-          color={"#ffffff"}
           title={"Rolling Fee = Bet Amount * 1%"}
+          arrow
         >
           <span>{props.bottomLeftText}</span>
-        </Tooltip>
+        </LightTooltip>
       </p>
     );
   };
@@ -171,9 +174,8 @@ const InfoShow: FC<Props> = ({ children, ...props }) => {
         tokenName = "NEST";
       }
       return (
-        <Tooltip
-          placement="right"
-          color={"#ffffff"}
+        <LightTooltip
+          placement="bottom"
           title={
             <button
               className={`${classPrefix}-balance-add`}
@@ -183,6 +185,7 @@ const InfoShow: FC<Props> = ({ children, ...props }) => {
               <p>{`Add ${tokenName} to your wallet`}</p>
             </button>
           }
+          arrow
         >
           <p
             className={classNames({
@@ -193,7 +196,7 @@ const InfoShow: FC<Props> = ({ children, ...props }) => {
           >
             <span>{props.bottomRightText}</span>
           </p>
-        </Tooltip>
+        </LightTooltip>
       );
     } else if (props.popText != null) {
       return (
@@ -204,9 +207,9 @@ const InfoShow: FC<Props> = ({ children, ...props }) => {
             [`underLine`]: true,
           })}
         >
-          <Tooltip placement="right" color={"#ffffff"} title={props.popText}>
+          <LightTooltip placement="right" title={props.popText} arrow>
             <span>{props.bottomRightText}</span>
-          </Tooltip>
+          </LightTooltip>
         </p>
       );
     } else {
@@ -224,13 +227,22 @@ const InfoShow: FC<Props> = ({ children, ...props }) => {
   };
 
   return (
-    <div className={classPrefix}>
+    <div
+      className={classNames({
+        [`${classPrefix}`]: true,
+        [`${classPrefix}-dark`]: theme === ThemeType.dark,
+      })}
+    >
       <div className={`${classPrefix}-top`}>
         <p className={`${classPrefix}-topLeft`}>{props.topLeftText}</p>
-        <p className={classNames({
-          [`${classPrefix}-topRight`]: true,
-          [`topRightRed`]: props.topRightRed
-        })}>{props.topRightText}</p>
+        <p
+          className={classNames({
+            [`${classPrefix}-topRight`]: true,
+            [`topRightRed`]: props.topRightRed,
+          })}
+        >
+          {props.topRightText}
+        </p>
       </div>
 
       <div

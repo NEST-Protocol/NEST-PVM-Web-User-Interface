@@ -2,6 +2,7 @@ import { t } from "@lingui/macro";
 import { message } from "antd";
 import { useEffect, useState } from "react";
 import injected from "../connectors/injected";
+import OKX from "../connectors/okx-connect";
 import useWeb3 from "./useWeb3";
 
 const useEagerConnect = () => {
@@ -12,9 +13,18 @@ const useEagerConnect = () => {
   useEffect(() => {
     (async () => {
       try {
-        const isAuthorized = await injected.connector.isAuthorized();
-        if (isAuthorized) {
+        const isAuthorized_inj = await injected.connector.isAuthorized();
+        if (isAuthorized_inj) {
           activate(injected.connector, undefined, true).catch(() => {
+            deactivate();
+            message.error(
+              t`This network is not supported, please switch the network`
+            );
+          })
+        }
+        const isAuthorized_okx = await OKX.connector.isAuthorized();
+        if (isAuthorized_okx) {
+          activate(OKX.connector, undefined, true).catch(() => {
             deactivate();
             message.error(
               t`This network is not supported, please switch the network`
