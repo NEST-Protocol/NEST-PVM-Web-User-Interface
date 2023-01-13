@@ -225,10 +225,11 @@ export function useFutures() {
       }
       const list: Array<OrderView> = await PVMFuturesOJ.find2(
         "0",
-        "500",
-        "500",
+        "1000",
+        "1000",
         account
       );
+      console.log(list)
       const result = list.filter((item) => {
         if (chainId === 56) {
           return item.balance.toString() !== "0";
