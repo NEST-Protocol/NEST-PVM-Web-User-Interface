@@ -626,23 +626,17 @@ export function useFuturesOrderList(
   order: OrderView,
   kValue?: { [key: string]: TokenType }
 ) {
-  const { chainId } = useWeb3();
   const [marginAssets, setMarginAssets] = useState<BigNumber>();
 
   const PVMFuturesOJ = PVMFutures();
 
   const tokenName = useCallback(() => {
-    if (!chainId) {
-      return;
-    }
-    const thisToken = tokenArray.filter((item) => {
-      return item.pairIndex[chainId] === order.tokenIndex.toString();
-    });
-    if (thisToken[0].addresses[chainId] === ZERO_ADDRESS) {
+    if (order.tokenIndex.toString() === "0") {
       return "ETH";
+    } else {
+      return "BTC";
     }
-    return "BTC";
-  }, [chainId, order.tokenIndex]);
+  }, [order.tokenIndex]);
   const orderValue = useCallback(async () => {
     try {
       if (!tokenName() || !kValue || !PVMFuturesOJ) {
@@ -776,20 +770,14 @@ export function useFuturesOldOrderList(
 }
 
 export function useFuturesLimitOrderList(order: LimitOrderView) {
-  const { chainId } = useWeb3();
   const { pendingList } = useTransactionListCon();
   const tokenName = useCallback(() => {
-    if (!chainId) {
-      return;
-    }
-    const thisToken = tokenArray.filter((item) => {
-      return item.pairIndex[chainId] === order.tokenIndex.toString();
-    });
-    if (thisToken[0].addresses[chainId] === ZERO_ADDRESS) {
+    if (order.tokenIndex.toString() === "0") {
       return "ETH";
+    } else {
+      return "BTC";
     }
-    return "BTC";
-  }, [chainId, order.tokenIndex]);
+  }, [order.tokenIndex]);
   const showBalance = () => {
     return parseFloat(formatUnits(order.balance, 4)).toFixed(2).toString();
   };
