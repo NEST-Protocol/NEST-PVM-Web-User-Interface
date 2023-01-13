@@ -225,8 +225,8 @@ export function useFutures() {
       }
       const list: Array<OrderView> = await PVMFuturesOJ.find2(
         "0",
-        "1000",
-        "1000",
+        "500",
+        "100000",
         account
       );
       console.log(list)
