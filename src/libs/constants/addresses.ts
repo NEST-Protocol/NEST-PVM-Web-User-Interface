@@ -94,7 +94,7 @@ export const tokenList: { [key: string]: TokenType } = {
     pairIndex: {
       1: "0",
       5: '1',
-      56: '1',
+      56: '2',
       97: '2'
     },
     sigmaSQ: BigNumber.from('31708924900')
