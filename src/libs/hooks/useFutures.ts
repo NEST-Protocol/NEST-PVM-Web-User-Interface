@@ -860,9 +860,8 @@ export function useFuturesTrigger(order: OrderView) {
       if (!chainId) {
         return "---";
       }
-      const thisToken = tokenArray.filter((item) => {
-        return item.pairIndex[chainId] === order.tokenIndex.toString();
-      });
+      const thisToken = order.tokenIndex.toString() === "0" ? [tokenArray[0]] : [tokenArray[1]]
+    
       return thisToken[0].nowPrice
         ? parseFloat(formatUnits(thisToken[0].nowPrice, 18))
             .toFixed(2)
@@ -1053,9 +1052,7 @@ export function useFuturesAdd(order: OrderView) {
     if (!chainId || nestInput === "" || !nowBlock) {
       return order.basePrice;
     }
-    const thisToken = tokenArray.filter((item) => {
-      return item.pairIndex[chainId] === order.tokenIndex.toString();
-    });
+    const thisToken = order.tokenIndex.toString() === "0" ? [tokenArray[0]] : [tokenArray[1]]
     if (!thisToken[0].nowPrice) {
       return order.basePrice;
     }
@@ -1169,9 +1166,7 @@ export function useFuturesCloseOrder(
     if (!kValue || !chainId) {
       return "---";
     }
-    const thisToken = tokenArray.filter((item) => {
-      return item.pairIndex[chainId] === order.tokenIndex.toString();
-    });
+    const thisToken = order.tokenIndex.toString() === "0" ? [tokenArray[0]] : [tokenArray[1]]
     return thisToken[0].nowPrice
       ? parseFloat(formatUnits(thisToken[0].nowPrice, 18)).toFixed(2).toString()
       : "---";
@@ -1181,9 +1176,7 @@ export function useFuturesCloseOrder(
     if (!chainId) {
       return "---";
     }
-    const thisToken = tokenArray.filter((item) => {
-      return item.pairIndex[chainId] === order.tokenIndex.toString();
-    });
+    const thisToken = order.tokenIndex.toString() === "0" ? [tokenArray[0]] : [tokenArray[1]]
     if (!thisToken[0].nowPrice) {
       return "---";
     }
