@@ -231,8 +231,8 @@ export function useFutures() {
       );
       const result = list.filter((item) => {
         return (
-          item.balance.toString() !== "0"
-          // item.balance.toString() !== "0" && BigNumber.from("30").lt(item.index)
+          // item.balance.toString() !== "0"
+          item.balance.toString() !== "0" && BigNumber.from("30").lt(item.index)
         );
       });
       setOrderList(result);
@@ -282,6 +282,9 @@ export function useFutures() {
   }, [PVMFuturesOJ, account]);
   const getClosedOrderList = useCallback(async () => {
     try {
+      if (!chainId || !account) {
+        return
+      }
       const data = await fetch(
         `https://api.nestfi.net/api/order/position/list/${chainId}?address=${account}`
       );
