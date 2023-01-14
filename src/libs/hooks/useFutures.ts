@@ -254,7 +254,7 @@ export function useFutures() {
       const list: Array<LimitOrderView> = await PVMFuturesProxyOJ.find(
         "0",
         "500",
-        "500",
+        "100000",
         account
       );
       const result = list.filter((item) => {
