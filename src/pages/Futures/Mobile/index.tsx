@@ -99,7 +99,7 @@ const FuturesMobile: FC = () => {
           <USDTIcon className="USDT" />
           <PutDownIcon className="putDown" />
         </button>
-        <p>1 ETH = {tokenPrice ? tokenPrice.price : "---"} USDT</p>
+        <p>1 {tokenPrice.tokenName} = {tokenPrice ? tokenPrice.price : "---"} USDT</p>
       </Stack>
     );
   };

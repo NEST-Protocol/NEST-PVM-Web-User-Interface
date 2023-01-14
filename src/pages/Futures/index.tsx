@@ -198,7 +198,7 @@ const Futures: FC = () => {
               <p>{tokenPrice ? tokenPrice.tokenName : "---"}/USDT</p>
               <PutDownIcon className="putDown" />
             </button>
-            <p>1 ETH = {tokenPrice ? tokenPrice.price : "---"} USDT</p>
+            <p>1 {tokenPrice.tokenName} = {tokenPrice ? tokenPrice.price : "---"} USDT</p>
           </Stack>
           <Popover
             open={Boolean(anchorEl)}
