@@ -145,7 +145,7 @@
 
     &-card {
         &-selectToken {
-            .css-3bmhjh-MuiPaper-root-MuiPopover-paper {
+            .MuiPopover-paper {
                 width: 482px;
                 border-radius: 22px;
                 margin-left: -20px;
@@ -301,7 +301,7 @@ table {
 
         &-card {
             &-selectToken {
-                .css-3bmhjh-MuiPaper-root-MuiPopover-paper {
+                .MuiPopover-paper {
                     border-radius: 22px;
                     margin-top: 6px;
                     max-width: calc(100% - 46px);

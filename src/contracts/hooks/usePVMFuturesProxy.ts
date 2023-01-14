@@ -20,7 +20,7 @@ export function usePVMFuturesProxyNew(
     contract = null;
   } else {
     callData = contract?.interface.encodeFunctionData("newLimitOrder", [
-      token.pairIndex[chainId],
+      token.pairIndex[chainId] === "2" ? "1" : "0",
       lever,
       orientation,
       amount,

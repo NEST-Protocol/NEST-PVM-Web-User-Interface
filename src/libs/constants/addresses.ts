@@ -148,13 +148,13 @@ export const PVMLeverContract: AddressesType = {
 export const PVMFuturesContract: AddressesType = {
   1: "",
   5: "",
-  56: "",
+  56: "0x8e32C33814271bD64D5138bE9d47Cd55025074CD",
   97: "0xA2D58989ef9981065f749C217984DB21970fF0b7"
 };
 export const PVMFuturesProxyContract: AddressesType = {
   1: "",
   5: "",
-  56: "",
+  56: "0x8b2A11F6C5cEbB00793dCE502a9B08741eDBcb96",
   97: "0xd6C4BE39748510BB5b8B2eF0b0aF71B860691bcb"
 }
 export const NESTRedeemContract: AddressesType = {

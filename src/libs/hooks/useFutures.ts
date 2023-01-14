@@ -70,11 +70,12 @@ export type OldOrderView = {
   baseBlock: BigNumber;
 };
 
-const UPDATE_PRICE_TIME = 10;
-const UPDATE_LIST_TIME = 10;
+const UPDATE_PRICE_TIME = 20;
+const UPDATE_LIST_TIME = 15;
 const UPDATE_BALANCE_TIME = 60;
 const BASE_NEST_FEE = "15";
 const MIN_NEST = 50;
+const ORDER_GROUP = 4000
 
 const tokenArray = [tokenList["ETH"], tokenList["BTC"]];
 
@@ -218,28 +219,65 @@ export function useFutures() {
     },
     []
   );
-  const getOrderList = useCallback(async () => {
+  const getOrderList = useCallback(async (getPart: boolean = false) => {
     try {
       if (!PVMFuturesOJ || !account) {
         return;
       }
-      const list: Array<OrderView> = await PVMFuturesOJ.find2(
-        "0",
-        "500",
-        "500",
-        account
-      );
-      // TODO
-      const result = list.filter((item) => {
-        return (
-          item.balance.toString() !== "0" && BigNumber.from("30").lt(item.index)
+      const latestOrder: Array<OrderView> = await PVMFuturesOJ.list2("0", "1", "0")
+      const orderMaxNum = Number(latestOrder[0].index.toString()) + 1
+      const orderGroupNum = orderMaxNum / ORDER_GROUP
+      var result: OrderView[] = []
+      for (let i = 0; i < orderGroupNum; i++) {
+        const startNum = i === 0 ? 0 : orderMaxNum - i * ORDER_GROUP
+        if ( i !== 0 && startNum === 0) {
+          return
+        }
+        const groupList: Array<OrderView> = await PVMFuturesOJ.find2(
+          startNum.toString(),
+          "1000",
+          ORDER_GROUP.toString(),
+          account
         );
-      });
-      setOrderList(result);
+        const groupResult = groupList.filter((item) => {
+          if (chainId === 56) {
+            return item.balance.toString() !== "0";
+          } else {
+            return (
+              item.balance.toString() !== "0" &&
+              BigNumber.from("30").lt(item.index)
+            );
+          }
+        });
+        result = [...result, ...groupResult];
+        if (getPart) {
+          setOrderList(result);
+        }
+      }
+      if (!getPart) {
+        setOrderList(result);
+      }
+      // const list: Array<OrderView> = await PVMFuturesOJ.find2(
+      //   "0",
+      //   "500",
+      //   "100000",
+      //   account
+      // );
+      // const result = list.filter((item) => {
+      //   if (chainId === 56) {
+      //     return item.balance.toString() !== "0";
+      //   } else {
+      //     return (
+      //       item.balance.toString() !== "0" &&
+      //       BigNumber.from("30").lt(item.index)
+      //     );
+      //   }
+      // });
+      // setOrderList(result);
     } catch (error) {
       console.log(error);
     }
-  }, [PVMFuturesOJ, account]);
+  }, [PVMFuturesOJ, account, chainId]);
 
   const getLimitOrderList = useCallback(async () => {
     try {
@@ -249,7 +287,7 @@ export function useFutures() {
       const list: Array<LimitOrderView> = await PVMFuturesProxyOJ.find(
         "0",
         "500",
-        "500",
+        "4000",
         account
       );
       const result = list.filter((item) => {
@@ -282,6 +320,9 @@ export function useFutures() {
   }, [PVMFuturesOJ, account]);
   const getClosedOrderList = useCallback(async () => {
     try {
+      if (!chainId || !account) {
+        return;
+      }
       const data = await fetch(
         `https://api.nestfi.net/api/order/position/list/${chainId}?address=${account}`
       );
@@ -406,7 +447,7 @@ export function useFutures() {
   }, [getAllowance, txList]);
   // list
   useEffect(() => {
-    getOrderList();
+    getOrderList(true);
     getLimitOrderList();
     getOldOrderList();
     getClosedOrderList();
@@ -546,7 +587,10 @@ export function useFutures() {
     } else if (limit && !stop) {
       return ["Position fee = Position*0.2%", "Limit order fee = 15 NEST"];
     } else if (!limit && stop) {
-      return ["Position fee = Position*0.2%", "Stop order fee(after execution) = 15 NEST"];
+      return [
+        "Position fee = Position*0.2%",
+        "Stop order fee(after execution) = 15 NEST",
+      ];
     } else {
       return [
         "Position fee = Position*0.2%",
@@ -616,23 +660,17 @@ export function useFuturesOrderList(
   order: OrderView,
   kValue?: { [key: string]: TokenType }
 ) {
-  const { chainId } = useWeb3();
   const [marginAssets, setMarginAssets] = useState<BigNumber>();
 
   const PVMFuturesOJ = PVMFutures();
 
   const tokenName = useCallback(() => {
-    if (!chainId) {
-      return;
-    }
-    const thisToken = tokenArray.filter((item) => {
-      return item.pairIndex[chainId] === order.tokenIndex.toString();
-    });
-    if (thisToken[0].addresses[chainId] === ZERO_ADDRESS) {
+    if (order.tokenIndex.toString() === "0") {
       return "ETH";
+    } else {
+      return "BTC";
     }
-    return "BTC";
-  }, [chainId, order.tokenIndex]);
+  }, [order.tokenIndex]);
   const orderValue = useCallback(async () => {
     try {
       if (!tokenName() || !kValue || !PVMFuturesOJ) {
@@ -766,20 +804,14 @@ export function useFuturesOldOrderList(
 }
 
 export function useFuturesLimitOrderList(order: LimitOrderView) {
-  const { chainId } = useWeb3();
   const { pendingList } = useTransactionListCon();
   const tokenName = useCallback(() => {
-    if (!chainId) {
-      return;
-    }
-    const thisToken = tokenArray.filter((item) => {
-      return item.pairIndex[chainId] === order.tokenIndex.toString();
-    });
-    if (thisToken[0].addresses[chainId] === ZERO_ADDRESS) {
+    if (order.tokenIndex.toString() === "0") {
       return "ETH";
+    } else {
+      return "BTC";
     }
-    return "BTC";
-  }, [chainId, order.tokenIndex]);
+  }, [order.tokenIndex]);
   const showBalance = () => {
     return parseFloat(formatUnits(order.balance, 4)).toFixed(2).toString();
   };
@@ -862,9 +894,8 @@ export function useFuturesTrigger(order: OrderView) {
       if (!chainId) {
         return "---";
       }
-      const thisToken = tokenArray.filter((item) => {
-        return item.pairIndex[chainId] === order.tokenIndex.toString();
-      });
+      const thisToken = order.tokenIndex.toString() === "0" ? [tokenArray[0]] : [tokenArray[1]]
+    
       return thisToken[0].nowPrice
         ? parseFloat(formatUnits(thisToken[0].nowPrice, 18))
             .toFixed(2)
@@ -1055,9 +1086,7 @@ export function useFuturesAdd(order: OrderView) {
     if (!chainId || nestInput === "" || !nowBlock) {
       return order.basePrice;
     }
-    const thisToken = tokenArray.filter((item) => {
-      return item.pairIndex[chainId] === order.tokenIndex.toString();
-    });
+    const thisToken = order.tokenIndex.toString() === "0" ? [tokenArray[0]] : [tokenArray[1]]
     if (!thisToken[0].nowPrice) {
       return order.basePrice;
     }
@@ -1171,9 +1200,7 @@ export function useFuturesCloseOrder(
     if (!kValue || !chainId) {
       return "---";
     }
-    const thisToken = tokenArray.filter((item) => {
-      return item.pairIndex[chainId] === order.tokenIndex.toString();
-    });
+    const thisToken = order.tokenIndex.toString() === "0" ? [tokenArray[0]] : [tokenArray[1]]
     return thisToken[0].nowPrice
       ? parseFloat(formatUnits(thisToken[0].nowPrice, 18)).toFixed(2).toString()
       : "---";
@@ -1183,9 +1210,7 @@ export function useFuturesCloseOrder(
     if (!chainId) {
       return "---";
     }
-    const thisToken = tokenArray.filter((item) => {
-      return item.pairIndex[chainId] === order.tokenIndex.toString();
-    });
+    const thisToken = order.tokenIndex.toString() === "0" ? [tokenArray[0]] : [tokenArray[1]]
     if (!thisToken[0].nowPrice) {
       return "---";
     }

@@ -19,7 +19,7 @@ export function usePVMFuturesBuy2(
     contract = null;
   } else {
     callData = contract?.interface.encodeFunctionData("buy2", [
-      token.pairIndex[chainId],
+      token.pairIndex[chainId] === "2" ? "1" : "0",
       lever,
       orientation,
       amount,

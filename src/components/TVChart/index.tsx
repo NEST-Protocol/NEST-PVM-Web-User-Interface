@@ -38,28 +38,37 @@ const TVChart: FC<TVChartProps> = ({ chainId, tokenPair, chartHeight}) => {
   const [currentChart, setCurrentChart] = useState<any>();
   const [hoveredCandlestick, setHoveredCandlestick] = useState(null);
   const [period, setPeriod] = useState("K_5M");
-  const [priceData, setPriceData] = useState<any[]>([]);
+  const [priceData, setPriceData] = useState<{[key:string]:any[]}>({});
   const [currentSeries, setCurrentSeries] = useState<any>();
   const [chartInited, setChartInited] = useState(false);
   const { theme } = useThemes();
 
   const getPriceData = useCallback(async () => {
     try {
+      const dataCount = () => {
+        if (period === "K_1M") {
+          return 1000
+        } else if (period === "K_5M") {
+          return 200
+        } else {
+          return 100
+        }
+      }
       const k_data = await fetch(
         `https://api.nestfi.net/api/oracle/get_cur_kline/${
           chainId?.toString() || 56
-        }/0/${tokenPair.toLocaleLowerCase() + "usdt"}/${period}/1000`
+        }/0/${tokenPair.toLocaleLowerCase() + "usdt"}/${period}/${dataCount()}`
       );
       const k_data_value = await k_data.json();
-      setPriceData(
-        k_data_value["value"].map((item: any) => ({
-          close: Number(item.close.toFixed(2)),
-          high: Math.max(Number(item.open.toFixed(2)), Number(item.close.toFixed(2))),
-          low: Math.min(Number(item.open.toFixed(2)), Number(item.close.toFixed(2))),
-          open: Number(item.open.toFixed(2)),
-          time: item.timestamp as UTCTimestamp,
-        }))
-      );
+      const data = {...priceData}
+      data[`${period}${tokenPair}`] = k_data_value["value"].map((item: any) => ({
+        close: Number(item.close.toFixed(2)),
+        high: Math.max(Number(item.open.toFixed(2)), Number(item.close.toFixed(2))),
+        low: Math.min(Number(item.open.toFixed(2)), Number(item.close.toFixed(2))),
+        open: Number(item.open.toFixed(2)),
+        time: item.timestamp as UTCTimestamp,
+      }))
+      setPriceData(data);
     } catch (error) {
       console.log(error)
     }
@@ -69,7 +78,7 @@ const TVChart: FC<TVChartProps> = ({ chainId, tokenPair, chartHeight}) => {
     getPriceData();
     const internal = setInterval(() => {
       getPriceData();
-    }, 60 * 1000);
+    }, 30 * 1000);
     return () => clearInterval(internal);
   }, [getPriceData]);
 
@@ -171,18 +180,18 @@ const TVChart: FC<TVChartProps> = ({ chainId, tokenPair, chartHeight}) => {
   );
 
   useEffect(() => {
-    if (currentSeries && priceData && priceData.length) {
-      currentSeries.setData(priceData);
+    if (currentSeries && priceData[`${period}${tokenPair}`] && priceData[`${period}${tokenPair}`].length) {
+      currentSeries.setData(priceData[`${period}${tokenPair}`]);
 
       if (!chartInited) {
         scaleChart();
         setChartInited(true);
       }
     }
-  }, [priceData, currentSeries, chartInited, scaleChart]);
+  }, [chartInited, currentSeries, period, priceData, scaleChart, tokenPair]);
 
   useEffect(() => {
-    if (!ref.current || !priceData || !priceData.length || currentChart) {
+    if (!ref.current || !priceData[`${period}${tokenPair}`] || !priceData[`${period}${tokenPair}`].length || currentChart) {
       return;
     }
     const chart = createChart(
@@ -199,7 +208,7 @@ const TVChart: FC<TVChartProps> = ({ chainId, tokenPair, chartHeight}) => {
 
     setCurrentChart(chart);
     setCurrentSeries(series);
-  }, [ref, priceData, currentChart, onCrosshairMove, getChartOptions]);
+  }, [ref, priceData, currentChart, onCrosshairMove, getChartOptions, period, tokenPair]);
 
   useEffect(() => {
     if (currentChart && chartHeight) {
@@ -211,17 +220,18 @@ const TVChart: FC<TVChartProps> = ({ chainId, tokenPair, chartHeight}) => {
   }, [currentChart, getChartOptions, chartHeight, theme]);
 
   const candlestick = useMemo(() => {
-    if (!priceData) {
+    const data = priceData[`${period}${tokenPair}`]
+    if (!data) {
       return null;
     }
     if (hoveredCandlestick) {
       return hoveredCandlestick;
     }
-    if (priceData[priceData.length - 1]) {
-      return priceData[priceData.length - 1];
+    if (data[data.length - 1]) {
+      return data[data.length - 1];
     }
     return null;
-  }, [priceData, hoveredCandlestick]);
+  }, [priceData, period, tokenPair, hoveredCandlestick]);
 
   return (
     <div
