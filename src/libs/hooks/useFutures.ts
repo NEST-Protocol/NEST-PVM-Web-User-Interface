@@ -70,11 +70,12 @@ export type OldOrderView = {
   baseBlock: BigNumber;
 };
 
-const UPDATE_PRICE_TIME = 10;
-const UPDATE_LIST_TIME = 10;
+const UPDATE_PRICE_TIME = 20;
+const UPDATE_LIST_TIME = 15;
 const UPDATE_BALANCE_TIME = 60;
 const BASE_NEST_FEE = "15";
 const MIN_NEST = 50;
+const ORDER_GROUP = 4000
 
 const tokenArray = [tokenList["ETH"], tokenList["BTC"]];
 
@@ -218,29 +219,61 @@ export function useFutures() {
     },
     []
   );
-  const getOrderList = useCallback(async () => {
+  const getOrderList = useCallback(async (getPart: boolean = false) => {
     try {
       if (!PVMFuturesOJ || !account) {
         return;
       }
-      const list: Array<OrderView> = await PVMFuturesOJ.find2(
-        "0",
-        "500",
-        "100000",
-        account
-      );
-      console.log(list)
-      const result = list.filter((item) => {
-        if (chainId === 56) {
-          return item.balance.toString() !== "0";
-        } else {
-          return (
-            item.balance.toString() !== "0" &&
-            BigNumber.from("30").lt(item.index)
-          );
+      const latestOrder: Array<OrderView> = await PVMFuturesOJ.list2("0", "1", "0")
+      const orderMaxNum = Number(latestOrder[0].index.toString()) + 1
+      const orderGroupNum = orderMaxNum / ORDER_GROUP
+      var result: OrderView[] = []
+      for (let i = 0; i < orderGroupNum; i++) {
+        const startNum = i === 0 ? 0 : orderMaxNum - i * ORDER_GROUP
+        if ( i !== 0 && startNum === 0) {
+          return
         }
-      });
-      setOrderList(result);
+        const groupList: Array<OrderView> = await PVMFuturesOJ.find2(
+          startNum.toString(),
+          "1000",
+          ORDER_GROUP.toString(),
+          account
+        );
+        const groupResult = groupList.filter((item) => {
+          if (chainId === 56) {
+            return item.balance.toString() !== "0";
+          } else {
+            return (
+              item.balance.toString() !== "0" &&
+              BigNumber.from("30").lt(item.index)
+            );
+          }
+        });
+        result = [...result, ...groupResult];
+        if (getPart) {
+          setOrderList(result);
+        }
+      }
+      if (!getPart) {
+        setOrderList(result);
+      }
+      // const list: Array<OrderView> = await PVMFuturesOJ.find2(
+      //   "0",
+      //   "500",
+      //   "100000",
+      //   account
+      // );
+      // const result = list.filter((item) => {
+      //   if (chainId === 56) {
+      //     return item.balance.toString() !== "0";
+      //   } else {
+      //     return (
+      //       item.balance.toString() !== "0" &&
+      //       BigNumber.from("30").lt(item.index)
+      //     );
+      //   }
+      // });
+      // setOrderList(result);
     } catch (error) {
       console.log(error);
     }
@@ -254,7 +287,7 @@ export function useFutures() {
       const list: Array<LimitOrderView> = await PVMFuturesProxyOJ.find(
         "0",
         "500",
-        "100000",
+        "4000",
         account
       );
       const result = list.filter((item) => {
@@ -414,7 +447,7 @@ export function useFutures() {
   }, [getAllowance, txList]);
   // list
   useEffect(() => {
-    getOrderList();
+    getOrderList(true);
     getLimitOrderList();
     getOldOrderList();
     getClosedOrderList();
