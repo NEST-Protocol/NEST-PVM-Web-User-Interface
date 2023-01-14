@@ -70,7 +70,7 @@ export type OldOrderView = {
   baseBlock: BigNumber;
 };
 
-const UPDATE_PRICE_TIME = 20;
+const UPDATE_PRICE_TIME = 60;
 const UPDATE_LIST_TIME = 15;
 const UPDATE_BALANCE_TIME = 60;
 const BASE_NEST_FEE = "15";
@@ -209,10 +209,11 @@ export function useFutures() {
           tokenList["BTC"],
           chainId
         );
+        
         const tokenListNew = tokenList;
         tokenListNew["ETH"] = ETH;
         tokenListNew["BTC"] = BTC;
-        setKValue(tokenListNew);
+        setKValue({...tokenListNew});
       } catch (error) {
         console.log(error);
       }
