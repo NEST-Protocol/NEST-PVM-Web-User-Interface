@@ -4,7 +4,7 @@ import { TokenNest } from "../Icon";
 import NFTLeverIcon from "../NFTLeverIcon";
 import "./styles";
 import { downTime } from "../../libs/utils";
-import { Skeleton, Space } from "antd";
+import Skeleton from "@mui/material/Skeleton";
 
 export type NFTItemType = {
   src: string;
@@ -18,8 +18,7 @@ export type NFTItemType = {
 const NFTItem: FC<NFTItemType> = ({ ...props }) => {
   const src =
     props.src && props.src.length > 7
-      ? "https://ipfs.io/ipfs/" +
-        props.src.substring(7, props.src.length)
+      ? "https://ipfs.io/ipfs/" + props.src.substring(7, props.src.length)
       : "";
   const [timeString, setTimeString] = useState<string>();
   // time
@@ -53,10 +52,11 @@ const NFTItem: FC<NFTItemType> = ({ ...props }) => {
       })}
     >
       <div className="NFTItem-image">
-        <Space>
-          <Skeleton.Image className="NFTItem-image-skeleton" active={true} />
-        </Space>
-
+        <Skeleton
+          variant="rounded"
+          animation="wave"
+          className="NFTItem-image-skeleton"
+        />
         <img src={src} alt="NEST NFT" />
       </div>
       <div className="NFTItem-info">
