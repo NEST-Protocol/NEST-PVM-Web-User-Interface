@@ -10,6 +10,8 @@ import Modal from "./Modal";
 import SelectNetwork from "./SelectNetwork";
 import "./styles";
 import WalletModal from "./WalletModal";
+import {Stack} from "@mui/material";
+import {Link} from "react-router-dom";
 
 const ConnectStatus: FC = () => {
   const { account } = useWeb3();
@@ -24,9 +26,16 @@ const ConnectStatus: FC = () => {
         [`isConnect`]: false,
       })}
     >
-      
+
       <SelectNetwork/>
-      
+
+      <Stack style={{ justifyContent: "center", padding: '0 16px', border: '1px solid #EEEEEE', borderRadius: '22px', margin: '0 16px 0 0'}}>
+        <p style={{ color: '#0047BB', fontWeight: 600 }}>
+          <Link to={'/dashboard'}>
+            Dashboard
+          </Link>
+        </p>
+      </Stack>
 
       {(isFirst && !account) ? (<Popup open><Modal onClose={() => {
     setIsFirst(false)
