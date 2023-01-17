@@ -12,6 +12,7 @@ const ShareMyDealModal: FC = () => {
     _7DaysTrade: false,
     _30DaysTrade: false,
   })
+  const [confirm, setConfirm] = useState(false)
 
   return (
     <Popup
@@ -24,7 +25,10 @@ const ShareMyDealModal: FC = () => {
       }
     >
       <BaseModal
-        onClose={() => modal?.current?.close()}
+        onClose={() => {
+          modal?.current?.close()
+          setConfirm(false)
+        }}
         titleName={'Share'}
       >
         <Stack width={['360px', '480px', '600px']} textAlign={"center"} pt={'10px'}>
@@ -105,7 +109,12 @@ const ShareMyDealModal: FC = () => {
           </Stack>
           <Divider/>
           <Stack pt={'34px'} px={['10px', '40px', '100px']}>
-            <MainButton disable={!select.todayTrade && !select.totalTrade && !select._7DaysTrade && !select._30DaysTrade}>
+            <MainButton
+              disable={!select.todayTrade && !select.totalTrade && !select._7DaysTrade && !select._30DaysTrade}
+              onClick={() => {
+                setConfirm(true)
+              }}
+            >
               Confirm
             </MainButton>
           </Stack>

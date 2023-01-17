@@ -1,4 +1,4 @@
-import {FC, useState} from "react";
+import {FC, useCallback, useEffect, useState} from "react";
 import {Stack} from "@mui/material";
 import MainCard from "../../components/MainCard";
 import MainButton from "../../components/MainButton";
@@ -6,16 +6,104 @@ import "./styles";
 import ShareMyDealModal from "./ShareMyDealModal";
 import {checkWidth} from "../../libs/utils";
 import useWeb3 from "../../libs/hooks/useWeb3";
+import axios from "axios"
+import FuturesList from "./FuturesList";
 
 const Dashboard: FC = () => {
-  // 获取销毁接口: GET http://api.nestfi.net/api/dashboard/destory
-  // 每日交易折线图: GET http://api.nestfi.net/api/dashboard/txVolume/list
-  // 交易历史: GET http://api.nestfi.net/api/dashboard/history/list?address=0x481a74d43ae3A7BdE38B7fE36E46CF9a6cbb4F39
-  // 盈亏: GET http://api.nestfi.net/api/dashboard/myTx/info?address=0x481a74d43ae3A7BdE38B7fE36E46CF9a6cbb4F39
+  // 获取销毁接口: GET https://api.nestfi.net/api/dashboard/destory
+  // 每日交易折线图: GET https://api.nestfi.net/api/dashboard/txVolume/list
+  // 交易历史: GET https://api.nestfi.net/api/dashboard/history/list?address=0x481a74d43ae3A7BdE38B7fE36E46CF9a6cbb4F39
+  // 盈亏: GET https://api.nestfi.net/api/dashboard/myTx/info?address=0x481a74d43ae3A7BdE38B7fE36E46CF9a6cbb4F39
   const [showHold, setShowHold] = useState(true)
   const isPC = checkWidth();
   const { account } = useWeb3();
   const [copied, setCopied] = useState(false);
+  const [destoryData, setDestoryData] = useState({
+    dayDestroy: 0,
+    totalDestroy: 0,
+  })
+  const [myTxInfo, setMyTxInfo] = useState({
+    totalValue: 0,
+    todayValue: 0,
+    day7Value: 0,
+    day30Value: 0,
+    todayRate: 0,
+    day7Rate: 0,
+    day30Rate: 0,
+  })
+  const [historyList, setHistoryList] = useState<{
+    owner: string,
+    leverage: string,
+    orientation: string,
+    actualRate: number,
+    index: number,
+    openPrice: number,
+    tokenPair: string,
+    actualMargin: number,
+    initialMargin: number,
+    lastPrice: number,
+  }[]>([])
+
+  const fetchDestory = useCallback(async () => {
+    try {
+      const res = await axios({
+        method: 'get',
+        url: 'https://api.nestfi.net/api/dashboard/destory',
+      })
+      if (res.data) {
+        setDestoryData(res.data.value)
+      }
+    } catch (e) {
+      console.log(e)
+    }
+  }, [])
+
+  const fetchMyTxInfo = useCallback(async () => {
+    if (!account) {
+      return
+    }
+    try {
+      const res = await axios({
+        method: 'get',
+        url: `https://api.nestfi.net/api/dashboard/myTx/info?address=${account}`,
+      })
+      if (res.data) {
+        setMyTxInfo(res.data.value)
+      }
+    } catch (e) {
+      console.log(e)
+    }
+  }, [account])
+
+  const fetchHistoryList = useCallback(async () => {
+    if (!account) {
+      return
+    }
+    try {
+      const res = await axios({
+        method: 'get',
+        // url: `https://api.nestfi.net/api/dashboard/history/list?address=${account}`,
+        url: `https://api.nestfi.net/api/dashboard/history/list?address=0x481a74d43ae3A7BdE38B7fE36E46CF9a6cbb4F39`,
+      })
+      if (res.data) {
+        setHistoryList(res.data.value)
+      }
+    } catch (e) {
+      console.log(e)
+    }
+  }, [account])
+
+  useEffect(() => {
+    fetchDestory()
+  }, [fetchDestory])
+
+  useEffect(() => {
+    fetchMyTxInfo()
+  }, [fetchMyTxInfo])
+
+  useEffect(() => {
+    fetchHistoryList()
+  }, [fetchHistoryList])
 
   return (
     <Stack alignItems={"center"} width={'100%'}>
@@ -24,13 +112,13 @@ const Dashboard: FC = () => {
           <MainCard classNames={'dashboard-card'}>
             <Stack alignItems={"center"} justifyContent={"center"} height={['100px', "210px"]} spacing={['4px', '18px']}>
               <p className={'dashboard-label'}>NEST Total Destruction</p>
-              <p className={'dashboard-value'}>-1029301.02</p>
+              <p className={'dashboard-value'}>{destoryData.totalDestroy.toLocaleString('en-US',{maximumFractionDigits: 2})}</p>
             </Stack>
           </MainCard>
           <MainCard classNames={'dashboard-card'}>
             <Stack alignItems={"center"} justifyContent={"center"} height={['100px', "210px"]} spacing={['4px', '18px']}>
               <p className={'dashboard-label'}>NEST Today Destruction</p>
-              <p className={'dashboard-value'}>-1029301.02</p>
+              <p className={'dashboard-value'}>{destoryData.dayDestroy.toLocaleString('en-US',{maximumFractionDigits: 2})}</p>
             </Stack>
           </MainCard>
         </Stack>
@@ -71,56 +159,52 @@ const Dashboard: FC = () => {
             <MainCard classNames={'dashboard-card'}>
               <Stack height={['100px', '200px']} alignItems={"center"} justifyContent={"center"} spacing={['4px', '10px']}>
                 <p className={'dashboard-label'}>Total Trade</p>
-                <p className={'dashboard-value'}>-1029392.2</p>
+                <p className={'dashboard-value'}>{myTxInfo.totalValue.toLocaleString('en-US',{maximumFractionDigits: 2})}</p>
               </Stack>
             </MainCard>
             <Stack spacing={{ xs: '10px', sm: '22px'}} direction={{ xs: 'column', sm: 'column', md: 'row' }}>
               <MainCard classNames={'dashboard-card'}>
                 <Stack height={['100px', '200px']} alignItems={"center"} justifyContent={"center"} spacing={['4px', '10px']}>
-                  <p className={'dashboard-label'}>Total Trade</p>
-                  <p className={'dashboard-value'}>-1029392.2</p>
-                  <p className={'dashboard-caption'}>-25% Today ringgit</p>
+                  <p className={'dashboard-label'}>Day Trade</p>
+                  <p className={'dashboard-value'}>{myTxInfo.todayValue.toLocaleString('en-US',{maximumFractionDigits: 2})}</p>
+                  <p className={'dashboard-caption'}>{myTxInfo.todayRate}% Today ringgit</p>
                 </Stack>
               </MainCard>
               <MainCard classNames={'dashboard-card'}>
                 <Stack height={['100px', '200px']} alignItems={"center"} justifyContent={"center"} spacing={['4px', '10px']}>
                   <p className={'dashboard-label'}>7 Day Trade</p>
-                  <p className={'dashboard-value'}>-1029392.2</p>
-                  <p className={'dashboard-caption'}>-25% Today ringgit</p>
+                  <p className={'dashboard-value'}>{myTxInfo.day7Value.toLocaleString('en-US',{maximumFractionDigits: 2})}</p>
+                  <p className={'dashboard-caption'}>{myTxInfo.day7Rate}% Today ringgit</p>
                 </Stack>
               </MainCard>
               <MainCard classNames={'dashboard-card'}>
                 <Stack height={['100px', '200px']} alignItems={"center"} justifyContent={"center"} spacing={['4px', '10px']}>
                   <p className={'dashboard-label'}>30 Day Trade</p>
-                  <p className={'dashboard-value'}>-1029392.2</p>
-                  <p className={'dashboard-caption'}>-25% Today ringgit</p>
+                  <p className={'dashboard-value'}>{myTxInfo.day30Value.toLocaleString('en-US',{maximumFractionDigits: 2})}</p>
+                  <p className={'dashboard-caption'}>{myTxInfo.day30Rate}% Today ringgit</p>
                 </Stack>
               </MainCard>
             </Stack>
             {
               isPC && (
-                <>
-                  <Stack direction={'row'}>
-                    <MainButton className={`dashboard-leftButton ${showHold ? '' : 'outline'}`} onClick={() => setShowHold(true)}>
-                      Hold
-                    </MainButton>
-                    <MainButton className={`dashboard-rightButton ${showHold ? 'outline' : ''}`} onClick={() => setShowHold(false)}>
-                      History
-                    </MainButton>
-                  </Stack>
-                  <MainCard>
-                    <Stack paddingX={'55px'} height={'60px'} direction={'row'} justifyContent={"space-between"}
-                           alignItems={"center"}>
-                      <p className={'dashboard-label'}>Token Pair</p>
-                      <p className={'dashboard-label'}>Type</p>
-                      <p className={'dashboard-label'}>Leverage</p>
-                      <p className={'dashboard-label'}>Initial Margin</p>
-                      <p className={'dashboard-label'}>Open Price</p>
-                      <p className={'dashboard-label'}>Actual Margin</p>
-                      <p className={'dashboard-label'}>Operate</p>
-                    </Stack>
-                  </MainCard>
-                </>
+                <table className={`dashboard-table`}>
+                  <thead>
+                  <tr className={`Futures-table-title`}>
+                    <th>Token Pair</th>
+                    <th>Type</th>
+                    <th>Leverage</th>
+                    <th>Initial Margin</th>
+                    <th>Open Price</th>
+                    <th>Actual Margin</th>
+                    <th>Operate</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  { historyList.map((item, index) => (
+                    <FuturesList item={item} key={index} className={'Futures'}/>
+                  )) }
+                  </tbody>
+                </table>
               )
             }
           </Stack>
