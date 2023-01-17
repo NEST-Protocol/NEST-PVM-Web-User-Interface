@@ -1,0 +1,99 @@
+@use "sass:math";
+@import 'src/styles/shared.scss';
+
+.dashboard {
+  margin-top: 22px;
+
+  &-card {
+    width: 100%;
+  }
+
+  &-label {
+    color: #878787;
+    font-size: 17px;
+    font-weight: 600;
+  }
+
+  &-value {
+    font-size: 25px;
+    font-weight: 600;
+  }
+
+  &-caption {
+    font-size: 13px;
+    font-weight: 500;
+    color: #878787;
+  }
+
+  &-leftButton {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+
+    &.outline {
+      background-color: transparent;
+      border: 1px solid #EEEEEE;
+      color: #878787;
+    }
+  }
+
+  &-rightButton {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+
+    &.outline {
+      background-color: white;
+      border: 1px solid #EEEEEE;
+      color: #878787;
+    }
+  }
+}
+
+.main-dark {
+  .dashboard {
+    margin-top: 22px;
+
+    &-card {
+      width: 100%;
+    }
+
+    &-label {
+      color: #C5C5C5;
+      font-size: 17px;
+      font-weight: 600;
+    }
+
+    &-value {
+      color: #FFFFFF;
+      font-size: 25px;
+      font-weight: 600;
+    }
+
+    &-caption {
+      font-size: 13px;
+      font-weight: 500;
+      color: #878787;
+    }
+
+    &-leftButton {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+
+      &.outline {
+        background-color: transparent;
+        border: 1px solid #EEEEEE;
+        color: #878787;
+      }
+    }
+
+    &-rightButton {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+
+      &.outline {
+        background-color: white;
+        border: 1px solid #EEEEEE;
+        color: #878787;
+      }
+    }
+  }
+}
