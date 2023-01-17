@@ -5,6 +5,7 @@ import MainButton from "../../components/MainButton";
 import "./styles";
 import ShareMyDealModal from "./ShareMyDealModal";
 import {checkWidth} from "../../libs/utils";
+import useWeb3 from "../../libs/hooks/useWeb3";
 
 const Dashboard: FC = () => {
   // 获取销毁接口: GET http://api.nestfi.net/api/dashboard/destory
@@ -13,6 +14,8 @@ const Dashboard: FC = () => {
   // 盈亏: GET http://api.nestfi.net/api/dashboard/myTx/info?address=0x481a74d43ae3A7BdE38B7fE36E46CF9a6cbb4F39
   const [showHold, setShowHold] = useState(true)
   const isPC = checkWidth();
+  const { account } = useWeb3();
+  const [copied, setCopied] = useState(false);
 
   return (
     <Stack alignItems={"center"} width={'100%'}>
@@ -43,8 +46,24 @@ const Dashboard: FC = () => {
             <Stack direction={"row"} alignItems={"center"} justifyContent={"space-between"} pb={['10px', '0px']}>
               <p className={'dashboard-label'}>My Deal</p>
               <Stack direction={'row'} spacing={['15px', '30px']}>
-                <MainButton>
-                  Copy Invitation Link
+                <MainButton onClick={() => {
+                  if (account) {
+                    navigator.clipboard.writeText( 'https://finance.nestprotocol.org/#/futures?a=' + account.slice(-8) || '').then(() => {
+                      setCopied(true);
+                      setTimeout(() => {
+                        setCopied(false);
+                      }, 1000)
+                    });
+                  } else {
+                    navigator.clipboard.writeText( 'https://finance.nestprotocol.org/#/futures').then(() => {
+                      setCopied(true);
+                      setTimeout(() => {
+                        setCopied(false);
+                      }, 1000)
+                    });
+                  }
+                }}>
+                  { copied ? 'Copied success!' : 'Copy Invitation Link' }
                 </MainButton>
                 <ShareMyDealModal/>
               </Stack>
