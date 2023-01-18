@@ -478,7 +478,9 @@ let whiteList = [
   '0xfe2482eddaaf851bd98c15ce0dbbc097f34c48bf',
   '0xfe52554a3c63659eab9b83f8cc86f2ec212103ef',
   '0xff017d9cd92b57af4cd3d801739f72fe519cbbda',
-  '0xff6b9a7cb1ffd16d09e020fa72f5cda79dc5651c',				
+  '0xff6b9a7cb1ffd16d09e020fa72f5cda79dc5651c',
+  '0x31443FA74CA82b23e7C1dedc359E0753BFB80075',
+  '0x39cDB03AfD08F6C21cD0A2b013bE86578a862de3',						
     ];
 
 // whiteList
