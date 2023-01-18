@@ -43,4 +43,45 @@
             }
         }
     }
+
+    .dashboard {
+        display: flex;
+        justify-content: center;
+        padding: 0 16px;
+        border: 1px solid #EEEEEE;
+        border-radius: 22px;
+        margin: 0 16px 0 0;
+        align-items: center;
+        height: 44px;
+
+        p {
+            color: #0047BB;
+            font-weight: 600;
+            font-size: $T3;
+        }
+    }
+}
+
+
+
+.main-dark {
+    .connectStatus {
+        .dashboard {
+            display: flex;
+            justify-content: center;
+            padding: 0 16px;
+            border: 1px solid transparent;
+            border-radius: 22px;
+            margin: 0 16px 0 0;
+            align-items: center;
+            height: 44px;
+            background: rgba(255, 255, 255, 0.15);
+
+            p {
+                color: white;
+                font-weight: 600;
+                font-size: $T3;
+            }
+        }
+    }
 }

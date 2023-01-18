@@ -14,7 +14,7 @@ const Dashboard: FC = () => {
   // 每日交易折线图: GET https://api.nestfi.net/api/dashboard/txVolume/list
   // 交易历史: GET https://api.nestfi.net/api/dashboard/history/list?address=0x481a74d43ae3A7BdE38B7fE36E46CF9a6cbb4F39
   // 盈亏: GET https://api.nestfi.net/api/dashboard/myTx/info?address=0x481a74d43ae3A7BdE38B7fE36E46CF9a6cbb4F39
-  const [showHold, setShowHold] = useState(true)
+  const [showHold, setShowHold] = useState(true);
   const isPC = checkWidth();
   const { account } = useWeb3();
   const [copied, setCopied] = useState(false);
@@ -184,6 +184,18 @@ const Dashboard: FC = () => {
                   <p className={'dashboard-caption'}>{myTxInfo.day30Rate}% Today ringgit</p>
                 </Stack>
               </MainCard>
+            </Stack>
+            <Stack direction={'row'}>
+              <MainButton className={`dashboard-leftButton ${showHold ? '' : 'outline'}`} onClick={() => {
+                setShowHold(true);
+              }}>
+                Hold
+              </MainButton>
+              <MainButton className={`dashboard-rightButton ${!showHold ? '' : 'outline'}`} onClick={() => {
+                setShowHold(false);
+              }}>
+                History
+              </MainButton>
             </Stack>
             {
               isPC && (

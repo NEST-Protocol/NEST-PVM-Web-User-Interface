@@ -2,6 +2,7 @@ import {FC, useRef} from "react";
 import {LongIcon, ShortIcon} from "../../../components/Icon";
 import Popup from "reactjs-popup";
 import '../styles';
+import useTokenPairSymbol from "../../../libs/hooks/useTokenPairSymbol";
 
 type OrderView = {
   index: number;
@@ -24,11 +25,13 @@ type FuturesListProps = {
 
 const FuturesList: FC<FuturesListProps> = ({ ...props }) => {
   const share = useRef<any>();
+  const { TokenOneSvg, TokenTwoSvg } = useTokenPairSymbol(props.item.tokenPair);
 
   return (
     <tr className={`${props.className}-table-normal`}>
       <td className={"tokenPair"}>
-        <span>{props.item.tokenPair}</span>
+        <TokenOneSvg />
+        <TokenTwoSvg />
       </td>
       <td className={"td-type"}>
         {props.item.orientation ? <LongIcon /> : <ShortIcon />}

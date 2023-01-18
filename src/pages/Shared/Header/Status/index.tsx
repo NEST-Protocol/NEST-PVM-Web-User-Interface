@@ -29,8 +29,8 @@ const ConnectStatus: FC = () => {
 
       <SelectNetwork/>
 
-      <Stack style={{ justifyContent: "center", padding: '0 16px', border: '1px solid #EEEEEE', borderRadius: '22px', margin: '0 16px 0 0'}}>
-        <p style={{ color: '#0047BB', fontWeight: 600 }}>
+      <Stack className={'dashboard'}>
+        <p>
           <Link to={'/dashboard'}>
             Dashboard
           </Link>

@@ -1,0 +1,30 @@
+@use "sass:math";
+@import 'src/styles/shared.scss';
+
+.baseModal {
+
+    & > .mainCard {
+        padding: 0;
+    }
+
+    &-top {
+        display: flex;
+        justify-content: space-between;
+        height: 40px;
+        position: absolute;
+        right: 10px;
+        top: 10px;
+
+        &-rightButton {
+            padding: 10px 10px;
+        }
+
+        button {
+            width: 40px;
+            height: 40px;
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+}
