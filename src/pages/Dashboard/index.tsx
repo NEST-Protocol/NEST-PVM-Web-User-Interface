@@ -130,7 +130,7 @@ const Dashboard: FC = () => {
         <MainCard>
           <Stack padding={['15px', '28px']} spacing={{ xs: '10px', sm: '22px'}}>
             <Stack direction={"row"} alignItems={"center"} justifyContent={"space-between"} pb={['10px', '0px']}>
-              <Stack direction={'row'} spacing={'16px'}>
+              <Stack direction={'row'} spacing={'16px'} alignItems={"center"}>
                 <p className={'dashboard-label'}>My Deal</p>
                 <TipsIcon />
               </Stack>

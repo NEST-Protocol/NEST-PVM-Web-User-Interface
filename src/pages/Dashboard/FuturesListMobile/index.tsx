@@ -5,6 +5,7 @@ import useTokenPairSymbol from "../../../libs/hooks/useTokenPairSymbol";
 import {Divider, Stack} from "@mui/material";
 import MainCard from "../../../components/MainCard";
 import Popup from "reactjs-popup";
+import ShareMyOrderModal from "../ShareMyOrderModal";
 
 type OrderView = {
   index: number;
@@ -71,17 +72,11 @@ const FuturesListMobile: FC<FuturesListProps> = ({...props}) => {
           <p className={'dashboard-orderCard-caption'}>{props.item.actualRate} %</p>
         </Stack>
       </Stack>
-      <Popup
-        modal
-        ref={share}
-        trigger={<Stack position={'absolute'} right={0} top={0} width={'32px'} height={'32px'} borderRadius={'0 20px'}
-                            justifyContent={"center"} alignItems={"center"}
-                            style={{ background: 'red' }}>
-          <p>S</p>
-        </Stack>}
-        nested
-      >
-      </Popup>
+      <Stack position={'absolute'} right={0} top={0} width={'32px'} height={'32px'} borderRadius={'0 20px'}
+             justifyContent={"center"} alignItems={"center"}
+             style={{ background: 'rgba(255, 255, 255, 0.15)' }}>
+        <ShareMyOrderModal order={props.item} />
+      </Stack>
     </MainCard>
   );
 };
