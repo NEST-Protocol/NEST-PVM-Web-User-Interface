@@ -5,7 +5,7 @@ import MainButton from "../../../components/MainButton";
 import {QRCodeCanvas} from "qrcode.react";
 import domtoimage from "../../../libs/dom-to-image";
 import useWeb3 from "../../../libs/hooks/useWeb3";
-import BaseModal from "../BaseModal";
+import BaseModal from "../DashboardModal";
 import {OrderView} from "../FuturesList";
 import useTokenPairSymbol from "../../../libs/hooks/useTokenPairSymbol";
 import {LongIcon, NESTLogo, ShareIcon, ShortIcon} from "../../../components/Icon";

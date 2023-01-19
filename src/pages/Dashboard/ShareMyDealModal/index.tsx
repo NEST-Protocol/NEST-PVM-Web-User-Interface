@@ -5,8 +5,10 @@ import MainButton from "../../../components/MainButton";
 import {QRCodeCanvas} from "qrcode.react";
 import domtoimage from "../../../libs/dom-to-image";
 import useWeb3 from "../../../libs/hooks/useWeb3";
-import BaseModal from "../BaseModal";
+import BaseModal from "../DashboardModal";
 import {DownIcon, NESTLogo, ShareIcon, UpIcon} from "../../../components/Icon";
+import classNames from "classnames";
+import useThemes, {ThemeType} from "../../../libs/hooks/useThemes";
 
 const ShareMyDealModal: FC<{
   value: {
@@ -29,6 +31,8 @@ const ShareMyDealModal: FC<{
   })
   const [show, setShow] = useState(false)
   const [hasCopied, setHasCopied] = useState(false)
+  const { theme } = useThemes();
+  const classPrefix = "modal-wallet";
 
   const copy = () => {
     const link = `https://finance.nestprotocol.org/#/futures?a=${account?.slice(-8).toLowerCase()}`
@@ -77,6 +81,10 @@ You can follow the right person on NESTFi, here is my refer link:`
       }
     >
       <BaseModal
+        classNames={classNames({
+          [`${classPrefix}`]: true,
+          [`${classPrefix}-dark`]: theme === ThemeType.dark,
+        })}
         onClose={() => {
           modal?.current?.close()
           setShow(false)
@@ -102,16 +110,16 @@ You can follow the right person on NESTFi, here is my refer link:`
                   {
                     select.totalTrade && (
                       <Stack spacing={'4px'}>
-                        <p className={'shareMyDealModal-title1'}>Total Trade</p>
-                        <p className={'shareMyDealModal-value1'}>{value.totalValue}</p>
+                        <p className={`shareMyDealModal-title1`}>Total Trade</p>
+                        <p className={`shareMyDealModal-value1`}>{value.totalValue}</p>
                       </Stack>
                     )
                   }
                   {
                     select.todayTrade && (
                       <Stack spacing={'4px'}>
-                        <p className={'shareMyDealModal-title2'}>Today Trade</p>
-                        <p className={'shareMyDealModal-value2'}>{value.todayValue > 0 &&
+                        <p className={`shareMyDealModal-title2`}>Today Trade</p>
+                        <p className={`shareMyDealModal-value2`}>{value.todayValue > 0 &&
                             <UpIcon/>} {value.todayValue < 0 && <DownIcon/>} {value.todayValue}</p>
                         <p className={'shareMyDealModal-caption2'}>{value.todayRate}% Today ringgit</p>
                       </Stack>
@@ -159,7 +167,7 @@ You can follow the right person on NESTFi, here is my refer link:`
               </Stack>
             </>
           ) : (
-            <Stack width={['360px', '480px', '600px']} textAlign={"center"} p={'34px'} overflow={'hidden'}>
+            <Stack width={['360px', '480px', '600px']} textAlign={"center"} p={'34px'} overflow={'hidden'} className={theme === ThemeType.dark ? 'dark' : ''}>
               <Stack pb={'34px'}>
                 <p className={'dashboard-label'}>Share</p>
               </Stack>

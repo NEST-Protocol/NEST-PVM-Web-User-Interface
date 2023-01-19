@@ -10,7 +10,7 @@ type Props = {
 }
 
 const BaseModal: FC<Props> = ({children, ...props}) => {
-    const classPrefix = 'baseModal'
+    const classPrefix = 'dashboardModal'
     return (
         <div className={classPrefix}>
             <MainCard classNames={props.classNames}>

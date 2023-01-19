@@ -10,13 +10,9 @@ import axios from "axios"
 import FuturesList from "./FuturesList";
 import FuturesListMobile from "./FuturesListMobile";
 import TVChart from "./TVChart";
-import {TipsIcon} from "../../components/Icon";
+import {DownIcon, TipsIcon, UpIcon} from "../../components/Icon";
 
 const Dashboard: FC = () => {
-  // 获取销毁接口: GET https://api.nestfi.net/api/dashboard/destory
-  // 每日交易折线图: GET https://api.nestfi.net/api/dashboard/txVolume/list
-  // 交易历史: GET https://api.nestfi.net/api/dashboard/history/list?address=0x481a74d43ae3A7BdE38B7fE36E46CF9a6cbb4F39
-  // 盈亏: GET https://api.nestfi.net/api/dashboard/myTx/info?address=0x481a74d43ae3A7BdE38B7fE36E46CF9a6cbb4F39
   const [showHold, setShowHold] = useState(true);
   const isPC = checkWidth();
   const { account } = useWeb3();
@@ -172,21 +168,21 @@ const Dashboard: FC = () => {
               <MainCard classNames={'dashboard-card'}>
                 <Stack height={['100px', '200px']} alignItems={"center"} justifyContent={"center"} spacing={['4px', '10px']}>
                   <p className={'dashboard-label'}>Day Trade</p>
-                  <p className={'dashboard-value'}>{myTxInfo.todayValue.toLocaleString('en-US',{maximumFractionDigits: 2})}</p>
+                  <p className={'dashboard-value'}>{myTxInfo.todayValue > 0 && <UpIcon/>} {myTxInfo.todayValue < 0 && <DownIcon/>} {myTxInfo.todayValue.toLocaleString('en-US',{maximumFractionDigits: 2})}</p>
                   <p className={'dashboard-caption'}>{myTxInfo.todayRate}% Today ringgit</p>
                 </Stack>
               </MainCard>
               <MainCard classNames={'dashboard-card'}>
                 <Stack height={['100px', '200px']} alignItems={"center"} justifyContent={"center"} spacing={['4px', '10px']}>
                   <p className={'dashboard-label'}>7 Day Trade</p>
-                  <p className={'dashboard-value'}>{myTxInfo.day7Value.toLocaleString('en-US',{maximumFractionDigits: 2})}</p>
+                  <p className={'dashboard-value'}>{myTxInfo.day7Value > 0 && <UpIcon/>} {myTxInfo.day7Value < 0 && <DownIcon/>} {myTxInfo.day7Value.toLocaleString('en-US',{maximumFractionDigits: 2})}</p>
                   <p className={'dashboard-caption'}>{myTxInfo.day7Rate}% Today ringgit</p>
                 </Stack>
               </MainCard>
               <MainCard classNames={'dashboard-card'}>
                 <Stack height={['100px', '200px']} alignItems={"center"} justifyContent={"center"} spacing={['4px', '10px']}>
                   <p className={'dashboard-label'}>30 Day Trade</p>
-                  <p className={'dashboard-value'}>{myTxInfo.day30Value.toLocaleString('en-US',{maximumFractionDigits: 2})}</p>
+                  <p className={'dashboard-value'}>{myTxInfo.day30Value > 0 && <UpIcon/>} {myTxInfo.day30Value < 0 && <DownIcon/>} {myTxInfo.day30Value.toLocaleString('en-US',{maximumFractionDigits: 2})}</p>
                   <p className={'dashboard-caption'}>{myTxInfo.day30Rate}% Today ringgit</p>
                 </Stack>
               </MainCard>
