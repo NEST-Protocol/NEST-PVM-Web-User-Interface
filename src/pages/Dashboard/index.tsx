@@ -9,6 +9,7 @@ import useWeb3 from "../../libs/hooks/useWeb3";
 import axios from "axios"
 import FuturesList from "./FuturesList";
 import FuturesListMobile from "./FuturesListMobile";
+import TVChart from "./TVChart";
 
 const Dashboard: FC = () => {
   // 获取销毁接口: GET https://api.nestfi.net/api/dashboard/destory
@@ -126,8 +127,7 @@ const Dashboard: FC = () => {
         <MainCard>
           <Stack padding={['15px','28px']} height={['240px', '440px']} spacing={['24px', '28px']}>
             <p className={'dashboard-label'}>Total Transaction Volume</p>
-            <Stack width={'100%'} height={'100%'} style={{background: '#EEEEEE'}} borderRadius={'20px'}>
-            </Stack>
+            <TVChart />
           </Stack>
         </MainCard>
         <MainCard>
