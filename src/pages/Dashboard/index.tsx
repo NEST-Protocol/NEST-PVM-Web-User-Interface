@@ -54,6 +54,7 @@ const Dashboard: FC = () => {
     initialMargin: number,
     lastPrice?: number,
   }[]>([])
+  const [showMore, setShowMore] = useState(false)
 
   const fetchDestory = useCallback(async () => {
     try {
@@ -249,14 +250,29 @@ const Dashboard: FC = () => {
                     </tr>
                     </thead>
                     <tbody>
-                    { showHold && positionList.map((item, index) => (
+                    { showHold && positionList.filter((item, index) => {
+                      if (showMore) {
+                        return true;
+                      }
+                      return index < 5;
+                    } ).map((item, index) => (
                       <FuturesList item={item} key={index} className={'Futures'}/>
                     )) }
-                    { !showHold && historyList.map((item, index) => (
+                    { !showHold && historyList.filter((item, index) => {
+                      if (showMore) {
+                        return true;
+                      }
+                      return index < 5;
+                    } ).map((item, index) => (
                       <FuturesList item={item} key={index} className={'Futures'}/>
                     )) }
                     </tbody>
                   </table>
+                  <Stack alignItems={"center"}>
+                    <button className={'dashboard-button-more'} onClick={() => setShowMore(!showMore)}>
+                      { showMore ? 'Less' : 'More' }
+                    </button>
+                  </Stack>
                 </>
               )
             }
@@ -282,7 +298,12 @@ const Dashboard: FC = () => {
                showHold ? (
                  <>
                    {
-                     positionList.map((item, index) => (
+                     positionList.filter((item, index) => {
+                       if (showMore) {
+                         return true;
+                       }
+                       return index < 5;
+                     } ).map((item, index) => (
                        <FuturesListMobile item={item} key={index} className={'Futures'}/>
                      ))
                    }
@@ -290,13 +311,23 @@ const Dashboard: FC = () => {
                ) : (
                  <>
                    {
-                     historyList.map((item, index) => (
+                     historyList.filter((item, index) => {
+                       if (showMore) {
+                         return true;
+                       }
+                       return index < 5;
+                     } ).map((item, index) => (
                        <FuturesListMobile item={item} key={index} className={'Futures'}/>
                      ))
                    }
                  </>
                )
             }
+            <Stack alignItems={"center"}>
+              <button className={'dashboard-button-more'} onClick={() => setShowMore(!showMore)}>
+                { showMore ? 'Less' : 'More' }
+              </button>
+            </Stack>
           </>
         )}
       </Stack>

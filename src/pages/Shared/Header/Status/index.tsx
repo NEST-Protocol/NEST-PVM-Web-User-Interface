@@ -2,7 +2,7 @@ import { Trans } from "@lingui/macro";
 import classNames from "classnames";
 import { FC, useRef, useState } from "react";
 import Popup from "reactjs-popup";
-import {DashboardIcon, WhiteLoading} from "../../../../components/Icon";
+import {DashboardIcon, DashboardWhiteIcon, WhiteLoading} from "../../../../components/Icon";
 import useTransactionListCon from "../../../../libs/hooks/useTransactionInfo";
 import useWeb3 from "../../../../libs/hooks/useWeb3";
 import { showEllipsisAddress } from "../../../../libs/utils";
@@ -12,6 +12,7 @@ import "./styles";
 import WalletModal from "./WalletModal";
 import {Stack} from "@mui/material";
 import {Link} from "react-router-dom";
+import useThemes, {ThemeType} from "../../../../libs/hooks/useThemes";
 
 const ConnectStatus: FC = () => {
   const { account } = useWeb3();
@@ -19,6 +20,7 @@ const ConnectStatus: FC = () => {
   const modal = useRef<any>();
   const classPrefix = "connectStatus";
   const { pendingList } = useTransactionListCon();
+  const { theme } = useThemes()
   return (
     <div
       className={classNames({
@@ -30,7 +32,7 @@ const ConnectStatus: FC = () => {
       <SelectNetwork/>
 
       <Stack className={'dashboard'}>
-        <DashboardIcon/>
+        { theme === ThemeType.dark ? <DashboardWhiteIcon/> : <DashboardIcon/> }
         <p>
           <Link to={'/dashboard'}>
             Dashboard
