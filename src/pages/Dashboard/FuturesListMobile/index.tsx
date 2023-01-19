@@ -4,7 +4,6 @@ import '../styles';
 import useTokenPairSymbol from "../../../libs/hooks/useTokenPairSymbol";
 import {Divider, Stack} from "@mui/material";
 import MainCard from "../../../components/MainCard";
-import Popup from "reactjs-popup";
 import ShareMyOrderModal from "../ShareMyOrderModal";
 
 type OrderView = {
@@ -17,7 +16,7 @@ type OrderView = {
   tokenPair: string;
   actualMargin: number;
   initialMargin: number;
-  lastPrice: number;
+  lastPrice?: number;
 };
 
 type FuturesListProps = {
@@ -27,7 +26,6 @@ type FuturesListProps = {
 };
 
 const FuturesListMobile: FC<FuturesListProps> = ({...props}) => {
-  const share = useRef<any>();
   const {TokenOneSvg, TokenTwoSvg} = useTokenPairSymbol(props.item.tokenPair);
 
   return (

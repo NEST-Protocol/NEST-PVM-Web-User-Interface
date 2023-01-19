@@ -108,8 +108,8 @@ You can follow the right person on NESTFi, here is my refer link:`
               <p style={{
                 fontSize: '16px',
                 fontWeight: 500,
-                color: '#003232'
-              }}>{order.lastPrice.toLocaleString('US', {maximumFractionDigits: 2})}</p>
+                color: '#003232',
+              }}>{order?.lastPrice?.toLocaleString('US', {maximumFractionDigits: 2})}</p>
             </Stack>
             <Stack spacing={'8px'}>
               <p style={{fontSize: '12.5px', fontWeight: 500, color: '#2F759D'}}>Avg Open Price</p>

@@ -42,6 +42,18 @@ const Dashboard: FC = () => {
     initialMargin: number,
     lastPrice: number,
   }[]>([])
+  const [positionList, setPositionList] = useState<{
+    owner: string,
+    leverage: string,
+    orientation: string,
+    actualRate: number,
+    index: number,
+    openPrice: number,
+    tokenPair: string,
+    actualMargin: number,
+    initialMargin: number,
+    lastPrice?: number,
+  }[]>([])
 
   const fetchDestory = useCallback(async () => {
     try {
@@ -92,6 +104,24 @@ const Dashboard: FC = () => {
     }
   }, [account])
 
+  const fetchPositionList = useCallback(async () => {
+    if (!account) {
+      return
+    }
+    try {
+      const res = await axios({
+        method: 'get',
+        // url: `https://api.nestfi.net/api/dashboard/position/list?address=${account}`,
+        url: `https://api.nestfi.net/api/dashboard/position/list?address=0x481a74d43ae3A7BdE38B7fE36E46CF9a6cbb4F39`,
+      })
+      if (res.data) {
+        setPositionList(res.data.value)
+      }
+    } catch (e) {
+      console.log(e)
+    }
+  }, [account])
+
   useEffect(() => {
     fetchDestory()
   }, [fetchDestory])
@@ -103,6 +133,10 @@ const Dashboard: FC = () => {
   useEffect(() => {
     fetchHistoryList()
   }, [fetchHistoryList])
+
+  useEffect(() => {
+    fetchPositionList()
+  }, [fetchPositionList])
 
   return (
     <Stack alignItems={"center"} width={'100%'}>
@@ -130,7 +164,7 @@ const Dashboard: FC = () => {
         <MainCard>
           <Stack padding={['15px', '28px']} spacing={{ xs: '10px', sm: '22px'}}>
             <Stack direction={"row"} alignItems={"center"} justifyContent={"space-between"} pb={['10px', '0px']}>
-              <Stack direction={'row'} spacing={'16px'} alignItems={"center"}>
+              <Stack direction={'row'} spacing={['8px', '16px']} alignItems={"center"}>
                 <p className={'dashboard-label'}>My Deal</p>
                 <TipsIcon />
               </Stack>
@@ -215,7 +249,10 @@ const Dashboard: FC = () => {
                     </tr>
                     </thead>
                     <tbody>
-                    { historyList.map((item, index) => (
+                    { showHold && positionList.map((item, index) => (
+                      <FuturesList item={item} key={index} className={'Futures'}/>
+                    )) }
+                    { !showHold && historyList.map((item, index) => (
                       <FuturesList item={item} key={index} className={'Futures'}/>
                     )) }
                     </tbody>
@@ -242,9 +279,23 @@ const Dashboard: FC = () => {
         { !isPC && (
           <>
             {
-              historyList.map((item, index) => (
-                <FuturesListMobile item={item} key={index} className={'Futures'}/>
-              ))
+               showHold ? (
+                 <>
+                   {
+                     positionList.map((item, index) => (
+                       <FuturesListMobile item={item} key={index} className={'Futures'}/>
+                     ))
+                   }
+                 </>
+               ) : (
+                 <>
+                   {
+                     historyList.map((item, index) => (
+                       <FuturesListMobile item={item} key={index} className={'Futures'}/>
+                     ))
+                   }
+                 </>
+               )
             }
           </>
         )}

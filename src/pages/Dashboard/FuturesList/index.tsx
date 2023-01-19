@@ -15,7 +15,7 @@ export type OrderView = {
   tokenPair: string;
   actualMargin: number;
   initialMargin: number;
-  lastPrice: number;
+  lastPrice?: number;
 };
 
 type FuturesListProps = {

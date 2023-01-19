@@ -71,4 +71,5 @@ export {ReactComponent as TipsIcon} from './svg/tips_icon.svg'
 export {ReactComponent as UpIcon} from './svg/up_icon.svg'
 export {ReactComponent as DownIcon} from './svg/down_icon.svg'
 export {ReactComponent as DashboardIcon} from './svg/dashboard_icon.svg'
+export {ReactComponent as DashboardWhiteIcon} from './svg/dashboard_icon_white.svg'
 

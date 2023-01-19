@@ -10,7 +10,7 @@ import {
   WhiteIcon,
   WhiteLoading,
   XIcon,
-  LittleETH, DashboardIcon,
+  LittleETH, DashboardIcon, DashboardWhiteIcon,
 } from "../../../../components/Icon";
 import useTransactionListCon from "../../../../libs/hooks/useTransactionInfo";
 import useWeb3 from "../../../../libs/hooks/useWeb3";
@@ -177,7 +177,11 @@ const MobileHeader: FC = () => {
         <div className={`${classPrefix}-rightButton`}>
           <button>
             <Link to={'/dashboard'}>
-              <DashboardIcon/>
+              { theme === ThemeType.dark ? (
+                <DashboardWhiteIcon/>
+              ) : (
+                <DashboardIcon/>
+              ) }
             </Link>
           </button>
         </div>
