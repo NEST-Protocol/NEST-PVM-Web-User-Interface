@@ -8,7 +8,7 @@ import useWeb3 from "../../../libs/hooks/useWeb3";
 import BaseModal from "../BaseModal";
 import {OrderView} from "../FuturesList";
 import useTokenPairSymbol from "../../../libs/hooks/useTokenPairSymbol";
-import {LongIcon, ShareIcon, ShortIcon} from "../../../components/Icon";
+import {LongIcon, NESTLogo, ShareIcon, ShortIcon} from "../../../components/Icon";
 
 type ShareMyDealModalProps = {
   order: OrderView
@@ -72,11 +72,13 @@ You can follow the right person on NESTFi, here is my refer link:`
         }}
         titleName={''}
       >
-        <Stack id={'my-share'} width={['360px', '480px', '600px']} textAlign={"center"} px={'28px'} overflow={'hidden'}
+        <Stack id={'my-share'} width={['360px', '480px', '600px']} textAlign={"center"} px={'28px'} overflow={'hidden'} borderRadius={'20px'}
+               style={{ backgroundImage:  'url(/DashboardImage/pc_share_bg_2.png)', backgroundPosition: 'center', backgroundSize: 'cover', overflow: 'hidden' }}
                spacing={'22px'}>
-          <Stack pt={'28px'}>
-            <p>NEST</p>
+          <Stack pt={'28px'} alignItems={"center"}>
+            <NESTLogo/>
           </Stack>
+
           <Stack direction={'row'} justifyContent={'space-around'} borderTop={'1px solid #CCDDF4'} alignItems={"center"}
                  minHeight={'40px'} py={'10px'}
                  borderBottom={'1px solid #CCDDF4'}>

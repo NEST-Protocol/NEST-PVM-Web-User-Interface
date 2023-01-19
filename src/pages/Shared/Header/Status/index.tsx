@@ -2,7 +2,7 @@ import { Trans } from "@lingui/macro";
 import classNames from "classnames";
 import { FC, useRef, useState } from "react";
 import Popup from "reactjs-popup";
-import { WhiteLoading } from "../../../../components/Icon";
+import {DashboardIcon, WhiteLoading} from "../../../../components/Icon";
 import useTransactionListCon from "../../../../libs/hooks/useTransactionInfo";
 import useWeb3 from "../../../../libs/hooks/useWeb3";
 import { showEllipsisAddress } from "../../../../libs/utils";
@@ -30,6 +30,7 @@ const ConnectStatus: FC = () => {
       <SelectNetwork/>
 
       <Stack className={'dashboard'}>
+        <DashboardIcon/>
         <p>
           <Link to={'/dashboard'}>
             Dashboard

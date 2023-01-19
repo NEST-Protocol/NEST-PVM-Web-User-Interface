@@ -6,10 +6,20 @@ import {QRCodeCanvas} from "qrcode.react";
 import domtoimage from "../../../libs/dom-to-image";
 import useWeb3 from "../../../libs/hooks/useWeb3";
 import BaseModal from "../BaseModal";
-import {ShareIcon} from "../../../components/Icon";
+import {DownIcon, NESTLogo, ShareIcon, UpIcon} from "../../../components/Icon";
 
-const ShareMyDealModal: FC = () => {
-  const { account } = useWeb3()
+const ShareMyDealModal: FC<{
+  value: {
+    totalValue: number,
+    todayValue: number,
+    day7Value: number,
+    day30Value: number,
+    todayRate: number,
+    day7Rate: number,
+    day30Rate: number,
+  }
+}> = ({value}) => {
+  const {account} = useWeb3()
   const modal = useRef<any>();
   const [select, setSelect] = useState({
     totalTrade: true,
@@ -61,8 +71,8 @@ You can follow the right person on NESTFi, here is my refer link:`
       modal
       ref={modal}
       trigger={
-        <Stack style={{ alignItems: "center", justifyContent: 'center', cursor: 'pointer' }}>
-          <ShareIcon />
+        <Stack style={{alignItems: "center", justifyContent: 'center', cursor: 'pointer'}}>
+          <ShareIcon/>
         </Stack>
       }
     >
@@ -76,15 +86,24 @@ You can follow the right person on NESTFi, here is my refer link:`
         {
           show ? (
             <>
-              <Stack width={['360px', '480px', '600px']} borderRadius={'20px'} textAlign={"center"} p={'60px'} spacing={'30px'} id={'my-share'}>
-                <p>NEST</p>
+              <Stack width={['360px', '480px', '600px']} borderRadius={'20px'} textAlign={"center"} p={'60px'}
+                     style={{
+                       backgroundImage: 'url(/DashboardImage/pc_share_bg_1.png)',
+                       backgroundPosition: 'center',
+                       backgroundSize: 'cover',
+                       overflow: 'hidden'
+                     }}
+                     spacing={'30px'} id={'my-share'}>
+                <Stack alignItems={"center"}>
+                  <NESTLogo/>
+                </Stack>
                 <Divider/>
                 <Stack minHeight={'300px'} justifyContent={'center'} spacing={'24px'}>
                   {
                     select.totalTrade && (
                       <Stack spacing={'4px'}>
                         <p className={'shareMyDealModal-title1'}>Total Trade</p>
-                        <p className={'shareMyDealModal-value1'}>-10293.1</p>
+                        <p className={'shareMyDealModal-value1'}>{value.totalValue}</p>
                       </Stack>
                     )
                   }
@@ -92,8 +111,9 @@ You can follow the right person on NESTFi, here is my refer link:`
                     select.todayTrade && (
                       <Stack spacing={'4px'}>
                         <p className={'shareMyDealModal-title2'}>Today Trade</p>
-                        <p className={'shareMyDealModal-value2'}>-102922</p>
-                        <p className={'shareMyDealModal-caption2'}>-25% Today ringgit</p>
+                        <p className={'shareMyDealModal-value2'}>{value.todayValue > 0 &&
+                            <UpIcon/>} {value.todayValue < 0 && <DownIcon/>} {value.todayValue}</p>
+                        <p className={'shareMyDealModal-caption2'}>{value.todayRate}% Today ringgit</p>
                       </Stack>
                     )
                   }
@@ -101,8 +121,9 @@ You can follow the right person on NESTFi, here is my refer link:`
                     select._7DaysTrade && (
                       <Stack spacing={'4px'}>
                         <p className={'shareMyDealModal-title2'}>7 Day Trade</p>
-                        <p className={'shareMyDealModal-value2'}>-1028301</p>
-                        <p className={'shareMyDealModal-caption2'}>-25% 7 Day ringgit</p>
+                        <p className={'shareMyDealModal-value2'}>{value.day7Value > 0 &&
+                            <UpIcon/>} {value.day7Value < 0 && <DownIcon/>}{value.day7Value}</p>
+                        <p className={'shareMyDealModal-caption2'}>{value.day7Rate}% 7 Day ringgit</p>
                       </Stack>
                     )
                   }
@@ -110,20 +131,24 @@ You can follow the right person on NESTFi, here is my refer link:`
                     select._30DaysTrade && (
                       <Stack spacing={'8px'}>
                         <p className={'shareMyDealModal-title2'}>30 Day Trade</p>
-                        <p className={'shareMyDealModal-value2'}>-1029002</p>
-                        <p className={'shareMyDealModal-caption2'}>-25% 30 Day ringgit</p>
+                        <p className={'shareMyDealModal-value2'}>{value.day30Value > 0 &&
+                            <UpIcon/>} {value.day30Value < 0 && <DownIcon/>} {value.day30Value}</p>
+                        <p className={'shareMyDealModal-caption2'}>{value.day30Rate}% 30 Day ringgit</p>
                       </Stack>
                     )
                   }
                 </Stack>
                 <Divider/>
                 <Stack alignItems={"center"} pb={'40px'}>
-                  <QRCodeCanvas value={`https://finance.nestprotocol.org/#/futures?a=${account?.slice(-8).toLowerCase()}`} size={80}/>
+                  <QRCodeCanvas
+                    value={`https://finance.nestprotocol.org/#/futures?a=${account?.slice(-8).toLowerCase()}`}
+                    size={80}/>
                 </Stack>
               </Stack>
-              <Stack width={['360px', '480px', '600px']} direction={'row'} position={'absolute'} bottom={34} spacing={'16px'} px={'60px'}>
+              <Stack width={['360px', '480px', '600px']} direction={'row'} position={'absolute'} bottom={34}
+                     spacing={'16px'} px={'60px'}>
                 <MainButton className={'shareMyDealModal-button'} onClick={copy}>
-                  { hasCopied ? 'Copied' : 'Copy' }
+                  {hasCopied ? 'Copied' : 'Copy'}
                 </MainButton>
                 <MainButton className={'shareMyDealModal-button'} onClick={download}>
                   Download
@@ -143,10 +168,10 @@ You can follow the right person on NESTFi, here is my refer link:`
                      onClick={() => {
                        setSelect({...select, totalTrade: !select.totalTrade})
                      }}
-                     style={{ userSelect: 'none', cursor: 'pointer' }}
+                     style={{userSelect: 'none', cursor: 'pointer'}}
               >
                 <p className={'dashboard-label'}>Total Trade</p>
-                <p className={'dashboard-value'}>-1029301.02</p>
+                <p className={'dashboard-value'}>{value.totalValue}</p>
                 <Stack position={'absolute'} right={['20px', '40px', '60px']} height={'22px'} width={'22px'}
                        border={'1px solid #EEEEEE'} boxShadow={'0px 0px 10px 0px #EEEEEE'} alignItems={"center"}
                        justifyContent={"center"}
@@ -161,11 +186,11 @@ You can follow the right person on NESTFi, here is my refer link:`
                      onClick={() => {
                        setSelect({...select, todayTrade: !select.todayTrade})
                      }}
-                     style={{ userSelect: 'none', cursor: 'pointer' }}
+                     style={{userSelect: 'none', cursor: 'pointer'}}
               >
                 <p className={'dashboard-label'}>Today Trade</p>
-                <p className={'dashboard-value'}>-1029301.02</p>
-                <p>-25% Today ringgit</p>
+                <p className={'dashboard-value'}>{value.todayValue > 0 && <UpIcon/>} {value.todayValue < 0 && <DownIcon/>} {value.todayValue}</p>
+                <p className={'dashboard-caption'}>{value.todayRate}% Today ringgit</p>
                 <Stack position={'absolute'} right={['20px', '40px', '60px']} height={'22px'} width={'22px'}
                        border={'1px solid #EEEEEE'} boxShadow={'0px 0px 10px 0px #EEEEEE'} alignItems={"center"}
                        justifyContent={"center"}
@@ -180,11 +205,11 @@ You can follow the right person on NESTFi, here is my refer link:`
                      onClick={() => {
                        setSelect({...select, _7DaysTrade: !select._7DaysTrade})
                      }}
-                     style={{ userSelect: 'none', cursor: 'pointer' }}
+                     style={{userSelect: 'none', cursor: 'pointer'}}
               >
                 <p className={'dashboard-label'}>7 Day Trade</p>
-                <p className={'dashboard-value'}>-1029301.02</p>
-                <p>-25% Today ringgit</p>
+                <p className={'dashboard-value'}>{value.day7Value > 0 && <UpIcon/>} {value.day7Value < 0 && <DownIcon/>} {value.day7Value}</p>
+                <p className={'dashboard-caption'}>{value.day7Rate}% Today ringgit</p>
                 <Stack position={'absolute'} right={['20px', '40px', '60px']} height={'22px'} width={'22px'}
                        border={'1px solid #EEEEEE'} boxShadow={'0px 0px 10px 0px #EEEEEE'} alignItems={"center"}
                        justifyContent={"center"}
@@ -199,11 +224,11 @@ You can follow the right person on NESTFi, here is my refer link:`
                      onClick={() => {
                        setSelect({...select, _30DaysTrade: !select._30DaysTrade})
                      }}
-                     style={{ userSelect: 'none', cursor: 'pointer' }}
+                     style={{userSelect: 'none', cursor: 'pointer'}}
               >
                 <p className={'dashboard-label'}>30 Day Trade</p>
-                <p className={'dashboard-value'}>-1029301.02</p>
-                <p>-25% Today ringgit</p>
+                <p className={'dashboard-value'}>{value.day30Value > 0 && <UpIcon/>} {value.day30Value < 0 && <DownIcon/>} {value.day30Value}</p>
+                <p className={'dashboard-caption'}>{value.day30Rate}% Today ringgit</p>
                 <Stack position={'absolute'} right={['20px', '40px', '60px']} height={'22px'} width={'22px'}
                        border={'1px solid #EEEEEE'} boxShadow={'0px 0px 10px 0px #EEEEEE'} alignItems={"center"}
                        justifyContent={"center"}

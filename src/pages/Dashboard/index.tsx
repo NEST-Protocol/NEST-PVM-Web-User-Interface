@@ -159,7 +159,7 @@ const Dashboard: FC = () => {
                 }}>
                   { copied ? 'Copied success!' : 'Copy Invitation Link' }
                 </MainButton>
-                <ShareMyDealModal/>
+                <ShareMyDealModal value={myTxInfo}/>
               </Stack>
             </Stack>
             <MainCard classNames={'dashboard-card'}>
