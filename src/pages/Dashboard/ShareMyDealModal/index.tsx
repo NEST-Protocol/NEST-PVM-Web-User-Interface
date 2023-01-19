@@ -94,7 +94,7 @@ You can follow the right person on NESTFi, here is my refer link:`
         {
           show ? (
             <>
-              <Stack width={['360px', '480px', '600px']} borderRadius={'20px'} textAlign={"center"} p={'60px'}
+              <Stack width={'100%'} borderRadius={'20px'} textAlign={"center"} p={'60px'}
                      style={{
                        backgroundImage: 'url(/DashboardImage/pc_share_bg_1.png)',
                        backgroundPosition: 'center',
@@ -153,7 +153,7 @@ You can follow the right person on NESTFi, here is my refer link:`
                     size={80}/>
                 </Stack>
               </Stack>
-              <Stack width={['360px', '480px', '600px']} direction={'row'} position={'absolute'} bottom={34} className={theme === ThemeType.dark ? 'dark' : ''}
+              <Stack width={'100%'} direction={'row'} position={'absolute'} bottom={34} className={theme === ThemeType.dark ? 'dark' : ''}
                      spacing={'16px'} px={'60px'}>
                 <MainButton className={'dashboard-button'} onClick={copy}>
                   {hasCopied ? 'Copied' : 'Copy'}
@@ -167,7 +167,7 @@ You can follow the right person on NESTFi, here is my refer link:`
               </Stack>
             </>
           ) : (
-            <Stack width={['360px', '480px', '600px']} textAlign={"center"} p={'34px'} overflow={'hidden'} className={theme === ThemeType.dark ? 'dark' : ''}>
+            <Stack width={['100%']} textAlign={"center"} p={'34px'} overflow={'hidden'} className={theme === ThemeType.dark ? 'dark' : ''}>
               <Stack pb={'34px'}>
                 <p className={'dashboard-label'}>Share</p>
               </Stack>
