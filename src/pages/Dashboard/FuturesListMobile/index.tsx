@@ -42,9 +42,9 @@ const FuturesListMobile: FC<FuturesListProps> = ({...props}) => {
             <TokenTwoSvg/>
           </Stack>
           <Stack direction={"row"} spacing={'6px'}>
-            {props.item.orientation ? <LongIcon/> : <ShortIcon/>}
-            <p className={props.item.orientation ? "red" : "green"}>
-              {props.item.orientation ? "Long" : "Short"}
+            {props.item.orientation === 'Long' ? <LongIcon/> : <ShortIcon/>}
+            <p style={{ fontWeight: 'bold', color: props.item.orientation === 'Long' ? '#DD8751' : '#63C8A7' }}>
+              {props.item.orientation}
             </p>
           </Stack>
         </Stack>

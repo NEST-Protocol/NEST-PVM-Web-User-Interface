@@ -1,10 +1,10 @@
-import {FC, useRef} from "react";
+import {FC} from "react";
 import {LongIcon, ShortIcon} from "../../../components/Icon";
-import Popup from "reactjs-popup";
 import '../styles';
 import useTokenPairSymbol from "../../../libs/hooks/useTokenPairSymbol";
+import ShareMyOrderModal from "../ShareMyOrderModal";
 
-type OrderView = {
+export type OrderView = {
   index: number;
   owner: string;
   leverage: string;
@@ -24,8 +24,9 @@ type FuturesListProps = {
 };
 
 const FuturesList: FC<FuturesListProps> = ({ ...props }) => {
-  const share = useRef<any>();
   const { TokenOneSvg, TokenTwoSvg } = useTokenPairSymbol(props.item.tokenPair);
+
+  console.log(props.item.orientation)
 
   return (
     <tr className={`${props.className}-table-normal`}>
@@ -34,9 +35,9 @@ const FuturesList: FC<FuturesListProps> = ({ ...props }) => {
         <TokenTwoSvg />
       </td>
       <td className={"td-type"}>
-        {props.item.orientation ? <LongIcon /> : <ShortIcon />}
-        <p className={props.item.orientation ? "red" : "green"}>
-          {props.item.orientation ? "Long" : "Short"}
+        {props.item.orientation === 'Long' ? <LongIcon /> : <ShortIcon />}
+        <p className={props.item.orientation === 'Long' ? "red" : "green"}>
+          {props.item.orientation}
         </p>
       </td>
       <td>{props.item.leverage}</td>
@@ -44,14 +45,7 @@ const FuturesList: FC<FuturesListProps> = ({ ...props }) => {
       <td>{props.item.openPrice} USDT</td>
       <td>{props.item.actualMargin} NEST</td>
       <td>
-        <Popup
-          modal
-          ref={share}
-          trigger={<button className="fort-button">Add</button>}
-          nested
-        >
-          {/*<FuturesAdd order={props.item} onClose={() => modalAdd.current.close()}/>*/}
-        </Popup>
+        <ShareMyOrderModal order={props.item} />
       </td>
     </tr>
   );

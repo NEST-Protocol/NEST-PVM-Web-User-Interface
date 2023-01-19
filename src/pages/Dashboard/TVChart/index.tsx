@@ -17,7 +17,7 @@ const TVChart: FC = () => {
       const todayStr = today.toISOString().split("T")[0];
       const res = await axios({
         method: "get",
-        url: `https://api.nestfi.net/api/dashboard/txVolume/list?from=2021-11-29&to=${todayStr}`
+        url: `https://api.nestfi.net/api/dashboard/txVolume/list?from=2022-11-28&to=${todayStr}`
       })
       if (res.data) {
         setData(res.data.value.map((item: any) => ({
