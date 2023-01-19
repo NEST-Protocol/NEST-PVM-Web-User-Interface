@@ -8,6 +8,7 @@ import {checkWidth} from "../../libs/utils";
 import useWeb3 from "../../libs/hooks/useWeb3";
 import axios from "axios"
 import FuturesList from "./FuturesList";
+import FuturesListMobile from "./FuturesListMobile";
 
 const Dashboard: FC = () => {
   // 获取销毁接口: GET https://api.nestfi.net/api/dashboard/destory
@@ -185,42 +186,67 @@ const Dashboard: FC = () => {
                 </Stack>
               </MainCard>
             </Stack>
-            <Stack direction={'row'}>
-              <MainButton className={`dashboard-leftButton ${showHold ? '' : 'outline'}`} onClick={() => {
-                setShowHold(true);
-              }}>
-                Hold
-              </MainButton>
-              <MainButton className={`dashboard-rightButton ${!showHold ? '' : 'outline'}`} onClick={() => {
-                setShowHold(false);
-              }}>
-                History
-              </MainButton>
-            </Stack>
             {
               isPC && (
-                <table className={`dashboard-table`}>
-                  <thead>
-                  <tr className={`Futures-table-title`}>
-                    <th>Token Pair</th>
-                    <th>Type</th>
-                    <th>Leverage</th>
-                    <th>Initial Margin</th>
-                    <th>Open Price</th>
-                    <th>Actual Margin</th>
-                    <th>Operate</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  { historyList.map((item, index) => (
-                    <FuturesList item={item} key={index} className={'Futures'}/>
-                  )) }
-                  </tbody>
-                </table>
+                <>
+                  <Stack direction={'row'}>
+                    <MainButton className={`dashboard-leftButton ${showHold ? '' : 'outline'}`} onClick={() => {
+                      setShowHold(true);
+                    }}>
+                      Hold
+                    </MainButton>
+                    <MainButton className={`dashboard-rightButton ${!showHold ? '' : 'outline'}`} onClick={() => {
+                      setShowHold(false);
+                    }}>
+                      History
+                    </MainButton>
+                  </Stack>
+                  <table className={`dashboard-table`}>
+                    <thead>
+                    <tr className={`Futures-table-title`}>
+                      <th>Token Pair</th>
+                      <th>Type</th>
+                      <th>Leverage</th>
+                      <th>Initial Margin</th>
+                      <th>Open Price</th>
+                      <th>Actual Margin</th>
+                      <th>Operate</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    { historyList.map((item, index) => (
+                      <FuturesList item={item} key={index} className={'Futures'}/>
+                    )) }
+                    </tbody>
+                  </table>
+                </>
               )
             }
           </Stack>
         </MainCard>
+        { !isPC && (
+          <Stack direction={"row"} spacing={'28px'} px={'28px'} py={'20px'}>
+            <button className={`dashboard-leftButton ${showHold ? '' : 'outline'}`} onClick={() => {
+              setShowHold(true);
+            }}>
+              Hold
+            </button>
+            <button className={`dashboard-rightButton ${!showHold ? '' : 'outline'}`} onClick={() => {
+              setShowHold(false);
+            }}>
+              History
+            </button>
+          </Stack>
+        ) }
+        { !isPC && (
+          <>
+            {
+              historyList.map((item, index) => (
+                <FuturesListMobile item={item} key={index} className={'Futures'}/>
+              ))
+            }
+          </>
+        )}
       </Stack>
     </Stack>
   )

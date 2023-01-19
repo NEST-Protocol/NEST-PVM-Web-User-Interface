@@ -75,7 +75,7 @@
           z-index: 1;
         }
 
-        svg+svg {
+        svg + svg {
           margin-left: -8px;
           z-index: 0;
         }
@@ -92,7 +92,7 @@
     td.button {
       width: 350px;
 
-      button+button {
+      button + button {
         margin-left: 10px;
       }
 
@@ -115,6 +115,7 @@
         border: 1px solid #0047BB;
         border-radius: 14px;
         padding: 0 20px;
+
         &:hover {
           cursor: pointer;
         }
@@ -193,24 +194,26 @@
     }
 
     &-leftButton {
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
-
+      font-weight: 700;
+      font-size: 14px;
+      background: transparent;
+      border: none;
       &.outline {
-        background-color: transparent;
-        border: 1px solid #EEEEEE;
-        color: #878787;
+        font-weight: 500;
+        background: transparent;
+        border: none;
       }
     }
 
     &-rightButton {
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
-
+      font-weight: 700;
+      font-size: 14px;
+      background: transparent;
+      border: none;
       &.outline {
-        background-color: white;
-        border: 1px solid #EEEEEE;
-        color: #878787;
+        background: transparent;
+        border: none;
+        font-weight: 500;
       }
     }
   }
@@ -326,25 +329,32 @@
       }
 
       &-leftButton {
-        border-top-right-radius: 0;
-        border-bottom-right-radius: 0;
-
+        font-weight: 700;
+        font-size: 14px;
+        color: #BDD6FF;
         &.outline {
-          background-color: transparent;
-          border: 1px solid #EEEEEE;
-          color: #878787;
+          border: none;
+          font-weight: 500;
+          background: transparent;
+          color: #C5C5C5;
         }
       }
 
       &-rightButton {
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
+        font-weight: 700;
+        font-size: 14px;
+        color: #BDD6FF;
 
         &.outline {
-          background-color: white;
-          border: 1px solid #EEEEEE;
-          color: #878787;
+          border: none;
+          font-weight: 500;
+          background: transparent;
+          color: #C5C5C5;
         }
+      }
+
+      &-orderCard {
+        padding: 30px;
       }
     }
   }
@@ -354,26 +364,31 @@
   &-button {
     width: 100%;
   }
+
   &-title1 {
     font-size: 17px;
     font-weight: 600;
     color: #2F759D;
   }
+
   &-value1 {
     font-size: 42px;
     font-weight: 600;
     color: #0047BB;
   }
+
   &-title2 {
     font-size: 13px;
     font-weight: 600;
     color: #2F759D;
   }
+
   &-value2 {
     font-size: 17px;
     font-weight: 600;
     color: #000000;
   }
+
   &-caption2 {
     height: 10px;
     font-size: 11px;
