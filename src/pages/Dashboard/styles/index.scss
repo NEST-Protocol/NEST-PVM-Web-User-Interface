@@ -337,9 +337,9 @@
       border-bottom-right-radius: 0;
 
       &.outline {
-        background-color: transparent;
-        border: 1px solid #EEEEEE;
-        color: #878787;
+        background: transparent;
+        border: none;
+        color: #C5C5C5;
       }
     }
 
@@ -348,9 +348,9 @@
       border-bottom-left-radius: 0;
 
       &.outline {
-        background-color: white;
-        border: 1px solid #EEEEEE;
-        color: #878787;
+        background: transparent;
+        border: none;
+        color: #C5C5C5;
       }
     }
   }
