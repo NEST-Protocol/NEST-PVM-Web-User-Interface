@@ -7,7 +7,6 @@ import domtoimage from "../../../libs/dom-to-image";
 import useWeb3 from "../../../libs/hooks/useWeb3";
 import DashboardModal from "../DashboardModal";
 import {DownIcon, NESTLogo, ShareIcon, UpIcon} from "../../../components/Icon";
-import classNames from "classnames";
 import useThemes, {ThemeType} from "../../../libs/hooks/useThemes";
 
 const ShareMyDealModal: FC<{
@@ -32,7 +31,6 @@ const ShareMyDealModal: FC<{
   const [show, setShow] = useState(false)
   const [hasCopied, setHasCopied] = useState(false)
   const { theme } = useThemes();
-  const classPrefix = "modal-wallet";
 
   const copy = () => {
     const link = `https://finance.nestprotocol.org/#/futures?a=${account?.slice(-8).toLowerCase()}`
@@ -81,10 +79,6 @@ You can follow the right person on NESTFi, here is my refer link:`
       }
     >
       <DashboardModal
-        classNames={classNames({
-          [`${classPrefix}`]: true,
-          [`${classPrefix}-dark`]: theme === ThemeType.dark,
-        })}
         onClose={() => {
           modal?.current?.close()
           setShow(false)
@@ -94,7 +88,7 @@ You can follow the right person on NESTFi, here is my refer link:`
         {
           show ? (
             <>
-              <Stack width={'100%'} borderRadius={'20px'} textAlign={"center"} p={'60px'}
+              <Stack width={'100%'} minWidth={'360px'} borderRadius={'20px'} textAlign={"center"} p={'60px'}
                      style={{
                        backgroundImage: 'url(/DashboardImage/pc_share_bg_1.png)',
                        backgroundPosition: 'center',
@@ -153,8 +147,9 @@ You can follow the right person on NESTFi, here is my refer link:`
                     size={80}/>
                 </Stack>
               </Stack>
-              <Stack width={'100%'} direction={'row'} position={'absolute'} bottom={34} className={theme === ThemeType.dark ? 'dark' : ''}
-                     spacing={'16px'} px={'60px'}>
+              <Stack width={'100%'} minWidth={'360px'} direction={'row'} position={'absolute'} bottom={34}
+                     className={theme === ThemeType.dark ? 'dark' : ''}
+                     spacing={['0px', '16px']} px={'60px'} justifyContent={'center'}>
                 <MainButton className={'dashboard-button'} onClick={copy}>
                   {hasCopied ? 'Copied' : 'Copy'}
                 </MainButton>
@@ -167,7 +162,8 @@ You can follow the right person on NESTFi, here is my refer link:`
               </Stack>
             </>
           ) : (
-            <Stack width={['100%']} textAlign={"center"} p={'34px'} overflow={'hidden'} className={theme === ThemeType.dark ? 'dark' : ''}>
+            <Stack width={'100%'} minWidth={'360px'} textAlign={"center"} p={'34px'} overflow={'hidden'}
+                   className={theme === ThemeType.dark ? 'dark' : ''}>
               <Stack pb={'34px'}>
                 <p className={'dashboard-label'}>Share</p>
               </Stack>
@@ -247,7 +243,7 @@ You can follow the right person on NESTFi, here is my refer link:`
                 </Stack>
               </Stack>
               <Divider/>
-              <Stack pt={'34px'} px={['10px', '40px', '100px']}>
+              <Stack pt={'34px'} width={'100%'} alignItems={'center'}>
                 <MainButton
                   className={'dashboard-button'}
                   disable={!select.todayTrade && !select.totalTrade && !select._7DaysTrade && !select._30DaysTrade}
