@@ -1,8 +1,9 @@
 import {FC} from "react";
-import {LongIcon, ShortIcon} from "../../../components/Icon";
+import {DownIcon, LongIcon, ShortIcon, UpIcon} from "../../../components/Icon";
 import '../styles';
 import useTokenPairSymbol from "../../../libs/hooks/useTokenPairSymbol";
 import ShareMyOrderModal from "../ShareMyOrderModal";
+import {Stack} from "@mui/material";
 
 export type OrderView = {
   index: number;
@@ -23,19 +24,17 @@ type FuturesListProps = {
   className: string;
 };
 
-const FuturesList: FC<FuturesListProps> = ({ ...props }) => {
-  const { TokenOneSvg, TokenTwoSvg } = useTokenPairSymbol(props.item.tokenPair);
-
-  console.log(props.item.orientation)
+const FuturesList: FC<FuturesListProps> = ({...props}) => {
+  const {TokenOneSvg, TokenTwoSvg} = useTokenPairSymbol(props.item.tokenPair);
 
   return (
     <tr className={`${props.className}-table-normal`}>
       <td className={"tokenPair"}>
-        <TokenOneSvg />
-        <TokenTwoSvg />
+        <TokenOneSvg/>
+        <TokenTwoSvg/>
       </td>
       <td className={"td-type"}>
-        {props.item.orientation === 'Long' ? <LongIcon /> : <ShortIcon />}
+        {props.item.orientation === 'Long' ? <LongIcon/> : <ShortIcon/>}
         <p className={props.item.orientation === 'Long' ? "red" : "green"}>
           {props.item.orientation}
         </p>
@@ -43,9 +42,19 @@ const FuturesList: FC<FuturesListProps> = ({ ...props }) => {
       <td>{props.item.leverage}</td>
       <td>{props.item.initialMargin} NEST</td>
       <td>{props.item.openPrice} USDT</td>
-      <td>{props.item.actualMargin} NEST</td>
       <td>
-        <ShareMyOrderModal order={props.item} />
+        <Stack alignItems={"center"}>
+          <p>{props.item.actualMargin} NEST</p>
+          <Stack direction={'row'}>
+            {props.item.actualRate > 0 ? <UpIcon/> : <DownIcon/>}
+            <p style={{fontWeight: 500}}>
+              {props.item.actualRate}%
+            </p>
+          </Stack>
+        </Stack>
+      </td>
+      <td>
+        <ShareMyOrderModal order={props.item}/>
       </td>
     </tr>
   );

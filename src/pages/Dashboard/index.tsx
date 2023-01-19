@@ -10,6 +10,7 @@ import axios from "axios"
 import FuturesList from "./FuturesList";
 import FuturesListMobile from "./FuturesListMobile";
 import TVChart from "./TVChart";
+import {TipsIcon} from "../../components/Icon";
 
 const Dashboard: FC = () => {
   // 获取销毁接口: GET https://api.nestfi.net/api/dashboard/destory
@@ -133,7 +134,11 @@ const Dashboard: FC = () => {
         <MainCard>
           <Stack padding={['15px', '28px']} spacing={{ xs: '10px', sm: '22px'}}>
             <Stack direction={"row"} alignItems={"center"} justifyContent={"space-between"} pb={['10px', '0px']}>
-              <p className={'dashboard-label'}>My Deal</p>
+              <Stack direction={'row'} spacing={'16px'}>
+                <p className={'dashboard-label'}>My Deal</p>
+                <TipsIcon />
+              </Stack>
+
               <Stack direction={'row'} spacing={['15px', '30px']}>
                 <MainButton onClick={() => {
                   if (account) {

@@ -6,6 +6,7 @@ import {QRCodeCanvas} from "qrcode.react";
 import domtoimage from "../../../libs/dom-to-image";
 import useWeb3 from "../../../libs/hooks/useWeb3";
 import BaseModal from "../BaseModal";
+import {ShareIcon} from "../../../components/Icon";
 
 const ShareMyDealModal: FC = () => {
   const { account } = useWeb3()
@@ -60,9 +61,9 @@ You can follow the right person on NESTFi, here is my refer link:`
       modal
       ref={modal}
       trigger={
-        <button>
-          share
-        </button>
+        <Stack style={{ alignItems: "center", justifyContent: 'center', cursor: 'pointer' }}>
+          <ShareIcon />
+        </Stack>
       }
     >
       <BaseModal

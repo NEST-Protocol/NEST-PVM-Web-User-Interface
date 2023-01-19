@@ -8,7 +8,7 @@ import useWeb3 from "../../../libs/hooks/useWeb3";
 import BaseModal from "../BaseModal";
 import {OrderView} from "../FuturesList";
 import useTokenPairSymbol from "../../../libs/hooks/useTokenPairSymbol";
-import {LongIcon, ShortIcon} from "../../../components/Icon";
+import {LongIcon, ShareIcon, ShortIcon} from "../../../components/Icon";
 
 type ShareMyDealModalProps = {
   order: OrderView
@@ -61,9 +61,9 @@ You can follow the right person on NESTFi, here is my refer link:`
       modal
       ref={modal}
       trigger={
-        <button>
-          share
-        </button>
+      <Stack style={{ cursor: 'pointer', alignItems: "center" }}>
+        <ShareIcon />
+      </Stack>
       }
     >
       <BaseModal
