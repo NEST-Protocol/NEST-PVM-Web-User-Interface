@@ -5,7 +5,7 @@ import MainButton from "../../../components/MainButton";
 import {QRCodeCanvas} from "qrcode.react";
 import domtoimage from "../../../libs/dom-to-image";
 import useWeb3 from "../../../libs/hooks/useWeb3";
-import BaseModal from "../DashboardModal";
+import DashboardModal from "../DashboardModal";
 import {OrderView} from "../FuturesList";
 import useTokenPairSymbol from "../../../libs/hooks/useTokenPairSymbol";
 import {LongIcon, NESTLogo, ShareIcon, ShortIcon} from "../../../components/Icon";
@@ -68,13 +68,13 @@ You can follow the right person on NESTFi, here is my refer link:`
       </Stack>
       }
     >
-      <BaseModal
+      <DashboardModal
         onClose={() => {
           modal?.current?.close()
         }}
         titleName={''}
       >
-        <Stack id={'my-share'} width={'100%'} textAlign={"center"} px={'28px'} overflow={'hidden'} borderRadius={'20px'}
+        <Stack id={'my-share'} width={'100%'} minWidth={['360px', '480px', '600px']} textAlign={"center"} px={'28px'} overflow={'hidden'} borderRadius={'20px'}
                style={{ backgroundImage:  'url(/DashboardImage/pc_share_bg_2.png)', backgroundPosition: 'center', backgroundSize: 'cover', overflow: 'hidden' }}
                spacing={'22px'}>
           <Stack pt={'28px'} alignItems={"center"}>
@@ -126,8 +126,8 @@ You can follow the right person on NESTFi, here is my refer link:`
                           size={80}/>
           </Stack>
         </Stack>
-        <Stack width={'100%'} direction={'row'} position={'absolute'} bottom={22} spacing={'16px'} className={theme === ThemeType.dark ? 'dark' : ''}
-               px={'60px'}>
+        <Stack width={'100%'} minWidth={['360px', '480px', '600px']} direction={'row'} position={'absolute'} bottom={22} spacing={['0', '16px']} className={theme === ThemeType.dark ? 'dark' : ''}
+               justifyContent={"center"} >
           <MainButton className={'dashboard-button'} onClick={copy}>
             {hasCopied ? 'Copied' : 'Copy'}
           </MainButton>
@@ -138,7 +138,7 @@ You can follow the right person on NESTFi, here is my refer link:`
             Twitter
           </MainButton>
         </Stack>
-      </BaseModal>
+      </DashboardModal>
     </Popup>
   )
 
