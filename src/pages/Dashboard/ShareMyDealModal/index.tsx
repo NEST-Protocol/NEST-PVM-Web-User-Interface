@@ -5,7 +5,7 @@ import MainButton from "../../../components/MainButton";
 import {QRCodeCanvas} from "qrcode.react";
 import domtoimage from "../../../libs/dom-to-image";
 import useWeb3 from "../../../libs/hooks/useWeb3";
-import BaseModal from "../DashboardModal";
+import DashboardModal from "../DashboardModal";
 import {DownIcon, NESTLogo, ShareIcon, UpIcon} from "../../../components/Icon";
 import classNames from "classnames";
 import useThemes, {ThemeType} from "../../../libs/hooks/useThemes";
@@ -80,7 +80,7 @@ You can follow the right person on NESTFi, here is my refer link:`
         </Stack>
       }
     >
-      <BaseModal
+      <DashboardModal
         classNames={classNames({
           [`${classPrefix}`]: true,
           [`${classPrefix}-dark`]: theme === ThemeType.dark,
@@ -153,15 +153,15 @@ You can follow the right person on NESTFi, here is my refer link:`
                     size={80}/>
                 </Stack>
               </Stack>
-              <Stack width={['360px', '480px', '600px']} direction={'row'} position={'absolute'} bottom={34}
+              <Stack width={['360px', '480px', '600px']} direction={'row'} position={'absolute'} bottom={34} className={theme === ThemeType.dark ? 'dark' : ''}
                      spacing={'16px'} px={'60px'}>
-                <MainButton className={'shareMyDealModal-button'} onClick={copy}>
+                <MainButton className={'dashboard-button'} onClick={copy}>
                   {hasCopied ? 'Copied' : 'Copy'}
                 </MainButton>
-                <MainButton className={'shareMyDealModal-button'} onClick={download}>
+                <MainButton className={'dashboard-button'} onClick={download}>
                   Download
                 </MainButton>
-                <MainButton className={'shareMyDealModal-button'} onClick={tweet}>
+                <MainButton className={'dashboard-button'} onClick={tweet}>
                   Twitter
                 </MainButton>
               </Stack>
@@ -249,6 +249,7 @@ You can follow the right person on NESTFi, here is my refer link:`
               <Divider/>
               <Stack pt={'34px'} px={['10px', '40px', '100px']}>
                 <MainButton
+                  className={'dashboard-button'}
                   disable={!select.todayTrade && !select.totalTrade && !select._7DaysTrade && !select._30DaysTrade}
                   onClick={() => {
                     setShow(true)
@@ -261,7 +262,7 @@ You can follow the right person on NESTFi, here is my refer link:`
           )
         }
 
-      </BaseModal>
+      </DashboardModal>
     </Popup>
   )
 }

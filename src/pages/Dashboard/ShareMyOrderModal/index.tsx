@@ -9,6 +9,7 @@ import BaseModal from "../DashboardModal";
 import {OrderView} from "../FuturesList";
 import useTokenPairSymbol from "../../../libs/hooks/useTokenPairSymbol";
 import {LongIcon, NESTLogo, ShareIcon, ShortIcon} from "../../../components/Icon";
+import useThemes, {ThemeType} from "../../../libs/hooks/useThemes";
 
 type ShareMyDealModalProps = {
   order: OrderView
@@ -19,6 +20,7 @@ const ShareMyDealModal: FC<ShareMyDealModalProps> = ({order}) => {
   const {account} = useWeb3()
   const modal = useRef<any>();
   const {TokenOneSvg, TokenTwoSvg} = useTokenPairSymbol(order.tokenPair)
+  const { theme } = useThemes();
 
   const copy = () => {
     const link = `https://finance.nestprotocol.org/#/futures?a=${account?.slice(-8).toLowerCase()}`
@@ -124,15 +126,15 @@ You can follow the right person on NESTFi, here is my refer link:`
                           size={80}/>
           </Stack>
         </Stack>
-        <Stack width={['360px', '480px', '600px']} direction={'row'} position={'absolute'} bottom={22} spacing={'16px'}
+        <Stack width={['360px', '480px', '600px']} direction={'row'} position={'absolute'} bottom={22} spacing={'16px'} className={theme === ThemeType.dark ? 'dark' : ''}
                px={'60px'}>
-          <MainButton className={'shareMyDealModal-button'} onClick={copy}>
+          <MainButton className={'dashboard-button'} onClick={copy}>
             {hasCopied ? 'Copied' : 'Copy'}
           </MainButton>
-          <MainButton className={'shareMyDealModal-button'} onClick={download}>
+          <MainButton className={'dashboard-button'} onClick={download}>
             Download
           </MainButton>
-          <MainButton className={'shareMyDealModal-button'} onClick={tweet}>
+          <MainButton className={'dashboard-button'} onClick={tweet}>
             Twitter
           </MainButton>
         </Stack>
