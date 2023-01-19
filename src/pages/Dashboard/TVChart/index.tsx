@@ -1,12 +1,7 @@
-import { FC, useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { createChart, UTCTimestamp } from "lightweight-charts";
-import { format as formatDateFn } from "date-fns";
+import { FC, useCallback, useEffect, useRef, useState } from "react";
+import { createChart } from "lightweight-charts";
 import useThemes, { ThemeType } from "../../../libs/hooks/useThemes";
 import axios from "axios";
-
-export function formatDateTime(time: number) {
-  return formatDateFn(time * 1000, "dd MMM yyyy, h:mm a");
-}
 
 const TVChart: FC = () => {
   const chartRef = useRef(null);
