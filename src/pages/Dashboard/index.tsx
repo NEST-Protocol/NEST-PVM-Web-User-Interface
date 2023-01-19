@@ -225,7 +225,7 @@ const Dashboard: FC = () => {
           </Stack>
         </MainCard>
         { !isPC && (
-          <Stack direction={"row"} spacing={'28px'} px={'28px'} py={'20px'}>
+          <Stack direction={"row"} spacing={'28px'} px={'28px'} pt={'10px'} pb={'10px'}>
             <button className={`dashboard-leftButton ${showHold ? '' : 'outline'}`} onClick={() => {
               setShowHold(true);
             }}>

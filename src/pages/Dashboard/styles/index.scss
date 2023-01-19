@@ -198,6 +198,7 @@
       font-size: 14px;
       background: transparent;
       border: none;
+
       &.outline {
         font-weight: 500;
         background: transparent;
@@ -210,6 +211,7 @@
       font-size: 14px;
       background: transparent;
       border: none;
+
       &.outline {
         background: transparent;
         border: none;
@@ -332,6 +334,7 @@
         font-weight: 700;
         font-size: 14px;
         color: #BDD6FF;
+
         &.outline {
           border: none;
           font-weight: 500;
@@ -355,6 +358,23 @@
 
       &-orderCard {
         padding: 30px;
+
+        &-title {
+          color: #C5C5C5;
+          font-size: 12.5px;
+          font-weight: 500;
+        }
+
+        &-value {
+          color: #FFFFFF;
+          font-size: 12.5px;
+          font-weight: 700;
+        }
+
+        &-caption {
+          font-size: 12px;
+          font-weight: 500;
+        }
       }
     }
   }
