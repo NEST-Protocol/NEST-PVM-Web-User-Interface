@@ -6,7 +6,7 @@ import {QRCodeCanvas} from "qrcode.react";
 import domtoimage from "../../../libs/dom-to-image";
 import useWeb3 from "../../../libs/hooks/useWeb3";
 import DashboardModal from "../DashboardModal";
-import {DownIcon, NESTLogo, ShareIcon, UpIcon} from "../../../components/Icon";
+import {DownIcon, NESTLogo, ShareIcon, ShareWhiteIcon, UpIcon} from "../../../components/Icon";
 import useThemes, {ThemeType} from "../../../libs/hooks/useThemes";
 
 const ShareMyDealModal: FC<{
@@ -74,7 +74,7 @@ You can follow the right person on NESTFi, here is my refer link:`
       ref={modal}
       trigger={
         <Stack style={{alignItems: "center", justifyContent: 'center', cursor: 'pointer'}}>
-          <ShareIcon/>
+          { theme === ThemeType.dark ? <ShareWhiteIcon/> : <ShareIcon/> }
         </Stack>
       }
     >

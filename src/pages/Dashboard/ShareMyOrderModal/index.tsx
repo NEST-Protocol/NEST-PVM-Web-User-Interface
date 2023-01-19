@@ -8,7 +8,7 @@ import useWeb3 from "../../../libs/hooks/useWeb3";
 import DashboardModal from "../DashboardModal";
 import {OrderView} from "../FuturesList";
 import useTokenPairSymbol from "../../../libs/hooks/useTokenPairSymbol";
-import {LongIcon, NESTLogo, ShareIcon, ShortIcon} from "../../../components/Icon";
+import {LongIcon, NESTLogo, ShareIcon, ShareWhiteIcon, ShortIcon} from "../../../components/Icon";
 import useThemes, {ThemeType} from "../../../libs/hooks/useThemes";
 
 type ShareMyDealModalProps = {
@@ -63,8 +63,8 @@ You can follow the right person on NESTFi, here is my refer link:`
       modal
       ref={modal}
       trigger={
-      <Stack style={{ cursor: 'pointer', alignItems: "center" }}>
-        <ShareIcon />
+      <Stack style={{ cursor: 'pointer', alignItems: "center", justifyContent: "center" }}>
+        { theme === ThemeType.dark ? <ShareWhiteIcon/> : <ShareIcon/> }
       </Stack>
       }
     >

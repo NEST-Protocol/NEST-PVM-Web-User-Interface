@@ -67,6 +67,7 @@ export { ReactComponent as NFTWhiteListIcon } from './svg/NFTWhiteList.svg'
 export { ReactComponent as SwapLimitIcon } from './svg/swapLimitIcon.svg'
 
 export {ReactComponent as ShareIcon} from './svg/share_icon.svg'
+export {ReactComponent as ShareWhiteIcon} from './svg/share_icon_white.svg'
 export {ReactComponent as TipsIcon} from './svg/tips_icon.svg'
 export {ReactComponent as UpIcon} from './svg/up_icon.svg'
 export {ReactComponent as DownIcon} from './svg/down_icon.svg'
