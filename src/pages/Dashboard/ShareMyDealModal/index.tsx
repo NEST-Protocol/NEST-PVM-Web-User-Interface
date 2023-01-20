@@ -63,7 +63,7 @@ const ShareMyDealModal: FC<{
   }
 
   const tweet = () => {
-    const link = `(Paste Your Invitation Link)`
+    const link = `(Paste your invitation link)`
     const text = `Follow the right person, making money is as easy as breathing.
 You can follow the right person on NESTFi, here is my refer link: ${link}`
     window.open(`https://twitter.com/intent/tweet?text=${encodeURI(text)}&hashtags=NEST,btc,eth&via=NEST_Protocol`)
