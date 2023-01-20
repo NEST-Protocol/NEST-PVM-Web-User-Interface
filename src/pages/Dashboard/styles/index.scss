@@ -36,6 +36,11 @@
     }
   }
 
+  &-button {
+    width: 100%;
+    border-radius: 22px;
+  }
+
   &-button-more {
     width: 160px;
     border: 1px solid #0047BB;
@@ -475,6 +480,12 @@
 }
 
 .dark {
+  //background: rgba(255, 255, 255, 0.15);
+  //box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  //border: 0;
+  //backdrop-filter: blur(24px);
+  //border-radius: 20px;
+
   .dashboard {
     &-label {
       color: #C5C5C5;
