@@ -226,7 +226,7 @@ const Dashboard: FC = () => {
                     <MainButton className={`dashboard-leftButton ${showHold ? '' : 'outline'}`} onClick={() => {
                       setShowHold(true);
                     }}>
-                      Hold
+                      Current Positions
                     </MainButton>
                     <MainButton className={`dashboard-rightButton ${!showHold ? '' : 'outline'}`} onClick={() => {
                       setShowHold(false);
@@ -284,7 +284,7 @@ const Dashboard: FC = () => {
             <button className={`dashboard-leftButton ${showHold ? '' : 'outline'}`} onClick={() => {
               setShowHold(true);
             }}>
-              Hold
+              Current Positions
             </button>
             <button className={`dashboard-rightButton ${!showHold ? '' : 'outline'}`} onClick={() => {
               setShowHold(false);
