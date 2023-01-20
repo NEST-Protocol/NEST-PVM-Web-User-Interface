@@ -94,7 +94,8 @@ const Dashboard: FC = () => {
     try {
       const res = await axios({
         method: 'get',
-        url: `https://api.nestfi.net/api/dashboard/history/list?address=${account}`,
+        // url: `https://api.nestfi.net/api/dashboard/history/list?address=${account}`,
+        url: `https://api.nestfi.net/api/dashboard/history/list?address=0x481a74d43ae3A7BdE38B7fE36E46CF9a6cbb4F39`,
       })
       if (res.data) {
         setHistoryList(res.data.value)
@@ -111,7 +112,8 @@ const Dashboard: FC = () => {
     try {
       const res = await axios({
         method: 'get',
-        url: `https://api.nestfi.net/api/dashboard/position/list?address=${account}`,
+        // url: `https://api.nestfi.net/api/dashboard/position/list?address=${account}`,
+        url: `https://api.nestfi.net/api/dashboard/position/list?address=0x481a74d43ae3A7BdE38B7fE36E46CF9a6cbb4F39`,
       })
       if (res.data) {
         setPositionList(res.data.value)
@@ -265,11 +267,15 @@ const Dashboard: FC = () => {
                     )) }
                     </tbody>
                   </table>
-                  <Stack alignItems={"center"}>
-                    <button className={'dashboard-button-more'} onClick={() => setShowMore(!showMore)}>
-                      { showMore ? 'Less' : 'More' }
-                    </button>
-                  </Stack>
+                  {
+                    ((showHold && positionList.length > 5) || (!showHold && historyList.length > 5)) && (
+                      <Stack alignItems={"center"}>
+                        <button className={'dashboard-button-more'} onClick={() => setShowMore(!showMore)}>
+                          { showMore ? 'Less' : 'More' }
+                        </button>
+                      </Stack>
+                    )
+                  }
                 </>
               )
             }
@@ -320,11 +326,15 @@ const Dashboard: FC = () => {
                  </>
                )
             }
-            <Stack alignItems={"center"}>
-              <button className={'dashboard-button-more'} onClick={() => setShowMore(!showMore)}>
-                { showMore ? 'Less' : 'More' }
-              </button>
-            </Stack>
+            {
+              ((showHold && positionList.length > 5) || (!showHold && historyList.length > 5)) && (
+                <Stack alignItems={"center"}>
+                  <button className={'dashboard-button-more'} onClick={() => setShowMore(!showMore)}>
+                    { showMore ? 'Less' : 'More' }
+                  </button>
+                </Stack>
+              )
+            }
           </>
         )}
       </Stack>

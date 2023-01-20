@@ -45,9 +45,9 @@ const FuturesList: FC<FuturesListProps> = ({...props}) => {
       <td>
         <Stack alignItems={"center"}>
           <p>{props.item.actualMargin} NEST</p>
-          <Stack direction={'row'}>
+          <Stack direction={'row'} spacing={'6px'}>
             {props.item.actualRate > 0 ? <UpIcon/> : <DownIcon/>}
-            <p style={{fontWeight: 500}}>
+            <p style={{fontWeight: 500}} className={''}>
               {props.item.actualRate}%
             </p>
           </Stack>
