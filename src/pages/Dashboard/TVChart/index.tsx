@@ -71,15 +71,21 @@ const TVChart: FC = () => {
     [theme]
   );
 
+  const scaleChart = useCallback(() => {
+    const from = Date.now() / 1000 - 7 * 86400;
+    const to = Date.now() / 1000;
+    currentChart.timeScale().setVisibleRange({ from, to });
+  }, [currentChart]);
+
   useEffect(() => {
-    if (currentSeries) {
+    if (currentSeries && data.length) {
       currentSeries.setData(data);
-      currentChart.timeScale().fitContent();
       if (!chartInited) {
+        scaleChart();
         setChartInited(true);
       }
     }
-  }, [chartInited, currentSeries, data, currentChart]);
+  }, [chartInited, currentSeries, data, currentChart, scaleChart]);
 
   useEffect(() => {
     if (currentChart) {
