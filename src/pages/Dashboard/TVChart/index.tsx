@@ -74,12 +74,12 @@ const TVChart: FC = () => {
   useEffect(() => {
     if (currentSeries) {
       currentSeries.setData(data);
-
+      currentChart.timeScale().fitContent();
       if (!chartInited) {
         setChartInited(true);
       }
     }
-  }, [chartInited, currentSeries, data]);
+  }, [chartInited, currentSeries, data, currentChart]);
 
   useEffect(() => {
     if (currentChart) {
