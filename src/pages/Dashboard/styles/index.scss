@@ -28,8 +28,10 @@
   &-leftButton {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
+    width: 160px;
 
     &.outline {
+      width: 160px;
       background-color: transparent;
       border: 1px solid #EEEEEE;
       color: #878787;
@@ -176,8 +178,10 @@
   &-rightButton {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
+    width: 160px;
 
     &.outline {
+      width: 160px;
       background-color: white;
       border: 1px solid #EEEEEE;
       color: #878787;
@@ -340,8 +344,10 @@
     &-leftButton {
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
+      width: 160px;
 
       &.outline {
+        width: 160px;
         background: transparent;
         border: none;
         color: #C5C5C5;
@@ -351,8 +357,10 @@
     &-rightButton {
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
+      width: 160px;
 
       &.outline {
+        width: 160px;
         background: transparent;
         border: none;
         color: #C5C5C5;
