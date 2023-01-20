@@ -197,7 +197,9 @@ You can follow the right person on NESTFi, here is my refer link:`
                      style={{userSelect: 'none', cursor: 'pointer'}}
               >
                 <p className={'dashboard-label'}>Today Trade</p>
-                <p className={'dashboard-value'}>{value.todayValue > 0 && <UpIcon/>} {value.todayValue < 0 && <DownIcon/>} {value.todayValue}</p>
+                <p className={'dashboard-value'}>{value.todayValue > 0 && <UpIcon/>} {value.todayValue < 0 && <DownIcon/>} {value.todayValue.toLocaleString('en-US', {
+                  maximumFractionDigits: 2,
+                })}</p>
                 {/*<p className={'dashboard-caption'}>{value.todayRate}% Today ringgit</p>*/}
                 <Stack position={'absolute'} right={['20px', '40px', '60px']} height={'22px'} width={'22px'}
                        border={'1px solid #EEEEEE'} boxShadow={'0px 0px 10px 0px #EEEEEE'} alignItems={"center"}
@@ -216,7 +218,9 @@ You can follow the right person on NESTFi, here is my refer link:`
                      style={{userSelect: 'none', cursor: 'pointer'}}
               >
                 <p className={'dashboard-label'}>7 Day Trade</p>
-                <p className={'dashboard-value'}>{value.day7Value > 0 && <UpIcon/>} {value.day7Value < 0 && <DownIcon/>} {value.day7Value}</p>
+                <p className={'dashboard-value'}>{value.day7Value > 0 && <UpIcon/>} {value.day7Value < 0 && <DownIcon/>} {value.day7Value.toLocaleString('en-US', {
+                  maximumFractionDigits: 2,
+                })}</p>
                 {/*<p className={'dashboard-caption'}>{value.day7Rate}% Today ringgit</p>*/}
                 <Stack position={'absolute'} right={['20px', '40px', '60px']} height={'22px'} width={'22px'}
                        border={'1px solid #EEEEEE'} boxShadow={'0px 0px 10px 0px #EEEEEE'} alignItems={"center"}
@@ -235,7 +239,9 @@ You can follow the right person on NESTFi, here is my refer link:`
                      style={{userSelect: 'none', cursor: 'pointer'}}
               >
                 <p className={'dashboard-label'}>30 Day Trade</p>
-                <p className={'dashboard-value'}>{value.day30Value > 0 && <UpIcon/>} {value.day30Value < 0 && <DownIcon/>} {value.day30Value}</p>
+                <p className={'dashboard-value'}>{value.day30Value > 0 && <UpIcon/>} {value.day30Value < 0 && <DownIcon/>} {value.day30Value.toLocaleString('en-US', {
+                  maximumFractionDigits: 2,
+                })}</p>
                 {/*<p className={'dashboard-caption'}>{value.day30Rate}% Today ringgit</p>*/}
                 <Stack position={'absolute'} right={['20px', '40px', '60px']} height={'22px'} width={'22px'}
                        border={'1px solid #EEEEEE'} boxShadow={'0px 0px 10px 0px #EEEEEE'} alignItems={"center"}

@@ -101,7 +101,7 @@ You can follow the right person on NESTFi, here is my refer link:`
                 fontSize: '80px',
                 fontWeight: 700,
                 color: '#0047BB'
-              }}>{order?.actualRate?.toLocaleString('US', {maximumFractionDigits: 2}) || '-'}%</p>
+              }}>{order?.actualRate?.toLocaleString('en-US', {maximumFractionDigits: 2}) || '-'}%</p>
             </Stack>
             <Stack spacing={'8px'}>
               <p style={{fontSize: '12.5px', fontWeight: 500, color: '#2F759D'}}>Last price</p>
@@ -109,7 +109,7 @@ You can follow the right person on NESTFi, here is my refer link:`
                 fontSize: '16px',
                 fontWeight: 500,
                 color: '#003232',
-              }}>{order?.lastPrice?.toLocaleString('US', {maximumFractionDigits: 2}) || '-'}</p>
+              }}>{order?.lastPrice?.toLocaleString('en-US', {maximumFractionDigits: 2}) || '-'}</p>
             </Stack>
             <Stack spacing={'8px'}>
               <p style={{fontSize: '12.5px', fontWeight: 500, color: '#2F759D'}}>Avg Open Price</p>
@@ -117,7 +117,7 @@ You can follow the right person on NESTFi, here is my refer link:`
                 fontSize: '16px',
                 fontWeight: 500,
                 color: '#003232'
-              }}>{order?.openPrice?.toLocaleString('US', {maximumFractionDigits: 2}) || '-'}</p>
+              }}>{order?.openPrice?.toLocaleString('en-US', {maximumFractionDigits: 2}) || '-'}</p>
             </Stack>
           </Stack>
           <Divider/>
