@@ -52,6 +52,11 @@ const TVChart: FC = () => {
       },
       localization: {
         locale: "en-US",
+        priceFormatter: (price: number) => {
+          return `${(price).toLocaleString("en-US", {
+            maximumFractionDigits: 0,
+          })}`;
+        }
       },
       layout: {
         backgroundColor: 'transparent',
