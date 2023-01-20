@@ -92,11 +92,11 @@ const Futures: FC = () => {
 
   const postInviteCode = useCallback(async () => {
     const inviteCode = window.localStorage.getItem("inviteCode");
-    if (inviteCode && inviteCode?.length !== 8) {
-      window.localStorage.removeItem("inviteCode");
-    }
     if (inviteCode && account) {
-      console.log(inviteCode, account)
+      if (inviteCode === account.toLowerCase().slice(-8)) {
+        return;
+      }
+
       try {
         await axios({
           method: "post",
