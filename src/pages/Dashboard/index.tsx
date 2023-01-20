@@ -192,7 +192,7 @@ const Dashboard: FC = () => {
             </Stack>
             <MainCard classNames={'dashboard-card'}>
               <Stack height={['100px', '200px']} alignItems={"center"} justifyContent={"center"} spacing={['4px', '10px']}>
-                <p className={'dashboard-label'}>Total Trade</p>
+                <p className={'dashboard-label'}>Total Profit & Loss</p>
                 <p className={'dashboard-value'}>{myTxInfo.totalValue.toLocaleString('en-US',{maximumFractionDigits: 2})}</p>
               </Stack>
             </MainCard>
@@ -206,14 +206,14 @@ const Dashboard: FC = () => {
               </MainCard>
               <MainCard classNames={'dashboard-card'}>
                 <Stack height={['100px', '200px']} alignItems={"center"} justifyContent={"center"} spacing={['4px', '10px']}>
-                  <p className={'dashboard-label'}>7 Day Trade</p>
+                  <p className={'dashboard-label'}>7 Days' PNL</p>
                   <p className={'dashboard-value'}>{myTxInfo.day7Value > 0 && <UpIcon/>} {myTxInfo.day7Value < 0 && <DownIcon/>} {myTxInfo.day7Value.toLocaleString('en-US',{maximumFractionDigits: 2})}</p>
                   {/*<p className={'dashboard-caption'}>{myTxInfo.day7Rate}% Today ringgit</p>*/}
                 </Stack>
               </MainCard>
               <MainCard classNames={'dashboard-card'}>
                 <Stack height={['100px', '200px']} alignItems={"center"} justifyContent={"center"} spacing={['4px', '10px']}>
-                  <p className={'dashboard-label'}>30 Day Trade</p>
+                  <p className={'dashboard-label'}>30 Days' PNL</p>
                   <p className={'dashboard-value'}>{myTxInfo.day30Value > 0 && <UpIcon/>} {myTxInfo.day30Value < 0 && <DownIcon/>} {myTxInfo.day30Value.toLocaleString('en-US',{maximumFractionDigits: 2})}</p>
                   {/*<p className={'dashboard-caption'}>{myTxInfo.day30Rate}% Today ringgit</p>*/}
                 </Stack>
