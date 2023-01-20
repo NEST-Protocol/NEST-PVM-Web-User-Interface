@@ -52,10 +52,10 @@ const ShareMyDealModal: FC<ShareMyDealModalProps> = ({order}) => {
   }
 
   const tweet = () => {
-    const text = `Follow the right person, making money is as easy as breathing.
-You can follow the right person on NESTFi, here is my refer link:`
     const link = `https://finance.nestprotocol.org/#/futures?a=${account?.slice(-8).toLowerCase()}`
-    window.open(`https://twitter.com/intent/tweet?text=${encodeURI(text)}&url=${link}&hashtags=NEST,btc,eth&via=NEST_Protocol`)
+    const text = `Follow the right person, making money is as easy as breathing.
+You can follow the right person on NESTFi, here is my refer link:${link}`
+    window.open(`https://twitter.com/intent/tweet?text=${encodeURI(text)}&hashtags=NEST,btc,eth&via=NEST_Protocol`)
   }
 
   return (
@@ -128,9 +128,9 @@ You can follow the right person on NESTFi, here is my refer link:`
         </Stack>
         <Stack width={'100%'} minWidth={['360px', '480px', '600px']} direction={'row'} position={'absolute'} bottom={22} spacing={['0', '16px']} className={theme === ThemeType.dark ? 'dark' : ''}
                justifyContent={"center"} >
-          <MainButton className={'dashboard-button'} onClick={copy}>
-            {hasCopied ? 'Copied' : 'Copy'}
-          </MainButton>
+          {/*<MainButton className={'dashboard-button'} onClick={copy}>*/}
+          {/*  {hasCopied ? 'Copied' : 'Copy'}*/}
+          {/*</MainButton>*/}
           <MainButton className={'dashboard-button'} onClick={download}>
             Download
           </MainButton>
