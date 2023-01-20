@@ -92,11 +92,9 @@ const Dashboard: FC = () => {
       return
     }
     try {
-      // TODO
       const res = await axios({
         method: 'get',
-        // url: `https://api.nestfi.net/api/dashboard/history/list?address=${account}`,
-        url: `https://api.nestfi.net/api/dashboard/history/list?address=0x481a74d43ae3A7BdE38B7fE36E46CF9a6cbb4F39`,
+        url: `https://api.nestfi.net/api/dashboard/history/list?address=${account}`,
       })
       if (res.data) {
         setHistoryList(res.data.value)
@@ -111,11 +109,9 @@ const Dashboard: FC = () => {
       return
     }
     try {
-      // TODO
       const res = await axios({
         method: 'get',
-        // url: `https://api.nestfi.net/api/dashboard/position/list?address=${account}`,
-        url: `https://api.nestfi.net/api/dashboard/position/list?address=0x481a74d43ae3A7BdE38B7fE36E46CF9a6cbb4F39`,
+        url: `https://api.nestfi.net/api/dashboard/position/list?address=${account}`,
       })
       if (res.data) {
         setPositionList(res.data.value)
