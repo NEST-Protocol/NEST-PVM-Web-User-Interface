@@ -143,13 +143,13 @@ const Dashboard: FC = () => {
         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={{ xs: '10px', sm: '22px'}}>
           <MainCard classNames={'dashboard-card'}>
             <Stack alignItems={"center"} justifyContent={"center"} height={['100px', "210px"]} spacing={['4px', '18px']}>
-              <p className={'dashboard-label'}>NEST Total Burnt</p>
+              <p className={'dashboard-label'}>NEST Total Burned</p>
               <p className={'dashboard-value'}>{(-1 * destoryData.totalDestroy).toLocaleString('en-US',{maximumFractionDigits: 2})}</p>
             </Stack>
           </MainCard>
           <MainCard classNames={'dashboard-card'}>
             <Stack alignItems={"center"} justifyContent={"center"} height={['100px', "210px"]} spacing={['4px', '18px']}>
-              <p className={'dashboard-label'}>NEST Today Burnt</p>
+              <p className={'dashboard-label'}>NEST Today Burned</p>
               <p className={'dashboard-value'}>{(-1 * destoryData.dayDestroy).toLocaleString('en-US',{maximumFractionDigits: 2})}</p>
             </Stack>
           </MainCard>
