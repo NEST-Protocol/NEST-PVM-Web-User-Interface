@@ -92,6 +92,7 @@ const Dashboard: FC = () => {
       return
     }
     try {
+      // TODO
       const res = await axios({
         method: 'get',
         // url: `https://api.nestfi.net/api/dashboard/history/list?address=${account}`,
@@ -110,6 +111,7 @@ const Dashboard: FC = () => {
       return
     }
     try {
+      // TODO
       const res = await axios({
         method: 'get',
         // url: `https://api.nestfi.net/api/dashboard/position/list?address=${account}`,
@@ -146,13 +148,13 @@ const Dashboard: FC = () => {
           <MainCard classNames={'dashboard-card'}>
             <Stack alignItems={"center"} justifyContent={"center"} height={['100px', "210px"]} spacing={['4px', '18px']}>
               <p className={'dashboard-label'}>NEST Total Burnt</p>
-              <p className={'dashboard-value'}>{destoryData.totalDestroy.toLocaleString('en-US',{maximumFractionDigits: 2})}</p>
+              <p className={'dashboard-value'}>{(-1 * destoryData.totalDestroy).toLocaleString('en-US',{maximumFractionDigits: 2})}</p>
             </Stack>
           </MainCard>
           <MainCard classNames={'dashboard-card'}>
             <Stack alignItems={"center"} justifyContent={"center"} height={['100px', "210px"]} spacing={['4px', '18px']}>
               <p className={'dashboard-label'}>NEST Today Burnt</p>
-              <p className={'dashboard-value'}>{destoryData.dayDestroy.toLocaleString('en-US',{maximumFractionDigits: 2})}</p>
+              <p className={'dashboard-value'}>{(-1 * destoryData.dayDestroy).toLocaleString('en-US',{maximumFractionDigits: 2})}</p>
             </Stack>
           </MainCard>
         </Stack>
