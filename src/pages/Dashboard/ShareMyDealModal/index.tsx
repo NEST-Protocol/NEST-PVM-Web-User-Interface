@@ -8,6 +8,7 @@ import useWeb3 from "../../../libs/hooks/useWeb3";
 import DashboardModal from "../DashboardModal";
 import {DownIcon, NESTLogo, ShareIcon, ShareWhiteIcon, UpIcon} from "../../../components/Icon";
 import useThemes, {ThemeType} from "../../../libs/hooks/useThemes";
+import classNames from "classnames";
 
 const ShareMyDealModal: FC<{
   value: {
@@ -84,6 +85,9 @@ You can follow the right person on NESTFi, here is my refer link:`
           setShow(false)
         }}
         titleName={show ? '' : 'Share'}
+        classNames={classNames({
+          [`modal-wallet-dark`]: theme === ThemeType.dark,
+        })}
       >
         {
           show ? (
