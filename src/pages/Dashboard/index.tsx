@@ -199,7 +199,7 @@ const Dashboard: FC = () => {
             <Stack spacing={{ xs: '10px', sm: '22px'}} direction={{ xs: 'column', sm: 'column', md: 'row' }}>
               <MainCard classNames={'dashboard-card'}>
                 <Stack height={['100px', '200px']} alignItems={"center"} justifyContent={"center"} spacing={['4px', '10px']}>
-                  <p className={'dashboard-label'}>Day Trade</p>
+                  <p className={'dashboard-label'}>Today's PNL</p>
                   <p className={'dashboard-value'}>{myTxInfo.todayValue > 0 && <UpIcon/>} {myTxInfo.todayValue < 0 && <DownIcon/>} {myTxInfo.todayValue.toLocaleString('en-US',{maximumFractionDigits: 2})} NEST</p>
                   {/*<p className={'dashboard-caption'}>{myTxInfo.todayRate}% Today ringgit</p>*/}
                 </Stack>
