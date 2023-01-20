@@ -109,7 +109,9 @@ You can follow the right person on NESTFi, here is my refer link:`
                     select.totalTrade && (
                       <Stack spacing={'4px'}>
                         <p className={`shareMyDealModal-title1`}>Total Trade</p>
-                        <p className={`shareMyDealModal-value1`}>{value.totalValue}</p>
+                        <p className={`shareMyDealModal-value1`}>{value.totalValue.toLocaleString('en-US', {
+                          maximumFractionDigits: 2
+                        })}</p>
                       </Stack>
                     )
                   }
@@ -118,7 +120,9 @@ You can follow the right person on NESTFi, here is my refer link:`
                       <Stack spacing={'4px'}>
                         <p className={`shareMyDealModal-title2`}>Today Trade</p>
                         <p className={`shareMyDealModal-value2`}>{value.todayValue > 0 &&
-                            <UpIcon/>} {value.todayValue < 0 && <DownIcon/>} {value.todayValue}</p>
+                            <UpIcon/>} {value.todayValue < 0 && <DownIcon/>} {value.todayValue.toLocaleString('en-US', {
+                          maximumFractionDigits: 2
+                        })}</p>
                         {/*<p className={'shareMyDealModal-caption2'}>{value.todayRate}% Today ringgit</p>*/}
                       </Stack>
                     )
@@ -128,7 +132,9 @@ You can follow the right person on NESTFi, here is my refer link:`
                       <Stack spacing={'4px'}>
                         <p className={'shareMyDealModal-title2'}>7 Day Trade</p>
                         <p className={'shareMyDealModal-value2'}>{value.day7Value > 0 &&
-                            <UpIcon/>} {value.day7Value < 0 && <DownIcon/>}{value.day7Value}</p>
+                            <UpIcon/>} {value.day7Value < 0 && <DownIcon/>}{value.day7Value.toLocaleString('en-US', {
+                          maximumFractionDigits: 2
+                        })}</p>
                         {/*<p className={'shareMyDealModal-caption2'}>{value.day7Rate}% 7 Day ringgit</p>*/}
                       </Stack>
                     )
@@ -138,7 +144,9 @@ You can follow the right person on NESTFi, here is my refer link:`
                       <Stack spacing={'8px'}>
                         <p className={'shareMyDealModal-title2'}>30 Day Trade</p>
                         <p className={'shareMyDealModal-value2'}>{value.day30Value > 0 &&
-                            <UpIcon/>} {value.day30Value < 0 && <DownIcon/>} {value.day30Value}</p>
+                            <UpIcon/>} {value.day30Value < 0 && <DownIcon/>} {value.day30Value.toLocaleString('en-US', {
+                          maximumFractionDigits: 2
+                        })}</p>
                         {/*<p className={'shareMyDealModal-caption2'}>{value.day30Rate}% 30 Day ringgit</p>*/}
                       </Stack>
                     )
@@ -179,7 +187,9 @@ You can follow the right person on NESTFi, here is my refer link:`
                      style={{userSelect: 'none', cursor: 'pointer'}}
               >
                 <p className={'dashboard-label'}>Total Trade</p>
-                <p className={'dashboard-value'}>{value.totalValue}</p>
+                <p className={'dashboard-value'}>{value.totalValue.toLocaleString('en-US', {
+                  maximumFractionDigits: 2
+                })}</p>
                 <Stack position={'absolute'} right={['20px', '40px', '60px']} height={'22px'} width={'22px'}
                        border={'1px solid #EEEEEE'} boxShadow={'0px 0px 10px 0px #EEEEEE'} alignItems={"center"}
                        justifyContent={"center"}
