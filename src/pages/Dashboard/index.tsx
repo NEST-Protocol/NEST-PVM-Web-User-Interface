@@ -144,13 +144,13 @@ const Dashboard: FC = () => {
           <MainCard classNames={'dashboard-card'}>
             <Stack alignItems={"center"} justifyContent={"center"} height={['100px', "210px"]} spacing={['4px', '18px']}>
               <p className={'dashboard-label'}>NEST Total Burned</p>
-              <p className={'dashboard-value'}>{(-1 * destoryData.totalDestroy).toLocaleString('en-US',{maximumFractionDigits: 2})}</p>
+              <p className={'dashboard-value'}>{(-1 * destoryData.totalDestroy).toLocaleString('en-US',{maximumFractionDigits: 2})} NEST</p>
             </Stack>
           </MainCard>
           <MainCard classNames={'dashboard-card'}>
             <Stack alignItems={"center"} justifyContent={"center"} height={['100px', "210px"]} spacing={['4px', '18px']}>
               <p className={'dashboard-label'}>NEST Today Burned</p>
-              <p className={'dashboard-value'}>{(-1 * destoryData.dayDestroy).toLocaleString('en-US',{maximumFractionDigits: 2})}</p>
+              <p className={'dashboard-value'}>{(-1 * destoryData.dayDestroy).toLocaleString('en-US',{maximumFractionDigits: 2})} NEST</p>
             </Stack>
           </MainCard>
         </Stack>
@@ -193,28 +193,28 @@ const Dashboard: FC = () => {
             <MainCard classNames={'dashboard-card'}>
               <Stack height={['100px', '200px']} alignItems={"center"} justifyContent={"center"} spacing={['4px', '10px']}>
                 <p className={'dashboard-label'}>Total Profit & Loss</p>
-                <p className={'dashboard-value'}>{myTxInfo.totalValue.toLocaleString('en-US',{maximumFractionDigits: 2})}</p>
+                <p className={'dashboard-value'}>{myTxInfo.totalValue.toLocaleString('en-US',{maximumFractionDigits: 2})} NEST</p>
               </Stack>
             </MainCard>
             <Stack spacing={{ xs: '10px', sm: '22px'}} direction={{ xs: 'column', sm: 'column', md: 'row' }}>
               <MainCard classNames={'dashboard-card'}>
                 <Stack height={['100px', '200px']} alignItems={"center"} justifyContent={"center"} spacing={['4px', '10px']}>
                   <p className={'dashboard-label'}>Day Trade</p>
-                  <p className={'dashboard-value'}>{myTxInfo.todayValue > 0 && <UpIcon/>} {myTxInfo.todayValue < 0 && <DownIcon/>} {myTxInfo.todayValue.toLocaleString('en-US',{maximumFractionDigits: 2})}</p>
+                  <p className={'dashboard-value'}>{myTxInfo.todayValue > 0 && <UpIcon/>} {myTxInfo.todayValue < 0 && <DownIcon/>} {myTxInfo.todayValue.toLocaleString('en-US',{maximumFractionDigits: 2})} NEST</p>
                   {/*<p className={'dashboard-caption'}>{myTxInfo.todayRate}% Today ringgit</p>*/}
                 </Stack>
               </MainCard>
               <MainCard classNames={'dashboard-card'}>
                 <Stack height={['100px', '200px']} alignItems={"center"} justifyContent={"center"} spacing={['4px', '10px']}>
                   <p className={'dashboard-label'}>7 Days' PNL</p>
-                  <p className={'dashboard-value'}>{myTxInfo.day7Value > 0 && <UpIcon/>} {myTxInfo.day7Value < 0 && <DownIcon/>} {myTxInfo.day7Value.toLocaleString('en-US',{maximumFractionDigits: 2})}</p>
+                  <p className={'dashboard-value'}>{myTxInfo.day7Value > 0 && <UpIcon/>} {myTxInfo.day7Value < 0 && <DownIcon/>} {myTxInfo.day7Value.toLocaleString('en-US',{maximumFractionDigits: 2})} NEST</p>
                   {/*<p className={'dashboard-caption'}>{myTxInfo.day7Rate}% Today ringgit</p>*/}
                 </Stack>
               </MainCard>
               <MainCard classNames={'dashboard-card'}>
                 <Stack height={['100px', '200px']} alignItems={"center"} justifyContent={"center"} spacing={['4px', '10px']}>
                   <p className={'dashboard-label'}>30 Days' PNL</p>
-                  <p className={'dashboard-value'}>{myTxInfo.day30Value > 0 && <UpIcon/>} {myTxInfo.day30Value < 0 && <DownIcon/>} {myTxInfo.day30Value.toLocaleString('en-US',{maximumFractionDigits: 2})}</p>
+                  <p className={'dashboard-value'}>{myTxInfo.day30Value > 0 && <UpIcon/>} {myTxInfo.day30Value < 0 && <DownIcon/>} {myTxInfo.day30Value.toLocaleString('en-US',{maximumFractionDigits: 2})} NEST</p>
                   {/*<p className={'dashboard-caption'}>{myTxInfo.day30Rate}% Today ringgit</p>*/}
                 </Stack>
               </MainCard>
