@@ -10,7 +10,7 @@ import axios from "axios"
 import FuturesList from "./FuturesList";
 import FuturesListMobile from "./FuturesListMobile";
 import TVChart from "./TVChart";
-import {DownIcon, TipsIcon, UpIcon} from "../../components/Icon";
+import {DownIcon, UpIcon} from "../../components/Icon";
 
 const Dashboard: FC = () => {
   const [showHold, setShowHold] = useState(true);
@@ -143,13 +143,13 @@ const Dashboard: FC = () => {
         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={{ xs: '10px', sm: '22px'}}>
           <MainCard classNames={'dashboard-card'}>
             <Stack alignItems={"center"} justifyContent={"center"} height={['100px', "210px"]} spacing={['4px', '18px']}>
-              <p className={'dashboard-label'}>NEST Total Destruction</p>
+              <p className={'dashboard-label'}>NEST Total Burnt</p>
               <p className={'dashboard-value'}>{destoryData.totalDestroy.toLocaleString('en-US',{maximumFractionDigits: 2})}</p>
             </Stack>
           </MainCard>
           <MainCard classNames={'dashboard-card'}>
             <Stack alignItems={"center"} justifyContent={"center"} height={['100px', "210px"]} spacing={['4px', '18px']}>
-              <p className={'dashboard-label'}>NEST Today Destruction</p>
+              <p className={'dashboard-label'}>NEST Today Burnt</p>
               <p className={'dashboard-value'}>{destoryData.dayDestroy.toLocaleString('en-US',{maximumFractionDigits: 2})}</p>
             </Stack>
           </MainCard>
