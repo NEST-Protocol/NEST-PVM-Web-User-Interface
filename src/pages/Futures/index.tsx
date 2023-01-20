@@ -104,7 +104,7 @@ const Futures: FC = () => {
           data: {
             address: account,
             code: inviteCode,
-            timestamp: new Date().getTime(),
+            timestamp: new Date().getTime() / 1000,
           }
         })
         window.localStorage.removeItem("inviteCode");
