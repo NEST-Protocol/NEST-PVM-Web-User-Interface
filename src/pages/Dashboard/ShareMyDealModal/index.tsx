@@ -86,7 +86,7 @@ You can follow the right person on NESTFi, here is my refer link:`
         }}
         titleName={show ? '' : 'Share'}
         classNames={classNames({
-          [`modal-wallet-dark`]: theme === ThemeType.dark,
+          [`dashboardModal-dark`]: theme === ThemeType.dark,
         })}
       >
         {
