@@ -168,7 +168,9 @@ const Dashboard: FC = () => {
                 {/*<TipsIcon />*/}
               </Stack>
               <Stack direction={'row'} spacing={['15px', '30px']}>
-                <MainButton onClick={() => {
+                <MainButton
+                  disable={!account}
+                  onClick={() => {
                   if (account) {
                     navigator.clipboard.writeText( 'https://finance.nestprotocol.org/#/futures?a=' + account.slice(-8) || '').then(() => {
                       setCopied(true);
@@ -177,12 +179,7 @@ const Dashboard: FC = () => {
                       }, 1000)
                     });
                   } else {
-                    navigator.clipboard.writeText( 'https://finance.nestprotocol.org/#/futures').then(() => {
-                      setCopied(true);
-                      setTimeout(() => {
-                        setCopied(false);
-                      }, 1000)
-                    });
+                    return
                   }
                 }}>
                   { copied ? 'Copied success!' : 'Copy Invitation Link' }
