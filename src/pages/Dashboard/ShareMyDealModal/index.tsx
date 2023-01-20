@@ -47,7 +47,7 @@ const ShareMyDealModal: FC<{
     const node = document.getElementById('my-share');
     if (node) {
       domtoimage.toPng(node, {
-        bgcolor: '#f1fff9',
+        bgcolor: '#f7fdf6',
         width: node.clientWidth || 360,
         height: node.clientHeight || 640,
         quality: 1,
