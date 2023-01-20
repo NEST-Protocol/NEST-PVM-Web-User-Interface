@@ -40,15 +40,23 @@ const FuturesList: FC<FuturesListProps> = ({...props}) => {
         </p>
       </td>
       <td>{props.item.leverage}</td>
-      <td>{props.item.initialMargin} NEST</td>
-      <td>{props.item.openPrice} USDT</td>
+      <td>{props.item.initialMargin.toLocaleString('en-US', {
+        maximumFractionDigits: 2
+      })} NEST</td>
+      <td>{props.item.openPrice.toLocaleString('en-US', {
+        maximumFractionDigits: 2
+      })} USDT</td>
       <td>
         <Stack alignItems={"center"}>
-          <p>{props.item.actualMargin} NEST</p>
+          <p>{props.item.actualMargin.toLocaleString('en-US', {
+            maximumFractionDigits: 2
+          })} NEST</p>
           <Stack direction={'row'} spacing={'6px'}>
             {props.item.actualRate > 0 ? <UpIcon/> : <DownIcon/>}
             <p>
-              {props.item.actualRate}%
+              {props.item.actualRate.toLocaleString('en-US', {
+                maximumFractionDigits: 2
+              })}%
             </p>
           </Stack>
         </Stack>

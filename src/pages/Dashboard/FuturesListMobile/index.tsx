@@ -54,7 +54,9 @@ const FuturesListMobile: FC<FuturesListProps> = ({...props}) => {
         </Stack>
         <Stack direction={"row"} justifyContent={"space-between"}>
           <p className={'dashboard-orderCard-value'}>{props.item.leverage}</p>
-          <p className={'dashboard-orderCard-value'}>{props.item.initialMargin} NEST</p>
+          <p className={'dashboard-orderCard-value'}>{props.item.initialMargin.toLocaleString('en-US', {
+            maximumFractionDigits: 2
+          })} NEST</p>
         </Stack>
         <Divider color={'#C5C5C5'} style={{opacity: 0.15}}/>
         <Stack direction={"row"} justifyContent={"space-between"}>
@@ -62,12 +64,18 @@ const FuturesListMobile: FC<FuturesListProps> = ({...props}) => {
           <p className={'dashboard-orderCard-title'}>Actual Margin</p>
         </Stack>
         <Stack direction={"row"} justifyContent={"space-between"}>
-          <p className={'dashboard-orderCard-value'}>{props.item.openPrice} USDT</p>
-          <p className={'dashboard-orderCard-value'}>{props.item.actualMargin} NEST</p>
+          <p className={'dashboard-orderCard-value'}>{props.item.openPrice.toLocaleString('en-US', {
+            maximumFractionDigits: 2
+          })} USDT</p>
+          <p className={'dashboard-orderCard-value'}>{props.item.actualMargin.toLocaleString('en-US', {
+            maximumFractionDigits: 2
+          })} NEST</p>
         </Stack>
         <Stack direction={"row"} justifyContent={"space-between"}>
           <p></p>
-          <p className={'dashboard-orderCard-caption'}>{props.item.actualRate} %</p>
+          <p className={'dashboard-orderCard-caption'}>{props.item.actualRate.toLocaleString('en-US', {
+            maximumFractionDigits: 2
+          })} %</p>
         </Stack>
       </Stack>
       <Stack position={'absolute'} right={0} top={0} width={'32px'} height={'32px'} borderRadius={'0 20px'}
