@@ -16,6 +16,7 @@ import { NFTAuctionWrongChain } from "./NFTAuction";
 // import NFTAuction from "./NFTAuction";
 
 const Perpetuals = loadable(() => import("./Futures"));
+const Dashboard = loadable(() => import("./Dashboard"));
 // const Option = loadable(() => import("./Options"));
 // const Mining = loadable(() => import("./Farm"));
 const NFTAuction = loadable(() => import("./NFTAuction"));
@@ -52,7 +53,9 @@ const App: FC = () => {
             <Route path="/swap">
               <Swap />
             </Route>
-
+            <Route path="/dashboard">
+              <Dashboard />
+            </Route>
             <Redirect to="/futures" />
           </Switch>
         </HashRouter>
