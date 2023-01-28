@@ -337,7 +337,7 @@ export function useFutures() {
             tokenIndex: BigNumber.from(item["tokenIndex"].toString()),
             baseBlock: BigNumber.from(item["baseBlock"].toString()),
             lever: BigNumber.from(item["level"].toString()),
-            orientation: item["orientation"],
+            orientation: item["orientation"].toString() === "true",
             basePrice: parseUnits(item["basePrice"].toString(), 18),
             stopPrice: parseUnits(
               item["stopPrice"] ? item["stopPrice"].toString() : "0",
