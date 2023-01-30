@@ -57,7 +57,7 @@ const Footer: FC = () => {
             })}
             title={
               <>
-                <p>Select a network</p>
+                <p>Select a test token</p>
                 <ul>
                   <li onClick={() => addNEST()}>
                     <TokenNest />
