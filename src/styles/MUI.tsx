@@ -20,3 +20,20 @@ export const LightTooltip = styled(({ className, ...props }: TooltipProps) => (
     },
   })
 });
+
+export const ListTooltip = styled(({ className, ...props }: TooltipProps) => (
+  <Tooltip {...props} classes={{ popper: className }} />
+))(({ theme }) => {
+  const maxWidth = checkWidth() ? 300 : 300
+  return ({
+    [`& .${tooltipClasses.tooltip}`]: {
+      backgroundColor: theme.palette.common.white,
+      boxShadow: theme.shadows[1],
+      maxWidth: maxWidth,
+      paddingLeft: 0,
+      paddingRight: 0,
+      paddingTop: 5,
+      paddingBottom: 5
+    },
+  })
+});

@@ -32,6 +32,7 @@ export enum TransactionType {
   PVMFuturesProxyCancel = 20,
   PVMFuturesProxyEdit = 21,
   PVMFuturesProxyNew = 22,
+  transfer = 23,
 }
 
 export enum TransactionState {

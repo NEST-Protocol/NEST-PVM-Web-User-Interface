@@ -1,8 +1,11 @@
+import classNames from "classnames";
 import { FC } from "react";
 import {
   DarkIcon,
   DisIcon,
   GithubIcon,
+  LittleBSC,
+  TokenNest,
   MiIcon,
   SafeIcon,
   TelIcon,
@@ -10,12 +13,16 @@ import {
   WhiteIcon,
   WhitePaper,
 } from "../../../components/Icon";
+import { useGetToken } from "../../../contracts/hooks/useGetToken";
 import useThemes, { ThemeType } from "../../../libs/hooks/useThemes";
+import useWeb3 from "../../../libs/hooks/useWeb3";
+import { ListTooltip } from "../../../styles/MUI";
 // import { dynamicActivate } from "../../../libs/i18nConfig";
 import "./styles/index";
 
 const Footer: FC = () => {
   const footer = "footer";
+  const { chainId } = useWeb3();
   const { theme, setTheme } = useThemes();
   const themeIcon = () => {
     if (theme === ThemeType.dark) {
@@ -24,6 +31,7 @@ const Footer: FC = () => {
       return <DarkIcon />;
     }
   };
+  const addNEST = useGetToken("NEST");
 
   return (
     <footer>
@@ -40,15 +48,53 @@ const Footer: FC = () => {
         >
           {themeIcon()}
         </button>
+        {chainId === 97 ? (
+          <ListTooltip
+            placement="top-start"
+            className={classNames({
+              [`testToken`]: true,
+              [`testToken-dark`]: theme === ThemeType.dark,
+            })}
+            title={
+              <>
+                <p>Select a network</p>
+                <ul>
+                  <li onClick={() => addNEST()}>
+                    <TokenNest />
+                    <p>NEST</p>
+                  </li>
+                  <li
+                    onClick={() => {
+                      window.open("https://testnet.bnbchain.org/faucet-smart");
+                    }}
+                  >
+                    <LittleBSC />
+                    <p>BNB</p>
+                  </li>
+                </ul>
+              </>
+            }
+          >
+            <button className={`${footer}-left-receive`}>Test Token</button>
+          </ListTooltip>
+        ) : (
+          <></>
+        )}
       </div>
       <div className={`${footer}-right`}>
-        <a href="https://nestprotocol.org/doc/ennestwhitepaper.pdf" target="view_window">
+        <a
+          href="https://nestprotocol.org/doc/ennestwhitepaper.pdf"
+          target="view_window"
+        >
           <SafeIcon className={`${footer}-right-safe`} />
         </a>
         <a href="https://discord.com/invite/nestprotocol" target="view_window">
           <DisIcon className={`${footer}-right-disIcon`} />
         </a>
-        <a href="https://finance.docs.nestprotocol.org/#connect-wallet" target="view_window">
+        <a
+          href="https://finance.docs.nestprotocol.org/#connect-wallet"
+          target="view_window"
+        >
           <WhitePaper className={`${footer}-right-paper`} />
         </a>
         <a href="https://t.me/nest_chat" target="view_window">

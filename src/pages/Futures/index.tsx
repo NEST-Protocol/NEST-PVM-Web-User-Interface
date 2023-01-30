@@ -1,4 +1,4 @@
-import { FC, useRef, useState } from "react";
+import { FC, useCallback, useEffect, useRef, useState } from "react";
 import {
   checkWidth,
   formatInputNum,
@@ -25,9 +25,12 @@ import { LightTooltip } from "../../styles/MUI";
 import PerpetualsNoticeModal from "./PerpetualsNoticeModal";
 import Popup from "reactjs-popup";
 import TriggerRiskModal from "./TriggerRisk";
+import useWeb3 from "../../libs/hooks/useWeb3";
+import axios from "axios";
 
 const Futures: FC = () => {
   const classPrefix = "Futures";
+  const { account } = useWeb3();
   const isPC = checkWidth();
   const modal = useRef<any>();
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
@@ -78,6 +81,48 @@ const Futures: FC = () => {
   const BTCIcon = tokenList["BTC"].Icon;
   const ETHIcon = tokenList["ETH"].Icon;
   const USDTIcon = tokenList["USDT"].Icon;
+
+  const handleInviteCode = useCallback(async () => {
+    const href = window.location.href;
+    const inviteCode = href?.split("?a=")[1];
+    if (inviteCode && inviteCode.length === 8) {
+      window.localStorage.setItem("inviteCode", inviteCode.toLowerCase());
+    }
+  }, []);
+
+  const postInviteCode = useCallback(async () => {
+    const inviteCode = window.localStorage.getItem("inviteCode");
+    if (inviteCode && account) {
+      if (inviteCode === account.toLowerCase().slice(-8)) {
+        return;
+      }
+
+      try {
+        await axios({
+          method: "post",
+          url: "https://api.nestfi.net/api/users/users/saveInviteUser",
+          data: {
+            address: account,
+            code: inviteCode,
+            timestamp: new Date().getTime() / 1000,
+          },
+        });
+        window.localStorage.removeItem("inviteCode");
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  }, [account, localStorage.getItem("inviteCode")]);
+
+  useEffect(() => {
+    handleInviteCode();
+  }, [handleInviteCode]);
+
+  useEffect(() => {
+    if (chainId === 56) {
+      postInviteCode();
+    }
+  }, [chainId, postInviteCode]);
 
   const handleLeverNum = (selected: number) => {
     setLeverNum(selected);
@@ -198,7 +243,10 @@ const Futures: FC = () => {
               <p>{tokenPrice ? tokenPrice.tokenName : "---"}/USDT</p>
               <PutDownIcon className="putDown" />
             </button>
-            <p>1 {tokenPrice.tokenName} = {tokenPrice ? tokenPrice.price : "---"} USDT</p>
+            <p>
+              1 {tokenPrice.tokenName} = {tokenPrice ? tokenPrice.price : "---"}{" "}
+              USDT
+            </p>
           </Stack>
           <Popover
             open={Boolean(anchorEl)}

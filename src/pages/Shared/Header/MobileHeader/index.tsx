@@ -10,7 +10,7 @@ import {
   WhiteIcon,
   WhiteLoading,
   XIcon,
-  LittleETH,
+  LittleETH, DashboardIcon, DashboardWhiteIcon,
 } from "../../../../components/Icon";
 import useTransactionListCon from "../../../../libs/hooks/useTransactionInfo";
 import useWeb3 from "../../../../libs/hooks/useWeb3";
@@ -174,7 +174,17 @@ const MobileHeader: FC = () => {
           </button>
         </div>
         <NESTLogo className={`${classPrefix}-logo`} />
-        <div className={`${classPrefix}-rightButton`}></div>
+        <div className={`${classPrefix}-rightButton`}>
+          <button>
+            <Link to={'/dashboard'}>
+              { theme === ThemeType.dark ? (
+                <DashboardWhiteIcon/>
+              ) : (
+                <DashboardIcon/>
+              ) }
+            </Link>
+          </button>
+        </div>
       </div>
     </header>
   );

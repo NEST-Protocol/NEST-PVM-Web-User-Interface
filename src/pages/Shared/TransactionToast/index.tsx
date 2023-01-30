@@ -107,6 +107,8 @@ export const transactionTitle = (type: TransactionType) => {
       return "Update Limit Order";
     case 22:
       return "New Limit Order";
+    case 23:
+      return "Transfer"
     default:
       break;
   }
