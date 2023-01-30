@@ -174,16 +174,16 @@ const MobileHeader: FC = () => {
       <Drawer anchor={"top"} open={showList} onClose={() => setShowList(false)}>
         {headerListShow()}
       </Drawer>
-      <Popup modal ref={modal} open={showNet}>
+      <Popup modal ref={modal} open={showNet} onClose={() => setShowNet(false)}>
         <SelectNetworkModal onClose={() => setShowNet(false)} />
       </Popup>
-      <Popup modal ref={modal} open={showTestToken} nested>
+      <Popup modal ref={modal} open={showTestToken} onClose={() => setShowTestToken(false)} nested>
         <SelectTestTokenModal onClose={() => setShowTestToken(false)} />
       </Popup>
-      <Popup modal ref={modal} open={showCon}>
+      <Popup modal ref={modal} open={showCon} onClose={() => setShowCon(false)}>
         <Modal onClose={() => setShowCon(false)} />
       </Popup>
-      <Popup modal ref={modal} open={showWallet}>
+      <Popup modal ref={modal} open={showWallet} onClose={() => setShowWallet(false)}>
         <WalletModal onClose={() => setShowWallet(false)} />
       </Popup>
       <div className={classPrefix}>
