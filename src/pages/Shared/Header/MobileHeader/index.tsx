@@ -10,7 +10,9 @@ import {
   WhiteIcon,
   WhiteLoading,
   XIcon,
-  LittleETH, DashboardIcon, DashboardWhiteIcon,
+  LittleETH,
+  DashboardIcon,
+  DashboardWhiteIcon,
 } from "../../../../components/Icon";
 import useTransactionListCon from "../../../../libs/hooks/useTransactionInfo";
 import useWeb3 from "../../../../libs/hooks/useWeb3";
@@ -151,10 +153,19 @@ const MobileHeader: FC = () => {
             </button>
           )}
         </div>
-        <button className="testToken" onClick={() => {
-          setShowList(false);
-          setShowTestToken(true);
-        }}><p>Test Token</p></button>
+        {chainId === 97 ? (
+          <button
+            className="testToken"
+            onClick={() => {
+              setShowList(false);
+              setShowTestToken(true);
+            }}
+          >
+            <p>Test Token</p>
+          </button>
+        ) : (
+          <></>
+        )}
       </div>
     );
   };
@@ -184,12 +195,12 @@ const MobileHeader: FC = () => {
         <NESTLogo className={`${classPrefix}-logo`} />
         <div className={`${classPrefix}-rightButton`}>
           <button>
-            <Link to={'/dashboard'}>
-              { theme === ThemeType.dark ? (
-                <DashboardWhiteIcon/>
+            <Link to={"/dashboard"}>
+              {theme === ThemeType.dark ? (
+                <DashboardWhiteIcon />
               ) : (
-                <DashboardIcon/>
-              ) }
+                <DashboardIcon />
+              )}
             </Link>
           </button>
         </div>
