@@ -25,6 +25,7 @@ import "./styles";
 import SelectNetworkModal, { SelectTestTokenModal } from "./SelectNetworkModal";
 import useThemes, { ThemeType } from "../../../../libs/hooks/useThemes";
 import Drawer from "@mui/material/Drawer";
+import { SupportedChains } from "../../../../libs/constants/chain";
 
 const MobileHeader: FC = () => {
   const classPrefix = "header-mobile";
@@ -153,12 +154,16 @@ const MobileHeader: FC = () => {
             </button>
           )}
         </div>
-        {chainId === 97 ? (
+        {SupportedChains[0].chainId === 97 ? (
           <button
             className="testToken"
             onClick={() => {
               setShowList(false);
-              setShowTestToken(true);
+              if (account === undefined) {
+                setShowCon(true);
+              } else {
+                setShowTestToken(true);
+              }
             }}
           >
             <p>Test Token</p>
@@ -177,13 +182,24 @@ const MobileHeader: FC = () => {
       <Popup modal ref={modal} open={showNet} onClose={() => setShowNet(false)}>
         <SelectNetworkModal onClose={() => setShowNet(false)} />
       </Popup>
-      <Popup modal ref={modal} open={showTestToken} onClose={() => setShowTestToken(false)} nested>
+      <Popup
+        modal
+        ref={modal}
+        open={showTestToken}
+        onClose={() => setShowTestToken(false)}
+        nested
+      >
         <SelectTestTokenModal onClose={() => setShowTestToken(false)} />
       </Popup>
       <Popup modal ref={modal} open={showCon} onClose={() => setShowCon(false)}>
         <Modal onClose={() => setShowCon(false)} />
       </Popup>
-      <Popup modal ref={modal} open={showWallet} onClose={() => setShowWallet(false)}>
+      <Popup
+        modal
+        ref={modal}
+        open={showWallet}
+        onClose={() => setShowWallet(false)}
+      >
         <WalletModal onClose={() => setShowWallet(false)} />
       </Popup>
       <div className={classPrefix}>

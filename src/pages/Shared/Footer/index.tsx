@@ -1,5 +1,6 @@
 import classNames from "classnames";
-import { FC } from "react";
+import { FC, useRef, useState } from "react";
+import Popup from "reactjs-popup";
 import {
   DarkIcon,
   DisIcon,
@@ -14,15 +15,19 @@ import {
   WhitePaper,
 } from "../../../components/Icon";
 import { useGetToken } from "../../../contracts/hooks/useGetToken";
+import { SupportedChains } from "../../../libs/constants/chain";
 import useThemes, { ThemeType } from "../../../libs/hooks/useThemes";
 import useWeb3 from "../../../libs/hooks/useWeb3";
 import { ListTooltip } from "../../../styles/MUI";
+import Modal from "../Header/Status/Modal";
 // import { dynamicActivate } from "../../../libs/i18nConfig";
 import "./styles/index";
 
 const Footer: FC = () => {
   const footer = "footer";
-  const { chainId } = useWeb3();
+  const { account } = useWeb3();
+  const modal = useRef<any>();
+  const [showCon, setShowCon] = useState(false);
   const { theme, setTheme } = useThemes();
   const themeIcon = () => {
     if (theme === ThemeType.dark) {
@@ -35,6 +40,14 @@ const Footer: FC = () => {
 
   return (
     <footer>
+      <Popup
+        modal
+        ref={modal}
+        onClose={() => setShowCon(false)}
+        open={showCon}
+      >
+        <Modal onClose={() => setShowCon(false)} />
+      </Popup>
       <div className={`${footer}-left`}>
         <button
           className={`${footer}-left-theme`}
@@ -48,7 +61,7 @@ const Footer: FC = () => {
         >
           {themeIcon()}
         </button>
-        {chainId === 97 ? (
+        {SupportedChains[0].chainId === 97 ? (
           <ListTooltip
             placement="top-start"
             className={classNames({
@@ -59,7 +72,15 @@ const Footer: FC = () => {
               <>
                 <p>Select a test token</p>
                 <ul>
-                  <li onClick={() => addNEST()}>
+                  <li
+                    onClick={() => {
+                      if (account === undefined) {
+                        setShowCon(true);
+                      } else {
+                        addNEST();
+                      }
+                    }}
+                  >
                     <TokenNest />
                     <p>NEST</p>
                   </li>
