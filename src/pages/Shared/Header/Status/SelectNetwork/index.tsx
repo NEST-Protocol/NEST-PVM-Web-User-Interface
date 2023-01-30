@@ -6,20 +6,13 @@ import {
 } from "../../../../../components/Icon";
 import MainCard from "../../../../../components/MainCard";
 import { SupportedChains } from "../../../../../libs/constants/chain";
+import changeNetwork from "../../../../../libs/hooks/changeNetwork";
 import useWeb3 from "../../../../../libs/hooks/useWeb3";
 import "./styles";
 
 const SelectNetwork: FC = () => {
   const classPrefix = "selectNetwork";
   const { chainId } = useWeb3();
-  const { ethereum } = window;
-
-  const selectNetwork = async (id: number) => {
-    await ethereum.request({
-      method: "wallet_switchEthereumChain",
-      params: [{ chainId: "0x" + id.toString(16) }],
-    });
-  };
   const nowNetwork = useCallback(() => {
     if (!chainId) {
       return (
@@ -33,7 +26,7 @@ const SelectNetwork: FC = () => {
       return (
         <>
           <LittleETH />
-          <p>{chainId === 1 ? "Ethereum" : "Rinkeby"}</p>
+          <p>{chainId === 1 ? "Ethereum" : "Goerli"}</p>
         </>
       );
     } else {
@@ -53,12 +46,12 @@ const SelectNetwork: FC = () => {
         <MainCard classNames={`${classPrefix}-ul`}>
           <p>Select a network</p>
           <ul>
-            <li onClick={() => selectNetwork(SupportedChains[1].chainId)}>
+            <li onClick={() => changeNetwork(SupportedChains[1].chainId)}>
               <LittleETH />
               <p>{SupportedChains[1].name}</p>
               {SupportedChains[1].chainId === chainId ? <NetworkNow /> : <></>}
             </li>
-            <li onClick={() => selectNetwork(SupportedChains[0].chainId)}>
+            <li onClick={() => changeNetwork(SupportedChains[0].chainId)}>
               <LittleBSC />
               <p>{SupportedChains[0].name}</p>
               {SupportedChains[0].chainId === chainId ? <NetworkNow /> : <></>}

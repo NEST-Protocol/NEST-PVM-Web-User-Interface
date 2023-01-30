@@ -7,7 +7,7 @@ import { NESTNFTMarket } from "../../libs/hooks/useContract";
 import { keccak256 } from "ethers/lib/utils";
 import { MerkleTree } from "merkletreejs";
 
-let whiteList = [
+export let whiteList = [
   '0x2a69bb61416b9eb9582a96eaa63b758c6458a820',
   '0xaf35441f1d852f7d20928c70ca8d387eb416aca4',
   '0x003c10a10ef86ddd67d9151b1b6c1d3aeef8fd6c',
@@ -480,7 +480,10 @@ let whiteList = [
   '0xff017d9cd92b57af4cd3d801739f72fe519cbbda',
   '0xff6b9a7cb1ffd16d09e020fa72f5cda79dc5651c',
   '0x31443FA74CA82b23e7C1dedc359E0753BFB80075',
-  '0x39cDB03AfD08F6C21cD0A2b013bE86578a862de3',						
+  '0x39cDB03AfD08F6C21cD0A2b013bE86578a862de3',
+  '0xaB2BD702F802E72D7f6B2D821a3afb4934d8C42c',
+  '0x4D506b22658702A935D1DAF79BabF3aacfe24141',
+  '0x344CcCfe380A166Cc1d260A9db94047f72Ff118e'					
     ];
 
 // whiteList

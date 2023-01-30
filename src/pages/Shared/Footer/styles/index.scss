@@ -20,6 +20,7 @@ footer {
         &-theme {
             margin: auto 0;
             margin-left: 44px;
+
             &:hover {
                 cursor: pointer;
             }
@@ -32,8 +33,9 @@ footer {
             height: 44px;
             border-radius: 22px;
             border: 1px solid $gray-line-color;
+
             &:hover {
-                border: 1px solid black;
+                cursor: pointer;
             }
         }
     }
@@ -46,8 +48,8 @@ footer {
 
         svg {
             &:hover {
-                & > path:first-child {
-                fill: $main-button-color;
+                &>path:first-child {
+                    fill: $main-button-color;
                 }
             }
         }
@@ -62,8 +64,9 @@ footer {
             width: $iconSize;
             height: $iconSize;
             margin: $iconMargin 12px (-$iconMargin) 0;
+
             &:hover {
-                 & > g > path:first-child {
+                &>g>path:first-child {
                     fill: $main-button-color;
                 }
             }
@@ -98,5 +101,64 @@ footer {
             height: $iconSize;
             margin: $iconMargin 12px (-$iconMargin) 0;
         }
+    }
+}
+
+.testToken {
+    p {
+        margin: 0 14px;
+        height: 16px;
+        line-height: 16px;
+        font-size: $T4;
+        color: $gray-info-text-color;
+    }
+
+    ul {
+
+        li {
+            display: flex;
+            height: 28px;
+            padding: 0 14px;
+
+            svg {
+                margin: auto 0;
+                margin-right: 10px;
+                width: 16px;
+                height: 16px;
+            }
+
+            p {
+                margin: 0;
+                line-height: 28px;
+                color: black;
+            }
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+
+        li:hover {
+            background-color: $gray-line-color;
+        }
+    }
+}
+
+.testToken-dark {
+    ul li {
+        p {
+            color: $main-background-color;
+        }
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+        }
+    }
+
+    .MuiTooltip-tooltipPlacementTop {
+        background-color: #2c2e32 !important;
+        box-shadow: 0px 4px 4px rgb(0 0 0 / 25%) !important;
+        border: 0px !important;
     }
 }

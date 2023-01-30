@@ -10,7 +10,9 @@ import {
   WhiteIcon,
   WhiteLoading,
   XIcon,
-  LittleETH, DashboardIcon, DashboardWhiteIcon,
+  LittleETH,
+  DashboardIcon,
+  DashboardWhiteIcon,
 } from "../../../../components/Icon";
 import useTransactionListCon from "../../../../libs/hooks/useTransactionInfo";
 import useWeb3 from "../../../../libs/hooks/useWeb3";
@@ -20,7 +22,7 @@ import Modal from "../Status/Modal";
 import WalletModal from "../Status/WalletModal";
 import "../Status/styles";
 import "./styles";
-import SelectNetworkModal from "./SelectNetworkModal";
+import SelectNetworkModal, { SelectTestTokenModal } from "./SelectNetworkModal";
 import useThemes, { ThemeType } from "../../../../libs/hooks/useThemes";
 import Drawer from "@mui/material/Drawer";
 
@@ -29,6 +31,7 @@ const MobileHeader: FC = () => {
   const { account, chainId } = useWeb3();
   const [showList, setShowList] = useState(false);
   const [showNet, setShowNet] = useState(false);
+  const [showTestToken, setShowTestToken] = useState(false);
   const [showCon, setShowCon] = useState(false);
   const [showWallet, setShowWallet] = useState(false);
   const location = useLocation();
@@ -150,6 +153,19 @@ const MobileHeader: FC = () => {
             </button>
           )}
         </div>
+        {chainId === 97 ? (
+          <button
+            className="testToken"
+            onClick={() => {
+              setShowList(false);
+              setShowTestToken(true);
+            }}
+          >
+            <p>Test Token</p>
+          </button>
+        ) : (
+          <></>
+        )}
       </div>
     );
   };
@@ -158,13 +174,16 @@ const MobileHeader: FC = () => {
       <Drawer anchor={"top"} open={showList} onClose={() => setShowList(false)}>
         {headerListShow()}
       </Drawer>
-      <Popup modal ref={modal} open={showNet}>
+      <Popup modal ref={modal} open={showNet} onClose={() => setShowNet(false)}>
         <SelectNetworkModal onClose={() => setShowNet(false)} />
       </Popup>
-      <Popup modal ref={modal} open={showCon}>
+      <Popup modal ref={modal} open={showTestToken} onClose={() => setShowTestToken(false)} nested>
+        <SelectTestTokenModal onClose={() => setShowTestToken(false)} />
+      </Popup>
+      <Popup modal ref={modal} open={showCon} onClose={() => setShowCon(false)}>
         <Modal onClose={() => setShowCon(false)} />
       </Popup>
-      <Popup modal ref={modal} open={showWallet}>
+      <Popup modal ref={modal} open={showWallet} onClose={() => setShowWallet(false)}>
         <WalletModal onClose={() => setShowWallet(false)} />
       </Popup>
       <div className={classPrefix}>
@@ -176,12 +195,12 @@ const MobileHeader: FC = () => {
         <NESTLogo className={`${classPrefix}-logo`} />
         <div className={`${classPrefix}-rightButton`}>
           <button>
-            <Link to={'/dashboard'}>
-              { theme === ThemeType.dark ? (
-                <DashboardWhiteIcon/>
+            <Link to={"/dashboard"}>
+              {theme === ThemeType.dark ? (
+                <DashboardWhiteIcon />
               ) : (
-                <DashboardIcon/>
-              ) }
+                <DashboardIcon />
+              )}
             </Link>
           </button>
         </div>

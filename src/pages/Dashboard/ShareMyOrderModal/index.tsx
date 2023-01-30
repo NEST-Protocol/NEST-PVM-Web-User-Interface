@@ -1,4 +1,4 @@
-import {FC, useRef, useState} from "react";
+import {FC, useRef} from "react";
 import Popup from "reactjs-popup";
 import {Divider, Stack} from "@mui/material";
 import MainButton from "../../../components/MainButton";
@@ -16,21 +16,10 @@ type ShareMyDealModalProps = {
 }
 
 const ShareMyDealModal: FC<ShareMyDealModalProps> = ({order}) => {
-  const [hasCopied, setHasCopied] = useState(false)
   const {account} = useWeb3()
   const modal = useRef<any>();
   const {TokenOneSvg, TokenTwoSvg} = useTokenPairSymbol(order.tokenPair)
   const { theme } = useThemes();
-
-  const copy = () => {
-    const link = `https://finance.nestprotocol.org/#/futures?a=${account?.slice(-8).toLowerCase()}`
-    navigator.clipboard.writeText(link).then(() => {
-      setHasCopied(true)
-      setTimeout(() => {
-        setHasCopied(false)
-      }, 2000)
-    })
-  }
 
   const download = () => {
     const node = document.getElementById('my-share');

@@ -30,18 +30,7 @@ const ShareMyDealModal: FC<{
     _30DaysTrade: false,
   })
   const [show, setShow] = useState(false)
-  const [hasCopied, setHasCopied] = useState(false)
   const { theme } = useThemes();
-
-  const copy = () => {
-    const link = `https://finance.nestprotocol.org/#/futures?a=${account?.slice(-8).toLowerCase()}`
-    navigator.clipboard.writeText(link).then(() => {
-      setHasCopied(true)
-      setTimeout(() => {
-        setHasCopied(false)
-      }, 2000)
-    })
-  }
 
   const download = () => {
     const node = document.getElementById('my-share');

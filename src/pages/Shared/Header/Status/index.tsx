@@ -5,7 +5,7 @@ import Popup from "reactjs-popup";
 import {DashboardIcon, DashboardWhiteIcon, WhiteLoading} from "../../../../components/Icon";
 import useTransactionListCon from "../../../../libs/hooks/useTransactionInfo";
 import useWeb3 from "../../../../libs/hooks/useWeb3";
-import {showEllipsisAddress, showEllipsisAddress2, showEllipsisAddress3} from "../../../../libs/utils";
+import {showEllipsisAddress2} from "../../../../libs/utils";
 import Modal from "./Modal";
 import SelectNetwork from "./SelectNetwork";
 import "./styles";

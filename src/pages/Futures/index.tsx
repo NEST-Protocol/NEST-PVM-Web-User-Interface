@@ -1,4 +1,4 @@
-import {FC, useCallback, useEffect, useRef, useState} from "react";
+import { FC, useCallback, useEffect, useRef, useState } from "react";
 import {
   checkWidth,
   formatInputNum,
@@ -30,7 +30,7 @@ import axios from "axios";
 
 const Futures: FC = () => {
   const classPrefix = "Futures";
-  const { account } = useWeb3()
+  const { account } = useWeb3();
   const isPC = checkWidth();
   const modal = useRef<any>();
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
@@ -105,22 +105,24 @@ const Futures: FC = () => {
             address: account,
             code: inviteCode,
             timestamp: new Date().getTime() / 1000,
-          }
-        })
+          },
+        });
         window.localStorage.removeItem("inviteCode");
       } catch (e) {
-        console.log(e)
+        console.log(e);
       }
     }
-  }, [account, localStorage.getItem('inviteCode')]);
+  }, [account, localStorage.getItem("inviteCode")]);
 
   useEffect(() => {
-    handleInviteCode()
-  }, [handleInviteCode])
+    handleInviteCode();
+  }, [handleInviteCode]);
 
   useEffect(() => {
-    postInviteCode()
-  }, [postInviteCode])
+    if (chainId === 56) {
+      postInviteCode();
+    }
+  }, [chainId, postInviteCode]);
 
   const handleLeverNum = (selected: number) => {
     setLeverNum(selected);
@@ -241,7 +243,10 @@ const Futures: FC = () => {
               <p>{tokenPrice ? tokenPrice.tokenName : "---"}/USDT</p>
               <PutDownIcon className="putDown" />
             </button>
-            <p>1 {tokenPrice.tokenName} = {tokenPrice ? tokenPrice.price : "---"} USDT</p>
+            <p>
+              1 {tokenPrice.tokenName} = {tokenPrice ? tokenPrice.price : "---"}{" "}
+              USDT
+            </p>
           </Stack>
           <Popover
             open={Boolean(anchorEl)}

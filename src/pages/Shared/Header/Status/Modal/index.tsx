@@ -1,5 +1,4 @@
 import { t, Trans } from "@lingui/macro";
-import { message } from "antd";
 import classNames from "classnames";
 import { FC, MouseEventHandler, useState } from "react";
 import BaseModal from "../../../../../components/BaseModal";
@@ -11,7 +10,9 @@ import {
   WalletConnectIcon,
 } from "../../../../../components/Icon";
 import MainCard from "../../../../../components/MainCard";
-import { SupportedConnectors } from "../../../../../libs/connectors";
+import { Connector, SupportedConnectors } from "../../../../../libs/connectors";
+import { SupportedChains } from "../../../../../libs/constants/chain";
+import changeNetwork from "../../../../../libs/hooks/changeNetwork";
 import useThemes, { ThemeType } from "../../../../../libs/hooks/useThemes";
 import useWeb3 from "../../../../../libs/hooks/useWeb3";
 import "./styles";
@@ -21,10 +22,24 @@ type Props = {
 };
 
 const Modal: FC<Props> = ({ ...props }) => {
-  const { activate} = useWeb3();
+  const { activate } = useWeb3();
   const classPrefix = "modal-status";
   const { theme } = useThemes();
   const [isMore, setIsMore] = useState<boolean>(false);
+
+  const activateClick = (connector: Connector) => {
+    activate(connector.connector, undefined, true).catch(() => {
+      changeNetwork(SupportedChains[0].chainId)
+      // message.error(
+      //   <span>
+      //     This network is not supported, please{" "}
+      //     <button onClick={() => changeNetwork(SupportedChains[0].chainId)}>
+      //       switch the BNB network
+      //     </button>
+      //   </span>
+      // );
+    });
+  };
   return (
     <BaseModal
       onClose={props.onClose}
@@ -39,31 +54,11 @@ const Modal: FC<Props> = ({ ...props }) => {
       </p>
       <div className={`${classPrefix}-showView`}>
         <div className={`${classPrefix}-walletSelect`}>
-          <MainCard
-            onClick={() => {
-              activate(SupportedConnectors[0].connector, undefined, true).catch(
-                () => {
-                  message.error(
-                    t`This network is not supported, please switch the network`
-                  );
-                }
-              );
-            }}
-          >
+          <MainCard onClick={() => activateClick(SupportedConnectors[0])}>
             <MetamaskIcon />
             <p>MetaMask</p>
           </MainCard>
-          <MainCard
-            onClick={() => {
-              activate(SupportedConnectors[1].connector, undefined, true).catch(
-                () => {
-                  message.error(
-                    t`This network is not supported, please switch the network`
-                  );
-                }
-              );
-            }}
-          >
+          <MainCard onClick={() => activateClick(SupportedConnectors[1])}>
             <WalletConnectIcon />
             <p>WalletConnect</p>
           </MainCard>
@@ -71,69 +66,21 @@ const Modal: FC<Props> = ({ ...props }) => {
         {isMore ? (
           <div className={`${classPrefix}-moreView`}>
             <div className={`${classPrefix}-walletSelect2`}>
-            <MainCard
-                onClick={() => {
-                  activate(
-                    SupportedConnectors[3].connector,
-                    undefined,
-                    true
-                  ).catch(() => {
-                    message.error(
-                      t`This network is not supported, please switch the network`
-                    );
-                  });
-                }}
-              >
-                <img src="OKXWallet.png" alt="NEST IMG"/>
+              <MainCard onClick={() => activateClick(SupportedConnectors[3])}>
+                <img src="OKXWallet.png" alt="NEST IMG" />
                 <p>OKX Wallet</p>
               </MainCard>
-              <MainCard
-                onClick={() => {
-                  activate(
-                    SupportedConnectors[0].connector,
-                    undefined,
-                    true
-                  ).catch(() => {
-                    message.error(
-                      t`This network is not supported, please switch the network`
-                    );
-                  });
-                }}
-              >
+              <MainCard onClick={() => activateClick(SupportedConnectors[0])}>
                 <TokenPocketIcon />
                 <p>Token Pocket</p>
               </MainCard>
             </div>
             <div className={`${classPrefix}-walletSelect3`}>
-              <MainCard
-                onClick={() => {
-                  activate(
-                    SupportedConnectors[0].connector,
-                    undefined,
-                    true
-                  ).catch(() => {
-                    message.error(
-                      t`This network is not supported, please switch the network`
-                    );
-                  });
-                }}
-              >
+              <MainCard onClick={() => activateClick(SupportedConnectors[0])}>
                 <Coin98Icon />
                 <p>Coin98</p>
               </MainCard>
-              <MainCard
-                onClick={() => {
-                  activate(
-                    SupportedConnectors[2].connector,
-                    undefined,
-                    true
-                  ).catch(() => {
-                    message.error(
-                      t`This network is not supported, please switch the network`
-                    );
-                  });
-                }}
-              >
+              <MainCard onClick={() => activateClick(SupportedConnectors[2])}>
                 <CoinbaseIcon />
                 <p>Coinbase Wallet</p>
               </MainCard>
