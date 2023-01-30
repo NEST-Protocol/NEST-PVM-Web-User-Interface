@@ -4,7 +4,9 @@ import {
   LittleBSC,
   LittleETH,
   NetworkNow,
+  TokenNest,
 } from "../../../../../components/Icon";
+import { useGetToken } from "../../../../../contracts/hooks/useGetToken";
 import { SupportedChains } from "../../../../../libs/constants/chain";
 import changeNetwork from "../../../../../libs/hooks/changeNetwork";
 import useWeb3 from "../../../../../libs/hooks/useWeb3";
@@ -42,6 +44,33 @@ const SelectNetworkModal: FC<Props> = ({ ...props }) => {
           <LittleKCC />
           <p>KCC</p>
         </li> */}
+      </ul>
+    </BaseModal>
+  );
+};
+
+export const SelectTestTokenModal: FC<Props> = ({ ...props }) => {
+  const classPrefix = "selectNetworkMobile";
+  const addNEST = useGetToken("NEST");
+  return (
+    <BaseModal
+      onClose={props.onClose}
+      classNames={classPrefix}
+      titleName={`Select a test token`}
+    >
+      <ul>
+        <li onClick={() => addNEST()}>
+          <TokenNest />
+          <p>NEST</p>
+        </li>
+        <li
+          onClick={() => {
+            window.open("https://testnet.bnbchain.org/faucet-smart");
+          }}
+        >
+          <LittleBSC />
+          <p>BNB</p>
+        </li>
       </ul>
     </BaseModal>
   );

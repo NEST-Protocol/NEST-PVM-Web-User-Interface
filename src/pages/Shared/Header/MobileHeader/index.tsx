@@ -20,7 +20,7 @@ import Modal from "../Status/Modal";
 import WalletModal from "../Status/WalletModal";
 import "../Status/styles";
 import "./styles";
-import SelectNetworkModal from "./SelectNetworkModal";
+import SelectNetworkModal, { SelectTestTokenModal } from "./SelectNetworkModal";
 import useThemes, { ThemeType } from "../../../../libs/hooks/useThemes";
 import Drawer from "@mui/material/Drawer";
 
@@ -29,6 +29,7 @@ const MobileHeader: FC = () => {
   const { account, chainId } = useWeb3();
   const [showList, setShowList] = useState(false);
   const [showNet, setShowNet] = useState(false);
+  const [showTestToken, setShowTestToken] = useState(false);
   const [showCon, setShowCon] = useState(false);
   const [showWallet, setShowWallet] = useState(false);
   const location = useLocation();
@@ -150,6 +151,10 @@ const MobileHeader: FC = () => {
             </button>
           )}
         </div>
+        <button className="testToken" onClick={() => {
+          setShowList(false);
+          setShowTestToken(true);
+        }}><p>Test Token</p></button>
       </div>
     );
   };
@@ -160,6 +165,9 @@ const MobileHeader: FC = () => {
       </Drawer>
       <Popup modal ref={modal} open={showNet}>
         <SelectNetworkModal onClose={() => setShowNet(false)} />
+      </Popup>
+      <Popup modal ref={modal} open={showTestToken} nested>
+        <SelectTestTokenModal onClose={() => setShowTestToken(false)} />
       </Popup>
       <Popup modal ref={modal} open={showCon}>
         <Modal onClose={() => setShowCon(false)} />
