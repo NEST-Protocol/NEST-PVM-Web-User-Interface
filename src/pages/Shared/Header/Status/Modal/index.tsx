@@ -29,7 +29,7 @@ const Modal: FC<Props> = ({ ...props }) => {
 
   const activateClick = (connector: Connector) => {
     activate(connector.connector, undefined, true).catch(() => {
-      changeNetwork(SupportedChains[0].chainId)
+      changeNetwork(SupportedChains[0].chainId);
       // message.error(
       //   <span>
       //     This network is not supported, please{" "}

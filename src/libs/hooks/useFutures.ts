@@ -75,7 +75,7 @@ const UPDATE_LIST_TIME = 15;
 const UPDATE_BALANCE_TIME = 60;
 const BASE_NEST_FEE = "15";
 const MIN_NEST = 50;
-const ORDER_GROUP = 4000
+const ORDER_GROUP = 10000
 
 const tokenArray = [tokenList["ETH"], tokenList["BTC"]];
 
