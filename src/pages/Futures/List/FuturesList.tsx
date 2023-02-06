@@ -1,3 +1,4 @@
+import { Stack } from "@mui/material";
 import { BigNumber } from "ethers/lib/ethers";
 import { FC, useRef } from "react";
 import Popup from "reactjs-popup";
@@ -39,7 +40,7 @@ export type FuturesOldListProps = {
 const FuturesList: FC<FuturesListProps> = ({ ...props }) => {
   const modalAdd = useRef<any>();
   const modalTrigger = useRef<any>();
-  const modalClose= useRef<any>();
+  const modalClose = useRef<any>();
   const {
     TokenOneSvg,
     TokenTwoSvg,
@@ -71,17 +72,21 @@ const FuturesList: FC<FuturesListProps> = ({ ...props }) => {
 
   return (
     <tr className={`${props.className}-table-normal`}>
-      <td className={"tokenPair"}>
-        <TokenOneSvg />
-        <TokenTwoSvg />
+      <td className={"position"}>
+        <Stack spacing={1} alignItems="center">
+          <Stack direction={"row"} spacing={0} alignItems="center">
+            <TokenOneSvg />
+            <TokenTwoSvg />
+          </Stack>
+          <Stack direction={"row"} spacing={1} alignItems="center">
+            <p>{props.item.lever.toString()}X</p>
+            {props.item.orientation ? <LongIcon /> : <ShortIcon />}
+            <p className={props.item.orientation ? "red" : "green"}>
+              {props.item.orientation ? "Long" : "Short"}
+            </p>
+          </Stack>
+        </Stack>
       </td>
-      <td className={"td-type"}>
-        {props.item.orientation ? <LongIcon /> : <ShortIcon />}
-        <p className={props.item.orientation ? "red" : "green"}>
-          {props.item.orientation ? "Long" : "Short"}
-        </p>
-      </td>
-      <td>{props.item.lever.toString()}X</td>
       <td>{showBalance()} NEST</td>
       <td>{showBasePrice()} USDT</td>
       <td>{showMarginAssets()} NEST</td>
@@ -95,7 +100,10 @@ const FuturesList: FC<FuturesListProps> = ({ ...props }) => {
             trigger={<button className="fort-button">Add</button>}
             nested
           >
-            <FuturesAdd order={props.item} onClose={() => modalAdd.current.close()}/>
+            <FuturesAdd
+              order={props.item}
+              onClose={() => modalAdd.current.close()}
+            />
           </Popup>
           <Popup
             modal
@@ -105,7 +113,10 @@ const FuturesList: FC<FuturesListProps> = ({ ...props }) => {
             }
             nested
           >
-            <Trigger order={props.item}  onClose={() => modalTrigger.current.close()}/>
+            <Trigger
+              order={props.item}
+              onClose={() => modalTrigger.current.close()}
+            />
           </Popup>
           <Popup
             modal
@@ -113,7 +124,11 @@ const FuturesList: FC<FuturesListProps> = ({ ...props }) => {
             trigger={<button className="fort-button">Close</button>}
             nested
           >
-            <FuturesClose order={props.item} kValue={props.kValue}  onClose={() => modalClose.current.close()}/>
+            <FuturesClose
+              order={props.item}
+              kValue={props.kValue}
+              onClose={() => modalClose.current.close()}
+            />
           </Popup>
         </td>
       )}
@@ -136,7 +151,7 @@ export const FuturesList2: FC<FuturesList2Props> = ({ ...props }) => {
   } = useFuturesLimitOrderList(props.item);
 
   return (
-    <tr className={`${props.className}-table-normal`}>
+    <tr className={`${props.className}-table-order`}>
       <td className={"tokenPair"}>
         <TokenOneSvg />
         <TokenTwoSvg />
@@ -157,7 +172,10 @@ export const FuturesList2: FC<FuturesList2Props> = ({ ...props }) => {
           trigger={<button className="fort-button">Edit</button>}
           nested
         >
-          <LimitPrice order={props.item} onClose={() => modalLimit.current.close()}/>
+          <LimitPrice
+            order={props.item}
+            onClose={() => modalLimit.current.close()}
+          />
         </Popup>
 
         <MainButton
@@ -187,17 +205,21 @@ export const FuturesListOld: FC<FuturesOldListProps> = ({ ...props }) => {
 
   return (
     <tr className={`${props.className}-table-normal`}>
-      <td className={"tokenPair"}>
-        <TokenOneSvg />
-        <TokenTwoSvg />
+      <td className={"position"}>
+        <Stack spacing={1} alignItems="center">
+          <Stack direction={"row"} spacing={0} alignItems="center">
+            <TokenOneSvg />
+            <TokenTwoSvg />
+          </Stack>
+          <Stack direction={"row"} spacing={1} alignItems="center">
+            <p>{props.item.lever.toString()}X</p>
+            {props.item.orientation ? <LongIcon /> : <ShortIcon />}
+            <p className={props.item.orientation ? "red" : "green"}>
+              {props.item.orientation ? "Long" : "Short"}
+            </p>
+          </Stack>
+        </Stack>
       </td>
-      <td className={"td-type"}>
-        {props.item.orientation ? <LongIcon /> : <ShortIcon />}
-        <p className={props.item.orientation ? "red" : "green"}>
-          {props.item.orientation ? "Long" : "Short"}
-        </p>
-      </td>
-      <td>{props.item.lever.toString()}X</td>
       <td>{showBalance()} NEST</td>
       <td>{showBasePrice()} USDT</td>
       <td>{showMarginAssets()} NEST</td>

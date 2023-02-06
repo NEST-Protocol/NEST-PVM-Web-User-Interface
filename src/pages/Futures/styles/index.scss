@@ -284,10 +284,10 @@
             box-shadow: $shadow;
         }
 
-        .Futures-table-normal {
+        .Futures-table-normal, .Futures-table-order {
             color: $gray-info-text-color;
             font-size: $T2;
-            height: 44px;
+            height: 72px;
             border-radius: 12px;
             box-shadow: $shadow;
             text-align: center;
@@ -305,17 +305,36 @@
                 padding: 0;
             }
 
-            .tokenPair {
+            .position {
                 svg {
                     position: relative;
                     z-index: 1;
+                    width: 20px;
+                    height: 20px;
                 }
 
                 svg+svg {
                     margin-left: -8px;
                     z-index: 0;
                 }
+
+                p + svg {
+                    width: 32px;
+                    height: 17px;
+                }
+
+                p.red {
+                    color: $up-color;
+                }
+    
+                p.green {
+                    color: $down-color;
+                }
             }
+        }
+
+        .Futures-table-order {
+            height: 44px;
         }
 
         th {

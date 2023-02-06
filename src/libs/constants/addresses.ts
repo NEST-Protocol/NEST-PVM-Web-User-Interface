@@ -207,8 +207,8 @@ export const NESTNFTMarketContract: AddressesType = {
 };
 
 export const TestTokenContract: AddressesType = {
-  1: "",
-  5: "",
-  56: "",
+  1: ZERO_ADDRESS,
+  5: ZERO_ADDRESS,
+  56: ZERO_ADDRESS,
   97: "0x953750D91CaCcFBD43fcbC562BB2d66975231CE7",
 };
