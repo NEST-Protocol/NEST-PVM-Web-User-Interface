@@ -167,7 +167,7 @@ const PositionsList: FC<FuturesListProps> = ({ ...props }) => {
         </div>
         <div className="right">
           <p className="title">Open Price</p>
-          <p className="value">{showBasePrice()} NEST</p>
+          <p className="value">{showBasePrice()} USDT</p>
         </div>
       </Stack>
       <Stack
