@@ -1,4 +1,4 @@
-import { FC, useCallback, useEffect, useRef, useState } from "react";
+import {FC, useCallback, useEffect, useMemo, useRef, useState} from "react";
 import {
   checkWidth,
   formatInputNum,
@@ -27,6 +27,7 @@ import Popup from "reactjs-popup";
 import TriggerRiskModal from "./TriggerRisk";
 import useWeb3 from "../../libs/hooks/useWeb3";
 import axios from "axios";
+import {BigNumber} from "ethers";
 
 const Futures: FC = () => {
   const classPrefix = "Futures";
@@ -113,6 +114,13 @@ const Futures: FC = () => {
       }
     }
   }, [account, localStorage.getItem("inviteCode")]);
+
+  const close = useMemo(() => {
+    if (kValue?.[tokenPair].nowPrice) {
+      return BigNumber.from(kValue?.[tokenPair].nowPrice).div(BigNumber.from(10).pow(16)).toNumber() / 100;
+    }
+    return 0;
+  }, [kValue, tokenPair])
 
   useEffect(() => {
     handleInviteCode();
@@ -421,6 +429,7 @@ const Futures: FC = () => {
             chainId={56}
             tokenPair={tokenPair}
             chartHeight={chartHeight()}
+            close={close}
           />
         </Stack>
       </Stack>

@@ -9,6 +9,7 @@ type TVChartProps = {
   chainId: number;
   tokenPair: string;
   chartHeight?: number;
+  close: number;
 };
 
 const PERIOD_TYPE = [
@@ -32,7 +33,7 @@ export function formatDateTime(time: number) {
   return formatDateFn(time * 1000, "dd MMM yyyy, h:mm a");
 }
 
-const TVChart: FC<TVChartProps> = ({ chainId, tokenPair, chartHeight}) => {
+const TVChart: FC<TVChartProps> = ({ chainId, tokenPair, chartHeight, close}) => {
   const ref = useRef(null);
   const chartRef = useRef(null);
   const [currentChart, setCurrentChart] = useState<any>();
@@ -67,18 +68,31 @@ const TVChart: FC<TVChartProps> = ({ chainId, tokenPair, chartHeight}) => {
         low: Math.min(Number(item.open.toFixed(2)), Number(item.close.toFixed(2))),
         open: Number(item.open.toFixed(2)),
         time: item.timestamp as UTCTimestamp,
-      }))
+      }));
       setPriceData(data);
     } catch (error) {
       console.log(error)
     }
   }, [chainId, tokenPair, period]);
 
+  const updateClose = useCallback(() => {
+    if (close && priceData[`${period}${tokenPair}`] && priceData[`${period}${tokenPair}`].length) {
+      console.log('updated', close)
+      const data = {...priceData}
+      data[`${period}${tokenPair}`][priceData[`${period}${tokenPair}`].length - 1].close = close
+      setPriceData(data)
+    }
+  }, [close, period, tokenPair])
+
+  useEffect(() => {
+    updateClose()
+  }, [updateClose])
+
   useEffect(() => {
     getPriceData();
     const internal = setInterval(() => {
       getPriceData();
-    }, 30 * 1000);
+    }, 10 * 1000);
     return () => clearInterval(internal);
   }, [getPriceData]);
 
