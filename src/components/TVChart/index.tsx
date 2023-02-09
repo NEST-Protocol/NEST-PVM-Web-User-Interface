@@ -92,7 +92,7 @@ const TVChart: FC<TVChartProps> = ({ chainId, tokenPair, chartHeight, close}) =>
     getPriceData();
     const internal = setInterval(() => {
       getPriceData();
-    }, 10 * 1000);
+    }, 30 * 1000);
     return () => clearInterval(internal);
   }, [getPriceData]);
 
