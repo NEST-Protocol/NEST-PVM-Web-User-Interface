@@ -74,6 +74,7 @@ const FuturesMobile: FC = () => {
   } = useFutures();
   const BTCIcon = tokenList["BTC"].Icon;
   const ETHIcon = tokenList["ETH"].Icon;
+  const BNBIcon = tokenList["BNB"].Icon;
   const USDTIcon = tokenList["USDT"].Icon;
 
   const handleLeverNum = (selected: number) => {
@@ -128,11 +129,11 @@ const FuturesMobile: FC = () => {
           ]
         : [
             { text: "1X", value: 1 },
-            { text: "2X", value: 2 },
             { text: "5X", value: 5 },
             { text: "10X", value: 10 },
-            { text: "15X", value: 15 },
             { text: "20X", value: 20 },
+            { text: "25X", value: 25 },
+            { text: "30X", value: 30 },
           ];
     const limitPrice = () => {
       return (
@@ -171,7 +172,35 @@ const FuturesMobile: FC = () => {
           spacing={0}
           className={`${classPrefix}-stopLimit1`}
         >
-          <p className={`${classPrefix}-stopLimit1-title`}>Trigger</p>
+          <p className={`${classPrefix}-stopLimit1-title`}>Take Profit</p>
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+            spacing={0}
+            className={`rightInput`}
+          >
+            <input
+              placeholder={`${tokenPrice.price}`}
+              value={takeInput}
+              maxLength={32}
+              onChange={(e) => setTakeInput(formatInputNum(e.target.value))}
+            />
+            <p>USDT</p>
+          </Stack>
+        </Stack>
+      );
+    };
+    const stopLimit2 = () => {
+      return (
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+          spacing={0}
+          className={`${classPrefix}-stopLimit2`}
+        >
+          <p className={`${classPrefix}-stopLimit2-title`}>Stop Loss</p>
           <Stack
             direction="row"
             justifyContent="space-between"
@@ -260,6 +289,7 @@ const FuturesMobile: FC = () => {
 
         {limit ? limitPrice() : <></>}
         {stop ? stopLimit1() : <></>}
+        {stop ? stopLimit2() : <></>}
         {limit ? (
           <></>
         ) : (
@@ -468,6 +498,16 @@ const FuturesMobile: FC = () => {
             <BTCIcon />
             <USDTIcon className="USDT" />
             <p>BTC/USDT</p>
+          </li>
+          <li
+            onClick={() => {
+              setTokenPair("BNB");
+              setAnchorEl(null);
+            }}
+          >
+            <BNBIcon />
+            <USDTIcon className="USDT" />
+            <p>BNB/USDT</p>
           </li>
         </ul>
       </Popover>

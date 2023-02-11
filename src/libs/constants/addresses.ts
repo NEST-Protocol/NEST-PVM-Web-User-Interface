@@ -1,5 +1,6 @@
 import { BigNumber } from "ethers";
 import {
+  TokenBNB,
   TokenBTC,
   TokenETH,
   TokenFORT,
@@ -44,6 +45,24 @@ export const tokenList: { [key: string]: TokenType } = {
       5: "0",
       56: "0",
       97: "0",
+    },
+    sigmaSQ: BigNumber.from("45659142400"),
+  },
+  BNB: {
+    symbol: "BNB",
+    Icon: TokenBNB,
+    decimals: 18,
+    addresses: {
+      1: ZERO_ADDRESS,
+      5: ZERO_ADDRESS,
+      56: ZERO_ADDRESS,
+      97: ZERO_ADDRESS,
+    },
+    pairIndex: {
+      1: "3",
+      5: "0",
+      56: "3",
+      97: "3",
     },
     sigmaSQ: BigNumber.from("45659142400"),
   },

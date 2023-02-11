@@ -152,6 +152,7 @@ const InfoShow: FC<Props> = ({ children, ...props }) => {
         imageURL =
           "https://raw.githubusercontent.com/FORT-Protocol/Fort-Web-User-Interface/2e289cd29722576329fae529c2bfaa0a905f0148/src/components/Icon/svg/TokenNest.svg";
       }
+      alert("66666")
       await ethereum.request({
         method: "wallet_watchAsset",
         params: {

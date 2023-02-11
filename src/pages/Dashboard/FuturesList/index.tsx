@@ -5,7 +5,7 @@ import useTokenPairSymbol from "../../../libs/hooks/useTokenPairSymbol";
 import ShareMyOrderModal from "../ShareMyOrderModal";
 import {Stack} from "@mui/material";
 
-export type OrderView = {
+export type FuturesShareOrderView = {
   index: number;
   owner: string;
   leverage: string;
@@ -19,7 +19,7 @@ export type OrderView = {
 };
 
 type FuturesListProps = {
-  item: OrderView;
+  item: FuturesShareOrderView;
   key: number;
   className: string;
 };

@@ -36,6 +36,7 @@ const Trigger: FC<TriggerProp> = ({ ...props }) => {
     showTriggerRisk,
     setShowTriggerRisk,
     baseAction,
+    showLiqPrice
   } = useFuturesTrigger(props.order);
   const stopLimit1 = () => {
     return (
@@ -46,7 +47,7 @@ const Trigger: FC<TriggerProp> = ({ ...props }) => {
         spacing={0}
         className={`${classPrefix}-stopLimit1`}
       >
-        <p className={`${classPrefix}-stopLimit1-title`}>Trigger</p>
+        <p className={`${classPrefix}-stopLimit1-title`}>Take Profit</p>
         <Stack
           direction="row"
           justifyContent="space-between"
@@ -80,6 +81,36 @@ const Trigger: FC<TriggerProp> = ({ ...props }) => {
       </Stack>
     );
   };
+  const stopLimit2 = () => {
+    return (
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+        spacing={0}
+        className={`${classPrefix}-stopLimit2`}
+      >
+        <p className={`${classPrefix}-stopLimit2-title`}>Stop Loss</p>
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+          spacing={0}
+          className={`rightInput`}
+        >
+          <input
+            placeholder={showPlaceHolder()}
+            value={triggerInput}
+            maxLength={32}
+            onChange={(e) =>
+              setTriggerInput(formatInputNumWithFour(e.target.value))
+            }
+          />
+          <p>USDT</p>
+        </Stack>
+      </Stack>
+    );
+  };
   const info = () => {
     return (
       <>
@@ -106,27 +137,39 @@ const Trigger: FC<TriggerProp> = ({ ...props }) => {
         {isEdit() ? (
           <></>
         ) : (
-          <Stack
-            direction="row"
-            justifyContent="space-between"
-            alignItems="center"
-            spacing={0}
-            className={`${classPrefix}-infoShow`}
-          >
-            <LightTooltip
-              placement="right"
-              title={
-                <div>
-                  <p>Position fee = Position*0.2%</p>
-                  <p>Stop order fee(after execution) = 15 NEST</p>
-                </div>
-              }
-              arrow
+          <>
+            <Stack
+              direction="row"
+              justifyContent="space-between"
+              alignItems="center"
+              spacing={0}
+              className={`${classPrefix}-infoShow`}
             >
-              <p className="underLine">Fees</p>
-            </LightTooltip>
-            <p>{`${showTriggerFee()}`}</p>
-          </Stack>
+              <p>Liq Price</p>
+              <p>{showLiqPrice()} USDT</p>
+            </Stack>
+            <Stack
+              direction="row"
+              justifyContent="space-between"
+              alignItems="center"
+              spacing={0}
+              className={`${classPrefix}-infoShow`}
+            >
+              <LightTooltip
+                placement="right"
+                title={
+                  <div>
+                    <p>Position fee = Position*0.2%</p>
+                    <p>Stop order fee(after execution) = 15 NEST</p>
+                  </div>
+                }
+                arrow
+              >
+                <p className="underLine">Fees</p>
+              </LightTooltip>
+              <p>{`${showTriggerFee()}`}</p>
+            </Stack>
+          </>
         )}
       </>
     );
@@ -156,6 +199,7 @@ const Trigger: FC<TriggerProp> = ({ ...props }) => {
       <Stack spacing={0} alignItems="center">
         <p className="title">{showTitle()}</p>
         {stopLimit1()}
+        {stopLimit2()}
         {info()}
         <MainButton
           className="mainButton"

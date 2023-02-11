@@ -1,13 +1,21 @@
 @use "sass:math";
 @import 'src/styles/shared.scss';
 
-.Trigger {
+.OpenPosition {
     width: 572px;
     padding: 40px 44px;
 
     p.title {
         font-size: 20px;
         margin-bottom: 25px;
+    }
+
+    &-position {
+        width: 100%;
+        font-size: 16px;
+        color: #878787;
+        padding: 0 15px;
+        margin-top: 40px;
     }
 
     &-infoShow {
@@ -17,17 +25,12 @@
         padding: 0 15px;
         margin-top: 10px;
 
-        p.underLine {
-            border-bottom: 1px dashed #878787;
-        }
-
         p+p {
             font-size: 12px;
         }
     }
 
-    &-stopLimit1,
-    &-stopLimit2 {
+    &-input {
         width: 100%;
         height: 44px;
         border-radius: 22px;
@@ -82,7 +85,7 @@
     }
 }
 
-.Trigger-dark {
+.OpenPosition-dark {
     background: rgba(255, 255, 255, 0.15);
     box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
     border: 0px;
@@ -102,10 +105,12 @@
         }
     }
 
-    .Trigger {
+    .OpenPosition {
 
-        &-stopLimit1,
-        &-stopLimit2 {
+        &-position {
+            color: #C5C5C5;
+        }
+        &-input {
             background: rgba(255, 255, 255, 0.15);
             box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
             border: 0;
@@ -125,10 +130,6 @@
 
         &-infoShow {
             color: #C5C5C5;
-
-            p.underLine {
-                border-bottom: 1px dashed #C5C5C5;
-            }
         }
     }
 }

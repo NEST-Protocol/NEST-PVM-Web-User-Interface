@@ -1,4 +1,4 @@
-import {FC, useRef} from "react";
+import {FC, useRef, useState} from "react";
 import Popup from "reactjs-popup";
 import {Divider, Stack} from "@mui/material";
 import MainButton from "../../../components/MainButton";
@@ -6,20 +6,30 @@ import {QRCodeCanvas} from "qrcode.react";
 import domtoimage from "../../../libs/dom-to-image";
 import useWeb3 from "../../../libs/hooks/useWeb3";
 import DashboardModal from "../DashboardModal";
-import {OrderView} from "../FuturesList";
+import {FuturesShareOrderView} from "../FuturesList";
 import useTokenPairSymbol from "../../../libs/hooks/useTokenPairSymbol";
 import {LongIcon, NESTLogo, ShareIcon, ShareWhiteIcon, ShortIcon} from "../../../components/Icon";
 import useThemes, {ThemeType} from "../../../libs/hooks/useThemes";
 
 type ShareMyDealModalProps = {
-  order: OrderView
+  order: FuturesShareOrderView
 }
 
 const ShareMyDealModal: FC<ShareMyDealModalProps> = ({order}) => {
+  const [hasCopied, setHasCopied] = useState(false)
   const {account} = useWeb3()
   const modal = useRef<any>();
   const {TokenOneSvg, TokenTwoSvg} = useTokenPairSymbol(order.tokenPair)
   const { theme } = useThemes();
+  const copy = () => {
+    const link = `https://finance.nestprotocol.org/#/futures?a=${account?.slice(-8).toLowerCase()}`
+    navigator.clipboard.writeText(link).then(() => {
+      setHasCopied(true)
+      setTimeout(() => {
+        setHasCopied(false)
+      }, 2000)
+    })
+  }
 
   const download = () => {
     const node = document.getElementById('my-share');
@@ -117,9 +127,9 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`
         </Stack>
         <Stack width={'100%'} minWidth={['360px', '480px', '600px']} direction={'row'} position={'absolute'} bottom={22} spacing={['0', '16px']} className={theme === ThemeType.dark ? 'dark' : ''}
                justifyContent={"center"} >
-          {/*<MainButton className={'dashboard-button'} onClick={copy}>*/}
-          {/*  {hasCopied ? 'Copied' : 'Copy'}*/}
-          {/*</MainButton>*/}
+          <MainButton className={'dashboard-button'} onClick={copy}>
+          {hasCopied ? 'Copied' : 'Copy'}
+          </MainButton>
           <MainButton className={'dashboard-button'} onClick={download}>
             Download
           </MainButton>

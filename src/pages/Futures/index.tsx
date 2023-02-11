@@ -15,11 +15,11 @@ import InfoShow from "../../components/InfoShow";
 import { SingleTokenShow } from "../../components/TokenShow";
 import OpenShow from "../../components/OpenShow";
 import MainButton from "../../components/MainButton";
-import { PutDownIcon } from "../../components/Icon";
+import { PutDownIcon, TokenBNB } from "../../components/Icon";
 import { Popover } from "@mui/material";
 import classNames from "classnames";
 import TVChart from "../../components/TVChart";
-import { useFutures } from "../../libs/hooks/useFutures";
+import { OrderView, tokenArray, useFutures } from "../../libs/hooks/useFutures";
 import FuturesList, { FuturesList2, FuturesListOld } from "./List/FuturesList";
 import { LightTooltip } from "../../styles/MUI";
 import PerpetualsNoticeModal from "./PerpetualsNoticeModal";
@@ -27,6 +27,8 @@ import Popup from "reactjs-popup";
 import TriggerRiskModal from "./TriggerRisk";
 import useWeb3 from "../../libs/hooks/useWeb3";
 import axios from "axios";
+import OpenPosition from "./OpenPosition";
+import { BigNumber } from "ethers";
 
 const Futures: FC = () => {
   const classPrefix = "Futures";
@@ -34,6 +36,9 @@ const Futures: FC = () => {
   const isPC = checkWidth();
   const modal = useRef<any>();
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
+  const [showOpenPosition, setShowOpenPosition] = useState(false);
+  const [showOpenPositionOrder, setShowOpenPositionOrder] =
+    useState<OrderView>();
   const {
     chainId,
     isLong,
@@ -90,6 +95,35 @@ const Futures: FC = () => {
     }
   }, []);
 
+  const handleShareOrder = useCallback(async () => {
+    const href = window.location.href;
+    const inviteCode = href?.split("?position=")[1];
+    if (inviteCode && account && inviteCode.length > 0) {
+      const orderData = inviteCode.split("&");
+      if (orderData.length === 7) {
+        const tokenNameArray = tokenArray.map((item) => {
+          return item.symbol;
+        });
+        const tokenIndex = tokenNameArray.indexOf(orderData[0]);
+        if (tokenIndex === -1) {return}
+        const order: OrderView = {
+          index: BigNumber.from("0"),
+          owner: "",
+          balance: BigNumber.from(orderData[1]),
+          tokenIndex: BigNumber.from(tokenIndex.toString()),
+          baseBlock: BigNumber.from("0"),
+          lever: BigNumber.from(orderData[2]),
+          orientation: orderData[3] === "true",
+          basePrice: BigNumber.from(orderData[4]),
+          stopPrice: BigNumber.from(orderData[5]),
+          actualMargin: "",
+        };
+        setShowOpenPositionOrder(order);
+        setShowOpenPosition(true)
+      }
+    }
+  }, [account]);
+
   const postInviteCode = useCallback(async () => {
     const inviteCode = window.localStorage.getItem("inviteCode");
     if (inviteCode && account) {
@@ -119,6 +153,10 @@ const Futures: FC = () => {
   }, [handleInviteCode]);
 
   useEffect(() => {
+    handleShareOrder();
+  }, [handleShareOrder]);
+
+  useEffect(() => {
     if (chainId === 56) {
       postInviteCode();
     }
@@ -144,11 +182,11 @@ const Futures: FC = () => {
           ]
         : [
             { text: "1X", value: 1 },
-            { text: "2X", value: 2 },
             { text: "5X", value: 5 },
             { text: "10X", value: 10 },
-            { text: "15X", value: 15 },
             { text: "20X", value: 20 },
+            { text: "25X", value: 25 },
+            { text: "30X", value: 30 },
           ];
     const limitPrice = () => {
       return (
@@ -187,7 +225,37 @@ const Futures: FC = () => {
           spacing={0}
           className={`${classPrefix}-stopLimit1`}
         >
-          <p className={`${classPrefix}-stopLimit1-title`}>Trigger</p>
+          <p className={`${classPrefix}-stopLimit1-title`}>Take Profit</p>
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+            spacing={0}
+            className={`rightInput`}
+          >
+            <input
+              placeholder={`${tokenPrice.price}`}
+              value={takeInput}
+              maxLength={32}
+              onChange={(e) =>
+                setTakeInput(`${formatInputNum(e.target.value)}`)
+              }
+            />
+            <p>USDT</p>
+          </Stack>
+        </Stack>
+      );
+    };
+    const stopLimit2 = () => {
+      return (
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+          spacing={0}
+          className={`${classPrefix}-stopLimit2`}
+        >
+          <p className={`${classPrefix}-stopLimit2-title`}>Stop Loss</p>
           <Stack
             direction="row"
             justifyContent="space-between"
@@ -210,11 +278,11 @@ const Futures: FC = () => {
     };
     const chartHeight = () => {
       if (stop && limit) {
-        return 565;
+        return 624;
       } else if (!stop && !limit) {
         return 475;
       } else if (stop && !limit) {
-        return 534;
+        return 593;
       } else if (!stop && limit) {
         return 506;
       }
@@ -278,6 +346,16 @@ const Futures: FC = () => {
                 <BTCIcon />
                 <USDTIcon className="USDT" />
                 <p>BTC/USDT</p>
+              </li>
+              <li
+                onClick={() => {
+                  setTokenPair("BNB");
+                  setAnchorEl(null);
+                }}
+              >
+                <TokenBNB />
+                <USDTIcon className="USDT" />
+                <p>BNB/USDT</p>
               </li>
             </ul>
           </Popover>
@@ -349,6 +427,7 @@ const Futures: FC = () => {
 
           {limit ? limitPrice() : <></>}
           {stop ? stopLimit1() : <></>}
+          {stop ? stopLimit2() : <></>}
           {limit ? (
             <></>
           ) : (
@@ -461,8 +540,6 @@ const Futures: FC = () => {
         <thead>
           <tr className={`${classPrefix}-table-title`}>
             <th>Positions</th>
-            <th>Initial Margin</th>
-            <th>Open Price</th>
             <th>
               <LightTooltip
                 placement="top"
@@ -481,6 +558,9 @@ const Futures: FC = () => {
                 <span>Actual Margin</span>
               </LightTooltip>
             </th>
+            <th>Open Price</th>
+            <th>Liq Price</th>
+            <th>Stop Order</th>
             <th>Operate</th>
           </tr>
         </thead>
@@ -526,6 +606,17 @@ const Futures: FC = () => {
     <FuturesMobile />
   ) : (
     <Stack spacing={0} alignItems="center" className={`${classPrefix}`}>
+      <Popup
+        open={showOpenPosition}
+        modal
+        ref={modal}
+        onClose={() => setShowOpenPosition(false)}
+      >
+        <OpenPosition
+          onClose={() => setShowOpenPosition(false)}
+          order={showOpenPositionOrder!}
+        />
+      </Popup>
       <Popup
         open={showNotice}
         modal

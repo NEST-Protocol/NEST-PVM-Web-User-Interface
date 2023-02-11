@@ -9,13 +9,15 @@
     border-radius: 14px;
 
     &-one,
-    &-two {
+    &-two,
+    &-three {
         border-bottom: 1px solid #DCDCDC;
     }
 
     &-one,
     &-two,
-    &-three {
+    &-three,
+    &-four {
         p.title {
             color: #878787;
             font-size: 12.5px;
@@ -43,12 +45,44 @@
     }
 
     &-two,
-    &-three {
+    &-three,
+    &-four {
         margin-top: 14px;
+    }
+
+    &-one {
+        p.positionLever {
+            margin-left: 13px;
+            margin-right: 13px;
+            line-height: 20px;
+        }
+
+        .longShort {
+            line-height: 20px;
+        }
+    }
+
+    &-two {
+        p.positionActual {
+            width: 93px;
+        }
+
+        p.value+p.value {
+            margin-left: 30px;
+        }
+    }
+
+    &-four {
+        width: 100%;
+
+        .left {
+            width: 100%;
+        }
     }
 
     .pairIcon {
         margin: 11.5px 0;
+        padding-right: 7px;
 
         svg {
             position: relative;
@@ -105,7 +139,7 @@
             border-radius: 17px;
             line-height: 34px;
             font-size: 12.5px;
-            color:#878787;
+            color: #878787;
             font-family: $boldFont;
 
             p {
@@ -116,10 +150,19 @@
                 width: 17px;
                 height: 17px;
                 margin-top: 7px;
+
                 path {
                     fill: #878787;
                 }
             }
+        }
+    }
+
+    &-futuresShare {
+        margin-top: 22px;
+
+        svg {
+            fill: #878787;
         }
     }
 
@@ -237,7 +280,8 @@
         }
     }
 
-    &-stopLimit1{
+    &-stopLimit1,
+    &-stopLimit2 {
         width: 100%;
         height: 34px;
         border-radius: 17px;
@@ -276,9 +320,10 @@
             .TriggerClose {
                 width: 68px;
                 height: 28px;
-                padding:0 10px;
+                padding: 0 10px;
                 margin: 0;
                 margin-left: 10px;
+
                 p {
                     font-family: $boldFont;
                     font-size: 12.5px;
@@ -364,7 +409,8 @@
             .positionsList {
 
                 &-limitPrice,
-                &-stopLimit1{
+                &-stopLimit1,
+                &-stopLimit2 {
                     background: rgba(255, 255, 255, 0.15);
                     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
                     border: 0;
@@ -383,6 +429,7 @@
 
                     .TriggerClose {
                         background: linear-gradient(90deg, #8BB7FF 0%, #0061FF 100%);
+
                         p {
                             color: white;
                         }
@@ -409,13 +456,15 @@
         border: 0;
 
         &-one,
-        &-two {
+        &-two,
+        &-three {
             border-bottom: 1px solid rgba(197, 197, 197, 0.15);
         }
 
         &-one,
         &-two,
-        &-three {
+        &-three,
+        &-four {
             p.title {
                 color: #C5C5C5;
 
@@ -439,6 +488,12 @@
                         fill: #C5C5C5;
                     }
                 }
+            }
+        }
+
+        &-futuresShare {
+            svg {
+                fill: #8BB7FF;
             }
         }
     }

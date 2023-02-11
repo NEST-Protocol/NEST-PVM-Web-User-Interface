@@ -156,6 +156,7 @@ export const DrawerTrigger: FC<DrawerBaseType> = ({ ...props }) => {
     showTriggerRisk,
     setShowTriggerRisk,
     baseAction,
+    showLiqPrice,
   } = useFuturesTrigger(props.order);
   const stopLimit1 = () => {
     return (
@@ -184,15 +185,48 @@ export const DrawerTrigger: FC<DrawerBaseType> = ({ ...props }) => {
           />
           <p>USDT</p>
           {isEdit() ? (
-            <MainButton className="TriggerClose" onClick={() => {
-              props.hideSelf()
-              actionClose()
-            }}>
+            <MainButton
+              className="TriggerClose"
+              onClick={() => {
+                props.hideSelf();
+                actionClose();
+              }}
+            >
               <p>Close</p>
             </MainButton>
           ) : (
             <></>
           )}
+        </Stack>
+      </Stack>
+    );
+  };
+  const stopLimit2 = () => {
+    return (
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+        spacing={0}
+        className={`${classPrefix}-stopLimit2`}
+      >
+        <p className={`${classPrefix}-stopLimit2-title`}>Trigger</p>
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+          spacing={0}
+          className={`rightInput`}
+        >
+          <input
+            placeholder={showPlaceHolder()}
+            value={triggerInput}
+            maxLength={32}
+            onChange={(e) =>
+              setTriggerInput(formatInputNumWithFour(e.target.value))
+            }
+          />
+          <p>USDT</p>
         </Stack>
       </Stack>
     );
@@ -217,6 +251,7 @@ export const DrawerTrigger: FC<DrawerBaseType> = ({ ...props }) => {
       <p className="title">{showTitle()}</p>
       <Stack spacing={0}>
         {stopLimit1()}
+        {stopLimit2()}
         <Stack
           direction="row"
           justifyContent="space-between"
@@ -240,27 +275,39 @@ export const DrawerTrigger: FC<DrawerBaseType> = ({ ...props }) => {
         {isEdit() ? (
           <></>
         ) : (
-          <Stack
-            direction="row"
-            justifyContent="space-between"
-            alignItems="center"
-            spacing={0}
-            className={`${classPrefix}-infoShow`}
-          >
-            <LightTooltip
-              placement="top-start"
-              title={
-                <div>
-                  <p>Position fee = Position*0.2%</p>
-                  <p>Stop order fee(after execution) = 15 NEST</p>
-                </div>
-              }
-              arrow
+          <>
+            <Stack
+              direction="row"
+              justifyContent="space-between"
+              alignItems="center"
+              spacing={0}
+              className={`${classPrefix}-infoShow`}
             >
-              <p className="underLine">Fees</p>
-            </LightTooltip>
-            <p>{`${showTriggerFee()}`}</p>
-          </Stack>
+              <p>Liq Price</p>
+              <p>{showLiqPrice()} USDT</p>
+            </Stack>
+            <Stack
+              direction="row"
+              justifyContent="space-between"
+              alignItems="center"
+              spacing={0}
+              className={`${classPrefix}-infoShow`}
+            >
+              <LightTooltip
+                placement="top-start"
+                title={
+                  <div>
+                    <p>Position fee = Position*0.2%</p>
+                    <p>Stop order fee(after execution) = 15 NEST</p>
+                  </div>
+                }
+                arrow
+              >
+                <p className="underLine">Fees</p>
+              </LightTooltip>
+              <p>{`${showTriggerFee()}`}</p>
+            </Stack>
+          </>
         )}
       </Stack>
       <MainButton

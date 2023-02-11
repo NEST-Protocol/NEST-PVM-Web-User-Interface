@@ -1,5 +1,6 @@
 import { Stack } from "@mui/material";
 import { BigNumber } from "ethers/lib/ethers";
+import { formatUnits } from "ethers/lib/utils";
 import { FC, useRef } from "react";
 import Popup from "reactjs-popup";
 import { LongIcon, ShortIcon, XIcon } from "../../../components/Icon";
@@ -13,6 +14,8 @@ import {
   useFuturesOldOrderList,
   useFuturesOrderList,
 } from "../../../libs/hooks/useFutures";
+import { FuturesShareOrderView } from "../../Dashboard/FuturesList";
+import ShareMyOrderModal from "../../Dashboard/ShareMyOrderModal";
 import FuturesAdd from "../Add";
 import FuturesClose from "../Close";
 import LimitPrice from "../LimitPrice";
@@ -44,10 +47,13 @@ const FuturesList: FC<FuturesListProps> = ({ ...props }) => {
   const {
     TokenOneSvg,
     TokenTwoSvg,
-    showBalance,
     showBasePrice,
     showMarginAssets,
     showTriggerTitle,
+    showPercent,
+    showLiqPrice,
+    showStopPrice,
+    tokenName,
   } = useFuturesOrderList(props.item, props.kValue);
 
   const endButton = () => {
@@ -70,6 +76,31 @@ const FuturesList: FC<FuturesListProps> = ({ ...props }) => {
     return props.item.actualMargin !== undefined;
   };
 
+  const shareOrderData = () => {
+    const nowPrice = props.kValue
+      ? props.kValue[tokenName()].nowPrice
+      : undefined;
+    const data: FuturesShareOrderView = {
+      index: Number(props.item.index.toString()),
+      owner: props.item.owner,
+      leverage: props.item.lever.toString() + "X",
+      orientation: props.item.orientation ? "Long" : "Short",
+      actualRate: parseFloat(showPercent().toFixed(2)),
+      openPrice: parseFloat(
+        parseFloat(formatUnits(props.item.basePrice, 18)).toFixed(2)
+      ),
+      tokenPair: `${tokenName()}/USDT`,
+      actualMargin: parseFloat(showMarginAssets()),
+      initialMargin: parseFloat(
+        parseFloat(formatUnits(props.item.balance, 4)).toFixed(2)
+      ),
+      lastPrice: nowPrice
+        ? parseFloat(parseFloat(formatUnits(nowPrice, 18)).toFixed(2))
+        : undefined,
+    };
+    return data;
+  };
+
   return (
     <tr className={`${props.className}-table-normal`}>
       <td className={"position"}>
@@ -87,9 +118,23 @@ const FuturesList: FC<FuturesListProps> = ({ ...props }) => {
           </Stack>
         </Stack>
       </td>
-      <td>{showBalance()} NEST</td>
+      <td>
+        <Stack spacing={1} alignItems="center">
+          <p>{showMarginAssets()} NEST</p>
+          <p style={{ color: showPercent() >= 0 ? "#80C269" : "#FF0000" }}>
+            {showPercent().toFixed(2)}%
+          </p>
+        </Stack>
+      </td>
       <td>{showBasePrice()} USDT</td>
-      <td>{showMarginAssets()} NEST</td>
+      <td>{showLiqPrice()} USDT</td>
+      <td>
+        <Stack spacing={1} alignItems="center">
+          {showStopPrice().map((item, index) => {
+            return <p key={`stopOrder+${index}`}>{item}</p>;
+          })}
+        </Stack>
+      </td>
       {isEnd() ? (
         <td className="button">{endButton()}</td>
       ) : (
@@ -122,6 +167,18 @@ const FuturesList: FC<FuturesListProps> = ({ ...props }) => {
             modal
             ref={modalClose}
             trigger={<button className="fort-button">Close</button>}
+            nested
+          >
+            <FuturesClose
+              order={props.item}
+              kValue={props.kValue}
+              onClose={() => modalClose.current.close()}
+            />
+          </Popup>
+          <Popup
+            modal
+            ref={modalClose}
+            trigger={<button><ShareMyOrderModal order={shareOrderData()} /></button>}
             nested
           >
             <FuturesClose
@@ -195,12 +252,13 @@ export const FuturesListOld: FC<FuturesOldListProps> = ({ ...props }) => {
   const {
     TokenOneSvg,
     TokenTwoSvg,
-    showBalance,
     showBasePrice,
     showMarginAssets,
     closeButtonLoading,
     closeButtonDis,
     closeButtonAction,
+    showPercent,
+    showLiqPrice,
   } = useFuturesOldOrderList(props.item, props.kValue);
 
   return (
@@ -220,9 +278,17 @@ export const FuturesListOld: FC<FuturesOldListProps> = ({ ...props }) => {
           </Stack>
         </Stack>
       </td>
-      <td>{showBalance()} NEST</td>
+      <td>
+        <Stack spacing={1} alignItems="center">
+          <p>{showMarginAssets()} NEST</p>
+          <p style={{ color: showPercent() >= 0 ? "#80C269" : "#FF0000" }}>
+            {showPercent().toFixed(2)}%
+          </p>
+        </Stack>
+      </td>
       <td>{showBasePrice()} USDT</td>
-      <td>{showMarginAssets()} NEST</td>
+      <td>{showLiqPrice()} USDT</td>
+      <td>not set</td>
       <td className="button">
         <MainButton
           disable={closeButtonDis()}

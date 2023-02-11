@@ -1,7 +1,7 @@
 import Stack from "@mui/material/Stack";
 import Drawer from "@mui/material/Drawer";
 import { FC, useState } from "react";
-import { LongIcon, ShortIcon, XIcon } from "../../../../components/Icon";
+import { LongIcon, ShareWhiteIcon, ShortIcon, XIcon } from "../../../../components/Icon";
 import MainButton from "../../../../components/MainButton";
 import "./styles";
 import classNames from "classnames";
@@ -39,10 +39,12 @@ const PositionsList: FC<FuturesListProps> = ({ ...props }) => {
   const {
     TokenOneSvg,
     TokenTwoSvg,
-    showBalance,
     showBasePrice,
     showMarginAssets,
     showTriggerTitle,
+    showPercent,
+    showLiqPrice,
+    showStopPrice,
   } = useFuturesOrderList(props.item, props.kValue);
 
   const drawerView = () => {
@@ -99,15 +101,22 @@ const PositionsList: FC<FuturesListProps> = ({ ...props }) => {
         className={`${classPrefix}-one`}
       >
         <div className="left">
-          <p className="title">Token Pair</p>
-          <div className="pairIcon">
-            <TokenOneSvg />
-            <TokenTwoSvg className="USDT" />
-          </div>
-        </div>
-        <div className="right">
-          <p className="title">Lever</p>
-          <p className="value">{props.item.lever.toString()}X</p>
+          <p className="title">Positions</p>
+          <Stack direction="row" spacing={1} alignItems="left">
+            <div className="pairIcon">
+              <TokenOneSvg />
+              <TokenTwoSvg className="USDT" />
+            </div>
+            <p className="value positionLever">
+              {props.item.lever.toString()}X
+            </p>
+            <div className="longShort">
+              {props.item.orientation ? <LongIcon /> : <ShortIcon />}
+              <p className={props.item.orientation ? "red" : "green"}>
+                {props.item.orientation ? "Long" : "Short"}
+              </p>
+            </div>
+          </Stack>
         </div>
       </Stack>
       <Stack
@@ -116,27 +125,6 @@ const PositionsList: FC<FuturesListProps> = ({ ...props }) => {
         alignItems="center"
         spacing={0}
         className={`${classPrefix}-two`}
-      >
-        <div className="left">
-          <p className="title">Initial Margin</p>
-          <p className="value">{showBalance()} NEST</p>
-        </div>
-        <div className="right">
-          <p className="title">Type</p>
-          <div className="longShort">
-            {props.item.orientation ? <LongIcon /> : <ShortIcon />}
-            <p className={props.item.orientation ? "red" : "green"}>
-              {props.item.orientation ? "Long" : "Short"}
-            </p>
-          </div>
-        </div>
-      </Stack>
-      <Stack
-        direction="row"
-        justifyContent="space-between"
-        alignItems="center"
-        spacing={0}
-        className={`${classPrefix}-three`}
       >
         <div className="left">
           <LightTooltip
@@ -155,19 +143,63 @@ const PositionsList: FC<FuturesListProps> = ({ ...props }) => {
           >
             <p
               className={classNames({
-                [`title`]: true,
+                [`title positionActual`]: true,
                 [`underLine`]: true,
               })}
             >
               Actual Margin
             </p>
           </LightTooltip>
-
-          <p className="value">{showMarginAssets()} NEST</p>
+          <Stack direction="row" spacing={1} alignItems="left">
+            <p className="value">{showMarginAssets()} NEST</p>
+            <p
+              className="value"
+              style={{ color: showPercent() >= 0 ? "#80C269" : "#FF0000" }}
+            >
+              {showPercent().toFixed(2)}%
+            </p>
+          </Stack>
         </div>
-        <div className="right">
+      </Stack>
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+        spacing={0}
+        className={`${classPrefix}-three`}
+      >
+        <div className="left">
           <p className="title">Open Price</p>
           <p className="value">{showBasePrice()} NEST</p>
+        </div>
+        <div className="right">
+          <p className="title">Liq Price </p>
+          <p className="value">{showLiqPrice()} USDT</p>
+        </div>
+      </Stack>
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+        spacing={0}
+        className={`${classPrefix}-four`}
+      >
+        <div className="left">
+          <p className="title">Stop Order</p>
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+            spacing={0}
+          >
+            {showStopPrice().map((item, index) => {
+              return (
+                <p className="value" key={`stopOrder+${index}`}>
+                  {item}
+                </p>
+              );
+            })}
+          </Stack>
         </div>
       </Stack>
       <Stack
@@ -207,6 +239,15 @@ const PositionsList: FC<FuturesListProps> = ({ ...props }) => {
             </MainButton>
           </>
         )}
+      </Stack>
+      <Stack
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+        spacing={1}
+        className={`${classPrefix}-futuresShare`}
+      >
+        <button><ShareWhiteIcon/></button>
       </Stack>
       <Drawer
         anchor={"bottom"}
@@ -413,7 +454,7 @@ export const PositionsOldList: FC<FuturesOldListProps> = ({ ...props }) => {
         </div>
         <div className="right">
           <p className="title">Open Price</p>
-          <p className="value">{showBasePrice()} NEST</p>
+          <p className="value">{showBasePrice()} USDT</p>
         </div>
       </Stack>
       <Stack

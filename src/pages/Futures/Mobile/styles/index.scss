@@ -66,7 +66,7 @@
 
                         &:hover {
                             line-height: 20px;
-                            border:1px solid $main-button-color;
+                            border: 1px solid $main-button-color;
                         }
                     }
 
@@ -216,7 +216,8 @@
         }
     }
 
-    &-stopLimit1 {
+    &-stopLimit1,
+    &-stopLimit2 {
         width: 100%;
         height: 34px;
         border-radius: 17px;
@@ -285,8 +286,8 @@
     }
 
     &-selectToken {
-        
-        .MuiPopover-paper{
+
+        .MuiPopover-paper {
             width: 100%;
             border-radius: 22px;
             margin-top: 6px;
@@ -397,7 +398,8 @@
         }
 
         &-limitPrice,
-        &-stopLimit1 {
+        &-stopLimit1,
+        &-stopLimit2 {
             background: rgba(255, 255, 255, 0.15);
             box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
             border: 0;
@@ -432,10 +434,11 @@
                 }
             }
         }
+
         ul.list {
             p.emptyOrder {
                 color: #C5C5C5;
             }
-        } 
+        }
     }
 }
