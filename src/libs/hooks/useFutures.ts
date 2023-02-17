@@ -340,7 +340,7 @@ export function useFutures() {
             actualMargin: item["actualMargin"],
           };
         }
-      );
+      ).filter((item: any) => item.lever.toString() !== "0");
       setClosedOrder(list);
     } catch (error) {
       console.log(error);
