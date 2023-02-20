@@ -1,4 +1,4 @@
-import { FC, useCallback, useEffect, useRef, useState } from "react";
+import { FC, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   checkWidth,
   formatInputNum,
@@ -95,6 +95,17 @@ const Futures: FC = () => {
     }
   }, []);
 
+  const close = useMemo(() => {
+    if (kValue?.[tokenPair].nowPrice) {
+      return (
+        BigNumber.from(kValue?.[tokenPair].nowPrice)
+          .div(BigNumber.from(10).pow(16))
+          .toNumber() / 100
+      );
+    }
+    return 0;
+  }, [kValue, tokenPair]);
+
   const handleShareOrder = useCallback(async () => {
     const href = window.location.href;
     const inviteCode = href?.split("?position=")[1];
@@ -105,7 +116,9 @@ const Futures: FC = () => {
           return item.symbol;
         });
         const tokenIndex = tokenNameArray.indexOf(orderData[0]);
-        if (tokenIndex === -1) {return}
+        if (tokenIndex === -1) {
+          return;
+        }
         const order: OrderView = {
           index: BigNumber.from("0"),
           owner: "",
@@ -119,7 +132,7 @@ const Futures: FC = () => {
           actualMargin: "",
         };
         setShowOpenPositionOrder(order);
-        setShowOpenPosition(true)
+        setShowOpenPosition(true);
       }
     }
   }, [account]);
@@ -500,6 +513,7 @@ const Futures: FC = () => {
             chainId={56}
             tokenPair={tokenPair}
             chartHeight={chartHeight()}
+            close={close}
           />
         </Stack>
       </Stack>

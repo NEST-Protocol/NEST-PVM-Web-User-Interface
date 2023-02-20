@@ -1,4 +1,4 @@
-import { FC, useRef, useState } from "react";
+import { FC, useMemo, useRef, useState } from "react";
 import "./styles";
 import Stack from "@mui/material/Stack";
 import { tokenList } from "../../../libs/constants/addresses";
@@ -23,6 +23,7 @@ import { LightTooltip } from "../../../styles/MUI";
 import PerpetualsNoticeModal from "../PerpetualsNoticeModal";
 import Popup from "reactjs-popup";
 import TriggerRiskModal from "../TriggerRisk";
+import {BigNumber} from "ethers";
 
 const FuturesMobile: FC = () => {
   const classPrefix = "FuturesMobile";
@@ -104,6 +105,12 @@ const FuturesMobile: FC = () => {
       </Stack>
     );
   };
+  const close = useMemo(() => {
+    if (kValue?.[tokenPair].nowPrice) {
+      return BigNumber.from(kValue?.[tokenPair].nowPrice).div(BigNumber.from(10).pow(16)).toNumber() / 100;
+    }
+    return 0;
+  }, [kValue, tokenPair])
   const KPrice = () => {
     return (
       <Stack
@@ -113,7 +120,7 @@ const FuturesMobile: FC = () => {
         spacing={0}
         className={`${classPrefix}-KPrice`}
       >
-        <TVChart chainId={56} tokenPair={tokenPair} />
+        <TVChart chainId={56} tokenPair={tokenPair} close={close}/>
       </Stack>
     );
   };

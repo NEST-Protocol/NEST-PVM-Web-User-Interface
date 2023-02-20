@@ -72,8 +72,7 @@ const PerpetualsNoticeModal: FC<Props> = ({ ...props }) => {
           </li>
           <li>
             <Trans>
-              5. Smart contract risk: The smart contract of the NEST protocol
-              has not been audited. There may be fatal unknown risks in the
+              5. Smart contract risk: There may be fatal unknown risks in the
               smart contract that may cause your principal to be damaged. Please
               evaluate the risk yourself before deciding whether to participate.
             </Trans>
