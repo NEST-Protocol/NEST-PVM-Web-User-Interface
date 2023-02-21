@@ -5,7 +5,7 @@ import MainButton from "../../../components/MainButton";
 import MainCard from "../../../components/MainCard";
 import { TokenType } from "../../../libs/constants/addresses";
 import {
-  OrderView,
+  Futures3OrderView,
   useFuturesCloseOrder,
 } from "../../../libs/hooks/useFutures";
 import useThemes, { ThemeType } from "../../../libs/hooks/useThemes";
@@ -13,7 +13,7 @@ import { LightTooltip } from "../../../styles/MUI";
 import "./styles";
 
 export type FuturesCloseProps = {
-  order: OrderView;
+  order: Futures3OrderView;
   kValue?: { [key: string]: TokenType };
   onClose: () => void;
 };

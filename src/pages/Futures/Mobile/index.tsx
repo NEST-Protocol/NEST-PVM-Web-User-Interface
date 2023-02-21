@@ -11,7 +11,8 @@ import { formatInputNum, formatInputNumWithFour } from "../../../libs/utils";
 import { formatUnits, parseUnits } from "ethers/lib/utils";
 import OpenShow from "../../../components/OpenShow";
 import classNames from "classnames";
-import PositionsList, {
+import {
+  PositionsList,
   PositionsList2,
   PositionsOldList,
 } from "./PositionsList";
@@ -58,6 +59,7 @@ const FuturesMobile: FC = () => {
     mainButtonDis,
     mainButtonAction,
     mainButtonLoading,
+    order3List,
     orderList,
     limitOrderList,
     oldOrderList,

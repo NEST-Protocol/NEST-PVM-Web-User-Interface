@@ -7,9 +7,11 @@ import { LongIcon, ShortIcon, XIcon } from "../../../components/Icon";
 import MainButton from "../../../components/MainButton";
 import { TokenType } from "../../../libs/constants/addresses";
 import {
+  Futures3OrderView,
   LimitOrderView,
   OldOrderView,
   OrderView,
+  useFutures3OrderList,
   useFuturesLimitOrderList,
   useFuturesOldOrderList,
   useFuturesOrderList,
@@ -20,6 +22,14 @@ import FuturesAdd from "../Add";
 import FuturesClose from "../Close";
 import LimitPrice from "../LimitPrice";
 import Trigger from "../Trigger";
+
+export type FuturesList3Props = {
+  item: Futures3OrderView;
+  key: string;
+  className: string;
+  hideOrder: (index: BigNumber) => void;
+  kValue?: { [key: string]: TokenType };
+};
 
 export type FuturesListProps = {
   item: OrderView;
@@ -40,7 +50,7 @@ export type FuturesOldListProps = {
   kValue?: { [key: string]: TokenType };
 };
 
-const FuturesList: FC<FuturesListProps> = ({ ...props }) => {
+const FuturesList3: FC<FuturesList3Props> = ({ ...props }) => {
   const modalAdd = useRef<any>();
   const modalTrigger = useRef<any>();
   const modalClose = useRef<any>();
@@ -54,13 +64,15 @@ const FuturesList: FC<FuturesListProps> = ({ ...props }) => {
     showLiqPrice,
     showStopPrice,
     tokenName,
-  } = useFuturesOrderList(props.item, props.kValue);
+  } = useFutures3OrderList(props.item, props.kValue);
 
   const endButton = () => {
-    const text =
-      props.item.baseBlock.toString() === "0"
-        ? "Liquidated"
-        : "Trigger executed";
+    //  TODO
+    // const text =
+    //   props.item.baseBlock.toString() === "0"
+    //     ? "Liquidated"
+    //     : "Trigger executed";
+    const text = "Liquidated";
     return (
       <button
         className="endOrder"
@@ -82,7 +94,7 @@ const FuturesList: FC<FuturesListProps> = ({ ...props }) => {
       : undefined;
     const data: FuturesShareOrderView = {
       index: Number(props.item.index.toString()),
-      owner: props.item.owner,
+      owner: props.item.owner.toString(),
       leverage: props.item.lever.toString() + "X",
       orientation: props.item.orientation ? "Long" : "Short",
       actualRate: parseFloat(showPercent().toFixed(2)),
@@ -158,10 +170,10 @@ const FuturesList: FC<FuturesListProps> = ({ ...props }) => {
             }
             nested
           >
-            <Trigger
+            {/* <Trigger
               order={props.item}
               onClose={() => modalTrigger.current.close()}
-            />
+            /> */}
           </Popup>
           <Popup
             modal
@@ -178,14 +190,18 @@ const FuturesList: FC<FuturesListProps> = ({ ...props }) => {
           <Popup
             modal
             ref={modalClose}
-            trigger={<button><ShareMyOrderModal order={shareOrderData()} /></button>}
+            trigger={
+              <button>
+                <ShareMyOrderModal order={shareOrderData()} />
+              </button>
+            }
             nested
           >
-            <FuturesClose
+            {/* <FuturesClose
               order={props.item}
               kValue={props.kValue}
               onClose={() => modalClose.current.close()}
-            />
+            /> */}
           </Popup>
         </td>
       )}
@@ -193,7 +209,69 @@ const FuturesList: FC<FuturesListProps> = ({ ...props }) => {
   );
 };
 
-export default FuturesList;
+export const FuturesList: FC<FuturesListProps> = ({ ...props }) => {
+  const {
+    TokenOneSvg,
+    TokenTwoSvg,
+    showBasePrice,
+    showMarginAssets,
+    showPercent,
+    showLiqPrice,
+    showStopPrice,
+    buttonLoading,
+    buttonDis,
+    buttonAction,
+  } = useFuturesOrderList(props.item, props.kValue);
+
+  return (
+    <tr className={`${props.className}-table-normal`}>
+      <td className={"position"}>
+        <Stack spacing={1} alignItems="center">
+          <Stack direction={"row"} spacing={0} alignItems="center">
+            <TokenOneSvg />
+            <TokenTwoSvg />
+          </Stack>
+          <Stack direction={"row"} spacing={1} alignItems="center">
+            <p>{props.item.lever.toString()}X</p>
+            {props.item.orientation ? <LongIcon /> : <ShortIcon />}
+            <p className={props.item.orientation ? "red" : "green"}>
+              {props.item.orientation ? "Long" : "Short"}
+            </p>
+          </Stack>
+        </Stack>
+      </td>
+      <td>
+        <Stack spacing={1} alignItems="center">
+          <p>{showMarginAssets()} NEST</p>
+          <p style={{ color: showPercent() >= 0 ? "#80C269" : "#FF0000" }}>
+            {showPercent().toFixed(2)}%
+          </p>
+        </Stack>
+      </td>
+      <td>{showBasePrice()} USDT</td>
+      <td>{showLiqPrice()} USDT</td>
+      <td>
+        <Stack spacing={1} alignItems="center">
+          {showStopPrice().map((item, index) => {
+            return <p key={`stopOrder+${index}`}>{item}</p>;
+          })}
+        </Stack>
+      </td>
+      <td className="button">
+        <MainButton
+          className="fort-button"
+          disable={buttonDis()}
+          loading={buttonLoading()}
+          onClick={buttonAction}
+        >
+          Close
+        </MainButton>
+      </td>
+    </tr>
+  );
+};
+
+export default FuturesList3;
 
 export const FuturesList2: FC<FuturesList2Props> = ({ ...props }) => {
   const modalLimit = useRef<any>();

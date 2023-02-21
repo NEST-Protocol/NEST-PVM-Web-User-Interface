@@ -6,14 +6,14 @@ import InfoShow from "../../../components/InfoShow";
 import MainButton from "../../../components/MainButton";
 import MainCard from "../../../components/MainCard";
 import { SingleTokenShow } from "../../../components/TokenShow";
-import { OrderView, useFuturesAdd } from "../../../libs/hooks/useFutures";
+import { Futures3OrderView, useFuturesAdd } from "../../../libs/hooks/useFutures";
 import useThemes, { ThemeType } from "../../../libs/hooks/useThemes";
 import { formatInputNumWithFour } from "../../../libs/utils";
 import { LightTooltip } from "../../../styles/MUI";
 import "./styles";
 
 type FuturesAddProps = {
-  order: OrderView;
+  order: Futures3OrderView;
   onClose: () => void;
 };
 

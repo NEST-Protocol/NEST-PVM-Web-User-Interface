@@ -20,7 +20,11 @@ import { Popover } from "@mui/material";
 import classNames from "classnames";
 import TVChart from "../../components/TVChart";
 import { OrderView, tokenArray, useFutures } from "../../libs/hooks/useFutures";
-import FuturesList, { FuturesList2, FuturesListOld } from "./List/FuturesList";
+import FuturesList3, {
+  FuturesList,
+  FuturesList2,
+  FuturesListOld,
+} from "./List/FuturesList";
 import { LightTooltip } from "../../styles/MUI";
 import PerpetualsNoticeModal from "./PerpetualsNoticeModal";
 import Popup from "reactjs-popup";
@@ -68,6 +72,7 @@ const Futures: FC = () => {
     mainButtonDis,
     mainButtonAction,
     mainButtonLoading,
+    order3List,
     orderList,
     limitOrderList,
     oldOrderList,
@@ -521,8 +526,21 @@ const Futures: FC = () => {
   };
 
   const listView1 = () => {
+    const orderList3View = () => {
+      return [...order3List].map((item) => {
+        return (
+          <FuturesList3
+            key={`f3+${item.index}`}
+            item={item}
+            kValue={kValue}
+            className={classPrefix}
+            hideOrder={hideOrder}
+          />
+        );
+      });
+    };
     const orderListView = () => {
-      return [...orderList, ...showClosedOrder].map((item) => {
+      return [...orderList].map((item) => {
         return (
           <FuturesList
             key={`f+${item.index}`}
@@ -579,6 +597,7 @@ const Futures: FC = () => {
           </tr>
         </thead>
         <tbody>
+          {orderList3View()}
           {orderListView()}
           {oldOrderListView()}
         </tbody>

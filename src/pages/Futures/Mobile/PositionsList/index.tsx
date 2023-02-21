@@ -1,18 +1,25 @@
 import Stack from "@mui/material/Stack";
 import Drawer from "@mui/material/Drawer";
 import { FC, useState } from "react";
-import { LongIcon, ShareWhiteIcon, ShortIcon, XIcon } from "../../../../components/Icon";
+import {
+  LongIcon,
+  ShareWhiteIcon,
+  ShortIcon,
+  XIcon,
+} from "../../../../components/Icon";
 import MainButton from "../../../../components/MainButton";
 import "./styles";
 import classNames from "classnames";
 import useThemes, { ThemeType } from "../../../../libs/hooks/useThemes";
 import {
+  useFutures3OrderList,
   useFuturesLimitOrderList,
   useFuturesOldOrderList,
   useFuturesOrderList,
 } from "../../../../libs/hooks/useFutures";
 import {
   FuturesList2Props,
+  FuturesList3Props,
   FuturesListProps,
   FuturesOldListProps,
 } from "../../List/FuturesList";
@@ -31,7 +38,7 @@ enum DrawerType {
   close = 3,
 }
 
-const PositionsList: FC<FuturesListProps> = ({ ...props }) => {
+const PositionsList3: FC<FuturesList3Props> = ({ ...props }) => {
   const classPrefix = "positionsList";
   const [showDrawer, setShowDrawer] = useState(false);
   const [drawerType, setDrawerType] = useState<DrawerType>(DrawerType.trigger);
@@ -45,37 +52,39 @@ const PositionsList: FC<FuturesListProps> = ({ ...props }) => {
     showPercent,
     showLiqPrice,
     showStopPrice,
-  } = useFuturesOrderList(props.item, props.kValue);
+  } = useFutures3OrderList(props.item, props.kValue);
 
   const drawerView = () => {
-    switch (drawerType) {
-      case DrawerType.add:
-        return (
-          <DrawerAdd order={props.item} hideSelf={() => setShowDrawer(false)} />
-        );
-      case DrawerType.trigger:
-        return (
-          <DrawerTrigger
-            order={props.item}
-            hideSelf={() => setShowDrawer(false)}
-          />
-        );
-      case DrawerType.close:
-        return (
-          <DrawerClose
-            order={props.item}
-            hideSelf={() => setShowDrawer(false)}
-            kValue={props.kValue}
-          />
-        );
-    }
+    // switch (drawerType) {
+    //   case DrawerType.add:
+    //     return (
+    //       <DrawerAdd order={props.item} hideSelf={() => setShowDrawer(false)} />
+    //     );
+    //   case DrawerType.trigger:
+    //     return (
+    //       <DrawerTrigger
+    //         order={props.item}
+    //         hideSelf={() => setShowDrawer(false)}
+    //       />
+    //     );
+    //   case DrawerType.close:
+    //     return (
+    //       <DrawerClose
+    //         order={props.item}
+    //         hideSelf={() => setShowDrawer(false)}
+    //         kValue={props.kValue}
+    //       />
+    //     );
+    // }
   };
 
   const endButton = () => {
-    const text =
-      props.item.baseBlock.toString() === "0"
-        ? "Liquidated"
-        : "Trigger executed";
+    // TODO
+    // const text =
+    //   props.item.baseBlock.toString() === "0"
+    //     ? "Liquidated"
+    //     : "Trigger executed";
+    const text = "Liquidated";
     return (
       <button
         className="endOrder"
@@ -247,7 +256,9 @@ const PositionsList: FC<FuturesListProps> = ({ ...props }) => {
         spacing={1}
         className={`${classPrefix}-futuresShare`}
       >
-        <button><ShareWhiteIcon/></button>
+        <button>
+          <ShareWhiteIcon />
+        </button>
       </Stack>
       <Drawer
         anchor={"bottom"}
@@ -264,7 +275,152 @@ const PositionsList: FC<FuturesListProps> = ({ ...props }) => {
   );
 };
 
-export default PositionsList;
+export const PositionsList: FC<FuturesListProps> = ({ ...props }) => {
+  const classPrefix = "positionsList";
+  const {
+    TokenOneSvg,
+    TokenTwoSvg,
+    showBasePrice,
+    showMarginAssets,
+    showPercent,
+    showLiqPrice,
+    showStopPrice,
+    buttonLoading,
+    buttonDis,
+    buttonAction,
+  } = useFuturesOrderList(props.item, props.kValue);
+
+  return (
+    <Stack spacing={0} className={`${classPrefix}`}>
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+        spacing={0}
+        className={`${classPrefix}-one`}
+      >
+        <div className="left">
+          <p className="title">Positions</p>
+          <Stack direction="row" spacing={1} alignItems="left">
+            <div className="pairIcon">
+              <TokenOneSvg />
+              <TokenTwoSvg className="USDT" />
+            </div>
+            <p className="value positionLever">
+              {props.item.lever.toString()}X
+            </p>
+            <div className="longShort">
+              {props.item.orientation ? <LongIcon /> : <ShortIcon />}
+              <p className={props.item.orientation ? "red" : "green"}>
+                {props.item.orientation ? "Long" : "Short"}
+              </p>
+            </div>
+          </Stack>
+        </div>
+      </Stack>
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+        spacing={0}
+        className={`${classPrefix}-two`}
+      >
+        <div className="left">
+          <LightTooltip
+            placement="top"
+            title={
+              <div>
+                <p>
+                  The net asset value, if this value is lower than liquidation
+                  amount, the position will be liquidated. Liquidation ratio =
+                  0.2% Liquidation amount = margin * leverage * (current
+                  price/initial price)*Liquidation ratio
+                </p>
+              </div>
+            }
+            arrow
+          >
+            <p
+              className={classNames({
+                [`title positionActual`]: true,
+                [`underLine`]: true,
+              })}
+            >
+              Actual Margin
+            </p>
+          </LightTooltip>
+          <Stack direction="row" spacing={1} alignItems="left">
+            <p className="value">{showMarginAssets()} NEST</p>
+            <p
+              className="value"
+              style={{ color: showPercent() >= 0 ? "#80C269" : "#FF0000" }}
+            >
+              {showPercent().toFixed(2)}%
+            </p>
+          </Stack>
+        </div>
+      </Stack>
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+        spacing={0}
+        className={`${classPrefix}-three`}
+      >
+        <div className="left">
+          <p className="title">Open Price</p>
+          <p className="value">{showBasePrice()} NEST</p>
+        </div>
+        <div className="right">
+          <p className="title">Liq Price </p>
+          <p className="value">{showLiqPrice()} USDT</p>
+        </div>
+      </Stack>
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+        spacing={0}
+        className={`${classPrefix}-four`}
+      >
+        <div className="left">
+          <p className="title">Stop Order</p>
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+            spacing={0}
+          >
+            {showStopPrice().map((item, index) => {
+              return (
+                <p className="value" key={`stopOrder+${index}`}>
+                  {item}
+                </p>
+              );
+            })}
+          </Stack>
+        </div>
+      </Stack>
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+        spacing={1}
+        className={`${classPrefix}-button`}
+      >
+        <MainButton
+          disable={buttonDis()}
+          loading={buttonLoading()}
+          onClick={buttonAction}
+        >
+          Close
+        </MainButton>
+      </Stack>
+    </Stack>
+  );
+};
+
+export default PositionsList3;
 
 export const PositionsList2: FC<FuturesList2Props> = ({ ...props }) => {
   const classPrefix = "positionsList";

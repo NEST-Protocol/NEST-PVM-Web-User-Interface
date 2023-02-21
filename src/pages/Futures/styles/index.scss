@@ -346,6 +346,17 @@
             }
         }
 
+        td.tokenPair {
+            svg {
+                position: relative;
+                z-index: 10;
+            }
+            svg + svg {
+                margin-left: -8px;
+                z-index: 1;
+            }
+        }
+
         td.button {
             width: 350px;
 
@@ -525,6 +536,10 @@
             }
 
             .Futures-table-normal {
+                box-shadow: none;
+            }
+
+            .Futures-table-order {
                 box-shadow: none;
             }
 
