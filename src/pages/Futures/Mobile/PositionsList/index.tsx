@@ -55,6 +55,7 @@ const PositionsList3: FC<FuturesList3Props> = ({ ...props }) => {
   } = useFutures3OrderList(props.item, props.kValue);
 
   const drawerView = () => {
+    return <></>
     // switch (drawerType) {
     //   case DrawerType.add:
     //     return (
