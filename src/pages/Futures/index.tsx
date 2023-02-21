@@ -72,7 +72,7 @@ const Futures: FC = () => {
     mainButtonDis,
     mainButtonAction,
     mainButtonLoading,
-    order3List,
+    plusOrder3List,
     orderList,
     limitOrderList,
     oldOrderList,
@@ -527,7 +527,7 @@ const Futures: FC = () => {
 
   const listView1 = () => {
     const orderList3View = () => {
-      return [...order3List].map((item) => {
+      return [...plusOrder3List].map((item) => {
         return (
           <FuturesList3
             key={`f3+${item.index}`}

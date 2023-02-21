@@ -55,28 +55,27 @@ const PositionsList3: FC<FuturesList3Props> = ({ ...props }) => {
   } = useFutures3OrderList(props.item, props.kValue);
 
   const drawerView = () => {
-    return <></>
-    // switch (drawerType) {
-    //   case DrawerType.add:
-    //     return (
-    //       <DrawerAdd order={props.item} hideSelf={() => setShowDrawer(false)} />
-    //     );
-    //   case DrawerType.trigger:
-    //     return (
-    //       <DrawerTrigger
-    //         order={props.item}
-    //         hideSelf={() => setShowDrawer(false)}
-    //       />
-    //     );
-    //   case DrawerType.close:
-    //     return (
-    //       <DrawerClose
-    //         order={props.item}
-    //         hideSelf={() => setShowDrawer(false)}
-    //         kValue={props.kValue}
-    //       />
-    //     );
-    // }
+    switch (drawerType) {
+      case DrawerType.add:
+        return (
+          <DrawerAdd order={props.item} hideSelf={() => setShowDrawer(false)} />
+        );
+      case DrawerType.trigger:
+        return (
+          <DrawerTrigger
+            order={props.item}
+            hideSelf={() => setShowDrawer(false)}
+          />
+        );
+      case DrawerType.close:
+        return (
+          <DrawerClose
+            order={props.item}
+            hideSelf={() => setShowDrawer(false)}
+            kValue={props.kValue}
+          />
+        );
+    }
   };
 
   const endButton = () => {

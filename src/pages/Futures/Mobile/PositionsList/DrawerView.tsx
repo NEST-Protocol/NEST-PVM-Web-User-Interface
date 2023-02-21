@@ -139,197 +139,214 @@ export const DrawerAdd: FC<DrawerBaseType> = ({ ...props }) => {
 };
 
 export const DrawerTrigger: FC<DrawerBaseType> = ({ ...props }) => {
-  return <></>
-  // const modal = useRef<any>();
-  // const {
-  //   triggerInput,
-  //   setTriggerInput,
-  //   showPosition,
-  //   showOpenPrice,
-  //   showTriggerFee,
-  //   showTitle,
-  //   actionClose,
-  //   buttonDis,
-  //   buttonLoading,
-  //   buttonAction,
-  //   isEdit,
-  //   showPlaceHolder,
-  //   showTriggerRisk,
-  //   setShowTriggerRisk,
-  //   baseAction,
-  //   showLiqPrice,
-  // } = useFuturesTrigger(props.order);
-  // const stopLimit1 = () => {
-  //   return (
-  //     <Stack
-  //       direction="row"
-  //       justifyContent="space-between"
-  //       alignItems="center"
-  //       spacing={0}
-  //       className={`${classPrefix}-stopLimit1`}
-  //     >
-  //       <p className={`${classPrefix}-stopLimit1-title`}>Trigger</p>
-  //       <Stack
-  //         direction="row"
-  //         justifyContent="space-between"
-  //         alignItems="center"
-  //         spacing={0}
-  //         className={`rightInput`}
-  //       >
-  //         <input
-  //           placeholder={showPlaceHolder()}
-  //           value={triggerInput}
-  //           maxLength={32}
-  //           onChange={(e) =>
-  //             setTriggerInput(formatInputNumWithFour(e.target.value))
-  //           }
-  //         />
-  //         <p>USDT</p>
-  //         {isEdit() ? (
-  //           <MainButton
-  //             className="TriggerClose"
-  //             onClick={() => {
-  //               props.hideSelf();
-  //               actionClose();
-  //             }}
-  //           >
-  //             <p>Close</p>
-  //           </MainButton>
-  //         ) : (
-  //           <></>
-  //         )}
-  //       </Stack>
-  //     </Stack>
-  //   );
-  // };
-  // const stopLimit2 = () => {
-  //   return (
-  //     <Stack
-  //       direction="row"
-  //       justifyContent="space-between"
-  //       alignItems="center"
-  //       spacing={0}
-  //       className={`${classPrefix}-stopLimit2`}
-  //     >
-  //       <p className={`${classPrefix}-stopLimit2-title`}>Trigger</p>
-  //       <Stack
-  //         direction="row"
-  //         justifyContent="space-between"
-  //         alignItems="center"
-  //         spacing={0}
-  //         className={`rightInput`}
-  //       >
-  //         <input
-  //           placeholder={showPlaceHolder()}
-  //           value={triggerInput}
-  //           maxLength={32}
-  //           onChange={(e) =>
-  //             setTriggerInput(formatInputNumWithFour(e.target.value))
-  //           }
-  //         />
-  //         <p>USDT</p>
-  //       </Stack>
-  //     </Stack>
-  //   );
-  // };
-  // return (
-  //   <Stack spacing={0}>
-  //     <Popup
-  //       open={showTriggerRisk}
-  //       modal
-  //       ref={modal}
-  //       onClose={() => setShowTriggerRisk(false)}
-  //       nested
-  //     >
-  //       <TriggerRiskModal
-  //         onClose={() => setShowTriggerRisk(false)}
-  //         action={() => {
-  //           baseAction();
-  //           props.hideSelf();
-  //         }}
-  //       />
-  //     </Popup>
-  //     <p className="title">{showTitle()}</p>
-  //     <Stack spacing={0}>
-  //       {stopLimit1()}
-  //       {stopLimit2()}
-  //       <Stack
-  //         direction="row"
-  //         justifyContent="space-between"
-  //         alignItems="center"
-  //         spacing={0}
-  //         className={`${classPrefix}-infoShow`}
-  //       >
-  //         <p>Position</p>
-  //         <p>{showPosition()}</p>
-  //       </Stack>
-  //       <Stack
-  //         direction="row"
-  //         justifyContent="space-between"
-  //         alignItems="center"
-  //         spacing={0}
-  //         className={`${classPrefix}-infoShow`}
-  //       >
-  //         <p>Open price</p>
-  //         <p>{showOpenPrice()}</p>
-  //       </Stack>
-  //       {isEdit() ? (
-  //         <></>
-  //       ) : (
-  //         <>
-  //           <Stack
-  //             direction="row"
-  //             justifyContent="space-between"
-  //             alignItems="center"
-  //             spacing={0}
-  //             className={`${classPrefix}-infoShow`}
-  //           >
-  //             <p>Liq Price</p>
-  //             <p>{showLiqPrice()} USDT</p>
-  //           </Stack>
-  //           <Stack
-  //             direction="row"
-  //             justifyContent="space-between"
-  //             alignItems="center"
-  //             spacing={0}
-  //             className={`${classPrefix}-infoShow`}
-  //           >
-  //             <LightTooltip
-  //               placement="top-start"
-  //               title={
-  //                 <div>
-  //                   <p>Position fee = Position*0.2%</p>
-  //                   <p>Stop order fee(after execution) = 15 NEST</p>
-  //                 </div>
-  //               }
-  //               arrow
-  //             >
-  //               <p className="underLine">Fees</p>
-  //             </LightTooltip>
-  //             <p>{`${showTriggerFee()}`}</p>
-  //           </Stack>
-  //         </>
-  //       )}
-  //     </Stack>
-  //     <MainButton
-  //       className="action"
-  //       loading={buttonLoading()}
-  //       disable={buttonDis()}
-  //       onClick={() => {
-  //         if (buttonDis()) {
-  //           return;
-  //         }
-  //         const triggerRiskModal = localStorage.getItem("TriggerRiskModal");
-  //         if (triggerRiskModal === "1") {
-  //           props.hideSelf();
-  //         }
-  //         buttonAction();
-  //       }}
-  //     >
-  //       Confirm
-  //     </MainButton>
-  //   </Stack>
-  // );
+  const modal = useRef<any>();
+  const {
+    stopProfitPriceInput,
+    setStopProfitPriceInput,
+    stopLossPriceInput,
+    setStopLossPriceInput,
+    showPosition,
+    showOpenPrice,
+    showTriggerFee,
+    showTitle,
+    actionCloseProfit,
+    actionCloseLoss,
+    buttonDis,
+    buttonLoading,
+    buttonAction,
+    isEdit,
+    showPlaceHolder,
+    showTriggerRisk,
+    setShowTriggerRisk,
+    baseAction,
+    showLiqPrice,
+    closeProfit,
+    closeLoss,
+  } = useFuturesTrigger(props.order);
+  const stopLimit1 = () => {
+    return (
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+        spacing={0}
+        className={`${classPrefix}-stopLimit1`}
+      >
+        <p className={`${classPrefix}-stopLimit1-title`}>Trigger</p>
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+          spacing={0}
+          className={`rightInput`}
+        >
+          <input
+            placeholder={showPlaceHolder()}
+            value={stopProfitPriceInput}
+            maxLength={32}
+            onChange={(e) =>
+              setStopProfitPriceInput(formatInputNumWithFour(e.target.value))
+            }
+          />
+          <p>USDT</p>
+          {closeProfit() ? (
+            <MainButton
+              className="TriggerClose"
+              onClick={() => {
+                props.hideSelf();
+                actionCloseProfit();
+              }}
+            >
+              <p>Close</p>
+            </MainButton>
+          ) : (
+            <></>
+          )}
+        </Stack>
+      </Stack>
+    );
+  };
+  const stopLimit2 = () => {
+    return (
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+        spacing={0}
+        className={`${classPrefix}-stopLimit2`}
+      >
+        <p className={`${classPrefix}-stopLimit2-title`}>Trigger</p>
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+          spacing={0}
+          className={`rightInput`}
+        >
+          <input
+            placeholder={showPlaceHolder()}
+            value={stopLossPriceInput}
+            maxLength={32}
+            onChange={(e) =>
+              setStopLossPriceInput(formatInputNumWithFour(e.target.value))
+            }
+          />
+          <p>USDT</p>
+          {closeLoss() ? (
+            <MainButton
+              className="TriggerClose"
+              onClick={() => {
+                props.hideSelf();
+                actionCloseLoss();
+              }}
+            >
+              <p>Close</p>
+            </MainButton>
+          ) : (
+            <></>
+          )}
+        </Stack>
+      </Stack>
+    );
+  };
+  return (
+    <Stack spacing={0}>
+      <Popup
+        open={showTriggerRisk}
+        modal
+        ref={modal}
+        onClose={() => setShowTriggerRisk(false)}
+        nested
+      >
+        <TriggerRiskModal
+          onClose={() => setShowTriggerRisk(false)}
+          action={() => {
+            baseAction();
+            props.hideSelf();
+          }}
+        />
+      </Popup>
+      <p className="title">{showTitle()}</p>
+      <Stack spacing={0}>
+        {stopLimit1()}
+        {stopLimit2()}
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+          spacing={0}
+          className={`${classPrefix}-infoShow`}
+        >
+          <p>Position</p>
+          <p>{showPosition()}</p>
+        </Stack>
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+          spacing={0}
+          className={`${classPrefix}-infoShow`}
+        >
+          <p>Open price</p>
+          <p>{showOpenPrice()}</p>
+        </Stack>
+        {isEdit() ? (
+          <></>
+        ) : (
+          <>
+            <Stack
+              direction="row"
+              justifyContent="space-between"
+              alignItems="center"
+              spacing={0}
+              className={`${classPrefix}-infoShow`}
+            >
+              <p>Liq Price</p>
+              <p>{showLiqPrice()} USDT</p>
+            </Stack>
+            <Stack
+              direction="row"
+              justifyContent="space-between"
+              alignItems="center"
+              spacing={0}
+              className={`${classPrefix}-infoShow`}
+            >
+              <LightTooltip
+                placement="top-start"
+                title={
+                  <div>
+                    <p>Position fee = Position*0.2%</p>
+                    <p>Stop order fee(after execution) = 15 NEST</p>
+                  </div>
+                }
+                arrow
+              >
+                <p className="underLine">Fees</p>
+              </LightTooltip>
+              <p>{`${showTriggerFee()}`}</p>
+            </Stack>
+          </>
+        )}
+      </Stack>
+      <MainButton
+        className="action"
+        loading={buttonLoading()}
+        disable={buttonDis()}
+        onClick={() => {
+          if (buttonDis()) {
+            return;
+          }
+          const triggerRiskModal = localStorage.getItem("TriggerRiskModal");
+          if (triggerRiskModal === "1") {
+            props.hideSelf();
+          }
+          buttonAction();
+        }}
+      >
+        Confirm
+      </MainButton>
+    </Stack>
+  );
 };
 
 export const DrawerClose: FC<DrawerCloseType> = ({ ...props }) => {

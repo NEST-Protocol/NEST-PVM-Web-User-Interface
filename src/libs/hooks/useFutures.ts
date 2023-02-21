@@ -38,13 +38,18 @@ import useTransactionListCon, { TransactionType } from "./useTransactionInfo";
 import {
   useTrustFuturesAdd,
   useTrustFuturesBuy,
+  useTrustFuturesNewStopOrder,
   useTrustFuturesSell,
+  useTrustFuturesUpdateStopPrice,
 } from "../../contracts/hooks/useNESTTrustFutures";
 
 export type TrustOrder = {
+  index: BigNumber;
+  owner: string;
   orderIndex: BigNumber;
   balance: BigNumber;
   fee: BigNumber;
+  limitPrice: BigNumber;
   stopProfitPrice: BigNumber;
   stopLossPrice: BigNumber;
   status: BigNumber;
@@ -55,7 +60,7 @@ export type Futures3OrderView = {
   owner: BigNumber;
   basePrice: BigNumber;
   balance: BigNumber;
-  appends: BigNumber;
+  append: BigNumber;
   channelIndex: BigNumber;
   lever: BigNumber;
   orientation: boolean;
@@ -133,6 +138,13 @@ export function useFutures() {
   const [tokenPair, setTokenPair] = useState<string>("ETH");
   const [kValue, setKValue] = useState<{ [key: string]: TokenType }>();
   const [order3List, setOrder3List] = useState<Array<Futures3OrderView>>([]);
+  const [trustOrder3List, setTrustOrder3List] = useState<Array<TrustOrder>>([]);
+  const [plusOrder3List, setPlusOrder3] = useState<Array<Futures3OrderView>>(
+    []
+  );
+  const [plusLimitOrder3List, setPlusLimitOrder3] = useState<
+    Array<Futures3OrderView>
+  >([]);
   const [orderList, setOrderList] = useState<Array<OrderView>>([]);
   const [limitOrderList, setLimitOrderList] = useState<Array<LimitOrderView>>(
     []
@@ -193,18 +205,14 @@ export function useFutures() {
       const tokenNew = token;
       const index = channelIndex(token.symbol);
       const basePriceList = await leverContract.lastPrice(index);
-      // const baseK = parseUnits("0.002", 18);
-      // tokenNew.k = baseK;
-      // const priceValue = BASE_2000ETH_AMOUNT.mul(BASE_AMOUNT).div(
-      //   basePriceList[2]
-      // );
       tokenNew.nowPrice = BigNumber.from(basePriceList[2].toString());
       return tokenNew;
     },
     []
   );
+
   const getPrice = useCallback(
-    async (contract: Contract, leverContract: Contract, chainId: number) => {
+    async (leverContract: Contract, chainId: number) => {
       try {
         const ETH = await getPriceAndK(leverContract, tokenList["ETH"]);
         const BTC = await getPriceAndK(leverContract, tokenList["BTC"]);
@@ -255,6 +263,47 @@ export function useFutures() {
         }
         if (!getPart) {
           setOrder3List(result);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    [account, trustFuturesContract]
+  );
+
+  const getFutures3TrustList = useCallback(
+    async (getPart: boolean = false) => {
+      try {
+        if (!trustFuturesContract || !account) {
+          return;
+        }
+        const latestOrder: Array<TrustOrder> =
+          await trustFuturesContract.listTrustOrder("0", "1", "0");
+        const orderMaxNum = Number(latestOrder[0].index.toString()) + 1;
+        const orderGroupNum = orderMaxNum / ORDER_GROUP;
+        var result: TrustOrder[] = [];
+        for (let i = 0; i < orderGroupNum; i++) {
+          const startNum = i === 0 ? 0 : orderMaxNum - i * ORDER_GROUP;
+          if (i !== 0 && startNum === 0) {
+            return;
+          }
+          const groupList: Array<TrustOrder> =
+            await trustFuturesContract.findTrustOrder(
+              startNum.toString(),
+              "1000",
+              ORDER_GROUP.toString(),
+              account
+            );
+          const groupResult = groupList.filter((item) => {
+            return item.orderIndex.toString() !== "0";
+          });
+          result = [...result, ...groupResult];
+          if (getPart) {
+            setTrustOrder3List(result);
+          }
+        }
+        if (!getPart) {
+          setTrustOrder3List(result);
         }
       } catch (error) {
         console.log(error);
@@ -446,14 +495,41 @@ export function useFutures() {
     }
   }, [account, chainId, nestToken]);
 
+  useEffect(() => {
+    console.log(order3List);
+
+    const plusOrders = order3List.map((order) => {
+      var newOrder = { ...order };
+      const trustOrders = trustOrder3List.filter((trust) =>
+        BigNumber.from(trust.orderIndex.toString()).eq(order.index)
+      );
+      console.log(newOrder.trustOrder);
+      if (trustOrders.length > 0) {
+        newOrder.trustOrder = trustOrders[0];
+      }
+      return newOrder;
+    });
+    const plusOrdersNormal = plusOrders.filter(
+      (item) =>
+        !item.trustOrder ||
+        (item.trustOrder && BigNumber.from("0").eq(item.trustOrder.status))
+    );
+    const plusOrdersLimit = plusOrders.filter(
+      (item) =>
+        item.trustOrder && BigNumber.from("1").eq(item.trustOrder.status)
+    );
+    setPlusOrder3(plusOrdersNormal);
+    setPlusLimitOrder3(plusOrdersLimit);
+  }, [order3List, trustOrder3List]);
+
   // price
   useEffect(() => {
     if (!priceContract || !chainId || !trustFuturesContract) {
       return;
     }
-    getPrice(priceContract, trustFuturesContract, chainId);
+    getPrice(trustFuturesContract, chainId);
     const time = setInterval(() => {
-      getPrice(priceContract, trustFuturesContract, chainId);
+      getPrice(trustFuturesContract, chainId);
     }, UPDATE_PRICE_TIME * 1000);
     return () => {
       clearInterval(time);
@@ -476,12 +552,14 @@ export function useFutures() {
   // list
   useEffect(() => {
     getFutures3List(true);
+    getFutures3TrustList(true);
     getOrderList(true);
     getLimitOrderList();
     getOldOrderList();
     getClosedOrderList();
     const time = setInterval(() => {
       getFutures3List();
+      getFutures3TrustList();
       getOrderList();
       getLimitOrderList();
       getOldOrderList();
@@ -493,6 +571,7 @@ export function useFutures() {
   }, [
     getClosedOrderList,
     getFutures3List,
+    getFutures3TrustList,
     getLimitOrderList,
     getOldOrderList,
     getOrderList,
@@ -665,7 +744,7 @@ export function useFutures() {
     mainButtonDis,
     mainButtonAction,
     mainButtonLoading,
-    order3List,
+    plusOrder3List,
     orderList,
     limitOrderList,
     oldOrderList,
@@ -727,7 +806,12 @@ export function useFutures3OrderList(
   const showPercent = () => {
     if (marginAssets) {
       const marginAssets_num = parseFloat(formatUnits(marginAssets, 18));
-      const balance_num = parseFloat(formatUnits(order.balance, 4));
+      const balance_num = parseFloat(
+        formatUnits(
+          BigNumber.from(order.balance.toString()).add(order.append),
+          4
+        )
+      );
       if (marginAssets_num >= balance_num) {
         return ((marginAssets_num - balance_num) * 100) / balance_num;
       } else {
@@ -747,12 +831,31 @@ export function useFutures3OrderList(
     return parseFloat(formatUnits(result, 18)).toFixed(2).toString();
   };
   const showStopPrice = () => {
-    if (order.trustOrder === undefined) {
+    if (
+      order.trustOrder === undefined ||
+      (order.trustOrder &&
+        BigNumber.from("0").eq(order.trustOrder.stopProfitPrice) &&
+        BigNumber.from("0").eq(order.trustOrder.stopLossPrice))
+    ) {
       return ["not set"];
-    } else if (BigNumber.from(order.lever.toString()).eq(BigNumber.from("5"))) {
-      return ["TP:1700.45 USDT"];
+    } else if (
+      order.trustOrder &&
+      BigNumber.from("0").eq(order.trustOrder.stopProfitPrice)
+    ) {
+      return [
+        `SL:${parseFloat(
+          formatUnits(order.trustOrder.stopLossPrice, 18)
+        ).toFixed(2)} USDT`,
+      ];
     } else {
-      return ["TP:1700.45 USDT", "SL:1200.43 USDT"];
+      return [
+        `TP:${parseFloat(
+          formatUnits(order.trustOrder.stopProfitPrice, 18)
+        ).toFixed(2)} USDT`,
+        `SL:${parseFloat(
+          formatUnits(order.trustOrder.stopLossPrice, 18)
+        ).toFixed(2)} USDT`,
+      ];
     }
   };
   const TokenOneSvg = tokenList[tokenName()].Icon;
@@ -840,7 +943,7 @@ export function useFuturesOrderList(
       return ["not set"];
     }
     return [
-      `TP:${parseFloat(formatUnits(order.stopPrice, 18).toString()).toFixed(
+      `TRIG:${parseFloat(formatUnits(order.stopPrice, 18).toString()).toFixed(
         2
       )} USDT`,
     ];
@@ -1048,8 +1151,9 @@ export function useFuturesLimitOrderList(order: LimitOrderView) {
   };
 }
 
-export function useFuturesTrigger(order: OrderView) {
-  const [triggerInput, setTriggerInput] = useState<string>("");
+export function useFuturesTrigger(order: Futures3OrderView) {
+  const [stopProfitPriceInput, setStopProfitPriceInput] = useState<string>("");
+  const [stopLossPriceInput, setStopLossPriceInput] = useState<string>("");
   const [showTriggerRisk, setShowTriggerRisk] = useState(false);
   const { chainId } = useWeb3();
   const { pendingList } = useTransactionListCon();
@@ -1077,25 +1181,37 @@ export function useFuturesTrigger(order: OrderView) {
     return `${parseFloat(formatUnits(fee, 4)).toFixed(2).toString()} NEST`;
   };
 
+  const hadSet = () => {
+    if (
+      !order.trustOrder ||
+      (order.trustOrder &&
+        BigNumber.from("0").eq(order.trustOrder.stopProfitPrice) &&
+        BigNumber.from("0").eq(order.trustOrder.stopLossPrice))
+    ) {
+      return false;
+    } else {
+      return true;
+    }
+  };
+
   const showTitle = () => {
-    return BigNumber.from("0").eq(order.stopPrice)
-      ? "Trigger Position"
-      : "Edit Position";
+    return hadSet() ? "Edit Position" : "Trigger Position";
   };
 
   const showPlaceHolder = () => {
-    if (order.stopPrice.toString() === "0") {
-      if (!chainId) {
-        return "---";
-      }
-      const thisToken = tokenArray[Number(order.tokenIndex.toString())];
+    // if (order.stopPrice.toString() === "0") {
+    //   if (!chainId) {
+    //     return "---";
+    //   }
+    //   const thisToken = tokenArray[Number(order.channelIndex.toString())];
 
-      return thisToken.nowPrice
-        ? parseFloat(formatUnits(thisToken.nowPrice, 18)).toFixed(2).toString()
-        : "---";
-    } else {
-      return parseFloat(formatUnits(order.stopPrice, 18)).toFixed(2).toString();
-    }
+    //   return thisToken.nowPrice
+    //     ? parseFloat(formatUnits(thisToken.nowPrice, 18)).toFixed(2).toString()
+    //     : "---";
+    // } else {
+    //   return parseFloat(formatUnits(order.stopPrice, 18)).toFixed(2).toString();
+    // }
+    return "Input";
   };
 
   const showLiqPrice = () => {
@@ -1109,15 +1225,43 @@ export function useFuturesTrigger(order: OrderView) {
   };
 
   const isEdit = () => {
-    return !BigNumber.from("0").eq(order.stopPrice);
+    return hadSet();
   };
 
-  const action = usePVMFuturesSet(
-    order.index,
-    parseUnits(triggerInput === "" ? "0" : triggerInput, 18)
-  );
-  const actionClose = usePVMFuturesSet(order.index, parseUnits("0", 18));
+  const closeProfit = () => {
+    return order.trustOrder &&
+      !BigNumber.from("0").eq(order.trustOrder.stopProfitPrice)
+      ? true
+      : false;
+  };
 
+  const closeLoss = () => {
+    return order.trustOrder &&
+      !BigNumber.from("0").eq(order.trustOrder.stopLossPrice)
+      ? true
+      : false;
+  };
+
+  const actionCreate = useTrustFuturesNewStopOrder(
+    order.index,
+    parseUnits(stopProfitPriceInput === "" ? "0" : stopProfitPriceInput, 18),
+    parseUnits(stopLossPriceInput === "" ? "0" : stopLossPriceInput, 18)
+  );
+  const actionUpdate = useTrustFuturesUpdateStopPrice(
+    order.index,
+    parseUnits(stopProfitPriceInput === "" ? "0" : stopProfitPriceInput, 18),
+    parseUnits(stopLossPriceInput === "" ? "0" : stopLossPriceInput, 18)
+  );
+  const actionCloseProfit = useTrustFuturesUpdateStopPrice(
+    order.index,
+    parseUnits("0", 18),
+    parseUnits(stopLossPriceInput === "" ? "0" : stopLossPriceInput, 18)
+  );
+  const actionCloseLoss = useTrustFuturesUpdateStopPrice(
+    order.index,
+    parseUnits(stopProfitPriceInput === "" ? "0" : stopProfitPriceInput, 18),
+    parseUnits("0", 18)
+  );
   const buttonLoading = () => {
     const pendingTransaction = pendingList.filter(
       (item) => item.type === TransactionType.PVMFuturesEditTrigger
@@ -1126,7 +1270,7 @@ export function useFuturesTrigger(order: OrderView) {
   };
 
   const buttonDis = () => {
-    if (triggerInput === "" || buttonLoading()) {
+    if (buttonLoading()) {
       return true;
     }
     return false;
@@ -1141,21 +1285,32 @@ export function useFuturesTrigger(order: OrderView) {
       setShowTriggerRisk(true);
       return;
     }
-    action();
+    if (order.trustOrder) {
+      actionUpdate();
+    } else {
+      actionCreate();
+    }
   };
 
   const baseAction = () => {
-    action();
+    if (order.trustOrder) {
+      actionUpdate();
+    } else {
+      actionCreate();
+    }
   };
 
   return {
-    triggerInput,
-    setTriggerInput,
+    stopProfitPriceInput,
+    setStopProfitPriceInput,
+    stopLossPriceInput,
+    setStopLossPriceInput,
     showPosition,
     showOpenPrice,
     showTriggerFee,
     showTitle,
-    actionClose,
+    actionCloseProfit,
+    actionCloseLoss,
     buttonDis,
     buttonLoading,
     buttonAction,
@@ -1165,6 +1320,8 @@ export function useFuturesTrigger(order: OrderView) {
     setShowTriggerRisk,
     baseAction,
     showLiqPrice,
+    closeProfit,
+    closeLoss,
   };
 }
 

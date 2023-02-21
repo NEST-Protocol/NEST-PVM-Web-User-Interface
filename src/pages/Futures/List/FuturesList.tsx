@@ -170,10 +170,10 @@ const FuturesList3: FC<FuturesList3Props> = ({ ...props }) => {
             }
             nested
           >
-            {/* <Trigger
+            <Trigger
               order={props.item}
               onClose={() => modalTrigger.current.close()}
-            /> */}
+            />
           </Popup>
           <Popup
             modal

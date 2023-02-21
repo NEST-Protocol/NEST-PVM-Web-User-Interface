@@ -4,7 +4,10 @@ import { FC, useRef } from "react";
 import Popup from "reactjs-popup";
 import MainButton from "../../../components/MainButton";
 import MainCard from "../../../components/MainCard";
-import { OrderView, useFuturesTrigger } from "../../../libs/hooks/useFutures";
+import {
+  Futures3OrderView,
+  useFuturesTrigger,
+} from "../../../libs/hooks/useFutures";
 import useThemes, { ThemeType } from "../../../libs/hooks/useThemes";
 import { formatInputNumWithFour } from "../../../libs/utils";
 import { LightTooltip } from "../../../styles/MUI";
@@ -12,7 +15,7 @@ import TriggerRiskModal from "../TriggerRisk";
 import "./styles";
 
 type TriggerProp = {
-  order: OrderView;
+  order: Futures3OrderView;
   onClose: () => void;
 };
 
@@ -21,13 +24,16 @@ const Trigger: FC<TriggerProp> = ({ ...props }) => {
   const modalRisk = useRef<any>();
   const { theme } = useThemes();
   const {
-    triggerInput,
-    setTriggerInput,
+    stopProfitPriceInput,
+    setStopProfitPriceInput,
+    stopLossPriceInput,
+    setStopLossPriceInput,
     showPosition,
     showOpenPrice,
     showTriggerFee,
     showTitle,
-    actionClose,
+    actionCloseProfit,
+    actionCloseLoss,
     buttonDis,
     buttonLoading,
     buttonAction,
@@ -36,7 +42,9 @@ const Trigger: FC<TriggerProp> = ({ ...props }) => {
     showTriggerRisk,
     setShowTriggerRisk,
     baseAction,
-    showLiqPrice
+    showLiqPrice,
+    closeProfit,
+    closeLoss,
   } = useFuturesTrigger(props.order);
   const stopLimit1 = () => {
     return (
@@ -57,19 +65,19 @@ const Trigger: FC<TriggerProp> = ({ ...props }) => {
         >
           <input
             placeholder={showPlaceHolder()}
-            value={triggerInput}
+            value={stopProfitPriceInput}
             maxLength={32}
             onChange={(e) =>
-              setTriggerInput(formatInputNumWithFour(e.target.value))
+              setStopProfitPriceInput(formatInputNumWithFour(e.target.value))
             }
           />
           <p>USDT</p>
-          {isEdit() ? (
+          {closeProfit() ? (
             <MainButton
               className="TriggerClose"
               onClick={() => {
                 props.onClose();
-                actionClose();
+                actionCloseProfit();
               }}
             >
               <p>Close</p>
@@ -81,6 +89,7 @@ const Trigger: FC<TriggerProp> = ({ ...props }) => {
       </Stack>
     );
   };
+
   const stopLimit2 = () => {
     return (
       <Stack
@@ -100,13 +109,26 @@ const Trigger: FC<TriggerProp> = ({ ...props }) => {
         >
           <input
             placeholder={showPlaceHolder()}
-            value={triggerInput}
+            value={stopLossPriceInput}
             maxLength={32}
             onChange={(e) =>
-              setTriggerInput(formatInputNumWithFour(e.target.value))
+              setStopLossPriceInput(formatInputNumWithFour(e.target.value))
             }
           />
           <p>USDT</p>
+          {closeLoss() ? (
+            <MainButton
+              className="TriggerClose"
+              onClick={() => {
+                props.onClose();
+                actionCloseLoss();
+              }}
+            >
+              <p>Close</p>
+            </MainButton>
+          ) : (
+            <></>
+          )}
         </Stack>
       </Stack>
     );

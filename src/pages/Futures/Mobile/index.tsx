@@ -11,7 +11,7 @@ import { formatInputNum, formatInputNumWithFour } from "../../../libs/utils";
 import { formatUnits, parseUnits } from "ethers/lib/utils";
 import OpenShow from "../../../components/OpenShow";
 import classNames from "classnames";
-import {
+import PositionsList3, {
   PositionsList,
   PositionsList2,
   PositionsOldList,
@@ -24,7 +24,7 @@ import { LightTooltip } from "../../../styles/MUI";
 import PerpetualsNoticeModal from "../PerpetualsNoticeModal";
 import Popup from "reactjs-popup";
 import TriggerRiskModal from "../TriggerRisk";
-import {BigNumber} from "ethers";
+import { BigNumber } from "ethers";
 
 const FuturesMobile: FC = () => {
   const classPrefix = "FuturesMobile";
@@ -59,7 +59,7 @@ const FuturesMobile: FC = () => {
     mainButtonDis,
     mainButtonAction,
     mainButtonLoading,
-    order3List,
+    plusOrder3List,
     orderList,
     limitOrderList,
     oldOrderList,
@@ -103,16 +103,23 @@ const FuturesMobile: FC = () => {
           <USDTIcon className="USDT" />
           <PutDownIcon className="putDown" />
         </button>
-        <p>1 {tokenPrice.tokenName} = {tokenPrice ? tokenPrice.price : "---"} USDT</p>
+        <p>
+          1 {tokenPrice.tokenName} = {tokenPrice ? tokenPrice.price : "---"}{" "}
+          USDT
+        </p>
       </Stack>
     );
   };
   const close = useMemo(() => {
     if (kValue?.[tokenPair].nowPrice) {
-      return BigNumber.from(kValue?.[tokenPair].nowPrice).div(BigNumber.from(10).pow(16)).toNumber() / 100;
+      return (
+        BigNumber.from(kValue?.[tokenPair].nowPrice)
+          .div(BigNumber.from(10).pow(16))
+          .toNumber() / 100
+      );
     }
     return 0;
-  }, [kValue, tokenPair])
+  }, [kValue, tokenPair]);
   const KPrice = () => {
     return (
       <Stack
@@ -122,7 +129,7 @@ const FuturesMobile: FC = () => {
         spacing={0}
         className={`${classPrefix}-KPrice`}
       >
-        <TVChart chainId={56} tokenPair={tokenPair} close={close}/>
+        <TVChart chainId={56} tokenPair={tokenPair} close={close} />
       </Stack>
     );
   };
@@ -395,8 +402,24 @@ const FuturesMobile: FC = () => {
     );
   };
 
+  const order3ListView = () => {
+    return [...plusOrder3List].map((item, index) => {
+      return (
+        <li key={`f3+${index}`}>
+          <PositionsList3
+            key={"f3"}
+            item={item}
+            className={classPrefix}
+            kValue={kValue}
+            hideOrder={hideOrder}
+          />
+        </li>
+      );
+    });
+  };
+
   const orderListView = () => {
-    return [...orderList, ...showClosedOrder].map((item, index) => {
+    return [...orderList].map((item, index) => {
       return (
         <li key={`f+${index}`}>
           <PositionsList
@@ -441,7 +464,7 @@ const FuturesMobile: FC = () => {
       if (orderEmpty()) {
         return noOrders();
       }
-      return orderListView();
+      return order3ListView();
     } else {
       if (limitEmpty()) {
         return noOrders();
@@ -451,7 +474,7 @@ const FuturesMobile: FC = () => {
   };
   const oldListView = () => {
     if (isPositions) {
-      return oldOrderListView();
+      return [...orderListView(), oldOrderListView()];
     }
     return <></>;
   };
