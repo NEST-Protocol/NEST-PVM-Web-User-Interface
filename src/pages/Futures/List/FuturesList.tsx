@@ -1,6 +1,5 @@
 import { Stack } from "@mui/material";
 import { BigNumber } from "ethers/lib/ethers";
-import { formatUnits } from "ethers/lib/utils";
 import { FC, useRef } from "react";
 import Popup from "reactjs-popup";
 import { LongIcon, ShortIcon, XIcon } from "../../../components/Icon";
@@ -15,7 +14,6 @@ import {
   useFuturesOldOrderList,
   useFuturesOrderList,
 } from "../../../libs/hooks/useFutures";
-import { FuturesShareOrderView } from "../../Dashboard/FuturesList";
 import ShareMyOrderModal from "../../Dashboard/ShareMyOrderModal";
 import FuturesAdd from "../Add";
 import FuturesClose from "../Close";
@@ -62,7 +60,7 @@ const FuturesList3: FC<FuturesList3Props> = ({ ...props }) => {
     showPercent,
     showLiqPrice,
     showStopPrice,
-    tokenName,
+    shareOrderData,
   } = useFutures3OrderList(props.item, props.kValue);
 
   const endButton = () => {
@@ -85,31 +83,6 @@ const FuturesList3: FC<FuturesList3Props> = ({ ...props }) => {
 
   const isEnd = () => {
     return props.item.actualMargin !== undefined;
-  };
-
-  const shareOrderData = () => {
-    const nowPrice = props.kValue
-      ? props.kValue[tokenName()].nowPrice
-      : undefined;
-    const data: FuturesShareOrderView = {
-      index: Number(props.item.index.toString()),
-      owner: props.item.owner.toString(),
-      leverage: props.item.lever.toString() + "X",
-      orientation: props.item.orientation ? "Long" : "Short",
-      actualRate: parseFloat(showPercent().toFixed(2)),
-      openPrice: parseFloat(
-        parseFloat(formatUnits(props.item.basePrice, 18)).toFixed(2)
-      ),
-      tokenPair: `${tokenName()}/USDT`,
-      actualMargin: parseFloat(showMarginAssets()),
-      initialMargin: parseFloat(
-        parseFloat(formatUnits(props.item.balance, 4)).toFixed(2)
-      ),
-      lastPrice: nowPrice
-        ? parseFloat(parseFloat(formatUnits(nowPrice, 18)).toFixed(2))
-        : undefined,
-    };
-    return data;
   };
 
   return (

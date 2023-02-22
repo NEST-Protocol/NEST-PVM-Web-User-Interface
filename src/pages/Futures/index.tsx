@@ -409,7 +409,14 @@ const Futures: FC = () => {
             callBack={handleLeverNum}
             title={"Leverage"}
           />
-          <LeverSlider />
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+          >
+            <p>Leverage</p>
+            <p>{leverNum}</p>
+          </Stack>
+          <LeverSlider callBack={handleLeverNum}/>
           <InfoShow
             topLeftText={"Payment"}
             bottomRightText={""}

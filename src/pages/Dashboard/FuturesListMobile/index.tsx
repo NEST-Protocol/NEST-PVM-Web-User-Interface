@@ -16,6 +16,8 @@ type OrderView = {
   tokenPair: string;
   actualMargin: number;
   initialMargin: number;
+  tp?: number;
+  sl?: number;
   lastPrice?: number;
 };
 

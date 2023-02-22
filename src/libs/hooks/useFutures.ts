@@ -8,9 +8,7 @@ import {
   usePVMFuturesSell2,
 } from "../../contracts/hooks/usePVMFutures";
 import { tokenList, TokenType } from "../constants/addresses";
-import {
-  ZERO_ADDRESS,
-} from "../utils";
+import { ZERO_ADDRESS } from "../utils";
 import {
   ERC20Contract,
   NestPriceContract,
@@ -30,6 +28,7 @@ import {
   useTrustFuturesUpdateLimitPrice,
   useTrustFuturesUpdateStopPrice,
 } from "../../contracts/hooks/useNESTTrustFutures";
+import { FuturesShareOrderView } from "../../pages/Dashboard/FuturesList";
 
 export type TrustOrder = {
   index: BigNumber;
@@ -815,6 +814,42 @@ export function useFutures3OrderList(
     }
     return parseFloat(formatUnits(result, 18)).toFixed(2).toString();
   };
+  const shareOrderData = () => {
+    const nowPrice = kValue ? kValue[tokenName()].nowPrice : undefined;
+    const tp = order.trustOrder
+      ? parseFloat(
+          parseFloat(formatUnits(order.trustOrder.stopProfitPrice, 18)).toFixed(
+            2
+          )
+        )
+      : 0;
+    const sl = order.trustOrder
+      ? parseFloat(
+          parseFloat(formatUnits(order.trustOrder.stopLossPrice, 18)).toFixed(2)
+        )
+      : 0;
+    const data: FuturesShareOrderView = {
+      index: Number(order.index.toString()),
+      owner: order.owner.toString(),
+      leverage: order.lever.toString() + "X",
+      orientation: order.orientation ? "Long" : "Short",
+      actualRate: parseFloat(showPercent().toFixed(2)),
+      openPrice: parseFloat(
+        parseFloat(formatUnits(order.basePrice, 18)).toFixed(2)
+      ),
+      tokenPair: `${tokenName()}/USDT`,
+      actualMargin: parseFloat(showMarginAssets()),
+      initialMargin: parseFloat(
+        parseFloat(formatUnits(order.balance, 4)).toFixed(2)
+      ),
+      tp: tp,
+      sl: sl,
+      lastPrice: nowPrice
+        ? parseFloat(parseFloat(formatUnits(nowPrice, 18)).toFixed(2))
+        : undefined,
+    };
+    return data;
+  };
   const showStopPrice = () => {
     if (
       order.trustOrder === undefined ||
@@ -863,6 +898,7 @@ export function useFutures3OrderList(
     showLiqPrice,
     showStopPrice,
     tokenName,
+    shareOrderData
   };
 }
 
@@ -1727,8 +1763,8 @@ export function useFuturesOpenPosition(order: Futures3OrderView) {
       )
     )
       .toFixed(2)
-      .toString()
-  }
+      .toString();
+  };
 
   return {
     nestAmount,
@@ -1747,6 +1783,6 @@ export function useFuturesOpenPosition(order: Futures3OrderView) {
     feeHoverText,
     showFee,
     showTotalPay,
-    checkNESTBalance
+    checkNESTBalance,
   };
 }
