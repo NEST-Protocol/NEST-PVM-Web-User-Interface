@@ -33,6 +33,7 @@ import useWeb3 from "../../libs/hooks/useWeb3";
 import axios from "axios";
 import OpenPosition from "./OpenPosition";
 import { BigNumber } from "ethers";
+import LeverSlider from "../../components/LeverSlider";
 
 const Futures: FC = () => {
   const classPrefix = "Futures";
@@ -61,8 +62,10 @@ const Futures: FC = () => {
     setTokenPair,
     limitInput,
     setLimitInput,
-    takeInput,
-    setTakeInput,
+    stopProfitPriceInput,
+    setStopProfitPriceInput,
+    stopLossPriceInput,
+    setStopLossPriceInput,
     tokenPrice,
     tokenPair,
     checkNESTBalance,
@@ -253,10 +256,10 @@ const Futures: FC = () => {
           >
             <input
               placeholder={`${tokenPrice.price}`}
-              value={takeInput}
+              value={stopProfitPriceInput}
               maxLength={32}
               onChange={(e) =>
-                setTakeInput(`${formatInputNum(e.target.value)}`)
+                setStopProfitPriceInput(`${formatInputNum(e.target.value)}`)
               }
             />
             <p>USDT</p>
@@ -283,10 +286,10 @@ const Futures: FC = () => {
           >
             <input
               placeholder={`${tokenPrice.price}`}
-              value={takeInput}
+              value={stopLossPriceInput}
               maxLength={32}
               onChange={(e) =>
-                setTakeInput(`${formatInputNum(e.target.value)}`)
+                setStopLossPriceInput(`${formatInputNum(e.target.value)}`)
               }
             />
             <p>USDT</p>
@@ -388,6 +391,7 @@ const Futures: FC = () => {
             callBack={handleLeverNum}
             title={"Leverage"}
           />
+          <LeverSlider/>
           <InfoShow
             topLeftText={"Payment"}
             bottomRightText={""}

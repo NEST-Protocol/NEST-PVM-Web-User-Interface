@@ -9,7 +9,6 @@ import { SingleTokenShow } from "../../../components/TokenShow";
 import { Futures3OrderView, useFuturesAdd } from "../../../libs/hooks/useFutures";
 import useThemes, { ThemeType } from "../../../libs/hooks/useThemes";
 import { formatInputNumWithFour } from "../../../libs/utils";
-import { LightTooltip } from "../../../styles/MUI";
 import "./styles";
 
 type FuturesAddProps = {
@@ -26,7 +25,6 @@ const FuturesAdd: FC<FuturesAddProps> = ({ ...props }) => {
     checkNESTBalance,
     showPosition,
     showOpenPrice,
-    showFee,
     buttonLoading,
     buttonDis,
     buttonAction,
@@ -54,19 +52,6 @@ const FuturesAdd: FC<FuturesAddProps> = ({ ...props }) => {
         >
           <p>Open Price</p>
           <p>{showOpenPrice()}</p>
-        </Stack>
-        <Stack
-          direction="row"
-          justifyContent="space-between"
-          alignItems="center"
-          spacing={0}
-          className={`${classPrefix}-infoShow`}
-        >
-          <LightTooltip placement="right" title={"margin*leverage*0.2%"} arrow>
-            <p className="underLine">Fees</p>
-          </LightTooltip>
-
-          <p>{showFee()} NEST</p>
         </Stack>
       </>
     );

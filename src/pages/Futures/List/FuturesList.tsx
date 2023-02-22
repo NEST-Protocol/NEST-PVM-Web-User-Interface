@@ -8,7 +8,6 @@ import MainButton from "../../../components/MainButton";
 import { TokenType } from "../../../libs/constants/addresses";
 import {
   Futures3OrderView,
-  LimitOrderView,
   OldOrderView,
   OrderView,
   useFutures3OrderList,
@@ -39,7 +38,7 @@ export type FuturesListProps = {
   kValue?: { [key: string]: TokenType };
 };
 export type FuturesList2Props = {
-  item: LimitOrderView;
+  item: Futures3OrderView;
   key: string;
   className: string;
 };

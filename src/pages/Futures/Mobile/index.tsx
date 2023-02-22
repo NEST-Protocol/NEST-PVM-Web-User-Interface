@@ -48,8 +48,10 @@ const FuturesMobile: FC = () => {
     setTokenPair,
     limitInput,
     setLimitInput,
-    takeInput,
-    setTakeInput,
+    stopProfitPriceInput,
+    setStopProfitPriceInput,
+    stopLossPriceInput,
+    setStopLossPriceInput,
     tokenPrice,
     tokenPair,
     checkNESTBalance,
@@ -198,9 +200,11 @@ const FuturesMobile: FC = () => {
           >
             <input
               placeholder={`${tokenPrice.price}`}
-              value={takeInput}
+              value={stopProfitPriceInput}
               maxLength={32}
-              onChange={(e) => setTakeInput(formatInputNum(e.target.value))}
+              onChange={(e) =>
+                setStopProfitPriceInput(formatInputNum(e.target.value))
+              }
             />
             <p>USDT</p>
           </Stack>
@@ -226,9 +230,11 @@ const FuturesMobile: FC = () => {
           >
             <input
               placeholder={`${tokenPrice.price}`}
-              value={takeInput}
+              value={stopLossPriceInput}
               maxLength={32}
-              onChange={(e) => setTakeInput(formatInputNum(e.target.value))}
+              onChange={(e) =>
+                setStopLossPriceInput(formatInputNum(e.target.value))
+              }
             />
             <p>USDT</p>
           </Stack>

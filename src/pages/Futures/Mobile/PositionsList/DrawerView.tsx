@@ -8,7 +8,6 @@ import { SingleTokenShow } from "../../../../components/TokenShow";
 import { TokenType } from "../../../../libs/constants/addresses";
 import {
   Futures3OrderView,
-  LimitOrderView,
   useFuturesAdd,
   useFuturesCloseOrder,
   useFuturesSetLimitOrder,
@@ -32,7 +31,7 @@ type DrawerCloseType = {
 };
 
 type DrawerLimitEditType = {
-  order: LimitOrderView;
+  order: Futures3OrderView;
   hideSelf: () => void;
 };
 
@@ -44,7 +43,6 @@ export const DrawerAdd: FC<DrawerBaseType> = ({ ...props }) => {
     checkNESTBalance,
     showPosition,
     showOpenPrice,
-    showFee,
     buttonLoading,
     buttonDis,
     buttonAction,
@@ -102,22 +100,6 @@ export const DrawerAdd: FC<DrawerBaseType> = ({ ...props }) => {
         >
           <p>Open price</p>
           <p>{showOpenPrice()}</p>
-        </Stack>
-        <Stack
-          direction="row"
-          justifyContent="space-between"
-          alignItems="center"
-          spacing={0}
-          className={`${classPrefix}-infoShow`}
-        >
-          <LightTooltip
-            placement="top-start"
-            title={"margin*leverage*0.2%"}
-            arrow
-          >
-            <p className="underLine">Fees</p>
-          </LightTooltip>
-          <p>{showFee()} NEST</p>
         </Stack>
       </Stack>
       <MainButton

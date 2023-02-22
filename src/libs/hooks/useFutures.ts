@@ -1,17 +1,11 @@
-import {
-  NestTrustFuturesContract,
-  PVMFuturesContract,
-  PVMFuturesProxyContract,
-} from "./../constants/addresses";
+import { NestTrustFuturesContract } from "./../constants/addresses";
 import { BigNumber, Contract } from "ethers";
 import { formatUnits, parseUnits } from "ethers/lib/utils";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useERC20Approve } from "../../contracts/hooks/useERC20Approve";
 import {
-  usePVMFuturesAdd2,
   usePVMFuturesSell,
   usePVMFuturesSell2,
-  usePVMFuturesSet,
 } from "../../contracts/hooks/usePVMFutures";
 import {
   usePVMFuturesProxyCancel,
@@ -38,8 +32,11 @@ import useTransactionListCon, { TransactionType } from "./useTransactionInfo";
 import {
   useTrustFuturesAdd,
   useTrustFuturesBuy,
+  useTrustFuturesCancelLimitOrder,
   useTrustFuturesNewStopOrder,
+  useTrustFuturesNewTrustOrder,
   useTrustFuturesSell,
+  useTrustFuturesUpdateLimitPrice,
   useTrustFuturesUpdateStopPrice,
 } from "../../contracts/hooks/useNESTTrustFutures";
 
@@ -133,7 +130,8 @@ export function useFutures() {
   const [isPositions, setIsPositions] = useState(true);
   const [nestInput, setNestInput] = useState<string>("");
   const [limitInput, setLimitInput] = useState<string>("");
-  const [takeInput, setTakeInput] = useState<string>("");
+  const [stopProfitPriceInput, setStopProfitPriceInput] = useState<string>("");
+  const [stopLossPriceInput, setStopLossPriceInput] = useState<string>("");
   const [leverNum, setLeverNum] = useState<number>(1);
   const [tokenPair, setTokenPair] = useState<string>("ETH");
   const [kValue, setKValue] = useState<{ [key: string]: TokenType }>();
@@ -142,13 +140,10 @@ export function useFutures() {
   const [plusOrder3List, setPlusOrder3] = useState<Array<Futures3OrderView>>(
     []
   );
-  const [plusLimitOrder3List, setPlusLimitOrder3] = useState<
+  const [orderList, setOrderList] = useState<Array<OrderView>>([]);
+  const [limitOrderList, setLimitOrderList] = useState<
     Array<Futures3OrderView>
   >([]);
-  const [orderList, setOrderList] = useState<Array<OrderView>>([]);
-  const [limitOrderList, setLimitOrderList] = useState<Array<LimitOrderView>>(
-    []
-  );
   const [oldOrderList, setOldOrderList] = useState<Array<OldOrderView>>([]);
   const [closedOrder, setClosedOrder] = useState<Array<OrderView>>([]);
   const [orderNotShow, setOrderNotShow] = useState<BigNumber[]>([]);
@@ -159,7 +154,6 @@ export function useFutures() {
 
   const priceContract = NestPriceContract();
   const PVMFuturesOJ = PVMFutures();
-  const PVMFuturesProxyOJ = PVMFuturesProxy();
 
   const checkNESTBalance = () => {
     if (nestInput === "") {
@@ -254,7 +248,7 @@ export function useFutures() {
               account
             );
           const groupResult = groupList.filter((item) => {
-            return item.balance.toString() !== "0";
+            return item.lever.toString() !== "0";
           });
           result = [...result, ...groupResult];
           if (getPart) {
@@ -361,25 +355,25 @@ export function useFutures() {
     [PVMFuturesOJ, account, chainId]
   );
 
-  const getLimitOrderList = useCallback(async () => {
-    try {
-      if (!PVMFuturesProxyOJ || !account) {
-        return;
-      }
-      const list: Array<LimitOrderView> = await PVMFuturesProxyOJ.find(
-        "0",
-        "500",
-        "4000",
-        account
-      );
-      const result = list.filter((item) => {
-        return item.status.toString() === "1";
-      });
-      setLimitOrderList(result);
-    } catch (error) {
-      console.log(error);
-    }
-  }, [PVMFuturesProxyOJ, account]);
+  // const getLimitOrderList = useCallback(async () => {
+  //   try {
+  //     if (!PVMFuturesProxyOJ || !account) {
+  //       return;
+  //     }
+  //     const list: Array<LimitOrderView> = await PVMFuturesProxyOJ.find(
+  //       "0",
+  //       "500",
+  //       "4000",
+  //       account
+  //     );
+  //     const result = list.filter((item) => {
+  //       return item.status.toString() === "1";
+  //     });
+  //     setLimitOrderList(result);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }, [PVMFuturesProxyOJ, account]);
 
   const getOldOrderList = useCallback(async () => {
     try {
@@ -496,30 +490,30 @@ export function useFutures() {
   }, [account, chainId, nestToken]);
 
   useEffect(() => {
-    console.log(order3List);
-
     const plusOrders = order3List.map((order) => {
       var newOrder = { ...order };
       const trustOrders = trustOrder3List.filter((trust) =>
         BigNumber.from(trust.orderIndex.toString()).eq(order.index)
       );
-      console.log(newOrder.trustOrder);
       if (trustOrders.length > 0) {
         newOrder.trustOrder = trustOrders[0];
       }
       return newOrder;
     });
-    const plusOrdersNormal = plusOrders.filter(
-      (item) =>
-        !item.trustOrder ||
-        (item.trustOrder && BigNumber.from("0").eq(item.trustOrder.status))
-    );
+
+    const plusOrdersNormal = plusOrders
+      .filter(
+        (item) =>
+          !item.trustOrder ||
+          (item.trustOrder && BigNumber.from("0").eq(item.trustOrder.status))
+      )
+      .filter((item) => item.balance.toString() !== "0");
     const plusOrdersLimit = plusOrders.filter(
       (item) =>
         item.trustOrder && BigNumber.from("1").eq(item.trustOrder.status)
     );
     setPlusOrder3(plusOrdersNormal);
-    setPlusLimitOrder3(plusOrdersLimit);
+    setLimitOrderList(plusOrdersLimit);
   }, [order3List, trustOrder3List]);
 
   // price
@@ -554,14 +548,12 @@ export function useFutures() {
     getFutures3List(true);
     getFutures3TrustList(true);
     getOrderList(true);
-    getLimitOrderList();
     getOldOrderList();
     getClosedOrderList();
     const time = setInterval(() => {
       getFutures3List();
       getFutures3TrustList();
       getOrderList();
-      getLimitOrderList();
       getOldOrderList();
       getClosedOrderList();
     }, UPDATE_LIST_TIME * 1000);
@@ -572,7 +564,6 @@ export function useFutures() {
     getClosedOrderList,
     getFutures3List,
     getFutures3TrustList,
-    getLimitOrderList,
     getOldOrderList,
     getOrderList,
   ]);
@@ -584,13 +575,14 @@ export function useFutures() {
     isLong,
     parseUnits(nestInput === "" ? "0" : nestInput, 4)
   );
-  const buy2 = usePVMFuturesProxyNew(
-    tokenList[tokenPair],
+  const buy2 = useTrustFuturesNewTrustOrder(
+    BigNumber.from(channelIndex(tokenPair).toString()),
     BigNumber.from(leverNum.toString()),
     isLong,
     parseUnits(nestInput === "" ? "0" : nestInput, 4),
     parseUnits(limitInput === "" ? "0" : limitInput, 18),
-    parseUnits(takeInput === "" ? "0" : takeInput, 18)
+    parseUnits(stopProfitPriceInput === "" ? "0" : stopProfitPriceInput, 18),
+    parseUnits(stopLossPriceInput === "" ? "0" : stopLossPriceInput, 18)
   );
   const approveToPVMFutures = useERC20Approve(
     "NEST",
@@ -616,7 +608,7 @@ export function useFutures() {
     if (limitInput === "" && limit) {
       return true;
     }
-    if (takeInput === "" && stop) {
+    if (stopProfitPriceInput === "" && stopLossPriceInput === "" && stop) {
       return true;
     }
     return false;
@@ -734,8 +726,10 @@ export function useFutures() {
     setTokenPair,
     limitInput,
     setLimitInput,
-    takeInput,
-    setTakeInput,
+    stopProfitPriceInput,
+    setStopProfitPriceInput,
+    stopLossPriceInput,
+    setStopLossPriceInput,
     tokenPrice,
     checkNESTBalance,
     fee,
@@ -1104,16 +1098,30 @@ export function useFuturesOldOrderList(
   };
 }
 
-export function useFuturesLimitOrderList(order: LimitOrderView) {
+export function useFuturesLimitOrderList(order: Futures3OrderView) {
   const { pendingList } = useTransactionListCon();
   const tokenName = useCallback(() => {
-    return tokenArray[Number(order.tokenIndex.toString())].symbol;
-  }, [order.tokenIndex]);
+    return tokenArray[Number(order.channelIndex.toString())].symbol;
+  }, [order.channelIndex]);
   const showBalance = () => {
-    return parseFloat(formatUnits(order.balance, 4)).toFixed(2).toString();
+    return parseFloat(
+      formatUnits(
+        order.trustOrder ? order.trustOrder.balance : BigNumber.from("0"),
+        4
+      )
+    )
+      .toFixed(2)
+      .toString();
   };
   const showLimitPrice = () => {
-    return parseFloat(formatUnits(order.limitPrice, 18)).toFixed(2).toString();
+    return parseFloat(
+      formatUnits(
+        order.trustOrder ? order.trustOrder.limitPrice : BigNumber.from("0"),
+        18
+      )
+    )
+      .toFixed(2)
+      .toString();
   };
   const TokenOneSvg = tokenList[tokenName()].Icon;
   const TokenTwoSvg = tokenList["USDT"].Icon;
@@ -1132,7 +1140,7 @@ export function useFuturesLimitOrderList(order: LimitOrderView) {
     }
     return false;
   };
-  const closeAction = usePVMFuturesProxyCancel(order.index);
+  const closeAction = useTrustFuturesCancelLimitOrder(order.trustOrder!.index);
   const closeButtonAction = () => {
     if (closeButtonDis()) {
       return;
@@ -1155,7 +1163,6 @@ export function useFuturesTrigger(order: Futures3OrderView) {
   const [stopProfitPriceInput, setStopProfitPriceInput] = useState<string>("");
   const [stopLossPriceInput, setStopLossPriceInput] = useState<string>("");
   const [showTriggerRisk, setShowTriggerRisk] = useState(false);
-  const { chainId } = useWeb3();
   const { pendingList } = useTransactionListCon();
   const showPosition = () => {
     const lever = order.lever.toString();
@@ -1325,11 +1332,11 @@ export function useFuturesTrigger(order: Futures3OrderView) {
   };
 }
 
-export function useFuturesSetLimitOrder(order: LimitOrderView) {
+export function useFuturesSetLimitOrder(order: Futures3OrderView) {
   const [limitInput, setLimitInput] = useState<string>("");
   const { pendingList } = useTransactionListCon();
-  const action = usePVMFuturesProxyUpdate(
-    order.index,
+  const action = useTrustFuturesUpdateLimitPrice(
+    order.trustOrder!.index,
     parseUnits(limitInput === "" ? "0" : limitInput, 18)
   );
 
@@ -1357,7 +1364,14 @@ export function useFuturesSetLimitOrder(order: LimitOrderView) {
   };
 
   const showPlaceHolder = () => {
-    return parseFloat(formatUnits(order.limitPrice, 18)).toFixed(2).toString();
+    return parseFloat(
+      formatUnits(
+        order.trustOrder ? order.trustOrder.limitPrice : BigNumber.from("0"),
+        18
+      )
+    )
+      .toFixed(2)
+      .toString();
   };
   return {
     limitInput,
@@ -1382,21 +1396,8 @@ export function useFuturesAdd(order: Futures3OrderView) {
     if (nestInput === "") {
       return true;
     }
-    return parseUnits(nestInput, 18)
-      .add(fee)
-      .lte(nestBalance || BigNumber.from("0"));
+    return parseUnits(nestInput, 18).lte(nestBalance || BigNumber.from("0"));
   };
-
-  const fee = useMemo(() => {
-    if (nestInput === "") {
-      return BigNumber.from("0");
-    }
-    const baseFee = parseUnits(nestInput, 18)
-      .mul(order.lever)
-      .mul(BigNumber.from("2"))
-      .div(BigNumber.from("1000"));
-    return baseFee;
-  }, [nestInput, order.lever]);
 
   const getBalance = useCallback(async () => {
     try {
@@ -1440,10 +1441,6 @@ export function useFuturesAdd(order: Futures3OrderView) {
     return order.basePrice;
   };
 
-  const showFee = () => {
-    return parseFloat(formatUnits(fee, 18)).toFixed(2).toString();
-  };
-
   const action = useTrustFuturesAdd(
     order.index,
     parseUnits(nestInput === "" ? "0" : nestInput, 4)
@@ -1484,7 +1481,6 @@ export function useFuturesAdd(order: Futures3OrderView) {
     checkNESTBalance,
     showPosition,
     showOpenPrice,
-    showFee,
     buttonLoading,
     buttonDis,
     buttonAction,

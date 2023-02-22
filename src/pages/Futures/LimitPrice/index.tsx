@@ -7,12 +7,12 @@ import "./styles";
 import useThemes, { ThemeType } from "../../../libs/hooks/useThemes";
 import { formatInputNumWithFour } from "../../../libs/utils";
 import {
-  LimitOrderView,
+  Futures3OrderView,
   useFuturesSetLimitOrder,
 } from "../../../libs/hooks/useFutures";
 
 export type LimitPriceProp = {
-  order: LimitOrderView;
+  order: Futures3OrderView;
   onClose: () => void;
 };
 

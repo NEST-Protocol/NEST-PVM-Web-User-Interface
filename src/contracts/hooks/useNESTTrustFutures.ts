@@ -191,7 +191,7 @@ export function useTrustFuturesUpdateLimitPrice(
   if (!chainId) {
     contract = null;
   } else {
-    callData = contract?.interface.encodeFunctionData("updateLimitOrder", [
+    callData = contract?.interface.encodeFunctionData("updateLimitPrice", [
       trustOrderIndex,
       limitPrice,
     ]);
