@@ -21,7 +21,6 @@ import classNames from "classnames";
 import TVChart from "../../components/TVChart";
 import {
   Futures3OrderView,
-  OrderView,
   tokenArray,
   TrustOrder,
   useFutures,

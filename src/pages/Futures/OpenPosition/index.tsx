@@ -37,6 +37,7 @@ const OpenPosition: FC<OpenPositionProp> = ({ ...props }) => {
     feeHoverText,
     showFee,
     showTotalPay,
+    checkNESTBalance,
   } = useFuturesOpenPosition(props.order);
   return (
     <MainCard
@@ -72,6 +73,19 @@ const OpenPosition: FC<OpenPositionProp> = ({ ...props }) => {
             />
             <p>NEST</p>
           </Stack>
+          {!checkNESTBalance() ? (
+            <p
+              style={{
+                position: "absolute",
+                color: "#FE3645",
+                marginLeft: "70px",
+              }}
+            >
+              Insufficient Balance
+            </p>
+          ) : (
+            <></>
+          )}
         </Stack>
 
         <Stack

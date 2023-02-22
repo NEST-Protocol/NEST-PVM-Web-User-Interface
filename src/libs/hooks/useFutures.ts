@@ -7,16 +7,8 @@ import {
   usePVMFuturesSell,
   usePVMFuturesSell2,
 } from "../../contracts/hooks/usePVMFutures";
-import {
-  usePVMFuturesProxyCancel,
-  usePVMFuturesProxyNew,
-  usePVMFuturesProxyUpdate,
-} from "../../contracts/hooks/usePVMFuturesProxy";
 import { tokenList, TokenType } from "../constants/addresses";
 import {
-  BASE_2000ETH_AMOUNT,
-  BASE_AMOUNT,
-  BLOCK_TIME,
   ZERO_ADDRESS,
 } from "../utils";
 import {
@@ -24,7 +16,6 @@ import {
   NestPriceContract,
   NESTTrustFutures,
   PVMFutures,
-  PVMFuturesProxy,
 } from "./useContract";
 import { MaxUint256 } from "@ethersproject/constants";
 import useWeb3 from "./useWeb3";
@@ -1693,7 +1684,7 @@ export function useFuturesOpenPosition(order: Futures3OrderView) {
     if (!checkAllowance()) {
       return false;
     }
-    if (limit === "" || tp === "" || sl === "") {
+    if (limit === "") {
       return true;
     }
     return false;
@@ -1755,6 +1746,7 @@ export function useFuturesOpenPosition(order: Futures3OrderView) {
     mainButtonLoading,
     feeHoverText,
     showFee,
-    showTotalPay
+    showTotalPay,
+    checkNESTBalance
   };
 }
