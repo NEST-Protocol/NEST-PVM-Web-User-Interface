@@ -19,7 +19,13 @@ import { PutDownIcon, TokenBNB } from "../../components/Icon";
 import { Popover } from "@mui/material";
 import classNames from "classnames";
 import TVChart from "../../components/TVChart";
-import { OrderView, tokenArray, useFutures } from "../../libs/hooks/useFutures";
+import {
+  Futures3OrderView,
+  OrderView,
+  tokenArray,
+  TrustOrder,
+  useFutures,
+} from "../../libs/hooks/useFutures";
 import FuturesList3, {
   FuturesList,
   FuturesList2,
@@ -43,7 +49,7 @@ const Futures: FC = () => {
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
   const [showOpenPosition, setShowOpenPosition] = useState(false);
   const [showOpenPositionOrder, setShowOpenPositionOrder] =
-    useState<OrderView>();
+    useState<Futures3OrderView>();
   const {
     chainId,
     isLong,
@@ -115,6 +121,7 @@ const Futures: FC = () => {
   }, [kValue, tokenPair]);
 
   const handleShareOrder = useCallback(async () => {
+    // http://localhost:3000/#/futures?position=ETH&12400030&20&true&130000&160000&120000
     const href = window.location.href;
     const inviteCode = href?.split("?position=")[1];
     if (inviteCode && account && inviteCode.length > 0) {
@@ -127,17 +134,29 @@ const Futures: FC = () => {
         if (tokenIndex === -1) {
           return;
         }
-        const order: OrderView = {
+        const trustOrder: TrustOrder = {
+          limitPrice: BigNumber.from(orderData[4]),
+          stopProfitPrice: BigNumber.from(orderData[5]),
+          stopLossPrice: BigNumber.from(orderData[6]),
           index: BigNumber.from("0"),
           owner: "",
+          orderIndex: BigNumber.from("0"),
+          balance: BigNumber.from("0"),
+          fee: BigNumber.from("0"),
+          status: BigNumber.from("0"),
+        };
+        const order: Futures3OrderView = {
+          index: BigNumber.from("0"),
+          owner: BigNumber.from("0"),
           balance: BigNumber.from(orderData[1]),
-          tokenIndex: BigNumber.from(tokenIndex.toString()),
-          baseBlock: BigNumber.from("0"),
+          channelIndex: BigNumber.from(tokenIndex.toString()),
           lever: BigNumber.from(orderData[2]),
           orientation: orderData[3] === "true",
-          basePrice: BigNumber.from(orderData[4]),
-          stopPrice: BigNumber.from(orderData[5]),
           actualMargin: "",
+          trustOrder: trustOrder,
+          basePrice: BigNumber.from("0"),
+          append: BigNumber.from("0"),
+          Pt: BigInt(0),
         };
         setShowOpenPositionOrder(order);
         setShowOpenPosition(true);
@@ -391,7 +410,7 @@ const Futures: FC = () => {
             callBack={handleLeverNum}
             title={"Leverage"}
           />
-          <LeverSlider/>
+          <LeverSlider />
           <InfoShow
             topLeftText={"Payment"}
             bottomRightText={""}
@@ -648,6 +667,7 @@ const Futures: FC = () => {
         modal
         ref={modal}
         onClose={() => setShowOpenPosition(false)}
+        nested
       >
         <OpenPosition
           onClose={() => setShowOpenPosition(false)}

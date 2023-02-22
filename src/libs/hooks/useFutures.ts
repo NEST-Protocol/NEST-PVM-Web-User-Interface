@@ -1562,24 +1562,182 @@ export function useFuturesCloseOrder(
   };
 }
 
-export function useFuturesOpenPosition(order: OrderView) {
-  const [nestAmount, setNestAmount] = useState<string>();
-  const [limit, setLimit] = useState<string>();
-  const [tp, setTp] = useState<string>();
-  const [sl, setSl] = useState<string>();
+export function useFuturesOpenPosition(order: Futures3OrderView) {
+  const [nestAmount, setNestAmount] = useState<string>("");
+  const [limit, setLimit] = useState<string>("");
+  const [tp, setTp] = useState<string>("");
+  const [sl, setSl] = useState<string>("");
+  const [nestBalance, setNestBalance] = useState<BigNumber>(
+    BigNumber.from("0")
+  );
+  const [nestAllowance, setNestAllowance] = useState<BigNumber>(
+    BigNumber.from("0")
+  );
+  const { chainId, account } = useWeb3();
+  const { pendingList } = useTransactionListCon();
+
+  const nestToken = ERC20Contract(tokenList["NEST"].addresses);
+
+  const checkNESTBalance = () => {
+    if (nestAmount === "") {
+      return true;
+    }
+    return parseUnits(nestAmount, 18)
+      .add(fee)
+      .lte(nestBalance || BigNumber.from("0"));
+  };
+  const checkAllowance = () => {
+    if (!nestAmount) {
+      return true;
+    }
+    return parseUnits(nestAmount, 18).add(fee).lte(nestAllowance);
+  };
+  const fee = useMemo(() => {
+    if (nestAmount === "") {
+      return BigNumber.from("0");
+    }
+    const baseFee = parseUnits(nestAmount, 18)
+      .mul(BigNumber.from(order.lever.toString()))
+      .mul(BigNumber.from("2"))
+      .div(BigNumber.from("1000"));
+    var limitFee = BigNumber.from("0");
+    if (limit) {
+      limitFee = parseUnits(BASE_NEST_FEE, 18);
+    }
+    return baseFee.add(limitFee);
+  }, [limit, nestAmount, order.lever]);
+
+  const getBalance = useCallback(async () => {
+    try {
+      if (!nestToken) {
+        return;
+      }
+      const balance = await nestToken.balanceOf(account);
+      setNestBalance(balance);
+    } catch (error) {
+      console.log(error);
+    }
+  }, [account, nestToken]);
+  const getAllowance = useCallback(async () => {
+    try {
+      if (!nestToken || !chainId) {
+        return;
+      }
+      const allowance1 = await nestToken.allowance(
+        account,
+        NestTrustFuturesContract[chainId]
+      );
+      setNestAllowance(allowance1);
+    } catch (error) {
+      console.log(error);
+    }
+  }, [account, chainId, nestToken]);
+
+  // balance
+  useEffect(() => {
+    getBalance();
+    const time = setInterval(() => {
+      getBalance();
+    }, UPDATE_BALANCE_TIME * 1000);
+    return () => {
+      clearInterval(time);
+    };
+  }, [getBalance]);
+  // approve
+  useEffect(() => {
+    getAllowance();
+  }, [getAllowance]);
 
   useEffect(() => {
     setNestAmount(formatUnits(order.balance, 4));
-    setLimit(formatUnits(order.basePrice, 2));
-    setTp(formatUnits(order.stopPrice, 2));
-  }, [order.balance, order.basePrice, order.stopPrice]);
+    setLimit(formatUnits(order.trustOrder!.limitPrice, 2));
+    setTp(formatUnits(order.trustOrder!.stopProfitPrice, 2));
+    setSl(formatUnits(order.trustOrder!.stopLossPrice, 2));
+  }, [order.balance, order.basePrice, order.trustOrder]);
 
   const showPosition = () => {
-    const tokenName = tokenArray[Number(order.tokenIndex.toString())];
+    const tokenName = tokenArray[Number(order.channelIndex.toString())];
     const LS = order.orientation ? "Long" : "Short";
     const lever = order.lever.toString();
     return `${tokenName.symbol}/USDT ${lever}X ${LS}`;
   };
+
+  const approveToPVMFutures = useERC20Approve(
+    "NEST",
+    MaxUint256,
+    chainId ? NestTrustFuturesContract[chainId] : undefined
+  );
+
+  const buy2 = useTrustFuturesNewTrustOrder(
+    order.channelIndex,
+    order.lever,
+    order.orientation,
+    parseUnits(nestAmount === "" ? "0" : nestAmount, 4),
+    parseUnits(limit === "" ? "0" : limit, 18),
+    parseUnits(tp === "" ? "0" : tp, 18),
+    parseUnits(sl === "" ? "0" : sl, 18)
+  );
+
+  // mainButton
+  const mainButtonTitle = () => {
+    const longOrShort = order.orientation ? "Long" : "Short";
+    return checkAllowance() ? `Open ${longOrShort}` : "Approve";
+  };
+  const mainButtonDis = () => {
+    if (mainButtonLoading()) {
+      return true;
+    }
+    if (nestAmount === "" || parseFloat(nestAmount) < MIN_NEST) {
+      return true;
+    }
+    if (!checkAllowance()) {
+      return false;
+    }
+    if (limit === "" || tp === "" || sl === "") {
+      return true;
+    }
+    return false;
+  };
+  const mainButtonAction = () => {
+    if (mainButtonDis()) {
+      return;
+    }
+    if (!checkAllowance()) {
+      approveToPVMFutures();
+      return;
+    }
+    buy2();
+  };
+  const mainButtonLoading = () => {
+    const pendingTransaction = pendingList.filter(
+      (item) =>
+        item.type === TransactionType.buyLever ||
+        item.type === TransactionType.approve ||
+        item.type === TransactionType.PVMFuturesProxyNew
+    );
+    return pendingTransaction.length > 0 ? true : false;
+  };
+
+  const feeHoverText = () => {
+    return [
+      "Position fee = Position*0.2%",
+      "Limit order fee = 15 NEST",
+      "Stop order fee(after execution) = 15 NEST",
+    ];
+  };
+  const showFee = () => {
+    return parseFloat(formatUnits(fee, 18)).toFixed(2).toString();
+  };
+  const showTotalPay = () => {
+    return parseFloat(
+      formatUnits(
+        fee.add(parseUnits(nestAmount === "" ? "0" : nestAmount, 18)),
+        18
+      )
+    )
+      .toFixed(2)
+      .toString()
+  }
 
   return {
     nestAmount,
@@ -1591,5 +1749,12 @@ export function useFuturesOpenPosition(order: OrderView) {
     sl,
     setSl,
     showPosition,
+    mainButtonTitle,
+    mainButtonDis,
+    mainButtonAction,
+    mainButtonLoading,
+    feeHoverText,
+    showFee,
+    showTotalPay
   };
 }
