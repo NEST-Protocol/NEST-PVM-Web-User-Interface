@@ -43,6 +43,7 @@ export const DrawerAdd: FC<DrawerBaseType> = ({ ...props }) => {
     checkNESTBalance,
     showPosition,
     showOpenPrice,
+    showLiqPrice,
     buttonLoading,
     buttonDis,
     buttonAction,
@@ -100,6 +101,16 @@ export const DrawerAdd: FC<DrawerBaseType> = ({ ...props }) => {
         >
           <p>Open price</p>
           <p>{showOpenPrice()}</p>
+        </Stack>
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+          spacing={0}
+          className={`${classPrefix}-infoShow`}
+        >
+          <p>Liq price</p>
+          <p>{showLiqPrice()}</p>
         </Stack>
       </Stack>
       <MainButton
@@ -272,20 +283,20 @@ export const DrawerTrigger: FC<DrawerBaseType> = ({ ...props }) => {
           <p>Open price</p>
           <p>{showOpenPrice()}</p>
         </Stack>
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+          spacing={0}
+          className={`${classPrefix}-infoShow`}
+        >
+          <p>Liq Price</p>
+          <p>{showLiqPrice()} USDT</p>
+        </Stack>
         {isEdit() ? (
           <></>
         ) : (
           <>
-            <Stack
-              direction="row"
-              justifyContent="space-between"
-              alignItems="center"
-              spacing={0}
-              className={`${classPrefix}-infoShow`}
-            >
-              <p>Liq Price</p>
-              <p>{showLiqPrice()} USDT</p>
-            </Stack>
             <Stack
               direction="row"
               justifyContent="space-between"

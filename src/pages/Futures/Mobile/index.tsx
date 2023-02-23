@@ -80,7 +80,8 @@ const FuturesMobile: FC = () => {
     feeHoverText,
     showOpenPosition,
     setShowOpenPosition,
-    showOpenPositionOrder
+    showOpenPositionOrder,
+    showLiqPrice,
   } = useFutures();
   const BTCIcon = tokenList["BTC"].Icon;
   const ETHIcon = tokenList["ETH"].Icon;
@@ -323,16 +324,28 @@ const FuturesMobile: FC = () => {
         {limit ? (
           <></>
         ) : (
-          <Stack
-            direction="row"
-            justifyContent="space-between"
-            alignItems="center"
-            spacing={0}
-            className={`${classPrefix}-infoShow`}
-          >
-            <p>Open Price</p>
-            <p>{tokenPrice ? tokenPrice.price : "---"} USDT</p>
-          </Stack>
+          <>
+            <Stack
+              direction="row"
+              justifyContent="space-between"
+              alignItems="center"
+              spacing={0}
+              className={`${classPrefix}-infoShow`}
+            >
+              <p>Open Price</p>
+              <p>{tokenPrice ? tokenPrice.price : "---"} USDT</p>
+            </Stack>
+            <Stack
+              direction="row"
+              justifyContent="space-between"
+              alignItems="center"
+              spacing={0}
+              className={`${classPrefix}-infoShow`}
+            >
+              <p>Liq Price</p>
+              <p>{showLiqPrice()} USDT</p>
+            </Stack>
+          </>
         )}
         <Stack
           direction="row"
