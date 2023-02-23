@@ -10,7 +10,7 @@ import Stack from "@mui/material/Stack";
 import { tokenList } from "../../libs/constants/addresses";
 import { formatUnits, parseUnits } from "ethers/lib/utils";
 import ChooseType from "../../components/ChooseType";
-import { LeverChoose } from "../../components/LeverChoose";
+// import { LeverChoose } from "../../components/LeverChoose";
 import InfoShow from "../../components/InfoShow";
 import { SingleTokenShow } from "../../components/TokenShow";
 import OpenShow from "../../components/OpenShow";
@@ -46,9 +46,6 @@ const Futures: FC = () => {
   const isPC = checkWidth();
   const modal = useRef<any>();
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
-  const [showOpenPosition, setShowOpenPosition] = useState(false);
-  const [showOpenPositionOrder, setShowOpenPositionOrder] =
-    useState<Futures3OrderView>();
   const {
     chainId,
     isLong,
@@ -95,18 +92,14 @@ const Futures: FC = () => {
     showClosedOrder,
     baseAction,
     feeHoverText,
+    showOpenPosition,
+    setShowOpenPosition,
+    showOpenPositionOrder,
+    showLiqPrice,
   } = useFutures();
   const BTCIcon = tokenList["BTC"].Icon;
   const ETHIcon = tokenList["ETH"].Icon;
   const USDTIcon = tokenList["USDT"].Icon;
-
-  const handleInviteCode = useCallback(async () => {
-    const href = window.location.href;
-    const inviteCode = href?.split("?a=")[1];
-    if (inviteCode && inviteCode.length === 8) {
-      window.localStorage.setItem("inviteCode", inviteCode.toLowerCase());
-    }
-  }, []);
 
   const close = useMemo(() => {
     if (kValue?.[tokenPair].nowPrice) {
@@ -119,88 +112,6 @@ const Futures: FC = () => {
     return 0;
   }, [kValue, tokenPair]);
 
-  const handleShareOrder = useCallback(async () => {
-    // http://localhost:3000/#/futures?position=ETH&12400030&20&true&130000&160000&120000
-    const href = window.location.href;
-    const inviteCode = href?.split("?position=")[1];
-    if (inviteCode && account && inviteCode.length > 0) {
-      const orderData = inviteCode.split("&");
-      if (orderData.length === 7) {
-        const tokenNameArray = tokenArray.map((item) => {
-          return item.symbol;
-        });
-        const tokenIndex = tokenNameArray.indexOf(orderData[0]);
-        if (tokenIndex === -1) {
-          return;
-        }
-        const trustOrder: TrustOrder = {
-          limitPrice: BigNumber.from(orderData[4]),
-          stopProfitPrice: BigNumber.from(orderData[5]),
-          stopLossPrice: BigNumber.from(orderData[6]),
-          index: BigNumber.from("0"),
-          owner: "",
-          orderIndex: BigNumber.from("0"),
-          balance: BigNumber.from("0"),
-          fee: BigNumber.from("0"),
-          status: BigNumber.from("0"),
-        };
-        const order: Futures3OrderView = {
-          index: BigNumber.from("0"),
-          owner: BigNumber.from("0"),
-          balance: BigNumber.from(orderData[1]),
-          channelIndex: BigNumber.from(tokenIndex.toString()),
-          lever: BigNumber.from(orderData[2]),
-          orientation: orderData[3] === "true",
-          actualMargin: "",
-          trustOrder: trustOrder,
-          basePrice: BigNumber.from("0"),
-          append: BigNumber.from("0"),
-          Pt: BigInt(0),
-        };
-        setShowOpenPositionOrder(order);
-        setShowOpenPosition(true);
-      }
-    }
-  }, [account]);
-
-  const postInviteCode = useCallback(async () => {
-    const inviteCode = window.localStorage.getItem("inviteCode");
-    if (inviteCode && account) {
-      if (inviteCode === account.toLowerCase().slice(-8)) {
-        return;
-      }
-
-      try {
-        await axios({
-          method: "post",
-          url: "https://api.nestfi.net/api/users/users/saveInviteUser",
-          data: {
-            address: account,
-            code: inviteCode,
-            timestamp: new Date().getTime() / 1000,
-          },
-        });
-        window.localStorage.removeItem("inviteCode");
-      } catch (e) {
-        console.log(e);
-      }
-    }
-  }, [account, localStorage.getItem("inviteCode")]);
-
-  useEffect(() => {
-    handleInviteCode();
-  }, [handleInviteCode]);
-
-  useEffect(() => {
-    handleShareOrder();
-  }, [handleShareOrder]);
-
-  useEffect(() => {
-    if (chainId === 56) {
-      postInviteCode();
-    }
-  }, [chainId, postInviteCode]);
-
   const handleLeverNum = (selected: number) => {
     setLeverNum(selected);
   };
@@ -210,23 +121,23 @@ const Futures: FC = () => {
   };
 
   const topView = () => {
-    const leverList =
-      chainId === 1
-        ? [
-            { text: "1X", value: 1 },
-            { text: "2X", value: 2 },
-            { text: "3X", value: 3 },
-            { text: "4X", value: 4 },
-            { text: "5X", value: 5 },
-          ]
-        : [
-            { text: "1X", value: 1 },
-            { text: "5X", value: 5 },
-            { text: "10X", value: 10 },
-            { text: "20X", value: 20 },
-            { text: "25X", value: 25 },
-            { text: "30X", value: 30 },
-          ];
+    // const leverList =
+    //   chainId === 1
+    //     ? [
+    //         { text: "1X", value: 1 },
+    //         { text: "2X", value: 2 },
+    //         { text: "3X", value: 3 },
+    //         { text: "4X", value: 4 },
+    //         { text: "5X", value: 5 },
+    //       ]
+    //     : [
+    //         { text: "1X", value: 1 },
+    //         { text: "5X", value: 5 },
+    //         { text: "10X", value: 10 },
+    //         { text: "20X", value: 20 },
+    //         { text: "25X", value: 25 },
+    //         { text: "30X", value: 30 },
+    //       ];
     const limitPrice = () => {
       return (
         <Stack
@@ -403,20 +314,21 @@ const Futures: FC = () => {
             isLong={isLong}
             textArray={[`Long`, `Short`]}
           />
-          <LeverChoose
+          {/* <LeverChoose
             selected={leverNum}
             list={leverList}
             callBack={handleLeverNum}
             title={"Leverage"}
-          />
+          /> */}
           <Stack
             direction="row"
             justifyContent="space-between"
+            className={`${classPrefix}-leverTitle`}
           >
             <p>Leverage</p>
             <p>{leverNum}</p>
           </Stack>
-          <LeverSlider callBack={handleLeverNum}/>
+          <LeverSlider callBack={handleLeverNum} />
           <InfoShow
             topLeftText={"Payment"}
             bottomRightText={""}
@@ -478,16 +390,28 @@ const Futures: FC = () => {
           {limit ? (
             <></>
           ) : (
-            <Stack
-              direction="row"
-              justifyContent="space-between"
-              alignItems="center"
-              spacing={0}
-              className={`${classPrefix}-infoShow`}
-            >
-              <p>Open Price</p>
-              <p>{tokenPrice ? tokenPrice.price : "---"} USDT</p>
-            </Stack>
+            <>
+              <Stack
+                direction="row"
+                justifyContent="space-between"
+                alignItems="center"
+                spacing={0}
+                className={`${classPrefix}-infoShow`}
+              >
+                <p>Open Price</p>
+                <p>{tokenPrice ? tokenPrice.price : "---"} USDT</p>
+              </Stack>
+              <Stack
+                direction="row"
+                justifyContent="space-between"
+                alignItems="center"
+                spacing={0}
+                className={`${classPrefix}-infoShow`}
+              >
+                <p>Liq Price</p>
+                <p>{showLiqPrice()} USDT</p>
+              </Stack>
+            </>
           )}
           <Stack
             direction="row"

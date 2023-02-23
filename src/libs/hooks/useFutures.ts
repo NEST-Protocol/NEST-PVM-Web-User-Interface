@@ -29,6 +29,7 @@ import {
   useTrustFuturesUpdateStopPrice,
 } from "../../contracts/hooks/useNESTTrustFutures";
 import { FuturesShareOrderView } from "../../pages/Dashboard/FuturesList";
+import axios from "axios";
 
 export type TrustOrder = {
   index: BigNumber;
@@ -104,6 +105,33 @@ export const tokenArray = [
   tokenList["BNB"],
 ];
 
+const lipPrice = (
+  balance: BigNumber,
+  append: BigNumber,
+  lever: BigNumber,
+  price: BigNumber,
+  orientation: boolean
+) => {
+  const top = BigNumber.from(balance.toString())
+    .add(append)
+    .sub(
+      BigNumber.from(balance.toString())
+        .mul(BigNumber.from(2))
+        .div(BigNumber.from(1000))
+    )
+    .sub(
+      BigNumber.from(balance.toString())
+        .mul(lever)
+        .mul(BigNumber.from(5))
+        .div(BigNumber.from(1000))
+    )
+    .mul(price);
+  const bottom = BigNumber.from(balance.toString()).mul(lever);
+  const subPrice = top.div(bottom);
+  const result = orientation ? price.sub(subPrice) : price.add(subPrice);
+  return result;
+};
+
 export function useFutures() {
   const { chainId, account } = useWeb3();
   const [isLong, setIsLong] = useState(true);
@@ -122,7 +150,7 @@ export function useFutures() {
   const [limitInput, setLimitInput] = useState<string>("");
   const [stopProfitPriceInput, setStopProfitPriceInput] = useState<string>("");
   const [stopLossPriceInput, setStopLossPriceInput] = useState<string>("");
-  const [leverNum, setLeverNum] = useState<number>(1);
+  const [leverNum, setLeverNum] = useState<number>(2);
   const [tokenPair, setTokenPair] = useState<string>("ETH");
   const [kValue, setKValue] = useState<{ [key: string]: TokenType }>();
   const [order3List, setOrder3List] = useState<Array<Futures3OrderView>>([]);
@@ -138,6 +166,11 @@ export function useFutures() {
   const [closedOrder, setClosedOrder] = useState<Array<OrderView>>([]);
   const [orderNotShow, setOrderNotShow] = useState<BigNumber[]>([]);
   const { pendingList, txList } = useTransactionListCon();
+
+  const [showOpenPosition, setShowOpenPosition] = useState(false);
+  const [showOpenPositionOrder, setShowOpenPositionOrder] =
+    useState<Futures3OrderView>();
+
   const nestToken = ERC20Contract(tokenList["NEST"].addresses);
 
   const trustFuturesContract = NESTTrustFutures();
@@ -479,6 +512,81 @@ export function useFutures() {
     }
   }, [account, chainId, nestToken]);
 
+  const handleInviteCode = useCallback(async () => {
+    const href = window.location.href;
+    const inviteCode = href?.split("?a=")[1];
+    if (inviteCode && inviteCode.length === 8) {
+      window.localStorage.setItem("inviteCode", inviteCode.toLowerCase());
+    }
+  }, []);
+
+  const handleShareOrder = useCallback(async () => {
+    // http://localhost:3000/#/futures?position=ETH&12400030&20&true&130000&160000&120000
+    const href = window.location.href;
+    const inviteCode = href?.split("?position=")[1];
+    if (inviteCode && account && inviteCode.length > 0) {
+      const orderData = inviteCode.split("&");
+      if (orderData.length === 7) {
+        const tokenNameArray = tokenArray.map((item) => {
+          return item.symbol;
+        });
+        const tokenIndex = tokenNameArray.indexOf(orderData[0]);
+        if (tokenIndex === -1) {
+          return;
+        }
+        const trustOrder: TrustOrder = {
+          limitPrice: BigNumber.from(orderData[4]),
+          stopProfitPrice: BigNumber.from(orderData[5]),
+          stopLossPrice: BigNumber.from(orderData[6]),
+          index: BigNumber.from("0"),
+          owner: "",
+          orderIndex: BigNumber.from("0"),
+          balance: BigNumber.from("0"),
+          fee: BigNumber.from("0"),
+          status: BigNumber.from("0"),
+        };
+        const order: Futures3OrderView = {
+          index: BigNumber.from("0"),
+          owner: BigNumber.from("0"),
+          balance: BigNumber.from(orderData[1]),
+          channelIndex: BigNumber.from(tokenIndex.toString()),
+          lever: BigNumber.from(orderData[2]),
+          orientation: orderData[3] === "true",
+          actualMargin: "",
+          trustOrder: trustOrder,
+          basePrice: BigNumber.from("0"),
+          append: BigNumber.from("0"),
+          Pt: BigInt(0),
+        };
+        setShowOpenPositionOrder(order);
+        setShowOpenPosition(true);
+      }
+    }
+  }, [account]);
+
+  const postInviteCode = useCallback(async () => {
+    const inviteCode = window.localStorage.getItem("inviteCode");
+    if (inviteCode && account) {
+      if (inviteCode === account.toLowerCase().slice(-8)) {
+        return;
+      }
+      try {
+        await axios({
+          method: "post",
+          url: "https://api.nestfi.net/api/users/users/saveInviteUser",
+          data: {
+            address: account,
+            code: inviteCode,
+            timestamp: new Date().getTime() / 1000,
+          },
+        });
+        window.localStorage.removeItem("inviteCode");
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  }, [account, localStorage.getItem("inviteCode")]);
+
   useEffect(() => {
     const plusOrders = order3List.map((order) => {
       var newOrder = { ...order };
@@ -557,6 +665,20 @@ export function useFutures() {
     getOldOrderList,
     getOrderList,
   ]);
+
+  useEffect(() => {
+    handleInviteCode();
+  }, [handleInviteCode]);
+
+  useEffect(() => {
+    handleShareOrder();
+  }, [handleShareOrder]);
+
+  useEffect(() => {
+    if (chainId === 56) {
+      postInviteCode();
+    }
+  }, [chainId, postInviteCode]);
 
   // action
   const buy1 = useTrustFuturesBuy(
@@ -668,6 +790,24 @@ export function useFutures() {
     });
   }, [closedOrder, orderNotShow]);
 
+  const showLiqPrice = () => {
+    if (!kValue) {
+      return "---";
+    }
+    const nowPrice = kValue[tokenPair].nowPrice;
+    if (!nowPrice || nestInput === "" || nestInput === "0") {
+      return "---";
+    }
+    const result = lipPrice(
+      parseUnits(nestInput === "" ? "0" : nestInput, 4),
+      BigNumber.from(0),
+      BigNumber.from(leverNum),
+      nowPrice,
+      isLong
+    );
+    return parseFloat(formatUnits(result, 18)).toFixed(2).toString();
+  };
+
   const feeHoverText = () => {
     if (!limit && !stop) {
       return ["Position fee = Position*0.2%"];
@@ -743,6 +883,10 @@ export function useFutures() {
     showClosedOrder,
     baseAction,
     feeHoverText,
+    showOpenPosition,
+    setShowOpenPosition,
+    showOpenPositionOrder,
+    showLiqPrice,
   };
 }
 
@@ -806,12 +950,13 @@ export function useFutures3OrderList(
     }
   };
   const showLiqPrice = () => {
-    var result;
-    if (order.orientation) {
-      result = order.basePrice.sub(order.basePrice.div(order.lever));
-    } else {
-      result = order.basePrice.add(order.basePrice.div(order.lever));
-    }
+    const result = lipPrice(
+      order.balance,
+      order.append,
+      order.lever,
+      order.basePrice,
+      order.orientation
+    );
     return parseFloat(formatUnits(result, 18)).toFixed(2).toString();
   };
   const shareOrderData = () => {
@@ -898,7 +1043,7 @@ export function useFutures3OrderList(
     showLiqPrice,
     showStopPrice,
     tokenName,
-    shareOrderData
+    shareOrderData,
   };
 }
 
@@ -950,13 +1095,15 @@ export function useFuturesOrderList(
       return 0;
     }
   };
+
   const showLiqPrice = () => {
-    var result;
-    if (order.orientation) {
-      result = order.basePrice.sub(order.basePrice.div(order.lever));
-    } else {
-      result = order.basePrice.add(order.basePrice.div(order.lever));
-    }
+    const result = lipPrice(
+      order.balance,
+      BigNumber.from("0"),
+      order.lever,
+      order.basePrice,
+      order.orientation
+    );
     return parseFloat(formatUnits(result, 18)).toFixed(2).toString();
   };
   const showStopPrice = () => {
@@ -1249,12 +1396,13 @@ export function useFuturesTrigger(order: Futures3OrderView) {
   };
 
   const showLiqPrice = () => {
-    var result;
-    if (order.orientation) {
-      result = order.basePrice.sub(order.basePrice.div(order.lever));
-    } else {
-      result = order.basePrice.add(order.basePrice.div(order.lever));
-    }
+    const result = lipPrice(
+      order.balance,
+      order.append,
+      order.lever,
+      order.basePrice,
+      order.orientation
+    );
     return parseFloat(formatUnits(result, 18)).toFixed(2).toString();
   };
 
@@ -1464,6 +1612,17 @@ export function useFuturesAdd(order: Futures3OrderView) {
       .toString()} USDT`;
   };
 
+  const showLiqPrice = () => {
+    const result = lipPrice(
+      order.balance,
+      order.append,
+      order.lever,
+      order.basePrice,
+      order.orientation
+    );
+    return parseFloat(formatUnits(result, 18)).toFixed(2).toString();
+  };
+
   const newBasePrice = () => {
     return order.basePrice;
   };
@@ -1508,6 +1667,7 @@ export function useFuturesAdd(order: Futures3OrderView) {
     checkNESTBalance,
     showPosition,
     showOpenPrice,
+    showLiqPrice,
     buttonLoading,
     buttonDis,
     buttonAction,

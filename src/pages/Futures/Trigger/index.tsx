@@ -156,20 +156,20 @@ const Trigger: FC<TriggerProp> = ({ ...props }) => {
           <p>Open Price</p>
           <p>{showOpenPrice()}</p>
         </Stack>
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+          spacing={0}
+          className={`${classPrefix}-infoShow`}
+        >
+          <p>Liq Price</p>
+          <p>{showLiqPrice()} USDT</p>
+        </Stack>
         {isEdit() ? (
           <></>
         ) : (
           <>
-            <Stack
-              direction="row"
-              justifyContent="space-between"
-              alignItems="center"
-              spacing={0}
-              className={`${classPrefix}-infoShow`}
-            >
-              <p>Liq Price</p>
-              <p>{showLiqPrice()} USDT</p>
-            </Stack>
             <Stack
               direction="row"
               justifyContent="space-between"

@@ -138,6 +138,17 @@
         margin-bottom: 7px;
     }
 
+    &-leverTitle {
+        padding: 0 20px;
+        color: #7D7D7D;
+        font-size: 16px;
+        margin-bottom: 20px;
+    }
+
+    .LeverSlider {
+        padding: 0 20px;
+    }
+
     &-limitPrice {
         width: 100%;
         height: 44px;
@@ -351,7 +362,8 @@
                 position: relative;
                 z-index: 10;
             }
-            svg + svg {
+
+            svg+svg {
                 margin-left: -8px;
                 z-index: 1;
             }
@@ -489,6 +501,10 @@
             &:hover {
                 border: 1px solid #8BB7FF;
             }
+        }
+
+        &-leverTitle {
+            color: #C5C5C5;
         }
 
         &-limitPrice,

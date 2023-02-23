@@ -25,6 +25,7 @@ const FuturesAdd: FC<FuturesAddProps> = ({ ...props }) => {
     checkNESTBalance,
     showPosition,
     showOpenPrice,
+    showLiqPrice,
     buttonLoading,
     buttonDis,
     buttonAction,
@@ -52,6 +53,16 @@ const FuturesAdd: FC<FuturesAddProps> = ({ ...props }) => {
         >
           <p>Open Price</p>
           <p>{showOpenPrice()}</p>
+        </Stack>
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+          spacing={0}
+          className={`${classPrefix}-infoShow`}
+        >
+          <p>Liq Price</p>
+          <p>{showLiqPrice()}</p>
         </Stack>
       </>
     );

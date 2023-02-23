@@ -122,3 +122,55 @@
         }
     }
 }
+
+@media screen and (max-width: 1000px) {
+    .OpenPosition {
+        width: 100%;
+        padding: 20px 15px;
+
+        p.title {
+            font-size: 12px;
+            margin-bottom: 15px;
+        }
+
+        &-infoShow {
+            font-size: 12px;
+
+            p+p {
+                font-size: 12px;
+            }
+        }
+
+        &-input {
+            width: 100%;
+            height: 34px;
+            border-radius: 17px;
+
+            &-title {
+                font-size: 12px;
+            }
+
+            .rightInput {
+                input {
+                    
+                    font-size: 12px;
+                }
+
+                p {
+                    font-size: 12px;
+                }
+
+                .TriggerClose {
+                    p {
+                        font-size: 12px;
+                    }
+                }
+
+                &+p {
+                    font-size: 12px;
+                    margin-left: 40px !important;
+                }
+            }
+        }
+    }
+}

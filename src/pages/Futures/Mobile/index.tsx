@@ -4,7 +4,7 @@ import Stack from "@mui/material/Stack";
 import { tokenList } from "../../../libs/constants/addresses";
 import { PutDownIcon } from "../../../components/Icon";
 import LongAndShort from "../../../components/LongAndShort";
-import { LeverChoose } from "../../../components/LeverChoose";
+// import { LeverChoose } from "../../../components/LeverChoose";
 import InfoShow from "../../../components/InfoShow";
 import { SingleTokenShow } from "../../../components/TokenShow";
 import { formatInputNum, formatInputNumWithFour } from "../../../libs/utils";
@@ -25,13 +25,15 @@ import PerpetualsNoticeModal from "../PerpetualsNoticeModal";
 import Popup from "reactjs-popup";
 import TriggerRiskModal from "../TriggerRisk";
 import { BigNumber } from "ethers";
+import LeverSlider from "../../../components/LeverSlider";
+import OpenPosition from "../OpenPosition";
 
 const FuturesMobile: FC = () => {
   const classPrefix = "FuturesMobile";
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
   const modal = useRef<any>();
   const {
-    chainId,
+    // chainId,
     isLong,
     setIsLong,
     nestBalance,
@@ -76,6 +78,9 @@ const FuturesMobile: FC = () => {
     showClosedOrder,
     baseAction,
     feeHoverText,
+    showOpenPosition,
+    setShowOpenPosition,
+    showOpenPositionOrder
   } = useFutures();
   const BTCIcon = tokenList["BTC"].Icon;
   const ETHIcon = tokenList["ETH"].Icon;
@@ -136,23 +141,23 @@ const FuturesMobile: FC = () => {
     );
   };
   const mainView = () => {
-    const leverList =
-      chainId === 1
-        ? [
-            { text: "1X", value: 1 },
-            { text: "2X", value: 2 },
-            { text: "3X", value: 3 },
-            { text: "4X", value: 4 },
-            { text: "5X", value: 5 },
-          ]
-        : [
-            { text: "1X", value: 1 },
-            { text: "5X", value: 5 },
-            { text: "10X", value: 10 },
-            { text: "20X", value: 20 },
-            { text: "25X", value: 25 },
-            { text: "30X", value: 30 },
-          ];
+    // const leverList =
+    //   chainId === 1
+    //     ? [
+    //         { text: "1X", value: 1 },
+    //         { text: "2X", value: 2 },
+    //         { text: "3X", value: 3 },
+    //         { text: "4X", value: 4 },
+    //         { text: "5X", value: 5 },
+    //       ]
+    //     : [
+    //         { text: "1X", value: 1 },
+    //         { text: "5X", value: 5 },
+    //         { text: "10X", value: 10 },
+    //         { text: "20X", value: 20 },
+    //         { text: "25X", value: 25 },
+    //         { text: "30X", value: 30 },
+    //       ];
     const limitPrice = () => {
       return (
         <Stack
@@ -248,12 +253,15 @@ const FuturesMobile: FC = () => {
         className={`${classPrefix}-mainView`}
       >
         <LongAndShort callBack={(e) => setIsLong(e)} isLong={isLong} />
-        <LeverChoose
-          selected={leverNum}
-          list={leverList}
-          callBack={handleLeverNum}
-          title={"Leverage"}
-        />
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          className={`${classPrefix}-mainView-leverTitle`}
+        >
+          <p>Leverage</p>
+          <p>{leverNum}</p>
+        </Stack>
+        <LeverSlider callBack={handleLeverNum} />
         <InfoShow
           topLeftText={"Payment"}
           bottomRightText={""}
@@ -486,6 +494,18 @@ const FuturesMobile: FC = () => {
   };
   return (
     <Stack spacing={0} className={`${classPrefix}`}>
+      <Popup
+        open={showOpenPosition}
+        modal
+        ref={modal}
+        onClose={() => setShowOpenPosition(false)}
+        nested
+      >
+        <OpenPosition
+          onClose={() => setShowOpenPosition(false)}
+          order={showOpenPositionOrder!}
+        />
+      </Popup>
       <Popup
         open={showNotice}
         modal
