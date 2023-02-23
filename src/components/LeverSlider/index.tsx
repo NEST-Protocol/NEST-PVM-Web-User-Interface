@@ -40,7 +40,7 @@ const LeverSlider: FC<LeverSliderProps> = ({ ...props }) => {
         max={50}
         min={2}
         getAriaValueText={valuetext}
-        step={null}
+        step={1}
         value={sliderValue}
         onChange={(e: any) => {
           setSliderValue(e.target.value);
