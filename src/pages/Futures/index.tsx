@@ -184,7 +184,7 @@ const Futures: FC = () => {
             className={`rightInput`}
           >
             <input
-              placeholder={`${tokenPrice.price}`}
+              placeholder={`>${tokenPrice.price}`}
               value={stopProfitPriceInput}
               maxLength={32}
               onChange={(e) =>
@@ -214,7 +214,7 @@ const Futures: FC = () => {
             className={`rightInput`}
           >
             <input
-              placeholder={`${tokenPrice.price}`}
+              placeholder={`<${tokenPrice.price}`}
               value={stopLossPriceInput}
               maxLength={32}
               onChange={(e) =>

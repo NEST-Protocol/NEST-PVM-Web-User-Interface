@@ -148,7 +148,8 @@ export const DrawerTrigger: FC<DrawerBaseType> = ({ ...props }) => {
     buttonLoading,
     buttonAction,
     isEdit,
-    showPlaceHolder,
+    showTPPlaceHolder,
+    showSLPlaceHolder,
     showTriggerRisk,
     setShowTriggerRisk,
     baseAction,
@@ -174,7 +175,7 @@ export const DrawerTrigger: FC<DrawerBaseType> = ({ ...props }) => {
           className={`rightInput`}
         >
           <input
-            placeholder={showPlaceHolder()}
+            placeholder={showTPPlaceHolder()}
             value={stopProfitPriceInput}
             maxLength={32}
             onChange={(e) =>
@@ -217,7 +218,7 @@ export const DrawerTrigger: FC<DrawerBaseType> = ({ ...props }) => {
           className={`rightInput`}
         >
           <input
-            placeholder={showPlaceHolder()}
+            placeholder={showSLPlaceHolder()}
             value={stopLossPriceInput}
             maxLength={32}
             onChange={(e) =>

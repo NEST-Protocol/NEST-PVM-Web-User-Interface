@@ -132,6 +132,40 @@ const lipPrice = (
   return result;
 };
 
+// async function getListData<N extends {index:BigNumber, lever:BigNumber}>(
+//     contract: Contract,
+//     getPart: boolean,
+//     account: string,
+//     setVoid: (value: React.SetStateAction<N[]>) => void
+//   ) {
+//     const latestOrder: Array<N> = await contract.list("0", "1", "0");
+//     const orderMaxNum = Number(latestOrder[0].index.toString()) + 1;
+//     const orderGroupNum = orderMaxNum / ORDER_GROUP;
+//     var result: Array<N> = [];
+//     for (let i = 0; i < orderGroupNum; i++) {
+//       const startNum = i === 0 ? 0 : orderMaxNum - i * ORDER_GROUP;
+//       if (i !== 0 && startNum === 0) {
+//         return;
+//       }
+//       const groupList: Array<N> = await contract.find(
+//         startNum.toString(),
+//         "1000",
+//         ORDER_GROUP.toString(),
+//         account
+//       );
+//       const groupResult = groupList.filter((item) => {
+//         return item.lever.toString() !== "0";
+//       });
+//       result = [...result, ...groupResult];
+//       if (getPart) {
+//         setVoid(result);
+//       }
+//     }
+//     if (!getPart) {
+//       setVoid(result);
+//     }
+//   }
+
 export function useFutures() {
   const { chainId, account } = useWeb3();
   const [isLong, setIsLong] = useState(true);
@@ -229,7 +263,7 @@ export function useFutures() {
   );
 
   const getPrice = useCallback(
-    async (leverContract: Contract, chainId: number) => {
+    async (leverContract: Contract) => {
       try {
         const ETH = await getPriceAndK(leverContract, tokenList["ETH"]);
         const BTC = await getPriceAndK(leverContract, tokenList["BTC"]);
@@ -294,6 +328,7 @@ export function useFutures() {
         if (!trustFuturesContract || !account) {
           return;
         }
+
         const latestOrder: Array<TrustOrder> =
           await trustFuturesContract.listTrustOrder("0", "1", "0");
         const orderMaxNum = Number(latestOrder[0].index.toString()) + 1;
@@ -377,26 +412,6 @@ export function useFutures() {
     },
     [PVMFuturesOJ, account, chainId]
   );
-
-  // const getLimitOrderList = useCallback(async () => {
-  //   try {
-  //     if (!PVMFuturesProxyOJ || !account) {
-  //       return;
-  //     }
-  //     const list: Array<LimitOrderView> = await PVMFuturesProxyOJ.find(
-  //       "0",
-  //       "500",
-  //       "4000",
-  //       account
-  //     );
-  //     const result = list.filter((item) => {
-  //       return item.status.toString() === "1";
-  //     });
-  //     setLimitOrderList(result);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }, [PVMFuturesProxyOJ, account]);
 
   const getOldOrderList = useCallback(async () => {
     try {
@@ -619,9 +634,9 @@ export function useFutures() {
     if (!priceContract || !chainId || !trustFuturesContract) {
       return;
     }
-    getPrice(trustFuturesContract, chainId);
+    getPrice(trustFuturesContract);
     const time = setInterval(() => {
-      getPrice(trustFuturesContract, chainId);
+      getPrice(trustFuturesContract);
     }, UPDATE_PRICE_TIME * 1000);
     return () => {
       clearInterval(time);
@@ -1379,20 +1394,19 @@ export function useFuturesTrigger(order: Futures3OrderView) {
     return hadSet() ? "Edit Position" : "Trigger Position";
   };
 
-  const showPlaceHolder = () => {
-    // if (order.stopPrice.toString() === "0") {
-    //   if (!chainId) {
-    //     return "---";
-    //   }
-    //   const thisToken = tokenArray[Number(order.channelIndex.toString())];
-
-    //   return thisToken.nowPrice
-    //     ? parseFloat(formatUnits(thisToken.nowPrice, 18)).toFixed(2).toString()
-    //     : "---";
-    // } else {
-    //   return parseFloat(formatUnits(order.stopPrice, 18)).toFixed(2).toString();
-    // }
-    return "Input";
+  const showTPPlaceHolder = () => {
+    return closeProfit()
+      ? parseFloat(formatUnits(order.trustOrder!.stopProfitPrice, 18)).toFixed(
+          2
+        )
+      : `>${showOpenPrice()}`;
+  };
+  const showSLPlaceHolder = () => {
+    return closeLoss()
+      ? parseFloat(formatUnits(order.trustOrder!.stopLossPrice, 18)).toFixed(
+          2
+        )
+      : `<${showOpenPrice()}`;
   };
 
   const showLiqPrice = () => {
@@ -1497,7 +1511,8 @@ export function useFuturesTrigger(order: Futures3OrderView) {
     buttonLoading,
     buttonAction,
     isEdit,
-    showPlaceHolder,
+    showTPPlaceHolder,
+    showSLPlaceHolder,
     showTriggerRisk,
     setShowTriggerRisk,
     baseAction,
@@ -1751,6 +1766,7 @@ export function useFuturesCloseOrder(
 
 export function useFuturesOpenPosition(order: Futures3OrderView) {
   const [nestAmount, setNestAmount] = useState<string>("");
+  const [nowPrice, setNowPrice] = useState<BigNumber>();
   const [limit, setLimit] = useState<string>("");
   const [tp, setTp] = useState<string>("");
   const [sl, setSl] = useState<string>("");
@@ -1764,6 +1780,7 @@ export function useFuturesOpenPosition(order: Futures3OrderView) {
   const { pendingList } = useTransactionListCon();
 
   const nestToken = ERC20Contract(tokenList["NEST"].addresses);
+  const trustFuturesContract = NESTTrustFutures();
 
   const checkNESTBalance = () => {
     if (nestAmount === "") {
@@ -1819,6 +1836,30 @@ export function useFuturesOpenPosition(order: Futures3OrderView) {
       console.log(error);
     }
   }, [account, chainId, nestToken]);
+
+  const getPrice = useCallback(
+    async (leverContract: Contract, channelIndex: BigNumber) => {
+      try {
+        const basePriceList = await leverContract.lastPrice(channelIndex);
+        setNowPrice(BigNumber.from(basePriceList[2].toString()));
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    []
+  );
+  useEffect(() => {
+    if (!chainId || !trustFuturesContract) {
+      return;
+    }
+    getPrice(trustFuturesContract, order.channelIndex);
+    const time = setInterval(() => {
+      getPrice(trustFuturesContract, order.channelIndex);
+    }, UPDATE_PRICE_TIME * 1000);
+    return () => {
+      clearInterval(time);
+    };
+  }, [chainId, getPrice, order.channelIndex, trustFuturesContract]);
 
   // balance
   useEffect(() => {
@@ -1905,6 +1946,27 @@ export function useFuturesOpenPosition(order: Futures3OrderView) {
     return pendingTransaction.length > 0 ? true : false;
   };
 
+  const showNowPrice = () => {
+    if (!nowPrice) {
+      return "---";
+    }
+    return parseFloat(formatUnits(nowPrice, 18)).toFixed(2);
+  };
+
+  const showLiqPrice = () => {
+    if (!nowPrice || nestAmount === "" || nestAmount === "0") {
+      return "---";
+    }
+    const result = lipPrice(
+      parseUnits(nestAmount === "" ? "0" : nestAmount, 4),
+      BigNumber.from(0),
+      BigNumber.from(order.lever),
+      nowPrice,
+      order.orientation
+    );
+    return parseFloat(formatUnits(result, 18)).toFixed(2).toString();
+  };
+
   const feeHoverText = () => {
     return [
       "Position fee = Position*0.2%",
@@ -1941,6 +2003,8 @@ export function useFuturesOpenPosition(order: Futures3OrderView) {
     mainButtonAction,
     mainButtonLoading,
     feeHoverText,
+    showNowPrice,
+    showLiqPrice,
     showFee,
     showTotalPay,
     checkNESTBalance,

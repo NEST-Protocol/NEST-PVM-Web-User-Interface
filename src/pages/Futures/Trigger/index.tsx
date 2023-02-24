@@ -38,7 +38,8 @@ const Trigger: FC<TriggerProp> = ({ ...props }) => {
     buttonLoading,
     buttonAction,
     isEdit,
-    showPlaceHolder,
+    showTPPlaceHolder,
+    showSLPlaceHolder,
     showTriggerRisk,
     setShowTriggerRisk,
     baseAction,
@@ -64,7 +65,7 @@ const Trigger: FC<TriggerProp> = ({ ...props }) => {
           className={`rightInput`}
         >
           <input
-            placeholder={showPlaceHolder()}
+            placeholder={showTPPlaceHolder()}
             value={stopProfitPriceInput}
             maxLength={32}
             onChange={(e) =>
@@ -108,7 +109,7 @@ const Trigger: FC<TriggerProp> = ({ ...props }) => {
           className={`rightInput`}
         >
           <input
-            placeholder={showPlaceHolder()}
+            placeholder={showSLPlaceHolder()}
             value={stopLossPriceInput}
             maxLength={32}
             onChange={(e) =>

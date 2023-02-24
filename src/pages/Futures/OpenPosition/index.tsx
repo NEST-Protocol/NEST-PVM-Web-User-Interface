@@ -35,6 +35,8 @@ const OpenPosition: FC<OpenPositionProp> = ({ ...props }) => {
     mainButtonAction,
     mainButtonLoading,
     feeHoverText,
+    showNowPrice,
+    showLiqPrice,
     showFee,
     showTotalPay,
     checkNESTBalance,
@@ -129,7 +131,7 @@ const OpenPosition: FC<OpenPositionProp> = ({ ...props }) => {
             className={`rightInput`}
           >
             <input
-              placeholder={"Input"}
+              placeholder={`>${showNowPrice()}`}
               value={tp}
               maxLength={32}
               onChange={(e) => setTp(formatInputNumWithFour(e.target.value))}
@@ -154,7 +156,7 @@ const OpenPosition: FC<OpenPositionProp> = ({ ...props }) => {
             className={`rightInput`}
           >
             <input
-              placeholder={"Input"}
+              placeholder={`<${showNowPrice()}`}
               value={sl}
               maxLength={32}
               onChange={(e) => setSl(formatInputNumWithFour(e.target.value))}
@@ -163,6 +165,27 @@ const OpenPosition: FC<OpenPositionProp> = ({ ...props }) => {
           </Stack>
         </Stack>
 
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+          spacing={0}
+          className={`${classPrefix}-infoShow`}
+        >
+          <p>Open Price</p>
+          <p>{showNowPrice()} USDT</p>
+        </Stack>
+
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+          spacing={0}
+          className={`${classPrefix}-infoShow`}
+        >
+          <p>Liq Price</p>
+          <p>{showLiqPrice()} USDT</p>
+        </Stack>
         <Stack
           direction="row"
           justifyContent="space-between"
@@ -185,7 +208,6 @@ const OpenPosition: FC<OpenPositionProp> = ({ ...props }) => {
           </LightTooltip>
           <p>{showFee()} NEST</p>
         </Stack>
-
         <Stack
           direction="row"
           justifyContent="space-between"
