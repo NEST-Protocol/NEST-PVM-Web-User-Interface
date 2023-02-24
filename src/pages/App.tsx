@@ -44,7 +44,10 @@ const App: FC = () => {
   }
 
   const handleInviteCode = useCallback(async () => {
-    const inviteCode = getQueryVariable("a");
+    let inviteCode = getQueryVariable("a");
+    if (!inviteCode) {
+      inviteCode = window.location.href.split("?a=")[1];
+    }
 
     if (inviteCode && account) {
       if (inviteCode.toLowerCase() === account.toLowerCase().slice(-8)) {
