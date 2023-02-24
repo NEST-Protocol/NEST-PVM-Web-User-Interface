@@ -1,4 +1,4 @@
-import {FC, useCallback, useEffect, useMemo, useRef, useState} from "react";
+import {FC, useMemo, useRef, useState} from "react";
 import "./styles";
 import Stack from "@mui/material/Stack";
 import { tokenList } from "../../../libs/constants/addresses";
@@ -24,12 +24,9 @@ import PerpetualsNoticeModal from "../PerpetualsNoticeModal";
 import Popup from "reactjs-popup";
 import TriggerRiskModal from "../TriggerRisk";
 import {BigNumber} from "ethers";
-import axios from "axios";
-import useWeb3 from "../../../libs/hooks/useWeb3";
 
 const FuturesMobile: FC = () => {
   const classPrefix = "FuturesMobile";
-  const { account } = useWeb3();
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
   const modal = useRef<any>();
   const {
@@ -107,48 +104,6 @@ const FuturesMobile: FC = () => {
       </Stack>
     );
   };
-
-  const handleInviteCode = useCallback(async () => {
-    const href = window.location.href;
-    const inviteCode = href?.split("?a=")[1];
-    if (inviteCode && inviteCode.length === 8) {
-      window.localStorage.setItem("inviteCode", inviteCode.toLowerCase());
-    }
-  }, []);
-
-  const postInviteCode = useCallback(async () => {
-    const inviteCode = window.localStorage.getItem("inviteCode");
-    if (inviteCode && account) {
-      if (inviteCode === account.toLowerCase().slice(-8)) {
-        return;
-      }
-
-      try {
-        await axios({
-          method: "post",
-          url: "https://api.nestfi.net/api/users/users/saveInviteUser",
-          data: {
-            address: account,
-            code: inviteCode,
-            timestamp: new Date().getTime() / 1000,
-          },
-        });
-        window.localStorage.removeItem("inviteCode");
-      } catch (e) {
-        console.log(e);
-      }
-    }
-  }, [account, localStorage.getItem("inviteCode")]);
-
-  useEffect(() => {
-    handleInviteCode();
-  }, [handleInviteCode]);
-
-  useEffect(() => {
-    if (chainId === 56) {
-      postInviteCode();
-    }
-  }, [chainId, postInviteCode]);
 
   const close = useMemo(() => {
     if (kValue?.[tokenPair].nowPrice) {

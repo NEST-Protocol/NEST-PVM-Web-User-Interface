@@ -172,7 +172,7 @@ const Dashboard: FC = () => {
                   disable={!account}
                   onClick={() => {
                   if (account) {
-                    navigator.clipboard.writeText( 'https://finance.nestprotocol.org/#/futures?a=' + account.slice(-8) || '').then(() => {
+                    navigator.clipboard.writeText( 'https://finance.nestprotocol.org/?a=' + account.slice(-8) || '').then(() => {
                       setCopied(true);
                       setTimeout(() => {
                         setCopied(false);
