@@ -236,5 +236,5 @@ export const NestTrustFuturesContract: AddressesType = {
   1: ZERO_ADDRESS,
   5: ZERO_ADDRESS,
   56: ZERO_ADDRESS,
-  97: "0x44224345b8CD7Cd3e54FAB464857A6122a0850Cf",
+  97: "0x573e166aAEEFb1baE40653351330cE29cc5E1434",
 };

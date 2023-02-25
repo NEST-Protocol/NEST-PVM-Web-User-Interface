@@ -1,16 +1,16 @@
-import {FC, useCallback, useEffect, useState} from "react";
-import {Stack} from "@mui/material";
+import { FC, useCallback, useEffect, useState } from "react";
+import { Stack } from "@mui/material";
 import MainCard from "../../components/MainCard";
 import MainButton from "../../components/MainButton";
 import "./styles";
 import ShareMyDealModal from "./ShareMyDealModal";
-import {checkWidth} from "../../libs/utils";
+import { checkWidth } from "../../libs/utils";
 import useWeb3 from "../../libs/hooks/useWeb3";
-import axios from "axios"
+import axios from "axios";
 import FuturesList from "./FuturesList";
 import FuturesListMobile from "./FuturesListMobile";
 import TVChart from "./TVChart";
-import {DownIcon, UpIcon} from "../../components/Icon";
+import { DownIcon, UpIcon } from "../../components/Icon";
 
 const Dashboard: FC = () => {
   const [showHold, setShowHold] = useState(true);
@@ -20,7 +20,7 @@ const Dashboard: FC = () => {
   const [destoryData, setDestoryData] = useState({
     dayDestroy: 0,
     totalDestroy: 0,
-  })
+  });
   const [myTxInfo, setMyTxInfo] = useState({
     totalValue: 0,
     todayValue: 0,
@@ -29,210 +29,323 @@ const Dashboard: FC = () => {
     todayRate: 0,
     day7Rate: 0,
     day30Rate: 0,
-  })
-  const [historyList, setHistoryList] = useState<{
-    owner: string,
-    leverage: string,
-    orientation: string,
-    actualRate: number,
-    index: number,
-    openPrice: number,
-    tokenPair: string,
-    actualMargin: number,
-    initialMargin: number,
-    lastPrice: number,
-  }[]>([])
-  const [positionList, setPositionList] = useState<{
-    owner: string,
-    leverage: string,
-    orientation: string,
-    actualRate: number,
-    index: number,
-    openPrice: number,
-    tokenPair: string,
-    actualMargin: number,
-    initialMargin: number,
-    lastPrice?: number,
-  }[]>([])
-  const [showMore, setShowMore] = useState(false)
+  });
+  const [historyList, setHistoryList] = useState<
+    {
+      owner: string;
+      leverage: string;
+      orientation: string;
+      actualRate: number;
+      index: number;
+      openPrice: number;
+      tokenPair: string;
+      actualMargin: number;
+      initialMargin: number;
+      lastPrice: number;
+    }[]
+  >([]);
+  const [positionList, setPositionList] = useState<
+    {
+      owner: string;
+      leverage: string;
+      orientation: string;
+      actualRate: number;
+      index: number;
+      openPrice: number;
+      tokenPair: string;
+      actualMargin: number;
+      initialMargin: number;
+      lastPrice?: number;
+    }[]
+  >([]);
+  const [showMore, setShowMore] = useState(false);
 
   const fetchDestory = useCallback(async () => {
     try {
       const res = await axios({
-        method: 'get',
-        url: 'https://api.nestfi.net/api/dashboard/destory',
-      })
+        method: "get",
+        url: "https://api.nestfi.net/api/dashboard/destory",
+      });
       if (res.data) {
-        setDestoryData(res.data.value)
+        setDestoryData(res.data.value);
       }
     } catch (e) {
-      console.log(e)
+      console.log(e);
     }
-  }, [])
+  }, []);
 
   const fetchMyTxInfo = useCallback(async () => {
     if (!account) {
-      return
+      return;
     }
     try {
       const res = await axios({
-        method: 'get',
+        method: "get",
         url: `https://api.nestfi.net/api/dashboard/myTx/info?address=${account}`,
-      })
+      });
       if (res.data) {
-        setMyTxInfo(res.data.value)
+        setMyTxInfo(res.data.value);
       }
     } catch (e) {
-      console.log(e)
+      console.log(e);
     }
-  }, [account])
+  }, [account]);
 
   const fetchHistoryList = useCallback(async () => {
     if (!account) {
-      return
+      return;
     }
     try {
       const res = await axios({
-        method: 'get',
+        method: "get",
         url: `https://api.nestfi.net/api/dashboard/history/list?address=${account}`,
-      })
+      });
       if (res.data) {
-        setHistoryList(res.data.value)
+        setHistoryList(res.data.value);
       }
     } catch (e) {
-      console.log(e)
+      console.log(e);
     }
-  }, [account])
+  }, [account]);
 
   const fetchPositionList = useCallback(async () => {
     if (!account) {
-      return
+      return;
     }
     try {
       const res = await axios({
-        method: 'get',
+        method: "get",
         url: `https://api.nestfi.net/api/dashboard/position/list?address=${account}`,
-      })
+      });
       if (res.data) {
-        setPositionList(res.data.value)
+        setPositionList(res.data.value);
       }
     } catch (e) {
-      console.log(e)
+      console.log(e);
     }
-  }, [account])
+  }, [account]);
 
   useEffect(() => {
-    fetchDestory()
-  }, [fetchDestory])
+    fetchDestory();
+  }, [fetchDestory]);
 
   useEffect(() => {
-    fetchMyTxInfo()
-  }, [fetchMyTxInfo])
+    fetchMyTxInfo();
+  }, [fetchMyTxInfo]);
 
   useEffect(() => {
-    fetchHistoryList()
-  }, [fetchHistoryList])
+    fetchHistoryList();
+  }, [fetchHistoryList]);
 
   useEffect(() => {
-    fetchPositionList()
-  }, [fetchPositionList])
+    fetchPositionList();
+  }, [fetchPositionList]);
 
   return (
-    <Stack alignItems={"center"} width={'100%'}>
-      <Stack paddingTop={['10px', '22px']} spacing={{ xs: '10px', sm: '22px'}} paddingX={['10px', '45px']} width={'100%'} maxWidth={['100%', '1366px']}>
-        <Stack direction={{ xs: 'column', sm: 'row' }} spacing={{ xs: '10px', sm: '22px'}}>
-          <MainCard classNames={'dashboard-card'}>
-            <Stack alignItems={"center"} justifyContent={"center"} height={['100px', "210px"]} spacing={['4px', '18px']}>
-              <p className={'dashboard-label'}>NEST Total Burned</p>
-              <p className={'dashboard-value'}>{(-1 * destoryData.totalDestroy).toLocaleString('en-US',{maximumFractionDigits: 2})} NEST</p>
+    <Stack alignItems={"center"} width={"100%"}>
+      <Stack
+        paddingTop={["10px", "22px"]}
+        spacing={{ xs: "10px", sm: "22px" }}
+        paddingX={["10px", "45px"]}
+        width={"100%"}
+        maxWidth={["100%", "1366px"]}
+      >
+        <Stack
+          direction={{ xs: "column", sm: "row" }}
+          spacing={{ xs: "10px", sm: "22px" }}
+        >
+          <MainCard classNames={"dashboard-card"}>
+            <Stack
+              alignItems={"center"}
+              justifyContent={"center"}
+              height={["100px", "210px"]}
+              spacing={["4px", "18px"]}
+            >
+              <p className={"dashboard-label"}>NEST Total Burned</p>
+              <p className={"dashboard-value"}>
+                {(-1 * destoryData.totalDestroy).toLocaleString("en-US", {
+                  maximumFractionDigits: 2,
+                })}{" "}
+                NEST
+              </p>
             </Stack>
           </MainCard>
-          <MainCard classNames={'dashboard-card'}>
-            <Stack alignItems={"center"} justifyContent={"center"} height={['100px', "210px"]} spacing={['4px', '18px']}>
-              <p className={'dashboard-label'}>NEST Today Burned</p>
-              <p className={'dashboard-value'}>{(-1 * destoryData.dayDestroy).toLocaleString('en-US',{maximumFractionDigits: 2})} NEST</p>
+          <MainCard classNames={"dashboard-card"}>
+            <Stack
+              alignItems={"center"}
+              justifyContent={"center"}
+              height={["100px", "210px"]}
+              spacing={["4px", "18px"]}
+            >
+              <p className={"dashboard-label"}>NEST Today Burned</p>
+              <p className={"dashboard-value"}>
+                {(-1 * destoryData.dayDestroy).toLocaleString("en-US", {
+                  maximumFractionDigits: 2,
+                })}{" "}
+                NEST
+              </p>
             </Stack>
           </MainCard>
         </Stack>
         <MainCard>
-          <Stack padding={['15px','28px']} height={['240px', '440px']} spacing={['24px', '28px']}>
-            <p className={'dashboard-label'}>Total Transaction Volume</p>
+          <Stack
+            padding={["15px", "28px"]}
+            height={["240px", "440px"]}
+            spacing={["24px", "28px"]}
+          >
+            <p className={"dashboard-label"}>Total Transaction Volume</p>
             <TVChart />
           </Stack>
         </MainCard>
         <MainCard>
-          <Stack padding={['15px', '28px']} spacing={{ xs: '10px', sm: '22px'}}>
-            <Stack direction={"row"} alignItems={"center"} justifyContent={"space-between"} pb={['10px', '0px']}>
-              <Stack direction={'row'} spacing={['8px', '16px']} alignItems={"center"}>
-                <p className={'dashboard-label'}>My Positions</p>
+          <Stack
+            padding={["15px", "28px"]}
+            spacing={{ xs: "10px", sm: "22px" }}
+          >
+            <Stack
+              direction={"row"}
+              alignItems={"center"}
+              justifyContent={"space-between"}
+              pb={["10px", "0px"]}
+            >
+              <Stack
+                direction={"row"}
+                spacing={["8px", "16px"]}
+                alignItems={"center"}
+              >
+                <p className={"dashboard-label"}>My Positions</p>
                 {/*<TipsIcon />*/}
               </Stack>
-              <Stack direction={'row'} spacing={['15px', '30px']}>
+              <Stack direction={"row"} spacing={["15px", "30px"]}>
                 <MainButton
                   disable={!account}
                   onClick={() => {
-                  if (account) {
-                    navigator.clipboard.writeText( 'https://finance.nestprotocol.org/#/futures?a=' + account.slice(-8) || '').then(() => {
-                      setCopied(true);
-                      setTimeout(() => {
-                        setCopied(false);
-                      }, 1000)
-                    });
-                  } else {
-                    return
-                  }
-                }}>
-                  { copied ? 'Copied success!' : 'Copy Invitation Link' }
+                    if (account) {
+                      navigator.clipboard
+                        .writeText(
+                          "https://finance.nestprotocol.org/?a=" +
+                            account.slice(-8) || ""
+                        )
+                        .then(() => {
+                          setCopied(true);
+                          setTimeout(() => {
+                            setCopied(false);
+                          }, 1000);
+                        });
+                    } else {
+                      return;
+                    }
+                  }}
+                >
+                  {copied ? "Copied success!" : "Copy Invitation Link"}
                 </MainButton>
-                <ShareMyDealModal value={myTxInfo}/>
+                <ShareMyDealModal value={myTxInfo} />
               </Stack>
             </Stack>
-            <MainCard classNames={'dashboard-card'}>
-              <Stack height={['100px', '200px']} alignItems={"center"} justifyContent={"center"} spacing={['4px', '10px']}>
-                <p className={'dashboard-label'}>Total Profit & Loss</p>
-                <p className={'dashboard-value'}>{myTxInfo.totalValue.toLocaleString('en-US',{maximumFractionDigits: 2})} NEST</p>
+            <MainCard classNames={"dashboard-card"}>
+              <Stack
+                height={["100px", "200px"]}
+                alignItems={"center"}
+                justifyContent={"center"}
+                spacing={["4px", "10px"]}
+              >
+                <p className={"dashboard-label"}>Total Profit & Loss</p>
+                <p className={"dashboard-value"}>
+                  {myTxInfo.totalValue.toLocaleString("en-US", {
+                    maximumFractionDigits: 2,
+                  })}{" "}
+                  NEST
+                </p>
               </Stack>
             </MainCard>
-            <Stack spacing={{ xs: '10px', sm: '22px'}} direction={{ xs: 'column', sm: 'column', md: 'row' }}>
-              <MainCard classNames={'dashboard-card'}>
-                <Stack height={['100px', '200px']} alignItems={"center"} justifyContent={"center"} spacing={['4px', '10px']}>
-                  <p className={'dashboard-label'}>Today's PNL</p>
-                  <p className={'dashboard-value'}>{myTxInfo.todayValue > 0 && <UpIcon/>} {myTxInfo.todayValue < 0 && <DownIcon/>} {myTxInfo.todayValue.toLocaleString('en-US',{maximumFractionDigits: 2})} NEST</p>
+            <Stack
+              spacing={{ xs: "10px", sm: "22px" }}
+              direction={{ xs: "column", sm: "column", md: "row" }}
+            >
+              <MainCard classNames={"dashboard-card"}>
+                <Stack
+                  height={["100px", "200px"]}
+                  alignItems={"center"}
+                  justifyContent={"center"}
+                  spacing={["4px", "10px"]}
+                >
+                  <p className={"dashboard-label"}>Today's PNL</p>
+                  <p className={"dashboard-value"}>
+                    {myTxInfo.todayValue > 0 && <UpIcon />}{" "}
+                    {myTxInfo.todayValue < 0 && <DownIcon />}{" "}
+                    {myTxInfo.todayValue.toLocaleString("en-US", {
+                      maximumFractionDigits: 2,
+                    })}{" "}
+                    NEST
+                  </p>
                   {/*<p className={'dashboard-caption'}>{myTxInfo.todayRate}% Today ringgit</p>*/}
                 </Stack>
               </MainCard>
-              <MainCard classNames={'dashboard-card'}>
-                <Stack height={['100px', '200px']} alignItems={"center"} justifyContent={"center"} spacing={['4px', '10px']}>
-                  <p className={'dashboard-label'}>7 Days' PNL</p>
-                  <p className={'dashboard-value'}>{myTxInfo.day7Value > 0 && <UpIcon/>} {myTxInfo.day7Value < 0 && <DownIcon/>} {myTxInfo.day7Value.toLocaleString('en-US',{maximumFractionDigits: 2})} NEST</p>
+              <MainCard classNames={"dashboard-card"}>
+                <Stack
+                  height={["100px", "200px"]}
+                  alignItems={"center"}
+                  justifyContent={"center"}
+                  spacing={["4px", "10px"]}
+                >
+                  <p className={"dashboard-label"}>7 Days' PNL</p>
+                  <p className={"dashboard-value"}>
+                    {myTxInfo.day7Value > 0 && <UpIcon />}{" "}
+                    {myTxInfo.day7Value < 0 && <DownIcon />}{" "}
+                    {myTxInfo.day7Value.toLocaleString("en-US", {
+                      maximumFractionDigits: 2,
+                    })}{" "}
+                    NEST
+                  </p>
                   {/*<p className={'dashboard-caption'}>{myTxInfo.day7Rate}% Today ringgit</p>*/}
                 </Stack>
               </MainCard>
-              <MainCard classNames={'dashboard-card'}>
-                <Stack height={['100px', '200px']} alignItems={"center"} justifyContent={"center"} spacing={['4px', '10px']}>
-                  <p className={'dashboard-label'}>30 Days' PNL</p>
-                  <p className={'dashboard-value'}>{myTxInfo.day30Value > 0 && <UpIcon/>} {myTxInfo.day30Value < 0 && <DownIcon/>} {myTxInfo.day30Value.toLocaleString('en-US',{maximumFractionDigits: 2})} NEST</p>
+              <MainCard classNames={"dashboard-card"}>
+                <Stack
+                  height={["100px", "200px"]}
+                  alignItems={"center"}
+                  justifyContent={"center"}
+                  spacing={["4px", "10px"]}
+                >
+                  <p className={"dashboard-label"}>30 Days' PNL</p>
+                  <p className={"dashboard-value"}>
+                    {myTxInfo.day30Value > 0 && <UpIcon />}{" "}
+                    {myTxInfo.day30Value < 0 && <DownIcon />}{" "}
+                    {myTxInfo.day30Value.toLocaleString("en-US", {
+                      maximumFractionDigits: 2,
+                    })}{" "}
+                    NEST
+                  </p>
                   {/*<p className={'dashboard-caption'}>{myTxInfo.day30Rate}% Today ringgit</p>*/}
                 </Stack>
               </MainCard>
             </Stack>
-            {
-              isPC && (
-                <>
-                  <Stack direction={'row'}>
-                    <MainButton className={`dashboard-leftButton ${showHold ? '' : 'outline'}`} onClick={() => {
+            {isPC && (
+              <>
+                <Stack direction={"row"}>
+                  <MainButton
+                    className={`dashboard-leftButton ${
+                      showHold ? "" : "outline"
+                    }`}
+                    onClick={() => {
                       setShowHold(true);
-                    }}>
-                      Current Positions
-                    </MainButton>
-                    <MainButton className={`dashboard-rightButton ${!showHold ? '' : 'outline'}`} onClick={() => {
+                    }}
+                  >
+                    Current Positions
+                  </MainButton>
+                  <MainButton
+                    className={`dashboard-rightButton ${
+                      !showHold ? "" : "outline"
+                    }`}
+                    onClick={() => {
                       setShowHold(false);
-                    }}>
-                      History
-                    </MainButton>
-                  </Stack>
-                  <table className={`dashboard-table`}>
-                    <thead>
+                    }}
+                  >
+                    History
+                  </MainButton>
+                </Stack>
+                <table className={`dashboard-table`}>
+                  <thead>
                     <tr className={`Futures-table-title`}>
                       <th>Token Pair</th>
                       <th>Type</th>
@@ -242,99 +355,134 @@ const Dashboard: FC = () => {
                       <th>Actual Margin</th>
                       <th>Operate</th>
                     </tr>
-                    </thead>
-                    <tbody>
-                    { showHold && positionList.filter((item, index) => {
-                      if (showMore) {
-                        return true;
-                      }
-                      return index < 5;
-                    } ).map((item, index) => (
-                      <FuturesList item={item} key={index} className={'Futures'}/>
-                    )) }
-                    { !showHold && historyList.filter((item, index) => {
-                      if (showMore) {
-                        return true;
-                      }
-                      return index < 5;
-                    } ).map((item, index) => (
-                      <FuturesList item={item} key={index} className={'Futures'}/>
-                    )) }
-                    </tbody>
-                  </table>
-                  {
-                    ((showHold && positionList.length > 5) || (!showHold && historyList.length > 5)) && (
-                      <Stack alignItems={"center"}>
-                        <button className={'dashboard-button-more'} onClick={() => setShowMore(!showMore)}>
-                          { showMore ? 'Less' : 'More' }
-                        </button>
-                      </Stack>
-                    )
-                  }
-                </>
-              )
-            }
+                  </thead>
+                  <tbody>
+                    {showHold &&
+                      positionList
+                        .filter((item, index) => {
+                          if (showMore) {
+                            return true;
+                          }
+                          return index < 5;
+                        })
+                        .map((item, index) => (
+                          <FuturesList
+                            item={item}
+                            key={index}
+                            className={"Futures"}
+                          />
+                        ))}
+                    {!showHold &&
+                      historyList
+                        .filter((item, index) => {
+                          if (showMore) {
+                            return true;
+                          }
+                          return index < 5;
+                        })
+                        .map((item, index) => (
+                          <FuturesList
+                            item={item}
+                            key={index}
+                            className={"Futures"}
+                          />
+                        ))}
+                  </tbody>
+                </table>
+                {((showHold && positionList.length > 5) ||
+                  (!showHold && historyList.length > 5)) && (
+                  <Stack alignItems={"center"}>
+                    <button
+                      className={"dashboard-button-more"}
+                      onClick={() => setShowMore(!showMore)}
+                    >
+                      {showMore ? "Less" : "More"}
+                    </button>
+                  </Stack>
+                )}
+              </>
+            )}
           </Stack>
         </MainCard>
-        { !isPC && (
-          <Stack direction={"row"} spacing={'28px'} px={'28px'} pt={'10px'} pb={'10px'}>
-            <button className={`dashboard-leftButton ${showHold ? '' : 'outline'}`} onClick={() => {
-              setShowHold(true);
-            }}>
+        {!isPC && (
+          <Stack
+            direction={"row"}
+            spacing={"28px"}
+            px={"28px"}
+            pt={"10px"}
+            pb={"10px"}
+          >
+            <button
+              className={`dashboard-leftButton ${showHold ? "" : "outline"}`}
+              onClick={() => {
+                setShowHold(true);
+              }}
+            >
               Current Positions
             </button>
-            <button className={`dashboard-rightButton ${!showHold ? '' : 'outline'}`} onClick={() => {
-              setShowHold(false);
-            }}>
+            <button
+              className={`dashboard-rightButton ${!showHold ? "" : "outline"}`}
+              onClick={() => {
+                setShowHold(false);
+              }}
+            >
               History
             </button>
           </Stack>
-        ) }
-        { !isPC && (
+        )}
+        {!isPC && (
           <>
-            {
-               showHold ? (
-                 <>
-                   {
-                     positionList.filter((item, index) => {
-                       if (showMore) {
-                         return true;
-                       }
-                       return index < 5;
-                     } ).map((item, index) => (
-                       <FuturesListMobile item={item} key={index} className={'Futures'}/>
-                     ))
-                   }
-                 </>
-               ) : (
-                 <>
-                   {
-                     historyList.filter((item, index) => {
-                       if (showMore) {
-                         return true;
-                       }
-                       return index < 5;
-                     } ).map((item, index) => (
-                       <FuturesListMobile item={item} key={index} className={'Futures'}/>
-                     ))
-                   }
-                 </>
-               )
-            }
-            {
-              ((showHold && positionList.length > 5) || (!showHold && historyList.length > 5)) && (
-                <Stack alignItems={"center"}>
-                  <button className={'dashboard-button-more'} onClick={() => setShowMore(!showMore)}>
-                    { showMore ? 'Less' : 'More' }
-                  </button>
-                </Stack>
-              )
-            }
+            {showHold ? (
+              <>
+                {positionList
+                  .filter((item, index) => {
+                    if (showMore) {
+                      return true;
+                    }
+                    return index < 5;
+                  })
+                  .map((item, index) => (
+                    <FuturesListMobile
+                      item={item}
+                      key={index}
+                      className={"Futures"}
+                    />
+                  ))}
+              </>
+            ) : (
+              <>
+                {historyList
+                  .filter((item, index) => {
+                    if (showMore) {
+                      return true;
+                    }
+                    return index < 5;
+                  })
+                  .map((item, index) => (
+                    <FuturesListMobile
+                      item={item}
+                      key={index}
+                      className={"Futures"}
+                    />
+                  ))}
+              </>
+            )}
+            {((showHold && positionList.length > 5) ||
+              (!showHold && historyList.length > 5)) && (
+              <Stack alignItems={"center"}>
+                <button
+                  className={"dashboard-button-more"}
+                  onClick={() => setShowMore(!showMore)}
+                >
+                  {showMore ? "Less" : "More"}
+                </button>
+              </Stack>
+            )}
           </>
         )}
       </Stack>
     </Stack>
-  )
-}
+  );
+};
 
 export default Dashboard;

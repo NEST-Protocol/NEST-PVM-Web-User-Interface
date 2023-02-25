@@ -29,7 +29,6 @@ import {
   useTrustFuturesUpdateStopPrice,
 } from "../../contracts/hooks/useNESTTrustFutures";
 import { FuturesShareOrderView } from "../../pages/Dashboard/FuturesList";
-import axios from "axios";
 
 export type TrustOrder = {
   index: BigNumber;
@@ -527,14 +526,6 @@ export function useFutures() {
     }
   }, [account, chainId, nestToken]);
 
-  const handleInviteCode = useCallback(async () => {
-    const href = window.location.href;
-    const inviteCode = href?.split("?a=")[1];
-    if (inviteCode && inviteCode.length === 8) {
-      window.localStorage.setItem("inviteCode", inviteCode.toLowerCase());
-    }
-  }, []);
-
   const handleShareOrder = useCallback(async () => {
     // http://localhost:3000/#/futures?position=ETH&12400030&20&true&130000&160000&120000
     const href = window.location.href;
@@ -578,29 +569,6 @@ export function useFutures() {
       }
     }
   }, [account]);
-
-  const postInviteCode = useCallback(async () => {
-    const inviteCode = window.localStorage.getItem("inviteCode");
-    if (inviteCode && account) {
-      if (inviteCode === account.toLowerCase().slice(-8)) {
-        return;
-      }
-      try {
-        await axios({
-          method: "post",
-          url: "https://api.nestfi.net/api/users/users/saveInviteUser",
-          data: {
-            address: account,
-            code: inviteCode,
-            timestamp: new Date().getTime() / 1000,
-          },
-        });
-        window.localStorage.removeItem("inviteCode");
-      } catch (e) {
-        console.log(e);
-      }
-    }
-  }, [account, localStorage.getItem("inviteCode")]);
 
   useEffect(() => {
     const plusOrders = order3List.map((order) => {
@@ -682,18 +650,8 @@ export function useFutures() {
   ]);
 
   useEffect(() => {
-    handleInviteCode();
-  }, [handleInviteCode]);
-
-  useEffect(() => {
     handleShareOrder();
   }, [handleShareOrder]);
-
-  useEffect(() => {
-    if (chainId === 56) {
-      postInviteCode();
-    }
-  }, [chainId, postInviteCode]);
 
   // action
   const buy1 = useTrustFuturesBuy(
@@ -1403,9 +1361,7 @@ export function useFuturesTrigger(order: Futures3OrderView) {
   };
   const showSLPlaceHolder = () => {
     return closeLoss()
-      ? parseFloat(formatUnits(order.trustOrder!.stopLossPrice, 18)).toFixed(
-          2
-        )
+      ? parseFloat(formatUnits(order.trustOrder!.stopLossPrice, 18)).toFixed(2)
       : `<${showOpenPrice()}`;
   };
 

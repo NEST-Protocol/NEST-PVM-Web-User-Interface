@@ -144,7 +144,7 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`
                 <Divider/>
                 <Stack alignItems={"center"} pb={'40px'}>
                   <QRCodeCanvas
-                    value={`https://finance.nestprotocol.org/#/futures?a=${account?.slice(-8).toLowerCase()}`}
+                    value={`https://finance.nestprotocol.org/?a=${account?.slice(-8).toLowerCase()}`}
                     size={80}/>
                 </Stack>
               </Stack>
