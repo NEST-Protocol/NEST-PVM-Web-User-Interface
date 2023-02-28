@@ -36,6 +36,42 @@ export function useTrustFuturesBuy(
   return txPromise;
 }
 
+export function useTrustFuturesBuyWithStopOrder(
+  channelIndex: BigNumber,
+  lever: BigNumber,
+  orientation: boolean,
+  amount: BigNumber,
+  stopProfitPrice: BigNumber,
+  stopLossPrice: BigNumber
+) {
+  const { account, chainId } = useWeb3();
+  var contract = NESTTrustFutures();
+  var callData: string | undefined;
+  if (!chainId) {
+    contract = null;
+  } else {
+    callData = contract?.interface.encodeFunctionData("buyWithStopOrder", [
+      channelIndex,
+      lever,
+      orientation,
+      amount,
+      stopProfitPrice,
+      stopLossPrice,
+    ]);
+  }
+  const tx = {
+    from: account,
+    to: contract?.address,
+    data: callData,
+  };
+  const txPromise = useSendTransaction(contract, tx, {
+    title: `Open Future positions`,
+    info: "",
+    type: TransactionType.PVMFuturesProxyNew,
+  });
+  return txPromise;
+}
+
 export function useTrustFuturesNewTrustOrder(
   channelIndex: BigNumber,
   lever: BigNumber,

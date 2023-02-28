@@ -21,6 +21,7 @@ import useTransactionListCon, { TransactionType } from "./useTransactionInfo";
 import {
   useTrustFuturesAdd,
   useTrustFuturesBuy,
+  useTrustFuturesBuyWithStopOrder,
   useTrustFuturesCancelLimitOrder,
   useTrustFuturesNewStopOrder,
   useTrustFuturesNewTrustOrder,
@@ -47,7 +48,7 @@ export type Futures3OrderView = {
   owner: BigNumber;
   basePrice: BigNumber;
   balance: BigNumber;
-  append: BigNumber;
+  appends: BigNumber;
   channelIndex: BigNumber;
   lever: BigNumber;
   orientation: boolean;
@@ -106,13 +107,13 @@ export const tokenArray = [
 
 const lipPrice = (
   balance: BigNumber,
-  append: BigNumber,
+  appends: BigNumber,
   lever: BigNumber,
   price: BigNumber,
   orientation: boolean
 ) => {
   const top = BigNumber.from(balance.toString())
-    .add(append)
+    .add(appends)
     .sub(
       BigNumber.from(balance.toString())
         .mul(BigNumber.from(2))
@@ -346,7 +347,10 @@ export function useFutures() {
               account
             );
           const groupResult = groupList.filter((item) => {
-            return item.orderIndex.toString() !== "0";
+            return (
+              item.owner.toString().toLocaleLowerCase() !==
+              ZERO_ADDRESS.toLocaleLowerCase()
+            );
           });
           result = [...result, ...groupResult];
           if (getPart) {
@@ -356,6 +360,7 @@ export function useFutures() {
         if (!getPart) {
           setTrustOrder3List(result);
         }
+        console.log(result);
       } catch (error) {
         console.log(error);
       }
@@ -561,7 +566,7 @@ export function useFutures() {
           actualMargin: "",
           trustOrder: trustOrder,
           basePrice: BigNumber.from("0"),
-          append: BigNumber.from("0"),
+          appends: BigNumber.from("0"),
           Pt: BigInt(0),
         };
         setShowOpenPositionOrder(order);
@@ -669,6 +674,14 @@ export function useFutures() {
     parseUnits(stopProfitPriceInput === "" ? "0" : stopProfitPriceInput, 18),
     parseUnits(stopLossPriceInput === "" ? "0" : stopLossPriceInput, 18)
   );
+  const buy3 = useTrustFuturesBuyWithStopOrder(
+    BigNumber.from(channelIndex(tokenPair).toString()),
+    BigNumber.from(leverNum.toString()),
+    isLong,
+    parseUnits(nestInput === "" ? "0" : nestInput, 4),
+    parseUnits(stopProfitPriceInput === "" ? "0" : stopProfitPriceInput, 18),
+    parseUnits(stopLossPriceInput === "" ? "0" : stopLossPriceInput, 18)
+  );
   const approveToPVMFutures = useERC20Approve(
     "NEST",
     MaxUint256,
@@ -715,11 +728,7 @@ export function useFutures() {
       setShowTriggerRisk(true);
       return;
     }
-    if (limit) {
-      buy2();
-    } else {
-      buy1();
-    }
+    baseAction();
   };
   const mainButtonLoading = () => {
     const pendingTransaction = pendingList.filter(
@@ -734,7 +743,11 @@ export function useFutures() {
     if (limit) {
       buy2();
     } else {
-      buy1();
+      if (stop) {
+        buy3();
+      } else {
+        buy1();
+      }
     }
   };
 
@@ -880,7 +893,7 @@ export function useFutures3OrderList(
         return;
       }
       const price = kValue[tokenName()!].nowPrice;
-      const value = await trustFuturesContract.valueOf1(order.index, price);
+      const value = await trustFuturesContract.balanceOf(order.index, price);
       setMarginAssets(value);
     } catch (error) {
       console.log(error);
@@ -909,7 +922,7 @@ export function useFutures3OrderList(
       const marginAssets_num = parseFloat(formatUnits(marginAssets, 18));
       const balance_num = parseFloat(
         formatUnits(
-          BigNumber.from(order.balance.toString()).add(order.append),
+          BigNumber.from(order.balance.toString()).add(order.appends),
           4
         )
       );
@@ -925,7 +938,7 @@ export function useFutures3OrderList(
   const showLiqPrice = () => {
     const result = lipPrice(
       order.balance,
-      order.append,
+      order.appends,
       order.lever,
       order.basePrice,
       order.orientation
@@ -1368,7 +1381,7 @@ export function useFuturesTrigger(order: Futures3OrderView) {
   const showLiqPrice = () => {
     const result = lipPrice(
       order.balance,
-      order.append,
+      order.appends,
       order.lever,
       order.basePrice,
       order.orientation
@@ -1586,7 +1599,7 @@ export function useFuturesAdd(order: Futures3OrderView) {
   const showLiqPrice = () => {
     const result = lipPrice(
       order.balance,
-      order.append,
+      order.appends,
       order.lever,
       order.basePrice,
       order.orientation

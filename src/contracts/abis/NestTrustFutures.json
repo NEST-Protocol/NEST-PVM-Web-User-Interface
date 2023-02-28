@@ -144,6 +144,30 @@
     {
         "inputs": [
             {
+                "internalType": "uint256",
+                "name": "orderIndex",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "oraclePrice",
+                "type": "uint256"
+            }
+        ],
+        "name": "balanceOf",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "value",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
                 "internalType": "uint16",
                 "name": "channelIndex",
                 "type": "uint16"
@@ -165,6 +189,44 @@
             }
         ],
         "name": "buy",
+        "outputs": [],
+        "stateMutability": "payable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint16",
+                "name": "channelIndex",
+                "type": "uint16"
+            },
+            {
+                "internalType": "uint8",
+                "name": "lever",
+                "type": "uint8"
+            },
+            {
+                "internalType": "bool",
+                "name": "orientation",
+                "type": "bool"
+            },
+            {
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "stopProfitPrice",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "stopLossPrice",
+                "type": "uint256"
+            }
+        ],
+        "name": "buyWithStopOrder",
         "outputs": [],
         "stateMutability": "payable",
         "type": "function"
@@ -262,7 +324,7 @@
                     },
                     {
                         "internalType": "uint40",
-                        "name": "append",
+                        "name": "appends",
                         "type": "uint40"
                     },
                     {
@@ -399,17 +461,22 @@
                 "components": [
                     {
                         "internalType": "uint56",
-                        "name": "Lp",
-                        "type": "uint56"
-                    },
-                    {
-                        "internalType": "uint56",
-                        "name": "Sp",
+                        "name": "lastPrice",
                         "type": "uint56"
                     },
                     {
                         "internalType": "int56",
-                        "name": "Pt",
+                        "name": "miu",
+                        "type": "int56"
+                    },
+                    {
+                        "internalType": "int56",
+                        "name": "PtL",
+                        "type": "int56"
+                    },
+                    {
+                        "internalType": "int56",
+                        "name": "PtS",
                         "type": "int56"
                     },
                     {
@@ -418,7 +485,7 @@
                         "type": "uint32"
                     }
                 ],
-                "internalType": "struct INestFutures3.TradeChannel",
+                "internalType": "struct NestFutures3V3.TradeChannel",
                 "name": "channel",
                 "type": "tuple"
             }
@@ -530,7 +597,7 @@
                     },
                     {
                         "internalType": "uint40",
-                        "name": "append",
+                        "name": "appends",
                         "type": "uint40"
                     },
                     {
@@ -718,19 +785,6 @@
         "inputs": [
             {
                 "internalType": "uint256",
-                "name": "channelIndex",
-                "type": "uint256"
-            }
-        ],
-        "name": "openChannel",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "uint256",
                 "name": "period",
                 "type": "uint256"
             },
@@ -823,30 +877,6 @@
         "name": "updateStopPrice",
         "outputs": [],
         "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "orderIndex",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "oraclePrice",
-                "type": "uint256"
-            }
-        ],
-        "name": "valueOf1",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "value",
-                "type": "uint256"
-            }
-        ],
-        "stateMutability": "view",
         "type": "function"
     }
 ]
