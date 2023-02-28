@@ -182,7 +182,7 @@ const Trigger: FC<TriggerProp> = ({ ...props }) => {
                 placement="right"
                 title={
                   <div>
-                    <p>Position fee = Position*0.2%</p>
+                    <p>Position fee =Position*0.1%</p>
                     <p>Stop order fee(after execution) = 15 NEST</p>
                   </div>
                 }

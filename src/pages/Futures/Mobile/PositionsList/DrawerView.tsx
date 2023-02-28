@@ -309,7 +309,7 @@ export const DrawerTrigger: FC<DrawerBaseType> = ({ ...props }) => {
                 placement="top-start"
                 title={
                   <div>
-                    <p>Position fee = Position*0.2%</p>
+                    <p>Position fee = Position*0.1%</p>
                     <p>Stop order fee(after execution) = 15 NEST</p>
                   </div>
                 }
@@ -384,7 +384,7 @@ export const DrawerClose: FC<DrawerCloseType> = ({ ...props }) => {
       >
         <LightTooltip
           placement="top-start"
-          title={"margin*leverage*0.2%"}
+          title={"margin*leverage*0.1%"}
           arrow
         >
           <p className="underLine">Fees</p>

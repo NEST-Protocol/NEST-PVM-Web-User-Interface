@@ -496,7 +496,7 @@ export function useFutures() {
     }
     const baseFee = parseUnits(nestInput, 18)
       .mul(BigNumber.from(leverNum.toString()))
-      .mul(BigNumber.from("2"))
+      .mul(BigNumber.from("1"))
       .div(BigNumber.from("1000"));
     var limitFee = BigNumber.from("0");
     if (limit) {
@@ -796,17 +796,17 @@ export function useFutures() {
 
   const feeHoverText = () => {
     if (!limit && !stop) {
-      return ["Position fee = Position*0.2%"];
+      return ["Position fee = Position*0.1%"];
     } else if (limit && !stop) {
-      return ["Position fee = Position*0.2%", "Limit order fee = 15 NEST"];
+      return ["Position fee = Position*0.1%", "Limit order fee = 15 NEST"];
     } else if (!limit && stop) {
       return [
-        "Position fee = Position*0.2%",
+        "Position fee = Position*0.1%",
         "Stop order fee(after execution) = 15 NEST",
       ];
     } else {
       return [
-        "Position fee = Position*0.2%",
+        "Position fee = Position*0.1%",
         "Limit order fee = 15 NEST",
         "Stop order fee(after execution) = 15 NEST",
       ];
@@ -1340,7 +1340,7 @@ export function useFuturesTrigger(order: Futures3OrderView) {
   };
 
   const showTriggerFee = () => {
-    const fee = BigNumber.from("2")
+    const fee = BigNumber.from("1")
       .mul(order.lever)
       .mul(order.balance)
       .div(BigNumber.from("1000"))
@@ -1691,7 +1691,7 @@ export function useFuturesCloseOrder(
     if (!thisToken.nowPrice) {
       return "---";
     }
-    const fee = BigNumber.from("2")
+    const fee = BigNumber.from("1")
       .mul(order.lever)
       .mul(order.balance)
       .mul(thisToken.nowPrice)
@@ -1938,7 +1938,7 @@ export function useFuturesOpenPosition(order: Futures3OrderView) {
 
   const feeHoverText = () => {
     return [
-      "Position fee = Position*0.2%",
+      "Position fee = Position*0.1%",
       "Limit order fee = 15 NEST",
       "Stop order fee(after execution) = 15 NEST",
     ];
