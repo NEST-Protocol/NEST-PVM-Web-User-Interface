@@ -197,7 +197,7 @@ export function useFutures() {
     Array<Futures3OrderView>
   >([]);
   const [oldOrderList, setOldOrderList] = useState<Array<OldOrderView>>([]);
-  const [closedOrder, setClosedOrder] = useState<Array<OrderView>>([]);
+  const [closedOrder, setClosedOrder] = useState<Array<Futures3OrderView>>([]);
   const [orderNotShow, setOrderNotShow] = useState<BigNumber[]>([]);
   const { pendingList, txList } = useTransactionListCon();
 
@@ -442,16 +442,27 @@ export function useFutures() {
         return;
       }
       const data = await fetch(
-        `https://api.nestfi.net/api/order/position/list/${chainId}?address=${account}`
+        `https://api.nestfi.net/api/order/position/v2/list/${chainId}?address=${account}`
       );
       const data_json = await data.json();
-      const list: Array<OrderView> = data_json["value"]
+      const list: Array<Futures3OrderView> = data_json["value"]
         .map((item: { [x: string]: any }) => {
+          const trustOrder: TrustOrder = {
+            limitPrice: BigNumber.from("0"),
+            stopProfitPrice: parseUnits(item["sp"].toString(), 18),
+            stopLossPrice: parseUnits(item["sl"].toString(), 18),
+            index: BigNumber.from("0"),
+            owner: "",
+            orderIndex: BigNumber.from("0"),
+            balance: BigNumber.from("0"),
+            fee: BigNumber.from("0"),
+            status: BigNumber.from("0"),
+          };
           return {
             index: BigNumber.from(item["index"].toString()),
-            owner: item["owner"],
+            owner: BigNumber.from(item["owner"].toString()),
             balance: parseUnits(item["balance"].toString(), 4),
-            tokenIndex: BigNumber.from(item["tokenIndex"].toString()),
+            channelIndex: BigNumber.from(item["tokenIndex"].toString()),
             baseBlock: BigNumber.from(item["baseBlock"].toString()),
             lever: BigNumber.from(item["level"].toString()),
             orientation: item["orientation"].toString() === "true",
@@ -460,7 +471,9 @@ export function useFutures() {
               item["stopPrice"] ? item["stopPrice"].toString() : "0",
               18
             ),
+            appends: BigNumber.from(item["append"].toString()),
             actualMargin: item["actualMargin"],
+            trustOrder: trustOrder,
           };
         })
         .filter((item: any) => item.lever.toString() !== "0");

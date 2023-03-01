@@ -1,4 +1,4 @@
-import { FC, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { FC, useMemo, useRef, useState } from "react";
 import {
   checkWidth,
   formatInputNum,
@@ -10,7 +10,6 @@ import Stack from "@mui/material/Stack";
 import { tokenList } from "../../libs/constants/addresses";
 import { formatUnits, parseUnits } from "ethers/lib/utils";
 import ChooseType from "../../components/ChooseType";
-// import { LeverChoose } from "../../components/LeverChoose";
 import InfoShow from "../../components/InfoShow";
 import { SingleTokenShow } from "../../components/TokenShow";
 import OpenShow from "../../components/OpenShow";
@@ -20,9 +19,6 @@ import { Popover } from "@mui/material";
 import classNames from "classnames";
 import TVChart from "../../components/TVChart";
 import {
-  Futures3OrderView,
-  tokenArray,
-  TrustOrder,
   useFutures,
 } from "../../libs/hooks/useFutures";
 import FuturesList3, {
@@ -34,15 +30,12 @@ import { LightTooltip } from "../../styles/MUI";
 import PerpetualsNoticeModal from "./PerpetualsNoticeModal";
 import Popup from "reactjs-popup";
 import TriggerRiskModal from "./TriggerRisk";
-import useWeb3 from "../../libs/hooks/useWeb3";
-import axios from "axios";
 import OpenPosition from "./OpenPosition";
 import { BigNumber } from "ethers";
 import LeverSlider from "../../components/LeverSlider";
 
 const Futures: FC = () => {
   const classPrefix = "Futures";
-  const { account } = useWeb3();
   const isPC = checkWidth();
   const modal = useRef<any>();
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
@@ -468,7 +461,7 @@ const Futures: FC = () => {
         <Stack spacing={0} className={`${classPrefix}-topView-right`}>
           <p className="title">{tokenPair}/USDT</p>
           <TVChart
-            chainId={56}
+            chainId={chainId ?? 56}
             tokenPair={tokenPair}
             chartHeight={chartHeight()}
             close={close}
@@ -480,10 +473,10 @@ const Futures: FC = () => {
 
   const listView1 = () => {
     const orderList3View = () => {
-      return [...plusOrder3List].map((item) => {
+      return [...plusOrder3List, ...showClosedOrder].map((item, index) => {
         return (
           <FuturesList3
-            key={`f3+${item.index}`}
+            key={`f3+${index}`}
             item={item}
             kValue={kValue}
             className={classPrefix}

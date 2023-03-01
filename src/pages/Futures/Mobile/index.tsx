@@ -4,7 +4,6 @@ import Stack from "@mui/material/Stack";
 import { tokenList } from "../../../libs/constants/addresses";
 import { PutDownIcon } from "../../../components/Icon";
 import LongAndShort from "../../../components/LongAndShort";
-// import { LeverChoose } from "../../../components/LeverChoose";
 import InfoShow from "../../../components/InfoShow";
 import { SingleTokenShow } from "../../../components/TokenShow";
 import { formatInputNum, formatInputNumWithFour } from "../../../libs/utils";
@@ -33,7 +32,7 @@ const FuturesMobile: FC = () => {
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
   const modal = useRef<any>();
   const {
-    // chainId,
+    chainId,
     isLong,
     setIsLong,
     nestBalance,
@@ -137,7 +136,7 @@ const FuturesMobile: FC = () => {
         spacing={0}
         className={`${classPrefix}-KPrice`}
       >
-        <TVChart chainId={56} tokenPair={tokenPair} close={close} />
+        <TVChart chainId={chainId ?? 56} tokenPair={tokenPair} close={close} />
       </Stack>
     );
   };
@@ -430,7 +429,7 @@ const FuturesMobile: FC = () => {
   };
 
   const order3ListView = () => {
-    return [...plusOrder3List].map((item, index) => {
+    return [...plusOrder3List, ...showClosedOrder].map((item, index) => {
       return (
         <li key={`f3+${index}`}>
           <PositionsList3
