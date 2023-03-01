@@ -1427,19 +1427,18 @@ export function useFuturesTrigger(order: Futures3OrderView) {
     parseUnits(stopLossPriceInput === "" ? "0" : stopLossPriceInput, 18)
   );
   const actionUpdate = useTrustFuturesUpdateStopPrice(
-    order.trustOrder!.index,
     parseUnits(stopProfitPriceInput === "" ? "0" : stopProfitPriceInput, 18),
     parseUnits(stopLossPriceInput === "" ? "0" : stopLossPriceInput, 18)
   );
   const actionCloseProfit = useTrustFuturesUpdateStopPrice(
-    order.trustOrder!.index,
     parseUnits("0", 18),
-    parseUnits(stopLossPriceInput === "" ? "0" : stopLossPriceInput, 18)
+    parseUnits(stopLossPriceInput === "" ? "0" : stopLossPriceInput, 18),
+    order.trustOrder?.index
   );
   const actionCloseLoss = useTrustFuturesUpdateStopPrice(
-    order.trustOrder!.index,
     parseUnits(stopProfitPriceInput === "" ? "0" : stopProfitPriceInput, 18),
-    parseUnits("0", 18)
+    parseUnits("0", 18),
+    order.trustOrder?.index
   );
   const buttonLoading = () => {
     const pendingTransaction = pendingList.filter(

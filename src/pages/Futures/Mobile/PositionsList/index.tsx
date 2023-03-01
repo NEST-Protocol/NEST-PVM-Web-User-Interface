@@ -110,7 +110,7 @@ const PositionsList3: FC<FuturesList3Props> = ({ ...props }) => {
         className={`${classPrefix}-one`}
       >
         <div className="left">
-          <p className="title">Positions</p>
+          <p className="title">Symbol</p>
           <Stack direction="row" spacing={1} alignItems="left">
             <div className="pairIcon">
               <TokenOneSvg />

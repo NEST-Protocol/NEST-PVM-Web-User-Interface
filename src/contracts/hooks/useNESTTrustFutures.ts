@@ -188,14 +188,14 @@ export function useTrustFuturesNewStopOrder(
 }
 
 export function useTrustFuturesUpdateStopPrice(
-  trustOrderIndex: BigNumber,
   stopProfitPrice: BigNumber,
-  stopLossPrice: BigNumber
+  stopLossPrice: BigNumber,
+  trustOrderIndex?: BigNumber,
 ) {
   const { account, chainId } = useWeb3();
   var contract = NESTTrustFutures();
   var callData: string | undefined;
-  if (!chainId) {
+  if (!chainId || !trustOrderIndex) {
     contract = null;
   } else {
     callData = contract?.interface.encodeFunctionData("updateStopPrice", [
@@ -211,7 +211,7 @@ export function useTrustFuturesUpdateStopPrice(
   };
   const txPromise = useSendTransaction(contract, tx, {
     title: `Edit Trigger`,
-    info: trustOrderIndex.toString(),
+    info: trustOrderIndex ? trustOrderIndex.toString() : '',
     type: TransactionType.PVMFuturesEditTrigger,
   });
   return txPromise;

@@ -517,7 +517,7 @@ const Futures: FC = () => {
       <table className={`${classPrefix}-table`}>
         <thead>
           <tr className={`${classPrefix}-table-title`}>
-            <th>Positions</th>
+            <th>Symbol</th>
             <th>
               <LightTooltip
                 placement="top"
@@ -569,7 +569,7 @@ const Futures: FC = () => {
       <table className={`${classPrefix}-table`}>
         <thead>
           <tr className={`${classPrefix}-table-title`}>
-            <th>Symbol</th>
+            <th>Token Pair</th>
             <th>Type</th>
             <th>Lever</th>
             <th>Initial Margin</th>
