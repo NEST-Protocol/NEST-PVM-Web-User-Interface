@@ -13,19 +13,32 @@ const LeverSlider: FC<LeverSliderProps> = ({ ...props }) => {
   function valuetext(value: number) {
     return `${value}`;
   }
-  const buttonArray = [2, 5, 10, 20, 50].map((item) => {
-    return (
-      <button
-        key={`${classPrefix}+${item}`}
-        onClick={() => {
-          setSliderValue(item);
-          props.callBack(item);
-        }}
-      >
-        {item}
-      </button>
-    );
-  });
+  const marks = [
+    {
+      value: 2,
+      label: "2",
+    },
+    {
+      value: 10,
+      label: "10",
+    },
+    {
+      value: 20,
+      label: "20",
+    },
+    {
+      value: 30,
+      label: "30",
+    },
+    {
+      value: 40,
+      label: "40",
+    },
+    {
+      value: 50,
+      label: "50",
+    },
+  ];
   return (
     <Stack
       direction="column"
@@ -46,17 +59,8 @@ const LeverSlider: FC<LeverSliderProps> = ({ ...props }) => {
           setSliderValue(e.target.value);
           props.callBack(e.target.value);
         }}
+        marks={marks}
       />
-
-      <Stack
-        direction="row"
-        justifyContent="space-between"
-        spacing={0}
-        style={{ width: "100%" }}
-        className={`${classPrefix}-button`}
-      >
-        {buttonArray}
-      </Stack>
     </Stack>
   );
 };

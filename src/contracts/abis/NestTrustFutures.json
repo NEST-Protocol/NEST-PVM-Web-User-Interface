@@ -168,14 +168,14 @@
     {
         "inputs": [
             {
-                "internalType": "uint16",
+                "internalType": "uint256",
                 "name": "channelIndex",
-                "type": "uint16"
+                "type": "uint256"
             },
             {
-                "internalType": "uint8",
+                "internalType": "uint256",
                 "name": "lever",
-                "type": "uint8"
+                "type": "uint256"
             },
             {
                 "internalType": "bool",
@@ -196,14 +196,14 @@
     {
         "inputs": [
             {
-                "internalType": "uint16",
+                "internalType": "uint256",
                 "name": "channelIndex",
-                "type": "uint16"
+                "type": "uint256"
             },
             {
-                "internalType": "uint8",
+                "internalType": "uint256",
                 "name": "lever",
-                "type": "uint8"
+                "type": "uint256"
             },
             {
                 "internalType": "bool",

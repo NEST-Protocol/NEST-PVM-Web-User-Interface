@@ -15,12 +15,10 @@
         background-color: #0047BB;
     }
 
-    &-button {
-        button {
-            font-size: 16px;
+    .MuiSlider-markLabel {
+        font-size: 16px;
             font-family: $boldFont;
             color: black;
-        }
     }
 }
 
@@ -39,10 +37,8 @@
             background: linear-gradient(90deg, #8BB7FF 0%, #0061FF 100%);
         }
 
-        &-button {
-            button {
-                color: white;
-            }
+        .MuiSlider-markLabel {
+            color: white;
         }
     }
 }
