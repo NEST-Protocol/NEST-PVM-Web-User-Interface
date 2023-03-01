@@ -15,8 +15,8 @@ const LeverSlider: FC<LeverSliderProps> = ({ ...props }) => {
   }
   const marks = [
     {
-      value: 2,
-      label: "2",
+      value: 1,
+      label: "1",
     },
     {
       value: 10,
@@ -49,9 +49,9 @@ const LeverSlider: FC<LeverSliderProps> = ({ ...props }) => {
     >
       <Slider
         aria-label="Custom marks"
-        defaultValue={2}
+        defaultValue={1}
         max={50}
-        min={2}
+        min={1}
         getAriaValueText={valuetext}
         step={1}
         value={sliderValue}

@@ -33,7 +33,7 @@ const ShareMyDealModal: FC<ShareMyDealModalProps> = ({ order }) => {
     const tokenName = order.tokenPair.split("/")[0];
     const nestAmount = parseUnits(order.initialMargin.toString(), 4).toString();
     const basePrice = parseUnits(order.openPrice.toString(), 2).toString();
-    const lever = order.leverage;
+    const lever = order.leverage.split("X")[0];
     const orientation = order.orientation === "Long" ? "true" : "false";
     const tp = order.tp ? parseUnits(order.tp!.toString(), 2).toString() : "0";
     const sl = order.sl ? parseUnits(order.sl!.toString(), 2).toString() : "0";

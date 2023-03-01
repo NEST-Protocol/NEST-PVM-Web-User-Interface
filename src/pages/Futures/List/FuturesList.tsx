@@ -106,7 +106,7 @@ const FuturesList3: FC<FuturesList3Props> = ({ ...props }) => {
         <Stack spacing={1} alignItems="center">
           <p>{showMarginAssets()} NEST</p>
           <p style={{ color: showPercent() >= 0 ? "#80C269" : "#FF0000" }}>
-            {showPercent().toFixed(2)}%
+          {showPercent() > 0 ? '+' : ''}{showPercent().toFixed(2)}%
           </p>
         </Stack>
       </td>
@@ -216,7 +216,7 @@ export const FuturesList: FC<FuturesListProps> = ({ ...props }) => {
         <Stack spacing={1} alignItems="center">
           <p>{showMarginAssets()} NEST</p>
           <p style={{ color: showPercent() >= 0 ? "#80C269" : "#FF0000" }}>
-            {showPercent().toFixed(2)}%
+          {showPercent() > 0 ? '+' : ''}{showPercent().toFixed(2)}%
           </p>
         </Stack>
       </td>
@@ -332,7 +332,7 @@ export const FuturesListOld: FC<FuturesOldListProps> = ({ ...props }) => {
         <Stack spacing={1} alignItems="center">
           <p>{showMarginAssets()} NEST</p>
           <p style={{ color: showPercent() >= 0 ? "#80C269" : "#FF0000" }}>
-            {showPercent().toFixed(2)}%
+            {showPercent() > 0 ? '+' : ''}{showPercent().toFixed(2)}%
           </p>
         </Stack>
       </td>

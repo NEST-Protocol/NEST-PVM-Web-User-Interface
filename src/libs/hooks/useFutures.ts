@@ -116,7 +116,8 @@ const lipPrice = (
     .add(appends)
     .sub(
       BigNumber.from(balance.toString())
-        .mul(BigNumber.from(2))
+        .mul(lever)
+        .mul(BigNumber.from(1))
         .div(BigNumber.from(1000))
     )
     .sub(
@@ -940,7 +941,7 @@ export function useFutures3OrderList(
         )
       );
       if (marginAssets_num >= balance_num) {
-        return ((marginAssets_num - balance_num) * 100) / balance_num;
+        return +((marginAssets_num - balance_num) * 100) / balance_num;
       } else {
         return -(((balance_num - marginAssets_num) * 100) / balance_num);
       }
@@ -1426,17 +1427,17 @@ export function useFuturesTrigger(order: Futures3OrderView) {
     parseUnits(stopLossPriceInput === "" ? "0" : stopLossPriceInput, 18)
   );
   const actionUpdate = useTrustFuturesUpdateStopPrice(
-    order.index,
+    order.trustOrder!.index,
     parseUnits(stopProfitPriceInput === "" ? "0" : stopProfitPriceInput, 18),
     parseUnits(stopLossPriceInput === "" ? "0" : stopLossPriceInput, 18)
   );
   const actionCloseProfit = useTrustFuturesUpdateStopPrice(
-    order.index,
+    order.trustOrder!.index,
     parseUnits("0", 18),
     parseUnits(stopLossPriceInput === "" ? "0" : stopLossPriceInput, 18)
   );
   const actionCloseLoss = useTrustFuturesUpdateStopPrice(
-    order.index,
+    order.trustOrder!.index,
     parseUnits(stopProfitPriceInput === "" ? "0" : stopProfitPriceInput, 18),
     parseUnits("0", 18)
   );

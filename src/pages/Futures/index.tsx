@@ -569,7 +569,7 @@ const Futures: FC = () => {
       <table className={`${classPrefix}-table`}>
         <thead>
           <tr className={`${classPrefix}-table-title`}>
-            <th>Token Pair</th>
+            <th>Symbol</th>
             <th>Type</th>
             <th>Lever</th>
             <th>Initial Margin</th>

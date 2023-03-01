@@ -165,7 +165,7 @@ const PositionsList3: FC<FuturesList3Props> = ({ ...props }) => {
               className="value"
               style={{ color: showPercent() >= 0 ? "#80C269" : "#FF0000" }}
             >
-              {showPercent().toFixed(2)}%
+              {showPercent() > 0 ? '+' : ''}{showPercent().toFixed(2)}%
             </p>
           </Stack>
         </div>
@@ -355,7 +355,7 @@ export const PositionsList: FC<FuturesListProps> = ({ ...props }) => {
               className="value"
               style={{ color: showPercent() >= 0 ? "#80C269" : "#FF0000" }}
             >
-              {showPercent().toFixed(2)}%
+              {showPercent() > 0 ? '+' : ''}{showPercent().toFixed(2)}%
             </p>
           </Stack>
         </div>
