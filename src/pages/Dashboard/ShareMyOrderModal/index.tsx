@@ -235,7 +235,7 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`;
           <Divider />
           <Stack alignItems={"center"} pb={"80px"}>
             <QRCodeCanvas
-              value={`https://finance.nestprotocol.org/?a=${account?.slice(-8).toLowerCase()}`}
+              value={`${shareLink()}`}
               size={80}
             />
           </Stack>

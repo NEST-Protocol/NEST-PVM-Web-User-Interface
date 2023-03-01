@@ -1,6 +1,5 @@
 import { FC, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { createChart, UTCTimestamp } from "lightweight-charts";
-import { format as formatDateFn } from "date-fns";
 import "./styles";
 import classNames from "classnames";
 import useThemes, { ThemeType } from "../../libs/hooks/useThemes";
@@ -11,6 +10,11 @@ type TVChartProps = {
   chartHeight?: number;
   close: number;
 };
+
+function timeToLocal(originalTime: number) {
+  const d = new Date(originalTime * 1000);
+  return Date.UTC(d.getFullYear(), d.getMonth(), d.getDate(), d.getHours(), d.getMinutes(), d.getSeconds(), d.getMilliseconds()) / 1000;
+}
 
 const PERIOD_TYPE = [
   { label: "1M", value: "K_1M", period: 60 * 1000 },
@@ -28,10 +32,6 @@ export const CHART_PERIODS = {
   K_4H: 60 * 60 * 4,
   K_DAY: 60 * 60 * 24,
 };
-
-export function formatDateTime(time: number) {
-  return formatDateFn(time * 1000, "dd MMM yyyy, h:mm a");
-}
 
 const TVChart: FC<TVChartProps> = ({ chainId, tokenPair, chartHeight, close}) => {
   const ref = useRef(null);
@@ -67,7 +67,7 @@ const TVChart: FC<TVChartProps> = ({ chainId, tokenPair, chartHeight, close}) =>
         high: Math.max(Number(item.open.toFixed(2)), Number(item.close.toFixed(2))),
         low: Math.min(Number(item.open.toFixed(2)), Number(item.close.toFixed(2))),
         open: Number(item.open.toFixed(2)),
-        time: item.timestamp as UTCTimestamp,
+        time: timeToLocal(item.timestamp) as UTCTimestamp,
       }))
       setPriceData(data);
     } catch (error) {
@@ -128,9 +128,6 @@ const TVChart: FC<TVChartProps> = ({ chainId, tokenPair, chartHeight, close}) =>
       },
       localization: {
         locale: "en-US",
-        timeFormatter: (timestamp: number) => {
-          return formatDateTime(timestamp);
-        },
       },
       grid: {
         vertLines: {
@@ -152,6 +149,7 @@ const TVChart: FC<TVChartProps> = ({ chainId, tokenPair, chartHeight, close}) =>
         timeVisible: true,
         secondsVisible: true,
         fixLeftEdge: true,
+        shiftVisibleRangeOnNewBar: true,
       },
       priceScale: {
         borderVisible: false,
