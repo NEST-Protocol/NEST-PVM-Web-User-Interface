@@ -54,6 +54,7 @@ export type Futures3OrderView = {
   orientation: boolean;
   Pt: BigInt;
   actualMargin: string;
+  baseBlock: BigNumber;
   trustOrder?: TrustOrder;
 };
 
@@ -130,7 +131,7 @@ const lipPrice = (
   const bottom = BigNumber.from(balance.toString()).mul(lever);
   const subPrice = top.div(bottom);
   const result = orientation ? price.sub(subPrice) : price.add(subPrice);
-  return result;
+  return BigNumber.from("0").gt(result) ? BigNumber.from("0") : result;
 };
 
 // async function getListData<N extends {index:BigNumber, lever:BigNumber}>(
@@ -581,6 +582,7 @@ export function useFutures() {
           trustOrder: trustOrder,
           basePrice: BigNumber.from("0"),
           appends: BigNumber.from("0"),
+          baseBlock: BigNumber.from("0"),
           Pt: BigInt(0),
         };
         setShowOpenPositionOrder(order);
@@ -929,7 +931,17 @@ export function useFutures3OrderList(
     return parseFloat(formatUnits(order.basePrice, 18)).toFixed(2).toString();
   };
   const showTriggerTitle = () => {
-    return order.trustOrder === undefined ? "Trigger" : "Edit";
+    if (order.trustOrder === undefined) {
+      return "Trigger";
+    } else {
+      if (
+        BigNumber.from("0").eq(order.trustOrder.stopLossPrice) &&
+        BigNumber.from("0").eq(order.trustOrder.stopProfitPrice)
+      ) {
+        return "Trigger";
+      }
+      return "Edit";
+    }
   };
   const showPercent = () => {
     if (marginAssets) {
@@ -1010,6 +1022,15 @@ export function useFutures3OrderList(
       return [
         `SL:${parseFloat(
           formatUnits(order.trustOrder.stopLossPrice, 18)
+        ).toFixed(2)} USDT`,
+      ];
+    } else if (
+      order.trustOrder &&
+      BigNumber.from("0").eq(order.trustOrder.stopLossPrice)
+    ) {
+      return [
+        `TP:${parseFloat(
+          formatUnits(order.trustOrder.stopProfitPrice, 18)
         ).toFixed(2)} USDT`,
       ];
     } else {
@@ -1353,6 +1374,35 @@ export function useFuturesTrigger(order: Futures3OrderView) {
       .toString()} USDT`;
   };
 
+  const defaultSp = useCallback(() => {
+    if (
+      order.trustOrder &&
+      !BigNumber.from("0").eq(order.trustOrder.stopProfitPrice)
+    ) {
+      return parseFloat(
+        formatUnits(order.trustOrder.stopProfitPrice, 18)
+      ).toFixed(2);
+    }
+    return "";
+  }, [order.trustOrder]);
+
+  const defaultSl = useCallback(() => {
+    if (
+      order.trustOrder &&
+      !BigNumber.from("0").eq(order.trustOrder.stopLossPrice)
+    ) {
+      return parseFloat(
+        formatUnits(order.trustOrder.stopLossPrice, 18)
+      ).toFixed(2);
+    }
+    return "";
+  }, [order.trustOrder]);
+
+  useEffect(() => {
+    setStopProfitPriceInput(defaultSp());
+    setStopLossPriceInput(defaultSl());
+  }, [defaultSl, defaultSp]);
+
   const showTriggerFee = () => {
     const fee = BigNumber.from("1")
       .mul(order.lever)
@@ -1380,16 +1430,10 @@ export function useFuturesTrigger(order: Futures3OrderView) {
   };
 
   const showTPPlaceHolder = () => {
-    return closeProfit()
-      ? parseFloat(formatUnits(order.trustOrder!.stopProfitPrice, 18)).toFixed(
-          2
-        )
-      : `>${showOpenPrice()}`;
+    return `>${showOpenPrice()}`;
   };
   const showSLPlaceHolder = () => {
-    return closeLoss()
-      ? parseFloat(formatUnits(order.trustOrder!.stopLossPrice, 18)).toFixed(2)
-      : `<${showOpenPrice()}`;
+    return `<${showOpenPrice()}`;
   };
 
   const showLiqPrice = () => {
@@ -1428,7 +1472,8 @@ export function useFuturesTrigger(order: Futures3OrderView) {
   );
   const actionUpdate = useTrustFuturesUpdateStopPrice(
     parseUnits(stopProfitPriceInput === "" ? "0" : stopProfitPriceInput, 18),
-    parseUnits(stopLossPriceInput === "" ? "0" : stopLossPriceInput, 18)
+    parseUnits(stopLossPriceInput === "" ? "0" : stopLossPriceInput, 18),
+    order.trustOrder?.index
   );
   const actionCloseProfit = useTrustFuturesUpdateStopPrice(
     parseUnits("0", 18),
@@ -1620,7 +1665,7 @@ export function useFuturesAdd(order: Futures3OrderView) {
   const showLiqPrice = () => {
     const result = lipPrice(
       order.balance,
-      order.appends,
+      parseUnits(nestInput === "" ? "0" : nestInput, 4),
       order.lever,
       order.basePrice,
       order.orientation

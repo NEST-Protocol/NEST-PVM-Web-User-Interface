@@ -1,21 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 21.0.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" id="图层_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 30 30" style="enable-background:new 0 0 30 30;" xml:space="preserve">
-<style type="text/css">
-	.st0{clip-path:url(#SVGID_2_);fill:#F3BA2F;}
-	.st1{clip-path:url(#SVGID_2_);fill:#FFFFFF;}
-</style>
-<g>
-	<defs>
-		<rect id="SVGID_1_" width="30" height="30"/>
-	</defs>
-	<clipPath id="SVGID_2_">
-		<use xlink:href="#SVGID_1_"  style="overflow:visible;"/>
-	</clipPath>
-	<path class="st0" d="M15,0c8.3,0,15,6.7,15,15s-6.7,15-15,15S0,23.3,0,15S6.7,0,15,0"/>
-	<path class="st1" d="M11.4,13.5L15,9.9l3.6,3.6l2.1-2.1L15,5.6l-5.8,5.8L11.4,13.5z M5.6,15l2.1-2.1L9.9,15l-2.1,2.1L5.6,15z
-		 M11.4,16.5l3.6,3.6l3.6-3.6l2.1,2.1L15,24.4l-5.8-5.8l0,0L11.4,16.5z M20.1,15l2.1-2.1l2.1,2.1l-2.1,2.1L20.1,15z M17.1,15
-		L17.1,15L17.1,15L15,17.2L12.9,15l0,0l0,0l0.4-0.4l0.2-0.2l1.6-1.6L17.1,15L17.1,15z"/>
+<svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_767_4073)">
+<path d="M24 12C24 18.6259 18.627 23.9981 11.9971 23.999C5.37206 23.999 -0.000959639 18.6259 5.14575e-07 11.999C-0.00191979 5.37216 5.3711 0 11.999 0C18.627 0 24 5.37312 24 12V12Z" fill="#EAB300"/>
+<path d="M12.0019 7.35112L15.2567 10.5722L17.1485 8.69671L12.0019 3.6001L6.85538 8.69671L8.74711 10.5722L12.0019 7.35112Z" fill="white"/>
+<path d="M5.49232 10.032L3.60059 11.9075L5.49232 13.783L7.38923 11.9075L5.49232 10.032Z" fill="white"/>
+<path d="M16.6147 11.9075L18.5116 10.032L20.4033 11.9075L18.5116 13.783L16.6147 11.9075Z" fill="white"/>
+<path d="M12.0019 16.474L8.74711 13.2529L6.85538 15.1284L12.0019 20.225L17.1485 15.1284L15.2567 13.2529L12.0019 16.474Z" fill="white"/>
+<path d="M13.8937 11.9177L12.0019 13.7933L10.1102 11.9177L12.0019 10.0422L13.8937 11.9177Z" fill="white"/>
 </g>
+<defs>
+<clipPath id="clip0_767_4073">
+<rect width="28" height="28" fill="white"/>
+</clipPath>
+</defs>
 </svg>

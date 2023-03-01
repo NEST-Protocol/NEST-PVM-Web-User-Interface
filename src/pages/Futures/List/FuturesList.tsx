@@ -64,12 +64,10 @@ const FuturesList3: FC<FuturesList3Props> = ({ ...props }) => {
   } = useFutures3OrderList(props.item, props.kValue);
 
   const endButton = () => {
-    //  TODO
-    // const text =
-    //   props.item.baseBlock.toString() === "0"
-    //     ? "Liquidated"
-    //     : "Trigger executed";
-    const text = "Liquidated";
+    const text =
+      props.item.baseBlock.toString() === "0"
+        ? "Liquidated"
+        : "Trigger executed";
     return (
       <button
         className="endOrder"
