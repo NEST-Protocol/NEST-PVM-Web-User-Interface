@@ -1451,6 +1451,14 @@ export function useFuturesTrigger(order: Futures3OrderView) {
     if (buttonLoading()) {
       return true;
     }
+    const sp = stopProfitPriceInput === "" ? "0" : stopProfitPriceInput;
+    const sl = stopLossPriceInput === "" ? "0" : stopLossPriceInput;
+    if (
+      BigNumber.from("0").eq(parseUnits(sp, 18)) &&
+      BigNumber.from("0").eq(parseUnits(sl, 18))
+    ) {
+      return true;
+    }
     return false;
   };
 
@@ -1643,7 +1651,7 @@ export function useFuturesAdd(order: Futures3OrderView) {
       nestInput === "" ||
       buttonLoading() ||
       !checkNESTBalance() ||
-      parseFloat(nestInput) < MIN_NEST
+      parseFloat(nestInput) < 0.0001
     ) {
       return true;
     }
