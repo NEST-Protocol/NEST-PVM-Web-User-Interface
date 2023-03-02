@@ -17,6 +17,7 @@ function timeToLocal(originalTime: number) {
 }
 
 const PERIOD_TYPE = [
+  { label: "30S", value: "K_30S", period: 30 * 1000 },
   { label: "1M", value: "K_1M", period: 60 * 1000 },
   { label: "5M", value: "K_5M", period: 5 * 60 * 1000 },
   { label: "15M", value: "K_15M", period: 15 * 60 * 1000 },
@@ -25,20 +26,12 @@ const PERIOD_TYPE = [
   { label: "1D", value: "K_DAY", period: 24 * 60 * 60 * 1000 },
 ];
 
-export const CHART_PERIODS = {
-  K_5M: 60 * 5,
-  K_15M: 60 * 15,
-  K_1H: 60 * 60,
-  K_4H: 60 * 60 * 4,
-  K_DAY: 60 * 60 * 24,
-};
-
 const TVChart: FC<TVChartProps> = ({ chainId, tokenPair, chartHeight, close}) => {
   const ref = useRef(null);
   const chartRef = useRef(null);
   const [currentChart, setCurrentChart] = useState<any>();
   const [hoveredCandlestick, setHoveredCandlestick] = useState(null);
-  const [period, setPeriod] = useState("K_5M");
+  const [period, setPeriod] = useState("K_1M");
   const [priceData, setPriceData] = useState<{[key:string]:any[]}>({});
   const [currentSeries, setCurrentSeries] = useState<any>();
   const [chartInited, setChartInited] = useState(false);
@@ -47,12 +40,15 @@ const TVChart: FC<TVChartProps> = ({ chainId, tokenPair, chartHeight, close}) =>
   const getPriceData = useCallback(async () => {
     try {
       const dataCount = () => {
-        if (period === "K_1M") {
-          return 1000
-        } else if (period === "K_5M") {
-          return 200
-        } else {
-          return 100
+        switch (period) {
+          case "K_30S":
+            return 1000;
+          case "K_1M":
+            return 1000;
+          case "K_5M":
+            return 200;
+          default:
+            return 100;
         }
       }
       const k_data = await fetch(
@@ -108,13 +104,6 @@ const TVChart: FC<TVChartProps> = ({ chainId, tokenPair, chartHeight, close}) =>
     wickUpColor: "#0ecc83",
     borderVisible: false,
   });
-
-  const scaleChart = useCallback(() => {
-    // @ts-ignore
-    const from = Date.now() / 1000 - (7 * 24 * CHART_PERIODS[period]) / 2;
-    const to = Date.now() / 1000;
-    currentChart.timeScale().setVisibleRange({ from, to });
-  }, [currentChart, period]);
 
   const getChartOptions = useCallback(
     (width: number, height: number) => ({
@@ -196,11 +185,10 @@ const TVChart: FC<TVChartProps> = ({ chainId, tokenPair, chartHeight, close}) =>
       currentSeries.setData(priceData[`${period}${tokenPair}`]);
 
       if (!chartInited) {
-        scaleChart();
         setChartInited(true);
       }
     }
-  }, [chartInited, currentSeries, period, priceData, scaleChart, tokenPair]);
+  }, [chartInited, currentSeries, period, priceData, tokenPair]);
 
   useEffect(() => {
     if (!ref.current || !priceData[`${period}${tokenPair}`] || !priceData[`${period}${tokenPair}`].length || currentChart) {
