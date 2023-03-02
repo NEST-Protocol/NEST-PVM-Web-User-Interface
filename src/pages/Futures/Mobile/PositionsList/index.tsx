@@ -1,12 +1,7 @@
 import Stack from "@mui/material/Stack";
 import Drawer from "@mui/material/Drawer";
-import { FC, useState } from "react";
-import {
-  LongIcon,
-  ShareWhiteIcon,
-  ShortIcon,
-  XIcon,
-} from "../../../../components/Icon";
+import { FC, useRef, useState } from "react";
+import { LongIcon, ShortIcon, XIcon } from "../../../../components/Icon";
 import MainButton from "../../../../components/MainButton";
 import "./styles";
 import classNames from "classnames";
@@ -30,6 +25,8 @@ import {
   DrawerTrigger,
 } from "./DrawerView";
 import { LightTooltip } from "../../../../styles/MUI";
+import Popup from "reactjs-popup";
+import ShareMyOrderModal from "../../../Dashboard/ShareMyOrderModal";
 
 enum DrawerType {
   add = 0,
@@ -43,6 +40,7 @@ const PositionsList3: FC<FuturesList3Props> = ({ ...props }) => {
   const [showDrawer, setShowDrawer] = useState(false);
   const [drawerType, setDrawerType] = useState<DrawerType>(DrawerType.trigger);
   const { theme } = useThemes();
+  const modalShare = useRef<any>();
   const {
     TokenOneSvg,
     TokenTwoSvg,
@@ -52,6 +50,7 @@ const PositionsList3: FC<FuturesList3Props> = ({ ...props }) => {
     showPercent,
     showLiqPrice,
     showStopPrice,
+    shareOrderData,
   } = useFutures3OrderList(props.item, props.kValue);
 
   const drawerView = () => {
@@ -163,7 +162,8 @@ const PositionsList3: FC<FuturesList3Props> = ({ ...props }) => {
               className="value"
               style={{ color: showPercent() >= 0 ? "#80C269" : "#FF0000" }}
             >
-              {showPercent() > 0 ? '+' : ''}{showPercent().toFixed(2)}%
+              {showPercent() > 0 ? "+" : ""}
+              {showPercent().toFixed(2)}%
             </p>
           </Stack>
         </div>
@@ -254,9 +254,17 @@ const PositionsList3: FC<FuturesList3Props> = ({ ...props }) => {
         spacing={1}
         className={`${classPrefix}-futuresShare`}
       >
-        <button>
-          <ShareWhiteIcon />
-        </button>
+        <Popup
+          modal
+          ref={modalShare}
+          trigger={
+            <button>
+              <ShareMyOrderModal order={shareOrderData()} />
+            </button>
+          }
+          nested
+          children={undefined}
+        ></Popup>
       </Stack>
       <Drawer
         anchor={"bottom"}
@@ -353,7 +361,8 @@ export const PositionsList: FC<FuturesListProps> = ({ ...props }) => {
               className="value"
               style={{ color: showPercent() >= 0 ? "#80C269" : "#FF0000" }}
             >
-              {showPercent() > 0 ? '+' : ''}{showPercent().toFixed(2)}%
+              {showPercent() > 0 ? "+" : ""}
+              {showPercent().toFixed(2)}%
             </p>
           </Stack>
         </div>

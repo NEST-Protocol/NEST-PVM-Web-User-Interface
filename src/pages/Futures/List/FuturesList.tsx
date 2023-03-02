@@ -51,6 +51,7 @@ const FuturesList3: FC<FuturesList3Props> = ({ ...props }) => {
   const modalAdd = useRef<any>();
   const modalTrigger = useRef<any>();
   const modalClose = useRef<any>();
+  const modalShare = useRef<any>();
   const {
     TokenOneSvg,
     TokenTwoSvg,
@@ -159,7 +160,7 @@ const FuturesList3: FC<FuturesList3Props> = ({ ...props }) => {
           </Popup>
           <Popup
             modal
-            ref={modalClose}
+            ref={modalShare}
             trigger={
               <button>
                 <ShareMyOrderModal order={shareOrderData()} />
@@ -167,11 +168,6 @@ const FuturesList3: FC<FuturesList3Props> = ({ ...props }) => {
             }
             nested
           >
-            {/* <FuturesClose
-              order={props.item}
-              kValue={props.kValue}
-              onClose={() => modalClose.current.close()}
-            /> */}
           </Popup>
         </td>
       )}
