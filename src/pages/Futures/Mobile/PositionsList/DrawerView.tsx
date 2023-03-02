@@ -384,7 +384,7 @@ export const DrawerClose: FC<DrawerCloseType> = ({ ...props }) => {
       >
         <LightTooltip
           placement="top-start"
-          title={"margin*leverage*0.1%"}
+          title={"Position*0.1%"}
           arrow
         >
           <p className="underLine">Fees</p>

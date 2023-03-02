@@ -113,6 +113,12 @@ const lipPrice = (
   price: BigNumber,
   orientation: boolean
 ) => {
+  if (
+    BigNumber.from("0").eq(BigNumber.from(balance.toString())) ||
+    BigNumber.from("0").eq(lever)
+  ) {
+    return BigNumber.from("0");
+  }
   const top = BigNumber.from(balance.toString())
     .add(appends)
     .sub(
@@ -1050,6 +1056,8 @@ export function useFutures3OrderList(
   useEffect(() => {
     if (order.actualMargin === undefined) {
       orderValue();
+    } else {
+      setMarginAssets(parseUnits(order.actualMargin, 4))
     }
   }, [order.actualMargin, orderValue]);
 

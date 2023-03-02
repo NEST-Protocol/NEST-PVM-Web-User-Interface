@@ -65,7 +65,7 @@ const FuturesClose: FC<FuturesCloseProps> = ({ ...props }) => {
           spacing={0}
           className={`${classPrefix}-infoShow`}
         >
-          <LightTooltip placement="right" title={"margin*leverage*0.1%"} arrow>
+          <LightTooltip placement="right" title={"Position*0.1%"} arrow>
             <p className="underLine">Fees</p>
           </LightTooltip>
 

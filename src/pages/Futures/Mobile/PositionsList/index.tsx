@@ -141,7 +141,7 @@ const PositionsList3: FC<FuturesList3Props> = ({ ...props }) => {
                 <p>
                   The net asset value, if this value is lower than liquidation
                   amount, the position will be liquidated. Liquidation ratio =
-                  0.2% Liquidation amount = margin * leverage * (current
+                  0.5% Liquidation amount = margin * leverage * (current
                   price/initial price)*Liquidation ratio
                 </p>
               </div>
@@ -331,7 +331,7 @@ export const PositionsList: FC<FuturesListProps> = ({ ...props }) => {
                 <p>
                   The net asset value, if this value is lower than liquidation
                   amount, the position will be liquidated. Liquidation ratio =
-                  0.2% Liquidation amount = margin * leverage * (current
+                  0.5% Liquidation amount = margin * leverage * (current
                   price/initial price)*Liquidation ratio
                 </p>
               </div>
