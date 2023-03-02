@@ -100,7 +100,7 @@ const FuturesAdd: FC<FuturesAddProps> = ({ ...props }) => {
           <button
             className={"max-button"}
             onClick={() =>
-              setNestInput(nestBalance ? formatUnits(nestBalance, 18) : "")
+              setNestInput(nestBalance ? parseFloat(formatUnits(nestBalance, 18)).toFixed(2) : "")
             }
           >
             MAX

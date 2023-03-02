@@ -480,7 +480,7 @@ export function useFutures() {
               18
             ),
             appends: BigNumber.from(item["append"].toString()),
-            actualMargin: item["actualMargin"],
+            actualMargin: item["actualMargin"].toString(),
             trustOrder: trustOrder,
           };
         })
@@ -1057,7 +1057,7 @@ export function useFutures3OrderList(
     if (order.actualMargin === undefined) {
       orderValue();
     } else {
-      setMarginAssets(parseUnits(order.actualMargin, 4))
+      setMarginAssets(parseUnits(parseFloat(order.actualMargin).toFixed(2), 4))
     }
   }, [order.actualMargin, orderValue]);
 
@@ -1391,8 +1391,9 @@ export function useFuturesTrigger(order: Futures3OrderView) {
         formatUnits(order.trustOrder.stopProfitPrice, 18)
       ).toFixed(2);
     }
+    if (stopProfitPriceInput !== '') {return stopProfitPriceInput}
     return "";
-  }, [order.trustOrder]);
+  }, [order.trustOrder, stopProfitPriceInput]);
 
   const defaultSl = useCallback(() => {
     if (
@@ -1403,8 +1404,9 @@ export function useFuturesTrigger(order: Futures3OrderView) {
         formatUnits(order.trustOrder.stopLossPrice, 18)
       ).toFixed(2);
     }
+    if (stopLossPriceInput !== '') {return stopLossPriceInput}
     return "";
-  }, [order.trustOrder]);
+  }, [order.trustOrder, stopLossPriceInput]);
 
   useEffect(() => {
     setStopProfitPriceInput(defaultSp());
