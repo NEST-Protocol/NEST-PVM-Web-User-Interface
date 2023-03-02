@@ -951,7 +951,7 @@ export function useFutures3OrderList(
   };
   const showPercent = () => {
     if (marginAssets) {
-      const marginAssets_num = parseFloat(formatUnits(marginAssets, 18));
+      const marginAssets_num = parseFloat(formatUnits(marginAssets, order.baseBlock.toString() === '0' ? 18 : 4));
       const balance_num = parseFloat(
         formatUnits(
           BigNumber.from(order.balance.toString()).add(order.appends),
