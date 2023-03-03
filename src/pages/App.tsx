@@ -45,7 +45,7 @@ const App: FC = () => {
   const handleInviteCode = useCallback(async () => {
     let inviteCode = getQueryVariable("a");
     if (!inviteCode) {
-      inviteCode = window.location.href.split("?a=")[1];
+      inviteCode = window.location.href.split("?a=")[1].slice(0, 8);
     }
 
     if (inviteCode && account) {
