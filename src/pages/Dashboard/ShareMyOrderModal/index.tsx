@@ -29,7 +29,7 @@ const ShareMyDealModal: FC<ShareMyDealModalProps> = ({ order }) => {
   const { TokenOneSvg, TokenTwoSvg } = useTokenPairSymbol(order.tokenPair);
   const { theme } = useThemes();
   const shareLink = () => {
-    const baseUrl = "https://finance.nestprotocol.org/#/futures?position=";
+    const baseUrl = `https://finance.nestprotocol.org/#/futures?a=${account?.slice(-8).toLowerCase()}?position=`;
     const tokenName = order.tokenPair.split("/")[0];
     const nestAmount = parseUnits(order.initialMargin.toString(), 4).toString();
     const basePrice = parseUnits(order.openPrice.toString(), 2).toString();
