@@ -526,7 +526,7 @@ const Futures: FC = () => {
                     <p>
                       The net asset value, if this value is lower than
                       liquidation amount, the position will be liquidated.
-                      Liquidation ratio = 0.2% Liquidation amount = margin *
+                      Liquidation ratio = 0.5% Liquidation amount = margin *
                       leverage * (current price/initial price)*Liquidation ratio
                     </p>
                   </div>
