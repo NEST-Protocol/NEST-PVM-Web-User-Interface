@@ -1,6 +1,7 @@
 import Stack from "@mui/material/Stack";
 import classNames from "classnames";
-import { FC } from "react";
+import { FC, useRef } from "react";
+import Popup from "reactjs-popup";
 import MainButton from "../../../components/MainButton";
 import MainCard from "../../../components/MainCard";
 import {
@@ -10,6 +11,7 @@ import {
 import useThemes, { ThemeType } from "../../../libs/hooks/useThemes";
 import { formatInputNumWithFour } from "../../../libs/utils";
 import { LightTooltip } from "../../../styles/MUI";
+import Modal from "../../Shared/Header/Status/Modal";
 import "./styles";
 
 type OpenPositionProp = {
@@ -20,6 +22,7 @@ type OpenPositionProp = {
 const OpenPosition: FC<OpenPositionProp> = ({ ...props }) => {
   const classPrefix = "OpenPosition";
   const { theme } = useThemes();
+  const modal = useRef<any>();
   const {
     nestAmount,
     setNestAmount,
@@ -40,6 +43,8 @@ const OpenPosition: FC<OpenPositionProp> = ({ ...props }) => {
     showFee,
     showTotalPay,
     checkNESTBalance,
+    showConnect,
+    setShowConnect,
   } = useFuturesOpenPosition(props.order);
   return (
     <MainCard
@@ -48,6 +53,15 @@ const OpenPosition: FC<OpenPositionProp> = ({ ...props }) => {
         [`${classPrefix}-dark`]: theme === ThemeType.dark,
       })}
     >
+      <Popup
+        open={showConnect}
+        modal
+        ref={modal}
+        onClose={() => setShowConnect(false)}
+        nested
+      >
+        <Modal onClose={() => setShowConnect(false)} />
+      </Popup>
       <Stack spacing={0} alignItems="center">
         <p className="title">{showPosition()}</p>
         <Stack

@@ -556,7 +556,7 @@ export function useFutures() {
     // http://localhost:3000/#/futures?position=ETH&12400030&20&true&130000&160000&120000
     const href = window.location.href;
     const inviteCode = href?.split("?position=")[1];
-    if (inviteCode && account && inviteCode.length > 0) {
+    if (inviteCode && inviteCode.length > 0) {
       const orderData = inviteCode.split("&");
       if (orderData.length === 7) {
         const tokenNameArray = tokenArray.map((item) => {
@@ -595,7 +595,7 @@ export function useFutures() {
         setShowOpenPosition(true);
       }
     }
-  }, [account]);
+  }, []);
 
   useEffect(() => {
     const plusOrders = order3List.map((order) => {
@@ -951,7 +951,9 @@ export function useFutures3OrderList(
   };
   const showPercent = () => {
     if (marginAssets) {
-      const marginAssets_num = parseFloat(formatUnits(marginAssets, order.baseBlock.toString() === '0' ? 18 : 4));
+      const marginAssets_num = parseFloat(
+        formatUnits(marginAssets, !order.baseBlock || order.baseBlock.toString() === "0" ? 18 : 4)
+      );
       const balance_num = parseFloat(
         formatUnits(
           BigNumber.from(order.balance.toString()).add(order.appends),
@@ -1057,7 +1059,7 @@ export function useFutures3OrderList(
     if (order.actualMargin === undefined) {
       orderValue();
     } else {
-      setMarginAssets(parseUnits(parseFloat(order.actualMargin).toFixed(2), 4))
+      setMarginAssets(parseUnits(parseFloat(order.actualMargin).toFixed(2), 4));
     }
   }, [order.actualMargin, orderValue]);
 
@@ -1391,7 +1393,9 @@ export function useFuturesTrigger(order: Futures3OrderView) {
         formatUnits(order.trustOrder.stopProfitPrice, 18)
       ).toFixed(2);
     }
-    if (stopProfitPriceInput !== '') {return stopProfitPriceInput}
+    if (stopProfitPriceInput !== "") {
+      return stopProfitPriceInput;
+    }
     return "";
   }, [order.trustOrder, stopProfitPriceInput]);
 
@@ -1404,7 +1408,9 @@ export function useFuturesTrigger(order: Futures3OrderView) {
         formatUnits(order.trustOrder.stopLossPrice, 18)
       ).toFixed(2);
     }
-    if (stopLossPriceInput !== '') {return stopLossPriceInput}
+    if (stopLossPriceInput !== "") {
+      return stopLossPriceInput;
+    }
     return "";
   }, [order.trustOrder, stopLossPriceInput]);
 
@@ -1825,6 +1831,7 @@ export function useFuturesOpenPosition(order: Futures3OrderView) {
   const { pendingList } = useTransactionListCon();
 
   const nestToken = ERC20Contract(tokenList["NEST"].addresses);
+  const [showConnect, setShowConnect] = useState(false);
   const trustFuturesContract = NESTTrustFutures();
 
   const checkNESTBalance = () => {
@@ -1951,8 +1958,17 @@ export function useFuturesOpenPosition(order: Futures3OrderView) {
     parseUnits(sl === "" ? "0" : sl, 18)
   );
 
+  useEffect(() => {
+    if (account && showConnect) {
+      setShowConnect(false);
+    }
+  }, [account, showConnect]);
+
   // mainButton
   const mainButtonTitle = () => {
+    if (!account) {
+      return "Connect Wallet";
+    }
     const longOrShort = order.orientation ? "Long" : "Short";
     return checkAllowance() ? `Open ${longOrShort}` : "Approve";
   };
@@ -1972,6 +1988,10 @@ export function useFuturesOpenPosition(order: Futures3OrderView) {
     return false;
   };
   const mainButtonAction = () => {
+    if (!account) {
+      setShowConnect(true);
+      return;
+    }
     if (mainButtonDis()) {
       return;
     }
@@ -2053,5 +2073,7 @@ export function useFuturesOpenPosition(order: Futures3OrderView) {
     showFee,
     showTotalPay,
     checkNESTBalance,
+    showConnect,
+    setShowConnect,
   };
 }
