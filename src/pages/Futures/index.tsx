@@ -89,6 +89,7 @@ const Futures: FC = () => {
     setShowOpenPosition,
     showOpenPositionOrder,
     showLiqPrice,
+    maxNum
   } = useFutures();
   const BTCIcon = tokenList["BTC"].Icon;
   const ETHIcon = tokenList["ETH"].Icon;
@@ -344,15 +345,7 @@ const Futures: FC = () => {
             />
             <button
               className={"max-button"}
-              onClick={() =>
-                setNestInput(
-                  nestBalance
-                    ? parseFloat(formatUnits(nestBalance, 18))
-                        .toFixed(2)
-                        .toString()
-                    : ""
-                )
-              }
+              onClick={maxNum}
             >
               MAX
             </button>
