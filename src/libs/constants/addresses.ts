@@ -235,6 +235,6 @@ export const TestTokenContract: AddressesType = {
 export const NestTrustFuturesContract: AddressesType = {
   1: ZERO_ADDRESS,
   5: ZERO_ADDRESS,
-  56: "0x4DAd153409B22707D118336B15b530E37b185dd3",
+  56: "0x907b35BE2dc26b12734D92e5fe20Fd511dFb0723",
   97: "0xE8b787EdE23997Ff5C64067e2220FBbd13b085A1",
 };
