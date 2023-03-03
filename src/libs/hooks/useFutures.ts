@@ -192,7 +192,7 @@ export function useFutures() {
   const [limitInput, setLimitInput] = useState<string>("");
   const [stopProfitPriceInput, setStopProfitPriceInput] = useState<string>("");
   const [stopLossPriceInput, setStopLossPriceInput] = useState<string>("");
-  const [leverNum, setLeverNum] = useState<number>(2);
+  const [leverNum, setLeverNum] = useState<number>(1);
   const [tokenPair, setTokenPair] = useState<string>("ETH");
   const [kValue, setKValue] = useState<{ [key: string]: TokenType }>();
   const [order3List, setOrder3List] = useState<Array<Futures3OrderView>>([]);
