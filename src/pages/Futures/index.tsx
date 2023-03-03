@@ -509,9 +509,9 @@ const Futures: FC = () => {
         );
       });
     };
-    // if (orderEmpty()) {
-    //   return noOrders();
-    // }
+    if (orderEmpty()) {
+      return noOrders();
+    }
     return (
       <table className={`${classPrefix}-table`}>
         <thead>

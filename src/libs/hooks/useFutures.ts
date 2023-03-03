@@ -197,9 +197,9 @@ export function useFutures() {
   const [kValue, setKValue] = useState<{ [key: string]: TokenType }>();
   const [order3List, setOrder3List] = useState<Array<Futures3OrderView>>([]);
   const [trustOrder3List, setTrustOrder3List] = useState<Array<TrustOrder>>([]);
-  const [plusOrder3List, setPlusOrder3List] = useState<Array<Futures3OrderView>>(
-    []
-  );
+  const [plusOrder3List, setPlusOrder3List] = useState<
+    Array<Futures3OrderView>
+  >([]);
   const [orderList, setOrderList] = useState<Array<OrderView>>([]);
   const [limitOrderList, setLimitOrderList] = useState<
     Array<Futures3OrderView>
@@ -238,8 +238,9 @@ export function useFutures() {
     const isShow = localStorage.getItem("PerpetualsFirst");
     return isShow === "1" ? false : true;
   };
-  const orderEmpty = () => {
+  const orderEmpty = useCallback(() => {
     if (
+      plusOrder3List.length === 0 &&
       orderList.length === 0 &&
       closedOrder.length === 0 &&
       oldOrderList.length === 0
@@ -247,7 +248,12 @@ export function useFutures() {
       return true;
     }
     return false;
-  };
+  }, [
+    closedOrder.length,
+    plusOrder3List.length,
+    oldOrderList.length,
+    orderList.length,
+  ]);
   const limitEmpty = () => {
     if (limitOrderList.length === 0) {
       return true;
@@ -368,7 +374,6 @@ export function useFutures() {
         if (!getPart) {
           setTrustOrder3List(result);
         }
-
       } catch (error) {
         console.log(error);
       }
@@ -616,12 +621,12 @@ export function useFutures() {
           (item.trustOrder && BigNumber.from("0").eq(item.trustOrder.status))
       )
       .filter((item) => item.balance.toString() !== "0");
-      console.log(plusOrdersNormal)
+    console.log(plusOrdersNormal);
     const plusOrdersLimit = plusOrders.filter(
       (item) =>
         item.trustOrder && BigNumber.from("1").eq(item.trustOrder.status)
     );
-    console.log(plusOrdersLimit)
+    console.log(plusOrdersLimit);
     setPlusOrder3List(plusOrdersNormal);
     setLimitOrderList(plusOrdersLimit);
   }, [order3List, trustOrder3List]);
@@ -954,7 +959,10 @@ export function useFutures3OrderList(
   const showPercent = () => {
     if (marginAssets) {
       const marginAssets_num = parseFloat(
-        formatUnits(marginAssets, !order.baseBlock || order.baseBlock.toString() === "0" ? 18 : 4)
+        formatUnits(
+          marginAssets,
+          !order.baseBlock || order.baseBlock.toString() === "0" ? 18 : 4
+        )
       );
       const balance_num = parseFloat(
         formatUnits(
@@ -1395,11 +1403,11 @@ export function useFuturesTrigger(order: Futures3OrderView) {
         formatUnits(order.trustOrder.stopProfitPrice, 18)
       ).toFixed(2);
     }
-    if (stopProfitPriceInput !== "") {
-      return stopProfitPriceInput;
-    }
+    // if (stopProfitPriceInput !== "") {
+    //   return stopProfitPriceInput;
+    // }
     return "";
-  }, [order.trustOrder, stopProfitPriceInput]);
+  }, [order.trustOrder]);
 
   const defaultSl = useCallback(() => {
     if (
@@ -1410,16 +1418,21 @@ export function useFuturesTrigger(order: Futures3OrderView) {
         formatUnits(order.trustOrder.stopLossPrice, 18)
       ).toFixed(2);
     }
-    if (stopLossPriceInput !== "") {
-      return stopLossPriceInput;
-    }
+    // if (stopLossPriceInput !== "") {
+    //   return stopLossPriceInput;
+    // }
     return "";
-  }, [order.trustOrder, stopLossPriceInput]);
+  }, [order.trustOrder]);
 
   useEffect(() => {
-    setStopProfitPriceInput(defaultSp());
-    setStopLossPriceInput(defaultSl());
-  }, [defaultSl, defaultSp]);
+    if (stopProfitPriceInput === "") {
+      setStopProfitPriceInput(defaultSp());
+    }
+    if (stopLossPriceInput === "") {
+      setStopLossPriceInput(defaultSl());
+    }
+    
+  }, [defaultSl, defaultSp, stopLossPriceInput, stopProfitPriceInput]);
 
   const showTriggerFee = () => {
     const fee = BigNumber.from("1")
