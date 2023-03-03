@@ -197,7 +197,7 @@ export function useFutures() {
   const [kValue, setKValue] = useState<{ [key: string]: TokenType }>();
   const [order3List, setOrder3List] = useState<Array<Futures3OrderView>>([]);
   const [trustOrder3List, setTrustOrder3List] = useState<Array<TrustOrder>>([]);
-  const [plusOrder3List, setPlusOrder3] = useState<Array<Futures3OrderView>>(
+  const [plusOrder3List, setPlusOrder3List] = useState<Array<Futures3OrderView>>(
     []
   );
   const [orderList, setOrderList] = useState<Array<OrderView>>([]);
@@ -368,7 +368,7 @@ export function useFutures() {
         if (!getPart) {
           setTrustOrder3List(result);
         }
-        console.log(result);
+
       } catch (error) {
         console.log(error);
       }
@@ -616,11 +616,13 @@ export function useFutures() {
           (item.trustOrder && BigNumber.from("0").eq(item.trustOrder.status))
       )
       .filter((item) => item.balance.toString() !== "0");
+      console.log(plusOrdersNormal)
     const plusOrdersLimit = plusOrders.filter(
       (item) =>
         item.trustOrder && BigNumber.from("1").eq(item.trustOrder.status)
     );
-    setPlusOrder3(plusOrdersNormal);
+    console.log(plusOrdersLimit)
+    setPlusOrder3List(plusOrdersNormal);
     setLimitOrderList(plusOrdersLimit);
   }, [order3List, trustOrder3List]);
 

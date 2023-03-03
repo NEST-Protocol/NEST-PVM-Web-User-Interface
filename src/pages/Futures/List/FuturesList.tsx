@@ -63,7 +63,6 @@ const FuturesList3: FC<FuturesList3Props> = ({ ...props }) => {
     showStopPrice,
     shareOrderData,
   } = useFutures3OrderList(props.item, props.kValue);
-
   const endButton = () => {
     const text =
       props.item.baseBlock.toString() === "0"

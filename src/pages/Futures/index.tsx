@@ -112,7 +112,6 @@ const Futures: FC = () => {
   const noOrders = () => {
     return <p className="emptyOrder">No Orders</p>;
   };
-
   const topView = () => {
     // const leverList =
     //   chainId === 1
@@ -471,8 +470,8 @@ const Futures: FC = () => {
     );
   };
 
-  const listView1 = () => {
-    const orderList3View = () => {
+  const listView1 = () => { 
+    const orderList3View = () => {  
       return [...plusOrder3List, ...showClosedOrder].map((item, index) => {
         return (
           <FuturesList3
@@ -510,9 +509,9 @@ const Futures: FC = () => {
         );
       });
     };
-    if (orderEmpty()) {
-      return noOrders();
-    }
+    // if (orderEmpty()) {
+    //   return noOrders();
+    // }
     return (
       <table className={`${classPrefix}-table`}>
         <thead>
