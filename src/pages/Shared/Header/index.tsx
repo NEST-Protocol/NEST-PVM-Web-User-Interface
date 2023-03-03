@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import classNames from "classnames";
 import { NESTLogo, XIcon } from "../../../components/Icon";
@@ -27,15 +27,6 @@ const Header: FC = () => {
       <Link to={item.path}>{item.content}</Link>
     </li>
   ));
-
-  useEffect(() => {
-    var cache = localStorage.getItem("topNotice");
-    if (cache !== "1") {
-      setShowTopNotice(true);
-    } else {
-      setShowTopNotice(false);
-    }
-  }, []);
 
   const closeTopNotice = () => {
     localStorage.setItem("topNotice", "1");

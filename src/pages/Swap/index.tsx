@@ -57,7 +57,7 @@ const Swap: FC = () => {
   const [inputValue, setInputValue] = useState<string>();
   const [priceValue, setPriceValue] = useState<BigNumber>();
   const [swapToken, setSwapToken] = useState<SwapTokenType>({
-    src: "DCU",
+    src: "USDT",
     dest: "NEST",
   });
   const [srcAllowance, setSrcAllowance] = useState<BigNumber>(
@@ -280,7 +280,7 @@ const Swap: FC = () => {
   const tokenListShow = (top: boolean) => {
     const allToken =
       chainId === 56
-        ? ["DCU", "NEST", "USDT"]
+        ? ["NEST", "USDT"]
         : ["DCU", "NEST", "USDT", "NHBTC"];
     if (top) {
       const leftToken = allToken.filter(
