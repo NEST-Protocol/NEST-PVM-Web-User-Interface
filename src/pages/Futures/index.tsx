@@ -1,4 +1,4 @@
-import {FC, useMemo, useRef, useState} from "react";
+import { FC, useMemo, useRef, useState } from "react";
 import {
   checkWidth,
   formatInputNum,
@@ -10,22 +10,29 @@ import Stack from "@mui/material/Stack";
 import { tokenList } from "../../libs/constants/addresses";
 import { formatUnits, parseUnits } from "ethers/lib/utils";
 import ChooseType from "../../components/ChooseType";
-import { LeverChoose } from "../../components/LeverChoose";
 import InfoShow from "../../components/InfoShow";
 import { SingleTokenShow } from "../../components/TokenShow";
 import OpenShow from "../../components/OpenShow";
 import MainButton from "../../components/MainButton";
-import { PutDownIcon } from "../../components/Icon";
+import { PutDownIcon, TokenBNB } from "../../components/Icon";
 import { Popover } from "@mui/material";
 import classNames from "classnames";
 import TVChart from "../../components/TVChart";
-import { useFutures } from "../../libs/hooks/useFutures";
-import FuturesList, { FuturesList2, FuturesListOld } from "./List/FuturesList";
+import {
+  useFutures,
+} from "../../libs/hooks/useFutures";
+import FuturesList3, {
+  FuturesList,
+  FuturesList2,
+  FuturesListOld,
+} from "./List/FuturesList";
 import { LightTooltip } from "../../styles/MUI";
 import PerpetualsNoticeModal from "./PerpetualsNoticeModal";
 import Popup from "reactjs-popup";
 import TriggerRiskModal from "./TriggerRisk";
-import {BigNumber} from "ethers";
+import OpenPosition from "./OpenPosition";
+import { BigNumber } from "ethers";
+import LeverSlider from "../../components/LeverSlider";
 
 const Futures: FC = () => {
   const classPrefix = "Futures";
@@ -50,8 +57,10 @@ const Futures: FC = () => {
     setTokenPair,
     limitInput,
     setLimitInput,
-    takeInput,
-    setTakeInput,
+    stopProfitPriceInput,
+    setStopProfitPriceInput,
+    stopLossPriceInput,
+    setStopLossPriceInput,
     tokenPrice,
     tokenPair,
     checkNESTBalance,
@@ -61,6 +70,7 @@ const Futures: FC = () => {
     mainButtonDis,
     mainButtonAction,
     mainButtonLoading,
+    plusOrder3List,
     orderList,
     limitOrderList,
     oldOrderList,
@@ -75,6 +85,10 @@ const Futures: FC = () => {
     showClosedOrder,
     baseAction,
     feeHoverText,
+    showOpenPosition,
+    setShowOpenPosition,
+    showOpenPositionOrder,
+    showLiqPrice,
   } = useFutures();
   const BTCIcon = tokenList["BTC"].Icon;
   const ETHIcon = tokenList["ETH"].Icon;
@@ -82,10 +96,14 @@ const Futures: FC = () => {
 
   const close = useMemo(() => {
     if (kValue?.[tokenPair].nowPrice) {
-      return BigNumber.from(kValue?.[tokenPair].nowPrice).div(BigNumber.from(10).pow(16)).toNumber() / 100;
+      return (
+        BigNumber.from(kValue?.[tokenPair].nowPrice)
+          .div(BigNumber.from(10).pow(16))
+          .toNumber() / 100
+      );
     }
     return 0;
-  }, [kValue, tokenPair])
+  }, [kValue, tokenPair]);
 
   const handleLeverNum = (selected: number) => {
     setLeverNum(selected);
@@ -94,25 +112,24 @@ const Futures: FC = () => {
   const noOrders = () => {
     return <p className="emptyOrder">No Orders</p>;
   };
-
   const topView = () => {
-    const leverList =
-      chainId === 1
-        ? [
-            { text: "1X", value: 1 },
-            { text: "2X", value: 2 },
-            { text: "3X", value: 3 },
-            { text: "4X", value: 4 },
-            { text: "5X", value: 5 },
-          ]
-        : [
-            { text: "1X", value: 1 },
-            { text: "2X", value: 2 },
-            { text: "5X", value: 5 },
-            { text: "10X", value: 10 },
-            { text: "15X", value: 15 },
-            { text: "20X", value: 20 },
-          ];
+    // const leverList =
+    //   chainId === 1
+    //     ? [
+    //         { text: "1X", value: 1 },
+    //         { text: "2X", value: 2 },
+    //         { text: "3X", value: 3 },
+    //         { text: "4X", value: 4 },
+    //         { text: "5X", value: 5 },
+    //       ]
+    //     : [
+    //         { text: "1X", value: 1 },
+    //         { text: "5X", value: 5 },
+    //         { text: "10X", value: 10 },
+    //         { text: "20X", value: 20 },
+    //         { text: "25X", value: 25 },
+    //         { text: "30X", value: 30 },
+    //       ];
     const limitPrice = () => {
       return (
         <Stack
@@ -150,7 +167,7 @@ const Futures: FC = () => {
           spacing={0}
           className={`${classPrefix}-stopLimit1`}
         >
-          <p className={`${classPrefix}-stopLimit1-title`}>Trigger</p>
+          <p className={`${classPrefix}-stopLimit1-title`}>Take Profit</p>
           <Stack
             direction="row"
             justifyContent="space-between"
@@ -159,11 +176,41 @@ const Futures: FC = () => {
             className={`rightInput`}
           >
             <input
-              placeholder={`${tokenPrice.price}`}
-              value={takeInput}
+              placeholder={`>${tokenPrice.price}`}
+              value={stopProfitPriceInput}
               maxLength={32}
               onChange={(e) =>
-                setTakeInput(`${formatInputNum(e.target.value)}`)
+                setStopProfitPriceInput(`${formatInputNum(e.target.value)}`)
+              }
+            />
+            <p>USDT</p>
+          </Stack>
+        </Stack>
+      );
+    };
+    const stopLimit2 = () => {
+      return (
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+          spacing={0}
+          className={`${classPrefix}-stopLimit2`}
+        >
+          <p className={`${classPrefix}-stopLimit2-title`}>Stop Loss</p>
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+            spacing={0}
+            className={`rightInput`}
+          >
+            <input
+              placeholder={`<${tokenPrice.price}`}
+              value={stopLossPriceInput}
+              maxLength={32}
+              onChange={(e) =>
+                setStopLossPriceInput(`${formatInputNum(e.target.value)}`)
               }
             />
             <p>USDT</p>
@@ -173,11 +220,11 @@ const Futures: FC = () => {
     };
     const chartHeight = () => {
       if (stop && limit) {
-        return 565;
+        return 624;
       } else if (!stop && !limit) {
         return 475;
       } else if (stop && !limit) {
-        return 534;
+        return 593;
       } else if (!stop && limit) {
         return 506;
       }
@@ -242,6 +289,16 @@ const Futures: FC = () => {
                 <USDTIcon className="USDT" />
                 <p>BTC/USDT</p>
               </li>
+              <li
+                onClick={() => {
+                  setTokenPair("BNB");
+                  setAnchorEl(null);
+                }}
+              >
+                <TokenBNB />
+                <USDTIcon className="USDT" />
+                <p>BNB/USDT</p>
+              </li>
             </ul>
           </Popover>
           <ChooseType
@@ -249,12 +306,21 @@ const Futures: FC = () => {
             isLong={isLong}
             textArray={[`Long`, `Short`]}
           />
-          <LeverChoose
+          {/* <LeverChoose
             selected={leverNum}
             list={leverList}
             callBack={handleLeverNum}
             title={"Leverage"}
-          />
+          /> */}
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            className={`${classPrefix}-leverTitle`}
+          >
+            <p>Leverage</p>
+            <p>{leverNum}</p>
+          </Stack>
+          <LeverSlider callBack={handleLeverNum} />
           <InfoShow
             topLeftText={"Payment"}
             bottomRightText={""}
@@ -312,19 +378,32 @@ const Futures: FC = () => {
 
           {limit ? limitPrice() : <></>}
           {stop ? stopLimit1() : <></>}
+          {stop ? stopLimit2() : <></>}
           {limit ? (
             <></>
           ) : (
-            <Stack
-              direction="row"
-              justifyContent="space-between"
-              alignItems="center"
-              spacing={0}
-              className={`${classPrefix}-infoShow`}
-            >
-              <p>Open Price</p>
-              <p>{tokenPrice ? tokenPrice.price : "---"} USDT</p>
-            </Stack>
+            <>
+              <Stack
+                direction="row"
+                justifyContent="space-between"
+                alignItems="center"
+                spacing={0}
+                className={`${classPrefix}-infoShow`}
+              >
+                <p>Open Price</p>
+                <p>{tokenPrice ? tokenPrice.price : "---"} USDT</p>
+              </Stack>
+              <Stack
+                direction="row"
+                justifyContent="space-between"
+                alignItems="center"
+                spacing={0}
+                className={`${classPrefix}-infoShow`}
+              >
+                <p>Liq Price</p>
+                <p>{showLiqPrice()} USDT</p>
+              </Stack>
+            </>
           )}
           <Stack
             direction="row"
@@ -381,7 +460,7 @@ const Futures: FC = () => {
         <Stack spacing={0} className={`${classPrefix}-topView-right`}>
           <p className="title">{tokenPair}/USDT</p>
           <TVChart
-            chainId={56}
+            chainId={chainId ?? 56}
             tokenPair={tokenPair}
             chartHeight={chartHeight()}
             close={close}
@@ -391,9 +470,22 @@ const Futures: FC = () => {
     );
   };
 
-  const listView1 = () => {
+  const listView1 = () => { 
+    const orderList3View = () => {  
+      return [...plusOrder3List, ...showClosedOrder].map((item, index) => {
+        return (
+          <FuturesList3
+            key={`f3+${index}`}
+            item={item}
+            kValue={kValue}
+            className={classPrefix}
+            hideOrder={hideOrder}
+          />
+        );
+      });
+    };
     const orderListView = () => {
-      return [...orderList, ...showClosedOrder].map((item) => {
+      return [...orderList].map((item) => {
         return (
           <FuturesList
             key={`f+${item.index}`}
@@ -424,11 +516,7 @@ const Futures: FC = () => {
       <table className={`${classPrefix}-table`}>
         <thead>
           <tr className={`${classPrefix}-table-title`}>
-            <th>Token Pair</th>
-            <th>Type</th>
-            <th>Lever</th>
-            <th>Initial Margin</th>
-            <th>Open Price</th>
+            <th>Symbol</th>
             <th>
               <LightTooltip
                 placement="top"
@@ -437,7 +525,7 @@ const Futures: FC = () => {
                     <p>
                       The net asset value, if this value is lower than
                       liquidation amount, the position will be liquidated.
-                      Liquidation ratio = 0.2% Liquidation amount = margin *
+                      Liquidation ratio = 0.5% Liquidation amount = margin *
                       leverage * (current price/initial price)*Liquidation ratio
                     </p>
                   </div>
@@ -447,10 +535,14 @@ const Futures: FC = () => {
                 <span>Actual Margin</span>
               </LightTooltip>
             </th>
+            <th>Open Price</th>
+            <th>Liq Price</th>
+            <th>Stop Order</th>
             <th>Operate</th>
           </tr>
         </thead>
         <tbody>
+          {orderList3View()}
           {orderListView()}
           {oldOrderListView()}
         </tbody>
@@ -492,6 +584,18 @@ const Futures: FC = () => {
     <FuturesMobile />
   ) : (
     <Stack spacing={0} alignItems="center" className={`${classPrefix}`}>
+      <Popup
+        open={showOpenPosition}
+        modal
+        ref={modal}
+        onClose={() => setShowOpenPosition(false)}
+        nested
+      >
+        <OpenPosition
+          onClose={() => setShowOpenPosition(false)}
+          order={showOpenPositionOrder!}
+        />
+      </Popup>
       <Popup
         open={showNotice}
         modal

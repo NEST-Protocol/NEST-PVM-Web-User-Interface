@@ -1,18 +1,20 @@
 import Stack from "@mui/material/Stack";
 import Drawer from "@mui/material/Drawer";
-import { FC, useState } from "react";
+import { FC, useRef, useState } from "react";
 import { LongIcon, ShortIcon, XIcon } from "../../../../components/Icon";
 import MainButton from "../../../../components/MainButton";
 import "./styles";
 import classNames from "classnames";
 import useThemes, { ThemeType } from "../../../../libs/hooks/useThemes";
 import {
+  useFutures3OrderList,
   useFuturesLimitOrderList,
   useFuturesOldOrderList,
   useFuturesOrderList,
 } from "../../../../libs/hooks/useFutures";
 import {
   FuturesList2Props,
+  FuturesList3Props,
   FuturesListProps,
   FuturesOldListProps,
 } from "../../List/FuturesList";
@@ -23,6 +25,8 @@ import {
   DrawerTrigger,
 } from "./DrawerView";
 import { LightTooltip } from "../../../../styles/MUI";
+import Popup from "reactjs-popup";
+import ShareMyOrderModal from "../../../Dashboard/ShareMyOrderModal";
 
 enum DrawerType {
   add = 0,
@@ -31,19 +35,23 @@ enum DrawerType {
   close = 3,
 }
 
-const PositionsList: FC<FuturesListProps> = ({ ...props }) => {
+const PositionsList3: FC<FuturesList3Props> = ({ ...props }) => {
   const classPrefix = "positionsList";
   const [showDrawer, setShowDrawer] = useState(false);
   const [drawerType, setDrawerType] = useState<DrawerType>(DrawerType.trigger);
   const { theme } = useThemes();
+  const modalShare = useRef<any>();
   const {
     TokenOneSvg,
     TokenTwoSvg,
-    showBalance,
     showBasePrice,
     showMarginAssets,
     showTriggerTitle,
-  } = useFuturesOrderList(props.item, props.kValue);
+    showPercent,
+    showLiqPrice,
+    showStopPrice,
+    shareOrderData,
+  } = useFutures3OrderList(props.item, props.kValue);
 
   const drawerView = () => {
     switch (drawerType) {
@@ -99,15 +107,22 @@ const PositionsList: FC<FuturesListProps> = ({ ...props }) => {
         className={`${classPrefix}-one`}
       >
         <div className="left">
-          <p className="title">Token Pair</p>
-          <div className="pairIcon">
-            <TokenOneSvg />
-            <TokenTwoSvg className="USDT" />
-          </div>
-        </div>
-        <div className="right">
-          <p className="title">Lever</p>
-          <p className="value">{props.item.lever.toString()}X</p>
+          <p className="title">Symbol</p>
+          <Stack direction="row" spacing={1} alignItems="left">
+            <div className="pairIcon">
+              <TokenOneSvg />
+              <TokenTwoSvg className="USDT" />
+            </div>
+            <p className="value positionLever">
+              {props.item.lever.toString()}X
+            </p>
+            <div className="longShort">
+              {props.item.orientation ? <LongIcon /> : <ShortIcon />}
+              <p className={props.item.orientation ? "red" : "green"}>
+                {props.item.orientation ? "Long" : "Short"}
+              </p>
+            </div>
+          </Stack>
         </div>
       </Stack>
       <Stack
@@ -118,17 +133,39 @@ const PositionsList: FC<FuturesListProps> = ({ ...props }) => {
         className={`${classPrefix}-two`}
       >
         <div className="left">
-          <p className="title">Initial Margin</p>
-          <p className="value">{showBalance()} NEST</p>
-        </div>
-        <div className="right">
-          <p className="title">Type</p>
-          <div className="longShort">
-            {props.item.orientation ? <LongIcon /> : <ShortIcon />}
-            <p className={props.item.orientation ? "red" : "green"}>
-              {props.item.orientation ? "Long" : "Short"}
+          <LightTooltip
+            placement="top"
+            title={
+              <div>
+                <p>
+                  The net asset value, if this value is lower than liquidation
+                  amount, the position will be liquidated. Liquidation ratio =
+                  0.5% Liquidation amount = margin * leverage * (current
+                  price/initial price)*Liquidation ratio
+                </p>
+              </div>
+            }
+            arrow
+          >
+            <p
+              className={classNames({
+                [`title positionActual`]: true,
+                [`underLine`]: true,
+              })}
+            >
+              Actual Margin
             </p>
-          </div>
+          </LightTooltip>
+          <Stack direction="row" spacing={1} alignItems="left">
+            <p className="value">{showMarginAssets()} NEST</p>
+            <p
+              className="value"
+              style={{ color: showPercent() >= 0 ? "#80C269" : "#FF0000" }}
+            >
+              {showPercent() > 0 ? "+" : ""}
+              {showPercent().toFixed(2)}%
+            </p>
+          </Stack>
         </div>
       </Stack>
       <Stack
@@ -139,35 +176,37 @@ const PositionsList: FC<FuturesListProps> = ({ ...props }) => {
         className={`${classPrefix}-three`}
       >
         <div className="left">
-          <LightTooltip
-            placement="top"
-            title={
-              <div>
-                <p>
-                  The net asset value, if this value is lower than liquidation
-                  amount, the position will be liquidated. Liquidation ratio =
-                  0.2% Liquidation amount = margin * leverage * (current
-                  price/initial price)*Liquidation ratio
-                </p>
-              </div>
-            }
-            arrow
-          >
-            <p
-              className={classNames({
-                [`title`]: true,
-                [`underLine`]: true,
-              })}
-            >
-              Actual Margin
-            </p>
-          </LightTooltip>
-
-          <p className="value">{showMarginAssets()} NEST</p>
+          <p className="title">Open Price</p>
+          <p className="value">{showBasePrice()} NEST</p>
         </div>
         <div className="right">
-          <p className="title">Open Price</p>
-          <p className="value">{showBasePrice()} USDT</p>
+          <p className="title">Liq Price </p>
+          <p className="value">{showLiqPrice()} USDT</p>
+        </div>
+      </Stack>
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+        spacing={0}
+        className={`${classPrefix}-four`}
+      >
+        <div className="left">
+          <p className="title">Stop Order</p>
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+            spacing={0}
+          >
+            {showStopPrice().map((item, index) => {
+              return (
+                <p className="value" key={`stopOrder+${index}`}>
+                  {item}
+                </p>
+              );
+            })}
+          </Stack>
         </div>
       </Stack>
       <Stack
@@ -208,6 +247,25 @@ const PositionsList: FC<FuturesListProps> = ({ ...props }) => {
           </>
         )}
       </Stack>
+      <Stack
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+        spacing={1}
+        className={`${classPrefix}-futuresShare`}
+      >
+        <Popup
+          modal
+          ref={modalShare}
+          trigger={
+            <button>
+              <ShareMyOrderModal order={shareOrderData()} />
+            </button>
+          }
+          nested
+          children={undefined}
+        ></Popup>
+      </Stack>
       <Drawer
         anchor={"bottom"}
         open={showDrawer}
@@ -223,7 +281,153 @@ const PositionsList: FC<FuturesListProps> = ({ ...props }) => {
   );
 };
 
-export default PositionsList;
+export const PositionsList: FC<FuturesListProps> = ({ ...props }) => {
+  const classPrefix = "positionsList";
+  const {
+    TokenOneSvg,
+    TokenTwoSvg,
+    showBasePrice,
+    showMarginAssets,
+    showPercent,
+    showLiqPrice,
+    showStopPrice,
+    buttonLoading,
+    buttonDis,
+    buttonAction,
+  } = useFuturesOrderList(props.item, props.kValue);
+
+  return (
+    <Stack spacing={0} className={`${classPrefix}`}>
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+        spacing={0}
+        className={`${classPrefix}-one`}
+      >
+        <div className="left">
+          <p className="title">Positions</p>
+          <Stack direction="row" spacing={1} alignItems="left">
+            <div className="pairIcon">
+              <TokenOneSvg />
+              <TokenTwoSvg className="USDT" />
+            </div>
+            <p className="value positionLever">
+              {props.item.lever.toString()}X
+            </p>
+            <div className="longShort">
+              {props.item.orientation ? <LongIcon /> : <ShortIcon />}
+              <p className={props.item.orientation ? "red" : "green"}>
+                {props.item.orientation ? "Long" : "Short"}
+              </p>
+            </div>
+          </Stack>
+        </div>
+      </Stack>
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+        spacing={0}
+        className={`${classPrefix}-two`}
+      >
+        <div className="left">
+          <LightTooltip
+            placement="top"
+            title={
+              <div>
+                <p>
+                  The net asset value, if this value is lower than liquidation
+                  amount, the position will be liquidated. Liquidation ratio =
+                  0.5% Liquidation amount = margin * leverage * (current
+                  price/initial price)*Liquidation ratio
+                </p>
+              </div>
+            }
+            arrow
+          >
+            <p
+              className={classNames({
+                [`title positionActual`]: true,
+                [`underLine`]: true,
+              })}
+            >
+              Actual Margin
+            </p>
+          </LightTooltip>
+          <Stack direction="row" spacing={1} alignItems="left">
+            <p className="value">{showMarginAssets()} NEST</p>
+            <p
+              className="value"
+              style={{ color: showPercent() >= 0 ? "#80C269" : "#FF0000" }}
+            >
+              {showPercent() > 0 ? "+" : ""}
+              {showPercent().toFixed(2)}%
+            </p>
+          </Stack>
+        </div>
+      </Stack>
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+        spacing={0}
+        className={`${classPrefix}-three`}
+      >
+        <div className="left">
+          <p className="title">Open Price</p>
+          <p className="value">{showBasePrice()} NEST</p>
+        </div>
+        <div className="right">
+          <p className="title">Liq Price </p>
+          <p className="value">{showLiqPrice()} USDT</p>
+        </div>
+      </Stack>
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+        spacing={0}
+        className={`${classPrefix}-four`}
+      >
+        <div className="left">
+          <p className="title">Stop Order</p>
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+            spacing={0}
+          >
+            {showStopPrice().map((item, index) => {
+              return (
+                <p className="value" key={`stopOrder+${index}`}>
+                  {item}
+                </p>
+              );
+            })}
+          </Stack>
+        </div>
+      </Stack>
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+        spacing={1}
+        className={`${classPrefix}-button`}
+      >
+        <MainButton
+          disable={buttonDis()}
+          loading={buttonLoading()}
+          onClick={buttonAction}
+        >
+          Close
+        </MainButton>
+      </Stack>
+    </Stack>
+  );
+};
+
+export default PositionsList3;
 
 export const PositionsList2: FC<FuturesList2Props> = ({ ...props }) => {
   const classPrefix = "positionsList";
@@ -413,7 +617,7 @@ export const PositionsOldList: FC<FuturesOldListProps> = ({ ...props }) => {
         </div>
         <div className="right">
           <p className="title">Open Price</p>
-          <p className="value">{showBasePrice()} NEST</p>
+          <p className="value">{showBasePrice()} USDT</p>
         </div>
       </Stack>
       <Stack

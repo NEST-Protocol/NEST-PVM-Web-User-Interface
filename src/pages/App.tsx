@@ -1,4 +1,4 @@
-import {FC, useCallback, useEffect} from "react";
+import { FC, useCallback, useEffect } from "react";
 import Footer from "./Shared/Footer";
 import Header from "./Shared/Header";
 import { Switch, Route, Redirect, HashRouter } from "react-router-dom";
@@ -26,8 +26,7 @@ const Swap = loadable(() => import("./Swap"));
 
 const App: FC = () => {
   const { theme } = useThemes();
-  const { chainId } = useWeb3();
-  const { account } = useWeb3();
+  const { chainId, account } = useWeb3();
 
   const getQueryVariable = (variable: string) => {
     const query = window.location.search.substring(1);
@@ -41,12 +40,17 @@ const App: FC = () => {
       }
     }
     return null;
-  }
+  };
 
   const handleInviteCode = useCallback(async () => {
     let inviteCode = getQueryVariable("a");
+    console.log(inviteCode)
     if (!inviteCode) {
-      inviteCode = window.location.href.split("?a=")[1];
+      const code = window.location.href.split("?a=")[1]
+      if (code) {
+        inviteCode = window.location.href.split("?a=")[1].split("?position=")[0];
+          console.log(inviteCode)
+      }
     }
 
     if (inviteCode && account) {
@@ -72,7 +76,6 @@ const App: FC = () => {
   useEffect(() => {
     handleInviteCode();
   }, [handleInviteCode]);
-
   return (
     <main className={`main-${theme.valueOf()}`}>
       <div className={"main-content"}>
@@ -95,7 +98,7 @@ const App: FC = () => {
               <WinV2 />
             </Route> */}
             <Route path="/NFTAuction">
-              {chainId === 1 ? (<NFTAuctionWrongChain/>) : (<NFTAuction />)}
+              {chainId === 1 ? <NFTAuctionWrongChain /> : <NFTAuction />}
             </Route>
             <Route path="/swap">
               <Swap />

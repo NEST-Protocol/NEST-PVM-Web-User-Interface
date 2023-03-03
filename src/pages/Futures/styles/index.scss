@@ -138,6 +138,17 @@
         margin-bottom: 7px;
     }
 
+    &-leverTitle {
+        padding: 0 20px;
+        color: #7D7D7D;
+        font-size: 16px;
+        margin-bottom: 20px;
+    }
+
+    .LeverSlider {
+        padding: 0 20px;
+    }
+
     &-limitPrice {
         width: 100%;
         height: 44px;
@@ -173,7 +184,8 @@
         }
     }
 
-    &-stopLimit1 {
+    &-stopLimit1,
+    &-stopLimit2 {
         width: 100%;
         height: 44px;
         border-radius: 22px;
@@ -284,10 +296,11 @@
             box-shadow: $shadow;
         }
 
-        .Futures-table-normal {
+        .Futures-table-normal,
+        .Futures-table-order {
             color: $gray-info-text-color;
             font-size: $T2;
-            height: 44px;
+            height: 72px;
             border-radius: 12px;
             box-shadow: $shadow;
             text-align: center;
@@ -305,23 +318,54 @@
                 padding: 0;
             }
 
-            .tokenPair {
+            .position {
                 svg {
                     position: relative;
                     z-index: 1;
+                    width: 20px;
+                    height: 20px;
                 }
 
                 svg+svg {
                     margin-left: -8px;
                     z-index: 0;
                 }
+
+                p+svg {
+                    width: 32px;
+                    height: 17px;
+                }
+
+                p.red {
+                    color: $up-color;
+                }
+
+                p.green {
+                    color: $down-color;
+                }
             }
+        }
+
+        .Futures-table-order {
+            height: 44px;
         }
 
         th {
             span {
                 border-bottom: 1px dashed #7D7D7D;
                 padding-bottom: 3px;
+            }
+        }
+
+        td.tokenPair {
+            svg {
+                position: relative;
+                z-index: 10;
+            }
+
+            svg+svg {
+                margin-left: -8px;
+                z-index: 1;
             }
         }
 
@@ -351,6 +395,7 @@
                 border: 1px solid #0047BB;
                 border-radius: 14px;
                 padding: 0 20px;
+
                 &:hover {
                     cursor: pointer;
                 }
@@ -367,6 +412,14 @@
                     path {
                         fill: #878787;
                     }
+                }
+            }
+
+            .futuresShare {
+                margin-left: 20px;
+
+                path {
+                    fill: #878787;
                 }
             }
         }
@@ -450,8 +503,13 @@
             }
         }
 
+        &-leverTitle {
+            color: #C5C5C5;
+        }
+
         &-limitPrice,
-        &-stopLimit1 {
+        &-stopLimit1,
+        &-stopLimit2 {
             background: rgba(255, 255, 255, 0.15);
             box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
             border: 0;
@@ -497,6 +555,10 @@
                 box-shadow: none;
             }
 
+            .Futures-table-order {
+                box-shadow: none;
+            }
+
             td {
                 color: white;
             }
@@ -516,6 +578,12 @@
                         path {
                             fill: #C5C5C5;
                         }
+                    }
+                }
+
+                .futuresShare {
+                    path {
+                        fill: #8BB7FF;
                     }
                 }
             }

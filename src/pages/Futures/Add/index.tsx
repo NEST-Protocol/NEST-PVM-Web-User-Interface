@@ -6,14 +6,13 @@ import InfoShow from "../../../components/InfoShow";
 import MainButton from "../../../components/MainButton";
 import MainCard from "../../../components/MainCard";
 import { SingleTokenShow } from "../../../components/TokenShow";
-import { OrderView, useFuturesAdd } from "../../../libs/hooks/useFutures";
+import { Futures3OrderView, useFuturesAdd } from "../../../libs/hooks/useFutures";
 import useThemes, { ThemeType } from "../../../libs/hooks/useThemes";
 import { formatInputNumWithFour } from "../../../libs/utils";
-import { LightTooltip } from "../../../styles/MUI";
 import "./styles";
 
 type FuturesAddProps = {
-  order: OrderView;
+  order: Futures3OrderView;
   onClose: () => void;
 };
 
@@ -26,7 +25,7 @@ const FuturesAdd: FC<FuturesAddProps> = ({ ...props }) => {
     checkNESTBalance,
     showPosition,
     showOpenPrice,
-    showFee,
+    showLiqPrice,
     buttonLoading,
     buttonDis,
     buttonAction,
@@ -62,11 +61,8 @@ const FuturesAdd: FC<FuturesAddProps> = ({ ...props }) => {
           spacing={0}
           className={`${classPrefix}-infoShow`}
         >
-          <LightTooltip placement="right" title={"margin*leverage*0.2%"} arrow>
-            <p className="underLine">Fees</p>
-          </LightTooltip>
-
-          <p>{showFee()} NEST</p>
+          <p>Liq Price</p>
+          <p>{showLiqPrice()}</p>
         </Stack>
       </>
     );
@@ -104,7 +100,7 @@ const FuturesAdd: FC<FuturesAddProps> = ({ ...props }) => {
           <button
             className={"max-button"}
             onClick={() =>
-              setNestInput(nestBalance ? formatUnits(nestBalance, 18) : "")
+              setNestInput(nestBalance ? parseFloat(formatUnits(nestBalance, 18)).toFixed(2) : "")
             }
           >
             MAX

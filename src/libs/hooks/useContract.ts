@@ -1,4 +1,4 @@
-import { NESTNFTAuctionContract, NESTNFTContract, NESTNFTMarketContract, NestPrice as NestPriceAddress, NESTRedeemContract, PVMFuturesContract, PVMFuturesProxyContract, TestTokenContract } from './../constants/addresses';
+import { NESTNFTAuctionContract, NESTNFTContract, NESTNFTMarketContract, NestPrice as NestPriceAddress, NESTRedeemContract, NestTrustFuturesContract, PVMFuturesContract, PVMFuturesProxyContract, TestTokenContract } from './../constants/addresses';
 import useWeb3 from '../hooks/useWeb3';
 import { getAddress } from "@ethersproject/address"
 import { Contract } from "@ethersproject/contracts"
@@ -19,6 +19,7 @@ import PVMFUTURESABI from '../../contracts/abis/PVMFutures.json';
 import PVMFUTURESPROXYABI from '../../contracts/abis/PVMFuturesProxy.json';
 import NESTREDEEMABI from '../../contracts/abis/NESTRedeem.json';
 import TestTokenABI from '../../contracts/abis/TestToken.json';
+import NESTTrustFuturesABI from '../../contracts/abis/NestTrustFutures.json';
 import { ZERO_ADDRESS } from '../utils';
 
 function isAddress(value: any): string | false {
@@ -111,6 +112,10 @@ export function PVMFutures():Contract | null {
 
 export function PVMFuturesProxy():Contract | null {
     return useContract(PVMFuturesProxyContract, PVMFUTURESPROXYABI)
+}
+
+export function NESTTrustFutures():Contract | null {
+    return useContract(NestTrustFuturesContract, NESTTrustFuturesABI)
 }
 
 export function NESTRedeem():Contract | null {

@@ -7,8 +7,7 @@ import MainButton from "../../../../components/MainButton";
 import { SingleTokenShow } from "../../../../components/TokenShow";
 import { TokenType } from "../../../../libs/constants/addresses";
 import {
-  LimitOrderView,
-  OrderView,
+  Futures3OrderView,
   useFuturesAdd,
   useFuturesCloseOrder,
   useFuturesSetLimitOrder,
@@ -21,18 +20,18 @@ import TriggerRiskModal from "../../TriggerRisk";
 const classPrefix = "positionsList";
 
 type DrawerBaseType = {
-  order: OrderView;
+  order: Futures3OrderView;
   hideSelf: () => void;
 };
 
 type DrawerCloseType = {
-  order: OrderView;
+  order: Futures3OrderView;
   hideSelf: () => void;
   kValue?: { [key: string]: TokenType };
 };
 
 type DrawerLimitEditType = {
-  order: LimitOrderView;
+  order: Futures3OrderView;
   hideSelf: () => void;
 };
 
@@ -44,7 +43,7 @@ export const DrawerAdd: FC<DrawerBaseType> = ({ ...props }) => {
     checkNESTBalance,
     showPosition,
     showOpenPrice,
-    showFee,
+    showLiqPrice,
     buttonLoading,
     buttonDis,
     buttonAction,
@@ -77,7 +76,7 @@ export const DrawerAdd: FC<DrawerBaseType> = ({ ...props }) => {
           <button
             className={"max-button"}
             onClick={() =>
-              setNestInput(nestBalance ? formatUnits(nestBalance, 18) : "")
+              setNestInput(nestBalance ? parseFloat(formatUnits(nestBalance, 18)).toFixed(2) : "")
             }
           >
             MAX
@@ -110,14 +109,8 @@ export const DrawerAdd: FC<DrawerBaseType> = ({ ...props }) => {
           spacing={0}
           className={`${classPrefix}-infoShow`}
         >
-          <LightTooltip
-            placement="top-start"
-            title={"margin*leverage*0.2%"}
-            arrow
-          >
-            <p className="underLine">Fees</p>
-          </LightTooltip>
-          <p>{showFee()} NEST</p>
+          <p>Liq price</p>
+          <p>{showLiqPrice()}</p>
         </Stack>
       </Stack>
       <MainButton
@@ -141,21 +134,28 @@ export const DrawerAdd: FC<DrawerBaseType> = ({ ...props }) => {
 export const DrawerTrigger: FC<DrawerBaseType> = ({ ...props }) => {
   const modal = useRef<any>();
   const {
-    triggerInput,
-    setTriggerInput,
+    stopProfitPriceInput,
+    setStopProfitPriceInput,
+    stopLossPriceInput,
+    setStopLossPriceInput,
     showPosition,
     showOpenPrice,
     showTriggerFee,
     showTitle,
-    actionClose,
+    actionCloseProfit,
+    actionCloseLoss,
     buttonDis,
     buttonLoading,
     buttonAction,
     isEdit,
-    showPlaceHolder,
+    showTPPlaceHolder,
+    showSLPlaceHolder,
     showTriggerRisk,
     setShowTriggerRisk,
     baseAction,
+    showLiqPrice,
+    closeProfit,
+    closeLoss,
   } = useFuturesTrigger(props.order);
   const stopLimit1 = () => {
     return (
@@ -175,19 +175,65 @@ export const DrawerTrigger: FC<DrawerBaseType> = ({ ...props }) => {
           className={`rightInput`}
         >
           <input
-            placeholder={showPlaceHolder()}
-            value={triggerInput}
+            placeholder={showTPPlaceHolder()}
+            value={stopProfitPriceInput}
             maxLength={32}
             onChange={(e) =>
-              setTriggerInput(formatInputNumWithFour(e.target.value))
+              setStopProfitPriceInput(formatInputNumWithFour(e.target.value))
             }
           />
           <p>USDT</p>
-          {isEdit() ? (
-            <MainButton className="TriggerClose" onClick={() => {
-              props.hideSelf()
-              actionClose()
-            }}>
+          {closeProfit() ? (
+            <MainButton
+              className="TriggerClose"
+              onClick={() => {
+                props.hideSelf();
+                actionCloseProfit();
+              }}
+            >
+              <p>Close</p>
+            </MainButton>
+          ) : (
+            <></>
+          )}
+        </Stack>
+      </Stack>
+    );
+  };
+  const stopLimit2 = () => {
+    return (
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+        spacing={0}
+        className={`${classPrefix}-stopLimit2`}
+      >
+        <p className={`${classPrefix}-stopLimit2-title`}>Trigger</p>
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+          spacing={0}
+          className={`rightInput`}
+        >
+          <input
+            placeholder={showSLPlaceHolder()}
+            value={stopLossPriceInput}
+            maxLength={32}
+            onChange={(e) =>
+              setStopLossPriceInput(formatInputNumWithFour(e.target.value))
+            }
+          />
+          <p>USDT</p>
+          {closeLoss() ? (
+            <MainButton
+              className="TriggerClose"
+              onClick={() => {
+                props.hideSelf();
+                actionCloseLoss();
+              }}
+            >
               <p>Close</p>
             </MainButton>
           ) : (
@@ -217,6 +263,7 @@ export const DrawerTrigger: FC<DrawerBaseType> = ({ ...props }) => {
       <p className="title">{showTitle()}</p>
       <Stack spacing={0}>
         {stopLimit1()}
+        {stopLimit2()}
         <Stack
           direction="row"
           justifyContent="space-between"
@@ -237,30 +284,42 @@ export const DrawerTrigger: FC<DrawerBaseType> = ({ ...props }) => {
           <p>Open price</p>
           <p>{showOpenPrice()}</p>
         </Stack>
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+          spacing={0}
+          className={`${classPrefix}-infoShow`}
+        >
+          <p>Liq Price</p>
+          <p>{showLiqPrice()} USDT</p>
+        </Stack>
         {isEdit() ? (
           <></>
         ) : (
-          <Stack
-            direction="row"
-            justifyContent="space-between"
-            alignItems="center"
-            spacing={0}
-            className={`${classPrefix}-infoShow`}
-          >
-            <LightTooltip
-              placement="top-start"
-              title={
-                <div>
-                  <p>Position fee = Position*0.2%</p>
-                  <p>Stop order fee(after execution) = 15 NEST</p>
-                </div>
-              }
-              arrow
+          <>
+            <Stack
+              direction="row"
+              justifyContent="space-between"
+              alignItems="center"
+              spacing={0}
+              className={`${classPrefix}-infoShow`}
             >
-              <p className="underLine">Fees</p>
-            </LightTooltip>
-            <p>{`${showTriggerFee()}`}</p>
-          </Stack>
+              <LightTooltip
+                placement="top-start"
+                title={
+                  <div>
+                    <p>Position fee = Position*0.1%</p>
+                    <p>Stop order fee(after execution) = 15 NEST</p>
+                  </div>
+                }
+                arrow
+              >
+                <p className="underLine">Fees</p>
+              </LightTooltip>
+              <p>{`${showTriggerFee()}`}</p>
+            </Stack>
+          </>
         )}
       </Stack>
       <MainButton
@@ -325,7 +384,7 @@ export const DrawerClose: FC<DrawerCloseType> = ({ ...props }) => {
       >
         <LightTooltip
           placement="top-start"
-          title={"margin*leverage*0.2%"}
+          title={"Position*0.1%"}
           arrow
         >
           <p className="underLine">Fees</p>

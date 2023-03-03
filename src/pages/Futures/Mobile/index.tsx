@@ -1,17 +1,17 @@
-import {FC, useMemo, useRef, useState} from "react";
+import { FC, useMemo, useRef, useState } from "react";
 import "./styles";
 import Stack from "@mui/material/Stack";
 import { tokenList } from "../../../libs/constants/addresses";
 import { PutDownIcon } from "../../../components/Icon";
 import LongAndShort from "../../../components/LongAndShort";
-import { LeverChoose } from "../../../components/LeverChoose";
 import InfoShow from "../../../components/InfoShow";
 import { SingleTokenShow } from "../../../components/TokenShow";
 import { formatInputNum, formatInputNumWithFour } from "../../../libs/utils";
 import { formatUnits, parseUnits } from "ethers/lib/utils";
 import OpenShow from "../../../components/OpenShow";
 import classNames from "classnames";
-import PositionsList, {
+import PositionsList3, {
+  PositionsList,
   PositionsList2,
   PositionsOldList,
 } from "./PositionsList";
@@ -23,7 +23,9 @@ import { LightTooltip } from "../../../styles/MUI";
 import PerpetualsNoticeModal from "../PerpetualsNoticeModal";
 import Popup from "reactjs-popup";
 import TriggerRiskModal from "../TriggerRisk";
-import {BigNumber} from "ethers";
+import { BigNumber } from "ethers";
+import LeverSlider from "../../../components/LeverSlider";
+import OpenPosition from "../OpenPosition";
 
 const FuturesMobile: FC = () => {
   const classPrefix = "FuturesMobile";
@@ -47,8 +49,10 @@ const FuturesMobile: FC = () => {
     setTokenPair,
     limitInput,
     setLimitInput,
-    takeInput,
-    setTakeInput,
+    stopProfitPriceInput,
+    setStopProfitPriceInput,
+    stopLossPriceInput,
+    setStopLossPriceInput,
     tokenPrice,
     tokenPair,
     checkNESTBalance,
@@ -58,6 +62,7 @@ const FuturesMobile: FC = () => {
     mainButtonDis,
     mainButtonAction,
     mainButtonLoading,
+    plusOrder3List,
     orderList,
     limitOrderList,
     oldOrderList,
@@ -72,9 +77,14 @@ const FuturesMobile: FC = () => {
     showClosedOrder,
     baseAction,
     feeHoverText,
+    showOpenPosition,
+    setShowOpenPosition,
+    showOpenPositionOrder,
+    showLiqPrice,
   } = useFutures();
   const BTCIcon = tokenList["BTC"].Icon;
   const ETHIcon = tokenList["ETH"].Icon;
+  const BNBIcon = tokenList["BNB"].Icon;
   const USDTIcon = tokenList["USDT"].Icon;
 
   const handleLeverNum = (selected: number) => {
@@ -100,18 +110,23 @@ const FuturesMobile: FC = () => {
           <USDTIcon className="USDT" />
           <PutDownIcon className="putDown" />
         </button>
-        <p>1 {tokenPrice.tokenName} = {tokenPrice ? tokenPrice.price : "---"} USDT</p>
+        <p>
+          1 {tokenPrice.tokenName} = {tokenPrice ? tokenPrice.price : "---"}{" "}
+          USDT
+        </p>
       </Stack>
     );
   };
-
   const close = useMemo(() => {
     if (kValue?.[tokenPair].nowPrice) {
-      return BigNumber.from(kValue?.[tokenPair].nowPrice).div(BigNumber.from(10).pow(16)).toNumber() / 100;
+      return (
+        BigNumber.from(kValue?.[tokenPair].nowPrice)
+          .div(BigNumber.from(10).pow(16))
+          .toNumber() / 100
+      );
     }
     return 0;
-  }, [kValue, tokenPair])
-
+  }, [kValue, tokenPair]);
   const KPrice = () => {
     return (
       <Stack
@@ -121,28 +136,28 @@ const FuturesMobile: FC = () => {
         spacing={0}
         className={`${classPrefix}-KPrice`}
       >
-        <TVChart chainId={56} tokenPair={tokenPair} close={close}/>
+        <TVChart chainId={chainId ?? 56} tokenPair={tokenPair} close={close} />
       </Stack>
     );
   };
   const mainView = () => {
-    const leverList =
-      chainId === 1
-        ? [
-            { text: "1X", value: 1 },
-            { text: "2X", value: 2 },
-            { text: "3X", value: 3 },
-            { text: "4X", value: 4 },
-            { text: "5X", value: 5 },
-          ]
-        : [
-            { text: "1X", value: 1 },
-            { text: "2X", value: 2 },
-            { text: "5X", value: 5 },
-            { text: "10X", value: 10 },
-            { text: "15X", value: 15 },
-            { text: "20X", value: 20 },
-          ];
+    // const leverList =
+    //   chainId === 1
+    //     ? [
+    //         { text: "1X", value: 1 },
+    //         { text: "2X", value: 2 },
+    //         { text: "3X", value: 3 },
+    //         { text: "4X", value: 4 },
+    //         { text: "5X", value: 5 },
+    //       ]
+    //     : [
+    //         { text: "1X", value: 1 },
+    //         { text: "5X", value: 5 },
+    //         { text: "10X", value: 10 },
+    //         { text: "20X", value: 20 },
+    //         { text: "25X", value: 25 },
+    //         { text: "30X", value: 30 },
+    //       ];
     const limitPrice = () => {
       return (
         <Stack
@@ -180,7 +195,7 @@ const FuturesMobile: FC = () => {
           spacing={0}
           className={`${classPrefix}-stopLimit1`}
         >
-          <p className={`${classPrefix}-stopLimit1-title`}>Trigger</p>
+          <p className={`${classPrefix}-stopLimit1-title`}>Take Profit</p>
           <Stack
             direction="row"
             justifyContent="space-between"
@@ -190,9 +205,41 @@ const FuturesMobile: FC = () => {
           >
             <input
               placeholder={`${tokenPrice.price}`}
-              value={takeInput}
+              value={stopProfitPriceInput}
               maxLength={32}
-              onChange={(e) => setTakeInput(formatInputNum(e.target.value))}
+              onChange={(e) =>
+                setStopProfitPriceInput(formatInputNum(e.target.value))
+              }
+            />
+            <p>USDT</p>
+          </Stack>
+        </Stack>
+      );
+    };
+    const stopLimit2 = () => {
+      return (
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+          spacing={0}
+          className={`${classPrefix}-stopLimit2`}
+        >
+          <p className={`${classPrefix}-stopLimit2-title`}>Stop Loss</p>
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+            spacing={0}
+            className={`rightInput`}
+          >
+            <input
+              placeholder={`${tokenPrice.price}`}
+              value={stopLossPriceInput}
+              maxLength={32}
+              onChange={(e) =>
+                setStopLossPriceInput(formatInputNum(e.target.value))
+              }
             />
             <p>USDT</p>
           </Stack>
@@ -206,12 +253,15 @@ const FuturesMobile: FC = () => {
         className={`${classPrefix}-mainView`}
       >
         <LongAndShort callBack={(e) => setIsLong(e)} isLong={isLong} />
-        <LeverChoose
-          selected={leverNum}
-          list={leverList}
-          callBack={handleLeverNum}
-          title={"Leverage"}
-        />
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          className={`${classPrefix}-mainView-leverTitle`}
+        >
+          <p>Leverage</p>
+          <p>{leverNum}</p>
+        </Stack>
+        <LeverSlider callBack={handleLeverNum} />
         <InfoShow
           topLeftText={"Payment"}
           bottomRightText={""}
@@ -269,19 +319,32 @@ const FuturesMobile: FC = () => {
 
         {limit ? limitPrice() : <></>}
         {stop ? stopLimit1() : <></>}
+        {stop ? stopLimit2() : <></>}
         {limit ? (
           <></>
         ) : (
-          <Stack
-            direction="row"
-            justifyContent="space-between"
-            alignItems="center"
-            spacing={0}
-            className={`${classPrefix}-infoShow`}
-          >
-            <p>Open Price</p>
-            <p>{tokenPrice ? tokenPrice.price : "---"} USDT</p>
-          </Stack>
+          <>
+            <Stack
+              direction="row"
+              justifyContent="space-between"
+              alignItems="center"
+              spacing={0}
+              className={`${classPrefix}-infoShow`}
+            >
+              <p>Open Price</p>
+              <p>{tokenPrice ? tokenPrice.price : "---"} USDT</p>
+            </Stack>
+            <Stack
+              direction="row"
+              justifyContent="space-between"
+              alignItems="center"
+              spacing={0}
+              className={`${classPrefix}-infoShow`}
+            >
+              <p>Liq Price</p>
+              <p>{showLiqPrice()} USDT</p>
+            </Stack>
+          </>
         )}
         <Stack
           direction="row"
@@ -365,8 +428,24 @@ const FuturesMobile: FC = () => {
     );
   };
 
+  const order3ListView = () => {
+    return [...plusOrder3List, ...showClosedOrder].map((item, index) => {
+      return (
+        <li key={`f3+${index}`}>
+          <PositionsList3
+            key={"f3"}
+            item={item}
+            className={classPrefix}
+            kValue={kValue}
+            hideOrder={hideOrder}
+          />
+        </li>
+      );
+    });
+  };
+
   const orderListView = () => {
-    return [...orderList, ...showClosedOrder].map((item, index) => {
+    return [...orderList].map((item, index) => {
       return (
         <li key={`f+${index}`}>
           <PositionsList
@@ -411,7 +490,7 @@ const FuturesMobile: FC = () => {
       if (orderEmpty()) {
         return noOrders();
       }
-      return orderListView();
+      return order3ListView();
     } else {
       if (limitEmpty()) {
         return noOrders();
@@ -421,12 +500,24 @@ const FuturesMobile: FC = () => {
   };
   const oldListView = () => {
     if (isPositions) {
-      return oldOrderListView();
+      return [...orderListView(), oldOrderListView()];
     }
     return <></>;
   };
   return (
     <Stack spacing={0} className={`${classPrefix}`}>
+      <Popup
+        open={showOpenPosition}
+        modal
+        ref={modal}
+        onClose={() => setShowOpenPosition(false)}
+        nested
+      >
+        <OpenPosition
+          onClose={() => setShowOpenPosition(false)}
+          order={showOpenPositionOrder!}
+        />
+      </Popup>
       <Popup
         open={showNotice}
         modal
@@ -478,6 +569,16 @@ const FuturesMobile: FC = () => {
             <USDTIcon className="USDT" />
             <p>BTC/USDT</p>
           </li>
+          <li
+            onClick={() => {
+              setTokenPair("BNB");
+              setAnchorEl(null);
+            }}
+          >
+            <BNBIcon />
+            <USDTIcon className="USDT" />
+            <p>BNB/USDT</p>
+          </li>
         </ul>
       </Popover>
       {KPrice()}
@@ -492,4 +593,3 @@ const FuturesMobile: FC = () => {
 };
 
 export default FuturesMobile;
-

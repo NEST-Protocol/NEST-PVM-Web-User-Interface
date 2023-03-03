@@ -4,7 +4,10 @@ import { FC, useRef } from "react";
 import Popup from "reactjs-popup";
 import MainButton from "../../../components/MainButton";
 import MainCard from "../../../components/MainCard";
-import { OrderView, useFuturesTrigger } from "../../../libs/hooks/useFutures";
+import {
+  Futures3OrderView,
+  useFuturesTrigger,
+} from "../../../libs/hooks/useFutures";
 import useThemes, { ThemeType } from "../../../libs/hooks/useThemes";
 import { formatInputNumWithFour } from "../../../libs/utils";
 import { LightTooltip } from "../../../styles/MUI";
@@ -12,7 +15,7 @@ import TriggerRiskModal from "../TriggerRisk";
 import "./styles";
 
 type TriggerProp = {
-  order: OrderView;
+  order: Futures3OrderView;
   onClose: () => void;
 };
 
@@ -21,21 +24,28 @@ const Trigger: FC<TriggerProp> = ({ ...props }) => {
   const modalRisk = useRef<any>();
   const { theme } = useThemes();
   const {
-    triggerInput,
-    setTriggerInput,
+    stopProfitPriceInput,
+    setStopProfitPriceInput,
+    stopLossPriceInput,
+    setStopLossPriceInput,
     showPosition,
     showOpenPrice,
     showTriggerFee,
     showTitle,
-    actionClose,
+    actionCloseProfit,
+    actionCloseLoss,
     buttonDis,
     buttonLoading,
     buttonAction,
     isEdit,
-    showPlaceHolder,
+    showTPPlaceHolder,
+    showSLPlaceHolder,
     showTriggerRisk,
     setShowTriggerRisk,
     baseAction,
+    showLiqPrice,
+    closeProfit,
+    closeLoss,
   } = useFuturesTrigger(props.order);
   const stopLimit1 = () => {
     return (
@@ -46,7 +56,7 @@ const Trigger: FC<TriggerProp> = ({ ...props }) => {
         spacing={0}
         className={`${classPrefix}-stopLimit1`}
       >
-        <p className={`${classPrefix}-stopLimit1-title`}>Trigger</p>
+        <p className={`${classPrefix}-stopLimit1-title`}>Take Profit</p>
         <Stack
           direction="row"
           justifyContent="space-between"
@@ -55,20 +65,64 @@ const Trigger: FC<TriggerProp> = ({ ...props }) => {
           className={`rightInput`}
         >
           <input
-            placeholder={showPlaceHolder()}
-            value={triggerInput}
+            placeholder={showTPPlaceHolder()}
+            value={stopProfitPriceInput}
             maxLength={32}
             onChange={(e) =>
-              setTriggerInput(formatInputNumWithFour(e.target.value))
+              setStopProfitPriceInput(formatInputNumWithFour(e.target.value))
             }
           />
           <p>USDT</p>
-          {isEdit() ? (
+          {closeProfit() ? (
             <MainButton
               className="TriggerClose"
               onClick={() => {
                 props.onClose();
-                actionClose();
+                actionCloseProfit();
+              }}
+            >
+              <p>Close</p>
+            </MainButton>
+          ) : (
+            <></>
+          )}
+        </Stack>
+      </Stack>
+    );
+  };
+
+  const stopLimit2 = () => {
+    return (
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+        spacing={0}
+        className={`${classPrefix}-stopLimit2`}
+      >
+        <p className={`${classPrefix}-stopLimit2-title`}>Stop Loss</p>
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+          spacing={0}
+          className={`rightInput`}
+        >
+          <input
+            placeholder={showSLPlaceHolder()}
+            value={stopLossPriceInput}
+            maxLength={32}
+            onChange={(e) =>
+              setStopLossPriceInput(formatInputNumWithFour(e.target.value))
+            }
+          />
+          <p>USDT</p>
+          {closeLoss() ? (
+            <MainButton
+              className="TriggerClose"
+              onClick={() => {
+                props.onClose();
+                actionCloseLoss();
               }}
             >
               <p>Close</p>
@@ -103,30 +157,42 @@ const Trigger: FC<TriggerProp> = ({ ...props }) => {
           <p>Open Price</p>
           <p>{showOpenPrice()}</p>
         </Stack>
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+          spacing={0}
+          className={`${classPrefix}-infoShow`}
+        >
+          <p>Liq Price</p>
+          <p>{showLiqPrice()} USDT</p>
+        </Stack>
         {isEdit() ? (
           <></>
         ) : (
-          <Stack
-            direction="row"
-            justifyContent="space-between"
-            alignItems="center"
-            spacing={0}
-            className={`${classPrefix}-infoShow`}
-          >
-            <LightTooltip
-              placement="right"
-              title={
-                <div>
-                  <p>Position fee = Position*0.2%</p>
-                  <p>Stop order fee(after execution) = 15 NEST</p>
-                </div>
-              }
-              arrow
+          <>
+            <Stack
+              direction="row"
+              justifyContent="space-between"
+              alignItems="center"
+              spacing={0}
+              className={`${classPrefix}-infoShow`}
             >
-              <p className="underLine">Fees</p>
-            </LightTooltip>
-            <p>{`${showTriggerFee()}`}</p>
-          </Stack>
+              <LightTooltip
+                placement="right"
+                title={
+                  <div>
+                    <p>Position fee =Position*0.1%</p>
+                    <p>Stop order fee(after execution) = 15 NEST</p>
+                  </div>
+                }
+                arrow
+              >
+                <p className="underLine">Fees</p>
+              </LightTooltip>
+              <p>{`${showTriggerFee()}`}</p>
+            </Stack>
+          </>
         )}
       </>
     );
@@ -156,6 +222,7 @@ const Trigger: FC<TriggerProp> = ({ ...props }) => {
       <Stack spacing={0} alignItems="center">
         <p className="title">{showTitle()}</p>
         {stopLimit1()}
+        {stopLimit2()}
         {info()}
         <MainButton
           className="mainButton"
