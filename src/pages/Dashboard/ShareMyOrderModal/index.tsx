@@ -71,7 +71,7 @@ const ShareMyDealModal: FC<ShareMyDealModalProps> = ({ order }) => {
   };
 
   const tweet = () => {
-    const link = `(Paste your invitation link)`;
+    const link = `https://finance.nestprotocol.org/?a=${account?.slice(-8).toLowerCase()}`;
     const text = `Follow the right person, making money is as easy as breathing.
 You can follow the right person on NESTFi, here is my refer link: ${link}`;
     window.open(
