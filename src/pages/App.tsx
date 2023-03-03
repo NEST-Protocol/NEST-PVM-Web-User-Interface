@@ -44,8 +44,9 @@ const App: FC = () => {
 
   const handleInviteCode = useCallback(async () => {
     let inviteCode = getQueryVariable("a");
-    if (!inviteCode) {
+    if (!inviteCode && window.location.href.split("?a=")[1]) {
       inviteCode = window.location.href.split("?a=")[1].split("?position=")[0];
+      console.log(inviteCode)
     }
 
     if (inviteCode && account) {
@@ -53,7 +54,6 @@ const App: FC = () => {
         return;
       }
       try {
-        
         await axios({
           method: "post",
           url: "https://api.nestfi.net/api/users/users/saveInviteUser",
