@@ -515,6 +515,19 @@ export function useFutures() {
         .toString(),
     };
   }, [kValue, tokenPair]);
+  const maxNum = useCallback(() => {
+    const top = BigNumber.from("1000").mul(
+      BigNumber.from(nestBalance).sub(
+        limit ? parseUnits(BASE_NEST_FEE, 18) : BigNumber.from("0")
+      )
+    );
+    const bottom = leverNum + 1000;
+    setNestInput(
+      parseFloat(
+        formatUnits(top.div(BigNumber.from(bottom.toString())), 18)
+      ).toFixed(2)
+    );
+  }, [leverNum, limit, nestBalance]);
 
   const fee = useMemo(() => {
     if (nestInput === "") {
@@ -902,6 +915,7 @@ export function useFutures() {
     setShowOpenPosition,
     showOpenPositionOrder,
     showLiqPrice,
+    maxNum,
   };
 }
 
@@ -1431,7 +1445,6 @@ export function useFuturesTrigger(order: Futures3OrderView) {
     if (stopLossPriceInput === "") {
       setStopLossPriceInput(defaultSl());
     }
-    
   }, [defaultSl, defaultSp, stopLossPriceInput, stopProfitPriceInput]);
 
   const showTriggerFee = () => {

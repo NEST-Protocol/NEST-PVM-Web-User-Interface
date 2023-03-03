@@ -81,6 +81,7 @@ const FuturesMobile: FC = () => {
     setShowOpenPosition,
     showOpenPositionOrder,
     showLiqPrice,
+    maxNum,
   } = useFutures();
   const BTCIcon = tokenList["BTC"].Icon;
   const ETHIcon = tokenList["ETH"].Icon;
@@ -283,18 +284,7 @@ const FuturesMobile: FC = () => {
             }
             onBlur={(e: any) => {}}
           />
-          <button
-            className={"max-button"}
-            onClick={() =>
-              setNestInput(
-                nestBalance
-                  ? parseFloat(formatUnits(nestBalance, 18))
-                      .toFixed(2)
-                      .toString()
-                  : ""
-              )
-            }
-          >
+          <button className={"max-button"} onClick={maxNum}>
             MAX
           </button>
         </InfoShow>
