@@ -177,7 +177,7 @@ const PositionsList3: FC<FuturesList3Props> = ({ ...props }) => {
       >
         <div className="left">
           <p className="title">Open Price</p>
-          <p className="value">{showBasePrice()} NEST</p>
+          <p className="value">{showBasePrice()} USDT</p>
         </div>
         <div className="right">
           <p className="title">Liq Price </p>
@@ -376,7 +376,7 @@ export const PositionsList: FC<FuturesListProps> = ({ ...props }) => {
       >
         <div className="left">
           <p className="title">Open Price</p>
-          <p className="value">{showBasePrice()} NEST</p>
+          <p className="value">{showBasePrice()} USDT</p>
         </div>
         <div className="right">
           <p className="title">Liq Price </p>
