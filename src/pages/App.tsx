@@ -16,6 +16,7 @@ import { NFTAuctionWrongChain } from "./NFTAuction";
 import axios from "axios";
 // import NFTAuction from "./NFTAuction";
 
+const Home = loadable(() => import("./Home"));
 const Perpetuals = loadable(() => import("./Futures"));
 const Dashboard = loadable(() => import("./Dashboard"));
 // const Option = loadable(() => import("./Options"));
@@ -106,7 +107,10 @@ const App: FC = () => {
             <Route path="/dashboard">
               <Dashboard />
             </Route>
-            <Redirect to="/futures" />
+            <Route path="/">
+              <Home />
+            </Route>
+            <Redirect to="/" />
           </Switch>
         </HashRouter>
       </div>

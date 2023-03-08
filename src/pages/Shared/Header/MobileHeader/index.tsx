@@ -208,7 +208,9 @@ const MobileHeader: FC = () => {
             <HeaderListMobile />
           </button>
         </div>
-        <NESTLogo className={`${classPrefix}-logo`} />
+        <a href={'/#/'} className={`${classPrefix}-logo`}>
+          <NESTLogo />
+        </a>
         <div className={`${classPrefix}-rightButton`}>
           <button>
             <Link to={"/dashboard"}>
