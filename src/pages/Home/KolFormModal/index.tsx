@@ -4,7 +4,6 @@ import BaseModal from "../../../components/BaseModal";
 import MainButton from "../../../components/MainButton";
 import {Divider, Stack} from "@mui/material";
 import useThemes, {ThemeType} from "../../../libs/hooks/useThemes";
-import {checkWidth} from "../../../libs/utils";
 
 type Props = {
   onClose?: MouseEventHandler<HTMLButtonElement>;
@@ -15,13 +14,12 @@ const KolFormModal: FC<Props> = ({...props}) => {
   const [info, setInfo] = useState({
     country: '',
     language: '',
-    platform: '',
+    platform: 'Youtube',
     channel_link: '',
     subscribers: '',
     collaborated_cexs: '',
     contact_info: '',
   })
-  const isPC = checkWidth();
   const [loading, setLoading] = useState(false)
   const [showSuccess, setShowSuccess] = useState(false)
 
@@ -53,8 +51,8 @@ const KolFormModal: FC<Props> = ({...props}) => {
             <defs>
               <linearGradient id="paint0_linear_929_78043" x1="0.0507813" y1="18.0093" x2="35.9589" y2="18.0093"
                               gradientUnits="userSpaceOnUse">
-                <stop stop-color="#80D5F8"/>
-                <stop offset="1" stop-color="#54BEF3"/>
+                <stop stopColor="#80D5F8"/>
+                <stop offset="1" stopColor="#54BEF3"/>
               </linearGradient>
             </defs>
           </svg>
@@ -70,32 +68,26 @@ const KolFormModal: FC<Props> = ({...props}) => {
     <BaseModal titleName={'Become a Trading KOL'} classNames={`${theme === ThemeType.dark ? 'dark' : ''}`}
                onClose={props.onClose}>
       <Stack position={'relative'}>
-        <Stack spacing={'20px'} height={['500px', '100%']} overflow={'scroll'} width={['100%', '570px']} pt={'20px'} pb={'60px'}>
-          <Stack direction={isPC ? 'row' : 'column'} justifyContent={"space-between"} spacing={'16px'}>
-            <Stack spacing={'8px'} width={'100%'}>
-              <div className={'label'}>
-                Country
-              </div>
-              <input className={'kol-input'} placeholder={'Enter your Country'} onChange={(e) => {
-                setInfo({...info, country: e.target.value})
-              }}/>
-            </Stack>
-            <Stack spacing={'8px'} width={'100%'}>
-              <div className={'label'}>
-                Language
-              </div>
-              <input className={'kol-input'} placeholder={'Enter your Language'} onChange={(e) => {
-                setInfo({...info, language: e.target.value})
-              }}/>
-            </Stack>
-          </Stack>
+        <Stack spacing={'20px'} overflow={'scroll'} width={['100%', '570px']} pt={'20px'} pb={'60px'}>
           <Stack spacing={'8px'} width={'100%'}>
             <div className={'label'}>
               Platform (Youtube, Telegram, Twitter, Instagram, Facebook, Tiktok, Others)
             </div>
-            <input className={'kol-input'} placeholder={'Enter your Platform'} onChange={(e) => {
+            <select style={{ cursor: 'pointer', appearance: 'none'}} className={'kol-input'} onChange={(e) => {
               setInfo({...info, platform: e.target.value})
-            }}/>
+            }}>
+              <option value="Youtube">Youtube</option>
+              <option value="Telegram">Telegram</option>
+              <option value="Twitter">Twitter</option>
+              <option value="Instagram">Instagram</option>
+              <option value="Facebook">Facebook</option>
+              <option value="Tiktok">Tiktok</option>
+              <option value="Others">Others</option>
+            </select>
+
+            {/*<input className={'kol-input'} placeholder={'Enter your Platform'} onChange={(e) => {*/}
+            {/*  setInfo({...info, platform: e.target.value})*/}
+            {/*}}/>*/}
           </Stack>
           <Stack spacing={'8px'} width={'100%'}>
             <div className={'label'}>
@@ -103,22 +95,6 @@ const KolFormModal: FC<Props> = ({...props}) => {
             </div>
             <input className={'kol-input'} placeholder={'Enter your Channel link'} onChange={(e) => {
               setInfo({...info, channel_link: e.target.value})
-            }}/>
-          </Stack>
-          <Stack spacing={'8px'} width={'100%'}>
-            <div className={'label'}>
-              Number of subscribers
-            </div>
-            <input className={'kol-input'} placeholder={'Enter the number'} onChange={(e) => {
-              setInfo({...info, subscribers: e.target.value})
-            }}/>
-          </Stack>
-          <Stack spacing={'8px'} width={'100%'}>
-            <div className={'label'}>
-              Collaborated CEXs
-            </div>
-            <input className={'kol-input'} placeholder={'Enter Collaborated CEXs'} onChange={(e) => {
-              setInfo({...info, collaborated_cexs: e.target.value})
             }}/>
           </Stack>
           <Stack spacing={'8px'} width={'100%'}>
@@ -133,7 +109,7 @@ const KolFormModal: FC<Props> = ({...props}) => {
           <Stack position={'absolute'} bottom={0} width={'100%'}>
             <MainButton
               className={'btn'}
-              disable={!info.country || !info.language || !info.platform || !info.channel_link || !info.subscribers || !info.collaborated_cexs || !info.contact_info}
+              disable={!info.platform || !info.channel_link || !info.contact_info}
               onClick={async () => {
                 await postInfo()
               }}

@@ -42,7 +42,7 @@ const Home = () => {
     return () => {
       clearInterval(timer)
     }
-  }, [fetchDestory])
+  }, [])
 
   return (
     <Stack alignItems={"center"} width={"100%"}>

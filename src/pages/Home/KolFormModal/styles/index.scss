@@ -24,6 +24,7 @@
 
 .btn {
   min-height: 48px;
+  border-radius: 24px;
 }
 
 .label {
@@ -76,10 +77,12 @@
     min-height: 48px;
     background: linear-gradient(90deg, #8BB7FF 0%, #0061FF 100%);
     box-shadow: 0 4px 4px rgb(0 0 0 / 25%);
+    border-radius: 24px;
   }
 
   .btn.disable {
     background: $button-disable-color;
+    border-radius: 24px;
     &:hover {
       cursor: not-allowed;
     }
