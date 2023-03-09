@@ -1,6 +1,6 @@
 import { Trans } from "@lingui/macro";
 import classNames from "classnames";
-import { FC, useRef, useState } from "react";
+import { FC, useRef } from "react";
 import Popup from "reactjs-popup";
 import {DashboardIcon, DashboardWhiteIcon, WhiteLoading} from "../../../../components/Icon";
 import useTransactionListCon from "../../../../libs/hooks/useTransactionInfo";
@@ -16,7 +16,6 @@ import useThemes, {ThemeType} from "../../../../libs/hooks/useThemes";
 
 const ConnectStatus: FC = () => {
   const { account } = useWeb3();
-  const [isFirst, setIsFirst] = useState(true)
   const modal = useRef<any>();
   const classPrefix = "connectStatus";
   const { pendingList } = useTransactionListCon();
@@ -39,10 +38,6 @@ const ConnectStatus: FC = () => {
           </Link>
         </p>
       </Stack>
-
-      {(isFirst && !account) ? (<Popup open><Modal onClose={() => {
-    setIsFirst(false)
-    modal.current.close()}} /></Popup>) : null}
 
       {account === undefined ? (
         <Popup

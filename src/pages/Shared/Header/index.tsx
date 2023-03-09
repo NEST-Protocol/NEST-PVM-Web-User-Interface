@@ -50,7 +50,7 @@ const Header: FC = () => {
       )}
 
       <div className={`${header}-nav`}>
-        <a href={"https://www.nestprotocol.org"}>
+        <a href={"/#/"}>
           <NESTLogo className={`${header}-logo`} />
         </a>
         <nav>

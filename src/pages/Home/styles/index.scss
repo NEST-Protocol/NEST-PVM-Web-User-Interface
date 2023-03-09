@@ -1,0 +1,507 @@
+@use "sass:math";
+@import 'src/styles/shared.scss';
+
+.home {
+  &-button {
+    height: 48px;
+    border-radius: 24px;
+  }
+  &-main-title {
+    font-family: 'Helvetica', serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 44px;
+    text-align: center;
+    color: #030308;
+  }
+  &-sub-title {
+    font-family: 'Helvetica', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: rgba(3, 3, 8, 0.6);
+    text-align: center;
+  }
+  &-data {
+    &-number {
+      font-family: 'Helvetica', serif;
+      font-style: normal;
+      font-weight: 700;
+      font-size: 48px;
+      line-height: 56px;
+      color: #030308;
+    }
+    &-unit {
+      font-family: 'Helvetica', serif;
+      font-style: normal;
+      font-weight: 700;
+      font-size: 32px;
+      line-height: 56px;
+      color: #030308;
+    }
+  }
+  &-badge {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 12px;
+    gap: 12px;
+
+    width: 130px;
+    height: 44px;
+
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 28px 0 0 28px;
+
+    &-title {
+      font-family: 'Helvetica', serif;
+      font-style: normal;
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 20px;
+      color: #030308;
+    }
+  }
+  &-form {
+    &-title {
+      font-family: 'Helvetica';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 24px;
+      line-height: 32px;
+      color: #030308;
+    }
+    &-title-point {
+      color: rgba(234, 170, 0, 1);
+      font-size: 32px;
+    }
+    &-number {
+      font-family: 'Helvetica';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 48px;
+      line-height: 56px;
+      color: #030308;
+    }
+    &-caption {
+      font-family: 'Helvetica';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 20px;
+      color: rgba(3, 3, 8, 0.6);
+    }
+    &-icon {
+      fill: #030308;
+    }
+  }
+  &-card {
+    &-title {
+      font-family: 'Helvetica', serif;
+      font-style: normal;
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 22px;
+      text-align: center;
+      color: #030308;
+    }
+    &-content {
+      font-family: 'Helvetica', serif;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 20px;
+      text-align: center;
+      color: rgba(3, 3, 8, 0.6);
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+  }
+
+  @media (max-width: 1000px) {
+    &-button {
+      font-size: 16px;
+      height: 48px;
+      min-width: 240px;
+      border-radius: 24px;
+    }
+    &-main-title {
+      padding: 0 4px;
+      font-family: 'Helvetica', serif;
+      font-style: normal;
+      font-weight: 700;
+      font-size: 26px;
+      line-height: 44px;
+      text-align: center;
+      color: #030308;
+    }
+    &-sub-title {
+      font-family: 'Helvetica', serif;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 20px;
+      color: rgba(3, 3, 8, 0.6);
+      text-align: center;
+    }
+    &-data {
+      &-number {
+        font-family: 'Helvetica', serif;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 48px;
+        line-height: 56px;
+        color: #030308;
+      }
+      &-unit {
+        font-family: 'Helvetica', serif;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 32px;
+        line-height: 56px;
+        color: #030308;
+      }
+    }
+    &-badge {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      padding: 12px;
+      gap: 12px;
+
+      width: 130px;
+      height: 44px;
+
+      background: rgba(67, 138, 255, 0.6);
+      border-radius: 16px 16px 0 16px;
+
+      &-title {
+        font-family: 'Helvetica', serif;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 20px;
+        color: #030308;
+      }
+    }
+    &-form {
+      &-title {
+        text-align: center;
+        font-family: 'Helvetica';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 32px;
+        color: #030308;
+      }
+      &-title-point {
+        color: rgba(234, 170, 0, 1);
+        font-size: 32px;
+      }
+      &-number {
+        font-family: 'Helvetica';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 28px;
+        line-height: 40px;
+        color: #030308;
+      }
+      &-caption {
+        font-family: 'Helvetica';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 20px;
+        color: rgba(3, 3, 8, 0.6);
+      }
+      &-icon {
+        fill: #030308;
+      }
+    }
+    &-card {
+      &-title {
+        font-family: 'Helvetica', serif;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 22px;
+        text-align: center;
+        color: #030308;
+      }
+      &-content {
+        font-family: 'Helvetica', serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 20px;
+        text-align: center;
+        color: rgba(3, 3, 8, 0.6);
+      }
+    }
+  }
+}
+
+.main-dark {
+  .home {
+    &-button {
+      height: 48px;
+      border-radius: 24px;
+    }
+    &-main-title {
+      font-family: 'Helvetica', serif;
+      font-style: normal;
+      font-weight: 700;
+      font-size: 32px;
+      line-height: 44px;
+      text-align: center;
+      color: #F9F9F9;
+    }
+
+    &-sub-title {
+      font-family: 'Helvetica', serif;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 20px;
+      color: rgba(249, 249, 249, 0.8);
+      text-align: center;
+    }
+
+    &-data {
+      &-number {
+        font-family: 'Helvetica', serif;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 48px;
+        line-height: 56px;
+        color: #F9F9F9;
+      }
+      &-unit {
+        font-family: 'Helvetica', serif;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 32px;
+        line-height: 56px;
+        color: #F9F9F9;
+      }
+    }
+
+    &-badge {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      padding: 12px;
+      gap: 12px;
+
+      width: 130px;
+      height: 44px;
+
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 28px 0 0 28px;
+
+      &-title {
+        font-family: 'Helvetica', serif;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 20px;
+        color: #F9F9F9;
+      }
+    }
+
+    &-form {
+      &-title {
+        font-family: 'Helvetica';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 32px;
+        color: #F9F9F9;
+      }
+      &-title-point {
+        color: rgba(234, 170, 0, 1);
+        font-size: 32px;
+      }
+      &-number {
+        font-family: 'Helvetica';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 48px;
+        line-height: 56px;
+        color: #F9F9F9;
+      }
+      &-caption {
+        font-family: 'Helvetica';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 20px;
+        color: rgba(249, 249, 249, 0.6);
+      }
+      &-icon {
+        fill: #F9F9F9;
+      }
+    }
+
+    &-card {
+      &-title {
+        font-family: 'Helvetica', serif;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 22px;
+        text-align: center;
+        color: #F9F9F9;
+      }
+      &-content {
+        font-family: 'Helvetica', serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 20px;
+        text-align: center;
+        color: rgba(249, 249, 249, 0.6);
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+    }
+
+    @media (max-width: 1000px) {
+      &-button {
+        font-size: 16px;
+        height: 48px;
+        min-width: 240px;
+        border-radius: 24px;
+      }
+
+      &-main-title {
+        padding: 0 4px;
+        font-family: 'Helvetica';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 26px;
+        line-height: 40px;
+        text-align: center;
+        color: #F9F9F9;
+      }
+
+      &-sub-title {
+        font-family: 'Helvetica';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 20px;
+        text-align: center;
+        color: rgba(249, 249, 249, 0.8);
+      }
+
+      &-data {
+        &-number {
+          font-family: 'Helvetica', serif;
+          font-style: normal;
+          font-weight: 700;
+          font-size: 48px;
+          line-height: 56px;
+          color: #F9F9F9;
+        }
+        &-unit {
+          font-family: 'Helvetica', serif;
+          font-style: normal;
+          font-weight: 700;
+          font-size: 32px;
+          line-height: 56px;
+          color: #F9F9F9;
+        }
+      }
+
+      &-badge {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 12px;
+        gap: 12px;
+
+        width: 130px;
+        height: 44px;
+
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 28px 0 0 28px;
+
+        &-title {
+          font-family: 'Helvetica', serif;
+          font-style: normal;
+          font-weight: 700;
+          font-size: 14px;
+          line-height: 20px;
+          color: #F9F9F9;
+        }
+      }
+
+      &-form {
+        &-title {
+          text-align: center;
+          font-family: 'Helvetica';
+          font-style: normal;
+          font-weight: 700;
+          font-size: 24px;
+          line-height: 32px;
+          color: #F9F9F9;
+        }
+        &-title-point {
+          color: rgba(234, 170, 0, 1);
+          font-size: 32px;
+        }
+        &-number {
+          font-family: 'Helvetica';
+          font-style: normal;
+          font-weight: 700;
+          font-size: 28px;
+          line-height: 40px;
+          color: #F9F9F9;
+        }
+        &-caption {
+          font-family: 'Helvetica';
+          font-style: normal;
+          font-weight: 700;
+          font-size: 14px;
+          line-height: 20px;
+          color: rgba(249, 249, 249, 0.6);
+        }
+        &-icon {
+          fill: #F9F9F9;
+        }
+      }
+
+      &-card {
+        &-title {
+          font-family: 'Helvetica', serif;
+          font-style: normal;
+          font-weight: 700;
+          font-size: 16px;
+          line-height: 22px;
+          text-align: center;
+          color: #F9F9F9;
+        }
+        &-content {
+          font-family: 'Helvetica', serif;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 20px;
+          text-align: center;
+          color: rgba(249, 249, 249, 0.6);
+        }
+      }
+    }
+  }
+}

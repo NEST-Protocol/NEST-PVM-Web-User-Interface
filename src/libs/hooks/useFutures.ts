@@ -122,16 +122,7 @@ const lipPrice = (
   const top = BigNumber.from(balance.toString())
     .add(appends)
     .sub(
-      BigNumber.from(balance.toString())
-        .mul(lever)
-        .mul(BigNumber.from(1))
-        .div(BigNumber.from(1000))
-    )
-    .sub(
-      BigNumber.from(balance.toString())
-        .mul(lever)
-        .mul(BigNumber.from(5))
-        .div(BigNumber.from(1000))
+      BigNumber.from('150000')
     )
     .mul(price);
   const bottom = BigNumber.from(balance.toString()).mul(lever);
