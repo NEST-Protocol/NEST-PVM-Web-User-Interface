@@ -4,6 +4,7 @@ import { FC, useRef } from "react";
 import Popup from "reactjs-popup";
 import MainButton from "../../../components/MainButton";
 import MainCard from "../../../components/MainCard";
+import { TokenType } from "../../../libs/constants/addresses";
 import {
   Futures3OrderView,
   useFuturesTrigger,
@@ -17,6 +18,7 @@ import "./styles";
 type TriggerProp = {
   order: Futures3OrderView;
   onClose: () => void;
+  kValue?: { [key: string]: TokenType };
 };
 
 const Trigger: FC<TriggerProp> = ({ ...props }) => {
@@ -46,7 +48,7 @@ const Trigger: FC<TriggerProp> = ({ ...props }) => {
     showLiqPrice,
     closeProfit,
     closeLoss,
-  } = useFuturesTrigger(props.order);
+  } = useFuturesTrigger(props.order, props.kValue);
   const stopLimit1 = () => {
     return (
       <Stack

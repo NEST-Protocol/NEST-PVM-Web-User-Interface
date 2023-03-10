@@ -110,6 +110,7 @@ const lipPrice = (
   balance: BigNumber,
   appends: BigNumber,
   lever: BigNumber,
+  nowPrice: BigNumber,
   price: BigNumber,
   orientation: boolean
 ) => {
@@ -119,12 +120,13 @@ const lipPrice = (
   ) {
     return BigNumber.from("0");
   }
-  const top = BigNumber.from(balance.toString())
-    .add(appends)
-    .sub(
-      BigNumber.from('150000')
-    )
-    .mul(price);
+  const i = BigNumber.from("1")
+    .mul(balance)
+    .mul(lever)
+    .mul(nowPrice)
+    .div(BigNumber.from("1000").mul(price))
+    .add(BigNumber.from("150000"));
+  const top = BigNumber.from(balance.toString()).add(appends).sub(i).mul(price);
   const bottom = BigNumber.from(balance.toString()).mul(lever);
   const subPrice = top.div(bottom);
   const result = orientation ? price.sub(subPrice) : price.add(subPrice);
@@ -822,6 +824,7 @@ export function useFutures() {
       BigNumber.from(0),
       BigNumber.from(leverNum),
       nowPrice,
+      nowPrice,
       isLong
     );
     return parseFloat(formatUnits(result, 18)).toFixed(2).toString();
@@ -989,6 +992,9 @@ export function useFutures3OrderList(
       order.balance,
       order.appends,
       order.lever,
+      kValue
+        ? kValue[tokenName()].nowPrice ?? order.basePrice
+        : order.basePrice,
       order.basePrice,
       order.orientation
     );
@@ -1147,6 +1153,9 @@ export function useFuturesOrderList(
       order.balance,
       BigNumber.from("0"),
       order.lever,
+      kValue
+        ? kValue[tokenName()].nowPrice ?? order.basePrice
+        : order.basePrice,
       order.basePrice,
       order.orientation
     );
@@ -1379,7 +1388,10 @@ export function useFuturesLimitOrderList(order: Futures3OrderView) {
   };
 }
 
-export function useFuturesTrigger(order: Futures3OrderView) {
+export function useFuturesTrigger(
+  order: Futures3OrderView,
+  kValue?: { [key: string]: TokenType }
+) {
   const [stopProfitPriceInput, setStopProfitPriceInput] = useState<string>("");
   const [stopLossPriceInput, setStopLossPriceInput] = useState<string>("");
   const [showTriggerRisk, setShowTriggerRisk] = useState(false);
@@ -1470,12 +1482,17 @@ export function useFuturesTrigger(order: Futures3OrderView) {
   const showSLPlaceHolder = () => {
     return `<${showOpenPrice()}`;
   };
-
+  const tokenName = useCallback(() => {
+    return tokenArray[Number(order.channelIndex.toString())].symbol;
+  }, [order.channelIndex]);
   const showLiqPrice = () => {
     const result = lipPrice(
       order.balance,
       order.appends,
       order.lever,
+      kValue
+        ? kValue[tokenName()].nowPrice ?? order.basePrice
+        : order.basePrice,
       order.basePrice,
       order.orientation
     );
@@ -1643,7 +1660,10 @@ export function useFuturesSetLimitOrder(order: Futures3OrderView) {
   };
 }
 
-export function useFuturesAdd(order: Futures3OrderView) {
+export function useFuturesAdd(
+  order: Futures3OrderView,
+  kValue?: { [key: string]: TokenType }
+) {
   const { account } = useWeb3();
   const [nestInput, setNestInput] = useState<string>("");
   const [nestBalance, setNestBalance] = useState<BigNumber>(
@@ -1696,12 +1716,17 @@ export function useFuturesAdd(order: Futures3OrderView) {
       .toFixed(2)
       .toString()} USDT`;
   };
-
+  const tokenName = useCallback(() => {
+    return tokenArray[Number(order.channelIndex.toString())].symbol;
+  }, [order.channelIndex]);
   const showLiqPrice = () => {
     const result = lipPrice(
       order.balance,
       parseUnits(nestInput === "" ? "0" : nestInput, 4),
       order.lever,
+      kValue
+        ? kValue[tokenName()].nowPrice ?? order.basePrice
+        : order.basePrice,
       order.basePrice,
       order.orientation
     );
@@ -1834,7 +1859,9 @@ export function useFuturesCloseOrder(
   };
 }
 
-export function useFuturesOpenPosition(order: Futures3OrderView) {
+export function useFuturesOpenPosition(
+  order: Futures3OrderView
+) {
   const [nestAmount, setNestAmount] = useState<string>("");
   const [nowPrice, setNowPrice] = useState<BigNumber>();
   const [limit, setLimit] = useState<string>("");
@@ -2036,7 +2063,9 @@ export function useFuturesOpenPosition(order: Futures3OrderView) {
     }
     return parseFloat(formatUnits(nowPrice, 18)).toFixed(2);
   };
-
+  const tokenName = useCallback(() => {
+    return tokenArray[Number(order.channelIndex.toString())].symbol;
+  }, [order.channelIndex]);
   const showLiqPrice = () => {
     if (!nowPrice || nestAmount === "" || nestAmount === "0") {
       return "---";
@@ -2045,6 +2074,7 @@ export function useFuturesOpenPosition(order: Futures3OrderView) {
       parseUnits(nestAmount === "" ? "0" : nestAmount, 4),
       BigNumber.from(0),
       BigNumber.from(order.lever),
+      nowPrice,
       nowPrice,
       order.orientation
     );

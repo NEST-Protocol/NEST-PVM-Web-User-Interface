@@ -129,6 +129,7 @@ const FuturesList3: FC<FuturesList3Props> = ({ ...props }) => {
           >
             <FuturesAdd
               order={props.item}
+              kValue={props.kValue}
               onClose={() => modalAdd.current.close()}
             />
           </Popup>
@@ -142,6 +143,7 @@ const FuturesList3: FC<FuturesList3Props> = ({ ...props }) => {
           >
             <Trigger
               order={props.item}
+              kValue={props.kValue}
               onClose={() => modalTrigger.current.close()}
             />
           </Popup>
