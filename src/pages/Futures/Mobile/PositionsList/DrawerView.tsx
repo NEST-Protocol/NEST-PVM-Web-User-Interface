@@ -22,6 +22,7 @@ const classPrefix = "positionsList";
 type DrawerBaseType = {
   order: Futures3OrderView;
   hideSelf: () => void;
+  kValue?: { [key: string]: TokenType };
 };
 
 type DrawerCloseType = {
@@ -47,7 +48,7 @@ export const DrawerAdd: FC<DrawerBaseType> = ({ ...props }) => {
     buttonLoading,
     buttonDis,
     buttonAction,
-  } = useFuturesAdd(props.order);
+  } = useFuturesAdd(props.order, props.kValue);
   return (
     <Stack spacing={0}>
       <p className="title">Add Position</p>
@@ -156,7 +157,7 @@ export const DrawerTrigger: FC<DrawerBaseType> = ({ ...props }) => {
     showLiqPrice,
     closeProfit,
     closeLoss,
-  } = useFuturesTrigger(props.order);
+  } = useFuturesTrigger(props.order, props.kValue);
   const stopLimit1 = () => {
     return (
       <Stack

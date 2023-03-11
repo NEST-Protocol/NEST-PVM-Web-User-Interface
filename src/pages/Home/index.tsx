@@ -402,9 +402,7 @@ const Home = () => {
                     </div>
                     <div className={'home-card-title'} style={{paddingTop: '20px'}}>Deflationary</div>
                     <div className={'home-card-content'} style={{paddingTop: '8px'}}>
-                      According to market theory, NEST burned will exceed the NEST generated, allowing our economic
-                      model to
-                      deflate
+                      NEST's economic model is deflationary, thus settlement with $NEST will bring higher potential revenue
                     </div>
                   </Stack>
                 </MainCard>
@@ -456,7 +454,7 @@ const Home = () => {
                     </div>
                     <div className={'home-card-title'} style={{paddingTop: '20px'}}>No Market Makers</div>
                     <div className={'home-card-content'} style={{paddingTop: '8px'}}>
-                      No market makers & LPs needed in NESTFi, the smart contract is the only seller of the system.
+                      The smart contract is the only seller of the system, which means there are no market marking costs, no liquidity debt, no slippage costs in the system.
                     </div>
                   </Stack>
                 </MainCard>
@@ -514,8 +512,7 @@ const Home = () => {
                     </div>
                     <div className={'home-card-title'} style={{paddingTop: '20px'}}>Infinite Liquidity</div>
                     <div className={'home-card-content'} style={{paddingTop: '8px'}}>
-                      Users burn $NEST to buy futures from the smart contract, and the smart contract settles futures by
-                      issuing additional $NEST.
+                      Users burn $NEST to buy futures from the smart contract, and the smart contract settles futures by issuing additional $NEST.
                     </div>
                   </Stack>
                 </MainCard>

@@ -57,12 +57,17 @@ const PositionsList3: FC<FuturesList3Props> = ({ ...props }) => {
     switch (drawerType) {
       case DrawerType.add:
         return (
-          <DrawerAdd order={props.item} hideSelf={() => setShowDrawer(false)} />
+          <DrawerAdd
+            order={props.item}
+            kValue={props.kValue}
+            hideSelf={() => setShowDrawer(false)}
+          />
         );
       case DrawerType.trigger:
         return (
           <DrawerTrigger
             order={props.item}
+            kValue={props.kValue}
             hideSelf={() => setShowDrawer(false)}
           />
         );
