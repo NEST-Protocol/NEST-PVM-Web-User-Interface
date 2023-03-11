@@ -6,6 +6,7 @@ import InfoShow from "../../../components/InfoShow";
 import MainButton from "../../../components/MainButton";
 import MainCard from "../../../components/MainCard";
 import { SingleTokenShow } from "../../../components/TokenShow";
+import { TokenType } from "../../../libs/constants/addresses";
 import { Futures3OrderView, useFuturesAdd } from "../../../libs/hooks/useFutures";
 import useThemes, { ThemeType } from "../../../libs/hooks/useThemes";
 import { formatInputNumWithFour } from "../../../libs/utils";
@@ -14,6 +15,7 @@ import "./styles";
 type FuturesAddProps = {
   order: Futures3OrderView;
   onClose: () => void;
+  kValue?: { [key: string]: TokenType };
 };
 
 const FuturesAdd: FC<FuturesAddProps> = ({ ...props }) => {
@@ -29,7 +31,7 @@ const FuturesAdd: FC<FuturesAddProps> = ({ ...props }) => {
     buttonLoading,
     buttonDis,
     buttonAction,
-  } = useFuturesAdd(props.order);
+  } = useFuturesAdd(props.order, props.kValue);
   const { theme } = useThemes();
   const info = () => {
     return (
