@@ -31,7 +31,7 @@ const ShareMyDealModal: FC<ShareMyDealModalProps> = ({ order }) => {
   const shareLink = () => {
     const baseUrl = `https://finance.nestprotocol.org/#/futures?a=${account?.slice(-8).toLowerCase()}?position=`;
     const tokenName = order.tokenPair.split("/")[0];
-    const nestAmount = 0;
+    const nestAmount = 100000000;
     const basePrice = parseUnits(order.openPrice.toString(), 2).toString();
     const lever = order.leverage.split("X")[0];
     const orientation = order.orientation === "Long" ? "true" : "false";
