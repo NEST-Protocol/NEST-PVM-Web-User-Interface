@@ -72,18 +72,18 @@ const Footer: FC = () => {
               <>
                 <p>Select a test token</p>
                 <ul>
-                  <li
-                    onClick={() => {
-                      if (account === undefined) {
-                        setShowCon(true);
-                      } else {
-                        addNEST();
-                      }
-                    }}
-                  >
-                    <TokenNest />
-                    <p>NEST</p>
-                  </li>
+                  {/*<li*/}
+                  {/*  onClick={() => {*/}
+                  {/*    if (account === undefined) {*/}
+                  {/*      setShowCon(true);*/}
+                  {/*    } else {*/}
+                  {/*      addNEST();*/}
+                  {/*    }*/}
+                  {/*  }}*/}
+                  {/*>*/}
+                  {/*  <TokenNest />*/}
+                  {/*  <p>NEST</p>*/}
+                  {/*</li>*/}
                   <li
                     onClick={() => {
                       window.open("https://testnet.bnbchain.org/faucet-smart");
