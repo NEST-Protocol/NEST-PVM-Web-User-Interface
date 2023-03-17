@@ -2063,9 +2063,6 @@ export function useFuturesOpenPosition(
     }
     return parseFloat(formatUnits(nowPrice, 18)).toFixed(2);
   };
-  const tokenName = useCallback(() => {
-    return tokenArray[Number(order.channelIndex.toString())].symbol;
-  }, [order.channelIndex]);
   const showLiqPrice = () => {
     if (!nowPrice || nestAmount === "" || nestAmount === "0") {
       return "---";
