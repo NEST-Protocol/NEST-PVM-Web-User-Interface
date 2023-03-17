@@ -530,7 +530,8 @@ const Swap: FC = () => {
               </Popup>
             </div>
 
-            <p>{`${(limitOut / 10).toFixed(1)} %`}</p>
+            {/* <p>{`${(limitOut / 10).toFixed(1)} %`}</p> */}
+            <p>{''}</p>
           </div>
         )}
 
