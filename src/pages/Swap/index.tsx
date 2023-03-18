@@ -57,7 +57,7 @@ const Swap: FC = () => {
   const [inputValue, setInputValue] = useState<string>();
   const [priceValue, setPriceValue] = useState<BigNumber>();
   const [swapToken, setSwapToken] = useState<SwapTokenType>({
-    src: "USDT",
+    src: 'NHBTC',
     dest: "NEST",
   });
   const [srcAllowance, setSrcAllowance] = useState<BigNumber>(
@@ -107,6 +107,12 @@ const Swap: FC = () => {
     )?.balanceOf(account);
     setSwapTokenBalance({ src: srcTokenBalance, dest: destTokenBalance });
   }, [account, chainId, library, swapToken]);
+
+  useEffect(() => {
+    if (chainId === 1) {
+      setSwapToken({src: 'NHBTC', dest: 'NEST'})
+    }
+  }, [chainId])
 
   useEffect(() => {
     getBalance();
@@ -281,7 +287,7 @@ const Swap: FC = () => {
     const allToken =
       chainId === 56
         ? ["NEST", "USDT"]
-        : ["DCU", "NEST", "USDT", "NHBTC"];
+        : ["NHBTC"];
     if (top) {
       const leftToken = allToken.filter(
         (item: string) => [swapToken.src].indexOf(item) === -1
