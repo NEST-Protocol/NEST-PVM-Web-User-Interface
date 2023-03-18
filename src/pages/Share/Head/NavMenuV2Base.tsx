@@ -92,22 +92,23 @@ const NavMenuV2Base: FC = () => {
           return {
             height: "48px",
             "& button": {
-              width: 24,
-              height: 24,
+              width: '24px',
+              height: '24px',
               marginRight: "8px",
               borderRadius: 12,
               background: theme.normal.bg1,
+              padding: '6px',
               "& svg": {
                 width: 12,
                 height: 12,
                 display: "block",
-                margin: "auto auto",
                 "& path": {
                   fill: theme.normal.text1,
                 },
               },
             },
             "& a": {
+              width: '100%',
               fontSize: 16,
               fontWeight: 700,
               color: theme.normal.text1,
@@ -180,6 +181,7 @@ const NavMenuV2Base: FC = () => {
           alignItems={"center"}
           height={"40px"}
           sx={(theme) => ({
+            width: '100%',
             fontWeight: 400,
             fontSize: 16,
             color: theme.normal.text1,
@@ -202,6 +204,7 @@ const NavMenuV2Base: FC = () => {
           alignItems={"center"}
           height={"40px"}
           sx={(theme) => ({
+            width: '100%',
             marginTop: "12px",
             fontWeight: 400,
             fontSize: 16,
@@ -223,6 +226,7 @@ const NavMenuV2Base: FC = () => {
           alignItems={"center"}
           height={"40px"}
           sx={(theme) => ({
+            width: '100%',
             marginTop: "12px",
             fontWeight: 400,
             fontSize: 16,
@@ -244,6 +248,7 @@ const NavMenuV2Base: FC = () => {
           alignItems={"center"}
           height={"40px"}
           sx={(theme) => ({
+            width: '100%',
             marginTop: "12px",
             fontWeight: 400,
             fontSize: 16,
@@ -266,6 +271,7 @@ const NavMenuV2Base: FC = () => {
             alignItems={"center"}
             height={"40px"}
             sx={(theme) => ({
+              width: '100%',
               marginTop: "12px",
               fontWeight: 400,
               fontSize: 16,

@@ -183,11 +183,11 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
 
   const tabs = useMemo(() => {
     const orderTabsData = [
-      <Stack direction={"row"} spacing={"4px"}>
+      <Stack direction={"row"} alignItems={'center'} spacing={"4px"}>
         <FuturesOrder />
         <p>Positions</p>
       </Stack>,
-      <Stack direction={"row"} spacing={"4px"}>
+      <Stack direction={"row"} alignItems={'center'} spacing={"4px"}>
         <FuturesLimitOrder />
         <p>Order</p>
       </Stack>,

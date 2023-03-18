@@ -12,7 +12,7 @@ function useTransactionSnackBar() {
 
   const transactionsData: Array<any> = useMemo(() => {
     var cache = localStorage.getItem(
-      "transactionList" + chainsData.chain?.id.toString()
+      "transactionListV2" + chainsData.chain?.id.toString()
     );
     if (!cache) {
       return [];
@@ -62,7 +62,7 @@ function useTransactionSnackBar() {
       ];
 
       localStorage.setItem(
-        "transactionList" + chainsData.chainId?.toString(),
+        "transactionListV2" + chainsData.chainId?.toString(),
         JSON.stringify(newTransactionsData)
       );
     }

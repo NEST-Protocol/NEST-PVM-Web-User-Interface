@@ -100,7 +100,7 @@ const MyWalletModal: FC<MyWalletModalProps> = ({ ...props }) => {
   const walletIcon = useWalletIcon();
   const transactionsData: Array<any> = useMemo(() => {
     var cache = localStorage.getItem(
-      "transactionList" + chainsData.chain?.id.toString()
+      "transactionListV2" + chainsData.chain?.id.toString()
     );
     if (!cache) {
       return [];
