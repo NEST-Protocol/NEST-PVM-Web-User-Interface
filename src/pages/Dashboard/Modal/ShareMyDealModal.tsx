@@ -88,6 +88,12 @@ const ModalButton = styled(Stack)(({theme}) => ({
   alignItems: 'center',
   justifyContent: 'center',
   cursor: 'pointer',
+  "&:hover": {
+    background: theme.normal.primary_hover,
+  },
+  "&:active": {
+    background: theme.normal.primary_active,
+  },
 }))
 
 const DivSvg = styled('div')(({theme}) => ({
@@ -152,7 +158,7 @@ const ShareMyDealModal: FC<ShareMyDealModalProps> = ({...props}) => {
       domtoimage.toPng(node, {
         bgcolor: '#f7fdf6',
         width: node.clientWidth || 450,
-        height: node.clientHeight || 640,
+        height: node.clientHeight || 666,
         quality: 1,
         scale: 2,
       })

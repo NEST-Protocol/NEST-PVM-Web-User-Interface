@@ -81,7 +81,7 @@ const ShareNewOrderModal: FC<ShareNewOrderModalProps> = ({...props}) => {
       domtoimage.toPng(node, {
         bgcolor: '#f7fdf6',
         width: node.clientWidth || 450,
-        height: node.clientHeight || 640,
+        height: node.clientHeight || 666,
         quality: 1,
         scale: 2,
       })
