@@ -540,7 +540,7 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`
                 <DivSvg>
                   <DownloadIcon/>
                 </DivSvg>
-                <span>Download</span>
+                <span>Image</span>
               </Stack>
             </ModalButton>
             <ModalButton onClick={tweet}>
