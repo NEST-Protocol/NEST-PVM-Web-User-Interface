@@ -663,8 +663,22 @@ const Dashboard: FC = () => {
         {
           isBigMobile ? (
             <Stack px={'20px'} spacing={'16px'}>
-              <Stack>
+              <Stack direction={'row'} justifyContent={'space-between'} alignItems={'center'}>
                 <Title1>My Positions</Title1>
+                <Stack>
+                  <MainButton style={{
+                    padding: '0px 12px',
+                    height: '36px',
+                    fontSize: '12px',
+                    fontWeight: 700,
+                    lineHeight: '16px',
+                  }} title={'Copy Invitation Link'} onClick={() => {
+                    if (!address) return;
+                    const link = 'https://finance.nestprotocol.org/?a=' + address.slice(-8).toLowerCase()
+                    copy(link);
+                    messageSnackBar("Copy Successfully");
+                  }} />
+                </Stack>
               </Stack>
               <Card4 sx={{position: 'relative'}}>
                 {
