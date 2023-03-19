@@ -37,6 +37,21 @@ const DashboardShare = styled(Box)(({theme}) => ({
       fill: theme.normal.text2,
     },
   },
+  "&:hover": {
+    cursor: 'pointer',
+    border: `1px solid ${theme.normal.grey_hover}`,
+    background: theme.normal.grey_hover,
+    "& svg path": {
+      fill: theme.normal.text0,
+    },
+  },
+  "&:active": {
+    border: `1px solid ${theme.normal.grey_active}`,
+    background: theme.normal.grey_active,
+    "& svg path": {
+      fill: theme.normal.text0,
+    },
+  },
 }));
 
 const Title1 = styled("div")(({theme}) => ({
@@ -556,7 +571,14 @@ const Dashboard: FC = () => {
               })}>Liq Price</Caption5>
               <Caption5 sx={(theme) => ({
                 color: theme.normal.text0
-              })}>6418.25USDT</Caption5>
+              })}>{lipPrice(
+                ethers.utils.parseEther(item.initialMargin.toString()),
+                ethers.utils.parseEther(item?.appendMargin?.toString() || '0'),
+                BigNumber.from(item.leverage.replace('X', '')),
+                ethers.utils.parseEther(item.lastPrice.toString()),
+                ethers.utils.parseEther(item.openPrice.toString()),
+                item.orientation === 'Long',
+              ).div(BigNumber.from(10).pow(16)).toNumber() / 100} USDT</Caption5>
             </Stack>
           </Stack>
         </Stack>
