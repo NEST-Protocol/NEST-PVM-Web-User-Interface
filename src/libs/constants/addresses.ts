@@ -142,8 +142,8 @@ export const tokenList: { [key: string]: TokenType } = {
     decimals: 18,
     addresses: {
       1: "0x1F832091fAf289Ed4f50FE7418cFbD2611225d46",
-      5: "",
-      56: "",
+      5: ZERO_ADDRESS,
+      56: ZERO_ADDRESS,
       97: "0xDda3801487a8Bb5ec19dD1E3510b6340BA435863",
     },
     pairIndex: {},

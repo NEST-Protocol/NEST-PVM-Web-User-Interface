@@ -57,7 +57,7 @@ const Swap: FC = () => {
   const [inputValue, setInputValue] = useState<string>();
   const [priceValue, setPriceValue] = useState<BigNumber>();
   const [swapToken, setSwapToken] = useState<SwapTokenType>({
-    src: 'NHBTC',
+    src: 'USDT',
     dest: "NEST",
   });
   const [srcAllowance, setSrcAllowance] = useState<BigNumber>(
