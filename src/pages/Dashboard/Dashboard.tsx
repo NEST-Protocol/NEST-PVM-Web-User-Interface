@@ -677,7 +677,7 @@ const Dashboard: FC = () => {
                     const link = 'https://finance.nestprotocol.org/?a=' + address.slice(-8).toLowerCase()
                     copy(link);
                     messageSnackBar("Copy Successfully");
-                  }} />
+                  }}/>
                 </Stack>
               </Stack>
               <Card4 sx={{position: 'relative'}}>
@@ -715,6 +715,16 @@ const Dashboard: FC = () => {
                             fill: theme.normal.text2,
                           },
                         },
+                        '&:hover': {
+                          "& svg path": {
+                            fill: theme.normal.text0,
+                          }
+                        },
+                        '&:active': {
+                          "& svg path": {
+                            fill: theme.normal.text0,
+                          }
+                        }
                       })} onClick={() => {
                         setShareMyDealModal(true)
                       }}>
