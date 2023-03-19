@@ -444,9 +444,15 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`
               !!showList[0] && (
                 <Stack pt={'44px'}>
                   <Caption2>{showList[0].title}</Caption2>
-                  <Caption3 sx={{paddingTop: '8px'}}>{showList[0].value.toLocaleString('en-US', {
+                  <Caption3 sx={{
+                    paddingTop: '8px',
+                    'span': {
+                      fontSize: '28px',
+                      lineHeight: '40px'
+                    }
+                  }}>{showList[0].value.toLocaleString('en-US', {
                     maximumFractionDigits: 2,
-                  })} NEST</Caption3>
+                  })} <span>NEST</span></Caption3>
                   <Caption4 sx={(theme) => ({
                     paddingTop: '16px',
                     color: showList[0].rate >= 0 ? theme.normal.success : theme.normal.danger,
