@@ -5,7 +5,7 @@ import {FC, useState} from "react";
 import BaseModal from "../../Share/Modal/BaseModal";
 import {styled} from "@mui/material/styles";
 import MainButton from "../../../components/MainButton/MainButton";
-import {Success} from "../../../components/icons";
+import {DownIcon, Success} from "../../../components/icons";
 import DashboardBaseModal from "../../Dashboard/Components/DashboardBaseModal";
 import NESTLine from "../../../components/NESTLine";
 import NormalInput from "../../../components/NormalInput/NormalInput";
@@ -32,6 +32,9 @@ const Select1 = styled("select")(({theme}) => ({
   "&:hover": {
     border: `1px solid ${theme.normal.primary}`,
   },
+  "-webkit-appearance": "none",
+  "-moz-appearance": "none",
+  appearance: "none",
 }));
 
 const Title2 = styled("div")(({theme}) => ({
@@ -93,17 +96,33 @@ const ApplyModalBase: FC<ApplyModalBaseProps> = ({...props}) => {
     <Stack spacing={'24px'}>
       <Stack spacing={'8px'}>
         <Title1>Platform (Youtube, Telegram, Twitter, Instagram, Facebook, Tiktok, Others)</Title1>
-        <Select1 onChange={(e) => {
-          setInfo({...info, platform: e.target.value})
-        }}>
-          <option value="Youtube">Youtube</option>
-          <option value="Telegram">Telegram</option>
-          <option value="Twitter">Twitter</option>
-          <option value="Instagram">Instagram</option>
-          <option value="Facebook">Facebook</option>
-          <option value="Tiktok">Tiktok</option>
-          <option value="Others">Others</option>
-        </Select1>
+        <Box position={'relative'}>
+          <Stack position={'absolute'} sx={(theme) => ({
+            right: '12px',
+            height: '48px',
+            justifyContent: 'center',
+            '& svg': {
+              height: '12px',
+              width: '12px',
+              '& path': {
+                fill: theme.normal.text2
+              },
+            },
+          })}>
+            <DownIcon/>
+          </Stack>
+          <Select1 onChange={(e) => {
+            setInfo({...info, platform: e.target.value})
+          }}>
+            <option value="Youtube">Youtube</option>
+            <option value="Telegram">Telegram</option>
+            <option value="Twitter">Twitter</option>
+            <option value="Instagram">Instagram</option>
+            <option value="Facebook">Facebook</option>
+            <option value="Tiktok">Tiktok</option>
+            <option value="Others">Others</option>
+          </Select1>
+        </Box>
       </Stack>
       <Stack spacing={'8px'}>
         <Title1>Channel link</Title1>

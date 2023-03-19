@@ -52,3 +52,4 @@ export { ReactComponent as DownloadIcon } from "./svg/download.svg";
 export { ReactComponent as FuturesIcon } from "./svg/futuresIcon.svg";
 export { ReactComponent as Home } from "./svg/home.svg";
 export { ReactComponent as Add } from "./svg/add.svg";
+export { ReactComponent as DownIcon } from "./svg/DownIcon.svg";
