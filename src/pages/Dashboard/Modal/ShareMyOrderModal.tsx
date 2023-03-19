@@ -1,5 +1,5 @@
 import { Box, Modal, Stack } from "@mui/material";
-import { FC, useMemo } from "react";
+import {FC, useMemo, useRef} from "react";
 import BaseModal from "../Components/DashboardBaseModal";
 import { Order } from "../Dashboard";
 import { styled } from "@mui/material/styles";
@@ -80,15 +80,21 @@ interface ShareMyOrderModalProps {
 const ShareMyOrderModal: FC<ShareMyOrderModalProps> = ({ ...props }) => {
   const { address } = useAccount();
   const { messageSnackBar } = useNESTSnackBar();
+  const myShareRef = useRef(null)
 
   const download = () => {
-    const node = document.getElementById("my-share");
+    if (!myShareRef.current) return
+    const node = myShareRef.current;
+    // @ts-ignore
+    node.style.width = '450px'
+    // @ts-ignore
+    node.style.height = '666px'
     if (node) {
       domtoimage
         .toPng(node, {
           bgcolor: "#f7fdf6",
-          width: node.clientWidth || 450,
-          height: node.clientHeight || 666,
+          width: 450,
+          height: 666,
           quality: 1,
           scale: 2,
         })
@@ -97,6 +103,10 @@ const ShareMyOrderModal: FC<ShareMyOrderModalProps> = ({ ...props }) => {
           link.download = `${address}.png`;
           link.href = dataUrl;
           link.click();
+          // @ts-ignore
+          node.style.width = '100%'
+          // @ts-ignore
+          node.style.height = '100%'
         });
     }
   };
@@ -156,7 +166,7 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`;
                 <Close />
               </button>
             </TopStack>
-            <Stack id={"my-share"}>
+            <Stack ref={myShareRef}>
               <Stack
                 pt={"50px"}
                 px={"24px"}

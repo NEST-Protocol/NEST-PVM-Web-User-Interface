@@ -1,5 +1,5 @@
 import {Box, Drawer, Modal, Stack} from "@mui/material";
-import {FC, useMemo, useState} from "react";
+import {FC, useMemo, useRef, useState} from "react";
 import domtoimage from "../../../lib/dom-to-image";
 import {useAccount} from "wagmi";
 import useWindowWidth from "../../../hooks/useWindowWidth";
@@ -151,14 +151,20 @@ const ShareMyDealModal: FC<ShareMyDealModalProps> = ({...props}) => {
   const {address} = useAccount()
   const [showPage, setShowPage] = useState(false)
   const {isBigMobile} = useWindowWidth()
+  const myShareRef = useRef(null)
 
   const download = () => {
-    const node = document.getElementById('my-share');
+    if (!myShareRef.current) return
+    const node = myShareRef.current;
+    // @ts-ignore
+    node.style.width = '450px'
+    // @ts-ignore
+    node.style.height = '666px'
     if (node) {
       domtoimage.toPng(node, {
         bgcolor: '#f7fdf6',
-        width: node.clientWidth || 450,
-        height: node.clientHeight || 666,
+        width: 450,
+        height: 666,
         quality: 1,
         scale: 2,
       })
@@ -167,6 +173,10 @@ const ShareMyDealModal: FC<ShareMyDealModalProps> = ({...props}) => {
           link.download = `${address}.png`;
           link.href = dataUrl;
           link.click();
+          // @ts-ignore
+          node.style.width = '100%'
+          // @ts-ignore
+          node.style.height = '100%'
         })
     }
   }
@@ -426,7 +436,7 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`
             </button>
           </Stack>
         </TopStack>
-        <Stack id={'my-share'}>
+        <Stack ref={myShareRef}>
           <Stack pt={'50px'} px={'24px'} bgcolor={'#0B0C0D'} minHeight={'558px'}
                  style={{
                    backgroundImage: `url('/images/share_deal.svg')`,
