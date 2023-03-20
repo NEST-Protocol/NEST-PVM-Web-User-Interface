@@ -129,7 +129,7 @@ const MyWalletModal: FC<MyWalletModalProps> = ({ ...props }) => {
               messageSnackBar("Copy Successfully");
             }}
           >
-            <Copy style={{width: '14px', height: '14px'}}/>
+            <Copy style={{ width: "14px", height: "14px" }} />
           </LinkButton>
         </MyAddressStack>
         <DisconnectButton
@@ -154,12 +154,14 @@ const MyWalletModal: FC<MyWalletModalProps> = ({ ...props }) => {
           window.open(item["hash"].hashToChainScan(chainsData.chainId));
         }}
       >
-        <BorderItem sx={(theme) => ({
-          "&:hover": {
-            border: `1px solid ${theme.normal.bg3}`,
-            background: theme.normal.bg3
-          }
-        })}>
+        <BorderItem
+          sx={(theme) => ({
+            "&:hover": {
+              border: `1px solid ${theme.normal.bg3}`,
+              background: theme.normal.bg3,
+            },
+          })}
+        >
           <Stack
             direction={"row"}
             justifyContent={"space-between"}
@@ -189,12 +191,29 @@ const MyWalletModal: FC<MyWalletModalProps> = ({ ...props }) => {
       </li>
     );
   });
+
   return (
     <BaseModal title={"Wallet"} onClose={props.onClose}>
       <BaseStack spacing={0}>
         {myAddress}
         <p className="TransactionsTitle">Recent transactions</p>
-        <TransactionUl>{transactionLi}</TransactionUl>
+        {transactionsData.length === 0 ? (
+          <Stack
+            direction={"row"}
+            justifyContent={"center"}
+            alignItems={"center"}
+            sx={(theme) => ({
+              height: '168px',
+              fontWeight: 400,
+              fontSize: 14,
+              color: theme.normal.text2,
+            })}
+          >
+            No Transactions yet
+          </Stack>
+        ) : (
+          <TransactionUl>{transactionLi}</TransactionUl>
+        )}
       </BaseStack>
     </BaseModal>
   );

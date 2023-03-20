@@ -5,8 +5,10 @@ import NormalSnackBar, {
   SnackBarType,
 } from "../components/SnackBar/NormalSnackBar";
 import useNEST from "./useNEST";
+import useWindowWidth from "./useWindowWidth";
 
 function useTransactionSnackBar() {
+  const { isBigMobile } = useWindowWidth();
   const { chainsData } = useNEST();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
@@ -30,7 +32,7 @@ function useTransactionSnackBar() {
       preventDuplicate: true,
       anchorOrigin: {
         vertical: "top",
-        horizontal: "right",
+        horizontal: isBigMobile ? "center" : "right",
       },
       content: (key, message) => (
         <NormalSnackBar
@@ -86,13 +88,13 @@ function useTransactionSnackBar() {
         />
       ),
     });
-  }, [closeSnackbar, enqueueSnackbar])
+  }, [closeSnackbar, enqueueSnackbar]);
   useEffect(() => {
     if (chainsData.status === "success") {
-      switchNetWork()
-      chainsData.switchNetworkReset()
+      switchNetWork();
+      chainsData.switchNetworkReset();
     }
-  }, [chainsData, chainsData.status, switchNetWork])
+  }, [chainsData, chainsData.status, switchNetWork]);
 
   const messageSnackBar = (message: string) => {
     enqueueSnackbar(`${message}`, {

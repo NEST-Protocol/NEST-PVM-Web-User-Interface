@@ -95,7 +95,7 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
   }, []);
 
   const orderList = useMemo(() => {
-    if (tabsValue === 0 && width > 992) {
+    if (tabsValue === 0 && width > 890) {
       return (
         <POrderTable
           dataArray={pOrderList}
@@ -105,7 +105,7 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
           buttonCallBack={setModalInfoValue}
         />
       );
-    } else if (tabsValue === 1 && width > 992) {
+    } else if (tabsValue === 1 && width > 890) {
       return (
         <OrderTable
           dataArray={limitOrderList}

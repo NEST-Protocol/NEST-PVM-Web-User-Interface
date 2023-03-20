@@ -63,7 +63,6 @@ const POrderTable: FC<FuturesPOrderListProps> = ({ ...props }) => {
         "Stop Order",
         "Operate",
       ]}
-      style={props.style}
       noOrder={noOrder}
       helps={[
         {
@@ -77,12 +76,18 @@ const POrderTable: FC<FuturesPOrderListProps> = ({ ...props }) => {
           ),
         },
       ]}
+      style={props.style}
+      noNeedPadding
     >
       {rows}
       {closeRows}
     </FuturesTableTitle>
   );
 };
+
+const tdNoPadding = {
+  padding: '0px !important',
+}
 
 interface POrderTableRowProps {
   data: FuturesOrderV2;
@@ -124,7 +129,7 @@ const POrderTableRow: FC<POrderTableRowProps> = ({ ...props }) => {
           lever={lever}
         />
       </TableCell>
-      <TableCell>
+      <TableCell sx={tdNoPadding}>
         <Stack
           direction={"row"}
           spacing={"4px"}
@@ -147,7 +152,7 @@ const POrderTableRow: FC<POrderTableRowProps> = ({ ...props }) => {
           <span>{showPercent}%</span>
         </Stack>
       </TableCell>
-      <TableCell>
+      <TableCell sx={tdNoPadding}>
         <Box
           component={"p"}
           sx={(theme) => ({
@@ -159,7 +164,7 @@ const POrderTableRow: FC<POrderTableRowProps> = ({ ...props }) => {
           {showBasePrice}USDT
         </Box>
       </TableCell>
-      <TableCell>
+      <TableCell sx={tdNoPadding}>
         <Box
           component={"p"}
           sx={(theme) => ({
@@ -171,7 +176,7 @@ const POrderTableRow: FC<POrderTableRowProps> = ({ ...props }) => {
           {showLiqPrice}USDT
         </Box>
       </TableCell>
-      <TableCell>
+      <TableCell sx={tdNoPadding}>
         <Stack
           spacing={"4px"}
           sx={(theme) => ({
@@ -262,7 +267,7 @@ const POrderTableCloseRow: FC<POrderTableRowCloseProps> = ({ ...props }) => {
     shareOrder,
   } = useFuturesPOrderClose(props.data, props.price);
   return (
-    <TableRow>
+    <TableRow sx={(theme) => ({ "&: hover": { background: theme.normal.bg1 } })}>
       <ShareMyOrderModal
         value={shareOrder}
         open={showShareOrderModal}
@@ -277,7 +282,7 @@ const POrderTableCloseRow: FC<POrderTableRowCloseProps> = ({ ...props }) => {
           lever={lever}
         />
       </TableCell>
-      <TableCell>
+      <TableCell sx={tdNoPadding}>
         <Stack
           direction={"row"}
           spacing={"4px"}
@@ -299,7 +304,7 @@ const POrderTableCloseRow: FC<POrderTableRowCloseProps> = ({ ...props }) => {
           <span>{showPercent}%</span>
         </Stack>
       </TableCell>
-      <TableCell>
+      <TableCell sx={tdNoPadding}>
         <Box
           component={"p"}
           sx={(theme) => ({
@@ -311,7 +316,7 @@ const POrderTableCloseRow: FC<POrderTableRowCloseProps> = ({ ...props }) => {
           {showBasePrice}USDT
         </Box>
       </TableCell>
-      <TableCell>
+      <TableCell sx={tdNoPadding}>
         <Box
           component={"p"}
           sx={(theme) => ({
@@ -323,7 +328,7 @@ const POrderTableCloseRow: FC<POrderTableRowCloseProps> = ({ ...props }) => {
           {showLiqPrice}USDT
         </Box>
       </TableCell>
-      <TableCell>
+      <TableCell sx={tdNoPadding}>
         <Stack
           spacing={"4px"}
           sx={(theme) => ({

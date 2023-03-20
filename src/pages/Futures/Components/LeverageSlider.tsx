@@ -65,7 +65,7 @@ const LeverageSlider: FC<LeverageSliderProps> = ({ ...props }) => {
           })}
         >{`${props.value}X`}</Box>
       </Stack>
-      <Box sx={{paddingX: '5px'}}>
+      <Box sx={{paddingLeft: '5px', paddingRight: '8px'}}>
       <Slider
         aria-label="Custom marks"
         defaultValue={1}
