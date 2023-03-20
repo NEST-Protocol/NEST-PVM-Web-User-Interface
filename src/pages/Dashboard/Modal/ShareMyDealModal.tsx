@@ -4,13 +4,11 @@ import domtoimage from "../../../lib/dom-to-image";
 import {useAccount} from "wagmi";
 import useWindowWidth from "../../../hooks/useWindowWidth";
 import MainButton from "../../../components/MainButton/MainButton";
-import {Close, NESTFiLogo, NESTLogo, Success, UpIcon} from "../../../components/icons";
+import {Close, DownloadIcon, NESTFiLogo, NESTLogo, Success, TwitterIcon, UpIcon} from "../../../components/icons";
 import {styled} from "@mui/material/styles";
 import BaseModal from "../Components/DashboardBaseModal";
 import {QRCodeCanvas} from "qrcode.react";
 import BaseDrawer from "../Components/DashboardBaseDrawer";
-import copy from "copy-to-clipboard";
-import useNESTSnackBar from "../../../hooks/useNESTSnackBar";
 
 const Title1 = styled('div')(({theme}) => ({
   fontWeight: "400",
@@ -78,6 +76,40 @@ const Card1 = styled(Stack)(({theme}) => ({
   cursor: 'pointer'
 }))
 
+const ModalButton = styled('button')(({theme}) => ({
+  width: '100%',
+  height: '48px',
+  borderRadius: '12px',
+  fontSize: '16px',
+  fontWeight: '700',
+  lineHeight: '22px',
+  color: theme.normal.highDark,
+  background: theme.normal.primary,
+  alignItems: 'center',
+  justifyContent: 'center',
+  cursor: 'pointer',
+  "&:hover": {
+    background: theme.normal.primary_hover,
+  },
+  "&:active": {
+    background: theme.normal.primary_active,
+  },
+  "&:disabled": {
+    background: theme.normal.disabled_bg,
+  }
+}))
+
+const DivSvg = styled('div')(({theme}) => ({
+  "& svg": {
+    width: "18px",
+    height: "18px",
+    display: "block",
+    "& path": {
+      fill: theme.normal.highDark
+    }
+  }
+}))
+
 const TopStack = styled(Stack)(({theme}) => {
   return {
     position: 'absolute',
@@ -124,13 +156,12 @@ const ShareMyDealModal: FC<ShareMyDealModalProps> = ({...props}) => {
   const {isBigMobile} = useWindowWidth()
   const myShareRef = useRef(null)
   const [dataUrl, setDataUrl] = useState<string | null>(null)
-  const {messageSnackBar} = useNESTSnackBar();
 
   const buildDataUrl = async () => {
     if (!myShareRef.current) {
       setTimeout(() => {
         buildDataUrl()
-      }, 500)
+      }, 300)
       return
     }
     const node = myShareRef.current;
@@ -559,37 +590,22 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`
         }
         <Stack px={'20px'} pb={'24px'}>
           <Stack direction={'row'} width={'100%'} spacing={'12px'} pt={'24px'}>
-            <MainButton
-              style={{
-                height: '48px',
-                fontSize: '16px',
-                fontWeight: '700',
-                lineHeight: '22px',
-              }}
-              disable={!address}
-              title={'Copy Link'} onClick={() => {
-              if (!address) return;
-              const link = `https://finance.nestprotocol.org/?a=${address?.slice(-8).toLowerCase()}`;
-              copy(link);
-              messageSnackBar("Copy Successfully");
-            }}/>
-            <MainButton
-              style={{
-                height: '48px',
-                fontSize: '16px',
-                fontWeight: '700',
-                lineHeight: '22px',
-              }}
-              title={!dataUrl ? "Loading" :  "Image"}
-              onClick={download}
-              disable={!dataUrl}
-            />
-            <MainButton style={{
-              height: '48px',
-              fontSize: '16px',
-              fontWeight: '700',
-              lineHeight: '22px',
-            }} title={'Twitter'} onClick={tweet}/>
+            <ModalButton onClick={download} disabled={!dataUrl}>
+              <Stack direction={'row'} spacing={'12px'} alignItems={"center"} justifyContent={"center"}>
+                <DivSvg>
+                  <DownloadIcon/>
+                </DivSvg>
+                <span>{!dataUrl ? "Loading" : "Image"}</span>
+              </Stack>
+            </ModalButton>
+            <ModalButton onClick={tweet}>
+              <Stack direction={'row'} spacing={'12px'} alignItems={"center"} justifyContent={"center"}>
+                <DivSvg>
+                  <TwitterIcon/>
+                </DivSvg>
+                <span>Twitter</span>
+              </Stack>
+            </ModalButton>
           </Stack>
         </Stack>
       </Stack>

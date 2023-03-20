@@ -5,6 +5,7 @@ import { BigNumber } from "ethers";
 import {
   FC,
   useCallback,
+  useEffect,
   useLayoutEffect,
   useMemo,
   useRef,
@@ -20,13 +21,15 @@ import OrderList from "./Components/OrderList";
 import OrderTable from "./Components/OrderTable";
 import POrderList, { POrderCloseList } from "./Components/POrderList";
 import POrderTable from "./Components/POrderTable";
-import { FuturesPrice } from "./Futures";
+import { FuturesPrice, priceToken } from "./Futures";
 import AddModal from "./Modal/AddModal";
 import CloseModal from "./Modal/CloseModal";
 import CloseOrderNoticeModal from "./Modal/CloseOrderNoticeModal";
 import EditLimitModal from "./Modal/EditLimitModal";
 import EditPositionModal from "./Modal/EditPositionModal";
 import { styled } from "@mui/material/styles";
+import { getQueryVariable } from "../../lib/queryVaribale";
+import SharePositionModal from "./Modal/SharePositionModal";
 
 interface FuturesOrderListProps {
   price: FuturesPrice | undefined;
@@ -76,6 +79,29 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
     showClosedOrder,
     hideOrder,
   } = useFuturesOrderList();
+  const [openSharePosition, setOpenSharePosition] = useState<boolean>(false);
+  useEffect(() => {
+    let code = getQueryVariable("pt");
+    if (code) {
+      const num = priceToken.filter(
+        (item) => item.toLocaleLowerCase() === code!.toLocaleLowerCase()
+      );
+      if (num && num.length > 0) {
+        setOpenSharePosition(true);
+        setTabsValue(1)
+      }
+    }
+  }, []);
+
+  const sharePositionModal = useMemo(() => {
+    return (
+      <SharePositionModal
+        open={openSharePosition}
+        price={props.price}
+        onClose={() => setOpenSharePosition(false)}
+      />
+    );
+  }, [openSharePosition, props.price]);
   /**
    * this width
    */
@@ -183,11 +209,11 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
 
   const tabs = useMemo(() => {
     const orderTabsData = [
-      <Stack direction={"row"} alignItems={'center'} spacing={"4px"}>
+      <Stack direction={"row"} alignItems={"center"} spacing={"4px"}>
         <FuturesOrder />
         <p>Positions</p>
       </Stack>,
-      <Stack direction={"row"} alignItems={'center'} spacing={"4px"}>
+      <Stack direction={"row"} alignItems={"center"} spacing={"4px"}>
         <FuturesLimitOrder />
         <p>Order</p>
       </Stack>,
@@ -247,6 +273,7 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
   }, [modalInfo, props.price]);
   return (
     <Stack spacing={"16px"} width={"100%"} ref={ref}>
+      {sharePositionModal}
       {addModal}
       <Modal
         open={hideOrderModalInfo !== undefined}
