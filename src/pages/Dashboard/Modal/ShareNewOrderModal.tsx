@@ -154,7 +154,7 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`
                        backgroundImage: "url('/images/share_order2.svg')",
                        backgroundRepeat: 'no-repeat',
                        backgroundPosition: 'center',
-                       backgroundSize: 'cover',
+                       backgroundSize: 'contain',
                      }}
               >
                 <Box sx={{
