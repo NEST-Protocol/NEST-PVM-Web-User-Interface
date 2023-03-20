@@ -88,13 +88,13 @@ const ShareMyOrderModal: FC<ShareMyOrderModalProps> = ({ ...props }) => {
     // @ts-ignore
     node.style.width = '450px'
     // @ts-ignore
-    node.style.height = '666px'
+    node.style.height = '658px'
     if (node) {
       domtoimage
         .toPng(node, {
           bgcolor: "#f7fdf6",
           width: 450,
-          height: 666,
+          height: 658,
           quality: 1,
           scale: 2,
         })
