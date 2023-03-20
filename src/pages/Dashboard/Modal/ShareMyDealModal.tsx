@@ -163,21 +163,29 @@ const ShareMyDealModal: FC<ShareMyDealModalProps> = ({...props}) => {
     }
     console.log('buildDataUrl: start build')
     const node = myShareRef.current;
-    // @ts-ignore
-    node.style.width = '450px'
-    if (node) {
-      domtoimage.toPng(node, {
-        bgcolor: '#1D1E22',
-        // @ts-ignore
-        width: node.offsetWidth,
-        // @ts-ignore
-        height: node.offsetHeight,
-        quality: 1,
-        scale: 2,
-      })
-        .then(function (dataUrl) {
-          setDataUrl(dataUrl)
+    try {
+      // @ts-ignore
+      node.style.width = '450px'
+      if (node) {
+        domtoimage.toPng(node, {
+          bgcolor: '#1D1E22',
+          // @ts-ignore
+          width: node.offsetWidth,
+          // @ts-ignore
+          height: node.offsetHeight,
+          quality: 1,
+          scale: 2,
         })
+          .then(function (dataUrl) {
+            setDataUrl(dataUrl)
+            // @ts-ignore
+            node.style.width = '100%'
+          })
+      }
+    } catch (e) {
+      console.log('buildDataUrl: error', e)
+      // @ts-ignore
+      node.style.width = '100%'
     }
   }
 

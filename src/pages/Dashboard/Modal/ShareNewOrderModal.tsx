@@ -83,21 +83,29 @@ const ShareNewOrderModal: FC<ShareNewOrderModalProps> = ({...props}) => {
     }
     console.log('buildDataUrl: start build')
     const node = myShareRef.current;
-    // @ts-ignore
-    node.style.width = '450px'
-    if (node) {
-      domtoimage.toPng(node, {
-        bgcolor: '#1D1E22',
-        // @ts-ignore
-        width: node.offsetWidth,
-        // @ts-ignore
-        height: node.offsetHeight,
-        quality: 1,
-        scale: 2,
-      })
-        .then(function (dataUrl) {
-          setDataUrl(dataUrl)
+    try {
+      // @ts-ignore
+      node.style.width = '450px'
+      if (node) {
+        domtoimage.toPng(node, {
+          bgcolor: '#1D1E22',
+          // @ts-ignore
+          width: node.offsetWidth,
+          // @ts-ignore
+          height: node.offsetHeight,
+          quality: 1,
+          scale: 2,
         })
+          .then(function (dataUrl) {
+            setDataUrl(dataUrl)
+            // @ts-ignore
+            node.style.width = '100%'
+          })
+      }
+    } catch (e) {
+      console.log('buildDataUrl: error', e)
+      // @ts-ignore
+      node.style.width = '100%'
     }
   }
 
@@ -162,70 +170,76 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`
                 <Close/>
               </button>
             </TopStack>
-            <Stack ref={myShareRef}>
-              <Stack pt={'50px'} px={'24px'} bgcolor={'#0B0C0D'} minHeight={'558px'}
-                     style={{
-                       backgroundImage: "url('/images/share_order2.svg')",
-                       backgroundRepeat: 'no-repeat',
-                       backgroundPosition: 'center',
-                       backgroundSize: 'contain',
-                     }}
-              >
-                <Box sx={{
-                  "& svg": {
-                    height: '48px',
-                    display: "block",
-                    "& path": {
-                      fill: "#fff"
-                    }
-                  }
-                }}>
-                  <NESTFiLogo/>
-                </Box>
-                <Stack direction={'row'} pt={'60px'}>
-                  <ShareOrderPosition
-                    tokenName={'ETH'}
-                    isLong={props.value.orientation === 'Long'}
-                    lever={props.value.leverage}
-                  />
-                </Stack>
-                <Stack pt={'68px'} spacing={'8px'}>
-                  <Caption5>Open Price</Caption5>
-                  <Caption9>{props.value.openPrice}</Caption9>
-                </Stack>
-                <Stack direction={'row'} pt={'54px'}>
-                  <Stack spacing={'7px'} width={'50%'}>
-                    <Caption5>Take Profit</Caption5>
-                    <Caption8>{props.value.sp?.toLocaleString('en-US', {
-                      maximumFractionDigits: 2,
-                    })} USDT</Caption8>
+            {
+              dataUrl ? (
+                <img src={dataUrl} style={{width: '100%'}} alt={'share'}/>
+              ) : (
+                <Stack ref={myShareRef}>
+                  <Stack pt={'50px'} px={'24px'} bgcolor={'#0B0C0D'} minHeight={'558px'}
+                         style={{
+                           backgroundImage: "url('/images/share_order2.svg')",
+                           backgroundRepeat: 'no-repeat',
+                           backgroundPosition: 'center',
+                           backgroundSize: 'contain',
+                         }}
+                  >
+                    <Box sx={{
+                      "& svg": {
+                        height: '48px',
+                        display: "block",
+                        "& path": {
+                          fill: "#fff"
+                        }
+                      }
+                    }}>
+                      <NESTFiLogo/>
+                    </Box>
+                    <Stack direction={'row'} pt={'60px'}>
+                      <ShareOrderPosition
+                        tokenName={'ETH'}
+                        isLong={props.value.orientation === 'Long'}
+                        lever={props.value.leverage}
+                      />
+                    </Stack>
+                    <Stack pt={'68px'} spacing={'8px'}>
+                      <Caption5>Open Price</Caption5>
+                      <Caption9>{props.value.openPrice}</Caption9>
+                    </Stack>
+                    <Stack direction={'row'} pt={'54px'}>
+                      <Stack spacing={'7px'} width={'50%'}>
+                        <Caption5>Take Profit</Caption5>
+                        <Caption8>{props.value.sp?.toLocaleString('en-US', {
+                          maximumFractionDigits: 2,
+                        })} USDT</Caption8>
+                      </Stack>
+                      <Stack spacing={'7px'} width={'50%'}>
+                        <Caption5>Stop Loss</Caption5>
+                        <Caption8>{props.value.sl?.toLocaleString('en-US', {
+                          maximumFractionDigits: 2,
+                        })} USDT</Caption8>
+                      </Stack>
+                    </Stack>
+                    <Stack height={'110px'}/>
                   </Stack>
-                  <Stack spacing={'7px'} width={'50%'}>
-                    <Caption5>Stop Loss</Caption5>
-                    <Caption8>{props.value.sl?.toLocaleString('en-US', {
-                      maximumFractionDigits: 2,
-                    })} USDT</Caption8>
+                  <Stack px={'20px'} direction={'row'} width={'100%'} paddingRight={'36px'}
+                         justifyContent={'space-between'}
+                         bgcolor={'rgba(29, 30, 34, 1)'}
+                         alignItems={"center"} py={'18px'}>
+                    <Stack direction={'row'} spacing={'12px'}>
+                      <NESTLogo/>
+                      <Stack>
+                        <Caption7>Scan and copy the trade</Caption7>
+                        <Caption7>with 1 click</Caption7>
+                      </Stack>
+                    </Stack>
+                    <Box style={{width: '64px', height: '64px', background: 'white', padding: '3px'}}>
+                      <QRCodeCanvas
+                        value={shareLink}
+                        size={58}/>
+                    </Box>
                   </Stack>
                 </Stack>
-                <Stack height={'110px'}/>
-              </Stack>
-              <Stack px={'20px'} direction={'row'} width={'100%'} paddingRight={'36px'} justifyContent={'space-between'}
-                     bgcolor={'rgba(29, 30, 34, 1)'}
-                     alignItems={"center"} py={'18px'}>
-                <Stack direction={'row'} spacing={'12px'}>
-                  <NESTLogo/>
-                  <Stack>
-                    <Caption7>Scan and copy the trade</Caption7>
-                    <Caption7>with 1 click</Caption7>
-                  </Stack>
-                </Stack>
-                <Box style={{width: '64px', height: '64px', background: 'white', padding: '3px'}}>
-                  <QRCodeCanvas
-                    value={shareLink}
-                    size={58}/>
-                </Box>
-              </Stack>
-            </Stack>
+              )}
             <Stack direction={'row'} width={'100%'} spacing={'12px'} px={'20px'} py={'24px'}>
               <MainButton
                 style={{
