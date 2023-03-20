@@ -347,7 +347,8 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`;
                   fontWeight: "700",
                   lineHeight: "22px",
                 }}
-                title={!dataUrl ? "Loading" : "Image"}
+                isLoading={!dataUrl}
+                title={"Image"}
                 onClick={download}
                 disable={!dataUrl}
               />
