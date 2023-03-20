@@ -21,9 +21,9 @@ function useMainReact() {
   const disconnect = useDisconnect();
   useEffect(() => {
     if (showConnect && account.isConnected) {
-      setShowConnect(false)
+      setShowConnect(false);
     }
-  }, [account.isConnected, showConnect])
+  }, [account.isConnected, showConnect]);
   /**
    * Switch chains
    */
@@ -37,7 +37,7 @@ function useMainReact() {
     pendingChainId,
     switchNetwork,
     status,
-    reset: switchNetworkReset
+    reset: switchNetworkReset,
   } = useSwitchNetwork();
   const chainsData = {
     chain,
@@ -49,6 +49,26 @@ function useMainReact() {
     switchNetworkReset,
     status,
   };
+  /**
+   * user: connect wallet
+   */
+  useEffect(() => {
+    if (chainId !== 97 && account.address) {
+      (async () => {
+        try {
+          await fetch(
+            `https://api.nestfi.net/api/users/users/setwallet?address=${account.address}`,
+            {
+              method: "POST",
+            }
+          );
+        } catch (error) {
+          console.log(error);
+        }
+      })();
+    }
+  }, [account.address, chainId]);
+
   return {
     showConnect,
     setShowConnect,
