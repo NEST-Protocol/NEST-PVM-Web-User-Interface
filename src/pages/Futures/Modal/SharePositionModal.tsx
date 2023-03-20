@@ -33,6 +33,7 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
   const { isMobile } = useWindowWidth();
   const [showApproveNotice, setShowApproveNotice] = useState(false);
   const [showApproveNoticeDone, setShowApproveNoticeDone] = useState(false);
+  const [setToken, setSetToken] = useState(false);
   const tokenName_info = useMemo(() => {
     return getQueryVariable("pt");
   }, []);
@@ -122,7 +123,6 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
     tokenName_info ? tokenName_info.toLocaleUpperCase() : "ETH"
   );
   useEffect(() => {
-    setInputAmount("10000");
     setLongOrShort(orientation_info);
     setTabsValue(1);
     setLever(lever_info ? parseInt(lever_info) : 1);
@@ -139,7 +139,35 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
     } else {
       setIsStop(false);
     }
-    if (nestBalance && usdtBalance) {
+    if (
+      account.address &&
+      !showApproveNoticeDone &&
+      tokenAllowance &&
+      BigNumber.from("0").eq(tokenAllowance)
+    ) {
+      setShowApproveNotice(true);
+    }
+  }, [
+    account.address,
+    basePrice_info,
+    lever_info,
+    orientation_info,
+    setInputAmount,
+    setIsStop,
+    setLever,
+    setLimitAmount,
+    setLongOrShort,
+    setSl,
+    setTabsValue,
+    setTp,
+    showApproveNoticeDone,
+    sl_info,
+    tokenAllowance,
+    tp_info,
+  ]);
+
+  useEffect(() => {
+    if (nestBalance && usdtBalance && !setToken) {
       if (
         BigNumber.from("0").eq(nestBalance) &&
         BigNumber.from("0").eq(usdtBalance)
@@ -153,34 +181,13 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
         setInputToken("USDT");
         setInputAmount("200");
       }
-    }
-    if (
-      account.address &&
-      !showApproveNoticeDone &&
-      tokenAllowance &&
-      BigNumber.from("0").eq(tokenAllowance)
-    ) {
-      setShowApproveNotice(true);
+      setSetToken(true);
     }
   }, [
-    account.address,
-    basePrice_info,
-    lever_info,
     nestBalance,
-    orientation_info,
     setInputAmount,
     setInputToken,
-    setIsStop,
-    setLever,
-    setLimitAmount,
-    setLongOrShort,
-    setSl,
-    setTabsValue,
-    setTp,
-    showApproveNoticeDone,
-    sl_info,
-    tokenAllowance,
-    tp_info,
+    setToken,
     uniSwapAmountOut,
     usdtBalance,
   ]);

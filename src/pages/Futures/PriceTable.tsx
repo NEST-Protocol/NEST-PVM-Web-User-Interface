@@ -114,8 +114,8 @@ const FuturesPriceTable: FC<FuturesPriceTableProps> = ({ ...props }) => {
       width={"100%"}
       sx={(theme) => ({
         border: isBigMobile ? `0px` : `1px solid ${theme.normal.border}`,
-        borderBottom: isBigMobile ? `1px solid ${theme.normal.border}` : `0px`,
-        borderRadius: "12px",
+        borderBottom: `1px solid ${theme.normal.border}`,
+        borderRadius: isBigMobile ? "0px" : "12px",
       })}
     >
       <Stack

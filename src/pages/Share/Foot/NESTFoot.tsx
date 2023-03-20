@@ -43,7 +43,7 @@ export const NESTFootStack = styled(Stack)(({ theme }) => ({
 export const FootAList = FootArray.map((item, index) => {
   const Icon = item.icon;
   return (
-    <a key={`FootLink + ${index}`} href={`${item.link}`}>
+    <a key={`FootLink + ${index}`} href={`${item.link}`} target={"blank"}>
       <Icon />
     </a>
   );

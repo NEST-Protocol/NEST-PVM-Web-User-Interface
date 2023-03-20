@@ -325,7 +325,7 @@ export function useFuturesAdd(
     ...config,
     request: { ...config.request, gasLimit: gasLimit },
   });
-
+  console.log(config.request)
   useEffect(() => {
     if (transaction.data) {
       addPendingList({

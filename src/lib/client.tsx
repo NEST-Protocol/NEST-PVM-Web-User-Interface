@@ -16,7 +16,6 @@ import {
   trustWallet,
 } from "@rainbow-me/rainbowkit/wallets";
 
-import { alchemyProvider } from "wagmi/providers/alchemy";
 import { infuraProvider } from "wagmi/providers/infura";
 import { ProviderProps } from "./provider";
 import { okxWallet } from "./okxWallet";
@@ -30,7 +29,7 @@ import {
 import useTheme from "../hooks/useTheme";
 
 const { chains, provider, webSocketProvider } = configureChains(
-  [bscTestnet, bsc, mainnet],
+  [bscTestnet, mainnet],
   [
     infuraProvider({ apiKey: "be0a9832394640b090fceb2b2107993c" }),
     jsonRpcProvider({
