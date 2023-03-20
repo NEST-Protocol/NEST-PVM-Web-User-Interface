@@ -81,13 +81,13 @@ const ShareNewOrderModal: FC<ShareNewOrderModalProps> = ({...props}) => {
     const node = myShareRef.current;
     // @ts-ignore
     node.style.width = '450px'
-    // @ts-ignore
-    node.style.height = '658px'
     if (node) {
       domtoimage.toPng(node, {
-        bgcolor: '#f7fdf6',
-        width: 450,
-        height: 658,
+        bgcolor: '#1D1E22',
+        // @ts-ignore
+        width: node.offsetWidth,
+        // @ts-ignore
+        height: node.offsetHeight,
         quality: 1,
         scale: 2,
       })
@@ -98,8 +98,6 @@ const ShareNewOrderModal: FC<ShareNewOrderModalProps> = ({...props}) => {
           link.click();
           // @ts-ignore
           node.style.width = '100%'
-          // @ts-ignore
-          node.style.height = '100%'
         })
     }
   }

@@ -158,13 +158,13 @@ const ShareMyDealModal: FC<ShareMyDealModalProps> = ({...props}) => {
     const node = myShareRef.current;
     // @ts-ignore
     node.style.width = '450px'
-    // @ts-ignore
-    node.style.height = '658px'
     if (node) {
       domtoimage.toPng(node, {
-        bgcolor: '#f7fdf6',
-        width: 450,
-        height: 658,
+        bgcolor: '#1D1E22',
+        // @ts-ignore
+        width: node.offsetWidth,
+        // @ts-ignore
+        height: node.offsetHeight,
         quality: 1,
         scale: 2,
       })
@@ -175,8 +175,6 @@ const ShareMyDealModal: FC<ShareMyDealModalProps> = ({...props}) => {
           link.click();
           // @ts-ignore
           node.style.width = '100%'
-          // @ts-ignore
-          node.style.height = '100%'
         })
     }
   }
@@ -437,7 +435,7 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`
           </Stack>
         </TopStack>
         <Stack ref={myShareRef}>
-          <Stack pt={'50px'} px={'24px'} bgcolor={'#0B0C0D'} minHeight={'558px'}
+          <Stack pt={'50px'} px={'24px'} bgcolor={'#0B0C0D'}
                  style={{
                    backgroundImage: `url('/images/share_deal.svg')`,
                    backgroundRepeat: 'no-repeat',
