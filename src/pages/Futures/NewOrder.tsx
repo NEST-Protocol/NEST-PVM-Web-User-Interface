@@ -296,7 +296,7 @@ const FuturesNewOrder: FC<FuturesNewOrderProps> = ({ ...props }) => {
         value={longOrShort}
         changeValue={(value: boolean) => setLongOrShort(value)}
       />
-      <Stack spacing={"16px"} sx={{ paddingX: "4px", paddingY: "8px" }}>
+      <Stack spacing={"16px"} sx={{ paddingX: "4px", paddingTop: "8px", paddingBottom: '16px' }}>
         {newOrderTabs}
         {tabsValue === 0 ? (
           <></>
