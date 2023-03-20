@@ -11,6 +11,7 @@ import {QRCodeCanvas} from "qrcode.react";
 import BaseDrawer from "../Components/DashboardBaseDrawer";
 import copy from "copy-to-clipboard";
 import useNESTSnackBar from "../../../hooks/useNESTSnackBar";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const Title1 = styled('div')(({theme}) => ({
   fontWeight: "400",
@@ -418,7 +419,8 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`
 
   const getSharePage = () => {
     return (
-      <Stack width={'100%'} bgcolor={'rgba(29, 30, 34, 1)'} position={'relative'} borderRadius={'12px'} overflow={'hidden'}>
+      <Stack width={'100%'} bgcolor={'rgba(29, 30, 34, 1)'} position={'relative'} borderRadius={'12px'}
+             overflow={'hidden'}>
         <TopStack sx={{
           "& button": {
             "& svg": {
@@ -442,121 +444,136 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`
           dataUrl ? (
             <img src={dataUrl} style={{width: '100%'}} alt={'share'}/>
           ) : (
-            <Stack ref={myShareRef}>
-              <Stack pt={'50px'} px={'24px'} bgcolor={'#0B0C0D'}
-                     style={{
-                       backgroundImage: `url('/images/share_deal.png')`,
-                       backgroundRepeat: 'no-repeat',
-                       backgroundPosition: 'center',
-                       backgroundSize: 'contain',
-                     }}
-              >
-                <Box sx={{
-                  "& svg": {
-                    height: '48px',
-                    display: "block",
-                    "& path": {
-                      fill: "#fff"
-                    }
-                  }
-                }}>
-                  <NESTFiLogo/>
-                </Box>
-                {
-                  !!showList[0] && (
-                    <Stack pt={'44px'}>
-                      <Caption2>{showList[0].title}</Caption2>
-                      <Caption3 sx={{
-                        paddingTop: '8px',
-                        'span': {
-                          fontSize: '28px',
-                          lineHeight: '40px'
-                        }
-                      }}>{showList[0].value.toLocaleString('en-US', {
-                        maximumFractionDigits: 2,
-                      })} <span>NEST</span></Caption3>
-                      <Caption4 sx={(theme) => ({
-                        paddingTop: '16px',
-                        color: showList[0].rate >= 0 ? theme.normal.success : theme.normal.danger,
-                      })}>{showList[0].rate}%</Caption4>
-                    </Stack>
-                  )
-                }
-                <Stack spacing={'24px'} pt={'64px'}>
-                  <Stack direction={'row'} justifyContent={'space-between'}>
-                    {
-                      !!showList?.[1] && (
-                        <Stack spacing={'8px'} width={'50%'}>
-                          <Caption5>{showList?.[1].title}</Caption5>
-                          <Caption6
-                            sx={(theme) => ({
-                              'span': {
-                                color: showList?.[1].rate >= 0 ? theme.normal.success : theme.normal.danger
-                              }
-                            })}
-                          >{showList?.[1].value.toLocaleString('en-US', {
-                            maximumFractionDigits: 2,
-                          })} NEST <span>{showList?.[1].rate}%</span>
-                          </Caption6>
-                        </Stack>
-                      )
-                    }
-                    {
-                      !!showList?.[2] && (
-                        <Stack spacing={'8px'} width={'50%'}>
-                          <Caption5>{showList?.[2].title}</Caption5>
-                          <Caption6
-                            sx={(theme) => ({
-                              'span': {
-                                color: showList?.[2].rate >= 0 ? theme.normal.success : theme.normal.danger
-                              }
-                            })}
-                          >{showList?.[2].value.toLocaleString('en-US', {
-                            maximumFractionDigits: 2,
-                          })} NEST <span>{showList?.[2].rate}%</span></Caption6>
-                        </Stack>
-                      )
-                    }
-                  </Stack>
-                  {
-                    !!showList?.[3] && (
-                      <Stack spacing={'8px'} width={'50%'}>
-                        <Caption5>{showList?.[3].title}</Caption5>
-                        <Caption6
-                          sx={(theme) => ({
-                            'span': {
-                              color: showList?.[3].rate >= 0 ? theme.normal.success : theme.normal.danger
-                            }
-                          })}
-                        >{showList?.[3].value.toLocaleString('en-US', {
-                          maximumFractionDigits: 2,
-                        })} NEST <span>{showList?.[3].rate}%</span></Caption6>
-                      </Stack>
-                    )
-                  }
-                </Stack>
-                <Stack height={'80px'}/>
-              </Stack>
-              <Stack px={'20px'} direction={'row'} width={'100%'} paddingRight={'36px'}
-                     justifyContent={'space-between'}
-                     bgcolor={'rgba(29, 30, 34, 1)'}
-                     alignItems={"center"} py={'18px'}>
-                <Stack direction={'row'} spacing={'12px'}>
-                  <NESTLogo/>
-                  <Stack spacing={'4px'}>
-                    <Caption7>Trade with me on NESTFi</Caption7>
-                    <Caption5>{new Date().toLocaleString()}</Caption5>
-                  </Stack>
-                </Stack>
-                <Box style={{width: '64px', height: '64px', background: 'white', padding: '3px'}}>
-                  <QRCodeCanvas
-                    value={`https://finance.nestprotocol.org/?a=${address?.slice(-8).toLowerCase()}`}
-                    size={58}/>
-                </Box>
-              </Stack>
+            <Stack minHeight={'400px'} height={'calc(min(100vw, 450px) * 1.4622)'} alignItems={'center'} spacing={'18px'} justifyContent={'center'} sx={(theme) => ({
+              color: theme.normal.text0,
+              fontSize: '16px',
+              lineHeight: '22px',
+              fontWeight: '700',
+              "& svg": {
+                display: "block",
+                color: theme.normal.primary,
+              }
+            })}>
+              <CircularProgress size={'44px'}/>
+              <span>
+                Loading...
+              </span>
             </Stack>
           )
         }
+        <Stack ref={myShareRef} position={'absolute'} zIndex={-1}>
+          <Stack pt={'50px'} px={'24px'} bgcolor={'#0B0C0D'}
+                 style={{
+                   backgroundImage: `url('/images/share_deal.png')`,
+                   backgroundRepeat: 'no-repeat',
+                   backgroundPosition: 'center',
+                   backgroundSize: 'contain',
+                 }}
+          >
+            <Box sx={{
+              "& svg": {
+                height: '48px',
+                display: "block",
+                "& path": {
+                  fill: "#fff"
+                }
+              }
+            }}>
+              <NESTFiLogo/>
+            </Box>
+            {
+              !!showList[0] && (
+                <Stack pt={'44px'}>
+                  <Caption2>{showList[0].title}</Caption2>
+                  <Caption3 sx={{
+                    paddingTop: '8px',
+                    'span': {
+                      fontSize: '28px',
+                      lineHeight: '40px'
+                    }
+                  }}>{showList[0].value.toLocaleString('en-US', {
+                    maximumFractionDigits: 2,
+                  })} <span>NEST</span></Caption3>
+                  <Caption4 sx={(theme) => ({
+                    paddingTop: '16px',
+                    color: showList[0].rate >= 0 ? theme.normal.success : theme.normal.danger,
+                  })}>{showList[0].rate}%</Caption4>
+                </Stack>
+              )
+            }
+            <Stack spacing={'24px'} pt={'64px'}>
+              <Stack direction={'row'} justifyContent={'space-between'}>
+                {
+                  !!showList?.[1] && (
+                    <Stack spacing={'8px'} width={'50%'}>
+                      <Caption5>{showList?.[1].title}</Caption5>
+                      <Caption6
+                        sx={(theme) => ({
+                          'span': {
+                            color: showList?.[1].rate >= 0 ? theme.normal.success : theme.normal.danger
+                          }
+                        })}
+                      >{showList?.[1].value.toLocaleString('en-US', {
+                        maximumFractionDigits: 2,
+                      })} NEST <span>{showList?.[1].rate}%</span>
+                      </Caption6>
+                    </Stack>
+                  )
+                }
+                {
+                  !!showList?.[2] && (
+                    <Stack spacing={'8px'} width={'50%'}>
+                      <Caption5>{showList?.[2].title}</Caption5>
+                      <Caption6
+                        sx={(theme) => ({
+                          'span': {
+                            color: showList?.[2].rate >= 0 ? theme.normal.success : theme.normal.danger
+                          }
+                        })}
+                      >{showList?.[2].value.toLocaleString('en-US', {
+                        maximumFractionDigits: 2,
+                      })} NEST <span>{showList?.[2].rate}%</span></Caption6>
+                    </Stack>
+                  )
+                }
+              </Stack>
+              {
+                !!showList?.[3] && (
+                  <Stack spacing={'8px'} width={'50%'}>
+                    <Caption5>{showList?.[3].title}</Caption5>
+                    <Caption6
+                      sx={(theme) => ({
+                        'span': {
+                          color: showList?.[3].rate >= 0 ? theme.normal.success : theme.normal.danger
+                        }
+                      })}
+                    >{showList?.[3].value.toLocaleString('en-US', {
+                      maximumFractionDigits: 2,
+                    })} NEST <span>{showList?.[3].rate}%</span></Caption6>
+                  </Stack>
+                )
+              }
+            </Stack>
+            <Stack height={'80px'}/>
+          </Stack>
+          <Stack px={'20px'} direction={'row'} width={'100%'} paddingRight={'36px'}
+                 justifyContent={'space-between'}
+                 bgcolor={'rgba(29, 30, 34, 1)'}
+                 alignItems={"center"} py={'18px'}>
+            <Stack direction={'row'} spacing={'12px'}>
+              <NESTLogo/>
+              <Stack spacing={'4px'}>
+                <Caption7>Trade with me on NESTFi</Caption7>
+                <Caption5>{new Date().toLocaleString()}</Caption5>
+              </Stack>
+            </Stack>
+            <Box style={{width: '64px', height: '64px', background: 'white', padding: '3px'}}>
+              <QRCodeCanvas
+                value={`https://finance.nestprotocol.org/?a=${address?.slice(-8).toLowerCase()}`}
+                size={58}/>
+            </Box>
+          </Stack>
+        </Stack>
         <Stack px={'20px'} pb={'24px'}>
           <Stack direction={'row'} width={'100%'} spacing={'12px'} pt={'24px'}>
             <MainButton
@@ -580,7 +597,7 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`
                 fontWeight: '700',
                 lineHeight: '22px',
               }}
-              title={!dataUrl ? "Loading" :  "Image"}
+              title={!dataUrl ? "Loading" : "Image"}
               onClick={download}
               disable={!dataUrl}
             />
