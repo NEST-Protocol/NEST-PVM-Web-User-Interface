@@ -1,5 +1,5 @@
 import { Box, Modal, Stack } from "@mui/material";
-import {FC, useMemo, useRef} from "react";
+import {FC, useEffect, useMemo, useRef, useState} from "react";
 import BaseModal from "../Components/DashboardBaseModal";
 import { Order } from "../Dashboard";
 import { styled } from "@mui/material/styles";
@@ -80,34 +80,48 @@ interface ShareMyOrderModalProps {
 const ShareMyOrderModal: FC<ShareMyOrderModalProps> = ({ ...props }) => {
   const { address } = useAccount();
   const { messageSnackBar } = useNESTSnackBar();
-  const myShareRef = useRef(null)
+  const myShareRef = useRef(null);
+  const [dataUrl, setDataUrl] = useState<string | null>(null)
 
-  const download = () => {
-    if (!myShareRef.current) return
+  const buildDataUrl = async () => {
+    if (!myShareRef.current) {
+      return
+    }
+    console.log('buildDataUrl: start build')
     const node = myShareRef.current;
     // @ts-ignore
     node.style.width = '450px'
     if (node) {
-      domtoimage
-        .toPng(node, {
-          bgcolor: "#1D1E22",
-          // @ts-ignore
-          width: node.offsetWidth,
-          // @ts-ignore
-          height: node.offsetHeight,
-          quality: 1,
-          scale: 2,
-        })
+      domtoimage.toPng(node, {
+        bgcolor: '#1D1E22',
+        // @ts-ignore
+        width: node.offsetWidth,
+        // @ts-ignore
+        height: node.offsetHeight,
+        quality: 1,
+        scale: 2,
+      })
         .then(function (dataUrl) {
-          const link = document.createElement("a");
-          link.download = `${address}.png`;
-          link.href = dataUrl;
-          link.click();
-          // @ts-ignore
-          node.style.width = '100%'
-        });
+          setDataUrl(dataUrl)
+        })
     }
-  };
+  }
+
+  useEffect(() => {
+    buildDataUrl()
+  }, [props, myShareRef])
+
+  const download = async () => {
+    const link = document.createElement('a');
+    link.download = `${address}.png`;
+    if (!dataUrl) {
+      await buildDataUrl()
+    }
+    if (typeof dataUrl === "string") {
+      link.href = dataUrl;
+      link.click();
+    }
+  }
 
   const shareLink = useMemo(() => {
     const order = props.value;
@@ -292,8 +306,9 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`;
                   fontWeight: "700",
                   lineHeight: "22px",
                 }}
-                title={"Download"}
+                title={"Image"}
                 onClick={download}
+                disable={!dataUrl}
               />
               <MainButton
                 style={{

@@ -1,5 +1,5 @@
 import {Box, Modal, Stack} from "@mui/material";
-import {FC, useMemo, useRef} from "react";
+import {FC, useEffect, useMemo, useRef, useState} from "react";
 import BaseModal from "../Components/DashboardBaseModal";
 import {Order} from "../Dashboard";
 import {styled} from "@mui/material/styles";
@@ -11,7 +11,7 @@ import MainButton from "../../../components/MainButton/MainButton";
 import domtoimage from "../../../lib/dom-to-image";
 import useNESTSnackBar from "../../../hooks/useNESTSnackBar";
 import copy from "copy-to-clipboard";
-import { parseUnits } from "ethers/lib/utils.js";
+import {parseUnits} from "ethers/lib/utils.js";
 
 const Caption5 = styled('div')(({theme}) => ({
   fontWeight: "400",
@@ -75,9 +75,13 @@ const ShareNewOrderModal: FC<ShareNewOrderModalProps> = ({...props}) => {
   const {address} = useAccount()
   const {messageSnackBar} = useNESTSnackBar()
   const myShareRef = useRef(null)
+  const [dataUrl, setDataUrl] = useState<string | null>(null)
 
-  const download = () => {
-    if (!myShareRef.current) return
+  const buildDataUrl = async () => {
+    if (!myShareRef.current) {
+      return
+    }
+    console.log('buildDataUrl: start build')
     const node = myShareRef.current;
     // @ts-ignore
     node.style.width = '450px'
@@ -92,13 +96,24 @@ const ShareNewOrderModal: FC<ShareNewOrderModalProps> = ({...props}) => {
         scale: 2,
       })
         .then(function (dataUrl) {
-          const link = document.createElement('a');
-          link.download = `${address}.png`;
-          link.href = dataUrl;
-          link.click();
-          // @ts-ignore
-          node.style.width = '100%'
+          setDataUrl(dataUrl)
         })
+    }
+  }
+
+  useEffect(() => {
+    buildDataUrl()
+  }, [props, myShareRef])
+
+  const download = async () => {
+    const link = document.createElement('a');
+    link.download = `${address}.png`;
+    if (!dataUrl) {
+      await buildDataUrl()
+    }
+    if (typeof dataUrl === "string") {
+      link.href = dataUrl;
+      link.click();
     }
   }
 
@@ -132,7 +147,8 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`
     >
       <Box>
         <BaseModal>
-          <Stack width={'100%'} bgcolor={'rgba(29, 30, 34, 1)'} position={'relative'} borderRadius={'12px'} overflow={'hidden'}>
+          <Stack width={'100%'} bgcolor={'rgba(29, 30, 34, 1)'} position={'relative'} borderRadius={'12px'}
+                 overflow={'hidden'}>
             <TopStack sx={{
               "& button": {
                 "& svg": {
@@ -225,12 +241,17 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`
                 copy(link);
                 messageSnackBar("Copy Successfully");
               }}/>
-              <MainButton style={{
-                height: '48px',
-                fontSize: '16px',
-                fontWeight: '700',
-                lineHeight: '22px',
-              }} title={'Download'} onClick={download}/>
+              <MainButton
+                style={{
+                  height: '48px',
+                  fontSize: '16px',
+                  fontWeight: '700',
+                  lineHeight: '22px',
+                }}
+                title={'Image'}
+                onClick={download}
+                disable={!dataUrl}
+              />
               <MainButton style={{
                 height: '48px',
                 fontSize: '16px',

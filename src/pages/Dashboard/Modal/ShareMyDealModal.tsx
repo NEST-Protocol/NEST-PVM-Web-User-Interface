@@ -1,5 +1,5 @@
 import {Box, Drawer, Modal, Stack} from "@mui/material";
-import {FC, useMemo, useRef, useState} from "react";
+import {FC, useEffect, useMemo, useRef, useState} from "react";
 import domtoimage from "../../../lib/dom-to-image";
 import {useAccount} from "wagmi";
 import useWindowWidth from "../../../hooks/useWindowWidth";
@@ -76,7 +76,7 @@ const Card1 = styled(Stack)(({theme}) => ({
   cursor: 'pointer'
 }))
 
-const ModalButton = styled(Stack)(({theme}) => ({
+const ModalButton = styled('button')(({theme}) => ({
   width: '100%',
   height: '48px',
   borderRadius: '12px',
@@ -94,6 +94,9 @@ const ModalButton = styled(Stack)(({theme}) => ({
   "&:active": {
     background: theme.normal.primary_active,
   },
+  "&:disabled": {
+    background: theme.normal.disabled_bg,
+  }
 }))
 
 const DivSvg = styled('div')(({theme}) => ({
@@ -152,9 +155,13 @@ const ShareMyDealModal: FC<ShareMyDealModalProps> = ({...props}) => {
   const [showPage, setShowPage] = useState(false)
   const {isBigMobile} = useWindowWidth()
   const myShareRef = useRef(null)
+  const [dataUrl, setDataUrl] = useState<string | null>(null)
 
-  const download = () => {
-    if (!myShareRef.current) return
+  const buildDataUrl = async () => {
+    if (!myShareRef.current) {
+      return
+    }
+    console.log('buildDataUrl: start build')
     const node = myShareRef.current;
     // @ts-ignore
     node.style.width = '450px'
@@ -169,15 +176,27 @@ const ShareMyDealModal: FC<ShareMyDealModalProps> = ({...props}) => {
         scale: 2,
       })
         .then(function (dataUrl) {
-          const link = document.createElement('a');
-          link.download = `${address}.png`;
-          link.href = dataUrl;
-          link.click();
-          // @ts-ignore
-          node.style.width = '100%'
+          setDataUrl(dataUrl)
         })
     }
   }
+
+  useEffect(() => {
+    buildDataUrl()
+  }, [props, myShareRef])
+
+  const download = async () => {
+    const link = document.createElement('a');
+    link.download = `${address}.png`;
+    if (!dataUrl) {
+      await buildDataUrl()
+    }
+    if (typeof dataUrl === "string") {
+      link.href = dataUrl;
+      link.click();
+    }
+  }
+
   const tweet = () => {
     const link = `https://finance.nestprotocol.org/?a=${address?.slice(-8).toLowerCase()}`
     const text = `Follow the right person, making money is as easy as breathing.
@@ -434,122 +453,128 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`
             </button>
           </Stack>
         </TopStack>
-        <Stack ref={myShareRef}>
-          <Stack pt={'50px'} px={'24px'} bgcolor={'#0B0C0D'}
-                 style={{
-                   backgroundImage: `url('/images/share_deal.svg')`,
-                   backgroundRepeat: 'no-repeat',
-                   backgroundPosition: 'center',
-                   backgroundSize: 'contain',
-                 }}
-          >
-            <Box sx={{
-              "& svg": {
-                height: '48px',
-                display: "block",
-                "& path": {
-                  fill: "#fff"
-                }
-              }
-            }}>
-              <NESTFiLogo/>
-            </Box>
-            {
-              !!showList[0] && (
-                <Stack pt={'44px'}>
-                  <Caption2>{showList[0].title}</Caption2>
-                  <Caption3 sx={{
-                    paddingTop: '8px',
-                    'span': {
-                      fontSize: '28px',
-                      lineHeight: '40px'
+        {
+          dataUrl ? (
+            <img src={dataUrl} style={{width: '100%'}} alt={'share'}/>
+          ) : (
+            <Stack ref={myShareRef}>
+              <Stack pt={'50px'} px={'24px'} bgcolor={'#0B0C0D'}
+                     style={{
+                       backgroundImage: `url('/images/share_deal.svg')`,
+                       backgroundRepeat: 'no-repeat',
+                       backgroundPosition: 'center',
+                       backgroundSize: 'contain',
+                     }}
+              >
+                <Box sx={{
+                  "& svg": {
+                    height: '48px',
+                    display: "block",
+                    "& path": {
+                      fill: "#fff"
                     }
-                  }}>{showList[0].value.toLocaleString('en-US', {
-                    maximumFractionDigits: 2,
-                  })} <span>NEST</span></Caption3>
-                  <Caption4 sx={(theme) => ({
-                    paddingTop: '16px',
-                    color: showList[0].rate >= 0 ? theme.normal.success : theme.normal.danger,
-                  })}>{showList[0].rate}%</Caption4>
-                </Stack>
-              )
-            }
-            <Stack spacing={'24px'} pt={'64px'}>
-              <Stack direction={'row'} justifyContent={'space-between'}>
+                  }
+                }}>
+                  <NESTFiLogo/>
+                </Box>
                 {
-                  !!showList?.[1] && (
-                    <Stack spacing={'8px'} width={'50%'}>
-                      <Caption5>{showList?.[1].title}</Caption5>
-                      <Caption6
-                        sx={(theme) => ({
-                          'span': {
-                            color: showList?.[1].rate >= 0 ? theme.normal.success : theme.normal.danger
-                          }
-                        })}
-                      >{showList?.[1].value.toLocaleString('en-US', {
-                        maximumFractionDigits: 2,
-                      })} NEST <span>{showList?.[1].rate}%</span>
-                      </Caption6>
-                    </Stack>
-                  )
-                }
-                {
-                  !!showList?.[2] && (
-                    <Stack spacing={'8px'} width={'50%'}>
-                      <Caption5>{showList?.[2].title}</Caption5>
-                      <Caption6
-                        sx={(theme) => ({
-                          'span': {
-                            color: showList?.[2].rate >= 0 ? theme.normal.success : theme.normal.danger
-                          }
-                        })}
-                      >{showList?.[2].value.toLocaleString('en-US', {
-                        maximumFractionDigits: 2,
-                      })} NEST <span>{showList?.[2].rate}%</span></Caption6>
-                    </Stack>
-                  )
-                }
-              </Stack>
-              {
-                !!showList?.[3] && (
-                  <Stack spacing={'8px'} width={'50%'}>
-                    <Caption5>{showList?.[3].title}</Caption5>
-                    <Caption6
-                      sx={(theme) => ({
+                  !!showList[0] && (
+                    <Stack pt={'44px'}>
+                      <Caption2>{showList[0].title}</Caption2>
+                      <Caption3 sx={{
+                        paddingTop: '8px',
                         'span': {
-                          color: showList?.[3].rate >= 0 ? theme.normal.success : theme.normal.danger
+                          fontSize: '28px',
+                          lineHeight: '40px'
                         }
-                      })}
-                    >{showList?.[3].value.toLocaleString('en-US', {
-                      maximumFractionDigits: 2,
-                    })} NEST <span>{showList?.[3].rate}%</span></Caption6>
+                      }}>{showList[0].value.toLocaleString('en-US', {
+                        maximumFractionDigits: 2,
+                      })} <span>NEST</span></Caption3>
+                      <Caption4 sx={(theme) => ({
+                        paddingTop: '16px',
+                        color: showList[0].rate >= 0 ? theme.normal.success : theme.normal.danger,
+                      })}>{showList[0].rate}%</Caption4>
+                    </Stack>
+                  )
+                }
+                <Stack spacing={'24px'} pt={'64px'}>
+                  <Stack direction={'row'} justifyContent={'space-between'}>
+                    {
+                      !!showList?.[1] && (
+                        <Stack spacing={'8px'} width={'50%'}>
+                          <Caption5>{showList?.[1].title}</Caption5>
+                          <Caption6
+                            sx={(theme) => ({
+                              'span': {
+                                color: showList?.[1].rate >= 0 ? theme.normal.success : theme.normal.danger
+                              }
+                            })}
+                          >{showList?.[1].value.toLocaleString('en-US', {
+                            maximumFractionDigits: 2,
+                          })} NEST <span>{showList?.[1].rate}%</span>
+                          </Caption6>
+                        </Stack>
+                      )
+                    }
+                    {
+                      !!showList?.[2] && (
+                        <Stack spacing={'8px'} width={'50%'}>
+                          <Caption5>{showList?.[2].title}</Caption5>
+                          <Caption6
+                            sx={(theme) => ({
+                              'span': {
+                                color: showList?.[2].rate >= 0 ? theme.normal.success : theme.normal.danger
+                              }
+                            })}
+                          >{showList?.[2].value.toLocaleString('en-US', {
+                            maximumFractionDigits: 2,
+                          })} NEST <span>{showList?.[2].rate}%</span></Caption6>
+                        </Stack>
+                      )
+                    }
                   </Stack>
-                )
-              }
-            </Stack>
-            <Stack height={'80px'}/>
-          </Stack>
-          <Stack px={'20px'} direction={'row'} width={'100%'} paddingRight={'36px'}
-                 justifyContent={'space-between'}
-                 bgcolor={'rgba(29, 30, 34, 1)'}
-                 alignItems={"center"} py={'18px'}>
-            <Stack direction={'row'} spacing={'12px'}>
-              <NESTLogo/>
-              <Stack spacing={'4px'}>
-                <Caption7>Get the NESTFi APP</Caption7>
-                <Caption5>{new Date().toLocaleString()}</Caption5>
+                  {
+                    !!showList?.[3] && (
+                      <Stack spacing={'8px'} width={'50%'}>
+                        <Caption5>{showList?.[3].title}</Caption5>
+                        <Caption6
+                          sx={(theme) => ({
+                            'span': {
+                              color: showList?.[3].rate >= 0 ? theme.normal.success : theme.normal.danger
+                            }
+                          })}
+                        >{showList?.[3].value.toLocaleString('en-US', {
+                          maximumFractionDigits: 2,
+                        })} NEST <span>{showList?.[3].rate}%</span></Caption6>
+                      </Stack>
+                    )
+                  }
+                </Stack>
+                <Stack height={'80px'}/>
+              </Stack>
+              <Stack px={'20px'} direction={'row'} width={'100%'} paddingRight={'36px'}
+                     justifyContent={'space-between'}
+                     bgcolor={'rgba(29, 30, 34, 1)'}
+                     alignItems={"center"} py={'18px'}>
+                <Stack direction={'row'} spacing={'12px'}>
+                  <NESTLogo/>
+                  <Stack spacing={'4px'}>
+                    <Caption7>Get the NESTFi APP</Caption7>
+                    <Caption5>{new Date().toLocaleString()}</Caption5>
+                  </Stack>
+                </Stack>
+                <Box style={{width: '64px', height: '64px', background: 'white', padding: '3px'}}>
+                  <QRCodeCanvas
+                    value={`https://finance.nestprotocol.org/?a=${address?.slice(-8).toLowerCase()}`}
+                    size={58}/>
+                </Box>
               </Stack>
             </Stack>
-            <Box style={{width: '64px', height: '64px', background: 'white', padding: '3px'}}>
-              <QRCodeCanvas
-                value={`https://finance.nestprotocol.org/?a=${address?.slice(-8).toLowerCase()}`}
-                size={58}/>
-            </Box>
-          </Stack>
-        </Stack>
+          )
+        }
         <Stack px={'20px'} pb={'24px'}>
           <Stack direction={'row'} width={'100%'} spacing={'12px'} pt={'24px'}>
-            <ModalButton onClick={download}>
+            <ModalButton onClick={download} disabled={!dataUrl}>
               <Stack direction={'row'} spacing={'12px'} alignItems={"center"} justifyContent={"center"}>
                 <DivSvg>
                   <DownloadIcon/>
