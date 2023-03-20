@@ -567,7 +567,7 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`
                 <Stack direction={'row'} spacing={'12px'}>
                   <NESTLogo/>
                   <Stack spacing={'4px'}>
-                    <Caption7>Get the NESTFi APP</Caption7>
+                    <Caption7>Trade with me on NESTFi</Caption7>
                     <Caption5>{new Date().toLocaleString()}</Caption5>
                   </Stack>
                 </Stack>
