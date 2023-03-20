@@ -225,6 +225,7 @@ const ConnectWalletModal: FC<ConnectWalletModalProps> = ({ ...props }) => {
         open={props.open}
         onClose={props.onClose}
         sx={{
+          zIndex: 1301,
           "& .MuiPaper-root": { background: "none", backgroundImage: "none" },
         }}
       >
