@@ -150,6 +150,7 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`;
             bgcolor={"rgba(29, 30, 34, 1)"}
             borderRadius={"12px"}
             overflow={"hidden"}
+            position={'relative'}
           >
             <TopStack
               sx={{

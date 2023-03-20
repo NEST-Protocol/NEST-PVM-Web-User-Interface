@@ -134,7 +134,7 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`
     >
       <Box>
         <BaseModal>
-          <Stack width={'100%'} bgcolor={'rgba(29, 30, 34, 1)'} borderRadius={'12px'} overflow={'hidden'}>
+          <Stack width={'100%'} bgcolor={'rgba(29, 30, 34, 1)'} position={'relative'} borderRadius={'12px'} overflow={'hidden'}>
             <TopStack sx={{
               "& button": {
                 "& svg": {
