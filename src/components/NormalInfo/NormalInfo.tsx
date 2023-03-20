@@ -39,7 +39,7 @@ const NormalInfo: FC<NormalInfoProps> = ({ ...props }) => {
         >
           {props.title}
         </Box>
-        {props.help ? <NESTTooltipFC title={props.helpInfo} /> : <></>}
+        {props.help ? <NESTTooltipFC title={props.helpInfo}/> : <></>}
       </Stack>
 
       <Stack

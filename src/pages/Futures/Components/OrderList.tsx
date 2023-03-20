@@ -6,7 +6,9 @@ import useFuturesOrder from "../../../hooks/useFuturesOrder";
 import { FuturesOrderV2 } from "../../../hooks/useFuturesOrderList";
 import ShareNewOrderModal from "../../Dashboard/Modal/ShareNewOrderModal";
 import { FuturesModalInfo, FuturesModalType } from "../OrderList";
-import { FuturesOrderListInfoMain } from "./FuturesOrderListInfo";
+import FuturesOrderListInfo, {
+  FuturesOrderListInfoMain,
+} from "./FuturesOrderListInfo";
 import OrderListPosition from "./OrderListPosition";
 
 interface OrderListProps {
@@ -28,6 +30,8 @@ const OrderList: FC<OrderListProps> = ({ ...props }) => {
     showShareOrderModal,
     setShowShareOrderModal,
     shareOrder,
+    tp,
+    sl,
   } = useFuturesOrder(props.data);
   return (
     <Stack
@@ -71,6 +75,28 @@ const OrderList: FC<OrderListProps> = ({ ...props }) => {
           </FuturesOrderListInfoMain>
         </Stack>
       </Stack>
+      {props.data.trustOrder ? (
+        <Stack direction={"row"} justifyContent={"space-around"}>
+          <FuturesOrderListInfo
+            direction={"row"}
+            spacing={"4px"}
+            width={"100%"}
+          >
+            <Box component={"p"}>Take Profit</Box>
+            <Box component={"p"}>{tp}USDT</Box>
+          </FuturesOrderListInfo>
+          <FuturesOrderListInfo
+            direction={"row"}
+            spacing={"4px"}
+            width={"100%"}
+          >
+            <Box component={"p"}>Stop Loss</Box>
+            <Box component={"p"}>{sl}USDT</Box>
+          </FuturesOrderListInfo>
+        </Stack>
+      ) : (
+        <></>
+      )}
       <Stack direction={"row"} spacing={"8px"}>
         <MainButton
           title={"Edit"}
