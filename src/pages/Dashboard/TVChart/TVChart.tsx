@@ -36,8 +36,8 @@ const Value1 = styled("div")(({theme}) => ({
     lineHeight: '40px',
   },
   [theme.breakpoints.down('sm')]: {
-    fontSize: "24px",
-    lineHeight: "32px",
+    fontSize: "20px",
+    lineHeight: "28px",
     'span': {
       fontSize: '18px',
       lineHeight: '24px',
