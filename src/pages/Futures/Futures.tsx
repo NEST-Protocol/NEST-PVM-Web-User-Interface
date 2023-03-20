@@ -4,8 +4,6 @@ import { FC, useCallback, useEffect, useMemo, useState } from "react";
 import useReadFuturesPrice from "../../contracts/Read/useReadFutureContract";
 import useNEST from "../../hooks/useNEST";
 import useWindowWidth, { WidthType } from "../../hooks/useWindowWidth";
-import { getQueryVariable } from "../../lib/queryVaribale";
-import SharePositionModal from "./Modal/SharePositionModal";
 import FuturesMoreInfo from "./MoreInfo";
 import FuturesNewOrder from "./NewOrder";
 import FuturesOrderList from "./OrderList";
@@ -20,7 +18,7 @@ const Futures: FC = () => {
   const { account } = useNEST();
   const { width, isBigMobile } = useWindowWidth();
   const [tokenPair, setTokenPair] = useState("ETH");
-  const [openSharePosition, setOpenSharePosition] = useState<boolean>(false);
+ 
   const priceToken = useMemo(() => {
     return ["ETH", "BTC", "BNB"];
   }, []);
@@ -52,17 +50,7 @@ const Futures: FC = () => {
       clearInterval(time);
     };
   }, [BNBPriceRefetch, BTCPriceRefetch, ETHPriceRefetch, account.address]);
-  useEffect(() => {
-    let code = getQueryVariable("pt");
-    if (code) {
-      const num = priceToken.filter(
-        (item) => item.toLocaleLowerCase() === code!.toLocaleLowerCase()
-      );
-      if (num && num.length > 0) {
-        setOpenSharePosition(true);
-      }
-    }
-  }, [priceToken]);
+  
   const paddingY = useMemo(() => {
     return isBigMobile ? 0 : 24;
   }, [isBigMobile]);
@@ -87,15 +75,7 @@ const Futures: FC = () => {
   const moreInfo = useCallback(() => {
     return <FuturesMoreInfo />;
   }, []);
-  const sharePositionModal = useMemo(() => {
-    return (
-      <SharePositionModal
-        open={openSharePosition}
-        price={price}
-        onClose={() => setOpenSharePosition(false)}
-      />
-    );
-  }, [openSharePosition, price]);
+  
 
   const mainView = useMemo(() => {
     switch (width) {
@@ -149,7 +129,6 @@ const Futures: FC = () => {
   ]);
   return (
     <>
-      {sharePositionModal}
       {mainView}
     </>
   );

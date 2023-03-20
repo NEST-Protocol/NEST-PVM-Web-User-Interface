@@ -82,7 +82,7 @@ const ShareNewOrderModal: FC<ShareNewOrderModalProps> = ({...props}) => {
     if (!myShareRef.current) {
       setTimeout(() => {
         buildDataUrl()
-      }, 500)
+      }, 300)
       return
     }
     const node = myShareRef.current;
