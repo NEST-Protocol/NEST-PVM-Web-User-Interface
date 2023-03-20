@@ -25,7 +25,7 @@ interface NESTTooltipFCProps {
 
 export const NESTTooltipFC: FC<NESTTooltipFCProps> = ({ ...props }) => {
   return (
-    <NESTTooltip title={props.title} placement="top-start" arrow disableFocusListener>
+    <NESTTooltip title={props.title} placement="top-start" arrow disableFocusListener enterTouchDelay={10}>
       <Box
         component={"button"}
         sx={(theme) => ({
