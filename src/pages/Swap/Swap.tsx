@@ -242,7 +242,7 @@ const Swap: FC = () => {
                 justifyContent={"flex-end"}
                 spacing={"8px"}
               >
-                <p>{slippage} %</p>
+                {/* <p>{slippage} %</p> */}
                 <LinkButton onClick={() => setOpenModal(true)}>
                   <WriteIcon />
                 </LinkButton>

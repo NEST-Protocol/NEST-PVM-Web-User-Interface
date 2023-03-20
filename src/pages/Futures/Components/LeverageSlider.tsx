@@ -65,6 +65,7 @@ const LeverageSlider: FC<LeverageSliderProps> = ({ ...props }) => {
           })}
         >{`${props.value}X`}</Box>
       </Stack>
+      <Box sx={{paddingX: '5px'}}>
       <Slider
         aria-label="Custom marks"
         defaultValue={1}
@@ -104,12 +105,16 @@ const LeverageSlider: FC<LeverageSliderProps> = ({ ...props }) => {
             background: theme.normal.highLight,
             width: '12px',
             height: '12px',
+            "&:before": {
+              boxShadow: 'none'
+            },
             "&:hover":{
               boxShadow: 'none'
             },
             "&:active":{
               boxShadow: 'none'
-            }
+            },
+            boxShadow: 'none'
           },
           "& .MuiSlider-markLabel": {
             fontSize: 14,
@@ -118,6 +123,7 @@ const LeverageSlider: FC<LeverageSliderProps> = ({ ...props }) => {
           }
         })}
       />
+      </Box>
     </Stack>
   );
 };

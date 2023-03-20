@@ -26,10 +26,20 @@ const SWAP_UPDATE = 30;
 
 function useSwap() {
   const { chainsData, account, setShowConnect } = useNEST();
-  const [swapToken, setSwapToken] = useState<SwapToken>({
-    src: "USDT",
-    dest: "NEST",
-  });
+  const swapTokenOfChain = useCallback(() => {
+    if (chainsData.chainId === 1) {
+      return {
+        src: "NHBTC",
+        dest: "NEST",
+      };
+    } else {
+      return {
+        src: "USDT",
+        dest: "NEST",
+      };
+    }
+  }, [chainsData.chainId]);
+  const [swapToken, setSwapToken] = useState<SwapToken>(swapTokenOfChain());
   const [slippage, setSlippage] = useState<number>(0.1);
   const [inputAmount, setInputAmount] = useState<string>("");
   const [outAmount, setOutAmount] = useState<string>("");
@@ -37,12 +47,15 @@ function useSwap() {
   const { isPendingType } = usePendingTransactions();
   const tokenArray = useMemo(() => {
     if (chainsData.chainId === 1 || chainsData.chainId === 5) {
-      return ["USDT", "NEST", "NHBTC"];
+      return ["NHBTC"];
     } else if (chainsData.chainId === 56 || chainsData.chainId === 97) {
       // TODO: delete NHBTC
       return ["USDT", "NEST", "NHBTC"];
     }
   }, [chainsData.chainId]);
+  useEffect(() => {
+    setSwapToken(swapTokenOfChain())
+  }, [swapTokenOfChain])
   /**
    * swap contract
    */
@@ -399,7 +412,7 @@ function useSwap() {
         image: imageURL, // A string url of the token logo
       });
     }
-  }, [account.connector, chainsData.chainId])
+  }, [account.connector, chainsData.chainId]);
 
   useEffect(() => {
     if (swapToken.src === "USDT" || swapToken.src === "NEST") {
