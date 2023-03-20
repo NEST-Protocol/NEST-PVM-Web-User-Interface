@@ -85,9 +85,11 @@ const ShareMyOrderModal: FC<ShareMyOrderModalProps> = ({...props}) => {
 
   const buildDataUrl = async () => {
     if (!myShareRef.current) {
+      setTimeout(() => {
+        buildDataUrl()
+      }, 300)
       return
     }
-    console.log('buildDataUrl: start build')
     const node = myShareRef.current;
     try {
       // @ts-ignore
@@ -116,8 +118,10 @@ const ShareMyOrderModal: FC<ShareMyOrderModalProps> = ({...props}) => {
   }
 
   useEffect(() => {
-    buildDataUrl()
-  }, [props, myShareRef])
+    if (!dataUrl) {
+      buildDataUrl()
+    }
+  }, [props])
 
   const download = async () => {
     const link = document.createElement('a');
