@@ -111,13 +111,14 @@ const FuturesNewOrder: FC<FuturesNewOrderProps> = ({ ...props }) => {
             changeValue={(value: boolean) => setIsStop(value)}
           />{" "}
           <Box
-            component={"p"}
+            component={"button"}
             sx={(theme) => ({
               fontSize: 16,
               fontWeight: 700,
               marginLeft: "4px",
               color: theme.normal.text0,
             })}
+            onClick={() => setIsStop(!isStop)}
           >
             Stop-Limit
           </Box>
