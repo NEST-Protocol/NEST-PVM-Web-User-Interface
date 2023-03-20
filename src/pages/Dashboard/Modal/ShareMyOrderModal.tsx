@@ -159,7 +159,10 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`;
   return (
     <Modal
       open={props.open}
-      onClose={() => props.onClose()}
+      onClose={() => {
+        setDataUrl(null)
+        props.onClose()
+      }}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
@@ -183,7 +186,10 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`;
                 },
               }}
             >
-              <button onClick={props.onClose}>
+              <button onClick={() => {
+                setDataUrl(null)
+                props.onClose()
+              }}>
                 <Close/>
               </button>
             </TopStack>

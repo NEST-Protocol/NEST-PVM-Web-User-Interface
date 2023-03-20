@@ -267,7 +267,10 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`
               color: theme.normal.text0,
               textAlign: 'center',
             })}>Share</Box>
-            <button onClick={props.onClose}>
+            <button onClick={() => {
+              setDataUrl(null)
+              props.onClose()
+            }}>
               <Close/>
             </button>
           </Stack>
@@ -455,6 +458,7 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`
           <Stack direction={'row'} justifyContent={'end'}>
             <button onClick={() => {
               setShowPage(false)
+              setDataUrl(null)
               props.onClose()
             }}>
               <Close/>
@@ -609,7 +613,10 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`
       <Drawer
         anchor={"bottom"}
         open={props.open}
-        onClose={props.onClose}
+        onClose={() => {
+          setDataUrl(null)
+          props.onClose()
+        }}
         sx={{
           "& .MuiPaper-root": {background: "none", backgroundImage: "none"},
         }}
@@ -626,7 +633,10 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`
   return (
     <Modal
       open={props.open}
-      onClose={() => props.onClose()}
+      onClose={() => {
+        setDataUrl(null)
+        props.onClose()
+      }}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
