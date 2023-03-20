@@ -101,7 +101,7 @@ export const darkTheme = createTheme({
   breakpoints: {
     values: {
       xs: 0,
-      ssm: 420,
+      ssm: 450,
       sm: 768,
       md: 992,
       lg: 1200,

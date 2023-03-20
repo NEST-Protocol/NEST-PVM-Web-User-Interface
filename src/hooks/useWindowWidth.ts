@@ -10,7 +10,7 @@ export enum WidthType {
 
 function useWindowWidth() {
   const getType = (width: number) => {
-    if (width < 420) {
+    if (width < 450) {
       return WidthType.ssm;
     } else if (width < 768) {
       return WidthType.sm;

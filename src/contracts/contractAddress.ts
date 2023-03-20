@@ -4,6 +4,7 @@ import {
   ETHLogo,
   ETHTokenLogo,
   NESTLogo,
+  NHBTCTokenLogo,
   USDTLogo,
 } from "../components/icons";
 
@@ -131,7 +132,7 @@ export const TokenList: Array<TokenType> = [
   },
   {
     symbol: "NHBTC",
-    icon: USDTLogo,
+    icon: NHBTCTokenLogo,
     decimals: All18,
     address: NHBTCToken,
   },

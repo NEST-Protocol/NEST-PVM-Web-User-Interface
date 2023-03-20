@@ -49,13 +49,12 @@ function useSwap() {
     if (chainsData.chainId === 1 || chainsData.chainId === 5) {
       return ["NHBTC"];
     } else if (chainsData.chainId === 56 || chainsData.chainId === 97) {
-      // TODO: delete NHBTC
-      return ["USDT", "NEST", "NHBTC"];
+      return ["USDT", "NEST"];
     }
   }, [chainsData.chainId]);
   useEffect(() => {
-    setSwapToken(swapTokenOfChain())
-  }, [swapTokenOfChain])
+    setSwapToken(swapTokenOfChain());
+  }, [swapTokenOfChain]);
   /**
    * swap contract
    */

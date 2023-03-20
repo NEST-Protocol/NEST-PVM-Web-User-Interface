@@ -20,6 +20,7 @@ interface FuturesTableTitleProps {
   noOrder?: boolean;
   style?: React.CSSProperties;
   helps?: FuturesTableTitleHelp[];
+  noNeedPadding?: boolean;
 }
 
 const FuturesTableTitle: FC<FuturesTableTitleProps> = ({
@@ -35,10 +36,16 @@ const FuturesTableTitle: FC<FuturesTableTitleProps> = ({
     ) : (
       <></>
     );
+    const paddingConfig = props.noNeedPadding ? { padding: '0px !important' } : {};
     return (
       <TableCell
         key={`TableTitle + ${props.dataArray.length} + ${index}`}
         align={index === props.dataArray.length - 1 ? "right" : "left"}
+        sx={
+          index !== 0 && index !== props.dataArray.length - 1
+            ? paddingConfig
+            : {}
+        }
       >
         {help ? (
           <Stack direction={"row"} alignItems={"center"} spacing={"4px"}>
@@ -57,7 +64,7 @@ const FuturesTableTitle: FC<FuturesTableTitleProps> = ({
         <TableHead
           sx={(theme) => ({
             "& th": {
-              padding: "0px 20px",
+              padding: "0 20px",
               height: "44px",
               fontWeight: 400,
               fontSize: 12,
@@ -72,8 +79,8 @@ const FuturesTableTitle: FC<FuturesTableTitleProps> = ({
         <TableBody
           sx={(theme) => ({
             "& td": {
+              padding: "0 20px",
               height: "84px",
-              padding: "0px 20px",
               borderBottom: `1px solid ${theme.normal.border}`,
             },
           })}
