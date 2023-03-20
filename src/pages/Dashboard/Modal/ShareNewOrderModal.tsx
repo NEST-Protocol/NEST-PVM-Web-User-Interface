@@ -177,7 +177,7 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`
                 <Stack ref={myShareRef}>
                   <Stack pt={'50px'} px={'24px'} bgcolor={'#0B0C0D'} minHeight={'558px'}
                          style={{
-                           backgroundImage: "url('/images/share_order2.svg')",
+                           backgroundImage: "url('/images/share_order2.png')",
                            backgroundRepeat: 'no-repeat',
                            backgroundPosition: 'center',
                            backgroundSize: 'contain',

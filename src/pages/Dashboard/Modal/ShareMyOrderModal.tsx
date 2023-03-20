@@ -198,7 +198,7 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`;
                     bgcolor={"#0B0C0D"}
                     minHeight={"558px"}
                     style={{
-                      backgroundImage: `url('/images/share_order.svg')`,
+                      backgroundImage: `url('/images/share_order.png')`,
                       backgroundRepeat: "no-repeat",
                       backgroundPosition: "center",
                       backgroundSize: "contain",
