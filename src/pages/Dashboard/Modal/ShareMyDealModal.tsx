@@ -587,7 +587,7 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`
                 <DivSvg>
                   <DownloadIcon/>
                 </DivSvg>
-                <span>Image</span>
+                <span>{!dataUrl ? "Loading" : "Image"}</span>
               </Stack>
             </ModalButton>
             <ModalButton onClick={tweet}>
