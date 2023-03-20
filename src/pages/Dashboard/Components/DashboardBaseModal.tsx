@@ -14,7 +14,9 @@ const BaseModal: FC<BaseModalProps> = ({children}) => {
       top: "50%",
       left: "50%",
       transform: "translate(-50%, -50%)",
-      padding: ['20px', '20px', 0]
+      padding: ['20px', '20px', 0],
+      height: ['100%', '100%', 'auto'],
+      overflow: 'auto',
     }}>
       <Stack sx={(theme) => ({
         width: '100%',
