@@ -490,7 +490,11 @@ const Dashboard: FC = () => {
               cursor: 'pointer'
             }} onClick={() => {
               setShowShareOrderModal(true)
-              setShareOrder(item)
+              setShareOrder({
+                ...item,
+                sp: Number(item.sp.toFixed(2)),
+                sl: Number(item.sl.toFixed(2)),
+              })
             }}>
               <Share/>
             </FuturesOrderShare>
@@ -506,7 +510,11 @@ const Dashboard: FC = () => {
         paddingX: '16px'
       }} key={index} onClick={() => {
         setShowShareOrderModal(true)
-        setShareOrder(item)
+        setShareOrder({
+          ...item,
+          sp: Number(item.sp.toFixed(2)),
+          sl: Number(item.sl.toFixed(2)),
+        })
       }}>
         <OrderTablePosition
           tokenName={item.tokenPair.split('/')[0]}
