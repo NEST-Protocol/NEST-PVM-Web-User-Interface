@@ -14,6 +14,7 @@ import Box from "@mui/material/Box";
 import ApplyModal from "./Modal/ApplyModal";
 import useWindowWidth from "../../hooks/useWindowWidth";
 import useTheme from "../../hooks/useTheme";
+import {Link} from "react-router-dom";
 
 const Header1 = styled("header")(({theme}) => ({
   fontWeight: "700",
@@ -270,10 +271,10 @@ const Home: FC = () => {
             )
           }
           <Stack pb={['60px', '60px', '80px']} zIndex={1} px={['20px', '20px', '40px']}>
-            <MainButton title={"Start Trading"} style={{width: '200px', height: "48px"}}
-                        onClick={() => {
-                          window.location.href = '/#/futures'
-                        }}/>
+            <Link to={'/futures'}>
+              <MainButton title={"Start Trading"} style={{width: '200px', height: "48px"}}
+                          onClick={() => {}}/>
+            </Link>
           </Stack>
         </Stack>
         {
