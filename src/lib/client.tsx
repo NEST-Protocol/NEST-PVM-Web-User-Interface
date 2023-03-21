@@ -56,7 +56,7 @@ const { chains, provider, webSocketProvider } = configureChains(
 
 export const Wallets = [
   {
-    wallet: metaMaskWallet({ chains, shimDisconnect: true }),
+    wallet: metaMaskWallet({ chains }),
     icon: MetaMask,
     name: "MetaMask",
   },
