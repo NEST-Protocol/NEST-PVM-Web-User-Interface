@@ -1,0 +1,32 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    outline: none;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: none;
+    font-family: 'Open Sans';
+}
+
+html,
+body {
+    min-height: 100%;
+}
+
+input {
+    border: 0;
+    background-color: transparent;
+}
+
+button {
+    border: 0px;
+    background-color: transparent;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* .MuiModal-backdrop  {
+    background-color: rgba(0, 0, 0, 0.7) !important;
+} */

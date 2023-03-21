@@ -1,33 +1,21 @@
-import { FC, useCallback, useEffect } from "react";
-import Footer from "./Shared/Footer";
-import Header from "./Shared/Header";
-import { Switch, Route, Redirect, HashRouter } from "react-router-dom";
+import {FC, useCallback, useEffect} from "react";
+import Stack from "@mui/material/Stack";
+import NESTHead from "./Share/Head/NESTHead";
+import NESTFoot from "./Share/Foot/NESTFoot";
+import TestTheme from "./demo/testTheme";
+import { HashRouter, Navigate, Route, Routes } from "react-router-dom";
 import loadable from "@loadable/component";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import TransactionModal from "./Shared/TransactionModal";
-import { checkWidth } from "../libs/utils";
-import MobileFooter from "./Shared/Footer/MobileFooter";
-import MobileHeader from "./Shared/Header/MobileHeader";
-import useThemes from "../libs/hooks/useThemes";
-import "../themes/styles";
-import useWeb3 from "../libs/hooks/useWeb3";
-import { NFTAuctionWrongChain } from "./NFTAuction";
-import axios from "axios";
-// import NFTAuction from "./NFTAuction";
+import { styled } from "@mui/material/styles";
+import useWindowWidth from "../hooks/useWindowWidth";
+import useNEST from "../hooks/useNEST";
 
-const Home = loadable(() => import("./Home"));
-const Perpetuals = loadable(() => import("./Futures"));
-const Dashboard = loadable(() => import("./Dashboard"));
-// const Option = loadable(() => import("./Options"));
-// const Mining = loadable(() => import("./Farm"));
-const NFTAuction = loadable(() => import("./NFTAuction"));
-const Swap = loadable(() => import("./Swap"));
-// const WinV2 = loadable(() => import("./WinV2"));
-
+const HomePage = loadable(() => import("./Home/Home"));
+const FuturesPage = loadable(() => import("./Futures/Futures"));
+const SwapPage = loadable(() => import("./Swap/Swap"));
+const DashboardPage = loadable(() => import("./Dashboard/Dashboard"));
 const App: FC = () => {
-  const { theme } = useThemes();
-  const { chainId, account } = useWeb3();
+  const { headHeight, isBigMobile } = useWindowWidth();
+  const { account } = useNEST();
 
   const getQueryVariable = (variable: string) => {
     const query = window.location.search.substring(1);
@@ -45,77 +33,61 @@ const App: FC = () => {
 
   const handleInviteCode = useCallback(async () => {
     let inviteCode = getQueryVariable("a");
-    console.log(inviteCode)
     if (!inviteCode) {
       const code = window.location.href.split("?a=")[1]
       if (code) {
         inviteCode = window.location.href.split("?a=")[1].split("?position=")[0];
-          console.log(inviteCode)
       }
     }
+    console.log(inviteCode)
 
-    if (inviteCode && account) {
-      if (inviteCode.toLowerCase() === account.toLowerCase().slice(-8)) {
+    if (inviteCode && account.address) {
+      if (inviteCode.toLowerCase() === account.address.toLowerCase().slice(-8)) {
         return;
       }
-      try {
-        await axios({
-          method: "post",
-          url: "https://api.nestfi.net/api/users/users/saveInviteUser",
-          data: {
-            address: account,
-            code: inviteCode.toLowerCase(),
-            timestamp: new Date().getTime() / 1000,
-          },
-        });
-      } catch (e) {
+      fetch("https://api.nestfi.net/api/users/users/saveInviteUser", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          address: account.address,
+          code: inviteCode.toLowerCase(),
+          timestamp: new Date().getTime() / 1000,
+        }),
+      }).catch((e) => {
         console.log(e);
-      }
+      });
     }
   }, [account]);
 
   useEffect(() => {
     handleInviteCode();
   }, [handleInviteCode]);
+
+  const MainContent = styled("div")(({ theme }) => {
+    return {
+      minHeight: isBigMobile ? `calc(100vh - ${headHeight}px)` : `calc(100vh - ${112 + headHeight}px)`,
+      background: theme.normal.bg0,
+    };
+  });
   return (
-    <main className={`main-${theme.valueOf()}`}>
-      <div className={"main-content"}>
-        <TransactionModal />
-        {/* <ToastContainer autoClose={8000}/> */}
-        <ToastContainer />
-        <HashRouter>
-          {checkWidth() ? <Header /> : <MobileHeader />}
-          <Switch>
-            <Route path="/futures">
-              <Perpetuals />
-            </Route>
-            {/* <Route path="/options">
-              <Option />
-            </Route> */}
-            {/* <Route path="/farm">
-              <Mining />
-            </Route> */}
-            {/* <Route path="/win">
-              <WinV2 />
-            </Route> */}
-            <Route path="/NFTAuction">
-              {chainId === 1 ? <NFTAuctionWrongChain /> : <NFTAuction />}
-            </Route>
-            <Route path="/swap">
-              <Swap />
-            </Route>
-            <Route path="/dashboard">
-              <Dashboard />
-            </Route>
-            <Route path="/">
-              <Home />
-            </Route>
-            <Redirect to="/" />
-          </Switch>
-        </HashRouter>
-      </div>
-      {checkWidth() ? <Footer /> : <MobileFooter />}
-    </main>
+    <Stack spacing={0}>
+      <HashRouter>
+        <NESTHead />
+        <MainContent>
+          <Routes>
+            <Route path="/home" element={<HomePage />} />
+            <Route path="/futures" element={<FuturesPage />} />
+            <Route path="/swap" element={<SwapPage />} />
+            <Route path="/dashboard" element={<DashboardPage />} />
+            <Route path="*" element={<Navigate to="/home" />} />
+          </Routes>
+          {/* <TestTheme /> */}
+        </MainContent>
+        <NESTFoot />
+      </HashRouter>
+    </Stack>
   );
 };
 
