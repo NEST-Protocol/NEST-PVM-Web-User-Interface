@@ -15,7 +15,7 @@ import useWindowWidth, { WidthType } from "../../hooks/useWindowWidth";
 import { FuturesPrice, priceToken } from "./Futures";
 
 const PERIOD_TYPE = [
-  { label: "30S", value: "K_30S", period: 30 * 1000 },
+  { label: "15S", value: "K_15S", period: 15 * 1000 },
   { label: "1M", value: "K_1M", period: 60 * 1000 },
   { label: "5M", value: "K_5M", period: 5 * 60 * 1000 },
   { label: "15M", value: "K_15M", period: 15 * 60 * 1000 },

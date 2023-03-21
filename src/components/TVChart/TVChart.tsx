@@ -48,7 +48,7 @@ const TVChart: FC<TVChartProps> = ({ tokenPair, period, close }) => {
     try {
       const dataCount = () => {
         switch (period) {
-          case "K_30S":
+          case "K_15S":
             return 1000;
           case "K_1M":
             return 1000;
@@ -108,7 +108,7 @@ const TVChart: FC<TVChartProps> = ({ tokenPair, period, close }) => {
     getPriceData();
     const internal = setInterval(() => {
       getPriceData();
-    }, 30 * 1000);
+    }, 15_000);
     return () => clearInterval(internal);
   }, [getPriceData]);
 
