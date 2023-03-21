@@ -9,7 +9,7 @@ function useAddGasLimit(tranConfig: any, percent?: number) {
       const basGasLimit = config.request.gasLimit as BigNumber;
       return basGasLimit.add(basGasLimit.mul(percent ?? 10).div(100));
     } else {
-      return BigNumber.from("200000");
+      return BigNumber.from("0");
     }
   }, [config, percent]);
   return gasLimit;
