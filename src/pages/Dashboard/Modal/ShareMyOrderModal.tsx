@@ -202,7 +202,7 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`;
               dataUrl ? (
                 <img src={dataUrl} style={{width: '100%'}} alt={'share'}/>
               ) : (
-                <Stack minHeight={'400px'} height={'calc(min(100vw, 450px) * 1.4622)'} alignItems={'center'} spacing={'18px'} justifyContent={'center'}
+                <Stack minHeight={'400px'} height={'calc(min(100vw - 40px, 450px) * 1.46222)'} alignItems={'center'} spacing={'18px'} justifyContent={'center'}
                        sx={(theme) => ({
                          color: theme.normal.text0,
                          fontSize: '16px',
@@ -347,7 +347,8 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`;
                   fontWeight: "700",
                   lineHeight: "22px",
                 }}
-                title={!dataUrl ? "Loading" : "Image"}
+                isLoading={!dataUrl}
+                title={"Image"}
                 onClick={download}
                 disable={!dataUrl}
               />

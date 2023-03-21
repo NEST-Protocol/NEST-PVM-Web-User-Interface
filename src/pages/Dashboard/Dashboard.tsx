@@ -466,7 +466,9 @@ const Dashboard: FC = () => {
               !!item.sp && (
                 <Box component={"p"}>
                   <span>TP</span>
-                  {item.sp} USDT
+                  {item.sp.toLocaleString('en-US', {
+                    maximumFractionDigits: 2,
+                  })} USDT
                 </Box>
               )
             }
@@ -474,7 +476,9 @@ const Dashboard: FC = () => {
               !!item.sl && (
                 <Box component={"p"}>
                   <span>SL</span>
-                  {item.sl} USDT
+                  {item.sl.toLocaleString('en-US', {
+                    maximumFractionDigits: 2,
+                  })} USDT
                 </Box>
               )
             }
@@ -486,7 +490,11 @@ const Dashboard: FC = () => {
               cursor: 'pointer'
             }} onClick={() => {
               setShowShareOrderModal(true)
-              setShareOrder(item)
+              setShareOrder({
+                ...item,
+                sp: Number(item.sp.toFixed(2)),
+                sl: Number(item.sl.toFixed(2)),
+              })
             }}>
               <Share/>
             </FuturesOrderShare>
@@ -502,7 +510,11 @@ const Dashboard: FC = () => {
         paddingX: '16px'
       }} key={index} onClick={() => {
         setShowShareOrderModal(true)
-        setShareOrder(item)
+        setShareOrder({
+          ...item,
+          sp: Number(item.sp.toFixed(2)),
+          sl: Number(item.sl.toFixed(2)),
+        })
       }}>
         <OrderTablePosition
           tokenName={item.tokenPair.split('/')[0]}
@@ -553,7 +565,9 @@ const Dashboard: FC = () => {
               })}>Take Profit</Caption5>
               <Caption5 sx={(theme) => ({
                 color: theme.normal.text0
-              })}>{item.sp} USDT</Caption5>
+              })}>{item.sp.toLocaleString('en-US', {
+                maximumFractionDigits: 2,
+              })} USDT</Caption5>
             </Stack>
             <Stack direction={'row'} width={'50%'} spacing={'4px'}>
               <Caption5 sx={(theme) => ({
@@ -561,7 +575,9 @@ const Dashboard: FC = () => {
               })}>Stop Loss</Caption5>
               <Caption5 sx={(theme) => ({
                 color: theme.normal.text0
-              })}>{item.sl} USDT</Caption5>
+              })}>{item.sl.toLocaleString('en-US', {
+                maximumFractionDigits: 2,
+              })} USDT</Caption5>
             </Stack>
           </Stack>
           <Stack direction={'row'}>

@@ -68,7 +68,7 @@ const Value2 = styled("div")(({theme}) => ({
   },
   [theme.breakpoints.down('sm')]: {
     fontSize: '14px',
-    lineHeight: '20px',
+    lineHeight: '28px',
     textAlign: 'end',
     'span': {
       fontSize: "14px",
@@ -226,7 +226,7 @@ const TVChart: FC<TVChartProps> = ({...props}) => {
         <Title1>{props.title1}</Title1>
         <Title2>{props.title2}</Title2>
       </Stack>
-      <Stack direction={'row'} width={'100%'} justifyContent={'space-between'} pt={'8px'}>
+      <Stack direction={'row'} width={'100%'} justifyContent={'space-between'} pt={['4px', '4px', '8px']}>
         <Value1>{props.value1} <span>NEST</span></Value1>
         <Value2>{props.value2} <span>NEST</span></Value2>
       </Stack>
