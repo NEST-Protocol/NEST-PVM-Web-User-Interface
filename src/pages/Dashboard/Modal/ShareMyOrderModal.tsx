@@ -204,7 +204,7 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`;
               ) : (
                 <Stack minHeight={'400px'} height={'calc(min(100vw - 40px, 450px) * 1.46222)'} alignItems={'center'} spacing={'18px'} justifyContent={'center'}
                        sx={(theme) => ({
-                         color: theme.normal.text0,
+                         color: '#F9F9F9',
                          fontSize: '16px',
                          lineHeight: '22px',
                          fontWeight: '700',
@@ -350,7 +350,6 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`;
                 isLoading={!dataUrl}
                 title={"Image"}
                 onClick={download}
-                disable={!dataUrl}
               />
               <MainButton
                 style={{

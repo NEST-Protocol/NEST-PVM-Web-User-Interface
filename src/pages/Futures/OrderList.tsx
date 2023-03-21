@@ -88,7 +88,7 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
       );
       if (num && num.length > 0) {
         setOpenSharePosition(true);
-        setTabsValue(1)
+        setTabsValue(1);
       }
     }
   }, []);
@@ -98,7 +98,9 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
       <SharePositionModal
         open={openSharePosition}
         price={props.price}
-        onClose={() => setOpenSharePosition(false)}
+        onClose={() => {
+          setOpenSharePosition(false);
+        }}
       />
     );
   }, [openSharePosition, props.price]);
