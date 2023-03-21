@@ -26,7 +26,6 @@ function useFuturesBuy(
       return FuturesV2Contract[chainsData.chainId] as `0x${string}`;
     }
   }, [amount, chainsData.chainId]);
-  console.log(amount.toString())
   const { config } = usePrepareContractWrite({
     address: address,
     abi: FuturesV2ABI,
@@ -39,6 +38,7 @@ function useFuturesBuy(
     ...config,
     request: { ...config.request, gasLimit: gasLimit },
   });
+  console.log(transaction.error)
   useEffect(() => {
     if (transaction.data) {
       addPendingList({
@@ -48,7 +48,6 @@ function useFuturesBuy(
       transaction.reset();
     }
   }, [addPendingList, transaction, transaction.data]);
-
   return {
     transaction,
   };
@@ -139,6 +138,7 @@ export function useFuturesBuyWithUSDT(
     ...config,
     request: { ...config.request, gasLimit: gasLimit },
   });
+  console.log(transaction.error)
   useEffect(() => {
     if (transaction.data) {
       addPendingList({

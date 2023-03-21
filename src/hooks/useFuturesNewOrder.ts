@@ -373,16 +373,21 @@ function useFuturesNewOrder(
   const baseAction = useCallback(() => {
     if (inputToken === "USDT") {
       if (tabsValue === 1) {
+        console.log(2);
         newTrustOrderWithUSDT.write?.();
       } else {
+        console.log(3);
         buyWithUSDT.write?.();
       }
     } else {
       if (tabsValue === 1) {
+        console.log(4);
         newTrustOrder.write?.();
       } else if (isStop) {
+        console.log(5);
         buyWithStop.write?.();
       } else {
+        console.log(6);
         buyTransaction.write?.();
       }
     }
@@ -410,6 +415,7 @@ function useFuturesNewOrder(
         setShowProtocol(true);
         return;
       }
+      console.log(1);
       tokenApprove.write?.();
     } else {
       if (tabsValue === 1 || isStop) {
@@ -523,10 +529,13 @@ function useFuturesNewOrder(
         tokenBalance
           .sub("0.1".stringToBigNumber(18)!)
           .bigNumberToShowString(18, 2)
+          .formatInputNum4()
       );
     } else {
       if (tokenBalance) {
-        setInputAmount(allValue(tokenBalance).bigNumberToShowString(18, 2));
+        setInputAmount(
+          allValue(tokenBalance).bigNumberToShowString(18, 2).formatInputNum4()
+        );
       }
     }
   }, [inputToken, tokenBalance, allValue]);

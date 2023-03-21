@@ -128,10 +128,6 @@ function useSwap() {
   /**
    * uniswap out amount
    */
-  const { uniSwapAmountOut, uniSwapAmountOutRefetch } = useReadSwapAmountOut(
-    (inputAmount === "" ? "1" : inputAmount).stringToBigNumber(scrDecimals),
-    [scrAddress ?? String().zeroAddress, destAddress ?? String().zeroAddress]
-  );
   const inputToBigNumber = useMemo(() => {
     if (inputAmount !== "" && scrDecimals) {
       return inputAmount.stringToBigNumber(scrDecimals);
@@ -139,6 +135,14 @@ function useSwap() {
       return undefined;
     }
   }, [inputAmount, scrDecimals]);
+
+  const { uniSwapAmountOut, uniSwapAmountOutRefetch } = useReadSwapAmountOut(
+    inputToBigNumber && !inputToBigNumber.eq(BigNumber.from("0"))
+      ? inputToBigNumber
+      : "1".stringToBigNumber(18)!,
+    [scrAddress ?? String().zeroAddress, destAddress ?? String().zeroAddress]
+  );
+
   const amountOutMin = useMemo(() => {
     if (uniSwapAmountOut) {
       return uniSwapAmountOut[1].sub(
@@ -179,14 +183,15 @@ function useSwap() {
         return String().placeHolder;
       }
     } else {
-      if (outAmount && inputAmount) {
+      if (outAmount) {
+        const inputNum = parseFloat(inputAmount) === 0 ? '1' : inputAmount
         if (samePrice) {
-          const out = parseFloat(outAmount) / parseFloat(inputAmount);
+          const out = parseFloat(outAmount) / parseFloat(inputNum);
           return `1 ${swapToken.src} = ${parseFloat(out.toFixed(6))} ${
             swapToken.dest
           }`;
         } else {
-          const out = parseFloat(inputAmount) / parseFloat(outAmount);
+          const out = parseFloat(inputNum) / parseFloat(outAmount);
           return `1 ${swapToken.dest} = ${parseFloat(out.toFixed(6))} ${
             swapToken.src
           }`;
@@ -232,7 +237,9 @@ function useSwap() {
     const token = swapToken.src.getToken();
     if (token && scrBalance && chainsData.chainId) {
       setInputAmount(
-        scrBalance.bigNumberToShowString(token.decimals[chainsData.chainId], 18)
+        scrBalance
+          .bigNumberToShowString(token.decimals[chainsData.chainId], 18)
+          .formatInputNum4()
       );
     }
   }, [chainsData.chainId, scrBalance, swapToken.src]);
