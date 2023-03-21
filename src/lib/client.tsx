@@ -29,7 +29,8 @@ import {
 import useTheme from "../hooks/useTheme";
 
 const { chains, provider, webSocketProvider } = configureChains(
-  [bscTestnet, mainnet],
+  // [bsc],
+  [bscTestnet],
   [
     infuraProvider({ apiKey: "be0a9832394640b090fceb2b2107993c" }),
     jsonRpcProvider({

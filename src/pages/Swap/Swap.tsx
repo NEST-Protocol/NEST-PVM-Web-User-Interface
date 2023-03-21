@@ -56,7 +56,7 @@ const Swap: FC = () => {
     tokenArray,
     selectToken,
     hideSetting,
-    addNESTToWallet
+    addNESTToWallet,
   } = useSwap();
 
   const ExchangeIcon = styled("button")(({ theme }) => {
@@ -121,7 +121,7 @@ const Swap: FC = () => {
       },
     };
   });
-  
+
   return (
     <Stack direction={"row"} justifyContent={"center"}>
       <Modal
@@ -157,7 +157,7 @@ const Swap: FC = () => {
               alignItems={"center"}
               spacing={"4px"}
               width={"auto"}
-              component={'button'}
+              component={"button"}
               sx={(theme) => ({
                 border: `1px solid ${theme.normal.border}`,
                 height: "28px",

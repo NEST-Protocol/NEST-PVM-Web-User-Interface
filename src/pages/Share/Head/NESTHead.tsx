@@ -45,6 +45,7 @@ const NESTHead: FC = () => {
       if (chainIds.indexOf(chainsData.chainId) === -1) {
         chainsData.switchNetwork(chainsData.chains[0].id);
       } else if (
+        //  in futures, switch to eth
         location.pathname.indexOf(NavItems[1].path) === 0 &&
         chainsData.chainId === 1
       ) {

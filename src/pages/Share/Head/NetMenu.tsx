@@ -1,7 +1,7 @@
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
 import { FC, useMemo, useState } from "react";
-import { BNBLogo, ETHLogo, NetworkDownIcon } from "../../../components/icons";
+import { BNBLogo, NetworkDownIcon } from "../../../components/icons";
 import OneIconWithString from "../../../components/IconWithString/OneIconWithString";
 import SelectListMenu from "../../../components/SelectListMemu/SelectListMenu";
 import useNEST from "../../../hooks/useNEST";
@@ -37,7 +37,7 @@ const NetButton = styled("button")(({ theme }) => {
 });
 
 const networkArray = [
-  { icon: ETHLogo, title: "Ethereum", chainId: 1 },
+  // { icon: ETHLogo, title: "Ethereum", chainId: 1 },
   // { icon: BNBLogo, title: "BNB", chainId: 56 },
   { icon: BNBLogo, title: "BNBTest", chainId: 97 },
 ];
@@ -53,9 +53,9 @@ const NetMenu: FC = () => {
       const net = networkArray.filter(
         (item) => item.chainId === chainsData.chainId
       );
-      return net.length > 0 ? net[0].title : "Ethereum";
+      return net.length > 0 ? net[0].title : networkArray[0].title;
     } else {
-      return "Ethereum";
+      return networkArray[0].title;
     }
   }, [chainsData.chainId]);
 
@@ -64,9 +64,9 @@ const NetMenu: FC = () => {
       const net = networkArray.filter(
         (item) => item.chainId === chainsData.chainId
       );
-      return net.length > 0 ? net[0].icon : ETHLogo;
+      return net.length > 0 ? net[0].icon : networkArray[0].icon;
     } else {
-      return ETHLogo;
+      return networkArray[0].icon;
     }
   }, [chainsData.chainId]);
 
