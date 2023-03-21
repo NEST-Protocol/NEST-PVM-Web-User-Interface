@@ -248,7 +248,7 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`;
                 </Box>
                 <Stack direction={"row"} pt={"60px"}>
                   <ShareOrderPosition
-                    tokenName={"ETH"}
+                    tokenName={props.value.tokenPair.split("/")[0]}
                     isLong={props.value.orientation === "Long"}
                     lever={props.value.leverage}
                   />
