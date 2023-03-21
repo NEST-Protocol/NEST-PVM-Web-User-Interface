@@ -297,6 +297,11 @@ function useFuturesNewOrder(
       isPendingType(TransactionType.approve)
     );
   }, [isPendingType]);
+  useEffect(() => {
+    if (tokenApprove.isSuccess) {
+      setInputAmount("");
+    }
+  }, [tokenApprove]);
   const checkMinNEST = useMemo(() => {
     return (nestAmount.stringToBigNumber(4) ?? BigNumber.from("0")).lt(
       MIN_NEST_BIG_NUMBER

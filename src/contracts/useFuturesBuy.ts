@@ -38,7 +38,6 @@ function useFuturesBuy(
     ...config,
     request: { ...config.request, gasLimit: gasLimit },
   });
-  console.log(transaction.error)
   useEffect(() => {
     if (transaction.data) {
       addPendingList({
@@ -138,7 +137,6 @@ export function useFuturesBuyWithUSDT(
     ...config,
     request: { ...config.request, gasLimit: gasLimit },
   });
-  console.log(transaction.error)
   useEffect(() => {
     if (transaction.data) {
       addPendingList({
@@ -326,7 +324,6 @@ export function useFuturesAdd(
     ...config,
     request: { ...config.request, gasLimit: gasLimit },
   });
-  console.log(config.request)
   useEffect(() => {
     if (transaction.data) {
       addPendingList({

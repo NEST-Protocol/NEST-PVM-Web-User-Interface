@@ -251,7 +251,7 @@ function useSwap() {
    * show out amount
    */
   const showOutAmount = useMemo(() => {
-    return outAmount !== "" && inputAmount !== "" ? outAmount : "0.0";
+    return outAmount !== "" && inputAmount !== "" && parseFloat(inputAmount) !== 0 ? outAmount : "0.0";
   }, [outAmount, inputAmount]);
   /**
    * show balance
