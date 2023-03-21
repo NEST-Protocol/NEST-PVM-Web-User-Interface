@@ -89,6 +89,7 @@ const NetMenu: FC = () => {
     return networkArray.map((item, index) => {
       return (
         <Stack
+          key={`NetList + ${index}`}
           direction={"row"}
           alignItems={"center"}
           sx={(theme) => ({
@@ -100,7 +101,6 @@ const NetMenu: FC = () => {
           })}
         >
           <OneIconWithString
-            key={`NetList + ${index}`}
             icon={item.icon}
             title={item.title}
             selected={nowChainName === item.title}

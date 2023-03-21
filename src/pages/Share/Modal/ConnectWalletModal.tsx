@@ -239,6 +239,7 @@ const ConnectWalletModal: FC<ConnectWalletModalProps> = ({ ...props }) => {
         onClose={() => props.onClose()}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
+        sx={{zIndex: 1301}}
       >
         <Box>
           <BaseModal title={"Connect Wallet"} onClose={props.onClose}>

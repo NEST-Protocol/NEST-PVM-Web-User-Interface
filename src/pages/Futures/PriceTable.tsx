@@ -84,6 +84,7 @@ const FuturesPriceTable: FC<FuturesPriceTableProps> = ({ ...props }) => {
       .map((item, index) => {
         return (
           <Stack
+            key={`SelectTokenList + ${index}`}
             direction={"row"}
             alignItems={"center"}
             sx={(theme) => ({
@@ -95,7 +96,6 @@ const FuturesPriceTable: FC<FuturesPriceTableProps> = ({ ...props }) => {
             })}
           >
             <TwoIconWithString
-              key={`SelectTokenList + ${index}`}
               icon1={item.icon1}
               icon2={item.icon2}
               title={item.title}

@@ -43,6 +43,7 @@ const NESTInputSelect: FC<NESTInputSelectProps> = ({ ...props }) => {
       .map((item, index) => {
         return (
           <Stack
+            key={`SelectTokenList + ${index}`}
             direction={"row"}
             alignItems={"center"}
             sx={(theme) => ({
@@ -54,7 +55,6 @@ const NESTInputSelect: FC<NESTInputSelectProps> = ({ ...props }) => {
             })}
           >
             <OneIconWithString
-              key={`SelectTokenList + ${index}`}
               icon={item.icon}
               title={item.title}
               selected={props.tokenName === item.title}

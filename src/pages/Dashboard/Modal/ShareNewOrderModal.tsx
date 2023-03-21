@@ -78,8 +78,6 @@ const ShareNewOrderModal: FC<ShareNewOrderModalProps> = ({...props}) => {
   const myShareRef = useRef(null)
   const [dataUrl, setDataUrl] = useState<string | null>(null)
 
-  console.log(props.value)
-
   const buildDataUrl = async () => {
     if (!myShareRef.current) {
       setTimeout(() => {

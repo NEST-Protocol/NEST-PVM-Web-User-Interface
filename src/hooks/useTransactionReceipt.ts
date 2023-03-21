@@ -59,7 +59,6 @@ export const usePendingTransactionsBase = () => {
   }, []);
   useEffect(() => {
     if ((isSuccess || isError) && info) {
-      console.log(1);
       const type = isSuccess ? SnackBarType.success : SnackBarType.fail;
       transactionSnackBar(getInfoTitle(info.type), "", type, info.hash);
       const newList = pendingList.slice(1, pendingList.length - 1);
@@ -76,7 +75,6 @@ export const usePendingTransactionsBase = () => {
   ]);
   useEffect(() => {
     if (!info && pendingList.length > 0) {
-      console.log(2);
       const thisInfo = pendingList[0];
       setInfo(thisInfo);
     }

@@ -26,6 +26,7 @@ function useFuturesBuy(
       return FuturesV2Contract[chainsData.chainId] as `0x${string}`;
     }
   }, [amount, chainsData.chainId]);
+  console.log(amount.toString())
   const { config } = usePrepareContractWrite({
     address: address,
     abi: FuturesV2ABI,
