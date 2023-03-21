@@ -445,14 +445,14 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`
             <img src={dataUrl} style={{width: '100%'}} alt={'share'}/>
           ) : (
             <Stack minHeight={'400px'} height={'calc(min(100vw - 40px, 450px) * 1.46222)'} alignItems={'center'} spacing={'18px'} justifyContent={'center'} sx={(theme) => ({
-              color: theme.normal.text0,
+              color: '#F9F9F9',
               fontSize: '16px',
               lineHeight: '22px',
               fontWeight: '700',
               "& svg": {
                 display: "block",
                 color: theme.normal.primary,
-              }
+              },
             })}>
               <CircularProgress size={'44px'}/>
               <span>
@@ -600,7 +600,6 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`
               title={"Image"}
               isLoading={!dataUrl}
               onClick={download}
-              disable={!dataUrl}
             />
             <MainButton style={{
               height: '48px',
