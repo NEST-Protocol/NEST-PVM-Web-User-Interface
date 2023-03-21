@@ -12,7 +12,7 @@ import FuturesPriceTable from "./PriceTable";
 export interface FuturesPrice {
   [key: string]: BigNumber;
 }
-const UPDATE_PRICE = 30;
+const UPDATE_PRICE = 15;
 export const priceToken = ["ETH", "BTC", "BNB"];
 const Futures: FC = () => {
   const { account } = useNEST();
