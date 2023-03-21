@@ -68,7 +68,11 @@ function useMainReact() {
       })();
     }
   }, [account.address, chainId]);
-
+  /**
+   * show share position
+   */
+  const [openedSharePosition, setOpenedSharePosition] =
+    useState<boolean>(false);
   return {
     showConnect,
     setShowConnect,
@@ -76,6 +80,8 @@ function useMainReact() {
     connectData,
     chainsData,
     disconnect,
+    openedSharePosition,
+    setOpenedSharePosition,
   };
 }
 const NEST = createContainer(useMainReact);
