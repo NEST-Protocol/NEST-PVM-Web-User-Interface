@@ -30,6 +30,7 @@ import EditPositionModal from "./Modal/EditPositionModal";
 import { styled } from "@mui/material/styles";
 import { getQueryVariable } from "../../lib/queryVaribale";
 import SharePositionModal from "./Modal/SharePositionModal";
+import useNEST from "../../hooks/useNEST";
 
 interface FuturesOrderListProps {
   price: FuturesPrice | undefined;
@@ -79,6 +80,7 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
     showClosedOrder,
     hideOrder,
   } = useFuturesOrderList();
+  const { openedSharePosition, setOpenedSharePosition } = useNEST();
   const [openSharePosition, setOpenSharePosition] = useState<boolean>(false);
   useEffect(() => {
     let code = getQueryVariable("pt");
@@ -86,12 +88,12 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
       const num = priceToken.filter(
         (item) => item.toLocaleLowerCase() === code!.toLocaleLowerCase()
       );
-      if (num && num.length > 0) {
+      if (num && num.length > 0 && !openedSharePosition) {
         setOpenSharePosition(true);
         setTabsValue(1);
       }
     }
-  }, []);
+  }, [openedSharePosition]);
 
   const sharePositionModal = useMemo(() => {
     return (
@@ -100,10 +102,11 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
         price={props.price}
         onClose={() => {
           setOpenSharePosition(false);
+          setOpenedSharePosition(true);
         }}
       />
     );
-  }, [openSharePosition, props.price]);
+  }, [openSharePosition, props.price, setOpenedSharePosition]);
   /**
    * this width
    */
