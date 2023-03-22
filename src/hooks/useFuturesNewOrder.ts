@@ -324,11 +324,11 @@ function useFuturesNewOrder(
       isPendingType(TransactionType.approve)
     );
   }, [isPendingType]);
-  // useEffect(() => {
-  //   if (tokenApprove.isSuccess) {
-  //     setInputAmount('');
-  //   }
-  // }, [inputAmount, tokenApprove]);
+  useEffect(() => {
+    if (tokenApprove.isSuccess) {
+      setInputAmount('');
+    }
+  }, [inputAmount, tokenApprove]);
   const checkMinNEST = useMemo(() => {
     return (nestAmount.stringToBigNumber(4) ?? BigNumber.from("0")).lt(
       MIN_NEST_BIG_NUMBER
@@ -526,17 +526,17 @@ function useFuturesNewOrder(
   }, [lever, longOrShort, nestAmount, openPrice]);
   const showFeeHoverText = useMemo(() => {
     if (tabsValue === 0 && !isStop) {
-      return ["Position fee = Position*0.1%"];
+      return ["Position fee = Position*0.05%"];
     } else if (tabsValue === 1 && !isStop) {
-      return ["Position fee = Position*0.1%", "Limit order fee = 15 NEST"];
+      return ["Position fee = Position*0.05%", "Limit order fee = 15 NEST"];
     } else if (tabsValue === 0 && isStop) {
       return [
-        "Position fee = Position*0.1%",
+        "Position fee = Position*0.05%",
         "Stop order fee(after execution) = 15 NEST",
       ];
     } else {
       return [
-        "Position fee = Position*0.1%",
+        "Position fee = Position*0.05%",
         "Limit order fee = 15 NEST",
         "Stop order fee(after execution) = 15 NEST",
       ];

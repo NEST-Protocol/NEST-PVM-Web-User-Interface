@@ -41,7 +41,6 @@ function useFuturesClose(
               .mul(BigNumber.from("10").pow(18))
               .mul(data.basePrice)
           );
-        console.log(cc_top.toString());
         const cc_long = BigNumber.from(data.basePrice.toString())
           .mul(nowPrice)
           .mul(BigNumber.from("10").pow(36))
@@ -93,7 +92,7 @@ function useFuturesClose(
     return fee.bigNumberToShowString(4, 2);
   }, [data.balance, data.basePrice, data.channelIndex, data.lever, price]);
   const feeTip = useMemo(() => {
-    return "Position*0.1%";
+    return "Position*0.05%";
   }, []);
   /**
    * action
