@@ -174,6 +174,12 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
       ) {
         setInputToken("USDT");
         setInputAmount("200");
+      } else if (
+        !BigNumber.from("0").eq(nestBalance) &&
+        BigNumber.from("0").eq(usdtBalance)
+      ) {
+        setInputToken("NEST");
+        setInputAmount("10000");
       } else if (uniSwapAmountOut && uniSwapAmountOut[1].lt(nestBalance)) {
         setInputToken("NEST");
         setInputAmount("10000");

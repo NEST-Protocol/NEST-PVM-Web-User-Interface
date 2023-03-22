@@ -133,10 +133,10 @@ function useFuturesEditPosition(
     price,
   ]);
   const showTriggerFee = useMemo(() => {
-    const fee = BigNumber.from("1")
+    const fee = BigNumber.from("5")
       .mul(data.lever)
       .mul(data.balance)
-      .div(BigNumber.from("1000"))
+      .div(BigNumber.from("10000"))
       .add(BASE_NEST_FEE.stringToBigNumber(4)!);
     return BigNumber.from(fee.toString()).bigNumberToShowString(4, 2);
   }, [data.balance, data.lever]);

@@ -184,7 +184,7 @@ function useSwap() {
       }
     } else {
       if (outAmount) {
-        const inputNum = parseFloat(inputAmount) === 0 ? '1' : inputAmount
+        const inputNum = parseFloat(inputAmount) === 0 ? "1" : inputAmount;
         if (samePrice) {
           const out = parseFloat(outAmount) / parseFloat(inputNum);
           return `1 ${swapToken.src} = ${parseFloat(out.toFixed(6))} ${
@@ -251,7 +251,11 @@ function useSwap() {
    * show out amount
    */
   const showOutAmount = useMemo(() => {
-    return outAmount !== "" && inputAmount !== "" && parseFloat(inputAmount) !== 0 ? outAmount : "0.0";
+    return outAmount !== "" &&
+      inputAmount !== "" &&
+      parseFloat(inputAmount) !== 0
+      ? outAmount
+      : "0.0";
   }, [outAmount, inputAmount]);
   /**
    * show balance
@@ -357,8 +361,10 @@ function useSwap() {
       tokenApprove.write?.();
     } else {
       if (swapToken.src === "NHBTC") {
+        swapNHBTC.reset();
         swapNHBTC.write?.();
       } else {
+        swapTTT.reset();
         swapTTT.write?.();
       }
     }

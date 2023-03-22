@@ -85,6 +85,33 @@ function useFuturesNewOrder(
       return undefined;
     }
   }, [chainsData.chainId, inputToken]);
+  const openPrice = useMemo(() => {
+    const nestBigNumber = nestAmount.stringToBigNumber(18);
+    if (price && nestBigNumber) {
+      const nowPrice = price[tokenPair];
+      if (parseFloat(nestAmount) >= 100000) {
+        const c0_top = BigNumber.from("55560000")
+          .mul(nestBigNumber)
+          .mul(BigNumber.from(lever.toString()))
+          .add(
+            BigNumber.from("444400000000000").mul(BigNumber.from("10").pow(18))
+          );
+        const c0_long = BigNumber.from("10")
+          .pow(36)
+          .add(c0_top)
+          .mul(nowPrice)
+          .div(BigNumber.from("10").pow(36));
+        const c0_Short = nowPrice
+          .mul(BigNumber.from("10").pow(36))
+          .div(c0_top.add(BigNumber.from("10").pow(36)));
+        return longOrShort ? c0_long : c0_Short;
+      } else {
+        return nowPrice;
+      }
+    } else {
+      return undefined;
+    }
+  }, [lever, longOrShort, nestAmount, price, tokenPair]);
   /**
    * uniswap out amount
    */
@@ -209,8 +236,8 @@ function useFuturesNewOrder(
     const baseFee = nestAmount
       .stringToBigNumber(18)!
       .mul(BigNumber.from(lever.toString()))
-      .mul(BigNumber.from("1"))
-      .div(BigNumber.from("1000"));
+      .mul(BigNumber.from("5"))
+      .div(BigNumber.from("10000"));
     var limitFee = BigNumber.from("0");
     if (tabsValue === 1) {
       limitFee = BASE_NEST_FEE.stringToBigNumber(18) ?? BigNumber.from("0");
@@ -299,9 +326,9 @@ function useFuturesNewOrder(
   }, [isPendingType]);
   useEffect(() => {
     if (tokenApprove.isSuccess) {
-      setInputAmount("");
+      setInputAmount('');
     }
-  }, [tokenApprove]);
+  }, [inputAmount, tokenApprove]);
   const checkMinNEST = useMemo(() => {
     return (nestAmount.stringToBigNumber(4) ?? BigNumber.from("0")).lt(
       MIN_NEST_BIG_NUMBER
@@ -335,6 +362,8 @@ function useFuturesNewOrder(
       buyTransaction.isLoading ||
       buyWithStop.isLoading ||
       newTrustOrder.isLoading ||
+      buyWithUSDT.isLoading ||
+      newTrustOrderWithUSDT.isLoading ||
       pending
     ) {
       return true;
@@ -344,7 +373,9 @@ function useFuturesNewOrder(
   }, [
     buyTransaction.isLoading,
     buyWithStop.isLoading,
+    buyWithUSDT.isLoading,
     newTrustOrder.isLoading,
+    newTrustOrderWithUSDT.isLoading,
     pending,
     tokenApprove.isLoading,
   ]);
@@ -378,21 +409,21 @@ function useFuturesNewOrder(
   const baseAction = useCallback(() => {
     if (inputToken === "USDT") {
       if (tabsValue === 1) {
-        console.log(2);
+        newTrustOrderWithUSDT.reset();
         newTrustOrderWithUSDT.write?.();
       } else {
-        console.log(3);
+        buyWithUSDT.reset();
         buyWithUSDT.write?.();
       }
     } else {
       if (tabsValue === 1) {
-        console.log(4);
+        newTrustOrder.reset();
         newTrustOrder.write?.();
       } else if (isStop) {
-        console.log(5);
+        buyWithStop.reset();
         buyWithStop.write?.();
       } else {
-        console.log(6);
+        buyTransaction.reset();
         buyTransaction.write?.();
       }
     }
@@ -464,12 +495,12 @@ function useFuturesNewOrder(
     }
   }, [account.address, tokenBalance]);
   const showOpenPrice = useMemo(() => {
-    if (price) {
-      return price[tokenPair].bigNumberToShowString(18, 2);
+    if (openPrice) {
+      return openPrice.bigNumberToShowString(18, 2);
     } else {
       return String().placeHolder;
     }
-  }, [price, tokenPair]);
+  }, [openPrice]);
   const showFee = useMemo(() => {
     if (tabsValue === 0 && isStop) {
       return fee
@@ -479,10 +510,10 @@ function useFuturesNewOrder(
     return fee.bigNumberToShowString(18, 2);
   }, [fee, isStop, tabsValue]);
   const showLiqPrice = useMemo(() => {
-    if (!price || nestAmount === "" || nestAmount === "0") {
+    if (!openPrice || nestAmount === "" || nestAmount === "0") {
       return String().placeHolder;
     }
-    const nowPrice = price[tokenPair];
+    const nowPrice = openPrice;
     const result = lipPrice(
       nestAmount.stringToBigNumber(4) ?? BigNumber.from("0"),
       BigNumber.from("0"),
@@ -492,7 +523,7 @@ function useFuturesNewOrder(
       longOrShort
     );
     return result.bigNumberToShowString(18, 2) ?? String().placeHolder;
-  }, [lever, longOrShort, nestAmount, price, tokenPair]);
+  }, [lever, longOrShort, nestAmount, openPrice]);
   const showFeeHoverText = useMemo(() => {
     if (tabsValue === 0 && !isStop) {
       return ["Position fee = Position*0.1%"];
