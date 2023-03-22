@@ -24,24 +24,72 @@ function useFuturesClose(
     return `${lever}X ${longOrShort} ${balance} NEST`;
   }, [data.balance, data.lever, data.orientation]);
 
+  const closePrice = useMemo(() => {
+    const nestBigNumber = BigNumber.from(data.balance.toString())
+      .bigNumberToShowString(4)
+      .stringToBigNumber(18);
+    const token = priceToken[parseInt(data.channelIndex.toString())];
+    if (price && nestBigNumber) {
+      const nowPrice = price[token];
+      if (nestBigNumber.gte("100000".stringToBigNumber(18)!)) {
+        const cc_top = BigNumber.from("55560000")
+          .mul(nestBigNumber)
+          .mul(BigNumber.from(data.lever.toString()))
+          .mul(nowPrice)
+          .add(
+            BigNumber.from("444400000000000")
+              .mul(BigNumber.from("10").pow(18))
+              .mul(data.basePrice)
+          );
+        console.log(cc_top.toString());
+        const cc_long = BigNumber.from(data.basePrice.toString())
+          .mul(nowPrice)
+          .mul(BigNumber.from("10").pow(36))
+          .div(
+            BigNumber.from(data.basePrice.toString())
+              .mul(BigNumber.from("10").pow(36))
+              .add(cc_top)
+          );
+        const cc_Short = BigNumber.from(nowPrice)
+          .mul(BigNumber.from(data.basePrice.toString()))
+          .mul(BigNumber.from("10").pow(36))
+          .add(cc_top.mul(nowPrice)).div(
+            BigNumber.from(data.basePrice.toString()).mul(
+              BigNumber.from("10").pow(36)
+            )
+          );
+        return data.orientation ? cc_long : cc_Short;
+      } else {
+        return nowPrice;
+      }
+    } else {
+      return undefined;
+    }
+  }, [
+    data.balance,
+    data.basePrice,
+    data.channelIndex,
+    data.lever,
+    data.orientation,
+    price,
+  ]);
   const showClosePrice = useMemo(() => {
-    if (!price) {
+    if (!closePrice) {
       return String().placeHolder;
     }
-    const token = priceToken[parseInt(data.channelIndex.toString())];
-    return BigNumber.from(price[token].toString()).bigNumberToShowString(18, 2);
-  }, [data.channelIndex, price]);
+    return BigNumber.from(closePrice.toString()).bigNumberToShowString(18, 2);
+  }, [closePrice]);
 
   const showFee = useMemo(() => {
     if (!price) {
       return String().placeHolder;
     }
     const token = priceToken[parseInt(data.channelIndex.toString())];
-    const fee = BigNumber.from("1")
+    const fee = BigNumber.from("5")
       .mul(data.lever)
       .mul(data.balance)
       .mul(price[token])
-      .div(BigNumber.from("1000").mul(data.basePrice));
+      .div(BigNumber.from("10000").mul(data.basePrice));
     return fee.bigNumberToShowString(4, 2);
   }, [data.balance, data.basePrice, data.channelIndex, data.lever, price]);
   const feeTip = useMemo(() => {
