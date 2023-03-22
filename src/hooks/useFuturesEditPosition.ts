@@ -142,7 +142,7 @@ function useFuturesEditPosition(
   }, [data.balance, data.lever]);
   const feeTip = useMemo(() => {
     return [
-      "Position fee =Position*0.1%",
+      "Position fee =Position*0.05s%",
       "Stop order fee(after execution) = 15 NEST",
     ];
   }, []);

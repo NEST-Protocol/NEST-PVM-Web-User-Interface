@@ -92,7 +92,7 @@ function useFuturesClose(
     return fee.bigNumberToShowString(4, 2);
   }, [data.balance, data.basePrice, data.channelIndex, data.lever, price]);
   const feeTip = useMemo(() => {
-    return "Position*0.1%";
+    return "Position*0.05%";
   }, []);
   /**
    * action
