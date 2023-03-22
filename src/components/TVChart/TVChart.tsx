@@ -114,11 +114,6 @@ const TVChart: FC<TVChartProps> = ({ tokenPair, period, close }) => {
 
   const getSeriesOptions = useMemo(
     () => ({
-      lineColor: "#5472cc",
-      topColor: "rgba(49, 69, 131, 0.4)",
-      bottomColor: "rgba(42, 64, 103, 0.0)",
-      lineWidth: 2,
-      priceLineColor: "#3a3e5e",
       downColor: nowTheme.normal.danger,
       wickDownColor: nowTheme.normal.danger,
       upColor: nowTheme.normal.success,
