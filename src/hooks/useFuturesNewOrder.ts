@@ -297,11 +297,11 @@ function useFuturesNewOrder(
       isPendingType(TransactionType.approve)
     );
   }, [isPendingType]);
-  useEffect(() => {
-    if (tokenApprove.isSuccess) {
-      setInputAmount("");
-    }
-  }, [tokenApprove]);
+  // useEffect(() => {
+  //   if (tokenApprove.isSuccess) {
+  //     setInputAmount('');
+  //   }
+  // }, [inputAmount, tokenApprove]);
   const checkMinNEST = useMemo(() => {
     return (nestAmount.stringToBigNumber(4) ?? BigNumber.from("0")).lt(
       MIN_NEST_BIG_NUMBER
@@ -335,6 +335,8 @@ function useFuturesNewOrder(
       buyTransaction.isLoading ||
       buyWithStop.isLoading ||
       newTrustOrder.isLoading ||
+      buyWithUSDT.isLoading ||
+      newTrustOrderWithUSDT.isLoading ||
       pending
     ) {
       return true;
@@ -344,7 +346,9 @@ function useFuturesNewOrder(
   }, [
     buyTransaction.isLoading,
     buyWithStop.isLoading,
+    buyWithUSDT.isLoading,
     newTrustOrder.isLoading,
+    newTrustOrderWithUSDT.isLoading,
     pending,
     tokenApprove.isLoading,
   ]);
@@ -378,21 +382,21 @@ function useFuturesNewOrder(
   const baseAction = useCallback(() => {
     if (inputToken === "USDT") {
       if (tabsValue === 1) {
-        console.log(2);
+        newTrustOrderWithUSDT.reset();
         newTrustOrderWithUSDT.write?.();
       } else {
-        console.log(3);
+        buyWithUSDT.reset();
         buyWithUSDT.write?.();
       }
     } else {
       if (tabsValue === 1) {
-        console.log(4);
+        newTrustOrder.reset();
         newTrustOrder.write?.();
       } else if (isStop) {
-        console.log(5);
+        buyWithStop.reset();
         buyWithStop.write?.();
       } else {
-        console.log(6);
+        buyTransaction.reset();
         buyTransaction.write?.();
       }
     }

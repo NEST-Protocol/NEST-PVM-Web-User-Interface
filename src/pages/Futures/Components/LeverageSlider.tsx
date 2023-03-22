@@ -41,10 +41,7 @@ const LeverageSlider: FC<LeverageSliderProps> = ({ ...props }) => {
     return `${value}`;
   }
   return (
-    <Stack
-      width={"100%"}
-      style={props.style}
-    >
+    <Stack width={"100%"} style={props.style}>
       <Stack direction={"row"} justifyContent={"space-between"}>
         <Box
           component={"p"}
@@ -65,64 +62,92 @@ const LeverageSlider: FC<LeverageSliderProps> = ({ ...props }) => {
           })}
         >{`${props.value}X`}</Box>
       </Stack>
-      <Box sx={{paddingLeft: '5px', paddingRight: '8px'}}>
-      <Slider
-        aria-label="Custom marks"
-        defaultValue={1}
-        max={50}
-        min={1}
-        getAriaValueText={valuetext}
-        step={1}
-        value={props.value}
-        onChange={(e: any) => {
-          props.changeValue(e.target.value);
-        }}
-        marks={marks}
-        sx={(theme) => ({
-          color: theme.normal.primary,
-          "& .MuiSlider-rail": {
-            background: theme.normal.bg1,
-            opacity: 1,
-          },
-          "& .MuiSlider-track": {
-            background: theme.normal.primary,
-          },
-          "& .MuiSlider-mark": {
-            opacity: 1,
-            width: "10px",
-            height: "10px",
-            background: theme.normal.bg0,
-            border: `1px solid ${theme.normal.bg1}`,
-            boxSizing: "border-box",
-            borderRadius: "5px",
-            marginLeft: '-4px',
-            "&.MuiSlider-markActive": {
+      <Box sx={{display:'block', position:'relative'}}>
+        {/* <Stack
+          direction={"row"}
+          justifyContent={"space-between"}
+          alignItems={"center"}
+          sx={{
+            position: "absolute",
+            top: '13px',
+            width: "100%",
+            height: "4px",
+          }}
+        >
+          <Box
+            sx={(theme) => ({
               background: theme.normal.primary,
-            },
-          },
-          "& .MuiSlider-thumb": {
-            border: `2px solid ${theme.normal.primary}`,
-            background: theme.normal.highLight,
-            width: '12px',
-            height: '12px',
-            "&:before": {
-              boxShadow: 'none'
-            },
-            "&:hover":{
-              boxShadow: 'none'
-            },
-            "&:active":{
-              boxShadow: 'none'
-            },
-            boxShadow: 'none'
-          },
-          "& .MuiSlider-markLabel": {
-            fontSize: 14,
-            fontWeight: 400,
-            color: theme.normal.text2,
-          }
-        })}
-      />
+              width: "100%",
+              height: "4px",
+            })}
+          ></Box>
+          <Box
+            sx={(theme) => ({
+              background: theme.normal.bg1,
+              width: "100%",
+              height: "4px",
+            })}
+          ></Box>
+        </Stack> */}
+        <Box sx={{ paddingLeft: "5px", paddingRight: '8px' }}>
+          <Slider
+            aria-label="Custom marks"
+            defaultValue={1}
+            max={50}
+            min={1}
+            getAriaValueText={valuetext}
+            step={1}
+            value={props.value}
+            onChange={(e: any) => {
+              props.changeValue(e.target.value);
+            }}
+            marks={marks}
+            sx={(theme) => ({
+              color: theme.normal.primary,
+              "& .MuiSlider-rail": {
+                background: theme.normal.bg1,
+                opacity: 1,
+              },
+              "& .MuiSlider-track": {
+                background: theme.normal.primary,
+              },
+              "& .MuiSlider-mark": {
+                opacity: 1,
+                width: "10px",
+                height: "10px",
+                background: theme.normal.bg0,
+                border: `1px solid ${theme.normal.bg1}`,
+                boxSizing: "border-box",
+                borderRadius: "5px",
+                marginLeft: "-4px",
+                "&.MuiSlider-markActive": {
+                  background: theme.normal.primary,
+                },
+              },
+              "& .MuiSlider-thumb": {
+                border: `2px solid ${theme.normal.primary}`,
+                background: theme.normal.highLight,
+                width: "12px",
+                height: "12px",
+                "&:before": {
+                  boxShadow: "none",
+                },
+                "&:hover": {
+                  boxShadow: "none",
+                },
+                "&:active": {
+                  boxShadow: "none",
+                },
+                boxShadow: "none",
+              },
+              "& .MuiSlider-markLabel": {
+                fontSize: 14,
+                fontWeight: 400,
+                color: theme.normal.text2,
+              },
+            })}
+          />
+        </Box>
       </Box>
     </Stack>
   );
