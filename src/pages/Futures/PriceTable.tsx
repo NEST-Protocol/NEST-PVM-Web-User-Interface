@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
-import { BigNumber } from "ethers";
-import { FC, useMemo, useState } from "react";
+import {BigNumber} from "ethers";
+import {FC, useMemo, useState} from "react";
 import {
   HidePriceTable,
   SelectedTokenDown,
@@ -10,18 +10,18 @@ import {
 import TwoIconWithString from "../../components/IconWithString/TwoIconWithString";
 import NESTLine from "../../components/NESTLine";
 import SelectListMenu from "../../components/SelectListMemu/SelectListMenu";
-import TVChart from "../../components/TVChart/TVChart";
-import useWindowWidth, { WidthType } from "../../hooks/useWindowWidth";
-import { FuturesPrice, priceToken } from "./Futures";
+import useWindowWidth, {WidthType} from "../../hooks/useWindowWidth";
+import {FuturesPrice, priceToken} from "./Futures";
+import TradingViewWidget from "../../components/TVChart/TradingViewWidget";
 
 const PERIOD_TYPE = [
-  { label: "15S", value: "K_15S", period: 15 * 1000 },
-  { label: "1M", value: "K_1M", period: 60 * 1000 },
-  { label: "5M", value: "K_5M", period: 5 * 60 * 1000 },
-  { label: "15M", value: "K_15M", period: 15 * 60 * 1000 },
-  { label: "1H", value: "K_1H", period: 60 * 60 * 1000 },
-  { label: "4H", value: "K_4H", period: 4 * 60 * 60 * 1000 },
-  { label: "1D", value: "K_DAY", period: 24 * 60 * 60 * 1000 },
+  {label: "15S", value: "K_15S", period: 15 * 1000},
+  {label: "1M", value: "K_1M", period: 60 * 1000},
+  {label: "5M", value: "K_5M", period: 5 * 60 * 1000},
+  {label: "15M", value: "K_15M", period: 15 * 60 * 1000},
+  {label: "1H", value: "K_1H", period: 60 * 60 * 1000},
+  {label: "4H", value: "K_4H", period: 4 * 60 * 60 * 1000},
+  {label: "1D", value: "K_DAY", period: 24 * 60 * 60 * 1000},
 ];
 
 interface FuturesPriceTableProps {
@@ -30,8 +30,8 @@ interface FuturesPriceTableProps {
   changeTokenPair: (value: string) => void;
 }
 
-const FuturesPriceTable: FC<FuturesPriceTableProps> = ({ ...props }) => {
-  const { width, isBigMobile } = useWindowWidth();
+const FuturesPriceTable: FC<FuturesPriceTableProps> = ({...props}) => {
+  const {width, isBigMobile} = useWindowWidth();
   const [isHide, setIsHide] = useState(false);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -68,7 +68,7 @@ const FuturesPriceTable: FC<FuturesPriceTableProps> = ({ ...props }) => {
   const nowPrice = useMemo(() => {
     return props.price
       ? props.price[props.tokenPair].bigNumberToShowString(18, 2) ??
-          String().placeHolder
+      String().placeHolder
       : String().placeHolder;
   }, [props.price, props.tokenPair]);
   const tokenPairList = useMemo(() => {
@@ -132,7 +132,7 @@ const FuturesPriceTable: FC<FuturesPriceTableProps> = ({ ...props }) => {
             width: "200px",
             paddingX: "20px",
             paddingY: isBigMobile ? "16px" : "24px",
-            "&:hover": { cursor: "pointer" },
+            "&:hover": {cursor: "pointer"},
           }}
           aria-controls={"SelectTokenPair-menu"}
           aria-haspopup="true"
@@ -149,11 +149,11 @@ const FuturesPriceTable: FC<FuturesPriceTableProps> = ({ ...props }) => {
                 position: "relative",
                 zIndex: 5,
               },
-              "& svg + svg": { marginLeft: "-8px", zIndex: 4 },
+              "& svg + svg": {marginLeft: "-8px", zIndex: 4},
             }}
           >
-            <TokenIcon />
-            <USDTLogo />
+            <TokenIcon/>
+            <USDTLogo/>
           </Stack>
           <Stack spacing={0}>
             <Box
@@ -189,7 +189,7 @@ const FuturesPriceTable: FC<FuturesPriceTableProps> = ({ ...props }) => {
               },
             })}
           >
-            <SelectedTokenDown />
+            <SelectedTokenDown/>
           </Box>
         </Stack>
         <Box
@@ -246,7 +246,7 @@ const FuturesPriceTable: FC<FuturesPriceTableProps> = ({ ...props }) => {
             },
           })}
         >
-          <HidePriceTable />
+          <HidePriceTable/>
         </Box>
       </Stack>
 
@@ -263,7 +263,7 @@ const FuturesPriceTable: FC<FuturesPriceTableProps> = ({ ...props }) => {
         <></>
       ) : (
         <>
-          <NESTLine />
+          <NESTLine/>
           <Stack
             direction={"row"}
             justifyContent={isBigMobile ? "space-around" : "flex-start"}
@@ -298,11 +298,7 @@ const FuturesPriceTable: FC<FuturesPriceTableProps> = ({ ...props }) => {
             })}
           </Stack>
           <Box height={height}>
-            <TVChart
-              tokenPair={props.tokenPair}
-              period={period}
-              close={close}
-            />
+            <TradingViewWidget/>
           </Box>
         </>
       )}
