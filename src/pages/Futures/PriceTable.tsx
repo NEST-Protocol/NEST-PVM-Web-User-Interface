@@ -1,14 +1,12 @@
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
-import {BigNumber} from "ethers";
-import {FC, useMemo, useState} from "react";
+import {FC, useCallback, useEffect, useMemo, useState} from "react";
 import {
   HidePriceTable,
   SelectedTokenDown,
   USDTLogo,
 } from "../../components/icons";
 import TwoIconWithString from "../../components/IconWithString/TwoIconWithString";
-import NESTLine from "../../components/NESTLine";
 import SelectListMenu from "../../components/SelectListMemu/SelectListMenu";
 import useWindowWidth, {WidthType} from "../../hooks/useWindowWidth";
 import {FuturesPrice, priceToken} from "./Futures";
@@ -25,6 +23,7 @@ const FuturesPriceTable: FC<FuturesPriceTableProps> = ({...props}) => {
   const [isHide, setIsHide] = useState(false);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+  const [nowPrice, setNowPrice] = useState(0)
   const handleClick = (event: any) => {
     setAnchorEl(event.currentTarget);
   };
@@ -43,23 +42,8 @@ const FuturesPriceTable: FC<FuturesPriceTableProps> = ({...props}) => {
         return 348;
     }
   }, [width]);
-  const close = useMemo(() => {
-    if (props.price && props.price[props.tokenPair]) {
-      return (
-        BigNumber.from(props.price[props.tokenPair])
-          .div(BigNumber.from(10).pow(16))
-          .toNumber() / 100
-      );
-    }
-    return 0;
-  }, [props.price, props.tokenPair]);
   const TokenIcon = props.tokenPair.getToken()!.icon;
-  const nowPrice = useMemo(() => {
-    return props.price
-      ? props.price[props.tokenPair].bigNumberToShowString(18, 2) ??
-      String().placeHolder
-      : String().placeHolder;
-  }, [props.price, props.tokenPair]);
+
   const tokenPairList = useMemo(() => {
     return priceToken
       .map((item) => {
@@ -98,6 +82,24 @@ const FuturesPriceTable: FC<FuturesPriceTableProps> = ({...props}) => {
         );
       });
   }, [props]);
+
+  const fetchNowPrice = useCallback(async () => {
+    const res = await fetch('https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT')
+    const result = await res.json()
+    if (result.price) {
+      setNowPrice(result.price)
+    }
+  }, [])
+
+  useEffect(() => {
+    fetchNowPrice()
+    // 3s 自动刷新
+    const internal = setInterval(() => {
+      fetchNowPrice()
+    }, 1_000)
+    return () => clearInterval(internal)
+  }, [fetchNowPrice])
+
   return (
     <Stack
       width={"100%"}
@@ -251,12 +253,9 @@ const FuturesPriceTable: FC<FuturesPriceTableProps> = ({...props}) => {
       {isHide ? (
         <></>
       ) : (
-        <>
-          <NESTLine/>
-          <Box height={height}>
-            <TradingViewWidget/>
-          </Box>
-        </>
+        <Box height={height}>
+          <TradingViewWidget/>
+        </Box>
       )}
     </Stack>
   );
