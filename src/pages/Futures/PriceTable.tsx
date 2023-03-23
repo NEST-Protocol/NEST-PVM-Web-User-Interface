@@ -165,7 +165,7 @@ const FuturesPriceTable: FC<FuturesPriceTableProps> = ({...props}) => {
                 color: theme.normal.success,
               })}
             >
-              {nowPrice}
+              {Number(nowPrice).toFixed(2)}
             </Box>
           </Stack>
           <Box
