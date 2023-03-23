@@ -14,16 +14,6 @@ import useWindowWidth, {WidthType} from "../../hooks/useWindowWidth";
 import {FuturesPrice, priceToken} from "./Futures";
 import TradingViewWidget from "../../components/TVChart/TradingViewWidget";
 
-const PERIOD_TYPE = [
-  {label: "15S", value: "K_15S", period: 15 * 1000},
-  {label: "1M", value: "K_1M", period: 60 * 1000},
-  {label: "5M", value: "K_5M", period: 5 * 60 * 1000},
-  {label: "15M", value: "K_15M", period: 15 * 60 * 1000},
-  {label: "1H", value: "K_1H", period: 60 * 60 * 1000},
-  {label: "4H", value: "K_4H", period: 4 * 60 * 60 * 1000},
-  {label: "1D", value: "K_DAY", period: 24 * 60 * 60 * 1000},
-];
-
 interface FuturesPriceTableProps {
   price: FuturesPrice | undefined;
   tokenPair: string;
@@ -41,7 +31,6 @@ const FuturesPriceTable: FC<FuturesPriceTableProps> = ({...props}) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const [period, setPeriod] = useState("K_1M");
   const height = useMemo(() => {
     switch (width) {
       case WidthType.ssm:
@@ -264,39 +253,6 @@ const FuturesPriceTable: FC<FuturesPriceTableProps> = ({...props}) => {
       ) : (
         <>
           <NESTLine/>
-          <Stack
-            direction={"row"}
-            justifyContent={isBigMobile ? "space-around" : "flex-start"}
-            alignItems={"center"}
-          >
-            {PERIOD_TYPE.map((item, index) => {
-              return (
-                <Box
-                  className={period === item.value ? "Selected" : ""}
-                  key={`Price + ${index}`}
-                  onClick={() => setPeriod(item.value)}
-                  component={"p"}
-                  sx={(theme) => ({
-                    fontWeight: 700,
-                    fontSize: 12,
-                    color: theme.normal.text2,
-                    width: isBigMobile ? "auto" : "65px",
-                    textAlign: "center",
-                    paddingY: "16px",
-                    "&.Selected": {
-                      color: theme.normal.text0,
-                    },
-                    "&:hover": {
-                      cursor: "pointer",
-                      color: theme.normal.text0,
-                    },
-                  })}
-                >
-                  {item.label}
-                </Box>
-              );
-            })}
-          </Stack>
           <Box height={height}>
             <TradingViewWidget/>
           </Box>
