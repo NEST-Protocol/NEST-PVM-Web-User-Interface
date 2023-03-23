@@ -41,7 +41,6 @@ export const lipPrice = (
     .mul(balance)
     .mul(lever)
     .div(BigNumber.from("100"))
-    .add(BigNumber.from("150000"));
   const top = BigNumber.from(balance.toString()).add(appends).sub(i).mul(price);
   const bottom = BigNumber.from(balance.toString()).mul(lever);
   const subPrice = top.div(bottom);
