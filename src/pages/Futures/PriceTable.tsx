@@ -10,7 +10,6 @@ import TwoIconWithString from "../../components/IconWithString/TwoIconWithString
 import SelectListMenu from "../../components/SelectListMemu/SelectListMenu";
 import useWindowWidth, {WidthType} from "../../hooks/useWindowWidth";
 import {FuturesPrice, priceToken} from "./Futures";
-import TradingViewWidget from "../../components/TVChart/TradingViewWidget";
 
 interface FuturesPriceTableProps {
   price: FuturesPrice | undefined;
@@ -254,7 +253,6 @@ const FuturesPriceTable: FC<FuturesPriceTableProps> = ({...props}) => {
         <></>
       ) : (
         <Box height={height}>
-          <TradingViewWidget/>
         </Box>
       )}
     </Stack>
