@@ -1,12 +1,12 @@
 .theme-dark:root {
-  --dark-blue-bg: #16182e;
+  --dark-blue-bg: #0B0C0D;
 
   --tv-color-pane-background: var(--dark-blue-bg);
   --tv-color-platform-background: var(--dark-blue-bg);
   --tv-color-pane-background-secondary: var(--dark-blue-bg);
   --tv-color-toolbar-button-text-hover: #b2b5be;
   --tv-color-toolbar-button-background-hover: #1e223de6;
-  --tv-color-toolbar-button-text-active: #2962ff;
+  --tv-color-toolbar-button-text-active: rgba(249, 249, 249, 1);
   --tv-color-toolbar-toggle-button-background-active: #3a3e5e;
   --tv-color-toolbar-toggle-button-background-active-hover: #3a3e5e;
   --tv-color-toolbar-button-background-expanded: var(--dark-blue-bg);
@@ -49,7 +49,7 @@ html.theme-dark .container-3Ywm3-oo.selected-3Ywm3-oo {
 }
 
 html.theme-dark .container-3Ywm3-oo.selected-3Ywm3-oo {
-  background-color: #2962ff !important;
+  background-color: #0B0C0D !important;
 }
 
 html.theme-dark .dialog-2AogBbC7 {
@@ -111,7 +111,7 @@ html.theme-dark .color-green-xRobF0EE.variant-primary-xRobF0EE {
   cursor: pointer;
 }
 html.theme-dark .color-green-xRobF0EE.variant-primary-xRobF0EE:hover {
-  background: #4f60fc;
+  background: #0B0C0D;
 }
 
 html.theme-dark .color-gray-xRobF0EE.variant-secondary-xRobF0EE {

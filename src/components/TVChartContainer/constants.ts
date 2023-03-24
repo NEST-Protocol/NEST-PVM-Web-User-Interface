@@ -25,7 +25,7 @@ const chartStyleOverrides = ["candleStyle", "hollowCandleStyle", "haStyle"].redu
 }, {});
 
 const chartOverrides = {
-  "paneProperties.background": "#16182e",
+  "paneProperties.background": "#0B0C0D",
   "paneProperties.backgroundGradientStartColor": "#16182e",
   "paneProperties.backgroundGradientEndColor": "#16182e",
   "paneProperties.backgroundType": "solid",
@@ -34,8 +34,8 @@ const chartOverrides = {
   "paneProperties.horzGridProperties.color": "rgba(35, 38, 59, 1)",
   "paneProperties.horzGridProperties.style": 2,
   "mainSeriesProperties.priceLineColor": "#3a3e5e",
-  "scalesProperties.textColor": "#fff",
-  "scalesProperties.lineColor": "#16182e",
+  "scalesProperties.textColor": "rgba(249, 249, 249, 0.8)",
+  "scalesProperties.lineColor": "rgba(255, 255, 255, 0.09)",
   ...chartStyleOverrides,
 };
 
