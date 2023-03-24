@@ -52,7 +52,6 @@ export default function TVChartContainer(
   const tvWidgetRef = useRef<IChartingLibraryWidget | null>(null);
   const [chartReady, setChartReady] = useState(false);
   const [chartDataLoading, setChartDataLoading] = useState(true);
-  const [tvCharts, setTvCharts] = useLocalStorage<ChartData[] | undefined>("tv-save-load-charts", []);
   const { datafeed, resetCache } = useTVDatafeed({ dataProvider });
   const isMobile = useMedia("(max-width: 550px)");
   const symbolRef = useRef(symbol);
@@ -188,12 +187,17 @@ export default function TVChartContainer(
 
 
   return (
-    <div className="ExchangeChart-error">
-      {chartDataLoading && <div>loading</div>}
+    <div style={{
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      width: '100%',
+      height: '100%',
+      position: 'relative',
+    }}>
       <div
-        style={{ visibility: !chartDataLoading ? "visible" : "hidden" }}
+        style={{position: 'absolute', bottom: 0, left: 0, right: 0, top: 0 }}
         ref={chartContainerRef}
-        className="TVChartContainer ExchangeChart-bottom-content"
       />
     </div>
   )

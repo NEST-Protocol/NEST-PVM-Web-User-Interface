@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
-import {FC, useCallback, useEffect, useMemo, useState} from "react";
+import {FC, useCallback, useEffect, useMemo, useRef, useState} from "react";
 import {
   HidePriceTable,
   SelectedTokenDown,
@@ -10,6 +10,8 @@ import TwoIconWithString from "../../components/IconWithString/TwoIconWithString
 import SelectListMenu from "../../components/SelectListMemu/SelectListMenu";
 import useWindowWidth, {WidthType} from "../../hooks/useWindowWidth";
 import {FuturesPrice, priceToken} from "./Futures";
+import TVChartContainer from "../../components/TVChartContainer/TVChartContainer";
+import {TVDataProvider} from "../../components/TVChartContainer/TVDataProvider";
 
 interface FuturesPriceTableProps {
   price: FuturesPrice | undefined;
@@ -42,6 +44,7 @@ const FuturesPriceTable: FC<FuturesPriceTableProps> = ({...props}) => {
     }
   }, [width]);
   const TokenIcon = props.tokenPair.getToken()!.icon;
+  const dataProvider = useRef(null);
 
   const tokenPairList = useMemo(() => {
     return priceToken
@@ -98,6 +101,11 @@ const FuturesPriceTable: FC<FuturesPriceTableProps> = ({...props}) => {
     }, 1_000)
     return () => clearInterval(internal)
   }, [fetchNowPrice])
+
+  useEffect(() => {
+    // @ts-ignore
+    dataProvider.current = new TVDataProvider();
+  }, []);
 
   return (
     <Stack
@@ -253,6 +261,16 @@ const FuturesPriceTable: FC<FuturesPriceTableProps> = ({...props}) => {
         <></>
       ) : (
         <Box height={height}>
+          <TVChartContainer
+            chartLines={[]}
+            savedShouldShowPositionLines={false}
+            symbol={"ETH"}
+            chainId={1}
+            onSelectToken={() => {
+
+            }}
+            dataProvider={dataProvider.current!}
+          />
         </Box>
       )}
     </Stack>
