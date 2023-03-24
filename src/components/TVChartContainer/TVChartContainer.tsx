@@ -2,8 +2,8 @@ import {TVDataProvider} from "./TVDataProvider";
 import {useLocalStorageSerializeKey} from "../../lib/localStorage";
 import {DEFAULT_PERIOD, defaultChartProps, disabledFeaturesOnMobile} from "./constants";
 import {useCallback, useEffect, useRef, useState} from "react";
-import {ChartData, IChartingLibraryWidget, IPositionLineAdapter} from "../../charting_library";
-import {useLocalStorage, useMedia} from "react-use";
+import {IChartingLibraryWidget, IPositionLineAdapter} from "../../charting_library";
+import {useMedia} from "react-use";
 import useTVDatafeed, {SUPPORTED_RESOLUTIONS} from "../../hooks/useTVDatafeed";
 
 export const TV_CHART_RELOAD_INTERVAL = 15 * 60 * 1000; // 15 minutes
@@ -78,7 +78,6 @@ export default function TVChartContainer(
     },
     [chartReady]
   );
-
 
   useEffect(() => {
     const handleVisibilityChange = () => {

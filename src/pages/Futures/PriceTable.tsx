@@ -93,13 +93,18 @@ const FuturesPriceTable: FC<FuturesPriceTableProps> = ({...props}) => {
     }
   }, [])
 
+  const [chartToken, setChartToken] = useState({
+    maxPrice: null,
+    minPrice: null,
+  });
+
   useEffect(() => {
     fetchNowPrice()
     // 3s 自动刷新
-    const internal = setInterval(() => {
-      fetchNowPrice()
-    }, 1_000)
-    return () => clearInterval(internal)
+    // const internal = setInterval(() => {
+    //   fetchNowPrice()
+    // }, 1_000)
+    // return () => clearInterval(internal)
   }, [fetchNowPrice])
 
   useEffect(() => {
@@ -265,7 +270,7 @@ const FuturesPriceTable: FC<FuturesPriceTableProps> = ({...props}) => {
             chartLines={[]}
             savedShouldShowPositionLines={false}
             symbol={"ETH"}
-            chainId={1}
+            chainId={42161}
             onSelectToken={() => {
 
             }}
