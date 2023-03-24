@@ -40,7 +40,7 @@ export const lipPrice = (
   const i = BigNumber.from("1")
     .mul(balance)
     .mul(lever)
-    .div(BigNumber.from("100"))
+    .div(BigNumber.from("100"));
   const top = BigNumber.from(balance.toString()).add(appends).sub(i).mul(price);
   const bottom = BigNumber.from(balance.toString()).mul(lever);
   const subPrice = top.div(bottom);
@@ -56,7 +56,7 @@ function useFuturesNewOrder(
   price: FuturesPrice | undefined,
   tokenPair: string
 ) {
-  const { isPendingType } = usePendingTransactions();
+  const { isPendingType, pendingList } = usePendingTransactions();
   const { account, chainsData, setShowConnect } = useNEST();
   const [longOrShort, setLongOrShort] = useState(true);
   const [tabsValue, setTabsValue] = useState(0);
@@ -322,11 +322,27 @@ function useFuturesNewOrder(
       isPendingType(TransactionType.approve)
     );
   }, [isPendingType]);
+  // useEffect(() => {
+  //   if (tokenApprove.isSuccess) {
+  //     setInputAmount('');
+  //   }
+  // }, [inputAmount, tokenApprove]);
   useEffect(() => {
-    if (tokenApprove.isSuccess) {
-      setInputAmount('');
-    }
-  }, [inputAmount, tokenApprove]);
+    console.log("test");
+    console.log(
+      newTrustOrderWithUSDT,
+      buyWithUSDT,
+      newTrustOrder,
+      buyWithStop,
+      buyTransaction
+    );
+    newTrustOrderWithUSDT.reset();
+    buyWithUSDT.reset();
+    newTrustOrder.reset();
+    buyWithStop.reset();
+    buyTransaction.reset();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [checkAllowance, checkBalance]);
   const checkMinNEST = useMemo(() => {
     return (nestAmount.stringToBigNumber(4) ?? BigNumber.from("0")).lt(
       MIN_NEST_BIG_NUMBER
