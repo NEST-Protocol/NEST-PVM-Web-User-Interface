@@ -305,20 +305,25 @@ function useSwap() {
   /**
    * action
    */
+  const inputAmountTransaction = useMemo(() => {
+    if (inputToBigNumber && checkAllowance && checkBalance) {
+      return inputToBigNumber;
+    } else {
+      return BigNumber.from("0");
+    }
+  }, [checkAllowance, checkBalance, inputToBigNumber]);
   const { transaction: tokenApprove } = useTokenApprove(
     (scrAddress ?? String().zeroAddress) as `0x${string}`,
     swapContract,
     MaxUint256
   );
   const { transaction: swapTTT } = useSwapExactTokensForTokens(
-    inputToBigNumber ?? BigNumber.from("0"),
+    inputAmountTransaction,
     amountOutMin,
     swapPathAddress,
     account.address
   );
-  const { transaction: swapNHBTC } = useSwapNHBTCToNEST(
-    inputToBigNumber ?? BigNumber.from("0")
-  );
+  const { transaction: swapNHBTC } = useSwapNHBTCToNEST(inputAmountTransaction);
   /**
    * show button title
    */

@@ -56,7 +56,7 @@ function useFuturesNewOrder(
   price: FuturesPrice | undefined,
   tokenPair: string
 ) {
-  const { isPendingType, pendingList } = usePendingTransactions();
+  const { isPendingType } = usePendingTransactions();
   const { account, chainsData, setShowConnect } = useNEST();
   const [longOrShort, setLongOrShort] = useState(true);
   const [tabsValue, setTabsValue] = useState(0);
@@ -189,44 +189,7 @@ function useFuturesNewOrder(
       (nowToken ?? String().zeroAddress) as `0x${string}`,
       account.address ?? ""
     );
-  /**
-   * action
-   */
-  const { transaction: tokenApprove } = useTokenApprove(
-    (nowToken ?? String().zeroAddress) as `0x${string}`,
-    futureContract,
-    MaxUint256
-  );
-  const { transaction: buyTransaction } = useFuturesBuy(
-    BigNumber.from(priceToken.indexOf(tokenPair).toString()),
-    BigNumber.from(lever.toString()),
-    longOrShort,
-    inputAmount.stringToBigNumber(4) ?? BigNumber.from("0")
-  );
-  const { transaction: buyWithStop } = useFuturesBuyWithStopOrder(
-    BigNumber.from(priceToken.indexOf(tokenPair).toString()),
-    BigNumber.from(lever.toString()),
-    longOrShort,
-    inputAmount.stringToBigNumber(4) ?? BigNumber.from("0"),
-    tp.stringToBigNumber(18) ?? BigNumber.from("0"),
-    sl.stringToBigNumber(18) ?? BigNumber.from("0")
-  );
-  const { transaction: newTrustOrder } = useFuturesNewTrustOrder(
-    BigNumber.from(priceToken.indexOf(tokenPair).toString()),
-    BigNumber.from(lever.toString()),
-    longOrShort,
-    inputAmount.stringToBigNumber(4) ?? BigNumber.from("0"),
-    limitAmount.stringToBigNumber(18) ?? BigNumber.from("0"),
-    tp.stringToBigNumber(18) ?? BigNumber.from("0"),
-    sl.stringToBigNumber(18) ?? BigNumber.from("0")
-  );
-  const USDTAmount = useMemo(() => {
-    if (inputToken !== "USDT" && !tokenDecimals) {
-      return undefined;
-    } else {
-      return inputAmount.stringToBigNumber(tokenDecimals);
-    }
-  }, [inputAmount, inputToken, tokenDecimals]);
+
   const fee = useMemo(() => {
     if (nestAmount === "") {
       return BigNumber.from("0");
@@ -242,40 +205,6 @@ function useFuturesNewOrder(
     }
     return baseFee.add(limitFee);
   }, [lever, nestAmount, tabsValue]);
-  const showTotalPay = useMemo(() => {
-    if (nestAmount !== "") {
-      return fee
-        .add(nestAmount.stringToBigNumber(18)!)
-        .bigNumberToShowString(18, 2);
-    }
-    return fee.bigNumberToShowString(18, 2);
-  }, [fee, nestAmount]);
-  const USDTWithMinNEST = useMemo(() => {
-    const NESTToBigNumber = showTotalPay.stringToBigNumber(18);
-    return NESTToBigNumber
-      ? NESTToBigNumber.sub(NESTToBigNumber.mul(1).div(1000))
-      : undefined;
-  }, [showTotalPay]);
-  const { transaction: buyWithUSDT } = useFuturesBuyWithUSDT(
-    USDTAmount,
-    USDTWithMinNEST,
-    BigNumber.from(priceToken.indexOf(tokenPair).toString()),
-    BigNumber.from(lever.toString()),
-    longOrShort,
-    tp.stringToBigNumber(18) ?? BigNumber.from("0"),
-    sl.stringToBigNumber(18) ?? BigNumber.from("0")
-  );
-  const { transaction: newTrustOrderWithUSDT } =
-    useFuturesNewTrustOrderWithUSDT(
-      USDTAmount,
-      USDTWithMinNEST,
-      BigNumber.from(priceToken.indexOf(tokenPair).toString()),
-      BigNumber.from(lever.toString()),
-      longOrShort,
-      limitAmount.stringToBigNumber(18) ?? BigNumber.from("0"),
-      tp.stringToBigNumber(18) ?? BigNumber.from("0"),
-      sl.stringToBigNumber(18) ?? BigNumber.from("0")
-    );
   /**
    * check
    */
@@ -310,6 +239,91 @@ function useFuturesNewOrder(
       return false;
     }
   }, [fee, inputAmount, inputToken, tokenBalance]);
+  /**
+   * action
+   */
+  const inputNESTTransaction = useMemo(() => {
+    const amount = inputAmount.stringToBigNumber(4);
+    if (checkAllowance && checkBalance && amount) {
+      return amount;
+    } else {
+      return BigNumber.from("0");
+    }
+  }, [checkAllowance, checkBalance, inputAmount]);
+  const { transaction: tokenApprove } = useTokenApprove(
+    (nowToken ?? String().zeroAddress) as `0x${string}`,
+    futureContract,
+    MaxUint256
+  );
+  const { transaction: buyTransaction } = useFuturesBuy(
+    BigNumber.from(priceToken.indexOf(tokenPair).toString()),
+    BigNumber.from(lever.toString()),
+    longOrShort,
+    inputNESTTransaction
+  );
+  const { transaction: buyWithStop } = useFuturesBuyWithStopOrder(
+    BigNumber.from(priceToken.indexOf(tokenPair).toString()),
+    BigNumber.from(lever.toString()),
+    longOrShort,
+    inputNESTTransaction,
+    tp.stringToBigNumber(18) ?? BigNumber.from("0"),
+    sl.stringToBigNumber(18) ?? BigNumber.from("0")
+  );
+  const { transaction: newTrustOrder } = useFuturesNewTrustOrder(
+    BigNumber.from(priceToken.indexOf(tokenPair).toString()),
+    BigNumber.from(lever.toString()),
+    longOrShort,
+    inputNESTTransaction,
+    limitAmount.stringToBigNumber(18) ?? BigNumber.from("0"),
+    tp.stringToBigNumber(18) ?? BigNumber.from("0"),
+    sl.stringToBigNumber(18) ?? BigNumber.from("0")
+  );
+  const USDTAmount = useMemo(() => {
+    if (
+      inputToken !== "USDT" ||
+      !tokenDecimals ||
+      !checkAllowance ||
+      !checkBalance
+    ) {
+      return undefined;
+    } else {
+      return inputAmount.stringToBigNumber(tokenDecimals);
+    }
+  }, [checkAllowance, checkBalance, inputAmount, inputToken, tokenDecimals]);
+  const showTotalPay = useMemo(() => {
+    if (nestAmount !== "") {
+      return fee
+        .add(nestAmount.stringToBigNumber(18)!)
+        .bigNumberToShowString(18, 2);
+    }
+    return fee.bigNumberToShowString(18, 2);
+  }, [fee, nestAmount]);
+  const USDTWithMinNEST = useMemo(() => {
+    const NESTToBigNumber = showTotalPay.stringToBigNumber(18);
+    return NESTToBigNumber
+      ? NESTToBigNumber.sub(NESTToBigNumber.mul(1).div(1000))
+      : undefined;
+  }, [showTotalPay]);
+  const { transaction: buyWithUSDT } = useFuturesBuyWithUSDT(
+    USDTAmount,
+    USDTWithMinNEST,
+    BigNumber.from(priceToken.indexOf(tokenPair).toString()),
+    BigNumber.from(lever.toString()),
+    longOrShort,
+    tp.stringToBigNumber(18) ?? BigNumber.from("0"),
+    sl.stringToBigNumber(18) ?? BigNumber.from("0")
+  );
+  const { transaction: newTrustOrderWithUSDT } =
+    useFuturesNewTrustOrderWithUSDT(
+      USDTAmount,
+      USDTWithMinNEST,
+      BigNumber.from(priceToken.indexOf(tokenPair).toString()),
+      BigNumber.from(lever.toString()),
+      longOrShort,
+      limitAmount.stringToBigNumber(18) ?? BigNumber.from("0"),
+      tp.stringToBigNumber(18) ?? BigNumber.from("0"),
+      sl.stringToBigNumber(18) ?? BigNumber.from("0")
+    );
 
   /**
    * main button
@@ -327,22 +341,6 @@ function useFuturesNewOrder(
   //     setInputAmount('');
   //   }
   // }, [inputAmount, tokenApprove]);
-  useEffect(() => {
-    console.log("test");
-    console.log(
-      newTrustOrderWithUSDT,
-      buyWithUSDT,
-      newTrustOrder,
-      buyWithStop,
-      buyTransaction
-    );
-    newTrustOrderWithUSDT.reset();
-    buyWithUSDT.reset();
-    newTrustOrder.reset();
-    buyWithStop.reset();
-    buyTransaction.reset();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [checkAllowance, checkBalance]);
   const checkMinNEST = useMemo(() => {
     return (nestAmount.stringToBigNumber(4) ?? BigNumber.from("0")).lt(
       MIN_NEST_BIG_NUMBER
@@ -423,21 +421,16 @@ function useFuturesNewOrder(
   const baseAction = useCallback(() => {
     if (inputToken === "USDT") {
       if (tabsValue === 1) {
-        newTrustOrderWithUSDT.reset();
         newTrustOrderWithUSDT.write?.();
       } else {
-        buyWithUSDT.reset();
         buyWithUSDT.write?.();
       }
     } else {
       if (tabsValue === 1) {
-        newTrustOrder.reset();
         newTrustOrder.write?.();
       } else if (isStop) {
-        buyWithStop.reset();
         buyWithStop.write?.();
       } else {
-        buyTransaction.reset();
         buyTransaction.write?.();
       }
     }
@@ -465,7 +458,6 @@ function useFuturesNewOrder(
         setShowProtocol(true);
         return;
       }
-      console.log(1);
       tokenApprove.write?.();
     } else {
       if (tabsValue === 1 || isStop) {
