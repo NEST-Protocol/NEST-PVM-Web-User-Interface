@@ -98,17 +98,13 @@ const FuturesPriceTable: FC<FuturesPriceTableProps> = ({...props}) => {
       });
   }, [props]);
 
-  const onSelectToken = (token: any) => {
-    setChartToken({
-      maxPrice: 1801,
-      minPrice: 1700,
-    });
-  };
+  const [chartTokenPrice, setChartTokenPrice] = useState(0);
 
-  const [chartToken, setChartToken] = useState({
-    maxPrice: 0,
-    minPrice: 0,
-  });
+  const fetchChartTokenPrice = async () => {
+    // get token price from binance api
+
+  }
+
 
   useEffect(() => {
     // @ts-ignore
@@ -121,11 +117,12 @@ const FuturesPriceTable: FC<FuturesPriceTableProps> = ({...props}) => {
   let delta;
   let deltaPercentage = 0;
   let deltaPercentageStr;
+  let closePrice;
 
   const now = parseInt(String(Date.now() / 1000));
   const timeThreshold = now - 24 * 60 * 60;
   // @ts-ignore
-  const currentAveragePrice = chartToken.maxPrice && chartToken.minPrice ? chartToken.maxPrice.add(chartToken.minPrice).div(2) : null;
+  const currentAveragePrice = chartTokenPrice.maxPrice && chartTokenPrice.minPrice ? chartTokenPrice.maxPrice.add(chartTokenPrice.minPrice).div(2) : null;
   const [priceData, updatePriceData] = useChartPrices(
     // TODO
     42161,
@@ -163,6 +160,7 @@ const FuturesPriceTable: FC<FuturesPriceTableProps> = ({...props}) => {
       }
 
       deltaPrice = price.open;
+      closePrice = price.close;
     }
   }
 
@@ -180,7 +178,6 @@ const FuturesPriceTable: FC<FuturesPriceTableProps> = ({...props}) => {
     }
   }
 
-  // @ts-ignore
   return (
     <Stack
       width={"100%"}
@@ -247,7 +244,8 @@ const FuturesPriceTable: FC<FuturesPriceTableProps> = ({...props}) => {
                   color: theme.normal.success,
                 })}
               >
-                {chartToken.maxPrice && formatAmount(chartToken.maxPrice, USD_DECIMALS, 2, true)}
+                 {/*@ts-ignore*/}
+                {chartTokenPrice ? chartTokenPrice : "-" }
               </Box>
             </Stack>
             <Box
@@ -363,8 +361,7 @@ const FuturesPriceTable: FC<FuturesPriceTableProps> = ({...props}) => {
           <TVChartContainer
             symbol={props.tokenPair}
             // TODO
-            chainId={42161}
-            onSelectToken={onSelectToken}
+            chainId={1}
             dataProvider={dataProvider.current!}
           />
         </Box>

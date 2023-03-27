@@ -8,13 +8,11 @@ import {SUPPORTED_RESOLUTIONS, TV_CHART_RELOAD_INTERVAL} from "../../config/trad
 import {TVDataProvider} from "../../domain/tradingview/TVDataProvider";
 import {CHART_PERIODS} from "../../lib/legacy";
 import {getObjectKeyFromValue} from "../../domain/tradingview/utils";
-import {SaveLoadAdapter} from "./SaveLoadAdapter";
 import {CircularProgress} from "@mui/material";
 
 type Props = {
   symbol: string;
   chainId: number;
-  onSelectToken: (token: any) => void;
   dataProvider?: TVDataProvider;
 };
 
@@ -22,7 +20,6 @@ export default function TVChartContainer(
   {
     symbol,
     chainId,
-    onSelectToken,
     dataProvider,
   }: Props) {
   let [period, setPeriod] = useLocalStorageSerializeKey([chainId, "Chart-period"], DEFAULT_PERIOD);
@@ -90,7 +87,6 @@ export default function TVChartContainer(
       interval: getObjectKeyFromValue(period, SUPPORTED_RESOLUTIONS),
       favorites: defaultChartProps.favorites,
       custom_formatters: defaultChartProps.custom_formatters,
-      save_load_adapter: new SaveLoadAdapter(chainId, tvCharts, setTvCharts, onSelectToken),
     };
     // @ts-ignore
     tvWidgetRef.current = new window.TradingView.widget(widgetOptions);
