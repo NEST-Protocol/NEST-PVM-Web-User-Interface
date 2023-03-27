@@ -128,46 +128,6 @@ export async function getChartPricesFromStats(chainId: number, symbol: string, p
   return prices;
 }
 
-function getCandlesFromPrices(prices: any[], period: string) {
-  // @ts-ignore
-  const periodTime = CHART_PERIODS[period];
-
-  if (prices.length < 2) {
-    return [];
-  }
-
-  const candles: any[] = [];
-  const first = prices[0];
-  let prevTsGroup = Math.floor(first[0] / periodTime) * periodTime;
-  let prevPrice = first[1];
-  let o = prevPrice;
-  let h = prevPrice;
-  let l = prevPrice;
-  let c = prevPrice;
-  for (let i = 1; i < prices.length; i++) {
-    const [ts, price] = prices[i];
-    const tsGroup = Math.floor(ts / periodTime) * periodTime;
-    if (prevTsGroup !== tsGroup) {
-      candles.push({ t: prevTsGroup + timezoneOffset, o, h, l, c });
-      o = c;
-      h = Math.max(o, c);
-      l = Math.min(o, c);
-    }
-    c = price;
-    h = Math.max(h, price);
-    l = Math.min(l, price);
-    prevTsGroup = tsGroup;
-  }
-
-  return candles.map(({ t: time, o: open, c: close, h: high, l: low }) => ({
-    time,
-    open,
-    close,
-    high,
-    low,
-  }));
-}
-
 export function useChartPrices(chainId: number, symbol: string, isStable: boolean, period: string, currentAveragePrice: number) {
   const swrKey = !isStable && symbol ? ["getChartCandles", chainId, symbol, period] : null;
   let { data: prices, mutate: updatePrices } = useSWR(swrKey, {
