@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useMedia } from "react-use";
 import { defaultChartProps, DEFAULT_PERIOD, disabledFeaturesOnMobile } from "./constants";
 import useTVDatafeed from "../../domain/tradingview/useTVDatafeed";
-import { IChartingLibraryWidget, IPositionLineAdapter } from "../../charting_library";
+import { IChartingLibraryWidget } from "../../charting_library";
 import { getObjectKeyFromValue } from "../../domain/tradingview/utils";
 import { SUPPORTED_RESOLUTIONS, TV_CHART_RELOAD_INTERVAL } from "../../config/tradingview";
 import { isChartAvailabeForToken } from "../../config/tokens";

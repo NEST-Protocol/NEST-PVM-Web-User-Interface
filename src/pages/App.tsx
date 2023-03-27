@@ -39,7 +39,6 @@ const App: FC = () => {
         inviteCode = window.location.href.split("?a=")[1].split("?position=")[0];
       }
     }
-    console.log(inviteCode)
 
     if (inviteCode && account.address) {
       if (inviteCode.toLowerCase() === account.address.toLowerCase().slice(-8)) {

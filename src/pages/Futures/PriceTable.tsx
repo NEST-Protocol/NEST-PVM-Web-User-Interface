@@ -57,7 +57,7 @@ const FuturesPriceTable: FC<FuturesPriceTableProps> = ({...props}) => {
     }
   }, [width]);
   const TokenIcon = props.tokenPair.getToken()!.icon;
-  const dataProvider = useRef(null);
+  const dataProvider = useRef();
 
   const tokenPairList = useMemo(() => {
     return priceToken

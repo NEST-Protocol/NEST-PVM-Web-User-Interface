@@ -104,12 +104,10 @@ export class TVDataProvider {
     // @ts-ignore
     const period = SUPPORTED_RESOLUTIONS[resolution];
     const { countBack } = periodParams;
-
     try {
       const bars = isStable
         ? getStablePriceData(period, countBack)
         : await this.getTokenHistoryBars(chainId, ticker, period, periodParams, shouldRefetchBars);
-
       return bars.map(formatTimeInBarToMs);
     } catch {
       throw new Error("Failed to get history bars");

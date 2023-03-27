@@ -1,5 +1,5 @@
 import { HistoryCallback, PeriodParams, ResolutionString, SubscribeBarsCallback } from "../../charting_library";
-import { getNativeToken, getTokens, isChartAvailabeForToken } from "../../config/tokens";
+import { getNativeToken, isChartAvailabeForToken } from "../../config/tokens";
 import { SUPPORTED_RESOLUTIONS } from "../../config/tradingview";
 import { useEffect, useMemo, useRef } from "react";
 import { TVDataProvider } from "./TVDataProvider";
@@ -48,10 +48,6 @@ export default function useTVDatafeed({ dataProvider }: Props) {
           if (!isChartAvailabeForToken(chainId, symbolName)) {
             symbolName = getNativeToken(chainId).symbol;
           }
-
-          const stableTokens = getTokens(chainId)
-            .filter((t) => t.isStable)
-            .map((t) => t.symbol);
           const symbolInfo = {
             name: symbolName,
             type: "crypto",
@@ -66,7 +62,7 @@ export default function useTVDatafeed({ dataProvider }: Props) {
             currency_code: "USD",
             visible_plots_set: "ohlc",
             data_status: "streaming",
-            isStable: stableTokens.includes(symbolName),
+            isStable: false,
           };
           setTimeout(() => onSymbolResolvedCallback(symbolInfo));
         },
