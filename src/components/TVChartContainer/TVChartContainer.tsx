@@ -50,9 +50,9 @@ export default function TVChartContainer({
           .setLineLength(1)
           .setBodyFont(`normal 12pt "Relative", sans-serif`)
           .setBodyTextColor("#fff")
-          .setLineColor("#3a3e5e")
-          .setBodyBackgroundColor("#3a3e5e")
-          .setBodyBorderColor("#3a3e5e");
+          // .setLineColor("#3a3e5e")
+          // .setBodyBackgroundColor("#3a3e5e")
+          // .setBodyBorderColor("#3a3e5e");
       }
     },
     [chartReady]
@@ -124,9 +124,14 @@ export default function TVChartContainer({
       favorites: defaultChartProps.favorites,
       custom_formatters: defaultChartProps.custom_formatters,
     };
+    console.log("widgetOptions", widgetOptions)
     // @ts-ignore
     tvWidgetRef.current = new window.TradingView.widget(widgetOptions);
-    tvWidgetRef.current!.onChartReady(function () {
+    if (!tvWidgetRef.current) {
+      console.log("TradingView widget not available")
+      return;
+    }
+    tvWidgetRef.current.onChartReady(function () {
       setChartReady(true);
       tvWidgetRef.current!.applyOverrides({
         "paneProperties.background": "#16182e",
@@ -159,7 +164,7 @@ export default function TVChartContainer({
     };
     // We don't want to re-initialize the chart when the symbol changes. This will make the chart flicker.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [chainId]);
+  }, [chainId, window.TradingView]);
 
   return (
     <div style={{
