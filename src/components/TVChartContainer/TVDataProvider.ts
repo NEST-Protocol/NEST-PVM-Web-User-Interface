@@ -1,6 +1,8 @@
 import {Bar as BarType, PeriodParams} from "../../charting_library"
-import {SUPPORTED_RESOLUTIONS} from "../../hooks/useTVDatafeed";
+import {formatTimeInBarToMs, SUPPORTED_RESOLUTIONS} from "../../hooks/useTVDatafeed";
 import {CHART_PERIODS} from "./TVChartContainer";
+import {formatAmount} from "../../lib/numbers";
+import {BigNumberish} from "ethers";
 
 export type Bar = BarType & {
   ticker?: string;
@@ -12,14 +14,10 @@ const initialHistoryBarsInfo = {
   ticker: "",
 };
 
-function getCurrentBarTimestamp(periodSeconds: number) {
-  return Math.floor(Date.now() / (periodSeconds * 1000)) * (periodSeconds * 1000);
-}
-
 export function fillBarGaps(prices: any[], periodSeconds: number) {
   if (prices.length < 2) return prices;
-
-  const currentBarTimestamp = getCurrentBarTimestamp(periodSeconds) / 1000 + timezoneOffset;
+  let currentBarTimestamp = Math.floor(Date.now() / (periodSeconds * 1000)) * (periodSeconds * 1000);
+  currentBarTimestamp = currentBarTimestamp / 1000 + timezoneOffset;
   let lastBar = prices[prices.length - 1];
 
   if (lastBar.time !== currentBarTimestamp) {
@@ -87,10 +85,7 @@ export class TVDataProvider {
     const period = SUPPORTED_RESOLUTIONS[resolution];
     try {
       const bars = await this.getTokenHistoryBars(chainId, ticker, period, periodParams, shouldRefetchBars);
-      return bars.map((bar) => ({
-          ...bar,
-          time: bar.time * 1000,
-        }));
+      return bars.map(formatTimeInBarToMs);
     } catch {
       throw new Error("Failed to get history bars");
     }
@@ -109,9 +104,7 @@ export class TVDataProvider {
         const bars = await this.getTokenChartPrice(chainId, ticker, period);
         // @ts-ignore
         const filledBars = fillBarGaps(bars, CHART_PERIODS[period]);
-        // @ts-ignore
-        const periodSeconds = CHART_PERIODS[period];
-        const currentCandleTime = Math.floor(Date.now() / 1000 / periodSeconds) * periodSeconds + timezoneOffset;
+        const currentCandleTime = getCurrentCandleTime(period);
         // @ts-ignore
         const lastCandleTime = currentCandleTime - CHART_PERIODS[period];
         const lastBar = filledBars[filledBars.length - 1];
@@ -157,12 +150,94 @@ export class TVDataProvider {
     }
     return prices;
   }
+
+  async getTokenLastBars(chainId: number, ticker: string, period: string, limit: number): Promise<Bar[]> {
+    return getLimitChartPricesFromStats(chainId, ticker, period, limit);
+  }
+
+  async getLastBar(chainId: number, ticker: string, period: string) {
+    if (!ticker || !period || !chainId) {
+      throw new Error("Invalid input. Ticker, period, and chainId are required parameters.");
+    }
+    const currentTime = Date.now();
+    if (
+      currentTime - this.startTime > 15000 ||
+      this.lastTicker !== ticker ||
+      this.lastPeriod !== period
+    ) {
+      const prices = await this.getTokenLastBars(chainId, ticker, period, 1);
+      if (prices?.length) {
+        // @ts-ignore
+        const lastBar = prices[0];
+        const currentCandleTime = getCurrentCandleTime(period);
+        // @ts-ignore
+        const lastCandleTime = currentCandleTime - CHART_PERIODS[period];
+        if (lastBar.time === currentCandleTime || lastBar.time === lastCandleTime) {
+          this.lastBar = { ...lastBar, ticker };
+          this.startTime = currentTime;
+          this.lastTicker = ticker;
+          this.lastPeriod = period;
+        }
+      }
+    }
+    return this.lastBar;
+  }
+
+  async getCurrentPriceOfToken(chainId: number, ticker: string): Promise<BigNumberish> {
+    return getCurrentPriceOfToken(chainId, ticker);
+  }
+
+  async getLiveBar(chainId: number, ticker: string, resolution: string) {
+    // @ts-ignore
+    const period = SUPPORTED_RESOLUTIONS[resolution];
+    if (!ticker || !period || !chainId) return;
+
+    const currentCandleTime = getCurrentCandleTime(period);
+    try {
+      this.lastBar = await this.getLastBar(chainId, ticker, period);
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error(error);
+    }
+
+    if (!this.lastBar) return;
+
+    const currentPrice = await this.getCurrentPriceOfToken(chainId, ticker);
+    const averagePriceValue = parseFloat(formatAmount(currentPrice, 30, 4));
+    if (this.lastBar.time && currentCandleTime === this.lastBar.time && ticker === this.lastBar.ticker) {
+      return {
+        ...this.lastBar,
+        close: averagePriceValue,
+        high: Math.max(this.lastBar.open, this.lastBar.high, averagePriceValue),
+        low: Math.min(this.lastBar.open, this.lastBar.low, averagePriceValue),
+        ticker,
+      };
+    } else {
+      const newBar = {
+        time: currentCandleTime,
+        open: this.lastBar.close,
+        close: averagePriceValue,
+        high: Math.max(this.lastBar.close, averagePriceValue),
+        low: Math.min(this.lastBar.close, averagePriceValue),
+        ticker,
+      };
+      this.lastBar = newBar;
+      return this.lastBar;
+    }
+  }
 }
 
 export function sleep(ms: number) {
   return new Promise<void>((resolve) => {
     setTimeout(() => resolve(), ms);
   });
+}
+
+export function getCurrentCandleTime(period: string) {
+  // Converts current time to seconds, rounds down to nearest period, adds timezone offset, and converts back to milliseconds
+  // @ts-ignore
+  const periodSeconds = CHART_PERIODS[period];
+  return Math.floor(Date.now() / 1000 / periodSeconds) * periodSeconds + timezoneOffset;
 }
 
 export async function getChartPricesFromStats(chainId: number, symbol: string, period: string) {
@@ -213,15 +288,37 @@ export async function getChartPricesFromStats(chainId: number, symbol: string, p
     );
   }
 
-  prices = prices.map((bar: any) => {
-    const { t, o: open, c: close, h: high, l: low } = bar;
-    return {
-      time: t + timezoneOffset,
-      open,
-      close,
-      high,
-      low,
-    };
-  });
+  prices = prices.map(formatBarInfo);
   return prices;
+}
+
+export async function getLimitChartPricesFromStats(chainId: number, symbol: string, period: string, limit = 1) {
+  const url = `https://stats.gmx.io/api/candles/${symbol}?preferableChainId=42161&period=${period}&limit=${limit}`;
+
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const prices = await response.json().then(({ prices }) => prices);
+    return prices.map(formatBarInfo);
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.log(`Error fetching data: ${error}`);
+  }
+}
+
+function formatBarInfo(bar: any) {
+  const { t, o: open, c: close, h: high, l: low } = bar;
+  return {
+    time: t + timezoneOffset,
+    open,
+    close,
+    high,
+    low,
+  };
+}
+
+export async function getCurrentPriceOfToken(chainId: number, symbol: string) {
+  return "1000"
 }

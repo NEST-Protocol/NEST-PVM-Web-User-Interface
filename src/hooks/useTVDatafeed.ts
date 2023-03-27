@@ -30,6 +30,7 @@ type Props = {
 
 export default function useTVDatafeed({ dataProvider }: Props) {
   const chainId = useChainId();
+  const intervalRef = useRef<ReturnType<typeof setInterval> | undefined>();
   const resetCacheRef = useRef<() => void | undefined>();
   const tvDataProvider = useRef<TVDataProvider>();
   const activeTicker = useRef<string | undefined>();
@@ -112,7 +113,21 @@ export default function useTVDatafeed({ dataProvider }: Props) {
           _subscribeUID: any,
           onResetCacheNeededCallback: () => void
         ) {
-
+          const { ticker, isStable } = symbolInfo;
+          if (!ticker) {
+            return;
+          }
+          intervalRef.current && clearInterval(intervalRef.current);
+          resetCacheRef.current = onResetCacheNeededCallback;
+          if (!isStable) {
+            intervalRef.current = setInterval(function () {
+              tvDataProvider.current?.getLiveBar(chainId, ticker, resolution).then((bar) => {
+                if (bar && ticker === activeTicker.current) {
+                  onRealtimeCallback(formatTimeInBarToMs(bar));
+                }
+              });
+            }, 500);
+          }
         },
         unsubscribeBars: (
           subscriberUID: any
@@ -122,4 +137,11 @@ export default function useTVDatafeed({ dataProvider }: Props) {
       },
     };
   }, [chainId]);
+}
+
+export function formatTimeInBarToMs(bar: Bar) {
+  return {
+    ...bar,
+    time: bar.time * 1000,
+  };
 }
