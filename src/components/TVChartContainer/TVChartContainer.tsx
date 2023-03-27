@@ -19,8 +19,6 @@ type ChartLine = {
 type Props = {
   symbol: string;
   chainId: number;
-  savedShouldShowPositionLines: boolean;
-  chartLines: ChartLine[];
   onSelectToken: (token: any) => void;
   dataProvider?: TVDataProvider;
 };
@@ -29,8 +27,6 @@ export default function TVChartContainer(
   {
     symbol,
     chainId,
-    savedShouldShowPositionLines,
-    chartLines,
     onSelectToken,
     dataProvider,
   }: Props) {
@@ -47,7 +43,6 @@ export default function TVChartContainer(
   const { datafeed, resetCache } = useTVDatafeed({ dataProvider });
   const isMobile = useMedia("(max-width: 550px)");
   const symbolRef = useRef(symbol);
-
 
   const drawLineOnChart = useCallback(
     (title: string, price: number) => {
@@ -96,16 +91,11 @@ export default function TVChartContainer(
   useEffect(
     function updateLines() {
       const lines: (IPositionLineAdapter | undefined)[] = [];
-      if (savedShouldShowPositionLines) {
-        chartLines.forEach((order) => {
-          lines.push(drawLineOnChart(order.title, order.price));
-        });
-      }
       return () => {
         lines.forEach((line) => line?.remove());
       };
     },
-    [chartLines, savedShouldShowPositionLines, drawLineOnChart]
+    [drawLineOnChart]
   );
 
   useEffect(() => {

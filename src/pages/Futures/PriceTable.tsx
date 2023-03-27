@@ -361,8 +361,6 @@ const FuturesPriceTable: FC<FuturesPriceTableProps> = ({...props}) => {
       ) : (
         <Box height={height}>
           <TVChartContainer
-            chartLines={[]}
-            savedShouldShowPositionLines={false}
             symbol={props.tokenPair}
             // TODO
             chainId={42161}
