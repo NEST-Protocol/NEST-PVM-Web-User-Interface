@@ -1,8 +1,8 @@
 import {useLocalStorageSerializeKey} from "../../lib/localStorage";
 import {DEFAULT_PERIOD, defaultChartProps, disabledFeaturesOnMobile} from "./constants";
 import {useEffect, useRef, useState} from "react";
-import {ChartData, IChartingLibraryWidget} from "../../charting_library";
-import {useLocalStorage, useMedia} from "react-use";
+import {IChartingLibraryWidget} from "../../charting_library";
+import {useMedia} from "react-use";
 import useTVDatafeed from "../../domain/tradingview/useTVDatafeed";
 import {SUPPORTED_RESOLUTIONS, TV_CHART_RELOAD_INTERVAL} from "../../config/tradingview";
 import {TVDataProvider} from "../../domain/tradingview/TVDataProvider";
@@ -29,7 +29,6 @@ export default function TVChartContainer(
 
   const chartContainerRef = useRef<HTMLDivElement | null>(null);
   const tvWidgetRef = useRef<IChartingLibraryWidget | null>(null);
-  const [tvCharts, setTvCharts] = useLocalStorage<ChartData[] | undefined>("tv-save-load-charts", []);
   const [chartReady, setChartReady] = useState(false);
   const [chartDataLoading, setChartDataLoading] = useState(true);
   const { datafeed, resetCache } = useTVDatafeed({ dataProvider });
