@@ -32,6 +32,7 @@ export default function useTVDatafeed({ dataProvider }: Props) {
   const chainId = useChainId();
   const resetCacheRef = useRef<() => void | undefined>();
   const tvDataProvider = useRef<TVDataProvider>();
+  const activeTicker = useRef<string | undefined>();
   const shouldRefetchBars = useRef<boolean>(false);
 
   useEffect(() => {
@@ -51,6 +52,7 @@ export default function useTVDatafeed({ dataProvider }: Props) {
         onReady: (callback: any) => {
           setTimeout(() => callback(configurationData));
         },
+        // resolve symbol info by symbol name
         resolveSymbol(symbolName: string, onSymbolResolvedCallback: any) {
           const symbolInfo = {
             name: symbolName,
@@ -78,8 +80,31 @@ export default function useTVDatafeed({ dataProvider }: Props) {
           onHistoryCallback: HistoryCallback,
           onErrorCallback: (error: string) => void
         ) {
-
+          const { ticker, isStable } = symbolInfo;
+          if (activeTicker.current !== ticker) {
+            activeTicker.current = ticker;
+          }
+          try {
+            if (!ticker) {
+              onErrorCallback("Invalid ticker!");
+              return;
+            }
+            const bars = await tvDataProvider.current?.getBars(
+              chainId,
+              ticker,
+              resolution,
+              isStable,
+              periodParams,
+              shouldRefetchBars.current
+            );
+            const noData = !bars || bars.length === 0;
+            // @ts-ignore
+            onHistoryCallback(bars, { noData });
+          } catch {
+            onErrorCallback("Unable to load historical data!");
+          }
         },
+
         async subscribeBars(
           symbolInfo: SymbolInfo,
           resolution: ResolutionString,
@@ -89,7 +114,9 @@ export default function useTVDatafeed({ dataProvider }: Props) {
         ) {
 
         },
-        unsubscribeBars: () => {
+        unsubscribeBars: (
+          subscriberUID: any
+        ) => {
 
         },
       },
