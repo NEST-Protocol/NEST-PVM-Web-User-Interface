@@ -4,7 +4,8 @@ import {DEFAULT_PERIOD, defaultChartProps, disabledFeaturesOnMobile} from "./con
 import {useCallback, useEffect, useRef, useState} from "react";
 import {IChartingLibraryWidget, IPositionLineAdapter} from "../../charting_library";
 import {useMedia} from "react-use";
-import useTVDatafeed, {SUPPORTED_RESOLUTIONS} from "../../hooks/useTVDatafeed";
+import useTVDatafeed from "../../domain/tradingview/useTVDatafeed";
+import {SUPPORTED_RESOLUTIONS} from "../../config/tradingview";
 
 export const TV_CHART_RELOAD_INTERVAL = 15 * 60 * 1000; // 15 minutes
 

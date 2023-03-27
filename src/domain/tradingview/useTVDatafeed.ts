@@ -1,20 +1,10 @@
-import {TVDataProvider} from "../components/TVChartContainer/TVDataProvider";
-import {useChainId} from "wagmi";
-import {useEffect, useMemo, useRef} from "react";
-import {
-  Bar,
-  HistoryCallback,
-  LibrarySymbolInfo,
-  PeriodParams,
-  ResolutionString,
-  SubscribeBarsCallback
-} from "../charting_library";
-
-export const SUPPORTED_RESOLUTIONS = { 5: "5m", 15: "15m", 60: "1h", 240: "4h", "1D": "1d" };
-
-export type SymbolInfo = LibrarySymbolInfo & {
-  isStable: boolean;
-};
+import { HistoryCallback, PeriodParams, ResolutionString, SubscribeBarsCallback } from "../../charting_library";
+import { getNativeToken, getTokens, isChartAvailabeForToken } from "../../config/tokens";
+import { SUPPORTED_RESOLUTIONS } from "../../config/tradingview";
+import { useEffect, useMemo, useRef } from "react";
+import { TVDataProvider } from "./TVDataProvider";
+import { SymbolInfo } from "./types";
+import { formatTimeInBarToMs } from "./utils";
 
 const configurationData = {
   supported_resolutions: Object.keys(SUPPORTED_RESOLUTIONS),
@@ -29,11 +19,12 @@ type Props = {
 };
 
 export default function useTVDatafeed({ dataProvider }: Props) {
-  const chainId = useChainId();
+  // TODO
+  const chainId = 42161;
   const intervalRef = useRef<ReturnType<typeof setInterval> | undefined>();
   const resetCacheRef = useRef<() => void | undefined>();
-  const tvDataProvider = useRef<TVDataProvider>();
   const activeTicker = useRef<string | undefined>();
+  const tvDataProvider = useRef<TVDataProvider>();
   const shouldRefetchBars = useRef<boolean>(false);
 
   useEffect(() => {
@@ -53,8 +44,14 @@ export default function useTVDatafeed({ dataProvider }: Props) {
         onReady: (callback: any) => {
           setTimeout(() => callback(configurationData));
         },
-        // resolve symbol info by symbol name
         resolveSymbol(symbolName: string, onSymbolResolvedCallback: any) {
+          if (!isChartAvailabeForToken(chainId, symbolName)) {
+            symbolName = getNativeToken(chainId).symbol;
+          }
+
+          const stableTokens = getTokens(chainId)
+            .filter((t) => t.isStable)
+            .map((t) => t.symbol);
           const symbolInfo = {
             name: symbolName,
             type: "crypto",
@@ -69,7 +66,7 @@ export default function useTVDatafeed({ dataProvider }: Props) {
             currency_code: "USD",
             visible_plots_set: "ohlc",
             data_status: "streaming",
-            isStable: true,
+            isStable: stableTokens.includes(symbolName),
           };
           setTimeout(() => onSymbolResolvedCallback(symbolInfo));
         },
@@ -81,10 +78,15 @@ export default function useTVDatafeed({ dataProvider }: Props) {
           onHistoryCallback: HistoryCallback,
           onErrorCallback: (error: string) => void
         ) {
+          // @ts-ignore
+          if (!SUPPORTED_RESOLUTIONS[resolution]) {
+            return onErrorCallback("[getBars] Invalid resolution");
+          }
           const { ticker, isStable } = symbolInfo;
           if (activeTicker.current !== ticker) {
             activeTicker.current = ticker;
           }
+
           try {
             if (!ticker) {
               onErrorCallback("Invalid ticker!");
@@ -99,13 +101,11 @@ export default function useTVDatafeed({ dataProvider }: Props) {
               shouldRefetchBars.current
             );
             const noData = !bars || bars.length === 0;
-            // @ts-ignore
             onHistoryCallback(bars, { noData });
           } catch {
             onErrorCallback("Unable to load historical data!");
           }
         },
-
         async subscribeBars(
           symbolInfo: SymbolInfo,
           resolution: ResolutionString,
@@ -129,19 +129,10 @@ export default function useTVDatafeed({ dataProvider }: Props) {
             }, 500);
           }
         },
-        unsubscribeBars: (
-          subscriberUID: any
-        ) => {
-
+        unsubscribeBars: () => {
+          intervalRef.current && clearInterval(intervalRef.current);
         },
       },
     };
   }, [chainId]);
-}
-
-export function formatTimeInBarToMs(bar: Bar) {
-  return {
-    ...bar,
-    time: bar.time * 1000,
-  };
 }

@@ -2,9 +2,9 @@ import { LAST_BAR_REFRESH_INTERVAL, SUPPORTED_RESOLUTIONS } from "../../config/t
 import { getLimitChartPricesFromStats, getStablePriceData, timezoneOffset } from "../../domain/prices";
 import { CHART_PERIODS, USD_DECIMALS } from "../../lib/legacy";
 import { formatAmount } from "../../lib/numbers";
-import { Bar } from "../../domain/tradingview/types";
-import { formatTimeInBarToMs, getCurrentCandleTime } from "../../domain/tradingview/utils";
-import { fillBarGaps, getCurrentPriceOfToken, getTokenChartPrice } from "../../domain/tradingview/requests";
+import { Bar } from "./types";
+import { formatTimeInBarToMs, getCurrentCandleTime } from "./utils";
+import { fillBarGaps, getCurrentPriceOfToken, getTokenChartPrice } from "./requests";
 import { BigNumberish } from "ethers";
 import { PeriodParams } from "../../charting_library";
 
