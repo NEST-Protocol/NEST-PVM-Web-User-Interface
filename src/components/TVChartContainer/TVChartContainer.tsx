@@ -4,22 +4,10 @@ import {useCallback, useEffect, useRef, useState} from "react";
 import {IChartingLibraryWidget, IPositionLineAdapter} from "../../charting_library";
 import {useMedia} from "react-use";
 import useTVDatafeed from "../../domain/tradingview/useTVDatafeed";
-import {SUPPORTED_RESOLUTIONS} from "../../config/tradingview";
+import {SUPPORTED_RESOLUTIONS, TV_CHART_RELOAD_INTERVAL} from "../../config/tradingview";
 import {TVDataProvider} from "../../domain/tradingview/TVDataProvider";
-
-export const TV_CHART_RELOAD_INTERVAL = 15 * 60 * 1000; // 15 minutes
-
-export function getObjectKeyFromValue(value: any, object: any) {
-  return Object.keys(object).find((key) => object[key] === value);
-}
-
-export const CHART_PERIODS = {
-  "5m": 60 * 5,
-  "15m": 60 * 15,
-  "1h": 60 * 60,
-  "4h": 60 * 60 * 4,
-  "1d": 60 * 60 * 24,
-};
+import {CHART_PERIODS} from "../../lib/legacy";
+import {getObjectKeyFromValue} from "../../domain/tradingview/utils";
 
 type ChartLine = {
   price: number;
