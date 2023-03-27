@@ -172,7 +172,9 @@ export default function TVChartContainer({
     }}>
       {chartDataLoading && <CircularProgress />}
       <div
-        style={{ visibility: !chartDataLoading ? "visible" : "hidden", position: 'absolute', bottom: 0, left: 0, right: 0, top: 0  }}
+        style={{
+          // visibility: !chartDataLoading ? "visible" : "hidden",
+          position: 'absolute', bottom: 0, left: 0, right: 0, top: 0  }}
         ref={chartContainerRef}
       />
     </div>
