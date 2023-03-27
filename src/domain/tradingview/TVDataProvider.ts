@@ -1,5 +1,5 @@
 import { LAST_BAR_REFRESH_INTERVAL, SUPPORTED_RESOLUTIONS } from "../../config/tradingview";
-import { getLimitChartPricesFromStats, getStablePriceData, timezoneOffset } from "../../domain/prices";
+import { getLimitChartPricesFromStats, getStablePriceData, timezoneOffset } from "../prices";
 import { CHART_PERIODS, USD_DECIMALS } from "../../lib/legacy";
 import { formatAmount } from "../../lib/numbers";
 import { Bar } from "./types";

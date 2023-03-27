@@ -11,7 +11,7 @@ import SelectListMenu from "../../components/SelectListMemu/SelectListMenu";
 import useWindowWidth, {WidthType} from "../../hooks/useWindowWidth";
 import {FuturesPrice, priceToken} from "./Futures";
 import TVChartContainer from "../../components/TVChartContainer/TVChartContainer";
-import {TVDataProvider} from "../../components/TVChartContainer/TVDataProvider";
+import {TVDataProvider} from "../../domain/tradingview/TVDataProvider";
 
 interface FuturesPriceTableProps {
   price: FuturesPrice | undefined;
