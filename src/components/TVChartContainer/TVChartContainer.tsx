@@ -1,13 +1,14 @@
-import {useLocalStorageSerializeKey} from "../../lib/localStorage";
-import {DEFAULT_PERIOD, defaultChartProps, disabledFeaturesOnMobile} from "./constants";
-import {useEffect, useRef, useState} from "react";
-import {IChartingLibraryWidget} from "../../charting_library";
-import {useMedia} from "react-use";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { useMedia } from "react-use";
+import { defaultChartProps, DEFAULT_PERIOD, disabledFeaturesOnMobile } from "./constants";
 import useTVDatafeed from "../../domain/tradingview/useTVDatafeed";
-import {SUPPORTED_RESOLUTIONS, TV_CHART_RELOAD_INTERVAL} from "../../config/tradingview";
-import {TVDataProvider} from "../../domain/tradingview/TVDataProvider";
-import {CHART_PERIODS} from "../../lib/legacy";
-import {getObjectKeyFromValue} from "../../domain/tradingview/utils";
+import { IChartingLibraryWidget, IPositionLineAdapter } from "../../charting_library";
+import { getObjectKeyFromValue } from "../../domain/tradingview/utils";
+import { SUPPORTED_RESOLUTIONS, TV_CHART_RELOAD_INTERVAL } from "../../config/tradingview";
+import { isChartAvailabeForToken } from "../../config/tokens";
+import { TVDataProvider } from "../../domain/tradingview/TVDataProvider";
+import { useLocalStorageSerializeKey } from "../../lib/localStorage";
+import { CHART_PERIODS } from "../../lib/legacy";
 import {CircularProgress} from "@mui/material";
 
 type Props = {
@@ -16,13 +17,13 @@ type Props = {
   dataProvider?: TVDataProvider;
 };
 
-export default function TVChartContainer(
-  {
-    symbol,
-    chainId,
-    dataProvider,
-  }: Props) {
+export default function TVChartContainer({
+                                           symbol,
+                                           chainId,
+                                           dataProvider,
+                                         }: Props) {
   let [period, setPeriod] = useLocalStorageSerializeKey([chainId, "Chart-period"], DEFAULT_PERIOD);
+
   if (!period || !(period in CHART_PERIODS)) {
     period = DEFAULT_PERIOD;
   }
@@ -35,6 +36,30 @@ export default function TVChartContainer(
   const isMobile = useMedia("(max-width: 550px)");
   const symbolRef = useRef(symbol);
 
+  const drawLineOnChart = useCallback(
+    (title: string, price: number) => {
+      if (chartReady && tvWidgetRef.current?.activeChart?.().dataReady()) {
+        const chart = tvWidgetRef.current.activeChart();
+        const positionLine = chart.createPositionLine({ disableUndo: true });
+
+        return positionLine
+          .setText(title)
+          .setPrice(price)
+          .setQuantity("")
+          .setLineStyle(1)
+          .setLineLength(1)
+          .setBodyFont(`normal 12pt "Relative", sans-serif`)
+          .setBodyTextColor("#fff")
+          .setLineColor("#3a3e5e")
+          .setBodyBackgroundColor("#3a3e5e")
+          .setBodyBorderColor("#3a3e5e");
+      }
+    },
+    [chartReady]
+  );
+
+  /* Tradingview charting library only fetches the historical data once so if the tab is inactive or system is in sleep mode
+  for a long time, the historical data will be outdated. */
   useEffect(() => {
     const handleVisibilityChange = () => {
       if (document.visibilityState === "hidden") {
@@ -57,9 +82,21 @@ export default function TVChartContainer(
     };
   }, [resetCache]);
 
+  useEffect(
+    function updateLines() {
+      const lines: (IPositionLineAdapter | undefined)[] = [];
+      return () => {
+        lines.forEach((line) => line?.remove());
+      };
+    },
+    [drawLineOnChart]
+  );
+
   useEffect(() => {
     if (chartReady && tvWidgetRef.current && symbol !== tvWidgetRef.current?.activeChart?.().symbol()) {
-      tvWidgetRef.current.setSymbol(symbol, tvWidgetRef.current.activeChart().resolution(), () => {})
+      if (isChartAvailabeForToken(chainId, symbol)) {
+        tvWidgetRef.current.setSymbol(symbol, tvWidgetRef.current.activeChart().resolution(), () => {});
+      }
     }
   }, [symbol, chartReady, period, chainId]);
 
