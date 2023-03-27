@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useMedia } from "react-use";
 import { defaultChartProps, DEFAULT_PERIOD, disabledFeaturesOnMobile } from "./constants";
 import useTVDatafeed from "../../domain/tradingview/useTVDatafeed";
@@ -36,28 +36,6 @@ export default function TVChartContainer({
   const isMobile = useMedia("(max-width: 550px)");
   const symbolRef = useRef(symbol);
 
-  const drawLineOnChart = useCallback(
-    (title: string, price: number) => {
-      if (chartReady && tvWidgetRef.current?.activeChart?.().dataReady()) {
-        const chart = tvWidgetRef.current.activeChart();
-        const positionLine = chart.createPositionLine({ disableUndo: true });
-
-        return positionLine
-          .setText(title)
-          .setPrice(price)
-          .setQuantity("")
-          .setLineStyle(1)
-          .setLineLength(1)
-          .setBodyFont(`normal 12pt "Relative", sans-serif`)
-          .setBodyTextColor("#fff")
-          // .setLineColor("#3a3e5e")
-          // .setBodyBackgroundColor("#3a3e5e")
-          // .setBodyBorderColor("#3a3e5e");
-      }
-    },
-    [chartReady]
-  );
-
   /* Tradingview charting library only fetches the historical data once so if the tab is inactive or system is in sleep mode
   for a long time, the historical data will be outdated. */
   useEffect(() => {
@@ -81,16 +59,6 @@ export default function TVChartContainer({
       document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
   }, [resetCache]);
-
-  useEffect(
-    function updateLines() {
-      const lines: (IPositionLineAdapter | undefined)[] = [];
-      return () => {
-        lines.forEach((line) => line?.remove());
-      };
-    },
-    [drawLineOnChart]
-  );
 
   useEffect(() => {
     if (chartReady && tvWidgetRef.current && symbol !== tvWidgetRef.current?.activeChart?.().symbol()) {
@@ -124,14 +92,13 @@ export default function TVChartContainer({
       favorites: defaultChartProps.favorites,
       custom_formatters: defaultChartProps.custom_formatters,
     };
-    console.log("widgetOptions", widgetOptions)
     // @ts-ignore
     tvWidgetRef.current = new window.TradingView.widget(widgetOptions);
     if (!tvWidgetRef.current) {
       console.log("TradingView widget not available")
       return;
     }
-    tvWidgetRef.current.onChartReady(function () {
+    tvWidgetRef.current!.onChartReady(function () {
       setChartReady(true);
       tvWidgetRef.current!.applyOverrides({
         "paneProperties.background": "#16182e",
