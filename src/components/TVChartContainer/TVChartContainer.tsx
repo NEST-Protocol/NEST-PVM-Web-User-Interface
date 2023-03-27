@@ -21,7 +21,7 @@ type Props = {
   chainId: number;
   savedShouldShowPositionLines: boolean;
   chartLines: ChartLine[];
-  onSelectToken: () => void;
+  onSelectToken: (token: any) => void;
   dataProvider?: TVDataProvider;
 };
 

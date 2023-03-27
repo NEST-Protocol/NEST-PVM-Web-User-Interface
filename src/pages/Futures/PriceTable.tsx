@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
-import {FC, useCallback, useEffect, useMemo, useRef, useState} from "react";
+import {FC, useEffect, useMemo, useRef, useState} from "react";
 import {
   HidePriceTable,
   SelectedTokenDown,
@@ -12,6 +12,10 @@ import useWindowWidth, {WidthType} from "../../hooks/useWindowWidth";
 import {FuturesPrice, priceToken} from "./Futures";
 import TVChartContainer from "../../components/TVChartContainer/TVChartContainer";
 import {TVDataProvider} from "../../domain/tradingview/TVDataProvider";
+import {formatAmount, numberWithCommas} from "../../lib/numbers";
+import {USD_DECIMALS} from "../../lib/legacy";
+import {useChartPrices} from "../../domain/prices";
+import {styled} from "@mui/material";
 
 interface FuturesPriceTableProps {
   price: FuturesPrice | undefined;
@@ -19,12 +23,21 @@ interface FuturesPriceTableProps {
   changeTokenPair: (value: string) => void;
 }
 
+const ChartDataTitle = styled("div")(({theme}) => ({
+  fontSize: "12px",
+  color: theme.normal.text2,
+}));
+
+const ChartDataValue = styled("div")(({theme}) => ({
+  fontSize: "16px",
+  color: theme.normal.text0,
+}));
+
 const FuturesPriceTable: FC<FuturesPriceTableProps> = ({...props}) => {
   const {width, isBigMobile} = useWindowWidth();
   const [isHide, setIsHide] = useState(false);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
-  const [nowPrice, setNowPrice] = useState(0)
   const handleClick = (event: any) => {
     setAnchorEl(event.currentTarget);
   };
@@ -85,33 +98,89 @@ const FuturesPriceTable: FC<FuturesPriceTableProps> = ({...props}) => {
       });
   }, [props]);
 
-  const fetchNowPrice = useCallback(async () => {
-    const res = await fetch('https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT')
-    const result = await res.json()
-    if (result.price) {
-      setNowPrice(result.price)
-    }
-  }, [])
+  const onSelectToken = (token: any) => {
+    setChartToken({
+      maxPrice: 1801,
+      minPrice: 1700,
+    });
+  };
 
   const [chartToken, setChartToken] = useState({
-    maxPrice: null,
-    minPrice: null,
+    maxPrice: 0,
+    minPrice: 0,
   });
-
-  useEffect(() => {
-    fetchNowPrice()
-    // 3s 自动刷新
-    // const internal = setInterval(() => {
-    //   fetchNowPrice()
-    // }, 1_000)
-    // return () => clearInterval(internal)
-  }, [fetchNowPrice])
 
   useEffect(() => {
     // @ts-ignore
     dataProvider.current = new TVDataProvider();
   }, []);
 
+  let high;
+  let low;
+  let deltaPrice;
+  let delta;
+  let deltaPercentage = 0;
+  let deltaPercentageStr;
+
+  const now = parseInt(String(Date.now() / 1000));
+  const timeThreshold = now - 24 * 60 * 60;
+  // @ts-ignore
+  const currentAveragePrice = chartToken.maxPrice && chartToken.minPrice ? chartToken.maxPrice.add(chartToken.minPrice).div(2) : null;
+  const [priceData, updatePriceData] = useChartPrices(
+    // TODO
+    42161,
+    props.tokenPair,
+    false,
+    "1h",
+    currentAveragePrice
+  );
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      updatePriceData(undefined, true);
+    }, 60 * 1000);
+    return () => clearInterval(interval);
+  }, [updatePriceData]);
+
+  if (priceData) {
+    for (let i = priceData.length - 1; i > 0; i--) {
+      const price = priceData[i];
+      if (price.time < timeThreshold) {
+        break;
+      }
+      if (!low) {
+        low = price.low;
+      }
+      if (!high) {
+        high = price.high;
+      }
+
+      if (price.high > high) {
+        high = price.high;
+      }
+      if (price.low < low) {
+        low = price.low;
+      }
+
+      deltaPrice = price.open;
+    }
+  }
+
+  if (deltaPrice && currentAveragePrice) {
+    const average = parseFloat(formatAmount(currentAveragePrice, USD_DECIMALS, 2));
+    delta = average - deltaPrice;
+    deltaPercentage = (delta * 100) / average;
+    if (deltaPercentage > 0) {
+      deltaPercentageStr = `+${deltaPercentage.toFixed(2)}%`;
+    } else {
+      deltaPercentageStr = `${deltaPercentage.toFixed(2)}%`;
+    }
+    if (deltaPercentage === 0) {
+      deltaPercentageStr = "0.00";
+    }
+  }
+
+  // @ts-ignore
   return (
     <Stack
       width={"100%"}
@@ -126,73 +195,98 @@ const FuturesPriceTable: FC<FuturesPriceTableProps> = ({...props}) => {
         justifyContent={"space-between"}
         alignItems={"center"}
       >
-        <Stack
-          direction={"row"}
-          justifyContent={"flex-start"}
-          alignItems={"center"}
-          spacing={"12px"}
-          sx={{
-            width: "200px",
-            paddingX: "20px",
-            paddingY: isBigMobile ? "16px" : "24px",
-            "&:hover": {cursor: "pointer"},
-          }}
-          aria-controls={"SelectTokenPair-menu"}
-          aria-haspopup="true"
-          aria-expanded={"true"}
-          onClick={handleClick}
-        >
+        <Stack direction={'row'} alignItems={"center"} spacing={'40px'}>
           <Stack
             direction={"row"}
+            justifyContent={"flex-start"}
+            alignItems={"center"}
+            spacing={"12px"}
             sx={{
-              "& svg": {
-                width: "24px",
-                height: "24px",
-                display: "block",
-                position: "relative",
-                zIndex: 5,
-              },
-              "& svg + svg": {marginLeft: "-8px", zIndex: 4},
+              width: "200px",
+              paddingX: "20px",
+              paddingY: isBigMobile ? "16px" : "24px",
+              "&:hover": {cursor: "pointer"},
             }}
+            aria-controls={"SelectTokenPair-menu"}
+            aria-haspopup="true"
+            aria-expanded={"true"}
+            onClick={handleClick}
           >
-            <TokenIcon/>
-            <USDTLogo/>
-          </Stack>
-          <Stack spacing={0}>
-            <Box
-              component={"p"}
-              sx={(theme) => ({
-                fontSize: 14,
-                fontWeight: 700,
-                color: theme.normal.text1,
-              })}
-            >
-              {props.tokenPair}/USDT
-            </Box>
-            <Box
-              component={"p"}
-              sx={(theme) => ({
-                fontSize: 16,
-                fontWeight: 700,
-                color: theme.normal.success,
-              })}
-            >
-              {Number(nowPrice).toFixed(2)}
-            </Box>
-          </Stack>
-          <Box
-            sx={(theme) => ({
-              "& svg": {
-                width: "16px",
-                height: "16px",
-                display: "block",
-                "& path": {
-                  fill: theme.normal.text2,
+            <Stack
+              direction={"row"}
+              sx={{
+                "& svg": {
+                  width: "24px",
+                  height: "24px",
+                  display: "block",
+                  position: "relative",
+                  zIndex: 5,
                 },
-              },
-            })}
-          >
-            <SelectedTokenDown/>
+                "& svg + svg": {marginLeft: "-8px", zIndex: 4},
+              }}
+            >
+              <TokenIcon/>
+              <USDTLogo/>
+            </Stack>
+            <Stack spacing={0}>
+              <Box
+                component={"p"}
+                sx={(theme) => ({
+                  fontSize: 14,
+                  fontWeight: 700,
+                  color: theme.normal.text1,
+                })}
+              >
+                {props.tokenPair}/USDT
+              </Box>
+              <Box
+                component={"p"}
+                sx={(theme) => ({
+                  fontSize: 16,
+                  fontWeight: 700,
+                  color: theme.normal.success,
+                })}
+              >
+                {chartToken.maxPrice && formatAmount(chartToken.maxPrice, USD_DECIMALS, 2, true)}
+              </Box>
+            </Stack>
+            <Box
+              sx={(theme) => ({
+                "& svg": {
+                  width: "16px",
+                  height: "16px",
+                  display: "block",
+                  "& path": {
+                    fill: theme.normal.text2,
+                  },
+                },
+              })}
+            >
+              <SelectedTokenDown/>
+            </Box>
+          </Stack>
+          <Box>
+            <ChartDataTitle>24h Change</ChartDataTitle>
+            <ChartDataValue sx={(theme) => ({
+              color: deltaPercentage >= 0 ? theme.normal.success : theme.normal.danger,
+            })}>
+              {!deltaPercentageStr && "-"}
+              {deltaPercentageStr && deltaPercentageStr}
+            </ChartDataValue>
+          </Box>
+          <Box>
+            <ChartDataTitle>24h High</ChartDataTitle>
+            <ChartDataValue>
+              {!high && "-"}
+              {high && numberWithCommas(high.toFixed(2))}
+            </ChartDataValue>
+          </Box>
+          <Box>
+            <ChartDataTitle>24h Low</ChartDataTitle>
+            <ChartDataValue>
+              {!low && "-"}
+              {low && numberWithCommas(low.toFixed(2))}
+            </ChartDataValue>
           </Box>
         </Stack>
         <Box
@@ -269,11 +363,10 @@ const FuturesPriceTable: FC<FuturesPriceTableProps> = ({...props}) => {
           <TVChartContainer
             chartLines={[]}
             savedShouldShowPositionLines={false}
-            symbol={"ETH"}
+            symbol={props.tokenPair}
+            // TODO
             chainId={42161}
-            onSelectToken={() => {
-
-            }}
+            onSelectToken={onSelectToken}
             dataProvider={dataProvider.current!}
           />
         </Box>
