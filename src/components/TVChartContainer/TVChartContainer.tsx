@@ -1,7 +1,7 @@
 import {useLocalStorageSerializeKey} from "../../lib/localStorage";
 import {DEFAULT_PERIOD, defaultChartProps, disabledFeaturesOnMobile} from "./constants";
 import {useEffect, useRef, useState} from "react";
-import {ChartData, IChartingLibraryWidget, IPositionLineAdapter} from "../../charting_library";
+import {ChartData, IChartingLibraryWidget} from "../../charting_library";
 import {useLocalStorage, useMedia} from "react-use";
 import useTVDatafeed from "../../domain/tradingview/useTVDatafeed";
 import {SUPPORTED_RESOLUTIONS, TV_CHART_RELOAD_INTERVAL} from "../../config/tradingview";
