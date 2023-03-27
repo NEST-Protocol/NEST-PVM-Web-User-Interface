@@ -1,13 +1,15 @@
 import {useLocalStorageSerializeKey} from "../../lib/localStorage";
 import {DEFAULT_PERIOD, defaultChartProps, disabledFeaturesOnMobile} from "./constants";
 import {useCallback, useEffect, useRef, useState} from "react";
-import {IChartingLibraryWidget, IPositionLineAdapter} from "../../charting_library";
-import {useMedia} from "react-use";
+import {ChartData, IChartingLibraryWidget, IPositionLineAdapter} from "../../charting_library";
+import {useLocalStorage, useMedia} from "react-use";
 import useTVDatafeed from "../../domain/tradingview/useTVDatafeed";
 import {SUPPORTED_RESOLUTIONS, TV_CHART_RELOAD_INTERVAL} from "../../config/tradingview";
 import {TVDataProvider} from "../../domain/tradingview/TVDataProvider";
 import {CHART_PERIODS} from "../../lib/legacy";
 import {getObjectKeyFromValue} from "../../domain/tradingview/utils";
+import {SaveLoadAdapter} from "./SaveLoadAdapter";
+import {CircularProgress} from "@mui/material";
 
 type ChartLine = {
   price: number;
@@ -39,6 +41,7 @@ export default function TVChartContainer(
 
   const chartContainerRef = useRef<HTMLDivElement | null>(null);
   const tvWidgetRef = useRef<IChartingLibraryWidget | null>(null);
+  const [tvCharts, setTvCharts] = useLocalStorage<ChartData[] | undefined>("tv-save-load-charts", []);
   const [chartReady, setChartReady] = useState(false);
   const [chartDataLoading, setChartDataLoading] = useState(true);
   const { datafeed, resetCache } = useTVDatafeed({ dataProvider });
@@ -134,7 +137,7 @@ export default function TVChartContainer(
       interval: getObjectKeyFromValue(period, SUPPORTED_RESOLUTIONS),
       favorites: defaultChartProps.favorites,
       custom_formatters: defaultChartProps.custom_formatters,
-      // save_load_adapter: new SaveLoadAdapter(chainId, tvCharts, setTvCharts, onSelectToken),
+      save_load_adapter: new SaveLoadAdapter(chainId, tvCharts, setTvCharts, onSelectToken),
     };
     // @ts-ignore
     tvWidgetRef.current = new window.TradingView.widget(widgetOptions);
@@ -183,8 +186,9 @@ export default function TVChartContainer(
       height: '100%',
       position: 'relative',
     }}>
+      {chartDataLoading && <CircularProgress />}
       <div
-        style={{position: 'absolute', bottom: 0, left: 0, right: 0, top: 0 }}
+        style={{ visibility: !chartDataLoading ? "visible" : "hidden", position: 'absolute', bottom: 0, left: 0, right: 0, top: 0  }}
         ref={chartContainerRef}
       />
     </div>
