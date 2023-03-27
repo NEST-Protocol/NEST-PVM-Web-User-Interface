@@ -1,6 +1,6 @@
 import {useLocalStorageSerializeKey} from "../../lib/localStorage";
 import {DEFAULT_PERIOD, defaultChartProps, disabledFeaturesOnMobile} from "./constants";
-import {useCallback, useEffect, useRef, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {ChartData, IChartingLibraryWidget, IPositionLineAdapter} from "../../charting_library";
 import {useLocalStorage, useMedia} from "react-use";
 import useTVDatafeed from "../../domain/tradingview/useTVDatafeed";
@@ -10,11 +10,6 @@ import {CHART_PERIODS} from "../../lib/legacy";
 import {getObjectKeyFromValue} from "../../domain/tradingview/utils";
 import {SaveLoadAdapter} from "./SaveLoadAdapter";
 import {CircularProgress} from "@mui/material";
-
-type ChartLine = {
-  price: number;
-  title: string;
-};
 
 type Props = {
   symbol: string;
@@ -44,28 +39,6 @@ export default function TVChartContainer(
   const isMobile = useMedia("(max-width: 550px)");
   const symbolRef = useRef(symbol);
 
-  const drawLineOnChart = useCallback(
-    (title: string, price: number) => {
-      if (chartReady && tvWidgetRef.current?.activeChart?.().dataReady()) {
-        const chart = tvWidgetRef.current.activeChart();
-        const positionLine = chart.createPositionLine({ disableUndo: true });
-
-        return positionLine
-          .setText(title)
-          .setPrice(price)
-          .setQuantity("")
-          .setLineStyle(1)
-          .setLineLength(1)
-          .setBodyFont(`normal 12pt "Relative", sans-serif`)
-          .setBodyTextColor("#fff")
-          .setLineColor("#3a3e5e")
-          .setBodyBackgroundColor("#3a3e5e")
-          .setBodyBorderColor("#3a3e5e");
-      }
-    },
-    [chartReady]
-  );
-
   useEffect(() => {
     const handleVisibilityChange = () => {
       if (document.visibilityState === "hidden") {
@@ -87,16 +60,6 @@ export default function TVChartContainer(
       document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
   }, [resetCache]);
-
-  useEffect(
-    function updateLines() {
-      const lines: (IPositionLineAdapter | undefined)[] = [];
-      return () => {
-        lines.forEach((line) => line?.remove());
-      };
-    },
-    [drawLineOnChart]
-  );
 
   useEffect(() => {
     if (chartReady && tvWidgetRef.current && symbol !== tvWidgetRef.current?.activeChart?.().symbol()) {
@@ -165,7 +128,6 @@ export default function TVChartContainer(
     // We don't want to re-initialize the chart when the symbol changes. This will make the chart flicker.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [chainId]);
-
 
   return (
     <div style={{
