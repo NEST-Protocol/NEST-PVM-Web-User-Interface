@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import { useMedia } from "react-use";
 import { defaultChartProps, DEFAULT_PERIOD } from "./constants";
 import useTVDatafeed from "../../domain/tradingview/useTVDatafeed";
 import { IChartingLibraryWidget } from "../../charting_library";
@@ -33,7 +32,6 @@ export default function TVChartContainer({
   const [chartReady, setChartReady] = useState(false);
   const [chartDataLoading, setChartDataLoading] = useState(true);
   const { datafeed, resetCache } = useTVDatafeed({ dataProvider });
-  const isMobile = useMedia("(max-width: 550px)");
   const symbolRef = useRef(symbol);
 
   /* Tradingview charting library only fetches the historical data once so if the tab is inactive or system is in sleep mode
@@ -93,10 +91,6 @@ export default function TVChartContainer({
     tvWidgetRef.current = new window.TradingView.widget(widgetOptions);
     tvWidgetRef.current!.onChartReady(function () {
       setChartReady(true);
-      tvWidgetRef.current!.applyOverrides({
-        "paneProperties.background": "#16182e",
-        "paneProperties.backgroundType": "solid",
-      });
       tvWidgetRef.current
         ?.activeChart()
         .onIntervalChanged()
