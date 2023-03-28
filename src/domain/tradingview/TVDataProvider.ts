@@ -1,5 +1,5 @@
 import { LAST_BAR_REFRESH_INTERVAL, SUPPORTED_RESOLUTIONS } from "../../config/tradingview";
-import { getLimitChartPricesFromStats, getStablePriceData, timezoneOffset } from "../prices";
+import { getLimitChartPricesFromStats, timezoneOffset } from "../prices";
 import { CHART_PERIODS, USD_DECIMALS } from "../../lib/legacy";
 import { formatAmount } from "../../lib/numbers";
 import { Bar } from "./types";
@@ -97,17 +97,15 @@ export class TVDataProvider {
     chainId: number,
     ticker: string,
     resolution: string,
-    isStable: boolean,
     periodParams: PeriodParams,
     shouldRefetchBars: boolean
   ) {
     // @ts-ignore
     const period = SUPPORTED_RESOLUTIONS[resolution];
-    const { countBack } = periodParams;
+
     try {
-      const bars = isStable
-        ? getStablePriceData(period, countBack)
-        : await this.getTokenHistoryBars(chainId, ticker, period, periodParams, shouldRefetchBars);
+      const bars = await this.getTokenHistoryBars(chainId, ticker, period, periodParams, shouldRefetchBars);
+
       return bars.map(formatTimeInBarToMs);
     } catch {
       throw new Error("Failed to get history bars");

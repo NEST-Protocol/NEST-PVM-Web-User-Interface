@@ -1,5 +1,5 @@
 import { HistoryCallback, PeriodParams, ResolutionString, SubscribeBarsCallback } from "../../charting_library";
-import { getNativeToken, isChartAvailabeForToken } from "../../config/tokens";
+import { getNativeToken, getTokens, isChartAvailabeForToken } from "../../config/tokens";
 import { SUPPORTED_RESOLUTIONS } from "../../config/tradingview";
 import { useEffect, useMemo, useRef } from "react";
 import { TVDataProvider } from "./TVDataProvider";
@@ -19,7 +19,6 @@ type Props = {
 };
 
 export default function useTVDatafeed({ dataProvider }: Props) {
-  // TODO
   const chainId = 42161;
   const intervalRef = useRef<ReturnType<typeof setInterval> | undefined>();
   const resetCacheRef = useRef<() => void | undefined>();
@@ -48,6 +47,10 @@ export default function useTVDatafeed({ dataProvider }: Props) {
           if (!isChartAvailabeForToken(chainId, symbolName)) {
             symbolName = getNativeToken(chainId).symbol;
           }
+
+          const stableTokens = getTokens(chainId)
+            .filter((t) => t.isStable)
+            .map((t) => t.symbol);
           const symbolInfo = {
             name: symbolName,
             type: "crypto",
@@ -62,7 +65,7 @@ export default function useTVDatafeed({ dataProvider }: Props) {
             currency_code: "USD",
             visible_plots_set: "ohlc",
             data_status: "streaming",
-            isStable: false,
+            isStable: stableTokens.includes(symbolName),
           };
           setTimeout(() => onSymbolResolvedCallback(symbolInfo));
         },
@@ -78,7 +81,7 @@ export default function useTVDatafeed({ dataProvider }: Props) {
           if (!SUPPORTED_RESOLUTIONS[resolution]) {
             return onErrorCallback("[getBars] Invalid resolution");
           }
-          const { ticker, isStable } = symbolInfo;
+          const { ticker } = symbolInfo;
           if (activeTicker.current !== ticker) {
             activeTicker.current = ticker;
           }
@@ -92,11 +95,11 @@ export default function useTVDatafeed({ dataProvider }: Props) {
               chainId,
               ticker,
               resolution,
-              isStable,
               periodParams,
               shouldRefetchBars.current
             );
             const noData = !bars || bars.length === 0;
+            // @ts-ignore
             onHistoryCallback(bars, { noData });
           } catch {
             onErrorCallback("Unable to load historical data!");
