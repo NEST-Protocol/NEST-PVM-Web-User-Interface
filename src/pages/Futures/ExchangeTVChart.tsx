@@ -177,9 +177,6 @@ const ExchangeTVChart: FC<ExchangeTVChartProps> = ({...props}) => {
     }
   }
 
-  console.log("ExchangeTVChart props.tokenPair", props.tokenPair);
-  console.log("ExchangeTVChart dataProvider.current", dataProvider.current);
-
   return (
     <Stack
       width={"100%"}
