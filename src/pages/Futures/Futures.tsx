@@ -77,9 +77,6 @@ const Futures: FC = () => {
     return <FuturesMoreInfo />;
   }, []);
 
-
-  console.log("exchangeTvChart", exchangeTvChart);
-
   const mainView = useMemo(() => {
     switch (width) {
       case WidthType.xl:
