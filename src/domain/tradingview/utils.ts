@@ -1,4 +1,4 @@
-import { timezoneOffset } from "../../domain/prices";
+import { timezoneOffset } from "../prices";
 import { CHART_PERIODS } from "../../lib/legacy";
 import { Bar } from "./types";
 
