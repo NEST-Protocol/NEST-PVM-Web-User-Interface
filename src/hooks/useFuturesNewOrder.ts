@@ -22,6 +22,8 @@ import {
   usePendingTransactions,
 } from "./useTransactionReceipt";
 import useReadSwapAmountOut from "../contracts/Read/useReadSwapContract";
+import { getQueryVariable } from "../lib/queryVaribale";
+import { KOLTx } from "../lib/NESTRequest";
 
 export const lipPrice = (
   balance: BigNumber,
@@ -324,7 +326,25 @@ function useFuturesNewOrder(
       tp.stringToBigNumber(18) ?? BigNumber.from("0"),
       sl.stringToBigNumber(18) ?? BigNumber.from("0")
     );
-
+  // count KOL Link with address
+  useEffect(() => {
+    let code = getQueryVariable("pt");
+    if (
+      code &&
+      account.address &&
+      chainsData.chainId !== 97 &&
+      (newTrustOrder.data?.hash || newTrustOrderWithUSDT.data?.hash)
+    ) {
+      console.log(newTrustOrder.status)
+      if (newTrustOrder.isSuccess || newTrustOrderWithUSDT.isSuccess) {
+        const hash = newTrustOrder.data?.hash
+          ? newTrustOrder.data!.hash
+          : newTrustOrderWithUSDT.data!.hash;
+        KOLTx({ kolLink: window.location.href, hash: hash });
+        console.log(newTrustOrder.status)
+      }
+    }
+  }, [account.address, chainsData.chainId, newTrustOrder.data, newTrustOrder.data?.hash, newTrustOrder.isSuccess, newTrustOrder.status, newTrustOrderWithUSDT.data, newTrustOrderWithUSDT.data?.hash, newTrustOrderWithUSDT.isSuccess]);
   /**
    * main button
    */
@@ -336,11 +356,7 @@ function useFuturesNewOrder(
       isPendingType(TransactionType.approve)
     );
   }, [isPendingType]);
-  // useEffect(() => {
-  //   if (tokenApprove.isSuccess) {
-  //     setInputAmount('');
-  //   }
-  // }, [inputAmount, tokenApprove]);
+
   const checkMinNEST = useMemo(() => {
     return (nestAmount.stringToBigNumber(4) ?? BigNumber.from("0")).lt(
       MIN_NEST_BIG_NUMBER
