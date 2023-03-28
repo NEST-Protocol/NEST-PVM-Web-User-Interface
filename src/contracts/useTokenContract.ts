@@ -35,7 +35,7 @@ function useTokenApprove(
   }, [addPendingList, transaction, transaction.data]);
 
   return {
-    transaction,
+    transaction
   };
 }
 

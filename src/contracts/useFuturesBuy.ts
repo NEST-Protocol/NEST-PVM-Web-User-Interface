@@ -37,6 +37,9 @@ function useFuturesBuy(
   const transaction = useContractWrite({
     ...config,
     request: { ...config.request, gasLimit: gasLimit },
+    onError(error) {
+      console.log("Error", error);
+    },
   });
   useEffect(() => {
     if (transaction.data) {

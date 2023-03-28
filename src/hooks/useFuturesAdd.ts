@@ -82,6 +82,14 @@ function useFuturesAdd(
   /**
    * action
    */
+  const inputAmountTransaction = useMemo(() => {
+    const amount = nestAmount.stringToBigNumber(4);
+    if (amount && checkAllowance && checkBalance) {
+      return amount;
+    } else {
+      return undefined;
+    }
+  }, [checkAllowance, checkBalance, nestAmount]);
   const { transaction: tokenApprove } = useTokenApprove(
     (NESTToken ?? String().zeroAddress) as `0x${string}`,
     futureContract,
@@ -89,7 +97,7 @@ function useFuturesAdd(
   );
   const { transaction: add } = useFuturesAddTransaction(
     data.index,
-    nestAmount.stringToBigNumber(4)
+    inputAmountTransaction
   );
 
   const maxCallBack = useCallback(() => {
