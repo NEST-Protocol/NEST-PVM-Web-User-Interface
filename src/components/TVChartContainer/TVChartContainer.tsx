@@ -92,12 +92,7 @@ export default function TVChartContainer({
       favorites: defaultChartProps.favorites,
       custom_formatters: defaultChartProps.custom_formatters,
     };
-    // @ts-ignore
     tvWidgetRef.current = new window.TradingView.widget(widgetOptions);
-    if (!tvWidgetRef.current) {
-      console.log("TradingView widget not available")
-      return;
-    }
     tvWidgetRef.current!.onChartReady(function () {
       setChartReady(true);
       tvWidgetRef.current!.applyOverrides({
@@ -131,7 +126,7 @@ export default function TVChartContainer({
     };
     // We don't want to re-initialize the chart when the symbol changes. This will make the chart flicker.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [chainId, window.TradingView]);
+  }, [chainId]);
 
   return (
     <div style={{

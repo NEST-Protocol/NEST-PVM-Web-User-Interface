@@ -360,7 +360,6 @@ const FuturesPriceTable: FC<FuturesPriceTableProps> = ({...props}) => {
         <Box height={height}>
           <TVChartContainer
             symbol={props.tokenPair}
-            // TODO
             chainId={1}
             dataProvider={dataProvider.current!}
           />
