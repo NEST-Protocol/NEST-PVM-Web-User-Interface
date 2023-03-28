@@ -25,7 +25,7 @@ const chartStyleOverrides = ["candleStyle", "hollowCandleStyle", "haStyle"].redu
 }, {});
 
 const chartOverrides = {
-  "paneProperties.background": "#0B0C0D",
+  "paneProperties.background": "#16182e",
   "paneProperties.backgroundGradientStartColor": "#16182e",
   "paneProperties.backgroundGradientEndColor": "#16182e",
   "paneProperties.backgroundType": "solid",
@@ -33,13 +33,11 @@ const chartOverrides = {
   "paneProperties.vertGridProperties.style": 2,
   "paneProperties.horzGridProperties.color": "rgba(35, 38, 59, 1)",
   "paneProperties.horzGridProperties.style": 2,
-  "mainSeriesProperties.priceLineColor": "rgba(255, 255, 255, 0.09)",
-  "scalesProperties.textColor": "rgba(249, 249, 249, 0.8)",
-  "scalesProperties.lineColor": "rgba(255, 255, 255, 0.09)",
+  "mainSeriesProperties.priceLineColor": "#3a3e5e",
+  "scalesProperties.textColor": "#fff",
+  "scalesProperties.lineColor": "#16182e",
   ...chartStyleOverrides,
 };
-
-export const disabledFeaturesOnMobile = ["header_saveload", "header_fullscreen_button"];
 
 const disabledFeatures = [
   "volume_force_overlay",
@@ -57,10 +55,10 @@ const disabledFeatures = [
   "use_localstorage_for_settings",
   "right_bar_stays_on_scroll",
   "symbol_info",
+  "header_saveload",
+  "header_fullscreen_button",
 ];
 const enabledFeatures = [
-  "side_toolbar_in_fullscreen_mode",
-  "header_in_fullscreen_mode",
   "hide_resolution_in_legend",
   "items_favoriting",
   "hide_left_toolbar_by_default",
@@ -85,10 +83,12 @@ export const defaultChartProps = {
   },
   custom_formatters: {
     timeFormatter: {
-      format: (date: Date) => formatTVTime(date),
+      // @ts-ignore
+      format: (date) => formatTVTime(date),
     },
     dateFormatter: {
-      format: (date: Date) => formatTVDate(date),
+      // @ts-ignore
+      format: (date) => formatTVDate(date),
     },
   },
 };

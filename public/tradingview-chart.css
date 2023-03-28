@@ -1,16 +1,33 @@
-.theme-dark:root {
-  --dark-blue-bg: #16182e;
+:root:not(.theme-dark) {
+  --tv-color-platform-background: #d1c4e9;
+  --tv-color-pane-background: rgb(251, 223, 244);
+  --tv-color-pane-background-secondary: rgb(249, 185, 233);
+  --tv-color-toolbar-button-background-hover: rgb(244, 143, 177);
+  --tv-color-toolbar-button-background-secondary-hover: red;
+  --tv-color-toolbar-button-background-expanded: rgb(244, 143, 177);
+  --tv-color-toolbar-button-text: rgb(136, 24, 79);
+  --tv-color-toolbar-button-text-hover: rgb(74, 20, 140);
+  --tv-color-toolbar-button-text-active: red;
+  --tv-color-toolbar-button-text-active-hover: red;
+  --tv-color-item-active-text: rgb(6, 6, 255);
+  --tv-color-toolbar-toggle-button-background-active: red;
+  --tv-color-toolbar-toggle-button-background-active-hover: magenta;
+}
 
-  --tv-color-pane-background: var(--dark-blue-bg);
-  --tv-color-platform-background: var(--dark-blue-bg);
-  --tv-color-pane-background-secondary: var(--dark-blue-bg);
-  --tv-color-toolbar-button-text-hover: #b2b5be;
-  --tv-color-toolbar-button-background-hover: #1e223de6;
-  --tv-color-toolbar-button-text-active: #2962ff;
-  --tv-color-toolbar-toggle-button-background-active: #3a3e5e;
-  --tv-color-toolbar-toggle-button-background-active-hover: #3a3e5e;
-  --tv-color-toolbar-button-background-expanded: var(--dark-blue-bg);
-  /* --tv-list-item-button-background-color: #20243f; */
+.theme-dark:root {
+  --tv-color-platform-background: rgba(23, 26, 31, 1);
+  --tv-color-pane-background: rgba(23, 26, 31, 1);
+  --tv-color-pane-background-secondary: rgba(23, 26, 31, 1);
+  --tv-color-toolbar-button-background-hover: transparent;
+  --tv-color-toolbar-button-background-secondary-hover: rgba(23, 26, 31, 1);
+  --tv-color-toolbar-button-background-expanded: rgba(23, 26, 31, 1);
+  --tv-color-toolbar-button-text: rgba(249, 249, 249, 0.6);
+  --tv-color-toolbar-button-text-hover: rgba(249, 249, 249, 1);
+  --tv-color-toolbar-button-text-active: rgba(249, 249, 249, 1);
+  --tv-color-toolbar-button-text-active-hover: rgba(249, 249, 249, 1);
+  --tv-color-item-active-text: rgba(249, 249, 249, 1);
+  --tv-color-toolbar-toggle-button-background-active: rgba(23, 26, 31, 1);
+  --tv-color-toolbar-toggle-button-background-active-hover: rgba(249, 249, 249, 1);
 }
 
 html.theme-dark .chart-page {
@@ -45,7 +62,7 @@ html.theme-dark .item-2IihgTnv:not(.isActive-2IihgTnv) {
 
 html.theme-dark .item-2IihgTnv:not(.isActive-2IihgTnv):hover,
 html.theme-dark .container-3Ywm3-oo.selected-3Ywm3-oo {
-  background-color: var(--dark-blue-bg) !important;
+  background-color: var(--dark-black-bg) !important;
 }
 
 html.theme-dark .container-3Ywm3-oo.selected-3Ywm3-oo {
@@ -77,12 +94,12 @@ html.theme-dark .item-f5BaKrKq.interactive-f5BaKrKq {
 
 html.theme-dark .tab-DggvOZTm:not(.active-DggvOZTm):hover,
 html.theme-dark .item-f5BaKrKq.interactive-f5BaKrKq:hover {
-  background-color: var(--dark-blue-bg) !important;
+  background-color: var(--dark-black-bg) !important;
 }
 
 html.theme-dark .item-f5BaKrKq.interactive-f5BaKrKq.hovered-f5BaKrKq,
 html.theme-dark .item-f5BaKrKq.interactive-f5BaKrKq:active {
-  background-color: var(--dark-blue-bg) !important;
+  background-color: var(--dark-black-bg) !important;
 }
 
 html.theme-dark .wrap-3jbioG5e,
@@ -118,8 +135,8 @@ html.theme-dark .color-gray-xRobF0EE.variant-secondary-xRobF0EE {
   cursor: pointer;
 }
 html.theme-dark .color-gray-xRobF0EE.variant-secondary-xRobF0EE:hover {
-  background: var(--dark-blue-bg);
-  border-color: var(--dark-blue-bg);
+  background: var(--dark-black-bg);
+  border-color: var(--dark-black-bg);
 }
 
 html.theme-dark .drawer-164vy-kj .smallTabletSectionTitle-2R6OKuTS {
@@ -131,7 +148,7 @@ html.theme-dark .drawer-164vy-kj .normal-eqcGT_ow {
 
 html.theme-dark .tv-floating-toolbar,
 html.theme-dark .drawer-164vy-kj {
-  background-color: var(--dark-blue-bg) !important;
+  background-color: var(--dark-black-bg) !important;
 }
 
 html.theme-dark .summary-3UYGeClB {
@@ -142,6 +159,6 @@ html.theme-dark .summary-3UYGeClB {
 html.theme-dark .summary-3UYGeClB:hover,
 html.theme-dark .itemRow-1SBAfF8E:not(.active-1SBAfF8E):hover,
 html.theme-dark .container-3Ywm3-oo:not(.disabled-3Ywm3-oo):not(.selected-3Ywm3-oo):hover {
-  background-color: var(--dark-blue-bg) !important;
+  background-color: var(--dark-black-bg) !important;
   cursor: pointer;
 }

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useMedia } from "react-use";
-import { defaultChartProps, DEFAULT_PERIOD, disabledFeaturesOnMobile } from "./constants";
+import { defaultChartProps, DEFAULT_PERIOD } from "./constants";
 import useTVDatafeed from "../../domain/tradingview/useTVDatafeed";
 import { IChartingLibraryWidget } from "../../charting_library";
 import { getObjectKeyFromValue } from "../../domain/tradingview/utils";
@@ -79,9 +79,7 @@ export default function TVChartContainer({
       locale: defaultChartProps.locale,
       loading_screen: defaultChartProps.loading_screen,
       enabled_features: defaultChartProps.enabled_features,
-      disabled_features: isMobile
-        ? defaultChartProps.disabled_features.concat(disabledFeaturesOnMobile)
-        : defaultChartProps.disabled_features,
+      disabled_features: defaultChartProps.disabled_features,
       client_id: defaultChartProps.clientId,
       user_id: defaultChartProps.userId,
       fullscreen: defaultChartProps.fullscreen,
@@ -140,7 +138,7 @@ export default function TVChartContainer({
       {chartDataLoading && <CircularProgress />}
       <div
         style={{
-          visibility: !chartDataLoading ? "visible" : "hidden",
+          // visibility: !chartDataLoading ? "visible" : "hidden",
           position: 'absolute', bottom: 0, left: 0, right: 0, top: 0  }}
         ref={chartContainerRef}
       />
