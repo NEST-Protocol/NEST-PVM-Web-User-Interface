@@ -9,7 +9,7 @@ import {
 import TwoIconWithString from "../../components/IconWithString/TwoIconWithString";
 import SelectListMenu from "../../components/SelectListMemu/SelectListMenu";
 import useWindowWidth, {WidthType} from "../../hooks/useWindowWidth";
-import {FuturesPrice, priceToken} from "./Futures";
+import {priceToken} from "./Futures";
 import TVChartContainer from "../../components/TVChartContainer/TVChartContainer";
 import {TVDataProvider} from "../../domain/tradingview/TVDataProvider";
 import {formatAmount, numberWithCommas} from "../../lib/numbers";
@@ -17,8 +17,7 @@ import {USD_DECIMALS} from "../../lib/legacy";
 import {useChartPrices} from "../../domain/prices";
 import {styled} from "@mui/material";
 
-interface FuturesPriceTableProps {
-  price: FuturesPrice | undefined;
+interface ExchangeTVChartProps {
   tokenPair: string;
   changeTokenPair: (value: string) => void;
 }
@@ -33,7 +32,7 @@ const ChartDataValue = styled("div")(({theme}) => ({
   color: theme.normal.text0,
 }));
 
-const FuturesPriceTable: FC<FuturesPriceTableProps> = ({...props}) => {
+const ExchangeTVChart: FC<ExchangeTVChartProps> = ({...props}) => {
   const {width, isBigMobile} = useWindowWidth();
   const [isHide, setIsHide] = useState(false);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -177,6 +176,9 @@ const FuturesPriceTable: FC<FuturesPriceTableProps> = ({...props}) => {
       deltaPercentageStr = "0.00";
     }
   }
+
+  console.log("ExchangeTVChart props.tokenPair", props.tokenPair);
+  console.log("ExchangeTVChart dataProvider.current", dataProvider.current);
 
   return (
     <Stack
@@ -369,4 +371,4 @@ const FuturesPriceTable: FC<FuturesPriceTableProps> = ({...props}) => {
   );
 };
 
-export default FuturesPriceTable;
+export default ExchangeTVChart;
