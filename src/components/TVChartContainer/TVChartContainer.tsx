@@ -9,6 +9,7 @@ import { TVDataProvider } from "../../domain/tradingview/TVDataProvider";
 import { useLocalStorageSerializeKey } from "../../lib/localStorage";
 import { CHART_PERIODS } from "../../lib/legacy";
 import {CircularProgress} from "@mui/material";
+import useTheme from "../../hooks/useTheme";
 
 type Props = {
   symbol: string;
@@ -33,6 +34,7 @@ export default function TVChartContainer({
   const [chartDataLoading, setChartDataLoading] = useState(true);
   const { datafeed, resetCache } = useTVDatafeed({ dataProvider });
   const symbolRef = useRef(symbol);
+  const { nowTheme } = useTheme();
 
   /* Tradingview charting library only fetches the historical data once so if the tab is inactive or system is in sleep mode
   for a long time, the historical data will be outdated. */
@@ -71,7 +73,7 @@ export default function TVChartContainer({
       debug: false,
       symbol: symbolRef.current, // Using ref to avoid unnecessary re-renders on symbol change and still have access to the latest symbol
       datafeed: datafeed,
-      theme: defaultChartProps.theme,
+      theme: nowTheme.isLight ? "Light" : "Dark",
       container: chartContainerRef.current,
       library_path: defaultChartProps.library_path,
       locale: defaultChartProps.locale,
@@ -118,7 +120,7 @@ export default function TVChartContainer({
     };
     // We don't want to re-initialize the chart when the symbol changes. This will make the chart flicker.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [chainId]);
+  }, [chainId, nowTheme.isLight]);
 
   return (
     <div style={{
@@ -132,7 +134,7 @@ export default function TVChartContainer({
       {chartDataLoading && <CircularProgress />}
       <div
         style={{
-          // visibility: !chartDataLoading ? "visible" : "hidden",
+          visibility: !chartDataLoading ? "visible" : "hidden",
           position: 'absolute', bottom: 0, left: 0, right: 0, top: 0  }}
         ref={chartContainerRef}
       />
