@@ -7,7 +7,7 @@ import useWindowWidth, { WidthType } from "../../hooks/useWindowWidth";
 import FuturesMoreInfo from "./MoreInfo";
 import FuturesNewOrder from "./NewOrder";
 import FuturesOrderList from "./OrderList";
-import FuturesPriceTable from "./PriceTable";
+import ExchangeTVChart from "./ExchangeTVChart";
 
 export interface FuturesPrice {
   [key: string]: BigNumber;
@@ -18,7 +18,7 @@ const Futures: FC = () => {
   const { account } = useNEST();
   const { width, isBigMobile } = useWindowWidth();
   const [tokenPair, setTokenPair] = useState("ETH");
- 
+
   const priceToken = useMemo(() => {
     return ["ETH", "BTC", "BNB"];
   }, []);
@@ -50,22 +50,23 @@ const Futures: FC = () => {
       clearInterval(time);
     };
   }, [BNBPriceRefetch, BTCPriceRefetch, ETHPriceRefetch, account.address]);
-  
+
   const paddingY = useMemo(() => {
     return isBigMobile ? 0 : 24;
   }, [isBigMobile]);
   const paddingX = useMemo(() => {
     return isBigMobile ? 0 : 40;
   }, [isBigMobile]);
-  const priceTable = useCallback(() => {
+
+  const exchangeTvChart = useCallback(() => {
     return (
-      <FuturesPriceTable
-        price={price}
+      <ExchangeTVChart
         tokenPair={tokenPair}
         changeTokenPair={(value: string) => setTokenPair(value)}
       />
     );
-  }, [price, tokenPair]);
+  }, [tokenPair]);
+
   const orderList = useCallback(() => {
     return <FuturesOrderList price={price} />;
   }, [price]);
@@ -75,7 +76,6 @@ const Futures: FC = () => {
   const moreInfo = useCallback(() => {
     return <FuturesMoreInfo />;
   }, []);
-  
 
   const mainView = useMemo(() => {
     switch (width) {
@@ -91,7 +91,7 @@ const Futures: FC = () => {
               paddingY={`${paddingY}px`}
             >
               <Stack spacing={"16px"} width={"100%"}>
-                {priceTable()}
+                {exchangeTvChart()}
                 {orderList()}
               </Stack>
               <Stack spacing={"16px"} width={"450px"}>
@@ -109,7 +109,7 @@ const Futures: FC = () => {
             paddingX={`${paddingX}px`}
           >
             <Stack spacing={"16px"} width={"100%"} paddingY={`${paddingY}px`}>
-              {priceTable()}
+              {exchangeTvChart()}
               {newOrder()}
               {isBigMobile ? <></> : moreInfo()}
               {orderList()}
@@ -124,7 +124,7 @@ const Futures: FC = () => {
     orderList,
     paddingX,
     paddingY,
-    priceTable,
+    exchangeTvChart,
     width,
   ]);
   return (
