@@ -17,6 +17,8 @@ export const getTokenChartPrice = async (chainId: number, symbol: string, period
   return prices;
 };
 
+// get current price of token, by chainId and symbol
+// return price in 18 decimals
 export async function getCurrentPriceOfToken(chainId: number, symbol: string) {
   try {
     const indexPricesUrl = getServerUrl(chainId, "/prices");

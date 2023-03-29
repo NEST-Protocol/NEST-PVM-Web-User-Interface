@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
-import {FC, useEffect, useMemo, useRef, useState} from "react";
+import {FC, useCallback, useEffect, useMemo, useRef, useState} from "react";
 import {
   HidePriceTable,
   SelectedTokenDown,
@@ -97,13 +97,25 @@ const ExchangeTVChart: FC<ExchangeTVChartProps> = ({...props}) => {
       });
   }, [props]);
 
-  const [chartTokenPrice, setChartTokenPrice] = useState(0);
+  const [chartTokenPrice, setChartTokenPrice] = useState('-');
 
-  const fetchChartTokenPrice = async () => {
-    // get token price from binance api
+  const fetchChartTokenPrice = useCallback(async () => {
+    if (dataProvider.current) {
+      // @ts-ignore, TODO
+      const price = await dataProvider.current?.getCurrentPriceOfToken(42161, props.tokenPair);
+      const parsedPrice = formatAmount(price, USD_DECIMALS, 2);
+      setChartTokenPrice(parsedPrice);
+    }
+  }, [props.tokenPair])
 
-  }
-
+  useEffect(() => {
+    fetchChartTokenPrice();
+    // 每秒更新一次
+    const interval = setInterval(() => {
+      fetchChartTokenPrice();
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [fetchChartTokenPrice])
 
   useEffect(() => {
     // @ts-ignore
