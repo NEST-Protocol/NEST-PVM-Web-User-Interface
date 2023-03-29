@@ -44,10 +44,13 @@ html.theme-dark .chart-controls-bar {
   height: 0;
 }
 html.theme-light .chart-page {
-  background-color: #FFFFFF;
+  background-color: transparent;
   font-family: "Open Sans", sans-serif;
 }
-
-html.theme-light .chart-page .chart-container {
-  background-color: #FFFFFF;
+html.theme-light .chart-container {
+  border: none;
+}
+html.theme-light .chart-controls-bar {
+  display: none;
+  height: 0;
 }
