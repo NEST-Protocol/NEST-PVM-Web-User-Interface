@@ -93,6 +93,12 @@ export default function TVChartContainer({
     tvWidgetRef.current = new window.TradingView.widget(widgetOptions);
     tvWidgetRef.current!.onChartReady(function () {
       setChartReady(true);
+      if (nowTheme.isLight) {
+        tvWidgetRef.current!.applyOverrides({
+          "paneProperties.background": "#ffffff",
+          "paneProperties.backgroundType": "solid",
+        });
+      }
       tvWidgetRef.current
         ?.activeChart()
         .onIntervalChanged()
@@ -138,7 +144,7 @@ export default function TVChartContainer({
       {chartDataLoading && <CircularProgress size={'44px'}/>}
       <div
         style={{
-          // visibility: !chartDataLoading ? "visible" : "hidden",
+          visibility: !chartDataLoading ? "visible" : "hidden",
           position: 'absolute', bottom: 0, left: 0, right: 0, top: 0  }}
         ref={chartContainerRef}
       />

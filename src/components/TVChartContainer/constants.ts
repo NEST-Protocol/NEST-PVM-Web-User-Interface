@@ -24,6 +24,19 @@ const chartStyleOverrides = ["candleStyle", "hollowCandleStyle", "haStyle"].redu
   return acc;
 }, {});
 
+const chartOverrides = {
+  "paneProperties.background": "#171A1F",
+  "paneProperties.backgroundType": "solid",
+  // "paneProperties.vertGridProperties.color": "rgba(35, 38, 59, 1)",
+  // "paneProperties.vertGridProperties.style": 2,
+  // "paneProperties.horzGridProperties.color": "rgba(35, 38, 59, 1)",
+  // "paneProperties.horzGridProperties.style": 2,
+  // "mainSeriesProperties.priceLineColor": "#3a3e5e",
+  // "scalesProperties.textColor": "#fff",
+  // "scalesProperties.lineColor": "#171A1F",
+  ...chartStyleOverrides,
+};
+
 const disabledFeatures = [
   "volume_force_overlay",
   "show_logo_on_all_charts",
@@ -58,7 +71,7 @@ export const defaultChartProps = {
   fullscreen: false,
   autosize: true,
   header_widget_dom_node: false,
-  overrides: chartStyleOverrides,
+  overrides: chartOverrides,
   enabled_features: enabledFeatures,
   disabled_features: disabledFeatures,
   custom_css_url: "/tradingview-chart.css",
