@@ -8,7 +8,7 @@ import { isChartAvailabeForToken } from "../../config/tokens";
 import { TVDataProvider } from "../../domain/tradingview/TVDataProvider";
 import { useLocalStorageSerializeKey } from "../../lib/localStorage";
 import { CHART_PERIODS } from "../../lib/legacy";
-import {CircularProgress} from "@mui/material";
+import {Box, CircularProgress} from "@mui/material";
 import useTheme from "../../hooks/useTheme";
 
 type Props = {
@@ -123,21 +123,25 @@ export default function TVChartContainer({
   }, [chainId, nowTheme.isLight]);
 
   return (
-    <div style={{
+    <Box sx={(theme) => ({
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
       width: '100%',
       height: '100%',
       position: 'relative',
-    }}>
-      {chartDataLoading && <CircularProgress />}
+      "& svg": {
+        display: "block",
+        color: theme.normal.primary,
+      }
+    })}>
+      {chartDataLoading && <CircularProgress size={'44px'}/>}
       <div
         style={{
           visibility: !chartDataLoading ? "visible" : "hidden",
           position: 'absolute', bottom: 0, left: 0, right: 0, top: 0  }}
         ref={chartContainerRef}
       />
-    </div>
+    </Box>
   )
 }
