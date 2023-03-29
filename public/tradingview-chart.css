@@ -15,12 +15,14 @@
 }
 
 .theme-dark:root {
-  --tv-color-platform-background: #171A1F;
-  --tv-color-pane-background: #171A1F;
-  --tv-color-pane-background-secondary: #171A1F;
-  --tv-color-toolbar-button-background-hover: #171A1F;
-  --tv-color-toolbar-button-background-secondary-hover: #171A1F;
-  --tv-color-toolbar-button-background-expanded: #171A1F;
+  --dark-black-bg: #171A1F;
+
+  --tv-color-platform-background: var(--dark-black-bg);
+  --tv-color-pane-background: var(--dark-black-bg);
+  --tv-color-pane-background-secondary: var(--dark-black-bg);
+  --tv-color-toolbar-button-background-hover: var(--dark-black-bg);
+  --tv-color-toolbar-button-background-secondary-hover: var(--dark-black-bg);
+  --tv-color-toolbar-button-background-expanded: var(--dark-black-bg);
   --tv-color-toolbar-button-text: rgba(249, 249, 249, 0.6);
   --tv-color-toolbar-button-text-hover: rgba(249, 249, 249, 1);
   --tv-color-toolbar-button-text-active: rgba(249, 249, 249, 1);
@@ -31,14 +33,16 @@
 }
 
 html.theme-dark .chart-page {
-  background-color: #171A1F;
+  background-color: transparent;
   font-family: "Open Sans", sans-serif;
 }
-
-html.theme-dark .chart-page .chart-container {
-  background-color: #171A1F;
+html.theme-dark .chart-container {
+  border: none;
 }
-
+html.theme-dark .chart-controls-bar {
+  display: none;
+  height: 0;
+}
 html.theme-light .chart-page {
   background-color: #FFFFFF;
   font-family: "Open Sans", sans-serif;
