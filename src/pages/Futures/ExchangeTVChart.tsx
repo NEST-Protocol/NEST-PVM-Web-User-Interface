@@ -97,7 +97,7 @@ const ExchangeTVChart: FC<ExchangeTVChartProps> = ({...props}) => {
       });
   }, [props]);
 
-  const [chartTokenPrice, setChartTokenPrice] = useState('-');
+  const [chartTokenPrice, setChartTokenPrice] = useState('');
 
   const fetchChartTokenPrice = useCallback(async () => {
     if (dataProvider.current) {
@@ -110,7 +110,6 @@ const ExchangeTVChart: FC<ExchangeTVChartProps> = ({...props}) => {
 
   useEffect(() => {
     fetchChartTokenPrice();
-    // 每秒更新一次
     const interval = setInterval(() => {
       fetchChartTokenPrice();
     }, 1000);
@@ -132,15 +131,13 @@ const ExchangeTVChart: FC<ExchangeTVChartProps> = ({...props}) => {
 
   const now = parseInt(String(Date.now() / 1000));
   const timeThreshold = now - 24 * 60 * 60;
-  // @ts-ignore
-  const currentAveragePrice = chartTokenPrice.maxPrice && chartTokenPrice.minPrice ? chartTokenPrice.maxPrice.add(chartTokenPrice.minPrice).div(2) : null;
   const [priceData, updatePriceData] = useChartPrices(
     // TODO
     42161,
     props.tokenPair,
     false,
     "1h",
-    currentAveragePrice
+    0,
   );
 
   useEffect(() => {
@@ -175,10 +172,9 @@ const ExchangeTVChart: FC<ExchangeTVChartProps> = ({...props}) => {
     }
   }
 
-  if (deltaPrice && currentAveragePrice) {
-    const average = parseFloat(formatAmount(currentAveragePrice, USD_DECIMALS, 2));
-    delta = average - deltaPrice;
-    deltaPercentage = (delta * 100) / average;
+  if (deltaPrice && chartTokenPrice) {
+    delta = Number(chartTokenPrice) - deltaPrice;
+    deltaPercentage = (delta * 100) / Number(chartTokenPrice);
     if (deltaPercentage > 0) {
       deltaPercentageStr = `+${deltaPercentage.toFixed(2)}%`;
     } else {
@@ -252,10 +248,9 @@ const ExchangeTVChart: FC<ExchangeTVChartProps> = ({...props}) => {
                 sx={(theme) => ({
                   fontSize: 16,
                   fontWeight: 700,
-                  color: theme.normal.success,
+                  color: deltaPercentage >= 0 ? theme.normal.success : theme.normal.danger,
                 })}
               >
-                 {/*@ts-ignore*/}
                 {chartTokenPrice ? chartTokenPrice : "-" }
               </Box>
             </Stack>
@@ -279,8 +274,7 @@ const ExchangeTVChart: FC<ExchangeTVChartProps> = ({...props}) => {
             <ChartDataValue sx={(theme) => ({
               color: deltaPercentage >= 0 ? theme.normal.success : theme.normal.danger,
             })}>
-              {!deltaPercentageStr && "-"}
-              {deltaPercentageStr && deltaPercentageStr}
+              {deltaPercentageStr ? deltaPercentageStr : "-"}
             </ChartDataValue>
           </Box>
           <Box>
