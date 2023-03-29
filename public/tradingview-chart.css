@@ -43,3 +43,7 @@ html.theme-light .chart-page {
   background-color: #FFFFFF;
   font-family: "Open Sans", sans-serif;
 }
+
+html.theme-light .chart-page .chart-container {
+  background-color: #FFFFFF;
+}
