@@ -1,7 +1,7 @@
 import { formatTVDate, formatTVTime } from "../../lib/dates";
 
-const RED = "#fa3c58";
-const GREEN = "#0ecc83";
+const RED = "rgba(255, 79, 51, 1)";
+const GREEN = "rgba(54, 197, 110, 1)";
 export const DEFAULT_PERIOD = "4h";
 
 const chartStyleOverrides = ["candleStyle", "hollowCandleStyle", "haStyle"].reduce((acc, cv) => {
