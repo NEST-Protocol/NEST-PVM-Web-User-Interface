@@ -120,15 +120,7 @@ export default function TVChartContainer({
     };
     // We don't want to re-initialize the chart when the symbol changes. This will make the chart flicker.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [chainId]);
-
-  useEffect(() => {
-    tvWidgetRef.current!.onChartReady(function () {
-      if (tvWidgetRef.current) {
-        tvWidgetRef.current?.changeTheme(nowTheme.isLight ? 'Light' : 'Dark')
-      }
-    })
-  }, [nowTheme])
+  }, [chainId, nowTheme]);
 
   return (
     <Box sx={(theme) => ({
