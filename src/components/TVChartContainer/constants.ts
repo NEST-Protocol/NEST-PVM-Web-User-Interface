@@ -50,7 +50,7 @@ const enabledFeatures = [
 ];
 
 export const defaultChartProps = {
-  theme: "Dark",
+  theme: "Light",
   locale: "en",
   library_path: "/charting_library/",
   clientId: "tradingview.com",
@@ -62,7 +62,7 @@ export const defaultChartProps = {
   enabled_features: enabledFeatures,
   disabled_features: disabledFeatures,
   custom_css_url: "/tradingview-chart.css",
-  loading_screen: { backgroundColor: "#16182e", foregroundColor: "#fff" },
+  loading_screen: { backgroundColor: "#171A1F", foregroundColor: "#fff" },
   favorites: {
     intervals: ["5", "15", "60", "240", "1D"],
   },
