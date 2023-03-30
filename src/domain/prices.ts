@@ -4,7 +4,6 @@ import { ethers } from "ethers";
 
 import { USD_DECIMALS, CHART_PERIODS } from "../lib/legacy";
 import { formatAmount } from "../lib/numbers";
-import { getNormalizedTokenSymbol } from "../config/tokens";
 
 const BigNumber = ethers.BigNumber;
 export const timezoneOffset = -new Date().getTimezoneOffset() * 60;
@@ -40,7 +39,6 @@ export function fillGaps(prices: any[], periodSeconds: number) {
 }
 
 export async function getChartPricesFromStats(symbol: string, period: string, limit: number) {
-  symbol = getNormalizedTokenSymbol(symbol);
   const url = `https://api.binance.com/api/v1/klines?symbol=${symbol}USDT&limit=${limit}&interval=${period}`;
   try {
     const response = await fetch(url);
@@ -64,8 +62,8 @@ export async function getChartPricesFromStats(symbol: string, period: string, li
   }
 }
 
-export function useChartPrices(symbol: string, isStable: boolean, period: string, currentAveragePrice: number) {
-  const swrKey = !isStable && symbol ? ["getChartCandles", symbol, period] : null;
+export function useChartPrices(symbol: string, period: string, currentAveragePrice: number) {
+  const swrKey = symbol ? ["getChartCandles", symbol, period] : null;
   let { data: prices, mutate: updatePrices } = useSWR(swrKey, {
     fetcher: async (...args) => {
       try {
@@ -81,10 +79,6 @@ export function useChartPrices(symbol: string, isStable: boolean, period: string
 
   const currentAveragePriceString = currentAveragePrice && currentAveragePrice.toString();
   const retPrices = useMemo(() => {
-    if (isStable) {
-      return getStablePriceData(period);
-    }
-
     if (!prices) {
       return [];
     }
@@ -96,7 +90,7 @@ export function useChartPrices(symbol: string, isStable: boolean, period: string
 
     // @ts-ignore
     return fillGaps(_prices, CHART_PERIODS[period]);
-  }, [prices, isStable, currentAveragePriceString, period]);
+  }, [prices, currentAveragePriceString, period]);
 
   return [retPrices, updatePrices];
 }

@@ -134,13 +134,13 @@ const ExchangeTVChart: FC<ExchangeTVChartProps> = ({...props}) => {
   const timeThreshold = now - 24 * 60 * 60;
   const [priceData, updatePriceData] = useChartPrices(
     props.tokenPair,
-    false,
     "1h",
     0,
   );
 
   useEffect(() => {
     const interval = setInterval(() => {
+      // @ts-ignore
       updatePriceData(undefined, true);
     }, 60 * 1000);
     return () => clearInterval(interval);
@@ -148,6 +148,7 @@ const ExchangeTVChart: FC<ExchangeTVChartProps> = ({...props}) => {
 
   if (priceData) {
     for (let i = priceData.length - 1; i > 0; i--) {
+      // @ts-ignore
       const price = priceData[i];
       if (price.time < timeThreshold) {
         break;

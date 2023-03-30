@@ -13,7 +13,6 @@ export type Token = {
   isNative?: boolean;
   isWrapped?: boolean;
   isShortable?: boolean;
-  isStable?: boolean;
   isTempHidden?: boolean;
 };
 
