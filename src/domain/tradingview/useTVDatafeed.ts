@@ -1,9 +1,14 @@
-import { HistoryCallback, PeriodParams, ResolutionString, SubscribeBarsCallback } from "../../charting_library";
+import {
+  HistoryCallback,
+  LibrarySymbolInfo,
+  PeriodParams,
+  ResolutionString,
+  SubscribeBarsCallback
+} from "../../charting_library";
 import { getNativeToken, getTokens, isChartAvailabeForToken } from "../../config/tokens";
 import { SUPPORTED_RESOLUTIONS } from "../../config/tradingview";
 import { useEffect, useMemo, useRef } from "react";
 import { TVDataProvider } from "./TVDataProvider";
-import { SymbolInfo } from "./types";
 import { formatTimeInBarToMs } from "./utils";
 
 const configurationData = {
@@ -71,7 +76,7 @@ export default function useTVDatafeed({ dataProvider }: Props) {
         },
 
         async getBars(
-          symbolInfo: SymbolInfo,
+          symbolInfo: LibrarySymbolInfo,
           resolution: ResolutionString,
           periodParams: PeriodParams,
           onHistoryCallback: HistoryCallback,
@@ -92,7 +97,6 @@ export default function useTVDatafeed({ dataProvider }: Props) {
               return;
             }
             const bars = await tvDataProvider.current?.getBars(
-              chainId,
               ticker,
               resolution,
               periodParams,
@@ -106,27 +110,25 @@ export default function useTVDatafeed({ dataProvider }: Props) {
           }
         },
         async subscribeBars(
-          symbolInfo: SymbolInfo,
+          symbolInfo: LibrarySymbolInfo,
           resolution: ResolutionString,
           onRealtimeCallback: SubscribeBarsCallback,
           _subscribeUID: any,
           onResetCacheNeededCallback: () => void
         ) {
-          const { ticker, isStable } = symbolInfo;
+          const { ticker } = symbolInfo;
           if (!ticker) {
             return;
           }
           intervalRef.current && clearInterval(intervalRef.current);
           resetCacheRef.current = onResetCacheNeededCallback;
-          if (!isStable) {
-            intervalRef.current = setInterval(function () {
-              tvDataProvider.current?.getLiveBar(chainId, ticker, resolution).then((bar) => {
-                if (bar && ticker === activeTicker.current) {
-                  onRealtimeCallback(formatTimeInBarToMs(bar));
-                }
-              });
-            }, 500);
-          }
+          intervalRef.current = setInterval(function () {
+            tvDataProvider.current?.getLiveBar(ticker, resolution).then((bar) => {
+              if (bar && ticker === activeTicker.current) {
+                onRealtimeCallback(formatTimeInBarToMs(bar));
+              }
+            });
+          }, 500);
         },
         unsubscribeBars: () => {
           intervalRef.current && clearInterval(intervalRef.current);

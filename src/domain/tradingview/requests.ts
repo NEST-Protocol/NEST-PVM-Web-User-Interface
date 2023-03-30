@@ -1,15 +1,13 @@
-import { getServerUrl } from "../../config/backend";
-import { getTokenBySymbol, getWrappedToken } from "../../config/tokens";
 import { getChartPricesFromStats, timezoneOffset } from "../prices";
 
 function getCurrentBarTimestamp(periodSeconds: number) {
   return Math.floor(Date.now() / (periodSeconds * 1000)) * (periodSeconds * 1000);
 }
 
-export const getTokenChartPrice = async (chainId: number, symbol: string, period: string) => {
+export const getTokenChartPrice = async (symbol: string, period: string) => {
   let prices;
   try {
-    prices = await getChartPricesFromStats(chainId, symbol, period);
+    prices = await getChartPricesFromStats(symbol, period, 500);
   } catch (ex) {
     // eslint-disable-next-line no-console
     console.warn(ex, "Switching to graph chainlink data");
@@ -19,19 +17,12 @@ export const getTokenChartPrice = async (chainId: number, symbol: string, period
 
 // get current price of token, by chainId and symbol
 // return price in 18 decimals
-export async function getCurrentPriceOfToken(chainId: number, symbol: string) {
+export async function getCurrentPriceOfToken(symbol: string) {
   try {
-    const indexPricesUrl = getServerUrl(chainId, "/prices");
-    const response = await fetch(indexPricesUrl);
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const indexPrices = await response.json();
-    let symbolInfo = getTokenBySymbol(chainId, symbol);
-    if (symbolInfo.isNative) {
-      symbolInfo = getWrappedToken(chainId);
-    }
-    return indexPrices[symbolInfo.address];
+    const res = await fetch(`https://api.binance.com/api/v3/ticker/price?symbol=${symbol}USDT`);
+    const data = await res.json();
+    const price = data.price;
+    return Number(price);
   } catch (err) {
     // eslint-disable-next-line no-console
     console.error(err);

@@ -12,8 +12,7 @@ import useWindowWidth, {WidthType} from "../../hooks/useWindowWidth";
 import {priceToken} from "./Futures";
 import TVChartContainer from "../../components/TVChartContainer/TVChartContainer";
 import {TVDataProvider} from "../../domain/tradingview/TVDataProvider";
-import {formatAmount, numberWithCommas} from "../../lib/numbers";
-import {USD_DECIMALS} from "../../lib/legacy";
+import {numberWithCommas} from "../../lib/numbers";
 import {useChartPrices} from "../../domain/prices";
 import {styled} from "@mui/material";
 
@@ -101,12 +100,11 @@ const ExchangeTVChart: FC<ExchangeTVChartProps> = ({...props}) => {
 
   const fetchChartTokenPrice = useCallback(async () => {
     if (dataProvider.current) {
-      // @ts-ignore, TODO
-      const price = await dataProvider.current?.getCurrentPriceOfToken(42161, props.tokenPair);
-      const parsedPrice = formatAmount(price, USD_DECIMALS, 2);
+      // @ts-ignore
+      const price = await dataProvider.current?.getCurrentPriceOfToken(props.tokenPair);
       setChartTokenPrice({
         ...chartTokenPrice,
-        [props.tokenPair]: parsedPrice,
+        [props.tokenPair]: price,
       });
     }
   }, [props.tokenPair])
@@ -135,8 +133,6 @@ const ExchangeTVChart: FC<ExchangeTVChartProps> = ({...props}) => {
   const now = parseInt(String(Date.now() / 1000));
   const timeThreshold = now - 24 * 60 * 60;
   const [priceData, updatePriceData] = useChartPrices(
-    // TODO
-    42161,
     props.tokenPair,
     false,
     "1h",
@@ -368,7 +364,6 @@ const ExchangeTVChart: FC<ExchangeTVChartProps> = ({...props}) => {
         <Box height={height}>
           <TVChartContainer
             symbol={props.tokenPair}
-            chainId={42161}
             dataProvider={dataProvider.current!}
           />
         </Box>

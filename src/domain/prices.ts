@@ -3,24 +3,11 @@ import useSWR from "swr";
 import { ethers } from "ethers";
 
 import { USD_DECIMALS, CHART_PERIODS } from "../lib/legacy";
-import { GMX_STATS_API_URL } from "../config/backend";
-import { sleep } from "../lib/sleep";
 import { formatAmount } from "../lib/numbers";
-import { getNativeToken, getNormalizedTokenSymbol, isChartAvailabeForToken } from "../config/tokens";
+import { getNormalizedTokenSymbol } from "../config/tokens";
 
 const BigNumber = ethers.BigNumber;
 export const timezoneOffset = -new Date().getTimezoneOffset() * 60;
-
-function formatBarInfo(bar: any) {
-  const { t, o: open, c: close, h: high, l: low } = bar;
-  return {
-    time: t + timezoneOffset,
-    open,
-    close,
-    high,
-    low,
-  };
-}
 
 export function fillGaps(prices: any[], periodSeconds: number) {
   if (prices.length < 2) {
@@ -52,88 +39,37 @@ export function fillGaps(prices: any[], periodSeconds: number) {
   return newPrices;
 }
 
-export async function getLimitChartPricesFromStats(chainId: number, symbol: string, period: string, limit = 1) {
+export async function getChartPricesFromStats(symbol: string, period: string, limit: number) {
   symbol = getNormalizedTokenSymbol(symbol);
-
-  if (!isChartAvailabeForToken(chainId, symbol)) {
-    symbol = getNativeToken(chainId).symbol;
-  }
-
-  const url = `${GMX_STATS_API_URL}/candles/${symbol}?preferableChainId=${chainId}&period=${period}&limit=${limit}`;
-
+  const url = `https://api.binance.com/api/v1/klines?symbol=${symbol}USDT&limit=${limit}&interval=${period}`;
   try {
     const response = await fetch(url);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    const prices = await response.json().then(({ prices }) => prices);
-    return prices.map(formatBarInfo);
+    const prices = await response.json();
+    return prices.map((price: any) => {
+      return {
+        time: price[0] / 1000,
+        open: Number(price[1]),
+        close: Number(price[4]),
+        high: Number(price[2]),
+        low: Number(price[3]),
+        volume: Number(price[5]),
+      }
+    });
   } catch (error) {
     // eslint-disable-next-line no-console
     console.log(`Error fetching data: ${error}`);
   }
 }
 
-export async function getChartPricesFromStats(chainId: number, symbol: string, period: string) {
-  symbol = getNormalizedTokenSymbol(symbol);
-
-  // @ts-ignore
-  const timeDiff = CHART_PERIODS[period] * 3000;
-  const from = Math.floor(Date.now() / 1000 - timeDiff);
-  const url = `${GMX_STATS_API_URL}/candles/${symbol}?preferableChainId=${chainId}&period=${period}&from=${from}&preferableSource=fast`;
-
-  const TIMEOUT = 5000;
-  const res: Response = await new Promise(async (resolve, reject) => {
-    let done = false;
-    setTimeout(() => {
-      done = true;
-      reject(new Error(`request timeout ${url}`));
-    }, TIMEOUT);
-
-    let lastEx;
-    for (let i = 0; i < 3; i++) {
-      if (done) return;
-      try {
-        const res = await fetch(url);
-        resolve(res);
-        return;
-      } catch (ex) {
-        await sleep(300);
-        lastEx = ex;
-      }
-    }
-    reject(lastEx);
-  });
-  if (!res.ok) {
-    throw new Error(`request failed ${res.status} ${res.statusText}`);
-  }
-  const json = await res.json();
-  let prices = json?.prices;
-  if (!prices || prices.length < 1) {
-    throw new Error(`not enough prices data: ${prices?.length}`);
-  }
-
-  const OBSOLETE_THRESHOLD = Date.now() / 1000 - 60 * 30; // 30 min ago
-  const updatedAt = json?.updatedAt || 0;
-  if (updatedAt < OBSOLETE_THRESHOLD) {
-    throw new Error(
-      "chart data is obsolete, last price record at " +
-        new Date(updatedAt * 1000).toISOString() +
-        " now: " +
-        new Date().toISOString()
-    );
-  }
-
-  prices = prices.map(formatBarInfo);
-  return prices;
-}
-
-export function useChartPrices(chainId: number, symbol: string, isStable: boolean, period: string, currentAveragePrice: number) {
-  const swrKey = !isStable && symbol ? ["getChartCandles", chainId, symbol, period] : null;
+export function useChartPrices(symbol: string, isStable: boolean, period: string, currentAveragePrice: number) {
+  const swrKey = !isStable && symbol ? ["getChartCandles", symbol, period] : null;
   let { data: prices, mutate: updatePrices } = useSWR(swrKey, {
     fetcher: async (...args) => {
       try {
-        return await getChartPricesFromStats(chainId, symbol, period);
+        return await getChartPricesFromStats(symbol, period, 500);
       } catch (ex) {
         // eslint-disable-next-line no-console
         console.warn(ex);

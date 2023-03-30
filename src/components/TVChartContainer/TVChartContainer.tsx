@@ -4,7 +4,6 @@ import useTVDatafeed from "../../domain/tradingview/useTVDatafeed";
 import { IChartingLibraryWidget } from "../../charting_library";
 import { getObjectKeyFromValue } from "../../domain/tradingview/utils";
 import { SUPPORTED_RESOLUTIONS, TV_CHART_RELOAD_INTERVAL } from "../../config/tradingview";
-import { isChartAvailabeForToken } from "../../config/tokens";
 import { TVDataProvider } from "../../domain/tradingview/TVDataProvider";
 import { useLocalStorageSerializeKey } from "../../lib/localStorage";
 import { CHART_PERIODS } from "../../lib/legacy";
@@ -13,16 +12,11 @@ import useTheme from "../../hooks/useTheme";
 
 type Props = {
   symbol: string;
-  chainId: number;
   dataProvider?: TVDataProvider;
 };
 
-export default function TVChartContainer({
-                                           symbol,
-                                           chainId,
-                                           dataProvider,
-                                         }: Props) {
-  let [period, setPeriod] = useLocalStorageSerializeKey([chainId, "Chart-period"], DEFAULT_PERIOD);
+export default function TVChartContainer({symbol, dataProvider}: Props) {
+  let [period, setPeriod] = useLocalStorageSerializeKey(["Chart-period"], DEFAULT_PERIOD);
 
   if (!period || !(period in CHART_PERIODS)) {
     period = DEFAULT_PERIOD;
@@ -62,11 +56,9 @@ export default function TVChartContainer({
 
   useEffect(() => {
     if (chartReady && tvWidgetRef.current && symbol !== tvWidgetRef.current?.activeChart?.().symbol()) {
-      if (isChartAvailabeForToken(chainId, symbol)) {
-        tvWidgetRef.current.setSymbol(symbol, tvWidgetRef.current.activeChart().resolution(), () => {});
-      }
+      tvWidgetRef.current.setSymbol(symbol, tvWidgetRef.current.activeChart().resolution(), () => {});
     }
-  }, [symbol, chartReady, period, chainId]);
+  }, [symbol, chartReady, period]);
 
   useEffect(() => {
     const widgetOptions = {
@@ -126,7 +118,7 @@ export default function TVChartContainer({
     };
     // We don't want to re-initialize the chart when the symbol changes. This will make the chart flicker.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [chainId, nowTheme]);
+  }, [nowTheme]);
 
   return (
     <Box sx={(theme) => ({

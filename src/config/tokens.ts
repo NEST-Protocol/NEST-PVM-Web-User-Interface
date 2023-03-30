@@ -445,10 +445,6 @@ for (const chainId of CHAIN_IDS) {
   }
 }
 
-export function getWrappedToken(chainId: number) {
-  return WRAPPED_TOKENS_MAP[chainId];
-}
-
 export function getNativeToken(chainId: number) {
   return NATIVE_TOKENS_MAP[chainId];
 }
