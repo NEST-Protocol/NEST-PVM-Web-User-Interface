@@ -117,20 +117,3 @@ function appendCurrentAveragePrice(prices: any[], currentAveragePrice: number, p
     return [...prices, newCandle];
   }
 }
-
-export function getStablePriceData(period: string, countBack = 100) {
-  // @ts-ignore
-  const periodSeconds = CHART_PERIODS[period];
-  const now = Math.floor(Date.now() / 1000 / periodSeconds) * periodSeconds;
-  let priceData: any = [];
-  for (let i = countBack; i > 0; i--) {
-    priceData.push({
-      time: now - i * periodSeconds,
-      open: 1,
-      close: 1,
-      high: 1,
-      low: 1,
-    });
-  }
-  return priceData;
-}
