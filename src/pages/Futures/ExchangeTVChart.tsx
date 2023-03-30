@@ -269,28 +269,34 @@ const ExchangeTVChart: FC<ExchangeTVChartProps> = ({...props}) => {
               <SelectedTokenDown/>
             </Box>
           </Stack>
-          <Box>
-            <ChartDataTitle>24h Change</ChartDataTitle>
-            <ChartDataValue sx={(theme) => ({
-              color: deltaPercentage >= 0 ? theme.normal.success : theme.normal.danger,
-            })}>
-              {deltaPercentageStr ? deltaPercentageStr : "-"}
-            </ChartDataValue>
-          </Box>
-          <Box>
-            <ChartDataTitle>24h High</ChartDataTitle>
-            <ChartDataValue>
-              {!high && "-"}
-              {high && numberWithCommas(high.toFixed(2))}
-            </ChartDataValue>
-          </Box>
-          <Box>
-            <ChartDataTitle>24h Low</ChartDataTitle>
-            <ChartDataValue>
-              {!low && "-"}
-              {low && numberWithCommas(low.toFixed(2))}
-            </ChartDataValue>
-          </Box>
+          {
+            !isBigMobile && (
+              <>
+                <Box>
+                  <ChartDataTitle>24h Change</ChartDataTitle>
+                  <ChartDataValue sx={(theme) => ({
+                    color: deltaPercentage >= 0 ? theme.normal.success : theme.normal.danger,
+                  })}>
+                    {deltaPercentageStr ? deltaPercentageStr : "-"}
+                  </ChartDataValue>
+                </Box>
+                <Box>
+                  <ChartDataTitle>24h High</ChartDataTitle>
+                  <ChartDataValue>
+                    {!high && "-"}
+                    {high && numberWithCommas(high.toFixed(2))}
+                  </ChartDataValue>
+                </Box>
+                <Box>
+                  <ChartDataTitle>24h Low</ChartDataTitle>
+                  <ChartDataValue>
+                    {!low && "-"}
+                    {low && numberWithCommas(low.toFixed(2))}
+                  </ChartDataValue>
+                </Box>
+              </>
+            )
+          }
         </Stack>
         <Box
           component={"button"}
