@@ -1,10 +1,10 @@
-import { LAST_BAR_REFRESH_INTERVAL, SUPPORTED_RESOLUTIONS } from "../../config/tradingview";
-import { getChartPricesFromStats, timezoneOffset } from "../prices";
-import { CHART_PERIODS } from "../../lib/legacy";
-import { Bar } from "./types";
-import { formatTimeInBarToMs, getCurrentCandleTime } from "./utils";
-import { fillBarGaps, getCurrentPriceOfToken, getTokenChartPrice } from "./requests";
-import { PeriodParams } from "../../charting_library";
+import {LAST_BAR_REFRESH_INTERVAL, SUPPORTED_RESOLUTIONS} from "../../config/tradingview";
+import {getChartPricesFromStats, timezoneOffset} from "../prices";
+import {CHART_PERIODS} from "../../lib/legacy";
+import {Bar} from "./types";
+import {formatTimeInBarToMs, getCurrentCandleTime} from "./utils";
+import {fillBarGaps, getCurrentPriceOfToken, getTokenChartPrice} from "./requests";
+import {PeriodParams} from "../../charting_library";
 
 const initialHistoryBarsInfo = {
   period: "",
@@ -152,8 +152,7 @@ export class TVDataProvider {
 
     if (!this.lastBar) return;
 
-    const currentPrice = await this.getCurrentPriceOfToken(ticker);
-    const averagePriceValue = currentPrice;
+    const averagePriceValue = await this.getCurrentPriceOfToken(ticker);
     if (this.lastBar.time && currentCandleTime === this.lastBar.time && ticker === this.lastBar.ticker) {
       return {
         ...this.lastBar,
@@ -163,7 +162,7 @@ export class TVDataProvider {
         ticker,
       };
     } else {
-      const newBar = {
+      this.lastBar = {
         time: currentCandleTime,
         open: this.lastBar.close,
         close: averagePriceValue,
@@ -171,7 +170,6 @@ export class TVDataProvider {
         low: Math.min(this.lastBar.close, averagePriceValue),
         ticker,
       };
-      this.lastBar = newBar;
       return this.lastBar;
     }
   }
