@@ -53,7 +53,6 @@ export async function getChartPricesFromStats(symbol: string, period: string, li
         close: Number(price[4]),
         high: Number(price[2]),
         low: Number(price[3]),
-        volume: Number(price[5]),
       }
     });
   } catch (error) {

@@ -89,10 +89,4 @@ export const defaultChartProps = {
       format: (date) => formatTVDate(date),
     },
   },
-  studies_overrides: {
-    "volume.volume.color.0": RED,
-    "volume.volume.color.1": GREEN,
-    "volume.volume.transparency": 50,
-    "bollinger bands.median.color": GREEN,
-  }
 };
