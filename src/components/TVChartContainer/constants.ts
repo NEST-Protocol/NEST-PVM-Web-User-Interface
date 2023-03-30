@@ -1,7 +1,7 @@
 import { formatTVDate, formatTVTime } from "../../lib/dates";
 
-const RED = "rgba(255, 79, 51, 1)";
-const GREEN = "rgba(54, 197, 110, 1)";
+const RED = "#FF4F33";
+const GREEN = "#36C56E";
 export const DEFAULT_PERIOD = "4h";
 
 const chartStyleOverrides = ["candleStyle", "hollowCandleStyle", "haStyle"].reduce((acc, cv) => {
@@ -89,4 +89,10 @@ export const defaultChartProps = {
       format: (date) => formatTVDate(date),
     },
   },
+  studies_overrides: {
+    "volume.volume.color.0": RED,
+    "volume.volume.color.1": GREEN,
+    "volume.volume.transparency": 50,
+    "bollinger bands.median.color": GREEN,
+  }
 };

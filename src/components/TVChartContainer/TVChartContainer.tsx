@@ -81,6 +81,7 @@ export default function TVChartContainer({symbol, dataProvider}: Props) {
       interval: getObjectKeyFromValue(period, SUPPORTED_RESOLUTIONS),
       favorites: defaultChartProps.favorites,
       custom_formatters: defaultChartProps.custom_formatters,
+      studies_overrides: defaultChartProps.studies_overrides,
     };
     tvWidgetRef.current = new window.TradingView.widget(widgetOptions);
     tvWidgetRef.current!.onChartReady(function () {
@@ -91,6 +92,11 @@ export default function TVChartContainer({symbol, dataProvider}: Props) {
           "paneProperties.backgroundType": "solid",
         });
       }
+      tvWidgetRef.current
+        ?.chart()
+        .createStudy("Volume", false, false,
+          // @ts-ignore
+          tvWidgetRef.current?.activeChart().resolution(), {}, {})
       tvWidgetRef.current
         ?.activeChart()
         .onIntervalChanged()

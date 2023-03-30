@@ -46,12 +46,12 @@ const ExchangeTVChart: FC<ExchangeTVChartProps> = ({...props}) => {
     switch (width) {
       case WidthType.ssm:
       case WidthType.sm:
-        return 168;
+        return 320;
       case WidthType.md:
       case WidthType.lg:
-        return 278;
+        return 420;
       default:
-        return 348;
+        return 420;
     }
   }, [width]);
   const TokenIcon = props.tokenPair.getToken()!.icon;
