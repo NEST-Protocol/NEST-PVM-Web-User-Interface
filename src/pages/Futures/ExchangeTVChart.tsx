@@ -97,14 +97,17 @@ const ExchangeTVChart: FC<ExchangeTVChartProps> = ({...props}) => {
       });
   }, [props]);
 
-  const [chartTokenPrice, setChartTokenPrice] = useState('');
+  const [chartTokenPrice, setChartTokenPrice] = useState<{[key: string]: string | number | undefined;}>({});
 
   const fetchChartTokenPrice = useCallback(async () => {
     if (dataProvider.current) {
       // @ts-ignore, TODO
       const price = await dataProvider.current?.getCurrentPriceOfToken(42161, props.tokenPair);
       const parsedPrice = formatAmount(price, USD_DECIMALS, 2);
-      setChartTokenPrice(parsedPrice);
+      setChartTokenPrice({
+        ...chartTokenPrice,
+        [props.tokenPair]: parsedPrice,
+      });
     }
   }, [props.tokenPair])
 
@@ -172,9 +175,9 @@ const ExchangeTVChart: FC<ExchangeTVChartProps> = ({...props}) => {
     }
   }
 
-  if (deltaPrice && chartTokenPrice) {
-    delta = Number(chartTokenPrice) - deltaPrice;
-    deltaPercentage = (delta * 100) / Number(chartTokenPrice);
+  if (deltaPrice && chartTokenPrice?.[props.tokenPair]) {
+    delta = Number(chartTokenPrice[props.tokenPair]) - deltaPrice;
+    deltaPercentage = (delta * 100) / Number(chartTokenPrice[props.tokenPair]);
     if (deltaPercentage > 0) {
       deltaPercentageStr = `+${deltaPercentage.toFixed(2)}%`;
     } else {
@@ -251,7 +254,7 @@ const ExchangeTVChart: FC<ExchangeTVChartProps> = ({...props}) => {
                   color: deltaPercentage >= 0 ? theme.normal.success : theme.normal.danger,
                 })}
               >
-                {chartTokenPrice ? chartTokenPrice : "-" }
+                {chartTokenPrice?.[props.tokenPair] ? chartTokenPrice?.[props.tokenPair] : "-" }
               </Box>
             </Stack>
             <Box

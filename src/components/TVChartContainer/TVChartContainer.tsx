@@ -136,6 +136,7 @@ export default function TVChartContainer({
       width: '100%',
       height: '100%',
       position: 'relative',
+      borderTop: `1px solid ${theme.normal.border}`,
       "& svg": {
         display: "block",
         color: theme.normal.primary,
