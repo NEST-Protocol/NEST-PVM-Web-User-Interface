@@ -1,13 +1,12 @@
 import Stack from "@mui/material/Stack";
 import { BigNumber } from "ethers/lib/ethers";
 import { FC, useCallback, useEffect, useMemo, useState } from "react";
-import useReadFuturesPrice from "../../contracts/Read/useReadFutureContract";
-import useNEST from "../../hooks/useNEST";
 import useWindowWidth, { WidthType } from "../../hooks/useWindowWidth";
 import FuturesMoreInfo from "./MoreInfo";
 import FuturesNewOrder from "./NewOrder";
 import FuturesOrderList from "./OrderList";
 import ExchangeTVChart from "./ExchangeTVChart";
+import { getPriceFromNESTLocal } from "../../lib/NESTRequest";
 
 export interface FuturesPrice {
   [key: string]: BigNumber;
@@ -15,41 +14,60 @@ export interface FuturesPrice {
 const UPDATE_PRICE = 15;
 export const priceToken = ["ETH", "BTC", "BNB"];
 const Futures: FC = () => {
-  const { account } = useNEST();
   const { width, isBigMobile } = useWindowWidth();
   const [tokenPair, setTokenPair] = useState("ETH");
+  const [basePrice, setBasePrice] = useState<FuturesPrice>();
+  const [orderPrice, setOrderPrice] = useState<FuturesPrice>();
+  const getPrice = useCallback(async () => {
+    const ETHPriceBase: { [key: string]: string } = await getPriceFromNESTLocal(
+      "eth"
+    );
+    const BTCPriceBase: { [key: string]: string } = await getPriceFromNESTLocal(
+      "btc"
+    );
+    const BNBPriceBase: { [key: string]: string } = await getPriceFromNESTLocal(
+      "bnb"
+    );
+    const ETHPrice = ETHPriceBase
+      ? ETHPriceBase["value"].toString().stringToBigNumber(18)
+      : undefined;
+    const BTCPrice = BTCPriceBase
+      ? BTCPriceBase["value"].toString().stringToBigNumber(18)
+      : undefined;
+    const BNBPrice = BNBPriceBase
+      ? BNBPriceBase["value"].toString().stringToBigNumber(18)
+      : undefined;
 
-  const priceToken = useMemo(() => {
-    return ["ETH", "BTC", "BNB"];
-  }, []);
-  const { futuresPrice: ETHPrice, futuresPriceRefetch: ETHPriceRefetch } =
-    useReadFuturesPrice(priceToken.indexOf("ETH"));
-  const { futuresPrice: BTCPrice, futuresPriceRefetch: BTCPriceRefetch } =
-    useReadFuturesPrice(priceToken.indexOf("BTC"));
-  const { futuresPrice: BNBPrice, futuresPriceRefetch: BNBPriceRefetch } =
-    useReadFuturesPrice(priceToken.indexOf("BNB"));
-  const price = useMemo(() => {
     if (ETHPrice && BTCPrice && BNBPrice) {
       const newPrice: FuturesPrice = {
         ETH: ETHPrice,
         BTC: BTCPrice,
         BNB: BNBPrice,
       };
-      return newPrice;
+      setBasePrice(newPrice);
     } else {
-      return undefined;
+      setBasePrice(undefined);
     }
-  }, [BNBPrice, BTCPrice, ETHPrice]);
+  }, []);
+  // update base price 2s
   useEffect(() => {
     const time = setInterval(() => {
-      ETHPriceRefetch();
-      BTCPriceRefetch();
-      BNBPriceRefetch();
+      getPrice();
+    }, 2000);
+    return () => {
+      clearInterval(time);
+    };
+  }, [getPrice]);
+  // update order price 15s
+  useEffect(() => {
+    const time = setInterval(() => {
+      setOrderPrice(basePrice);
     }, UPDATE_PRICE * 1000);
     return () => {
       clearInterval(time);
     };
-  }, [BNBPriceRefetch, BTCPriceRefetch, ETHPriceRefetch, account.address]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const paddingY = useMemo(() => {
     return isBigMobile ? 0 : 24;
@@ -68,11 +86,11 @@ const Futures: FC = () => {
   }, [tokenPair]);
 
   const orderList = useCallback(() => {
-    return <FuturesOrderList price={price} />;
-  }, [price]);
+    return <FuturesOrderList price={orderPrice} />;
+  }, [orderPrice]);
   const newOrder = useCallback(() => {
-    return <FuturesNewOrder price={price} tokenPair={tokenPair} />;
-  }, [price, tokenPair]);
+    return <FuturesNewOrder price={basePrice} tokenPair={tokenPair} />;
+  }, [basePrice, tokenPair]);
   const moreInfo = useCallback(() => {
     return <FuturesMoreInfo />;
   }, []);
@@ -127,11 +145,7 @@ const Futures: FC = () => {
     exchangeTvChart,
     width,
   ]);
-  return (
-    <>
-      {mainView}
-    </>
-  );
+  return <>{mainView}</>;
 };
 
 export default Futures;
