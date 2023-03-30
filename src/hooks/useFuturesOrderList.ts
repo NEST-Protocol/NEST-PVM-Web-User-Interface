@@ -5,31 +5,21 @@ import useNEST from "./useNEST";
 import { useContract, useProvider } from "wagmi";
 import FuturesV2ABI from "../contracts/ABI/FuturesV2.json";
 
-export interface TrustOrder {
-  index: BigNumber;
-  owner: string;
-  orderIndex: BigNumber;
-  balance: BigNumber;
-  fee: BigNumber;
-  limitPrice: BigNumber;
-  stopProfitPrice: BigNumber;
-  stopLossPrice: BigNumber;
-  status: BigNumber;
-}
-
 export interface FuturesOrderV2 {
   index: BigNumber;
   owner: BigNumber;
-  basePrice: BigNumber;
   balance: BigNumber;
-  appends: BigNumber;
   channelIndex: BigNumber;
   lever: BigNumber;
+  appends: BigNumber;
   orientation: boolean;
+  basePrice: BigNumber;
+  baseBlock: BigNumber;
+  status: BigNumber;
+  stopProfitPrice: BigNumber;
+  stopLossPrice: BigNumber;
   Pt: BigInt;
   actualMargin: string;
-  baseBlock: BigNumber;
-  trustOrder?: TrustOrder;
   closeHash?: string;
 }
 
@@ -39,9 +29,6 @@ const UPDATE_LIST_TIME = 15;
 function useFuturesOrderList() {
   const provider = useProvider();
   const { account, chainsData } = useNEST();
-  const [trustOrderListV2, setTrustOrderListV2] = useState<Array<TrustOrder>>(
-    []
-  );
   const [orderListV2, setOrderListV2] = useState<Array<FuturesOrderV2>>([]);
   const [pOrderList, setPOrderList] = useState<Array<FuturesOrderV2>>([]);
   const [orderList, setOrderList] = useState<Array<FuturesOrderV2>>([]);
@@ -100,79 +87,16 @@ function useFuturesOrderList() {
     [FuturesV2, account]
   );
 
-  const getFutures3TrustList = useCallback(
-    async (getPart: boolean = false) => {
-      try {
-        if (!FuturesV2 || !account) {
-          return;
-        }
-
-        const latestOrder: Array<TrustOrder> = await FuturesV2.listTrustOrder(
-          "0",
-          "1",
-          "0"
-        );
-        const orderMaxNum = Number(latestOrder[0].index.toString()) + 1;
-        const orderGroupNum = orderMaxNum / ORDER_GROUP;
-        var result: TrustOrder[] = [];
-        for (let i = 0; i < orderGroupNum; i++) {
-          const startNum = i === 0 ? 0 : orderMaxNum - i * ORDER_GROUP;
-          if (i !== 0 && startNum === 0) {
-            return;
-          }
-          const groupList: Array<TrustOrder> = await FuturesV2.findTrustOrder(
-            startNum.toString(),
-            "1000",
-            ORDER_GROUP.toString(),
-            account.address
-          );
-          const groupResult = groupList.filter((item) => {
-            return (
-              item.owner.toString().toLocaleLowerCase() !==
-              String().zeroAddress.toLocaleLowerCase()
-            );
-          });
-          result = [...result, ...groupResult];
-          if (getPart) {
-            setTrustOrderListV2(result);
-          }
-        }
-        if (!getPart) {
-          setTrustOrderListV2(result);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    [account, FuturesV2]
-  );
-
   useEffect(() => {
-    const plusOrders = orderListV2.map((order) => {
-      var newOrder = { ...order };
-      const trustOrders = trustOrderListV2.filter((trust) =>
-        BigNumber.from(trust.orderIndex.toString()).eq(order.index)
-      );
-      if (trustOrders.length > 0) {
-        newOrder.trustOrder = trustOrders[0];
-      }
-      return newOrder;
-    });
-
-    const plusOrdersNormal = plusOrders
-      .filter(
-        (item) =>
-          !item.trustOrder ||
-          (item.trustOrder && BigNumber.from("0").eq(item.trustOrder.status))
-      )
-      .filter((item) => item.balance.toString() !== "0");
-    const plusOrdersLimit = plusOrders.filter(
-      (item) =>
-        item.trustOrder && BigNumber.from("1").eq(item.trustOrder.status)
+    const plusOrdersNormal = orderListV2.filter((item) =>
+      BigNumber.from("2").eq(item.status)
+    );
+    const plusOrdersLimit = orderListV2.filter((item) =>
+      BigNumber.from("4").eq(item.status)
     );
     setPOrderList(plusOrdersNormal);
     setOrderList(plusOrdersLimit);
-  }, [orderListV2, trustOrderListV2]);
+  }, [orderListV2]);
 
   const getClosedOrderList = useCallback(async () => {
     try {
@@ -185,21 +109,6 @@ function useFuturesOrderList() {
       const data_json = await data.json();
       const list: Array<FuturesOrderV2> = data_json["value"]
         .map((item: { [x: string]: any }) => {
-          const trustOrder: TrustOrder = {
-            limitPrice: BigNumber.from("0"),
-            stopProfitPrice:
-              item["sp"].toString().stringToBigNumber(18) ??
-              BigNumber.from("0"),
-            stopLossPrice:
-              item["sl"].toString().stringToBigNumber(18) ??
-              BigNumber.from("0"),
-            index: BigNumber.from("0"),
-            owner: "",
-            orderIndex: BigNumber.from("0"),
-            balance: BigNumber.from("0"),
-            fee: BigNumber.from("0"),
-            status: BigNumber.from("0"),
-          };
           return {
             index: BigNumber.from(item["index"].toString()),
             owner: BigNumber.from(item["owner"].toString()),
@@ -213,13 +122,15 @@ function useFuturesOrderList() {
             basePrice:
               item["basePrice"].toString().stringToBigNumber(18) ??
               BigNumber.from("0"),
-            stopPrice: item["stopPrice"]
-              ? item["stopPrice"].toString().stringToBigNumber(18) ??
-                BigNumber.from("0")
-              : BigNumber.from("0"),
+            stopProfitPrice:
+              item["sp"].toString().stringToBigNumber(18) ??
+              BigNumber.from("0"),
+            stopLossPrice:
+              item["sl"].toString().stringToBigNumber(18) ??
+              BigNumber.from("0"),
+            status: BigNumber.from("0"),
             appends: BigNumber.from(item["append"].toString()),
             actualMargin: item["actualMargin"].toString(),
-            trustOrder: trustOrder,
           };
         })
         .filter((item: any) => item.lever.toString() !== "0");
@@ -261,15 +172,13 @@ function useFuturesOrderList() {
   // list
   useEffect(() => {
     getFutures3List(true);
-    getFutures3TrustList(true);
     const time = setInterval(() => {
       getFutures3List();
-      getFutures3TrustList();
     }, UPDATE_LIST_TIME * 1000);
     return () => {
       clearInterval(time);
     };
-  }, [getFutures3List, getFutures3TrustList]);
+  }, [getFutures3List]);
   useEffect(() => {
     getClosedOrderList();
   }, [getClosedOrderList]);

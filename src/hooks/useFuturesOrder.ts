@@ -1,6 +1,6 @@
 import { BigNumber } from "ethers";
 import { useCallback, useMemo, useState } from "react";
-import { useFuturesCloseLimit } from "../contracts/useFuturesBuy";
+import { useCancelBuyRequest } from "../contracts/useFuturesBuyV2";
 import { Order } from "../pages/Dashboard/Dashboard";
 import { priceToken } from "../pages/Futures/Futures";
 import { FuturesOrderV2 } from "./useFuturesOrderList";
@@ -16,38 +16,28 @@ function useFuturesOrder(data: FuturesOrderV2) {
   const lever = parseInt(data.lever.toString());
   const [showShareOrderModal, setShowShareOrderModal] =
     useState<boolean>(false);
-  const trustOrderIndex = useMemo(() => {
-    return data.trustOrder ? data.trustOrder.index : undefined;
-  }, [data.trustOrder]);
   const showLimitPrice = useMemo(() => {
-    const limitNum = data.trustOrder
-      ? data.trustOrder.limitPrice
-      : BigNumber.from("0");
-    return BigNumber.from(limitNum.toString()).bigNumberToShowString(18, 2);
-  }, [data.trustOrder]);
+    return BigNumber.from(data.basePrice.toString()).bigNumberToShowString(
+      18,
+      2
+    );
+  }, [data.basePrice]);
   const showBalance = useMemo(() => {
-    const balanceNum = data.trustOrder
-      ? data.trustOrder.balance
-      : BigNumber.from("0");
-    return BigNumber.from(balanceNum.toString()).bigNumberToShowString(4, 2);
-  }, [data.trustOrder]);
+    return BigNumber.from(data.balance.toString()).bigNumberToShowString(4, 2);
+  }, [data.balance]);
   /**
    * action
    */
-  const { transaction: closeLimit } = useFuturesCloseLimit(trustOrderIndex);
+  const { transaction: closeLimit } = useCancelBuyRequest(data.index);
   /**
    * main button
    */
   const pending = useMemo(() => {
-    if (data.trustOrder) {
-      return isPendingOrder(
-        TransactionType.futures_closeLimit,
-        parseInt(data.trustOrder.index.toString())
-      );
-    } else {
-      return false;
-    }
-  }, [data.trustOrder, isPendingOrder]);
+    return isPendingOrder(
+      TransactionType.futures_closeLimit,
+      parseInt(data.index.toString())
+    );
+  }, [data.index, isPendingOrder]);
   const mainButtonTitle = useMemo(() => {
     return "Close";
   }, []);
@@ -69,25 +59,18 @@ function useFuturesOrder(data: FuturesOrderV2) {
     }
   }, [closeLimit, mainButtonLoading]);
   const tp = useMemo(() => {
-    if (data.trustOrder) {
-      const tpNum = data.trustOrder.stopProfitPrice;
-      return BigNumber.from("0").eq(tpNum)
-        ? String().placeHolder
-        : BigNumber.from(tpNum.toString()).bigNumberToShowString(18, 2);
-    } else {
-      return String().placeHolder;
-    }
-  }, [data.trustOrder]);
+    const tpNum = data.stopProfitPrice;
+    return BigNumber.from("0").eq(tpNum)
+      ? String().placeHolder
+      : BigNumber.from(tpNum.toString()).bigNumberToShowString(18, 2);
+  }, [data.stopProfitPrice]);
   const sl = useMemo(() => {
-    if (data.trustOrder) {
-      const slNum = data.trustOrder.stopLossPrice;
-      return BigNumber.from("0").eq(slNum)
-        ? String().placeHolder
-        : BigNumber.from(slNum.toString()).bigNumberToShowString(18, 2);
-    } else {
-      return String().placeHolder;
-    }
-  }, [data.trustOrder]);
+    const slNum = data.stopLossPrice;
+    return BigNumber.from("0").eq(slNum)
+      ? String().placeHolder
+      : BigNumber.from(slNum.toString()).bigNumberToShowString(18, 2);
+  }, [data.stopLossPrice]);
+  
   const shareOrder = useMemo(() => {
     const info: Order = {
       owner: data.owner.toString(),
@@ -131,7 +114,7 @@ function useFuturesOrder(data: FuturesOrderV2) {
     setShowShareOrderModal,
     shareOrder,
     tp,
-    sl
+    sl,
   };
 }
 

@@ -9,7 +9,7 @@ import useNEST from "./useNEST";
 import { MaxUint256 } from "@ethersproject/constants";
 import { BigNumber } from "ethers";
 import { lipPrice } from "./useFuturesNewOrder";
-import { useFuturesAdd as useFuturesAddTransaction } from "../contracts/useFuturesBuy";
+import { useFuturesAdd as useFuturesAddTransaction } from "../contracts/useFuturesBuyV2";
 import { FuturesPrice, priceToken } from "../pages/Futures/Futures";
 import {
   TransactionType,

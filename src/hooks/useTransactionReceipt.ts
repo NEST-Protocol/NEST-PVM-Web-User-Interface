@@ -8,12 +8,9 @@ import useTransactionSnackBar from "./useNESTSnackBar";
 export enum TransactionType {
   approve,
   futures_buy,
-  futures_buyWithStopOrder,
-  futures_newTrustOrder,
   futures_add,
   futures_sell,
   futures_editPosition,
-  futures_editPosition2,
   futures_editLimit,
   futures_closeLimit,
   swap_uni,
@@ -38,15 +35,12 @@ export const usePendingTransactionsBase = () => {
       case TransactionType.approve:
         return "Approve";
       case TransactionType.futures_buy:
-      case TransactionType.futures_buyWithStopOrder:
-      case TransactionType.futures_newTrustOrder:
         return "Open position";
       case TransactionType.futures_add:
         return "Add position";
       case TransactionType.futures_sell:
         return "Sell position";
       case TransactionType.futures_editPosition:
-      case TransactionType.futures_editPosition2:
         return "Edit Position";
       case TransactionType.futures_editLimit:
         return "Edit Limit Order";

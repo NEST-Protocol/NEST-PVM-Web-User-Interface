@@ -1,8 +1,8 @@
 import {
   MIN_NEST_BIG_NUMBER,
-  useFuturesBuyWithUSDT,
-  useFuturesNewTrustOrderWithUSDT,
-} from "./../contracts/useFuturesBuy";
+  useNewBuyRequest,
+  useNewBuyRequestWithUSDT,
+} from "./../contracts/useFuturesBuyV2";
 import { FuturesV2Contract } from "./../contracts/contractAddress";
 import { MaxUint256 } from "@ethersproject/constants";
 import { BigNumber } from "ethers";
@@ -13,10 +13,6 @@ import useReadTokenBalance, {
 import { FuturesPrice, priceToken } from "../pages/Futures/Futures";
 import useNEST from "./useNEST";
 import useTokenApprove from "../contracts/useTokenContract";
-import useFuturesBuy, {
-  useFuturesBuyWithStopOrder,
-  useFuturesNewTrustOrder,
-} from "../contracts/useFuturesBuy";
 import {
   TransactionType,
   usePendingTransactions,
@@ -252,31 +248,30 @@ function useFuturesNewOrder(
       return BigNumber.from("0");
     }
   }, [checkAllowance, checkBalance, inputAmount]);
+  const basePrice = useMemo(() => {
+    if (price) {
+      if (tabsValue === 1) {
+        return limitAmount.stringToBigNumber(18) ?? BigNumber.from("0");
+      } else {
+        const nowPrice = price[tokenPair];
+        return nowPrice;
+      }
+    } else {
+      return undefined;
+    }
+  }, [limitAmount, price, tabsValue, tokenPair]);
   const { transaction: tokenApprove } = useTokenApprove(
     (nowToken ?? String().zeroAddress) as `0x${string}`,
     futureContract,
     MaxUint256
   );
-  const { transaction: buyTransaction } = useFuturesBuy(
-    BigNumber.from(priceToken.indexOf(tokenPair).toString()),
-    BigNumber.from(lever.toString()),
-    longOrShort,
-    inputNESTTransaction
-  );
-  const { transaction: buyWithStop } = useFuturesBuyWithStopOrder(
+  const { transaction: newOrder } = useNewBuyRequest(
     BigNumber.from(priceToken.indexOf(tokenPair).toString()),
     BigNumber.from(lever.toString()),
     longOrShort,
     inputNESTTransaction,
-    tp.stringToBigNumber(18) ?? BigNumber.from("0"),
-    sl.stringToBigNumber(18) ?? BigNumber.from("0")
-  );
-  const { transaction: newTrustOrder } = useFuturesNewTrustOrder(
-    BigNumber.from(priceToken.indexOf(tokenPair).toString()),
-    BigNumber.from(lever.toString()),
-    longOrShort,
-    inputNESTTransaction,
-    limitAmount.stringToBigNumber(18) ?? BigNumber.from("0"),
+    basePrice,
+    tabsValue === 1,
     tp.stringToBigNumber(18) ?? BigNumber.from("0"),
     sl.stringToBigNumber(18) ?? BigNumber.from("0")
   );
@@ -306,26 +301,17 @@ function useFuturesNewOrder(
       ? NESTToBigNumber.sub(NESTToBigNumber.mul(1).div(1000))
       : undefined;
   }, [showTotalPay]);
-  const { transaction: buyWithUSDT } = useFuturesBuyWithUSDT(
+  const { transaction: newOrderWithUSDT } = useNewBuyRequestWithUSDT(
     USDTAmount,
     USDTWithMinNEST,
     BigNumber.from(priceToken.indexOf(tokenPair).toString()),
     BigNumber.from(lever.toString()),
     longOrShort,
+    basePrice,
+    tabsValue === 1,
     tp.stringToBigNumber(18) ?? BigNumber.from("0"),
     sl.stringToBigNumber(18) ?? BigNumber.from("0")
   );
-  const { transaction: newTrustOrderWithUSDT } =
-    useFuturesNewTrustOrderWithUSDT(
-      USDTAmount,
-      USDTWithMinNEST,
-      BigNumber.from(priceToken.indexOf(tokenPair).toString()),
-      BigNumber.from(lever.toString()),
-      longOrShort,
-      limitAmount.stringToBigNumber(18) ?? BigNumber.from("0"),
-      tp.stringToBigNumber(18) ?? BigNumber.from("0"),
-      sl.stringToBigNumber(18) ?? BigNumber.from("0")
-    );
   // count KOL Link with address
   useEffect(() => {
     let code = getQueryVariable("pt");
@@ -333,26 +319,31 @@ function useFuturesNewOrder(
       code &&
       account.address &&
       chainsData.chainId !== 97 &&
-      (newTrustOrder.data?.hash || newTrustOrderWithUSDT.data?.hash)
+      tabsValue === 1 &&
+      (newOrder.data?.hash || newOrderWithUSDT.data?.hash)
     ) {
-      console.log(newTrustOrder.status)
-      if (newTrustOrder.isSuccess || newTrustOrderWithUSDT.isSuccess) {
-        const hash = newTrustOrder.data?.hash
-          ? newTrustOrder.data!.hash
-          : newTrustOrderWithUSDT.data!.hash;
+      if (newOrder.isSuccess || newOrderWithUSDT.isSuccess) {
+        const hash = newOrder.data?.hash
+          ? newOrder.data!.hash
+          : newOrderWithUSDT.data!.hash;
         KOLTx({ kolLink: window.location.href, hash: hash });
-        console.log(newTrustOrder.status)
       }
     }
-  }, [account.address, chainsData.chainId, newTrustOrder.data, newTrustOrder.data?.hash, newTrustOrder.isSuccess, newTrustOrder.status, newTrustOrderWithUSDT.data, newTrustOrderWithUSDT.data?.hash, newTrustOrderWithUSDT.isSuccess]);
+  }, [
+    account.address,
+    chainsData.chainId,
+    newOrder.data,
+    newOrder.isSuccess,
+    newOrderWithUSDT.data,
+    newOrderWithUSDT.isSuccess,
+    tabsValue,
+  ]);
   /**
    * main button
    */
   const pending = useMemo(() => {
     return (
       isPendingType(TransactionType.futures_buy) ||
-      isPendingType(TransactionType.futures_buyWithStopOrder) ||
-      isPendingType(TransactionType.futures_newTrustOrder) ||
       isPendingType(TransactionType.approve)
     );
   }, [isPendingType]);
@@ -387,11 +378,8 @@ function useFuturesNewOrder(
   const mainButtonLoading = useMemo(() => {
     if (
       tokenApprove.isLoading ||
-      buyTransaction.isLoading ||
-      buyWithStop.isLoading ||
-      newTrustOrder.isLoading ||
-      buyWithUSDT.isLoading ||
-      newTrustOrderWithUSDT.isLoading ||
+      newOrder.isLoading ||
+      newOrderWithUSDT.isLoading ||
       pending
     ) {
       return true;
@@ -399,11 +387,8 @@ function useFuturesNewOrder(
       return false;
     }
   }, [
-    buyTransaction.isLoading,
-    buyWithStop.isLoading,
-    buyWithUSDT.isLoading,
-    newTrustOrder.isLoading,
-    newTrustOrderWithUSDT.isLoading,
+    newOrder.isLoading,
+    newOrderWithUSDT.isLoading,
     pending,
     tokenApprove.isLoading,
   ]);
@@ -436,30 +421,11 @@ function useFuturesNewOrder(
   }, [tokenApprove]);
   const baseAction = useCallback(() => {
     if (inputToken === "USDT") {
-      if (tabsValue === 1) {
-        newTrustOrderWithUSDT.write?.();
-      } else {
-        buyWithUSDT.write?.();
-      }
+      newOrderWithUSDT.write?.();
     } else {
-      if (tabsValue === 1) {
-        newTrustOrder.write?.();
-      } else if (isStop) {
-        buyWithStop.write?.();
-      } else {
-        buyTransaction.write?.();
-      }
+      newOrder.write?.();
     }
-  }, [
-    buyTransaction,
-    buyWithStop,
-    buyWithUSDT,
-    inputToken,
-    isStop,
-    newTrustOrder,
-    newTrustOrderWithUSDT,
-    tabsValue,
-  ]);
+  }, [inputToken, newOrder, newOrderWithUSDT]);
   const triggerNoticeCallback = useCallback(() => {
     setShowedTriggerNotice(true);
     baseAction();
