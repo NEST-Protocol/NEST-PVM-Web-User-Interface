@@ -40,30 +40,36 @@ async function baseRequestPOST(url: string) {
 
 async function baseRequestGet(url: string) {
   try {
-    const res = await fetch(url)
-    const resJson = await res.json()
-    return resJson
+    const res = await fetch(url);
+    const resJson = await res.json();
+    return resJson;
   } catch (error) {
     console.log(error);
-    return undefined
+    return undefined;
   }
 }
 
 export function KOLClick(info: RequestBodyInterface) {
-//   const infoString = `?kolLink=${JSON.stringify(info.kolLink)}`;
   baseRequestPOSTWithBody("kol/click", info);
 }
 
 export function KOLWallet(info: RequestBodyInterface) {
-//   const infoString = `?kolLink=${info.kolLink}&wallet=${info.wallet}`;
   baseRequestPOSTWithBody("kol/wallet", info);
 }
 
 export function KOLTx(info: RequestBodyInterface) {
-//   const infoString = `?kolLink=${info.kolLink}&hash=${info.hash}`;
   baseRequestPOSTWithBody("kol/tx", info);
 }
 
+export function hideFuturesOrder(
+  chainId: number,
+  address: string,
+  index: string
+) {
+  const url = `https://api.nestfi.net/api/order/save/${chainId}?address=${address}&index=${index.toString()}`;
+  baseRequestPOST(url);
+}
+
 export function getPriceFromNESTLocal(token: string): Promise<any> {
-  return baseRequestGet(`https://api.nestfi.net/api/oracle/price/${token}usdt`)
+  return baseRequestGet(`https://api.nestfi.net/api/oracle/price/${token}usdt`);
 }

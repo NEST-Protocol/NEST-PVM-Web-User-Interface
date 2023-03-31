@@ -58,11 +58,13 @@ export function useNewBuyRequest(
     if (transaction.data) {
       addPendingList({
         hash: transaction.data.hash,
-        type: TransactionType.futures_buy,
+        type: limit
+          ? TransactionType.futures_buy
+          : TransactionType.futures_buy_request,
       });
       transaction.reset();
     }
-  }, [addPendingList, transaction, transaction.data]);
+  }, [addPendingList, limit, transaction, transaction.data]);
   return {
     transaction,
   };
@@ -112,11 +114,13 @@ export function useNewBuyRequestWithUSDT(
     if (transaction.data) {
       addPendingList({
         hash: transaction.data.hash,
-        type: TransactionType.futures_buy,
+        type: limit
+          ? TransactionType.futures_buy
+          : TransactionType.futures_buy_request,
       });
       transaction.reset();
     }
-  }, [addPendingList, transaction, transaction.data]);
+  }, [addPendingList, limit, transaction, transaction.data]);
 
   return {
     transaction,
@@ -147,7 +151,7 @@ export function useNewSellRequest(orderIndex: BigNumber) {
     if (transaction.data) {
       addPendingList({
         hash: transaction.data.hash,
-        type: TransactionType.futures_sell,
+        type: TransactionType.futures_sell_request,
         info: orderIndex.toString(),
       });
       transaction.reset();

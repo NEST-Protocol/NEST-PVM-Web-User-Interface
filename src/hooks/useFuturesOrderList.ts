@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import useNEST from "./useNEST";
 import { useContract, useProvider } from "wagmi";
 import FuturesV2ABI from "../contracts/ABI/FuturesV2.json";
+import { hideFuturesOrder } from "../lib/NESTRequest";
 
 export interface FuturesOrderV2 {
   index: BigNumber;
@@ -150,20 +151,8 @@ function useFuturesOrderList() {
   const hideOrder = useCallback(
     async (index: BigNumber) => {
       setOrderNotShow([...orderNotShow, index]);
-      try {
-        await fetch(
-          `https://api.nestfi.net/api/order/save/${
-            chainsData.chainId
-          }?address=${account.address}&index=${index.toString()}`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
-      } catch (error) {
-        console.log(error);
+      if (chainsData.chainId && account.address) {
+        hideFuturesOrder(chainsData.chainId, account.address, index.toString());
       }
     },
     [account.address, chainsData.chainId, orderNotShow]
