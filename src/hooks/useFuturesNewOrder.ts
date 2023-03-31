@@ -50,6 +50,15 @@ export const BASE_NEST_FEE = "15";
 const NEW_ORDER_UPDATE = 30;
 export const INPUT_TOKENS = ["NEST", "USDT"];
 
+function addPricePoint(price: BigNumber, isLong: boolean) {
+  const priceBigNumber = BigNumber.from(price.toString());
+  if (isLong) {
+    return priceBigNumber.add(priceBigNumber.mul(2).div(10000));
+  } else {
+    return priceBigNumber.sub(priceBigNumber.mul(2).div(10000));
+  }
+}
+
 function useFuturesNewOrder(
   price: FuturesPrice | undefined,
   tokenPair: string
@@ -100,9 +109,13 @@ function useFuturesNewOrder(
         const c0_Short = nowPrice
           .mul(BigNumber.from("10").pow(36))
           .div(c0_top.add(BigNumber.from("10").pow(36)));
-        return longOrShort ? c0_long : c0_Short;
+        return longOrShort
+          ? addPricePoint(c0_long, true)
+          : addPricePoint(c0_Short, false);
       } else {
-        return nowPrice;
+        return longOrShort
+          ? addPricePoint(nowPrice, true)
+          : addPricePoint(nowPrice, false);
       }
     } else {
       return undefined;
@@ -240,30 +253,26 @@ function useFuturesNewOrder(
   /**
    * action
    */
-  const inputNESTTransaction = useMemo(() => {
-    const amount = inputAmount.stringToBigNumber(4);
-    if (checkAllowance && checkBalance && amount) {
-      return amount;
-    } else {
-      return BigNumber.from("0");
-    }
-  }, [checkAllowance, checkBalance, inputAmount]);
   const basePrice = useMemo(() => {
     if (price) {
       if (tabsValue === 1) {
         return limitAmount.stringToBigNumber(18) ?? BigNumber.from("0");
       } else {
         const nowPrice = price[tokenPair];
-        if (longOrShort) {
-          return nowPrice.add(nowPrice.mul(2).div(10000));
-        } else {
-          return nowPrice.sub(nowPrice.mul(2).div(10000));
-        }
+        return addPricePoint(nowPrice, longOrShort)
       }
     } else {
       return undefined;
     }
   }, [limitAmount, longOrShort, price, tabsValue, tokenPair]);
+  const inputNESTTransaction = useMemo(() => {
+    const amount = inputAmount.stringToBigNumber(4);
+    if (checkAllowance && checkBalance && amount && basePrice) {
+      return amount;
+    } else {
+      return BigNumber.from("0");
+    }
+  }, [basePrice, checkAllowance, checkBalance, inputAmount]);
   const { transaction: tokenApprove } = useTokenApprove(
     (nowToken ?? String().zeroAddress) as `0x${string}`,
     futureContract,
@@ -284,13 +293,21 @@ function useFuturesNewOrder(
       inputToken !== "USDT" ||
       !tokenDecimals ||
       !checkAllowance ||
-      !checkBalance
+      !checkBalance ||
+      !basePrice
     ) {
       return undefined;
     } else {
       return inputAmount.stringToBigNumber(tokenDecimals);
     }
-  }, [checkAllowance, checkBalance, inputAmount, inputToken, tokenDecimals]);
+  }, [
+    basePrice,
+    checkAllowance,
+    checkBalance,
+    inputAmount,
+    inputToken,
+    tokenDecimals,
+  ]);
   const showTotalPay = useMemo(() => {
     if (nestAmount !== "") {
       return fee
@@ -569,6 +586,16 @@ function useFuturesNewOrder(
     }
   }, [inputToken, tokenBalance, allValue]);
 
+  const openPriceHelpInfo = useMemo(() => {
+    const info = ["To ensure a successful trade, there is price slippage."];
+    if (parseFloat(nestAmount) >= 100000) {
+      info.push(
+        "To ensure system fairness, your position is added to the impact cost."
+      );
+    }
+    return info;
+  }, [nestAmount]);
+
   /**
    * update
    */
@@ -630,6 +657,7 @@ function useFuturesNewOrder(
     showPositions,
     tokenAllowance,
     tokenApprove,
+    openPriceHelpInfo,
   };
 }
 
