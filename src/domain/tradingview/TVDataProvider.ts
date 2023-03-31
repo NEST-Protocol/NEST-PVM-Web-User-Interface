@@ -73,8 +73,8 @@ export class TVDataProvider {
     }
 
     const { from, to, countBack } = periodParams;
-    const toWithOffset = to + timezoneOffset;
-    const fromWithOffset = from + timezoneOffset;
+    const toWithOffset = to;
+    const fromWithOffset = from;
     const bars = barsInfo.data.filter((bar) => bar.time > fromWithOffset && bar.time <= toWithOffset);
 
     // if no bars returned, return empty array
