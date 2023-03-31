@@ -39,7 +39,7 @@ export function fillGaps(prices: any[], periodSeconds: number) {
 }
 
 export async function getChartPricesFromStats(symbol: string, period: string, limit: number) {
-  const url = `https://api.binance.com/api/v1/klines?symbol=${symbol}USDT&limit=${limit}&interval=${period}`;
+  const url = `https://api.nestfi.net/api/oracle/price/klines?symbol=${symbol}USDT&limit=${limit}&interval=${period}`;
   try {
     const response = await fetch(url);
     if (!response.ok) {
