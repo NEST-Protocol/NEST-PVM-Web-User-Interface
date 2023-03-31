@@ -7,6 +7,10 @@ import FuturesNewOrder from "./NewOrder";
 import FuturesOrderList from "./OrderList";
 import ExchangeTVChart from "./ExchangeTVChart";
 import { getPriceFromNESTLocal } from "../../lib/NESTRequest";
+import { useContractEvent } from "wagmi";
+import useNEST from "../../hooks/useNEST";
+import { NESTToken, FuturesV2Contract } from "../../contracts/contractAddress";
+import ERC20ABI from "../../contracts/ABI/ERC20.json";
 
 export interface FuturesPrice {
   [key: string]: BigNumber;
@@ -15,9 +19,30 @@ const UPDATE_PRICE = 15;
 export const priceToken = ["ETH", "BTC", "BNB"];
 const Futures: FC = () => {
   const { width, isBigMobile } = useWindowWidth();
+  const { chainsData, account } = useNEST();
   const [tokenPair, setTokenPair] = useState("ETH");
   const [basePrice, setBasePrice] = useState<FuturesPrice>();
   const [orderPrice, setOrderPrice] = useState<FuturesPrice>();
+  // listen fail order
+  useContractEvent({
+    address: chainsData.chainId
+      ? (NESTToken[chainsData.chainId] as `0x${string}`)
+      : undefined,
+    abi: ERC20ABI,
+    eventName: "Transfer",
+    listener(from, to, amount) {
+      console.log(from, to, amount);
+      // if (chainsData.chainId && account.address) {
+      //   if (
+      //     from.toLocaleLowerCase() ===
+      //       FuturesV2Contract[chainsData.chainId].toLocaleLowerCase() &&
+      //     account.address.toLocaleLowerCase() === to.toLocaleLowerCase()
+      //   ) {
+
+      //   }
+      // }
+    },
+  });
   const getPrice = useCallback(async () => {
     const ETHPriceBase: { [key: string]: string } = await getPriceFromNESTLocal(
       "eth"

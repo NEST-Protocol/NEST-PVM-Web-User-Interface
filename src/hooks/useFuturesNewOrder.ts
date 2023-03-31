@@ -94,7 +94,7 @@ function useFuturesNewOrder(
     const nestBigNumber = nestAmount.stringToBigNumber(18);
     if (price && nestBigNumber) {
       const nowPrice = price[tokenPair];
-      if (parseFloat(nestAmount) >= 100000) {
+      if (parseFloat(nestAmount) * lever >= 100000) {
         const c0_top = BigNumber.from("55560000")
           .mul(nestBigNumber)
           .mul(BigNumber.from(lever.toString()))
@@ -259,7 +259,7 @@ function useFuturesNewOrder(
         return limitAmount.stringToBigNumber(18) ?? BigNumber.from("0");
       } else {
         const nowPrice = price[tokenPair];
-        return addPricePoint(nowPrice, longOrShort)
+        return addPricePoint(nowPrice, longOrShort);
       }
     } else {
       return undefined;
@@ -588,13 +588,13 @@ function useFuturesNewOrder(
 
   const openPriceHelpInfo = useMemo(() => {
     const info = ["To ensure a successful trade, there is price slippage."];
-    if (parseFloat(nestAmount) >= 100000) {
+    if (parseFloat(nestAmount) * lever >= 100000) {
       info.push(
         "To ensure system fairness, your position is added to the impact cost."
       );
     }
     return info;
-  }, [nestAmount]);
+  }, [lever, nestAmount]);
 
   /**
    * update

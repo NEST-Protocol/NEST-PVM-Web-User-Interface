@@ -5,7 +5,6 @@ import useNEST from "./useNEST";
 import { useContract, useProvider } from "wagmi";
 import FuturesV2ABI from "../contracts/ABI/FuturesV2.json";
 import { hideFuturesOrder } from "../lib/NESTRequest";
-import useTransactionSnackBar from "./useNESTSnackBar";
 
 export interface FuturesOrderV2 {
   index: BigNumber;
@@ -30,12 +29,8 @@ const UPDATE_LIST_TIME = 15;
 
 function useFuturesOrderList() {
   const provider = useProvider();
-  const { failRequest } = useTransactionSnackBar();
   const { account, chainsData } = useNEST();
   const [orderListV2, setOrderListV2] = useState<Array<FuturesOrderV2>>([]);
-  const [orderListV2Before, setOrderListV2Before] = useState<
-    Array<FuturesOrderV2>
-  >([]);
   const [pOrderList, setPOrderList] = useState<Array<FuturesOrderV2>>([]);
   const [orderList, setOrderList] = useState<Array<FuturesOrderV2>>([]);
   const [closedOrder, setClosedOrder] = useState<Array<FuturesOrderV2>>([]);
@@ -94,22 +89,6 @@ function useFuturesOrderList() {
   );
 
   useEffect(() => {
-    if (orderListV2.length > 0 && orderListV2Before.length > 0) {
-      for (let index = 0; index < orderListV2Before.length; index++) {
-        const element = orderListV2Before[index];
-        const fail = orderListV2.filter(
-          (item) =>
-            BigNumber.from(item.index.toString()).eq(element.index) &&
-            BigNumber.from(element.status.toString()).eq(BigNumber.from("1")) &&
-            BigNumber.from(item.status.toString()).eq(BigNumber.from("255"))
-        );
-        if (fail && fail.length > 0) {
-          // show
-          failRequest();
-        }
-      }
-    }
-    setOrderListV2Before(orderListV2);
     const plusOrdersNormal = orderListV2.filter((item) =>
       BigNumber.from("2").eq(item.status)
     );
