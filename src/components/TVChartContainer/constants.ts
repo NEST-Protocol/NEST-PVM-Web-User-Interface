@@ -60,12 +60,13 @@ const enabledFeatures = [
   "hide_resolution_in_legend",
   "items_favoriting",
   "hide_left_toolbar_by_default",
+  "iframe_loading_compatibility_mode",
 ];
 
 export const defaultChartProps = {
   theme: "Light",
   locale: "en",
-  library_path: "/charting_library/",
+  library_path: "charting_library/",
   clientId: "tradingview.com",
   userId: "public_user_id",
   fullscreen: false,
