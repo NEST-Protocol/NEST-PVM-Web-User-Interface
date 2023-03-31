@@ -152,22 +152,25 @@ export class TVDataProvider {
 
     if (!this.lastBar) return;
 
-    const averagePriceValue = await this.getCurrentPriceOfToken(ticker);
-    if (this.lastBar.time && currentCandleTime === this.lastBar.time && ticker === this.lastBar.ticker) {
+    const currentPriceOfToken = await this.getCurrentPriceOfToken(ticker);
+    if (ticker !== this.lastBar.ticker) {
+      return undefined
+    }
+    if (this.lastBar.time && currentCandleTime === this.lastBar.time) {
       return {
         ...this.lastBar,
-        close: averagePriceValue,
-        high: Math.max(this.lastBar.open, this.lastBar.high, averagePriceValue),
-        low: Math.min(this.lastBar.open, this.lastBar.low, averagePriceValue),
+        close: currentPriceOfToken,
+        high: Math.max(this.lastBar.open, this.lastBar.high, currentPriceOfToken),
+        low: Math.min(this.lastBar.open, this.lastBar.low, currentPriceOfToken),
         ticker,
       };
     } else {
       this.lastBar = {
         time: currentCandleTime,
         open: this.lastBar.close,
-        close: averagePriceValue,
-        high: Math.max(this.lastBar.close, averagePriceValue),
-        low: Math.min(this.lastBar.close, averagePriceValue),
+        close: currentPriceOfToken,
+        high: Math.max(this.lastBar.close, currentPriceOfToken),
+        low: Math.min(this.lastBar.close, currentPriceOfToken),
         ticker,
       };
       return this.lastBar;
