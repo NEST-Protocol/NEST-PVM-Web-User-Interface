@@ -16,6 +16,7 @@ export const priceToken = ["ETH", "BTC", "BNB"];
 const Futures: FC = () => {
   const { width, isBigMobile } = useWindowWidth();
   const [tokenPair, setTokenPair] = useState("ETH");
+  // TODO:丁涯用这个价格basePrice传图表里，弄完顺便把这行删了~
   const [basePrice, setBasePrice] = useState<FuturesPrice>();
   const [orderPrice, setOrderPrice] = useState<FuturesPrice>();
   const getPrice = useCallback(async () => {
