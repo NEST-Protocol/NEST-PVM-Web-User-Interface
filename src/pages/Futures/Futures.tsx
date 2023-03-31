@@ -44,15 +44,18 @@ const Futures: FC = () => {
         BTC: BTCPrice,
         BNB: BNBPrice,
       };
-      setBasePrice(newPrice);
+      return newPrice;
     } else {
-      setBasePrice(undefined);
+      return undefined;
     }
   }, []);
   // update base price 2s
   useEffect(() => {
     const time = setInterval(() => {
-      getPrice();
+      (async () => {
+        const newPrice = await getPrice();
+        setBasePrice(newPrice);
+      })();
     }, 2000);
     return () => {
       clearInterval(time);
@@ -60,14 +63,18 @@ const Futures: FC = () => {
   }, [getPrice]);
   // update order price 15s
   useEffect(() => {
+    const getOrderPrice = async () => {
+      const newPrice = await getPrice();
+      setOrderPrice(newPrice);
+    };
+    getOrderPrice();
     const time = setInterval(() => {
-      setOrderPrice(basePrice);
+      getOrderPrice();
     }, UPDATE_PRICE * 1000);
     return () => {
       clearInterval(time);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [getPrice]);
 
   const paddingY = useMemo(() => {
     return isBigMobile ? 0 : 24;

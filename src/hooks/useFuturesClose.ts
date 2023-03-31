@@ -105,7 +105,7 @@ function useFuturesClose(
    */
   const pending = useMemo(() => {
     return isPendingOrder(
-      TransactionType.futures_sell,
+      TransactionType.futures_sell_request,
       parseInt(data.index.toString())
     );
   }, [data.index, isPendingOrder]);

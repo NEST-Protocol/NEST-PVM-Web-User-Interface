@@ -42,6 +42,7 @@ function useFuturesPOrder(
         }
         const priceNum = price[tokenName];
         const value = await FuturesV2.balanceOf(data.index, priceNum);
+        
         setMarginAssets(value);
       } catch (error) {
         console.log(error);

@@ -254,12 +254,16 @@ function useFuturesNewOrder(
         return limitAmount.stringToBigNumber(18) ?? BigNumber.from("0");
       } else {
         const nowPrice = price[tokenPair];
-        return nowPrice;
+        if (longOrShort) {
+          return nowPrice.add(nowPrice.mul(2).div(10000));
+        } else {
+          return nowPrice.sub(nowPrice.mul(2).div(10000));
+        }
       }
     } else {
       return undefined;
     }
-  }, [limitAmount, price, tabsValue, tokenPair]);
+  }, [limitAmount, longOrShort, price, tabsValue, tokenPair]);
   const { transaction: tokenApprove } = useTokenApprove(
     (nowToken ?? String().zeroAddress) as `0x${string}`,
     futureContract,
@@ -344,6 +348,7 @@ function useFuturesNewOrder(
   const pending = useMemo(() => {
     return (
       isPendingType(TransactionType.futures_buy) ||
+      isPendingType(TransactionType.futures_buy_request) ||
       isPendingType(TransactionType.approve)
     );
   }, [isPendingType]);
