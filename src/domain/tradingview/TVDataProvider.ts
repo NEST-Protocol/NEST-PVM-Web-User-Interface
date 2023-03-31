@@ -1,5 +1,5 @@
 import {LAST_BAR_REFRESH_INTERVAL, SUPPORTED_RESOLUTIONS} from "../../config/tradingview";
-import {getChartPricesFromStats, timezoneOffset} from "../prices";
+import {getChartPricesFromStats} from "../prices";
 import {CHART_PERIODS} from "../../lib/legacy";
 import {Bar} from "./types";
 import {formatTimeInBarToMs, getCurrentCandleTime} from "./utils";

@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
-import {FC, useCallback, useEffect, useMemo, useRef, useState} from "react";
+import {FC, useEffect, useMemo, useRef, useState} from "react";
 import {
   HidePriceTable,
   SelectedTokenDown,
@@ -9,15 +9,16 @@ import {
 import TwoIconWithString from "../../components/IconWithString/TwoIconWithString";
 import SelectListMenu from "../../components/SelectListMemu/SelectListMenu";
 import useWindowWidth, {WidthType} from "../../hooks/useWindowWidth";
-import {priceToken} from "./Futures";
+import {FuturesPrice, priceToken} from "./Futures";
 import TVChartContainer from "../../components/TVChartContainer/TVChartContainer";
 import {TVDataProvider} from "../../domain/tradingview/TVDataProvider";
-import {numberWithCommas} from "../../lib/numbers";
+import {formatAmount, numberWithCommas} from "../../lib/numbers";
 import {useChartPrices} from "../../domain/prices";
 import {styled} from "@mui/material";
 
 interface ExchangeTVChartProps {
   tokenPair: string;
+  basePrice?: FuturesPrice;
   changeTokenPair: (value: string) => void;
 }
 
@@ -96,26 +97,12 @@ const ExchangeTVChart: FC<ExchangeTVChartProps> = ({...props}) => {
       });
   }, [props]);
 
-  const [chartTokenPrice, setChartTokenPrice] = useState<{[key: string]: string | number | undefined;}>({});
-
-  const fetchChartTokenPrice = useCallback(async () => {
-    if (dataProvider.current) {
-      // @ts-ignore
-      const price = await dataProvider.current?.getCurrentPriceOfToken(props.tokenPair);
-      setChartTokenPrice({
-        ...chartTokenPrice,
-        [props.tokenPair]: price,
-      });
+  const average = useMemo(() => {
+    if (props.tokenPair && props.basePrice) {
+      return parseFloat(formatAmount(props.basePrice?.[props.tokenPair], 18, 2))
     }
-  }, [props.tokenPair])
-
-  useEffect(() => {
-    fetchChartTokenPrice();
-    const interval = setInterval(() => {
-      fetchChartTokenPrice();
-    }, 1000);
-    return () => clearInterval(interval);
-  }, [fetchChartTokenPrice])
+    return ''
+  }, [props.tokenPair, props.basePrice])
 
   useEffect(() => {
     // @ts-ignore
@@ -172,9 +159,9 @@ const ExchangeTVChart: FC<ExchangeTVChartProps> = ({...props}) => {
     }
   }
 
-  if (deltaPrice && chartTokenPrice?.[props.tokenPair]) {
-    delta = Number(chartTokenPrice[props.tokenPair]) - deltaPrice;
-    deltaPercentage = (delta * 100) / Number(chartTokenPrice[props.tokenPair]);
+  if (deltaPrice && average) {
+    delta = average - deltaPrice;
+    deltaPercentage = (delta * 100) / average;
     if (deltaPercentage > 0) {
       deltaPercentageStr = `+${deltaPercentage.toFixed(2)}%`;
     } else {
@@ -251,7 +238,7 @@ const ExchangeTVChart: FC<ExchangeTVChartProps> = ({...props}) => {
                   color: deltaPercentage >= 0 ? theme.normal.success : theme.normal.danger,
                 })}
               >
-                {chartTokenPrice?.[props.tokenPair] ? chartTokenPrice?.[props.tokenPair] : "-" }
+                {props.basePrice?.[props.tokenPair] ? average : "-" }
               </Box>
             </Stack>
             <Box
