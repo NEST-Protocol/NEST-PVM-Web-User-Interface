@@ -19,10 +19,9 @@ export const getTokenChartPrice = async (symbol: string, period: string) => {
 // return price in 18 decimals
 export async function getCurrentPriceOfToken(symbol: string) {
   try {
-    const res = await fetch(`https://api.binance.com/api/v3/ticker/price?symbol=${symbol}USDT`);
+    const res = await fetch(`https://api.nestfi.net/api/oracle/price/${symbol.toLowerCase()}usdt`);
     const data = await res.json();
-    const price = data.price;
-    return Number(price);
+    return data.value;
   } catch (err) {
     // eslint-disable-next-line no-console
     console.error(err);
