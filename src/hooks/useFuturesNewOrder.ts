@@ -89,7 +89,7 @@ function useFuturesNewOrder(
     const nestBigNumber = nestAmount.stringToBigNumber(18);
     if (price && nestBigNumber) {
       const nowPrice = price[tokenPair];
-      if (parseFloat(nestAmount) >= 100000) {
+      if (parseFloat(nestAmount) * lever >= 100000) {
         const c0_top = BigNumber.from("55560000")
           .mul(nestBigNumber)
           .mul(BigNumber.from(lever.toString()))
@@ -303,7 +303,7 @@ function useFuturesNewOrder(
   const USDTWithMinNEST = useMemo(() => {
     const NESTToBigNumber = showTotalPay.stringToBigNumber(18);
     return NESTToBigNumber
-      ? NESTToBigNumber.sub(NESTToBigNumber.mul(1).div(1000))
+      ? NESTToBigNumber.sub(NESTToBigNumber.mul(BigNumber.from('1')).div(BigNumber.from('1000')))
       : undefined;
   }, [showTotalPay]);
   const { transaction: buyWithUSDT } = useFuturesBuyWithUSDT(
