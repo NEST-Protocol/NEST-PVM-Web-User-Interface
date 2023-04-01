@@ -10,6 +10,7 @@ import {
 
 function useMainReact() {
   const [showConnect, setShowConnect] = useState(false);
+  
   /**
    * wallet
    */

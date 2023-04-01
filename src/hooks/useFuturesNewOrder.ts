@@ -53,9 +53,9 @@ export const INPUT_TOKENS = ["NEST", "USDT"];
 function addPricePoint(price: BigNumber, isLong: boolean) {
   const priceBigNumber = BigNumber.from(price.toString());
   if (isLong) {
-    return priceBigNumber.add(priceBigNumber.mul(2).div(10000));
+    return priceBigNumber.add(priceBigNumber.mul(0).div(10000));
   } else {
-    return priceBigNumber.sub(priceBigNumber.mul(2).div(10000));
+    return priceBigNumber.sub(priceBigNumber.mul(0).div(10000));
   }
 }
 
@@ -319,7 +319,9 @@ function useFuturesNewOrder(
   const USDTWithMinNEST = useMemo(() => {
     const NESTToBigNumber = showTotalPay.stringToBigNumber(18);
     return NESTToBigNumber
-      ? NESTToBigNumber.sub(NESTToBigNumber.mul(1).div(1000))
+      ? NESTToBigNumber.sub(
+          NESTToBigNumber.mul(BigNumber.from("1")).div(BigNumber.from("1000"))
+        )
       : undefined;
   }, [showTotalPay]);
   const { transaction: newOrderWithUSDT } = useNewBuyRequestWithUSDT(
