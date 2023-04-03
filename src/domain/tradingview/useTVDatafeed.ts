@@ -23,7 +23,6 @@ type Props = {
 };
 
 export default function useTVDatafeed({ dataProvider }: Props) {
-  const chainId = 42161;
   const intervalRef = useRef<ReturnType<typeof setInterval> | undefined>();
   const resetCacheRef = useRef<() => void | undefined>();
   const activeTicker = useRef<string | undefined>();
@@ -126,5 +125,5 @@ export default function useTVDatafeed({ dataProvider }: Props) {
         },
       },
     };
-  }, [chainId]);
+  }, []);
 }
