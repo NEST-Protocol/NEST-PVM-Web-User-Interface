@@ -1,11 +1,9 @@
 import { BigNumber } from "ethers";
 
-import {bigNumberify, expandDecimals} from "./numbers";
+import {bigNumberify} from "./numbers";
 
-export const USD_DECIMALS = 30;
 export const LONG = "Long";
 export const SHORT = "Short";
-export const PRECISION = expandDecimals(1, 30);
 
 export function deserialize(data: any) {
   for (const [key, value] of Object.entries(data) as any) {
@@ -17,6 +15,7 @@ export function deserialize(data: any) {
 }
 
 export const CHART_PERIODS = {
+  "1s": 1,
   "1m": 60,
   "3m": 60 * 3,
   "5m": 60 * 5,

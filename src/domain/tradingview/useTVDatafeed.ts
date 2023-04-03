@@ -12,10 +12,6 @@ import { formatTimeInBarToMs } from "./utils";
 
 const configurationData = {
   supported_resolutions: Object.keys(SUPPORTED_RESOLUTIONS),
-  has_intraday: true,
-  has_seconds: true,
-  seconds_multipliers: ["1"],
-  intraday_multipliers: ["1", "2"],
   supports_marks: false,
   supports_timescale_marks: false,
   supports_time: true,
@@ -61,6 +57,7 @@ export default function useTVDatafeed({ dataProvider }: Props) {
             pricescale: 100,
             timezone: "Etc/UTC",
             has_intraday: true,
+            has_seconds: true,
             has_daily: true,
             currency_code: "USD",
             visible_plots_set: "ohlc",
