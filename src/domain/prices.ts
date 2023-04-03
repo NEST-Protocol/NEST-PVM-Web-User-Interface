@@ -48,7 +48,7 @@ export async function getChartPricesFromStats(symbol: string, period: string, li
     const prices = await response.json();
     return prices.map((price: any) => {
       return {
-        time: price[0] / 1000,
+        time: price[0] / 1000 + timezoneOffset,
         open: Number(price[1]),
         close: Number(price[4]),
         high: Number(price[2]),
@@ -67,7 +67,7 @@ export async function getChartPricesFromStats(symbol: string, period: string, li
       const prices = await response.json();
       return prices.map((price: any) => {
         return {
-          time: price[0] / 1000,
+          time: price[0] / 1000 + timezoneOffset,
           open: Number(price[1]),
           close: Number(price[4]),
           high: Number(price[2]),

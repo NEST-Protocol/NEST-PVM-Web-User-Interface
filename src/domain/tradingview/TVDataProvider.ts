@@ -1,5 +1,5 @@
 import {LAST_BAR_REFRESH_INTERVAL, SUPPORTED_RESOLUTIONS} from "../../config/tradingview";
-import {getChartPricesFromStats} from "../prices";
+import {getChartPricesFromStats, timezoneOffset} from "../prices";
 import {CHART_PERIODS} from "../../lib/legacy";
 import {Bar} from "./types";
 import {formatTimeInBarToMs, getCurrentCandleTime} from "./utils";
@@ -73,8 +73,8 @@ export class TVDataProvider {
     }
 
     const { from, to, countBack } = periodParams;
-    const toWithOffset = to;
-    const fromWithOffset = from;
+    const toWithOffset = to + timezoneOffset;
+    const fromWithOffset = from + timezoneOffset;
     const bars = barsInfo.data.filter((bar) => bar.time > fromWithOffset && bar.time <= toWithOffset);
 
     // if no bars returned, return empty array
