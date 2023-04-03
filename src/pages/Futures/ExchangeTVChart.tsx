@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
-import {FC, useEffect, useMemo, useRef, useState} from "react";
+import {FC, useCallback, useEffect, useMemo, useRef, useState} from "react";
 import {
   HidePriceTable,
   SelectedTokenDown,
@@ -13,7 +13,6 @@ import {FuturesPrice, priceToken} from "./Futures";
 import TVChartContainer from "../../components/TVChartContainer/TVChartContainer";
 import {TVDataProvider} from "../../domain/tradingview/TVDataProvider";
 import {formatAmount, numberWithCommas} from "../../lib/numbers";
-import {useChartPrices} from "../../domain/prices";
 import {styled} from "@mui/material";
 
 interface ExchangeTVChartProps {
@@ -57,6 +56,11 @@ const ExchangeTVChart: FC<ExchangeTVChartProps> = ({...props}) => {
   }, [width]);
   const TokenIcon = props.tokenPair.getToken()!.icon;
   const dataProvider = useRef();
+  const [hr, setHr] = useState({
+    priceChangePercent: '',
+    highPrice: '',
+    lowPrice: ''
+  });
 
   const tokenPairList = useMemo(() => {
     return priceToken
@@ -101,76 +105,34 @@ const ExchangeTVChart: FC<ExchangeTVChartProps> = ({...props}) => {
     if (props.tokenPair && props.basePrice) {
       return parseFloat(formatAmount(props.basePrice?.[props.tokenPair], 18, 2))
     }
-    return ''
+    return '-'
   }, [props.tokenPair, props.basePrice])
+
+  const fetchHr = useCallback(async () => {
+    // /api/v3/ticker/24hr
+    const res = await fetch(`https://api.binance.com/api/v3/ticker/24hr?symbol=${props.tokenPair}USDT`);
+    const data = await res.json();
+    if (data) {
+      setHr({
+        priceChangePercent: data.priceChangePercent,
+        highPrice: data.highPrice,
+        lowPrice: data.lowPrice
+      })
+    }
+  }, [props.tokenPair])
+
+  useEffect(() => {
+    fetchHr();
+    const interval = setInterval(() => {
+      fetchHr();
+    }, 60_000);
+    return () => clearInterval(interval);
+  }, [fetchHr])
 
   useEffect(() => {
     // @ts-ignore
     dataProvider.current = new TVDataProvider();
   }, []);
-
-  let high;
-  let low;
-  let deltaPrice;
-  let delta;
-  let deltaPercentage = 0;
-  let deltaPercentageStr;
-  let closePrice;
-
-  const now = parseInt(String(Date.now() / 1000));
-  const timeThreshold = now - 24 * 60 * 60;
-  const [priceData, updatePriceData] = useChartPrices(
-    props.tokenPair,
-    "1h",
-    0,
-  );
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      // @ts-ignore
-      updatePriceData(undefined, true);
-    }, 60 * 1000);
-    return () => clearInterval(interval);
-  }, [updatePriceData]);
-
-  if (priceData) {
-    for (let i = priceData.length - 1; i > 0; i--) {
-      // @ts-ignore
-      const price = priceData[i];
-      if (price.time < timeThreshold) {
-        break;
-      }
-      if (!low) {
-        low = price.low;
-      }
-      if (!high) {
-        high = price.high;
-      }
-
-      if (price.high > high) {
-        high = price.high;
-      }
-      if (price.low < low) {
-        low = price.low;
-      }
-
-      deltaPrice = price.open;
-      closePrice = price.close;
-    }
-  }
-
-  if (deltaPrice && average) {
-    delta = average - deltaPrice;
-    deltaPercentage = (delta * 100) / average;
-    if (deltaPercentage > 0) {
-      deltaPercentageStr = `+${deltaPercentage.toFixed(2)}%`;
-    } else {
-      deltaPercentageStr = `${deltaPercentage.toFixed(2)}%`;
-    }
-    if (deltaPercentage === 0) {
-      deltaPercentageStr = "0.00";
-    }
-  }
 
   return (
     <Stack
@@ -235,7 +197,7 @@ const ExchangeTVChart: FC<ExchangeTVChartProps> = ({...props}) => {
                 sx={(theme) => ({
                   fontSize: 16,
                   fontWeight: 700,
-                  color: deltaPercentage >= 0 ? theme.normal.success : theme.normal.danger,
+                  color: Number(hr.priceChangePercent) >= 0 ? theme.normal.success : theme.normal.danger,
                 })}
               >
                 {props.basePrice?.[props.tokenPair] ? average : "-" }
@@ -262,23 +224,21 @@ const ExchangeTVChart: FC<ExchangeTVChartProps> = ({...props}) => {
                 <Box>
                   <ChartDataTitle>24h Change</ChartDataTitle>
                   <ChartDataValue sx={(theme) => ({
-                    color: deltaPercentage >= 0 ? theme.normal.success : theme.normal.danger,
+                    color: Number(hr.priceChangePercent) >= 0 ? theme.normal.success : theme.normal.danger,
                   })}>
-                    {deltaPercentageStr ? deltaPercentageStr : "-"}
+                    {hr.priceChangePercent ? `${hr.priceChangePercent}%` : "-"}
                   </ChartDataValue>
                 </Box>
                 <Box>
                   <ChartDataTitle>24h High</ChartDataTitle>
                   <ChartDataValue>
-                    {!high && "-"}
-                    {high && numberWithCommas(high.toFixed(2))}
+                    {hr.highPrice ? numberWithCommas(Number(hr.highPrice).toFixed(2)) : "-"}
                   </ChartDataValue>
                 </Box>
                 <Box>
                   <ChartDataTitle>24h Low</ChartDataTitle>
                   <ChartDataValue>
-                    {!low && "-"}
-                    {low && numberWithCommas(low.toFixed(2))}
+                    {hr.lowPrice ? numberWithCommas(Number(hr.lowPrice).toFixed(2)) : "-"}
                   </ChartDataValue>
                 </Box>
               </>
