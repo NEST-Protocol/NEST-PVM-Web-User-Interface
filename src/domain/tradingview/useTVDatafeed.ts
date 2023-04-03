@@ -119,7 +119,7 @@ export default function useTVDatafeed({ dataProvider }: Props) {
                 onRealtimeCallback(formatTimeInBarToMs(bar));
               }
             });
-          }, 500);
+          }, 1000);
         },
         unsubscribeBars: () => {
           intervalRef.current && clearInterval(intervalRef.current);
