@@ -57,6 +57,7 @@ const disabledFeatures = [
   "header_fullscreen_button",
 ];
 const enabledFeatures = [
+  "seconds_resolution",
   "hide_resolution_in_legend",
   "items_favoriting",
   "hide_left_toolbar_by_default",
@@ -78,7 +79,7 @@ export const defaultChartProps = {
   custom_css_url: "/tradingview-chart.css",
   loading_screen: { backgroundColor: "#171A1F", foregroundColor: "#fff" },
   favorites: {
-    intervals: ["5", "15", "60", "240", "1D"],
+    intervals: ["1", "5", "15", "60", "240", "1D"],
   },
   custom_formatters: {
     timeFormatter: {

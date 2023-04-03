@@ -56,8 +56,6 @@ export async function getChartPricesFromStats(symbol: string, period: string, li
       }
     });
   } catch (error) {
-    console.log('try nestfi api')
-    // eslint-disable-next-line no-console
     const url = `https://api.nestfi.net/api/oracle/price/klines?symbol=${symbol}USDT&limit=${limit}&interval=${period}`;
     try {
       const response = await fetch(url);

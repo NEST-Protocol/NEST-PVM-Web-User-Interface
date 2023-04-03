@@ -12,6 +12,10 @@ import { formatTimeInBarToMs } from "./utils";
 
 const configurationData = {
   supported_resolutions: Object.keys(SUPPORTED_RESOLUTIONS),
+  has_intraday: true,
+  has_seconds: true,
+  seconds_multipliers: ["1"],
+  intraday_multipliers: ["1", "2"],
   supports_marks: false,
   supports_timescale_marks: false,
   supports_time: true,
