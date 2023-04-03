@@ -116,9 +116,7 @@ export default function TVChartContainer({symbol, dataProvider}: Props) {
         setChartDataLoading(true);
       }
     };
-    // We don't want to re-initialize the chart when the symbol changes. This will make the chart flicker.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [nowTheme]);
+  }, [nowTheme, tvWidgetRef.current]);
 
   return (
     <Box sx={(theme) => ({
