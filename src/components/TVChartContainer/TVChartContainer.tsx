@@ -102,7 +102,9 @@ export default function TVChartContainer({symbol, dataProvider}: Props) {
             setPeriod(period);
           }
         });
-
+      // @ts-ignore
+      tvWidgetRef.current?.activeChart().createStudy("Moving Average", false, false, tvWidgetRef.current?.activeChart().resolution()
+        , {}, {})
       tvWidgetRef.current?.activeChart().dataReady(() => {
         setChartDataLoading(false);
       });
