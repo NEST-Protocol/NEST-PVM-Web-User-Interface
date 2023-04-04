@@ -49,19 +49,20 @@ const disabledFeatures = [
   "show_interval_dialog_on_key_press",
   "header_symbol_search",
   "popup_hints",
-  "header_in_fullscreen_mode",
   "use_localstorage_for_settings",
   "right_bar_stays_on_scroll",
   "symbol_info",
   "header_saveload",
-  "header_fullscreen_button",
 ];
 const enabledFeatures = [
   "seconds_resolution",
+  "side_toolbar_in_fullscreen_mode",
+  "header_in_fullscreen_mode",
   "hide_resolution_in_legend",
   "items_favoriting",
   "hide_left_toolbar_by_default",
   "iframe_loading_compatibility_mode",
+  "header_fullscreen_button",
 ];
 
 export const defaultChartProps = {
