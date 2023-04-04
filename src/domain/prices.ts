@@ -1,6 +1,6 @@
 export const timezoneOffset = -new Date().getTimezoneOffset() * 60;
 
-export async function getChartPricesFromStats(symbol: string, period: string, limit: number) {
+export async function getChartPricesFromBinance(symbol: string, period: string, limit: number) {
   const url = `https://api.binance.com/api/v3/klines?symbol=${symbol}USDT&limit=${limit}&interval=${period}`;
   try {
     const response = await fetch(url);
