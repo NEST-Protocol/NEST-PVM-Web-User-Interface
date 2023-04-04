@@ -66,6 +66,7 @@ export default function TVChartContainer({symbol, dataProvider}: Props) {
       symbol: symbolRef.current, // Using ref to avoid unnecessary re-renders on symbol change and still have access to the latest symbol
       datafeed: datafeed,
       theme: nowTheme.isLight ? "Light" : "Dark",
+      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone as Timezone,
       container: chartContainerRef.current,
       library_path: defaultChartProps.library_path,
       locale: defaultChartProps.locale,
@@ -85,7 +86,6 @@ export default function TVChartContainer({symbol, dataProvider}: Props) {
     tvWidgetRef.current = new window.TradingView.widget(widgetOptions);
     tvWidgetRef.current!.onChartReady(function () {
       setChartReady(true);
-      tvWidgetRef.current?.activeChart().setTimezone(Intl.DateTimeFormat().resolvedOptions().timeZone as Timezone);
       if (nowTheme.isLight) {
         tvWidgetRef.current!.applyOverrides({
           "paneProperties.background": "#ffffff",
