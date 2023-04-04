@@ -118,7 +118,7 @@ export default function TVChartContainer({symbol, dataProvider}: Props) {
         setChartDataLoading(true);
       }
     };
-  }, [nowTheme, tvWidgetRef.current]);
+  }, [nowTheme]);
 
   return (
     <Box sx={(theme) => ({
