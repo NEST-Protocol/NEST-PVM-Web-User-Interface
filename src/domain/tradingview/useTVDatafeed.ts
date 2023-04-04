@@ -113,9 +113,9 @@ export default function useTVDatafeed({ dataProvider }: Props) {
           intervalRef.current && clearInterval(intervalRef.current);
           resetCacheRef.current = onResetCacheNeededCallback;
           intervalRef.current = setInterval(function () {
-            tvDataProvider.current?.getLiveBar(ticker, resolution).then((bars) => {
-              if (bars && ticker === activeTicker.current) {
-                onRealtimeCallback(bars[0]);
+            tvDataProvider.current?.getLiveBar(ticker, resolution).then((bar) => {
+              if (bar && ticker === activeTicker.current) {
+                onRealtimeCallback(bar);
               }
             });
           }, 1000);

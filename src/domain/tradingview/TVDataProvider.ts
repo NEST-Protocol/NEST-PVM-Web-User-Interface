@@ -99,8 +99,16 @@ export class TVDataProvider {
     // @ts-ignore
     const period = SUPPORTED_RESOLUTIONS[resolution];
     const bars = await getChartPricesFromBinance(ticker, period, 1);
-    // @ts-ignore
-    const filledBars = fillBarGaps(bars, CHART_PERIODS[resolution]);
-    return filledBars.map(formatTimeInBarToMs);
+    this.lastBar = {
+      ...bars[0],
+      ticker,
+      open: this.lastBar?.close || bars[0].open,
+    };
+    this.lastTicker = ticker;
+    this.lastPeriod = period;
+    if (this.lastBar) {
+      return formatTimeInBarToMs(this.lastBar);
+    }
+    return null;
   }
 }
