@@ -124,7 +124,7 @@ const ExchangeTVChart: FC<ExchangeTVChartProps> = ({...props}) => {
     fetchHr();
     const interval = setInterval(() => {
       fetchHr();
-    }, 60_000);
+    }, 1_000);
     return () => clearInterval(interval);
   }, [fetchHr])
 
