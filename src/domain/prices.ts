@@ -1,12 +1,10 @@
-export const timezoneOffset = -new Date().getTimezoneOffset() * 60;
-
 export async function getChartPricesFromBinance(symbol: string, period: string, limit: number) {
   try {
     const response = await fetch(`https://api.binance.com/api/v3/klines?symbol=${symbol}USDT&limit=${limit}&interval=${period}`);
     const prices = await response.json();
     return prices.map((price: any) => {
       return {
-        time: price[0] / 1000 + timezoneOffset,
+        time: price[0] / 1000,
         open: Number(price[1]),
         close: Number(price[4]),
         high: Number(price[2]),
@@ -19,7 +17,7 @@ export async function getChartPricesFromBinance(symbol: string, period: string, 
       const prices = await response.json();
       return prices.map((price: any) => {
         return {
-          time: price[0] / 1000 + timezoneOffset,
+          time: price[0] / 1000,
           open: Number(price[1]),
           close: Number(price[4]),
           high: Number(price[2]),

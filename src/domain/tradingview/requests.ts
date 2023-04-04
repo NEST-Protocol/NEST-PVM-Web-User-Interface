@@ -1,5 +1,3 @@
-import { timezoneOffset } from "../prices";
-
 function getCurrentBarTimestamp(periodSeconds: number) {
   return Math.floor(Date.now() / (periodSeconds * 1000)) * (periodSeconds * 1000);
 }
@@ -7,7 +5,7 @@ function getCurrentBarTimestamp(periodSeconds: number) {
 export function fillBarGaps(prices: any[], periodSeconds: number) {
   if (prices.length < 2) return prices;
 
-  const currentBarTimestamp = getCurrentBarTimestamp(periodSeconds) / 1000 + timezoneOffset;
+  const currentBarTimestamp = getCurrentBarTimestamp(periodSeconds) / 1000;
   let lastBar = prices[prices.length - 1];
 
   if (lastBar.time !== currentBarTimestamp) {

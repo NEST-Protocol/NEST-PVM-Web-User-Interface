@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { defaultChartProps, DEFAULT_PERIOD } from "./constants";
 import useTVDatafeed from "../../domain/tradingview/useTVDatafeed";
-import { IChartingLibraryWidget } from "../../charting_library";
+import {IChartingLibraryWidget, Timezone} from "../../charting_library";
 import { getObjectKeyFromValue } from "../../domain/tradingview/utils";
 import { SUPPORTED_RESOLUTIONS, TV_CHART_RELOAD_INTERVAL } from "../../config/tradingview";
 import { TVDataProvider } from "../../domain/tradingview/TVDataProvider";
@@ -85,6 +85,7 @@ export default function TVChartContainer({symbol, dataProvider}: Props) {
     tvWidgetRef.current = new window.TradingView.widget(widgetOptions);
     tvWidgetRef.current!.onChartReady(function () {
       setChartReady(true);
+      tvWidgetRef.current?.activeChart().setTimezone(Intl.DateTimeFormat().resolvedOptions().timeZone as Timezone);
       if (nowTheme.isLight) {
         tvWidgetRef.current!.applyOverrides({
           "paneProperties.background": "#ffffff",
@@ -109,7 +110,6 @@ export default function TVChartContainer({symbol, dataProvider}: Props) {
         setChartDataLoading(false);
       });
     });
-
     return () => {
       if (tvWidgetRef.current) {
         tvWidgetRef.current.remove();

@@ -1,5 +1,5 @@
 import {SUPPORTED_RESOLUTIONS} from "../../config/tradingview";
-import {getChartPricesFromBinance, timezoneOffset} from "../prices";
+import {getChartPricesFromBinance} from "../prices";
 import {CHART_PERIODS} from "../../lib/legacy";
 import {Bar} from "./types";
 import {formatTimeInBarToMs, getCurrentCandleTime} from "./utils";
@@ -61,9 +61,7 @@ export class TVDataProvider {
     }
 
     const { from, to, countBack } = periodParams;
-    const toWithOffset = to + timezoneOffset;
-    const fromWithOffset = from + timezoneOffset;
-    const bars = barsInfo.data.filter((bar) => bar.time > fromWithOffset && bar.time <= toWithOffset);
+    const bars = barsInfo.data.filter((bar) => bar.time > from && bar.time <= to);
 
     // if no bars returned, return empty array
     if (!bars.length) {
