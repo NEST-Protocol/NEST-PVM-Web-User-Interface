@@ -1,12 +1,8 @@
 export const timezoneOffset = -new Date().getTimezoneOffset() * 60;
 
 export async function getChartPricesFromBinance(symbol: string, period: string, limit: number) {
-  const url = `https://api.binance.com/api/v3/klines?symbol=${symbol}USDT&limit=${limit}&interval=${period}`;
   try {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
+    const response = await fetch(`https://api.binance.com/api/v3/klines?symbol=${symbol}USDT&limit=${limit}&interval=${period}`);
     const prices = await response.json();
     return prices.map((price: any) => {
       return {
@@ -18,12 +14,8 @@ export async function getChartPricesFromBinance(symbol: string, period: string, 
       }
     });
   } catch (error) {
-    const url = `https://api.nestfi.net/api/oracle/price/klines?symbol=${symbol}USDT&limit=${limit}&interval=${period}`;
     try {
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
+      const response = await fetch(`https://api.nestfi.net/api/oracle/price/klines?symbol=${symbol}USDT&limit=${limit}&interval=${period}`);
       const prices = await response.json();
       return prices.map((price: any) => {
         return {
@@ -38,5 +30,31 @@ export async function getChartPricesFromBinance(symbol: string, period: string, 
       // eslint-disable-next-line no-console
       console.log(`Error fetching data: ${e}`);
     }
+  }
+}
+
+export async function get24HrFromBinance(symbol: string) {
+  try {
+    const res = await fetch(`https://api.binance.com/api/v3/ticker/24hr?symbol=${symbol}USDT`);
+    const data = await res.json();
+    if (data) {
+      return {
+        priceChangePercent: data.priceChangePercent,
+        highPrice: data.highPrice,
+        lowPrice: data.lowPrice
+      }
+    }
+    return null;
+  } catch (e) {
+    const res = await fetch(`https://api.nestfi.net/api/oracle/price/ticker/24hr?symbol=${symbol}USDT`);
+    const data = await res.json();
+    if (data) {
+      return {
+        priceChangePercent: data.priceChangePercent,
+        highPrice: data.highPrice,
+        lowPrice: data.lowPrice
+      }
+    }
+    return null;
   }
 }

@@ -14,6 +14,7 @@ import TVChartContainer from "../../components/TVChartContainer/TVChartContainer
 import {TVDataProvider} from "../../domain/tradingview/TVDataProvider";
 import {formatAmount, numberWithCommas} from "../../lib/numbers";
 import {styled} from "@mui/material";
+import {get24HrFromBinance} from "../../domain/prices";
 
 interface ExchangeTVChartProps {
   tokenPair: string;
@@ -109,26 +110,13 @@ const ExchangeTVChart: FC<ExchangeTVChartProps> = ({...props}) => {
   }, [props.tokenPair, props.basePrice])
 
   const fetchHr = useCallback(async () => {
-    try {
-      const res = await fetch(`https://api.binance.com/api/v3/ticker/24hr?symbol=${props.tokenPair}USDT`);
-      const data = await res.json();
-      if (data) {
-        setHr({
-          priceChangePercent: data.priceChangePercent,
-          highPrice: data.highPrice,
-          lowPrice: data.lowPrice
-        })
-      }
-    } catch (e) {
-      const res = await fetch(`https://api.nestfi.net/api/oracle/price/ticker/24hr?symbol=${props.tokenPair}USDT`);
-      const data = await res.json();
-      if (data) {
-        setHr({
-          priceChangePercent: data.priceChangePercent,
-          highPrice: data.highPrice,
-          lowPrice: data.lowPrice
-        })
-      }
+    const data = await get24HrFromBinance(props.tokenPair);
+    if (data) {
+      setHr({
+        priceChangePercent: data.priceChangePercent,
+        highPrice: data.highPrice,
+        lowPrice: data.lowPrice
+      })
     }
   }, [props.tokenPair])
 
