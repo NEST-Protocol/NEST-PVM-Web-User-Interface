@@ -72,6 +72,13 @@ export const SwapContract: AddressType = {
   97: "0x7E9747Dd4a7390FCA7D86A400D14F031981Bc1E1",
 };
 
+export const NESTFiVault: AddressType = {
+  1: String().zeroAddress,
+  5: String().zeroAddress,
+  56: String().zeroAddress,
+  97: "0x0649A02C15229Cb970CDcE456f9dd52248023520",
+}
+
 export const FuturesV2Contract: AddressType = {
   1: String().zeroAddress,
   5: String().zeroAddress,
