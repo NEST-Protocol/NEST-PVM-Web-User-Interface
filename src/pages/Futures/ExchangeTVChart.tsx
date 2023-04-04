@@ -109,15 +109,26 @@ const ExchangeTVChart: FC<ExchangeTVChartProps> = ({...props}) => {
   }, [props.tokenPair, props.basePrice])
 
   const fetchHr = useCallback(async () => {
-    // /api/v3/ticker/24hr
-    const res = await fetch(`https://api.binance.com/api/v3/ticker/24hr?symbol=${props.tokenPair}USDT`);
-    const data = await res.json();
-    if (data) {
-      setHr({
-        priceChangePercent: data.priceChangePercent,
-        highPrice: data.highPrice,
-        lowPrice: data.lowPrice
-      })
+    try {
+      const res = await fetch(`https://api.binance.com/api/v3/ticker/24hr?symbol=${props.tokenPair}USDT`);
+      const data = await res.json();
+      if (data) {
+        setHr({
+          priceChangePercent: data.priceChangePercent,
+          highPrice: data.highPrice,
+          lowPrice: data.lowPrice
+        })
+      }
+    } catch (e) {
+      const res = await fetch(`https://api.nestfi.net/api/oracle/price/ticker/24hr?symbol=${props.tokenPair}USDT`);
+      const data = await res.json();
+      if (data) {
+        setHr({
+          priceChangePercent: data.priceChangePercent,
+          highPrice: data.highPrice,
+          lowPrice: data.lowPrice
+        })
+      }
     }
   }, [props.tokenPair])
 
