@@ -51,12 +51,11 @@ const NEW_ORDER_UPDATE = 30;
 export const INPUT_TOKENS = ["NEST", "USDT"];
 
 function addPricePoint(price: BigNumber, isLong: boolean) {
-  // TODO: 0->2
   const priceBigNumber = BigNumber.from(price.toString());
   if (isLong) {
-    return priceBigNumber.add(priceBigNumber.mul(0).div(10000));
+    return priceBigNumber.add(priceBigNumber.mul(2).div(10000));
   } else {
-    return priceBigNumber.sub(priceBigNumber.mul(0).div(10000));
+    return priceBigNumber.sub(priceBigNumber.mul(2).div(10000));
   }
 }
 
