@@ -74,7 +74,6 @@ const enabledFeatures = [
   "hide_left_toolbar_by_default",
   "iframe_loading_compatibility_mode",
   "header_fullscreen_button",
-  "save_chart_properties_to_local_storage",
   "use_na_string_for_not_available_values"
 ];
 
