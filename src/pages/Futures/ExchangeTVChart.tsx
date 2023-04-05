@@ -217,17 +217,17 @@ const ExchangeTVChart: FC<ExchangeTVChartProps> = ({...props}) => {
               <SelectedTokenDown/>
             </Box>
           </Stack>
+          <Box>
+            <ChartDataTitle>24h Change</ChartDataTitle>
+            <ChartDataValue sx={(theme) => ({
+              color: Number(hr.priceChangePercent) >= 0 ? theme.normal.success : theme.normal.danger,
+            })}>
+              {hr.priceChangePercent ? `${hr.priceChangePercent}%` : "-"}
+            </ChartDataValue>
+          </Box>
           {
             !isBigMobile && (
               <>
-                <Box>
-                  <ChartDataTitle>24h Change</ChartDataTitle>
-                  <ChartDataValue sx={(theme) => ({
-                    color: Number(hr.priceChangePercent) >= 0 ? theme.normal.success : theme.normal.danger,
-                  })}>
-                    {hr.priceChangePercent ? `${hr.priceChangePercent}%` : "-"}
-                  </ChartDataValue>
-                </Box>
                 <Box>
                   <ChartDataTitle>24h High</ChartDataTitle>
                   <ChartDataValue>
