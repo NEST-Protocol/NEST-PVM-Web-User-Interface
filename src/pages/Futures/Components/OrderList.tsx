@@ -75,7 +75,7 @@ const OrderList: FC<OrderListProps> = ({ ...props }) => {
           </FuturesOrderListInfoMain>
         </Stack>
       </Stack>
-      {props.data.trustOrder ? (
+      {!(tp === String().placeHolder && sl === String().placeHolder) ? (
         <Stack direction={"row"} justifyContent={"space-around"}>
           <FuturesOrderListInfo
             direction={"row"}

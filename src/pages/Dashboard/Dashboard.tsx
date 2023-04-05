@@ -644,10 +644,10 @@ const Dashboard: FC = () => {
               }
             })}>
               <TVChart title1={'NEST Total Burned'} title2={'Today Burned'}
-                       value1={`${burnedInfo.totalDestroy === 0 ? '-' : (-1 * burnedInfo.totalDestroy).toLocaleString('en-US', {
+                       value1={`${burnedInfo.totalDestroy === 0 ? '-' : burnedInfo.totalDestroy.toLocaleString('en-US', {
                          maximumFractionDigits: 2,
                        })}`}
-                       value2={`${burnedInfo.dayDestroy === 0 ? '-' : (-1 * burnedInfo.dayDestroy).toLocaleString('en-US', {
+                       value2={`${burnedInfo.dayDestroy === 0 ? '-' : burnedInfo.dayDestroy.toLocaleString('en-US', {
                          maximumFractionDigits: 2,
                        })}`}
                        data={burnedData}/>

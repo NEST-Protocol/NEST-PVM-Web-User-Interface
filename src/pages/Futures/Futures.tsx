@@ -1,13 +1,12 @@
 import Stack from "@mui/material/Stack";
 import { BigNumber } from "ethers/lib/ethers";
 import { FC, useCallback, useEffect, useMemo, useState } from "react";
-import useReadFuturesPrice from "../../contracts/Read/useReadFutureContract";
-import useNEST from "../../hooks/useNEST";
 import useWindowWidth, { WidthType } from "../../hooks/useWindowWidth";
 import FuturesMoreInfo from "./MoreInfo";
 import FuturesNewOrder from "./NewOrder";
 import FuturesOrderList from "./OrderList";
-import FuturesPriceTable from "./PriceTable";
+import ExchangeTVChart from "./ExchangeTVChart";
+import { getPriceFromNESTLocal } from "../../lib/NESTRequest";
 
 export interface FuturesPrice {
   [key: string]: BigNumber;
@@ -15,20 +14,30 @@ export interface FuturesPrice {
 const UPDATE_PRICE = 15;
 export const priceToken = ["ETH", "BTC", "BNB"];
 const Futures: FC = () => {
-  const { account } = useNEST();
   const { width, isBigMobile } = useWindowWidth();
   const [tokenPair, setTokenPair] = useState("ETH");
- 
-  const priceToken = useMemo(() => {
-    return ["ETH", "BTC", "BNB"];
-  }, []);
-  const { futuresPrice: ETHPrice, futuresPriceRefetch: ETHPriceRefetch } =
-    useReadFuturesPrice(priceToken.indexOf("ETH"));
-  const { futuresPrice: BTCPrice, futuresPriceRefetch: BTCPriceRefetch } =
-    useReadFuturesPrice(priceToken.indexOf("BTC"));
-  const { futuresPrice: BNBPrice, futuresPriceRefetch: BNBPriceRefetch } =
-    useReadFuturesPrice(priceToken.indexOf("BNB"));
-  const price = useMemo(() => {
+  const [basePrice, setBasePrice] = useState<FuturesPrice>();
+  const [orderPrice, setOrderPrice] = useState<FuturesPrice>();
+  const getPrice = useCallback(async () => {
+    const ETHPriceBase: { [key: string]: string } = await getPriceFromNESTLocal(
+      "eth"
+    );
+    const BTCPriceBase: { [key: string]: string } = await getPriceFromNESTLocal(
+      "btc"
+    );
+    const BNBPriceBase: { [key: string]: string } = await getPriceFromNESTLocal(
+      "bnb"
+    );
+    const ETHPrice = ETHPriceBase
+      ? ETHPriceBase["value"].toString().stringToBigNumber(18)
+      : undefined;
+    const BTCPrice = BTCPriceBase
+      ? BTCPriceBase["value"].toString().stringToBigNumber(18)
+      : undefined;
+    const BNBPrice = BNBPriceBase
+      ? BNBPriceBase["value"].toString().stringToBigNumber(18)
+      : undefined;
+
     if (ETHPrice && BTCPrice && BNBPrice) {
       const newPrice: FuturesPrice = {
         ETH: ETHPrice,
@@ -39,43 +48,60 @@ const Futures: FC = () => {
     } else {
       return undefined;
     }
-  }, [BNBPrice, BTCPrice, ETHPrice]);
+  }, []);
+  // update base price 2s
   useEffect(() => {
     const time = setInterval(() => {
-      ETHPriceRefetch();
-      BTCPriceRefetch();
-      BNBPriceRefetch();
+      (async () => {
+        const newPrice = await getPrice();
+        setBasePrice(newPrice);
+      })();
+    }, 2000);
+    return () => {
+      clearInterval(time);
+    };
+  }, [getPrice]);
+  // update order price 15s
+  useEffect(() => {
+    const getOrderPrice = async () => {
+      const newPrice = await getPrice();
+      setOrderPrice(newPrice);
+    };
+    getOrderPrice();
+    const time = setInterval(() => {
+      getOrderPrice();
     }, UPDATE_PRICE * 1000);
     return () => {
       clearInterval(time);
     };
-  }, [BNBPriceRefetch, BTCPriceRefetch, ETHPriceRefetch, account.address]);
-  
+  }, [getPrice]);
+
   const paddingY = useMemo(() => {
     return isBigMobile ? 0 : 24;
   }, [isBigMobile]);
   const paddingX = useMemo(() => {
     return isBigMobile ? 0 : 40;
   }, [isBigMobile]);
-  const priceTable = useCallback(() => {
+
+  const exchangeTvChart = useCallback(() => {
     return (
-      <FuturesPriceTable
-        price={price}
+      <ExchangeTVChart
         tokenPair={tokenPair}
+        basePrice={basePrice}
         changeTokenPair={(value: string) => setTokenPair(value)}
       />
     );
-  }, [price, tokenPair]);
+  }, [tokenPair, basePrice]);
+
   const orderList = useCallback(() => {
-    return <FuturesOrderList price={price} />;
-  }, [price]);
+    return <FuturesOrderList price={orderPrice} />;
+  }, [orderPrice]);
   const newOrder = useCallback(() => {
-    return <FuturesNewOrder price={price} tokenPair={tokenPair} />;
-  }, [price, tokenPair]);
+    return <FuturesNewOrder price={basePrice} tokenPair={tokenPair} />;
+  }, [basePrice, tokenPair]);
   const moreInfo = useCallback(() => {
     return <FuturesMoreInfo />;
   }, []);
-  
 
   const mainView = useMemo(() => {
     switch (width) {
@@ -91,7 +117,7 @@ const Futures: FC = () => {
               paddingY={`${paddingY}px`}
             >
               <Stack spacing={"16px"} width={"100%"}>
-                {priceTable()}
+                {exchangeTvChart()}
                 {orderList()}
               </Stack>
               <Stack spacing={"16px"} width={"450px"}>
@@ -109,7 +135,7 @@ const Futures: FC = () => {
             paddingX={`${paddingX}px`}
           >
             <Stack spacing={"16px"} width={"100%"} paddingY={`${paddingY}px`}>
-              {priceTable()}
+              {exchangeTvChart()}
               {newOrder()}
               {isBigMobile ? <></> : moreInfo()}
               {orderList()}
@@ -124,14 +150,10 @@ const Futures: FC = () => {
     orderList,
     paddingX,
     paddingY,
-    priceTable,
+    exchangeTvChart,
     width,
   ]);
-  return (
-    <>
-      {mainView}
-    </>
-  );
+  return <>{mainView}</>;
 };
 
 export default Futures;

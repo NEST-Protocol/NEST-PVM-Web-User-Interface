@@ -2,6 +2,7 @@ import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import Modal from "@mui/material/Modal";
 import Stack from "@mui/material/Stack";
+import { BigNumber } from "ethers/lib/ethers";
 import { FC, useMemo } from "react";
 import MainButton from "../../../components/MainButton/MainButton";
 import NESTLine from "../../../components/NESTLine";
@@ -160,8 +161,13 @@ interface EditPositionModalProps {
 const EditPositionModal: FC<EditPositionModalProps> = ({ ...props }) => {
   const { isMobile } = useWindowWidth();
   const title = useMemo(() => {
-    return props.data.trustOrder ? "Edit Position" : "Trigger Position";
-  }, [props.data.trustOrder]);
+    return !(
+      BigNumber.from("0").eq(props.data.stopLossPrice) &&
+      BigNumber.from("0").eq(props.data.stopProfitPrice)
+    )
+      ? "Edit Position"
+      : "Trigger Position";
+  }, [props.data.stopLossPrice, props.data.stopProfitPrice]);
   const view = useMemo(() => {
     return isMobile ? (
       <Drawer

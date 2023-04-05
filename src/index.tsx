@@ -6,8 +6,6 @@ import App from "./pages/App";
 import "./extension/string.d.ts"
 import "./extension/bigNumber.d.ts"
 import "./share/global.css";
-import "@fontsource/open-sans/400.css";
-import "@fontsource/open-sans/700.css";
 
 window.Buffer = buffer.Buffer;
 

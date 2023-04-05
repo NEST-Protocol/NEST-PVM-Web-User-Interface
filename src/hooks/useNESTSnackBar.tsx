@@ -106,7 +106,31 @@ function useTransactionSnackBar() {
       content: (key, message) => <MessageSnackBar id={key} message={message} />,
     });
   };
-  return { transactionSnackBar, closeSnackbar, messageSnackBar, switchNetWork };
+
+  const failRequest = () => {
+    enqueueSnackbar("", {
+      preventDuplicate: true,
+      anchorOrigin: {
+        vertical: "top",
+        horizontal: isBigMobile ? "center" : "right",
+      },
+      content: (key, message) => (
+        <NormalSnackBar
+          id={key}
+          title={"Fail Request"}
+          info={
+            "The transaction failed and the amount has been fully refunded. You can re-trade"
+          }
+          type={SnackBarType.fail}
+          hash={undefined}
+          message={message}
+          closeSnackbar={closeSnackbar}
+        />
+      ),
+    });
+  };
+
+  return { transactionSnackBar, closeSnackbar, messageSnackBar, switchNetWork, failRequest };
 }
 
 export default useTransactionSnackBar;
