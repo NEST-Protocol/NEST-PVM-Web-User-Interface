@@ -51,6 +51,7 @@ const NEW_ORDER_UPDATE = 30;
 export const INPUT_TOKENS = ["NEST", "USDT"];
 
 function addPricePoint(price: BigNumber, isLong: boolean) {
+  // TODO: 0->2
   const priceBigNumber = BigNumber.from(price.toString());
   if (isLong) {
     return priceBigNumber.add(priceBigNumber.mul(0).div(10000));
@@ -94,7 +95,7 @@ function useFuturesNewOrder(
     const nestBigNumber = nestAmount.stringToBigNumber(18);
     if (price && nestBigNumber) {
       const nowPrice = price[tokenPair];
-      if (parseFloat(nestAmount) * lever >= 100000) {
+      if (parseFloat(nestAmount) * lever >= 0) {
         const c0_top = BigNumber.from("55560000")
           .mul(nestBigNumber)
           .mul(BigNumber.from(lever.toString()))

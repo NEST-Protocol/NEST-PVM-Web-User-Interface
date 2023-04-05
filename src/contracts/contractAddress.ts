@@ -83,7 +83,7 @@ export const FuturesV2Contract: AddressType = {
   1: String().zeroAddress,
   5: String().zeroAddress,
   56: "0x907b35BE2dc26b12734D92e5fe20Fd511dFb0723",
-  97: "0x35253D54A3866c21A7DdEFb82B122D75d94F5327",
+  97: "0x476981D37FaA3bE8E8768E8E7d0d01625433126a",
 };
 
 export const NESTRedeemContract: AddressType = {

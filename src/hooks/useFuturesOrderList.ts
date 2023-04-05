@@ -1,14 +1,11 @@
 import {
-  FuturesV2Contract,
-  NESTFiVault,
-  NESTToken,
+  FuturesV2Contract
 } from "./../contracts/contractAddress";
 import { BigNumber } from "ethers/lib/ethers";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import useNEST from "./useNEST";
 import { useContract, useContractEvent, useProvider } from "wagmi";
 import FuturesV2ABI from "../contracts/ABI/FuturesV2.json";
-import ERC20ABI from "../contracts/ABI/ERC20.json";
 import { hideFuturesOrder } from "../lib/NESTRequest";
 import useTransactionSnackBar from "./useNESTSnackBar";
 
@@ -30,12 +27,6 @@ export interface FuturesOrderV2 {
   closeHash?: string;
 }
 
-interface WaitingFuturesOrder {
-  index: BigNumber;
-  nestAmount: BigNumber;
-  owner: string;
-}
-
 const ORDER_GROUP = 10000;
 const UPDATE_LIST_TIME = 15;
 
@@ -48,9 +39,6 @@ function useFuturesOrderList() {
   const [orderList, setOrderList] = useState<Array<FuturesOrderV2>>([]);
   const [closedOrder, setClosedOrder] = useState<Array<FuturesOrderV2>>([]);
   const [orderNotShow, setOrderNotShow] = useState<BigNumber[]>([]);
-  const [waitingOrders, setWaitingOrders] = useState<
-    Array<WaitingFuturesOrder>
-  >([]);
   const contractAddress = useMemo(() => {
     if (chainsData.chainId) {
       return FuturesV2Contract[chainsData.chainId];
@@ -69,110 +57,17 @@ function useFuturesOrderList() {
       ? (FuturesV2Contract[chainsData.chainId] as `0x${string}`)
       : undefined,
     abi: FuturesV2ABI,
-    eventName: "BuyRequest",
-    listener(index, nestAmount, owner) {
-      console.log(index, nestAmount, owner);
-      const newWaitingOrder: WaitingFuturesOrder = {
-        index: index as BigNumber,
-        nestAmount: nestAmount as BigNumber,
-        owner: owner as string,
-      };
-      setWaitingOrders([...waitingOrders, newWaitingOrder]);
-    },
-  });
-
-  const check = async () => {
-    console.log("test");
-    if (waitingOrders.length > 0 && FuturesV2) {
-      var overOrders = [];
-      for (let index = 0; index < waitingOrders.length; index++) {
-        const element = waitingOrders[index];
-        const checkOrder: Array<FuturesOrderV2> = await FuturesV2.find(
-          BigNumber.from("1").add(element.index).toString(),
-          "1",
-          "1",
-          account.address
-        );
-        // console.log(checkOrder);
-        if (
-          BigNumber.from("255").eq(checkOrder[0].status) ||
-          BigNumber.from("2").eq(checkOrder[0].status)
-        ) {
-          if (BigNumber.from("255").eq(checkOrder[0].status)) {
-            // show
-            console.log("fail");
-            failRequest();
-          }
-          overOrders.push(element);
-        }
-      }
-      const overOrdersIndex = overOrders.map((item) => item.index);
-      const newWaitingOrders = waitingOrders.filter(
-        (item) =>
-          overOrdersIndex.indexOf(BigNumber.from(item.index.toString())) !== -1
-      );
-      console.log(newWaitingOrders);
-      setWaitingOrders(newWaitingOrders);
-    }
-  };
-
-  useContractEvent({
-    address: chainsData.chainId
-      ? (NESTToken[chainsData.chainId] as `0x${string}`)
-      : undefined,
-    abi: ERC20ABI,
-    eventName: "Transfer",
-    listener(from, to, amount) {
-      console.log(from, to, amount);
+    eventName: "Revert",
+    listener(index, balance, owner) {
+      console.log(index, balance, owner);
       if (
-        chainsData.chainId &&
-        (from as string).toLocaleLowerCase() ===
-          NESTFiVault[chainsData.chainId].toLocaleLowerCase() &&
-        (to as string).toLocaleLowerCase() ===
-          account.address?.toLocaleLowerCase()
+        (owner as string).toLocaleLowerCase() ===
+        account.address?.toLocaleLowerCase()
       ) {
-        console.log("may be fail");
-        setTimeout(() => {
-          (async () => {
-            await check();
-          })();
-        }, 2 * 1000);
+        failRequest();
       }
     },
   });
-  // useEffect(() => {
-  //   const check = async () => {
-  //     console.log("test");
-  //     if (waitingOrders.length > 0 && FuturesV2) {
-  //       for (let index = 0; index < waitingOrders.length; index++) {
-  //         const element = waitingOrders[index];
-  //         const checkOrder: Array<FuturesOrderV2> = await FuturesV2.find(
-  //           BigNumber.from("1").add(element.index).toString(),
-  //           "1",
-  //           "1",
-  //           account.address
-  //         );
-  //         // console.log(checkOrder);
-  //         if (
-  //           BigNumber.from("255").eq(checkOrder[0].status) ||
-  //           BigNumber.from("2").eq(checkOrder[0].status)
-  //         ) {
-  //           if (BigNumber.from("255").eq(checkOrder[0].status)) {
-  //             // show
-  //             console.log("fail");
-  //             failRequest();
-  //           }
-  //           const newWaitingOrders = waitingOrders.filter(
-  //             (item) => !BigNumber.from(item.index.toString()).eq(element.index)
-  //           );
-  //           console.log(newWaitingOrders);
-  //           setWaitingOrders(newWaitingOrders);
-  //         }
-  //       }
-  //     }
-  //   };
-  //   check();
-  // }, [FuturesV2, account.address, waitingOrders]);
   const getFutures3List = useCallback(
     async (getPart: boolean = false) => {
       try {
