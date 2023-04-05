@@ -35,7 +35,6 @@
 }
 
 html.theme-dark .chart-page {
-  background-color: #171A1F;
   font-family: "Open Sans", sans-serif;
 }
 html.theme-dark .chart-container {
@@ -46,7 +45,6 @@ html.theme-dark .chart-controls-bar {
   height: 0;
 }
 html.theme-light .chart-page {
-  background-color: transparent;
   font-family: "Open Sans", sans-serif;
 }
 html.theme-light .chart-container {
