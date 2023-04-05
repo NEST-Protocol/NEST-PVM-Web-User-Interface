@@ -27,13 +27,13 @@ const chartStyleOverrides = ["candleStyle", "hollowCandleStyle", "haStyle"].redu
 const chartOverrides = {
   "paneProperties.background": "#171A1F",
   "paneProperties.backgroundType": "solid",
-  // "paneProperties.vertGridProperties.color": "rgba(35, 38, 59, 1)",
-  // "paneProperties.vertGridProperties.style": 2,
-  // "paneProperties.horzGridProperties.color": "rgba(35, 38, 59, 1)",
-  // "paneProperties.horzGridProperties.style": 2,
-  // "mainSeriesProperties.priceLineColor": "#3a3e5e",
-  // "scalesProperties.textColor": "#fff",
-  // "scalesProperties.lineColor": "#171A1F",
+  // "paneProperties.vertGridProperties.color": 'rgba(255, 255, 255, 0.09)',
+  "paneProperties.vertGridProperties.style": 2,
+  // "paneProperties.horzGridProperties.color": 'rgba(255, 255, 255, 0.09)',
+  "paneProperties.horzGridProperties.style": 2,
+  // "mainSeriesProperties.priceLineColor": '#ea0000',
+  // "scalesProperties.textColor": "rgba(249, 249, 249, 0.6)",
+  // "scalesProperties.lineColor": "rgba(255, 255, 255, 0.09)",
   ...chartStyleOverrides,
 };
 
@@ -53,7 +53,17 @@ const disabledFeatures = [
   "right_bar_stays_on_scroll",
   "symbol_info",
   "header_saveload",
+  "border_around_the_chart",
 ];
+export const disabledFeaturesOnMobile = [
+  "header_saveload",
+  "header_undo_redo",
+  "header_indicators",
+  "header_settings",
+  "header_chart_type",
+  "header_screenshot",
+  "header_fullscreen_button",
+]
 const enabledFeatures = [
   "seconds_resolution",
   "side_toolbar_in_fullscreen_mode",
@@ -63,6 +73,8 @@ const enabledFeatures = [
   "hide_left_toolbar_by_default",
   "iframe_loading_compatibility_mode",
   "header_fullscreen_button",
+  "save_chart_properties_to_local_storage",
+  "use_na_string_for_not_available_values"
 ];
 
 export const defaultChartProps = {

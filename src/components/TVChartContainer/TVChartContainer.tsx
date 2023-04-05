@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { defaultChartProps, DEFAULT_PERIOD } from "./constants";
+import {defaultChartProps, DEFAULT_PERIOD, disabledFeaturesOnMobile} from "./constants";
 import useTVDatafeed from "../../domain/tradingview/useTVDatafeed";
 import {IChartingLibraryWidget, Timezone} from "../../charting_library";
 import { getObjectKeyFromValue } from "../../domain/tradingview/utils";
@@ -9,6 +9,7 @@ import { useLocalStorageSerializeKey } from "../../lib/localStorage";
 import { CHART_PERIODS } from "../../lib/legacy";
 import {Box, CircularProgress} from "@mui/material";
 import useTheme from "../../hooks/useTheme";
+import useWindowWidth from "../../hooks/useWindowWidth";
 
 type Props = {
   symbol: string;
@@ -29,7 +30,7 @@ export default function TVChartContainer({symbol, dataProvider}: Props) {
   const { datafeed, resetCache } = useTVDatafeed({ dataProvider });
   const symbolRef = useRef(symbol);
   const { nowTheme } = useTheme();
-
+  const { isMobile } = useWindowWidth()
   /* Tradingview charting library only fetches the historical data once so if the tab is inactive or system is in sleep mode
   for a long time, the historical data will be outdated. */
   useEffect(() => {
@@ -72,7 +73,9 @@ export default function TVChartContainer({symbol, dataProvider}: Props) {
       locale: defaultChartProps.locale,
       loading_screen: defaultChartProps.loading_screen,
       enabled_features: defaultChartProps.enabled_features,
-      disabled_features: defaultChartProps.disabled_features,
+      disabled_features: isMobile
+        ? defaultChartProps.disabled_features.concat(disabledFeaturesOnMobile)
+        : defaultChartProps.disabled_features,
       client_id: defaultChartProps.clientId,
       user_id: defaultChartProps.userId,
       fullscreen: defaultChartProps.fullscreen,
@@ -118,7 +121,7 @@ export default function TVChartContainer({symbol, dataProvider}: Props) {
         setChartDataLoading(true);
       }
     };
-  }, [nowTheme]);
+  }, [nowTheme, tvWidgetRef.current, isMobile]);
 
   return (
     <Box sx={(theme) => ({
@@ -138,7 +141,7 @@ export default function TVChartContainer({symbol, dataProvider}: Props) {
       <div
         style={{
           visibility: !chartDataLoading ? "visible" : "hidden",
-          borderRadius: '10px',
+          borderRadius: '11px',
           overflow: 'hidden',
           position: 'absolute', bottom: 0, left: 0, right: 0, top: 0  }}
         ref={chartContainerRef}

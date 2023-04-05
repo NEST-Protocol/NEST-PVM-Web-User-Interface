@@ -6,5 +6,5 @@ export function formatTVDate(date: Date) {
 }
 
 export function formatTVTime(date: Date) {
-  return formatDateFn(addMinutes(date, date.getTimezoneOffset()), "h:mm a");
+  return formatDateFn(addMinutes(date, date.getTimezoneOffset()), "H:mm");
 }
