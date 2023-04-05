@@ -31,6 +31,7 @@ const chartOverrides = {
   "paneProperties.vertGridProperties.style": 2,
   // "paneProperties.horzGridProperties.color": 'rgba(255, 255, 255, 0.09)',
   "paneProperties.horzGridProperties.style": 2,
+  "crossHairProperties.style": 2,
   // "mainSeriesProperties.priceLineColor": '#ea0000',
   // "scalesProperties.textColor": "rgba(249, 249, 249, 0.6)",
   // "scalesProperties.lineColor": "rgba(255, 255, 255, 0.09)",
