@@ -65,7 +65,6 @@ const FuturesNewOrder: FC<FuturesNewOrderProps> = ({ ...props }) => {
     setInputAmount,
     showNESTPrice,
     showPositions,
-    openPriceHelpInfo,
   } = useFuturesNewOrder(props.price, props.tokenPair);
   const newOrderTabsData = useMemo(() => {
     return [<p>Market</p>, <p>Limit</p>];
@@ -178,17 +177,17 @@ const FuturesNewOrder: FC<FuturesNewOrderProps> = ({ ...props }) => {
         {tabsValue === 0 ? (
           <>
             <NormalInfo
-              title={"Open Price"}
+              title={"Entry Price"}
               value={showOpenPrice}
               symbol={"USDT"}
-              help
-              helpInfo={
-                <Stack>
-                  {openPriceHelpInfo.map((item, index) => (
-                    <p key={`HelpOpenPrice + ${index}`}>{item}</p>
-                  ))}
-                </Stack>
-              }
+              // help
+              // helpInfo={
+              //   <Stack>
+              //     {openPriceHelpInfo.map((item, index) => (
+              //       <p key={`HelpOpenPrice + ${index}`}>{item}</p>
+              //     ))}
+              //   </Stack>
+              // }
             />
             <NormalInfo
               title={"Liq Price"}
@@ -232,17 +231,7 @@ const FuturesNewOrder: FC<FuturesNewOrderProps> = ({ ...props }) => {
         />
       </>
     );
-  }, [
-    tabsValue,
-    showOpenPrice,
-    openPriceHelpInfo,
-    showLiqPrice,
-    showFee,
-    showFeeHoverText,
-    inputToken,
-    showPositions,
-    showTotalPay,
-  ]);
+  }, [inputToken, showFee, showFeeHoverText, showLiqPrice, showOpenPrice, showPositions, showTotalPay, tabsValue]);
   const modals = useMemo(() => {
     return (
       <>
