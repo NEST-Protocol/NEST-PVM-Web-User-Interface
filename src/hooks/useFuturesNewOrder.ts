@@ -53,9 +53,9 @@ export const INPUT_TOKENS = ["NEST", "USDT"];
 function addPricePoint(price: BigNumber, isLong: boolean) {
   const priceBigNumber = BigNumber.from(price.toString());
   if (isLong) {
-    return priceBigNumber.add(priceBigNumber.mul(2).div(10000));
+    return priceBigNumber.add(priceBigNumber.mul(2).div(1000));
   } else {
-    return priceBigNumber.sub(priceBigNumber.mul(2).div(10000));
+    return priceBigNumber.sub(priceBigNumber.mul(2).div(1000));
   }
 }
 
@@ -90,10 +90,18 @@ function useFuturesNewOrder(
       return undefined;
     }
   }, [chainsData.chainId, inputToken]);
+  const openPriceBase = useMemo(() => {
+    if (price) {
+      const nowPrice = price[tokenPair];
+      return nowPrice;
+    } else {
+      return undefined;
+    }
+  }, [price, tokenPair]);
   const openPrice = useMemo(() => {
     const nestBigNumber = nestAmount.stringToBigNumber(18);
-    if (price && nestBigNumber) {
-      const nowPrice = price[tokenPair];
+    if (openPriceBase && nestBigNumber) {
+      const nowPrice = openPriceBase;
       if (parseFloat(nestAmount) * lever >= 0) {
         const c0_top = BigNumber.from("55560000")
           .mul(nestBigNumber)
@@ -110,17 +118,15 @@ function useFuturesNewOrder(
           .mul(BigNumber.from("10").pow(36))
           .div(c0_top.add(BigNumber.from("10").pow(36)));
         return longOrShort
-          ? addPricePoint(c0_long, true)
-          : addPricePoint(c0_Short, false);
+          ? c0_long
+          : c0_Short;
       } else {
-        return longOrShort
-          ? addPricePoint(nowPrice, true)
-          : addPricePoint(nowPrice, false);
+        return nowPrice
       }
     } else {
       return undefined;
     }
-  }, [lever, longOrShort, nestAmount, price, tokenPair]);
+  }, [lever, longOrShort, nestAmount, openPriceBase]);
   /**
    * uniswap out amount
    */
@@ -254,17 +260,17 @@ function useFuturesNewOrder(
    * action
    */
   const basePrice = useMemo(() => {
-    if (price) {
+    if (openPriceBase) {
       if (tabsValue === 1) {
         return limitAmount.stringToBigNumber(18) ?? BigNumber.from("0");
       } else {
-        const nowPrice = price[tokenPair];
+        const nowPrice = openPriceBase;
         return addPricePoint(nowPrice, longOrShort);
       }
     } else {
       return undefined;
     }
-  }, [limitAmount, longOrShort, price, tabsValue, tokenPair]);
+  }, [limitAmount, longOrShort, openPriceBase, tabsValue]);
   const inputNESTTransaction = useMemo(() => {
     const amount = inputAmount.stringToBigNumber(4);
     if (checkAllowance && checkBalance && amount && basePrice) {
@@ -507,12 +513,12 @@ function useFuturesNewOrder(
     }
   }, [account.address, tokenBalance]);
   const showOpenPrice = useMemo(() => {
-    if (openPrice) {
-      return openPrice.bigNumberToShowString(18, 2);
+    if (openPriceBase) {
+      return openPriceBase.bigNumberToShowString(18, 2);
     } else {
       return String().placeHolder;
     }
-  }, [openPrice]);
+  }, [openPriceBase]);
   const showFee = useMemo(() => {
     if (tabsValue === 0 && isStop) {
       return fee
@@ -588,15 +594,15 @@ function useFuturesNewOrder(
     }
   }, [inputToken, tokenBalance, allValue]);
 
-  const openPriceHelpInfo = useMemo(() => {
-    const info = ["To ensure a successful trade, there is price slippage."];
+  // const openPriceHelpInfo = useMemo(() => {
+  //   const info = ["To ensure a successful trade, there is price slippage."];
     // if (parseFloat(nestAmount) * lever >= 100000) {
     //   info.push(
     //     "To ensure system fairness, your position is added to the impact cost."
     //   );
     // }
-    return info;
-  }, []);
+  //   return info;
+  // }, []);
 
   /**
    * update
@@ -659,7 +665,6 @@ function useFuturesNewOrder(
     showPositions,
     tokenAllowance,
     tokenApprove,
-    openPriceHelpInfo,
   };
 }
 
