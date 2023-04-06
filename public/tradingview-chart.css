@@ -1,0 +1,56 @@
+:root:not(.theme-dark) {
+  --tv-color-platform-background: #FFFFFF;
+  --tv-color-pane-background: #FFFFFF;
+  --tv-color-pane-background-secondary: #FFFFFF;
+  --tv-color-toolbar-button-background-hover: #FFFFFF;
+  --tv-color-toolbar-button-background-secondary-hover: #FFFFFF;
+  --tv-color-toolbar-button-background-expanded: #FFFFFF;
+  --tv-color-toolbar-button-text: rgba(3, 3, 8, 0.6);
+  --tv-color-toolbar-button-text-hover: #030308;
+  --tv-color-toolbar-button-text-active: #030308;
+  --tv-color-toolbar-button-text-active-hover: #030308;
+  --tv-color-item-active-text: #030308;
+  --tv-color-toolbar-toggle-button-background-active: rgba(3, 3, 8, 0.6);
+  --tv-color-toolbar-toggle-button-background-active-hover: #030308;
+  --tv-color-toolbar-divider-background: #FFFFFF;
+}
+
+.theme-dark:root {
+  --dark-black-bg: #171A1F;
+
+  --tv-color-platform-background: var(--dark-black-bg);
+  --tv-color-pane-background: var(--dark-black-bg);
+  --tv-color-pane-background-secondary: var(--dark-black-bg);
+  --tv-color-toolbar-button-background-hover: var(--dark-black-bg);
+  --tv-color-toolbar-button-background-secondary-hover: var(--dark-black-bg);
+  --tv-color-toolbar-button-background-expanded: var(--dark-black-bg);
+  --tv-color-toolbar-button-text: rgba(249, 249, 249, 0.6);
+  --tv-color-toolbar-button-text-hover: rgba(249, 249, 249, 1);
+  --tv-color-toolbar-button-text-active: rgba(249, 249, 249, 1);
+  --tv-color-toolbar-button-text-active-hover: rgba(249, 249, 249, 1);
+  --tv-color-item-active-text: rgba(249, 249, 249, 1);
+  --tv-color-toolbar-toggle-button-background-active: rgba(249, 249, 249, 1);
+  --tv-color-toolbar-toggle-button-background-active-hover: rgba(249, 249, 249, 1);
+  --tv-color-toolbar-divider-background: #171A1F;
+}
+
+html.theme-dark .chart-page {
+  font-family: "Open Sans", sans-serif;
+}
+html.theme-dark .chart-container {
+  border: none;
+}
+html.theme-dark .chart-controls-bar {
+  display: none;
+  height: 0;
+}
+html.theme-light .chart-page {
+  font-family: "Open Sans", sans-serif;
+}
+html.theme-light .chart-container {
+  border: none;
+}
+html.theme-light .chart-controls-bar {
+  display: none;
+  height: 0;
+}

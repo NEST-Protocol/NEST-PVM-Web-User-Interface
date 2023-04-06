@@ -2,10 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { FuturesOrderV2 } from "./useFuturesOrderList";
 import { BigNumber } from "ethers";
 import { BASE_NEST_FEE, lipPrice } from "./useFuturesNewOrder";
-import {
-  useFuturesEditPosition as useFuturesEditPositionTransaction,
-  useFuturesNewStopOrder,
-} from "../contracts/useFuturesBuy";
+import { useUpdateStopPrice } from "../contracts/useFuturesBuyV2";
 import { FuturesPrice, priceToken } from "../pages/Futures/Futures";
 import {
   TransactionType,
@@ -30,32 +27,23 @@ function useFuturesEditPosition(
   const [showedTriggerNotice, setShowedTriggerNotice] = useState(false);
 
   const defaultTP = useMemo(() => {
-    if (
-      data.trustOrder &&
-      !BigNumber.from("0").eq(data.trustOrder.stopProfitPrice)
-    ) {
-      const p = data.trustOrder.stopProfitPrice.bigNumberToShowString(18, 2);
+    if (!BigNumber.from("0").eq(data.stopProfitPrice)) {
+      const p = data.stopProfitPrice.bigNumberToShowString(18, 2);
       return p ?? "";
     }
     return "";
-  }, [data.trustOrder]);
+  }, [data.stopProfitPrice]);
   const defaultSL = useMemo(() => {
-    if (
-      data.trustOrder &&
-      !BigNumber.from("0").eq(data.trustOrder.stopLossPrice)
-    ) {
-      const p = data.trustOrder.stopLossPrice.bigNumberToShowString(18, 2);
+    if (!BigNumber.from("0").eq(data.stopLossPrice)) {
+      const p = data.stopLossPrice.bigNumberToShowString(18, 2);
       return p ?? "";
     }
     return "";
-  }, [data.trustOrder]);
+  }, [data.stopLossPrice]);
   const [stopProfitPriceInput, setStopProfitPriceInput] =
     useState<string>(defaultTP);
   const [stopLossPriceInput, setStopLossPriceInput] =
     useState<string>(defaultSL);
-  const trustOrderIndex = useMemo(() => {
-    return data.trustOrder ? data.trustOrder.index : undefined;
-  }, [data.trustOrder]);
   const isEditTP = useMemo(() => {
     if (stopProfitPriceInput !== "") {
       return true;
@@ -69,18 +57,16 @@ function useFuturesEditPosition(
     return false;
   }, [stopLossPriceInput]);
   const isEdit = useMemo(() => {
-    return data.trustOrder !== undefined;
-  }, [data.trustOrder]);
+    return !(
+      BigNumber.from("0").eq(data.stopProfitPrice) &&
+      BigNumber.from("0").eq(data.stopLossPrice)
+    );
+  }, [data.stopLossPrice, data.stopProfitPrice]);
 
   /**
    * action
    */
-  const { transaction: edit } = useFuturesEditPositionTransaction(
-    trustOrderIndex,
-    stopProfitPriceInput.stringToBigNumber(18) ?? BigNumber.from("0"),
-    stopLossPriceInput.stringToBigNumber(18) ?? BigNumber.from("0")
-  );
-  const { transaction: newStop } = useFuturesNewStopOrder(
+  const { transaction: edit } = useUpdateStopPrice(
     data.index,
     stopProfitPriceInput.stringToBigNumber(18) ?? BigNumber.from("0"),
     stopLossPriceInput.stringToBigNumber(18) ?? BigNumber.from("0")
@@ -150,18 +136,11 @@ function useFuturesEditPosition(
    * main button
    */
   const pending = useMemo(() => {
-    if (data.trustOrder) {
-      return isPendingOrder(
-        TransactionType.futures_editPosition,
-        parseInt(data.trustOrder.index.toString())
-      );
-    } else {
-      return isPendingOrder(
-        TransactionType.futures_editPosition2,
-        parseInt(data.index.toString())
-      );
-    }
-  }, [data.index, data.trustOrder, isPendingOrder]);
+    return isPendingOrder(
+      TransactionType.futures_editPosition,
+      parseInt(data.index.toString())
+    );
+  }, [data.index, isPendingOrder]);
   useEffect(() => {
     if (send && !pending) {
       onClose();
@@ -173,12 +152,12 @@ function useFuturesEditPosition(
     return "Confirm";
   }, []);
   const mainButtonLoading = useMemo(() => {
-    if (edit.isLoading || pending || newStop.isLoading) {
+    if (edit.isLoading || pending) {
       return true;
     } else {
       return false;
     }
-  }, [edit.isLoading, pending, newStop.isLoading]);
+  }, [edit.isLoading, pending]);
   const mainButtonDis = useMemo(() => {
     if (stopProfitPriceInput === "" && stopLossPriceInput === "") {
       return true;
@@ -187,8 +166,8 @@ function useFuturesEditPosition(
   }, [stopLossPriceInput, stopProfitPriceInput]);
   const triggerNoticeCallback = useCallback(() => {
     setShowedTriggerNotice(true);
-    isEdit ? edit.write?.() : newStop.write?.();
-  }, [edit, isEdit, newStop]);
+    edit.write?.();
+  }, [edit]);
   const mainButtonAction = useCallback(() => {
     if (mainButtonLoading) {
       return;
@@ -197,16 +176,9 @@ function useFuturesEditPosition(
         setShowTriggerNotice(true);
         return;
       }
-      isEdit ? edit.write?.() : newStop.write?.();
+      edit.write?.();
     }
-  }, [
-    checkShowTriggerNotice,
-    edit,
-    isEdit,
-    mainButtonLoading,
-    newStop,
-    showedTriggerNotice,
-  ]);
+  }, [checkShowTriggerNotice, edit, mainButtonLoading, showedTriggerNotice]);
   const closeTP = useCallback(() => {
     setStopProfitPriceInput("0");
   }, []);

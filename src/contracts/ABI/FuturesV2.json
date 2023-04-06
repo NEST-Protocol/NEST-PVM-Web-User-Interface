@@ -10,7 +10,7 @@
             {
                 "indexed": false,
                 "internalType": "uint256",
-                "name": "index",
+                "name": "orderIndex",
                 "type": "uint256"
             },
             {
@@ -35,13 +35,13 @@
             {
                 "indexed": false,
                 "internalType": "uint256",
-                "name": "index",
+                "name": "orderIndex",
                 "type": "uint256"
             },
             {
                 "indexed": false,
                 "internalType": "uint256",
-                "name": "nestAmount",
+                "name": "amount",
                 "type": "uint256"
             },
             {
@@ -65,8 +65,33 @@
             },
             {
                 "indexed": false,
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
                 "internalType": "address",
-                "name": "sender",
+                "name": "owner",
+                "type": "address"
+            }
+        ],
+        "name": "BuyRequest",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "orderIndex",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "owner",
                 "type": "address"
             },
             {
@@ -85,7 +110,32 @@
             {
                 "indexed": false,
                 "internalType": "uint256",
-                "name": "index",
+                "name": "orderIndex",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "owner",
+                "type": "address"
+            }
+        ],
+        "name": "Revert",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "orderIndex",
                 "type": "uint256"
             },
             {
@@ -169,107 +219,11 @@
         "inputs": [
             {
                 "internalType": "uint256",
-                "name": "channelIndex",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "lever",
-                "type": "uint256"
-            },
-            {
-                "internalType": "bool",
-                "name": "orientation",
-                "type": "bool"
-            },
-            {
-                "internalType": "uint256",
-                "name": "amount",
+                "name": "orderIndex",
                 "type": "uint256"
             }
         ],
-        "name": "buy",
-        "outputs": [],
-        "stateMutability": "payable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "channelIndex",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "lever",
-                "type": "uint256"
-            },
-            {
-                "internalType": "bool",
-                "name": "orientation",
-                "type": "bool"
-            },
-            {
-                "internalType": "uint256",
-                "name": "amount",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "stopProfitPrice",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "stopLossPrice",
-                "type": "uint256"
-            }
-        ],
-        "name": "buyWithStopOrder",
-        "outputs": [],
-        "stateMutability": "payable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "usdtAmount",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "minNestAmount",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "channelIndex",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "lever",
-                "type": "uint256"
-            },
-            {
-                "internalType": "bool",
-                "name": "orientation",
-                "type": "bool"
-            },
-            {
-                "internalType": "uint256",
-                "name": "stopProfitPrice",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "stopLossPrice",
-                "type": "uint256"
-            }
-        ],
-        "name": "buyWithUsdt",
+        "name": "cancelBuyRequest",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
@@ -277,38 +231,17 @@
     {
         "inputs": [
             {
-                "internalType": "uint256",
-                "name": "trustOrderIndex",
-                "type": "uint256"
-            }
-        ],
-        "name": "cancelLimitOrder",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
+                "internalType": "uint256[3]",
+                "name": "prices",
+                "type": "uint256[3]"
+            },
             {
                 "internalType": "uint256[]",
-                "name": "trustOrderIndices",
+                "name": "orderIndices",
                 "type": "uint256[]"
             }
         ],
-        "name": "executeLimitOrder",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "uint256[]",
-                "name": "trustOrderIndices",
-                "type": "uint256[]"
-            }
-        ],
-        "name": "executeStopOrder",
+        "name": "execute",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
@@ -356,9 +289,9 @@
                         "type": "uint40"
                     },
                     {
-                        "internalType": "uint16",
+                        "internalType": "uint8",
                         "name": "channelIndex",
-                        "type": "uint16"
+                        "type": "uint8"
                     },
                     {
                         "internalType": "uint8",
@@ -381,80 +314,19 @@
                         "type": "uint256"
                     },
                     {
-                        "internalType": "int256",
-                        "name": "Pt",
-                        "type": "int256"
-                    }
-                ],
-                "internalType": "struct INestFutures3.OrderView[]",
-                "name": "orderArray",
-                "type": "tuple[]"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "start",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "count",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "maxFindCount",
-                "type": "uint256"
-            },
-            {
-                "internalType": "address",
-                "name": "owner",
-                "type": "address"
-            }
-        ],
-        "name": "findTrustOrder",
-        "outputs": [
-            {
-                "components": [
-                    {
                         "internalType": "uint32",
-                        "name": "index",
+                        "name": "openBlock",
                         "type": "uint32"
-                    },
-                    {
-                        "internalType": "address",
-                        "name": "owner",
-                        "type": "address"
-                    },
-                    {
-                        "internalType": "uint32",
-                        "name": "orderIndex",
-                        "type": "uint32"
-                    },
-                    {
-                        "internalType": "uint16",
-                        "name": "channelIndex",
-                        "type": "uint16"
                     },
                     {
                         "internalType": "uint8",
-                        "name": "lever",
+                        "name": "status",
                         "type": "uint8"
                     },
                     {
-                        "internalType": "bool",
-                        "name": "orientation",
-                        "type": "bool"
-                    },
-                    {
-                        "internalType": "uint256",
-                        "name": "limitPrice",
-                        "type": "uint256"
+                        "internalType": "uint40",
+                        "name": "fee",
+                        "type": "uint40"
                     },
                     {
                         "internalType": "uint256",
@@ -465,72 +337,11 @@
                         "internalType": "uint256",
                         "name": "stopLossPrice",
                         "type": "uint256"
-                    },
-                    {
-                        "internalType": "uint40",
-                        "name": "balance",
-                        "type": "uint40"
-                    },
-                    {
-                        "internalType": "uint40",
-                        "name": "fee",
-                        "type": "uint40"
-                    },
-                    {
-                        "internalType": "uint8",
-                        "name": "status",
-                        "type": "uint8"
                     }
                 ],
-                "internalType": "struct INestTrustFutures.TrustOrderView[]",
+                "internalType": "struct INestFutures4.OrderView[]",
                 "name": "orderArray",
                 "type": "tuple[]"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "channelIndex",
-                "type": "uint256"
-            }
-        ],
-        "name": "getChannel",
-        "outputs": [
-            {
-                "components": [
-                    {
-                        "internalType": "uint56",
-                        "name": "lastPrice",
-                        "type": "uint56"
-                    },
-                    {
-                        "internalType": "int56",
-                        "name": "miu",
-                        "type": "int56"
-                    },
-                    {
-                        "internalType": "int56",
-                        "name": "PtL",
-                        "type": "int56"
-                    },
-                    {
-                        "internalType": "int56",
-                        "name": "PtS",
-                        "type": "int56"
-                    },
-                    {
-                        "internalType": "uint32",
-                        "name": "bn",
-                        "type": "uint32"
-                    }
-                ],
-                "internalType": "struct NestFutures3V3.TradeChannel",
-                "name": "channel",
-                "type": "tuple"
             }
         ],
         "stateMutability": "view",
@@ -547,48 +358,6 @@
         "name": "initialize",
         "outputs": [],
         "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "channelIndex",
-                "type": "uint256"
-            }
-        ],
-        "name": "lastPrice",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "period",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "height",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "price",
-                "type": "uint256"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "uint256[]",
-                "name": "indices",
-                "type": "uint256[]"
-            }
-        ],
-        "name": "liquidate",
-        "outputs": [],
-        "stateMutability": "payable",
         "type": "function"
     },
     {
@@ -629,9 +398,9 @@
                         "type": "uint40"
                     },
                     {
-                        "internalType": "uint16",
+                        "internalType": "uint8",
                         "name": "channelIndex",
-                        "type": "uint16"
+                        "type": "uint8"
                     },
                     {
                         "internalType": "uint8",
@@ -654,75 +423,19 @@
                         "type": "uint256"
                     },
                     {
-                        "internalType": "int256",
-                        "name": "Pt",
-                        "type": "int256"
-                    }
-                ],
-                "internalType": "struct INestFutures3.OrderView[]",
-                "name": "orderArray",
-                "type": "tuple[]"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "offset",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "count",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "order",
-                "type": "uint256"
-            }
-        ],
-        "name": "listTrustOrder",
-        "outputs": [
-            {
-                "components": [
-                    {
                         "internalType": "uint32",
-                        "name": "index",
+                        "name": "openBlock",
                         "type": "uint32"
-                    },
-                    {
-                        "internalType": "address",
-                        "name": "owner",
-                        "type": "address"
-                    },
-                    {
-                        "internalType": "uint32",
-                        "name": "orderIndex",
-                        "type": "uint32"
-                    },
-                    {
-                        "internalType": "uint16",
-                        "name": "channelIndex",
-                        "type": "uint16"
                     },
                     {
                         "internalType": "uint8",
-                        "name": "lever",
+                        "name": "status",
                         "type": "uint8"
                     },
                     {
-                        "internalType": "bool",
-                        "name": "orientation",
-                        "type": "bool"
-                    },
-                    {
-                        "internalType": "uint256",
-                        "name": "limitPrice",
-                        "type": "uint256"
+                        "internalType": "uint40",
+                        "name": "fee",
+                        "type": "uint40"
                     },
                     {
                         "internalType": "uint256",
@@ -733,24 +446,9 @@
                         "internalType": "uint256",
                         "name": "stopLossPrice",
                         "type": "uint256"
-                    },
-                    {
-                        "internalType": "uint40",
-                        "name": "balance",
-                        "type": "uint40"
-                    },
-                    {
-                        "internalType": "uint40",
-                        "name": "fee",
-                        "type": "uint40"
-                    },
-                    {
-                        "internalType": "uint8",
-                        "name": "status",
-                        "type": "uint8"
                     }
                 ],
-                "internalType": "struct INestTrustFutures.TrustOrderView[]",
+                "internalType": "struct INestFutures4.OrderView[]",
                 "name": "orderArray",
                 "type": "tuple[]"
             }
@@ -762,36 +460,13 @@
         "inputs": [
             {
                 "internalType": "uint256",
-                "name": "orderIndex",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "stopProfitPrice",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "stopLossPrice",
-                "type": "uint256"
-            }
-        ],
-        "name": "newStopOrder",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "uint16",
                 "name": "channelIndex",
-                "type": "uint16"
+                "type": "uint256"
             },
             {
-                "internalType": "uint8",
+                "internalType": "uint256",
                 "name": "lever",
-                "type": "uint8"
+                "type": "uint256"
             },
             {
                 "internalType": "bool",
@@ -805,8 +480,13 @@
             },
             {
                 "internalType": "uint256",
-                "name": "limitPrice",
+                "name": "basePrice",
                 "type": "uint256"
+            },
+            {
+                "internalType": "bool",
+                "name": "limit",
+                "type": "bool"
             },
             {
                 "internalType": "uint256",
@@ -819,9 +499,9 @@
                 "type": "uint256"
             }
         ],
-        "name": "newTrustOrder",
+        "name": "newBuyRequest",
         "outputs": [],
-        "stateMutability": "nonpayable",
+        "stateMutability": "payable",
         "type": "function"
     },
     {
@@ -837,14 +517,14 @@
                 "type": "uint256"
             },
             {
-                "internalType": "uint16",
+                "internalType": "uint256",
                 "name": "channelIndex",
-                "type": "uint16"
+                "type": "uint256"
             },
             {
-                "internalType": "uint8",
+                "internalType": "uint256",
                 "name": "lever",
-                "type": "uint8"
+                "type": "uint256"
             },
             {
                 "internalType": "bool",
@@ -853,8 +533,13 @@
             },
             {
                 "internalType": "uint256",
-                "name": "limitPrice",
+                "name": "basePrice",
                 "type": "uint256"
+            },
+            {
+                "internalType": "bool",
+                "name": "limit",
+                "type": "bool"
             },
             {
                 "internalType": "uint256",
@@ -867,25 +552,7 @@
                 "type": "uint256"
             }
         ],
-        "name": "newTrustOrderWithUsdt",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "period",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256[3]",
-                "name": "",
-                "type": "uint256[3]"
-            }
-        ],
-        "name": "post",
+        "name": "newBuyRequestWithUsdt",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
@@ -898,22 +565,9 @@
                 "type": "uint256"
             }
         ],
-        "name": "sell",
+        "name": "newSellRequest",
         "outputs": [],
         "stateMutability": "payable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "value",
-                "type": "uint256"
-            }
-        ],
-        "name": "settleExecuteFee",
-        "outputs": [],
-        "stateMutability": "nonpayable",
         "type": "function"
     },
     {
@@ -933,7 +587,7 @@
         "inputs": [
             {
                 "internalType": "uint256",
-                "name": "trustOrderIndex",
+                "name": "orderIndex",
                 "type": "uint256"
             },
             {
@@ -951,7 +605,7 @@
         "inputs": [
             {
                 "internalType": "uint256",
-                "name": "trustOrderIndex",
+                "name": "orderIndex",
                 "type": "uint256"
             },
             {

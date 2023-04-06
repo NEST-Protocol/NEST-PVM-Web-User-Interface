@@ -84,7 +84,7 @@ const POrderList: FC<POrderListProps> = ({ ...props }) => {
           </FuturesOrderListInfoMain>
         </Stack>
         <NESTLine />
-        {props.data.trustOrder ? (
+        {!(tp === String().placeHolder && sl === String().placeHolder) ? (
           <Stack direction={"row"} justifyContent={"space-around"}>
             <FuturesOrderListInfo
               direction={"row"}

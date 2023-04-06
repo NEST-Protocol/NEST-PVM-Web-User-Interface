@@ -1,43 +1,37 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { FuturesOrderV2 } from "./useFuturesOrderList";
-import { useFuturesEditLimit as useFuturesEditLimitTransaction } from "../contracts/useFuturesBuy";
+import { useFuturesUpdateLimitPrice } from "../contracts/useFuturesBuyV2";
 import {
   TransactionType,
   usePendingTransactions,
 } from "./useTransactionReceipt";
+import { BigNumber } from "ethers";
 
 function useFuturesEditLimit(data: FuturesOrderV2, onClose: () => void) {
   const { isPendingOrder } = usePendingTransactions();
   const [send, setSend] = useState(false);
   const defaultLimitPrice = useMemo(() => {
-    return data.trustOrder
-      ? data.trustOrder.limitPrice.bigNumberToShowString(18)
+    return !BigNumber.from("0").eq(data.basePrice)
+      ? data.basePrice.bigNumberToShowString(18)
       : "";
-  }, [data.trustOrder]);
+  }, [data.basePrice]);
   const [limitPrice, setLimitPrice] = useState(defaultLimitPrice);
-  const trustOrderIndex = useMemo(() => {
-    return data.trustOrder ? data.trustOrder.index : undefined;
-  }, [data.trustOrder]);
   /**
    * action
    */
-  const { transaction: edit } = useFuturesEditLimitTransaction(
-    trustOrderIndex,
-    limitPrice.stringToBigNumber(18)
+  const { transaction: edit } = useFuturesUpdateLimitPrice(
+    data.index,
+    limitPrice.stringToBigNumber(18) ?? BigNumber.from("0")
   );
   /**
    * main button
    */
   const pending = useMemo(() => {
-    if (data.trustOrder) {
-      return isPendingOrder(
-        TransactionType.futures_editLimit,
-        parseInt(data.trustOrder.index.toString())
-      );
-    } else {
-      return false;
-    }
-  }, [data.trustOrder, isPendingOrder]);
+    return isPendingOrder(
+      TransactionType.futures_editLimit,
+      parseInt(data.index.toString())
+    );
+  }, [data.index, isPendingOrder]);
   useEffect(() => {
     if (send && !pending) {
       onClose();

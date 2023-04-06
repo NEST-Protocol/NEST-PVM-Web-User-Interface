@@ -1,6 +1,6 @@
 import { BigNumber } from "ethers";
 import { useCallback, useMemo, useState, useEffect } from "react";
-import { useFuturesSell } from "../contracts/useFuturesBuy";
+import { useNewSellRequest } from "../contracts/useFuturesBuyV2";
 import { FuturesPrice, priceToken } from "../pages/Futures/Futures";
 import { FuturesOrderV2 } from "./useFuturesOrderList";
 import {
@@ -52,7 +52,8 @@ function useFuturesClose(
         const cc_Short = BigNumber.from(nowPrice)
           .mul(BigNumber.from(data.basePrice.toString()))
           .mul(BigNumber.from("10").pow(36))
-          .add(cc_top.mul(nowPrice)).div(
+          .add(cc_top.mul(nowPrice))
+          .div(
             BigNumber.from(data.basePrice.toString()).mul(
               BigNumber.from("10").pow(36)
             )
@@ -97,14 +98,14 @@ function useFuturesClose(
   /**
    * action
    */
-  const { transaction: sell } = useFuturesSell(data.index);
+  const { transaction: sell } = useNewSellRequest(data.index);
 
   /**
    * main button
    */
   const pending = useMemo(() => {
     return isPendingOrder(
-      TransactionType.futures_sell,
+      TransactionType.futures_sell_request,
       parseInt(data.index.toString())
     );
   }, [data.index, isPendingOrder]);

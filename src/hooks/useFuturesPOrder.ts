@@ -42,6 +42,7 @@ function useFuturesPOrder(
         }
         const priceNum = price[tokenName];
         const value = await FuturesV2.balanceOf(data.index, priceNum);
+        
         setMarginAssets(value);
       } catch (error) {
         console.log(error);
@@ -53,28 +54,23 @@ function useFuturesPOrder(
     data.basePrice.toString()
   ).bigNumberToShowString(18, 2);
   const showTriggerTitle = useMemo(() => {
-    return data.trustOrder ? "Edit" : "Trigger";
-  }, [data.trustOrder]);
+    const isEdit =
+      BigNumber.from("0").eq(data.stopProfitPrice) &&
+      BigNumber.from("0").eq(data.stopLossPrice);
+    return !isEdit ? "Edit" : "Trigger";
+  }, [data.stopLossPrice, data.stopProfitPrice]);
   const tp = useMemo(() => {
-    if (data.trustOrder) {
-      const tpNum = data.trustOrder.stopProfitPrice;
-      return BigNumber.from("0").eq(tpNum)
-        ? String().placeHolder
-        : BigNumber.from(tpNum.toString()).bigNumberToShowString(18, 2);
-    } else {
-      return String().placeHolder;
-    }
-  }, [data.trustOrder]);
+    const tpNum = data.stopProfitPrice;
+    return BigNumber.from("0").eq(tpNum)
+      ? String().placeHolder
+      : BigNumber.from(tpNum.toString()).bigNumberToShowString(18, 2);
+  }, [data.stopProfitPrice]);
   const sl = useMemo(() => {
-    if (data.trustOrder) {
-      const slNum = data.trustOrder.stopLossPrice;
-      return BigNumber.from("0").eq(slNum)
-        ? String().placeHolder
-        : BigNumber.from(slNum.toString()).bigNumberToShowString(18, 2);
-    } else {
-      return String().placeHolder;
-    }
-  }, [data.trustOrder]);
+    const slNum = data.stopLossPrice;
+    return BigNumber.from("0").eq(slNum)
+      ? String().placeHolder
+      : BigNumber.from(slNum.toString()).bigNumberToShowString(18, 2);
+  }, [data.stopLossPrice]);
   const showLiqPrice = useMemo(() => {
     const result = lipPrice(
       data.balance,
