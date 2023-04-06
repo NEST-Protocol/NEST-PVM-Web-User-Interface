@@ -112,21 +112,21 @@ export default function TVChartContainer({symbol, dataProvider}: Props) {
         , {
           "length": 5,
           "showLabelsOnPriceScale": false,
-          "Plot.color": "#D28934",
+          "Plot.color": "rgba(210,137,52,0.7)",
         }, {})
       // @ts-ignore
       tvWidgetRef.current?.activeChart().createStudy("Moving Average", false, false, tvWidgetRef.current?.activeChart().resolution()
         , {
           "length": 10,
           "showLabelsOnPriceScale": false,
-          "Plot.color": "#E63CF2",
+          "Plot.color": "rgba(230,60,242,0.7)",
         }, {})
       // @ts-ignore
       tvWidgetRef.current?.activeChart().createStudy("Moving Average", false, false, tvWidgetRef.current?.activeChart().resolution()
         , {
           "length": 30,
           "showLabelsOnPriceScale": false,
-          "Plot.color": "#74FCFD",
+          "Plot.color": "rgba(116,252,253,0.7)",
         }, {})
       tvWidgetRef.current?.activeChart().dataReady(() => {
         setChartDataLoading(false);
