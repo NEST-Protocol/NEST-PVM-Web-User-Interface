@@ -110,7 +110,7 @@ export default function TVChartContainer({symbol, dataProvider}: Props) {
       // @ts-ignore
       tvWidgetRef.current?.activeChart().createStudy("Moving Average", false, false, tvWidgetRef.current?.activeChart().resolution()
         , {
-          "length": 27,
+          // "length": 27,
         }, {})
       tvWidgetRef.current?.activeChart().dataReady(() => {
         setChartDataLoading(false);
