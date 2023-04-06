@@ -7,6 +7,7 @@ import FuturesNewOrder from "./NewOrder";
 import FuturesOrderList from "./OrderList";
 import ExchangeTVChart from "./ExchangeTVChart";
 import { getPriceFromNESTLocal } from "../../lib/NESTRequest";
+import FuturesNotice from "./Components/FuturesNotice";
 
 export interface FuturesPrice {
   [key: string]: BigNumber;
@@ -18,6 +19,11 @@ const Futures: FC = () => {
   const [tokenPair, setTokenPair] = useState("ETH");
   const [basePrice, setBasePrice] = useState<FuturesPrice>();
   const [orderPrice, setOrderPrice] = useState<FuturesPrice>();
+  const showNoticeDefault = useMemo(() => {
+    const isShow = localStorage.getItem("FuturesNoticeV1");
+    return isShow !== "1"
+  }, [])
+  const [showNotice, setShowNotice] = useState<boolean>(showNoticeDefault)
   const getPrice = useCallback(async () => {
     const ETHPriceBase: { [key: string]: string } = await getPriceFromNESTLocal(
       "eth"
@@ -49,14 +55,14 @@ const Futures: FC = () => {
       return undefined;
     }
   }, []);
-  // update base price 2s
+  // update base price 1s
   useEffect(() => {
     const time = setInterval(() => {
       (async () => {
         const newPrice = await getPrice();
         setBasePrice(newPrice);
       })();
-    }, 2000);
+    }, 1000);
     return () => {
       clearInterval(time);
     };
@@ -102,6 +108,9 @@ const Futures: FC = () => {
   const moreInfo = useCallback(() => {
     return <FuturesMoreInfo />;
   }, []);
+  const notice = useMemo(() => {
+    return !showNotice ? <></> : <FuturesNotice onClose={() => {setShowNotice(false)}}/>;
+  }, [showNotice]);
 
   const mainView = useMemo(() => {
     switch (width) {
@@ -110,19 +119,26 @@ const Futures: FC = () => {
         return (
           <Stack direction={"row"} justifyContent={"center"} paddingX={"40px"}>
             <Stack
-              direction={"row"}
               spacing={"16px"}
               width={"100%"}
               maxWidth={"1600px"}
               paddingY={`${paddingY}px`}
             >
-              <Stack spacing={"16px"} width={"100%"}>
-                {exchangeTvChart()}
-                {orderList()}
-              </Stack>
-              <Stack spacing={"16px"} width={"450px"}>
-                {newOrder()}
-                {moreInfo()}
+              {notice}
+              <Stack
+                direction={"row"}
+                spacing={"16px"}
+                width={"100%"}
+                maxWidth={"1600px"}
+              >
+                <Stack spacing={"16px"} width={"100%"}>
+                  {exchangeTvChart()}
+                  {orderList()}
+                </Stack>
+                <Stack spacing={"16px"} width={"450px"}>
+                  {newOrder()}
+                  {moreInfo()}
+                </Stack>
               </Stack>
             </Stack>
           </Stack>
@@ -135,6 +151,7 @@ const Futures: FC = () => {
             paddingX={`${paddingX}px`}
           >
             <Stack spacing={"16px"} width={"100%"} paddingY={`${paddingY}px`}>
+              {notice}
               {exchangeTvChart()}
               {newOrder()}
               {isBigMobile ? <></> : moreInfo()}
@@ -144,14 +161,15 @@ const Futures: FC = () => {
         );
     }
   }, [
-    isBigMobile,
-    moreInfo,
-    newOrder,
-    orderList,
-    paddingX,
+    width,
+    notice,
     paddingY,
     exchangeTvChart,
-    width,
+    orderList,
+    newOrder,
+    moreInfo,
+    paddingX,
+    isBigMobile,
   ]);
   return <>{mainView}</>;
 };

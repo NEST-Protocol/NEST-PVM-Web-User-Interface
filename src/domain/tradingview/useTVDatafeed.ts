@@ -8,6 +8,7 @@ import {
 import { SUPPORTED_RESOLUTIONS } from "../../config/tradingview";
 import { useEffect, useMemo, useRef } from "react";
 import { TVDataProvider } from "./TVDataProvider";
+import {formatTimeInBarToMs} from "./utils";
 
 const configurationData = {
   supported_resolutions: Object.keys(SUPPORTED_RESOLUTIONS),
@@ -115,10 +116,10 @@ export default function useTVDatafeed({ dataProvider }: Props) {
           intervalRef.current = setInterval(function () {
             tvDataProvider.current?.getLiveBar(ticker, resolution).then((bar) => {
               if (bar && ticker === activeTicker.current) {
-                onRealtimeCallback(bar);
+                onRealtimeCallback(formatTimeInBarToMs(bar));
               }
             });
-          }, 1000);
+          }, 500);
         },
         unsubscribeBars: () => {
           intervalRef.current && clearInterval(intervalRef.current);

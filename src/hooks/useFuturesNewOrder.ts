@@ -590,13 +590,13 @@ function useFuturesNewOrder(
 
   const openPriceHelpInfo = useMemo(() => {
     const info = ["To ensure a successful trade, there is price slippage."];
-    if (parseFloat(nestAmount) * lever >= 100000) {
-      info.push(
-        "To ensure system fairness, your position is added to the impact cost."
-      );
-    }
+    // if (parseFloat(nestAmount) * lever >= 100000) {
+    //   info.push(
+    //     "To ensure system fairness, your position is added to the impact cost."
+    //   );
+    // }
     return info;
-  }, [lever, nestAmount]);
+  }, []);
 
   /**
    * update

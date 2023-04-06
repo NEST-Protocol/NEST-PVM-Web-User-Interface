@@ -1,12 +1,12 @@
-import { useEffect, useRef, useState } from "react";
+import {useEffect, useRef, useState} from "react";
 import {defaultChartProps, DEFAULT_PERIOD, disabledFeaturesOnMobile} from "./constants";
 import useTVDatafeed from "../../domain/tradingview/useTVDatafeed";
 import {IChartingLibraryWidget, Timezone} from "../../charting_library";
-import { getObjectKeyFromValue } from "../../domain/tradingview/utils";
-import { SUPPORTED_RESOLUTIONS, TV_CHART_RELOAD_INTERVAL } from "../../config/tradingview";
-import { TVDataProvider } from "../../domain/tradingview/TVDataProvider";
-import { useLocalStorageSerializeKey } from "../../lib/localStorage";
-import { CHART_PERIODS } from "../../lib/legacy";
+import {getObjectKeyFromValue} from "../../domain/tradingview/utils";
+import {SUPPORTED_RESOLUTIONS, TV_CHART_RELOAD_INTERVAL} from "../../config/tradingview";
+import {TVDataProvider} from "../../domain/tradingview/TVDataProvider";
+import {useLocalStorageSerializeKey} from "../../lib/localStorage";
+import {CHART_PERIODS} from "../../lib/legacy";
 import {Box, CircularProgress} from "@mui/material";
 import useTheme from "../../hooks/useTheme";
 import useWindowWidth from "../../hooks/useWindowWidth";
@@ -27,10 +27,10 @@ export default function TVChartContainer({symbol, dataProvider}: Props) {
   const tvWidgetRef = useRef<IChartingLibraryWidget | null>(null);
   const [chartReady, setChartReady] = useState(false);
   const [chartDataLoading, setChartDataLoading] = useState(true);
-  const { datafeed, resetCache } = useTVDatafeed({ dataProvider });
+  const {datafeed, resetCache} = useTVDatafeed({dataProvider});
   const symbolRef = useRef(symbol);
-  const { nowTheme } = useTheme();
-  const { isMobile } = useWindowWidth()
+  const {nowTheme} = useTheme();
+  const {isMobile} = useWindowWidth()
   /* Tradingview charting library only fetches the historical data once so if the tab is inactive or system is in sleep mode
   for a long time, the historical data will be outdated. */
   useEffect(() => {
@@ -57,7 +57,8 @@ export default function TVChartContainer({symbol, dataProvider}: Props) {
 
   useEffect(() => {
     if (chartReady && tvWidgetRef.current && symbol !== tvWidgetRef.current?.activeChart?.().symbol()) {
-      tvWidgetRef.current.setSymbol(symbol, tvWidgetRef.current.activeChart().resolution(), () => {});
+      tvWidgetRef.current.setSymbol(symbol, tvWidgetRef.current.activeChart().resolution(), () => {
+      });
     }
   }, [symbol, chartReady, period]);
 
@@ -108,7 +109,25 @@ export default function TVChartContainer({symbol, dataProvider}: Props) {
         });
       // @ts-ignore
       tvWidgetRef.current?.activeChart().createStudy("Moving Average", false, false, tvWidgetRef.current?.activeChart().resolution()
-        , {}, {})
+        , {
+          "length": 5,
+          "showLabelsOnPriceScale": false,
+          "Plot.color": "#ffc87d",
+        }, {})
+      // @ts-ignore
+      tvWidgetRef.current?.activeChart().createStudy("Moving Average", false, false, tvWidgetRef.current?.activeChart().resolution()
+        , {
+          "length": 10,
+          "showLabelsOnPriceScale": false,
+          "Plot.color": "#ff7dff",
+        }, {})
+      // @ts-ignore
+      tvWidgetRef.current?.activeChart().createStudy("Moving Average", false, false, tvWidgetRef.current?.activeChart().resolution()
+        , {
+          "length": 30,
+          "showLabelsOnPriceScale": false,
+          "Plot.color": "#7dffff",
+        }, {})
       tvWidgetRef.current?.activeChart().dataReady(() => {
         setChartDataLoading(false);
       });
@@ -143,7 +162,8 @@ export default function TVChartContainer({symbol, dataProvider}: Props) {
           visibility: !chartDataLoading ? "visible" : "hidden",
           borderRadius: '11px',
           overflow: 'hidden',
-          position: 'absolute', bottom: 0, left: 0, right: 0, top: 0  }}
+          position: 'absolute', bottom: 0, left: 0, right: 0, top: 0
+        }}
         ref={chartContainerRef}
       />
     </Box>

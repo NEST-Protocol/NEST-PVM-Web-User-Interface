@@ -1,5 +1,5 @@
 import {SUPPORTED_RESOLUTIONS} from "../../config/tradingview";
-import {getChartPricesFromBinance} from "../prices";
+import {getChartPricesFromBinance, getCurrentPriceOfToken} from "../prices";
 import {CHART_PERIODS} from "../../lib/legacy";
 import {Bar} from "./types";
 import {formatTimeInBarToMs, getCurrentCandleTime} from "./utils";
@@ -95,20 +95,77 @@ export class TVDataProvider {
     }
   }
 
+  async getTokenLastBars(ticker: string, period: string, limit: number): Promise<Bar[]> {
+    return getChartPricesFromBinance(ticker, period, limit);
+  }
+
+  async getLastBar(ticker: string, period: string) {
+    if (!ticker || !period) {
+      throw new Error("Invalid input. Ticker, period, and chainId are required parameters.");
+    }
+    const currentTime = Date.now();
+    if (
+      currentTime - this.startTime > 15000 ||
+      this.lastTicker !== ticker ||
+      this.lastPeriod !== period
+    ) {
+      const prices = await this.getTokenLastBars(ticker, period, 1);
+      if (prices?.length) {
+        // @ts-ignore
+        const lastBar = prices[0];
+        const currentCandleTime = getCurrentCandleTime(period);
+        // @ts-ignore
+        const lastCandleTime = currentCandleTime - CHART_PERIODS[period];
+        if (lastBar.time === currentCandleTime || lastBar.time === lastCandleTime) {
+          this.lastBar = { ...lastBar, ticker };
+          this.startTime = currentTime;
+          this.lastTicker = ticker;
+          this.lastPeriod = period;
+        }
+      }
+    }
+    return this.lastBar;
+  }
+
+  async getCurrentPriceOfToken(ticker: string): Promise<number> {
+    return getCurrentPriceOfToken(ticker);
+  }
+
   async getLiveBar(ticker: string, resolution: string) {
     // @ts-ignore
     const period = SUPPORTED_RESOLUTIONS[resolution];
-    const bars = await getChartPricesFromBinance(ticker, period, 1);
-    this.lastBar = {
-      ...bars[0],
-      ticker,
-      open: this.lastBar?.close || bars[0].open,
-    };
-    this.lastTicker = ticker;
-    this.lastPeriod = period;
-    if (this.lastBar) {
-      return formatTimeInBarToMs(this.lastBar);
+    if (!ticker || !period) return;
+
+    const currentCandleTime = getCurrentCandleTime(period);
+    try {
+      this.lastBar = await this.getLastBar(ticker, period);
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error(error);
     }
-    return null;
+    if (!this.lastBar) return;
+
+    const currentPrice = await this.getCurrentPriceOfToken(ticker);
+    if (!currentPrice) return null;
+    if (this.lastBar.time && currentCandleTime === this.lastBar.time && ticker === this.lastBar.ticker) {
+      return {
+        ...this.lastBar,
+        close: Number(currentPrice),
+        high: Math.max(this.lastBar.open, this.lastBar.high, currentPrice),
+        low: Math.min(this.lastBar.open, this.lastBar.low, currentPrice),
+        ticker,
+      };
+    } else {
+      const newBar = {
+        time: currentCandleTime,
+        open: Number(this.lastBar.close),
+        close: Number(currentPrice),
+        high: Math.max(this.lastBar.close, Number(currentPrice)),
+        low: Math.min(this.lastBar.close, Number(currentPrice)),
+        ticker,
+      };
+      this.lastBar = newBar;
+      return this.lastBar;
+    }
   }
 }

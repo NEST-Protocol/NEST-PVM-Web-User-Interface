@@ -58,11 +58,6 @@ const disabledFeatures = [
 ];
 export const disabledFeaturesOnMobile = [
   "header_saveload",
-  "header_undo_redo",
-  "header_indicators",
-  "header_settings",
-  "header_chart_type",
-  "header_screenshot",
   "header_fullscreen_button",
 ]
 const enabledFeatures = [
