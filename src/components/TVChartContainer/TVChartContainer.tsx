@@ -110,7 +110,23 @@ export default function TVChartContainer({symbol, dataProvider}: Props) {
       // @ts-ignore
       tvWidgetRef.current?.activeChart().createStudy("Moving Average", false, false, tvWidgetRef.current?.activeChart().resolution()
         , {
-          // "length": 27,
+          "length": 5,
+          "showLabelsOnPriceScale": false,
+          "Plot.color": "#ffc87d",
+        }, {})
+      // @ts-ignore
+      tvWidgetRef.current?.activeChart().createStudy("Moving Average", false, false, tvWidgetRef.current?.activeChart().resolution()
+        , {
+          "length": 10,
+          "showLabelsOnPriceScale": false,
+          "Plot.color": "#ff7dff",
+        }, {})
+      // @ts-ignore
+      tvWidgetRef.current?.activeChart().createStudy("Moving Average", false, false, tvWidgetRef.current?.activeChart().resolution()
+        , {
+          "length": 30,
+          "showLabelsOnPriceScale": false,
+          "Plot.color": "#7dffff",
         }, {})
       tvWidgetRef.current?.activeChart().dataReady(() => {
         setChartDataLoading(false);

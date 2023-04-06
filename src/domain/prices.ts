@@ -35,7 +35,7 @@ export async function getCurrentPriceOfToken(symbol: string) {
   try {
     const response = await fetch(`https://api.binance.com/api/v3/ticker/price?symbol=${symbol}USDT`);
     const data = await response.json();
-    return data.price;
+    return Number(data.price);
   } catch (e) {
     // eslint-disable-next-line no-console
     try {
@@ -45,6 +45,7 @@ export async function getCurrentPriceOfToken(symbol: string) {
     } catch (e) {
       // eslint-disable-next-line no-console
       console.log(`Error fetching data: ${e}`);
+      return null;
     }
   }
 }
