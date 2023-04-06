@@ -82,7 +82,7 @@ export const NESTFiVault: AddressType = {
 export const FuturesV2Contract: AddressType = {
   1: String().zeroAddress,
   5: String().zeroAddress,
-  56: "0x907b35BE2dc26b12734D92e5fe20Fd511dFb0723",
+  56: "0x02904e03937E6a36D475025212859f1956BeC3f0",
   97: "0x476981D37FaA3bE8E8768E8E7d0d01625433126a",
 };
 
