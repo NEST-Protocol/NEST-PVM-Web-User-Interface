@@ -109,7 +109,7 @@ function useTransactionSnackBar() {
 
   const failRequest = () => {
     enqueueSnackbar("", {
-      preventDuplicate: true,
+      preventDuplicate: false,
       anchorOrigin: {
         vertical: "top",
         horizontal: isBigMobile ? "center" : "right",
