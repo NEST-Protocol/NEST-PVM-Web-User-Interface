@@ -66,7 +66,8 @@ export function hideFuturesOrder(
   address: string,
   index: string
 ) {
-  const url = `https://api.nestfi.net/api/order/save/${chainId}?address=${address}&index=${index.toString()}`;
+  const url = `order/save/${chainId}?address=${address}&index=${index.toString()}`;
+  
   baseRequestPOST(url);
 }
 
