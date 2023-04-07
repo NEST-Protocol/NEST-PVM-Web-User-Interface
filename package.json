@@ -6,6 +6,7 @@
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@loadable/component": "^5.15.3",
+    "@fontsource/open-sans": "^4.5.14",
     "@mui/material": "^5.11.10",
     "@rainbow-me/rainbowkit": "^0.11.1",
     "@testing-library/jest-dom": "^5.14.1",
