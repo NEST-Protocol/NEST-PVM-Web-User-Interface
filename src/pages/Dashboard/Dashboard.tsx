@@ -440,11 +440,11 @@ const Dashboard: FC = () => {
             })}
           >
             {lipPrice(
-              ethers.utils.parseEther(item.initialMargin.toString()),
-              ethers.utils.parseEther(item?.appendMargin?.toString() || '0'),
+              ethers.utils.parseEther(item.initialMargin.toFixed(12)),
+              ethers.utils.parseEther(item?.appendMargin?.toFixed(12) || '0'),
               BigNumber.from(item.leverage.replace('X', '')),
-              ethers.utils.parseEther(item.lastPrice.toString()),
-              ethers.utils.parseEther(item.openPrice.toString()),
+              ethers.utils.parseEther(item.lastPrice.toFixed(12)),
+              ethers.utils.parseEther(item.openPrice.toFixed(12)),
               item.orientation === 'Long',
             ).div(BigNumber.from(10).pow(16)).toNumber() / 100} USDT
           </Box>
@@ -588,11 +588,11 @@ const Dashboard: FC = () => {
               <Caption5 sx={(theme) => ({
                 color: theme.normal.text0
               })}>{lipPrice(
-                ethers.utils.parseEther(item.initialMargin.toString()),
-                ethers.utils.parseEther(item?.appendMargin?.toString() || '0'),
+                ethers.utils.parseEther(item.initialMargin.toFixed(12)),
+                ethers.utils.parseEther(item?.appendMargin?.toFixed(12) || '0'),
                 BigNumber.from(item.leverage.replace('X', '')),
-                ethers.utils.parseEther(item.lastPrice.toString()),
-                ethers.utils.parseEther(item.openPrice.toString()),
+                ethers.utils.parseEther(item.lastPrice.toFixed(12)),
+                ethers.utils.parseEther(item.openPrice.toFixed(12)),
                 item.orientation === 'Long',
               ).div(BigNumber.from(10).pow(16)).toNumber() / 100} USDT</Caption5>
             </Stack>
