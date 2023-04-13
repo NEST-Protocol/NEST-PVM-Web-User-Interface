@@ -630,6 +630,42 @@ const Dashboard: FC = () => {
     <Stack alignItems={"center"} width={'100%'}>
       {shareMyDealModal}
       {shareMyOrderModal}
+      {/*TODO: (option show)*/}
+      <Stack direction={'row'} width={'100%'} justifyContent={"center"} spacing={'32px'} sx={(theme) => ({
+        color: theme.normal.text0,
+        fontWeight: 700,
+        fontSize: '16px',
+        lineHeight: '22px',
+        background: '#1F2329',
+        borderBottom: `1px solid ${theme.normal.border}`,
+        borderTop: `1px solid ${theme.normal.border}`,
+      })}>
+        <Box sx={(theme) => ({
+          paddingY: '11px',
+          borderBottom: `2px solid ${theme.normal.primary}`,
+          a: {
+            color: theme.normal.primary,
+            cursor: 'pointer',
+            '&:hover': {
+              color: theme.normal.primary,
+            }
+          }
+        })}>
+          <a href={'/#/dashboard'}>Dashboard</a>
+        </Box>
+        <Box sx={(theme) => ({
+          paddingY: '11px',
+          a: {
+            color: theme.normal.text0,
+            cursor: 'pointer',
+            '&:hover': {
+              color: theme.normal.primary,
+            }
+          }
+        })}>
+          <a href={'/#/dashboard/mine'}>我的管理</a>
+        </Box>
+      </Stack>
       <Stack maxWidth={'1600px'} px={['0', '0', '20px']} width={'100%'} spacing={['20px', '20px', '40px']}
              py={['20px', '20px', '40px']}>
         <Stack>
