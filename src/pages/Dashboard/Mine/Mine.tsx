@@ -117,8 +117,10 @@ const Mine = () => {
         borderBottom: `1px solid ${theme.normal.border}`,
         borderTop: `1px solid ${theme.normal.border}`,
       })}>
-        <Box sx={(theme) => ({
+        <Stack sx={(theme) => ({
           paddingY: '11px',
+          alignItems: 'center',
+          width: isBigMobile ? '100%' : 'auto',
           a: {
             color: theme.normal.text0,
             cursor: 'pointer',
@@ -128,9 +130,11 @@ const Mine = () => {
           }
         })}>
           <a href={'/#/dashboard'}>Dashboard</a>
-        </Box>
+        </Stack>
         <Stack sx={(theme) => ({
           paddingY: '11px',
+          alignItems: 'center',
+          width: isBigMobile ? '100%' : 'auto',
           borderBottom: `2px solid ${theme.normal.primary}`,
           a: {
             color: theme.normal.primary,
