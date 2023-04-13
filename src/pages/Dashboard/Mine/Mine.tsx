@@ -172,7 +172,7 @@ const Mine = () => {
                   fontSize: '14px',
                   lineHeight: '20px',
                 })}>
-                  0xksjdfkjsdf
+                  {account.address?.toString().showAddress()}
                 </Box>
                 <Box>
                   Copy
@@ -204,7 +204,7 @@ const Mine = () => {
                       fontSize: '16px',
                       lineHeight: '22px',
                     })}>
-                      0x1234567890
+                      {account.address?.toString().showAddress()}
                     </Box>
                     <div>
                       copy
