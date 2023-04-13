@@ -55,3 +55,4 @@ export { ReactComponent as Add } from "./svg/add.svg";
 export { ReactComponent as DownIcon } from "./svg/DownIcon.svg";
 export { ReactComponent as NHBTCTokenLogo } from "./svg/NHBTCTokenLogo.svg";
 export { ReactComponent as Notice } from "./svg/notice.svg";
+export { ReactComponent as Edit } from "./svg/edit.svg";
