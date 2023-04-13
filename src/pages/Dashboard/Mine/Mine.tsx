@@ -9,6 +9,35 @@ import TableCell from "@mui/material/TableCell";
 import FuturesTableTitle from "../Components/TableTitle";
 import useTheme from "../../../hooks/useTheme";
 import useWindowWidth from "../../../hooks/useWindowWidth";
+import {styled} from "@mui/material/styles";
+
+const PaginationButton = styled('button')(({ theme }) => {
+  return {
+    width: "32px",
+    height: "32px",
+    borderRadius: '8px',
+    background: theme.normal.bg1,
+    color: theme.normal.text2,
+    fontWeight: 400,
+    fontSize: '14px',
+    "&:hover": {
+      cursor: "pointer",
+      color: theme.normal.bg1,
+      background: theme.normal.primary_hover,
+    },
+    "&:active": {
+      background: theme.normal.primary_active,
+    },
+    "&:disabled": {
+      cursor: "not-allowed",
+      background: theme.normal.disabled_bg,
+      color: theme.normal.disabled_text,
+    },
+    "& .MuiCircularProgress-root": {
+      color: theme.normal.highDark
+    }
+  };
+});
 
 const Mine = () => {
   const {account} = useNEST()
@@ -189,7 +218,7 @@ const Mine = () => {
                   })}>
                     账户总览
                   </Box>
-                  <Stack direction={'row'} alignItems={"center"} spacing={'12px'}>
+                  <Stack direction={'row'} alignItems={"baseline"} spacing={'12px'}>
                     <Box sx={(theme) => ({
                       color: theme.normal.text0,
                       fontWeight: 700,
@@ -273,7 +302,7 @@ const Mine = () => {
                   <div>12,564,897.00 NEST</div>
                   <span>Total Rewards</span>
                 </Stack>
-                <Stack spacing={'12px'} sx={(theme) => ({
+                <Stack direction={'row'} alignItems={"center"} justifyContent={'space-between'} sx={(theme) => ({
                   width: '100%',
                   color: theme.normal.text0,
                   fontWeight: 700,
@@ -289,8 +318,21 @@ const Mine = () => {
                   background: theme.normal.bg1,
                   borderRadius: '12px'
                 })}>
-                  <div>12,564,897.00 NEST</div>
-                  <span>Total Rewards</span>
+                  <Stack spacing={'12px'}>
+                    <div>12,564,897</div>
+                    <span>Total Number</span>
+                  </Stack>
+                  <Stack sx={(theme) => ({
+                    fontSize: '14px',
+                    lineHeight: '20px',
+                    color: theme.normal.text1,
+                    fontWeight: 400,
+                    padding: '8px 12px',
+                    border: `1px solid ${theme.normal.border}`,
+                    borderRadius: '20px',
+                  })}>
+                    有12人从未交易过
+                  </Stack>
                 </Stack>
               </Stack>
             )
@@ -422,30 +464,26 @@ const Mine = () => {
                   <PCOrderRow item={''} index={1}/>
                 </FuturesTableTitle>
                 <Stack direction={'row'} spacing={'10px'} justifyContent={'end'} px={'20px'}>
-                  <MainButton title={'<'} onClick={() => {
+                  <PaginationButton onClick={() => {
 
-                  }} style={{
-                    width: '32px', height: '32px', fontSize: '14px', fontWeight: 400, borderRadius: '8px',
-                    background: nowTheme.normal.bg1, color: nowTheme.normal.text2
-                  }}/>
-                  <MainButton title={'1'} onClick={() => {
+                  }}>
+                    1
+                  </PaginationButton>
+                  <PaginationButton onClick={() => {
 
-                  }} style={{
-                    width: '32px', height: '32px', fontSize: '14px', fontWeight: 400, borderRadius: '8px',
-                    background: nowTheme.normal.bg1, color: nowTheme.normal.text2
-                  }}/>
-                  <MainButton title={'2'} onClick={() => {
+                  }}>
+                    2
+                  </PaginationButton>
+                  <PaginationButton onClick={() => {
 
-                  }} style={{
-                    width: '32px', height: '32px', fontSize: '14px', fontWeight: 400, borderRadius: '8px',
-                    background: nowTheme.normal.bg1, color: nowTheme.normal.text2
-                  }}/>
-                  <MainButton title={'>'} onClick={() => {
+                  }}>
+                    3
+                  </PaginationButton>
+                  <PaginationButton onClick={() => {
 
-                  }} style={{
-                    width: '32px', height: '32px', fontSize: '14px', fontWeight: 400, borderRadius: '8px',
-                    background: nowTheme.normal.bg1, color: nowTheme.normal.text2
-                  }}/>
+                  }}>
+                    4
+                  </PaginationButton>
                 </Stack>
               </>
             )
