@@ -11,7 +11,7 @@ import useWindowWidth from "../../../hooks/useWindowWidth";
 import {styled} from "@mui/material/styles";
 import {DownIcon, NEXT} from "../../../components/icons";
 import TVChart from "./TVChart";
-import {useState} from "react";
+import {useMemo, useState} from "react";
 import UnTxUserModal from "../Modal/UnTxUserModal";
 
 const NextBox = styled(Box)(({theme}) => ({
@@ -82,6 +82,21 @@ const Mine = () => {
   const [showModal, setShowModal] = useState(false)
   const [periodList, setPeriodList] = useState([])
   const [periodIndex, setPeriodIndex] = useState(0)
+  const [page, setPage] = useState(1)
+  const [totalPage, setTotalPage] = useState(2)
+
+  const pageWindow = useMemo(() => {
+    if (totalPage <= 5) {
+      return Array.from({length: totalPage}, (v, k) => k + 1)
+    }
+    if (page <= 3) {
+      return [1, 2, 3, 4, 5]
+    }
+    if (page >= totalPage - 2) {
+      return [totalPage - 4, totalPage - 3, totalPage - 2, totalPage - 1, totalPage]
+    }
+    return [page - 2, page - 1, page, page + 1, page + 2]
+  }, [page, totalPage])
 
   const PCOrderRow = (item: any, index: number) => {
     return (
@@ -535,24 +550,29 @@ const Mine = () => {
                 </FuturesTableTitle>
                 <Stack direction={'row'} spacing={'10px'} justifyContent={'end'} px={'20px'}>
                   <PaginationButton onClick={() => {
-
-                  }}>
-                    1
+                    if (page > 1) {
+                      setPage(page - 1)
+                    }
+                  }} disabled={page <= 1}>
+                    {'<'}
                   </PaginationButton>
+                  {
+                    pageWindow.map((item, index) => {
+                      return (
+                        <PaginationButton key={index} onClick={() => {
+                          setPage(item)
+                        }} style={{ background: item === page ? '#EAAA00' : '', color: item === page ? '#1F2329' : '' }}>
+                          {item}
+                        </PaginationButton>
+                      )
+                    })
+                  }
                   <PaginationButton onClick={() => {
-
-                  }}>
-                    2
-                  </PaginationButton>
-                  <PaginationButton onClick={() => {
-
-                  }}>
-                    3
-                  </PaginationButton>
-                  <PaginationButton onClick={() => {
-
-                  }}>
-                    4
+                    if (page < totalPage) {
+                      setPage(page + 1)
+                    }
+                  }} disabled={page >= totalPage}>
+                    {'>'}
                   </PaginationButton>
                 </Stack>
               </>
