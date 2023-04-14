@@ -10,8 +10,22 @@ import FuturesTableTitle from "../Components/TableTitle";
 import useTheme from "../../../hooks/useTheme";
 import useWindowWidth from "../../../hooks/useWindowWidth";
 import {styled} from "@mui/material/styles";
+import {NEXT} from "../../../components/icons";
 
-const PaginationButton = styled('button')(({ theme }) => {
+const NextBox = styled(Box)(({theme}) => ({
+  width: 14,
+  height: 14,
+  "& svg": {
+    width: 14,
+    height: 14,
+    display: "block",
+    "& path": {
+      fill: theme.normal.text2,
+    },
+  },
+}));
+
+const PaginationButton = styled('button')(({theme}) => {
   return {
     width: "32px",
     height: "32px",
@@ -322,7 +336,7 @@ const Mine = () => {
                     <div>12,564,897</div>
                     <span>Total Number</span>
                   </Stack>
-                  <Stack sx={(theme) => ({
+                  <Stack direction={'row'} alignItems={"center"} spacing={'12px'} sx={(theme) => ({
                     fontSize: '14px',
                     lineHeight: '20px',
                     color: theme.normal.text1,
@@ -330,8 +344,12 @@ const Mine = () => {
                     padding: '8px 12px',
                     border: `1px solid ${theme.normal.border}`,
                     borderRadius: '20px',
+                    cursor: 'pointer',
                   })}>
-                    有12人从未交易过
+                    <Box>有12人从未交易过</Box>
+                    <NextBox>
+                      <NEXT/>
+                    </NextBox>
                   </Stack>
                 </Stack>
               </Stack>
@@ -404,7 +422,7 @@ const Mine = () => {
                   </Box>
                 </Stack>
                 <Stack width={'100%'} alignItems={'end'}>
-                  <Box sx={(theme) => ({
+                  <Stack direction={'row'} spacing={'11px'} alignItems={"center"}  sx={(theme) => ({
                     color: theme.normal.text1,
                     fontSize: '12px',
                     lineHeight: '16px',
@@ -413,9 +431,11 @@ const Mine = () => {
                     background: theme.normal.bg3,
                     borderRadius: '16px 0 16px 16px',
                   })}>
-                    {/*TODO*/}
-                    有233人从未交易过
-                  </Box>
+                    <Box>有233人从未交易过</Box>
+                    <NextBox>
+                      <NEXT/>
+                    </NextBox>
+                  </Stack>
                 </Stack>
                 <MainButton title={'Copy Invitation Link'} onClick={() => {
                 }}/>
