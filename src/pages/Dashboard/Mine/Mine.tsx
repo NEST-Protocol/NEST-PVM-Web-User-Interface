@@ -11,6 +11,8 @@ import useWindowWidth from "../../../hooks/useWindowWidth";
 import {styled} from "@mui/material/styles";
 import {NEXT} from "../../../components/icons";
 import TVChart from "./TVChart";
+import {useState} from "react";
+import UnTxUserModal from "../Modal/UnTxUserModal";
 
 const NextBox = styled(Box)(({theme}) => ({
   width: 14,
@@ -57,6 +59,7 @@ const Mine = () => {
   const {account} = useNEST()
   const {messageSnackBar} = useNESTSnackBar()
   const {isBigMobile} = useWindowWidth()
+  const [showModal, setShowModal] = useState(false)
 
   const PCOrderRow = (item: any, index: number) => {
     return (
@@ -149,6 +152,7 @@ const Mine = () => {
 
   return (
     <Stack alignItems={"center"} width={'100%'}>
+      <UnTxUserModal open={showModal} onClose={() => setShowModal(false)}/>
       {/*TODO: (option show)*/}
       <Stack direction={'row'} width={'100%'} justifyContent={"center"} spacing={'32px'} sx={(theme) => ({
         color: theme.normal.text0,
@@ -344,7 +348,9 @@ const Mine = () => {
                     border: `1px solid ${theme.normal.border}`,
                     borderRadius: '20px',
                     cursor: 'pointer',
-                  })}>
+                  })} onClick={() => {
+                    setShowModal(true)
+                  }}>
                     <Box>有12人从未交易过</Box>
                     <NextBox>
                       <NEXT/>
@@ -431,7 +437,9 @@ const Mine = () => {
                     padding: '8px 12px',
                     background: theme.normal.bg3,
                     borderRadius: '16px 0 16px 16px',
-                  })}>
+                  })} onClick={() => {
+                    setShowModal(true)
+                  }}>
                     <Box>有233人从未交易过</Box>
                     <NextBox>
                       <NEXT/>
