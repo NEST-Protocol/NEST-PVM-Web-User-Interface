@@ -636,7 +636,7 @@ const Dashboard: FC = () => {
         fontWeight: 700,
         fontSize: '16px',
         lineHeight: '22px',
-        background: '#1F2329',
+        background: theme.normal.bg1,
         borderBottom: `1px solid ${theme.normal.border}`,
         borderTop: `1px solid ${theme.normal.border}`,
       })}>
