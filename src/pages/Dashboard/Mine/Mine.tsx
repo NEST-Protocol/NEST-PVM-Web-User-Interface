@@ -9,7 +9,7 @@ import TableCell from "@mui/material/TableCell";
 import FuturesTableTitle from "../Components/TableTitle";
 import useWindowWidth from "../../../hooks/useWindowWidth";
 import {styled} from "@mui/material/styles";
-import {DownIcon, NEXT} from "../../../components/icons";
+import {Copy, DownIcon, NEXT} from "../../../components/icons";
 import TVChart from "./TVChart";
 import {useMemo, useState} from "react";
 import UnTxUserModal from "../Modal/UnTxUserModal";
@@ -106,16 +106,51 @@ const Mine = () => {
         }
       })}>
         <TableCell>
-          <div>@dddd</div>
+          <Box sx={(theme) => ({
+            fontSize: '16px',
+            lineHeight: '22px',
+            color: theme.normal.text0,
+            fontWeight: 700,
+          })}>@sss</Box>
         </TableCell>
         <TableCell>
-          <div>0xsjdkekwod</div>
+          <Stack direction={'row'} spacing={'8px'} alignItems={'center'}>
+            <Box sx={(theme) => ({
+              fontSize: '16px',
+              lineHeight: '22px',
+              color: theme.normal.text0,
+              fontWeight: 700,
+            })}>0xsjdkekwod</Box>
+            <Box sx={(theme) => ({
+              "svg": {
+                cursor: 'pointer',
+                width: 14,
+                height: 14,
+                display: "block",
+                "& path": {
+                  fill: theme.normal.text2,
+                },
+              }
+            })}>
+              <Copy/>
+            </Box>
+          </Stack>
         </TableCell>
         <TableCell>
-          <div>278229</div>
+          <Box sx={(theme) => ({
+            fontSize: '16px',
+            lineHeight: '22px',
+            color: theme.normal.text0,
+            fontWeight: 700,
+          })}>2222</Box>
         </TableCell>
         <TableCell>
-          <div>232</div>
+          <Box sx={(theme) => ({
+            fontSize: '16px',
+            lineHeight: '22px',
+            color: theme.normal.text0,
+            fontWeight: 700,
+          })}>22</Box>
         </TableCell>
       </TableRow>
     )
@@ -257,9 +292,7 @@ const Mine = () => {
                 })}>
                   {account.address?.toString().showAddress()}
                 </Box>
-                <Box>
-                  Copy
-                </Box>
+                <Copy style={{ width: "14px", height: "14px" }} />
               </Stack>
             ) : (
               <Stack direction={'row'} width={'100%'} justifyContent={"space-between"} alignItems={"center"}>
@@ -289,9 +322,19 @@ const Mine = () => {
                     })}>
                       {account.address?.toString().showAddress()}
                     </Box>
-                    <div>
-                      copy
-                    </div>
+                    <Box sx={(theme) => ({
+                      "svg": {
+                        cursor: 'pointer',
+                        width: 14,
+                        height: 14,
+                        display: "block",
+                        "& path": {
+                          fill: theme.normal.text2,
+                        },
+                      }
+                    })}>
+                      <Copy/>
+                    </Box>
                   </Stack>
                 </Stack>
                 <Box py={'4px'}>
