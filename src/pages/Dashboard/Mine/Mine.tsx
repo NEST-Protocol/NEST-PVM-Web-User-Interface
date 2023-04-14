@@ -524,7 +524,8 @@ const Mine = () => {
                     },
                     padding: '40px',
                     background: theme.normal.bg1,
-                    borderRadius: '12px'
+                    borderRadius: '12px',
+                    overflow: 'hidden',
                   })}>
                     <Stack spacing={'12px'}>
                       <div>12,564,897</div>
@@ -539,6 +540,10 @@ const Mine = () => {
                       border: `1px solid ${theme.normal.border}`,
                       borderRadius: '20px',
                       cursor: 'pointer',
+                      flexShrink: 0,
+                      '&:hover': {
+                        background: theme.normal.grey_hover,
+                      }
                     })} onClick={() => {
                       setShowModal(true)
                     }}>
