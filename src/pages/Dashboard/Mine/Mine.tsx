@@ -282,7 +282,7 @@ const Mine = () => {
         </Stack>
       </Stack>
       <Stack maxWidth={'1600px'} px={['0', '0', '20px']} width={'100%'} spacing={['20px', '20px', '40px']}
-             py={['20px', '20px', '40px']}>
+             pt={['0', '0', '40px']} pb={['20px', '20px', '40px']}>
         <Stack spacing={'40px'} sx={(theme) => ({
           width: '100%',
           padding: '20px',
@@ -435,7 +435,7 @@ const Mine = () => {
                   borderRadius: '12px'
                 })}>
                   <div>12,564,897.00 NEST</div>
-                  <span>Total Rewards</span>
+                  <span>Not Settled</span>
                 </Stack>
                 <Stack direction={'row'} alignItems={"center"} justifyContent={'space-between'} sx={(theme) => ({
                   width: '100%',
@@ -625,7 +625,7 @@ const Mine = () => {
               </Stack>
             ) : (
               <>
-                <Stack direction={'row'} justifyContent={'space-between'} px={'20px'} sx={(theme) => ({
+                <Stack direction={'row'} justifyContent={'space-between'} alignItems={'center'} px={'20px'} sx={(theme) => ({
                   color: theme.normal.text0,
                   fontWeight: 700,
                   fontSize: '16px',
