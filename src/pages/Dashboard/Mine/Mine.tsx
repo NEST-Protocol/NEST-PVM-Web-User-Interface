@@ -9,7 +9,7 @@ import TableCell from "@mui/material/TableCell";
 import FuturesTableTitle from "../Components/TableTitle";
 import useWindowWidth from "../../../hooks/useWindowWidth";
 import {styled} from "@mui/material/styles";
-import {NEXT} from "../../../components/icons";
+import {DownIcon, NEXT} from "../../../components/icons";
 import TVChart from "./TVChart";
 import {useState} from "react";
 import UnTxUserModal from "../Modal/UnTxUserModal";
@@ -25,6 +25,26 @@ const NextBox = styled(Box)(({theme}) => ({
       fill: theme.normal.text2,
     },
   },
+}));
+
+const Select1 = styled("select")(({theme}) => ({
+  width: "200px",
+  fontWeight: "700",
+  fontSize: "16px",
+  lineHeight: "22px",
+  background: theme.normal.bg1,
+  color: theme.normal.text0,
+  height: '48px',
+  padding: '0 12px',
+  border: "1px solid",
+  borderColor: theme.normal.border,
+  borderRadius: "8px",
+  "&:hover": {
+    border: `1px solid ${theme.normal.primary}`,
+  },
+  "-webkit-appearance": "none",
+  "-moz-appearance": "none",
+  appearance: "none",
 }));
 
 const PaginationButton = styled('button')(({theme}) => {
@@ -60,6 +80,8 @@ const Mine = () => {
   const {messageSnackBar} = useNESTSnackBar()
   const {isBigMobile} = useWindowWidth()
   const [showModal, setShowModal] = useState(false)
+  const [periodList, setPeriodList] = useState([])
+  const [periodIndex, setPeriodIndex] = useState(0)
 
   const PCOrderRow = (item: any, index: number) => {
     return (
@@ -477,9 +499,28 @@ const Mine = () => {
                   <div>
                     跟单名单
                   </div>
-                  <div>
-                    日期选择
-                  </div>
+                  <Box position={'relative'}>
+                    <Stack position={'absolute'} sx={(theme) => ({
+                      right: '12px',
+                      height: '48px',
+                      justifyContent: 'center',
+                      '& svg': {
+                        height: '12px',
+                        width: '12px',
+                        '& path': {
+                          fill: theme.normal.text2
+                        },
+                      },
+                    })}>
+                      <DownIcon/>
+                    </Stack>
+                    <Select1 onChange={(e) => {
+                      setPeriodIndex(Number(e.target.value))
+                    }}>
+                      <option value={0}>5th settlement</option>
+                      <option value={1}>4th settlement</option>
+                    </Select1>
+                  </Box>
                 </Stack>
                 <FuturesTableTitle
                   dataArray={[
