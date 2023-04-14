@@ -6,13 +6,16 @@ import useNESTSnackBar from "../../../hooks/useNESTSnackBar";
 import useNEST from "../../../hooks/useNEST";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
-import FuturesTableTitle from "../Components/TableTitle";
 import useWindowWidth from "../../../hooks/useWindowWidth";
 import {styled} from "@mui/material/styles";
-import {Copy, DownIcon, NEXT} from "../../../components/icons";
+import {Copy, DownIcon, NEXT, NoSort, UpSort, DownSort} from "../../../components/icons";
 import TVChart from "./TVChart";
 import {useMemo, useState} from "react";
 import UnTxUserModal from "../Modal/UnTxUserModal";
+import TableContainer from "@mui/material/TableContainer";
+import Table from "@mui/material/Table";
+import TableHead from "@mui/material/TableHead";
+import TableBody from "@mui/material/TableBody";
 
 const NextBox = styled(Box)(({theme}) => ({
   width: 14,
@@ -85,6 +88,11 @@ const Mine = () => {
   const [page, setPage] = useState(1)
   const [totalPage, setTotalPage] = useState(2)
   const [showTotalRewards, setShowTotalRewards] = useState(true)
+  const [sort1, setSort1] = useState({
+    key: 'totalRewards',
+    sort: 'desc',
+  })
+
 
   const pageWindow = useMemo(() => {
     if (totalPage <= 5) {
@@ -727,17 +735,101 @@ const Mine = () => {
                     </Select1>
                   </Box>
                 </Stack>
-                <FuturesTableTitle
-                  dataArray={[
-                    "Name",
-                    "Wallet",
-                    "Total rewards",
-                    "Week rewards",
-                  ]}
-                  noOrder={false}
-                >
-                  <PCOrderRow item={''} index={1}/>
-                </FuturesTableTitle>
+                <TableContainer component={"div"}>
+                  <Table sx={{ width: "100%" }} aria-label="simple table">
+                    <TableHead
+                      sx={(theme) => ({
+                        "& th": {
+                          padding: "0 20px",
+                          height: "44px",
+                          fontWeight: 400,
+                          fontSize: 12,
+                          lineHeight: "16px",
+                          color: theme.normal.text2,
+                          borderBottom: `1px solid ${theme.normal.border}`,
+                        },
+                      })}
+                    >
+                      <TableRow>
+                        <TableCell align="left">Name</TableCell>
+                        <TableCell align="left">Wallet</TableCell>
+                        <TableCell align="left">
+                          <Stack direction={'row'} spacing={'8px'} onClick={() => {
+                            setSort1({
+                              key: 'totalRewards',
+                              sort: sort1.key === 'totalRewards' ? (sort1.sort === 'asc' ? 'desc' : 'asc') : 'asc'
+                            })
+                          }} style={{ cursor: 'pointer', userSelect: 'none' }}>
+                            <div>Total Rewards</div>
+                            {
+                              sort1.key === 'totalRewards' ? (
+                                sort1.sort === 'asc' ? (
+                                  <UpSort/>
+                                ) : (
+                                  <DownSort/>
+                                )
+                              ) : (
+                                <NoSort/>
+                              )
+                            }
+                          </Stack>
+                        </TableCell>
+                        <TableCell align="left">
+                          <Stack direction={'row'} spacing={'8px'} onClick={() => {
+                            setSort1({
+                              key: 'weekRewards',
+                              sort: sort1.key === 'weekRewards' ? (sort1.sort === 'asc' ? 'desc' : 'asc') : 'asc'
+                            })
+                          }} style={{ cursor: 'pointer', userSelect: 'none' }}>
+                            <div>Week Rewards</div>
+                            {
+                              sort1.key === 'weekRewards' ? (
+                                sort1.sort === 'asc' ? (
+                                  <UpSort/>
+                                ) : (
+                                  <DownSort/>
+                                )
+                              ) : (
+                                <NoSort/>
+                              )
+                            }
+                          </Stack>
+                        </TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody
+                      sx={(theme) => ({
+                        "& td": {
+                          padding: "0 20px",
+                          height: "84px",
+                          borderBottom: `1px solid ${theme.normal.border}`,
+                        },
+                      })}
+                    >
+                      <PCOrderRow item={''} index={1}/>
+                      {/*{props.noOrder ? (*/}
+                      {/*  <TableRow sx={{ "& td": { borderBottom: "0px" } }}>*/}
+                      {/*    <TableCell*/}
+                      {/*      colSpan={6}*/}
+                      {/*      sx={(theme) => ({*/}
+                      {/*        width: "100%",*/}
+                      {/*        fontSize: 14,*/}
+                      {/*        fontWeight: 400,*/}
+                      {/*        color: theme.normal.text2,*/}
+                      {/*        height: "168px",*/}
+                      {/*        textAlign: "center",*/}
+                      {/*        lineHeight: "168px",*/}
+                      {/*      })}*/}
+                      {/*    >*/}
+                      {/*      No User*/}
+                      {/*    </TableCell>*/}
+                      {/*  </TableRow>*/}
+                      {/*) : (*/}
+                      {/*  <></>*/}
+                      {/*)}*/}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
                 <Stack direction={'row'} spacing={'10px'} justifyContent={'end'} px={'20px'}>
                   <PaginationButton onClick={() => {
                     if (page > 1) {
