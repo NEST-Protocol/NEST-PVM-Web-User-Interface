@@ -7,10 +7,10 @@ import useNEST from "../../../hooks/useNEST";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import FuturesTableTitle from "../Components/TableTitle";
-import useTheme from "../../../hooks/useTheme";
 import useWindowWidth from "../../../hooks/useWindowWidth";
 import {styled} from "@mui/material/styles";
 import {NEXT} from "../../../components/icons";
+import TVChart from "./TVChart";
 
 const NextBox = styled(Box)(({theme}) => ({
   width: 14,
@@ -56,7 +56,6 @@ const PaginationButton = styled('button')(({theme}) => {
 const Mine = () => {
   const {account} = useNEST()
   const {messageSnackBar} = useNESTSnackBar()
-  const {nowTheme} = useTheme()
   const {isBigMobile} = useWindowWidth()
 
   const PCOrderRow = (item: any, index: number) => {
@@ -355,10 +354,12 @@ const Mine = () => {
               </Stack>
             )
           }
-          <Stack>
-            <Stack width={'100%'} height={'200px'} bgcolor={'red'}>
-            </Stack>
-          </Stack>
+          <TVChart data={[
+            { time: "2021-05-01", value: 100},
+            { time: "2021-05-02", value: 200},
+            { time: "2021-05-03", value: 230},
+            { time: "2021-05-04", value: 300},
+          ]} />
           {
             isBigMobile && (
               <Stack sx={(theme) => ({
