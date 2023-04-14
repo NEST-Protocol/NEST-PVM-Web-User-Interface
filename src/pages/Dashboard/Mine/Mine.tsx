@@ -84,6 +84,7 @@ const Mine = () => {
   const [periodIndex, setPeriodIndex] = useState(0)
   const [page, setPage] = useState(1)
   const [totalPage, setTotalPage] = useState(2)
+  const [showTotalRewards, setShowTotalRewards] = useState(true)
 
   const pageWindow = useMemo(() => {
     if (totalPage <= 5) {
@@ -237,6 +238,71 @@ const Mine = () => {
     )
   }
 
+  const switchLineType = () => {
+    return (
+      <Stack direction={'row'} alignItems={"center"} justifyContent={"center"} spacing={'40px'}>
+        <Stack direction={"row"} spacing={'8px'} alignItems={"center"} sx={(theme) => ({
+          "label": {
+            color: theme.normal.text2,
+            fontSize: '14px',
+            lineHeight: '20px',
+            fontWeight: 700,
+            cursor: 'pointer',
+          }
+        })} onClick={() => {
+          setShowTotalRewards(true)
+        }}>
+          <Stack alignItems={"center"} justifyContent={"center"} sx={(theme) => ({
+            width: '14px',
+            height: '14px',
+            border: `1px solid ${showTotalRewards ? theme.normal.primary : theme.normal.border}`,
+            borderRadius: '50%',
+            cursor: 'pointer',
+            background: theme.normal.bg1,
+          })}>
+            <Stack sx={(theme) => ({
+              width: '8px',
+              height: '8px',
+              borderRadius: '50%',
+              background: showTotalRewards ? theme.normal.primary : '',
+            })}>
+            </Stack>
+          </Stack>
+          <label>Total Rewards</label>
+        </Stack>
+        <Stack direction={"row"} spacing={'8px'} alignItems={"center"} sx={(theme) => ({
+          "label": {
+            color: theme.normal.text2,
+            fontSize: '14px',
+            lineHeight: '20px',
+            fontWeight: 700,
+            cursor: 'pointer',
+          }
+        })} onClick={() => {
+          setShowTotalRewards(false)
+        }}>
+          <Stack alignItems={"center"} justifyContent={"center"} sx={(theme) => ({
+            width: '14px',
+            height: '14px',
+            border: `1px solid ${showTotalRewards ? theme.normal.border : theme.normal.primary}`,
+            borderRadius: '50%',
+            cursor: 'pointer',
+            background: theme.normal.bg1,
+          })}>
+            <Stack sx={(theme) => ({
+              width: '8px',
+              height: '8px',
+              borderRadius: '50%',
+              background: showTotalRewards ? '' : theme.normal.primary,
+            })}>
+            </Stack>
+          </Stack>
+          <label>Total Number</label>
+        </Stack>
+      </Stack>
+    )
+  }
+
   return (
     <Stack alignItems={"center"} width={'100%'}>
       <UnTxUserModal open={showModal} onClose={() => setShowModal(false)}/>
@@ -281,9 +347,9 @@ const Mine = () => {
           <a href={'/#/dashboard/mine'}>我的管理</a>
         </Stack>
       </Stack>
-      <Stack maxWidth={'1600px'} px={['0', '0', '20px']} width={'100%'} spacing={['20px', '20px', '40px']}
+      <Stack maxWidth={'1600px'} px={['0', '0', '20px']} width={'100%'} spacing={['12px', '12px', '40px']}
              pt={['0', '0', '40px']} pb={['20px', '20px', '40px']}>
-        <Stack spacing={'40px'} sx={(theme) => ({
+        <Stack spacing={['20px', '20px', '40px']} sx={(theme) => ({
           width: '100%',
           padding: '20px',
           border: isBigMobile ? '' : `1px solid ${theme.normal.border}`,
@@ -479,11 +545,14 @@ const Mine = () => {
             )
           }
           <TVChart data={[
-            { time: "2021-05-01", value: 100},
-            { time: "2021-05-02", value: 200},
-            { time: "2021-05-03", value: 230},
-            { time: "2021-05-04", value: 300},
-          ]} />
+            {time: "2021-05-01", value: 100},
+            {time: "2021-05-02", value: 200},
+            {time: "2021-05-03", value: 230},
+            {time: "2021-05-04", value: 300},
+          ]}/>
+          {
+            isBigMobile && switchLineType()
+          }
           {
             isBigMobile && (
               <Stack sx={(theme) => ({
@@ -547,7 +616,7 @@ const Mine = () => {
                   </Box>
                 </Stack>
                 <Stack width={'100%'} alignItems={'end'}>
-                  <Stack direction={'row'} spacing={'11px'} alignItems={"center"}  sx={(theme) => ({
+                  <Stack direction={'row'} spacing={'11px'} alignItems={"center"} sx={(theme) => ({
                     color: theme.normal.text1,
                     fontSize: '12px',
                     lineHeight: '16px',
@@ -568,6 +637,9 @@ const Mine = () => {
                 }}/>
               </Stack>
             )
+          }
+          {
+            !isBigMobile && switchLineType()
           }
         </Stack>
         <Stack width={'100%'} spacing={'24px'}>
@@ -592,7 +664,7 @@ const Mine = () => {
                     </Stack>
                     <Select1 onChange={(e) => {
                       setPeriodIndex(Number(e.target.value))
-                    }} style={{ width: '100%' }}>
+                    }} style={{width: '100%'}}>
                       <option value={0}>5th settlement</option>
                       <option value={1}>4th settlement</option>
                     </Select1>
@@ -614,7 +686,7 @@ const Mine = () => {
                     </Stack>
                     <Select1 onChange={(e) => {
                       // TODO
-                    }} style={{ width: '100%' }}>
+                    }} style={{width: '100%'}}>
                       <option value={0}>按本期佣金</option>
                     </Select1>
                   </Box>
@@ -625,14 +697,15 @@ const Mine = () => {
               </Stack>
             ) : (
               <>
-                <Stack direction={'row'} justifyContent={'space-between'} alignItems={'center'} px={'20px'} sx={(theme) => ({
-                  color: theme.normal.text0,
-                  fontWeight: 700,
-                  fontSize: '16px',
-                  lineHeight: '22px',
-                  paddingBottom: '12px',
-                  borderBottom: `1px solid ${theme.normal.border}`,
-                })}>
+                <Stack direction={'row'} justifyContent={'space-between'} alignItems={'center'} px={'20px'}
+                       sx={(theme) => ({
+                         color: theme.normal.text0,
+                         fontWeight: 700,
+                         fontSize: '16px',
+                         lineHeight: '22px',
+                         paddingBottom: '12px',
+                         borderBottom: `1px solid ${theme.normal.border}`,
+                       })}>
                   <div>
                     跟单名单
                   </div>
@@ -683,7 +756,7 @@ const Mine = () => {
                       return (
                         <PaginationButton key={index} onClick={() => {
                           setPage(item)
-                        }} style={{ background: item === page ? '#EAAA00' : '', color: item === page ? '#1F2329' : '' }}>
+                        }} style={{background: item === page ? '#EAAA00' : '', color: item === page ? '#1F2329' : ''}}>
                           {item}
                         </PaginationButton>
                       )
