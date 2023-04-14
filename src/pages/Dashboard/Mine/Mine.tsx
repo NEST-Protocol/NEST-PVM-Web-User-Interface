@@ -170,7 +170,7 @@ const Mine = () => {
         })}>
           @murtaza
         </Box>
-        <Box sx={(theme) => ({
+        <Stack direction={'row'} spacing={'8px'} sx={(theme) => ({
           fontSize: '12px',
           lineHeight: '16px',
           color: theme.normal.text2,
@@ -178,8 +178,23 @@ const Mine = () => {
           borderBottom: `1px solid ${theme.normal.border}`,
           paddingBottom: '8px',
         })}>
-          0xsjdkekwod
-        </Box>
+          <Box>0xsjdkekwod</Box>
+          <Box sx={(theme) => ({
+            "svg": {
+              cursor: 'pointer',
+              width: 14,
+              height: 14,
+              display: "block",
+              "& path": {
+                fill: theme.normal.text2,
+              },
+            }
+          })} onClick={() => {
+            // TODO: copy
+          }}>
+            <Copy/>
+          </Box>
+        </Stack>
         <Stack direction={'row'} justifyContent={'space-between'} pt={'8px'}>
           <Stack spacing={'4px'} width={'100%'}>
             <Box sx={(theme) => ({
@@ -234,6 +249,7 @@ const Mine = () => {
         background: '#1F2329',
         borderBottom: `1px solid ${theme.normal.border}`,
         borderTop: `1px solid ${theme.normal.border}`,
+        padding: '0 20px',
       })}>
         <Stack sx={(theme) => ({
           paddingY: '11px',
@@ -292,7 +308,24 @@ const Mine = () => {
                 })}>
                   {account.address?.toString().showAddress()}
                 </Box>
-                <Copy style={{ width: "14px", height: "14px" }} />
+                <Box sx={(theme) => ({
+                  "svg": {
+                    cursor: 'pointer',
+                    width: 14,
+                    height: 14,
+                    display: "block",
+                    "& path": {
+                      fill: theme.normal.text2,
+                    },
+                  }
+                })} onClick={() => {
+                  if (account.address) {
+                    copy(account.address.toString())
+                    messageSnackBar("Copy Successfully");
+                  }
+                }}>
+                  <Copy/>
+                </Box>
               </Stack>
             ) : (
               <Stack direction={'row'} width={'100%'} justifyContent={"space-between"} alignItems={"center"}>
@@ -332,7 +365,12 @@ const Mine = () => {
                           fill: theme.normal.text2,
                         },
                       }
-                    })}>
+                    })} onClick={() => {
+                      if (account.address) {
+                        copy(account.address.toString())
+                        messageSnackBar("Copy Successfully");
+                      }
+                    }}>
                       <Copy/>
                     </Box>
                   </Stack>
@@ -536,9 +574,50 @@ const Mine = () => {
           {
             isBigMobile ? (
               <Stack px={'20px'} spacing={'12px'}>
-                <Stack pb={'4px'} direction={'row'} color={'white'} justifyContent={'space-between'}>
-                  <Stack width={'100%'}>5th</Stack>
-                  <Stack width={'100%'}>按本周佣金</Stack>
+                <Stack pb={'4px'} direction={'row'} spacing={'8px'} color={'white'} justifyContent={'space-between'}>
+                  <Box position={'relative'} width={'100%'}>
+                    <Stack position={'absolute'} sx={(theme) => ({
+                      right: '12px',
+                      height: '48px',
+                      justifyContent: 'center',
+                      '& svg': {
+                        height: '12px',
+                        width: '12px',
+                        '& path': {
+                          fill: theme.normal.text2
+                        },
+                      },
+                    })}>
+                      <DownIcon/>
+                    </Stack>
+                    <Select1 onChange={(e) => {
+                      setPeriodIndex(Number(e.target.value))
+                    }} style={{ width: '100%' }}>
+                      <option value={0}>5th settlement</option>
+                      <option value={1}>4th settlement</option>
+                    </Select1>
+                  </Box>
+                  <Box position={'relative'} width={'100%'}>
+                    <Stack position={'absolute'} sx={(theme) => ({
+                      right: '12px',
+                      height: '48px',
+                      justifyContent: 'center',
+                      '& svg': {
+                        height: '12px',
+                        width: '12px',
+                        '& path': {
+                          fill: theme.normal.text2
+                        },
+                      },
+                    })}>
+                      <DownIcon/>
+                    </Stack>
+                    <Select1 onChange={(e) => {
+                      // TODO
+                    }} style={{ width: '100%' }}>
+                      <option value={0}>按本期佣金</option>
+                    </Select1>
+                  </Box>
                 </Stack>
                 <MobileOrderCard item={''} index={1}/>
                 <MobileOrderCard item={''} index={1}/>
