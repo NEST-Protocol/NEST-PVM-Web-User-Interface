@@ -8,7 +8,7 @@ import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import useWindowWidth from "../../../hooks/useWindowWidth";
 import {styled} from "@mui/material/styles";
-import {Copy, DownIcon, NEXT, NoSort, UpSort, DownSort} from "../../../components/icons";
+import {Copy, DownIcon, NEXT, NoSort, UpSort, DownSort, Calendar} from "../../../components/icons";
 import TVChart from "./TVChart";
 import {useMemo, useState} from "react";
 import UnTxUserModal from "../Modal/UnTxUserModal";
@@ -656,14 +656,14 @@ const Mine = () => {
                       height: '48px',
                       justifyContent: 'center',
                       '& svg': {
-                        height: '12px',
-                        width: '12px',
+                        height: '14px',
+                        width: '14px',
                         '& path': {
                           fill: theme.normal.text2
                         },
                       },
                     })}>
-                      <DownIcon/>
+                      <Calendar/>
                     </Stack>
                     <Select1 onChange={(e) => {
                       setPeriodIndex(Number(e.target.value))
@@ -718,14 +718,14 @@ const Mine = () => {
                       height: '48px',
                       justifyContent: 'center',
                       '& svg': {
-                        height: '12px',
-                        width: '12px',
+                        height: '14px',
+                        width: '14px',
                         '& path': {
                           fill: theme.normal.text2
                         },
                       },
                     })}>
-                      <DownIcon/>
+                      <Calendar/>
                     </Stack>
                     <Select1 onChange={(e) => {
                       setPeriodIndex(Number(e.target.value))

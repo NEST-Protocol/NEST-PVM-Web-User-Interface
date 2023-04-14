@@ -58,3 +58,4 @@ export { ReactComponent as Notice } from "./svg/notice.svg";
 export { ReactComponent as NoSort } from "./svg/noSort.svg";
 export { ReactComponent as UpSort } from "./svg/upSort.svg";
 export { ReactComponent as DownSort } from "./svg/downSort.svg";
+export { ReactComponent as Calendar } from "./svg/calendar.svg";
