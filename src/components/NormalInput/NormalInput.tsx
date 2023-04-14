@@ -1,8 +1,19 @@
+import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
 import { FC } from "react";
 
 interface NormalInputProps {
+  placeHolder: string;
+  rightTitle: string;
+  value: string;
+  changeValue: (value: string) => void;
+  error?: boolean;
+  style?: React.CSSProperties;
+}
+
+interface NormalInputWithLeftTitleProps {
+  leftTitle: string;
   placeHolder: string;
   rightTitle: string;
   value: string;
@@ -61,6 +72,47 @@ const NormalInput: FC<NormalInputProps> = ({ ...props }) => {
         onChange={(e) => props.changeValue(e.target.value)}
       />
       <p>{props.rightTitle}</p>
+    </NormalInputBaseStack>
+  );
+};
+
+export const NormalInputWithLeftTitle: FC<NormalInputWithLeftTitleProps> = ({
+  ...props
+}) => {
+  return (
+    <NormalInputBaseStack
+      direction={"row"}
+      justifyContent={"space-between"}
+      alignItems={"center"}
+      style={props.style}
+      className={props.error ? "error" : ""}
+      spacing={"8px"}
+    >
+      <Box
+        component={"div"}
+        sx={(theme) => ({
+          fontSize: "16px",
+          fontWeight: 400,
+          color: theme.normal.text1,
+        })}
+      >
+        {props.leftTitle}
+      </Box>
+      <Stack
+        direction={"row"}
+        justifyContent={"flex-end"}
+        alignItems={"center"}
+        spacing={"8px"}
+      >
+        <input
+          placeholder={props.placeHolder}
+          value={props.value}
+          maxLength={32}
+          onChange={(e) => props.changeValue(e.target.value)}
+          style={{ textAlign: "right" }}
+        />
+        <p>{props.rightTitle}</p>
+      </Stack>
     </NormalInputBaseStack>
   );
 };

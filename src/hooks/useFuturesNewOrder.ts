@@ -53,9 +53,9 @@ export const INPUT_TOKENS = ["NEST", "USDT"];
 function addPricePoint(price: BigNumber, isLong: boolean) {
   const priceBigNumber = BigNumber.from(price.toString());
   if (isLong) {
-    return priceBigNumber.add(priceBigNumber.mul(2).div(1000));
+    return priceBigNumber.add(priceBigNumber.mul(1).div(100));
   } else {
-    return priceBigNumber.sub(priceBigNumber.mul(2).div(1000));
+    return priceBigNumber.sub(priceBigNumber.mul(1).div(100));
   }
 }
 
