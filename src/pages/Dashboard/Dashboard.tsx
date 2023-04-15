@@ -270,7 +270,7 @@ const Dashboard: FC = () => {
       const res = await fetch(`https://api.nestfi.net/api/dashboard/history/list?address=${address}`)
       const resJson = await res.json()
       if (resJson) {
-        setHistoryList(resJson.value)
+        setHistoryList(resJson.value.reverse())
       }
     } catch (e) {
       console.log(e)
