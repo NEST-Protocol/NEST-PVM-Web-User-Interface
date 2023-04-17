@@ -62,7 +62,7 @@ const Futures: FC = () => {
         const newPrice = await getPrice();
         setBasePrice(newPrice);
       })();
-    }, 1000);
+    }, 2000);
     return () => {
       clearInterval(time);
     };
