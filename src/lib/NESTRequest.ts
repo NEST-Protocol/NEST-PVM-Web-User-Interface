@@ -72,5 +72,5 @@ export function hideFuturesOrder(
 }
 
 export function getPriceFromNESTLocal(token: string): Promise<any> {
-  return baseRequestGet(`https://dev.nestdapp.io/api2/oracle/price/${token}usdt`);
+  return baseRequestGet(`https://api.nestfi.net/api/oracle/price/${token}usdt`);
 }
