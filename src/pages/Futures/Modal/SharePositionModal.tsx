@@ -251,11 +251,11 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
           },
         },
         "& .ModalLeftButton": {
-          width: isMobile ? 0 : 20,
+          width: 20,
         },
       };
     });
-  }, [isMobile]);
+  }, []);
   const title = useMemo(() => {
     const BaseToken = "USDT".getToken()!.icon;
     const TokenIcon = tokenName_info
