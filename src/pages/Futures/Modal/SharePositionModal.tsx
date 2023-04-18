@@ -4,7 +4,7 @@ import Modal from "@mui/material/Modal";
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
 import { FC, useCallback, useEffect, useMemo, useState } from "react";
-import { Close, Edit, Long, Short } from "../../../components/icons";
+import { Back, Close, Edit, Long, Short } from "../../../components/icons";
 import MainButton from "../../../components/MainButton/MainButton";
 import NESTLine from "../../../components/NESTLine";
 import NormalInfo from "../../../components/NormalInfo/NormalInfo";
@@ -22,7 +22,8 @@ import useReadTokenBalance from "../../../contracts/Read/useReadTokenContract";
 import useReadSwapAmountOut from "../../../contracts/Read/useReadSwapContract";
 import { BigNumber } from "ethers/lib/ethers";
 import LinkButton from "../../../components/MainButton/LinkButton";
-import { NormalInputWithLeftTitle } from "../../../components/NormalInput/NormalInput";
+import LeverageSlider from "../Components/LeverageSlider";
+import NormalInput from "../../../components/NormalInput/NormalInput";
 
 interface SharePositionModalProps {
   open: boolean;
@@ -32,7 +33,6 @@ interface SharePositionModalProps {
 
 const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
   const [isEdit, setIsEdit] = useState(false);
-  const [editLever, setEditLever] = useState("");
   const { account, chainsData } = useNEST();
   const { isMobile } = useWindowWidth();
   const [showApproveNotice, setShowApproveNotice] = useState(false);
@@ -122,6 +122,8 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
     showPositions,
     tokenAllowance,
     tokenApprove,
+    tpDefault,
+    slDefault,
   } = useFuturesNewOrder(
     props.price,
     tokenName_info ? tokenName_info.toLocaleUpperCase() : "ETH"
@@ -130,7 +132,6 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
     setLongOrShort(orientation_info);
     setTabsValue(1);
     setLever(lever_info ? parseInt(lever_info) : 1);
-    setEditLever(lever_info ? parseInt(lever_info).toString() : "1");
     setLimitAmount(
       basePrice_info ? (parseFloat(basePrice_info) / 100).toFixed(2) : ""
     );
@@ -262,7 +263,19 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
         ? tokenName_info.getToken()!.icon
         : "ETH".getToken()!.icon
       : "ETH".getToken()!.icon;
-    return (
+
+    return isEdit ? (
+      <Box
+        sx={(theme) => ({
+          color: theme.normal.text0,
+          fontWeight: 700,
+          fontSize: 16,
+        })}
+        component={"p"}
+      >
+        Edit
+      </Box>
+    ) : (
       <Stack
         direction={"row"}
         alignItems={"center"}
@@ -295,30 +308,24 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
             height: "16px",
           })}
         />
-        {isEdit ? (
-          <></>
-        ) : (
-          <>
-            <Box
-              component={"p"}
-              sx={(theme) => ({
-                height: "20px",
-                paddingX: "4px",
-                textAlign: "center",
-                color: theme.normal.text2,
-                fontWeight: 400,
-                fontSize: 16,
-              })}
-            >{`${lever}X`}</Box>
-            <Divider
-              orientation="vertical"
-              sx={(theme) => ({
-                borderColor: theme.normal.border,
-                height: "16px",
-              })}
-            />
-          </>
-        )}
+        <Box
+          component={"p"}
+          sx={(theme) => ({
+            height: "20px",
+            paddingX: "4px",
+            textAlign: "center",
+            color: theme.normal.text2,
+            fontWeight: 400,
+            fontSize: 16,
+          })}
+        >{`${lever}X`}</Box>
+        <Divider
+          orientation="vertical"
+          sx={(theme) => ({
+            borderColor: theme.normal.border,
+            height: "16px",
+          })}
+        />
 
         <Stack
           direction={"row"}
@@ -365,42 +372,38 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
         ) : (
           <></>
         )}
-        {!isEdit ? (
-          <Stack
-            direction={"row"}
-            justifyContent={"flex-end"}
-            alignItems={"center"}
-            height={"20px"}
-          >
-            <LinkButton onClick={() => setIsEdit(true)}>
-              <Stack
-                direction={"row"}
-                spacing={"4px"}
-                justifyContent={"flex-end"}
-                alignItems={"center"}
-                sx={() => ({
-                  "& svg": {
-                    width: "12px",
-                    height: "12px",
-                  },
-                  "& p": {
-                    lineHeight: "20px",
-                    fontWeight: 400,
-                    fontSize: "14px",
-                  },
-                })}
-              >
-                <Edit />
-                <p>Edit</p>
-              </Stack>
-            </LinkButton>
-          </Stack>
-        ) : (
-          <></>
-        )}
+        <Stack
+          direction={"row"}
+          justifyContent={"flex-end"}
+          alignItems={"center"}
+          height={"20px"}
+        >
+          <LinkButton onClick={() => setIsEdit(true)}>
+            <Stack
+              direction={"row"}
+              spacing={"4px"}
+              justifyContent={"flex-end"}
+              alignItems={"center"}
+              sx={() => ({
+                "& svg": {
+                  width: "12px",
+                  height: "12px",
+                },
+                "& p": {
+                  lineHeight: "20px",
+                  fontWeight: 400,
+                  fontSize: "14px",
+                },
+              })}
+            >
+              <Edit />
+              <p>Edit</p>
+            </Stack>
+          </LinkButton>
+        </Stack>
       </Stack>
     );
-  }, [isEdit, limitAmount, sl, tp]);
+  }, [limitAmount, sl, tp]);
 
   const info2 = useMemo(() => {
     return (
@@ -528,121 +531,128 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
     triggerNoticeCallback,
   ]);
 
-  const inputsView = useMemo(() => {
+  const normalView = useMemo(() => {
     return (
-      <Stack spacing={"16px"}>
-        <NormalInputWithLeftTitle
-          leftTitle="Leverage"
-          placeHolder={""}
-          rightTitle={"X"}
-          error={!(parseInt(editLever) > 0 && parseInt(editLever) <= 50)}
-          value={editLever}
-          changeValue={(value: string) => {
-            setEditLever(value.formatInputNum());
-            const leverNum = parseInt(value.formatInputNum());
-            if (leverNum > 0 && leverNum <= 50) {
-              setLever(parseInt(value.formatInputNum()));
-            }
-          }}
-        />
-        <NormalInputWithLeftTitle
-          leftTitle="Limit Price"
-          placeHolder={""}
-          rightTitle={"USDT"}
-          value={limitAmount}
-          changeValue={(value: string) =>
-            setLimitAmount(value.formatInputNum())
-          }
-        />
-        <NormalInputWithLeftTitle
-          leftTitle="Take Profit"
-          placeHolder={""}
-          rightTitle={"USDT"}
-          value={tp}
-          changeValue={(value: string) => setTp(value.formatInputNum())}
-        />
-        <NormalInputWithLeftTitle
-          leftTitle="Stop Loss"
-          placeHolder={""}
-          rightTitle={"USDT"}
-          value={sl}
-          changeValue={(value: string) => setSl(value.formatInputNum())}
-        />
-      </Stack>
-    );
-  }, [editLever, limitAmount, setLever, setLimitAmount, setSl, setTp, sl, tp]);
-
-  const checkLever = useMemo(() => {
-    return lever === parseInt(editLever);
-  }, [editLever, lever]);
-
-  const mainButtons = useMemo(() => {
-    const mainButton = (
-      <MainButton
-        title={mainButtonTitle}
-        disable={mainButtonDis || !checkLever}
-        isLoading={mainButtonLoading}
-        onClick={() => {
-          if (checkLever) {
-            mainButtonAction();
-          }
-        }}
-        style={{
-          height: "48px",
-          fontSize: 16,
-        }}
-      />
-    );
-    if (isEdit) {
-      return (
-        <Stack
-          direction={"row"}
-          spacing={"12px"}
-          justifyContent={"space-between"}
-          alignItems={"center"}
-        >
-          <Box
-            sx={(theme) => ({
-              border: `1px solid ${theme.normal.primary_light_active}`,
-              borderRadius: "12px",
-              width: "100%",
+      <>
+        <Stack spacing={"24px"} width={"100%"}>
+          {inputNestAmount}
+          {info1}
+          <NESTLine />
+          {info2}
+          <MainButton
+            title={mainButtonTitle}
+            disable={mainButtonDis}
+            isLoading={mainButtonLoading}
+            onClick={mainButtonAction}
+            style={{
               height: "48px",
-              lineHeight: "48px",
-              fontWeight: 700,
-              fontSize: "16px",
-              color: theme.normal.primary,
-              "&:hover": {
-                cursor: "pointer",
-                color: theme.normal.highDark,
-                background: theme.normal.primary_hover,
-              },
-              "&:active": {
-                color: theme.normal.highDark,
-                background: theme.normal.primary_active,
-              },
-            })}
-            component={"button"}
-            onClick={() => {
-              getOrderInfo();
-              setIsEdit(false);
+              fontSize: 16,
             }}
-          >
-            Restore
-          </Box>
-          {mainButton}
+          />
         </Stack>
-      );
-    } else {
-      return mainButton;
-    }
+      </>
+    );
   }, [
-    checkLever,
-    getOrderInfo,
-    isEdit,
+    info1,
+    info2,
+    inputNestAmount,
     mainButtonAction,
     mainButtonDis,
     mainButtonLoading,
     mainButtonTitle,
+  ]);
+
+  const editView = useMemo(() => {
+    return (
+      <Stack spacing={"24px"} width={"100%"}>
+        <Stack spacing={"16px"} width={"100%"}>
+          <LeverageSlider
+            value={lever}
+            changeValue={(value: number) => setLever(value)}
+          />
+
+          <Stack spacing={"8px"} width={"100%"}>
+            <Box
+              sx={(theme) => ({
+                fontWeight: 400,
+                fontSize: 12,
+                color: theme.normal.text2,
+              })}
+            >
+              Limit Price
+            </Box>
+
+            <NormalInput
+              placeHolder={""}
+              rightTitle={"USDT"}
+              value={limitAmount}
+              changeValue={(value: string) =>
+                setLimitAmount(value.formatInputNum())
+              }
+            />
+          </Stack>
+
+          <Stack spacing={"8px"} width={"100%"}>
+            <Box
+              sx={(theme) => ({
+                fontWeight: 400,
+                fontSize: 12,
+                color: theme.normal.text2,
+              })}
+            >
+              Take Profit
+            </Box>
+
+            <NormalInput
+              placeHolder={tpDefault}
+              rightTitle={"USDT"}
+              value={tp}
+              changeValue={(value: string) => setTp(value.formatInputNum())}
+            />
+          </Stack>
+
+          <Stack spacing={"8px"} width={"100%"}>
+            <Box
+              sx={(theme) => ({
+                fontWeight: 400,
+                fontSize: 12,
+                color: theme.normal.text2,
+              })}
+            >
+              Stop Loss
+            </Box>
+
+            <NormalInput
+              placeHolder={slDefault}
+              rightTitle={"USDT"}
+              value={sl}
+              changeValue={(value: string) => setSl(value.formatInputNum())}
+            />
+          </Stack>
+        </Stack>
+        <MainButton
+          title={"Confirm"}
+          disable={false}
+          isLoading={false}
+          onClick={() => setIsEdit(false)}
+          style={{
+            height: "48px",
+            fontSize: 16,
+          }}
+        />
+      </Stack>
+    );
+  }, [
+    lever,
+    limitAmount,
+    setLever,
+    setLimitAmount,
+    setSl,
+    setTp,
+    sl,
+    slDefault,
+    tp,
+    tpDefault,
   ]);
 
   return (
@@ -666,19 +676,18 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
               alignItems="center"
               spacing={0}
             >
-              <button className="ModalLeftButton"></button>
+              <button
+                className="ModalLeftButton"
+                onClick={() => setIsEdit(false)}
+              >
+                {isEdit ? <Back /> : <></>}
+              </button>
               {title}
               <button onClick={props.onClose}>
                 <Close />
               </button>
             </TopStack>
-            <Stack spacing={"24px"} width={"100%"}>
-              {inputNestAmount}
-              {isEdit ? inputsView : info1}
-              <NESTLine />
-              {info2}
-              {mainButtons}
-            </Stack>
+            {isEdit ? editView : normalView}
           </BaseModalStack>
         </BaseBox>
       </Box>
