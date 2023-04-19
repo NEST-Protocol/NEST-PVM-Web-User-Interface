@@ -384,7 +384,7 @@ const Dashboard: FC = () => {
     return (
       <ShareMyOrderModal value={shareOrder} open={showShareOrderModal} onClose={() => {
         setShowShareOrderModal(false)
-      }}/>
+      }} isClosed={tabsValue === 1}/>
     )
   }, [showShareOrderModal])
 
