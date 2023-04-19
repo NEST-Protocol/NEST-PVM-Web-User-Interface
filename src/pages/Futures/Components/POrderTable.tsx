@@ -121,6 +121,7 @@ const POrderTableRow: FC<POrderTableRowProps> = ({ ...props }) => {
         onClose={() => {
           setShowShareOrderModal(false);
         }}
+        isClosed={false}
       />
       <TableCell>
         <OrderTablePosition
@@ -274,6 +275,7 @@ const POrderTableCloseRow: FC<POrderTableRowCloseProps> = ({ ...props }) => {
         onClose={() => {
           setShowShareOrderModal(false);
         }}
+        isClosed={false}
       />
       <TableCell>
         <OrderTablePosition

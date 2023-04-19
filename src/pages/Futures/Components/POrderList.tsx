@@ -57,6 +57,7 @@ const POrderList: FC<POrderListProps> = ({ ...props }) => {
         onClose={() => {
           setShowShareOrderModal(false);
         }}
+        isClosed={false}
       />
       <OrderListPosition
         tokenName={tokenName}
@@ -206,6 +207,7 @@ export const POrderCloseList: FC<POrderCloseListProps> = ({ ...props }) => {
         onClose={() => {
           setShowShareOrderModal(false);
         }}
+        isClosed={false}
       />
       <OrderListPosition
         tokenName={tokenName}
