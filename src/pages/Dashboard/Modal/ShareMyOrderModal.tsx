@@ -277,7 +277,7 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`;
                     </Caption8>
                   </Stack>
                   <Stack spacing={"7px"} width={"50%"}>
-                    <Caption5>Last Price</Caption5>
+                    <Caption5>Close Price</Caption5>
                     <Caption8>
                       {props.value.lastPrice?.toLocaleString("en-US", {
                         maximumFractionDigits: 2,
