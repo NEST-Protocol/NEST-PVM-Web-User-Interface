@@ -537,11 +537,44 @@ const Dashboard: FC = () => {
         paddingY: '12px'
       }} key={index}>
         <Stack direction={'row'} justifyContent={'space-between'}>
-          <OrderTablePosition
-            tokenName={item.tokenPair.split('/')[0]}
-            isLong={item.orientation === 'Long'}
-            lever={Number(item.leverage.replace('X', ''))}
-          />
+          <Stack direction={'row'} justifyContent={'space-between'}>
+            <OrderTablePosition
+              tokenName={item.tokenPair.split('/')[0]}
+              isLong={item.orientation === 'Long'}
+              lever={Number(item.leverage.replace('X', ''))}
+            />
+            <Box component={"button"} sx={(theme) => ({
+              cursor: "pointer",
+              "& svg": {
+                width: "20px",
+                height: "20px",
+                display: "block",
+                margin: "0 auto",
+                "& path": {
+                  fill: theme.normal.text2,
+                },
+              },
+              '&:hover': {
+                "& svg path": {
+                  fill: theme.normal.text0,
+                }
+              },
+              '&:active': {
+                "& svg path": {
+                  fill: theme.normal.text0,
+                }
+              }
+            })} onClick={() => {
+              setShowShareOrderModal(true)
+              setShareOrder({
+                ...item,
+                sp: Number(item.sp.toFixed(2)),
+                sl: Number(item.sl.toFixed(2)),
+              })
+            }}>
+              <Share/>
+            </Box>
+          </Stack>
           <Box component={"button"} sx={(theme) => ({
             cursor: "pointer",
             "& svg": {
