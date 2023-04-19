@@ -108,7 +108,11 @@ const FuturesNewOrder: FC<FuturesNewOrderProps> = ({ ...props }) => {
         <Stack direction={"row"} alignItems={"center"}>
           <Agree
             value={isStop}
-            changeValue={(value: boolean) => setIsStop(value)}
+            changeValue={(value: boolean) => {
+              setTp("");
+              setSl("");
+              setIsStop(value);
+            }}
           />{" "}
           <Box
             component={"button"}
@@ -118,7 +122,11 @@ const FuturesNewOrder: FC<FuturesNewOrderProps> = ({ ...props }) => {
               marginLeft: "4px",
               color: theme.normal.text0,
             })}
-            onClick={() => setIsStop(!isStop)}
+            onClick={() => {
+              setTp("");
+              setSl("");
+              setIsStop(!isStop);
+            }}
           >
             Stop-Limit
           </Box>
@@ -231,7 +239,16 @@ const FuturesNewOrder: FC<FuturesNewOrderProps> = ({ ...props }) => {
         />
       </>
     );
-  }, [inputToken, showFee, showFeeHoverText, showLiqPrice, showOpenPrice, showPositions, showTotalPay, tabsValue]);
+  }, [
+    inputToken,
+    showFee,
+    showFeeHoverText,
+    showLiqPrice,
+    showOpenPrice,
+    showPositions,
+    showTotalPay,
+    tabsValue,
+  ]);
   const modals = useMemo(() => {
     return (
       <>

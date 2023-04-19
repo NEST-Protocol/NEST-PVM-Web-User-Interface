@@ -594,15 +594,22 @@ function useFuturesNewOrder(
     }
   }, [inputToken, tokenBalance, allValue]);
 
-  // const openPriceHelpInfo = useMemo(() => {
-  //   const info = ["To ensure a successful trade, there is price slippage."];
-    // if (parseFloat(nestAmount) * lever >= 100000) {
-    //   info.push(
-    //     "To ensure system fairness, your position is added to the impact cost."
-    //   );
-    // }
-  //   return info;
-  // }, []);
+  const tpDefault = useMemo(() => {
+    if (openPriceBase) {
+      const limitPrice = openPriceBase.bigNumberToShowString(18, 2)
+      return longOrShort ? `> ${limitPrice}` : `< ${limitPrice}`
+    } else {
+      return ""
+    }
+  }, [longOrShort, openPriceBase])
+  const slDefault = useMemo(() => {
+    if (openPriceBase) {
+      const limitPrice = openPriceBase.bigNumberToShowString(18, 2)
+      return longOrShort ? `< ${limitPrice}` : `> ${limitPrice}`
+    } else {
+      return ""
+    }
+  }, [longOrShort, openPriceBase])
 
   /**
    * update
@@ -665,6 +672,8 @@ function useFuturesNewOrder(
     showPositions,
     tokenAllowance,
     tokenApprove,
+    tpDefault,
+    slDefault
   };
 }
 

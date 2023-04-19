@@ -159,6 +159,16 @@ export type Order = {
   sl: number;
 }
 
+function formatDate(timestamp: number) {
+  const date = new Date(timestamp);
+  return date.getFullYear() + '-'
+    + (date.getMonth() + 1).toString().padStart(2, '0') + '-'
+    + date.getDate().toString().padStart(2, '0') + ' '
+    + date.getHours().toString().padStart(2, '0') + ':'
+    + date.getMinutes().toString().padStart(2, '0') + ':'
+    + date.getSeconds().toString().padStart(2, '0');
+}
+
 const Dashboard: FC = () => {
   const {address} = useAccount()
   const {setShowConnect} = useNEST();
@@ -184,11 +194,11 @@ const Dashboard: FC = () => {
     day7Rate: 0,
     day30Rate: 0,
   });
-  const [historyList, setHistoryList] = useState<Order[]>([]);
-  const [positionList, setPositionList] = useState<Order[]>([]);
+  const [historyList, setHistoryList] = useState<any[]>([]);
+  const [positionList, setPositionList] = useState<any[]>([]);
   const [showShareMyDealModal, setShareMyDealModal] = useState(false);
   const [showShareOrderModal, setShowShareOrderModal] = useState(false);
-  const [shareOrder, setShareOrder] = useState<Order | undefined>(undefined);
+  const [shareOrder, setShareOrder] = useState<any>(undefined);
   const {messageSnackBar} = useNESTSnackBar();
 
   const getBurnedData = useCallback(async () => {
@@ -270,7 +280,7 @@ const Dashboard: FC = () => {
       const res = await fetch(`https://api.nestfi.net/api/dashboard/history/list?address=${address}`)
       const resJson = await res.json()
       if (resJson) {
-        setHistoryList(resJson.value)
+        setHistoryList(resJson.value.sort((a: any, b: any) => b.time - a.time))
       }
     } catch (e) {
       console.log(e)
@@ -378,13 +388,29 @@ const Dashboard: FC = () => {
     )
   }, [showShareOrderModal])
 
-  const PCOrderRow = (item: Order, index: number) => {
+  const PCOrderRow = (item: any, index: number, showTime: boolean = false) => {
     return (
       <TableRow key={index} sx={(theme) => ({
         ":hover": {
           background: theme.normal.bg1,
         }
       })}>
+        {
+          showTime && (
+            <TableCell>
+              <Box
+                component={"p"}
+                sx={(theme) => ({
+                  fontWeight: 700,
+                  fontSize: 16,
+                  color: theme.normal.text0,
+                })}
+              >
+                {formatDate(item.time * 1000)}
+              </Box>
+            </TableCell>
+          )
+        }
         <TableCell>
           <OrderTablePosition
             tokenName={item.tokenPair.split('/')[0]}
@@ -504,23 +530,50 @@ const Dashboard: FC = () => {
     )
   }
 
-  const MobileOrderCard = (item: Order, index: number) => {
+  const MobileOrderCard = (item: any, index: number, showTime: boolean = false) => {
     return (
       <Card4 sx={{
-        paddingX: '16px'
-      }} key={index} onClick={() => {
-        setShowShareOrderModal(true)
-        setShareOrder({
-          ...item,
-          sp: Number(item.sp.toFixed(2)),
-          sl: Number(item.sl.toFixed(2)),
-        })
-      }}>
-        <OrderTablePosition
-          tokenName={item.tokenPair.split('/')[0]}
-          isLong={item.orientation === 'Long'}
-          lever={Number(item.leverage.replace('X', ''))}
-        />
+        paddingX: '16px',
+        paddingY: '12px'
+      }} key={index}>
+        <Stack direction={'row'} justifyContent={'space-between'}>
+          <OrderTablePosition
+            tokenName={item.tokenPair.split('/')[0]}
+            isLong={item.orientation === 'Long'}
+            lever={Number(item.leverage.replace('X', ''))}
+          />
+          <Box component={"button"} sx={(theme) => ({
+            cursor: "pointer",
+            "& svg": {
+              width: "20px",
+              height: "20px",
+              display: "block",
+              margin: "0 auto",
+              "& path": {
+                fill: theme.normal.text2,
+              },
+            },
+            '&:hover': {
+              "& svg path": {
+                fill: theme.normal.text0,
+              }
+            },
+            '&:active': {
+              "& svg path": {
+                fill: theme.normal.text0,
+              }
+            }
+          })} onClick={() => {
+            setShowShareOrderModal(true)
+            setShareOrder({
+              ...item,
+              sp: Number(item.sp.toFixed(2)),
+              sl: Number(item.sl.toFixed(2)),
+            })
+          }}>
+            <Share/>
+          </Box>
+        </Stack>
         <Stack spacing={'8px'} pt={'20px'}>
           <Stack direction={'row'}>
             <Stack width={'50%'} spacing={'4px'}>
@@ -554,7 +607,7 @@ const Dashboard: FC = () => {
           <Box py={'8px'}>
             <Box sx={(theme) => ({
               width: '100%',
-              border: '1px solid',
+              borderBottom: '1px solid',
               borderColor: theme.normal.border,
             })}/>
           </Box>
@@ -580,23 +633,33 @@ const Dashboard: FC = () => {
               })} USDT</Caption5>
             </Stack>
           </Stack>
-          <Stack direction={'row'}>
-            <Stack direction={'row'} width={'50%'} spacing={'4px'}>
-              <Caption5 sx={(theme) => ({
-                color: theme.normal.text2
-              })}>Liq Price</Caption5>
-              <Caption5 sx={(theme) => ({
-                color: theme.normal.text0
-              })}>{lipPrice(
-                ethers.utils.parseEther(item.initialMargin.toFixed(12)),
-                ethers.utils.parseEther(item?.appendMargin?.toFixed(12) || '0'),
-                BigNumber.from(item.leverage.replace('X', '')),
-                ethers.utils.parseEther(item.lastPrice.toFixed(12)),
-                ethers.utils.parseEther(item.openPrice.toFixed(12)),
-                item.orientation === 'Long',
-              ).div(BigNumber.from(10).pow(16)).toNumber() / 100} USDT</Caption5>
-            </Stack>
+          <Stack direction={'row'} width={'50%'} spacing={'4px'}>
+            <Caption5 sx={(theme) => ({
+              color: theme.normal.text2
+            })}>Liq Price</Caption5>
+            <Caption5 sx={(theme) => ({
+              color: theme.normal.text0
+            })}>{lipPrice(
+              ethers.utils.parseEther(item.initialMargin.toFixed(12)),
+              ethers.utils.parseEther(item?.appendMargin?.toFixed(12) || '0'),
+              BigNumber.from(item.leverage.replace('X', '')),
+              ethers.utils.parseEther(item.lastPrice.toFixed(12)),
+              ethers.utils.parseEther(item.openPrice.toFixed(12)),
+              item.orientation === 'Long',
+            ).div(BigNumber.from(10).pow(16)).toNumber() / 100} USDT</Caption5>
           </Stack>
+          {
+            showTime && (
+              <Stack direction={'row'} width={'50%'} spacing={'4px'}>
+                <Caption5 sx={(theme) => ({
+                  color: theme.normal.text2
+                })}>Time</Caption5>
+                <Caption5 sx={(theme) => ({
+                  color: theme.normal.text0
+                })}>{formatDate(item.time * 1000)}</Caption5>
+              </Stack>
+            )
+          }
         </Stack>
       </Card4>
     )
@@ -630,6 +693,41 @@ const Dashboard: FC = () => {
     <Stack alignItems={"center"} width={'100%'}>
       {shareMyDealModal}
       {shareMyOrderModal}
+      {/*<Stack direction={'row'} width={'100%'} justifyContent={"center"} spacing={'32px'} sx={(theme) => ({*/}
+      {/*  color: theme.normal.text0,*/}
+      {/*  fontWeight: 700,*/}
+      {/*  fontSize: '16px',*/}
+      {/*  lineHeight: '22px',*/}
+      {/*  background: theme.normal.bg1,*/}
+      {/*  borderBottom: `1px solid ${theme.normal.border}`,*/}
+      {/*  borderTop: `1px solid ${theme.normal.border}`,*/}
+      {/*})}>*/}
+      {/*  <Box sx={(theme) => ({*/}
+      {/*    paddingY: '11px',*/}
+      {/*    borderBottom: `2px solid ${theme.normal.primary}`,*/}
+      {/*    a: {*/}
+      {/*      color: theme.normal.primary,*/}
+      {/*      cursor: 'pointer',*/}
+      {/*      '&:hover': {*/}
+      {/*        color: theme.normal.primary,*/}
+      {/*      }*/}
+      {/*    }*/}
+      {/*  })}>*/}
+      {/*    <a href={'/#/dashboard'}>Dashboard</a>*/}
+      {/*  </Box>*/}
+      {/*  <Box sx={(theme) => ({*/}
+      {/*    paddingY: '11px',*/}
+      {/*    a: {*/}
+      {/*      color: theme.normal.text0,*/}
+      {/*      cursor: 'pointer',*/}
+      {/*      '&:hover': {*/}
+      {/*        color: theme.normal.primary,*/}
+      {/*      }*/}
+      {/*    }*/}
+      {/*  })}>*/}
+      {/*    <a href={'/#/dashboard/mine'}>我的管理</a>*/}
+      {/*  </Box>*/}
+      {/*</Stack>*/}
       <Stack maxWidth={'1600px'} px={['0', '0', '20px']} width={'100%'} spacing={['20px', '20px', '40px']}
              py={['20px', '20px', '40px']}>
         <Stack>
@@ -974,7 +1072,7 @@ const Dashboard: FC = () => {
                 {
                   tabsValue === 1 && (historyList.length > 0 ? (
                       historyList.map((item, index) => (
-                        MobileOrderCard(item, index)
+                        MobileOrderCard(item, index, true)
                       ))
                     ) : (
                       <Stack sx={(theme) => ({
@@ -996,7 +1094,15 @@ const Dashboard: FC = () => {
               </Stack>
             ) : (
               <FuturesTableTitle
-                dataArray={[
+                dataArray={tabsValue === 0 ? [
+                  "Position",
+                  "Actual Margin",
+                  "Open Price",
+                  "Liq Price",
+                  "Stop Order",
+                  "Operate",
+                ] : [
+                  "Time",
                   "Position",
                   "Actual Margin",
                   "Open Price",
@@ -1008,12 +1114,12 @@ const Dashboard: FC = () => {
               >
                 {
                   tabsValue === 0 && positionList.map((item, index) => (
-                    PCOrderRow(item, index)
+                    PCOrderRow(item, index, false)
                   ))
                 }
                 {
                   tabsValue === 1 && historyList.map((item, index) => (
-                    PCOrderRow(item, index)
+                    PCOrderRow(item, index, true)
                   ))
                 }
               </FuturesTableTitle>
