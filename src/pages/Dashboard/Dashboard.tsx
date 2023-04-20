@@ -186,13 +186,13 @@ const Dashboard: FC = () => {
   const [txData, setTxData] = useState([]);
   const [myTxInfo, setMyTxInfo] = useState({
     totalValue: 0,
-    totalRate: 0,
+    // totalRate: 0,
     todayValue: 0,
     day7Value: 0,
     day30Value: 0,
-    todayRate: 0,
-    day7Rate: 0,
-    day30Rate: 0,
+    // todayRate: 0,
+    // day7Rate: 0,
+    // day30Rate: 0,
   });
   const [historyList, setHistoryList] = useState<any[]>([]);
   const [positionList, setPositionList] = useState<any[]>([]);
@@ -879,11 +879,11 @@ const Dashboard: FC = () => {
                       <Title4>{myTxInfo.totalValue.toLocaleString('en-US', {
                         maximumFractionDigits: 2,
                       })} NEST</Title4>
-                      <Title5 sx={(theme) => ({
-                        color: theme.normal.success
-                      })}>{myTxInfo.totalRate > 0 && '+'}{myTxInfo.totalRate.toLocaleString('en-US', {
-                        maximumFractionDigits: 2,
-                      })}%</Title5>
+                      {/*<Title5 sx={(theme) => ({*/}
+                      {/*  color: theme.normal.success*/}
+                      {/*})}>{myTxInfo.totalRate > 0 && '+'}{myTxInfo.totalRate.toLocaleString('en-US', {*/}
+                      {/*  maximumFractionDigits: 2,*/}
+                      {/*})}%</Title5>*/}
                     </Stack>
                   </Stack>
                   <Box py={'20px'}>
@@ -896,11 +896,11 @@ const Dashboard: FC = () => {
                         <Caption4>{myTxInfo.todayValue.toLocaleString('en-US', {
                           maximumFractionDigits: 2,
                         })} NEST</Caption4>
-                        <Caption5 sx={(theme) => ({
-                          color: theme.normal.success
-                        })}>{myTxInfo.todayRate > 0 && '+'}{myTxInfo.todayRate.toLocaleString('en-US', {
-                          maximumFractionDigits: 2,
-                        })}%</Caption5>
+                        {/*<Caption5 sx={(theme) => ({*/}
+                        {/*  color: theme.normal.success*/}
+                        {/*})}>{myTxInfo.todayRate > 0 && '+'}{myTxInfo.todayRate.toLocaleString('en-US', {*/}
+                        {/*  maximumFractionDigits: 2,*/}
+                        {/*})}%</Caption5>*/}
                       </Stack>
                     </Stack>
                     <Stack direction={'row'} justifyContent={'space-between'}>
@@ -909,11 +909,11 @@ const Dashboard: FC = () => {
                         <Caption4>{myTxInfo.day7Value.toLocaleString('en-US', {
                           maximumFractionDigits: 2,
                         })} NEST</Caption4>
-                        <Caption5 sx={(theme) => ({
-                          color: theme.normal.success
-                        })}>{myTxInfo.day7Rate > 0 && '+'}{myTxInfo.day7Rate.toLocaleString('en-US', {
-                          maximumFractionDigits: 2,
-                        })}%</Caption5>
+                        {/*<Caption5 sx={(theme) => ({*/}
+                        {/*  color: theme.normal.success*/}
+                        {/*})}>{myTxInfo.day7Rate > 0 && '+'}{myTxInfo.day7Rate.toLocaleString('en-US', {*/}
+                        {/*  maximumFractionDigits: 2,*/}
+                        {/*})}%</Caption5>*/}
                       </Stack>
                     </Stack>
                     <Stack direction={'row'} justifyContent={'space-between'}>
@@ -922,11 +922,11 @@ const Dashboard: FC = () => {
                         <Caption4>{myTxInfo.day30Value.toLocaleString('en-US', {
                           maximumFractionDigits: 2,
                         })} NEST</Caption4>
-                        <Caption5 sx={(theme) => ({
-                          color: theme.normal.success
-                        })}>{myTxInfo.day30Rate > 0 && '+'}{myTxInfo.day30Rate.toLocaleString('en-US', {
-                          maximumFractionDigits: 2,
-                        })}%</Caption5>
+                        {/*<Caption5 sx={(theme) => ({*/}
+                        {/*  color: theme.normal.success*/}
+                        {/*})}>{myTxInfo.day30Rate > 0 && '+'}{myTxInfo.day30Rate.toLocaleString('en-US', {*/}
+                        {/*  maximumFractionDigits: 2,*/}
+                        {/*})}%</Caption5>*/}
                       </Stack>
                     </Stack>
                   </Stack>
@@ -992,13 +992,15 @@ const Dashboard: FC = () => {
                         lineHeight: '40px',
                       },
                       '.color-full': {
-                        color: myTxInfo.totalRate >= 0 ? theme.normal.success : theme.normal.danger,
+                        // color: myTxInfo.totalRate >= 0 ? theme.normal.success : theme.normal.danger,
                       },
                     })}
                   >{myTxInfo.totalValue.toLocaleString('en-US', {
                     maximumFractionDigits: 2,
-                  })} <span>NEST</span> <span
-                    className={'color-full'}>{myTxInfo.totalRate > 0 && '+'}{myTxInfo.totalRate}%</span></Title2>
+                  })} <span>NEST</span>
+                    {/*<span*/}
+                    {/*className={'color-full'}>{myTxInfo.totalRate > 0 && '+'}{myTxInfo.totalRate}%</span>*/}
+                  </Title2>
                   <Caption1>Total Profit & Loss</Caption1>
                 </Stack>
                 <Stack direction={'row'} spacing={'16px'}>
@@ -1011,13 +1013,15 @@ const Dashboard: FC = () => {
                           lineHeight: '32px'
                         },
                         '.color-full': {
-                          color: myTxInfo.todayRate >= 0 ? theme.normal.success : theme.normal.danger,
+                          // color: myTxInfo.todayRate >= 0 ? theme.normal.success : theme.normal.danger,
                         }
                       })}
                     >{myTxInfo.todayValue.toLocaleString('en-US', {
                       maximumFractionDigits: 2,
-                    })} <span>NEST</span> <span
-                      className={'color-full'}>{myTxInfo.todayRate > 0 && '+'}{myTxInfo.todayRate}%</span></Title3>
+                    })} <span>NEST</span>
+                      {/*<span*/}
+                      {/*className={'color-full'}>{myTxInfo.todayRate > 0 && '+'}{myTxInfo.todayRate}%</span>*/}
+                    </Title3>
                     <Caption2 sx={{paddingTop: '12px'}}>Today's PNL</Caption2>
                   </Card3>
                   <Card3>
@@ -1029,13 +1033,15 @@ const Dashboard: FC = () => {
                           lineHeight: '32px'
                         },
                         '.color-full': {
-                          color: myTxInfo.day7Rate >= 0 ? theme.normal.success : theme.normal.danger,
+                          // color: myTxInfo.day7Rate >= 0 ? theme.normal.success : theme.normal.danger,
                         }
                       })}
                     >{myTxInfo.day7Value.toLocaleString('en-US', {
                       maximumFractionDigits: 2,
-                    })} <span>NEST</span> <span
-                      className={'color-full'}>{myTxInfo.day7Rate > 0 && '+'}{myTxInfo.day7Rate}%</span></Title3>
+                    })} <span>NEST</span>
+                      {/*<span*/}
+                      {/*className={'color-full'}>{myTxInfo.day7Rate > 0 && '+'}{myTxInfo.day7Rate}%</span>*/}
+                    </Title3>
                     <Caption2 sx={{paddingTop: '12px'}}>7 Days' PNL</Caption2>
                   </Card3>
                   <Card3>
@@ -1047,13 +1053,15 @@ const Dashboard: FC = () => {
                           lineHeight: '32px'
                         },
                         '.color-full': {
-                          color: myTxInfo.day30Rate >= 0 ? theme.normal.success : theme.normal.danger,
+                          // color: myTxInfo.day30Rate >= 0 ? theme.normal.success : theme.normal.danger,
                         },
                       })}
                     >{myTxInfo.day30Value.toLocaleString('en-US', {
                       maximumFractionDigits: 2,
-                    })} <span>NEST</span> <span
-                      className={'color-full'}>{myTxInfo.day30Rate > 0 && '+'}{myTxInfo.day30Rate}%</span></Title3>
+                    })} <span>NEST</span>
+                      {/*<span*/}
+                      {/*className={'color-full'}>{myTxInfo.day30Rate > 0 && '+'}{myTxInfo.day30Rate}%</span>*/}
+                    </Title3>
                     <Caption2 sx={{paddingTop: '12px'}}>30 Days' PNL</Caption2>
                   </Card3>
                 </Stack>
