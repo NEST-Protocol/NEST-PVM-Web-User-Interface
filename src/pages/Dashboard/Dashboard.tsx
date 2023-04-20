@@ -7,7 +7,6 @@ import useWindowWidth from "../../hooks/useWindowWidth";
 import {useAccount} from "wagmi";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
-import OrderTablePosition from "./Components/OrderTablePosition";
 import Box from "@mui/material/Box";
 import FuturesOrderShare from "../Futures/Components/FuturesOrderShare";
 import MainButton from "../../components/MainButton/MainButton";
@@ -20,6 +19,7 @@ import copy from "copy-to-clipboard";
 import useNESTSnackBar from "../../hooks/useNESTSnackBar";
 import NESTLine from "../../components/NESTLine";
 import FuturesTableTitle from "../Futures/Components/TableTitle";
+import OrderTablePosition from "../Futures/Components/OrderTablePosition";
 
 const DashboardShare = styled(Box)(({theme}) => ({
   borderRadius: "8px",
@@ -388,7 +388,7 @@ const Dashboard: FC = () => {
     )
   }, [showShareOrderModal])
 
-  const PCOrderRow = (item: any, index: number, showTime: boolean = false) => {
+  const PCOrderRow = (item: any, index: number, isHistory: boolean = false) => {
     return (
       <TableRow key={index} sx={(theme) => ({
         ":hover": {
@@ -396,7 +396,7 @@ const Dashboard: FC = () => {
         }
       })}>
         {
-          showTime && (
+          isHistory && (
             <TableCell>
               <Box
                 component={"p"}
@@ -475,39 +475,49 @@ const Dashboard: FC = () => {
             ).div(BigNumber.from(10).pow(16)).toNumber() / 100} USDT
           </Box>
         </TableCell>
+        {
+          isHistory && (
+            <TableCell>
+              <Box
+                component={"p"}
+                sx={(theme) => ({
+                  fontWeight: 700,
+                  fontSize: 16,
+                  color: theme.normal.text0,
+                })}
+              >
+                {item.lastPrice.toLocaleString('en-US', {
+                  maximumFractionDigits: 2,
+                })} USDT
+              </Box>
+            </TableCell>
+          )
+        }
         <TableCell>
           <Stack
-            spacing={"16px"}
-            direction={'row'}
+            spacing={"4px"}
             sx={(theme) => ({
               "& p": {
-                fontSize: 16,
+                fontSize: "12px",
                 fontWeight: 400,
+                lineHeight: "16px",
                 color: theme.normal.text0,
               },
               "& span": {fontSize: '14px', marginRight: "4px", color: theme.normal.text2},
             })}
           >
-            {
-              !!item.sp && (
-                <Box component={"p"}>
-                  <span>TP</span>
-                  {item.sp.toLocaleString('en-US', {
-                    maximumFractionDigits: 2,
-                  })} USDT
-                </Box>
-              )
-            }
-            {
-              !!item.sl && (
-                <Box component={"p"}>
-                  <span>SL</span>
-                  {item.sl.toLocaleString('en-US', {
-                    maximumFractionDigits: 2,
-                  })} USDT
-                </Box>
-              )
-            }
+            <Box component={"p"}>
+              <span>TP</span>
+              {item.sp ? item.sp.toLocaleString('en-US', {
+                maximumFractionDigits: 2,
+              }) : '-'} USDT
+            </Box>
+            <Box component={"p"}>
+              <span>SL</span>
+              {item.sl ? item.sl.toLocaleString('en-US', {
+                maximumFractionDigits: 2,
+              }) : '-'} USDT
+            </Box>
           </Stack>
         </TableCell>
         <TableCell>
@@ -530,7 +540,7 @@ const Dashboard: FC = () => {
     )
   }
 
-  const MobileOrderCard = (item: any, index: number, showTime: boolean = false) => {
+  const MobileOrderCard = (item: any, index: number, isHistory: boolean = false) => {
     return (
       <Card4 sx={{
         paddingX: '16px',
@@ -633,23 +643,39 @@ const Dashboard: FC = () => {
               })} USDT</Caption5>
             </Stack>
           </Stack>
-          <Stack direction={'row'} width={'50%'} spacing={'4px'}>
-            <Caption5 sx={(theme) => ({
-              color: theme.normal.text2
-            })}>Liq Price</Caption5>
-            <Caption5 sx={(theme) => ({
-              color: theme.normal.text0
-            })}>{lipPrice(
-              ethers.utils.parseEther(item.initialMargin.toFixed(12)),
-              ethers.utils.parseEther(item?.appendMargin?.toFixed(12) || '0'),
-              BigNumber.from(item.leverage.replace('X', '')),
-              ethers.utils.parseEther(item.lastPrice.toFixed(12)),
-              ethers.utils.parseEther(item.openPrice.toFixed(12)),
-              item.orientation === 'Long',
-            ).div(BigNumber.from(10).pow(16)).toNumber() / 100} USDT</Caption5>
+          <Stack direction={'row'}>
+            <Stack direction={'row'} width={'50%'} spacing={'4px'}>
+              <Caption5 sx={(theme) => ({
+                color: theme.normal.text2
+              })}>Liq Price</Caption5>
+              <Caption5 sx={(theme) => ({
+                color: theme.normal.text0
+              })}>{lipPrice(
+                ethers.utils.parseEther(item.initialMargin.toFixed(12)),
+                ethers.utils.parseEther(item?.appendMargin?.toFixed(12) || '0'),
+                BigNumber.from(item.leverage.replace('X', '')),
+                ethers.utils.parseEther(item.lastPrice.toFixed(12)),
+                ethers.utils.parseEther(item.openPrice.toFixed(12)),
+                item.orientation === 'Long',
+              ).div(BigNumber.from(10).pow(16)).toNumber() / 100} USDT</Caption5>
+            </Stack>
+            {
+              isHistory && (
+                <Stack direction={'row'} width={'50%'} spacing={'4px'}>
+                  <Caption5 sx={(theme) => ({
+                    color: theme.normal.text2
+                  })}>Close Price</Caption5>
+                  <Caption5 sx={(theme) => ({
+                    color: theme.normal.text0
+                  })}>{item.lastPrice.toLocaleString('en-US', {
+                    maximumFractionDigits: 2,
+                  })} USDT</Caption5>
+                </Stack>
+              )
+            }
           </Stack>
           {
-            showTime && (
+            isHistory && (
               <Stack direction={'row'} width={'50%'} spacing={'4px'}>
                 <Caption5 sx={(theme) => ({
                   color: theme.normal.text2
@@ -1115,6 +1141,7 @@ const Dashboard: FC = () => {
                   "Actual Margin",
                   "Open Price",
                   "Liq Price",
+                  "Close Price",
                   "Stop Order",
                   "Operate",
                 ]}
