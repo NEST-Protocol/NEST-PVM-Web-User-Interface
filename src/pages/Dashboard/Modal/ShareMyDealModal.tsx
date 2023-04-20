@@ -107,13 +107,13 @@ const TopStack = styled(Stack)(({theme}) => {
 interface ShareMyDealModalProps {
   value: {
     totalValue: number,
-    totalRate: number,
+    // totalRate: number,
     todayValue: number,
     day7Value: number,
     day30Value: number,
-    todayRate: number,
-    day7Rate: number,
-    day30Rate: number,
+    // todayRate: number,
+    // day7Rate: number,
+    // day30Rate: number,
   };
   open: boolean;
   onClose: () => void;
@@ -197,28 +197,28 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`
       list.push({
         title: 'Total Profit & Loss',
         value: props.value.totalValue,
-        rate: props.value.totalRate,
+        // rate: props.value.totalRate,
       })
     }
     if (select.todayTrade) {
       list.push({
         title: 'Today\'s PNL',
         value: props.value.todayValue,
-        rate: props.value.todayRate,
+        // rate: props.value.todayRate,
       })
     }
     if (select._7DaysTrade) {
       list.push({
         title: '7 Days\' PNL',
         value: props.value.day7Value,
-        rate: props.value.day7Rate,
+        // rate: props.value.day7Rate,
       })
     }
     if (select._30DaysTrade) {
       list.push({
         title: '30 Days\' PNL',
         value: props.value.day30Value,
-        rate: props.value.day30Rate,
+        // rate: props.value.day30Rate,
       })
     }
     return list
@@ -261,19 +261,19 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`
               <Caption1>{props.value.totalValue.toLocaleString('en-US', {
                 maximumFractionDigits: 2,
               })} NEST</Caption1>
-              <Box
-                sx={(theme) => ({
-                  transform: props.value.totalRate >= 0 ? 'rotate(0deg)' : 'rotate(180deg)',
-                  "& svg": {
-                    display: "block",
-                    "& path": {
-                      fill: props.value.totalRate >= 0 ? theme.normal.success : theme.normal.danger,
-                    }
-                  }
-                })}
-              >
-                <UpIcon/>
-              </Box>
+              {/*<Box*/}
+              {/*  sx={(theme) => ({*/}
+              {/*    transform: props.value.totalRate >= 0 ? 'rotate(0deg)' : 'rotate(180deg)',*/}
+              {/*    "& svg": {*/}
+              {/*      display: "block",*/}
+              {/*      "& path": {*/}
+              {/*        fill: props.value.totalRate >= 0 ? theme.normal.success : theme.normal.danger,*/}
+              {/*      }*/}
+              {/*    }*/}
+              {/*  })}*/}
+              {/*>*/}
+              {/*  <UpIcon/>*/}
+              {/*</Box>*/}
             </Stack>
           </Stack>
           <Box sx={(theme) => ({
@@ -300,19 +300,19 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`
               <Caption1>{props.value.todayValue.toLocaleString('en-US', {
                 maximumFractionDigits: 2,
               })} NEST</Caption1>
-              <Box
-                sx={(theme) => ({
-                  transform: props.value.todayRate >= 0 ? 'rotate(0deg)' : 'rotate(180deg)',
-                  "& svg": {
-                    display: "block",
-                    "& path": {
-                      fill: props.value.todayRate >= 0 ? theme.normal.success : theme.normal.danger,
-                    }
-                  }
-                })}
-              >
-                <UpIcon/>
-              </Box>
+              {/*<Box*/}
+              {/*  sx={(theme) => ({*/}
+              {/*    transform: props.value.todayRate >= 0 ? 'rotate(0deg)' : 'rotate(180deg)',*/}
+              {/*    "& svg": {*/}
+              {/*      display: "block",*/}
+              {/*      "& path": {*/}
+              {/*        fill: props.value.todayRate >= 0 ? theme.normal.success : theme.normal.danger,*/}
+              {/*      }*/}
+              {/*    }*/}
+              {/*  })}*/}
+              {/*>*/}
+              {/*  <UpIcon/>*/}
+              {/*</Box>*/}
             </Stack>
           </Stack>
           <Box sx={(theme) => ({
@@ -339,19 +339,19 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`
               <Caption1>{props.value.day7Value.toLocaleString('en-US', {
                 maximumFractionDigits: 2,
               })} NEST</Caption1>
-              <Box
-                sx={(theme) => ({
-                  transform: props.value.day7Rate >= 0 ? 'rotate(0deg)' : 'rotate(180deg)',
-                  "& svg": {
-                    display: "block",
-                    "& path": {
-                      fill: props.value.day7Rate >= 0 ? theme.normal.success : theme.normal.danger,
-                    }
-                  }
-                })}
-              >
-                <UpIcon/>
-              </Box>
+              {/*<Box*/}
+              {/*  sx={(theme) => ({*/}
+              {/*    transform: props.value.day7Rate >= 0 ? 'rotate(0deg)' : 'rotate(180deg)',*/}
+              {/*    "& svg": {*/}
+              {/*      display: "block",*/}
+              {/*      "& path": {*/}
+              {/*        fill: props.value.day7Rate >= 0 ? theme.normal.success : theme.normal.danger,*/}
+              {/*      }*/}
+              {/*    }*/}
+              {/*  })}*/}
+              {/*>*/}
+              {/*  <UpIcon/>*/}
+              {/*</Box>*/}
             </Stack>
           </Stack>
           <Box sx={(theme) => ({
@@ -378,19 +378,19 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`
               <Caption1>{props.value.day30Value.toLocaleString('en-US', {
                 maximumFractionDigits: 2,
               })} NEST</Caption1>
-              <Box
-                sx={(theme) => ({
-                  transform: props.value.day30Rate >= 0 ? 'rotate(0deg)' : 'rotate(180deg)',
-                  "& svg": {
-                    display: "block",
-                    "& path": {
-                      fill: props.value.day30Rate >= 0 ? theme.normal.success : theme.normal.danger,
-                    }
-                  }
-                })}
-              >
-                <UpIcon/>
-              </Box>
+              {/*<Box*/}
+              {/*  sx={(theme) => ({*/}
+              {/*    transform: props.value.day30Rate >= 0 ? 'rotate(0deg)' : 'rotate(180deg)',*/}
+              {/*    "& svg": {*/}
+              {/*      display: "block",*/}
+              {/*      "& path": {*/}
+              {/*        fill: props.value.day30Rate >= 0 ? theme.normal.success : theme.normal.danger,*/}
+              {/*      }*/}
+              {/*    }*/}
+              {/*  })}*/}
+              {/*>*/}
+              {/*  <UpIcon/>*/}
+              {/*</Box>*/}
             </Stack>
           </Stack>
           <Box sx={(theme) => ({
@@ -494,10 +494,10 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`
                   }}>{showList[0].value.toLocaleString('en-US', {
                     maximumFractionDigits: 2,
                   })} <span>NEST</span></Caption3>
-                  <Caption4 sx={(theme) => ({
-                    paddingTop: '16px',
-                    color: showList[0].rate >= 0 ? theme.normal.success : theme.normal.danger,
-                  })}>{showList[0].rate}%</Caption4>
+                  {/*<Caption4 sx={(theme) => ({*/}
+                  {/*  paddingTop: '16px',*/}
+                  {/*  color: showList[0].rate >= 0 ? theme.normal.success : theme.normal.danger,*/}
+                  {/*})}>{showList[0].rate}%</Caption4>*/}
                 </Stack>
               )
             }
@@ -510,12 +510,13 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`
                       <Caption6
                         sx={(theme) => ({
                           'span': {
-                            color: showList?.[1].rate >= 0 ? theme.normal.success : theme.normal.danger
+                            // color: showList?.[1].rate >= 0 ? theme.normal.success : theme.normal.danger
                           }
                         })}
                       >{showList?.[1].value.toLocaleString('en-US', {
                         maximumFractionDigits: 2,
-                      })} NEST <span>{showList?.[1].rate}%</span>
+                      })} NEST
+                        {/*<span>{showList?.[1].rate}%</span>*/}
                       </Caption6>
                     </Stack>
                   )
@@ -527,12 +528,14 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`
                       <Caption6
                         sx={(theme) => ({
                           'span': {
-                            color: showList?.[2].rate >= 0 ? theme.normal.success : theme.normal.danger
+                            // color: showList?.[2].rate >= 0 ? theme.normal.success : theme.normal.danger
                           }
                         })}
                       >{showList?.[2].value.toLocaleString('en-US', {
                         maximumFractionDigits: 2,
-                      })} NEST <span>{showList?.[2].rate}%</span></Caption6>
+                      })} NEST
+                        {/*<span>{showList?.[2].rate}%</span>*/}
+                      </Caption6>
                     </Stack>
                   )
                 }
@@ -544,12 +547,14 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`
                     <Caption6
                       sx={(theme) => ({
                         'span': {
-                          color: showList?.[3].rate >= 0 ? theme.normal.success : theme.normal.danger
+                          // color: showList?.[3].rate >= 0 ? theme.normal.success : theme.normal.danger
                         }
                       })}
                     >{showList?.[3].value.toLocaleString('en-US', {
                       maximumFractionDigits: 2,
-                    })} NEST <span>{showList?.[3].rate}%</span></Caption6>
+                    })} NEST
+                      {/*<span>{showList?.[3].rate}%</span>*/}
+                    </Caption6>
                   </Stack>
                 )
               }
