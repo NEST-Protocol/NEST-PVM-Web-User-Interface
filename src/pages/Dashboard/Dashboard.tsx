@@ -465,14 +465,16 @@ const Dashboard: FC = () => {
               color: theme.normal.text0,
             })}
           >
-            {lipPrice(
+            {(lipPrice(
               ethers.utils.parseEther(item.initialMargin.toFixed(12)),
               ethers.utils.parseEther(item?.appendMargin?.toFixed(12) || '0'),
               BigNumber.from(item.leverage.replace('X', '')),
               ethers.utils.parseEther(item.lastPrice.toFixed(12)),
               ethers.utils.parseEther(item.openPrice.toFixed(12)),
               item.orientation === 'Long',
-            ).div(BigNumber.from(10).pow(16)).toNumber() / 100} USDT
+            ).div(BigNumber.from(10).pow(16)).toNumber() / 100).toLocaleString('en-US', {
+              maximumFractionDigits: 2,
+            })} USDT
           </Box>
         </TableCell>
         {
@@ -650,14 +652,16 @@ const Dashboard: FC = () => {
               })}>Liq Price</Caption5>
               <Caption5 sx={(theme) => ({
                 color: theme.normal.text0
-              })}>{lipPrice(
+              })}>{(lipPrice(
                 ethers.utils.parseEther(item.initialMargin.toFixed(12)),
                 ethers.utils.parseEther(item?.appendMargin?.toFixed(12) || '0'),
                 BigNumber.from(item.leverage.replace('X', '')),
                 ethers.utils.parseEther(item.lastPrice.toFixed(12)),
                 ethers.utils.parseEther(item.openPrice.toFixed(12)),
                 item.orientation === 'Long',
-              ).div(BigNumber.from(10).pow(16)).toNumber() / 100} USDT</Caption5>
+              ).div(BigNumber.from(10).pow(16)).toNumber() / 100).toLocaleString('en-US', {
+                maximumFractionDigits: 2,
+              })} USDT</Caption5>
             </Stack>
             {
               isHistory && (
