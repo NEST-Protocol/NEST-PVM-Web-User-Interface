@@ -117,11 +117,9 @@ function useFuturesNewOrder(
         const c0_Short = nowPrice
           .mul(BigNumber.from("10").pow(36))
           .div(c0_top.add(BigNumber.from("10").pow(36)));
-        return longOrShort
-          ? c0_long
-          : c0_Short;
+        return longOrShort ? c0_long : c0_Short;
       } else {
-        return nowPrice
+        return nowPrice;
       }
     } else {
       return undefined;
@@ -169,18 +167,13 @@ function useFuturesNewOrder(
   /**
    * futures modal
    */
-  const checkShowNotice = useMemo(() => {
-    const isShow = localStorage.getItem("PerpetualsFirst");
-    return isShow === "1" ? false : true;
-  }, []);
-  const [showProtocol, setShowProtocol] = useState(false);
-  const [showedProtocol, setShowedProtocol] = useState(false);
   const checkShowTriggerNotice = useMemo(() => {
     const isShow = localStorage.getItem("TriggerRiskModal");
     return isShow === "1" ? false : true;
   }, []);
   const [showTriggerNotice, setShowTriggerNotice] = useState(false);
   const [showedTriggerNotice, setShowedTriggerNotice] = useState(false);
+  const [showApproveNotice, setShowApproveNotice] = useState(false);
   /**
    * futures contract
    */
@@ -445,10 +438,6 @@ function useFuturesNewOrder(
     limitAmount,
     tabsValue,
   ]);
-  const protocolCallBack = useCallback(() => {
-    setShowedProtocol(true);
-    tokenApprove.write?.();
-  }, [tokenApprove]);
   const baseAction = useCallback(() => {
     if (inputToken === "USDT") {
       newOrderWithUSDT.write?.();
@@ -460,23 +449,21 @@ function useFuturesNewOrder(
     setShowedTriggerNotice(true);
     baseAction();
   }, [baseAction]);
+  const approveNoticeCallBack = useCallback(() => {
+    tokenApprove.write?.();
+    setShowApproveNotice(false);
+  }, [tokenApprove]);
   const mainButtonAction = useCallback(() => {
     if (mainButtonTitle === "Connect Wallet") {
       setShowConnect(true);
     } else if (mainButtonLoading || !checkBalance) {
       return;
     } else if (!checkAllowance) {
-      if (checkShowNotice && !showedProtocol) {
-        setShowProtocol(true);
-        return;
-      }
-      tokenApprove.write?.();
+      setShowApproveNotice(true);
     } else {
-      if (tabsValue === 1 || isStop) {
-        if (checkShowTriggerNotice && !showedTriggerNotice) {
-          setShowTriggerNotice(true);
-          return;
-        }
+      if (checkShowTriggerNotice && !showedTriggerNotice) {
+        setShowTriggerNotice(true);
+        return;
       }
       baseAction();
     }
@@ -484,16 +471,11 @@ function useFuturesNewOrder(
     baseAction,
     checkAllowance,
     checkBalance,
-    checkShowNotice,
     checkShowTriggerNotice,
-    isStop,
     mainButtonLoading,
     mainButtonTitle,
     setShowConnect,
-    showedProtocol,
     showedTriggerNotice,
-    tabsValue,
-    tokenApprove,
   ]);
   /**
    * show
@@ -596,20 +578,20 @@ function useFuturesNewOrder(
 
   const tpDefault = useMemo(() => {
     if (openPriceBase) {
-      const limitPrice = openPriceBase.bigNumberToShowString(18, 2)
-      return longOrShort ? `> ${limitPrice}` : `< ${limitPrice}`
+      const limitPrice = openPriceBase.bigNumberToShowString(18, 2);
+      return longOrShort ? `> ${limitPrice}` : `< ${limitPrice}`;
     } else {
-      return ""
+      return "";
     }
-  }, [longOrShort, openPriceBase])
+  }, [longOrShort, openPriceBase]);
   const slDefault = useMemo(() => {
     if (openPriceBase) {
-      const limitPrice = openPriceBase.bigNumberToShowString(18, 2)
-      return longOrShort ? `< ${limitPrice}` : `> ${limitPrice}`
+      const limitPrice = openPriceBase.bigNumberToShowString(18, 2);
+      return longOrShort ? `< ${limitPrice}` : `> ${limitPrice}`;
     } else {
-      return ""
+      return "";
     }
-  }, [longOrShort, openPriceBase])
+  }, [longOrShort, openPriceBase]);
 
   /**
    * update
@@ -658,9 +640,6 @@ function useFuturesNewOrder(
     mainButtonAction,
     checkBalance,
     showLiqPrice,
-    showProtocol,
-    setShowProtocol,
-    protocolCallBack,
     showTriggerNotice,
     setShowTriggerNotice,
     triggerNoticeCallback,
@@ -670,10 +649,11 @@ function useFuturesNewOrder(
     setInputAmount,
     showNESTPrice,
     showPositions,
-    tokenAllowance,
-    tokenApprove,
     tpDefault,
-    slDefault
+    slDefault,
+    showApproveNotice,
+    setShowApproveNotice,
+    approveNoticeCallBack,
   };
 }
 
