@@ -49,7 +49,7 @@ const ApproveNoticeModal: FC<ApproveNoticeModalProps> = ({ ...props }) => {
                   fontWeight: 700,
                 })}
               >
-                You have connected your wallet
+                Approval required
               </Box>
               <Box
                 component={"p"}

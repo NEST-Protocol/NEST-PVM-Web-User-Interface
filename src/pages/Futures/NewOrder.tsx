@@ -14,9 +14,9 @@ import Agree from "../../components/Agree/Agree";
 import NormalInfo from "../../components/NormalInfo/NormalInfo";
 import { FuturesPrice } from "./Futures";
 import Modal from "@mui/material/Modal";
-import ProtocolModal from "./Modal/ProtocolModal";
 import TriggerRiskModal from "./Modal/LimitAndPriceModal";
 import NESTInputSelect from "../../components/NormalInput/NESTInputSelect";
+import ApproveNoticeModal from "./Modal/ApproveNoticeModal";
 
 interface FuturesNewOrderProps {
   price: FuturesPrice | undefined;
@@ -53,9 +53,6 @@ const FuturesNewOrder: FC<FuturesNewOrderProps> = ({ ...props }) => {
     mainButtonAction,
     checkBalance,
     showLiqPrice,
-    showProtocol,
-    setShowProtocol,
-    protocolCallBack,
     showTriggerNotice,
     setShowTriggerNotice,
     triggerNoticeCallback,
@@ -65,6 +62,9 @@ const FuturesNewOrder: FC<FuturesNewOrderProps> = ({ ...props }) => {
     setInputAmount,
     showNESTPrice,
     showPositions,
+    showApproveNotice,
+    setShowApproveNotice,
+    approveNoticeCallBack,
   } = useFuturesNewOrder(props.price, props.tokenPair);
   const newOrderTabsData = useMemo(() => {
     return [<p>Market</p>, <p>Limit</p>];
@@ -252,24 +252,12 @@ const FuturesNewOrder: FC<FuturesNewOrderProps> = ({ ...props }) => {
   const modals = useMemo(() => {
     return (
       <>
-        <Modal
-          open={showProtocol}
-          onClose={() => setShowProtocol(false)}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
-          <Box
-            sx={{
-              "& .ModalLeftButton": { width: "20px !important" },
-              " & .ModalTitle": { textAlign: "center !important" },
-            }}
-          >
-            <ProtocolModal
-              onClose={() => setShowProtocol(false)}
-              callBack={protocolCallBack}
-            />
-          </Box>
-        </Modal>
+        <ApproveNoticeModal
+          open={showApproveNotice}
+          isSuccess={true}
+          onClose={() => setShowApproveNotice(false)}
+          callBack={approveNoticeCallBack}
+        />
         <Modal
           open={showTriggerNotice}
           onClose={() => setShowTriggerNotice(false)}
@@ -291,10 +279,10 @@ const FuturesNewOrder: FC<FuturesNewOrderProps> = ({ ...props }) => {
       </>
     );
   }, [
-    protocolCallBack,
-    setShowProtocol,
+    approveNoticeCallBack,
+    setShowApproveNotice,
     setShowTriggerNotice,
-    showProtocol,
+    showApproveNotice,
     showTriggerNotice,
     triggerNoticeCallback,
   ]);
