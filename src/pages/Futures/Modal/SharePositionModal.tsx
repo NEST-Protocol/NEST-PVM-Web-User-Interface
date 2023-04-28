@@ -14,7 +14,6 @@ import useFuturesNewOrder from "../../../hooks/useFuturesNewOrder";
 import useWindowWidth from "../../../hooks/useWindowWidth";
 import { getQueryVariable } from "../../../lib/queryVaribale";
 import { FuturesPrice } from "../Futures";
-import ProtocolModal from "./ProtocolModal";
 import TriggerRiskModal from "./LimitAndPriceModal";
 import ApproveNoticeModal from "./ApproveNoticeModal";
 import useNEST from "../../../hooks/useNEST";
@@ -35,8 +34,6 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
   const [isEdit, setIsEdit] = useState(false);
   const { account, chainsData } = useNEST();
   const { isMobile } = useWindowWidth();
-  const [showApproveNotice, setShowApproveNotice] = useState(false);
-  const [showApproveNoticeDone, setShowApproveNoticeDone] = useState(false);
   const [setToken, setSetToken] = useState(false);
   const tokenName_info = useMemo(() => {
     return getQueryVariable("pt");
@@ -108,9 +105,6 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
     mainButtonDis,
     mainButtonAction,
     checkBalance,
-    showProtocol,
-    setShowProtocol,
-    protocolCallBack,
     showTriggerNotice,
     setShowTriggerNotice,
     triggerNoticeCallback,
@@ -120,10 +114,11 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
     setInputAmount,
     showNESTPrice,
     showPositions,
-    tokenAllowance,
-    tokenApprove,
     tpDefault,
     slDefault,
+    showApproveNotice,
+    setShowApproveNotice,
+    approveNoticeCallBack,
   } = useFuturesNewOrder(
     props.price,
     tokenName_info ? tokenName_info.toLocaleUpperCase() : "ETH"
@@ -145,16 +140,7 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
     } else {
       setIsStop(false);
     }
-    if (
-      account.address &&
-      !showApproveNoticeDone &&
-      tokenAllowance &&
-      BigNumber.from("0").eq(tokenAllowance)
-    ) {
-      setShowApproveNotice(true);
-    }
   }, [
-    account.address,
     basePrice_info,
     lever_info,
     orientation_info,
@@ -165,9 +151,7 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
     setSl,
     setTabsValue,
     setTp,
-    showApproveNoticeDone,
     sl_info,
-    tokenAllowance,
     tp_info,
   ]);
   useEffect(() => {
@@ -469,24 +453,12 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
   const modals = useMemo(() => {
     return (
       <>
-        <Modal
-          open={showProtocol}
-          onClose={() => setShowProtocol(false)}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
-          <Box
-            sx={{
-              "& .ModalLeftButton": { width: "20px !important" },
-              " & .ModalTitle": { textAlign: "center !important" },
-            }}
-          >
-            <ProtocolModal
-              onClose={() => setShowProtocol(false)}
-              callBack={protocolCallBack}
-            />
-          </Box>
-        </Modal>
+        <ApproveNoticeModal
+          open={showApproveNotice}
+          isSuccess={true}
+          onClose={() => setShowApproveNotice(false)}
+          callBack={approveNoticeCallBack}
+        />
         <Modal
           open={showTriggerNotice}
           onClose={() => setShowTriggerNotice(false)}
@@ -505,31 +477,9 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
             />
           </Box>
         </Modal>
-        <ApproveNoticeModal
-          open={showApproveNotice}
-          isSuccess={true}
-          onClose={() => {
-            setShowApproveNoticeDone(true);
-            setShowApproveNotice(false);
-          }}
-          callBack={() => {
-            tokenApprove.write?.();
-            setShowApproveNoticeDone(true);
-            setShowApproveNotice(false);
-          }}
-        />
       </>
     );
-  }, [
-    protocolCallBack,
-    setShowProtocol,
-    setShowTriggerNotice,
-    showApproveNotice,
-    showProtocol,
-    showTriggerNotice,
-    tokenApprove,
-    triggerNoticeCallback,
-  ]);
+  }, [approveNoticeCallBack, setShowApproveNotice, setShowTriggerNotice, showApproveNotice, showTriggerNotice, triggerNoticeCallback]);
 
   const normalView = useMemo(() => {
     return (
