@@ -9,7 +9,9 @@ import useFuturesNewOrder, {
 } from "../../hooks/useFuturesNewOrder";
 import Box from "@mui/material/Box";
 import LeverageSlider from "./Components/LeverageSlider";
-import NormalInput from "../../components/NormalInput/NormalInput";
+import NormalInput, {
+  NormalInputWithLastButton,
+} from "../../components/NormalInput/NormalInput";
 import Agree from "../../components/Agree/Agree";
 import NormalInfo from "../../components/NormalInfo/NormalInfo";
 import { FuturesPrice } from "./Futures";
@@ -71,7 +73,8 @@ const FuturesNewOrder: FC<FuturesNewOrderProps> = ({ ...props }) => {
     tpDefault,
     slDefault,
     tpError,
-    slError
+    slError,
+    lastPriceButton
   } = useFuturesNewOrder(props.price, props.tokenPair);
   const newOrderTabsData = useMemo(() => {
     return [<p>Market</p>, <p>Limit</p>];
@@ -182,15 +185,33 @@ const FuturesNewOrder: FC<FuturesNewOrderProps> = ({ ...props }) => {
                 changeValue={(value: string) => setSl(value.formatInputNum())}
               />
             </Stack>
-            {(tpError || slError) ? <ErrorLabel title={"After the limit order is executed, TP and SL price you set will trigger immediately."}/> : <></>}
-            
+            {tpError || slError ? (
+              <ErrorLabel
+                title={
+                  "After the limit order is executed, TP and SL price you set will trigger immediately."
+                }
+              />
+            ) : (
+              <></>
+            )}
           </Stack>
         ) : (
           <></>
         )}
       </Stack>
     );
-  }, [isStop, setIsStop, setSl, setTp, sl, slDefault, slError, tp, tpDefault, tpError]);
+  }, [
+    isStop,
+    setIsStop,
+    setSl,
+    setTp,
+    sl,
+    slDefault,
+    slError,
+    tp,
+    tpDefault,
+    tpError,
+  ]);
 
   const newOrderTabs = useMemo(() => {
     return (
@@ -359,13 +380,14 @@ const FuturesNewOrder: FC<FuturesNewOrderProps> = ({ ...props }) => {
             >
               Price
             </Box>
-            <NormalInput
+            <NormalInputWithLastButton
               placeHolder={""}
               rightTitle={"USDT"}
               value={limitAmount}
               changeValue={(value: string) =>
                 setLimitAmount(value.formatInputNum())
               }
+              rightAction={lastPriceButton}
             />
           </Stack>
         )}

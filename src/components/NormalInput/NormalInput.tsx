@@ -1,7 +1,7 @@
-import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
 import { FC } from "react";
+import LinkButton from "../MainButton/LinkButton";
 
 interface NormalInputProps {
   placeHolder: string;
@@ -11,13 +11,12 @@ interface NormalInputProps {
   error?: boolean;
   style?: React.CSSProperties;
 }
-
-interface NormalInputWithLeftTitleProps {
-  leftTitle: string;
+interface NormalInputWithLastButtonProps {
   placeHolder: string;
   rightTitle: string;
   value: string;
   changeValue: (value: string) => void;
+  rightAction: () => void;
   error?: boolean;
   style?: React.CSSProperties;
 }
@@ -76,7 +75,7 @@ const NormalInput: FC<NormalInputProps> = ({ ...props }) => {
   );
 };
 
-export const NormalInputWithLeftTitle: FC<NormalInputWithLeftTitleProps> = ({
+export const NormalInputWithLastButton: FC<NormalInputWithLastButtonProps> = ({
   ...props
 }) => {
   return (
@@ -86,31 +85,30 @@ export const NormalInputWithLeftTitle: FC<NormalInputWithLeftTitleProps> = ({
       alignItems={"center"}
       style={props.style}
       className={props.error ? "error" : ""}
-      spacing={"8px"}
     >
-      <Box
-        component={"div"}
-        sx={(theme) => ({
-          fontSize: "16px",
-          fontWeight: 400,
-          color: theme.normal.text1,
-        })}
-      >
-        {props.leftTitle}
-      </Box>
+      <input
+        placeholder={props.placeHolder}
+        value={props.value}
+        maxLength={32}
+        onChange={(e) => props.changeValue(e.target.value)}
+      />
       <Stack
         direction={"row"}
-        justifyContent={"flex-end"}
-        alignItems={"center"}
         spacing={"8px"}
+        alignItems={"center"}
+        justifyContent={"space-between"}
       >
-        <input
-          placeholder={props.placeHolder}
-          value={props.value}
-          maxLength={32}
-          onChange={(e) => props.changeValue(e.target.value)}
-          style={{ textAlign: "right" }}
-        />
+        <LinkButton
+          onClick={props.rightAction}
+          sx={(theme) => ({
+            height: `22px`,
+            lineHeight: `22px`,
+            fontSize: `14px`,
+            fontWeight: 400,
+          })}
+        >
+          Last
+        </LinkButton>
         <p>{props.rightTitle}</p>
       </Stack>
     </NormalInputBaseStack>

@@ -463,6 +463,12 @@ function useFuturesNewOrder(
       baseAction();
     }
   }, [baseAction, checkAllowance, checkBalance, checkShowTriggerNotice, mainButtonLoading, mainButtonTitle, setShowConnect, showedTriggerNotice, stopDis]);
+  const lastPriceButton = useCallback(() => {
+    if (openPriceBase) {
+      setLimitAmount(openPriceBase.bigNumberToShowString(18, 2));
+    }
+  }, [openPriceBase])
+  
   /**
    * show
    */
@@ -675,6 +681,7 @@ function useFuturesNewOrder(
     tpError,
     slError,
     setTabsValue,
+    lastPriceButton
   };
 }
 
