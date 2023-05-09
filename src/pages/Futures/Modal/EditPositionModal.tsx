@@ -15,6 +15,7 @@ import BaseDrawer from "../../Share/Modal/BaseDrawer";
 import BaseModal from "../../Share/Modal/BaseModal";
 import { FuturesPrice } from "../Futures";
 import TriggerRiskModal from "./LimitAndPriceModal";
+import ErrorLabel from "../../../components/ErrorLabel/ErrorLabel";
 
 interface EditPositionModalBaseProps {
   data: FuturesOrderV2;
@@ -46,6 +47,8 @@ const EditPositionModalBase: FC<EditPositionModalBaseProps> = ({
     showTriggerNotice,
     setShowTriggerNotice,
     triggerNoticeCallback,
+    tpError,
+    slError,
   } = useFuturesEditPosition(props.data, props.price, props.onClose);
   const triggerNoticeModal = useMemo(() => {
     return (
@@ -92,6 +95,7 @@ const EditPositionModalBase: FC<EditPositionModalBaseProps> = ({
               setStopProfitPriceInput(value.formatInputNum())
             }
             onClose={closeTP}
+            error={tpError}
           />
         </Stack>
         <Stack spacing={"8px"} width={"100%"}>
@@ -110,8 +114,18 @@ const EditPositionModalBase: FC<EditPositionModalBaseProps> = ({
             value={stopLossPriceInput}
             changeValue={(value: string) => setStopLossPriceInput(value)}
             onClose={closeSL}
+            error={slError}
           />
         </Stack>
+        {tpError || slError ? (
+          <ErrorLabel
+            title={
+              "After the limit order is executed, TP and SL price you set will trigger immediately."
+            }
+          />
+        ) : (
+          <></>
+        )}
       </Stack>
       <NESTLine />
       <Stack spacing={"8px"}>

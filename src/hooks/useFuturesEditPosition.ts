@@ -62,6 +62,22 @@ function useFuturesEditPosition(
       BigNumber.from("0").eq(data.stopLossPrice)
     );
   }, [data.stopLossPrice, data.stopProfitPrice]);
+  const baseOpenPrice = useMemo(() => {
+    return BigNumber.from(data.basePrice.toString()).bigNumberToShowString(
+      18,
+      2
+    );
+  }, [data.basePrice]);
+  const tpError = useMemo(() => {
+    return data.orientation
+      ? Number(stopProfitPriceInput) < Number(baseOpenPrice)
+      : Number(stopProfitPriceInput) > Number(baseOpenPrice);
+  }, [baseOpenPrice, data.orientation, stopProfitPriceInput]);
+  const slError = useMemo(() => {
+    return data.orientation
+      ? Number(stopLossPriceInput) > Number(baseOpenPrice)
+      : Number(stopLossPriceInput) < Number(baseOpenPrice);
+  }, [baseOpenPrice, data.orientation, stopLossPriceInput]);
 
   /**
    * action
@@ -75,14 +91,9 @@ function useFuturesEditPosition(
    * show
    */
   const placeHolder = useMemo(() => {
-    if (price) {
-      const nowPrice = price[
-        priceToken[parseInt(data.channelIndex.toString())]
-      ].bigNumberToShowString(18, 2);
-      return [`>${nowPrice}`, `<${nowPrice}`];
-    }
-    return ["", ""];
-  }, [data.channelIndex, price]);
+    const nowPrice = baseOpenPrice;
+    return [`>${nowPrice}`, `<${nowPrice}`];
+  }, [baseOpenPrice]);
   const showPosition = useMemo(() => {
     const lever = data.lever.toString();
     const longOrShort = data.orientation ? "Long" : "Short";
@@ -92,11 +103,8 @@ function useFuturesEditPosition(
     return `${lever}X ${longOrShort} ${balance} NEST`;
   }, [data.balance, data.lever, data.orientation]);
   const showOpenPrice = useMemo(() => {
-    return `${BigNumber.from(data.basePrice.toString()).bigNumberToShowString(
-      18,
-      2
-    )} USDT`;
-  }, [data.basePrice]);
+    return `${baseOpenPrice} USDT`;
+  }, [baseOpenPrice]);
   const showLiqPrice = useMemo(() => {
     const result = lipPrice(
       data.balance,
@@ -161,15 +169,17 @@ function useFuturesEditPosition(
   const mainButtonDis = useMemo(() => {
     if (stopProfitPriceInput === "" && stopLossPriceInput === "") {
       return true;
+    } else if (tpError || slError) {
+      return true;
     }
     return false;
-  }, [stopLossPriceInput, stopProfitPriceInput]);
+  }, [slError, stopLossPriceInput, stopProfitPriceInput, tpError]);
   const triggerNoticeCallback = useCallback(() => {
     setShowedTriggerNotice(true);
     edit.write?.();
   }, [edit]);
   const mainButtonAction = useCallback(() => {
-    if (mainButtonLoading) {
+    if (mainButtonLoading || tpError || slError) {
       return;
     } else {
       if (checkShowTriggerNotice && !showedTriggerNotice) {
@@ -178,7 +188,14 @@ function useFuturesEditPosition(
       }
       edit.write?.();
     }
-  }, [checkShowTriggerNotice, edit, mainButtonLoading, showedTriggerNotice]);
+  }, [
+    checkShowTriggerNotice,
+    edit,
+    mainButtonLoading,
+    showedTriggerNotice,
+    slError,
+    tpError,
+  ]);
   const closeTP = useCallback(() => {
     setStopProfitPriceInput("0");
   }, []);
@@ -208,6 +225,8 @@ function useFuturesEditPosition(
     showTriggerNotice,
     setShowTriggerNotice,
     triggerNoticeCallback,
+    tpError,
+    slError,
   };
 }
 
