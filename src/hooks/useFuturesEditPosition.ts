@@ -69,14 +69,20 @@ function useFuturesEditPosition(
     );
   }, [data.basePrice]);
   const tpError = useMemo(() => {
-    return data.orientation
-      ? Number(stopProfitPriceInput) < Number(baseOpenPrice)
-      : Number(stopProfitPriceInput) > Number(baseOpenPrice);
+    if (stopProfitPriceInput !== "") {
+      return data.orientation
+        ? Number(stopProfitPriceInput) < Number(baseOpenPrice)
+        : Number(stopProfitPriceInput) > Number(baseOpenPrice);
+    }
+    return false;
   }, [baseOpenPrice, data.orientation, stopProfitPriceInput]);
   const slError = useMemo(() => {
-    return data.orientation
-      ? Number(stopLossPriceInput) > Number(baseOpenPrice)
-      : Number(stopLossPriceInput) < Number(baseOpenPrice);
+    if (stopLossPriceInput) {
+      return data.orientation
+        ? Number(stopLossPriceInput) > Number(baseOpenPrice)
+        : Number(stopLossPriceInput) < Number(baseOpenPrice);
+    }
+    return false;
   }, [baseOpenPrice, data.orientation, stopLossPriceInput]);
 
   /**
@@ -91,9 +97,8 @@ function useFuturesEditPosition(
    * show
    */
   const placeHolder = useMemo(() => {
-    const nowPrice = baseOpenPrice;
-    return [`>${nowPrice}`, `<${nowPrice}`];
-  }, [baseOpenPrice]);
+    return [`> OPEN PRICE`, `< OPEN PRICE`];
+  }, []);
   const showPosition = useMemo(() => {
     const lever = data.lever.toString();
     const longOrShort = data.orientation ? "Long" : "Short";

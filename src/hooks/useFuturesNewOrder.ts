@@ -377,18 +377,24 @@ function useFuturesNewOrder(
     );
   }, [nestAmount]);
   const tpError = useMemo(() => {
-    return longOrShort
-      ? Number(tp) < Number(limitAmount)
-      : Number(tp) > Number(limitAmount);
+    if (tp !== "") {
+      return longOrShort
+        ? Number(tp) < Number(limitAmount)
+        : Number(tp) > Number(limitAmount);
+    }
+    return false;
   }, [limitAmount, longOrShort, tp]);
   const slError = useMemo(() => {
-    return longOrShort
-      ? Number(sl) > Number(limitAmount)
-      : Number(sl) < Number(limitAmount);
+    if (sl !== "") {
+      return longOrShort
+        ? Number(sl) > Number(limitAmount)
+        : Number(sl) < Number(limitAmount);
+    }
+    return false;
   }, [limitAmount, longOrShort, sl]);
   const stopDis = useMemo(() => {
-    return isStop && (tpError || slError)
-  }, [isStop, slError, tpError])
+    return isStop && (tpError || slError);
+  }, [isStop, slError, tpError]);
   const mainButtonTitle = useMemo(() => {
     if (!account.address) {
       return "Connect Wallet";
@@ -432,7 +438,15 @@ function useFuturesNewOrder(
       return true;
     }
     return !checkBalance;
-  }, [account.address, checkAllowance, checkBalance, checkMinNEST, limitAmount, stopDis, tabsValue]);
+  }, [
+    account.address,
+    checkAllowance,
+    checkBalance,
+    checkMinNEST,
+    limitAmount,
+    stopDis,
+    tabsValue,
+  ]);
   const baseAction = useCallback(() => {
     if (inputToken === "USDT") {
       newOrderWithUSDT.write?.();
@@ -462,13 +476,23 @@ function useFuturesNewOrder(
       }
       baseAction();
     }
-  }, [baseAction, checkAllowance, checkBalance, checkShowTriggerNotice, mainButtonLoading, mainButtonTitle, setShowConnect, showedTriggerNotice, stopDis]);
+  }, [
+    baseAction,
+    checkAllowance,
+    checkBalance,
+    checkShowTriggerNotice,
+    mainButtonLoading,
+    mainButtonTitle,
+    setShowConnect,
+    showedTriggerNotice,
+    stopDis,
+  ]);
   const lastPriceButton = useCallback(() => {
     if (openPriceBase) {
       setLimitAmount(openPriceBase.bigNumberToShowString(18, 2));
     }
-  }, [openPriceBase])
-  
+  }, [openPriceBase]);
+
   /**
    * show
    */
@@ -578,24 +602,19 @@ function useFuturesNewOrder(
   }, [inputToken, tokenBalance, allValue]);
 
   const tpDefault = useMemo(() => {
-    if (limitAmount !== "") {
-      const limitPrice = limitAmount
-        .stringToBigNumber(18)
-        ?.bigNumberToShowString(18, 2);
-      return longOrShort ? `> ${limitPrice}` : `< ${limitPrice}`;
+    if (tabsValue === 0) {
+      return longOrShort ? `> MARKET PRICE` : `< MARKET PRICE`;
+    } else {
+      return longOrShort ? `> LIMIT PRICE` : `< LIMIT PRICE`;
     }
-    return "";
-  }, [limitAmount, longOrShort]);
+  }, [longOrShort, tabsValue]);
   const slDefault = useMemo(() => {
-    if (limitAmount !== "") {
-      const limitPrice = limitAmount
-        .stringToBigNumber(18)
-        ?.bigNumberToShowString(18, 2);
-      return longOrShort ? `< ${limitPrice}` : `> ${limitPrice}`;
+    if (tabsValue === 0) {
+      return longOrShort ? `< MARKET PRICE` : `> MARKET PRICE`;
+    } else {
+      return longOrShort ? `< LIMIT PRICE` : `> LIMIT PRICE`;
     }
-    return "";
-  }, [limitAmount, longOrShort]);
-  
+  }, [longOrShort, tabsValue]);
 
   /**
    * update
@@ -681,7 +700,7 @@ function useFuturesNewOrder(
     tpError,
     slError,
     setTabsValue,
-    lastPriceButton
+    lastPriceButton,
   };
 }
 
