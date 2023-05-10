@@ -668,7 +668,10 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
             >
               <button
                 className="ModalLeftButton"
-                onClick={() => setIsEdit(false)}
+                onClick={() => {
+                  getOrderInfo();
+                  setIsEdit(false);
+                }}
               >
                 {isEdit ? <Back /> : <></>}
               </button>
