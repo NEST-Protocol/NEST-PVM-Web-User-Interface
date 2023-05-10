@@ -643,6 +643,12 @@ function useFuturesNewOrder(
       setHadSetLimit(true);
     }
   }, [hadSetLimit, limitAmount, openPriceBase]);
+  useEffect(() => {
+    setLimitAmount("")
+    setTp("")
+    setSl("")
+    setHadSetLimit(false)
+  }, [tokenPair])
   const changeTabs = useCallback(
     (value: number) => {
       setTabsValue(value);
