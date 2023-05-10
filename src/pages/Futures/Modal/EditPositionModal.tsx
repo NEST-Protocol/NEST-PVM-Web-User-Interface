@@ -112,7 +112,9 @@ const EditPositionModalBase: FC<EditPositionModalBaseProps> = ({
             placeHolder={placeHolder[1]}
             rightTitle={"USDT"}
             value={stopLossPriceInput}
-            changeValue={(value: string) => setStopLossPriceInput(value)}
+            changeValue={(value: string) =>
+              setStopLossPriceInput(value.formatInputNum())
+            }
             onClose={closeSL}
             error={slError}
           />
