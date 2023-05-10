@@ -377,7 +377,7 @@ function useFuturesNewOrder(
     );
   }, [nestAmount]);
   const tpError = useMemo(() => {
-    if (tp !== "") {
+    if (tp !== "" && !BigNumber.from("0").eq(tp.stringToBigNumber(18) ?? BigNumber.from("0"))) {
       return longOrShort
         ? Number(tp) < Number(limitAmount)
         : Number(tp) > Number(limitAmount);
@@ -385,7 +385,7 @@ function useFuturesNewOrder(
     return false;
   }, [limitAmount, longOrShort, tp]);
   const slError = useMemo(() => {
-    if (sl !== "") {
+    if (sl !== "" && !BigNumber.from("0").eq(sl.stringToBigNumber(18) ?? BigNumber.from("0"))) {
       return longOrShort
         ? Number(sl) > Number(limitAmount)
         : Number(sl) < Number(limitAmount);

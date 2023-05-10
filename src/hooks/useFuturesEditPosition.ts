@@ -69,7 +69,7 @@ function useFuturesEditPosition(
     );
   }, [data.basePrice]);
   const tpError = useMemo(() => {
-    if (stopProfitPriceInput !== "") {
+    if (stopProfitPriceInput !== "" && !BigNumber.from("0").eq(stopProfitPriceInput.stringToBigNumber(18) ?? BigNumber.from("0"))) {
       return data.orientation
         ? Number(stopProfitPriceInput) < Number(baseOpenPrice)
         : Number(stopProfitPriceInput) > Number(baseOpenPrice);
@@ -77,7 +77,7 @@ function useFuturesEditPosition(
     return false;
   }, [baseOpenPrice, data.orientation, stopProfitPriceInput]);
   const slError = useMemo(() => {
-    if (stopLossPriceInput) {
+    if (stopLossPriceInput !== "" && !BigNumber.from("0").eq(stopLossPriceInput.stringToBigNumber(18) ?? BigNumber.from("0"))) {
       return data.orientation
         ? Number(stopLossPriceInput) > Number(baseOpenPrice)
         : Number(stopLossPriceInput) < Number(baseOpenPrice);
