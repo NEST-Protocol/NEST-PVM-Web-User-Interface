@@ -4,6 +4,7 @@ import { createContainer } from "unstated-next";
 import { useWaitForTransaction } from "wagmi";
 import { SnackBarType } from "../components/SnackBar/NormalSnackBar";
 import useTransactionSnackBar from "./useNESTSnackBar";
+import { t } from "@lingui/macro";
 
 export enum TransactionType {
   approve,
@@ -35,26 +36,26 @@ export const usePendingTransactionsBase = () => {
   const getInfoTitle = useCallback((type: TransactionType) => {
     switch (type) {
       case TransactionType.approve:
-        return "Approve";
+        return t`Approve`;
       case TransactionType.futures_buy:
-        return "Open position";
+        return t`Open position`;
       case TransactionType.futures_buy_request:
-        return "Open position request";
+        return t`Open position request`;
       case TransactionType.futures_add:
-        return "Add position";
+        return t`Add position`;
       case TransactionType.futures_sell:
-        return "Sell position";
+        return t`Sell position`;
       case TransactionType.futures_sell_request:
-        return "Sell position request";
+        return t`Sell position request`;
       case TransactionType.futures_editPosition:
-        return "Edit Position";
+        return t`Edit Position`;
       case TransactionType.futures_editLimit:
-        return "Edit Limit Order";
+        return t`Edit Limit Order`;
       case TransactionType.futures_closeLimit:
-        return "Close Limit Order";
+        return t`Close Limit Order`;
       case TransactionType.swap_uni:
       case TransactionType.swap_nhbtc:
-        return "Swap";
+        return t`Swap`;
     }
   }, []);
   useEffect(() => {

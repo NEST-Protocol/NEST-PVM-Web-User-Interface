@@ -15,6 +15,7 @@ import {
   TransactionType,
   usePendingTransactions,
 } from "./useTransactionReceipt";
+import { t } from "@lingui/macro";
 
 function useFuturesAdd(
   data: FuturesOrderV2,
@@ -124,7 +125,7 @@ function useFuturesAdd(
   }, [account.address, nestBalance]);
   const showPosition = useMemo(() => {
     const lever = data.lever.toString();
-    const longOrShort = data.orientation ? "Long" : "Short";
+    const longOrShort = data.orientation ? t`Long` : t`Short`;
     const balance = BigNumber.from(
       data.balance.toString()
     ).bigNumberToShowString(4, 2);
@@ -182,11 +183,11 @@ function useFuturesAdd(
   }, [onClose, pending, send]);
   const mainButtonTitle = useMemo(() => {
     if (!checkBalance) {
-      return `Insufficient NEST balance`;
+      return t`Insufficient NEST balance`;
     } else if (checkAllowance) {
-      return "Confirm";
+      return t`Confirm`;
     } else {
-      return "Approve";
+      return t`Approve`;
     }
   }, [checkAllowance, checkBalance]);
   const mainButtonLoading = useMemo(() => {

@@ -10,6 +10,7 @@ import FuturesOrderListInfo, {
   FuturesOrderListInfoMain,
 } from "./FuturesOrderListInfo";
 import OrderListPosition from "./OrderListPosition";
+import { Trans, t } from "@lingui/macro";
 
 interface OrderListProps {
   data: FuturesOrderV2;
@@ -59,11 +60,15 @@ const OrderList: FC<OrderListProps> = ({ ...props }) => {
       <Stack spacing={"8px"}>
         <Stack direction={"row"} justifyContent={"space-around"}>
           <FuturesOrderListInfoMain spacing={"4px"} width={"100%"}>
-            <Box component={"p"}>Open Price</Box>
+            <Box component={"p"}>
+              <Trans>Open Price</Trans>
+            </Box>
             <Box component={"p"}>{showLimitPrice}USDT</Box>
           </FuturesOrderListInfoMain>
           <FuturesOrderListInfoMain spacing={"4px"} width={"100%"}>
-            <Box component={"p"}>Actual Margin</Box>
+            <Box component={"p"}>
+              <Trans>Actual Margin</Trans>
+            </Box>
             <Stack
               direction={"row"}
               spacing={"4px"}
@@ -82,7 +87,9 @@ const OrderList: FC<OrderListProps> = ({ ...props }) => {
             spacing={"4px"}
             width={"100%"}
           >
-            <Box component={"p"}>Take Profit</Box>
+            <Box component={"p"}>
+              <Trans>Take Profit</Trans>
+            </Box>
             <Box component={"p"}>{tp}USDT</Box>
           </FuturesOrderListInfo>
           <FuturesOrderListInfo
@@ -90,7 +97,9 @@ const OrderList: FC<OrderListProps> = ({ ...props }) => {
             spacing={"4px"}
             width={"100%"}
           >
-            <Box component={"p"}>Stop Loss</Box>
+            <Box component={"p"}>
+              <Trans>Stop Loss</Trans>
+            </Box>
             <Box component={"p"}>{sl}USDT</Box>
           </FuturesOrderListInfo>
         </Stack>
@@ -99,7 +108,7 @@ const OrderList: FC<OrderListProps> = ({ ...props }) => {
       )}
       <Stack direction={"row"} spacing={"8px"}>
         <MainButton
-          title={"Edit"}
+          title={t`Edit`}
           onClick={() =>
             props.buttonCallBack({
               data: props.data,

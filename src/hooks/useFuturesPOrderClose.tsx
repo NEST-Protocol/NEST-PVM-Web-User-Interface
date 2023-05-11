@@ -4,6 +4,7 @@ import { Order } from "../pages/Dashboard/Dashboard";
 import { FuturesPrice, priceToken } from "../pages/Futures/Futures";
 import { lipPrice } from "./useFuturesNewOrder";
 import { FuturesOrderV2 } from "./useFuturesOrderList";
+import { t } from "@lingui/macro";
 
 function useFuturesPOrderClose(
   data: FuturesOrderV2,
@@ -97,14 +98,14 @@ function useFuturesPOrderClose(
   }, [showPercent]);
   const showTitle = useMemo(() => {
     return data.baseBlock.toString() === "0"
-      ? "Liquidated"
-      : "Trigger executed";
+      ? t`Liquidated`
+      : t`Trigger executed`;
   }, [data.baseBlock]);
   const shareOrder = useMemo(() => {
     const info: Order = {
       owner: data.owner.toString(),
       leverage: `${data.lever.toString()}X`,
-      orientation: data.orientation ? "Long" : "Short",
+      orientation: data.orientation ? t`Long` : t`Short`,
       actualRate: showPercentNum,
       index: parseInt(data.index.toString()),
       openPrice: parseFloat(data.basePrice.bigNumberToShowString(18, 2)),

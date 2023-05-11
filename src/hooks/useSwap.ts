@@ -16,6 +16,7 @@ import {
   TransactionType,
   usePendingTransactions,
 } from "./useTransactionReceipt";
+import { t } from "@lingui/macro";
 
 interface SwapToken {
   src: string;
@@ -329,13 +330,13 @@ function useSwap() {
    */
   const mainButtonTitle = useMemo(() => {
     if (!account.address) {
-      return "Connect Wallet";
+      return t`Connect Wallet`;
     } else if (!checkBalance) {
-      return `Insufficient ${swapToken.src} balance`;
+      return `${t`Insufficient`} ${swapToken.src} ${t`balance`}`;
     } else if (checkAllowance) {
-      return "Swap";
+      return t`Swap`;
     } else {
-      return "Approve";
+      return t`Approve`;
     }
   }, [account.address, checkAllowance, checkBalance, swapToken.src]);
   const pending = useMemo(() => {

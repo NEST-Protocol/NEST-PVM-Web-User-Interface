@@ -8,6 +8,7 @@ import {
   TransactionType,
   usePendingTransactions,
 } from "./useTransactionReceipt";
+import { t } from "@lingui/macro";
 
 function useFuturesOrder(data: FuturesOrderV2) {
   const { isPendingOrder } = usePendingTransactions();
@@ -39,7 +40,7 @@ function useFuturesOrder(data: FuturesOrderV2) {
     );
   }, [data.index, isPendingOrder]);
   const mainButtonTitle = useMemo(() => {
-    return "Close";
+    return t`Close`;
   }, []);
   const mainButtonLoading = useMemo(() => {
     if (closeLimit.isLoading || pending) {
@@ -70,12 +71,12 @@ function useFuturesOrder(data: FuturesOrderV2) {
       ? String().placeHolder
       : BigNumber.from(slNum.toString()).bigNumberToShowString(18, 2);
   }, [data.stopLossPrice]);
-  
+
   const shareOrder = useMemo(() => {
     const info: Order = {
       owner: data.owner.toString(),
       leverage: `${data.lever.toString()}X`,
-      orientation: data.orientation ? "Long" : "Short",
+      orientation: data.orientation ? t`Long` : t`Short`,
       actualRate: 0,
       index: parseInt(data.index.toString()),
       openPrice: parseFloat(data.basePrice.bigNumberToShowString(18, 2)),

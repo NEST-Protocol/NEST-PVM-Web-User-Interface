@@ -7,6 +7,7 @@ import {
   TransactionType,
   usePendingTransactions,
 } from "./useTransactionReceipt";
+import { t } from "@lingui/macro";
 
 function useFuturesClose(
   data: FuturesOrderV2,
@@ -17,7 +18,7 @@ function useFuturesClose(
   const [send, setSend] = useState(false);
   const showPosition = useMemo(() => {
     const lever = data.lever.toString();
-    const longOrShort = data.orientation ? "Long" : "Short";
+    const longOrShort = data.orientation ? t`Long` : t`Short`;
     const balance = BigNumber.from(
       data.balance.toString()
     ).bigNumberToShowString(4, 2);
@@ -93,7 +94,7 @@ function useFuturesClose(
     return fee.bigNumberToShowString(4, 2);
   }, [data.balance, data.basePrice, data.channelIndex, data.lever, price]);
   const feeTip = useMemo(() => {
-    return "Position*0.05%";
+    return t`Position*0.05%`;
   }, []);
   /**
    * action
@@ -117,7 +118,7 @@ function useFuturesClose(
     }
   }, [onClose, pending, send]);
   const mainButtonTitle = useMemo(() => {
-    return "Confirm";
+    return t`Confirm`;
   }, []);
   const mainButtonLoading = useMemo(() => {
     if (sell.isLoading || pending) {

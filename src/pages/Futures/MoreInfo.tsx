@@ -4,6 +4,7 @@ import { styled } from "@mui/material/styles";
 import { FC } from "react";
 import { NEXT } from "../../components/icons";
 import NESTLine from "../../components/NESTLine";
+import { Trans } from "@lingui/macro";
 
 const InfoBox = styled(Box)(({ theme }) => ({
   fontWeight: 700,
@@ -50,7 +51,7 @@ const FuturesMoreInfo: FC = () => {
           color: theme.normal.text0,
         })}
       >
-        More Info
+        <Trans>More Info</Trans>
       </Box>
       <Stack
         sx={{
@@ -60,24 +61,30 @@ const FuturesMoreInfo: FC = () => {
         <Stack
           direction={"row"}
           justifyContent={"space-between"}
-          alignItems={'center'}
+          alignItems={"center"}
           width={"100%"}
           component={"button"}
           onClick={() => {
             window.open("https://nestprotocol.org/doc/ennestwhitepaper.pdf");
           }}
-          sx={(theme) => ({paddingX: "20px",height:'60px', "&:hover": { cursor: "pointer", background: theme.normal.bg1 } })}
+          sx={(theme) => ({
+            paddingX: "20px",
+            height: "60px",
+            "&:hover": { cursor: "pointer", background: theme.normal.bg1 },
+          })}
         >
-          <InfoBox component={"p"}>NEST White Paper</InfoBox>
+          <InfoBox component={"p"}>
+            <Trans>NEST White Paper</Trans>
+          </InfoBox>
           <NextBox>
             <NEXT />
           </NextBox>
         </Stack>
-        <NESTLine style={{padding: '0 20px'}}/>
+        <NESTLine style={{ padding: "0 20px" }} />
         <Stack
           direction={"row"}
           justifyContent={"space-between"}
-          alignItems={'center'}
+          alignItems={"center"}
           width={"100%"}
           component={"button"}
           onClick={() => {
@@ -85,9 +92,15 @@ const FuturesMoreInfo: FC = () => {
               "https://finance.docs.nestprotocol.org/#connect-wallet"
             );
           }}
-          sx={(theme) => ({paddingX: "20px",height:'60px', "&:hover": { cursor: "pointer", background: theme.normal.bg1 } })}
+          sx={(theme) => ({
+            paddingX: "20px",
+            height: "60px",
+            "&:hover": { cursor: "pointer", background: theme.normal.bg1 },
+          })}
         >
-          <InfoBox component={"p"}>How to Play</InfoBox>
+          <InfoBox component={"p"}>
+            <Trans>How to Play</Trans>
+          </InfoBox>
           <NextBox>
             <NEXT />
           </NextBox>

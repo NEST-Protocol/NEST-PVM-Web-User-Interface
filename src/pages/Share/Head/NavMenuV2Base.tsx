@@ -3,7 +3,7 @@ import { styled } from "@mui/material/styles";
 import Stack from "@mui/material/Stack";
 import { NavItems } from "./NESTHead";
 import { Link, useLocation } from "react-router-dom";
-import { Close, MobileListIcon } from "../../../components/icons";
+import { Close, MobileListIcon, NEXT } from "../../../components/icons";
 import NESTLine from "../../../components/NESTLine";
 import { FootAList, NESTFootStack } from "../Foot/NESTFoot";
 import Box from "@mui/material/Box";
@@ -13,10 +13,24 @@ import Modal from "@mui/material/Modal";
 import Switch from "@mui/material/Switch";
 import useTheme from "../../../hooks/useTheme";
 import useNEST from "../../../hooks/useNEST";
+import { Trans } from "@lingui/macro";
 
 const NavMenu = styled(Stack)(({ theme }) => {
   return {};
 });
+
+const NextBox = styled(Box)(({ theme }) => ({
+  width: 16,
+  height: 16,
+  "& svg": {
+    width: 16,
+    height: 16,
+    display: "block",
+    "& path": {
+      fill: theme.normal.text2,
+    },
+  },
+}));
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 44,
@@ -92,12 +106,12 @@ const NavMenuV2Base: FC = () => {
           return {
             height: "48px",
             "& button": {
-              width: '24px',
-              height: '24px',
+              width: "24px",
+              height: "24px",
               marginRight: "8px",
               borderRadius: 12,
               background: theme.normal.bg1,
-              padding: '6px',
+              padding: "6px",
               "& svg": {
                 width: 12,
                 height: 12,
@@ -108,7 +122,7 @@ const NavMenuV2Base: FC = () => {
               },
             },
             "& a": {
-              width: '100%',
+              width: "100%",
               fontSize: 16,
               fontWeight: 700,
               color: theme.normal.text1,
@@ -167,12 +181,50 @@ const NavMenuV2Base: FC = () => {
               color: theme.normal.text1,
             })}
           >
-            Dark mode
+            <Trans>Dark mode</Trans>
           </Box>
           <MaterialUISwitch
             checked={!nowTheme.isLight}
             onChange={changeTheme}
           />
+        </Stack>
+        <Stack
+          direction={"row"}
+          justifyContent={"space-between"}
+          alignItems={"center"}
+          height={"40px"}
+          marginTop={"12px"}
+        >
+          <Box
+            component={"p"}
+            sx={(theme) => ({
+              fontWeight: 400,
+              fontSize: 16,
+              color: theme.normal.text1,
+            })}
+          >
+            <Trans>Language</Trans>
+          </Box>
+          <Stack
+            direction={"row"}
+            justifyContent={"space-between"}
+            alignItems={"center"}
+            spacing={"8px"}
+          >
+            <Box
+              component={"p"}
+              sx={(theme) => ({
+                fontWeight: 400,
+                fontSize: 16,
+                color: theme.normal.text1,
+              })}
+            >
+              English
+            </Box>
+            <NextBox>
+              <NEXT />
+            </NextBox>
+          </Stack>
         </Stack>
         <NESTLine sx={{ margin: "15px 0" }} />
         <Stack
@@ -181,7 +233,7 @@ const NavMenuV2Base: FC = () => {
           alignItems={"center"}
           height={"40px"}
           sx={(theme) => ({
-            width: '100%',
+            width: "100%",
             fontWeight: 400,
             fontSize: 16,
             color: theme.normal.text1,
@@ -196,7 +248,9 @@ const NavMenuV2Base: FC = () => {
             );
           }}
         >
-          <p>User Guide</p>
+          <p>
+            <Trans>User Guide</Trans>
+          </p>
         </Stack>
         <Stack
           direction={"row"}
@@ -204,7 +258,7 @@ const NavMenuV2Base: FC = () => {
           alignItems={"center"}
           height={"40px"}
           sx={(theme) => ({
-            width: '100%',
+            width: "100%",
             marginTop: "12px",
             fontWeight: 400,
             fontSize: 16,
@@ -218,7 +272,9 @@ const NavMenuV2Base: FC = () => {
             window.open("https://nestprotocol.org/doc/ennestwhitepaper.pdf");
           }}
         >
-          <p>White Paper</p>
+          <p>
+            <Trans>White Paper</Trans>
+          </p>
         </Stack>
         <Stack
           direction={"row"}
@@ -226,7 +282,7 @@ const NavMenuV2Base: FC = () => {
           alignItems={"center"}
           height={"40px"}
           sx={(theme) => ({
-            width: '100%',
+            width: "100%",
             marginTop: "12px",
             fontWeight: 400,
             fontSize: 16,
@@ -240,7 +296,9 @@ const NavMenuV2Base: FC = () => {
             window.open("https://github.com/NEST-Protocol");
           }}
         >
-          <p>Github</p>
+          <p>
+            <Trans>Github</Trans>
+          </p>
         </Stack>
         <Stack
           direction={"row"}
@@ -248,7 +306,7 @@ const NavMenuV2Base: FC = () => {
           alignItems={"center"}
           height={"40px"}
           sx={(theme) => ({
-            width: '100%',
+            width: "100%",
             marginTop: "12px",
             fontWeight: 400,
             fontSize: 16,
@@ -262,7 +320,9 @@ const NavMenuV2Base: FC = () => {
             window.open("https://nest-protocol.medium.com");
           }}
         >
-          <p>News</p>
+          <p>
+            <Trans>News</Trans>
+          </p>
         </Stack>
         {chainsData.chainId === 97 ? (
           <Stack
@@ -271,7 +331,7 @@ const NavMenuV2Base: FC = () => {
             alignItems={"center"}
             height={"40px"}
             sx={(theme) => ({
-              width: '100%',
+              width: "100%",
               marginTop: "12px",
               fontWeight: 400,
               fontSize: 16,
@@ -285,7 +345,9 @@ const NavMenuV2Base: FC = () => {
               window.open("https://testnet.bnbchain.org/faucet-smart");
             }}
           >
-            <p>Test BNB</p>
+            <p>
+              <Trans>Test BNB</Trans>
+            </p>
           </Stack>
         ) : (
           <></>

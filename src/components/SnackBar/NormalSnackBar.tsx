@@ -6,6 +6,7 @@ import React, { useMemo } from "react";
 import useNEST from "../../hooks/useNEST";
 import { Close, Fail, Success } from "../icons";
 import MainButton from "../MainButton/MainButton";
+import { t } from "@lingui/macro";
 
 export enum SnackBarType {
   success,
@@ -118,7 +119,7 @@ const NormalSnackBar = React.forwardRef<HTMLDivElement, NormalSnackBarProps>(
           <Stack direction={"row"} justifyContent={"flex-end"}>
             {props.hash ? (
               <MainButton
-                title={"View"}
+                title={t`View`}
                 onClick={() => {
                   window.open(
                     (props.hash ?? "").hashToChainScan(chainsData.chainId)

@@ -4,6 +4,7 @@ import { FC, useState } from "react";
 import MainButton from "../../../components/MainButton/MainButton";
 import useWindowWidth from "../../../hooks/useWindowWidth";
 import BaseModal from "../../Share/Modal/BaseModal";
+import { t } from "@lingui/macro";
 
 interface SwapSlippageModalProps {
   onClose: () => void;
@@ -54,7 +55,7 @@ const SwapSlippageModal: FC<SwapSlippageModalProps> = ({ ...props }) => {
     );
   });
   return (
-    <BaseModal title={"Slippage Tolerance Setting"} onClose={props.onClose}>
+    <BaseModal title={t`Slippage Tolerance Setting`} onClose={props.onClose}>
       <Stack
         direction={"row"}
         justifyContent={"space-between"}
@@ -64,7 +65,7 @@ const SwapSlippageModal: FC<SwapSlippageModalProps> = ({ ...props }) => {
         {buttonArray}
       </Stack>
       <MainButton
-        title="Confirm"
+        title={t`Confirm`}
         onClick={() => {
           props.selectedCallBack(selected);
           props.onClose();

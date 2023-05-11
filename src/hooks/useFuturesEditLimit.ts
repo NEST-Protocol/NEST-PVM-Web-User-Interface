@@ -6,6 +6,7 @@ import {
   usePendingTransactions,
 } from "./useTransactionReceipt";
 import { BigNumber } from "ethers";
+import { t } from "@lingui/macro";
 
 function useFuturesEditLimit(data: FuturesOrderV2, onClose: () => void) {
   const { isPendingOrder } = usePendingTransactions();
@@ -40,7 +41,7 @@ function useFuturesEditLimit(data: FuturesOrderV2, onClose: () => void) {
     }
   }, [onClose, pending, send]);
   const mainButtonTitle = useMemo(() => {
-    return "Confirm";
+    return t`Confirm`;
   }, []);
   const mainButtonLoading = useMemo(() => {
     if (edit.isLoading || pending) {

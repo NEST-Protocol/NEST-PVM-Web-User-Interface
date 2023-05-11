@@ -31,6 +31,7 @@ import { styled } from "@mui/material/styles";
 import { getQueryVariable } from "../../lib/queryVaribale";
 import SharePositionModal from "./Modal/SharePositionModal";
 import useNEST from "../../hooks/useNEST";
+import { Trans } from "@lingui/macro";
 
 interface FuturesOrderListProps {
   price: FuturesPrice | undefined;
@@ -174,7 +175,13 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
               />
             );
           })}
-          {noOrder ? <NoOrderMobile>No Order</NoOrderMobile> : <></>}
+          {noOrder ? (
+            <NoOrderMobile>
+              <Trans>No Order</Trans>
+            </NoOrderMobile>
+          ) : (
+            <></>
+          )}
         </Stack>
       );
     } else if (tabsValue === 1) {
@@ -197,7 +204,13 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
               />
             );
           })}
-          {noOrder ? <NoOrderMobile>No Order</NoOrderMobile> : <></>}
+          {noOrder ? (
+            <NoOrderMobile>
+              <Trans>No Order</Trans>
+            </NoOrderMobile>
+          ) : (
+            <></>
+          )}
         </Stack>
       );
     }
@@ -216,11 +229,15 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
     const orderTabsData = [
       <Stack direction={"row"} alignItems={"center"} spacing={"4px"}>
         <FuturesOrder />
-        <p>Positions</p>
+        <p>
+          <Trans>Positions</Trans>
+        </p>
       </Stack>,
       <Stack direction={"row"} alignItems={"center"} spacing={"4px"}>
         <FuturesLimitOrder />
-        <p>Order</p>
+        <p>
+          <Trans>Order</Trans>
+        </p>
       </Stack>,
     ];
     return (

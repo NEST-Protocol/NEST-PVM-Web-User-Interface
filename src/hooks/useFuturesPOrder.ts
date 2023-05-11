@@ -8,6 +8,7 @@ import { FuturesOrderV2 } from "./useFuturesOrderList";
 import useNEST from "./useNEST";
 import FuturesV2ABI from "../contracts/ABI/FuturesV2.json";
 import { Order } from "../pages/Dashboard/Dashboard";
+import { t } from "@lingui/macro";
 
 function useFuturesPOrder(
   data: FuturesOrderV2,
@@ -42,7 +43,7 @@ function useFuturesPOrder(
         }
         const priceNum = price[tokenName];
         const value = await FuturesV2.balanceOf(data.index, priceNum);
-        
+
         setMarginAssets(value);
       } catch (error) {
         console.log(error);
@@ -57,7 +58,7 @@ function useFuturesPOrder(
     const isEdit =
       BigNumber.from("0").eq(data.stopProfitPrice) &&
       BigNumber.from("0").eq(data.stopLossPrice);
-    return !isEdit ? "Edit" : "Trigger";
+    return !isEdit ? t`Edit` : t`Trigger`;
   }, [data.stopLossPrice, data.stopProfitPrice]);
   const tp = useMemo(() => {
     const tpNum = data.stopProfitPrice;
@@ -136,7 +137,7 @@ function useFuturesPOrder(
     const info: Order = {
       owner: data.owner.toString(),
       leverage: `${data.lever.toString()}X`,
-      orientation: data.orientation ? "Long" : "Short",
+      orientation: data.orientation ? t`Long` : t`Short`,
       actualRate: showPercentNum,
       index: parseInt(data.index.toString()),
       openPrice: parseFloat(data.basePrice.bigNumberToShowString(18, 2)),

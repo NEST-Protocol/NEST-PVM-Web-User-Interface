@@ -20,7 +20,7 @@ import TriggerRiskModal from "./Modal/LimitAndPriceModal";
 import NESTInputSelect from "../../components/NormalInput/NESTInputSelect";
 import ApproveNoticeModal from "./Modal/ApproveNoticeModal";
 import ErrorLabel from "../../components/ErrorLabel/ErrorLabel";
-import { Trans } from "@lingui/macro"
+import { Trans, t } from "@lingui/macro";
 
 interface FuturesNewOrderProps {
   price: FuturesPrice | undefined;
@@ -79,7 +79,14 @@ const FuturesNewOrder: FC<FuturesNewOrderProps> = ({ ...props }) => {
     stopErrorText,
   } = useFuturesNewOrder(props.price, props.tokenPair);
   const newOrderTabsData = useMemo(() => {
-    return [<p>Market</p>, <p>Limit</p>];
+    return [
+      <p>
+        <Trans>Market</Trans>
+      </p>,
+      <p>
+        <Trans>Limit</Trans>
+      </p>,
+    ];
   }, []);
   const inputNestAmount = useCallback(() => {
     return (
@@ -140,7 +147,7 @@ const FuturesNewOrder: FC<FuturesNewOrderProps> = ({ ...props }) => {
               setIsStop(!isStop);
             }}
           >
-            Stop-Limit
+            <Trans>Stop-Limit</Trans>
           </Box>
         </Stack>
         {isStop ? (
@@ -177,7 +184,7 @@ const FuturesNewOrder: FC<FuturesNewOrderProps> = ({ ...props }) => {
                   color: theme.normal.text2,
                 })}
               >
-                Stop Loss
+                <Trans>Stop Loss</Trans>
               </Box>
               <NormalInput
                 placeHolder={slDefault}
@@ -238,7 +245,7 @@ const FuturesNewOrder: FC<FuturesNewOrderProps> = ({ ...props }) => {
         {tabsValue === 0 ? (
           <>
             <NormalInfo
-              title={"Entry Price"}
+              title={t`Entry Price`}
               value={showOpenPrice}
               symbol={"USDT"}
               // help
@@ -251,7 +258,7 @@ const FuturesNewOrder: FC<FuturesNewOrderProps> = ({ ...props }) => {
               // }
             />
             <NormalInfo
-              title={"Liq Price"}
+              title={t`Liq Price`}
               value={showLiqPrice}
               symbol={"USDT"}
               style={{ marginTop: "8px" }}
@@ -261,7 +268,7 @@ const FuturesNewOrder: FC<FuturesNewOrderProps> = ({ ...props }) => {
           <></>
         )}
         <NormalInfo
-          title={"Service Fee"}
+          title={t`Service Fee`}
           value={showFee}
           symbol={"NEST"}
           style={{ marginTop: tabsValue === 0 ? "8px" : "16px" }}
@@ -276,7 +283,7 @@ const FuturesNewOrder: FC<FuturesNewOrderProps> = ({ ...props }) => {
         />
         {inputToken === "USDT" ? (
           <NormalInfo
-            title={"Positions"}
+            title={t`Positions`}
             value={showPositions}
             symbol={"NEST"}
             style={{ marginTop: "8px" }}
@@ -285,7 +292,7 @@ const FuturesNewOrder: FC<FuturesNewOrderProps> = ({ ...props }) => {
           <></>
         )}
         <NormalInfo
-          title={"Total Pay"}
+          title={t`Total Pay`}
           value={showTotalPay}
           symbol={"NEST"}
           style={{ marginTop: "8px" }}
@@ -373,7 +380,7 @@ const FuturesNewOrder: FC<FuturesNewOrderProps> = ({ ...props }) => {
                 color: theme.normal.text2,
               })}
             >
-              Price
+              <Trans>Price</Trans>
             </Box>
             <NormalInputWithLastButton
               placeHolder={""}

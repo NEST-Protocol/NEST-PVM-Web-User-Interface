@@ -8,6 +8,7 @@ import {
   TransactionType,
   usePendingTransactions,
 } from "./useTransactionReceipt";
+import { t } from "@lingui/macro";
 
 function useFuturesEditPosition(
   data: FuturesOrderV2,
@@ -69,7 +70,12 @@ function useFuturesEditPosition(
     );
   }, [data.basePrice]);
   const tpError = useMemo(() => {
-    if (stopProfitPriceInput !== "" && !BigNumber.from("0").eq(stopProfitPriceInput.stringToBigNumber(18) ?? BigNumber.from("0"))) {
+    if (
+      stopProfitPriceInput !== "" &&
+      !BigNumber.from("0").eq(
+        stopProfitPriceInput.stringToBigNumber(18) ?? BigNumber.from("0")
+      )
+    ) {
       return data.orientation
         ? Number(stopProfitPriceInput) < Number(baseOpenPrice)
         : Number(stopProfitPriceInput) > Number(baseOpenPrice);
@@ -77,7 +83,12 @@ function useFuturesEditPosition(
     return false;
   }, [baseOpenPrice, data.orientation, stopProfitPriceInput]);
   const slError = useMemo(() => {
-    if (stopLossPriceInput !== "" && !BigNumber.from("0").eq(stopLossPriceInput.stringToBigNumber(18) ?? BigNumber.from("0"))) {
+    if (
+      stopLossPriceInput !== "" &&
+      !BigNumber.from("0").eq(
+        stopLossPriceInput.stringToBigNumber(18) ?? BigNumber.from("0")
+      )
+    ) {
       return data.orientation
         ? Number(stopLossPriceInput) > Number(baseOpenPrice)
         : Number(stopLossPriceInput) < Number(baseOpenPrice);
@@ -97,11 +108,11 @@ function useFuturesEditPosition(
    * show
    */
   const placeHolder = useMemo(() => {
-    return [`> OPEN PRICE`, `< OPEN PRICE`];
+    return [t`> OPEN PRICE`, t`< OPEN PRICE`];
   }, []);
   const showPosition = useMemo(() => {
     const lever = data.lever.toString();
-    const longOrShort = data.orientation ? "Long" : "Short";
+    const longOrShort = data.orientation ? t`Long` : t`Short`;
     const balance = BigNumber.from(
       data.balance.toString()
     ).bigNumberToShowString(4, 2);
@@ -141,8 +152,8 @@ function useFuturesEditPosition(
   }, [data.balance, data.lever]);
   const feeTip = useMemo(() => {
     return [
-      "Position fee =Position*0.05%",
-      "Stop order fee(after execution) = 15 NEST",
+      t`Position fee =Position*0.05%`,
+      t`Stop order fee(after execution) = 15 NEST`,
     ];
   }, []);
   /**
@@ -162,7 +173,7 @@ function useFuturesEditPosition(
     }
   }, [onClose, pending, send]);
   const mainButtonTitle = useMemo(() => {
-    return "Confirm";
+    return t`Confirm`;
   }, []);
   const mainButtonLoading = useMemo(() => {
     if (edit.isLoading || pending) {

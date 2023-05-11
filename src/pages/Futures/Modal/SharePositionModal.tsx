@@ -24,6 +24,7 @@ import LinkButton from "../../../components/MainButton/LinkButton";
 import LeverageSlider from "../Components/LeverageSlider";
 import NormalInput from "../../../components/NormalInput/NormalInput";
 import ErrorLabel from "../../../components/ErrorLabel/ErrorLabel";
+import { Trans, t } from "@lingui/macro";
 
 interface SharePositionModalProps {
   open: boolean;
@@ -266,7 +267,7 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
         })}
         component={"p"}
       >
-        Edit
+        <Trans>Edit</Trans>
       </Box>
     ) : (
       <Stack
@@ -346,7 +347,15 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
           })}
         >
           {longOrShort ? <Long /> : <Short />}
-          {longOrShort ? <p>Long</p> : <p>Short</p>}
+          {longOrShort ? (
+            <p>
+              <Trans>Long</Trans>
+            </p>
+          ) : (
+            <p>
+              <Trans>Short</Trans>
+            </p>
+          )}
         </Stack>
       </Stack>
     );
@@ -354,14 +363,18 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
   const info1 = useMemo(() => {
     return (
       <Stack spacing={"8px"}>
-        <NormalInfo title={"Limit Price"} value={limitAmount} symbol={"USDT"} />
+        <NormalInfo
+          title={t`Limit Price`}
+          value={limitAmount}
+          symbol={"USDT"}
+        />
         {tp !== "" ? (
-          <NormalInfo title={"Take Profit"} value={tp} symbol={"USDT"} />
+          <NormalInfo title={t`Take Profit`} value={tp} symbol={"USDT"} />
         ) : (
           <></>
         )}
         {sl !== "" ? (
-          <NormalInfo title={"Stop Loss"} value={sl} symbol={"USDT"} />
+          <NormalInfo title={t`Stop Loss`} value={sl} symbol={"USDT"} />
         ) : (
           <></>
         )}
@@ -390,7 +403,9 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
               })}
             >
               <Edit />
-              <p>Edit</p>
+              <p>
+                <Trans>Edit</Trans>
+              </p>
             </Stack>
           </LinkButton>
         </Stack>
@@ -402,7 +417,7 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
     return (
       <Stack spacing={"8px"} width={"100%"}>
         <NormalInfo
-          title={"Service Fee"}
+          title={t`Service Fee`}
           value={showFee}
           symbol={"NEST"}
           help
@@ -416,14 +431,14 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
         />
         {inputToken === "USDT" ? (
           <NormalInfo
-            title={"Positions"}
+            title={t`Positions`}
             value={showPositions}
             symbol={"NEST"}
           />
         ) : (
           <></>
         )}
-        <NormalInfo title={"Total Pay"} value={showTotalPay} symbol={"NEST"} />
+        <NormalInfo title={t`Total Pay`} value={showTotalPay} symbol={"NEST"} />
       </Stack>
     );
   }, [inputToken, showFee, showFeeHoverText, showPositions, showTotalPay]);
@@ -550,7 +565,7 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
                 color: theme.normal.text2,
               })}
             >
-              Limit Price
+              <Trans>Limit Price</Trans>
             </Box>
 
             <NormalInput
@@ -571,7 +586,7 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
                 color: theme.normal.text2,
               })}
             >
-              Take Profit
+              <Trans>Take Profit</Trans>
             </Box>
 
             <NormalInput
@@ -591,7 +606,7 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
                 color: theme.normal.text2,
               })}
             >
-              Stop Loss
+              <Trans>Stop Loss</Trans>
             </Box>
 
             <NormalInput
@@ -605,16 +620,14 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
 
           {tpError || slError ? (
             <ErrorLabel
-              title={
-                "TP and SL price you set will trigger immediately."
-              }
+              title={t`TP and SL price you set will trigger immediately.`}
             />
           ) : (
             <></>
           )}
         </Stack>
         <MainButton
-          title={"Confirm"}
+          title={t`Confirm`}
           disable={tpError || slError}
           isLoading={false}
           onClick={() => {

@@ -16,6 +16,7 @@ import FuturesOrderListInfo, {
   FuturesOrderListInfoMain,
 } from "./FuturesOrderListInfo";
 import OrderListPosition from "./OrderListPosition";
+import { Trans, t } from "@lingui/macro";
 
 interface POrderListProps {
   data: FuturesOrderV2;
@@ -68,11 +69,15 @@ const POrderList: FC<POrderListProps> = ({ ...props }) => {
       <Stack spacing={"8px"}>
         <Stack direction={"row"} justifyContent={"space-around"}>
           <FuturesOrderListInfoMain spacing={"4px"} width={"100%"}>
-            <Box component={"p"}>Open Price</Box>
+            <Box component={"p"}>
+              <Trans>Open Price</Trans>
+            </Box>
             <Box component={"p"}>{showBasePrice}USDT</Box>
           </FuturesOrderListInfoMain>
           <FuturesOrderListInfoMain spacing={"4px"} width={"100%"}>
-            <Box component={"p"}>Actual Margin</Box>
+            <Box component={"p"}>
+              <Trans>Actual Margin</Trans>
+            </Box>
             <Stack
               direction={"row"}
               spacing={"4px"}
@@ -92,7 +97,9 @@ const POrderList: FC<POrderListProps> = ({ ...props }) => {
               spacing={"4px"}
               width={"100%"}
             >
-              <Box component={"p"}>Take Profit</Box>
+              <Box component={"p"}>
+                <Trans>Take Profit</Trans>
+              </Box>
               <Box component={"p"}>{tp}USDT</Box>
             </FuturesOrderListInfo>
             <FuturesOrderListInfo
@@ -100,7 +107,9 @@ const POrderList: FC<POrderListProps> = ({ ...props }) => {
               spacing={"4px"}
               width={"100%"}
             >
-              <Box component={"p"}>Stop Loss</Box>
+              <Box component={"p"}>
+                <Trans>Stop Loss</Trans>
+              </Box>
               <Box component={"p"}>{sl}USDT</Box>
             </FuturesOrderListInfo>
           </Stack>
@@ -109,20 +118,27 @@ const POrderList: FC<POrderListProps> = ({ ...props }) => {
         )}
 
         <Stack direction={"row"} justifyContent={"space-around"}>
-        <FuturesOrderListInfo
+          <FuturesOrderListInfo
             direction={"row"}
             spacing={"4px"}
             width={"100%"}
           >
-            <Stack direction={"row"} spacing={"4px"} alignItems={"center"} component={"p"}>
+            <Stack
+              direction={"row"}
+              spacing={"4px"}
+              alignItems={"center"}
+              component={"p"}
+            >
               <Box component={"p"}>Liq Price</Box>
               <NESTTooltipFC
                 title={
                   <p>
-                    Due to the market volatility, the actual liquidation price
-                    may be different from the theoretical liquidation price .
-                    Here is the theoretical liquidation price, for reference
-                    only.
+                    <Trans>
+                      Due to the market volatility, the actual liquidation price
+                      may be different from the theoretical liquidation price .
+                      Here is the theoretical liquidation price, for reference
+                      only.
+                    </Trans>
                   </p>
                 }
               />
@@ -133,7 +149,7 @@ const POrderList: FC<POrderListProps> = ({ ...props }) => {
       </Stack>
       <Stack direction={"row"} spacing={"8px"}>
         <MainButton
-          title={"Add"}
+          title={t`Add`}
           onClick={() =>
             props.buttonCallBack({
               data: props.data,
@@ -153,7 +169,7 @@ const POrderList: FC<POrderListProps> = ({ ...props }) => {
           style={{ height: "40px", fontSize: 14 }}
         />
         <MainButton
-          title={"Close"}
+          title={t`Close`}
           onClick={() =>
             props.buttonCallBack({
               data: props.data,
@@ -218,11 +234,15 @@ export const POrderCloseList: FC<POrderCloseListProps> = ({ ...props }) => {
       <Stack spacing={"8px"}>
         <Stack direction={"row"} justifyContent={"space-around"}>
           <FuturesOrderListInfoMain spacing={"4px"} width={"100%"}>
-            <Box component={"p"}>Open Price</Box>
+            <Box component={"p"}>
+              <Trans>Open Price</Trans>
+            </Box>
             <Box component={"p"}>{showBasePrice}USDT</Box>
           </FuturesOrderListInfoMain>
           <FuturesOrderListInfoMain spacing={"4px"} width={"100%"}>
-            <Box component={"p"}>Actual Margin</Box>
+            <Box component={"p"}>
+              <Trans>Actual Margin</Trans>
+            </Box>
             <Stack
               direction={"row"}
               spacing={"4px"}
@@ -241,7 +261,9 @@ export const POrderCloseList: FC<POrderCloseListProps> = ({ ...props }) => {
             spacing={"4px"}
             width={"100%"}
           >
-            <Box component={"p"}>Take Profit</Box>
+            <Box component={"p"}>
+              <Trans>Take Profit</Trans>
+            </Box>
             <Box component={"p"}>{tp}USDT</Box>
           </FuturesOrderListInfo>
           <FuturesOrderListInfo
@@ -249,7 +271,9 @@ export const POrderCloseList: FC<POrderCloseListProps> = ({ ...props }) => {
             spacing={"4px"}
             width={"100%"}
           >
-            <Box component={"p"}>Stop Loss</Box>
+            <Box component={"p"}>
+              <Trans>Stop Loss</Trans>
+            </Box>
             <Box component={"p"}>{sl}USDT</Box>
           </FuturesOrderListInfo>
         </Stack>
@@ -259,7 +283,9 @@ export const POrderCloseList: FC<POrderCloseListProps> = ({ ...props }) => {
             spacing={"4px"}
             width={"100%"}
           >
-            <Box component={"p"}>Liq Price</Box>
+            <Box component={"p"}>
+              <Trans>Liq Price</Trans>
+            </Box>
             <Box component={"p"}>{showLiqPrice}USDT</Box>
           </FuturesOrderListInfo>
         </Stack>

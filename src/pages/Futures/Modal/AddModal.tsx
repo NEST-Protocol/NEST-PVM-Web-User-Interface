@@ -13,6 +13,7 @@ import useWindowWidth from "../../../hooks/useWindowWidth";
 import BaseDrawer from "../../Share/Modal/BaseDrawer";
 import BaseModal from "../../Share/Modal/BaseModal";
 import { FuturesPrice } from "../Futures";
+import { t } from "@lingui/macro";
 
 interface AddModalBaseProps {
   data: FuturesOrderV2;
@@ -37,29 +38,38 @@ const AddModalBase: FC<AddModalBaseProps> = ({ ...props }) => {
     mainButtonAction,
   } = useFuturesAdd(props.data, props.price, props.onClose);
   const input = useMemo(() => {
-    return <NESTInput
-    checkBalance={checkBalance}
-    showToSwap={showToSwap}
-    showBalance={showBalance}
-    maxCallBack={maxCallBack}
-    nestAmount={nestAmount}
-    changeNestAmount={(value: string) =>
-      setNestAmount(value.formatInputNum4())
-    }
-  />
-  }, [checkBalance, maxCallBack, nestAmount, setNestAmount, showBalance, showToSwap])
+    return (
+      <NESTInput
+        checkBalance={checkBalance}
+        showToSwap={showToSwap}
+        showBalance={showBalance}
+        maxCallBack={maxCallBack}
+        nestAmount={nestAmount}
+        changeNestAmount={(value: string) =>
+          setNestAmount(value.formatInputNum4())
+        }
+      />
+    );
+  }, [
+    checkBalance,
+    maxCallBack,
+    nestAmount,
+    setNestAmount,
+    showBalance,
+    showToSwap,
+  ]);
   return (
     <Stack spacing={"24px"} width={"100%"}>
       {input}
       <NESTLine />
       <Stack spacing={"8px"}>
-        <NormalInfo title={"Position"} value={""} symbol={showPosition} />
+        <NormalInfo title={t`Position`} value={""} symbol={showPosition} />
         <NormalInfo
-          title={"Open Price"}
+          title={t`Open Price`}
           value={showOpenPrice}
           symbol={"USDT"}
         />
-        <NormalInfo title={"Liq Price"} value={showLiqPrice} symbol={"USDT"} />
+        <NormalInfo title={t`Liq Price`} value={showLiqPrice} symbol={"USDT"} />
       </Stack>
       <MainButton
         title={mainButtonTitle}
@@ -92,7 +102,7 @@ const AddModal: FC<AddModalProps> = ({ ...props }) => {
         }}
         keepMounted
       >
-        <BaseDrawer title={"Add Position"} onClose={props.onClose}>
+        <BaseDrawer title={t`Add Position`} onClose={props.onClose}>
           <AddModalBase
             data={props.data}
             price={props.price}
@@ -108,7 +118,7 @@ const AddModal: FC<AddModalProps> = ({ ...props }) => {
         aria-describedby="modal-modal-description"
       >
         <Box>
-          <BaseModal title={"Add Position"} onClose={props.onClose}>
+          <BaseModal title={t`Add Position`} onClose={props.onClose}>
             <AddModalBase
               data={props.data}
               price={props.price}

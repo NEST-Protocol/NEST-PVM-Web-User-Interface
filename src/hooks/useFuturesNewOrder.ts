@@ -404,11 +404,11 @@ function useFuturesNewOrder(
   }, [isStop, slError, tpError]);
   const mainButtonTitle = useMemo(() => {
     if (!account.address) {
-      return "Connect Wallet";
+      return t`Connect Wallet`;
     } else if (checkAllowance) {
-      return `Open ${longOrShort ? "Long" : "Short"}`;
+      return `${t`Open`} ${longOrShort ? t`Long` : t`Short`}`;
     } else {
-      return "Approve";
+      return t`Approve`;
     }
   }, [account.address, checkAllowance, longOrShort]);
   const mainButtonLoading = useMemo(() => {
@@ -470,7 +470,7 @@ function useFuturesNewOrder(
     setShowApproveNotice(false);
   }, [tokenApprove]);
   const mainButtonAction = useCallback(() => {
-    if (mainButtonTitle === "Connect Wallet") {
+    if (mainButtonTitle === t`Connect Wallet`) {
       setShowConnect(true);
     } else if (mainButtonLoading || !checkBalance || stopDis) {
       return;
@@ -549,19 +549,19 @@ function useFuturesNewOrder(
   }, [lever, longOrShort, nestAmount, openPrice]);
   const showFeeHoverText = useMemo(() => {
     if (tabsValue === 0 && !isStop) {
-      return ["Position fee = Position*0.05%"];
+      return [t`Position fee = Position*0.05%`];
     } else if (tabsValue === 1 && !isStop) {
-      return ["Position fee = Position*0.05%", "Limit order fee = 15 NEST"];
+      return [t`Position fee = Position*0.05%`, t`Limit order fee = 15 NEST`];
     } else if (tabsValue === 0 && isStop) {
       return [
-        "Position fee = Position*0.05%",
-        "Stop order fee(after execution) = 15 NEST",
+        t`Position fee = Position*0.05%`,
+        t`Stop order fee(after execution) = 15 NEST`,
       ];
     } else {
       return [
-        "Position fee = Position*0.05%",
-        "Limit order fee = 15 NEST",
-        "Stop order fee(after execution) = 15 NEST",
+        t`Position fee = Position*0.05%`,
+        t`Limit order fee = 15 NEST`,
+        t`Stop order fee(after execution) = 15 NEST`,
       ];
     }
   }, [isStop, tabsValue]);
@@ -583,9 +583,9 @@ function useFuturesNewOrder(
   }, [lever, nestAmount]);
   const showAmountError = useMemo(() => {
     if (checkMinNEST) {
-      return "Minimum 50 NEST";
+      return t`Minimum 50 NEST`;
     } else if (!checkBalance) {
-      return "Insufficient NEST balance";
+      return t`Insufficient NEST balance`;
     } else {
       return undefined;
     }
@@ -610,24 +610,23 @@ function useFuturesNewOrder(
 
   const tpDefault = useMemo(() => {
     if (tabsValue === 0) {
-      const text1 = t`MARKET PRICE`
-      return longOrShort ? `> ${text1}` : `< ${text1}`;
+      return longOrShort ? t`> MARKET PRICE` : t`< MARKET PRICE`;
     } else {
-      return longOrShort ?`> LIMIT PRICE` : `< LIMIT PRICE`;
+      return longOrShort ? t`> LIMIT PRICE` : t`< LIMIT PRICE`;
     }
   }, [longOrShort, tabsValue]);
   const slDefault = useMemo(() => {
     if (tabsValue === 0) {
-      return longOrShort ? `< MARKET PRICE` : `> MARKET PRICE`;
+      return longOrShort ? t`< MARKET PRICE` : t`> MARKET PRICE`;
     } else {
-      return longOrShort ? `< LIMIT PRICE` : `> LIMIT PRICE`;
+      return longOrShort ? t`< LIMIT PRICE` : t`> LIMIT PRICE`;
     }
   }, [longOrShort, tabsValue]);
   const stopErrorText = useMemo(() => {
     if (tabsValue === 0) {
-      return "TP and SL price you set will trigger immediately.";
+      return t`TP and SL price you set will trigger immediately.`;
     } else {
-      return "After the limit order is executed, TP and SL price you set will trigger immediately.";
+      return t`After the limit order is executed, TP and SL price you set will trigger immediately.`;
     }
   }, [tabsValue]);
 
