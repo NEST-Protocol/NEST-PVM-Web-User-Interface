@@ -20,6 +20,7 @@ import {
 import useReadSwapAmountOut from "../contracts/Read/useReadSwapContract";
 import { getQueryVariable } from "../lib/queryVaribale";
 import { KOLTx } from "../lib/NESTRequest";
+import { t } from "@lingui/macro";
 
 export const lipPrice = (
   balance: BigNumber,
@@ -609,9 +610,10 @@ function useFuturesNewOrder(
 
   const tpDefault = useMemo(() => {
     if (tabsValue === 0) {
-      return longOrShort ? `> MARKET PRICE` : `< MARKET PRICE`;
+      const text1 = t`MARKET PRICE`
+      return longOrShort ? `> ${text1}` : `< ${text1}`;
     } else {
-      return longOrShort ? `> LIMIT PRICE` : `< LIMIT PRICE`;
+      return longOrShort ?`> LIMIT PRICE` : `< LIMIT PRICE`;
     }
   }, [longOrShort, tabsValue]);
   const slDefault = useMemo(() => {

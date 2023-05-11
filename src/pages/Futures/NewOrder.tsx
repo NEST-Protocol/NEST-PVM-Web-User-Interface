@@ -20,6 +20,7 @@ import TriggerRiskModal from "./Modal/LimitAndPriceModal";
 import NESTInputSelect from "../../components/NormalInput/NESTInputSelect";
 import ApproveNoticeModal from "./Modal/ApproveNoticeModal";
 import ErrorLabel from "../../components/ErrorLabel/ErrorLabel";
+import { Trans } from "@lingui/macro"
 
 interface FuturesNewOrderProps {
   price: FuturesPrice | undefined;
@@ -155,7 +156,7 @@ const FuturesNewOrder: FC<FuturesNewOrderProps> = ({ ...props }) => {
                   color: theme.normal.text2,
                 })}
               >
-                Take Profit
+                <Trans>Take Profit</Trans>
               </Box>
               <NormalInput
                 placeHolder={tpDefault}
