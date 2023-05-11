@@ -20,6 +20,7 @@ import useNESTSnackBar from "../../hooks/useNESTSnackBar";
 import NESTLine from "../../components/NESTLine";
 import FuturesTableTitle from "../Futures/Components/TableTitle";
 import OrderTablePosition from "../Futures/Components/OrderTablePosition";
+import {t} from "@lingui/macro";
 
 const DashboardShare = styled(Box)(({theme}) => ({
   borderRadius: "8px",
@@ -591,7 +592,7 @@ const Dashboard: FC = () => {
             <Stack width={'50%'} spacing={'4px'}>
               <Caption5 sx={(theme) => ({
                 color: theme.normal.text2
-              })}>Open Price</Caption5>
+              })}>{t`Open Price`}</Caption5>
               <Caption2 sx={(theme) => ({
                 color: theme.normal.text0
               })}>{item.openPrice.toLocaleString('en-US', {
@@ -601,7 +602,7 @@ const Dashboard: FC = () => {
             <Stack width={'50%'} spacing={'4px'}>
               <Caption5 sx={(theme) => ({
                 color: theme.normal.text2
-              })}>Actual Margin</Caption5>
+              })}>{t`Actual Margin`}</Caption5>
               <Caption2 sx={(theme) => ({
                 color: theme.normal.text0,
                 'span': {
@@ -649,7 +650,7 @@ const Dashboard: FC = () => {
             <Stack direction={'row'} width={'50%'} spacing={'4px'}>
               <Caption5 sx={(theme) => ({
                 color: theme.normal.text2
-              })}>Liq Price</Caption5>
+              })}>{t`Liq Price`}</Caption5>
               <Caption5 sx={(theme) => ({
                 color: theme.normal.text0
               })}>{(lipPrice(
@@ -668,7 +669,7 @@ const Dashboard: FC = () => {
                 <Stack direction={'row'} width={'50%'} spacing={'4px'}>
                   <Caption5 sx={(theme) => ({
                     color: theme.normal.text2
-                  })}>Close Price</Caption5>
+                  })}>{t`Close Price`}</Caption5>
                   <Caption5 sx={(theme) => ({
                     color: theme.normal.text0
                   })}>{item.lastPrice.toLocaleString('en-US', {
@@ -683,7 +684,7 @@ const Dashboard: FC = () => {
               <Stack direction={'row'} width={'50%'} spacing={'4px'}>
                 <Caption5 sx={(theme) => ({
                   color: theme.normal.text2
-                })}>Time</Caption5>
+                })}>{t`Time`}</Caption5>
                 <Caption5 sx={(theme) => ({
                   color: theme.normal.text0
                 })}>{formatDate(item.time * 1000)}</Caption5>
@@ -771,7 +772,7 @@ const Dashboard: FC = () => {
                 border: '0px'
               }
             })}>
-              <TVChart title1={'NEST Total Burned'} title2={'Today Burned'}
+              <TVChart title1={t`NEST Total Burned`} title2={t`Today Burned`}
                        value1={`${burnedInfo.totalDestroy === 0 ? '-' : burnedInfo.totalDestroy.toLocaleString('en-US', {
                          maximumFractionDigits: 2,
                        })}`}
@@ -789,7 +790,7 @@ const Dashboard: FC = () => {
                 border: '0px'
               }
             })}>
-              <TVChart title1={'Total Transaction Volume'} title2={'Today Volume'}
+              <TVChart title1={t`Total Transaction Volume`} title2={t`Today Volume`}
                        value1={`${txInfo.totalVolume === 0 ? '-' : txInfo.totalVolume.toLocaleString('en-US', {
                          maximumFractionDigits: 2,
                        })}`}
@@ -808,7 +809,7 @@ const Dashboard: FC = () => {
           isBigMobile ? (
             <Stack px={'20px'} spacing={'16px'}>
               <Stack direction={'row'} justifyContent={'space-between'} alignItems={'center'}>
-                <Title1>My Positions</Title1>
+                <Title1>{t`My Positions`}</Title1>
                 <Stack>
                   <MainButton
                     style={{
@@ -818,13 +819,13 @@ const Dashboard: FC = () => {
                       fontWeight: 700,
                       lineHeight: '16px',
                     }}
-                    title={'Copy Invitation Link'}
+                    title={t`Copy Invitation Link`}
                     disable={!address}
                     onClick={() => {
                       if (!address) return;
                       const link = 'https://finance.nestprotocol.org/?a=' + address.slice(-8).toLowerCase()
                       copy(link);
-                      messageSnackBar("Copy Successfully");
+                      messageSnackBar(t`Copy Successfully`);
                     }}/>
                 </Stack>
               </Stack>
@@ -838,7 +839,7 @@ const Dashboard: FC = () => {
                       })}>
                       <Stack width={'100%'} height={'100%'} alignItems={'center'} justifyContent={'center'}>
                         <Stack width={'170px'}>
-                          <MainButton title={'Connect Wallet'} onClick={() => {
+                          <MainButton title={t`Connect Wallet`} onClick={() => {
                             setShowConnect(true)
                           }}/>
                         </Stack>
@@ -851,7 +852,7 @@ const Dashboard: FC = () => {
                     <Stack direction={'row'} justifyContent={'space-between'}>
                       <Caption2 sx={(theme) => ({
                         color: theme.normal.text1,
-                      })}>Total Profit & Loss</Caption2>
+                      })}>{t`Total Profit & Loss`}</Caption2>
                       <Box component={"button"} sx={(theme) => ({
                         cursor: "pointer",
                         "& svg": {
@@ -895,7 +896,7 @@ const Dashboard: FC = () => {
                   </Box>
                   <Stack spacing={'22px'}>
                     <Stack direction={'row'} justifyContent={'space-between'}>
-                      <Caption3>Today's PNL</Caption3>
+                      <Caption3>{t`Today's PNL`}</Caption3>
                       <Stack direction={'row'} alignItems={"center"} spacing={'4px'}>
                         <Caption4>{myTxInfo.todayValue.toLocaleString('en-US', {
                           maximumFractionDigits: 2,
@@ -908,7 +909,7 @@ const Dashboard: FC = () => {
                       </Stack>
                     </Stack>
                     <Stack direction={'row'} justifyContent={'space-between'}>
-                      <Caption3>7 Days' PNL</Caption3>
+                      <Caption3>{t`7 Days' PNL`}</Caption3>
                       <Stack direction={'row'} alignItems={"center"} spacing={'4px'}>
                         <Caption4>{myTxInfo.day7Value.toLocaleString('en-US', {
                           maximumFractionDigits: 2,
@@ -921,7 +922,7 @@ const Dashboard: FC = () => {
                       </Stack>
                     </Stack>
                     <Stack direction={'row'} justifyContent={'space-between'}>
-                      <Caption3>30 Days' PNL</Caption3>
+                      <Caption3>{t`30 Days' PNL`}</Caption3>
                       <Stack direction={'row'} alignItems={"center"} spacing={'4px'}>
                         <Caption4>{myTxInfo.day30Value.toLocaleString('en-US', {
                           maximumFractionDigits: 2,
@@ -947,11 +948,11 @@ const Dashboard: FC = () => {
                       background: 'rgba(0, 0, 0, 0.7)'
                     })}>
                     <Stack direction={'row'} justifyContent={'space-between'}>
-                      <Title1>My Positions</Title1>
+                      <Title1>{t`My Positions`}</Title1>
                     </Stack>
                     <Stack width={'100%'} height={'100%'} alignItems={'center'} justifyContent={'center'}>
                       <Stack width={'170px'}>
-                        <MainButton title={'Connect Wallet'} onClick={() => {
+                        <MainButton title={t`Connect Wallet`} onClick={() => {
                           setShowConnect(true)
                         }}/>
                       </Stack>
@@ -961,7 +962,7 @@ const Dashboard: FC = () => {
               }
               <Stack padding={'20px'} width={'100%'} height={'100%'}>
                 <Stack direction={'row'} justifyContent={'space-between'}>
-                  <Title1>My Positions</Title1>
+                  <Title1>{t`My Positions`}</Title1>
                   <Stack direction={'row'} alignItems={"center"} spacing={'10px'}>
                     <MainButton
                       style={{
@@ -971,7 +972,7 @@ const Dashboard: FC = () => {
                         fontWeight: '700',
                         lineHeight: '20px',
                       }}
-                      title={'Copy Invitation Link'}
+                      title={`Copy Invitation Link`}
                       onClick={() => {
                         if (!address) return;
                         const link = 'https://finance.nestprotocol.org/?a=' + address.slice(-8).toLowerCase()
@@ -1005,7 +1006,7 @@ const Dashboard: FC = () => {
                     {/*<span*/}
                     {/*className={'color-full'}>{myTxInfo.totalRate > 0 && '+'}{myTxInfo.totalRate}%</span>*/}
                   </Title2>
-                  <Caption1>Total Profit & Loss</Caption1>
+                  <Caption1>{t`Total Profit & Loss`}</Caption1>
                 </Stack>
                 <Stack direction={'row'} spacing={'16px'}>
                   <Card3>
@@ -1026,7 +1027,7 @@ const Dashboard: FC = () => {
                       {/*<span*/}
                       {/*className={'color-full'}>{myTxInfo.todayRate > 0 && '+'}{myTxInfo.todayRate}%</span>*/}
                     </Title3>
-                    <Caption2 sx={{paddingTop: '12px'}}>Today's PNL</Caption2>
+                    <Caption2 sx={{paddingTop: '12px'}}>{t`Today's PNL`}</Caption2>
                   </Card3>
                   <Card3>
                     <Title3
@@ -1046,7 +1047,7 @@ const Dashboard: FC = () => {
                       {/*<span*/}
                       {/*className={'color-full'}>{myTxInfo.day7Rate > 0 && '+'}{myTxInfo.day7Rate}%</span>*/}
                     </Title3>
-                    <Caption2 sx={{paddingTop: '12px'}}>7 Days' PNL</Caption2>
+                    <Caption2 sx={{paddingTop: '12px'}}>{t`7 Days' PNL`}</Caption2>
                   </Card3>
                   <Card3>
                     <Title3
@@ -1066,7 +1067,7 @@ const Dashboard: FC = () => {
                       {/*<span*/}
                       {/*className={'color-full'}>{myTxInfo.day30Rate > 0 && '+'}{myTxInfo.day30Rate}%</span>*/}
                     </Title3>
-                    <Caption2 sx={{paddingTop: '12px'}}>30 Days' PNL</Caption2>
+                    <Caption2 sx={{paddingTop: '12px'}}>{t`30 Days' PNL`}</Caption2>
                   </Card3>
                 </Stack>
               </Stack>
@@ -1102,7 +1103,7 @@ const Dashboard: FC = () => {
                         borderRadius: '12px',
                         color: theme.normal.text2,
                       })}>
-                        No trades yet
+                        {t`No trades yet`}
                       </Stack>
                     )
                   )
@@ -1124,7 +1125,7 @@ const Dashboard: FC = () => {
                         borderRadius: '12px',
                         color: theme.normal.text2,
                       })}>
-                        No trades yet
+                        {t`No trades yet`}
                       </Stack>
                     )
                   )
@@ -1133,21 +1134,21 @@ const Dashboard: FC = () => {
             ) : (
               <FuturesTableTitle
                 dataArray={tabsValue === 0 ? [
-                  "Position",
-                  "Actual Margin",
-                  "Open Price",
-                  "Liq Price",
-                  "Stop Order",
-                  "Operate",
+                  t`Position`,
+                  t`Actual Margin`,
+                  t`Open Price`,
+                  t`Liq Price`,
+                  t`Stop Order`,
+                  t`Operate`,
                 ] : [
-                  "Time",
-                  "Position",
-                  "Actual Margin",
-                  "Open Price",
-                  "Liq Price",
-                  "Close Price",
-                  "Stop Order",
-                  "Operate",
+                  t`Time`,
+                  t`Position`,
+                  t`Actual Margin`,
+                  t`Open Price`,
+                  t`Liq Price`,
+                  t`Close Price`,
+                  t`Stop Order`,
+                  t`Operate`,
                 ]}
                 noOrder={(tabsValue === 0 && positionList.length === 0) || (tabsValue === 1 && historyList.length === 0)}
               >

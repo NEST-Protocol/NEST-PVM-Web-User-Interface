@@ -13,6 +13,7 @@ import useNESTSnackBar from "../../../hooks/useNESTSnackBar";
 import copy from "copy-to-clipboard";
 import {parseUnits} from "ethers/lib/utils.js";
 import CircularProgress from "@mui/material/CircularProgress";
+import {t} from "@lingui/macro";
 
 const Caption5 = styled('div')(({theme}) => ({
   fontWeight: "400",
@@ -146,8 +147,8 @@ const ShareNewOrderModal: FC<ShareNewOrderModalProps> = ({...props}) => {
 
   const tweet = () => {
     const link = shareLink
-    const text = `Follow the right person, making money is as easy as breathing.
-You can follow the right person on NESTFi, here is my refer link: ${link}`
+    const text = `${t`Follow the right person, making money is as easy as breathing.
+You can follow the right person on NESTFi, here is my refer link`}: ${link}`
     window.open(`https://twitter.com/intent/tweet?text=${encodeURI(text)}&hashtags=NEST,btc,eth&via=NEST_Protocol`)
   }
 
@@ -198,7 +199,7 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`
                        })}>
                   <CircularProgress size={'44px'}/>
                   <span>
-                Loading...
+                    {t`Loading...`}
               </span>
                 </Stack>
               )}
@@ -230,18 +231,18 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`
                   />
                 </Stack>
                 <Stack pt={'68px'} spacing={'8px'}>
-                  <Caption5>Open Price</Caption5>
+                  <Caption5>{t`Open Price`}</Caption5>
                   <Caption9>{props.value.openPrice}</Caption9>
                 </Stack>
                 <Stack direction={'row'} pt={'54px'}>
                   <Stack spacing={'7px'} width={'50%'}>
-                    <Caption5>Take Profit</Caption5>
+                    <Caption5>{t`Take Profit`}</Caption5>
                     <Caption8>{props.value.sp?.toLocaleString('en-US', {
                       maximumFractionDigits: 2,
                     })} USDT</Caption8>
                   </Stack>
                   <Stack spacing={'7px'} width={'50%'}>
-                    <Caption5>Stop Loss</Caption5>
+                    <Caption5>{t`Stop Loss`}</Caption5>
                     <Caption8>{props.value.sl?.toLocaleString('en-US', {
                       maximumFractionDigits: 2,
                     })} USDT</Caption8>
@@ -256,8 +257,8 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`
                 <Stack direction={'row'} spacing={'12px'}>
                   <NESTLogo/>
                   <Stack>
-                    <Caption7>Scan and copy the trade</Caption7>
-                    <Caption7>with 1 click</Caption7>
+                    <Caption7>{t`Scan and copy the trade`}</Caption7>
+                    <Caption7>{t`with 1 click`}</Caption7>
                   </Stack>
                 </Stack>
                 <Box style={{width: '64px', height: '64px', background: 'white', padding: '3px'}}>
@@ -276,11 +277,11 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`
                   lineHeight: '22px',
                 }}
                 disable={!address}
-                title={'Copy Link'} onClick={() => {
+                title={t`Copy Link`} onClick={() => {
                 if (!address) return;
                 const link = shareLink
                 copy(link);
-                messageSnackBar("Copy Successfully");
+                messageSnackBar(t`Copy Successfully`);
               }}/>
               <MainButton
                 style={{
@@ -290,7 +291,7 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`
                   lineHeight: '22px',
                 }}
                 isLoading={!dataUrl}
-                title={"Image"}
+                title={t`Image`}
                 onClick={download}
               />
               <MainButton style={{
@@ -298,7 +299,7 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`
                 fontSize: '16px',
                 fontWeight: '700',
                 lineHeight: '22px',
-              }} title={'Twitter'} onClick={tweet}/>
+              }} title={t`Twitter`} onClick={tweet}/>
             </Stack>
           </Stack>
         </BaseModal>

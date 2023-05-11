@@ -13,6 +13,7 @@ import copy from "copy-to-clipboard";
 import useNESTSnackBar from "../../../hooks/useNESTSnackBar";
 import {parseUnits} from "ethers/lib/utils.js";
 import CircularProgress from "@mui/material/CircularProgress";
+import {t} from "@lingui/macro";
 
 const Caption2 = styled("div")(({theme}) => ({
   fontWeight: "700",
@@ -153,8 +154,8 @@ const ShareMyOrderModal: FC<ShareMyOrderModalProps> = ({...props}) => {
 
   const tweet = () => {
     const link = shareLink;
-    const text = `Follow the right person, making money is as easy as breathing.
-You can follow the right person on NESTFi, here is my refer link: ${link}`;
+    const text = `${t`Follow the right person, making money is as easy as breathing.
+You can follow the right person on NESTFi, here is my refer link`}: ${link}`;
     window.open(
       `https://twitter.com/intent/tweet?text=${encodeURI(
         text
@@ -216,7 +217,7 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`;
                        })}>
                   <CircularProgress size={'44px'}/>
                   <span>
-                Loading...
+                    {t`Loading...`}
               </span>
                 </Stack>
               )
@@ -255,7 +256,7 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`;
                   />
                 </Stack>
                 <Stack pt={"20px"} spacing={"14px"}>
-                  <Caption2>Total Profit</Caption2>
+                  <Caption2>{t`Total Profit`}</Caption2>
                   <Caption4
                     sx={(theme) => ({
                       color:
@@ -269,7 +270,7 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`;
                 </Stack>
                 <Stack direction={"row"} pt={"54px"}>
                   <Stack spacing={"7px"} width={"50%"}>
-                    <Caption5>Open Price</Caption5>
+                    <Caption5>{t`Open Price`}</Caption5>
                     <Caption8>
                       {props.value.openPrice?.toLocaleString("en-US", {
                         maximumFractionDigits: 2,
@@ -278,7 +279,7 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`;
                     </Caption8>
                   </Stack>
                   <Stack spacing={"7px"} width={"50%"}>
-                    <Caption5>{props.isClosed ? 'Close' : 'Last'} Price</Caption5>
+                    <Caption5>{props.isClosed ? t`Close Price` : t`Last Price`}</Caption5>
                     <Caption8>
                       {props.value.lastPrice?.toLocaleString("en-US", {
                         maximumFractionDigits: 2,
@@ -302,8 +303,8 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`;
                 <Stack direction={"row"} spacing={"12px"}>
                   <NESTLogo/>
                   <Stack>
-                    <Caption7>Scan and copy the trade</Caption7>
-                    <Caption7>with 1 click</Caption7>
+                    <Caption7>{t`Scan and copy the trade`}</Caption7>
+                    <Caption7>{`with 1 click`}</Caption7>
                   </Stack>
                 </Stack>
                 <Box
@@ -333,12 +334,12 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`;
                   lineHeight: "22px",
                 }}
                 disable={!address}
-                title={"Copy Link"}
+                title={t`Copy Link`}
                 onClick={() => {
                   if (!address) return;
                   const link = shareLink;
                   copy(link);
-                  messageSnackBar("Copy Successfully");
+                  messageSnackBar(t`Copy Successfully`);
                 }}
               />
               <MainButton
@@ -349,7 +350,7 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`;
                   lineHeight: "22px",
                 }}
                 isLoading={!dataUrl}
-                title={"Image"}
+                title={t`Image`}
                 onClick={download}
               />
               <MainButton
@@ -359,7 +360,7 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`;
                   fontWeight: "700",
                   lineHeight: "22px",
                 }}
-                title={"Twitter"}
+                title={t`Twitter`}
                 onClick={tweet}
               />
             </Stack>
