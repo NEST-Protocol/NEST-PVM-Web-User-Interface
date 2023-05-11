@@ -376,28 +376,34 @@ function useFuturesNewOrder(
       MIN_NEST_BIG_NUMBER
     );
   }, [nestAmount]);
+  const tpError = useMemo(() => {
+    if (tp !== "" && !BigNumber.from("0").eq(tp.stringToBigNumber(18) ?? BigNumber.from("0"))) {
+      return longOrShort
+        ? Number(tp) < Number(limitAmount)
+        : Number(tp) > Number(limitAmount);
+    }
+    return false;
+  }, [limitAmount, longOrShort, tp]);
+  const slError = useMemo(() => {
+    if (sl !== "" && !BigNumber.from("0").eq(sl.stringToBigNumber(18) ?? BigNumber.from("0"))) {
+      return longOrShort
+        ? Number(sl) > Number(limitAmount)
+        : Number(sl) < Number(limitAmount);
+    }
+    return false;
+  }, [limitAmount, longOrShort, sl]);
+  const stopDis = useMemo(() => {
+    return isStop && (tpError || slError);
+  }, [isStop, slError, tpError]);
   const mainButtonTitle = useMemo(() => {
     if (!account.address) {
       return "Connect Wallet";
-    } else if (!checkBalance) {
-      return `Insufficient NEST balance`;
     } else if (checkAllowance) {
-      if (nestAmount !== "" && checkMinNEST) {
-        return "Minimum 50 NEST";
-      } else {
-        return `Open ${longOrShort ? "Long" : "Short"}`;
-      }
+      return `Open ${longOrShort ? "Long" : "Short"}`;
     } else {
       return "Approve";
     }
-  }, [
-    account.address,
-    checkAllowance,
-    checkBalance,
-    checkMinNEST,
-    longOrShort,
-    nestAmount,
-  ]);
+  }, [account.address, checkAllowance, longOrShort]);
   const mainButtonLoading = useMemo(() => {
     if (
       tokenApprove.isLoading ||
@@ -420,6 +426,8 @@ function useFuturesNewOrder(
       return false;
     } else if (checkAllowance && checkMinNEST) {
       return true;
+    } else if (stopDis) {
+      return true;
     } else if (
       tabsValue === 1 &&
       (checkMinNEST ||
@@ -436,6 +444,7 @@ function useFuturesNewOrder(
     checkBalance,
     checkMinNEST,
     limitAmount,
+    stopDis,
     tabsValue,
   ]);
   const baseAction = useCallback(() => {
@@ -456,7 +465,7 @@ function useFuturesNewOrder(
   const mainButtonAction = useCallback(() => {
     if (mainButtonTitle === "Connect Wallet") {
       setShowConnect(true);
-    } else if (mainButtonLoading || !checkBalance) {
+    } else if (mainButtonLoading || !checkBalance || stopDis) {
       return;
     } else if (!checkAllowance) {
       setShowApproveNotice(true);
@@ -476,7 +485,14 @@ function useFuturesNewOrder(
     mainButtonTitle,
     setShowConnect,
     showedTriggerNotice,
+    stopDis,
   ]);
+  const lastPriceButton = useCallback(() => {
+    if (openPriceBase) {
+      setLimitAmount(openPriceBase.bigNumberToShowString(18, 2));
+    }
+  }, [openPriceBase]);
+
   /**
    * show
    */
@@ -558,6 +574,15 @@ function useFuturesNewOrder(
       return String().placeHolder;
     }
   }, [lever, nestAmount]);
+  const showAmountError = useMemo(() => {
+    if (checkMinNEST) {
+      return "Minimum 50 NEST";
+    } else if (!checkBalance) {
+      return "Insufficient NEST balance";
+    } else {
+      return undefined;
+    }
+  }, [checkBalance, checkMinNEST]);
 
   const maxCallBack = useCallback(() => {
     if (inputToken === "USDT" && tokenBalance) {
@@ -577,21 +602,19 @@ function useFuturesNewOrder(
   }, [inputToken, tokenBalance, allValue]);
 
   const tpDefault = useMemo(() => {
-    if (openPriceBase) {
-      const limitPrice = openPriceBase.bigNumberToShowString(18, 2);
-      return longOrShort ? `> ${limitPrice}` : `< ${limitPrice}`;
+    if (tabsValue === 0) {
+      return longOrShort ? `> MARKET PRICE` : `< MARKET PRICE`;
     } else {
-      return "";
+      return longOrShort ? `> LIMIT PRICE` : `< LIMIT PRICE`;
     }
-  }, [longOrShort, openPriceBase]);
+  }, [longOrShort, tabsValue]);
   const slDefault = useMemo(() => {
-    if (openPriceBase) {
-      const limitPrice = openPriceBase.bigNumberToShowString(18, 2);
-      return longOrShort ? `< ${limitPrice}` : `> ${limitPrice}`;
+    if (tabsValue === 0) {
+      return longOrShort ? `< MARKET PRICE` : `> MARKET PRICE`;
     } else {
-      return "";
+      return longOrShort ? `< LIMIT PRICE` : `> LIMIT PRICE`;
     }
-  }, [longOrShort, openPriceBase]);
+  }, [longOrShort, tabsValue]);
 
   /**
    * update
@@ -611,12 +634,36 @@ function useFuturesNewOrder(
       tokenBalanceRefetch();
     }, 3000);
   }, [tokenAllowanceRefetch, tokenBalanceRefetch, pending]);
+  const [hadSetLimit, setHadSetLimit] = useState(false);
+  useEffect(() => {
+    if (limitAmount === "" && !hadSetLimit && openPriceBase) {
+      setLimitAmount(openPriceBase.bigNumberToShowString(18, 2));
+      setHadSetLimit(true);
+    } else if (limitAmount !== "" && !hadSetLimit) {
+      setHadSetLimit(true);
+    }
+  }, [hadSetLimit, limitAmount, openPriceBase]);
+  useEffect(() => {
+    setLimitAmount("")
+    setTp("")
+    setSl("")
+    setHadSetLimit(false)
+  }, [tokenPair])
+  const changeTabs = useCallback(
+    (value: number) => {
+      setTabsValue(value);
+      if (openPriceBase) {
+        setLimitAmount(openPriceBase.bigNumberToShowString(18, 2));
+      }
+    },
+    [openPriceBase]
+  );
 
   return {
     longOrShort,
     setLongOrShort,
     tabsValue,
-    setTabsValue,
+    changeTabs,
     showToSwap,
     lever,
     setLever,
@@ -639,6 +686,7 @@ function useFuturesNewOrder(
     mainButtonDis,
     mainButtonAction,
     checkBalance,
+    checkMinNEST,
     showLiqPrice,
     showTriggerNotice,
     setShowTriggerNotice,
@@ -654,6 +702,11 @@ function useFuturesNewOrder(
     showApproveNotice,
     setShowApproveNotice,
     approveNoticeCallBack,
+    showAmountError,
+    tpError,
+    slError,
+    setTabsValue,
+    lastPriceButton,
   };
 }
 

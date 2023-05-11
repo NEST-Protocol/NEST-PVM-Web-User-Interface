@@ -15,7 +15,7 @@ interface NESTInputSelectProps {
   tokenName: string;
   tokenArray: string[];
   selectToken: (tokenName: string) => void;
-  checkBalance: boolean;
+  error: boolean;
   showToSwap: boolean;
   showBalance: string;
   maxCallBack: () => void;
@@ -158,7 +158,7 @@ const NESTInputSelect: FC<NESTInputSelectProps> = ({ ...props }) => {
       justifyContent={"flex-start"}
       sx={(theme) => ({
         border: `1px solid ${
-          account.address && !props.checkBalance
+          account.address && props.error
             ? theme.normal.danger
             : theme.normal.border
         }`,
@@ -169,7 +169,7 @@ const NESTInputSelect: FC<NESTInputSelectProps> = ({ ...props }) => {
         paddingX: "12px",
         "&:hover": {
           border: `1px solid ${
-            account.address && !props.checkBalance
+            account.address && props.error
               ? theme.normal.danger
               : theme.normal.primary
           }`,
