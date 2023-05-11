@@ -606,7 +606,7 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
           {tpError || slError ? (
             <ErrorLabel
               title={
-                "After the limit order is executed, TP and SL price you set will trigger immediately."
+                "TP and SL price you set will trigger immediately."
               }
             />
           ) : (

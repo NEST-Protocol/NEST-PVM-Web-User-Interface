@@ -377,7 +377,10 @@ function useFuturesNewOrder(
     );
   }, [nestAmount]);
   const tpError = useMemo(() => {
-    if (tp !== "" && !BigNumber.from("0").eq(tp.stringToBigNumber(18) ?? BigNumber.from("0"))) {
+    if (
+      tp !== "" &&
+      !BigNumber.from("0").eq(tp.stringToBigNumber(18) ?? BigNumber.from("0"))
+    ) {
       return longOrShort
         ? Number(tp) < Number(limitAmount)
         : Number(tp) > Number(limitAmount);
@@ -385,7 +388,10 @@ function useFuturesNewOrder(
     return false;
   }, [limitAmount, longOrShort, tp]);
   const slError = useMemo(() => {
-    if (sl !== "" && !BigNumber.from("0").eq(sl.stringToBigNumber(18) ?? BigNumber.from("0"))) {
+    if (
+      sl !== "" &&
+      !BigNumber.from("0").eq(sl.stringToBigNumber(18) ?? BigNumber.from("0"))
+    ) {
       return longOrShort
         ? Number(sl) > Number(limitAmount)
         : Number(sl) < Number(limitAmount);
@@ -615,6 +621,13 @@ function useFuturesNewOrder(
       return longOrShort ? `< LIMIT PRICE` : `> LIMIT PRICE`;
     }
   }, [longOrShort, tabsValue]);
+  const stopErrorText = useMemo(() => {
+    if (tabsValue === 0) {
+      return "TP and SL price you set will trigger immediately.";
+    } else {
+      return "After the limit order is executed, TP and SL price you set will trigger immediately.";
+    }
+  }, [tabsValue]);
 
   /**
    * update
@@ -644,11 +657,11 @@ function useFuturesNewOrder(
     }
   }, [hadSetLimit, limitAmount, openPriceBase]);
   useEffect(() => {
-    setLimitAmount("")
-    setTp("")
-    setSl("")
-    setHadSetLimit(false)
-  }, [tokenPair])
+    setLimitAmount("");
+    setTp("");
+    setSl("");
+    setHadSetLimit(false);
+  }, [tokenPair]);
   const changeTabs = useCallback(
     (value: number) => {
       setTabsValue(value);
@@ -707,6 +720,7 @@ function useFuturesNewOrder(
     slError,
     setTabsValue,
     lastPriceButton,
+    stopErrorText,
   };
 }
 
