@@ -74,7 +74,8 @@ const FuturesNewOrder: FC<FuturesNewOrderProps> = ({ ...props }) => {
     slDefault,
     tpError,
     slError,
-    lastPriceButton
+    lastPriceButton,
+    stopErrorText,
   } = useFuturesNewOrder(props.price, props.tokenPair);
   const newOrderTabsData = useMemo(() => {
     return [<p>Market</p>, <p>Limit</p>];
@@ -185,15 +186,7 @@ const FuturesNewOrder: FC<FuturesNewOrderProps> = ({ ...props }) => {
                 changeValue={(value: string) => setSl(value.formatInputNum())}
               />
             </Stack>
-            {tpError || slError ? (
-              <ErrorLabel
-                title={
-                  "After the limit order is executed, TP and SL price you set will trigger immediately."
-                }
-              />
-            ) : (
-              <></>
-            )}
+            {tpError || slError ? <ErrorLabel title={stopErrorText} /> : <></>}
           </Stack>
         ) : (
           <></>
@@ -208,6 +201,7 @@ const FuturesNewOrder: FC<FuturesNewOrderProps> = ({ ...props }) => {
     sl,
     slDefault,
     slError,
+    stopErrorText,
     tp,
     tpDefault,
     tpError,
