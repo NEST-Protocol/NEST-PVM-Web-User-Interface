@@ -23,6 +23,7 @@ import { BigNumber } from "ethers/lib/ethers";
 import LinkButton from "../../../components/MainButton/LinkButton";
 import LeverageSlider from "../Components/LeverageSlider";
 import NormalInput from "../../../components/NormalInput/NormalInput";
+import ErrorLabel from "../../../components/ErrorLabel/ErrorLabel";
 
 interface SharePositionModalProps {
   open: boolean;
@@ -105,6 +106,7 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
     mainButtonDis,
     mainButtonAction,
     checkBalance,
+    checkMinNEST,
     showTriggerNotice,
     setShowTriggerNotice,
     triggerNoticeCallback,
@@ -119,6 +121,9 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
     showApproveNotice,
     setShowApproveNotice,
     approveNoticeCallBack,
+    showAmountError,
+    tpError,
+    slError,
   } = useFuturesNewOrder(
     props.price,
     tokenName_info ? tokenName_info.toLocaleUpperCase() : "ETH"
@@ -134,11 +139,13 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
       (tp_info && parseInt(tp_info) !== 0) ||
       (sl_info && parseInt(sl_info) !== 0)
     ) {
-      setIsStop(true);
       setTp(tp_info ? (parseFloat(tp_info) / 100).toFixed(2) : "");
       setSl(sl_info ? (parseFloat(sl_info) / 100).toFixed(2) : "");
-    } else {
+    }
+    if (tp === "" && sl === "") {
       setIsStop(false);
+    } else {
+      setIsStop(true);
     }
   }, [
     basePrice_info,
@@ -151,7 +158,9 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
     setSl,
     setTabsValue,
     setTp,
+    sl,
     sl_info,
+    tp,
     tp_info,
   ]);
   useEffect(() => {
@@ -427,7 +436,7 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
           setInputAmount("");
           setInputToken(tokenName);
         }}
-        checkBalance={checkBalance}
+        error={!checkBalance || checkMinNEST}
         showToSwap={showToSwap}
         showBalance={showBalance}
         maxCallBack={maxCallBack}
@@ -440,6 +449,7 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
     );
   }, [
     checkBalance,
+    checkMinNEST,
     inputAmount,
     inputToken,
     maxCallBack,
@@ -479,13 +489,23 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
         </Modal>
       </>
     );
-  }, [approveNoticeCallBack, setShowApproveNotice, setShowTriggerNotice, showApproveNotice, showTriggerNotice, triggerNoticeCallback]);
+  }, [
+    approveNoticeCallBack,
+    setShowApproveNotice,
+    setShowTriggerNotice,
+    showApproveNotice,
+    showTriggerNotice,
+    triggerNoticeCallback,
+  ]);
 
   const normalView = useMemo(() => {
     return (
       <>
         <Stack spacing={"24px"} width={"100%"}>
-          {inputNestAmount}
+          <Stack spacing={"8px"} width={"100%"}>
+            {inputNestAmount}
+            {showAmountError ? <ErrorLabel title={showAmountError} /> : <></>}
+          </Stack>
           {info1}
           <NESTLine />
           {info2}
@@ -510,6 +530,7 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
     mainButtonDis,
     mainButtonLoading,
     mainButtonTitle,
+    showAmountError,
   ]);
 
   const editView = useMemo(() => {
@@ -557,6 +578,7 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
               placeHolder={tpDefault}
               rightTitle={"USDT"}
               value={tp}
+              error={tpError}
               changeValue={(value: string) => setTp(value.formatInputNum())}
             />
           </Stack>
@@ -576,15 +598,31 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
               placeHolder={slDefault}
               rightTitle={"USDT"}
               value={sl}
+              error={slError}
               changeValue={(value: string) => setSl(value.formatInputNum())}
             />
           </Stack>
+
+          {tpError || slError ? (
+            <ErrorLabel
+              title={
+                "After the limit order is executed, TP and SL price you set will trigger immediately."
+              }
+            />
+          ) : (
+            <></>
+          )}
         </Stack>
         <MainButton
           title={"Confirm"}
-          disable={false}
+          disable={tpError || slError}
           isLoading={false}
-          onClick={() => setIsEdit(false)}
+          onClick={() => {
+            if (tpError || slError) {
+              return;
+            }
+            setIsEdit(false);
+          }}
           style={{
             height: "48px",
             fontSize: 16,
@@ -601,8 +639,10 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
     setTp,
     sl,
     slDefault,
+    slError,
     tp,
     tpDefault,
+    tpError,
   ]);
 
   return (
@@ -628,7 +668,10 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
             >
               <button
                 className="ModalLeftButton"
-                onClick={() => setIsEdit(false)}
+                onClick={() => {
+                  getOrderInfo();
+                  setIsEdit(false);
+                }}
               >
                 {isEdit ? <Back /> : <></>}
               </button>
