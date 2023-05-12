@@ -52,6 +52,11 @@ const NESTThemeProvider: FC<ProviderProps> = ({ children }) => {
 
 const LanguageProvider: FC<ProviderProps> = ({ children }) => {
   useEffect(() => {
+    var cache = localStorage.getItem("Language");
+    if (cache) {
+      dynamicActivate(cache);
+      return
+    }
     dynamicActivate(defaultLocale);
   }, []);
   return <I18nProvider i18n={i18n}>{children}</I18nProvider>;

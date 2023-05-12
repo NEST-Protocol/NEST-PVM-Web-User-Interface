@@ -45,7 +45,9 @@ export const LanguageList: FC<LanguageListProps> = ({ ...props }) => {
     return index >= 0 ? index : 0;
   }, []);
   const selectAction = (index: number) => {
+    localStorage.setItem("Language", LanData[index][1]);
     dynamicActivate(LanData[index][1]);
+    window.location.reload()
   };
   const liArray = () => {
     return LanData.map((item, index) => {
