@@ -16,69 +16,69 @@ msgstr ""
 #: src/hooks/useFuturesNewOrder.ts:615
 #: src/hooks/useFuturesNewOrder.ts:622
 msgid "< LIMIT PRICE"
-msgstr ""
+msgstr "< リミット価格"
 
 #: src/hooks/useFuturesNewOrder.ts:613
 #: src/hooks/useFuturesNewOrder.ts:620
 msgid "< MARKET PRICE"
-msgstr ""
+msgstr "< マーケット価格"
 
 #: src/hooks/useFuturesEditPosition.ts:111
 msgid "< OPEN PRICE"
-msgstr ""
+msgstr "< オープン価格"
 
 #: src/hooks/useFuturesNewOrder.ts:615
 #: src/hooks/useFuturesNewOrder.ts:622
 msgid "> LIMIT PRICE"
-msgstr ""
+msgstr "> リミット価格"
 
 #: src/hooks/useFuturesNewOrder.ts:613
 #: src/hooks/useFuturesNewOrder.ts:620
 msgid "> MARKET PRICE"
-msgstr ""
+msgstr "> マーケット価格"
 
 #: src/hooks/useFuturesEditPosition.ts:111
 msgid "> OPEN PRICE"
-msgstr ""
+msgstr "> オープン価格"
 
 #: src/components/NormalInput/NESTInput.tsx:147
 #: src/components/NormalInput/NESTInputSelect.tsx:147
 msgid "0 balance. Before trading, you can switch to \"Swap\" to exchange between USDT and NEST token."
-msgstr ""
+msgstr "0残高です。取引をする前に、「スワップ」に切り替えてUSDTとNESTトークンを交換できます。"
 
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx:78
 msgid "1. The trigger price has been reached but there is not enough time to execute."
-msgstr ""
+msgstr "1. トリガー価格が達成されましたが、実行する時間がありません。"
 
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx:31
 #: src/pages/Futures/Modal/ProtocolModal.tsx:32
 msgid "1. Uncertainty risk of income: The calculation method of NEST perpetual contract is different from the calculation method of perpetual contract of traditional centralized exchange. The NEST perpetual contract converts the future price of the asset based on the historical rate of return of the asset. Therefore, the asset price increases by 100% after the user opens a position. The user's income is not 100%. In extreme cases, even if the asset price is rising, your income may be negative."
-msgstr ""
+msgstr "1. 収益の不確実性リスク：NEST永続契約の計算方法は、従来の中央集権型取引所の永続契約の計算方法と異なります。 NEST永続契約は、資産の過去の収益率に基づいて将来の資産価格を変換します。したがって、ユーザーがポジションを開くと資産価格が100％上昇しますが、ユーザーの収益率は100％ではありません。極端な場合、資産価格が上昇していても、収益率がマイナスになる可能性があります。"
 
 #: src/pages/Home/Home.tsx:292
 #: src/pages/Home/Home.tsx:325
 msgid "100%"
-msgstr ""
+msgstr "100%"
 
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx:83
 msgid "2. No one picks up the execution order There may be slippage to execute at the trigger price."
-msgstr ""
+msgstr "2. 注文が誰にも引き取られない場合、トリガー価格での実行にスリッページが生じる場合があります。"
 
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx:42
 #: src/pages/Futures/Modal/ProtocolModal.tsx:44
 msgid "2. Position liquidation risk: NEST perpetual contracts provide leverage of 1-20 times. When your leverage is greater than 1 times leverage, the price fluctuation of the underlying asset may cause liquidation."
-msgstr ""
+msgstr "2. ポジション清算リスク：NEST永続契約は1〜20倍のレバレッジを提供します。レバレッジが1倍以上の場合、基礎となる資産の価格変動が清算を引き起こす可能性があります。"
 
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx:49
 #: src/pages/Futures/Modal/ProtocolModal.tsx:52
 msgid "3. NEST Token price fluctuation risk: Both the margin and the final profit and loss use NEST Token, and NEST itself is also a highly volatile asset. In extreme cases, even if your perpetual contract position is profitable, However, due to the fluctuation of the NEST price itself, it may cause you to lose money in terms of fiat currency."
-msgstr ""
+msgstr "3. NESTトークン価格変動リスク：マージンと最終的な損益の両方にNESTトークンが使用され、NEST自体も非常に変動しやすい資産です。極端な場合、永続契約ポジションが利益を生んでも、NEST価格の変動により、法定通貨に換算した場合には損失が生じる可能性があります。"
 
 #: src/pages/Dashboard/Dashboard.tsx:925
 #: src/pages/Dashboard/Dashboard.tsx:1070
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx:376
 msgid "30 Days' PNL"
-msgstr ""
+msgstr "30日間の損益"
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx:220
 msgid "30 Days\\' PNL"
@@ -87,22 +87,26 @@ msgstr ""
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx:58
 #: src/pages/Futures/Modal/ProtocolModal.tsx:62
 msgid "4. External oracle risk: NEST protocol's perpetual contract price comes from the NEST oracle. If the oracle is attacked or other reasons cause the price to be abnormal, The system may encounter settlement exceptions, which may cause errors in the user's revenue calculation."
-msgstr ""
+msgstr "4. 外部オラクルリスク：NESTプロトコルの永続契約価格は、NESTオラクルから取得されます。オラクルが攻撃された場合やその他の原因により価格が異常になった場合、システムは決済例外に遭遇する可能性があります。これにより、ユーザーの収益計算に誤差が生じる可能性があります。"
 
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx:65
 #: src/pages/Futures/Modal/ProtocolModal.tsx:70
 msgid "5. Smart contract risk: There may be fatal unknown risks in the smart contract that may cause your principal to be damaged. Please evaluate the risk yourself before deciding whether to participate."
-msgstr ""
+msgstr "5. スマートコントラクトリスク：スマートコントラクトには、原則不明な重大なリスクが存在する可能性があり、元本の損失につながる可能性があります。参加するかどうかを決定する前に、リスクを自己評価してください。"
 
 #: src/pages/Dashboard/Dashboard.tsx:912
 #: src/pages/Dashboard/Dashboard.tsx:1050
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx:337
 msgid "7 Days' PNL"
-msgstr ""
+msgstr "7日間のPNL"
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx:213
 msgid "7 Days\\' PNL"
-msgstr ""
+msgstr "7日間のPNL"
+
+#: src/pages/Home/Home.tsx:292
+#~ msgid "取引手数料"
+#~ msgstr "取引手数料："
 
 #: src/pages/Dashboard/Dashboard.tsx:605
 #: src/pages/Dashboard/Dashboard.tsx:1138
@@ -112,39 +116,39 @@ msgstr ""
 #: src/pages/Futures/Components/POrderList.tsx:79
 #: src/pages/Futures/Components/POrderList.tsx:244
 msgid "Actual Margin"
-msgstr ""
+msgstr "実際の証拠金"
 
 #: src/pages/Futures/Components/POrderList.tsx:152
 #: src/pages/Futures/Components/POrderTable.tsx:212
 msgid "Add"
-msgstr ""
+msgstr "追加"
 
 #: src/pages/Swap/Swap.tsx:201
 msgid "Add NEST to wallet"
-msgstr ""
+msgstr "NESTをウォレットに追加"
 
 #: src/hooks/useTransactionReceipt.ts:45
 msgid "Add position"
-msgstr ""
+msgstr "ポジションを追加"
 
 #: src/pages/Futures/Modal/AddModal.tsx:105
 #: src/pages/Futures/Modal/AddModal.tsx:121
 msgid "Add Position"
-msgstr ""
+msgstr "ポジションを追加"
 
 #: src/hooks/useFuturesNewOrder.ts:629
 #: src/pages/Futures/Modal/EditPositionModal.tsx:125
 msgid "After the limit order is executed, TP and SL price you set will trigger immediately."
-msgstr ""
+msgstr "指値注文が実行されると、設定したTP価格とSL価格がすぐにトリガーされます。"
 
 #: src/components/NormalInput/NESTInput.tsx:61
 #: src/components/NormalInput/NESTInputSelect.tsx:198
 msgid "Amount"
-msgstr ""
+msgstr "金額"
 
 #: src/pages/Futures/Modal/ApproveNoticeModal.tsx:53
 msgid "Approval required"
-msgstr ""
+msgstr "承認が必要です"
 
 #: src/hooks/useFuturesAdd.ts:190
 #: src/hooks/useFuturesNewOrder.ts:411
@@ -152,64 +156,64 @@ msgstr ""
 #: src/hooks/useTransactionReceipt.ts:39
 #: src/pages/Futures/Modal/ApproveNoticeModal.tsx:72
 msgid "Approve"
-msgstr ""
+msgstr "承認"
 
 #: src/pages/Home/Home.tsx:326
 msgid "as commission for KOLs."
-msgstr ""
+msgstr "KOLの手数料として。"
 
 #: src/hooks/useSwap.ts:335
 msgid "balance"
-msgstr ""
+msgstr "残高"
 
 #: src/components/NormalInput/NESTInput.tsx:88
 #: src/components/NormalInput/NESTInputSelect.tsx:243
 #: src/pages/Swap/Components/SwapInputItem.tsx:208
 #: src/pages/Swap/Components/SwapInputItem.tsx:243
 msgid "Balance:"
-msgstr ""
+msgstr "残高:"
 
 #: src/pages/Home/Home.tsx:312
 #: src/pages/Home/Home.tsx:328
 #: src/pages/Home/Modal/ApplyModal.tsx:196
 #: src/pages/Home/Modal/ApplyModal.tsx:212
 msgid "Become a Trading KOL"
-msgstr ""
+msgstr "トレーディングKOLになる"
 
 #: src/pages/Home/Modal/ApplyModal.tsx:131
 msgid "Channel link"
-msgstr ""
+msgstr "チャンネルリンク"
 
 #: src/components/NormalInput/NormalInputWithCloseButton.tsx:66
 #: src/hooks/useFuturesOrder.ts:43
 #: src/pages/Futures/Components/POrderList.tsx:172
 #: src/pages/Futures/Components/POrderTable.tsx:232
 msgid "Close"
-msgstr ""
+msgstr "閉じる"
 
 #: src/hooks/useTransactionReceipt.ts:55
 msgid "Close Limit Order"
-msgstr ""
+msgstr "リミット注文を閉じる"
 
 #: src/pages/Futures/Modal/CloseModal.tsx:82
 #: src/pages/Futures/Modal/CloseModal.tsx:98
 msgid "Close Position"
-msgstr ""
+msgstr "ポジションを閉じる"
 
 #: src/pages/Dashboard/Dashboard.tsx:672
 #: src/pages/Dashboard/Dashboard.tsx:1149
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx:282
 #: src/pages/Futures/Modal/CloseModal.tsx:40
 msgid "Close Price"
-msgstr ""
+msgstr "清算価格"
 
 #: src/pages/Futures/Modal/CloseOrderNoticeModal.tsx:17
 msgid "Close Risk"
-msgstr ""
+msgstr "清算リスク"
 
 #: src/pages/Home/Home.tsx:293
 msgid "commission for KOLs"
-msgstr ""
+msgstr "KOLへの手数料"
 
 #: src/hooks/useFuturesAdd.ts:188
 #: src/hooks/useFuturesClose.ts:121
@@ -219,7 +223,7 @@ msgstr ""
 #: src/pages/Home/Modal/ApplyModal.tsx:139
 #: src/pages/Swap/Components/SwapSlippageModal.tsx:68
 msgid "Confirm"
-msgstr ""
+msgstr "確認"
 
 #: src/hooks/useFuturesNewOrder.ts:407
 #: src/hooks/useFuturesNewOrder.ts:473
@@ -228,52 +232,52 @@ msgstr ""
 #: src/pages/Dashboard/Dashboard.tsx:955
 #: src/pages/Share/Head/ConnectButton.tsx:73
 msgid "Connect Wallet"
-msgstr ""
+msgstr "ウォレットに接続"
 
 #: src/pages/Home/Modal/ApplyModal.tsx:135
 msgid "Contact info (Telegram handle)"
-msgstr ""
+msgstr "連絡先情報（Telegram ハンドル）"
 
 #: src/pages/Dashboard/Dashboard.tsx:822
 msgid "Copy Invitation Link"
-msgstr ""
+msgstr "招待リンクをコピー"
 
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx:337
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx:280
 msgid "Copy Link"
-msgstr ""
+msgstr "リンクをコピー"
 
 #: src/pages/Dashboard/Dashboard.tsx:828
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx:342
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx:284
 msgid "Copy Successfully"
-msgstr ""
+msgstr "コピーしました"
 
-#: src/pages/Share/Head/NavMenuV2Base.tsx:184
+#: src/pages/Share/Head/NavMenuV2Base.tsx:196
 msgid "Dark mode"
-msgstr ""
+msgstr "ダークモード"
 
-#: src/pages/Share/Head/NESTHead.tsx:30
-#: src/pages/Share/Head/NESTHead.tsx:196
+#: src/pages/Share/Head/NESTHead.tsx:29
+#: src/pages/Share/Head/NESTHead.tsx:194
 msgid "Dashboard"
-msgstr ""
+msgstr "ダッシュボード"
 
 #: src/pages/Home/Home.tsx:366
 msgid "Decentralized"
-msgstr ""
+msgstr "分散化された"
 
 #: src/pages/Home/Home.tsx:236
 msgid "Decentralized Perpetual Exchange"
-msgstr ""
+msgstr "分散型永続契約取引所"
 
 #: src/pages/Home/Home.tsx:371
 msgid "Deflationary"
-msgstr ""
+msgstr "デフレーション"
 
 #: src/pages/Futures/Components/POrderList.tsx:136
 #: src/pages/Futures/Components/POrderTable.tsx:73
 msgid "Due to the market volatility, the actual liquidation price may be different from the theoretical liquidation price . Here is the theoretical liquidation price, for reference only."
-msgstr ""
+msgstr "市場の変動により、実際の清算価格は理論的な清算価格と異なる場合があります。以下は理論的な清算価格ですが、参考程度にとどめてください。"
 
 #: src/hooks/useFuturesPOrder.ts:61
 #: src/pages/Futures/Components/OrderList.tsx:111
@@ -281,32 +285,36 @@ msgstr ""
 #: src/pages/Futures/Modal/SharePositionModal.tsx:270
 #: src/pages/Futures/Modal/SharePositionModal.tsx:407
 msgid "Edit"
-msgstr ""
+msgstr "編集"
 
 #: src/hooks/useTransactionReceipt.ts:53
 msgid "Edit Limit Order"
-msgstr ""
+msgstr "リミットオーダーを編集"
 
 #: src/hooks/useTransactionReceipt.ts:51
 #: src/pages/Futures/Modal/EditPositionModal.tsx:183
 msgid "Edit Position"
+msgstr "ポジションを編集"
+
+#: src/pages/Share/Head/LanguageMenu.tsx:35
+msgid "English"
 msgstr ""
 
 #: src/pages/Home/Modal/ApplyModal.tsx:132
 msgid "Enter Channel link"
-msgstr ""
+msgstr "チャンネルリンクを入力"
 
 #: src/pages/Home/Modal/ApplyModal.tsx:136
 msgid "Enter your Contact info"
-msgstr ""
+msgstr "連絡先情報を入力してください"
 
 #: src/pages/Futures/NewOrder.tsx:248
 msgid "Entry Price"
-msgstr ""
+msgstr "参入価格"
 
 #: src/hooks/useNESTSnackBar.tsx:121
 msgid "Fail Request"
-msgstr ""
+msgstr "リクエストに失敗しました"
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx:185
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx:157
@@ -315,83 +323,95 @@ msgid ""
 "Follow the right person, making money is as easy as breathing.\n"
 "You can follow the right person on NESTFi, here is my refer link"
 msgstr ""
+"正しい人をフォローすれば、お金を稼ぐことは息をするのと同じくらい簡単です。\n"
+"あなたはNESTFiの正しい人をフォローすることができます。以下は私の紹介リンクです"
 
 #: src/pages/Futures/Components/FuturesNotice.tsx:60
 msgid "For the positions opened before April 6, 2023, please go to→"
-msgstr ""
+msgstr "2023年4月6日以前に開かれたポジションについては、以下へ移動してください→"
 
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx:23
 #: src/pages/Futures/Modal/ProtocolModal.tsx:23
 msgid "For users/smart contracts using NEST Protocol perpetual contracts, please understand its rules and the differences of similar products in the market when performing positions, settlement, liquidation and other related operations. After fully understanding the following possible risks and can bear Participate in the risk situation:"
-msgstr ""
+msgstr "NESTプロトコル永続契約を使用するユーザー/スマートコントラクトの方は、ポジション、決済、清算など関連する操作を実行する際に、そのルールと市場における類似製品の違いを理解してください。以下の可能なリスクを完全に理解し、そのリスク状況に耐えることができる場合に参加してください:"
 
 #: src/pages/Swap/Components/SwapInputItem.tsx:200
 msgid "From"
-msgstr ""
-
-#: src/pages/Share/Head/NESTHead.tsx:28
-msgid "Futures"
-msgstr ""
-
-#: src/pages/Share/Head/NavMenuV2Base.tsx:300
-msgid "Github"
-msgstr ""
+msgstr "送信元"
 
 #: src/pages/Share/Head/NESTHead.tsx:27
+msgid "Futures"
+msgstr "先物"
+
+#: src/pages/Share/Head/NavMenuV2Base.tsx:321
+msgid "Github"
+msgstr "Github"
+
+#: src/pages/Share/Head/NESTHead.tsx:26
 msgid "Home"
-msgstr ""
+msgstr "ホーム"
 
 #: src/pages/Futures/MoreInfo.tsx:102
 msgid "How to Play"
-msgstr ""
+msgstr "遊び方"
 
 #: src/pages/Futures/Modal/CloseOrderNoticeModal.tsx:33
 #: src/pages/Home/Modal/ApplyModal.tsx:171
 msgid "I understand"
-msgstr ""
+msgstr "理解しました"
 
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx:353
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx:294
 msgid "Image"
-msgstr ""
+msgstr "画像"
 
 #: src/pages/Home/Home.tsx:381
 msgid "Infinite Liquidity"
-msgstr ""
+msgstr "無限の流動性"
 
 #: src/hooks/useSwap.ts:335
 msgid "Insufficient"
-msgstr ""
+msgstr "不足"
 
 #: src/hooks/useFuturesAdd.ts:186
 #: src/hooks/useFuturesNewOrder.ts:588
 msgid "Insufficient NEST balance"
+msgstr "NEST残高不足"
+
+#: src/pages/Share/Head/LanguageMenu.tsx:37
+msgid "Japanese"
 msgstr ""
 
-#: src/pages/Share/Head/NavMenuV2Base.tsx:206
-msgid "Language"
+#: src/pages/Share/Head/LanguageMenu.tsx:38
+msgid "Korean"
 msgstr ""
+
+#: src/pages/Share/Head/NavMenuV2Base.tsx:218
+#: src/pages/Share/Modal/LanguageModal.tsx:40
+#: src/pages/Share/Modal/LanguageModal.tsx:52
+msgid "Language"
+msgstr "言語"
 
 #: src/components/NormalInput/NormalInput.tsx:111
 msgid "Last"
-msgstr ""
+msgstr "最終"
 
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx:282
 msgid "Last Price"
-msgstr ""
+msgstr "最終価格"
 
 #: src/pages/Futures/Components/LeverageSlider.tsx:55
 msgid "Leverage"
-msgstr ""
+msgstr "レバレッジ"
 
 #: src/pages/Futures/NewOrder.tsx:87
 msgid "Limit"
-msgstr ""
+msgstr "リミット"
 
 #: src/hooks/useFuturesNewOrder.ts:554
 #: src/hooks/useFuturesNewOrder.ts:563
 msgid "Limit order fee = 15 NEST"
-msgstr ""
+msgstr "リミットオーダー手数料 = 15 NEST"
 
 #: src/pages/Futures/Modal/EditLimitModal.tsx:33
 #: src/pages/Futures/Modal/EditLimitModal.tsx:68
@@ -399,7 +419,7 @@ msgstr ""
 #: src/pages/Futures/Modal/SharePositionModal.tsx:367
 #: src/pages/Futures/Modal/SharePositionModal.tsx:568
 msgid "Limit Price"
-msgstr ""
+msgstr "リミット価格"
 
 #: src/pages/Dashboard/Dashboard.tsx:653
 #: src/pages/Dashboard/Dashboard.tsx:1140
@@ -409,17 +429,17 @@ msgstr ""
 #: src/pages/Futures/Modal/EditPositionModal.tsx:139
 #: src/pages/Futures/NewOrder.tsx:261
 msgid "Liq Price"
-msgstr ""
+msgstr "清算価格"
 
 #: src/hooks/useFuturesPOrderClose.tsx:101
 msgid "Liquidated"
-msgstr ""
+msgstr "清算済み"
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx:460
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx:220
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx:202
 msgid "Loading..."
-msgstr ""
+msgstr "読み込み中..."
 
 #: src/components/LongOrShort/LongOrShort.tsx:87
 #: src/hooks/useFuturesAdd.ts:128
@@ -435,99 +455,99 @@ msgstr ""
 #: src/pages/Futures/Components/OrderTablePosition.tsx:77
 #: src/pages/Futures/Modal/SharePositionModal.tsx:352
 msgid "Long"
-msgstr ""
+msgstr "ロング"
 
 #: src/pages/Futures/NewOrder.tsx:84
 msgid "Market"
-msgstr ""
+msgstr "マーケット"
 
 #: src/hooks/useFuturesNewOrder.ts:613
 #~ msgid "MARKET PRICE"
-#~ msgstr ""
+#~ msgstr "マーケットプライス"
 
 #: src/pages/Swap/Components/SwapInputItem.tsx:211
 msgid "Max"
-msgstr ""
+msgstr "最大"
 
 #: src/components/NormalInput/NESTInput.tsx:91
 #: src/components/NormalInput/NESTInputSelect.tsx:247
 msgid "MAX"
-msgstr ""
+msgstr "最大"
 
 #: src/hooks/useFuturesNewOrder.ts:586
 msgid "Minimum 50 NEST"
-msgstr ""
+msgstr "最小50 NEST"
 
 #: src/pages/Futures/MoreInfo.tsx:54
 msgid "More Info"
-msgstr ""
+msgstr "詳細情報"
 
 #: src/pages/Dashboard/Dashboard.tsx:812
 #: src/pages/Dashboard/Dashboard.tsx:951
 #: src/pages/Dashboard/Dashboard.tsx:965
 msgid "My Positions"
-msgstr ""
+msgstr "自分のポジション"
 
 #: src/pages/Dashboard/Dashboard.tsx:775
 msgid "NEST Total Burned"
-msgstr ""
+msgstr "NEST総焼却量"
 
 #: src/pages/Futures/MoreInfo.tsx:77
 msgid "NEST White Paper"
-msgstr ""
+msgstr "NESTホワイトペーパー"
 
 #: src/pages/Home/Home.tsx:372
 msgid "NEST\\'s economic model is deflationary, thus settlement with $NEST will bring higher potential revenue."
-msgstr ""
+msgstr "NESTの経済モデルはデフレーション的です。したがって、$NESTでの決済はより高い潜在的収益をもたらします。"
 
 #: src/pages/Home/Home.tsx:287
 #: src/pages/Home/Home.tsx:324
 msgid "NESTFi offers"
-msgstr ""
+msgstr "NESTFiの提供するもの"
 
 #: src/pages/Home/Home.tsx:234
 msgid "NESTFi, A Next-Generation"
-msgstr ""
+msgstr "NESTFi、次世代の"
 
 #: src/pages/Home/Home.tsx:239
 msgid "NESTFi's economic model is deflationary, the more users trade, the more $NEST will be burned"
-msgstr ""
+msgstr "NESTFiの経済モデルはデフレーション的です。ユーザーが取引をするほど、$NESTが焼却されます。"
 
-#: src/pages/Share/Head/NavMenuV2Base.tsx:324
+#: src/pages/Share/Head/NavMenuV2Base.tsx:345
 msgid "News"
-msgstr ""
+msgstr "ニュース"
 
 #: src/pages/Home/Home.tsx:376
 msgid "No Market Makers"
-msgstr ""
+msgstr "マーケットメーカーなし"
 
 #: src/pages/Futures/Components/TableTitle.tsx:106
 #: src/pages/Futures/OrderList.tsx:180
 #: src/pages/Futures/OrderList.tsx:209
 msgid "No Order"
-msgstr ""
+msgstr "注文なし"
 
 #: src/pages/Dashboard/Dashboard.tsx:1106
 #: src/pages/Dashboard/Dashboard.tsx:1128
 msgid "No trades yet"
-msgstr ""
+msgstr "まだ取引がありません"
 
 #: src/pages/Home/Home.tsx:304
 #: src/pages/Home/Home.tsx:345
 msgid "Number of KOLs Joined NESTFi"
-msgstr ""
+msgstr "NESTFiに参加したKOLの数"
 
 #: src/hooks/useFuturesNewOrder.ts:409
 msgid "Open"
-msgstr ""
+msgstr "オープン"
 
 #: src/hooks/useTransactionReceipt.ts:41
 msgid "Open position"
-msgstr ""
+msgstr "オープンポジション"
 
 #: src/hooks/useTransactionReceipt.ts:43
 msgid "Open position request"
-msgstr ""
+msgstr "オープンポジションのリクエスト"
 
 #: src/pages/Dashboard/Dashboard.tsx:595
 #: src/pages/Dashboard/Dashboard.tsx:1139
@@ -541,28 +561,32 @@ msgstr ""
 #: src/pages/Futures/Modal/AddModal.tsx:68
 #: src/pages/Futures/Modal/EditPositionModal.tsx:135
 msgid "Open Price"
-msgstr ""
+msgstr "オープン価格"
 
 #: src/pages/Dashboard/Dashboard.tsx:1142
 #: src/pages/Dashboard/Dashboard.tsx:1151
 #: src/pages/Futures/Components/OrderTable.tsx:46
 msgid "Operate"
-msgstr ""
+msgstr "操作"
 
 #: src/pages/Futures/OrderList.tsx:239
 msgid "Order"
-msgstr ""
+msgstr "注文"
 
 #: src/pages/Home/Modal/ApplyModal.tsx:99
 msgid "Platform (Youtube, Telegram, Twitter, Instagram, Facebook, Tiktok, Others)"
-msgstr ""
+msgstr "プラットフォーム（Youtube、Telegram、Twitter、Instagram、Facebook、Tiktok、その他）"
 
 #: src/pages/Futures/Modal/ApproveNoticeModal.tsx:64
 msgid "Please click Approve for authorization and then you can open the position, this process will consume some GAS."
-msgstr ""
+msgstr "承認をクリックして承認し、ポジションを開いてください。このプロセスには一定のGASが消費されます。"
 
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx:72
 msgid "Please note that \"Limit order\" or \"Stop order\" is not guaranteed to be executed. This may include, but is not limited to, the following cases."
+msgstr "「指値注文」または「ストップ注文」は実行されることが保証されていません。これには以下のケースが含まれる場合があります。"
+
+#: src/pages/Share/Head/LanguageMenu.tsx:36
+msgid "Portuguese"
 msgstr ""
 
 #: src/pages/Dashboard/Dashboard.tsx:1137
@@ -571,58 +595,62 @@ msgstr ""
 #: src/pages/Futures/Modal/CloseModal.tsx:38
 #: src/pages/Futures/Modal/EditPositionModal.tsx:133
 msgid "Position"
-msgstr ""
+msgstr "ポジション"
 
 #: src/hooks/useFuturesNewOrder.ts:552
 #: src/hooks/useFuturesNewOrder.ts:554
 #: src/hooks/useFuturesNewOrder.ts:557
 #: src/hooks/useFuturesNewOrder.ts:562
 msgid "Position fee = Position*0.05%"
-msgstr ""
+msgstr "ポジション手数料 = ポジション*0.05%"
 
 #: src/hooks/useFuturesEditPosition.ts:155
 msgid "Position fee =Position*0.05%"
-msgstr ""
+msgstr "ポジション手数料 = ポジション*0.05%"
 
 #: src/hooks/useFuturesClose.ts:97
 msgid "Position*0.05%"
-msgstr ""
+msgstr "ポジション*0.05％"
 
 #: src/pages/Futures/Modal/SharePositionModal.tsx:434
 #: src/pages/Futures/NewOrder.tsx:286
 #: src/pages/Futures/OrderList.tsx:233
 msgid "Positions"
-msgstr ""
+msgstr "ポジション"
 
 #: src/pages/Futures/NewOrder.tsx:383
 #: src/pages/Swap/Swap.tsx:260
 msgid "Price"
-msgstr ""
+msgstr "価格"
 
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx:20
 #: src/pages/Futures/Modal/ProtocolModal.tsx:20
 msgid "Risk Warning"
+msgstr "リスク警告"
+
+#: src/pages/Share/Head/LanguageMenu.tsx:39
+msgid "Russian"
 msgstr ""
 
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx:306
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx:260
 msgid "Scan and copy the trade"
-msgstr ""
+msgstr "取引をスキャンしてコピー"
 
 #: src/hooks/useTransactionReceipt.ts:47
 msgid "Sell position"
-msgstr ""
+msgstr "ポジションを売る"
 
 #: src/hooks/useTransactionReceipt.ts:49
 msgid "Sell position request"
-msgstr ""
+msgstr "ポジションの売却リクエスト"
 
 #: src/pages/Futures/Modal/CloseModal.tsx:45
 #: src/pages/Futures/Modal/EditPositionModal.tsx:144
 #: src/pages/Futures/Modal/SharePositionModal.tsx:420
 #: src/pages/Futures/NewOrder.tsx:271
 msgid "Service Fee"
-msgstr ""
+msgstr "手数料"
 
 #: src/components/LongOrShort/LongOrShort.tsx:100
 #: src/hooks/useFuturesAdd.ts:128
@@ -636,25 +664,25 @@ msgstr ""
 #: src/pages/Futures/Components/OrderTablePosition.tsx:81
 #: src/pages/Futures/Modal/SharePositionModal.tsx:356
 msgid "Short"
-msgstr ""
+msgstr "ショート"
 
 #: src/pages/Futures/Components/OrderTable.tsx:144
 #: src/pages/Futures/Components/POrderTable.tsx:203
 #: src/pages/Futures/Components/POrderTable.tsx:362
 msgid "SL"
-msgstr ""
+msgstr "ストップロス"
 
 #: src/pages/Swap/Swap.tsx:243
 msgid "Slippage Tolerance"
-msgstr ""
+msgstr "スリッページ許容値"
 
 #: src/pages/Swap/Components/SwapSlippageModal.tsx:58
 msgid "Slippage Tolerance Setting"
-msgstr ""
+msgstr "スリッページトレランス設定"
 
 #: src/pages/Home/Home.tsx:277
 msgid "Start Trading"
-msgstr ""
+msgstr "取引を開始"
 
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx:245
 #: src/pages/Futures/Components/OrderList.tsx:101
@@ -665,44 +693,44 @@ msgstr ""
 #: src/pages/Futures/Modal/SharePositionModal.tsx:609
 #: src/pages/Futures/NewOrder.tsx:187
 msgid "Stop Loss"
-msgstr ""
+msgstr "ストップロス"
 
 #: src/pages/Dashboard/Dashboard.tsx:1141
 #: src/pages/Dashboard/Dashboard.tsx:1150
 #: src/pages/Futures/Components/OrderTable.tsx:45
 msgid "Stop Order"
-msgstr ""
+msgstr "ストップオーダー"
 
 #: src/hooks/useFuturesEditPosition.ts:156
 #: src/hooks/useFuturesNewOrder.ts:558
 #: src/hooks/useFuturesNewOrder.ts:564
 msgid "Stop order fee(after execution) = 15 NEST"
-msgstr ""
+msgstr "ストップオーダー手数料(執行後) = 15 NEST"
 
 #: src/pages/Futures/NewOrder.tsx:150
 msgid "Stop-Limit"
-msgstr ""
+msgstr "ストップ・リミット"
 
 #: src/pages/Home/Modal/ApplyModal.tsx:169
 msgid "Submit successfully"
-msgstr ""
+msgstr "送信完了しました"
 
 #: src/components/NormalInput/NESTInput.tsx:110
 #: src/components/NormalInput/NESTInputSelect.tsx:269
 #: src/hooks/useSwap.ts:337
 #: src/hooks/useTransactionReceipt.ts:58
-#: src/pages/Share/Head/NESTHead.tsx:29
+#: src/pages/Share/Head/NESTHead.tsx:28
 #: src/pages/Swap/Swap.tsx:155
 msgid "Swap"
-msgstr ""
+msgstr "スワップ"
 
 #: src/hooks/useNESTSnackBar.tsx:84
 msgid "Switch network successfully"
-msgstr ""
+msgstr "ネットワークの切り替えに成功しました"
 
 #: src/pages/Futures/Components/OrderTable.tsx:42
 msgid "Symbol"
-msgstr ""
+msgstr "銘柄"
 
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx:239
 #: src/pages/Futures/Components/OrderList.tsx:91
@@ -713,106 +741,106 @@ msgstr ""
 #: src/pages/Futures/Modal/SharePositionModal.tsx:589
 #: src/pages/Futures/NewOrder.tsx:166
 msgid "Take Profit"
-msgstr ""
+msgstr "利益確定"
 
-#: src/pages/Share/Head/NavMenuV2Base.tsx:349
+#: src/pages/Share/Head/NavMenuV2Base.tsx:370
 msgid "Test BNB"
-msgstr ""
+msgstr "テスト BNB"
 
 #: src/pages/Home/Home.tsx:382
 msgid "The smart contract guarantees the infinite liquidity through burning and issuing $NEST. This keeps positions safe from temporary wicks caused by illiquidity."
-msgstr ""
+msgstr "スマートコントラクトは、$NESTの焼却と発行により、無限の流動性を保証します。これにより、不流動性に起因する一時的なウィックからポジションを安全に保ちます。"
 
 #: src/pages/Home/Home.tsx:377
 msgid "The smart contract is the only seller of the system, which means there are no market marking costs, no liquidity debt, no slippage costs in the system."
-msgstr ""
+msgstr "スマートコントラクトはシステムの唯一の売り手であり、市場メーカーの費用、流動性の負債、スリッページコストはありません。"
 
 #: src/components/NormalInput/NESTInputSelect.tsx:107
 msgid "The system will automatically convert USDT to NEST at market price for you to open your position, and you will also receive NEST at settlement."
-msgstr ""
+msgstr "システムは市場価格でUSDTをNESTに自動変換し、ポジションを開設するためのNESTも受け取ります。"
 
 #: src/hooks/useNESTSnackBar.tsx:122
 msgid "The transaction failed and the amount has been fully refunded. You can re-trade"
-msgstr ""
+msgstr "取引に失敗し、金額は全額返金されました。再度取引できます"
 
 #: src/pages/Dashboard/Dashboard.tsx:687
 #: src/pages/Dashboard/Dashboard.tsx:1144
 msgid "Time"
-msgstr ""
+msgstr "時間"
 
 #: src/pages/Futures/Components/FuturesNotice.tsx:72
 msgid "to check and close."
-msgstr ""
+msgstr "確認して閉じます。"
 
 #: src/pages/Swap/Components/SwapInputItem.tsx:235
 msgid "To(Estimated)"
-msgstr ""
+msgstr "受取先（見積もり）"
 
 #: src/pages/Dashboard/Dashboard.tsx:775
 msgid "Today Burned"
-msgstr ""
+msgstr "今日燃やされた数"
 
 #: src/pages/Dashboard/Dashboard.tsx:793
 msgid "Today Volume"
-msgstr ""
+msgstr "今日の出来高"
 
 #: src/pages/Dashboard/Dashboard.tsx:899
 #: src/pages/Dashboard/Dashboard.tsx:1030
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx:298
 msgid "Today's PNL"
-msgstr ""
+msgstr "今日の利益と損失"
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx:206
 msgid "Today\\'s PNL"
-msgstr ""
+msgstr "今日のPNL"
 
 #: src/pages/Home/Home.tsx:253
 #: src/pages/Home/Home.tsx:264
 msgid "Total Burned"
-msgstr ""
+msgstr "総焼却量"
 
 #: src/pages/Futures/Modal/SharePositionModal.tsx:441
 #: src/pages/Futures/NewOrder.tsx:295
 msgid "Total Pay"
-msgstr ""
+msgstr "支払い合計"
 
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx:259
 msgid "Total Profit"
-msgstr ""
+msgstr "総利益"
 
 #: src/pages/Dashboard/Dashboard.tsx:855
 #: src/pages/Dashboard/Dashboard.tsx:1009
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx:199
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx:259
 msgid "Total Profit & Loss"
-msgstr ""
+msgstr "総損益"
 
 #: src/pages/Dashboard/Dashboard.tsx:793
 msgid "Total Transaction Volume"
-msgstr ""
+msgstr "総取引量"
 
 #: src/pages/Futures/Components/OrderTable.tsx:138
 #: src/pages/Futures/Components/POrderTable.tsx:197
 #: src/pages/Futures/Components/POrderTable.tsx:356
 msgid "TP"
-msgstr ""
+msgstr "TP（利確注文）"
 
 #: src/hooks/useFuturesNewOrder.ts:627
 #: src/pages/Futures/Modal/SharePositionModal.tsx:623
 msgid "TP and SL price you set will trigger immediately."
-msgstr ""
+msgstr "設定したTP価格とSL価格はすぐにトリガーされます。"
 
 #: src/pages/Home/Home.tsx:367
 msgid "Trade directly from your wallet without the risk of misappropriating funds."
-msgstr ""
+msgstr "資金の横領のリスクなしで、直接ウォレットから取引できます。"
 
 #: src/pages/Swap/Swap.tsx:212
 msgid "Trade tokens in instant"
-msgstr ""
+msgstr "トークンを瞬時に取引"
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx:572
 msgid "Trade with me on NESTFi"
-msgstr ""
+msgstr "NESTFiで私と取引をしてください"
 
 #: src/pages/Home/Home.tsx:325
 msgid ""
@@ -826,46 +854,46 @@ msgstr ""
 
 #: src/hooks/useFuturesPOrder.ts:61
 msgid "Trigger"
-msgstr ""
+msgstr "トリガー"
 
 #: src/hooks/useFuturesPOrderClose.tsx:102
 msgid "Trigger executed"
-msgstr ""
+msgstr "トリガー実行済み"
 
 #: src/pages/Futures/Modal/EditPositionModal.tsx:184
 msgid "Trigger Position"
-msgstr ""
+msgstr "トリガーポジション"
 
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx:363
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx:302
 msgid "Twitter"
-msgstr ""
+msgstr "Twitter"
 
-#: src/pages/Share/Head/NavMenuV2Base.tsx:252
+#: src/pages/Share/Head/NavMenuV2Base.tsx:273
 msgid "User Guide"
-msgstr ""
+msgstr "ユーザーガイド"
 
 #: src/components/SnackBar/NormalSnackBar.tsx:122
 #: src/pages/Futures/Components/FuturesNotice.tsx:82
 msgid "View"
-msgstr ""
+msgstr "表示"
 
-#: src/pages/Share/Head/NavMenuV2Base.tsx:276
+#: src/pages/Share/Head/NavMenuV2Base.tsx:297
 msgid "White Paper"
-msgstr ""
+msgstr "ホワイトペーパー"
 
 #: src/pages/Home/Home.tsx:357
 msgid "Why You Should Choose NESTFi"
-msgstr ""
+msgstr "NESTFiを選ぶべき理由"
 
 #: src/pages/Futures/Modal/CloseOrderNoticeModal.tsx:30
 msgid "Will not be displayed after closing"
-msgstr ""
+msgstr "閉じた後は表示されません"
 
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx:261
 msgid "with 1 click"
-msgstr ""
+msgstr "1クリックで"
 
 #: src/pages/Home/Modal/ApplyModal.tsx:119
 msgid "Youtube"
-msgstr ""
+msgstr "Youtube"

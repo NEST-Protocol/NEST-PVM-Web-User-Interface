@@ -16,39 +16,39 @@ msgstr ""
 #: src/hooks/useFuturesNewOrder.ts:615
 #: src/hooks/useFuturesNewOrder.ts:622
 msgid "< LIMIT PRICE"
-msgstr "< LIMIT PRICE"
+msgstr "< PREÇO LIMITE"
 
 #: src/hooks/useFuturesNewOrder.ts:613
 #: src/hooks/useFuturesNewOrder.ts:620
 msgid "< MARKET PRICE"
-msgstr "< MARKET PRICE"
+msgstr "< PREÇO DE MERCADO"
 
 #: src/hooks/useFuturesEditPosition.ts:111
 msgid "< OPEN PRICE"
-msgstr "< OPEN PRICE"
+msgstr "< PREÇO DE ABERTURA"
 
 #: src/hooks/useFuturesNewOrder.ts:615
 #: src/hooks/useFuturesNewOrder.ts:622
 msgid "> LIMIT PRICE"
-msgstr "> LIMIT PRICE"
+msgstr "> PREÇO LIMITE"
 
 #: src/hooks/useFuturesNewOrder.ts:613
 #: src/hooks/useFuturesNewOrder.ts:620
 msgid "> MARKET PRICE"
-msgstr "> MARKET PRICE"
+msgstr "> PREÇO DE MERCADO"
 
 #: src/hooks/useFuturesEditPosition.ts:111
 msgid "> OPEN PRICE"
-msgstr "> OPEN PRICE"
+msgstr "> PREÇO DE ABERTURA"
 
 #: src/components/NormalInput/NESTInput.tsx:147
 #: src/components/NormalInput/NESTInputSelect.tsx:147
 msgid "0 balance. Before trading, you can switch to \"Swap\" to exchange between USDT and NEST token."
-msgstr "0 balance. Before trading, you can switch to \"Swap\" to exchange between USDT and NEST token."
+msgstr "Saldo 0. Antes de negociar, você pode trocar para \"Swap\" para trocar entre USDT e token NEST."
 
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx:78
 msgid "1. The trigger price has been reached but there is not enough time to execute."
-msgstr "1. The trigger price has been reached but there is not enough time to execute."
+msgstr "1. O preço de gatilho foi atingido, mas não há tempo suficiente para executar."
 
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx:31
 #: src/pages/Futures/Modal/ProtocolModal.tsx:32
@@ -249,12 +249,12 @@ msgstr "Copy Link"
 msgid "Copy Successfully"
 msgstr "Copy Successfully"
 
-#: src/pages/Share/Head/NavMenuV2Base.tsx:184
+#: src/pages/Share/Head/NavMenuV2Base.tsx:196
 msgid "Dark mode"
 msgstr "Dark mode"
 
-#: src/pages/Share/Head/NESTHead.tsx:30
-#: src/pages/Share/Head/NESTHead.tsx:196
+#: src/pages/Share/Head/NESTHead.tsx:29
+#: src/pages/Share/Head/NESTHead.tsx:194
 msgid "Dashboard"
 msgstr "Dashboard"
 
@@ -291,6 +291,10 @@ msgstr "Edit Limit Order"
 #: src/pages/Futures/Modal/EditPositionModal.tsx:183
 msgid "Edit Position"
 msgstr "Edit Position"
+
+#: src/pages/Share/Head/LanguageMenu.tsx:35
+msgid "English"
+msgstr "English"
 
 #: src/pages/Home/Modal/ApplyModal.tsx:132
 msgid "Enter Channel link"
@@ -331,15 +335,15 @@ msgstr "For users/smart contracts using NEST Protocol perpetual contracts, pleas
 msgid "From"
 msgstr "From"
 
-#: src/pages/Share/Head/NESTHead.tsx:28
+#: src/pages/Share/Head/NESTHead.tsx:27
 msgid "Futures"
 msgstr "Futures"
 
-#: src/pages/Share/Head/NavMenuV2Base.tsx:300
+#: src/pages/Share/Head/NavMenuV2Base.tsx:321
 msgid "Github"
 msgstr "Github"
 
-#: src/pages/Share/Head/NESTHead.tsx:27
+#: src/pages/Share/Head/NESTHead.tsx:26
 msgid "Home"
 msgstr "Home"
 
@@ -370,7 +374,17 @@ msgstr "Insufficient"
 msgid "Insufficient NEST balance"
 msgstr "Insufficient NEST balance"
 
-#: src/pages/Share/Head/NavMenuV2Base.tsx:206
+#: src/pages/Share/Head/LanguageMenu.tsx:37
+msgid "Japanese"
+msgstr "Japanese"
+
+#: src/pages/Share/Head/LanguageMenu.tsx:38
+msgid "Korean"
+msgstr "Korean"
+
+#: src/pages/Share/Head/NavMenuV2Base.tsx:218
+#: src/pages/Share/Modal/LanguageModal.tsx:40
+#: src/pages/Share/Modal/LanguageModal.tsx:52
 msgid "Language"
 msgstr "Language"
 
@@ -495,7 +509,7 @@ msgstr "NESTFi, A Next-Generation"
 msgid "NESTFi's economic model is deflationary, the more users trade, the more $NEST will be burned"
 msgstr "NESTFi's economic model is deflationary, the more users trade, the more $NEST will be burned"
 
-#: src/pages/Share/Head/NavMenuV2Base.tsx:324
+#: src/pages/Share/Head/NavMenuV2Base.tsx:345
 msgid "News"
 msgstr "News"
 
@@ -567,6 +581,10 @@ msgstr "Please click Approve for authorization and then you can open the positio
 msgid "Please note that \"Limit order\" or \"Stop order\" is not guaranteed to be executed. This may include, but is not limited to, the following cases."
 msgstr "Please note that \"Limit order\" or \"Stop order\" is not guaranteed to be executed. This may include, but is not limited to, the following cases."
 
+#: src/pages/Share/Head/LanguageMenu.tsx:36
+msgid "Portuguese"
+msgstr "Portuguese"
+
 #: src/pages/Dashboard/Dashboard.tsx:1137
 #: src/pages/Dashboard/Dashboard.tsx:1145
 #: src/pages/Futures/Modal/AddModal.tsx:66
@@ -605,6 +623,10 @@ msgstr "Price"
 #: src/pages/Futures/Modal/ProtocolModal.tsx:20
 msgid "Risk Warning"
 msgstr "Risk Warning"
+
+#: src/pages/Share/Head/LanguageMenu.tsx:39
+msgid "Russian"
+msgstr "Russian"
 
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx:306
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx:260
@@ -693,7 +715,7 @@ msgstr "Submit successfully"
 #: src/components/NormalInput/NESTInputSelect.tsx:269
 #: src/hooks/useSwap.ts:337
 #: src/hooks/useTransactionReceipt.ts:58
-#: src/pages/Share/Head/NESTHead.tsx:29
+#: src/pages/Share/Head/NESTHead.tsx:28
 #: src/pages/Swap/Swap.tsx:155
 msgid "Swap"
 msgstr "Swap"
@@ -717,7 +739,7 @@ msgstr "Symbol"
 msgid "Take Profit"
 msgstr "Take Profit"
 
-#: src/pages/Share/Head/NavMenuV2Base.tsx:349
+#: src/pages/Share/Head/NavMenuV2Base.tsx:370
 msgid "Test BNB"
 msgstr "Test BNB"
 
@@ -845,7 +867,7 @@ msgstr "Trigger Position"
 msgid "Twitter"
 msgstr "Twitter"
 
-#: src/pages/Share/Head/NavMenuV2Base.tsx:252
+#: src/pages/Share/Head/NavMenuV2Base.tsx:273
 msgid "User Guide"
 msgstr "User Guide"
 
@@ -854,7 +876,7 @@ msgstr "User Guide"
 msgid "View"
 msgstr "View"
 
-#: src/pages/Share/Head/NavMenuV2Base.tsx:276
+#: src/pages/Share/Head/NavMenuV2Base.tsx:297
 msgid "White Paper"
 msgstr "White Paper"
 

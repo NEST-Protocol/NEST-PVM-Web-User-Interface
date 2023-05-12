@@ -57,12 +57,12 @@ const POrderTable: FC<FuturesPOrderListProps> = ({ ...props }) => {
   return (
     <FuturesTableTitle
       dataArray={[
-        "Symbol",
-        "Actual Margin",
-        "Open Price",
-        "Liq Price",
-        "Stop Order",
-        "Operate",
+        t`Symbol`,
+        t`Actual Margin`,
+        t`Open Price`,
+        t`Liq Price`,
+        t`Stop Order`,
+        t`Operate`,
       ]}
       noOrder={noOrder}
       helps={[
