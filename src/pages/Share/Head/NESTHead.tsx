@@ -6,8 +6,6 @@ import {
   Dashboard,
   FuturesIcon,
   Home,
-  Language,
-  // Language,
   Light,
   NESTFiLogo,
   SwapExchangeSmall,
@@ -22,6 +20,7 @@ import NetMenu from "./NetMenu";
 import { NavMenuV2, NavMenuV3 } from "./NavMenuV2Base";
 import useNEST from "../../../hooks/useNEST";
 import { Trans, t } from "@lingui/macro";
+import LanguageMenu from "./LanguageMenu";
 
 export const NavItems = [
   { path: "/home", content: t`Home`, icon: Home },
@@ -36,7 +35,6 @@ const NESTHead: FC = () => {
     width: widthLv,
     headHeight,
     isBigMobile,
-    isMobile,
     isPC,
   } = useWindowWidth();
   const { nowTheme, changeTheme } = useTheme();
@@ -304,12 +302,10 @@ const NESTHead: FC = () => {
           alignItems={"center"}
           paddingX={isBigMobile ? "0px" : "8px"}
         >
-          {isMobile ? (
+          {isBigMobile ? (
             <></>
           ) : (
-            <ThemeBox>
-              <Language />
-            </ThemeBox>
+            <LanguageMenu/>
           )}
 
           {!isBigMobile ? (

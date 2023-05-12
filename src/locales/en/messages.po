@@ -13,10 +13,863 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/hooks/useFuturesNewOrder.ts:613
-msgid "MARKET PRICE"
-msgstr "MARKET PRICE"
+#: src/hooks/useFuturesNewOrder.ts:615
+#: src/hooks/useFuturesNewOrder.ts:622
+msgid "< LIMIT PRICE"
+msgstr "< LIMIT PRICE"
 
-#: src/pages/Futures/NewOrder.tsx:159
+#: src/hooks/useFuturesNewOrder.ts:613
+#: src/hooks/useFuturesNewOrder.ts:620
+msgid "< MARKET PRICE"
+msgstr "< MARKET PRICE"
+
+#: src/hooks/useFuturesEditPosition.ts:111
+msgid "< OPEN PRICE"
+msgstr "< OPEN PRICE"
+
+#: src/hooks/useFuturesNewOrder.ts:615
+#: src/hooks/useFuturesNewOrder.ts:622
+msgid "> LIMIT PRICE"
+msgstr "> LIMIT PRICE"
+
+#: src/hooks/useFuturesNewOrder.ts:613
+#: src/hooks/useFuturesNewOrder.ts:620
+msgid "> MARKET PRICE"
+msgstr "> MARKET PRICE"
+
+#: src/hooks/useFuturesEditPosition.ts:111
+msgid "> OPEN PRICE"
+msgstr "> OPEN PRICE"
+
+#: src/components/NormalInput/NESTInput.tsx:147
+#: src/components/NormalInput/NESTInputSelect.tsx:147
+msgid "0 balance. Before trading, you can switch to \"Swap\" to exchange between USDT and NEST token."
+msgstr "0 balance. Before trading, you can switch to \"Swap\" to exchange between USDT and NEST token."
+
+#: src/pages/Futures/Modal/LimitAndPriceModal.tsx:78
+msgid "1. The trigger price has been reached but there is not enough time to execute."
+msgstr "1. The trigger price has been reached but there is not enough time to execute."
+
+#: src/pages/Futures/Modal/LimitAndPriceModal.tsx:31
+#: src/pages/Futures/Modal/ProtocolModal.tsx:32
+msgid "1. Uncertainty risk of income: The calculation method of NEST perpetual contract is different from the calculation method of perpetual contract of traditional centralized exchange. The NEST perpetual contract converts the future price of the asset based on the historical rate of return of the asset. Therefore, the asset price increases by 100% after the user opens a position. The user's income is not 100%. In extreme cases, even if the asset price is rising, your income may be negative."
+msgstr "1. Uncertainty risk of income: The calculation method of NEST perpetual contract is different from the calculation method of perpetual contract of traditional centralized exchange. The NEST perpetual contract converts the future price of the asset based on the historical rate of return of the asset. Therefore, the asset price increases by 100% after the user opens a position. The user's income is not 100%. In extreme cases, even if the asset price is rising, your income may be negative."
+
+#: src/pages/Home/Home.tsx:292
+#: src/pages/Home/Home.tsx:325
+msgid "100%"
+msgstr "100%"
+
+#: src/pages/Futures/Modal/LimitAndPriceModal.tsx:83
+msgid "2. No one picks up the execution order There may be slippage to execute at the trigger price."
+msgstr "2. No one picks up the execution order There may be slippage to execute at the trigger price."
+
+#: src/pages/Futures/Modal/LimitAndPriceModal.tsx:42
+#: src/pages/Futures/Modal/ProtocolModal.tsx:44
+msgid "2. Position liquidation risk: NEST perpetual contracts provide leverage of 1-20 times. When your leverage is greater than 1 times leverage, the price fluctuation of the underlying asset may cause liquidation."
+msgstr "2. Position liquidation risk: NEST perpetual contracts provide leverage of 1-20 times. When your leverage is greater than 1 times leverage, the price fluctuation of the underlying asset may cause liquidation."
+
+#: src/pages/Futures/Modal/LimitAndPriceModal.tsx:49
+#: src/pages/Futures/Modal/ProtocolModal.tsx:52
+msgid "3. NEST Token price fluctuation risk: Both the margin and the final profit and loss use NEST Token, and NEST itself is also a highly volatile asset. In extreme cases, even if your perpetual contract position is profitable, However, due to the fluctuation of the NEST price itself, it may cause you to lose money in terms of fiat currency."
+msgstr "3. NEST Token price fluctuation risk: Both the margin and the final profit and loss use NEST Token, and NEST itself is also a highly volatile asset. In extreme cases, even if your perpetual contract position is profitable, However, due to the fluctuation of the NEST price itself, it may cause you to lose money in terms of fiat currency."
+
+#: src/pages/Dashboard/Dashboard.tsx:925
+#: src/pages/Dashboard/Dashboard.tsx:1070
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx:376
+msgid "30 Days' PNL"
+msgstr "30 Days' PNL"
+
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx:220
+msgid "30 Days\\' PNL"
+msgstr "30 Days\\' PNL"
+
+#: src/pages/Futures/Modal/LimitAndPriceModal.tsx:58
+#: src/pages/Futures/Modal/ProtocolModal.tsx:62
+msgid "4. External oracle risk: NEST protocol's perpetual contract price comes from the NEST oracle. If the oracle is attacked or other reasons cause the price to be abnormal, The system may encounter settlement exceptions, which may cause errors in the user's revenue calculation."
+msgstr "4. External oracle risk: NEST protocol's perpetual contract price comes from the NEST oracle. If the oracle is attacked or other reasons cause the price to be abnormal, The system may encounter settlement exceptions, which may cause errors in the user's revenue calculation."
+
+#: src/pages/Futures/Modal/LimitAndPriceModal.tsx:65
+#: src/pages/Futures/Modal/ProtocolModal.tsx:70
+msgid "5. Smart contract risk: There may be fatal unknown risks in the smart contract that may cause your principal to be damaged. Please evaluate the risk yourself before deciding whether to participate."
+msgstr "5. Smart contract risk: There may be fatal unknown risks in the smart contract that may cause your principal to be damaged. Please evaluate the risk yourself before deciding whether to participate."
+
+#: src/pages/Dashboard/Dashboard.tsx:912
+#: src/pages/Dashboard/Dashboard.tsx:1050
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx:337
+msgid "7 Days' PNL"
+msgstr "7 Days' PNL"
+
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx:213
+msgid "7 Days\\' PNL"
+msgstr "7 Days\\' PNL"
+
+#: src/pages/Dashboard/Dashboard.tsx:605
+#: src/pages/Dashboard/Dashboard.tsx:1138
+#: src/pages/Dashboard/Dashboard.tsx:1146
+#: src/pages/Futures/Components/OrderList.tsx:70
+#: src/pages/Futures/Components/OrderTable.tsx:43
+#: src/pages/Futures/Components/POrderList.tsx:79
+#: src/pages/Futures/Components/POrderList.tsx:244
+msgid "Actual Margin"
+msgstr "Actual Margin"
+
+#: src/pages/Futures/Components/POrderList.tsx:152
+#: src/pages/Futures/Components/POrderTable.tsx:212
+msgid "Add"
+msgstr "Add"
+
+#: src/pages/Swap/Swap.tsx:201
+msgid "Add NEST to wallet"
+msgstr "Add NEST to wallet"
+
+#: src/hooks/useTransactionReceipt.ts:45
+msgid "Add position"
+msgstr "Add position"
+
+#: src/pages/Futures/Modal/AddModal.tsx:105
+#: src/pages/Futures/Modal/AddModal.tsx:121
+msgid "Add Position"
+msgstr "Add Position"
+
+#: src/hooks/useFuturesNewOrder.ts:629
+#: src/pages/Futures/Modal/EditPositionModal.tsx:125
+msgid "After the limit order is executed, TP and SL price you set will trigger immediately."
+msgstr "After the limit order is executed, TP and SL price you set will trigger immediately."
+
+#: src/components/NormalInput/NESTInput.tsx:61
+#: src/components/NormalInput/NESTInputSelect.tsx:198
+msgid "Amount"
+msgstr "Amount"
+
+#: src/pages/Futures/Modal/ApproveNoticeModal.tsx:53
+msgid "Approval required"
+msgstr "Approval required"
+
+#: src/hooks/useFuturesAdd.ts:190
+#: src/hooks/useFuturesNewOrder.ts:411
+#: src/hooks/useSwap.ts:339
+#: src/hooks/useTransactionReceipt.ts:39
+#: src/pages/Futures/Modal/ApproveNoticeModal.tsx:72
+msgid "Approve"
+msgstr "Approve"
+
+#: src/pages/Home/Home.tsx:326
+msgid "as commission for KOLs."
+msgstr "as commission for KOLs."
+
+#: src/hooks/useSwap.ts:335
+msgid "balance"
+msgstr "balance"
+
+#: src/components/NormalInput/NESTInput.tsx:88
+#: src/components/NormalInput/NESTInputSelect.tsx:243
+#: src/pages/Swap/Components/SwapInputItem.tsx:208
+#: src/pages/Swap/Components/SwapInputItem.tsx:243
+msgid "Balance:"
+msgstr "Balance:"
+
+#: src/pages/Home/Home.tsx:312
+#: src/pages/Home/Home.tsx:328
+#: src/pages/Home/Modal/ApplyModal.tsx:196
+#: src/pages/Home/Modal/ApplyModal.tsx:212
+msgid "Become a Trading KOL"
+msgstr "Become a Trading KOL"
+
+#: src/pages/Home/Modal/ApplyModal.tsx:131
+msgid "Channel link"
+msgstr "Channel link"
+
+#: src/components/NormalInput/NormalInputWithCloseButton.tsx:66
+#: src/hooks/useFuturesOrder.ts:43
+#: src/pages/Futures/Components/POrderList.tsx:172
+#: src/pages/Futures/Components/POrderTable.tsx:232
+msgid "Close"
+msgstr "Close"
+
+#: src/hooks/useTransactionReceipt.ts:55
+msgid "Close Limit Order"
+msgstr "Close Limit Order"
+
+#: src/pages/Futures/Modal/CloseModal.tsx:82
+#: src/pages/Futures/Modal/CloseModal.tsx:98
+msgid "Close Position"
+msgstr "Close Position"
+
+#: src/pages/Dashboard/Dashboard.tsx:672
+#: src/pages/Dashboard/Dashboard.tsx:1149
+#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx:282
+#: src/pages/Futures/Modal/CloseModal.tsx:40
+msgid "Close Price"
+msgstr "Close Price"
+
+#: src/pages/Futures/Modal/CloseOrderNoticeModal.tsx:17
+msgid "Close Risk"
+msgstr "Close Risk"
+
+#: src/pages/Home/Home.tsx:293
+msgid "commission for KOLs"
+msgstr "commission for KOLs"
+
+#: src/hooks/useFuturesAdd.ts:188
+#: src/hooks/useFuturesClose.ts:121
+#: src/hooks/useFuturesEditLimit.ts:44
+#: src/hooks/useFuturesEditPosition.ts:176
+#: src/pages/Futures/Modal/SharePositionModal.tsx:630
+#: src/pages/Home/Modal/ApplyModal.tsx:139
+#: src/pages/Swap/Components/SwapSlippageModal.tsx:68
+msgid "Confirm"
+msgstr "Confirm"
+
+#: src/hooks/useFuturesNewOrder.ts:407
+#: src/hooks/useFuturesNewOrder.ts:473
+#: src/hooks/useSwap.ts:333
+#: src/pages/Dashboard/Dashboard.tsx:842
+#: src/pages/Dashboard/Dashboard.tsx:955
+#: src/pages/Share/Head/ConnectButton.tsx:73
+msgid "Connect Wallet"
+msgstr "Connect Wallet"
+
+#: src/pages/Home/Modal/ApplyModal.tsx:135
+msgid "Contact info (Telegram handle)"
+msgstr "Contact info (Telegram handle)"
+
+#: src/pages/Dashboard/Dashboard.tsx:822
+msgid "Copy Invitation Link"
+msgstr "Copy Invitation Link"
+
+#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx:337
+#: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx:280
+msgid "Copy Link"
+msgstr "Copy Link"
+
+#: src/pages/Dashboard/Dashboard.tsx:828
+#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx:342
+#: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx:284
+msgid "Copy Successfully"
+msgstr "Copy Successfully"
+
+#: src/pages/Share/Head/NavMenuV2Base.tsx:184
+msgid "Dark mode"
+msgstr "Dark mode"
+
+#: src/pages/Share/Head/NESTHead.tsx:30
+#: src/pages/Share/Head/NESTHead.tsx:196
+msgid "Dashboard"
+msgstr "Dashboard"
+
+#: src/pages/Home/Home.tsx:366
+msgid "Decentralized"
+msgstr "Decentralized"
+
+#: src/pages/Home/Home.tsx:236
+msgid "Decentralized Perpetual Exchange"
+msgstr "Decentralized Perpetual Exchange"
+
+#: src/pages/Home/Home.tsx:371
+msgid "Deflationary"
+msgstr "Deflationary"
+
+#: src/pages/Futures/Components/POrderList.tsx:136
+#: src/pages/Futures/Components/POrderTable.tsx:73
+msgid "Due to the market volatility, the actual liquidation price may be different from the theoretical liquidation price . Here is the theoretical liquidation price, for reference only."
+msgstr "Due to the market volatility, the actual liquidation price may be different from the theoretical liquidation price . Here is the theoretical liquidation price, for reference only."
+
+#: src/hooks/useFuturesPOrder.ts:61
+#: src/pages/Futures/Components/OrderList.tsx:111
+#: src/pages/Futures/Components/OrderTable.tsx:153
+#: src/pages/Futures/Modal/SharePositionModal.tsx:270
+#: src/pages/Futures/Modal/SharePositionModal.tsx:407
+msgid "Edit"
+msgstr "Edit"
+
+#: src/hooks/useTransactionReceipt.ts:53
+msgid "Edit Limit Order"
+msgstr "Edit Limit Order"
+
+#: src/hooks/useTransactionReceipt.ts:51
+#: src/pages/Futures/Modal/EditPositionModal.tsx:183
+msgid "Edit Position"
+msgstr "Edit Position"
+
+#: src/pages/Home/Modal/ApplyModal.tsx:132
+msgid "Enter Channel link"
+msgstr "Enter Channel link"
+
+#: src/pages/Home/Modal/ApplyModal.tsx:136
+msgid "Enter your Contact info"
+msgstr "Enter your Contact info"
+
+#: src/pages/Futures/NewOrder.tsx:248
+msgid "Entry Price"
+msgstr "Entry Price"
+
+#: src/hooks/useNESTSnackBar.tsx:121
+msgid "Fail Request"
+msgstr "Fail Request"
+
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx:185
+#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx:157
+#: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx:150
+msgid ""
+"Follow the right person, making money is as easy as breathing.\n"
+"You can follow the right person on NESTFi, here is my refer link"
+msgstr ""
+"Follow the right person, making money is as easy as breathing.\n"
+"You can follow the right person on NESTFi, here is my refer link"
+
+#: src/pages/Futures/Components/FuturesNotice.tsx:60
+msgid "For the positions opened before April 6, 2023, please go to→"
+msgstr "For the positions opened before April 6, 2023, please go to→"
+
+#: src/pages/Futures/Modal/LimitAndPriceModal.tsx:23
+#: src/pages/Futures/Modal/ProtocolModal.tsx:23
+msgid "For users/smart contracts using NEST Protocol perpetual contracts, please understand its rules and the differences of similar products in the market when performing positions, settlement, liquidation and other related operations. After fully understanding the following possible risks and can bear Participate in the risk situation:"
+msgstr "For users/smart contracts using NEST Protocol perpetual contracts, please understand its rules and the differences of similar products in the market when performing positions, settlement, liquidation and other related operations. After fully understanding the following possible risks and can bear Participate in the risk situation:"
+
+#: src/pages/Swap/Components/SwapInputItem.tsx:200
+msgid "From"
+msgstr "From"
+
+#: src/pages/Share/Head/NESTHead.tsx:28
+msgid "Futures"
+msgstr "Futures"
+
+#: src/pages/Share/Head/NavMenuV2Base.tsx:300
+msgid "Github"
+msgstr "Github"
+
+#: src/pages/Share/Head/NESTHead.tsx:27
+msgid "Home"
+msgstr "Home"
+
+#: src/pages/Futures/MoreInfo.tsx:102
+msgid "How to Play"
+msgstr "How to Play"
+
+#: src/pages/Futures/Modal/CloseOrderNoticeModal.tsx:33
+#: src/pages/Home/Modal/ApplyModal.tsx:171
+msgid "I understand"
+msgstr "I understand"
+
+#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx:353
+#: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx:294
+msgid "Image"
+msgstr "Image"
+
+#: src/pages/Home/Home.tsx:381
+msgid "Infinite Liquidity"
+msgstr "Infinite Liquidity"
+
+#: src/hooks/useSwap.ts:335
+msgid "Insufficient"
+msgstr "Insufficient"
+
+#: src/hooks/useFuturesAdd.ts:186
+#: src/hooks/useFuturesNewOrder.ts:588
+msgid "Insufficient NEST balance"
+msgstr "Insufficient NEST balance"
+
+#: src/pages/Share/Head/NavMenuV2Base.tsx:206
+msgid "Language"
+msgstr "Language"
+
+#: src/components/NormalInput/NormalInput.tsx:111
+msgid "Last"
+msgstr "Last"
+
+#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx:282
+msgid "Last Price"
+msgstr "Last Price"
+
+#: src/pages/Futures/Components/LeverageSlider.tsx:55
+msgid "Leverage"
+msgstr "Leverage"
+
+#: src/pages/Futures/NewOrder.tsx:87
+msgid "Limit"
+msgstr "Limit"
+
+#: src/hooks/useFuturesNewOrder.ts:554
+#: src/hooks/useFuturesNewOrder.ts:563
+msgid "Limit order fee = 15 NEST"
+msgstr "Limit order fee = 15 NEST"
+
+#: src/pages/Futures/Modal/EditLimitModal.tsx:33
+#: src/pages/Futures/Modal/EditLimitModal.tsx:68
+#: src/pages/Futures/Modal/EditLimitModal.tsx:80
+#: src/pages/Futures/Modal/SharePositionModal.tsx:367
+#: src/pages/Futures/Modal/SharePositionModal.tsx:568
+msgid "Limit Price"
+msgstr "Limit Price"
+
+#: src/pages/Dashboard/Dashboard.tsx:653
+#: src/pages/Dashboard/Dashboard.tsx:1140
+#: src/pages/Dashboard/Dashboard.tsx:1148
+#: src/pages/Futures/Components/POrderList.tsx:287
+#: src/pages/Futures/Modal/AddModal.tsx:72
+#: src/pages/Futures/Modal/EditPositionModal.tsx:139
+#: src/pages/Futures/NewOrder.tsx:261
+msgid "Liq Price"
+msgstr "Liq Price"
+
+#: src/hooks/useFuturesPOrderClose.tsx:101
+msgid "Liquidated"
+msgstr "Liquidated"
+
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx:460
+#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx:220
+#: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx:202
+msgid "Loading..."
+msgstr "Loading..."
+
+#: src/components/LongOrShort/LongOrShort.tsx:87
+#: src/hooks/useFuturesAdd.ts:128
+#: src/hooks/useFuturesClose.ts:21
+#: src/hooks/useFuturesEditPosition.ts:115
+#: src/hooks/useFuturesNewOrder.ts:409
+#: src/hooks/useFuturesOrder.ts:79
+#: src/hooks/useFuturesPOrder.ts:140
+#: src/hooks/useFuturesPOrderClose.tsx:108
+#: src/pages/Dashboard/Components/ShareOrderPosition.tsx:98
+#: src/pages/Futures/Components/OrderListPosition.tsx:82
+#: src/pages/Futures/Components/OrderListPosition.tsx:86
+#: src/pages/Futures/Components/OrderTablePosition.tsx:77
+#: src/pages/Futures/Modal/SharePositionModal.tsx:352
+msgid "Long"
+msgstr "Long"
+
+#: src/pages/Futures/NewOrder.tsx:84
+msgid "Market"
+msgstr "Market"
+
+#: src/hooks/useFuturesNewOrder.ts:613
+#~ msgid "MARKET PRICE"
+#~ msgstr "MARKET PRICE"
+
+#: src/pages/Swap/Components/SwapInputItem.tsx:211
+msgid "Max"
+msgstr "Max"
+
+#: src/components/NormalInput/NESTInput.tsx:91
+#: src/components/NormalInput/NESTInputSelect.tsx:247
+msgid "MAX"
+msgstr "MAX"
+
+#: src/hooks/useFuturesNewOrder.ts:586
+msgid "Minimum 50 NEST"
+msgstr "Minimum 50 NEST"
+
+#: src/pages/Futures/MoreInfo.tsx:54
+msgid "More Info"
+msgstr "More Info"
+
+#: src/pages/Dashboard/Dashboard.tsx:812
+#: src/pages/Dashboard/Dashboard.tsx:951
+#: src/pages/Dashboard/Dashboard.tsx:965
+msgid "My Positions"
+msgstr "My Positions"
+
+#: src/pages/Dashboard/Dashboard.tsx:775
+msgid "NEST Total Burned"
+msgstr "NEST Total Burned"
+
+#: src/pages/Futures/MoreInfo.tsx:77
+msgid "NEST White Paper"
+msgstr "NEST White Paper"
+
+#: src/pages/Home/Home.tsx:372
+msgid "NEST\\'s economic model is deflationary, thus settlement with $NEST will bring higher potential revenue."
+msgstr "NEST\\'s economic model is deflationary, thus settlement with $NEST will bring higher potential revenue."
+
+#: src/pages/Home/Home.tsx:287
+#: src/pages/Home/Home.tsx:324
+msgid "NESTFi offers"
+msgstr "NESTFi offers"
+
+#: src/pages/Home/Home.tsx:234
+msgid "NESTFi, A Next-Generation"
+msgstr "NESTFi, A Next-Generation"
+
+#: src/pages/Home/Home.tsx:239
+msgid "NESTFi's economic model is deflationary, the more users trade, the more $NEST will be burned"
+msgstr "NESTFi's economic model is deflationary, the more users trade, the more $NEST will be burned"
+
+#: src/pages/Share/Head/NavMenuV2Base.tsx:324
+msgid "News"
+msgstr "News"
+
+#: src/pages/Home/Home.tsx:376
+msgid "No Market Makers"
+msgstr "No Market Makers"
+
+#: src/pages/Futures/Components/TableTitle.tsx:106
+#: src/pages/Futures/OrderList.tsx:180
+#: src/pages/Futures/OrderList.tsx:209
+msgid "No Order"
+msgstr "No Order"
+
+#: src/pages/Dashboard/Dashboard.tsx:1106
+#: src/pages/Dashboard/Dashboard.tsx:1128
+msgid "No trades yet"
+msgstr "No trades yet"
+
+#: src/pages/Home/Home.tsx:304
+#: src/pages/Home/Home.tsx:345
+msgid "Number of KOLs Joined NESTFi"
+msgstr "Number of KOLs Joined NESTFi"
+
+#: src/hooks/useFuturesNewOrder.ts:409
+msgid "Open"
+msgstr "Open"
+
+#: src/hooks/useTransactionReceipt.ts:41
+msgid "Open position"
+msgstr "Open position"
+
+#: src/hooks/useTransactionReceipt.ts:43
+msgid "Open position request"
+msgstr "Open position request"
+
+#: src/pages/Dashboard/Dashboard.tsx:595
+#: src/pages/Dashboard/Dashboard.tsx:1139
+#: src/pages/Dashboard/Dashboard.tsx:1147
+#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx:273
+#: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx:234
+#: src/pages/Futures/Components/OrderList.tsx:64
+#: src/pages/Futures/Components/OrderTable.tsx:44
+#: src/pages/Futures/Components/POrderList.tsx:73
+#: src/pages/Futures/Components/POrderList.tsx:238
+#: src/pages/Futures/Modal/AddModal.tsx:68
+#: src/pages/Futures/Modal/EditPositionModal.tsx:135
+msgid "Open Price"
+msgstr "Open Price"
+
+#: src/pages/Dashboard/Dashboard.tsx:1142
+#: src/pages/Dashboard/Dashboard.tsx:1151
+#: src/pages/Futures/Components/OrderTable.tsx:46
+msgid "Operate"
+msgstr "Operate"
+
+#: src/pages/Futures/OrderList.tsx:239
+msgid "Order"
+msgstr "Order"
+
+#: src/pages/Home/Modal/ApplyModal.tsx:99
+msgid "Platform (Youtube, Telegram, Twitter, Instagram, Facebook, Tiktok, Others)"
+msgstr "Platform (Youtube, Telegram, Twitter, Instagram, Facebook, Tiktok, Others)"
+
+#: src/pages/Futures/Modal/ApproveNoticeModal.tsx:64
+msgid "Please click Approve for authorization and then you can open the position, this process will consume some GAS."
+msgstr "Please click Approve for authorization and then you can open the position, this process will consume some GAS."
+
+#: src/pages/Futures/Modal/LimitAndPriceModal.tsx:72
+msgid "Please note that \"Limit order\" or \"Stop order\" is not guaranteed to be executed. This may include, but is not limited to, the following cases."
+msgstr "Please note that \"Limit order\" or \"Stop order\" is not guaranteed to be executed. This may include, but is not limited to, the following cases."
+
+#: src/pages/Dashboard/Dashboard.tsx:1137
+#: src/pages/Dashboard/Dashboard.tsx:1145
+#: src/pages/Futures/Modal/AddModal.tsx:66
+#: src/pages/Futures/Modal/CloseModal.tsx:38
+#: src/pages/Futures/Modal/EditPositionModal.tsx:133
+msgid "Position"
+msgstr "Position"
+
+#: src/hooks/useFuturesNewOrder.ts:552
+#: src/hooks/useFuturesNewOrder.ts:554
+#: src/hooks/useFuturesNewOrder.ts:557
+#: src/hooks/useFuturesNewOrder.ts:562
+msgid "Position fee = Position*0.05%"
+msgstr "Position fee = Position*0.05%"
+
+#: src/hooks/useFuturesEditPosition.ts:155
+msgid "Position fee =Position*0.05%"
+msgstr "Position fee =Position*0.05%"
+
+#: src/hooks/useFuturesClose.ts:97
+msgid "Position*0.05%"
+msgstr "Position*0.05%"
+
+#: src/pages/Futures/Modal/SharePositionModal.tsx:434
+#: src/pages/Futures/NewOrder.tsx:286
+#: src/pages/Futures/OrderList.tsx:233
+msgid "Positions"
+msgstr "Positions"
+
+#: src/pages/Futures/NewOrder.tsx:383
+#: src/pages/Swap/Swap.tsx:260
+msgid "Price"
+msgstr "Price"
+
+#: src/pages/Futures/Modal/LimitAndPriceModal.tsx:20
+#: src/pages/Futures/Modal/ProtocolModal.tsx:20
+msgid "Risk Warning"
+msgstr "Risk Warning"
+
+#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx:306
+#: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx:260
+msgid "Scan and copy the trade"
+msgstr "Scan and copy the trade"
+
+#: src/hooks/useTransactionReceipt.ts:47
+msgid "Sell position"
+msgstr "Sell position"
+
+#: src/hooks/useTransactionReceipt.ts:49
+msgid "Sell position request"
+msgstr "Sell position request"
+
+#: src/pages/Futures/Modal/CloseModal.tsx:45
+#: src/pages/Futures/Modal/EditPositionModal.tsx:144
+#: src/pages/Futures/Modal/SharePositionModal.tsx:420
+#: src/pages/Futures/NewOrder.tsx:271
+msgid "Service Fee"
+msgstr "Service Fee"
+
+#: src/components/LongOrShort/LongOrShort.tsx:100
+#: src/hooks/useFuturesAdd.ts:128
+#: src/hooks/useFuturesClose.ts:21
+#: src/hooks/useFuturesEditPosition.ts:115
+#: src/hooks/useFuturesNewOrder.ts:409
+#: src/hooks/useFuturesOrder.ts:79
+#: src/hooks/useFuturesPOrder.ts:140
+#: src/hooks/useFuturesPOrderClose.tsx:108
+#: src/pages/Dashboard/Components/ShareOrderPosition.tsx:98
+#: src/pages/Futures/Components/OrderTablePosition.tsx:81
+#: src/pages/Futures/Modal/SharePositionModal.tsx:356
+msgid "Short"
+msgstr "Short"
+
+#: src/pages/Futures/Components/OrderTable.tsx:144
+#: src/pages/Futures/Components/POrderTable.tsx:203
+#: src/pages/Futures/Components/POrderTable.tsx:362
+msgid "SL"
+msgstr "SL"
+
+#: src/pages/Swap/Swap.tsx:243
+msgid "Slippage Tolerance"
+msgstr "Slippage Tolerance"
+
+#: src/pages/Swap/Components/SwapSlippageModal.tsx:58
+msgid "Slippage Tolerance Setting"
+msgstr "Slippage Tolerance Setting"
+
+#: src/pages/Home/Home.tsx:277
+msgid "Start Trading"
+msgstr "Start Trading"
+
+#: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx:245
+#: src/pages/Futures/Components/OrderList.tsx:101
+#: src/pages/Futures/Components/POrderList.tsx:111
+#: src/pages/Futures/Components/POrderList.tsx:275
+#: src/pages/Futures/Modal/EditPositionModal.tsx:110
+#: src/pages/Futures/Modal/SharePositionModal.tsx:377
+#: src/pages/Futures/Modal/SharePositionModal.tsx:609
+#: src/pages/Futures/NewOrder.tsx:187
+msgid "Stop Loss"
+msgstr "Stop Loss"
+
+#: src/pages/Dashboard/Dashboard.tsx:1141
+#: src/pages/Dashboard/Dashboard.tsx:1150
+#: src/pages/Futures/Components/OrderTable.tsx:45
+msgid "Stop Order"
+msgstr "Stop Order"
+
+#: src/hooks/useFuturesEditPosition.ts:156
+#: src/hooks/useFuturesNewOrder.ts:558
+#: src/hooks/useFuturesNewOrder.ts:564
+msgid "Stop order fee(after execution) = 15 NEST"
+msgstr "Stop order fee(after execution) = 15 NEST"
+
+#: src/pages/Futures/NewOrder.tsx:150
+msgid "Stop-Limit"
+msgstr "Stop-Limit"
+
+#: src/pages/Home/Modal/ApplyModal.tsx:169
+msgid "Submit successfully"
+msgstr "Submit successfully"
+
+#: src/components/NormalInput/NESTInput.tsx:110
+#: src/components/NormalInput/NESTInputSelect.tsx:269
+#: src/hooks/useSwap.ts:337
+#: src/hooks/useTransactionReceipt.ts:58
+#: src/pages/Share/Head/NESTHead.tsx:29
+#: src/pages/Swap/Swap.tsx:155
+msgid "Swap"
+msgstr "Swap"
+
+#: src/hooks/useNESTSnackBar.tsx:84
+msgid "Switch network successfully"
+msgstr "Switch network successfully"
+
+#: src/pages/Futures/Components/OrderTable.tsx:42
+msgid "Symbol"
+msgstr "Symbol"
+
+#: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx:239
+#: src/pages/Futures/Components/OrderList.tsx:91
+#: src/pages/Futures/Components/POrderList.tsx:101
+#: src/pages/Futures/Components/POrderList.tsx:265
+#: src/pages/Futures/Modal/EditPositionModal.tsx:88
+#: src/pages/Futures/Modal/SharePositionModal.tsx:372
+#: src/pages/Futures/Modal/SharePositionModal.tsx:589
+#: src/pages/Futures/NewOrder.tsx:166
 msgid "Take Profit"
 msgstr "Take Profit"
+
+#: src/pages/Share/Head/NavMenuV2Base.tsx:349
+msgid "Test BNB"
+msgstr "Test BNB"
+
+#: src/pages/Home/Home.tsx:382
+msgid "The smart contract guarantees the infinite liquidity through burning and issuing $NEST. This keeps positions safe from temporary wicks caused by illiquidity."
+msgstr "The smart contract guarantees the infinite liquidity through burning and issuing $NEST. This keeps positions safe from temporary wicks caused by illiquidity."
+
+#: src/pages/Home/Home.tsx:377
+msgid "The smart contract is the only seller of the system, which means there are no market marking costs, no liquidity debt, no slippage costs in the system."
+msgstr "The smart contract is the only seller of the system, which means there are no market marking costs, no liquidity debt, no slippage costs in the system."
+
+#: src/components/NormalInput/NESTInputSelect.tsx:107
+msgid "The system will automatically convert USDT to NEST at market price for you to open your position, and you will also receive NEST at settlement."
+msgstr "The system will automatically convert USDT to NEST at market price for you to open your position, and you will also receive NEST at settlement."
+
+#: src/hooks/useNESTSnackBar.tsx:122
+msgid "The transaction failed and the amount has been fully refunded. You can re-trade"
+msgstr "The transaction failed and the amount has been fully refunded. You can re-trade"
+
+#: src/pages/Dashboard/Dashboard.tsx:687
+#: src/pages/Dashboard/Dashboard.tsx:1144
+msgid "Time"
+msgstr "Time"
+
+#: src/pages/Futures/Components/FuturesNotice.tsx:72
+msgid "to check and close."
+msgstr "to check and close."
+
+#: src/pages/Swap/Components/SwapInputItem.tsx:235
+msgid "To(Estimated)"
+msgstr "To(Estimated)"
+
+#: src/pages/Dashboard/Dashboard.tsx:775
+msgid "Today Burned"
+msgstr "Today Burned"
+
+#: src/pages/Dashboard/Dashboard.tsx:793
+msgid "Today Volume"
+msgstr "Today Volume"
+
+#: src/pages/Dashboard/Dashboard.tsx:899
+#: src/pages/Dashboard/Dashboard.tsx:1030
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx:298
+msgid "Today's PNL"
+msgstr "Today's PNL"
+
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx:206
+msgid "Today\\'s PNL"
+msgstr "Today\\'s PNL"
+
+#: src/pages/Home/Home.tsx:253
+#: src/pages/Home/Home.tsx:264
+msgid "Total Burned"
+msgstr "Total Burned"
+
+#: src/pages/Futures/Modal/SharePositionModal.tsx:441
+#: src/pages/Futures/NewOrder.tsx:295
+msgid "Total Pay"
+msgstr "Total Pay"
+
+#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx:259
+msgid "Total Profit"
+msgstr "Total Profit"
+
+#: src/pages/Dashboard/Dashboard.tsx:855
+#: src/pages/Dashboard/Dashboard.tsx:1009
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx:199
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx:259
+msgid "Total Profit & Loss"
+msgstr "Total Profit & Loss"
+
+#: src/pages/Dashboard/Dashboard.tsx:793
+msgid "Total Transaction Volume"
+msgstr "Total Transaction Volume"
+
+#: src/pages/Futures/Components/OrderTable.tsx:138
+#: src/pages/Futures/Components/POrderTable.tsx:197
+#: src/pages/Futures/Components/POrderTable.tsx:356
+msgid "TP"
+msgstr "TP"
+
+#: src/hooks/useFuturesNewOrder.ts:627
+#: src/pages/Futures/Modal/SharePositionModal.tsx:623
+msgid "TP and SL price you set will trigger immediately."
+msgstr "TP and SL price you set will trigger immediately."
+
+#: src/pages/Home/Home.tsx:367
+msgid "Trade directly from your wallet without the risk of misappropriating funds."
+msgstr "Trade directly from your wallet without the risk of misappropriating funds."
+
+#: src/pages/Swap/Swap.tsx:212
+msgid "Trade tokens in instant"
+msgstr "Trade tokens in instant"
+
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx:572
+msgid "Trade with me on NESTFi"
+msgstr "Trade with me on NESTFi"
+
+#: src/pages/Home/Home.tsx:325
+msgid ""
+"trading\n"
+"fees"
+msgstr ""
+"trading\n"
+"fees"
+
+#: src/pages/Home/Home.tsx:292
+msgid "trading fees as"
+msgstr "trading fees as"
+
+#: src/hooks/useFuturesPOrder.ts:61
+msgid "Trigger"
+msgstr "Trigger"
+
+#: src/hooks/useFuturesPOrderClose.tsx:102
+msgid "Trigger executed"
+msgstr "Trigger executed"
+
+#: src/pages/Futures/Modal/EditPositionModal.tsx:184
+msgid "Trigger Position"
+msgstr "Trigger Position"
+
+#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx:363
+#: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx:302
+msgid "Twitter"
+msgstr "Twitter"
+
+#: src/pages/Share/Head/NavMenuV2Base.tsx:252
+msgid "User Guide"
+msgstr "User Guide"
+
+#: src/components/SnackBar/NormalSnackBar.tsx:122
+#: src/pages/Futures/Components/FuturesNotice.tsx:82
+msgid "View"
+msgstr "View"
+
+#: src/pages/Share/Head/NavMenuV2Base.tsx:276
+msgid "White Paper"
+msgstr "White Paper"
+
+#: src/pages/Home/Home.tsx:357
+msgid "Why You Should Choose NESTFi"
+msgstr "Why You Should Choose NESTFi"
+
+#: src/pages/Futures/Modal/CloseOrderNoticeModal.tsx:30
+msgid "Will not be displayed after closing"
+msgstr "Will not be displayed after closing"
+
+#: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx:261
+msgid "with 1 click"
+msgstr "with 1 click"
+
+#: src/pages/Home/Modal/ApplyModal.tsx:119
+msgid "Youtube"
+msgstr "Youtube"

@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useMemo, useState } from "react";
 import { styled } from "@mui/material/styles";
 import Stack from "@mui/material/Stack";
 import { NavItems } from "./NESTHead";
@@ -14,6 +14,9 @@ import Switch from "@mui/material/Switch";
 import useTheme from "../../../hooks/useTheme";
 import useNEST from "../../../hooks/useNEST";
 import { Trans } from "@lingui/macro";
+import { i18n } from "@lingui/core";
+import { LanData } from "./LanguageMenu";
+import LanguageModal from "../Modal/LanguageModal";
 
 const NavMenu = styled(Stack)(({ theme }) => {
   return {};
@@ -94,8 +97,13 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   },
 }));
 
-const NavMenuV2Base: FC = () => {
+interface NavMenuV2BaseProps {
+  onClose: () => void;
+}
+
+const NavMenuV2Base: FC<NavMenuV2BaseProps> = ({ ...props }) => {
   const { nowTheme, changeTheme } = useTheme();
+  const [showLanModal, setShowLanModal] = useState(false);
   const { chainsData } = useNEST();
   const location = useLocation();
   const navList = NavItems.map((item, index) => {
@@ -162,6 +170,10 @@ const NavMenuV2Base: FC = () => {
       height: 32,
     };
   });
+  const lanName = useMemo(() => {
+    const index = LanData.map((item) => item[1]).indexOf(i18n.locale);
+    return index >= 0 ? LanData[index][0] : "";
+  }, []);
   return (
     <Stack className="NavMain" justifyContent={"space-between"}>
       <Box>
@@ -210,6 +222,8 @@ const NavMenuV2Base: FC = () => {
             justifyContent={"space-between"}
             alignItems={"center"}
             spacing={"8px"}
+            component={"button"}
+            onClick={() => setShowLanModal(true)}
           >
             <Box
               component={"p"}
@@ -219,12 +233,19 @@ const NavMenuV2Base: FC = () => {
                 color: theme.normal.text1,
               })}
             >
-              English
+              {lanName}
             </Box>
             <NextBox>
               <NEXT />
             </NextBox>
           </Stack>
+          <LanguageModal
+            open={showLanModal}
+            onClose={() => {
+              props.onClose();
+              setShowLanModal(false);
+            }}
+          />
         </Stack>
         <NESTLine sx={{ margin: "15px 0" }} />
         <Stack
@@ -399,6 +420,7 @@ export const NavMenuV2: FC = () => {
         sx={(theme) => {
           return {
             "& .MuiPaper-root": {
+              width: "320px",
               border: `1px solid ${theme.normal.border}`,
               background: theme.normal.bg0,
               paddingX: "40px",
@@ -412,7 +434,7 @@ export const NavMenuV2: FC = () => {
           };
         }}
       >
-        <NavMenuV2Base />
+        <NavMenuV2Base onClose={handleClose} />
       </Menu>
     </>
   );
@@ -467,7 +489,7 @@ export const NavMenuV3: FC = () => {
                 <Close />
               </Box>
             </Stack>
-            <NavMenuV2Base />
+            <NavMenuV2Base onClose={() => setOpenModal(false)} />
           </Stack>
         </Box>
       </Modal>
