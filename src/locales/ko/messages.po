@@ -106,7 +106,7 @@ msgstr "7 일 PNL"
 
 #: src/pages/Share/Modal/ConnectWalletModal.tsx
 msgid "about connecting wallets"
-msgstr ""
+msgstr "지갑 연결 정보"
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
@@ -261,7 +261,7 @@ msgstr "복사 완료"
 
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "Current Positions"
-msgstr ""
+msgstr "현재 위치"
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "Dark mode"
@@ -286,7 +286,7 @@ msgstr "물가 하락의"
 
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "Disconnect"
-msgstr ""
+msgstr "연결 해제"
 
 #: src/pages/Futures/Components/POrderList.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
@@ -312,7 +312,7 @@ msgstr "포지션 수정"
 
 #: src/pages/Share/Head/LanguageMenu.tsx
 msgid "English"
-msgstr ""
+msgstr "영어"
 
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Enter Channel link"
@@ -363,7 +363,7 @@ msgstr "깃허브"
 
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "History"
-msgstr ""
+msgstr "역사"
 
 #: src/pages/Share/Head/NESTHead.tsx
 msgid "Home"
@@ -398,11 +398,11 @@ msgstr "NEST 잔액 부족"
 
 #: src/pages/Share/Head/LanguageMenu.tsx
 msgid "Japanese"
-msgstr ""
+msgstr "일본어"
 
 #: src/pages/Share/Head/LanguageMenu.tsx
 msgid "Korean"
-msgstr ""
+msgstr "한국어"
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 #: src/pages/Share/Modal/LanguageModal.tsx
@@ -420,7 +420,7 @@ msgstr "최종 가격"
 
 #: src/pages/Share/Modal/ConnectWalletModal.tsx
 msgid "Learn more"
-msgstr ""
+msgstr "자세히 알아보기"
 
 #: src/pages/Futures/Components/LeverageSlider.tsx
 msgid "Leverage"
@@ -486,7 +486,7 @@ msgstr "시장가"
 
 #: src/hooks/useFuturesNewOrder.ts
 #~ msgid "MARKET PRICE"
-#~ msgstr ""
+#~ msgstr "시장 가격"
 
 #: src/pages/Swap/Components/SwapInputItem.tsx
 msgid "Max"
@@ -503,7 +503,7 @@ msgstr "최소 50 NEST"
 
 #: src/pages/Share/Modal/ConnectWalletModal.tsx
 msgid "More"
-msgstr ""
+msgstr "자세히 보기"
 
 #: src/pages/Futures/MoreInfo.tsx
 msgid "More Info"
@@ -561,7 +561,7 @@ msgstr "아직 거래 없음"
 
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "No Transactions yet"
-msgstr ""
+msgstr "아직 거래 없음"
 
 #: src/pages/Home/Home.tsx
 #: src/pages/Home/Home.tsx
@@ -620,7 +620,7 @@ msgstr "\"리미트 오더\" 또는 \"스톱 오더\"는 실행이 보장되지 
 
 #: src/pages/Share/Head/LanguageMenu.tsx
 msgid "Portuguese"
-msgstr ""
+msgstr "포르투갈어"
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
@@ -635,7 +635,7 @@ msgstr "포지션"
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useFuturesNewOrder.ts
 msgid "Position fee = Position * 0.05%"
-msgstr ""
+msgstr "포지션 수수료 = 포지션 * 0.05%"
 
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useFuturesNewOrder.ts
@@ -665,7 +665,7 @@ msgstr "가격"
 
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "Recent transactions"
-msgstr ""
+msgstr "최근 거래"
 
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 #: src/pages/Futures/Modal/ProtocolModal.tsx
@@ -674,7 +674,7 @@ msgstr "위험 경고"
 
 #: src/pages/Share/Head/LanguageMenu.tsx
 msgid "Russian"
-msgstr ""
+msgstr "러시아어"
 
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
@@ -926,7 +926,7 @@ msgstr "보기"
 
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "Wallet"
-msgstr ""
+msgstr "월렛"
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "White Paper"

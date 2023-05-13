@@ -82,7 +82,7 @@ msgstr "30日間の損益"
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 msgid "30 Days\\' PNL"
-msgstr ""
+msgstr "30日PNL"
 
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 #: src/pages/Futures/Modal/ProtocolModal.tsx
@@ -110,7 +110,7 @@ msgstr "7日間のPNL"
 
 #: src/pages/Share/Modal/ConnectWalletModal.tsx
 msgid "about connecting wallets"
-msgstr ""
+msgstr "コネクティングウォレットについて"
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
@@ -265,7 +265,7 @@ msgstr "コピーしました"
 
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "Current Positions"
-msgstr ""
+msgstr "現在の役職"
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "Dark mode"
@@ -290,7 +290,7 @@ msgstr "デフレーション"
 
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "Disconnect"
-msgstr ""
+msgstr "ディスコネクト"
 
 #: src/pages/Futures/Components/POrderList.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
@@ -316,7 +316,7 @@ msgstr "ポジションを編集"
 
 #: src/pages/Share/Head/LanguageMenu.tsx
 msgid "English"
-msgstr ""
+msgstr "イングリッシュ"
 
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Enter Channel link"
@@ -367,7 +367,7 @@ msgstr "Github"
 
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "History"
-msgstr ""
+msgstr "沿革"
 
 #: src/pages/Share/Head/NESTHead.tsx
 msgid "Home"
@@ -402,11 +402,11 @@ msgstr "NEST残高不足"
 
 #: src/pages/Share/Head/LanguageMenu.tsx
 msgid "Japanese"
-msgstr ""
+msgstr "やまと"
 
 #: src/pages/Share/Head/LanguageMenu.tsx
 msgid "Korean"
-msgstr ""
+msgstr "コリアン"
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 #: src/pages/Share/Modal/LanguageModal.tsx
@@ -424,7 +424,7 @@ msgstr "最終価格"
 
 #: src/pages/Share/Modal/ConnectWalletModal.tsx
 msgid "Learn more"
-msgstr ""
+msgstr "もっと詳しく"
 
 #: src/pages/Futures/Components/LeverageSlider.tsx
 msgid "Leverage"
@@ -507,7 +507,7 @@ msgstr "最小50 NEST"
 
 #: src/pages/Share/Modal/ConnectWalletModal.tsx
 msgid "More"
-msgstr ""
+msgstr "もっと見る"
 
 #: src/pages/Futures/MoreInfo.tsx
 msgid "More Info"
@@ -565,7 +565,7 @@ msgstr "まだ取引がありません"
 
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "No Transactions yet"
-msgstr ""
+msgstr "まだ取引はありません"
 
 #: src/pages/Home/Home.tsx
 #: src/pages/Home/Home.tsx
@@ -624,7 +624,7 @@ msgstr "「指値注文」または「ストップ注文」は実行されるこ
 
 #: src/pages/Share/Head/LanguageMenu.tsx
 msgid "Portuguese"
-msgstr ""
+msgstr "ポルトガル語"
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
@@ -639,7 +639,7 @@ msgstr "ポジション"
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useFuturesNewOrder.ts
 msgid "Position fee = Position * 0.05%"
-msgstr ""
+msgstr "ポジション料金 = ポジション * 0.05"
 
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useFuturesNewOrder.ts
@@ -669,7 +669,7 @@ msgstr "価格"
 
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "Recent transactions"
-msgstr ""
+msgstr "最近の取引"
 
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 #: src/pages/Futures/Modal/ProtocolModal.tsx
@@ -678,7 +678,7 @@ msgstr "リスク警告"
 
 #: src/pages/Share/Head/LanguageMenu.tsx
 msgid "Russian"
-msgstr ""
+msgstr "ロシアン"
 
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
@@ -896,11 +896,11 @@ msgstr "NESTFiで私と取引をしてください"
 msgid ""
 "trading\n"
 "fees"
-msgstr ""
+msgstr "トレーディング料金"
 
 #: src/pages/Home/Home.tsx
 msgid "trading fees as"
-msgstr ""
+msgstr "として取引手数料"
 
 #: src/hooks/useFuturesPOrder.ts
 msgid "Trigger"
@@ -930,7 +930,7 @@ msgstr "表示"
 
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "Wallet"
-msgstr ""
+msgstr "ウォレット"
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "White Paper"

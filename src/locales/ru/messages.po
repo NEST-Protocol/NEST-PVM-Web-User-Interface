@@ -82,7 +82,7 @@ msgstr "ПНЛ за 30 дней'"
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 msgid "30 Days\\' PNL"
-msgstr ""
+msgstr "30 дней\\' PNL"
 
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 #: src/pages/Futures/Modal/ProtocolModal.tsx
@@ -106,7 +106,7 @@ msgstr "Прибыль / убыток за 7 дней"
 
 #: src/pages/Share/Modal/ConnectWalletModal.tsx
 msgid "about connecting wallets"
-msgstr ""
+msgstr "о подключении кошельков"
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
@@ -261,7 +261,7 @@ msgstr "Скопировано успешно"
 
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "Current Positions"
-msgstr ""
+msgstr "Текущие должности"
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "Dark mode"
@@ -286,7 +286,7 @@ msgstr "Дефляционный"
 
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "Disconnect"
-msgstr ""
+msgstr "Отключить"
 
 #: src/pages/Futures/Components/POrderList.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
@@ -312,7 +312,7 @@ msgstr "Редактировать позицию"
 
 #: src/pages/Share/Head/LanguageMenu.tsx
 msgid "English"
-msgstr ""
+msgstr "Английский язык"
 
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Enter Channel link"
@@ -363,7 +363,7 @@ msgstr "Github"
 
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "History"
-msgstr ""
+msgstr "История"
 
 #: src/pages/Share/Head/NESTHead.tsx
 msgid "Home"
@@ -398,11 +398,11 @@ msgstr "Недостаточный баланс NEST"
 
 #: src/pages/Share/Head/LanguageMenu.tsx
 msgid "Japanese"
-msgstr ""
+msgstr "Японский"
 
 #: src/pages/Share/Head/LanguageMenu.tsx
 msgid "Korean"
-msgstr ""
+msgstr "Корейский"
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 #: src/pages/Share/Modal/LanguageModal.tsx
@@ -420,7 +420,7 @@ msgstr "Последняя цена"
 
 #: src/pages/Share/Modal/ConnectWalletModal.tsx
 msgid "Learn more"
-msgstr ""
+msgstr "Узнать больше"
 
 #: src/pages/Futures/Components/LeverageSlider.tsx
 msgid "Leverage"
@@ -503,7 +503,7 @@ msgstr "Минимум 50 NEST"
 
 #: src/pages/Share/Modal/ConnectWalletModal.tsx
 msgid "More"
-msgstr ""
+msgstr "Подробнее"
 
 #: src/pages/Futures/MoreInfo.tsx
 msgid "More Info"
@@ -561,7 +561,7 @@ msgstr "Транзакции отсутствуют"
 
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "No Transactions yet"
-msgstr ""
+msgstr "Сделок пока нет"
 
 #: src/pages/Home/Home.tsx
 #: src/pages/Home/Home.tsx
@@ -620,7 +620,7 @@ msgstr "Обратите внимание, что «лимитный ордер�
 
 #: src/pages/Share/Head/LanguageMenu.tsx
 msgid "Portuguese"
-msgstr ""
+msgstr "Португальский язык"
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
@@ -635,7 +635,7 @@ msgstr "Позиция"
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useFuturesNewOrder.ts
 msgid "Position fee = Position * 0.05%"
-msgstr ""
+msgstr "Плата за позицию = Позиция * 0,05%"
 
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useFuturesNewOrder.ts
@@ -665,7 +665,7 @@ msgstr "Цена"
 
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "Recent transactions"
-msgstr ""
+msgstr "Последние сделки"
 
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 #: src/pages/Futures/Modal/ProtocolModal.tsx
@@ -674,7 +674,7 @@ msgstr "Предупреждение об уровне риска"
 
 #: src/pages/Share/Head/LanguageMenu.tsx
 msgid "Russian"
-msgstr ""
+msgstr "Русский"
 
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
@@ -928,7 +928,7 @@ msgstr "Просмотр"
 
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "Wallet"
-msgstr ""
+msgstr "Кошелек"
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "White Paper"

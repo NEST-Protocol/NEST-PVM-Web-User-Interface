@@ -106,7 +106,7 @@ msgstr "Lucro e Perda de 7 dias\\'"
 
 #: src/pages/Share/Modal/ConnectWalletModal.tsx
 msgid "about connecting wallets"
-msgstr ""
+msgstr "sobre as carteiras digitais"
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
@@ -265,7 +265,7 @@ msgstr "Copiado com sucesso"
 
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "Current Positions"
-msgstr ""
+msgstr "Posições actuais"
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "Dark mode"
@@ -294,7 +294,7 @@ msgstr "Deflacionário"
 
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "Disconnect"
-msgstr ""
+msgstr "Desligar"
 
 #: src/hooks/useFuturesPOrder.ts
 #~ msgid "Disparador"
@@ -328,7 +328,7 @@ msgstr "Editar posição"
 
 #: src/pages/Share/Head/LanguageMenu.tsx
 msgid "English"
-msgstr ""
+msgstr "Inglês"
 
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Enter Channel link"
@@ -340,11 +340,11 @@ msgstr "Insira suas informações de contato"
 
 #: src/pages/Futures/NewOrder.tsx
 msgid "Entry Price"
-msgstr ""
+msgstr "Preço de entrada"
 
 #: src/hooks/useNESTSnackBar.tsx
 msgid "Fail Request"
-msgstr ""
+msgstr "Pedido de reprovação"
 
 #: src/hooks/useNESTSnackBar.tsx
 #~ msgid "Falha na solicitação"
@@ -356,24 +356,24 @@ msgstr ""
 msgid ""
 "Follow the right person, making money is as easy as breathing.\n"
 "You can follow the right person on NESTFi, here is my refer link"
-msgstr ""
+msgstr "Seguir a pessoa certa, ganhar dinheiro é tão fácil como respirar.Pode seguir a pessoa certa na NESTFi, aqui está o meu link de referência"
 
 #: src/pages/Futures/Components/FuturesNotice.tsx
 msgid "For the positions opened before April 6, 2023, please go to→"
-msgstr ""
+msgstr "Para as vagas abertas antes de 6 de Abril de 2023, consultar→"
 
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 #: src/pages/Futures/Modal/ProtocolModal.tsx
 msgid "For users/smart contracts using NEST Protocol perpetual contracts, please understand its rules and the differences of similar products in the market when performing positions, settlement, liquidation and other related operations. After fully understanding the following possible risks and can bear Participate in the risk situation:"
-msgstr ""
+msgstr "Para os utilizadores/contratantes inteligentes que utilizam os contratos perpétuos do Protocolo NEST, é importante que compreendam as suas regras e as diferenças entre produtos semelhantes no mercado aquando da realização de posições, liquidação, liquidação e outras operações relacionadas. Depois de compreender plenamente os seguintes riscos possíveis e poder suportar Participar na situação de risco:"
 
 #: src/pages/Swap/Components/SwapInputItem.tsx
 msgid "From"
-msgstr ""
+msgstr "From"
 
 #: src/pages/Share/Head/NESTHead.tsx
 msgid "Futures"
-msgstr ""
+msgstr "Futuros"
 
 #: src/pages/Share/Head/NESTHead.tsx
 #~ msgid "Futuros"
@@ -385,7 +385,7 @@ msgstr "Github"
 
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "History"
-msgstr ""
+msgstr "História"
 
 #: src/pages/Share/Head/NESTHead.tsx
 msgid "Home"
@@ -420,11 +420,11 @@ msgstr "Saldo insuficiente de NEST"
 
 #: src/pages/Share/Head/LanguageMenu.tsx
 msgid "Japanese"
-msgstr ""
+msgstr "Japonês"
 
 #: src/pages/Share/Head/LanguageMenu.tsx
 msgid "Korean"
-msgstr ""
+msgstr "coreano"
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 #: src/pages/Share/Modal/LanguageModal.tsx
@@ -442,7 +442,7 @@ msgstr "Preço Atual"
 
 #: src/pages/Share/Modal/ConnectWalletModal.tsx
 msgid "Learn more"
-msgstr ""
+msgstr "Saiba mais"
 
 #: src/pages/Futures/Components/LeverageSlider.tsx
 msgid "Leverage"
@@ -536,7 +536,7 @@ msgstr "Mínimo de 50 NEST"
 
 #: src/pages/Share/Modal/ConnectWalletModal.tsx
 msgid "More"
-msgstr ""
+msgstr "Mais"
 
 #: src/pages/Futures/MoreInfo.tsx
 msgid "More Info"
@@ -594,7 +594,7 @@ msgstr "Nenhuma negociação ainda"
 
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "No Transactions yet"
-msgstr ""
+msgstr "Ainda não há transacções"
 
 #: src/pages/Home/Home.tsx
 #: src/pages/Home/Home.tsx
@@ -630,7 +630,7 @@ msgstr "Pedido de posição aberta"
 #: src/pages/Futures/Modal/AddModal.tsx
 #: src/pages/Futures/Modal/EditPositionModal.tsx
 msgid "Open Price"
-msgstr ""
+msgstr "Preço aberto"
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
@@ -643,7 +643,7 @@ msgstr ""
 #: src/pages/Futures/Components/OrderTable.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 msgid "Operate"
-msgstr ""
+msgstr "Operar"
 
 #: src/pages/Futures/OrderList.tsx
 #~ msgid "Ordem"
@@ -651,7 +651,7 @@ msgstr ""
 
 #: src/pages/Futures/OrderList.tsx
 msgid "Order"
-msgstr ""
+msgstr "Encomendar"
 
 #: src/pages/Futures/Modal/SharePositionModal.tsx
 #: src/pages/Futures/NewOrder.tsx
@@ -665,7 +665,7 @@ msgstr ""
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 #: src/pages/Futures/Modal/ProtocolModal.tsx
 #~ msgid "Para usuários/contratos inteligentes que utilizam contratos perpétuos do Protocolo NEST, por favor, entenda suas regras e as diferenças de produtos similares no mercado ao realizar posições, liquidação e outras operações relacionadas. Após entender completamente os seguintes possíveis riscos e ser capaz de suportar a situação de risco, participe:"
-#~ msgstr ""
+#~ msgstr "For smart users/contractors using perpetual NEST Protocol contracts, please understand their rules and the differences from similar products in the market when making positions, settlement and other related transactions. After fully understanding the following possible risks and being able to bear the risk situation, please participate:"
 
 #: src/pages/Home/Modal/ApplyModal.tsx
 #~ msgid "Plataforma (Youtube, Telegram, Twitter, Instagram, Facebook, Tiktok, Outras)"
@@ -673,15 +673,15 @@ msgstr ""
 
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Platform (Youtube, Telegram, Twitter, Instagram, Facebook, Tiktok, Others)"
-msgstr ""
+msgstr "Plataforma (Youtube, Telegram, Twitter, Instagram, Facebook, Tiktok, outros)"
 
 #: src/pages/Futures/Modal/ApproveNoticeModal.tsx
 msgid "Please click Approve for authorization and then you can open the position, this process will consume some GAS."
-msgstr ""
+msgstr "Clique em Aprovar para obter autorização e, em seguida, pode abrir a posição, este processo consumirá algum GAS."
 
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 msgid "Please note that \"Limit order\" or \"Stop order\" is not guaranteed to be executed. This may include, but is not limited to, the following cases."
-msgstr ""
+msgstr "Tenha em atenção que a execução de uma \"ordem de limite\" ou \"ordem de paragem\" não é garantida. Isto pode incluir, mas não se limita a, os seguintes casos."
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #~ msgid "PNL de Hoje"
@@ -689,7 +689,7 @@ msgstr ""
 
 #: src/pages/Share/Head/LanguageMenu.tsx
 msgid "Portuguese"
-msgstr ""
+msgstr "Portuguese"
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
@@ -705,21 +705,21 @@ msgstr ""
 #: src/pages/Futures/Modal/CloseModal.tsx
 #: src/pages/Futures/Modal/EditPositionModal.tsx
 msgid "Position"
-msgstr ""
+msgstr "Posição"
 
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useFuturesNewOrder.ts
 msgid "Position fee = Position * 0.05%"
-msgstr ""
+msgstr "Taxa de posição = Posição * 0,05%"
 
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useFuturesNewOrder.ts
 #~ msgid "Position fee = Position*0.05%"
-#~ msgstr ""
+#~ msgstr "Taxa de posição = Posição*0,05%"
 
 #: src/hooks/useFuturesEditPosition.ts
 msgid "Position fee =Position*0.05%"
@@ -760,7 +760,7 @@ msgstr "Preço"
 
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "Recent transactions"
-msgstr ""
+msgstr "Transacções recentes"
 
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 #: src/pages/Futures/Modal/ProtocolModal.tsx
@@ -769,7 +769,7 @@ msgstr "Aviso de Risco"
 
 #: src/pages/Share/Head/LanguageMenu.tsx
 msgid "Russian"
-msgstr ""
+msgstr "Russo"
 
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
@@ -812,6 +812,8 @@ msgstr "Curto"
 #~ "Siga a pessoa certa, ganhar dinheiro é tão fácil quanto respirar.\n"
 #~ "Você pode seguir a pessoa certa na NESTFi, aqui está o meu link de referência"
 #~ msgstr ""
+#~ "Follow the right person, making money is as easy as breathing.\n"
+#~ "You can follow the right person at NESTFi, here is my referral link"
 
 #: src/pages/Futures/Components/OrderTable.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
@@ -903,11 +905,7 @@ msgstr "Obter lucro"
 #~ msgid ""
 #~ "taxas de\n"
 #~ "negociação"
-#~ msgstr ""
-
-#: src/pages/Home/Home.tsx
-#~ msgid "taxas de negociação como"
-#~ msgstr ""
+#~ msgstr "feesnegotiation"
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "Test BNB"
@@ -948,38 +946,38 @@ msgstr "Queimado Hoje"
 
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "Today Volume"
-msgstr ""
+msgstr "Volume actual"
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 msgid "Today's PNL"
-msgstr ""
+msgstr "O PNL de hoje"
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 msgid "Today\\'s PNL"
-msgstr ""
+msgstr "Hoje\\'s PNL"
 
 #: src/pages/Home/Home.tsx
 #: src/pages/Home/Home.tsx
 msgid "Total Burned"
-msgstr ""
+msgstr "Total queimado"
 
 #: src/pages/Futures/Modal/SharePositionModal.tsx
 #: src/pages/Futures/NewOrder.tsx
 msgid "Total Pay"
-msgstr ""
+msgstr "Remuneração total"
 
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 msgid "Total Profit"
-msgstr ""
+msgstr "Lucro total"
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 msgid "Total Profit & Loss"
-msgstr ""
+msgstr "Total de lucros e perdas"
 
 #: src/pages/Home/Home.tsx
 #: src/pages/Home/Home.tsx
@@ -988,7 +986,7 @@ msgstr ""
 
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "Total Transaction Volume"
-msgstr ""
+msgstr "Volume total de transacções"
 
 #: src/pages/Futures/Components/OrderTable.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
@@ -1018,18 +1016,20 @@ msgid ""
 "trading\n"
 "fees"
 msgstr ""
+"negociação\n"
+"taxas"
 
 #: src/pages/Home/Home.tsx
 msgid "trading fees as"
-msgstr ""
+msgstr "comissões de negociação como"
 
 #: src/hooks/useFuturesPOrder.ts
 msgid "Trigger"
-msgstr ""
+msgstr "Gatilho"
 
 #: src/hooks/useFuturesPOrderClose.tsx
 msgid "Trigger executed"
-msgstr ""
+msgstr "Accionamento executado"
 
 #: src/pages/Futures/Modal/EditPositionModal.tsx
 msgid "Trigger Position"
@@ -1059,7 +1059,7 @@ msgstr "Ver"
 
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "Wallet"
-msgstr ""
+msgstr "Carteira"
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "White Paper"
