@@ -19,14 +19,14 @@ import useTheme from "../../../hooks/useTheme";
 import NetMenu from "./NetMenu";
 import { NavMenuV2, NavMenuV3 } from "./NavMenuV2Base";
 import useNEST from "../../../hooks/useNEST";
-import { Trans, t } from "@lingui/macro";
+import { Trans } from "@lingui/macro";
 import LanguageMenu from "./LanguageMenu";
 
 export const NavItems = [
-  { path: "/home", content: t`Home`, icon: Home },
-  { path: "/futures", content: t`Futures`, icon: FuturesIcon },
-  { path: "/swap", content: t`Swap`, icon: SwapExchangeSmall },
-  { path: "/dashboard", content: t`Dashboard`, icon: Dashboard },
+  { path: "/home", content: `Home`, icon: Home, l:<Trans>Home</Trans> },
+  { path: "/futures", content: `Futures`, icon: FuturesIcon,l:<Trans>Futures</Trans> },
+  { path: "/swap", content: `Swap`, icon: SwapExchangeSmall,l:<Trans>Swap</Trans> },
+  { path: "/dashboard", content: `Dashboard`, icon: Dashboard,l:<Trans>Dashboard</Trans> },
 ];
 
 const NESTHead: FC = () => {
@@ -202,6 +202,7 @@ const NESTHead: FC = () => {
   const nav = () => {
     const NavStack = styled(Stack)(({ theme }) => {
       return {
+        width: "100%",
         "& a": {
           color: theme.normal.text0,
           fontWeight: 700,
@@ -232,7 +233,7 @@ const NESTHead: FC = () => {
           key={`nav + ${index}`}
           to={item.path}
         >
-          {item.content}
+          {item.l}
         </Link>
       );
     });

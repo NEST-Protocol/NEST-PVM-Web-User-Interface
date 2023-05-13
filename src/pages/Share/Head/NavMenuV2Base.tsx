@@ -160,7 +160,7 @@ const NavMenuV2Base: FC<NavMenuV2BaseProps> = ({ ...props }) => {
         <button>
           <Icon />
         </button>
-        <Link to={item.path}>{item.content}</Link>
+        <Link to={item.path}>{item.l}</Link>
       </Stack>
     );
   });

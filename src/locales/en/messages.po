@@ -13,6 +13,15 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
+#. js-lingui-explicit-id
+#: src/pages/Share/Head/NESTHead.tsx
+#~ msgid "Home"
+#~ msgstr "{0}"
+
+#: src/pages/Share/Head/NESTHead.tsx
+#~ msgid "{0}"
+#~ msgstr "{0}"
+
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useFuturesNewOrder.ts
 msgid "< LIMIT PRICE"
