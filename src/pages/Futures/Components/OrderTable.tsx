@@ -157,14 +157,28 @@ const OrderTableRow: FC<OrderTableRowProps> = ({ ...props }) => {
                 type: FuturesModalType.editLimit,
               })
             }
-            style={{ height: "36px", width: "65px", fontSize: 12 }}
+            style={{
+              width: "auto",
+              height: "36px",
+              minWidth: "65px",
+              fontSize: 12,
+              paddingLeft: `12px`,
+              paddingRight: `12px`,
+            }}
           />
           <MainButton
             title={mainButtonTitle}
             isLoading={mainButtonLoading}
             disable={mainButtonDis}
             onClick={mainButtonAction}
-            style={{ height: "36px", width: "65px", fontSize: 12 }}
+            style={{
+              width: "auto",
+              height: "36px",
+              minWidth: "65px",
+              fontSize: 12,
+              paddingLeft: `12px`,
+              paddingRight: `12px`,
+            }}
           />
           <FuturesOrderShare
             component={"button"}

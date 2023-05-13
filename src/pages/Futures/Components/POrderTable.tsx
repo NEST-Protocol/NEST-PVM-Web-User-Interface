@@ -216,7 +216,14 @@ const POrderTableRow: FC<POrderTableRowProps> = ({ ...props }) => {
                 type: FuturesModalType.add,
               })
             }
-            style={{ height: "36px", width: "65px", fontSize: 12 }}
+            style={{
+              width: "auto",
+              height: "36px",
+              minWidth: "65px",
+              fontSize: 12,
+              paddingLeft: `12px`,
+              paddingRight: `12px`,
+            }}
           />
           <MainButton
             title={showTriggerTitle}
@@ -226,7 +233,14 @@ const POrderTableRow: FC<POrderTableRowProps> = ({ ...props }) => {
                 type: FuturesModalType.trigger,
               })
             }
-            style={{ height: "36px", width: "65px", fontSize: 12 }}
+            style={{
+              width: "auto",
+              height: "36px",
+              minWidth: "65px",
+              fontSize: 12,
+              paddingLeft: `12px`,
+              paddingRight: `12px`,
+            }}
           />
           <MainButton
             title={t`Close`}
@@ -236,7 +250,14 @@ const POrderTableRow: FC<POrderTableRowProps> = ({ ...props }) => {
                 type: FuturesModalType.close,
               })
             }
-            style={{ height: "36px", width: "65px", fontSize: 12 }}
+            style={{
+              width: "auto",
+              height: "36px",
+              minWidth: "65px",
+              fontSize: 12,
+              paddingLeft: `12px`,
+              paddingRight: `12px`,
+            }}
           />
           <FuturesOrderShare
             component={"button"}

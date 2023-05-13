@@ -9,6 +9,7 @@ import Box from "@mui/material/Box";
 import useNESTSnackBar from "../../../hooks/useNESTSnackBar";
 import useWalletIcon from "../../../hooks/uswWalletIcon";
 import copy from "copy-to-clipboard";
+import { Trans, t } from "@lingui/macro";
 
 const BaseStack = styled(Stack)(({ theme }) => {
   return {
@@ -126,7 +127,7 @@ const MyWalletModal: FC<MyWalletModalProps> = ({ ...props }) => {
           <LinkButton
             onClick={() => {
               copy(account.address ? account.address : "");
-              messageSnackBar("Copy Successfully");
+              messageSnackBar(t`Copy Successfully`);
             }}
           >
             <Copy style={{ width: "14px", height: "14px" }} />
@@ -138,7 +139,7 @@ const MyWalletModal: FC<MyWalletModalProps> = ({ ...props }) => {
             props.onClose();
           }}
         >
-          Disconnect
+          <Trans>Disconnect</Trans>
         </DisconnectButton>
       </Stack>
     </BorderItem>
@@ -193,23 +194,25 @@ const MyWalletModal: FC<MyWalletModalProps> = ({ ...props }) => {
   });
 
   return (
-    <BaseModal title={"Wallet"} onClose={props.onClose}>
+    <BaseModal title={t`Wallet`} onClose={props.onClose}>
       <BaseStack spacing={0}>
         {myAddress}
-        <p className="TransactionsTitle">Recent transactions</p>
+        <p className="TransactionsTitle">
+          <Trans>Recent transactions</Trans>
+        </p>
         {transactionsData.length === 0 ? (
           <Stack
             direction={"row"}
             justifyContent={"center"}
             alignItems={"center"}
             sx={(theme) => ({
-              height: '168px',
+              height: "168px",
               fontWeight: 400,
               fontSize: 14,
               color: theme.normal.text2,
             })}
           >
-            No Transactions yet
+            <Trans>No Transactions yet</Trans>
           </Stack>
         ) : (
           <TransactionUl>{transactionLi}</TransactionUl>

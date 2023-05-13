@@ -549,17 +549,17 @@ function useFuturesNewOrder(
   }, [lever, longOrShort, nestAmount, openPrice]);
   const showFeeHoverText = useMemo(() => {
     if (tabsValue === 0 && !isStop) {
-      return [t`Position fee = Position*0.05%`];
+      return [t`Position fee = Position * 0.05%`];
     } else if (tabsValue === 1 && !isStop) {
-      return [t`Position fee = Position*0.05%`, t`Limit order fee = 15 NEST`];
+      return [t`Position fee = Position * 0.05%`, t`Limit order fee = 15 NEST`];
     } else if (tabsValue === 0 && isStop) {
       return [
-        t`Position fee = Position*0.05%`,
+        t`Position fee = Position * 0.05%`,
         t`Stop order fee(after execution) = 15 NEST`,
       ];
     } else {
       return [
-        t`Position fee = Position*0.05%`,
+        t`Position fee = Position * 0.05%`,
         t`Limit order fee = 15 NEST`,
         t`Stop order fee(after execution) = 15 NEST`,
       ];

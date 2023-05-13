@@ -13,1016 +13,1070 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/hooks/useFuturesNewOrder.ts:615
-#: src/hooks/useFuturesNewOrder.ts:622
+#: src/hooks/useFuturesNewOrder.ts
+#: src/hooks/useFuturesNewOrder.ts
 msgid "< LIMIT PRICE"
 msgstr "< PREÇO LIMITE"
 
-#: src/hooks/useFuturesNewOrder.ts:613
-#: src/hooks/useFuturesNewOrder.ts:620
+#: src/hooks/useFuturesNewOrder.ts
+#: src/hooks/useFuturesNewOrder.ts
 msgid "< MARKET PRICE"
 msgstr "< PREÇO DE MERCADO"
 
-#: src/hooks/useFuturesEditPosition.ts:111
+#: src/hooks/useFuturesEditPosition.ts
 msgid "< OPEN PRICE"
 msgstr "< PREÇO DE ABERTURA"
 
-#: src/hooks/useFuturesNewOrder.ts:615
-#: src/hooks/useFuturesNewOrder.ts:622
+#: src/hooks/useFuturesNewOrder.ts
+#: src/hooks/useFuturesNewOrder.ts
 msgid "> LIMIT PRICE"
 msgstr "> PREÇO LIMITE"
 
-#: src/hooks/useFuturesNewOrder.ts:613
-#: src/hooks/useFuturesNewOrder.ts:620
+#: src/hooks/useFuturesNewOrder.ts
+#: src/hooks/useFuturesNewOrder.ts
 msgid "> MARKET PRICE"
 msgstr "> PREÇO DE MERCADO"
 
-#: src/hooks/useFuturesEditPosition.ts:111
+#: src/hooks/useFuturesEditPosition.ts
 msgid "> OPEN PRICE"
 msgstr "> PREÇO DE ABERTURA"
 
-#: src/components/NormalInput/NESTInput.tsx:147
-#: src/components/NormalInput/NESTInputSelect.tsx:147
+#: src/components/NormalInput/NESTInput.tsx
+#: src/components/NormalInput/NESTInputSelect.tsx
 msgid "0 balance. Before trading, you can switch to \"Swap\" to exchange between USDT and NEST token."
 msgstr "Saldo 0. Antes de negociar, você pode trocar para \"troca\" para trocar entre USDT e token NEST."
 
-#: src/pages/Futures/Modal/LimitAndPriceModal.tsx:78
+#: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 msgid "1. The trigger price has been reached but there is not enough time to execute."
 msgstr "1. O preço de acionamento foi alcançado, mas não há tempo suficiente para executar."
 
-#: src/pages/Futures/Modal/LimitAndPriceModal.tsx:31
-#: src/pages/Futures/Modal/ProtocolModal.tsx:32
+#: src/pages/Futures/Modal/LimitAndPriceModal.tsx
+#: src/pages/Futures/Modal/ProtocolModal.tsx
 msgid "1. Uncertainty risk of income: The calculation method of NEST perpetual contract is different from the calculation method of perpetual contract of traditional centralized exchange. The NEST perpetual contract converts the future price of the asset based on the historical rate of return of the asset. Therefore, the asset price increases by 100% after the user opens a position. The user's income is not 100%. In extreme cases, even if the asset price is rising, your income may be negative."
 msgstr "1. Risco de incerteza de renda: O método de cálculo do contrato perpétuo NEST é diferente do método de cálculo do contrato perpétuo da troca centralizada tradicional. O contrato perpétuo NEST converte o preço futuro do ativo com base na taxa de retorno histórica do ativo. Portanto, o preço do ativo aumenta em 100% depois que o usuário abre uma posição. A renda do usuário não é de 100%. Em casos extremos, mesmo se o preço do ativo estiver subindo, sua renda pode ser negativa."
 
-#: src/pages/Home/Home.tsx:292
-#: src/pages/Home/Home.tsx:325
+#: src/pages/Home/Home.tsx
+#: src/pages/Home/Home.tsx
 msgid "100%"
 msgstr "100%"
 
-#: src/pages/Futures/Modal/LimitAndPriceModal.tsx:83
+#: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 msgid "2. No one picks up the execution order There may be slippage to execute at the trigger price."
 msgstr "2. Ninguém pega a ordem de execução. Pode haver deslizamento para executar no preço de acionamento."
 
-#: src/pages/Futures/Modal/LimitAndPriceModal.tsx:42
-#: src/pages/Futures/Modal/ProtocolModal.tsx:44
+#: src/pages/Futures/Modal/LimitAndPriceModal.tsx
+#: src/pages/Futures/Modal/ProtocolModal.tsx
 msgid "2. Position liquidation risk: NEST perpetual contracts provide leverage of 1-20 times. When your leverage is greater than 1 times leverage, the price fluctuation of the underlying asset may cause liquidation."
 msgstr "2. Risco de liquidação de posição: Os contratos perpétuos NEST fornecem alavancagem de 1-20 vezes. Quando sua alavancagem é maior que 1 vez, a flutuação de preço do ativo subjacente pode causar liquidação."
 
-#: src/pages/Futures/Modal/LimitAndPriceModal.tsx:49
-#: src/pages/Futures/Modal/ProtocolModal.tsx:52
+#: src/pages/Futures/Modal/LimitAndPriceModal.tsx
+#: src/pages/Futures/Modal/ProtocolModal.tsx
 msgid "3. NEST Token price fluctuation risk: Both the margin and the final profit and loss use NEST Token, and NEST itself is also a highly volatile asset. In extreme cases, even if your perpetual contract position is profitable, However, due to the fluctuation of the NEST price itself, it may cause you to lose money in terms of fiat currency."
 msgstr "3. Risco de flutuação de preço do token NEST: Tanto a margem quanto o lucro e a perda final usam o token NEST, e o NEST em si é também um ativo altamente volátil. Em casos extremos, mesmo que sua posição em contrato perpétuo seja lucrativa,"
 
-#: src/pages/Dashboard/Dashboard.tsx:925
-#: src/pages/Dashboard/Dashboard.tsx:1070
-#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx:376
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 msgid "30 Days' PNL"
 msgstr "Lucro e Perda de 30 dias"
 
-#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx:220
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 msgid "30 Days\\' PNL"
 msgstr "Lucro e Perda de 30 dias\\'"
 
-#: src/pages/Futures/Modal/LimitAndPriceModal.tsx:58
-#: src/pages/Futures/Modal/ProtocolModal.tsx:62
+#: src/pages/Futures/Modal/LimitAndPriceModal.tsx
+#: src/pages/Futures/Modal/ProtocolModal.tsx
 msgid "4. External oracle risk: NEST protocol's perpetual contract price comes from the NEST oracle. If the oracle is attacked or other reasons cause the price to be abnormal, The system may encounter settlement exceptions, which may cause errors in the user's revenue calculation."
 msgstr "4. Risco de oráculo externo: o preço do contrato perpétuo do protocolo NEST vem do oráculo NEST. Se o oráculo for atacado ou outros motivos causarem preço anormal, o sistema poderá encontrar exceções de liquidação, o que pode causar erros no cálculo de receita do usuário."
 
-#: src/pages/Futures/Modal/LimitAndPriceModal.tsx:65
-#: src/pages/Futures/Modal/ProtocolModal.tsx:70
+#: src/pages/Futures/Modal/LimitAndPriceModal.tsx
+#: src/pages/Futures/Modal/ProtocolModal.tsx
 msgid "5. Smart contract risk: There may be fatal unknown risks in the smart contract that may cause your principal to be damaged. Please evaluate the risk yourself before deciding whether to participate."
 msgstr "5. Risco de contrato inteligente: pode haver riscos desconhecidos fatais no contrato inteligente que possam causar danos ao seu principal. Por favor, avalie o risco antes de decidir se participa ou não."
 
-#: src/pages/Dashboard/Dashboard.tsx:912
-#: src/pages/Dashboard/Dashboard.tsx:1050
-#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx:337
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 msgid "7 Days' PNL"
 msgstr "Lucro e Perda de 7 dias"
 
-#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx:213
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 msgid "7 Days\\' PNL"
 msgstr "Lucro e Perda de 7 dias\\'"
 
-#: src/pages/Dashboard/Dashboard.tsx:605
-#: src/pages/Dashboard/Dashboard.tsx:1138
-#: src/pages/Dashboard/Dashboard.tsx:1146
-#: src/pages/Futures/Components/OrderList.tsx:70
-#: src/pages/Futures/Components/OrderTable.tsx:43
-#: src/pages/Futures/Components/POrderList.tsx:79
-#: src/pages/Futures/Components/POrderList.tsx:244
+#: src/pages/Share/Modal/ConnectWalletModal.tsx
+msgid "about connecting wallets"
+msgstr ""
+
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Futures/Components/OrderList.tsx
+#: src/pages/Futures/Components/OrderTable.tsx
+#: src/pages/Futures/Components/POrderList.tsx
+#: src/pages/Futures/Components/POrderList.tsx
+#: src/pages/Futures/Components/POrderTable.tsx
 msgid "Actual Margin"
 msgstr "Margem Atual"
 
-#: src/pages/Futures/Components/POrderList.tsx:152
-#: src/pages/Futures/Components/POrderTable.tsx:212
+#: src/pages/Futures/Components/POrderList.tsx
+#: src/pages/Futures/Components/POrderTable.tsx
 msgid "Add"
 msgstr "Adicionar"
 
-#: src/pages/Swap/Swap.tsx:201
+#: src/pages/Swap/Swap.tsx
 msgid "Add NEST to wallet"
 msgstr "Adicionar NEST à carteira"
 
-#: src/hooks/useTransactionReceipt.ts:45
+#: src/hooks/useTransactionReceipt.ts
 msgid "Add position"
 msgstr "Adicionar posição"
 
-#: src/pages/Futures/Modal/AddModal.tsx:105
-#: src/pages/Futures/Modal/AddModal.tsx:121
+#: src/pages/Futures/Modal/AddModal.tsx
+#: src/pages/Futures/Modal/AddModal.tsx
 msgid "Add Position"
 msgstr "Adicionar Posição"
 
-#: src/hooks/useFuturesNewOrder.ts:629
-#: src/pages/Futures/Modal/EditPositionModal.tsx:125
+#: src/hooks/useFuturesNewOrder.ts
+#: src/pages/Futures/Modal/EditPositionModal.tsx
 msgid "After the limit order is executed, TP and SL price you set will trigger immediately."
 msgstr "Após a execução da ordem limite, o preço TP e SL que você definiu será acionado imediatamente."
 
-#: src/components/NormalInput/NESTInput.tsx:61
-#: src/components/NormalInput/NESTInputSelect.tsx:198
+#: src/components/NormalInput/NESTInput.tsx
+#: src/components/NormalInput/NESTInputSelect.tsx
 msgid "Amount"
 msgstr "Quantidade"
 
-#: src/pages/Futures/Modal/ApproveNoticeModal.tsx:53
+#: src/pages/Futures/Modal/ApproveNoticeModal.tsx
 msgid "Approval required"
 msgstr "Aprovação necessária"
 
-#: src/hooks/useFuturesAdd.ts:190
-#: src/hooks/useFuturesNewOrder.ts:411
-#: src/hooks/useSwap.ts:339
-#: src/hooks/useTransactionReceipt.ts:39
-#: src/pages/Futures/Modal/ApproveNoticeModal.tsx:72
+#: src/hooks/useFuturesAdd.ts
+#: src/hooks/useFuturesNewOrder.ts
+#: src/hooks/useSwap.ts
+#: src/hooks/useTransactionReceipt.ts
+#: src/pages/Futures/Modal/ApproveNoticeModal.tsx
 msgid "Approve"
 msgstr "Aprovar"
 
-#: src/pages/Home/Home.tsx:326
+#: src/pages/Home/Home.tsx
 msgid "as commission for KOLs."
 msgstr "como comissão para os KOLs."
 
-#: src/hooks/useSwap.ts:335
+#: src/hooks/useSwap.ts
 msgid "balance"
 msgstr "saldo"
 
-#: src/components/NormalInput/NESTInput.tsx:88
-#: src/components/NormalInput/NESTInputSelect.tsx:243
-#: src/pages/Swap/Components/SwapInputItem.tsx:208
-#: src/pages/Swap/Components/SwapInputItem.tsx:243
+#: src/components/NormalInput/NESTInput.tsx
+#: src/components/NormalInput/NESTInputSelect.tsx
+#: src/pages/Swap/Components/SwapInputItem.tsx
+#: src/pages/Swap/Components/SwapInputItem.tsx
 msgid "Balance:"
 msgstr "Saldo:"
 
-#: src/pages/Home/Home.tsx:312
-#: src/pages/Home/Home.tsx:328
-#: src/pages/Home/Modal/ApplyModal.tsx:196
-#: src/pages/Home/Modal/ApplyModal.tsx:212
+#: src/pages/Home/Home.tsx
+#: src/pages/Home/Home.tsx
+#: src/pages/Home/Modal/ApplyModal.tsx
+#: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Become a Trading KOL"
 msgstr "Torne-se um KOL de negociação"
 
-#: src/pages/Home/Modal/ApplyModal.tsx:131
+#: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Channel link"
 msgstr "Link do canal"
 
-#: src/pages/Futures/Modal/ApproveNoticeModal.tsx:64
+#: src/pages/Futures/Modal/ApproveNoticeModal.tsx
 #~ msgid "Clique em Autorizar para autorizar e depois você pode abrir a posição, este processo consumirá algum GAS."
 #~ msgstr "Clique em Autorizar para autorizar e depois você pode abrir a posição, este processo consumirá algum GAS."
 
-#: src/components/NormalInput/NormalInputWithCloseButton.tsx:66
-#: src/hooks/useFuturesOrder.ts:43
-#: src/pages/Futures/Components/POrderList.tsx:172
-#: src/pages/Futures/Components/POrderTable.tsx:232
+#: src/components/NormalInput/NormalInputWithCloseButton.tsx
+#: src/hooks/useFuturesOrder.ts
+#: src/pages/Futures/Components/POrderList.tsx
+#: src/pages/Futures/Components/POrderTable.tsx
 msgid "Close"
 msgstr "Fechar"
 
-#: src/hooks/useTransactionReceipt.ts:55
+#: src/hooks/useTransactionReceipt.ts
 msgid "Close Limit Order"
 msgstr "Fechar ordem limite"
 
-#: src/pages/Futures/Modal/CloseModal.tsx:82
-#: src/pages/Futures/Modal/CloseModal.tsx:98
+#: src/pages/Futures/Modal/CloseModal.tsx
+#: src/pages/Futures/Modal/CloseModal.tsx
 msgid "Close Position"
 msgstr "Fechar posição"
 
-#: src/pages/Dashboard/Dashboard.tsx:672
-#: src/pages/Dashboard/Dashboard.tsx:1149
-#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx:282
-#: src/pages/Futures/Modal/CloseModal.tsx:40
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
+#: src/pages/Futures/Modal/CloseModal.tsx
 msgid "Close Price"
 msgstr "Preço de fechamento"
 
-#: src/pages/Futures/Modal/CloseOrderNoticeModal.tsx:17
+#: src/pages/Futures/Modal/CloseOrderNoticeModal.tsx
 msgid "Close Risk"
 msgstr "Risco de fechamento"
 
-#: src/pages/Home/Home.tsx:293
+#: src/pages/Home/Home.tsx
 msgid "commission for KOLs"
 msgstr "comissão para KOLs"
 
-#: src/hooks/useFuturesAdd.ts:188
-#: src/hooks/useFuturesClose.ts:121
-#: src/hooks/useFuturesEditLimit.ts:44
-#: src/hooks/useFuturesEditPosition.ts:176
-#: src/pages/Futures/Modal/SharePositionModal.tsx:630
-#: src/pages/Home/Modal/ApplyModal.tsx:139
-#: src/pages/Swap/Components/SwapSlippageModal.tsx:68
+#: src/hooks/useFuturesAdd.ts
+#: src/hooks/useFuturesClose.ts
+#: src/hooks/useFuturesEditLimit.ts
+#: src/hooks/useFuturesEditPosition.ts
+#: src/pages/Futures/Modal/SharePositionModal.tsx
+#: src/pages/Home/Modal/ApplyModal.tsx
+#: src/pages/Swap/Components/SwapSlippageModal.tsx
 msgid "Confirm"
 msgstr "Confirmar"
 
-#: src/hooks/useFuturesNewOrder.ts:407
-#: src/hooks/useFuturesNewOrder.ts:473
-#: src/hooks/useSwap.ts:333
-#: src/pages/Dashboard/Dashboard.tsx:842
-#: src/pages/Dashboard/Dashboard.tsx:955
-#: src/pages/Share/Head/ConnectButton.tsx:73
+#: src/hooks/useFuturesNewOrder.ts
+#: src/hooks/useFuturesNewOrder.ts
+#: src/hooks/useSwap.ts
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Share/Head/ConnectButton.tsx
+#: src/pages/Share/Modal/ConnectWalletModal.tsx
+#: src/pages/Share/Modal/ConnectWalletModal.tsx
 msgid "Connect Wallet"
 msgstr "Conectar carteira"
 
-#: src/pages/Home/Modal/ApplyModal.tsx:135
+#: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Contact info (Telegram handle)"
 msgstr "Informações de contato (Nome de usuário do Telegram)"
 
-#: src/pages/Dashboard/Dashboard.tsx:822
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
 msgid "Copy Invitation Link"
 msgstr "Copiar link de convite"
 
-#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx:337
-#: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx:280
+#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
+#: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 msgid "Copy Link"
 msgstr "Copiar link"
 
-#: src/pages/Dashboard/Dashboard.tsx:828
-#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx:342
-#: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx:284
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
+#: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
+#: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "Copy Successfully"
 msgstr "Copiado com sucesso"
 
-#: src/pages/Share/Head/NavMenuV2Base.tsx:196
+#: src/pages/Dashboard/Dashboard.tsx
+msgid "Current Positions"
+msgstr ""
+
+#: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "Dark mode"
 msgstr "Modo escuro"
 
-#: src/pages/Share/Head/NESTHead.tsx:29
-#: src/pages/Share/Head/NESTHead.tsx:194
+#: src/pages/Share/Head/NESTHead.tsx
+#: src/pages/Share/Head/NESTHead.tsx
 msgid "Dashboard"
 msgstr "Painel de controle"
 
-#: src/pages/Swap/Components/SwapInputItem.tsx:200
+#: src/pages/Swap/Components/SwapInputItem.tsx
 #~ msgid "De"
 #~ msgstr "From"
 
-#: src/pages/Home/Home.tsx:366
+#: src/pages/Home/Home.tsx
 msgid "Decentralized"
 msgstr "Descentralizado"
 
-#: src/pages/Home/Home.tsx:236
+#: src/pages/Home/Home.tsx
 msgid "Decentralized Perpetual Exchange"
 msgstr "Bolsa Perpétua Descentralizada"
 
-#: src/pages/Home/Home.tsx:371
+#: src/pages/Home/Home.tsx
 msgid "Deflationary"
 msgstr "Deflacionário"
 
-#: src/hooks/useFuturesPOrder.ts:61
+#: src/pages/Share/Modal/MyWalletModal.tsx
+msgid "Disconnect"
+msgstr ""
+
+#: src/hooks/useFuturesPOrder.ts
 #~ msgid "Disparador"
 #~ msgstr "Disparador"
 
-#: src/hooks/useFuturesPOrderClose.tsx:102
+#: src/hooks/useFuturesPOrderClose.tsx
 #~ msgid "Disparador executado"
 #~ msgstr "Disparador executado"
 
-#: src/pages/Futures/Components/POrderList.tsx:136
-#: src/pages/Futures/Components/POrderTable.tsx:73
+#: src/pages/Futures/Components/POrderList.tsx
+#: src/pages/Futures/Components/POrderTable.tsx
 msgid "Due to the market volatility, the actual liquidation price may be different from the theoretical liquidation price . Here is the theoretical liquidation price, for reference only."
 msgstr "Devido à volatilidade do mercado, o preço de liquidação real pode ser diferente do preço de liquidação teórico. Aqui está o preço de liquidação teórico, apenas para referência."
 
-#: src/hooks/useFuturesPOrder.ts:61
-#: src/pages/Futures/Components/OrderList.tsx:111
-#: src/pages/Futures/Components/OrderTable.tsx:153
-#: src/pages/Futures/Modal/SharePositionModal.tsx:270
-#: src/pages/Futures/Modal/SharePositionModal.tsx:407
+#: src/hooks/useFuturesPOrder.ts
+#: src/pages/Futures/Components/OrderList.tsx
+#: src/pages/Futures/Components/OrderTable.tsx
+#: src/pages/Futures/Modal/SharePositionModal.tsx
+#: src/pages/Futures/Modal/SharePositionModal.tsx
 msgid "Edit"
 msgstr "Editar"
 
-#: src/hooks/useTransactionReceipt.ts:53
+#: src/hooks/useTransactionReceipt.ts
 msgid "Edit Limit Order"
 msgstr "Editar ordem limitada"
 
-#: src/hooks/useTransactionReceipt.ts:51
-#: src/pages/Futures/Modal/EditPositionModal.tsx:183
+#: src/hooks/useTransactionReceipt.ts
+#: src/pages/Futures/Modal/EditPositionModal.tsx
 msgid "Edit Position"
 msgstr "Editar posição"
 
-#: src/pages/Share/Head/LanguageMenu.tsx:35
+#: src/pages/Share/Head/LanguageMenu.tsx
 msgid "English"
 msgstr ""
 
-#: src/pages/Home/Modal/ApplyModal.tsx:132
+#: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Enter Channel link"
 msgstr "Insira o link do canal"
 
-#: src/pages/Home/Modal/ApplyModal.tsx:136
+#: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Enter your Contact info"
 msgstr "Insira suas informações de contato"
 
-#: src/pages/Futures/NewOrder.tsx:248
+#: src/pages/Futures/NewOrder.tsx
 msgid "Entry Price"
 msgstr ""
 
-#: src/hooks/useNESTSnackBar.tsx:121
+#: src/hooks/useNESTSnackBar.tsx
 msgid "Fail Request"
 msgstr ""
 
-#: src/hooks/useNESTSnackBar.tsx:121
+#: src/hooks/useNESTSnackBar.tsx
 #~ msgid "Falha na solicitação"
 #~ msgstr "Fail Request"
 
-#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx:185
-#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx:157
-#: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx:150
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
+#: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 msgid ""
 "Follow the right person, making money is as easy as breathing.\n"
 "You can follow the right person on NESTFi, here is my refer link"
 msgstr ""
 
-#: src/pages/Futures/Components/FuturesNotice.tsx:60
+#: src/pages/Futures/Components/FuturesNotice.tsx
 msgid "For the positions opened before April 6, 2023, please go to→"
 msgstr ""
 
-#: src/pages/Futures/Modal/LimitAndPriceModal.tsx:23
-#: src/pages/Futures/Modal/ProtocolModal.tsx:23
+#: src/pages/Futures/Modal/LimitAndPriceModal.tsx
+#: src/pages/Futures/Modal/ProtocolModal.tsx
 msgid "For users/smart contracts using NEST Protocol perpetual contracts, please understand its rules and the differences of similar products in the market when performing positions, settlement, liquidation and other related operations. After fully understanding the following possible risks and can bear Participate in the risk situation:"
 msgstr ""
 
-#: src/pages/Swap/Components/SwapInputItem.tsx:200
+#: src/pages/Swap/Components/SwapInputItem.tsx
 msgid "From"
 msgstr ""
 
-#: src/pages/Share/Head/NESTHead.tsx:27
+#: src/pages/Share/Head/NESTHead.tsx
 msgid "Futures"
 msgstr ""
 
-#: src/pages/Share/Head/NESTHead.tsx:28
+#: src/pages/Share/Head/NESTHead.tsx
 #~ msgid "Futuros"
 #~ msgstr "Futures"
 
-#: src/pages/Share/Head/NavMenuV2Base.tsx:321
+#: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "Github"
 msgstr "Github"
 
-#: src/pages/Share/Head/NESTHead.tsx:26
+#: src/pages/Dashboard/Dashboard.tsx
+msgid "History"
+msgstr ""
+
+#: src/pages/Share/Head/NESTHead.tsx
 msgid "Home"
 msgstr "Página inicial"
 
-#: src/pages/Futures/MoreInfo.tsx:102
+#: src/pages/Futures/MoreInfo.tsx
 msgid "How to Play"
 msgstr "Como jogar"
 
-#: src/pages/Futures/Modal/CloseOrderNoticeModal.tsx:33
-#: src/pages/Home/Modal/ApplyModal.tsx:171
+#: src/pages/Futures/Modal/CloseOrderNoticeModal.tsx
+#: src/pages/Home/Modal/ApplyModal.tsx
 msgid "I understand"
 msgstr "Entendi"
 
-#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx:353
-#: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx:294
+#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
+#: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 msgid "Image"
 msgstr "Imagem"
 
-#: src/pages/Home/Home.tsx:381
+#: src/pages/Home/Home.tsx
 msgid "Infinite Liquidity"
 msgstr "Liquidez infinita"
 
-#: src/hooks/useSwap.ts:335
+#: src/hooks/useSwap.ts
 msgid "Insufficient"
 msgstr "Insuficiente"
 
-#: src/hooks/useFuturesAdd.ts:186
-#: src/hooks/useFuturesNewOrder.ts:588
+#: src/hooks/useFuturesAdd.ts
+#: src/hooks/useFuturesNewOrder.ts
 msgid "Insufficient NEST balance"
 msgstr "Saldo insuficiente de NEST"
 
-#: src/pages/Share/Head/LanguageMenu.tsx:37
+#: src/pages/Share/Head/LanguageMenu.tsx
 msgid "Japanese"
 msgstr ""
 
-#: src/pages/Share/Head/LanguageMenu.tsx:38
+#: src/pages/Share/Head/LanguageMenu.tsx
 msgid "Korean"
 msgstr ""
 
-#: src/pages/Share/Head/NavMenuV2Base.tsx:218
-#: src/pages/Share/Modal/LanguageModal.tsx:40
-#: src/pages/Share/Modal/LanguageModal.tsx:52
+#: src/pages/Share/Head/NavMenuV2Base.tsx
+#: src/pages/Share/Modal/LanguageModal.tsx
+#: src/pages/Share/Modal/LanguageModal.tsx
 msgid "Language"
 msgstr "Idioma"
 
-#: src/components/NormalInput/NormalInput.tsx:111
+#: src/components/NormalInput/NormalInput.tsx
 msgid "Last"
 msgstr "Último"
 
-#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx:282
+#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 msgid "Last Price"
 msgstr "Preço Atual"
 
-#: src/pages/Futures/Components/LeverageSlider.tsx:55
+#: src/pages/Share/Modal/ConnectWalletModal.tsx
+msgid "Learn more"
+msgstr ""
+
+#: src/pages/Futures/Components/LeverageSlider.tsx
 msgid "Leverage"
 msgstr "Alavancagem"
 
-#: src/pages/Futures/NewOrder.tsx:87
+#: src/pages/Futures/NewOrder.tsx
 msgid "Limit"
 msgstr "Limite"
 
-#: src/hooks/useFuturesNewOrder.ts:554
-#: src/hooks/useFuturesNewOrder.ts:563
+#: src/hooks/useFuturesNewOrder.ts
+#: src/hooks/useFuturesNewOrder.ts
 msgid "Limit order fee = 15 NEST"
 msgstr "Taxa de ordem de limite = 15 NEST"
 
-#: src/pages/Futures/Modal/EditLimitModal.tsx:33
-#: src/pages/Futures/Modal/EditLimitModal.tsx:68
-#: src/pages/Futures/Modal/EditLimitModal.tsx:80
-#: src/pages/Futures/Modal/SharePositionModal.tsx:367
-#: src/pages/Futures/Modal/SharePositionModal.tsx:568
+#: src/pages/Futures/Modal/EditLimitModal.tsx
+#: src/pages/Futures/Modal/EditLimitModal.tsx
+#: src/pages/Futures/Modal/EditLimitModal.tsx
+#: src/pages/Futures/Modal/SharePositionModal.tsx
+#: src/pages/Futures/Modal/SharePositionModal.tsx
 msgid "Limit Price"
 msgstr "Preço Limite"
 
-#: src/pages/Dashboard/Dashboard.tsx:653
-#: src/pages/Dashboard/Dashboard.tsx:1140
-#: src/pages/Dashboard/Dashboard.tsx:1148
-#: src/pages/Futures/Components/POrderList.tsx:287
-#: src/pages/Futures/Modal/AddModal.tsx:72
-#: src/pages/Futures/Modal/EditPositionModal.tsx:139
-#: src/pages/Futures/NewOrder.tsx:261
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Futures/Components/POrderList.tsx
+#: src/pages/Futures/Components/POrderTable.tsx
+#: src/pages/Futures/Modal/AddModal.tsx
+#: src/pages/Futures/Modal/EditPositionModal.tsx
+#: src/pages/Futures/NewOrder.tsx
 msgid "Liq Price"
 msgstr "Preço de Liquidação"
 
-#: src/hooks/useFuturesPOrderClose.tsx:101
+#: src/hooks/useFuturesPOrderClose.tsx
 msgid "Liquidated"
 msgstr "Liquidado"
 
-#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx:460
-#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx:220
-#: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx:202
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
+#: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 msgid "Loading..."
 msgstr "Carregando..."
 
-#: src/components/LongOrShort/LongOrShort.tsx:87
-#: src/hooks/useFuturesAdd.ts:128
-#: src/hooks/useFuturesClose.ts:21
-#: src/hooks/useFuturesEditPosition.ts:115
-#: src/hooks/useFuturesNewOrder.ts:409
-#: src/hooks/useFuturesOrder.ts:79
-#: src/hooks/useFuturesPOrder.ts:140
-#: src/hooks/useFuturesPOrderClose.tsx:108
-#: src/pages/Dashboard/Components/ShareOrderPosition.tsx:98
-#: src/pages/Futures/Components/OrderListPosition.tsx:82
-#: src/pages/Futures/Components/OrderListPosition.tsx:86
-#: src/pages/Futures/Components/OrderTablePosition.tsx:77
-#: src/pages/Futures/Modal/SharePositionModal.tsx:352
+#: src/components/LongOrShort/LongOrShort.tsx
+#: src/hooks/useFuturesAdd.ts
+#: src/hooks/useFuturesClose.ts
+#: src/hooks/useFuturesEditPosition.ts
+#: src/hooks/useFuturesNewOrder.ts
+#: src/hooks/useFuturesOrder.ts
+#: src/hooks/useFuturesPOrder.ts
+#: src/hooks/useFuturesPOrderClose.tsx
+#: src/pages/Dashboard/Components/ShareOrderPosition.tsx
+#: src/pages/Futures/Components/OrderListPosition.tsx
+#: src/pages/Futures/Components/OrderListPosition.tsx
+#: src/pages/Futures/Components/OrderTablePosition.tsx
+#: src/pages/Futures/Modal/SharePositionModal.tsx
 msgid "Long"
 msgstr "Longo"
 
-#: src/pages/Dashboard/Dashboard.tsx:855
-#: src/pages/Dashboard/Dashboard.tsx:1009
-#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx:199
-#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx:259
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #~ msgid "Lucro e Perda Total"
 #~ msgstr "Total Profit & Loss"
 
-#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx:259
+#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #~ msgid "Lucro Total"
 #~ msgstr "Total Profit"
 
-#: src/pages/Futures/NewOrder.tsx:84
+#: src/pages/Futures/NewOrder.tsx
 msgid "Market"
 msgstr "Mercado"
 
-#: src/hooks/useFuturesNewOrder.ts:613
+#: src/hooks/useFuturesNewOrder.ts
 #~ msgid "MARKET PRICE"
 #~ msgstr "PREÇO DE MERCADO"
 
-#: src/pages/Swap/Components/SwapInputItem.tsx:211
+#: src/pages/Swap/Components/SwapInputItem.tsx
 msgid "Max"
 msgstr "Máx"
 
-#: src/components/NormalInput/NESTInput.tsx:91
-#: src/components/NormalInput/NESTInputSelect.tsx:247
+#: src/components/NormalInput/NESTInput.tsx
+#: src/components/NormalInput/NESTInputSelect.tsx
 msgid "MAX"
 msgstr "MÁX"
 
-#: src/hooks/useFuturesNewOrder.ts:586
+#: src/hooks/useFuturesNewOrder.ts
 msgid "Minimum 50 NEST"
 msgstr "Mínimo de 50 NEST"
 
-#: src/pages/Futures/MoreInfo.tsx:54
+#: src/pages/Share/Modal/ConnectWalletModal.tsx
+msgid "More"
+msgstr ""
+
+#: src/pages/Futures/MoreInfo.tsx
 msgid "More Info"
 msgstr "Mais informações"
 
-#: src/pages/Dashboard/Dashboard.tsx:812
-#: src/pages/Dashboard/Dashboard.tsx:951
-#: src/pages/Dashboard/Dashboard.tsx:965
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
 msgid "My Positions"
 msgstr "Minhas Posições"
 
-#: src/pages/Dashboard/Dashboard.tsx:775
+#: src/pages/Dashboard/Dashboard.tsx
 msgid "NEST Total Burned"
 msgstr "NEST Queimados no Total"
 
-#: src/pages/Futures/MoreInfo.tsx:77
+#: src/pages/Futures/MoreInfo.tsx
 msgid "NEST White Paper"
 msgstr "White Paper NEST"
 
-#: src/pages/Home/Home.tsx:372
+#: src/pages/Home/Home.tsx
 msgid "NEST\\'s economic model is deflationary, thus settlement with $NEST will bring higher potential revenue."
 msgstr "O modelo econômico da NEST é deflacionário, portanto, a liquidação com $NEST trará receita potencialmente maior."
 
-#: src/pages/Home/Home.tsx:287
-#: src/pages/Home/Home.tsx:324
+#: src/pages/Home/Home.tsx
+#: src/pages/Home/Home.tsx
 msgid "NESTFi offers"
 msgstr "Ofertas NESTFi"
 
-#: src/pages/Home/Home.tsx:234
+#: src/pages/Home/Home.tsx
 msgid "NESTFi, A Next-Generation"
 msgstr "NESTFi, Uma Próxima Geração"
 
-#: src/pages/Home/Home.tsx:239
+#: src/pages/Home/Home.tsx
 msgid "NESTFi's economic model is deflationary, the more users trade, the more $NEST will be burned"
 msgstr "O modelo econômico da NESTFi é deflacionário, quanto mais usuários negociarem, mais $NEST serão queimados"
 
-#: src/pages/Share/Head/NavMenuV2Base.tsx:345
+#: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "News"
 msgstr "Notícias"
 
-#: src/pages/Home/Home.tsx:376
+#: src/pages/Home/Home.tsx
 msgid "No Market Makers"
 msgstr "Não há formadores de mercado"
 
-#: src/pages/Futures/Components/TableTitle.tsx:106
-#: src/pages/Futures/OrderList.tsx:180
-#: src/pages/Futures/OrderList.tsx:209
+#: src/pages/Futures/Components/TableTitle.tsx
+#: src/pages/Futures/OrderList.tsx
+#: src/pages/Futures/OrderList.tsx
 msgid "No Order"
 msgstr "Nenhum pedido"
 
-#: src/pages/Dashboard/Dashboard.tsx:1106
-#: src/pages/Dashboard/Dashboard.tsx:1128
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
 msgid "No trades yet"
 msgstr "Nenhuma negociação ainda"
 
-#: src/pages/Home/Home.tsx:304
-#: src/pages/Home/Home.tsx:345
+#: src/pages/Share/Modal/MyWalletModal.tsx
+msgid "No Transactions yet"
+msgstr ""
+
+#: src/pages/Home/Home.tsx
+#: src/pages/Home/Home.tsx
 msgid "Number of KOLs Joined NESTFi"
 msgstr "Número de KOLs que se juntaram à NESTFi"
 
-#: src/pages/Futures/Modal/LimitAndPriceModal.tsx:72
+#: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 #~ msgid "Observe que \"ordem de limite\" ou \"ordem stop\" não é garantida para ser executada. Isso pode incluir, mas não se limita aos seguintes casos."
 #~ msgstr "Observe que \"ordem de limite\" ou \"ordem stop\" não é garantida para ser executada. Isso pode incluir, mas não se limita aos seguintes casos."
 
-#: src/hooks/useFuturesNewOrder.ts:409
+#: src/hooks/useFuturesNewOrder.ts
 msgid "Open"
 msgstr "Aberto"
 
-#: src/hooks/useTransactionReceipt.ts:41
+#: src/hooks/useTransactionReceipt.ts
 msgid "Open position"
 msgstr "Posição aberta"
 
-#: src/hooks/useTransactionReceipt.ts:43
+#: src/hooks/useTransactionReceipt.ts
 msgid "Open position request"
 msgstr "Pedido de posição aberta"
 
-#: src/pages/Dashboard/Dashboard.tsx:595
-#: src/pages/Dashboard/Dashboard.tsx:1139
-#: src/pages/Dashboard/Dashboard.tsx:1147
-#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx:273
-#: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx:234
-#: src/pages/Futures/Components/OrderList.tsx:64
-#: src/pages/Futures/Components/OrderTable.tsx:44
-#: src/pages/Futures/Components/POrderList.tsx:73
-#: src/pages/Futures/Components/POrderList.tsx:238
-#: src/pages/Futures/Modal/AddModal.tsx:68
-#: src/pages/Futures/Modal/EditPositionModal.tsx:135
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
+#: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
+#: src/pages/Futures/Components/OrderList.tsx
+#: src/pages/Futures/Components/OrderTable.tsx
+#: src/pages/Futures/Components/POrderList.tsx
+#: src/pages/Futures/Components/POrderList.tsx
+#: src/pages/Futures/Components/POrderTable.tsx
+#: src/pages/Futures/Modal/AddModal.tsx
+#: src/pages/Futures/Modal/EditPositionModal.tsx
 msgid "Open Price"
 msgstr ""
 
-#: src/pages/Dashboard/Dashboard.tsx:1142
-#: src/pages/Dashboard/Dashboard.tsx:1151
-#: src/pages/Futures/Components/OrderTable.tsx:46
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Futures/Components/OrderTable.tsx
 #~ msgid "Operar"
 #~ msgstr "Operar"
 
-#: src/pages/Dashboard/Dashboard.tsx:1142
-#: src/pages/Dashboard/Dashboard.tsx:1151
-#: src/pages/Futures/Components/OrderTable.tsx:46
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Futures/Components/OrderTable.tsx
+#: src/pages/Futures/Components/POrderTable.tsx
 msgid "Operate"
 msgstr ""
 
-#: src/pages/Futures/OrderList.tsx:239
+#: src/pages/Futures/OrderList.tsx
 #~ msgid "Ordem"
 #~ msgstr "Ordem"
 
-#: src/pages/Futures/OrderList.tsx:239
+#: src/pages/Futures/OrderList.tsx
 msgid "Order"
 msgstr ""
 
-#: src/pages/Futures/Modal/SharePositionModal.tsx:441
-#: src/pages/Futures/NewOrder.tsx:295
+#: src/pages/Futures/Modal/SharePositionModal.tsx
+#: src/pages/Futures/NewOrder.tsx
 #~ msgid "Pagamento Total"
 #~ msgstr "Total Pay"
 
-#: src/pages/Futures/Components/FuturesNotice.tsx:60
+#: src/pages/Futures/Components/FuturesNotice.tsx
 #~ msgid "Para as posições abertas antes de 6 de abril de 2023, por favor acesse→"
 #~ msgstr "For the positions opened before April 6, 2023, please go to→"
 
-#: src/pages/Futures/Modal/LimitAndPriceModal.tsx:23
-#: src/pages/Futures/Modal/ProtocolModal.tsx:23
+#: src/pages/Futures/Modal/LimitAndPriceModal.tsx
+#: src/pages/Futures/Modal/ProtocolModal.tsx
 #~ msgid "Para usuários/contratos inteligentes que utilizam contratos perpétuos do Protocolo NEST, por favor, entenda suas regras e as diferenças de produtos similares no mercado ao realizar posições, liquidação e outras operações relacionadas. Após entender completamente os seguintes possíveis riscos e ser capaz de suportar a situação de risco, participe:"
 #~ msgstr ""
 
-#: src/pages/Home/Modal/ApplyModal.tsx:99
+#: src/pages/Home/Modal/ApplyModal.tsx
 #~ msgid "Plataforma (Youtube, Telegram, Twitter, Instagram, Facebook, Tiktok, Outras)"
 #~ msgstr "Plataforma (Youtube, Telegram, Twitter, Instagram, Facebook, Tiktok, Outras)"
 
-#: src/pages/Home/Modal/ApplyModal.tsx:99
+#: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Platform (Youtube, Telegram, Twitter, Instagram, Facebook, Tiktok, Others)"
 msgstr ""
 
-#: src/pages/Futures/Modal/ApproveNoticeModal.tsx:64
+#: src/pages/Futures/Modal/ApproveNoticeModal.tsx
 msgid "Please click Approve for authorization and then you can open the position, this process will consume some GAS."
 msgstr ""
 
-#: src/pages/Futures/Modal/LimitAndPriceModal.tsx:72
+#: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 msgid "Please note that \"Limit order\" or \"Stop order\" is not guaranteed to be executed. This may include, but is not limited to, the following cases."
 msgstr ""
 
-#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx:206
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #~ msgid "PNL de Hoje"
 #~ msgstr "Today\\'s PNL"
 
-#: src/pages/Share/Head/LanguageMenu.tsx:36
+#: src/pages/Share/Head/LanguageMenu.tsx
 msgid "Portuguese"
 msgstr ""
 
-#: src/pages/Dashboard/Dashboard.tsx:1137
-#: src/pages/Dashboard/Dashboard.tsx:1145
-#: src/pages/Futures/Modal/AddModal.tsx:66
-#: src/pages/Futures/Modal/CloseModal.tsx:38
-#: src/pages/Futures/Modal/EditPositionModal.tsx:133
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Futures/Modal/AddModal.tsx
+#: src/pages/Futures/Modal/CloseModal.tsx
+#: src/pages/Futures/Modal/EditPositionModal.tsx
 #~ msgid "Posição"
 #~ msgstr "Posição"
 
-#: src/pages/Dashboard/Dashboard.tsx:1137
-#: src/pages/Dashboard/Dashboard.tsx:1145
-#: src/pages/Futures/Modal/AddModal.tsx:66
-#: src/pages/Futures/Modal/CloseModal.tsx:38
-#: src/pages/Futures/Modal/EditPositionModal.tsx:133
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Futures/Modal/AddModal.tsx
+#: src/pages/Futures/Modal/CloseModal.tsx
+#: src/pages/Futures/Modal/EditPositionModal.tsx
 msgid "Position"
 msgstr ""
 
-#: src/hooks/useFuturesNewOrder.ts:552
-#: src/hooks/useFuturesNewOrder.ts:554
-#: src/hooks/useFuturesNewOrder.ts:557
-#: src/hooks/useFuturesNewOrder.ts:562
-msgid "Position fee = Position*0.05%"
+#: src/hooks/useFuturesNewOrder.ts
+#: src/hooks/useFuturesNewOrder.ts
+#: src/hooks/useFuturesNewOrder.ts
+#: src/hooks/useFuturesNewOrder.ts
+msgid "Position fee = Position * 0.05%"
 msgstr ""
 
-#: src/hooks/useFuturesEditPosition.ts:155
+#: src/hooks/useFuturesNewOrder.ts
+#: src/hooks/useFuturesNewOrder.ts
+#: src/hooks/useFuturesNewOrder.ts
+#: src/hooks/useFuturesNewOrder.ts
+#~ msgid "Position fee = Position*0.05%"
+#~ msgstr ""
+
+#: src/hooks/useFuturesEditPosition.ts
 msgid "Position fee =Position*0.05%"
 msgstr "Taxa de posição = Posição * 0,05%"
 
-#: src/hooks/useFuturesClose.ts:97
+#: src/hooks/useFuturesClose.ts
 msgid "Position*0.05%"
 msgstr "Posição * 0,05%"
 
-#: src/pages/Futures/Modal/SharePositionModal.tsx:434
-#: src/pages/Futures/NewOrder.tsx:286
-#: src/pages/Futures/OrderList.tsx:233
+#: src/pages/Futures/Modal/SharePositionModal.tsx
+#: src/pages/Futures/NewOrder.tsx
+#: src/pages/Futures/OrderList.tsx
 msgid "Positions"
 msgstr "Posições"
 
-#: src/pages/Dashboard/Dashboard.tsx:595
-#: src/pages/Dashboard/Dashboard.tsx:1139
-#: src/pages/Dashboard/Dashboard.tsx:1147
-#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx:273
-#: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx:234
-#: src/pages/Futures/Components/OrderList.tsx:64
-#: src/pages/Futures/Components/OrderTable.tsx:44
-#: src/pages/Futures/Components/POrderList.tsx:73
-#: src/pages/Futures/Components/POrderList.tsx:238
-#: src/pages/Futures/Modal/AddModal.tsx:68
-#: src/pages/Futures/Modal/EditPositionModal.tsx:135
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
+#: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
+#: src/pages/Futures/Components/OrderList.tsx
+#: src/pages/Futures/Components/OrderTable.tsx
+#: src/pages/Futures/Components/POrderList.tsx
+#: src/pages/Futures/Components/POrderList.tsx
+#: src/pages/Futures/Modal/AddModal.tsx
+#: src/pages/Futures/Modal/EditPositionModal.tsx
 #~ msgid "Preço de Abertura"
 #~ msgstr "Preço de Abertura"
 
-#: src/pages/Futures/NewOrder.tsx:248
+#: src/pages/Futures/NewOrder.tsx
 #~ msgid "Preço de entrada"
 #~ msgstr "Entry Price"
 
-#: src/pages/Futures/NewOrder.tsx:383
-#: src/pages/Swap/Swap.tsx:260
+#: src/pages/Futures/NewOrder.tsx
+#: src/pages/Swap/Swap.tsx
 msgid "Price"
 msgstr "Preço"
 
-#: src/pages/Futures/Modal/LimitAndPriceModal.tsx:20
-#: src/pages/Futures/Modal/ProtocolModal.tsx:20
+#: src/pages/Share/Modal/MyWalletModal.tsx
+msgid "Recent transactions"
+msgstr ""
+
+#: src/pages/Futures/Modal/LimitAndPriceModal.tsx
+#: src/pages/Futures/Modal/ProtocolModal.tsx
 msgid "Risk Warning"
 msgstr "Aviso de Risco"
 
-#: src/pages/Share/Head/LanguageMenu.tsx:39
+#: src/pages/Share/Head/LanguageMenu.tsx
 msgid "Russian"
 msgstr ""
 
-#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx:306
-#: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx:260
+#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
+#: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 msgid "Scan and copy the trade"
 msgstr "Escanear e copiar a negociação"
 
-#: src/hooks/useTransactionReceipt.ts:47
+#: src/hooks/useTransactionReceipt.ts
 msgid "Sell position"
 msgstr "Vender posição"
 
-#: src/hooks/useTransactionReceipt.ts:49
+#: src/hooks/useTransactionReceipt.ts
 msgid "Sell position request"
 msgstr "Pedido de venda de posição"
 
-#: src/pages/Futures/Modal/CloseModal.tsx:45
-#: src/pages/Futures/Modal/EditPositionModal.tsx:144
-#: src/pages/Futures/Modal/SharePositionModal.tsx:420
-#: src/pages/Futures/NewOrder.tsx:271
+#: src/pages/Futures/Modal/CloseModal.tsx
+#: src/pages/Futures/Modal/EditPositionModal.tsx
+#: src/pages/Futures/Modal/SharePositionModal.tsx
+#: src/pages/Futures/NewOrder.tsx
 msgid "Service Fee"
 msgstr "Taxa de Serviço"
 
-#: src/components/LongOrShort/LongOrShort.tsx:100
-#: src/hooks/useFuturesAdd.ts:128
-#: src/hooks/useFuturesClose.ts:21
-#: src/hooks/useFuturesEditPosition.ts:115
-#: src/hooks/useFuturesNewOrder.ts:409
-#: src/hooks/useFuturesOrder.ts:79
-#: src/hooks/useFuturesPOrder.ts:140
-#: src/hooks/useFuturesPOrderClose.tsx:108
-#: src/pages/Dashboard/Components/ShareOrderPosition.tsx:98
-#: src/pages/Futures/Components/OrderTablePosition.tsx:81
-#: src/pages/Futures/Modal/SharePositionModal.tsx:356
+#: src/components/LongOrShort/LongOrShort.tsx
+#: src/hooks/useFuturesAdd.ts
+#: src/hooks/useFuturesClose.ts
+#: src/hooks/useFuturesEditPosition.ts
+#: src/hooks/useFuturesNewOrder.ts
+#: src/hooks/useFuturesOrder.ts
+#: src/hooks/useFuturesPOrder.ts
+#: src/hooks/useFuturesPOrderClose.tsx
+#: src/pages/Dashboard/Components/ShareOrderPosition.tsx
+#: src/pages/Futures/Components/OrderTablePosition.tsx
+#: src/pages/Futures/Modal/SharePositionModal.tsx
 msgid "Short"
 msgstr "Curto"
 
-#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx:185
-#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx:157
-#: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx:150
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
+#: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 #~ msgid ""
 #~ "Siga a pessoa certa, ganhar dinheiro é tão fácil quanto respirar.\n"
 #~ "Você pode seguir a pessoa certa na NESTFi, aqui está o meu link de referência"
 #~ msgstr ""
 
-#: src/pages/Futures/Components/OrderTable.tsx:144
-#: src/pages/Futures/Components/POrderTable.tsx:203
-#: src/pages/Futures/Components/POrderTable.tsx:362
+#: src/pages/Futures/Components/OrderTable.tsx
+#: src/pages/Futures/Components/POrderTable.tsx
+#: src/pages/Futures/Components/POrderTable.tsx
 msgid "SL"
 msgstr "SL"
 
-#: src/pages/Swap/Swap.tsx:243
+#: src/pages/Swap/Swap.tsx
 msgid "Slippage Tolerance"
 msgstr "Tolerância ao deslizamento"
 
-#: src/pages/Swap/Components/SwapSlippageModal.tsx:58
+#: src/pages/Swap/Components/SwapSlippageModal.tsx
 msgid "Slippage Tolerance Setting"
 msgstr "Configuração de Tolerância ao Deslizamento"
 
-#: src/pages/Home/Home.tsx:277
+#: src/pages/Home/Home.tsx
 msgid "Start Trading"
 msgstr "Começar a Negociar"
 
-#: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx:245
-#: src/pages/Futures/Components/OrderList.tsx:101
-#: src/pages/Futures/Components/POrderList.tsx:111
-#: src/pages/Futures/Components/POrderList.tsx:275
-#: src/pages/Futures/Modal/EditPositionModal.tsx:110
-#: src/pages/Futures/Modal/SharePositionModal.tsx:377
-#: src/pages/Futures/Modal/SharePositionModal.tsx:609
-#: src/pages/Futures/NewOrder.tsx:187
+#: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
+#: src/pages/Futures/Components/OrderList.tsx
+#: src/pages/Futures/Components/POrderList.tsx
+#: src/pages/Futures/Components/POrderList.tsx
+#: src/pages/Futures/Modal/EditPositionModal.tsx
+#: src/pages/Futures/Modal/SharePositionModal.tsx
+#: src/pages/Futures/Modal/SharePositionModal.tsx
+#: src/pages/Futures/NewOrder.tsx
 msgid "Stop Loss"
 msgstr "Stop Loss"
 
-#: src/pages/Dashboard/Dashboard.tsx:1141
-#: src/pages/Dashboard/Dashboard.tsx:1150
-#: src/pages/Futures/Components/OrderTable.tsx:45
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Futures/Components/OrderTable.tsx
+#: src/pages/Futures/Components/POrderTable.tsx
 msgid "Stop Order"
 msgstr "Ordem de Stop"
 
-#: src/hooks/useFuturesEditPosition.ts:156
-#: src/hooks/useFuturesNewOrder.ts:558
-#: src/hooks/useFuturesNewOrder.ts:564
+#: src/hooks/useFuturesEditPosition.ts
+#: src/hooks/useFuturesNewOrder.ts
+#: src/hooks/useFuturesNewOrder.ts
 msgid "Stop order fee(after execution) = 15 NEST"
 msgstr "Taxa da ordem de Stop (após execução) = 15 NEST"
 
-#: src/pages/Futures/NewOrder.tsx:150
+#: src/pages/Futures/NewOrder.tsx
 msgid "Stop-Limit"
 msgstr "Stop-Limit"
 
-#: src/pages/Home/Modal/ApplyModal.tsx:169
+#: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Submit successfully"
 msgstr "Submissão bem sucedida"
 
-#: src/components/NormalInput/NESTInput.tsx:110
-#: src/components/NormalInput/NESTInputSelect.tsx:269
-#: src/hooks/useSwap.ts:337
-#: src/hooks/useTransactionReceipt.ts:58
-#: src/pages/Share/Head/NESTHead.tsx:28
-#: src/pages/Swap/Swap.tsx:155
+#: src/components/NormalInput/NESTInput.tsx
+#: src/components/NormalInput/NESTInputSelect.tsx
+#: src/hooks/useSwap.ts
+#: src/hooks/useTransactionReceipt.ts
+#: src/pages/Share/Head/NESTHead.tsx
+#: src/pages/Swap/Swap.tsx
 msgid "Swap"
 msgstr "Trocar"
 
-#: src/hooks/useNESTSnackBar.tsx:84
+#: src/hooks/useNESTSnackBar.tsx
 msgid "Switch network successfully"
 msgstr "Rede trocada com sucesso"
 
-#: src/pages/Futures/Components/OrderTable.tsx:42
+#: src/pages/Futures/Components/OrderTable.tsx
+#: src/pages/Futures/Components/POrderTable.tsx
 msgid "Symbol"
 msgstr "Símbolo"
 
-#: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx:239
-#: src/pages/Futures/Components/OrderList.tsx:91
-#: src/pages/Futures/Components/POrderList.tsx:101
-#: src/pages/Futures/Components/POrderList.tsx:265
-#: src/pages/Futures/Modal/EditPositionModal.tsx:88
-#: src/pages/Futures/Modal/SharePositionModal.tsx:372
-#: src/pages/Futures/Modal/SharePositionModal.tsx:589
-#: src/pages/Futures/NewOrder.tsx:166
+#: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
+#: src/pages/Futures/Components/OrderList.tsx
+#: src/pages/Futures/Components/POrderList.tsx
+#: src/pages/Futures/Components/POrderList.tsx
+#: src/pages/Futures/Modal/EditPositionModal.tsx
+#: src/pages/Futures/Modal/SharePositionModal.tsx
+#: src/pages/Futures/Modal/SharePositionModal.tsx
+#: src/pages/Futures/NewOrder.tsx
 msgid "Take Profit"
 msgstr "Obter lucro"
 
-#: src/hooks/useFuturesNewOrder.ts:552
-#: src/hooks/useFuturesNewOrder.ts:554
-#: src/hooks/useFuturesNewOrder.ts:557
-#: src/hooks/useFuturesNewOrder.ts:562
+#: src/hooks/useFuturesNewOrder.ts
+#: src/hooks/useFuturesNewOrder.ts
+#: src/hooks/useFuturesNewOrder.ts
+#: src/hooks/useFuturesNewOrder.ts
 #~ msgid "Taxa de posição = Posição*0,05%"
 #~ msgstr "Taxa de posição = Posição*0,05%"
 
-#: src/pages/Home/Home.tsx:325
+#: src/pages/Home/Home.tsx
 #~ msgid ""
 #~ "taxas de\n"
 #~ "negociação"
 #~ msgstr ""
 
-#: src/pages/Home/Home.tsx:292
+#: src/pages/Home/Home.tsx
 #~ msgid "taxas de negociação como"
 #~ msgstr ""
 
-#: src/pages/Share/Head/NavMenuV2Base.tsx:370
+#: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "Test BNB"
 msgstr "Teste BNB"
 
-#: src/pages/Home/Home.tsx:382
+#: src/pages/Home/Home.tsx
 msgid "The smart contract guarantees the infinite liquidity through burning and issuing $NEST. This keeps positions safe from temporary wicks caused by illiquidity."
 msgstr "O contrato inteligente garante a liquidez infinita por meio da queima e emissão de $NEST. Isso mantém as posições seguras contra oscilações temporárias causadas pela falta de liquidez."
 
-#: src/pages/Home/Home.tsx:377
+#: src/pages/Home/Home.tsx
 msgid "The smart contract is the only seller of the system, which means there are no market marking costs, no liquidity debt, no slippage costs in the system."
 msgstr "O contrato inteligente é o único vendedor do sistema, o que significa que não há custos de marcação de mercado, dívida de liquidez, nem custos de escorregamento no sistema."
 
-#: src/components/NormalInput/NESTInputSelect.tsx:107
+#: src/components/NormalInput/NESTInputSelect.tsx
 msgid "The system will automatically convert USDT to NEST at market price for you to open your position, and you will also receive NEST at settlement."
 msgstr "O sistema converterá automaticamente USDT para NEST ao preço de mercado para você abrir sua posição, e você também receberá NEST na liquidação."
 
-#: src/hooks/useNESTSnackBar.tsx:122
+#: src/hooks/useNESTSnackBar.tsx
 msgid "The transaction failed and the amount has been fully refunded. You can re-trade"
 msgstr "A transação falhou e o valor foi completamente reembolsado. Você pode fazer uma nova negociação"
 
-#: src/pages/Dashboard/Dashboard.tsx:687
-#: src/pages/Dashboard/Dashboard.tsx:1144
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
 msgid "Time"
 msgstr "Tempo"
 
-#: src/pages/Futures/Components/FuturesNotice.tsx:72
+#: src/pages/Futures/Components/FuturesNotice.tsx
 msgid "to check and close."
 msgstr "para verificar e fechar."
 
-#: src/pages/Swap/Components/SwapInputItem.tsx:235
+#: src/pages/Swap/Components/SwapInputItem.tsx
 msgid "To(Estimated)"
 msgstr "Para (Estimado)"
 
-#: src/pages/Dashboard/Dashboard.tsx:775
+#: src/pages/Dashboard/Dashboard.tsx
 msgid "Today Burned"
 msgstr "Queimado Hoje"
 
-#: src/pages/Dashboard/Dashboard.tsx:793
+#: src/pages/Dashboard/Dashboard.tsx
 msgid "Today Volume"
 msgstr ""
 
-#: src/pages/Dashboard/Dashboard.tsx:899
-#: src/pages/Dashboard/Dashboard.tsx:1030
-#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx:298
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 msgid "Today's PNL"
 msgstr ""
 
-#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx:206
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 msgid "Today\\'s PNL"
 msgstr ""
 
-#: src/pages/Home/Home.tsx:253
-#: src/pages/Home/Home.tsx:264
+#: src/pages/Home/Home.tsx
+#: src/pages/Home/Home.tsx
 msgid "Total Burned"
 msgstr ""
 
-#: src/pages/Futures/Modal/SharePositionModal.tsx:441
-#: src/pages/Futures/NewOrder.tsx:295
+#: src/pages/Futures/Modal/SharePositionModal.tsx
+#: src/pages/Futures/NewOrder.tsx
 msgid "Total Pay"
 msgstr ""
 
-#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx:259
+#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 msgid "Total Profit"
 msgstr ""
 
-#: src/pages/Dashboard/Dashboard.tsx:855
-#: src/pages/Dashboard/Dashboard.tsx:1009
-#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx:199
-#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx:259
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 msgid "Total Profit & Loss"
 msgstr ""
 
-#: src/pages/Home/Home.tsx:253
-#: src/pages/Home/Home.tsx:264
+#: src/pages/Home/Home.tsx
+#: src/pages/Home/Home.tsx
 #~ msgid "Total Queimado"
 #~ msgstr "Total Burned"
 
-#: src/pages/Dashboard/Dashboard.tsx:793
+#: src/pages/Dashboard/Dashboard.tsx
 msgid "Total Transaction Volume"
 msgstr ""
 
-#: src/pages/Futures/Components/OrderTable.tsx:138
-#: src/pages/Futures/Components/POrderTable.tsx:197
-#: src/pages/Futures/Components/POrderTable.tsx:356
+#: src/pages/Futures/Components/OrderTable.tsx
+#: src/pages/Futures/Components/POrderTable.tsx
+#: src/pages/Futures/Components/POrderTable.tsx
 msgid "TP"
 msgstr "TP"
 
-#: src/hooks/useFuturesNewOrder.ts:627
-#: src/pages/Futures/Modal/SharePositionModal.tsx:623
+#: src/hooks/useFuturesNewOrder.ts
+#: src/pages/Futures/Modal/SharePositionModal.tsx
 msgid "TP and SL price you set will trigger immediately."
 msgstr "O preço de TP e SL que você definiu será acionado imediatamente."
 
-#: src/pages/Home/Home.tsx:367
+#: src/pages/Home/Home.tsx
 msgid "Trade directly from your wallet without the risk of misappropriating funds."
 msgstr "Negocie diretamente de sua carteira sem o risco de desviar fundos."
 
-#: src/pages/Swap/Swap.tsx:212
+#: src/pages/Swap/Swap.tsx
 msgid "Trade tokens in instant"
 msgstr "Negocie tokens instantaneamente"
 
-#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx:572
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 msgid "Trade with me on NESTFi"
 msgstr "Negocie comigo na NESTFi"
 
-#: src/pages/Home/Home.tsx:325
+#: src/pages/Home/Home.tsx
 msgid ""
 "trading\n"
 "fees"
 msgstr ""
 
-#: src/pages/Home/Home.tsx:292
+#: src/pages/Home/Home.tsx
 msgid "trading fees as"
 msgstr ""
 
-#: src/hooks/useFuturesPOrder.ts:61
+#: src/hooks/useFuturesPOrder.ts
 msgid "Trigger"
 msgstr ""
 
-#: src/hooks/useFuturesPOrderClose.tsx:102
+#: src/hooks/useFuturesPOrderClose.tsx
 msgid "Trigger executed"
 msgstr ""
 
-#: src/pages/Futures/Modal/EditPositionModal.tsx:184
+#: src/pages/Futures/Modal/EditPositionModal.tsx
 msgid "Trigger Position"
 msgstr "Posição de disparo"
 
-#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx:363
-#: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx:302
+#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
+#: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 msgid "Twitter"
 msgstr "Twitter"
 
-#: src/pages/Share/Head/NavMenuV2Base.tsx:273
+#: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "User Guide"
 msgstr "Guia do usuário"
 
-#: src/components/SnackBar/NormalSnackBar.tsx:122
-#: src/pages/Futures/Components/FuturesNotice.tsx:82
+#: src/components/SnackBar/NormalSnackBar.tsx
+#: src/pages/Futures/Components/FuturesNotice.tsx
 msgid "View"
 msgstr "Ver"
 
-#: src/pages/Dashboard/Dashboard.tsx:793
+#: src/pages/Dashboard/Dashboard.tsx
 #~ msgid "Volume de Hoje"
 #~ msgstr "Today Volume"
 
-#: src/pages/Dashboard/Dashboard.tsx:793
+#: src/pages/Dashboard/Dashboard.tsx
 #~ msgid "Volume Total de Transações"
 #~ msgstr "Total Transaction Volume"
 
-#: src/pages/Share/Head/NavMenuV2Base.tsx:297
+#: src/pages/Share/Modal/MyWalletModal.tsx
+msgid "Wallet"
+msgstr ""
+
+#: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "White Paper"
 msgstr "White paper"
 
-#: src/pages/Home/Home.tsx:357
+#: src/pages/Home/Home.tsx
 msgid "Why You Should Choose NESTFi"
 msgstr "Por que escolher a NESTFi"
 
-#: src/pages/Futures/Modal/CloseOrderNoticeModal.tsx:30
+#: src/pages/Futures/Modal/CloseOrderNoticeModal.tsx
 msgid "Will not be displayed after closing"
 msgstr "Não será exibido após o fechamento"
 
-#: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx:261
+#: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 msgid "with 1 click"
 msgstr "com 1 clique"
 
-#: src/pages/Home/Modal/ApplyModal.tsx:119
+#: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Youtube"
 msgstr "Youtube"
