@@ -3,7 +3,7 @@ import { styled } from "@mui/material/styles";
 import { FC, useMemo, useState } from "react";
 import { Language, SelectedYes } from "../../../components/icons";
 import Stack from "@mui/material/Stack";
-import { t } from "@lingui/macro";
+import { Trans, t } from "@lingui/macro";
 import SelectListMenu from "../../../components/SelectListMemu/SelectListMenu";
 import { i18n } from "@lingui/core";
 import { dynamicActivate } from "../../../locales/i18n";
@@ -32,11 +32,11 @@ interface LanguageListProps {
 }
 
 export const LanData = [
-    [t`English`, "en"],
-    [t`Portuguese`, "pt"],
-    [t`Japanese`, "ja"],
-    [t`Korean`, "ko"],
-    [t`Russian`, "ru"],
+    [t`English`, "en",<Trans>English</Trans>],
+    [t`Portuguese`, "pt",<Trans>Portuguese</Trans>],
+    [t`Japanese`, "ja",<Trans>Japanese</Trans>],
+    [t`Korean`, "ko",<Trans>Korean</Trans>],
+    [t`Russian`, "ru",<Trans>Russian</Trans>],
   ];
 
 export const LanguageList: FC<LanguageListProps> = ({ ...props }) => {
@@ -45,8 +45,8 @@ export const LanguageList: FC<LanguageListProps> = ({ ...props }) => {
     return index >= 0 ? index : 0;
   }, []);
   const selectAction = (index: number) => {
-    localStorage.setItem("Language", LanData[index][1]);
-    dynamicActivate(LanData[index][1]);
+    localStorage.setItem("Language", LanData[index][1] as string);
+    dynamicActivate(LanData[index][1] as string);
     window.location.reload()
   };
   const liArray = () => {
@@ -77,7 +77,7 @@ export const LanguageList: FC<LanguageListProps> = ({ ...props }) => {
             },
           })}
         >
-          <Box>{item[0]}</Box>
+          <Box>{item[2]}</Box>
           {nowValue === index ? (
             <Box
               sx={(theme) => ({
