@@ -13,15 +13,6 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#. js-lingui-explicit-id
-#: src/pages/Share/Head/NESTHead.tsx
-#~ msgid "Home"
-#~ msgstr ""
-
-#: src/pages/Share/Head/NESTHead.tsx
-#~ msgid "{0}"
-#~ msgstr ""
-
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useFuturesNewOrder.ts
 msgid "< LIMIT PRICE"
@@ -112,10 +103,6 @@ msgstr "7日間のPNL"
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 msgid "7 Days\\' PNL"
 msgstr "7日間のPNL"
-
-#: src/pages/Home/Home.tsx
-#~ msgid "取引手数料"
-#~ msgstr "取引手数料："
 
 #: src/pages/Share/Modal/ConnectWalletModal.tsx
 msgid "about connecting wallets"
@@ -326,11 +313,6 @@ msgstr "リミットオーダーを編集"
 msgid "Edit Position"
 msgstr "ポジションを編集"
 
-#: src/pages/Share/Head/LanguageMenu.tsx
-#: src/pages/Share/Head/LanguageMenu.tsx
-#~ msgid "English"
-#~ msgstr "イングリッシュ"
-
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Enter Channel link"
 msgstr "チャンネルリンクを入力"
@@ -414,16 +396,6 @@ msgstr "不足"
 msgid "Insufficient NEST balance"
 msgstr "NEST残高不足"
 
-#: src/pages/Share/Head/LanguageMenu.tsx
-#: src/pages/Share/Head/LanguageMenu.tsx
-#~ msgid "Japanese"
-#~ msgstr "やまと"
-
-#: src/pages/Share/Head/LanguageMenu.tsx
-#: src/pages/Share/Head/LanguageMenu.tsx
-#~ msgid "Korean"
-#~ msgstr "コリアン"
-
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 #: src/pages/Share/Modal/LanguageModal.tsx
 #: src/pages/Share/Modal/LanguageModal.tsx
@@ -503,10 +475,6 @@ msgstr "ロング"
 #: src/pages/Futures/NewOrder.tsx
 msgid "Market"
 msgstr "マーケット"
-
-#: src/hooks/useFuturesNewOrder.ts
-#~ msgid "MARKET PRICE"
-#~ msgstr "マーケットプライス"
 
 #: src/pages/Swap/Components/SwapInputItem.tsx
 msgid "Max"
@@ -638,11 +606,6 @@ msgstr "承認をクリックして承認し、ポジションを開いてくだ
 msgid "Please note that \"Limit order\" or \"Stop order\" is not guaranteed to be executed. This may include, but is not limited to, the following cases."
 msgstr "「指値注文」または「ストップ注文」は実行されることが保証されていません。これには以下のケースが含まれる場合があります。"
 
-#: src/pages/Share/Head/LanguageMenu.tsx
-#: src/pages/Share/Head/LanguageMenu.tsx
-#~ msgid "Portuguese"
-#~ msgstr "ポルトガル語"
-
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Futures/Modal/AddModal.tsx
@@ -657,13 +620,6 @@ msgstr "ポジション"
 #: src/hooks/useFuturesNewOrder.ts
 msgid "Position fee = Position * 0.05%"
 msgstr "ポジション料金 = ポジション * 0.05"
-
-#: src/hooks/useFuturesNewOrder.ts
-#: src/hooks/useFuturesNewOrder.ts
-#: src/hooks/useFuturesNewOrder.ts
-#: src/hooks/useFuturesNewOrder.ts
-#~ msgid "Position fee = Position*0.05%"
-#~ msgstr "ポジション手数料 = ポジション*0.05%"
 
 #: src/hooks/useFuturesEditPosition.ts
 msgid "Position fee =Position*0.05%"
@@ -693,11 +649,6 @@ msgstr "最近の取引"
 msgid "Risk Warning"
 msgstr "リスク警告"
 
-#: src/pages/Share/Head/LanguageMenu.tsx
-#: src/pages/Share/Head/LanguageMenu.tsx
-#~ msgid "Russian"
-#~ msgstr "ロシアン"
-
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 msgid "Scan and copy the trade"
@@ -720,7 +671,7 @@ msgstr "手数料"
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 msgid "Share"
-msgstr ""
+msgstr "シェア"
 
 #: src/components/LongOrShort/LongOrShort.tsx
 #: src/hooks/useFuturesAdd.ts

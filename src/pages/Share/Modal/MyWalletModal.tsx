@@ -10,6 +10,7 @@ import useNESTSnackBar from "../../../hooks/useNESTSnackBar";
 import useWalletIcon from "../../../hooks/uswWalletIcon";
 import copy from "copy-to-clipboard";
 import { Trans, t } from "@lingui/macro";
+import { getTransactionTypeString } from "../../../hooks/useTransactionReceipt";
 
 const BaseStack = styled(Stack)(({ theme }) => {
   return {
@@ -148,6 +149,7 @@ const MyWalletModal: FC<MyWalletModalProps> = ({ ...props }) => {
   const transactionLi = transactionsData.reverse().map((item, index) => {
     const Icon = item["success"] ? <Success /> : <Fail />;
     const iconClass = item["success"] ? "success" : "fail";
+    const title = item["title"];
     return (
       <li
         key={`WalletTransaction + ${index}`}
@@ -184,7 +186,7 @@ const MyWalletModal: FC<MyWalletModalProps> = ({ ...props }) => {
               >
                 {Icon}
               </Box>
-              <p>{item["title"]}</p>
+              <p>{getTransactionTypeString(title)}</p>
             </Stack>
             <NEXT />
           </Stack>

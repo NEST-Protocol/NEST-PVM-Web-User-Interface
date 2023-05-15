@@ -16,7 +16,7 @@ msgstr ""
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useFuturesNewOrder.ts
 msgid "< LIMIT PRICE"
-msgstr "< LIMIT PRICE"
+msgstr "< LIMIT PRIC"
 
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useFuturesNewOrder.ts

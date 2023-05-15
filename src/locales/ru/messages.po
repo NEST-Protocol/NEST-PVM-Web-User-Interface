@@ -13,15 +13,6 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#. js-lingui-explicit-id
-#: src/pages/Share/Head/NESTHead.tsx
-#~ msgid "Home"
-#~ msgstr ""
-
-#: src/pages/Share/Head/NESTHead.tsx
-#~ msgid "{0}"
-#~ msgstr ""
-
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useFuturesNewOrder.ts
 msgid "< LIMIT PRICE"
@@ -322,11 +313,6 @@ msgstr "Редактировать лимитный ордер"
 msgid "Edit Position"
 msgstr "Редактировать позицию"
 
-#: src/pages/Share/Head/LanguageMenu.tsx
-#: src/pages/Share/Head/LanguageMenu.tsx
-#~ msgid "English"
-#~ msgstr "Английский язык"
-
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Enter Channel link"
 msgstr "Введите ссылку на канал"
@@ -410,16 +396,6 @@ msgstr "Недостаточно"
 msgid "Insufficient NEST balance"
 msgstr "Недостаточный баланс NEST"
 
-#: src/pages/Share/Head/LanguageMenu.tsx
-#: src/pages/Share/Head/LanguageMenu.tsx
-#~ msgid "Japanese"
-#~ msgstr "Японский"
-
-#: src/pages/Share/Head/LanguageMenu.tsx
-#: src/pages/Share/Head/LanguageMenu.tsx
-#~ msgid "Korean"
-#~ msgstr "Корейский"
-
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 #: src/pages/Share/Modal/LanguageModal.tsx
 #: src/pages/Share/Modal/LanguageModal.tsx
@@ -499,10 +475,6 @@ msgstr "Длинный"
 #: src/pages/Futures/NewOrder.tsx
 msgid "Market"
 msgstr "Рынок"
-
-#: src/hooks/useFuturesNewOrder.ts
-#~ msgid "MARKET PRICE"
-#~ msgstr "РЫНОЧНАЯ ЦЕНА"
 
 #: src/pages/Swap/Components/SwapInputItem.tsx
 msgid "Max"
@@ -634,11 +606,6 @@ msgstr "Пожалуйста, нажмите \"Approve\" для авториза
 msgid "Please note that \"Limit order\" or \"Stop order\" is not guaranteed to be executed. This may include, but is not limited to, the following cases."
 msgstr "Обратите внимание, что «лимитный ордер» или «стоп-ордер» не гарантируют исполнение. Это может включать, но не ограничивается следующими случаями."
 
-#: src/pages/Share/Head/LanguageMenu.tsx
-#: src/pages/Share/Head/LanguageMenu.tsx
-#~ msgid "Portuguese"
-#~ msgstr "Португальский язык"
-
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Futures/Modal/AddModal.tsx
@@ -653,13 +620,6 @@ msgstr "Позиция"
 #: src/hooks/useFuturesNewOrder.ts
 msgid "Position fee = Position * 0.05%"
 msgstr "Плата за позицию = Позиция * 0,05%"
-
-#: src/hooks/useFuturesNewOrder.ts
-#: src/hooks/useFuturesNewOrder.ts
-#: src/hooks/useFuturesNewOrder.ts
-#: src/hooks/useFuturesNewOrder.ts
-#~ msgid "Position fee = Position*0.05%"
-#~ msgstr "Комиссия за позицию = Позиция*0,05%"
 
 #: src/hooks/useFuturesEditPosition.ts
 msgid "Position fee =Position*0.05%"
@@ -689,11 +649,6 @@ msgstr "Последние сделки"
 msgid "Risk Warning"
 msgstr "Предупреждение об уровне риска"
 
-#: src/pages/Share/Head/LanguageMenu.tsx
-#: src/pages/Share/Head/LanguageMenu.tsx
-#~ msgid "Russian"
-#~ msgstr "Русский"
-
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 msgid "Scan and copy the trade"
@@ -716,7 +671,7 @@ msgstr "Сервисная комиссия"
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 msgid "Share"
-msgstr ""
+msgstr "Поделиться"
 
 #: src/components/LongOrShort/LongOrShort.tsx
 #: src/hooks/useFuturesAdd.ts

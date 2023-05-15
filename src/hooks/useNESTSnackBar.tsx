@@ -7,6 +7,7 @@ import NormalSnackBar, {
 import useNEST from "./useNEST";
 import useWindowWidth from "./useWindowWidth";
 import { t } from "@lingui/macro";
+import { getTransactionTypeString } from "./useTransactionReceipt";
 
 function useTransactionSnackBar() {
   const { isBigMobile } = useWindowWidth();
@@ -38,7 +39,7 @@ function useTransactionSnackBar() {
       content: (key, message) => (
         <NormalSnackBar
           id={key}
-          title={title}
+          title={getTransactionTypeString(title)}
           info={info}
           type={type}
           hash={hash}
