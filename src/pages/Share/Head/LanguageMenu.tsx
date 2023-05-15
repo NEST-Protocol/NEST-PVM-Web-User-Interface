@@ -76,7 +76,7 @@ export const LanguageList: FC<LanguageListProps> = ({ ...props }) => {
             },
           })}
         >
-          <Box>{item[2]}</Box>
+          <Box>{item[0]}</Box>
           {nowValue === index ? (
             <Box
               sx={(theme) => ({
