@@ -3,7 +3,6 @@ import { styled } from "@mui/material/styles";
 import { FC, useMemo, useState } from "react";
 import { Language, SelectedYes } from "../../../components/icons";
 import Stack from "@mui/material/Stack";
-import { Trans, t } from "@lingui/macro";
 import SelectListMenu from "../../../components/SelectListMemu/SelectListMenu";
 import { i18n } from "@lingui/core";
 import { dynamicActivate } from "../../../locales/i18n";
@@ -32,11 +31,11 @@ interface LanguageListProps {
 }
 
 export const LanData = [
-    [t`English`, "en",<Trans>English</Trans>],
-    [t`Portuguese`, "pt",<Trans>Portuguese</Trans>],
-    [t`Japanese`, "ja",<Trans>Japanese</Trans>],
-    [t`Korean`, "ko",<Trans>Korean</Trans>],
-    [t`Russian`, "ru",<Trans>Russian</Trans>],
+    [`English`, "en"],
+    [`Português`, "pt"],
+    [`日本語`, "ja"],
+    [`한국어`, "ko"],
+    [`Русский`, "ru"],
   ];
 
 export const LanguageList: FC<LanguageListProps> = ({ ...props }) => {

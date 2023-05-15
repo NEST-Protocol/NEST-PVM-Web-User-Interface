@@ -229,6 +229,7 @@ msgstr "KOL 수수료"
 #: src/hooks/useFuturesClose.ts
 #: src/hooks/useFuturesEditLimit.ts
 #: src/hooks/useFuturesEditPosition.ts
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Futures/Modal/SharePositionModal.tsx
 #: src/pages/Home/Modal/ApplyModal.tsx
 #: src/pages/Swap/Components/SwapSlippageModal.tsx
@@ -255,6 +256,7 @@ msgstr "연락처 정보 (텔레그램 핸들)"
 msgid "Copy Invitation Link"
 msgstr "초대 링크 복사"
 
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 msgid "Copy Link"
@@ -262,6 +264,7 @@ msgstr "링크 복사"
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 #: src/pages/Share/Modal/MyWalletModal.tsx
@@ -320,8 +323,9 @@ msgid "Edit Position"
 msgstr "포지션 수정"
 
 #: src/pages/Share/Head/LanguageMenu.tsx
-msgid "English"
-msgstr "영어"
+#: src/pages/Share/Head/LanguageMenu.tsx
+#~ msgid "English"
+#~ msgstr "영어"
 
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Enter Channel link"
@@ -387,6 +391,7 @@ msgstr "플레이 방법"
 msgid "I understand"
 msgstr "이해했습니다"
 
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 msgid "Image"
@@ -406,12 +411,14 @@ msgid "Insufficient NEST balance"
 msgstr "NEST 잔액 부족"
 
 #: src/pages/Share/Head/LanguageMenu.tsx
-msgid "Japanese"
-msgstr "일본어"
+#: src/pages/Share/Head/LanguageMenu.tsx
+#~ msgid "Japanese"
+#~ msgstr "일본어"
 
 #: src/pages/Share/Head/LanguageMenu.tsx
-msgid "Korean"
-msgstr "한국어"
+#: src/pages/Share/Head/LanguageMenu.tsx
+#~ msgid "Korean"
+#~ msgstr "한국어"
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 #: src/pages/Share/Modal/LanguageModal.tsx
@@ -628,8 +635,9 @@ msgid "Please note that \"Limit order\" or \"Stop order\" is not guaranteed to b
 msgstr "\"리미트 오더\" 또는 \"스톱 오더\"는 실행이 보장되지 않을 수 있습니다. 다음과 같은 경우가 포함될 수 있습니다."
 
 #: src/pages/Share/Head/LanguageMenu.tsx
-msgid "Portuguese"
-msgstr "포르투갈어"
+#: src/pages/Share/Head/LanguageMenu.tsx
+#~ msgid "Portuguese"
+#~ msgstr "포르투갈어"
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
@@ -682,8 +690,9 @@ msgid "Risk Warning"
 msgstr "위험 경고"
 
 #: src/pages/Share/Head/LanguageMenu.tsx
-msgid "Russian"
-msgstr "러시아어"
+#: src/pages/Share/Head/LanguageMenu.tsx
+#~ msgid "Russian"
+#~ msgstr "러시아어"
 
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
@@ -704,6 +713,10 @@ msgstr "포지션 매도 요청"
 #: src/pages/Futures/NewOrder.tsx
 msgid "Service Fee"
 msgstr "서비스 수수료"
+
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+msgid "Share"
+msgstr ""
 
 #: src/components/LongOrShort/LongOrShort.tsx
 #: src/hooks/useFuturesAdd.ts
@@ -919,6 +932,7 @@ msgstr "트리거 실행됨"
 msgid "Trigger Position"
 msgstr "트리거 포지션"
 
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 msgid "Twitter"

@@ -12,7 +12,7 @@ import BaseDrawer from "../Components/DashboardBaseDrawer";
 import copy from "copy-to-clipboard";
 import useNESTSnackBar from "../../../hooks/useNESTSnackBar";
 import CircularProgress from "@mui/material/CircularProgress";
-import {t} from "@lingui/macro";
+import {Trans, t} from "@lingui/macro";
 
 const Title1 = styled('div')(({theme}) => ({
   fontWeight: "400",
@@ -241,7 +241,7 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
               lineHeight: '22px',
               color: theme.normal.text0,
               textAlign: 'center',
-            })}>Share</Box>
+            })}><Trans>Share</Trans></Box>
             <button onClick={() => {
               setDataUrl(null)
               props.onClose()
@@ -408,7 +408,7 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
           </Box>
         </Card1>
         <Stack style={{paddingTop: '24px'}}>
-          <MainButton title={'Confirm'}
+          <MainButton title={t`Confirm`}
                       disable={!select.totalTrade && !select.todayTrade && !select._7DaysTrade && !select._30DaysTrade}
                       style={{fontWeight: '700', fontSize: '14px'}} onClick={() => {
             setShowPage(true)
@@ -590,11 +590,11 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
                 lineHeight: '22px',
               }}
               disable={!address}
-              title={'Copy Link'} onClick={() => {
+              title={t`Copy Link`} onClick={() => {
               if (!address) return;
               const link = `https://finance.nestprotocol.org/?a=${address?.slice(-8).toLowerCase()}`;
               copy(link);
-              messageSnackBar("Copy Successfully");
+              messageSnackBar(t`Copy Successfully`);
             }}/>
             <MainButton
               style={{
@@ -603,7 +603,7 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
                 fontWeight: '700',
                 lineHeight: '22px',
               }}
-              title={"Image"}
+              title={t`Image`}
               isLoading={!dataUrl}
               onClick={download}
             />
@@ -612,7 +612,7 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
               fontSize: '16px',
               fontWeight: '700',
               lineHeight: '22px',
-            }} title={'Twitter'} onClick={tweet}/>
+            }} title={t`Twitter`} onClick={tweet}/>
           </Stack>
         </Stack>
       </Stack>

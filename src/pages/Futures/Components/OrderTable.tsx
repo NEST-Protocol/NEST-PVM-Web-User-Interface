@@ -164,6 +164,7 @@ const OrderTableRow: FC<OrderTableRowProps> = ({ ...props }) => {
               fontSize: 12,
               paddingLeft: `12px`,
               paddingRight: `12px`,
+              borderRadius: `8px`
             }}
           />
           <MainButton
@@ -178,6 +179,7 @@ const OrderTableRow: FC<OrderTableRowProps> = ({ ...props }) => {
               fontSize: 12,
               paddingLeft: `12px`,
               paddingRight: `12px`,
+              borderRadius: `8px`
             }}
           />
           <FuturesOrderShare

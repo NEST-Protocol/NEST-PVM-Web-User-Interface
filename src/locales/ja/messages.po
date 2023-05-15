@@ -233,6 +233,7 @@ msgstr "KOLへの手数料"
 #: src/hooks/useFuturesClose.ts
 #: src/hooks/useFuturesEditLimit.ts
 #: src/hooks/useFuturesEditPosition.ts
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Futures/Modal/SharePositionModal.tsx
 #: src/pages/Home/Modal/ApplyModal.tsx
 #: src/pages/Swap/Components/SwapSlippageModal.tsx
@@ -259,6 +260,7 @@ msgstr "連絡先情報（Telegram ハンドル）"
 msgid "Copy Invitation Link"
 msgstr "招待リンクをコピー"
 
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 msgid "Copy Link"
@@ -266,6 +268,7 @@ msgstr "リンクをコピー"
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 #: src/pages/Share/Modal/MyWalletModal.tsx
@@ -324,8 +327,9 @@ msgid "Edit Position"
 msgstr "ポジションを編集"
 
 #: src/pages/Share/Head/LanguageMenu.tsx
-msgid "English"
-msgstr "イングリッシュ"
+#: src/pages/Share/Head/LanguageMenu.tsx
+#~ msgid "English"
+#~ msgstr "イングリッシュ"
 
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Enter Channel link"
@@ -391,6 +395,7 @@ msgstr "遊び方"
 msgid "I understand"
 msgstr "理解しました"
 
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 msgid "Image"
@@ -410,12 +415,14 @@ msgid "Insufficient NEST balance"
 msgstr "NEST残高不足"
 
 #: src/pages/Share/Head/LanguageMenu.tsx
-msgid "Japanese"
-msgstr "やまと"
+#: src/pages/Share/Head/LanguageMenu.tsx
+#~ msgid "Japanese"
+#~ msgstr "やまと"
 
 #: src/pages/Share/Head/LanguageMenu.tsx
-msgid "Korean"
-msgstr "コリアン"
+#: src/pages/Share/Head/LanguageMenu.tsx
+#~ msgid "Korean"
+#~ msgstr "コリアン"
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 #: src/pages/Share/Modal/LanguageModal.tsx
@@ -632,8 +639,9 @@ msgid "Please note that \"Limit order\" or \"Stop order\" is not guaranteed to b
 msgstr "「指値注文」または「ストップ注文」は実行されることが保証されていません。これには以下のケースが含まれる場合があります。"
 
 #: src/pages/Share/Head/LanguageMenu.tsx
-msgid "Portuguese"
-msgstr "ポルトガル語"
+#: src/pages/Share/Head/LanguageMenu.tsx
+#~ msgid "Portuguese"
+#~ msgstr "ポルトガル語"
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
@@ -686,8 +694,9 @@ msgid "Risk Warning"
 msgstr "リスク警告"
 
 #: src/pages/Share/Head/LanguageMenu.tsx
-msgid "Russian"
-msgstr "ロシアン"
+#: src/pages/Share/Head/LanguageMenu.tsx
+#~ msgid "Russian"
+#~ msgstr "ロシアン"
 
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
@@ -708,6 +717,10 @@ msgstr "ポジションの売却リクエスト"
 #: src/pages/Futures/NewOrder.tsx
 msgid "Service Fee"
 msgstr "手数料"
+
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+msgid "Share"
+msgstr ""
 
 #: src/components/LongOrShort/LongOrShort.tsx
 #: src/hooks/useFuturesAdd.ts
@@ -923,6 +936,7 @@ msgstr "トリガー実行済み"
 msgid "Trigger Position"
 msgstr "トリガーポジション"
 
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 msgid "Twitter"
