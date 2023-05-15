@@ -13,51 +13,42 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#. js-lingui-explicit-id
-#: src/pages/Share/Head/NESTHead.tsx
-#~ msgid "Home"
-#~ msgstr "{0}"
-
-#: src/pages/Share/Head/NESTHead.tsx
-#~ msgid "{0}"
-#~ msgstr "{0}"
-
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useFuturesNewOrder.ts
 msgid "< LIMIT PRICE"
-msgstr "< PREÇO LIMITE"
+msgstr "< LIMIT PRICE"
 
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useFuturesNewOrder.ts
 msgid "< MARKET PRICE"
-msgstr "< PREÇO DE MERCADO"
+msgstr "< MARKET PRICE"
 
 #: src/hooks/useFuturesEditPosition.ts
 msgid "< OPEN PRICE"
-msgstr "< PREÇO DE ABERTURA"
+msgstr "< OPEN PRICE"
 
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useFuturesNewOrder.ts
 msgid "> LIMIT PRICE"
-msgstr "> PREÇO LIMITE"
+msgstr "> LIMIT PRICE"
 
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useFuturesNewOrder.ts
 msgid "> MARKET PRICE"
-msgstr "> PREÇO DE MERCADO"
+msgstr "> MARKET PRICE"
 
 #: src/hooks/useFuturesEditPosition.ts
 msgid "> OPEN PRICE"
-msgstr "> PREÇO DE ABERTURA"
+msgstr "> OPEN PRICE"
 
 #: src/components/NormalInput/NESTInput.tsx
 #: src/components/NormalInput/NESTInputSelect.tsx
 msgid "0 balance. Before trading, you can switch to \"Swap\" to exchange between USDT and NEST token."
-msgstr "Saldo 0. Antes de negociar, você pode trocar para \"Swap\" para trocar entre USDT e token NEST."
+msgstr "0 balance. Before trading, you can switch to \"Swap\" to exchange between USDT and NEST token."
 
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 msgid "1. The trigger price has been reached but there is not enough time to execute."
-msgstr "1. O preço de gatilho foi atingido, mas não há tempo suficiente para executar."
+msgstr "1. The trigger price has been reached but there is not enough time to execute."
 
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 #: src/pages/Futures/Modal/ProtocolModal.tsx
@@ -322,11 +313,6 @@ msgstr "Edit Limit Order"
 msgid "Edit Position"
 msgstr "Edit Position"
 
-#: src/pages/Share/Head/LanguageMenu.tsx
-#: src/pages/Share/Head/LanguageMenu.tsx
-#~ msgid "English"
-#~ msgstr "English"
-
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Enter Channel link"
 msgstr "Enter Channel link"
@@ -410,16 +396,6 @@ msgstr "Insufficient"
 msgid "Insufficient NEST balance"
 msgstr "Insufficient NEST balance"
 
-#: src/pages/Share/Head/LanguageMenu.tsx
-#: src/pages/Share/Head/LanguageMenu.tsx
-#~ msgid "Japanese"
-#~ msgstr "Japanese"
-
-#: src/pages/Share/Head/LanguageMenu.tsx
-#: src/pages/Share/Head/LanguageMenu.tsx
-#~ msgid "Korean"
-#~ msgstr "Korean"
-
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 #: src/pages/Share/Modal/LanguageModal.tsx
 #: src/pages/Share/Modal/LanguageModal.tsx
@@ -499,10 +475,6 @@ msgstr "Long"
 #: src/pages/Futures/NewOrder.tsx
 msgid "Market"
 msgstr "Market"
-
-#: src/hooks/useFuturesNewOrder.ts
-#~ msgid "MARKET PRICE"
-#~ msgstr "MARKET PRICE"
 
 #: src/pages/Swap/Components/SwapInputItem.tsx
 msgid "Max"
@@ -634,11 +606,6 @@ msgstr "Please click Approve for authorization and then you can open the positio
 msgid "Please note that \"Limit order\" or \"Stop order\" is not guaranteed to be executed. This may include, but is not limited to, the following cases."
 msgstr "Please note that \"Limit order\" or \"Stop order\" is not guaranteed to be executed. This may include, but is not limited to, the following cases."
 
-#: src/pages/Share/Head/LanguageMenu.tsx
-#: src/pages/Share/Head/LanguageMenu.tsx
-#~ msgid "Portuguese"
-#~ msgstr "Portuguese"
-
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Futures/Modal/AddModal.tsx
@@ -653,13 +620,6 @@ msgstr "Position"
 #: src/hooks/useFuturesNewOrder.ts
 msgid "Position fee = Position * 0.05%"
 msgstr "Position fee = Position * 0.05%"
-
-#: src/hooks/useFuturesNewOrder.ts
-#: src/hooks/useFuturesNewOrder.ts
-#: src/hooks/useFuturesNewOrder.ts
-#: src/hooks/useFuturesNewOrder.ts
-#~ msgid "Position fee = Position*0.05%"
-#~ msgstr "Position fee = Position*0.05%"
 
 #: src/hooks/useFuturesEditPosition.ts
 msgid "Position fee =Position*0.05%"
@@ -688,11 +648,6 @@ msgstr "Recent transactions"
 #: src/pages/Futures/Modal/ProtocolModal.tsx
 msgid "Risk Warning"
 msgstr "Risk Warning"
-
-#: src/pages/Share/Head/LanguageMenu.tsx
-#: src/pages/Share/Head/LanguageMenu.tsx
-#~ msgid "Russian"
-#~ msgstr "Russian"
 
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
