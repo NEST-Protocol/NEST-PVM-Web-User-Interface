@@ -24,12 +24,15 @@ function useFuturesClose(
     ).bigNumberToShowString(4, 2);
     return `${lever}X ${longOrShort} ${balance} NEST`;
   }, [data.balance, data.lever, data.orientation]);
+  const tokenPair = useMemo(() => {
+    return priceToken[parseInt(data.channelIndex.toString())]
+  }, [data.channelIndex])
 
   const closePrice = useMemo(() => {
     const nestBigNumber = BigNumber.from(data.balance.toString())
       .bigNumberToShowString(4)
       .stringToBigNumber(18);
-    const token = priceToken[parseInt(data.channelIndex.toString())];
+    const token = tokenPair;
     if (price && nestBigNumber) {
       const nowPrice = price[token];
       if (nestBigNumber.gte("100000".stringToBigNumber(18)!)) {
@@ -66,33 +69,26 @@ function useFuturesClose(
     } else {
       return undefined;
     }
-  }, [
-    data.balance,
-    data.basePrice,
-    data.channelIndex,
-    data.lever,
-    data.orientation,
-    price,
-  ]);
+  }, [data.balance, data.basePrice, data.lever, data.orientation, price, tokenPair]);
   const showClosePrice = useMemo(() => {
     if (!closePrice) {
       return String().placeHolder;
     }
-    return BigNumber.from(closePrice.toString()).bigNumberToShowString(18, 2);
-  }, [closePrice]);
+    return BigNumber.from(closePrice.toString()).bigNumberToShowString(18, tokenPair.getTokenPriceDecimals());
+  }, [closePrice, tokenPair]);
 
   const showFee = useMemo(() => {
     if (!price) {
       return String().placeHolder;
     }
-    const token = priceToken[parseInt(data.channelIndex.toString())];
+    const token = tokenPair;
     const fee = BigNumber.from("5")
       .mul(data.lever)
       .mul(data.balance)
       .mul(price[token])
       .div(BigNumber.from("10000").mul(data.basePrice));
     return fee.bigNumberToShowString(4, 2);
-  }, [data.balance, data.basePrice, data.channelIndex, data.lever, price]);
+  }, [data.balance, data.basePrice, data.lever, price, tokenPair]);
   const feeTip = useMemo(() => {
     return t`Position*0.05%`;
   }, []);

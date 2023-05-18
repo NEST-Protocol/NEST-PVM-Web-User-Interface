@@ -33,9 +33,9 @@ interface LanguageListProps {
 export const LanData = [
     [`English`, "en"],
     [`Português`, "pt"],
-    [`日本語`, "ja"],
-    [`한국어`, "ko"],
-    [`Русский`, "ru"],
+    // [`日本語`, "ja"],
+    // [`한국어`, "ko"],
+    // [`Русский`, "ru"],
   ];
 
 export const LanguageList: FC<LanguageListProps> = ({ ...props }) => {

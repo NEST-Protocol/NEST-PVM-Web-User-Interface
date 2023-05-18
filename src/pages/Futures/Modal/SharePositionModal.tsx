@@ -133,15 +133,34 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
     setLongOrShort(orientation_info);
     setTabsValue(1);
     setLever(lever_info ? parseInt(lever_info) : 1);
+    const tokenPriceDecimals = tokenName_info
+      ? tokenName_info.getTokenPriceDecimals()
+      : 2;
     setLimitAmount(
-      basePrice_info ? (parseFloat(basePrice_info) / 100).toFixed(2) : ""
+      basePrice_info
+        ? (
+            parseFloat(basePrice_info) / Math.pow(10, tokenPriceDecimals)
+          ).toFixed(tokenPriceDecimals)
+        : ""
     );
     if (
       (tp_info && parseInt(tp_info) !== 0) ||
       (sl_info && parseInt(sl_info) !== 0)
     ) {
-      setTp(tp_info ? (parseFloat(tp_info) / 100).toFixed(2) : "");
-      setSl(sl_info ? (parseFloat(sl_info) / 100).toFixed(2) : "");
+      setTp(
+        tp_info
+          ? (parseFloat(tp_info) / Math.pow(10, tokenPriceDecimals)).toFixed(
+              tokenPriceDecimals
+            )
+          : ""
+      );
+      setSl(
+        sl_info
+          ? (parseFloat(sl_info) / Math.pow(10, tokenPriceDecimals)).toFixed(
+              tokenPriceDecimals
+            )
+          : ""
+      );
     }
     if (tp === "" && sl === "") {
       setIsStop(false);
@@ -161,6 +180,7 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
     setTp,
     sl,
     sl_info,
+    tokenName_info,
     tp,
     tp_info,
   ]);

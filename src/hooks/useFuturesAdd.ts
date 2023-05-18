@@ -32,6 +32,9 @@ function useFuturesAdd(
       return token.address[chainsData.chainId];
     }
   }, [chainsData.chainId]);
+  const tokenPair = useMemo(() => {
+    return priceToken[parseInt(data.channelIndex.toString())]
+  }, [data.channelIndex])
   /**
    * futures contract
    */
@@ -135,9 +138,9 @@ function useFuturesAdd(
   const showOpenPrice = useMemo(() => {
     return `${BigNumber.from(data.basePrice.toString()).bigNumberToShowString(
       18,
-      2
+      tokenPair.getTokenPriceDecimals()
     )} USDT`;
-  }, [data.basePrice]);
+  }, [data.basePrice, tokenPair]);
 
   const showLiqPrice = useMemo(() => {
     const result = lipPrice(
@@ -147,21 +150,13 @@ function useFuturesAdd(
         : nestAmount.stringToBigNumber(4)!,
       data.lever,
       price
-        ? price[priceToken[parseInt(data.channelIndex.toString())]]
+        ? price[tokenPair]
         : data.basePrice,
       data.basePrice,
       data.orientation
     );
-    return result.bigNumberToShowString(18, 2);
-  }, [
-    data.balance,
-    data.basePrice,
-    data.channelIndex,
-    data.lever,
-    data.orientation,
-    nestAmount,
-    price,
-  ]);
+    return result.bigNumberToShowString(18, tokenPair.getTokenPriceDecimals());
+  }, [data.balance, data.basePrice, data.lever, data.orientation, nestAmount, price, tokenPair]);
   /**
    * main button
    */

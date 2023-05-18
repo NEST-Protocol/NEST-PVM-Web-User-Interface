@@ -15,6 +15,7 @@ import {TVDataProvider} from "../../domain/tradingview/TVDataProvider";
 import {formatAmount, numberWithCommas} from "../../lib/numbers";
 import {styled} from "@mui/material";
 import {get24HrFromBinance} from "../../domain/prices";
+import { Trans } from "@lingui/macro";
 
 interface ExchangeTVChartProps {
   tokenPair: string;
@@ -104,7 +105,7 @@ const ExchangeTVChart: FC<ExchangeTVChartProps> = ({...props}) => {
 
   const average = useMemo(() => {
     if (props.tokenPair && props.basePrice) {
-      return parseFloat(formatAmount(props.basePrice?.[props.tokenPair], 18, 2))
+      return parseFloat(formatAmount(props.basePrice?.[props.tokenPair], 18, props.tokenPair.getTokenPriceDecimals()))
     }
     return '-'
   }, [props.tokenPair, props.basePrice])
@@ -218,7 +219,7 @@ const ExchangeTVChart: FC<ExchangeTVChartProps> = ({...props}) => {
             </Box>
           </Stack>
           <Box>
-            <ChartDataTitle>24h Change</ChartDataTitle>
+            <ChartDataTitle><Trans>24h Change</Trans></ChartDataTitle>
             <ChartDataValue sx={(theme) => ({
               color: Number(hr.priceChangePercent) >= 0 ? theme.normal.success : theme.normal.danger,
             })}>
@@ -229,15 +230,15 @@ const ExchangeTVChart: FC<ExchangeTVChartProps> = ({...props}) => {
             !isBigMobile && (
               <>
                 <Box>
-                  <ChartDataTitle>24h High</ChartDataTitle>
+                  <ChartDataTitle><Trans>24h High</Trans></ChartDataTitle>
                   <ChartDataValue>
-                    {hr.highPrice ? numberWithCommas(Number(hr.highPrice).toFixed(2)) : "-"}
+                    {hr.highPrice ? numberWithCommas(Number(hr.highPrice).toFixed(props.tokenPair.getTokenPriceDecimals())) : "-"}
                   </ChartDataValue>
                 </Box>
                 <Box>
-                  <ChartDataTitle>24h Low</ChartDataTitle>
+                  <ChartDataTitle><Trans>24h Low</Trans></ChartDataTitle>
                   <ChartDataValue>
-                    {hr.lowPrice ? numberWithCommas(Number(hr.lowPrice).toFixed(2)) : "-"}
+                    {hr.lowPrice ? numberWithCommas(Number(hr.lowPrice).toFixed(props.tokenPair.getTokenPriceDecimals())) : "-"}
                   </ChartDataValue>
                 </Box>
               </>

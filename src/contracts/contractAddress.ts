@@ -17,6 +17,7 @@ export type TokenType = {
   icon: typeof ETHLogo;
   decimals: DecimalsType;
   address: AddressType;
+  priceDecimals: number;
 };
 
 export interface AddressType {
@@ -116,59 +117,69 @@ export const TokenList: Array<TokenType> = [
     icon: BTCLogo,
     decimals: All18,
     address: BTC,
+    priceDecimals: 2,
   },
   {
     symbol: "ETH",
     icon: ETHTokenLogo,
     decimals: All18,
     address: ETH,
+    priceDecimals: 2,
   },
   {
     symbol: "BNB",
     icon: BNBTokenLogo,
     decimals: All18,
     address: BNB,
+    priceDecimals: 2,
   },
   {
     symbol: "NEST",
     icon: NESTLogo,
     decimals: All18,
     address: NESTToken,
+    priceDecimals: 2,
   },
   {
     symbol: "USDT",
     icon: USDTLogo,
     decimals: USDTDecimals,
     address: USDTToken,
+    priceDecimals: 2,
   },
   {
     symbol: "NHBTC",
     icon: NHBTCTokenLogo,
     decimals: All18,
     address: NHBTCToken,
+    priceDecimals: 2,
   },
   {
     symbol: "MATIC",
     icon: MATICTokenLogo,
     decimals: All18,
     address: NESTToken,
+    priceDecimals: 4,
   },
   {
     symbol: "ADA",
     icon: ADATokenLogo,
     decimals: All18,
     address: NESTToken,
+    priceDecimals: 4,
   },
   {
     symbol: "DOGE",
     icon: DOGETokenLogo,
     decimals: All18,
     address: NESTToken,
+    priceDecimals: 5,
   },
   {
     symbol: "XRP",
     icon: XRPTokenLogo,
     decimals: All18,
     address: NESTToken,
+    priceDecimals: 4,
   },
 ];

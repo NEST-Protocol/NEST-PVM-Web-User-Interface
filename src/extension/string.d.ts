@@ -10,6 +10,7 @@ declare global {
     hashToChainScan(chainId: number | undefined): string;
     chainScan(chainId: number | undefined): string;
     getToken(): TokenType | undefined;
+    getTokenPriceDecimals(): number;
     getTokenAddress(chainId: number | undefined): string | undefined;
     formatInputNum(): string;
     formatInputNum4(): string;
@@ -62,6 +63,15 @@ String.prototype.getToken = function () {
   return dataArray.length > 0 ? dataArray[0] : undefined;
 };
 
+String.prototype.getTokenPriceDecimals = function () {
+  const dataArray = TokenList.filter((item) => item.symbol === this);
+  if (dataArray.length > 0) {
+    const token = dataArray[0];
+    return token.priceDecimals;
+  }
+  return 2;
+};
+
 String.prototype.getTokenAddress = function (chainId: number | undefined) {
   const dataArray = TokenList.filter((item) => item.symbol === this);
   if (dataArray.length === 0 || !chainId) {
@@ -89,10 +99,7 @@ String.prototype.formatInputNum4 = function () {
     .replace(".", "$#$")
     .replace(/\./g, "")
     .replace("$#$", ".")
-    .replace(
-      /^(\-)*(\d+)\.(\d\d\d\d).*$/,
-      "$1$2.$3"
-    )
+    .replace(/^(\-)*(\d+)\.(\d\d\d\d).*$/, "$1$2.$3")
     .replace(/^\./g, "");
 };
 

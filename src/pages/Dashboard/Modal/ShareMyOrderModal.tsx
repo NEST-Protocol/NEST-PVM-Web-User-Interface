@@ -141,11 +141,11 @@ const ShareMyOrderModal: FC<ShareMyOrderModalProps> = ({...props}) => {
   const shareLink = useMemo(() => {
     const order = props.value;
     const tokenName = order.tokenPair.split("/")[0];
-    const basePrice = parseUnits(order.openPrice.toString(), 2).toString();
+    const basePrice = parseUnits(order.openPrice.toString(), tokenName.getTokenPriceDecimals()).toString();
     const lever = order.leverage.split("X")[0];
     const orientation = order.orientation === "Long" ? "1" : "0";
-    const sp = order.sp ? parseUnits(order.sp!.toString(), 2).toString() : "0";
-    const sl = order.sl ? parseUnits(order.sl!.toString(), 2).toString() : "0";
+    const sp = order.sp ? parseUnits(order.sp!.toString(), tokenName.getTokenPriceDecimals()).toString() : "0";
+    const sl = order.sl ? parseUnits(order.sl!.toString(), tokenName.getTokenPriceDecimals()).toString() : "0";
     const orderString = `&pt=${tokenName}&po=${orientation}&pl=${lever}&pp=${basePrice}&pst=${sp}&psl=${sl}`;
     return `https://finance.nestprotocol.org/?a=${address
       ?.slice(-8)

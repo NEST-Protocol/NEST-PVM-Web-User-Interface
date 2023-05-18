@@ -496,9 +496,14 @@ function useFuturesNewOrder(
   ]);
   const lastPriceButton = useCallback(() => {
     if (openPriceBase) {
-      setLimitAmount(openPriceBase.bigNumberToShowString(18, 2));
+      setLimitAmount(
+        openPriceBase.bigNumberToShowString(
+          18,
+          tokenPair.getTokenPriceDecimals()
+        )
+      );
     }
-  }, [openPriceBase]);
+  }, [openPriceBase, tokenPair]);
 
   /**
    * show
@@ -519,11 +524,14 @@ function useFuturesNewOrder(
   }, [account.address, tokenBalance]);
   const showOpenPrice = useMemo(() => {
     if (openPriceBase) {
-      return openPriceBase.bigNumberToShowString(18, 2);
+      return openPriceBase.bigNumberToShowString(
+        18,
+        tokenPair.getTokenPriceDecimals()
+      );
     } else {
       return String().placeHolder;
     }
-  }, [openPriceBase]);
+  }, [openPriceBase, tokenPair]);
   const showFee = useMemo(() => {
     if (tabsValue === 0 && isStop) {
       return fee
@@ -545,8 +553,11 @@ function useFuturesNewOrder(
       nowPrice,
       longOrShort
     );
-    return result.bigNumberToShowString(18, 2) ?? String().placeHolder;
-  }, [lever, longOrShort, nestAmount, openPrice]);
+    return (
+      result.bigNumberToShowString(18, tokenPair.getTokenPriceDecimals()) ??
+      String().placeHolder
+    );
+  }, [lever, longOrShort, nestAmount, openPrice, tokenPair]);
   const showFeeHoverText = useMemo(() => {
     if (tabsValue === 0 && !isStop) {
       return [t`Position fee = Position * 0.05%`];
@@ -651,12 +662,17 @@ function useFuturesNewOrder(
   const [hadSetLimit, setHadSetLimit] = useState(false);
   useEffect(() => {
     if (limitAmount === "" && !hadSetLimit && openPriceBase) {
-      setLimitAmount(openPriceBase.bigNumberToShowString(18, 2));
+      setLimitAmount(
+        openPriceBase.bigNumberToShowString(
+          18,
+          tokenPair.getTokenPriceDecimals()
+        )
+      );
       setHadSetLimit(true);
     } else if (limitAmount !== "" && !hadSetLimit) {
       setHadSetLimit(true);
     }
-  }, [hadSetLimit, limitAmount, openPriceBase]);
+  }, [hadSetLimit, limitAmount, openPriceBase, tokenPair]);
   useEffect(() => {
     setLimitAmount("");
     setTp("");
@@ -667,10 +683,15 @@ function useFuturesNewOrder(
     (value: number) => {
       setTabsValue(value);
       if (openPriceBase) {
-        setLimitAmount(openPriceBase.bigNumberToShowString(18, 2));
+        setLimitAmount(
+          openPriceBase.bigNumberToShowString(
+            18,
+            tokenPair.getTokenPriceDecimals()
+          )
+        );
       }
     },
-    [openPriceBase]
+    [openPriceBase, tokenPair]
   );
 
   return {

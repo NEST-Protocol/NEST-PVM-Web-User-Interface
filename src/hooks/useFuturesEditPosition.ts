@@ -17,6 +17,9 @@ function useFuturesEditPosition(
 ) {
   const { isPendingOrder } = usePendingTransactions();
   const [send, setSend] = useState(false);
+  const tokenPair = useMemo(() => {
+    return priceToken[parseInt(data.channelIndex.toString())];
+  }, [data.channelIndex]);
   /**
    * futures modal
    */
@@ -29,18 +32,24 @@ function useFuturesEditPosition(
 
   const defaultTP = useMemo(() => {
     if (!BigNumber.from("0").eq(data.stopProfitPrice)) {
-      const p = data.stopProfitPrice.bigNumberToShowString(18, 2);
+      const p = data.stopProfitPrice.bigNumberToShowString(
+        18,
+        tokenPair.getTokenPriceDecimals()
+      );
       return p ?? "";
     }
     return "";
-  }, [data.stopProfitPrice]);
+  }, [data.stopProfitPrice, tokenPair]);
   const defaultSL = useMemo(() => {
     if (!BigNumber.from("0").eq(data.stopLossPrice)) {
-      const p = data.stopLossPrice.bigNumberToShowString(18, 2);
+      const p = data.stopLossPrice.bigNumberToShowString(
+        18,
+        tokenPair.getTokenPriceDecimals()
+      );
       return p ?? "";
     }
     return "";
-  }, [data.stopLossPrice]);
+  }, [data.stopLossPrice, tokenPair]);
   const [stopProfitPriceInput, setStopProfitPriceInput] =
     useState<string>(defaultTP);
   const [stopLossPriceInput, setStopLossPriceInput] =
@@ -66,9 +75,9 @@ function useFuturesEditPosition(
   const baseOpenPrice = useMemo(() => {
     return BigNumber.from(data.basePrice.toString()).bigNumberToShowString(
       18,
-      2
+      tokenPair.getTokenPriceDecimals()
     );
-  }, [data.basePrice]);
+  }, [data.basePrice, tokenPair]);
   const tpError = useMemo(() => {
     if (
       stopProfitPriceInput !== "" &&
@@ -126,21 +135,19 @@ function useFuturesEditPosition(
       data.balance,
       data.appends,
       data.lever,
-      price
-        ? price[priceToken[parseInt(data.channelIndex.toString())]]
-        : data.basePrice,
+      price ? price[tokenPair] : data.basePrice,
       data.basePrice,
       data.orientation
     );
-    return result.bigNumberToShowString(18, 2);
+    return result.bigNumberToShowString(18, tokenPair.getTokenPriceDecimals());
   }, [
-    data.balance,
     data.appends,
-    data.lever,
-    data.channelIndex,
+    data.balance,
     data.basePrice,
+    data.lever,
     data.orientation,
     price,
+    tokenPair,
   ]);
   const showTriggerFee = useMemo(() => {
     const fee = BigNumber.from("5")
