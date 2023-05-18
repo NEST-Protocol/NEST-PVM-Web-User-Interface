@@ -106,7 +106,7 @@ const LeverageSlider: FC<LeverageSliderProps> = ({ ...props }) => {
             sx={(theme) => ({
               color: theme.normal.primary,
               "& .MuiSlider-rail": {
-                background: theme.normal.bg1,
+                background: theme.normal.bg3,
                 opacity: 1,
               },
               "& .MuiSlider-track": {
@@ -117,7 +117,7 @@ const LeverageSlider: FC<LeverageSliderProps> = ({ ...props }) => {
                 width: "10px",
                 height: "10px",
                 background: theme.normal.bg0,
-                border: `1px solid ${theme.normal.bg1}`,
+                border: `1px solid ${theme.normal.bg3}`,
                 boxSizing: "border-box",
                 borderRadius: "5px",
                 marginLeft: "-4px",

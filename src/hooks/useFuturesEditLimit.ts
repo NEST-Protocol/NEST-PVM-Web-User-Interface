@@ -7,15 +7,22 @@ import {
 } from "./useTransactionReceipt";
 import { BigNumber } from "ethers";
 import { t } from "@lingui/macro";
+import { priceToken } from "../pages/Futures/Futures";
 
 function useFuturesEditLimit(data: FuturesOrderV2, onClose: () => void) {
   const { isPendingOrder } = usePendingTransactions();
   const [send, setSend] = useState(false);
+  const tokenPair = useMemo(() => {
+    return priceToken[parseInt(data.channelIndex.toString())];
+  }, [data.channelIndex]);
   const defaultLimitPrice = useMemo(() => {
     return !BigNumber.from("0").eq(data.basePrice)
-      ? data.basePrice.bigNumberToShowString(18)
+      ? data.basePrice.bigNumberToShowString(
+          18,
+          tokenPair.getTokenPriceDecimals()
+        )
       : "";
-  }, [data.basePrice]);
+  }, [data.basePrice, tokenPair]);
   const [limitPrice, setLimitPrice] = useState(defaultLimitPrice);
   /**
    * action
