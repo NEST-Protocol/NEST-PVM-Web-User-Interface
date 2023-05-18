@@ -24,6 +24,7 @@ msgid "< MARKET PRICE"
 msgstr "< マーケット価格"
 
 #: src/hooks/useFuturesEditPosition.ts
+#: src/hooks/useFuturesEditPosition.ts
 msgid "< OPEN PRICE"
 msgstr "< オープン価格"
 
@@ -37,6 +38,7 @@ msgstr "> リミット価格"
 msgid "> MARKET PRICE"
 msgstr "> マーケット価格"
 
+#: src/hooks/useFuturesEditPosition.ts
 #: src/hooks/useFuturesEditPosition.ts
 msgid "> OPEN PRICE"
 msgstr "> オープン価格"

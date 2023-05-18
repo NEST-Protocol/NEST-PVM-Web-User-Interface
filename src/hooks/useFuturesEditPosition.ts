@@ -117,8 +117,10 @@ function useFuturesEditPosition(
    * show
    */
   const placeHolder = useMemo(() => {
-    return [t`> OPEN PRICE`, t`< OPEN PRICE`];
-  }, []);
+    return data.orientation
+      ? [t`> OPEN PRICE`, t`< OPEN PRICE`]
+      : [t`< OPEN PRICE`, t`> OPEN PRICE`];
+  }, [data.orientation]);
   const showPosition = useMemo(() => {
     const lever = data.lever.toString();
     const longOrShort = data.orientation ? t`Long` : t`Short`;

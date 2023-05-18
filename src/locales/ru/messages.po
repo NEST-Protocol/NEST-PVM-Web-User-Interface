@@ -24,6 +24,7 @@ msgid "< MARKET PRICE"
 msgstr "< РЫНОЧНАЯ ЦЕНА"
 
 #: src/hooks/useFuturesEditPosition.ts
+#: src/hooks/useFuturesEditPosition.ts
 msgid "< OPEN PRICE"
 msgstr "< ЦЕНА ОТКРЫТИЯ"
 
@@ -37,6 +38,7 @@ msgstr "> ЛИМИТНАЯ ЦЕНА"
 msgid "> MARKET PRICE"
 msgstr "> РЫНОЧНАЯ ЦЕНА"
 
+#: src/hooks/useFuturesEditPosition.ts
 #: src/hooks/useFuturesEditPosition.ts
 msgid "> OPEN PRICE"
 msgstr "> ЦЕНА ОТКРЫТИЯ"

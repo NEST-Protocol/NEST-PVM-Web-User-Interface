@@ -16,13 +16,14 @@ msgstr ""
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useFuturesNewOrder.ts
 msgid "< LIMIT PRICE"
-msgstr "< LIMIT PRIC"
+msgstr "< LIMIT PRICE"
 
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useFuturesNewOrder.ts
 msgid "< MARKET PRICE"
 msgstr "< MARKET PRICE"
 
+#: src/hooks/useFuturesEditPosition.ts
 #: src/hooks/useFuturesEditPosition.ts
 msgid "< OPEN PRICE"
 msgstr "< OPEN PRICE"
@@ -37,6 +38,7 @@ msgstr "> LIMIT PRICE"
 msgid "> MARKET PRICE"
 msgstr "> MARKET PRICE"
 
+#: src/hooks/useFuturesEditPosition.ts
 #: src/hooks/useFuturesEditPosition.ts
 msgid "> OPEN PRICE"
 msgstr "> OPEN PRICE"

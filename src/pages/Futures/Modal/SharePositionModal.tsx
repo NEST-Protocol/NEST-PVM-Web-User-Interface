@@ -129,13 +129,14 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
     props.price,
     tokenName_info ? tokenName_info.toLocaleUpperCase() : "ETH"
   );
+  const tokenPriceDecimals = useMemo(() => {
+    return tokenName_info ? tokenName_info.getTokenPriceDecimals() : 2;
+  }, [tokenName_info]);
   const getOrderInfo = useCallback(() => {
     setLongOrShort(orientation_info);
     setTabsValue(1);
     setLever(lever_info ? parseInt(lever_info) : 1);
-    const tokenPriceDecimals = tokenName_info
-      ? tokenName_info.getTokenPriceDecimals()
-      : 2;
+
     setLimitAmount(
       basePrice_info
         ? (
@@ -162,31 +163,30 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
           : ""
       );
     }
-    if (tp === "" && sl === "") {
-      setIsStop(false);
-    } else {
-      setIsStop(true);
-    }
   }, [
     basePrice_info,
     lever_info,
     orientation_info,
-    setIsStop,
     setLever,
     setLimitAmount,
     setLongOrShort,
     setSl,
     setTabsValue,
     setTp,
-    sl,
     sl_info,
-    tokenName_info,
-    tp,
+    tokenPriceDecimals,
     tp_info,
   ]);
   useEffect(() => {
     getOrderInfo();
   }, [getOrderInfo]);
+  useEffect(() => {
+    if (tp === "" && sl === "") {
+      setIsStop(false);
+    } else {
+      setIsStop(true);
+    }
+  }, [setIsStop, sl, tp]);
   useEffect(() => {
     if (nestBalance && usdtBalance && !setToken) {
       if (
@@ -702,6 +702,8 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
               <button
                 className="ModalLeftButton"
                 onClick={() => {
+                  setSl("")
+                  setTp("")
                   getOrderInfo();
                   setIsEdit(false);
                 }}
