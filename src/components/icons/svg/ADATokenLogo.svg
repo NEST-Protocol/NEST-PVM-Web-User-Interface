@@ -4,11 +4,11 @@
 <path d="M24 48C37.2548 48 48 37.2548 48 24C48 10.7452 37.2548 0 24 0C10.7452 0 0 10.7452 0 24C0 37.2548 10.7452 48 24 48Z" fill="white"/>
 </mask>
 <g mask="url(#mask0_5123_74523)">
-<rect width="48" height="48" fill="url(#pattern0)"/>
+<rect width="48" height="48" fill="url(#patternada)"/>
 </g>
 </g>
 <defs>
-<pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+<pattern id="patternada" patternContentUnits="objectBoundingBox" width="1" height="1">
 <use xlink:href="#image0_5123_74523" transform="scale(0.0104167)"/>
 </pattern>
 <clipPath id="clip0_5123_74523">
