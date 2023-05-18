@@ -131,9 +131,11 @@ const ShareNewOrderModal: FC<ShareNewOrderModalProps> = ({...props}) => {
     }
   }
 
+  const tokenName = props.value.tokenPair.split("/")[0];
+
   const shareLink = useMemo(() => {
     const order = props.value;
-    const tokenName = order.tokenPair.split("/")[0];
+    
     const basePrice = parseUnits(order.openPrice.toString(), tokenName.getTokenPriceDecimals()).toString();
     const lever = order.leverage.split("X")[0];
     const orientation = order.orientation === "Long" ? "1" : "0";
@@ -143,7 +145,7 @@ const ShareNewOrderModal: FC<ShareNewOrderModalProps> = ({...props}) => {
     return `https://finance.nestprotocol.org/?a=${address
       ?.slice(-8)
       .toLowerCase()}${orderString}/#/futures`;
-  }, [address, props.value]);
+  }, [address, props.value, tokenName]);
 
   const tweet = () => {
     const link = shareLink
@@ -238,13 +240,13 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
                   <Stack spacing={'7px'} width={'50%'}>
                     <Caption5>{t`Take Profit`}</Caption5>
                     <Caption8>{props.value.sp?.toLocaleString('en-US', {
-                      maximumFractionDigits: 2,
+                      maximumFractionDigits: tokenName.getTokenPriceDecimals(),
                     })} USDT</Caption8>
                   </Stack>
                   <Stack spacing={'7px'} width={'50%'}>
                     <Caption5>{t`Stop Loss`}</Caption5>
                     <Caption8>{props.value.sl?.toLocaleString('en-US', {
-                      maximumFractionDigits: 2,
+                      maximumFractionDigits: tokenName.getTokenPriceDecimals(),
                     })} USDT</Caption8>
                   </Stack>
                 </Stack>

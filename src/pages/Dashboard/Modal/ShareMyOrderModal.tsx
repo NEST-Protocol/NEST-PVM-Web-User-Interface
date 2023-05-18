@@ -137,10 +137,9 @@ const ShareMyOrderModal: FC<ShareMyOrderModalProps> = ({...props}) => {
       link.click();
     }
   }
-
+  const tokenName = props.value.tokenPair.split("/")[0];
   const shareLink = useMemo(() => {
     const order = props.value;
-    const tokenName = order.tokenPair.split("/")[0];
     const basePrice = parseUnits(order.openPrice.toString(), tokenName.getTokenPriceDecimals()).toString();
     const lever = order.leverage.split("X")[0];
     const orientation = order.orientation === "Long" ? "1" : "0";
@@ -150,7 +149,7 @@ const ShareMyOrderModal: FC<ShareMyOrderModalProps> = ({...props}) => {
     return `https://finance.nestprotocol.org/?a=${address
       ?.slice(-8)
       .toLowerCase()}${orderString}/#/futures`;
-  }, [address, props.value]);
+  }, [address, props.value, tokenName]);
 
   const tweet = () => {
     const link = shareLink;
@@ -273,7 +272,7 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`;
                     <Caption5>{t`Open Price`}</Caption5>
                     <Caption8>
                       {props.value.openPrice?.toLocaleString("en-US", {
-                        maximumFractionDigits: 2,
+                        maximumFractionDigits: tokenName.getTokenPriceDecimals(),
                       })}{" "}
                       USDT
                     </Caption8>
@@ -282,7 +281,7 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`;
                     <Caption5>{props.isClosed ? t`Close Price` : t`Last Price`}</Caption5>
                     <Caption8>
                       {props.value.lastPrice?.toLocaleString("en-US", {
-                        maximumFractionDigits: 2,
+                        maximumFractionDigits: tokenName.getTokenPriceDecimals(),
                       })}{" "}
                       USDT
                     </Caption8>

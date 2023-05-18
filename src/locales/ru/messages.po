@@ -69,6 +69,18 @@ msgstr "2. Никто не берет исполнительный ордер, �
 msgid "2. Position liquidation risk: NEST perpetual contracts provide leverage of 1-20 times. When your leverage is greater than 1 times leverage, the price fluctuation of the underlying asset may cause liquidation."
 msgstr "2. Риск ликвидации позиции: вечные контракты NEST обеспечивают плечо в 1-20 раз. Когда ваше плечо превышает 1 плечо, изменение цены базового актива может вызвать ликвидацию."
 
+#: src/pages/Futures/ExchangeTVChart.tsx
+msgid "24h Change"
+msgstr ""
+
+#: src/pages/Futures/ExchangeTVChart.tsx
+msgid "24h High"
+msgstr ""
+
+#: src/pages/Futures/ExchangeTVChart.tsx
+msgid "24h Low"
+msgstr ""
+
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 #: src/pages/Futures/Modal/ProtocolModal.tsx
 msgid "3. NEST Token price fluctuation risk: Both the margin and the final profit and loss use NEST Token, and NEST itself is also a highly volatile asset. In extreme cases, even if your perpetual contract position is profitable, However, due to the fluctuation of the NEST price itself, it may cause you to lose money in terms of fiat currency."

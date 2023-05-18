@@ -69,6 +69,18 @@ msgstr "2. Ninguém pega a ordem de execução. Pode haver deslizamento para exe
 msgid "2. Position liquidation risk: NEST perpetual contracts provide leverage of 1-20 times. When your leverage is greater than 1 times leverage, the price fluctuation of the underlying asset may cause liquidation."
 msgstr "2. Risco de liquidação de posição: Os contratos perpétuos NEST fornecem alavancagem de 1-20 vezes. Quando sua alavancagem é maior que 1 vez, a flutuação de preço do ativo subjacente pode causar liquidação."
 
+#: src/pages/Futures/ExchangeTVChart.tsx
+msgid "24h Change"
+msgstr "24h Variação"
+
+#: src/pages/Futures/ExchangeTVChart.tsx
+msgid "24h High"
+msgstr ""
+
+#: src/pages/Futures/ExchangeTVChart.tsx
+msgid "24h Low"
+msgstr ""
+
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 #: src/pages/Futures/Modal/ProtocolModal.tsx
 msgid "3. NEST Token price fluctuation risk: Both the margin and the final profit and loss use NEST Token, and NEST itself is also a highly volatile asset. In extreme cases, even if your perpetual contract position is profitable, However, due to the fluctuation of the NEST price itself, it may cause you to lose money in terms of fiat currency."
@@ -339,7 +351,7 @@ msgstr "Seguir a pessoa certa, ganhar dinheiro é tão fácil como respirar.Pode
 
 #: src/pages/Futures/Components/FuturesNotice.tsx
 msgid "For the positions opened before April 6, 2023, please go to→"
-msgstr "Para as vagas abertas antes de 6 de Abril de 2023, consultar→"
+msgstr "Para as entradas abertas antes de 6 de Abril de 2023, consultar→"
 
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 #: src/pages/Futures/Modal/ProtocolModal.tsx
