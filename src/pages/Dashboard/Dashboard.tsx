@@ -495,7 +495,7 @@ const Dashboard: FC = () => {
             })}
           >
             {item.openPrice.toLocaleString("en-US", {
-              maximumFractionDigits: item.tokenPair.getTokenPriceDecimals(),
+              maximumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
             })}{" "}
             USDT
           </Box>
@@ -521,7 +521,7 @@ const Dashboard: FC = () => {
                 .div(BigNumber.from(10).pow(16))
                 .toNumber() / 100
             ).toLocaleString("en-US", {
-              maximumFractionDigits: item.tokenPair.getTokenPriceDecimals(),
+              maximumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
             })}{" "}
             USDT
           </Box>
@@ -537,7 +537,7 @@ const Dashboard: FC = () => {
               })}
             >
               {item.lastPrice.toLocaleString("en-US", {
-                maximumFractionDigits: item.tokenPair.getTokenPriceDecimals(),
+                maximumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
               })}{" "}
               USDT
             </Box>
@@ -564,7 +564,7 @@ const Dashboard: FC = () => {
               <span>TP</span>
               {item.sp
                 ? item.sp.toLocaleString("en-US", {
-                    maximumFractionDigits: item.tokenPair.getTokenPriceDecimals(),
+                    maximumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
                   })
                 : "-"}{" "}
               USDT
@@ -573,7 +573,7 @@ const Dashboard: FC = () => {
               <span>SL</span>
               {item.sl
                 ? item.sl.toLocaleString("en-US", {
-                    maximumFractionDigits: item.tokenPair.getTokenPriceDecimals(),
+                    maximumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
                   })
                 : "-"}{" "}
               USDT
@@ -591,8 +591,8 @@ const Dashboard: FC = () => {
                 setShowShareOrderModal(true);
                 setShareOrder({
                   ...item,
-                  sp: Number(item.sp.toFixed(item.tokenPair.getTokenPriceDecimals())),
-                  sl: Number(item.sl.toFixed(item.tokenPair.getTokenPriceDecimals())),
+                  sp: Number(item.sp.toFixed(item.tokenPair.split("/")[0].getTokenPriceDecimals())),
+                  sl: Number(item.sl.toFixed(item.tokenPair.split("/")[0].getTokenPriceDecimals())),
                 });
               }}
             >
@@ -651,8 +651,8 @@ const Dashboard: FC = () => {
               setShowShareOrderModal(true);
               setShareOrder({
                 ...item,
-                sp: Number(item.sp.toFixed(item.tokenPair.getTokenPriceDecimals())),
-                sl: Number(item.sl.toFixed(item.tokenPair.getTokenPriceDecimals())),
+                sp: Number(item.sp.toFixed(item.tokenPair.split("/")[0].getTokenPriceDecimals())),
+                sl: Number(item.sl.toFixed(item.tokenPair.split("/")[0].getTokenPriceDecimals())),
               });
             }}
           >
@@ -673,7 +673,7 @@ const Dashboard: FC = () => {
                 })}
               >
                 {item.openPrice.toLocaleString("en-US", {
-                  maximumFractionDigits: item.tokenPair.getTokenPriceDecimals(),
+                  maximumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
                 })}{" "}
                 USDT
               </Caption2>
@@ -733,7 +733,7 @@ const Dashboard: FC = () => {
                 })}
               >
                 {item.sp.toLocaleString("en-US", {
-                  maximumFractionDigits: item.tokenPair.getTokenPriceDecimals(),
+                  maximumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
                 })}{" "}
                 USDT
               </Caption5>
@@ -752,7 +752,7 @@ const Dashboard: FC = () => {
                 })}
               >
                 {item.sl.toLocaleString("en-US", {
-                  maximumFractionDigits: item.tokenPair.getTokenPriceDecimals(),
+                  maximumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
                 })}{" "}
                 USDT
               </Caption5>
@@ -784,7 +784,7 @@ const Dashboard: FC = () => {
                     .div(BigNumber.from(10).pow(16))
                     .toNumber() / 100
                 ).toLocaleString("en-US", {
-                  maximumFractionDigits: item.tokenPair.getTokenPriceDecimals(),
+                  maximumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
                 })}{" "}
                 USDT
               </Caption5>
@@ -802,7 +802,7 @@ const Dashboard: FC = () => {
                   })}
                 >
                   {item.lastPrice.toLocaleString("en-US", {
-                    maximumFractionDigits: item.tokenPair.getTokenPriceDecimals(),
+                    maximumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
                   })}{" "}
                   USDT
                 </Caption5>
