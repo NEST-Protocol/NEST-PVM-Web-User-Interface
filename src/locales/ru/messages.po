@@ -480,7 +480,6 @@ msgstr "Загрузка..."
 #: src/hooks/useFuturesPOrderClose.tsx
 #: src/pages/Dashboard/Components/ShareOrderPosition.tsx
 #: src/pages/Futures/Components/OrderListPosition.tsx
-#: src/pages/Futures/Components/OrderListPosition.tsx
 #: src/pages/Futures/Components/OrderTablePosition.tsx
 #: src/pages/Futures/Modal/SharePositionModal.tsx
 msgid "Long"
@@ -696,6 +695,7 @@ msgstr "Поделиться"
 #: src/hooks/useFuturesPOrder.ts
 #: src/hooks/useFuturesPOrderClose.tsx
 #: src/pages/Dashboard/Components/ShareOrderPosition.tsx
+#: src/pages/Futures/Components/OrderListPosition.tsx
 #: src/pages/Futures/Components/OrderTablePosition.tsx
 #: src/pages/Futures/Modal/SharePositionModal.tsx
 msgid "Short"

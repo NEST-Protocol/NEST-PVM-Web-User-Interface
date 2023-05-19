@@ -83,7 +83,7 @@ const OrderListPosition: FC<OrderListPositionProps> = ({ ...props }) => {
             </p>
           ) : (
             <p>
-              <Trans>Long</Trans>
+              <Trans>Short</Trans>
             </p>
           )}
         </Stack>
