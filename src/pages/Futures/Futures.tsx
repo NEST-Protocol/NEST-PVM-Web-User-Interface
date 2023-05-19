@@ -166,7 +166,7 @@ const Futures: FC = () => {
               maxWidth={"1600px"}
               paddingY={`${paddingY}px`}
             >
-              {notice}
+              {/* {notice} */}
               <Stack
                 direction={"row"}
                 spacing={"16px"}
@@ -193,7 +193,7 @@ const Futures: FC = () => {
             paddingX={`${paddingX}px`}
           >
             <Stack spacing={"16px"} width={"100%"} paddingY={`${paddingY}px`}>
-              {notice}
+              {/* {notice} */}
               {exchangeTvChart()}
               {newOrder()}
               {isBigMobile ? <></> : moreInfo()}
@@ -204,7 +204,6 @@ const Futures: FC = () => {
     }
   }, [
     width,
-    notice,
     paddingY,
     exchangeTvChart,
     orderList,
