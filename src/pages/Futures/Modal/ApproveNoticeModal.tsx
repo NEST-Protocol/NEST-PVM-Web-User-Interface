@@ -5,6 +5,7 @@ import BaseNoticeModal from "../../Share/Modal/BaseNoticeModal";
 import Stack from "@mui/material/Stack";
 import { Fail, Success } from "../../../components/icons";
 import MainButton from "../../../components/MainButton/MainButton";
+import { Trans, t } from "@lingui/macro";
 
 interface ApproveNoticeModalProps {
   open: boolean;
@@ -49,7 +50,7 @@ const ApproveNoticeModal: FC<ApproveNoticeModalProps> = ({ ...props }) => {
                   fontWeight: 700,
                 })}
               >
-                Approval required
+                <Trans>Approval required</Trans>
               </Box>
               <Box
                 component={"p"}
@@ -60,13 +61,15 @@ const ApproveNoticeModal: FC<ApproveNoticeModalProps> = ({ ...props }) => {
                   textAlign: "center",
                 })}
               >
-                Please click Approve for authorization and then you can open the
-                position, this process will consume some GAS.
+                <Trans>
+                  Please click Approve for authorization and then you can open
+                  the position, this process will consume some GAS.
+                </Trans>
               </Box>
             </Stack>
           </Stack>
           <MainButton
-            title={"Approve"}
+            title={t`Approve`}
             onClick={props.callBack}
             style={{
               fontSize: 14,

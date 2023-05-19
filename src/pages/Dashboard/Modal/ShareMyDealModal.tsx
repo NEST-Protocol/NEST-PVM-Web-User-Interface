@@ -12,6 +12,7 @@ import BaseDrawer from "../Components/DashboardBaseDrawer";
 import copy from "copy-to-clipboard";
 import useNESTSnackBar from "../../../hooks/useNESTSnackBar";
 import CircularProgress from "@mui/material/CircularProgress";
+import {Trans, t} from "@lingui/macro";
 
 const Title1 = styled('div')(({theme}) => ({
   fontWeight: "400",
@@ -181,8 +182,8 @@ const ShareMyDealModal: FC<ShareMyDealModalProps> = ({...props}) => {
 
   const tweet = () => {
     const link = `https://finance.nestprotocol.org/?a=${address?.slice(-8).toLowerCase()}`
-    const text = `Follow the right person, making money is as easy as breathing.
-You can follow the right person on NESTFi, here is my refer link: ${link}`
+    const text = `${t`Follow the right person, making money is as easy as breathing.
+You can follow the right person on NESTFi, here is my refer link`}: ${link}`
     window.open(`https://twitter.com/intent/tweet?text=${encodeURI(text)}&hashtags=NEST,btc,eth&via=NEST_Protocol`)
   }
   const [select, setSelect] = useState({
@@ -195,28 +196,28 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`
     let list = []
     if (select.totalTrade) {
       list.push({
-        title: 'Total Profit & Loss',
+        title: t`Total Profit & Loss`,
         value: props.value.totalValue,
         // rate: props.value.totalRate,
       })
     }
     if (select.todayTrade) {
       list.push({
-        title: 'Today\'s PNL',
+        title: t`Today\'s PNL`,
         value: props.value.todayValue,
         // rate: props.value.todayRate,
       })
     }
     if (select._7DaysTrade) {
       list.push({
-        title: '7 Days\' PNL',
+        title: t`7 Days\' PNL`,
         value: props.value.day7Value,
         // rate: props.value.day7Rate,
       })
     }
     if (select._30DaysTrade) {
       list.push({
-        title: '30 Days\' PNL',
+        title: t`30 Days\' PNL`,
         value: props.value.day30Value,
         // rate: props.value.day30Rate,
       })
@@ -240,7 +241,7 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`
               lineHeight: '22px',
               color: theme.normal.text0,
               textAlign: 'center',
-            })}>Share</Box>
+            })}><Trans>Share</Trans></Box>
             <button onClick={() => {
               setDataUrl(null)
               props.onClose()
@@ -255,7 +256,7 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`
         })} onClick={() => setSelect({...select, totalTrade: !select.totalTrade})}>
           <Stack width={'100%'} spacing={'10px'}>
             <Title1>
-              Total Profit & Loss
+              {t`Total Profit & Loss`}
             </Title1>
             <Stack direction={'row'} spacing={'8px'} alignItems={"center"}>
               <Caption1>{props.value.totalValue.toLocaleString('en-US', {
@@ -294,7 +295,7 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`
         })} onClick={() => setSelect({...select, todayTrade: !select.todayTrade})}>
           <Stack width={'100%'} spacing={'10px'}>
             <Title1>
-              Today's PNL
+              {t`Today's PNL`}
             </Title1>
             <Stack direction={'row'} spacing={'8px'} alignItems={"center"}>
               <Caption1>{props.value.todayValue.toLocaleString('en-US', {
@@ -333,7 +334,7 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`
         })} onClick={() => setSelect({...select, _7DaysTrade: !select._7DaysTrade})}>
           <Stack width={'100%'} spacing={'10px'}>
             <Title1>
-              7 Days' PNL
+              {t`7 Days' PNL`}
             </Title1>
             <Stack direction={'row'} spacing={'8px'} alignItems={"center"}>
               <Caption1>{props.value.day7Value.toLocaleString('en-US', {
@@ -372,7 +373,7 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`
         })} onClick={() => setSelect({...select, _30DaysTrade: !select._30DaysTrade})}>
           <Stack width={'100%'} spacing={'10px'}>
             <Title1>
-              30 Days' PNL
+              {t`30 Days' PNL`}
             </Title1>
             <Stack direction={'row'} spacing={'8px'} alignItems={"center"}>
               <Caption1>{props.value.day30Value.toLocaleString('en-US', {
@@ -407,7 +408,7 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`
           </Box>
         </Card1>
         <Stack style={{paddingTop: '24px'}}>
-          <MainButton title={'Confirm'}
+          <MainButton title={t`Confirm`}
                       disable={!select.totalTrade && !select.todayTrade && !select._7DaysTrade && !select._30DaysTrade}
                       style={{fontWeight: '700', fontSize: '14px'}} onClick={() => {
             setShowPage(true)
@@ -456,7 +457,7 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`
             })}>
               <CircularProgress size={'44px'}/>
               <span>
-                Loading...
+                {t`Loading...`}
               </span>
             </Stack>
           )
@@ -568,7 +569,7 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`
             <Stack direction={'row'} spacing={'12px'}>
               <NESTLogo/>
               <Stack spacing={'4px'}>
-                <Caption7>Trade with me on NESTFi</Caption7>
+                <Caption7>{t`Trade with me on NESTFi`}</Caption7>
                 <Caption5>{new Date().toLocaleString()}</Caption5>
               </Stack>
             </Stack>
@@ -589,11 +590,11 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`
                 lineHeight: '22px',
               }}
               disable={!address}
-              title={'Copy Link'} onClick={() => {
+              title={t`Copy Link`} onClick={() => {
               if (!address) return;
               const link = `https://finance.nestprotocol.org/?a=${address?.slice(-8).toLowerCase()}`;
               copy(link);
-              messageSnackBar("Copy Successfully");
+              messageSnackBar(t`Copy Successfully`);
             }}/>
             <MainButton
               style={{
@@ -602,7 +603,7 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`
                 fontWeight: '700',
                 lineHeight: '22px',
               }}
-              title={"Image"}
+              title={t`Image`}
               isLoading={!dataUrl}
               onClick={download}
             />
@@ -611,7 +612,7 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`
               fontSize: '16px',
               fontWeight: '700',
               lineHeight: '22px',
-            }} title={'Twitter'} onClick={tweet}/>
+            }} title={t`Twitter`} onClick={tweet}/>
           </Stack>
         </Stack>
       </Stack>

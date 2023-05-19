@@ -20,6 +20,7 @@ import {
 import useReadSwapAmountOut from "../contracts/Read/useReadSwapContract";
 import { getQueryVariable } from "../lib/queryVaribale";
 import { KOLTx } from "../lib/NESTRequest";
+import { t } from "@lingui/macro";
 
 export const lipPrice = (
   balance: BigNumber,
@@ -403,11 +404,11 @@ function useFuturesNewOrder(
   }, [isStop, slError, tpError]);
   const mainButtonTitle = useMemo(() => {
     if (!account.address) {
-      return "Connect Wallet";
+      return t`Connect Wallet`;
     } else if (checkAllowance) {
-      return `Open ${longOrShort ? "Long" : "Short"}`;
+      return `${t`Open`} ${longOrShort ? t`Long` : t`Short`}`;
     } else {
-      return "Approve";
+      return t`Approve`;
     }
   }, [account.address, checkAllowance, longOrShort]);
   const mainButtonLoading = useMemo(() => {
@@ -469,7 +470,7 @@ function useFuturesNewOrder(
     setShowApproveNotice(false);
   }, [tokenApprove]);
   const mainButtonAction = useCallback(() => {
-    if (mainButtonTitle === "Connect Wallet") {
+    if (mainButtonTitle === t`Connect Wallet`) {
       setShowConnect(true);
     } else if (mainButtonLoading || !checkBalance || stopDis) {
       return;
@@ -495,9 +496,14 @@ function useFuturesNewOrder(
   ]);
   const lastPriceButton = useCallback(() => {
     if (openPriceBase) {
-      setLimitAmount(openPriceBase.bigNumberToShowString(18, 2));
+      setLimitAmount(
+        openPriceBase.bigNumberToShowString(
+          18,
+          tokenPair.getTokenPriceDecimals()
+        )
+      );
     }
-  }, [openPriceBase]);
+  }, [openPriceBase, tokenPair]);
 
   /**
    * show
@@ -518,11 +524,14 @@ function useFuturesNewOrder(
   }, [account.address, tokenBalance]);
   const showOpenPrice = useMemo(() => {
     if (openPriceBase) {
-      return openPriceBase.bigNumberToShowString(18, 2);
+      return openPriceBase.bigNumberToShowString(
+        18,
+        tokenPair.getTokenPriceDecimals()
+      );
     } else {
       return String().placeHolder;
     }
-  }, [openPriceBase]);
+  }, [openPriceBase, tokenPair]);
   const showFee = useMemo(() => {
     if (tabsValue === 0 && isStop) {
       return fee
@@ -544,23 +553,26 @@ function useFuturesNewOrder(
       nowPrice,
       longOrShort
     );
-    return result.bigNumberToShowString(18, 2) ?? String().placeHolder;
-  }, [lever, longOrShort, nestAmount, openPrice]);
+    return (
+      result.bigNumberToShowString(18, tokenPair.getTokenPriceDecimals()) ??
+      String().placeHolder
+    );
+  }, [lever, longOrShort, nestAmount, openPrice, tokenPair]);
   const showFeeHoverText = useMemo(() => {
     if (tabsValue === 0 && !isStop) {
-      return ["Position fee = Position*0.05%"];
+      return [t`Position fee = Position * 0.05%`];
     } else if (tabsValue === 1 && !isStop) {
-      return ["Position fee = Position*0.05%", "Limit order fee = 15 NEST"];
+      return [t`Position fee = Position * 0.05%`, t`Limit order fee = 15 NEST`];
     } else if (tabsValue === 0 && isStop) {
       return [
-        "Position fee = Position*0.05%",
-        "Stop order fee(after execution) = 15 NEST",
+        t`Position fee = Position * 0.05%`,
+        t`Stop order fee(after execution) = 15 NEST`,
       ];
     } else {
       return [
-        "Position fee = Position*0.05%",
-        "Limit order fee = 15 NEST",
-        "Stop order fee(after execution) = 15 NEST",
+        t`Position fee = Position * 0.05%`,
+        t`Limit order fee = 15 NEST`,
+        t`Stop order fee(after execution) = 15 NEST`,
       ];
     }
   }, [isStop, tabsValue]);
@@ -582,9 +594,9 @@ function useFuturesNewOrder(
   }, [lever, nestAmount]);
   const showAmountError = useMemo(() => {
     if (checkMinNEST) {
-      return "Minimum 50 NEST";
+      return t`Minimum 50 NEST`;
     } else if (!checkBalance) {
-      return "Insufficient NEST balance";
+      return t`Insufficient NEST balance`;
     } else {
       return undefined;
     }
@@ -609,23 +621,23 @@ function useFuturesNewOrder(
 
   const tpDefault = useMemo(() => {
     if (tabsValue === 0) {
-      return longOrShort ? `> MARKET PRICE` : `< MARKET PRICE`;
+      return longOrShort ? t`> MARKET PRICE` : t`< MARKET PRICE`;
     } else {
-      return longOrShort ? `> LIMIT PRICE` : `< LIMIT PRICE`;
+      return longOrShort ? t`> LIMIT PRICE` : t`< LIMIT PRICE`;
     }
   }, [longOrShort, tabsValue]);
   const slDefault = useMemo(() => {
     if (tabsValue === 0) {
-      return longOrShort ? `< MARKET PRICE` : `> MARKET PRICE`;
+      return longOrShort ? t`< MARKET PRICE` : t`> MARKET PRICE`;
     } else {
-      return longOrShort ? `< LIMIT PRICE` : `> LIMIT PRICE`;
+      return longOrShort ? t`< LIMIT PRICE` : t`> LIMIT PRICE`;
     }
   }, [longOrShort, tabsValue]);
   const stopErrorText = useMemo(() => {
     if (tabsValue === 0) {
-      return "TP and SL price you set will trigger immediately.";
+      return t`TP and SL price you set will trigger immediately.`;
     } else {
-      return "After the limit order is executed, TP and SL price you set will trigger immediately.";
+      return t`After the limit order is executed, TP and SL price you set will trigger immediately.`;
     }
   }, [tabsValue]);
 
@@ -650,12 +662,17 @@ function useFuturesNewOrder(
   const [hadSetLimit, setHadSetLimit] = useState(false);
   useEffect(() => {
     if (limitAmount === "" && !hadSetLimit && openPriceBase) {
-      setLimitAmount(openPriceBase.bigNumberToShowString(18, 2));
+      setLimitAmount(
+        openPriceBase.bigNumberToShowString(
+          18,
+          tokenPair.getTokenPriceDecimals()
+        )
+      );
       setHadSetLimit(true);
     } else if (limitAmount !== "" && !hadSetLimit) {
       setHadSetLimit(true);
     }
-  }, [hadSetLimit, limitAmount, openPriceBase]);
+  }, [hadSetLimit, limitAmount, openPriceBase, tokenPair]);
   useEffect(() => {
     setLimitAmount("");
     setTp("");
@@ -666,10 +683,15 @@ function useFuturesNewOrder(
     (value: number) => {
       setTabsValue(value);
       if (openPriceBase) {
-        setLimitAmount(openPriceBase.bigNumberToShowString(18, 2));
+        setLimitAmount(
+          openPriceBase.bigNumberToShowString(
+            18,
+            tokenPair.getTokenPriceDecimals()
+          )
+        );
       }
     },
-    [openPriceBase]
+    [openPriceBase, tokenPair]
   );
 
   return {

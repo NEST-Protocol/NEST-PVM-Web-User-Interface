@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import { FC, useMemo } from "react";
 import { BigNumber } from "ethers";
+import { Trans } from "@lingui/macro";
 
 interface NormalInputWithCloseButtonProps {
   placeHolder: string;
@@ -62,7 +63,7 @@ const NormalInputWithCloseButton: FC<NormalInputWithCloseButtonProps> = ({
               },
             })}
           >
-            Close
+            <Trans>Close</Trans>
           </Box>
         )}
 

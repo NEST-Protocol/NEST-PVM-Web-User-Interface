@@ -11,6 +11,7 @@ import { FuturesOrderV2 } from "../../../hooks/useFuturesOrderList";
 import useWindowWidth from "../../../hooks/useWindowWidth";
 import BaseDrawer from "../../Share/Modal/BaseDrawer";
 import BaseModal from "../../Share/Modal/BaseModal";
+import { t } from "@lingui/macro";
 
 interface EditLimitModalBaseProps {
   data: FuturesOrderV2;
@@ -29,7 +30,7 @@ const EditLimitModalBase: FC<EditLimitModalBaseProps> = ({ ...props }) => {
   return (
     <Stack spacing={"24px"} width={"100%"}>
       <NormalInput
-        placeHolder={"Limit Price"}
+        placeHolder={t`Limit Price`}
         rightTitle={"USDT"}
         value={limitPrice}
         changeValue={(value: string) => setLimitPrice(value.formatInputNum())}
@@ -64,7 +65,7 @@ const EditLimitModal: FC<EditLimitModalProps> = ({ ...props }) => {
           "& .MuiPaper-root": { background: "none", backgroundImage: "none" },
         }}
       >
-        <BaseDrawer title={"Limit Price"} onClose={props.onClose}>
+        <BaseDrawer title={t`Limit Price`} onClose={props.onClose}>
           <EditLimitModalBase data={props.data} onClose={props.onClose} />
         </BaseDrawer>
       </Drawer>
@@ -76,7 +77,7 @@ const EditLimitModal: FC<EditLimitModalProps> = ({ ...props }) => {
         aria-describedby="modal-modal-description"
       >
         <Box>
-          <BaseModal title={"Limit Price"} onClose={props.onClose}>
+          <BaseModal title={t`Limit Price`} onClose={props.onClose}>
             <EditLimitModalBase data={props.data} onClose={props.onClose} />
           </BaseModal>
         </Box>

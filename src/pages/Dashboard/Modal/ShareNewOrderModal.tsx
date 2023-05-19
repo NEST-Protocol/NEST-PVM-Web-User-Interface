@@ -13,6 +13,7 @@ import useNESTSnackBar from "../../../hooks/useNESTSnackBar";
 import copy from "copy-to-clipboard";
 import {parseUnits} from "ethers/lib/utils.js";
 import CircularProgress from "@mui/material/CircularProgress";
+import {t} from "@lingui/macro";
 
 const Caption5 = styled('div')(({theme}) => ({
   fontWeight: "400",
@@ -130,24 +131,26 @@ const ShareNewOrderModal: FC<ShareNewOrderModalProps> = ({...props}) => {
     }
   }
 
+  const tokenName = props.value.tokenPair.split("/")[0];
+
   const shareLink = useMemo(() => {
     const order = props.value;
-    const tokenName = order.tokenPair.split("/")[0];
-    const basePrice = parseUnits(order.openPrice.toString(), 2).toString();
+    
+    const basePrice = parseUnits(order.openPrice.toString(), tokenName.getTokenPriceDecimals()).toString();
     const lever = order.leverage.split("X")[0];
     const orientation = order.orientation === "Long" ? "1" : "0";
-    const sp = order.sp ? parseUnits(order.sp!.toString(), 2).toString() : "0";
-    const sl = order.sl ? parseUnits(order.sl!.toString(), 2).toString() : "0";
+    const sp = order.sp ? parseUnits(order.sp!.toString(), tokenName.getTokenPriceDecimals()).toString() : "0";
+    const sl = order.sl ? parseUnits(order.sl!.toString(), tokenName.getTokenPriceDecimals()).toString() : "0";
     const orderString = `&pt=${tokenName}&po=${orientation}&pl=${lever}&pp=${basePrice}&pst=${sp}&psl=${sl}`;
     return `https://finance.nestprotocol.org/?a=${address
       ?.slice(-8)
       .toLowerCase()}${orderString}/#/futures`;
-  }, [address, props.value]);
+  }, [address, props.value, tokenName]);
 
   const tweet = () => {
     const link = shareLink
-    const text = `Follow the right person, making money is as easy as breathing.
-You can follow the right person on NESTFi, here is my refer link: ${link}`
+    const text = `${t`Follow the right person, making money is as easy as breathing.
+You can follow the right person on NESTFi, here is my refer link`}: ${link}`
     window.open(`https://twitter.com/intent/tweet?text=${encodeURI(text)}&hashtags=NEST,btc,eth&via=NEST_Protocol`)
   }
 
@@ -198,7 +201,7 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`
                        })}>
                   <CircularProgress size={'44px'}/>
                   <span>
-                Loading...
+                    {t`Loading...`}
               </span>
                 </Stack>
               )}
@@ -230,20 +233,20 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`
                   />
                 </Stack>
                 <Stack pt={'68px'} spacing={'8px'}>
-                  <Caption5>Open Price</Caption5>
+                  <Caption5>{t`Open Price`}</Caption5>
                   <Caption9>{props.value.openPrice}</Caption9>
                 </Stack>
                 <Stack direction={'row'} pt={'54px'}>
                   <Stack spacing={'7px'} width={'50%'}>
-                    <Caption5>Take Profit</Caption5>
+                    <Caption5>{t`Take Profit`}</Caption5>
                     <Caption8>{props.value.sp?.toLocaleString('en-US', {
-                      maximumFractionDigits: 2,
+                      maximumFractionDigits: tokenName.getTokenPriceDecimals(),
                     })} USDT</Caption8>
                   </Stack>
                   <Stack spacing={'7px'} width={'50%'}>
-                    <Caption5>Stop Loss</Caption5>
+                    <Caption5>{t`Stop Loss`}</Caption5>
                     <Caption8>{props.value.sl?.toLocaleString('en-US', {
-                      maximumFractionDigits: 2,
+                      maximumFractionDigits: tokenName.getTokenPriceDecimals(),
                     })} USDT</Caption8>
                   </Stack>
                 </Stack>
@@ -256,8 +259,8 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`
                 <Stack direction={'row'} spacing={'12px'}>
                   <NESTLogo/>
                   <Stack>
-                    <Caption7>Scan and copy the trade</Caption7>
-                    <Caption7>with 1 click</Caption7>
+                    <Caption7>{t`Scan and copy the trade`}</Caption7>
+                    <Caption7>{t`with 1 click`}</Caption7>
                   </Stack>
                 </Stack>
                 <Box style={{width: '64px', height: '64px', background: 'white', padding: '3px'}}>
@@ -276,11 +279,11 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`
                   lineHeight: '22px',
                 }}
                 disable={!address}
-                title={'Copy Link'} onClick={() => {
+                title={t`Copy Link`} onClick={() => {
                 if (!address) return;
                 const link = shareLink
                 copy(link);
-                messageSnackBar("Copy Successfully");
+                messageSnackBar(t`Copy Successfully`);
               }}/>
               <MainButton
                 style={{
@@ -290,7 +293,7 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`
                   lineHeight: '22px',
                 }}
                 isLoading={!dataUrl}
-                title={"Image"}
+                title={t`Image`}
                 onClick={download}
               />
               <MainButton style={{
@@ -298,7 +301,7 @@ You can follow the right person on NESTFi, here is my refer link: ${link}`
                 fontSize: '16px',
                 fontWeight: '700',
                 lineHeight: '22px',
-              }} title={'Twitter'} onClick={tweet}/>
+              }} title={t`Twitter`} onClick={tweet}/>
             </Stack>
           </Stack>
         </BaseModal>

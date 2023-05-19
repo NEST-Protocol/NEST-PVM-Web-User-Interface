@@ -9,6 +9,7 @@ import {DownIcon, Success} from "../../../components/icons";
 import DashboardBaseModal from "../../Dashboard/Components/DashboardBaseModal";
 import NESTLine from "../../../components/NESTLine";
 import NormalInput from "../../../components/NormalInput/NormalInput";
+import {t, Trans} from "@lingui/macro";
 
 const Title1 = styled("div")(({theme}) => ({
   fontWeight: "400",
@@ -95,7 +96,7 @@ const ApplyModalBase: FC<ApplyModalBaseProps> = ({...props}) => {
   return (
     <Stack spacing={'24px'}>
       <Stack spacing={'8px'}>
-        <Title1>Platform (Youtube, Telegram, Twitter, Instagram, Facebook, Tiktok, Others)</Title1>
+        <Title1>{t`Platform (Youtube, Telegram, Twitter, Instagram, Facebook, Tiktok, Others)`}</Title1>
         <Box position={'relative'}>
           <Stack position={'absolute'} sx={(theme) => ({
             right: '12px',
@@ -114,7 +115,9 @@ const ApplyModalBase: FC<ApplyModalBaseProps> = ({...props}) => {
           <Select1 onChange={(e) => {
             setInfo({...info, platform: e.target.value})
           }}>
-            <option value="Youtube">Youtube</option>
+            <option value="Youtube">
+              <Trans>Youtube</Trans>
+            </option>
             <option value="Telegram">Telegram</option>
             <option value="Twitter">Twitter</option>
             <option value="Instagram">Instagram</option>
@@ -125,15 +128,15 @@ const ApplyModalBase: FC<ApplyModalBaseProps> = ({...props}) => {
         </Box>
       </Stack>
       <Stack spacing={'8px'}>
-        <Title1>Channel link</Title1>
-        <NormalInput placeHolder={'Enter Channel link'} rightTitle={''} value={info.channel_link} changeValue={(value) => setInfo({...info, channel_link: value})} />
+        <Title1>{t`Channel link`}</Title1>
+        <NormalInput placeHolder={t`Enter Channel link`} rightTitle={''} value={info.channel_link} changeValue={(value) => setInfo({...info, channel_link: value})} />
       </Stack>
       <Stack spacing={'8px'}>
-        <Title1>Contact info (Telegram handle)</Title1>
-        <NormalInput placeHolder={'Enter your Contact info'} rightTitle={''} value={info.contact_info} changeValue={(value) => setInfo({...info, contact_info: value})} />
+        <Title1>{t`Contact info (Telegram handle)`}</Title1>
+        <NormalInput placeHolder={t`Enter your Contact info`} rightTitle={''} value={info.contact_info} changeValue={(value) => setInfo({...info, contact_info: value})} />
       </Stack>
       <NESTLine/>
-      <MainButton title={'Confirm'} disable={!info.platform || !info.channel_link || !info.contact_info}
+      <MainButton title={t`Confirm`} disable={!info.platform || !info.channel_link || !info.contact_info}
                   style={{width: '100%', height: "48px"}}
                   onClick={postInfo} isLoading={loading}/>
     </Stack>
@@ -162,8 +165,10 @@ const ApplyModal: FC<ApplyModalProps> = ({...props}) => {
               <IconDiv>
                 <Success/>
               </IconDiv>
-              <Title2 style={{paddingBottom: '22px'}}>Submit successfully</Title2>
-              <MainButton title={'I understand'} style={{width: '100%', height: "48px"}} onClick={() => {
+              <Title2 style={{paddingBottom: '22px'}}>
+                {t`Submit successfully`}
+              </Title2>
+              <MainButton title={t`I understand`} style={{width: '100%', height: "48px"}} onClick={() => {
                 setShowSuccess(false)
                 props.onClose()
               }}/>
@@ -188,7 +193,7 @@ const ApplyModal: FC<ApplyModalProps> = ({...props}) => {
         }}
       >
         <Box>
-          <BaseDrawer title={"Become a Trading KOL"} onClose={props.onClose}>
+          <BaseDrawer title={t`Become a Trading KOL`} onClose={props.onClose}>
             <ApplyModalBase onClose={props.onClose} setShowSuccess={setShowSuccess}/>
           </BaseDrawer>
         </Box>
@@ -204,7 +209,7 @@ const ApplyModal: FC<ApplyModalProps> = ({...props}) => {
       aria-describedby="modal-modal-description"
     >
       <Box>
-        <BaseModal title={"Become a Trading KOL"} onClose={props.onClose}>
+        <BaseModal title={t`Become a Trading KOL`} onClose={props.onClose}>
           <ApplyModalBase onClose={props.onClose} setShowSuccess={setShowSuccess}/>
         </BaseModal>
       </Box>

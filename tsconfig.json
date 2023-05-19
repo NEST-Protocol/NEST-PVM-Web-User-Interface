@@ -1,5 +1,8 @@
 {
   "compilerOptions": {
+    "types": [
+      "./node_modules/@lingui/macro/global",
+    ],
     "target": "es5",
     "lib": [
       "dom",

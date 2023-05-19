@@ -16,6 +16,7 @@ import BaseModal from "../../Share/Modal/BaseModal";
 import { FuturesPrice } from "../Futures";
 import TriggerRiskModal from "./LimitAndPriceModal";
 import ErrorLabel from "../../../components/ErrorLabel/ErrorLabel";
+import { Trans, t } from "@lingui/macro";
 
 interface EditPositionModalBaseProps {
   data: FuturesOrderV2;
@@ -84,7 +85,7 @@ const EditPositionModalBase: FC<EditPositionModalBaseProps> = ({
               color: theme.normal.text2,
             })}
           >
-            Take Profit
+            <Trans>Take Profit</Trans>
           </Box>
 
           <NormalInputWithCloseButton
@@ -106,7 +107,7 @@ const EditPositionModalBase: FC<EditPositionModalBaseProps> = ({
               color: theme.normal.text2,
             })}
           >
-            Stop Loss
+            <Trans>Stop Loss</Trans>
           </Box>
           <NormalInputWithCloseButton
             placeHolder={placeHolder[1]}
@@ -121,9 +122,7 @@ const EditPositionModalBase: FC<EditPositionModalBaseProps> = ({
         </Stack>
         {tpError || slError ? (
           <ErrorLabel
-            title={
-              "After the limit order is executed, TP and SL price you set will trigger immediately."
-            }
+            title={t`After the limit order is executed, TP and SL price you set will trigger immediately.`}
           />
         ) : (
           <></>
@@ -131,18 +130,18 @@ const EditPositionModalBase: FC<EditPositionModalBaseProps> = ({
       </Stack>
       <NESTLine />
       <Stack spacing={"8px"}>
-        <NormalInfo title={"Position"} value={""} symbol={showPosition} />
+        <NormalInfo title={t`Position`} value={""} symbol={showPosition} />
         <NormalInfo
-          title={"Open Price"}
+          title={t`Open Price`}
           value={showOpenPrice}
           symbol={"USDT"}
         />
-        <NormalInfo title={"Liq Price"} value={showLiqPrice} symbol={"USDT"} />
+        <NormalInfo title={t`Liq Price`} value={showLiqPrice} symbol={"USDT"} />
         {isEdit ? (
           <></>
         ) : (
           <NormalInfo
-            title={"Service Fee"}
+            title={t`Service Fee`}
             value={showTriggerFee}
             symbol={"NEST"}
             help
@@ -181,8 +180,8 @@ const EditPositionModal: FC<EditPositionModalProps> = ({ ...props }) => {
       BigNumber.from("0").eq(props.data.stopLossPrice) &&
       BigNumber.from("0").eq(props.data.stopProfitPrice)
     )
-      ? "Edit Position"
-      : "Trigger Position";
+      ? t`Edit Position`
+      : t`Trigger Position`;
   }, [props.data.stopLossPrice, props.data.stopProfitPrice]);
   const view = useMemo(() => {
     return isMobile ? (

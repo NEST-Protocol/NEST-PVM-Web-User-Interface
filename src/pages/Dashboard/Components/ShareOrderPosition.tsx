@@ -2,6 +2,7 @@ import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import {FC, useMemo, CSSProperties} from "react";
 import {Long, Short} from "../../../components/icons";
+import {t} from "@lingui/macro";
 
 interface ShareOrderPositionProps {
   tokenName: string;
@@ -94,7 +95,7 @@ const ShareOrderPosition: FC<ShareOrderPositionProps> = ({...props}) => {
         })}
       >
         {props.isLong ? <Long/> : <Short/>}
-        {props.isLong ? <p>Long</p> : <p>Short</p>}
+        {props.isLong ? <p>{t`Long`}</p> : <p>{t`Short`}</p>}
       </Stack>
     </Stack>
   );

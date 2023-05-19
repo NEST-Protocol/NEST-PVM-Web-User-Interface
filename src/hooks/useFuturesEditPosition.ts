@@ -8,6 +8,7 @@ import {
   TransactionType,
   usePendingTransactions,
 } from "./useTransactionReceipt";
+import { t } from "@lingui/macro";
 
 function useFuturesEditPosition(
   data: FuturesOrderV2,
@@ -16,6 +17,9 @@ function useFuturesEditPosition(
 ) {
   const { isPendingOrder } = usePendingTransactions();
   const [send, setSend] = useState(false);
+  const tokenPair = useMemo(() => {
+    return priceToken[parseInt(data.channelIndex.toString())];
+  }, [data.channelIndex]);
   /**
    * futures modal
    */
@@ -28,18 +32,24 @@ function useFuturesEditPosition(
 
   const defaultTP = useMemo(() => {
     if (!BigNumber.from("0").eq(data.stopProfitPrice)) {
-      const p = data.stopProfitPrice.bigNumberToShowString(18, 2);
+      const p = data.stopProfitPrice.bigNumberToShowString(
+        18,
+        tokenPair.getTokenPriceDecimals()
+      );
       return p ?? "";
     }
     return "";
-  }, [data.stopProfitPrice]);
+  }, [data.stopProfitPrice, tokenPair]);
   const defaultSL = useMemo(() => {
     if (!BigNumber.from("0").eq(data.stopLossPrice)) {
-      const p = data.stopLossPrice.bigNumberToShowString(18, 2);
+      const p = data.stopLossPrice.bigNumberToShowString(
+        18,
+        tokenPair.getTokenPriceDecimals()
+      );
       return p ?? "";
     }
     return "";
-  }, [data.stopLossPrice]);
+  }, [data.stopLossPrice, tokenPair]);
   const [stopProfitPriceInput, setStopProfitPriceInput] =
     useState<string>(defaultTP);
   const [stopLossPriceInput, setStopLossPriceInput] =
@@ -65,11 +75,16 @@ function useFuturesEditPosition(
   const baseOpenPrice = useMemo(() => {
     return BigNumber.from(data.basePrice.toString()).bigNumberToShowString(
       18,
-      2
+      tokenPair.getTokenPriceDecimals()
     );
-  }, [data.basePrice]);
+  }, [data.basePrice, tokenPair]);
   const tpError = useMemo(() => {
-    if (stopProfitPriceInput !== "" && !BigNumber.from("0").eq(stopProfitPriceInput.stringToBigNumber(18) ?? BigNumber.from("0"))) {
+    if (
+      stopProfitPriceInput !== "" &&
+      !BigNumber.from("0").eq(
+        stopProfitPriceInput.stringToBigNumber(18) ?? BigNumber.from("0")
+      )
+    ) {
       return data.orientation
         ? Number(stopProfitPriceInput) < Number(baseOpenPrice)
         : Number(stopProfitPriceInput) > Number(baseOpenPrice);
@@ -77,7 +92,12 @@ function useFuturesEditPosition(
     return false;
   }, [baseOpenPrice, data.orientation, stopProfitPriceInput]);
   const slError = useMemo(() => {
-    if (stopLossPriceInput !== "" && !BigNumber.from("0").eq(stopLossPriceInput.stringToBigNumber(18) ?? BigNumber.from("0"))) {
+    if (
+      stopLossPriceInput !== "" &&
+      !BigNumber.from("0").eq(
+        stopLossPriceInput.stringToBigNumber(18) ?? BigNumber.from("0")
+      )
+    ) {
       return data.orientation
         ? Number(stopLossPriceInput) > Number(baseOpenPrice)
         : Number(stopLossPriceInput) < Number(baseOpenPrice);
@@ -97,11 +117,13 @@ function useFuturesEditPosition(
    * show
    */
   const placeHolder = useMemo(() => {
-    return [`> OPEN PRICE`, `< OPEN PRICE`];
-  }, []);
+    return data.orientation
+      ? [t`> OPEN PRICE`, t`< OPEN PRICE`]
+      : [t`< OPEN PRICE`, t`> OPEN PRICE`];
+  }, [data.orientation]);
   const showPosition = useMemo(() => {
     const lever = data.lever.toString();
-    const longOrShort = data.orientation ? "Long" : "Short";
+    const longOrShort = data.orientation ? t`Long` : t`Short`;
     const balance = BigNumber.from(
       data.balance.toString()
     ).bigNumberToShowString(4, 2);
@@ -115,21 +137,19 @@ function useFuturesEditPosition(
       data.balance,
       data.appends,
       data.lever,
-      price
-        ? price[priceToken[parseInt(data.channelIndex.toString())]]
-        : data.basePrice,
+      price ? price[tokenPair] : data.basePrice,
       data.basePrice,
       data.orientation
     );
-    return result.bigNumberToShowString(18, 2);
+    return result.bigNumberToShowString(18, tokenPair.getTokenPriceDecimals());
   }, [
-    data.balance,
     data.appends,
-    data.lever,
-    data.channelIndex,
+    data.balance,
     data.basePrice,
+    data.lever,
     data.orientation,
     price,
+    tokenPair,
   ]);
   const showTriggerFee = useMemo(() => {
     const fee = BigNumber.from("5")
@@ -141,8 +161,8 @@ function useFuturesEditPosition(
   }, [data.balance, data.lever]);
   const feeTip = useMemo(() => {
     return [
-      "Position fee =Position*0.05%",
-      "Stop order fee(after execution) = 15 NEST",
+      t`Position fee =Position*0.05%`,
+      t`Stop order fee(after execution) = 15 NEST`,
     ];
   }, []);
   /**
@@ -162,7 +182,7 @@ function useFuturesEditPosition(
     }
   }, [onClose, pending, send]);
   const mainButtonTitle = useMemo(() => {
-    return "Confirm";
+    return t`Confirm`;
   }, []);
   const mainButtonLoading = useMemo(() => {
     if (edit.isLoading || pending) {

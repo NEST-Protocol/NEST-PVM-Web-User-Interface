@@ -61,3 +61,8 @@ export { ReactComponent as UpSort } from "./svg/upSort.svg";
 export { ReactComponent as DownSort } from "./svg/downSort.svg";
 export { ReactComponent as Calendar } from "./svg/calendar.svg";
 export { ReactComponent as Back } from "./svg/back.svg";
+export { ReactComponent as SelectedYes } from "./svg/selectedYes.svg";
+export { ReactComponent as MATICTokenLogo } from "./svg/MATICTokenLogo.svg";
+export { ReactComponent as ADATokenLogo } from "./svg/ADATokenLogo.svg";
+export { ReactComponent as DOGETokenLogo } from "./svg/DOGETokenLogo.svg";
+export { ReactComponent as XRPTokenLogo } from "./svg/XRPTokenLogo.svg";

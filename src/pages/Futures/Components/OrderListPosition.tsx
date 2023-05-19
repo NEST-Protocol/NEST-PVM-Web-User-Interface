@@ -2,6 +2,7 @@ import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import { FC, useMemo } from "react";
 import { Long, Share, Short } from "../../../components/icons";
+import { Trans } from "@lingui/macro";
 
 interface OrderListPositionProps {
   tokenName: string;
@@ -76,7 +77,15 @@ const OrderListPosition: FC<OrderListPositionProps> = ({ ...props }) => {
           })}
         >
           {props.isLong ? <Long /> : <Short />}
-          {props.isLong ? <p>Long</p> : <p>Short</p>}
+          {props.isLong ? (
+            <p>
+              <Trans>Long</Trans>
+            </p>
+          ) : (
+            <p>
+              <Trans>Long</Trans>
+            </p>
+          )}
         </Stack>
         <Box
           component={"button"}

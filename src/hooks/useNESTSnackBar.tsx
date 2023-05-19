@@ -6,6 +6,8 @@ import NormalSnackBar, {
 } from "../components/SnackBar/NormalSnackBar";
 import useNEST from "./useNEST";
 import useWindowWidth from "./useWindowWidth";
+import { t } from "@lingui/macro";
+import { getTransactionTypeString } from "./useTransactionReceipt";
 
 function useTransactionSnackBar() {
   const { isBigMobile } = useWindowWidth();
@@ -37,7 +39,7 @@ function useTransactionSnackBar() {
       content: (key, message) => (
         <NormalSnackBar
           id={key}
-          title={title}
+          title={getTransactionTypeString(title)}
           info={info}
           type={type}
           hash={hash}
@@ -80,7 +82,7 @@ function useTransactionSnackBar() {
       content: (key, message) => (
         <NormalSnackBar
           id={key}
-          title={"Switch network successfully"}
+          title={t`Switch network successfully`}
           info={""}
           type={SnackBarType.success}
           message={message}
@@ -117,10 +119,8 @@ function useTransactionSnackBar() {
       content: (key, message) => (
         <NormalSnackBar
           id={key}
-          title={"Fail Request"}
-          info={
-            "The transaction failed and the amount has been fully refunded. You can re-trade"
-          }
+          title={t`Fail Request`}
+          info={t`The transaction failed and the amount has been fully refunded. You can re-trade`}
           type={SnackBarType.fail}
           hash={undefined}
           message={message}
@@ -130,7 +130,13 @@ function useTransactionSnackBar() {
     });
   };
 
-  return { transactionSnackBar, closeSnackbar, messageSnackBar, switchNetWork, failRequest };
+  return {
+    transactionSnackBar,
+    closeSnackbar,
+    messageSnackBar,
+    switchNetWork,
+    failRequest,
+  };
 }
 
 export default useTransactionSnackBar;

@@ -8,6 +8,7 @@ import { FuturesOrderV2 } from "./useFuturesOrderList";
 import useNEST from "./useNEST";
 import FuturesV2ABI from "../contracts/ABI/FuturesV2.json";
 import { Order } from "../pages/Dashboard/Dashboard";
+import { t } from "@lingui/macro";
 
 function useFuturesPOrder(
   data: FuturesOrderV2,
@@ -42,7 +43,7 @@ function useFuturesPOrder(
         }
         const priceNum = price[tokenName];
         const value = await FuturesV2.balanceOf(data.index, priceNum);
-        
+
         setMarginAssets(value);
       } catch (error) {
         console.log(error);
@@ -52,25 +53,31 @@ function useFuturesPOrder(
 
   const showBasePrice = BigNumber.from(
     data.basePrice.toString()
-  ).bigNumberToShowString(18, 2);
+  ).bigNumberToShowString(18, tokenName.getTokenPriceDecimals());
   const showTriggerTitle = useMemo(() => {
     const isEdit =
       BigNumber.from("0").eq(data.stopProfitPrice) &&
       BigNumber.from("0").eq(data.stopLossPrice);
-    return !isEdit ? "Edit" : "Trigger";
+    return !isEdit ? t`Edit` : t`Trigger`;
   }, [data.stopLossPrice, data.stopProfitPrice]);
   const tp = useMemo(() => {
     const tpNum = data.stopProfitPrice;
     return BigNumber.from("0").eq(tpNum)
       ? String().placeHolder
-      : BigNumber.from(tpNum.toString()).bigNumberToShowString(18, 2);
-  }, [data.stopProfitPrice]);
+      : BigNumber.from(tpNum.toString()).bigNumberToShowString(
+          18,
+          tokenName.getTokenPriceDecimals()
+        );
+  }, [data.stopProfitPrice, tokenName]);
   const sl = useMemo(() => {
     const slNum = data.stopLossPrice;
     return BigNumber.from("0").eq(slNum)
       ? String().placeHolder
-      : BigNumber.from(slNum.toString()).bigNumberToShowString(18, 2);
-  }, [data.stopLossPrice]);
+      : BigNumber.from(slNum.toString()).bigNumberToShowString(
+          18,
+          tokenName.getTokenPriceDecimals()
+        );
+  }, [data.stopLossPrice, tokenName]);
   const showLiqPrice = useMemo(() => {
     const result = lipPrice(
       data.balance,
@@ -80,7 +87,7 @@ function useFuturesPOrder(
       data.basePrice,
       data.orientation
     );
-    return result.bigNumberToShowString(18, 2);
+    return result.bigNumberToShowString(18, tokenName.getTokenPriceDecimals());
   }, [
     data.appends,
     data.balance,
@@ -136,10 +143,15 @@ function useFuturesPOrder(
     const info: Order = {
       owner: data.owner.toString(),
       leverage: `${data.lever.toString()}X`,
-      orientation: data.orientation ? "Long" : "Short",
+      orientation: data.orientation ? t`Long` : t`Short`,
       actualRate: showPercentNum,
       index: parseInt(data.index.toString()),
-      openPrice: parseFloat(data.basePrice.bigNumberToShowString(18, 2)),
+      openPrice: parseFloat(
+        data.basePrice.bigNumberToShowString(
+          18,
+          tokenName.getTokenPriceDecimals()
+        )
+      ),
       tokenPair: `${tokenName}/USDT`,
       actualMargin: marginAssets
         ? parseFloat(marginAssets.bigNumberToShowString(18, 2))
@@ -148,7 +160,12 @@ function useFuturesPOrder(
         BigNumber.from(data.balance.toString()).bigNumberToShowString(4, 2)
       ),
       lastPrice: parseFloat(
-        price ? price[tokenName].bigNumberToShowString(18, 2) : "0"
+        price
+          ? price[tokenName].bigNumberToShowString(
+              18,
+              tokenName.getTokenPriceDecimals()
+            )
+          : "0"
       ),
       sp: parseFloat(tp === String().placeHolder ? "0" : tp),
       sl: parseFloat(sl === String().placeHolder ? "0" : sl),

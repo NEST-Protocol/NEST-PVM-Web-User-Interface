@@ -1,11 +1,14 @@
 import { ThemeProvider } from "@mui/material/styles";
 import { SnackbarProvider } from "notistack";
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import useNEST, { NESTProvider } from "../hooks/useNEST";
 import useTheme, { SetThemeProvider } from "../hooks/useTheme";
 import { PendingTransactionsProvider } from "../hooks/useTransactionReceipt";
 import ConnectWalletModal from "../pages/Share/Modal/ConnectWalletModal";
 import WalletProvider from "./client";
+import { I18nProvider } from "@lingui/react";
+import { i18n } from "@lingui/core";
+import { defaultLocale, dynamicActivate } from "../locales/i18n";
 
 export interface ProviderProps {
   children?: React.ReactNode;
@@ -13,20 +16,22 @@ export interface ProviderProps {
 
 const MainProvider: FC<ProviderProps> = ({ children }) => {
   return (
-    <SetThemeProvider>
-      <NESTThemeProvider>
-        <WalletProvider>
-          <NESTProvider>
-            <SnackbarProvider maxSnack={10}>
-              <PendingTransactionsProvider>
-                <ConnectWallet />
-                {children}
-              </PendingTransactionsProvider>
-            </SnackbarProvider>
-          </NESTProvider>
-        </WalletProvider>
-      </NESTThemeProvider>
-    </SetThemeProvider>
+    <LanguageProvider>
+      <SetThemeProvider>
+        <NESTThemeProvider>
+          <WalletProvider>
+            <NESTProvider>
+              <SnackbarProvider maxSnack={10}>
+                <PendingTransactionsProvider>
+                  <ConnectWallet />
+                  {children}
+                </PendingTransactionsProvider>
+              </SnackbarProvider>
+            </NESTProvider>
+          </WalletProvider>
+        </NESTThemeProvider>
+      </SetThemeProvider>
+    </LanguageProvider>
   );
 };
 
@@ -43,6 +48,18 @@ const ConnectWallet: FC = () => {
 const NESTThemeProvider: FC<ProviderProps> = ({ children }) => {
   const { nowTheme } = useTheme();
   return <ThemeProvider theme={nowTheme}>{children}</ThemeProvider>;
+};
+
+const LanguageProvider: FC<ProviderProps> = ({ children }) => {
+  useEffect(() => {
+    var cache = localStorage.getItem("Language");
+    if (cache) {
+      dynamicActivate(cache);
+      return
+    }
+    dynamicActivate(defaultLocale);
+  }, []);
+  return <I18nProvider i18n={i18n}>{children}</I18nProvider>;
 };
 
 export default MainProvider;

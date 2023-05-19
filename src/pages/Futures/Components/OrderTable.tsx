@@ -12,6 +12,7 @@ import { FuturesModalInfo, FuturesModalType } from "../OrderList";
 import FuturesOrderShare from "./FuturesOrderShare";
 import OrderTablePosition from "./OrderTablePosition";
 import FuturesTableTitle from "./TableTitle";
+import { Trans, t } from "@lingui/macro";
 
 interface FuturesOrderListProps {
   dataArray: Array<FuturesOrderV2>;
@@ -37,7 +38,13 @@ const OrderTable: FC<FuturesOrderListProps> = ({ ...props }) => {
   }, [props.dataArray.length]);
   return (
     <FuturesTableTitle
-      dataArray={["Symbol", "Actual Margin", "Open Price", "Stop Order", "Operate"]}
+      dataArray={[
+        t`Symbol`,
+        t`Actual Margin`,
+        t`Open Price`,
+        t`Stop Order`,
+        t`Operate`,
+      ]}
       style={props.style}
       noOrder={noOrder}
     >
@@ -66,7 +73,7 @@ const OrderTableRow: FC<OrderTableRowProps> = ({ ...props }) => {
     setShowShareOrderModal,
     shareOrder,
     tp,
-    sl
+    sl,
   } = useFuturesOrder(props.data);
   return (
     <TableRow
@@ -127,11 +134,15 @@ const OrderTableRow: FC<OrderTableRowProps> = ({ ...props }) => {
           })}
         >
           <Box component={"p"}>
-            <span>TP</span>
+            <span>
+              <Trans>TP</Trans>
+            </span>
             {tp}USDT
           </Box>
           <Box component={"p"}>
-            <span>SL</span>
+            <span>
+              <Trans>SL</Trans>
+            </span>
             {sl}USDT
           </Box>
         </Stack>
@@ -139,21 +150,37 @@ const OrderTableRow: FC<OrderTableRowProps> = ({ ...props }) => {
       <TableCell>
         <Stack direction={"row"} justifyContent={"flex-end"} spacing={"8px"}>
           <MainButton
-            title={"Edit"}
+            title={t`Edit`}
             onClick={() =>
               props.buttonCallBack({
                 data: props.data,
                 type: FuturesModalType.editLimit,
               })
             }
-            style={{ height: "36px", width: "65px", fontSize: 12 }}
+            style={{
+              width: "auto",
+              height: "36px",
+              minWidth: "65px",
+              fontSize: 12,
+              paddingLeft: `12px`,
+              paddingRight: `12px`,
+              borderRadius: `8px`
+            }}
           />
           <MainButton
             title={mainButtonTitle}
             isLoading={mainButtonLoading}
             disable={mainButtonDis}
             onClick={mainButtonAction}
-            style={{ height: "36px", width: "65px", fontSize: 12 }}
+            style={{
+              width: "auto",
+              height: "36px",
+              minWidth: "65px",
+              fontSize: 12,
+              paddingLeft: `12px`,
+              paddingRight: `12px`,
+              borderRadius: `8px`
+            }}
           />
           <FuturesOrderShare
             component={"button"}

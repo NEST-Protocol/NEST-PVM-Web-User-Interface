@@ -15,6 +15,7 @@ import ApplyModal from "./Modal/ApplyModal";
 import useWindowWidth from "../../hooks/useWindowWidth";
 import useTheme from "../../hooks/useTheme";
 import {Link} from "react-router-dom";
+import {t} from '@lingui/macro'
 
 const Header1 = styled("header")(({theme}) => ({
   fontWeight: "700",
@@ -230,11 +231,12 @@ const Home: FC = () => {
           }
           <Stack spacing={'12px'} px={['20px', '20px', '40px']} paddingTop={['40px', '40px', '80px']}>
             <Header1 sx={{fontSize: ['26px', '26px', '32px'], zIndex: 1}}>
-              NESTFi, A Next-Generation<br/>
-              Decentralized Perpetual Exchange
+              {t`NESTFi, A Next-Generation`}
+              <br/>
+              {t`Decentralized Perpetual Exchange`}
             </Header1>
             <Caption1 sx={{zIndex: 1}}>
-              NESTFi's economic model is deflationary, the more users trade, the more $NEST will be burned
+              {t`NESTFi's economic model is deflationary, the more users trade, the more $NEST will be burned`}
             </Caption1>
           </Stack>
           {
@@ -248,7 +250,7 @@ const Home: FC = () => {
                         sx={{fontSize: ['28px', '28px', '32px']}}>{destoryData.totalDestroy === 0 ? '-' : (-1 * destoryData.totalDestroy).toLocaleString('en-US', {
                         maximumFractionDigits: 2,
                       })} NEST</Title1>
-                      <MobileCard1Caption>Total Burned</MobileCard1Caption>
+                      <MobileCard1Caption>{t`Total Burned`}</MobileCard1Caption>
                     </Stack>
                     <DashSvg>
                       <HomeIcon6/>
@@ -259,7 +261,7 @@ const Home: FC = () => {
             ) : (
               <Stack direction={'row'} zIndex={1} spacing={'16px'} py={'40px'} px={['20px', '20px', '40px']}>
                 <Badge1>
-                  Total Burned
+                  {t`Total Burned`}
                 </Badge1>
                 <Title1>
                   {destoryData.totalDestroy === 0 ? '-' : (-1 * destoryData.totalDestroy).toLocaleString('en-US', {
@@ -272,8 +274,9 @@ const Home: FC = () => {
           }
           <Stack pb={['60px', '60px', '80px']} zIndex={1} px={['20px', '20px', '40px']}>
             <Link to={'/futures'}>
-              <MainButton title={"Start Trading"} style={{width: '200px', height: "48px"}}
-                          onClick={() => {}}/>
+              <MainButton title={t`Start Trading`} style={{width: '200px', height: "48px"}}
+                          onClick={() => {
+                          }}/>
             </Link>
           </Stack>
         </Stack>
@@ -281,9 +284,13 @@ const Home: FC = () => {
           isBigMobile ? (
             <Stack width={'100%'}>
               <MobileCard2 sx={{padding: '40px 20px'}}>
-                <MobileCard2Title1>NESTFi offers<br/>
-                  <span style={{fontWeight: '700', fontSize: '28px', color: 'rgb(234, 170, 0)'}}>100%</span> trading
-                  fees as<br/> commission for KOLs
+                <MobileCard2Title1>{t`NESTFi offers`}<br/>
+                  <span style={{
+                    fontWeight: '700',
+                    fontSize: '28px',
+                    color: 'rgb(234, 170, 0)'
+                  }}>{t`100%`}</span> {t`trading fees as`}
+                  <br/> {t`commission for KOLs`}
                 </MobileCard2Title1>
                 <MobileCard1 sx={{paddingY: '20px'}}>
                   <CardBorder>
@@ -294,7 +301,7 @@ const Home: FC = () => {
                           sx={{fontSize: ['28px', '28px', '32px']}}>{kols === 0 ? '-' : kols.toLocaleString('en-US', {
                           maximumFractionDigits: 0,
                         })}</Title1>
-                        <MobileCard1Caption>Number of KOLs Joined NESTFi</MobileCard1Caption>
+                        <MobileCard1Caption>{t`Number of KOLs Joined NESTFi`}</MobileCard1Caption>
                       </Stack>
                       <DashSvg>
                         <HomeIcon5/>
@@ -302,7 +309,7 @@ const Home: FC = () => {
                     </Stack>
                   </CardBorder>
                 </MobileCard1>
-                <MainButton title={'Become a Trading KOL'} onClick={() => {
+                <MainButton title={t`Become a Trading KOL`} onClick={() => {
                   setOpenApplyModal(true)
                 }} style={{width: '225px', height: "48px"}}/>
               </MobileCard2>
@@ -314,12 +321,11 @@ const Home: FC = () => {
                 <Stack maxWidth={'1600px'} px={['20px', '20px', '40px']} direction={'row'} width={'100%'} zIndex={1}>
                   <Stack spacing={'40px'} width={'50%'} py={'80px'} px={'20px'}>
                     <Title2>
-                      NESTFi offers <span
-                      style={{fontWeight: '700', fontSize: '28px', color: 'rgb(234, 170, 0)'}}>100%</span> trading
-                      fees<br/>
-                      as commission for KOLs.
+                      {t`NESTFi offers`} <span
+                      style={{fontWeight: '700', fontSize: '28px', color: 'rgb(234, 170, 0)'}}>{t`100%`}</span> {t`trading
+                      fees`} <br/> {t`as commission for KOLs.`}
                     </Title2>
-                    <MainButton title={"Become a Trading KOL"}
+                    <MainButton title={t`Become a Trading KOL`}
                                 style={{width: '225px', height: "48px"}}
                                 onClick={() => {
                                   setOpenApplyModal(true)
@@ -336,7 +342,7 @@ const Home: FC = () => {
                         })}
                       </Title1>
                       <Caption1>
-                        Number of KOLs Joined NESTFi
+                        {t`Number of KOLs Joined NESTFi`}
                       </Caption1>
                     </Stack>
                   </Stack>
@@ -348,7 +354,7 @@ const Home: FC = () => {
         }
         <Stack pt={['60px', '60px', '100px']}>
           <Header1 sx={{padding: '0 20px', fontSize: ['28px', '28px', '32px']}}>
-            Why You Should Choose NESTFi
+            {t`Why You Should Choose NESTFi`}
           </Header1>
           <Stack direction={'row'} pt={['20px', '20px', '40px']} spacing={'24px'} maxWidth={'1600px'}
                  px={['20px', '20px', '40px']}>
@@ -357,23 +363,23 @@ const Home: FC = () => {
                 [
                   {
                     icon: <HomeIcon1/>,
-                    title: 'Decentralized',
-                    description: 'Trade directly from your wallet without the risk of misappropriating funds.'
+                    title: t`Decentralized`,
+                    description: t`Trade directly from your wallet without the risk of misappropriating funds.`
                   },
                   {
                     icon: <HomeIcon2/>,
-                    title: 'Deflationary',
-                    description: 'NEST\'s economic model is deflationary, thus settlement with $NEST will bring higher potential revenue.',
+                    title: t`Deflationary`,
+                    description: t`NEST\'s economic model is deflationary, thus settlement with $NEST will bring higher potential revenue.`,
                   },
                   {
                     icon: <HomeIcon3/>,
-                    title: 'No Market Makers',
-                    description: 'The smart contract is the only seller of the system, which means there are no market marking costs, no liquidity debt, no slippage costs in the system.',
+                    title: t`No Market Makers`,
+                    description: t`The smart contract is the only seller of the system, which means there are no market marking costs, no liquidity debt, no slippage costs in the system.`,
                   },
                   {
                     icon: <HomeIcon4/>,
-                    title: 'Infinite Liquidity',
-                    description: 'The smart contract guarantees the infinite liquidity through burning and issuing $NEST. This keeps positions safe from temporary wicks caused by illiquidity.',
+                    title: t`Infinite Liquidity`,
+                    description: t`The smart contract guarantees the infinite liquidity through burning and issuing $NEST. This keeps positions safe from temporary wicks caused by illiquidity.`,
                   }
                 ].map((item, index) => {
                   return (

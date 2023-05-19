@@ -5,6 +5,7 @@ import { Close, Notice } from "../../../components/icons";
 import MainButton from "../../../components/MainButton/MainButton";
 import Box from "@mui/material/Box";
 import LinkButton from "../../../components/MainButton/LinkButton";
+import { Trans, t } from "@lingui/macro";
 
 interface FuturesNoticeProps {
   onClose: () => void;
@@ -56,7 +57,9 @@ const FuturesNotice: FC<FuturesNoticeProps> = ({ ...props }) => {
         </Box>
 
         <p>
-          For the positions opened before April 6, 2023, please go to→
+          <Trans>
+            For the positions opened before April 6, 2023, please go to→
+          </Trans>
           <span> </span>
           <LinkButton
             onClick={() => {
@@ -66,7 +69,7 @@ const FuturesNotice: FC<FuturesNoticeProps> = ({ ...props }) => {
           >
             previous.nestfi.org
           </LinkButton>{" "}
-          to check and close.
+          <Trans>to check and close.</Trans>
         </p>
       </Stack>
       <Stack
@@ -76,7 +79,7 @@ const FuturesNotice: FC<FuturesNoticeProps> = ({ ...props }) => {
         alignItems={"center"}
       >
         <MainButton
-          title={"View"}
+          title={t`View`}
           onClick={() => {
             window.open("https://previous.nestfi.org/#/futures");
           }}
