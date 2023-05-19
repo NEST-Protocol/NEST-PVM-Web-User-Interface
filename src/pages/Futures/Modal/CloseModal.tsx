@@ -12,6 +12,7 @@ import useWindowWidth from "../../../hooks/useWindowWidth";
 import BaseDrawer from "../../Share/Modal/BaseDrawer";
 import BaseModal from "../../Share/Modal/BaseModal";
 import { FuturesPrice } from "../Futures";
+import { t } from "@lingui/macro";
 
 interface CloseModalBaseProps {
   data: FuturesOrderV2;
@@ -34,14 +35,14 @@ const CloseModalBase: FC<CloseModalBaseProps> = ({ ...props }) => {
     <Stack spacing={"24px"} width={"100%"}>
       <NESTLine />
       <Stack spacing={"8px"}>
-        <NormalInfo title={"Position"} value={""} symbol={showPosition} />
+        <NormalInfo title={t`Position`} value={""} symbol={showPosition} />
         <NormalInfo
-          title={"Close Price"}
+          title={t`Close Price`}
           value={showClosePrice}
           symbol={"USDT"}
         />
         <NormalInfo
-          title={"Service Fee"}
+          title={t`Service Fee`}
           value={showFee}
           symbol={"NEST"}
           help
@@ -78,7 +79,7 @@ const CloseModal: FC<CloseModalProps> = ({ ...props }) => {
           "& .MuiPaper-root": { background: "none", backgroundImage: "none" },
         }}
       >
-        <BaseDrawer title={"Close Position"} onClose={props.onClose}>
+        <BaseDrawer title={t`Close Position`} onClose={props.onClose}>
           <CloseModalBase
             data={props.data}
             price={props.price}
@@ -94,7 +95,7 @@ const CloseModal: FC<CloseModalProps> = ({ ...props }) => {
         aria-describedby="modal-modal-description"
       >
         <Box>
-          <BaseModal title={"Close Position"} onClose={props.onClose}>
+          <BaseModal title={t`Close Position`} onClose={props.onClose}>
             <CloseModalBase
               data={props.data}
               price={props.price}

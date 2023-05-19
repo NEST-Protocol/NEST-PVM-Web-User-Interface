@@ -7,6 +7,7 @@ import MainButton from "../../../components/MainButton/MainButton";
 import useNEST from "../../../hooks/useNEST";
 import useWalletIcon from "../../../hooks/uswWalletIcon";
 import MyWalletModal from "../Modal/MyWalletModal";
+import { t } from "@lingui/macro";
 
 const ConnectButton: FC = () => {
   const { account, setShowConnect } = useNEST();
@@ -69,7 +70,7 @@ const ConnectButton: FC = () => {
         </AddressStack>
       ) : (
         <MainButton
-          title={"Connect Wallet"}
+          title={t`Connect Wallet`}
           onClick={() => {
             setShowConnect(true);
           }}

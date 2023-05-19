@@ -3,6 +3,7 @@ import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
 import { FC } from "react";
 import { Long, Short } from "../icons";
+import { Trans } from "@lingui/macro";
 
 interface LongOrShortProps {
   value: boolean;
@@ -82,7 +83,9 @@ const LongOrShort: FC<LongOrShortProps> = ({ ...props }) => {
       >
         <Stack direction={"row"} spacing={"12px"} justifyContent={"center"}>
           <Long />
-          <p>Long</p>
+          <p>
+            <Trans>Long</Trans>
+          </p>
         </Stack>
       </Button>
       <Button
@@ -93,7 +96,9 @@ const LongOrShort: FC<LongOrShortProps> = ({ ...props }) => {
         <Stack direction={"row"} spacing={"12px"} justifyContent={"center"}>
           {" "}
           <Short />
-          <p>Short</p>
+          <p>
+            <Trans>Short</Trans>
+          </p>
         </Stack>
       </Button>
     </Stack>

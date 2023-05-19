@@ -1,0 +1,941 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2023-05-11 12:02+0800\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: ko\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+
+#: src/hooks/useFuturesNewOrder.ts
+#: src/hooks/useFuturesNewOrder.ts
+msgid "< LIMIT PRICE"
+msgstr "< 리미트 가격"
+
+#: src/hooks/useFuturesNewOrder.ts
+#: src/hooks/useFuturesNewOrder.ts
+msgid "< MARKET PRICE"
+msgstr "< 시장 가격"
+
+#: src/hooks/useFuturesEditPosition.ts
+#: src/hooks/useFuturesEditPosition.ts
+msgid "< OPEN PRICE"
+msgstr "< 개장 가격"
+
+#: src/hooks/useFuturesNewOrder.ts
+#: src/hooks/useFuturesNewOrder.ts
+msgid "> LIMIT PRICE"
+msgstr "> 리미트 가격"
+
+#: src/hooks/useFuturesNewOrder.ts
+#: src/hooks/useFuturesNewOrder.ts
+msgid "> MARKET PRICE"
+msgstr "> 시장 가격"
+
+#: src/hooks/useFuturesEditPosition.ts
+#: src/hooks/useFuturesEditPosition.ts
+msgid "> OPEN PRICE"
+msgstr "> 개장 가격"
+
+#: src/components/NormalInput/NESTInput.tsx
+#: src/components/NormalInput/NESTInputSelect.tsx
+msgid "0 balance. Before trading, you can switch to \"Swap\" to exchange between USDT and NEST token."
+msgstr "0 잔액입니다. 거래 전에 \"스왑\"으로 이동하여 USDT와 NEST 토큰을 교환할 수 있습니다."
+
+#: src/pages/Futures/Modal/LimitAndPriceModal.tsx
+msgid "1. The trigger price has been reached but there is not enough time to execute."
+msgstr "1. 트리거 가격이 도달했지만 실행에 충분한 시간이 없습니다."
+
+#: src/pages/Futures/Modal/LimitAndPriceModal.tsx
+#: src/pages/Futures/Modal/ProtocolModal.tsx
+msgid "1. Uncertainty risk of income: The calculation method of NEST perpetual contract is different from the calculation method of perpetual contract of traditional centralized exchange. The NEST perpetual contract converts the future price of the asset based on the historical rate of return of the asset. Therefore, the asset price increases by 100% after the user opens a position. The user's income is not 100%. In extreme cases, even if the asset price is rising, your income may be negative."
+msgstr "1. 수익의 불확실성 위험: NEST 영구 계약의 계산 방법은 전통적인 중앙 집중식 거래소의 영구 계약의 계산 방법과 다릅니다. NEST 영구 계약은 자산의 과거 수익률을 기반으로 자산의 미래 가격을 변환합니다. 따라서 사용자가 포지션을 오픈한 후 자산 가격이 100% 상승합니다. 사용자의 수익은 100%가 아닙니다. 극단적인 경우 자산 가격이 상승하더라도 수익이 음수가 될 수 있습니다."
+
+#: src/pages/Home/Home.tsx
+#: src/pages/Home/Home.tsx
+msgid "100%"
+msgstr "100%"
+
+#: src/pages/Futures/Modal/LimitAndPriceModal.tsx
+msgid "2. No one picks up the execution order There may be slippage to execute at the trigger price."
+msgstr "2. 아무도 실행 주문을 수행하지 않으면 트리거 가격에서 실행될 수 있습니다."
+
+#: src/pages/Futures/Modal/LimitAndPriceModal.tsx
+#: src/pages/Futures/Modal/ProtocolModal.tsx
+msgid "2. Position liquidation risk: NEST perpetual contracts provide leverage of 1-20 times. When your leverage is greater than 1 times leverage, the price fluctuation of the underlying asset may cause liquidation."
+msgstr "2. 포지션 청산 리스크: NEST 영구 계약은 1-20 배 레버리지를 제공합니다. 레버리지가 1 배 이상일 때, 기초 자산의 가격 변동으로 인해 청산될 수 있습니다."
+
+#: src/pages/Futures/ExchangeTVChart.tsx
+msgid "24h Change"
+msgstr ""
+
+#: src/pages/Futures/ExchangeTVChart.tsx
+msgid "24h High"
+msgstr ""
+
+#: src/pages/Futures/ExchangeTVChart.tsx
+msgid "24h Low"
+msgstr ""
+
+#: src/pages/Futures/Modal/LimitAndPriceModal.tsx
+#: src/pages/Futures/Modal/ProtocolModal.tsx
+msgid "3. NEST Token price fluctuation risk: Both the margin and the final profit and loss use NEST Token, and NEST itself is also a highly volatile asset. In extreme cases, even if your perpetual contract position is profitable, However, due to the fluctuation of the NEST price itself, it may cause you to lose money in terms of fiat currency."
+msgstr "3. NEST 토큰 가격 변동 리스크: 마진과 최종 이익과 손실 모두 NEST 토큰을 사용하며, NEST 자체도 매우 불안정한 자산입니다. 극단적인 경우, 영구 계약 포지션이 이익을 낼 수 있더라도, NEST 자체의 가격 변동으로 인해, 당신은 법정 화폐로 손해를 볼 수 있습니다."
+
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+msgid "30 Days' PNL"
+msgstr "30 일 수익/손실"
+
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+msgid "30 Days\\' PNL"
+msgstr "30 일 수익/손실"
+
+#: src/pages/Futures/Modal/LimitAndPriceModal.tsx
+#: src/pages/Futures/Modal/ProtocolModal.tsx
+msgid "4. External oracle risk: NEST protocol's perpetual contract price comes from the NEST oracle. If the oracle is attacked or other reasons cause the price to be abnormal, The system may encounter settlement exceptions, which may cause errors in the user's revenue calculation."
+msgstr "4. 외부 오라클 리스크: NEST 프로토콜의 영구 계약 가격은 NEST 오라클에서 나옵니다. 오라클이 공격을 받거나 기타 이유로 가격이 비정상적인 경우 시스템은 결제 예외 상황을 만날 수 있으며, 이는 사용자의 수익 계산에서 오류를 발생시킬 수 있습니다."
+
+#: src/pages/Futures/Modal/LimitAndPriceModal.tsx
+#: src/pages/Futures/Modal/ProtocolModal.tsx
+msgid "5. Smart contract risk: There may be fatal unknown risks in the smart contract that may cause your principal to be damaged. Please evaluate the risk yourself before deciding whether to participate."
+msgstr "5. 스마트 계약 위험: 스마트 계약에 치명적인 알 수 없는 위험이 있을 수 있으며, 참여 여부를 결정하기 전에 위험을 스스로 평가하십시오."
+
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+msgid "7 Days' PNL"
+msgstr "7 일 PNL"
+
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+msgid "7 Days\\' PNL"
+msgstr "7 일 PNL"
+
+#: src/pages/Share/Modal/ConnectWalletModal.tsx
+msgid "about connecting wallets"
+msgstr "지갑 연결 정보"
+
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Futures/Components/OrderList.tsx
+#: src/pages/Futures/Components/OrderTable.tsx
+#: src/pages/Futures/Components/POrderList.tsx
+#: src/pages/Futures/Components/POrderList.tsx
+#: src/pages/Futures/Components/POrderTable.tsx
+msgid "Actual Margin"
+msgstr "실제 마진"
+
+#: src/pages/Futures/Components/POrderList.tsx
+#: src/pages/Futures/Components/POrderTable.tsx
+msgid "Add"
+msgstr "추가"
+
+#: src/pages/Swap/Swap.tsx
+msgid "Add NEST to wallet"
+msgstr "월렛에 NEST 추가"
+
+#: src/hooks/useTransactionReceipt.ts
+msgid "Add position"
+msgstr "포지션 추가"
+
+#: src/pages/Futures/Modal/AddModal.tsx
+#: src/pages/Futures/Modal/AddModal.tsx
+msgid "Add Position"
+msgstr "포지션 추가"
+
+#: src/hooks/useFuturesNewOrder.ts
+#: src/pages/Futures/Modal/EditPositionModal.tsx
+msgid "After the limit order is executed, TP and SL price you set will trigger immediately."
+msgstr "리미트 오더가 실행된 후 설정한 TP 및 SL 가격이 즉시 트리거됩니다."
+
+#: src/components/NormalInput/NESTInput.tsx
+#: src/components/NormalInput/NESTInputSelect.tsx
+msgid "Amount"
+msgstr "수량"
+
+#: src/pages/Futures/Modal/ApproveNoticeModal.tsx
+msgid "Approval required"
+msgstr "승인 필요함"
+
+#: src/hooks/useFuturesAdd.ts
+#: src/hooks/useFuturesNewOrder.ts
+#: src/hooks/useSwap.ts
+#: src/hooks/useTransactionReceipt.ts
+#: src/pages/Futures/Modal/ApproveNoticeModal.tsx
+msgid "Approve"
+msgstr "승인"
+
+#: src/pages/Home/Home.tsx
+msgid "as commission for KOLs."
+msgstr "KOL의 수수료로."
+
+#: src/hooks/useSwap.ts
+msgid "balance"
+msgstr "잔고"
+
+#: src/components/NormalInput/NESTInput.tsx
+#: src/components/NormalInput/NESTInputSelect.tsx
+#: src/pages/Swap/Components/SwapInputItem.tsx
+#: src/pages/Swap/Components/SwapInputItem.tsx
+msgid "Balance:"
+msgstr "잔액:"
+
+#: src/pages/Home/Home.tsx
+#: src/pages/Home/Home.tsx
+#: src/pages/Home/Modal/ApplyModal.tsx
+#: src/pages/Home/Modal/ApplyModal.tsx
+msgid "Become a Trading KOL"
+msgstr "트레이딩 KOL이 되기"
+
+#: src/pages/Home/Modal/ApplyModal.tsx
+msgid "Channel link"
+msgstr "채널 링크"
+
+#: src/components/NormalInput/NormalInputWithCloseButton.tsx
+#: src/hooks/useFuturesOrder.ts
+#: src/pages/Futures/Components/POrderList.tsx
+#: src/pages/Futures/Components/POrderTable.tsx
+msgid "Close"
+msgstr "청산"
+
+#: src/hooks/useTransactionReceipt.ts
+msgid "Close Limit Order"
+msgstr "지정가 주문 청산"
+
+#: src/pages/Futures/Modal/CloseModal.tsx
+#: src/pages/Futures/Modal/CloseModal.tsx
+msgid "Close Position"
+msgstr "포지션 청산"
+
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
+#: src/pages/Futures/Modal/CloseModal.tsx
+msgid "Close Price"
+msgstr "청산 가격"
+
+#: src/pages/Futures/Modal/CloseOrderNoticeModal.tsx
+msgid "Close Risk"
+msgstr "청산 위험"
+
+#: src/pages/Home/Home.tsx
+msgid "commission for KOLs"
+msgstr "KOL 수수료"
+
+#: src/hooks/useFuturesAdd.ts
+#: src/hooks/useFuturesClose.ts
+#: src/hooks/useFuturesEditLimit.ts
+#: src/hooks/useFuturesEditPosition.ts
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Futures/Modal/SharePositionModal.tsx
+#: src/pages/Home/Modal/ApplyModal.tsx
+#: src/pages/Swap/Components/SwapSlippageModal.tsx
+msgid "Confirm"
+msgstr "확인"
+
+#: src/hooks/useFuturesNewOrder.ts
+#: src/hooks/useFuturesNewOrder.ts
+#: src/hooks/useSwap.ts
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Share/Head/ConnectButton.tsx
+#: src/pages/Share/Modal/ConnectWalletModal.tsx
+#: src/pages/Share/Modal/ConnectWalletModal.tsx
+msgid "Connect Wallet"
+msgstr "지갑 연결"
+
+#: src/pages/Home/Modal/ApplyModal.tsx
+msgid "Contact info (Telegram handle)"
+msgstr "연락처 정보 (텔레그램 핸들)"
+
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+msgid "Copy Invitation Link"
+msgstr "초대 링크 복사"
+
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
+#: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
+msgid "Copy Link"
+msgstr "링크 복사"
+
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
+#: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
+#: src/pages/Share/Modal/MyWalletModal.tsx
+msgid "Copy Successfully"
+msgstr "복사 완료"
+
+#: src/pages/Dashboard/Dashboard.tsx
+msgid "Current Positions"
+msgstr "현재 위치"
+
+#: src/pages/Share/Head/NavMenuV2Base.tsx
+msgid "Dark mode"
+msgstr "다크 모드"
+
+#: src/pages/Share/Head/NESTHead.tsx
+#: src/pages/Share/Head/NESTHead.tsx
+msgid "Dashboard"
+msgstr "대시보드"
+
+#: src/pages/Home/Home.tsx
+msgid "Decentralized"
+msgstr "분산형"
+
+#: src/pages/Home/Home.tsx
+msgid "Decentralized Perpetual Exchange"
+msgstr "분산형 영구 계약 거래소"
+
+#: src/pages/Home/Home.tsx
+msgid "Deflationary"
+msgstr "물가 하락의"
+
+#: src/pages/Share/Modal/MyWalletModal.tsx
+msgid "Disconnect"
+msgstr "연결 해제"
+
+#: src/pages/Futures/Components/POrderList.tsx
+#: src/pages/Futures/Components/POrderTable.tsx
+msgid "Due to the market volatility, the actual liquidation price may be different from the theoretical liquidation price . Here is the theoretical liquidation price, for reference only."
+msgstr "시장 변동성으로 인해 실제 청산 가격은 이론적인 청산 가격과 다를 수 있습니다. 이곳에서는 참고용 이론적 청산 가격이 제시됩니다."
+
+#: src/hooks/useFuturesPOrder.ts
+#: src/pages/Futures/Components/OrderList.tsx
+#: src/pages/Futures/Components/OrderTable.tsx
+#: src/pages/Futures/Modal/SharePositionModal.tsx
+#: src/pages/Futures/Modal/SharePositionModal.tsx
+msgid "Edit"
+msgstr "편집"
+
+#: src/hooks/useTransactionReceipt.ts
+msgid "Edit Limit Order"
+msgstr "한도 주문 수정"
+
+#: src/hooks/useTransactionReceipt.ts
+#: src/pages/Futures/Modal/EditPositionModal.tsx
+msgid "Edit Position"
+msgstr "포지션 수정"
+
+#: src/pages/Home/Modal/ApplyModal.tsx
+msgid "Enter Channel link"
+msgstr "채널 링크를 입력하세요"
+
+#: src/pages/Home/Modal/ApplyModal.tsx
+msgid "Enter your Contact info"
+msgstr "연락처 정보를 입력하세요"
+
+#: src/pages/Futures/NewOrder.tsx
+msgid "Entry Price"
+msgstr "진입 가격"
+
+#: src/hooks/useNESTSnackBar.tsx
+msgid "Fail Request"
+msgstr "요청 실패"
+
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
+#: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
+msgid ""
+"Follow the right person, making money is as easy as breathing.\n"
+"You can follow the right person on NESTFi, here is my refer link"
+msgstr ""
+"올바른 사람을 따라가면 돈 버는 것은 숨 쉬는 것만큼 쉽습니다.\n"
+"NESTFi에서 올바른 사람을 팔로우할 수 있습니다. 여기는 제 추천 링크입니다."
+
+#: src/pages/Futures/Components/FuturesNotice.tsx
+msgid "For the positions opened before April 6, 2023, please go to→"
+msgstr "2023년 4월 6일 이전에 열린 포지션은 여기로 이동하세요 →"
+
+#: src/pages/Futures/Modal/LimitAndPriceModal.tsx
+#: src/pages/Futures/Modal/ProtocolModal.tsx
+msgid "For users/smart contracts using NEST Protocol perpetual contracts, please understand its rules and the differences of similar products in the market when performing positions, settlement, liquidation and other related operations. After fully understanding the following possible risks and can bear Participate in the risk situation:"
+msgstr "NEST 프로토콜 영구 계약을 사용하는 사용자/스마트 계약의 경우, 포지션, 결제, 청산 및 기타 관련 작업 수행 시 해당 규칙 및 시장에서 유사한 제품과의 차이점을 이해해야 합니다. 다음과 같은 위험 가능성을 완전히 이해하고 수용할 수 있는 경우 위험 상황에 참여할 수 있습니다:"
+
+#: src/pages/Swap/Components/SwapInputItem.tsx
+msgid "From"
+msgstr "보낸 사람"
+
+#: src/pages/Share/Head/NESTHead.tsx
+msgid "Futures"
+msgstr "선물 계약"
+
+#: src/pages/Share/Head/NavMenuV2Base.tsx
+msgid "Github"
+msgstr "깃허브"
+
+#: src/pages/Dashboard/Dashboard.tsx
+msgid "History"
+msgstr "역사"
+
+#: src/pages/Share/Head/NESTHead.tsx
+msgid "Home"
+msgstr "홈"
+
+#: src/pages/Futures/MoreInfo.tsx
+msgid "How to Play"
+msgstr "플레이 방법"
+
+#: src/pages/Futures/Modal/CloseOrderNoticeModal.tsx
+#: src/pages/Home/Modal/ApplyModal.tsx
+msgid "I understand"
+msgstr "이해했습니다"
+
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
+#: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
+msgid "Image"
+msgstr "이미지"
+
+#: src/pages/Home/Home.tsx
+msgid "Infinite Liquidity"
+msgstr "무한한 유동성"
+
+#: src/hooks/useSwap.ts
+msgid "Insufficient"
+msgstr "불충분함"
+
+#: src/hooks/useFuturesAdd.ts
+#: src/hooks/useFuturesNewOrder.ts
+msgid "Insufficient NEST balance"
+msgstr "NEST 잔액 부족"
+
+#: src/pages/Share/Head/NavMenuV2Base.tsx
+#: src/pages/Share/Modal/LanguageModal.tsx
+#: src/pages/Share/Modal/LanguageModal.tsx
+msgid "Language"
+msgstr "언어"
+
+#: src/components/NormalInput/NormalInput.tsx
+msgid "Last"
+msgstr "마지막"
+
+#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
+msgid "Last Price"
+msgstr "최종 가격"
+
+#: src/pages/Share/Modal/ConnectWalletModal.tsx
+msgid "Learn more"
+msgstr "자세히 알아보기"
+
+#: src/pages/Futures/Components/LeverageSlider.tsx
+msgid "Leverage"
+msgstr "레버리지"
+
+#: src/pages/Futures/NewOrder.tsx
+msgid "Limit"
+msgstr "지정가"
+
+#: src/hooks/useFuturesNewOrder.ts
+#: src/hooks/useFuturesNewOrder.ts
+msgid "Limit order fee = 15 NEST"
+msgstr "지정가 주문 수수료 = 15 NEST"
+
+#: src/pages/Futures/Modal/EditLimitModal.tsx
+#: src/pages/Futures/Modal/EditLimitModal.tsx
+#: src/pages/Futures/Modal/EditLimitModal.tsx
+#: src/pages/Futures/Modal/SharePositionModal.tsx
+#: src/pages/Futures/Modal/SharePositionModal.tsx
+msgid "Limit Price"
+msgstr "리미트 가격"
+
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Futures/Components/POrderList.tsx
+#: src/pages/Futures/Components/POrderTable.tsx
+#: src/pages/Futures/Modal/AddModal.tsx
+#: src/pages/Futures/Modal/EditPositionModal.tsx
+#: src/pages/Futures/NewOrder.tsx
+msgid "Liq Price"
+msgstr "청산 가격"
+
+#: src/hooks/useFuturesPOrderClose.tsx
+msgid "Liquidated"
+msgstr "청산됨"
+
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
+#: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
+msgid "Loading..."
+msgstr "로딩 중..."
+
+#: src/components/LongOrShort/LongOrShort.tsx
+#: src/hooks/useFuturesAdd.ts
+#: src/hooks/useFuturesClose.ts
+#: src/hooks/useFuturesEditPosition.ts
+#: src/hooks/useFuturesNewOrder.ts
+#: src/hooks/useFuturesOrder.ts
+#: src/hooks/useFuturesPOrder.ts
+#: src/hooks/useFuturesPOrderClose.tsx
+#: src/pages/Dashboard/Components/ShareOrderPosition.tsx
+#: src/pages/Futures/Components/OrderListPosition.tsx
+#: src/pages/Futures/Components/OrderTablePosition.tsx
+#: src/pages/Futures/Modal/SharePositionModal.tsx
+msgid "Long"
+msgstr "롱"
+
+#: src/pages/Futures/NewOrder.tsx
+msgid "Market"
+msgstr "시장가"
+
+#: src/pages/Swap/Components/SwapInputItem.tsx
+msgid "Max"
+msgstr "최대"
+
+#: src/components/NormalInput/NESTInput.tsx
+#: src/components/NormalInput/NESTInputSelect.tsx
+msgid "MAX"
+msgstr "최대"
+
+#: src/hooks/useFuturesNewOrder.ts
+msgid "Minimum 50 NEST"
+msgstr "최소 50 NEST"
+
+#: src/pages/Share/Modal/ConnectWalletModal.tsx
+msgid "More"
+msgstr "자세히 보기"
+
+#: src/pages/Futures/MoreInfo.tsx
+msgid "More Info"
+msgstr "자세한 정보"
+
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+msgid "My Positions"
+msgstr "내 포지션"
+
+#: src/pages/Dashboard/Dashboard.tsx
+msgid "NEST Total Burned"
+msgstr "총 소각된 NEST"
+
+#: src/pages/Futures/MoreInfo.tsx
+msgid "NEST White Paper"
+msgstr "NEST 화이트페이퍼"
+
+#: src/pages/Home/Home.tsx
+msgid "NEST\\'s economic model is deflationary, thus settlement with $NEST will bring higher potential revenue."
+msgstr "NEST의 경제 모델은 불안정하며, 따라서 $NEST로 결제하면 더 높은 수익이 발생합니다."
+
+#: src/pages/Home/Home.tsx
+#: src/pages/Home/Home.tsx
+msgid "NESTFi offers"
+msgstr "NESTFi는 다음을 제공합니다"
+
+#: src/pages/Home/Home.tsx
+msgid "NESTFi, A Next-Generation"
+msgstr "NESTFi, 차세대"
+
+#: src/pages/Home/Home.tsx
+msgid "NESTFi's economic model is deflationary, the more users trade, the more $NEST will be burned"
+msgstr "NESTFi의 경제 모델은 불충분하며, 더 많은 사용자가 거래할수록 더 많은 $NEST가 소멸됩니다"
+
+#: src/pages/Share/Head/NavMenuV2Base.tsx
+msgid "News"
+msgstr "뉴스"
+
+#: src/pages/Home/Home.tsx
+msgid "No Market Makers"
+msgstr "시장 메이커 없음"
+
+#: src/pages/Futures/Components/TableTitle.tsx
+#: src/pages/Futures/OrderList.tsx
+#: src/pages/Futures/OrderList.tsx
+msgid "No Order"
+msgstr "주문 없음"
+
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+msgid "No trades yet"
+msgstr "아직 거래 없음"
+
+#: src/pages/Share/Modal/MyWalletModal.tsx
+msgid "No Transactions yet"
+msgstr "아직 거래 없음"
+
+#: src/pages/Home/Home.tsx
+#: src/pages/Home/Home.tsx
+msgid "Number of KOLs Joined NESTFi"
+msgstr "NESTFi에 가입한 KOL 수"
+
+#: src/hooks/useFuturesNewOrder.ts
+msgid "Open"
+msgstr "열기"
+
+#: src/hooks/useTransactionReceipt.ts
+msgid "Open position"
+msgstr "포지션 열기"
+
+#: src/hooks/useTransactionReceipt.ts
+msgid "Open position request"
+msgstr "포지션 열기 요청"
+
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
+#: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
+#: src/pages/Futures/Components/OrderList.tsx
+#: src/pages/Futures/Components/OrderTable.tsx
+#: src/pages/Futures/Components/POrderList.tsx
+#: src/pages/Futures/Components/POrderList.tsx
+#: src/pages/Futures/Components/POrderTable.tsx
+#: src/pages/Futures/Modal/AddModal.tsx
+#: src/pages/Futures/Modal/EditPositionModal.tsx
+msgid "Open Price"
+msgstr "오픈 가격"
+
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Futures/Components/OrderTable.tsx
+#: src/pages/Futures/Components/POrderTable.tsx
+msgid "Operate"
+msgstr "조작"
+
+#: src/pages/Futures/OrderList.tsx
+msgid "Order"
+msgstr "주문"
+
+#: src/pages/Home/Modal/ApplyModal.tsx
+msgid "Platform (Youtube, Telegram, Twitter, Instagram, Facebook, Tiktok, Others)"
+msgstr "플랫폼 (Youtube, Telegram, Twitter, Instagram, Facebook, Tiktok, 기타)"
+
+#: src/pages/Futures/Modal/ApproveNoticeModal.tsx
+msgid "Please click Approve for authorization and then you can open the position, this process will consume some GAS."
+msgstr "인증을 위해 승인을 클릭하면 포지션을 열 수 있으며, 이 과정에서 일부 GAS가 소비됩니다."
+
+#: src/pages/Futures/Modal/LimitAndPriceModal.tsx
+msgid "Please note that \"Limit order\" or \"Stop order\" is not guaranteed to be executed. This may include, but is not limited to, the following cases."
+msgstr "\"리미트 오더\" 또는 \"스톱 오더\"는 실행이 보장되지 않을 수 있습니다. 다음과 같은 경우가 포함될 수 있습니다."
+
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Futures/Modal/AddModal.tsx
+#: src/pages/Futures/Modal/CloseModal.tsx
+#: src/pages/Futures/Modal/EditPositionModal.tsx
+msgid "Position"
+msgstr "포지션"
+
+#: src/hooks/useFuturesNewOrder.ts
+#: src/hooks/useFuturesNewOrder.ts
+#: src/hooks/useFuturesNewOrder.ts
+#: src/hooks/useFuturesNewOrder.ts
+msgid "Position fee = Position * 0.05%"
+msgstr "포지션 수수료 = 포지션 * 0.05%"
+
+#: src/hooks/useFuturesEditPosition.ts
+msgid "Position fee =Position*0.05%"
+msgstr "포지션 수수료 = 포지션 * 0.05%"
+
+#: src/hooks/useFuturesClose.ts
+msgid "Position*0.05%"
+msgstr "포지션 * 0.05%"
+
+#: src/pages/Futures/Modal/SharePositionModal.tsx
+#: src/pages/Futures/NewOrder.tsx
+#: src/pages/Futures/OrderList.tsx
+msgid "Positions"
+msgstr "포지션"
+
+#: src/pages/Futures/NewOrder.tsx
+#: src/pages/Swap/Swap.tsx
+msgid "Price"
+msgstr "가격"
+
+#: src/pages/Share/Modal/MyWalletModal.tsx
+msgid "Recent transactions"
+msgstr "최근 거래"
+
+#: src/pages/Futures/Modal/LimitAndPriceModal.tsx
+#: src/pages/Futures/Modal/ProtocolModal.tsx
+msgid "Risk Warning"
+msgstr "위험 경고"
+
+#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
+#: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
+msgid "Scan and copy the trade"
+msgstr "거래 스캔 및 복사"
+
+#: src/hooks/useTransactionReceipt.ts
+msgid "Sell position"
+msgstr "포지션 매도"
+
+#: src/hooks/useTransactionReceipt.ts
+msgid "Sell position request"
+msgstr "포지션 매도 요청"
+
+#: src/pages/Futures/Modal/CloseModal.tsx
+#: src/pages/Futures/Modal/EditPositionModal.tsx
+#: src/pages/Futures/Modal/SharePositionModal.tsx
+#: src/pages/Futures/NewOrder.tsx
+msgid "Service Fee"
+msgstr "서비스 수수료"
+
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+msgid "Share"
+msgstr "공유"
+
+#: src/components/LongOrShort/LongOrShort.tsx
+#: src/hooks/useFuturesAdd.ts
+#: src/hooks/useFuturesClose.ts
+#: src/hooks/useFuturesEditPosition.ts
+#: src/hooks/useFuturesNewOrder.ts
+#: src/hooks/useFuturesOrder.ts
+#: src/hooks/useFuturesPOrder.ts
+#: src/hooks/useFuturesPOrderClose.tsx
+#: src/pages/Dashboard/Components/ShareOrderPosition.tsx
+#: src/pages/Futures/Components/OrderListPosition.tsx
+#: src/pages/Futures/Components/OrderTablePosition.tsx
+#: src/pages/Futures/Modal/SharePositionModal.tsx
+msgid "Short"
+msgstr "숏"
+
+#: src/pages/Futures/Components/OrderTable.tsx
+#: src/pages/Futures/Components/POrderTable.tsx
+#: src/pages/Futures/Components/POrderTable.tsx
+msgid "SL"
+msgstr "SL"
+
+#: src/pages/Swap/Swap.tsx
+msgid "Slippage Tolerance"
+msgstr "슬리피지 허용 범위"
+
+#: src/pages/Swap/Components/SwapSlippageModal.tsx
+msgid "Slippage Tolerance Setting"
+msgstr "슬리피지 허용 범위 설정"
+
+#: src/pages/Home/Home.tsx
+msgid "Start Trading"
+msgstr "거래 시작하기"
+
+#: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
+#: src/pages/Futures/Components/OrderList.tsx
+#: src/pages/Futures/Components/POrderList.tsx
+#: src/pages/Futures/Components/POrderList.tsx
+#: src/pages/Futures/Modal/EditPositionModal.tsx
+#: src/pages/Futures/Modal/SharePositionModal.tsx
+#: src/pages/Futures/Modal/SharePositionModal.tsx
+#: src/pages/Futures/NewOrder.tsx
+msgid "Stop Loss"
+msgstr "손실 제한"
+
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Futures/Components/OrderTable.tsx
+#: src/pages/Futures/Components/POrderTable.tsx
+msgid "Stop Order"
+msgstr "정지 주문"
+
+#: src/hooks/useFuturesEditPosition.ts
+#: src/hooks/useFuturesNewOrder.ts
+#: src/hooks/useFuturesNewOrder.ts
+msgid "Stop order fee(after execution) = 15 NEST"
+msgstr "실행 후 중지 주문 수수료 = 15 NEST"
+
+#: src/pages/Futures/NewOrder.tsx
+msgid "Stop-Limit"
+msgstr "정지-한도"
+
+#: src/pages/Home/Modal/ApplyModal.tsx
+msgid "Submit successfully"
+msgstr "성공적으로 제출됨"
+
+#: src/components/NormalInput/NESTInput.tsx
+#: src/components/NormalInput/NESTInputSelect.tsx
+#: src/hooks/useSwap.ts
+#: src/hooks/useTransactionReceipt.ts
+#: src/pages/Share/Head/NESTHead.tsx
+#: src/pages/Swap/Swap.tsx
+msgid "Swap"
+msgstr "스왑"
+
+#: src/hooks/useNESTSnackBar.tsx
+msgid "Switch network successfully"
+msgstr "네트워크 변경 성공"
+
+#: src/pages/Futures/Components/OrderTable.tsx
+#: src/pages/Futures/Components/POrderTable.tsx
+msgid "Symbol"
+msgstr "심볼"
+
+#: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
+#: src/pages/Futures/Components/OrderList.tsx
+#: src/pages/Futures/Components/POrderList.tsx
+#: src/pages/Futures/Components/POrderList.tsx
+#: src/pages/Futures/Modal/EditPositionModal.tsx
+#: src/pages/Futures/Modal/SharePositionModal.tsx
+#: src/pages/Futures/Modal/SharePositionModal.tsx
+#: src/pages/Futures/NewOrder.tsx
+msgid "Take Profit"
+msgstr "익절"
+
+#: src/pages/Share/Head/NavMenuV2Base.tsx
+msgid "Test BNB"
+msgstr "테스트 BNB"
+
+#: src/pages/Home/Home.tsx
+msgid "The smart contract guarantees the infinite liquidity through burning and issuing $NEST. This keeps positions safe from temporary wicks caused by illiquidity."
+msgstr "$NEST를 소각하고 발행함으로써 스마트 계약은 무한한 유동성을 보장합니다. 이는 일시적인 유동성 때문에 발생하는 가격 변동으로부터 포지션을 안전하게 보호합니다."
+
+#: src/pages/Home/Home.tsx
+msgid "The smart contract is the only seller of the system, which means there are no market marking costs, no liquidity debt, no slippage costs in the system."
+msgstr "스마트 계약은 시스템의 유일한 판매자이므로 시스템 내에서 시장 메이킹 비용, 유동성 부채 및 슬리피지 비용이 없습니다."
+
+#: src/components/NormalInput/NESTInputSelect.tsx
+msgid "The system will automatically convert USDT to NEST at market price for you to open your position, and you will also receive NEST at settlement."
+msgstr "시스템은 시장가에 따라 자동으로 USDT를 NEST로 변환하여 포지션을 진입할 수 있도록하며, 정산 시에는 NEST도 수령하게 됩니다."
+
+#: src/hooks/useNESTSnackBar.tsx
+msgid "The transaction failed and the amount has been fully refunded. You can re-trade"
+msgstr "트랜잭션이 실패하고 금액이 완전히 환불되었습니다. 재거래할 수 있습니다."
+
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+msgid "Time"
+msgstr "시간"
+
+#: src/pages/Futures/Components/FuturesNotice.tsx
+msgid "to check and close."
+msgstr "확인 및 종료하십시오."
+
+#: src/pages/Swap/Components/SwapInputItem.tsx
+msgid "To(Estimated)"
+msgstr "대상(예상)"
+
+#: src/pages/Dashboard/Dashboard.tsx
+msgid "Today Burned"
+msgstr "오늘 소각"
+
+#: src/pages/Dashboard/Dashboard.tsx
+msgid "Today Volume"
+msgstr "오늘 거래량"
+
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+msgid "Today's PNL"
+msgstr "오늘의 PNL"
+
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+msgid "Today\\'s PNL"
+msgstr "오늘의 PNL"
+
+#: src/pages/Home/Home.tsx
+#: src/pages/Home/Home.tsx
+msgid "Total Burned"
+msgstr "총 소각된 수량"
+
+#: src/pages/Futures/Modal/SharePositionModal.tsx
+#: src/pages/Futures/NewOrder.tsx
+msgid "Total Pay"
+msgstr "총 지불"
+
+#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
+msgid "Total Profit"
+msgstr "총 이익"
+
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+msgid "Total Profit & Loss"
+msgstr "총 수익과 손실"
+
+#: src/pages/Dashboard/Dashboard.tsx
+msgid "Total Transaction Volume"
+msgstr "총 거래량"
+
+#: src/pages/Futures/Components/OrderTable.tsx
+#: src/pages/Futures/Components/POrderTable.tsx
+#: src/pages/Futures/Components/POrderTable.tsx
+msgid "TP"
+msgstr "TP"
+
+#: src/hooks/useFuturesNewOrder.ts
+#: src/pages/Futures/Modal/SharePositionModal.tsx
+msgid "TP and SL price you set will trigger immediately."
+msgstr "설정한 TP 및 SL 가격이 즉시 트리거됩니다."
+
+#: src/pages/Home/Home.tsx
+msgid "Trade directly from your wallet without the risk of misappropriating funds."
+msgstr "자산이 누출될 위험이 없이 월렛에서 직접 거래하세요."
+
+#: src/pages/Swap/Swap.tsx
+msgid "Trade tokens in instant"
+msgstr "즉시 토큰 거래"
+
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+msgid "Trade with me on NESTFi"
+msgstr "NESTFi에서 함께 거래해요"
+
+#: src/pages/Home/Home.tsx
+msgid ""
+"trading\n"
+"fees"
+msgstr "거래 수수료"
+
+#: src/pages/Home/Home.tsx
+msgid "trading fees as"
+msgstr "거래 수수료"
+
+#: src/hooks/useFuturesPOrder.ts
+msgid "Trigger"
+msgstr "트리거"
+
+#: src/hooks/useFuturesPOrderClose.tsx
+msgid "Trigger executed"
+msgstr "트리거 실행됨"
+
+#: src/pages/Futures/Modal/EditPositionModal.tsx
+msgid "Trigger Position"
+msgstr "트리거 포지션"
+
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
+#: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
+msgid "Twitter"
+msgstr "트위터"
+
+#: src/pages/Share/Head/NavMenuV2Base.tsx
+msgid "User Guide"
+msgstr "사용자 가이드"
+
+#: src/components/SnackBar/NormalSnackBar.tsx
+#: src/pages/Futures/Components/FuturesNotice.tsx
+msgid "View"
+msgstr "보기"
+
+#: src/pages/Share/Modal/MyWalletModal.tsx
+msgid "Wallet"
+msgstr "월렛"
+
+#: src/pages/Share/Head/NavMenuV2Base.tsx
+msgid "White Paper"
+msgstr "백서"
+
+#: src/pages/Home/Home.tsx
+msgid "Why You Should Choose NESTFi"
+msgstr "NESTFi를 선택해야 하는 이유"
+
+#: src/pages/Futures/Modal/CloseOrderNoticeModal.tsx
+msgid "Will not be displayed after closing"
+msgstr "닫은 후에는 표시되지 않습니다"
+
+#: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
+msgid "with 1 click"
+msgstr "1 클릭으로"
+
+#: src/pages/Home/Modal/ApplyModal.tsx
+msgid "Youtube"
+msgstr "유튜브"

@@ -8,6 +8,7 @@ import TableRow from "@mui/material/TableRow";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import { NESTTooltipFC } from "../../../components/NESTTooltip/NESTTooltip";
+import { Trans } from "@lingui/macro";
 
 export interface FuturesTableTitleHelp {
   index: number;
@@ -36,7 +37,9 @@ const FuturesTableTitle: FC<FuturesTableTitleProps> = ({
     ) : (
       <></>
     );
-    const paddingConfig = props.noNeedPadding ? { padding: '0px !important' } : {};
+    const paddingConfig = props.noNeedPadding
+      ? { padding: "0px !important" }
+      : {};
     return (
       <TableCell
         key={`TableTitle + ${props.dataArray.length} + ${index}`}
@@ -100,7 +103,7 @@ const FuturesTableTitle: FC<FuturesTableTitleProps> = ({
                   lineHeight: "168px",
                 })}
               >
-                No Order
+                <Trans>No Order</Trans>
               </TableCell>
             </TableRow>
           ) : (

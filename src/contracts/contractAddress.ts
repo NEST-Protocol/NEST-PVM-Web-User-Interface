@@ -1,11 +1,15 @@
 import {
+  ADATokenLogo,
   BNBTokenLogo,
   BTCLogo,
+  DOGETokenLogo,
   ETHLogo,
   ETHTokenLogo,
+  MATICTokenLogo,
   NESTLogo,
   NHBTCTokenLogo,
   USDTLogo,
+  XRPTokenLogo,
 } from "../components/icons";
 
 export type TokenType = {
@@ -13,6 +17,7 @@ export type TokenType = {
   icon: typeof ETHLogo;
   decimals: DecimalsType;
   address: AddressType;
+  priceDecimals: number;
 };
 
 export interface AddressType {
@@ -77,7 +82,7 @@ export const NESTFiVault: AddressType = {
   5: String().zeroAddress,
   56: String().zeroAddress,
   97: "0x0649A02C15229Cb970CDcE456f9dd52248023520",
-}
+};
 
 export const FuturesV2Contract: AddressType = {
   1: String().zeroAddress,
@@ -112,35 +117,69 @@ export const TokenList: Array<TokenType> = [
     icon: BTCLogo,
     decimals: All18,
     address: BTC,
+    priceDecimals: 2,
   },
   {
     symbol: "ETH",
     icon: ETHTokenLogo,
     decimals: All18,
     address: ETH,
+    priceDecimals: 2,
   },
   {
     symbol: "BNB",
     icon: BNBTokenLogo,
     decimals: All18,
     address: BNB,
+    priceDecimals: 2,
   },
   {
     symbol: "NEST",
     icon: NESTLogo,
     decimals: All18,
     address: NESTToken,
+    priceDecimals: 2,
   },
   {
     symbol: "USDT",
     icon: USDTLogo,
     decimals: USDTDecimals,
     address: USDTToken,
+    priceDecimals: 2,
   },
   {
     symbol: "NHBTC",
     icon: NHBTCTokenLogo,
     decimals: All18,
     address: NHBTCToken,
+    priceDecimals: 2,
+  },
+  {
+    symbol: "MATIC",
+    icon: MATICTokenLogo,
+    decimals: All18,
+    address: NESTToken,
+    priceDecimals: 4,
+  },
+  {
+    symbol: "ADA",
+    icon: ADATokenLogo,
+    decimals: All18,
+    address: NESTToken,
+    priceDecimals: 4,
+  },
+  {
+    symbol: "DOGE",
+    icon: DOGETokenLogo,
+    decimals: All18,
+    address: NESTToken,
+    priceDecimals: 5,
+  },
+  {
+    symbol: "XRP",
+    icon: XRPTokenLogo,
+    decimals: All18,
+    address: NESTToken,
+    priceDecimals: 4,
   },
 ];

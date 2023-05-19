@@ -2,6 +2,7 @@ import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
 import { FC } from "react";
 import LinkButton from "../MainButton/LinkButton";
+import { Trans } from "@lingui/macro";
 
 interface NormalInputProps {
   placeHolder: string;
@@ -107,7 +108,7 @@ export const NormalInputWithLastButton: FC<NormalInputWithLastButtonProps> = ({
             fontWeight: 400,
           })}
         >
-          Last
+          <Trans>Last</Trans>
         </LinkButton>
         <p>{props.rightTitle}</p>
       </Stack>

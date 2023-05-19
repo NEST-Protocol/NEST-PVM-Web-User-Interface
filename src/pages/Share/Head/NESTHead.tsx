@@ -1,38 +1,44 @@
-import {FC, useMemo, useEffect} from "react";
+import { FC, useMemo, useEffect } from "react";
 import Stack from "@mui/material/Stack";
-import {styled} from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import {
   Dark,
   Dashboard,
   FuturesIcon,
   Home,
-  // Language,
   Light,
   NESTFiLogo,
   SwapExchangeSmall,
 } from "../../../components/icons";
 import Box from "@mui/material/Box";
-import useWindowWidth, {WidthType} from "../../../hooks/useWindowWidth";
-import {Link, useLocation} from "react-router-dom";
+import useWindowWidth, { WidthType } from "../../../hooks/useWindowWidth";
+import { Link, useLocation } from "react-router-dom";
 import ConnectButton from "./ConnectButton";
 import NavMenu from "./NavMenu";
 import useTheme from "../../../hooks/useTheme";
 import NetMenu from "./NetMenu";
-import {NavMenuV2, NavMenuV3} from "./NavMenuV2Base";
+import { NavMenuV2, NavMenuV3 } from "./NavMenuV2Base";
 import useNEST from "../../../hooks/useNEST";
+import { Trans } from "@lingui/macro";
+import LanguageMenu from "./LanguageMenu";
 
 export const NavItems = [
-  {path: "/home", content: "Home", icon: Home},
-  {path: "/futures", content: "Futures", icon: FuturesIcon},
-  {path: "/swap", content: "Swap", icon: SwapExchangeSmall},
-  {path: "/dashboard", content: "Dashboard", icon: Dashboard},
+  { path: "/home", content: `Home`, icon: Home, l:<Trans>Home</Trans> },
+  { path: "/futures", content: `Futures`, icon: FuturesIcon,l:<Trans>Futures</Trans> },
+  { path: "/swap", content: `Swap`, icon: SwapExchangeSmall,l:<Trans>Swap</Trans> },
+  { path: "/dashboard", content: `Dashboard`, icon: Dashboard,l:<Trans>Dashboard</Trans> },
 ];
 
 const NESTHead: FC = () => {
   const location = useLocation();
-  const {width: widthLv, headHeight, isBigMobile, isPC} = useWindowWidth();
-  const {nowTheme, changeTheme} = useTheme();
-  const {account, chainsData} = useNEST();
+  const {
+    width: widthLv,
+    headHeight,
+    isBigMobile,
+    isPC,
+  } = useWindowWidth();
+  const { nowTheme, changeTheme } = useTheme();
+  const { account, chainsData } = useNEST();
 
   useEffect(() => {
     const chainIds = chainsData.chains.map((item) => item.id);
@@ -54,12 +60,12 @@ const NESTHead: FC = () => {
     }
   }, [account.address, chainsData, location]);
 
-  const NESTHeadStack = styled(Stack)(({theme}) => ({
+  const NESTHeadStack = styled(Stack)(({ theme }) => ({
     background: theme.normal.bg0,
     borderBottom: `1px solid ${theme.normal.border}`,
     boxSizing: "content-box",
   }));
-  const LogoBox = styled(Box)(({theme}) => {
+  const LogoBox = styled(Box)(({ theme }) => {
     const marginLeft = !isBigMobile ? 40 : 20;
     return {
       marginLeft: marginLeft,
@@ -74,7 +80,7 @@ const NESTHead: FC = () => {
     };
   });
 
-  const LanBox = styled(Box)(({theme}) => ({
+  const LanBox = styled(Box)(({ theme }) => ({
     "&:hover": {
       cursor: "pointer",
       "& path": {
@@ -90,10 +96,10 @@ const NESTHead: FC = () => {
       },
     },
   }));
-  const ThemeBox = styled(LanBox)(({theme}) => {
+  const ThemeBox = styled(LanBox)(({ theme }) => {
     return {};
   });
-  const DashAndNetBox = styled(Box)(({theme}) => {
+  const DashAndNetBox = styled(Box)(({ theme }) => {
     return {
       minWidth: 36,
       height: 36,
@@ -118,7 +124,7 @@ const NESTHead: FC = () => {
       },
     };
   });
-  const DashBox = styled(DashAndNetBox)(({theme}) => {
+  const DashBox = styled(DashAndNetBox)(({ theme }) => {
     return {
       "& svg": {
         width: 14,
@@ -170,7 +176,7 @@ const NESTHead: FC = () => {
 
   const dashboard = () => {
     return (
-      <Link to={'/dashboard'}>
+      <Link to={"/dashboard"}>
         <DashBox>
           <Stack
             direction="row"
@@ -180,16 +186,23 @@ const NESTHead: FC = () => {
             width={"100%"}
             height={"100%"}
           >
-            <Dashboard/>
-            {hideText ? <></> : <p>Dashboard</p>}
+            <Dashboard />
+            {hideText ? (
+              <></>
+            ) : (
+              <p>
+                <Trans>Dashboard</Trans>
+              </p>
+            )}
           </Stack>
         </DashBox>
       </Link>
     );
   };
   const nav = () => {
-    const NavStack = styled(Stack)(({theme}) => {
+    const NavStack = styled(Stack)(({ theme }) => {
       return {
+        width: "100%",
         "& a": {
           color: theme.normal.text0,
           fontWeight: 700,
@@ -220,7 +233,7 @@ const NESTHead: FC = () => {
           key={`nav + ${index}`}
           to={item.path}
         >
-          {item.content}
+          {item.l}
         </Link>
       );
     });
@@ -240,11 +253,11 @@ const NESTHead: FC = () => {
   const navMenu = useMemo(() => {
     switch (widthLv) {
       case WidthType.ssm:
-        return <NavMenuV3/>;
+        return <NavMenuV3 />;
       case WidthType.sm:
-        return <NavMenuV2/>;
+        return <NavMenuV2 />;
       case WidthType.md:
-        return <NavMenu/>;
+        return <NavMenu />;
       default:
         return <></>;
     }
@@ -266,7 +279,7 @@ const NESTHead: FC = () => {
         height={headHeight}
       >
         <LogoBox>
-          <NESTFiLogo/>
+          <NESTFiLogo />
         </LogoBox>
       </Stack>
 
@@ -282,18 +295,24 @@ const NESTHead: FC = () => {
         paddingRight={`${paddingRight}px`}
       >
         {!isBigMobile ? dashboard() : <></>}
-        <NetMenu/>
-        <ConnectButton/>
+        <NetMenu />
+        <ConnectButton />
         <Stack
           direction={"row"}
           spacing={"16px"}
           alignItems={"center"}
           paddingX={isBigMobile ? "0px" : "8px"}
         >
+          {isBigMobile ? (
+            <></>
+          ) : (
+            <LanguageMenu/>
+          )}
+
           {!isBigMobile ? (
             <>
               <ThemeBox onClick={changeTheme}>
-                {nowTheme.isLight ? <Dark/> : <Light/>}
+                {nowTheme.isLight ? <Dark /> : <Light />}
               </ThemeBox>
             </>
           ) : (

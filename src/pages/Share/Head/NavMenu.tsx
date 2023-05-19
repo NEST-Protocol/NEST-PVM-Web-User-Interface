@@ -104,7 +104,7 @@ const NavMenu: FC = () => {
         <button>
           <Icon />
         </button>
-        <Link to={item.path}>{item.content}</Link>
+        <Link to={item.path}>{item.l}</Link>
       </MenuItem>
     );
   });

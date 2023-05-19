@@ -15,6 +15,7 @@ import { FuturesModalInfo, FuturesModalType } from "../OrderList";
 import FuturesOrderShare from "./FuturesOrderShare";
 import OrderTablePosition from "./OrderTablePosition";
 import FuturesTableTitle from "./TableTitle";
+import { Trans, t } from "@lingui/macro";
 
 interface FuturesPOrderListProps {
   dataArray: Array<FuturesOrderV2>;
@@ -56,12 +57,12 @@ const POrderTable: FC<FuturesPOrderListProps> = ({ ...props }) => {
   return (
     <FuturesTableTitle
       dataArray={[
-        "Symbol",
-        "Actual Margin",
-        "Open Price",
-        "Liq Price",
-        "Stop Order",
-        "Operate",
+        t`Symbol`,
+        t`Actual Margin`,
+        t`Open Price`,
+        t`Liq Price`,
+        t`Stop Order`,
+        t`Operate`,
       ]}
       noOrder={noOrder}
       helps={[
@@ -69,9 +70,11 @@ const POrderTable: FC<FuturesPOrderListProps> = ({ ...props }) => {
           index: 3,
           helpInfo: (
             <p>
-              Due to the market volatility, the actual liquidation price may be
-              different from the theoretical liquidation price . Here is the
-              theoretical liquidation price, for reference only.
+              <Trans>
+                Due to the market volatility, the actual liquidation price may
+                be different from the theoretical liquidation price . Here is
+                the theoretical liquidation price, for reference only.
+              </Trans>
             </p>
           ),
         },
@@ -86,8 +89,8 @@ const POrderTable: FC<FuturesPOrderListProps> = ({ ...props }) => {
 };
 
 const tdNoPadding = {
-  padding: '0px !important',
-}
+  padding: "0px !important",
+};
 
 interface POrderTableRowProps {
   data: FuturesOrderV2;
@@ -142,7 +145,7 @@ const POrderTableRow: FC<POrderTableRowProps> = ({ ...props }) => {
               color: theme.normal.text0,
             },
             "& span": {
-              display: 'block',
+              display: "block",
               fontWeight: 400,
               fontSize: 10,
               color: isRed ? theme.normal.danger : theme.normal.success,
@@ -190,11 +193,15 @@ const POrderTableRow: FC<POrderTableRowProps> = ({ ...props }) => {
           })}
         >
           <Box component={"p"}>
-            <span>TP</span>
+            <span>
+              <Trans>TP</Trans>
+            </span>
             {tp}USDT
           </Box>
           <Box component={"p"}>
-            <span>SL</span>
+            <span>
+              <Trans>SL</Trans>
+            </span>
             {sl}USDT
           </Box>
         </Stack>
@@ -202,14 +209,22 @@ const POrderTableRow: FC<POrderTableRowProps> = ({ ...props }) => {
       <TableCell>
         <Stack direction={"row"} justifyContent={"flex-end"} spacing={"8px"}>
           <MainButton
-            title={"Add"}
+            title={t`Add`}
             onClick={() =>
               props.buttonCallBack({
                 data: props.data,
                 type: FuturesModalType.add,
               })
             }
-            style={{ height: "36px", width: "65px", fontSize: 12 }}
+            style={{
+              width: "auto",
+              height: "36px",
+              minWidth: "65px",
+              fontSize: 12,
+              paddingLeft: `12px`,
+              paddingRight: `12px`,
+              borderRadius: `8px`
+            }}
           />
           <MainButton
             title={showTriggerTitle}
@@ -219,17 +234,33 @@ const POrderTableRow: FC<POrderTableRowProps> = ({ ...props }) => {
                 type: FuturesModalType.trigger,
               })
             }
-            style={{ height: "36px", width: "65px", fontSize: 12 }}
+            style={{
+              width: "auto",
+              height: "36px",
+              minWidth: "65px",
+              fontSize: 12,
+              paddingLeft: `12px`,
+              paddingRight: `12px`,
+              borderRadius: `8px`
+            }}
           />
           <MainButton
-            title={"Close"}
+            title={t`Close`}
             onClick={() =>
               props.buttonCallBack({
                 data: props.data,
                 type: FuturesModalType.close,
               })
             }
-            style={{ height: "36px", width: "65px", fontSize: 12 }}
+            style={{
+              width: "auto",
+              height: "36px",
+              minWidth: "65px",
+              fontSize: 12,
+              paddingLeft: `12px`,
+              paddingRight: `12px`,
+              borderRadius: `8px`
+            }}
           />
           <FuturesOrderShare
             component={"button"}
@@ -268,7 +299,9 @@ const POrderTableCloseRow: FC<POrderTableRowCloseProps> = ({ ...props }) => {
     shareOrder,
   } = useFuturesPOrderClose(props.data, props.price);
   return (
-    <TableRow sx={(theme) => ({ "&: hover": { background: theme.normal.bg1 } })}>
+    <TableRow
+      sx={(theme) => ({ "&: hover": { background: theme.normal.bg1 } })}
+    >
       <ShareMyOrderModal
         value={shareOrder}
         open={showShareOrderModal}
@@ -343,11 +376,15 @@ const POrderTableCloseRow: FC<POrderTableRowCloseProps> = ({ ...props }) => {
           })}
         >
           <Box component={"p"}>
-            <span>TP</span>
+            <span>
+              <Trans>TP</Trans>
+            </span>
             {tp}USDT
           </Box>
           <Box component={"p"}>
-            <span>SL</span>
+            <span>
+              <Trans>SL</Trans>
+            </span>
             {sl}USDT
           </Box>
         </Stack>

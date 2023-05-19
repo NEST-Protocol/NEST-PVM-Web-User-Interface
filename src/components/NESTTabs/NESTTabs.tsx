@@ -19,7 +19,6 @@ const NESTTabs: FC<NESTTabsProps> = ({ ...props }) => {
   };
 
   const NESTTabs = styled(Tabs)(({ theme }) => ({
-    height: props.height,
     minHeight: props.height,
     width: props.isFull ? '100%' : 'auto',
     "& .MuiTabs-scroller .MuiTabs-flexContainer button": {
@@ -31,6 +30,10 @@ const NESTTabs: FC<NESTTabsProps> = ({ ...props }) => {
       width: props.isFull ? '50%' : 'auto',
       fontSize: 16,
       fontWeight: 700,
+      "& p": {
+        maxWidth: '150px',
+        lineHeight: '16px !important'
+      },
       "& svg": {
         width: 16,
         height: 16,

@@ -1,3 +1,4 @@
+import { Trans } from "@lingui/macro";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 import Stack from "@mui/material/Stack";
@@ -51,7 +52,7 @@ const LeverageSlider: FC<LeverageSliderProps> = ({ ...props }) => {
             color: theme.normal.text2,
           })}
         >
-          Leverage
+          <Trans>Leverage</Trans>
         </Box>
         <Box
           component={"p"}
@@ -62,7 +63,7 @@ const LeverageSlider: FC<LeverageSliderProps> = ({ ...props }) => {
           })}
         >{`${props.value}X`}</Box>
       </Stack>
-      <Box sx={{display:'block', position:'relative'}}>
+      <Box sx={{ display: "block", position: "relative" }}>
         {/* <Stack
           direction={"row"}
           justifyContent={"space-between"}
@@ -89,7 +90,7 @@ const LeverageSlider: FC<LeverageSliderProps> = ({ ...props }) => {
             })}
           ></Box>
         </Stack> */}
-        <Box sx={{ paddingLeft: "5px", paddingRight: '8px' }}>
+        <Box sx={{ paddingLeft: "5px", paddingRight: "8px" }}>
           <Slider
             aria-label="Custom marks"
             defaultValue={1}
@@ -105,7 +106,7 @@ const LeverageSlider: FC<LeverageSliderProps> = ({ ...props }) => {
             sx={(theme) => ({
               color: theme.normal.primary,
               "& .MuiSlider-rail": {
-                background: theme.normal.bg1,
+                background: theme.normal.bg3,
                 opacity: 1,
               },
               "& .MuiSlider-track": {
@@ -116,7 +117,7 @@ const LeverageSlider: FC<LeverageSliderProps> = ({ ...props }) => {
                 width: "10px",
                 height: "10px",
                 background: theme.normal.bg0,
-                border: `1px solid ${theme.normal.bg1}`,
+                border: `1px solid ${theme.normal.bg3}`,
                 boxSizing: "border-box",
                 borderRadius: "5px",
                 marginLeft: "-4px",

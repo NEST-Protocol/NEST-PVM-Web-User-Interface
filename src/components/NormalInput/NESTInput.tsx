@@ -7,6 +7,7 @@ import { NEXT, SwapExchangeSmall } from "../icons";
 import LinkButton from "../MainButton/LinkButton";
 import NESTLine from "../NESTLine";
 import OneTokenIN from "../TokenIconAndName/OneTokenI&N";
+import { Trans, t } from "@lingui/macro";
 
 interface NESTInputProps {
   checkBalance: boolean;
@@ -26,8 +27,8 @@ const NESTInput: FC<NESTInputProps> = ({ ...props }) => {
       sx={(theme) => ({
         border: `1px solid ${
           account.address && !props.checkBalance
-              ? theme.normal.danger
-              : theme.normal.border
+            ? theme.normal.danger
+            : theme.normal.border
         }`,
         borderRadius: "8px",
         background: theme.normal.bg1,
@@ -57,7 +58,7 @@ const NESTInput: FC<NESTInputProps> = ({ ...props }) => {
             },
           })}
           component={"input"}
-          placeholder={"Amount"}
+          placeholder={t`Amount`}
           value={props.nestAmount}
           maxLength={32}
           onChange={(e) =>
@@ -84,9 +85,11 @@ const NESTInput: FC<NESTInputProps> = ({ ...props }) => {
               },
             })}
           >
-            Balance: <span>{props.showBalance} NEST</span>
+            {t`Balance:`} <span>{props.showBalance} NEST</span>
           </Box>
-          <LinkButton onClick={props.maxCallBack}>MAX</LinkButton>
+          <LinkButton onClick={props.maxCallBack}>
+            <Trans>MAX</Trans>
+          </LinkButton>
         </Stack>
         <LinkButton>
           <Link to={"/swap"}>
@@ -103,7 +106,9 @@ const NESTInput: FC<NESTInputProps> = ({ ...props }) => {
                 },
               }}
             >
-              <p>Swap</p>
+              <p>
+                <Trans>Swap</Trans>
+              </p>
               <SwapExchangeSmall />
             </Stack>
           </Link>
@@ -139,8 +144,10 @@ const NESTInput: FC<NESTInputProps> = ({ ...props }) => {
           alignItems={"center"}
         >
           <Link to={"/swap"}>
-            0 balance. Before trading, you can switch to "Swap" to exchange
-            between USDT and NEST token.
+            <Trans>
+              0 balance. Before trading, you can switch to "Swap" to exchange
+              between USDT and NEST token.
+            </Trans>
           </Link>
           <Link to={"/swap"}>
             <NEXT />

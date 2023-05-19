@@ -1,9 +1,9 @@
-import { FC, useState } from "react";
+import { FC, useMemo, useState } from "react";
 import { styled } from "@mui/material/styles";
 import Stack from "@mui/material/Stack";
 import { NavItems } from "./NESTHead";
 import { Link, useLocation } from "react-router-dom";
-import { Close, MobileListIcon } from "../../../components/icons";
+import { Close, MobileListIcon, NEXT } from "../../../components/icons";
 import NESTLine from "../../../components/NESTLine";
 import { FootAList, NESTFootStack } from "../Foot/NESTFoot";
 import Box from "@mui/material/Box";
@@ -13,10 +13,27 @@ import Modal from "@mui/material/Modal";
 import Switch from "@mui/material/Switch";
 import useTheme from "../../../hooks/useTheme";
 import useNEST from "../../../hooks/useNEST";
+import { Trans } from "@lingui/macro";
+import { i18n } from "@lingui/core";
+import { LanData } from "./LanguageMenu";
+import LanguageModal from "../Modal/LanguageModal";
 
 const NavMenu = styled(Stack)(({ theme }) => {
   return {};
 });
+
+const NextBox = styled(Box)(({ theme }) => ({
+  width: 16,
+  height: 16,
+  "& svg": {
+    width: 16,
+    height: 16,
+    display: "block",
+    "& path": {
+      fill: theme.normal.text2,
+    },
+  },
+}));
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 44,
@@ -80,8 +97,13 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   },
 }));
 
-const NavMenuV2Base: FC = () => {
+interface NavMenuV2BaseProps {
+  onClose: () => void;
+}
+
+const NavMenuV2Base: FC<NavMenuV2BaseProps> = ({ ...props }) => {
   const { nowTheme, changeTheme } = useTheme();
+  const [showLanModal, setShowLanModal] = useState(false);
   const { chainsData } = useNEST();
   const location = useLocation();
   const navList = NavItems.map((item, index) => {
@@ -92,12 +114,12 @@ const NavMenuV2Base: FC = () => {
           return {
             height: "48px",
             "& button": {
-              width: '24px',
-              height: '24px',
+              width: "24px",
+              height: "24px",
               marginRight: "8px",
               borderRadius: 12,
               background: theme.normal.bg1,
-              padding: '6px',
+              padding: "6px",
               "& svg": {
                 width: 12,
                 height: 12,
@@ -108,7 +130,7 @@ const NavMenuV2Base: FC = () => {
               },
             },
             "& a": {
-              width: '100%',
+              width: "100%",
               fontSize: 16,
               fontWeight: 700,
               color: theme.normal.text1,
@@ -138,7 +160,7 @@ const NavMenuV2Base: FC = () => {
         <button>
           <Icon />
         </button>
-        <Link to={item.path}>{item.content}</Link>
+        <Link to={item.path}>{item.l}</Link>
       </Stack>
     );
   });
@@ -148,6 +170,10 @@ const NavMenuV2Base: FC = () => {
       height: 32,
     };
   });
+  const lanName = useMemo(() => {
+    const index = LanData.map((item) => item[1]).indexOf(i18n.locale);
+    return index >= 0 ? LanData[index][0] : "";
+  }, []);
   return (
     <Stack className="NavMain" justifyContent={"space-between"}>
       <Box>
@@ -167,11 +193,58 @@ const NavMenuV2Base: FC = () => {
               color: theme.normal.text1,
             })}
           >
-            Dark mode
+            <Trans>Dark mode</Trans>
           </Box>
           <MaterialUISwitch
             checked={!nowTheme.isLight}
             onChange={changeTheme}
+          />
+        </Stack>
+        <Stack
+          direction={"row"}
+          justifyContent={"space-between"}
+          alignItems={"center"}
+          height={"40px"}
+          marginTop={"12px"}
+        >
+          <Box
+            component={"p"}
+            sx={(theme) => ({
+              fontWeight: 400,
+              fontSize: 16,
+              color: theme.normal.text1,
+            })}
+          >
+            <Trans>Language</Trans>
+          </Box>
+          <Stack
+            direction={"row"}
+            justifyContent={"space-between"}
+            alignItems={"center"}
+            spacing={"8px"}
+            component={"button"}
+            onClick={() => setShowLanModal(true)}
+          >
+            <Box
+              component={"p"}
+              sx={(theme) => ({
+                fontWeight: 400,
+                fontSize: 16,
+                color: theme.normal.text1,
+              })}
+            >
+              {lanName}
+            </Box>
+            <NextBox>
+              <NEXT />
+            </NextBox>
+          </Stack>
+          <LanguageModal
+            open={showLanModal}
+            onClose={() => {
+              props.onClose();
+              setShowLanModal(false);
+            }}
           />
         </Stack>
         <NESTLine sx={{ margin: "15px 0" }} />
@@ -181,7 +254,7 @@ const NavMenuV2Base: FC = () => {
           alignItems={"center"}
           height={"40px"}
           sx={(theme) => ({
-            width: '100%',
+            width: "100%",
             fontWeight: 400,
             fontSize: 16,
             color: theme.normal.text1,
@@ -196,7 +269,9 @@ const NavMenuV2Base: FC = () => {
             );
           }}
         >
-          <p>User Guide</p>
+          <p>
+            <Trans>User Guide</Trans>
+          </p>
         </Stack>
         <Stack
           direction={"row"}
@@ -204,7 +279,7 @@ const NavMenuV2Base: FC = () => {
           alignItems={"center"}
           height={"40px"}
           sx={(theme) => ({
-            width: '100%',
+            width: "100%",
             marginTop: "12px",
             fontWeight: 400,
             fontSize: 16,
@@ -218,7 +293,9 @@ const NavMenuV2Base: FC = () => {
             window.open("https://nestprotocol.org/doc/ennestwhitepaper.pdf");
           }}
         >
-          <p>White Paper</p>
+          <p>
+            <Trans>White Paper</Trans>
+          </p>
         </Stack>
         <Stack
           direction={"row"}
@@ -226,7 +303,7 @@ const NavMenuV2Base: FC = () => {
           alignItems={"center"}
           height={"40px"}
           sx={(theme) => ({
-            width: '100%',
+            width: "100%",
             marginTop: "12px",
             fontWeight: 400,
             fontSize: 16,
@@ -240,7 +317,9 @@ const NavMenuV2Base: FC = () => {
             window.open("https://github.com/NEST-Protocol");
           }}
         >
-          <p>Github</p>
+          <p>
+            <Trans>Github</Trans>
+          </p>
         </Stack>
         <Stack
           direction={"row"}
@@ -248,7 +327,7 @@ const NavMenuV2Base: FC = () => {
           alignItems={"center"}
           height={"40px"}
           sx={(theme) => ({
-            width: '100%',
+            width: "100%",
             marginTop: "12px",
             fontWeight: 400,
             fontSize: 16,
@@ -262,7 +341,9 @@ const NavMenuV2Base: FC = () => {
             window.open("https://nest-protocol.medium.com");
           }}
         >
-          <p>News</p>
+          <p>
+            <Trans>News</Trans>
+          </p>
         </Stack>
         {chainsData.chainId === 97 ? (
           <Stack
@@ -271,7 +352,7 @@ const NavMenuV2Base: FC = () => {
             alignItems={"center"}
             height={"40px"}
             sx={(theme) => ({
-              width: '100%',
+              width: "100%",
               marginTop: "12px",
               fontWeight: 400,
               fontSize: 16,
@@ -285,7 +366,9 @@ const NavMenuV2Base: FC = () => {
               window.open("https://testnet.bnbchain.org/faucet-smart");
             }}
           >
-            <p>Test BNB</p>
+            <p>
+              <Trans>Test BNB</Trans>
+            </p>
           </Stack>
         ) : (
           <></>
@@ -337,6 +420,7 @@ export const NavMenuV2: FC = () => {
         sx={(theme) => {
           return {
             "& .MuiPaper-root": {
+              width: "320px",
               border: `1px solid ${theme.normal.border}`,
               background: theme.normal.bg0,
               paddingX: "40px",
@@ -350,7 +434,7 @@ export const NavMenuV2: FC = () => {
           };
         }}
       >
-        <NavMenuV2Base />
+        <NavMenuV2Base onClose={handleClose} />
       </Menu>
     </>
   );
@@ -405,7 +489,7 @@ export const NavMenuV3: FC = () => {
                 <Close />
               </Box>
             </Stack>
-            <NavMenuV2Base />
+            <NavMenuV2Base onClose={() => setOpenModal(false)} />
           </Stack>
         </Box>
       </Modal>

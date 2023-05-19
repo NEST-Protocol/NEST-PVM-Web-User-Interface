@@ -7,6 +7,7 @@ import LinkButton from "../../../components/MainButton/LinkButton";
 import NESTLine from "../../../components/NESTLine";
 import SelectListMenu from "../../../components/SelectListMemu/SelectListMenu";
 import OneTokenIN from "../../../components/TokenIconAndName/OneTokenI&N";
+import { Trans, t } from "@lingui/macro";
 
 const SwapInputStack = styled(Stack)(({ theme }) => {
   return {
@@ -195,16 +196,20 @@ const SwapInputItem: FC<SwapInputItemProps> = ({ children, ...props }) => {
       </ShowInputStack>
       <NESTLine />
       <ShowInfoStack direction={"row"} justifyContent={"space-between"}>
-        <p className="SwapInfoTitle">From</p>
+        <p className="SwapInfoTitle">
+          <Trans>From</Trans>
+        </p>
         <Stack
           className="SwapInfo"
           direction={"row"}
           justifyContent={"flex-end"}
         >
           <p className="SwapInfoBalance">
-            Balance: <span>{`${props.balance} ${props.tokenName}`}</span>
+            {t`Balance:`} <span>{`${props.balance} ${props.tokenName}`}</span>
           </p>
-          <Max onClick={props.maxCallBack}>Max</Max>
+          <Max onClick={props.maxCallBack}>
+            <Trans>Max</Trans>
+          </Max>
         </Stack>
       </ShowInfoStack>
     </SwapInputStack>
@@ -226,14 +231,16 @@ export const SwapShowItem: FC<SwapShowItemProps> = ({ ...props }) => {
       </ShowInputStack>
       <NESTLine />
       <ShowInfoStack direction={"row"} justifyContent={"space-between"}>
-        <p className="SwapInfoTitle">To(Estimated)</p>
+        <p className="SwapInfoTitle">
+          <Trans>To(Estimated)</Trans>
+        </p>
         <Stack
           className="SwapInfo"
           direction={"row"}
           justifyContent={"flex-end"}
         >
           <p className="SwapInfoBalance">
-            Balance: <span>{`${props.balance} ${props.tokenName}`}</span>
+            {t`Balance:`} <span>{`${props.balance} ${props.tokenName}`}</span>
           </p>
         </Stack>
       </ShowInfoStack>

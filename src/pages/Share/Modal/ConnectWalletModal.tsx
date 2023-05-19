@@ -12,6 +12,7 @@ import { useWalletConnectors } from "../../../lib/RainbowOptions/useWalletConnec
 import { setWalletConnectDeepLink } from "../../../lib/RainbowOptions/walletConnectDeepLink";
 import BaseDrawer from "./BaseDrawer";
 import BaseModal from "./BaseModal";
+import { Trans, t } from "@lingui/macro";
 
 interface ConnectWalletModalBaseProps {
   onClose: () => void;
@@ -122,7 +123,9 @@ const ConnectWalletModalBase: FC<ConnectWalletModalBaseProps> = ({
                   }
                 });
               } else {
-                connectData.connect({connector: connectData.connectors[index]})
+                connectData.connect({
+                  connector: connectData.connectors[index],
+                });
               }
             }, [index, item, name])}
           >
@@ -178,7 +181,9 @@ const ConnectWalletModalBase: FC<ConnectWalletModalBaseProps> = ({
                   }
                 });
               } else {
-                connectData.connect({connector: connectData.connectors[index + 3]})
+                connectData.connect({
+                  connector: connectData.connectors[index + 3],
+                });
               }
             }, [index, item, name])}
           >
@@ -198,14 +203,16 @@ const ConnectWalletModalBase: FC<ConnectWalletModalBaseProps> = ({
   return (
     <BaseStack spacing={0}>
       <p className="WalletLearnMore">
-        <NESTa href="https://www.google.com" target={"_blank"}>Learn more</NESTa> about connecting
-        wallets
+        <NESTa href="https://www.google.com" target={"_blank"}>
+          <Trans>Learn more</Trans>{" "}
+        </NESTa>
+        <Trans>about connecting wallets</Trans>
       </p>
       {Row1}
       {isMore ? (
         Row2
       ) : (
-        <MoreButton onClick={() => setIsMore(!isMore)}>More</MoreButton>
+        <MoreButton onClick={() => setIsMore(!isMore)}><Trans>More</Trans></MoreButton>
       )}
     </BaseStack>
   );
@@ -229,7 +236,7 @@ const ConnectWalletModal: FC<ConnectWalletModalProps> = ({ ...props }) => {
           "& .MuiPaper-root": { background: "none", backgroundImage: "none" },
         }}
       >
-        <BaseDrawer title={"Connect Wallet"} onClose={props.onClose}>
+        <BaseDrawer title={t`Connect Wallet`} onClose={props.onClose}>
           <ConnectWalletModalBase onClose={props.onClose} />
         </BaseDrawer>
       </Drawer>
@@ -239,10 +246,10 @@ const ConnectWalletModal: FC<ConnectWalletModalProps> = ({ ...props }) => {
         onClose={() => props.onClose()}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
-        sx={{zIndex: 1301}}
+        sx={{ zIndex: 1301 }}
       >
         <Box>
-          <BaseModal title={"Connect Wallet"} onClose={props.onClose}>
+          <BaseModal title={t`Connect Wallet`} onClose={props.onClose}>
             <ConnectWalletModalBase onClose={props.onClose} />
           </BaseModal>
         </Box>

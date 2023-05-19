@@ -1,0 +1,943 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2023-05-11 12:02+0800\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: ru\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+
+#: src/hooks/useFuturesNewOrder.ts
+#: src/hooks/useFuturesNewOrder.ts
+msgid "< LIMIT PRICE"
+msgstr "< ЛИМИТНАЯ ЦЕНА"
+
+#: src/hooks/useFuturesNewOrder.ts
+#: src/hooks/useFuturesNewOrder.ts
+msgid "< MARKET PRICE"
+msgstr "< РЫНОЧНАЯ ЦЕНА"
+
+#: src/hooks/useFuturesEditPosition.ts
+#: src/hooks/useFuturesEditPosition.ts
+msgid "< OPEN PRICE"
+msgstr "< ЦЕНА ОТКРЫТИЯ"
+
+#: src/hooks/useFuturesNewOrder.ts
+#: src/hooks/useFuturesNewOrder.ts
+msgid "> LIMIT PRICE"
+msgstr "> ЛИМИТНАЯ ЦЕНА"
+
+#: src/hooks/useFuturesNewOrder.ts
+#: src/hooks/useFuturesNewOrder.ts
+msgid "> MARKET PRICE"
+msgstr "> РЫНОЧНАЯ ЦЕНА"
+
+#: src/hooks/useFuturesEditPosition.ts
+#: src/hooks/useFuturesEditPosition.ts
+msgid "> OPEN PRICE"
+msgstr "> ЦЕНА ОТКРЫТИЯ"
+
+#: src/components/NormalInput/NESTInput.tsx
+#: src/components/NormalInput/NESTInputSelect.tsx
+msgid "0 balance. Before trading, you can switch to \"Swap\" to exchange between USDT and NEST token."
+msgstr "0 баланса. Перед торговлей вы можете переключиться на \"Обменять\", чтобы обмениваться между токенами USDT и NEST."
+
+#: src/pages/Futures/Modal/LimitAndPriceModal.tsx
+msgid "1. The trigger price has been reached but there is not enough time to execute."
+msgstr "1. Была достигнута цена триггера, но недостаточно времени для исполнения."
+
+#: src/pages/Futures/Modal/LimitAndPriceModal.tsx
+#: src/pages/Futures/Modal/ProtocolModal.tsx
+msgid "1. Uncertainty risk of income: The calculation method of NEST perpetual contract is different from the calculation method of perpetual contract of traditional centralized exchange. The NEST perpetual contract converts the future price of the asset based on the historical rate of return of the asset. Therefore, the asset price increases by 100% after the user opens a position. The user's income is not 100%. In extreme cases, even if the asset price is rising, your income may be negative."
+msgstr "1. Риск неопределенности дохода: метод расчета вечного контракта NEST отличается от метода расчета вечного контракта традиционной централизованной биржи. Вечный контракт NEST преобразует будущую цену актива на основе исторической доходности актива. Поэтому цена актива увеличивается на 100% после открытия позиции пользователем. Доход пользователя не равен 100%. В экстремальных случаях, даже если цена актива растет, ваш доход может быть отрицательным."
+
+#: src/pages/Home/Home.tsx
+#: src/pages/Home/Home.tsx
+msgid "100%"
+msgstr "100%"
+
+#: src/pages/Futures/Modal/LimitAndPriceModal.tsx
+msgid "2. No one picks up the execution order There may be slippage to execute at the trigger price."
+msgstr "2. Никто не берет исполнительный ордер, может возникнуть проскальзывание при исполнении по цене триггера."
+
+#: src/pages/Futures/Modal/LimitAndPriceModal.tsx
+#: src/pages/Futures/Modal/ProtocolModal.tsx
+msgid "2. Position liquidation risk: NEST perpetual contracts provide leverage of 1-20 times. When your leverage is greater than 1 times leverage, the price fluctuation of the underlying asset may cause liquidation."
+msgstr "2. Риск ликвидации позиции: вечные контракты NEST обеспечивают плечо в 1-20 раз. Когда ваше плечо превышает 1 плечо, изменение цены базового актива может вызвать ликвидацию."
+
+#: src/pages/Futures/ExchangeTVChart.tsx
+msgid "24h Change"
+msgstr ""
+
+#: src/pages/Futures/ExchangeTVChart.tsx
+msgid "24h High"
+msgstr ""
+
+#: src/pages/Futures/ExchangeTVChart.tsx
+msgid "24h Low"
+msgstr ""
+
+#: src/pages/Futures/Modal/LimitAndPriceModal.tsx
+#: src/pages/Futures/Modal/ProtocolModal.tsx
+msgid "3. NEST Token price fluctuation risk: Both the margin and the final profit and loss use NEST Token, and NEST itself is also a highly volatile asset. In extreme cases, even if your perpetual contract position is profitable, However, due to the fluctuation of the NEST price itself, it may cause you to lose money in terms of fiat currency."
+msgstr "3. Риск колебания цены токена NEST: Используются как маржа, так и конечная прибыль и убыток в NEST Token, а сам NEST является высоко волатильным активом. В крайних случаях, даже если ваша позиция в перманентном контракте прибыльна, однако из-за колебаний цены NEST может возникнуть убыток в денежном эквиваленте."
+
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+msgid "30 Days' PNL"
+msgstr "ПНЛ за 30 дней'"
+
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+msgid "30 Days\\' PNL"
+msgstr "30 дней\\' PNL"
+
+#: src/pages/Futures/Modal/LimitAndPriceModal.tsx
+#: src/pages/Futures/Modal/ProtocolModal.tsx
+msgid "4. External oracle risk: NEST protocol's perpetual contract price comes from the NEST oracle. If the oracle is attacked or other reasons cause the price to be abnormal, The system may encounter settlement exceptions, which may cause errors in the user's revenue calculation."
+msgstr "4. Риск внешнего оракула: Цена перманентного контракта протокола NEST определяется оракулом NEST. Если оракул подвергнется атаке или по другим причинам цена станет необычной, система может столкнуться с исключениями расчетов, что может вызвать ошибки в расчетах доходности пользователя."
+
+#: src/pages/Futures/Modal/LimitAndPriceModal.tsx
+#: src/pages/Futures/Modal/ProtocolModal.tsx
+msgid "5. Smart contract risk: There may be fatal unknown risks in the smart contract that may cause your principal to be damaged. Please evaluate the risk yourself before deciding whether to participate."
+msgstr "5. Риск смарт-контракта: В смарт-контракте могут быть фатальные неизвестные риски, которые могут привести к ущербу вашему основному капиталу. Пожалуйста, оцените риск самостоятельно, прежде чем принимать решение об участии."
+
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+msgid "7 Days' PNL"
+msgstr "Прибыль / убыток за 7 дней"
+
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+msgid "7 Days\\' PNL"
+msgstr "Прибыль / убыток за 7 дней"
+
+#: src/pages/Share/Modal/ConnectWalletModal.tsx
+msgid "about connecting wallets"
+msgstr "о подключении кошельков"
+
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Futures/Components/OrderList.tsx
+#: src/pages/Futures/Components/OrderTable.tsx
+#: src/pages/Futures/Components/POrderList.tsx
+#: src/pages/Futures/Components/POrderList.tsx
+#: src/pages/Futures/Components/POrderTable.tsx
+msgid "Actual Margin"
+msgstr "Фактический залог"
+
+#: src/pages/Futures/Components/POrderList.tsx
+#: src/pages/Futures/Components/POrderTable.tsx
+msgid "Add"
+msgstr "Добавить"
+
+#: src/pages/Swap/Swap.tsx
+msgid "Add NEST to wallet"
+msgstr "Добавить NEST в кошелек"
+
+#: src/hooks/useTransactionReceipt.ts
+msgid "Add position"
+msgstr "Добавить позицию"
+
+#: src/pages/Futures/Modal/AddModal.tsx
+#: src/pages/Futures/Modal/AddModal.tsx
+msgid "Add Position"
+msgstr "Добавить позицию"
+
+#: src/hooks/useFuturesNewOrder.ts
+#: src/pages/Futures/Modal/EditPositionModal.tsx
+msgid "After the limit order is executed, TP and SL price you set will trigger immediately."
+msgstr "После выполнения лимитного ордера, установленные вами цены TP и SL будут срабатывать немедленно."
+
+#: src/components/NormalInput/NESTInput.tsx
+#: src/components/NormalInput/NESTInputSelect.tsx
+msgid "Amount"
+msgstr "Количество"
+
+#: src/pages/Futures/Modal/ApproveNoticeModal.tsx
+msgid "Approval required"
+msgstr "Требуется подтверждение"
+
+#: src/hooks/useFuturesAdd.ts
+#: src/hooks/useFuturesNewOrder.ts
+#: src/hooks/useSwap.ts
+#: src/hooks/useTransactionReceipt.ts
+#: src/pages/Futures/Modal/ApproveNoticeModal.tsx
+msgid "Approve"
+msgstr "Подтвердить"
+
+#: src/pages/Home/Home.tsx
+msgid "as commission for KOLs."
+msgstr "как комиссия для KOLs."
+
+#: src/hooks/useSwap.ts
+msgid "balance"
+msgstr "баланс"
+
+#: src/components/NormalInput/NESTInput.tsx
+#: src/components/NormalInput/NESTInputSelect.tsx
+#: src/pages/Swap/Components/SwapInputItem.tsx
+#: src/pages/Swap/Components/SwapInputItem.tsx
+msgid "Balance:"
+msgstr "Баланс:"
+
+#: src/pages/Home/Home.tsx
+#: src/pages/Home/Home.tsx
+#: src/pages/Home/Modal/ApplyModal.tsx
+#: src/pages/Home/Modal/ApplyModal.tsx
+msgid "Become a Trading KOL"
+msgstr "Станьте Торговым KOL"
+
+#: src/pages/Home/Modal/ApplyModal.tsx
+msgid "Channel link"
+msgstr "Ссылка на канал"
+
+#: src/components/NormalInput/NormalInputWithCloseButton.tsx
+#: src/hooks/useFuturesOrder.ts
+#: src/pages/Futures/Components/POrderList.tsx
+#: src/pages/Futures/Components/POrderTable.tsx
+msgid "Close"
+msgstr "Закрыть"
+
+#: src/hooks/useTransactionReceipt.ts
+msgid "Close Limit Order"
+msgstr "Закрыть лимитную заявку"
+
+#: src/pages/Futures/Modal/CloseModal.tsx
+#: src/pages/Futures/Modal/CloseModal.tsx
+msgid "Close Position"
+msgstr "Закрыть позицию"
+
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
+#: src/pages/Futures/Modal/CloseModal.tsx
+msgid "Close Price"
+msgstr "Цена закрытия"
+
+#: src/pages/Futures/Modal/CloseOrderNoticeModal.tsx
+msgid "Close Risk"
+msgstr "Риск закрытия"
+
+#: src/pages/Home/Home.tsx
+msgid "commission for KOLs"
+msgstr "комиссия для KOL"
+
+#: src/hooks/useFuturesAdd.ts
+#: src/hooks/useFuturesClose.ts
+#: src/hooks/useFuturesEditLimit.ts
+#: src/hooks/useFuturesEditPosition.ts
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Futures/Modal/SharePositionModal.tsx
+#: src/pages/Home/Modal/ApplyModal.tsx
+#: src/pages/Swap/Components/SwapSlippageModal.tsx
+msgid "Confirm"
+msgstr "Подтвердить"
+
+#: src/hooks/useFuturesNewOrder.ts
+#: src/hooks/useFuturesNewOrder.ts
+#: src/hooks/useSwap.ts
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Share/Head/ConnectButton.tsx
+#: src/pages/Share/Modal/ConnectWalletModal.tsx
+#: src/pages/Share/Modal/ConnectWalletModal.tsx
+msgid "Connect Wallet"
+msgstr "Подключить кошелек"
+
+#: src/pages/Home/Modal/ApplyModal.tsx
+msgid "Contact info (Telegram handle)"
+msgstr "Контактная информация (Telegram)"
+
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+msgid "Copy Invitation Link"
+msgstr "Копировать ссылку на приглашение"
+
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
+#: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
+msgid "Copy Link"
+msgstr "Копировать ссылку"
+
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
+#: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
+#: src/pages/Share/Modal/MyWalletModal.tsx
+msgid "Copy Successfully"
+msgstr "Скопировано успешно"
+
+#: src/pages/Dashboard/Dashboard.tsx
+msgid "Current Positions"
+msgstr "Текущие должности"
+
+#: src/pages/Share/Head/NavMenuV2Base.tsx
+msgid "Dark mode"
+msgstr "Темный режим"
+
+#: src/pages/Share/Head/NESTHead.tsx
+#: src/pages/Share/Head/NESTHead.tsx
+msgid "Dashboard"
+msgstr "Панель управления"
+
+#: src/pages/Home/Home.tsx
+msgid "Decentralized"
+msgstr "Децентрализованный"
+
+#: src/pages/Home/Home.tsx
+msgid "Decentralized Perpetual Exchange"
+msgstr "Децентрализованная бессрочная биржа"
+
+#: src/pages/Home/Home.tsx
+msgid "Deflationary"
+msgstr "Дефляционный"
+
+#: src/pages/Share/Modal/MyWalletModal.tsx
+msgid "Disconnect"
+msgstr "Отключить"
+
+#: src/pages/Futures/Components/POrderList.tsx
+#: src/pages/Futures/Components/POrderTable.tsx
+msgid "Due to the market volatility, the actual liquidation price may be different from the theoretical liquidation price . Here is the theoretical liquidation price, for reference only."
+msgstr "Из-за волатильности рынка фактическая цена ликвидации может отличаться от теоретической. Это только теоретическая цена ликвидации, предназначенная только для справки."
+
+#: src/hooks/useFuturesPOrder.ts
+#: src/pages/Futures/Components/OrderList.tsx
+#: src/pages/Futures/Components/OrderTable.tsx
+#: src/pages/Futures/Modal/SharePositionModal.tsx
+#: src/pages/Futures/Modal/SharePositionModal.tsx
+msgid "Edit"
+msgstr "Редактировать"
+
+#: src/hooks/useTransactionReceipt.ts
+msgid "Edit Limit Order"
+msgstr "Редактировать лимитный ордер"
+
+#: src/hooks/useTransactionReceipt.ts
+#: src/pages/Futures/Modal/EditPositionModal.tsx
+msgid "Edit Position"
+msgstr "Редактировать позицию"
+
+#: src/pages/Home/Modal/ApplyModal.tsx
+msgid "Enter Channel link"
+msgstr "Введите ссылку на канал"
+
+#: src/pages/Home/Modal/ApplyModal.tsx
+msgid "Enter your Contact info"
+msgstr "Введите свои контактные данные"
+
+#: src/pages/Futures/NewOrder.tsx
+msgid "Entry Price"
+msgstr "Цена входа"
+
+#: src/hooks/useNESTSnackBar.tsx
+msgid "Fail Request"
+msgstr "Не удалось выполнить запрос"
+
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
+#: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
+msgid ""
+"Follow the right person, making money is as easy as breathing.\n"
+"You can follow the right person on NESTFi, here is my refer link"
+msgstr ""
+"Следите за правильным человеком, зарабатывать деньги так же легко, как дышать.\n"
+"Вы можете следить за правильным человеком на NESTFi, вот моя ссылка-приглашение"
+
+#: src/pages/Futures/Components/FuturesNotice.tsx
+msgid "For the positions opened before April 6, 2023, please go to→"
+msgstr "Для позиций, открытых до 6 апреля 2023 года, перейдите по ссылке→"
+
+#: src/pages/Futures/Modal/LimitAndPriceModal.tsx
+#: src/pages/Futures/Modal/ProtocolModal.tsx
+msgid "For users/smart contracts using NEST Protocol perpetual contracts, please understand its rules and the differences of similar products in the market when performing positions, settlement, liquidation and other related operations. After fully understanding the following possible risks and can bear Participate in the risk situation:"
+msgstr "Для пользователей/смарт-контрактов, использующих перманентные контракты NEST Protocol, пожалуйста, понимайте его правила и различия с аналогичными продуктами на рынке при выполнении операций по открытию позиций, расчету, ликвидации и другим связанным операциям. После полного понимания возможных рисков и способности их выдержать участвуйте в рисковой ситуации:"
+
+#: src/pages/Swap/Components/SwapInputItem.tsx
+msgid "From"
+msgstr "От"
+
+#: src/pages/Share/Head/NESTHead.tsx
+msgid "Futures"
+msgstr "Фьючерсы"
+
+#: src/pages/Share/Head/NavMenuV2Base.tsx
+msgid "Github"
+msgstr "Github"
+
+#: src/pages/Dashboard/Dashboard.tsx
+msgid "History"
+msgstr "История"
+
+#: src/pages/Share/Head/NESTHead.tsx
+msgid "Home"
+msgstr "Главная"
+
+#: src/pages/Futures/MoreInfo.tsx
+msgid "How to Play"
+msgstr "Как играть"
+
+#: src/pages/Futures/Modal/CloseOrderNoticeModal.tsx
+#: src/pages/Home/Modal/ApplyModal.tsx
+msgid "I understand"
+msgstr "Я понимаю"
+
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
+#: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
+msgid "Image"
+msgstr "Изображение"
+
+#: src/pages/Home/Home.tsx
+msgid "Infinite Liquidity"
+msgstr "Бесконечная ликвидность"
+
+#: src/hooks/useSwap.ts
+msgid "Insufficient"
+msgstr "Недостаточно"
+
+#: src/hooks/useFuturesAdd.ts
+#: src/hooks/useFuturesNewOrder.ts
+msgid "Insufficient NEST balance"
+msgstr "Недостаточный баланс NEST"
+
+#: src/pages/Share/Head/NavMenuV2Base.tsx
+#: src/pages/Share/Modal/LanguageModal.tsx
+#: src/pages/Share/Modal/LanguageModal.tsx
+msgid "Language"
+msgstr "Язык"
+
+#: src/components/NormalInput/NormalInput.tsx
+msgid "Last"
+msgstr "Последний"
+
+#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
+msgid "Last Price"
+msgstr "Последняя цена"
+
+#: src/pages/Share/Modal/ConnectWalletModal.tsx
+msgid "Learn more"
+msgstr "Узнать больше"
+
+#: src/pages/Futures/Components/LeverageSlider.tsx
+msgid "Leverage"
+msgstr "Маржинальное плечо"
+
+#: src/pages/Futures/NewOrder.tsx
+msgid "Limit"
+msgstr "Лимит"
+
+#: src/hooks/useFuturesNewOrder.ts
+#: src/hooks/useFuturesNewOrder.ts
+msgid "Limit order fee = 15 NEST"
+msgstr "Плата за лимитный ордер = 15 NEST"
+
+#: src/pages/Futures/Modal/EditLimitModal.tsx
+#: src/pages/Futures/Modal/EditLimitModal.tsx
+#: src/pages/Futures/Modal/EditLimitModal.tsx
+#: src/pages/Futures/Modal/SharePositionModal.tsx
+#: src/pages/Futures/Modal/SharePositionModal.tsx
+msgid "Limit Price"
+msgstr "Цена лимита"
+
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Futures/Components/POrderList.tsx
+#: src/pages/Futures/Components/POrderTable.tsx
+#: src/pages/Futures/Modal/AddModal.tsx
+#: src/pages/Futures/Modal/EditPositionModal.tsx
+#: src/pages/Futures/NewOrder.tsx
+msgid "Liq Price"
+msgstr "Цена ликвидации"
+
+#: src/hooks/useFuturesPOrderClose.tsx
+msgid "Liquidated"
+msgstr "Ликвидирован"
+
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
+#: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
+msgid "Loading..."
+msgstr "Загрузка..."
+
+#: src/components/LongOrShort/LongOrShort.tsx
+#: src/hooks/useFuturesAdd.ts
+#: src/hooks/useFuturesClose.ts
+#: src/hooks/useFuturesEditPosition.ts
+#: src/hooks/useFuturesNewOrder.ts
+#: src/hooks/useFuturesOrder.ts
+#: src/hooks/useFuturesPOrder.ts
+#: src/hooks/useFuturesPOrderClose.tsx
+#: src/pages/Dashboard/Components/ShareOrderPosition.tsx
+#: src/pages/Futures/Components/OrderListPosition.tsx
+#: src/pages/Futures/Components/OrderTablePosition.tsx
+#: src/pages/Futures/Modal/SharePositionModal.tsx
+msgid "Long"
+msgstr "Длинный"
+
+#: src/pages/Futures/NewOrder.tsx
+msgid "Market"
+msgstr "Рынок"
+
+#: src/pages/Swap/Components/SwapInputItem.tsx
+msgid "Max"
+msgstr "Макс"
+
+#: src/components/NormalInput/NESTInput.tsx
+#: src/components/NormalInput/NESTInputSelect.tsx
+msgid "MAX"
+msgstr "МАКС"
+
+#: src/hooks/useFuturesNewOrder.ts
+msgid "Minimum 50 NEST"
+msgstr "Минимум 50 NEST"
+
+#: src/pages/Share/Modal/ConnectWalletModal.tsx
+msgid "More"
+msgstr "Подробнее"
+
+#: src/pages/Futures/MoreInfo.tsx
+msgid "More Info"
+msgstr "Больше информации"
+
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+msgid "My Positions"
+msgstr "Мои позиции"
+
+#: src/pages/Dashboard/Dashboard.tsx
+msgid "NEST Total Burned"
+msgstr "Всего сожжено NEST"
+
+#: src/pages/Futures/MoreInfo.tsx
+msgid "NEST White Paper"
+msgstr "Белая книга NEST"
+
+#: src/pages/Home/Home.tsx
+msgid "NEST\\'s economic model is deflationary, thus settlement with $NEST will bring higher potential revenue."
+msgstr "Экономическая модель NEST является дефляционной, поэтому расчеты с использованием $NEST принесут более высокий потенциальный доход."
+
+#: src/pages/Home/Home.tsx
+#: src/pages/Home/Home.tsx
+msgid "NESTFi offers"
+msgstr "NESTFi предлагает"
+
+#: src/pages/Home/Home.tsx
+msgid "NESTFi, A Next-Generation"
+msgstr "NESTFi - следующее поколение"
+
+#: src/pages/Home/Home.tsx
+msgid "NESTFi's economic model is deflationary, the more users trade, the more $NEST will be burned"
+msgstr "Экономическая модель NESTFi является дефляционной, чем больше пользователей торгуют, тем больше $NEST будет сожжено"
+
+#: src/pages/Share/Head/NavMenuV2Base.tsx
+msgid "News"
+msgstr "Новости"
+
+#: src/pages/Home/Home.tsx
+msgid "No Market Makers"
+msgstr "Нет рыночных мейкеров"
+
+#: src/pages/Futures/Components/TableTitle.tsx
+#: src/pages/Futures/OrderList.tsx
+#: src/pages/Futures/OrderList.tsx
+msgid "No Order"
+msgstr "Нет ордеров"
+
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+msgid "No trades yet"
+msgstr "Транзакции отсутствуют"
+
+#: src/pages/Share/Modal/MyWalletModal.tsx
+msgid "No Transactions yet"
+msgstr "Сделок пока нет"
+
+#: src/pages/Home/Home.tsx
+#: src/pages/Home/Home.tsx
+msgid "Number of KOLs Joined NESTFi"
+msgstr "Количество KOL, присоединившихся к NESTFi"
+
+#: src/hooks/useFuturesNewOrder.ts
+msgid "Open"
+msgstr "Открыть"
+
+#: src/hooks/useTransactionReceipt.ts
+msgid "Open position"
+msgstr "Открыть позицию"
+
+#: src/hooks/useTransactionReceipt.ts
+msgid "Open position request"
+msgstr "Запрос на открытие позиции"
+
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
+#: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
+#: src/pages/Futures/Components/OrderList.tsx
+#: src/pages/Futures/Components/OrderTable.tsx
+#: src/pages/Futures/Components/POrderList.tsx
+#: src/pages/Futures/Components/POrderList.tsx
+#: src/pages/Futures/Components/POrderTable.tsx
+#: src/pages/Futures/Modal/AddModal.tsx
+#: src/pages/Futures/Modal/EditPositionModal.tsx
+msgid "Open Price"
+msgstr "Цена открытия"
+
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Futures/Components/OrderTable.tsx
+#: src/pages/Futures/Components/POrderTable.tsx
+msgid "Operate"
+msgstr "Действие"
+
+#: src/pages/Futures/OrderList.tsx
+msgid "Order"
+msgstr "Ордер"
+
+#: src/pages/Home/Modal/ApplyModal.tsx
+msgid "Platform (Youtube, Telegram, Twitter, Instagram, Facebook, Tiktok, Others)"
+msgstr "Платформа (Youtube, Telegram, Twitter, Instagram, Facebook, Tiktok, Другое)"
+
+#: src/pages/Futures/Modal/ApproveNoticeModal.tsx
+msgid "Please click Approve for authorization and then you can open the position, this process will consume some GAS."
+msgstr "Пожалуйста, нажмите \"Approve\" для авторизации, затем вы можете открыть позицию. Этот процесс потребует некоторого количества GAS."
+
+#: src/pages/Futures/Modal/LimitAndPriceModal.tsx
+msgid "Please note that \"Limit order\" or \"Stop order\" is not guaranteed to be executed. This may include, but is not limited to, the following cases."
+msgstr "Обратите внимание, что «лимитный ордер» или «стоп-ордер» не гарантируют исполнение. Это может включать, но не ограничивается следующими случаями."
+
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Futures/Modal/AddModal.tsx
+#: src/pages/Futures/Modal/CloseModal.tsx
+#: src/pages/Futures/Modal/EditPositionModal.tsx
+msgid "Position"
+msgstr "Позиция"
+
+#: src/hooks/useFuturesNewOrder.ts
+#: src/hooks/useFuturesNewOrder.ts
+#: src/hooks/useFuturesNewOrder.ts
+#: src/hooks/useFuturesNewOrder.ts
+msgid "Position fee = Position * 0.05%"
+msgstr "Плата за позицию = Позиция * 0,05%"
+
+#: src/hooks/useFuturesEditPosition.ts
+msgid "Position fee =Position*0.05%"
+msgstr "Комиссия за позицию = Позиция*0,05%"
+
+#: src/hooks/useFuturesClose.ts
+msgid "Position*0.05%"
+msgstr "Позиция*0,05%"
+
+#: src/pages/Futures/Modal/SharePositionModal.tsx
+#: src/pages/Futures/NewOrder.tsx
+#: src/pages/Futures/OrderList.tsx
+msgid "Positions"
+msgstr "Позиции"
+
+#: src/pages/Futures/NewOrder.tsx
+#: src/pages/Swap/Swap.tsx
+msgid "Price"
+msgstr "Цена"
+
+#: src/pages/Share/Modal/MyWalletModal.tsx
+msgid "Recent transactions"
+msgstr "Последние сделки"
+
+#: src/pages/Futures/Modal/LimitAndPriceModal.tsx
+#: src/pages/Futures/Modal/ProtocolModal.tsx
+msgid "Risk Warning"
+msgstr "Предупреждение об уровне риска"
+
+#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
+#: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
+msgid "Scan and copy the trade"
+msgstr "Сканировать и копировать сделку"
+
+#: src/hooks/useTransactionReceipt.ts
+msgid "Sell position"
+msgstr "Продать позицию"
+
+#: src/hooks/useTransactionReceipt.ts
+msgid "Sell position request"
+msgstr "Запрос на продажу позиции"
+
+#: src/pages/Futures/Modal/CloseModal.tsx
+#: src/pages/Futures/Modal/EditPositionModal.tsx
+#: src/pages/Futures/Modal/SharePositionModal.tsx
+#: src/pages/Futures/NewOrder.tsx
+msgid "Service Fee"
+msgstr "Сервисная комиссия"
+
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+msgid "Share"
+msgstr "Поделиться"
+
+#: src/components/LongOrShort/LongOrShort.tsx
+#: src/hooks/useFuturesAdd.ts
+#: src/hooks/useFuturesClose.ts
+#: src/hooks/useFuturesEditPosition.ts
+#: src/hooks/useFuturesNewOrder.ts
+#: src/hooks/useFuturesOrder.ts
+#: src/hooks/useFuturesPOrder.ts
+#: src/hooks/useFuturesPOrderClose.tsx
+#: src/pages/Dashboard/Components/ShareOrderPosition.tsx
+#: src/pages/Futures/Components/OrderListPosition.tsx
+#: src/pages/Futures/Components/OrderTablePosition.tsx
+#: src/pages/Futures/Modal/SharePositionModal.tsx
+msgid "Short"
+msgstr "Коротко"
+
+#: src/pages/Futures/Components/OrderTable.tsx
+#: src/pages/Futures/Components/POrderTable.tsx
+#: src/pages/Futures/Components/POrderTable.tsx
+msgid "SL"
+msgstr "Стоп-лосс"
+
+#: src/pages/Swap/Swap.tsx
+msgid "Slippage Tolerance"
+msgstr "Допустимое отклонение цены"
+
+#: src/pages/Swap/Components/SwapSlippageModal.tsx
+msgid "Slippage Tolerance Setting"
+msgstr "Настройка допустимого отклонения цены"
+
+#: src/pages/Home/Home.tsx
+msgid "Start Trading"
+msgstr "Начать торговлю"
+
+#: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
+#: src/pages/Futures/Components/OrderList.tsx
+#: src/pages/Futures/Components/POrderList.tsx
+#: src/pages/Futures/Components/POrderList.tsx
+#: src/pages/Futures/Modal/EditPositionModal.tsx
+#: src/pages/Futures/Modal/SharePositionModal.tsx
+#: src/pages/Futures/Modal/SharePositionModal.tsx
+#: src/pages/Futures/NewOrder.tsx
+msgid "Stop Loss"
+msgstr "Стоп-лосс"
+
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Futures/Components/OrderTable.tsx
+#: src/pages/Futures/Components/POrderTable.tsx
+msgid "Stop Order"
+msgstr "Стоп-ордер"
+
+#: src/hooks/useFuturesEditPosition.ts
+#: src/hooks/useFuturesNewOrder.ts
+#: src/hooks/useFuturesNewOrder.ts
+msgid "Stop order fee(after execution) = 15 NEST"
+msgstr "Комиссия за исполнение стоп-ордера = 15 NEST"
+
+#: src/pages/Futures/NewOrder.tsx
+msgid "Stop-Limit"
+msgstr "Стоп-лимит"
+
+#: src/pages/Home/Modal/ApplyModal.tsx
+msgid "Submit successfully"
+msgstr "Успешно отправлено"
+
+#: src/components/NormalInput/NESTInput.tsx
+#: src/components/NormalInput/NESTInputSelect.tsx
+#: src/hooks/useSwap.ts
+#: src/hooks/useTransactionReceipt.ts
+#: src/pages/Share/Head/NESTHead.tsx
+#: src/pages/Swap/Swap.tsx
+msgid "Swap"
+msgstr "Обменять"
+
+#: src/hooks/useNESTSnackBar.tsx
+msgid "Switch network successfully"
+msgstr "Успешно переключена сеть"
+
+#: src/pages/Futures/Components/OrderTable.tsx
+#: src/pages/Futures/Components/POrderTable.tsx
+msgid "Symbol"
+msgstr "Символ"
+
+#: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
+#: src/pages/Futures/Components/OrderList.tsx
+#: src/pages/Futures/Components/POrderList.tsx
+#: src/pages/Futures/Components/POrderList.tsx
+#: src/pages/Futures/Modal/EditPositionModal.tsx
+#: src/pages/Futures/Modal/SharePositionModal.tsx
+#: src/pages/Futures/Modal/SharePositionModal.tsx
+#: src/pages/Futures/NewOrder.tsx
+msgid "Take Profit"
+msgstr "Прибыль"
+
+#: src/pages/Share/Head/NavMenuV2Base.tsx
+msgid "Test BNB"
+msgstr "Тест BNB"
+
+#: src/pages/Home/Home.tsx
+msgid "The smart contract guarantees the infinite liquidity through burning and issuing $NEST. This keeps positions safe from temporary wicks caused by illiquidity."
+msgstr "Смарт-контракт гарантирует бесконечную ликвидность путем сжигания и выпуска $NEST. Это обеспечивает безопасность позиций от временных выбросов, вызванных неликвидностью."
+
+#: src/pages/Home/Home.tsx
+msgid "The smart contract is the only seller of the system, which means there are no market marking costs, no liquidity debt, no slippage costs in the system."
+msgstr "Смарт-контракт является единственным продавцом в системе, что означает отсутствие расходов на маркетинг, отсутствие долгов по ликвидности и отсутствие расходов на проскальзывание в системе."
+
+#: src/components/NormalInput/NESTInputSelect.tsx
+msgid "The system will automatically convert USDT to NEST at market price for you to open your position, and you will also receive NEST at settlement."
+msgstr "Система автоматически конвертирует USDT в NEST по рыночной цене для открытия вашей позиции, и вы также получите NEST при расчете."
+
+#: src/hooks/useNESTSnackBar.tsx
+msgid "The transaction failed and the amount has been fully refunded. You can re-trade"
+msgstr "Транзакция не удалась, и сумма была полностью возмещена. Вы можете повторно торговать"
+
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+msgid "Time"
+msgstr "Время"
+
+#: src/pages/Futures/Components/FuturesNotice.tsx
+msgid "to check and close."
+msgstr "чтобы проверить и закрыть."
+
+#: src/pages/Swap/Components/SwapInputItem.tsx
+msgid "To(Estimated)"
+msgstr "Для (приблизительно)"
+
+#: src/pages/Dashboard/Dashboard.tsx
+msgid "Today Burned"
+msgstr "Сегодня сожжено"
+
+#: src/pages/Dashboard/Dashboard.tsx
+msgid "Today Volume"
+msgstr "Сегодняшний объем"
+
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+msgid "Today's PNL"
+msgstr "Прибыль и убытки за сегодня"
+
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+msgid "Today\\'s PNL"
+msgstr "Прибыль и убытки за сегодня"
+
+#: src/pages/Home/Home.tsx
+#: src/pages/Home/Home.tsx
+msgid "Total Burned"
+msgstr "Всего сожжено"
+
+#: src/pages/Futures/Modal/SharePositionModal.tsx
+#: src/pages/Futures/NewOrder.tsx
+msgid "Total Pay"
+msgstr "Общая оплата"
+
+#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
+msgid "Total Profit"
+msgstr "Общая прибыль"
+
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+msgid "Total Profit & Loss"
+msgstr "Общий доход и убыток"
+
+#: src/pages/Dashboard/Dashboard.tsx
+msgid "Total Transaction Volume"
+msgstr "Общий объем сделок"
+
+#: src/pages/Futures/Components/OrderTable.tsx
+#: src/pages/Futures/Components/POrderTable.tsx
+#: src/pages/Futures/Components/POrderTable.tsx
+msgid "TP"
+msgstr "TP"
+
+#: src/hooks/useFuturesNewOrder.ts
+#: src/pages/Futures/Modal/SharePositionModal.tsx
+msgid "TP and SL price you set will trigger immediately."
+msgstr "Цена TP и SL, которую вы установили, сработает немедленно."
+
+#: src/pages/Home/Home.tsx
+msgid "Trade directly from your wallet without the risk of misappropriating funds."
+msgstr "Торгуйте непосредственно из своего кошелька без риска присвоения средств."
+
+#: src/pages/Swap/Swap.tsx
+msgid "Trade tokens in instant"
+msgstr "Торговля токенами мгновенно"
+
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+msgid "Trade with me on NESTFi"
+msgstr "Торгуйте со мной на NESTFi"
+
+#: src/pages/Home/Home.tsx
+msgid ""
+"trading\n"
+"fees"
+msgstr ""
+"торговые\n"
+"комиссии"
+
+#: src/pages/Home/Home.tsx
+msgid "trading fees as"
+msgstr "торговые комиссии в качестве"
+
+#: src/hooks/useFuturesPOrder.ts
+msgid "Trigger"
+msgstr "Триггер"
+
+#: src/hooks/useFuturesPOrderClose.tsx
+msgid "Trigger executed"
+msgstr "Триггер выполнен"
+
+#: src/pages/Futures/Modal/EditPositionModal.tsx
+msgid "Trigger Position"
+msgstr "Триггер-позиция"
+
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
+#: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
+msgid "Twitter"
+msgstr "Твиттер"
+
+#: src/pages/Share/Head/NavMenuV2Base.tsx
+msgid "User Guide"
+msgstr "Руководство пользователя"
+
+#: src/components/SnackBar/NormalSnackBar.tsx
+#: src/pages/Futures/Components/FuturesNotice.tsx
+msgid "View"
+msgstr "Просмотр"
+
+#: src/pages/Share/Modal/MyWalletModal.tsx
+msgid "Wallet"
+msgstr "Кошелек"
+
+#: src/pages/Share/Head/NavMenuV2Base.tsx
+msgid "White Paper"
+msgstr "Белая бумага"
+
+#: src/pages/Home/Home.tsx
+msgid "Why You Should Choose NESTFi"
+msgstr "Почему стоит выбрать NESTFi"
+
+#: src/pages/Futures/Modal/CloseOrderNoticeModal.tsx
+msgid "Will not be displayed after closing"
+msgstr "Не будет отображаться после закрытия"
+
+#: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
+msgid "with 1 click"
+msgstr "в 1 клик"
+
+#: src/pages/Home/Modal/ApplyModal.tsx
+msgid "Youtube"
+msgstr "Ютуб"

@@ -13,7 +13,7 @@ export interface FuturesPrice {
   [key: string]: BigNumber;
 }
 const UPDATE_PRICE = 15;
-export const priceToken = ["ETH", "BTC", "BNB"];
+export const priceToken = ["ETH", "BTC", "BNB", "MATIC", "ADA", "DOGE", "XRP"];
 const Futures: FC = () => {
   const { width, isBigMobile } = useWindowWidth();
   const [tokenPair, setTokenPair] = useState("ETH");
@@ -21,9 +21,9 @@ const Futures: FC = () => {
   const [orderPrice, setOrderPrice] = useState<FuturesPrice>();
   const showNoticeDefault = useMemo(() => {
     const isShow = localStorage.getItem("FuturesNoticeV1");
-    return isShow !== "1"
-  }, [])
-  const [showNotice, setShowNotice] = useState<boolean>(showNoticeDefault)
+    return isShow !== "1";
+  }, []);
+  const [showNotice, setShowNotice] = useState<boolean>(showNoticeDefault);
   const getPrice = useCallback(async () => {
     const ETHPriceBase: { [key: string]: string } = await getPriceFromNESTLocal(
       "eth"
@@ -34,6 +34,16 @@ const Futures: FC = () => {
     const BNBPriceBase: { [key: string]: string } = await getPriceFromNESTLocal(
       "bnb"
     );
+    const MATICPriceBase: { [key: string]: string } =
+      await getPriceFromNESTLocal("matic");
+    const ADAPriceBase: { [key: string]: string } = await getPriceFromNESTLocal(
+      "ada"
+    );
+    const DOGEPriceBase: { [key: string]: string } =
+      await getPriceFromNESTLocal("doge");
+    const XRPPriceBase: { [key: string]: string } = await getPriceFromNESTLocal(
+      "xrp"
+    );
     const ETHPrice = ETHPriceBase
       ? ETHPriceBase["value"].toString().stringToBigNumber(18)
       : undefined;
@@ -43,12 +53,36 @@ const Futures: FC = () => {
     const BNBPrice = BNBPriceBase
       ? BNBPriceBase["value"].toString().stringToBigNumber(18)
       : undefined;
+    const MATICPrice = MATICPriceBase
+      ? MATICPriceBase["value"].toString().stringToBigNumber(18)
+      : undefined;
+    const ADAPrice = ADAPriceBase
+      ? ADAPriceBase["value"].toString().stringToBigNumber(18)
+      : undefined;
+    const DOGEPrice = DOGEPriceBase
+      ? DOGEPriceBase["value"].toString().stringToBigNumber(18)
+      : undefined;
+    const XRPPrice = XRPPriceBase
+      ? XRPPriceBase["value"].toString().stringToBigNumber(18)
+      : undefined;
 
-    if (ETHPrice && BTCPrice && BNBPrice) {
+    if (
+      ETHPrice &&
+      BTCPrice &&
+      BNBPrice &&
+      MATICPrice &&
+      ADAPrice &&
+      DOGEPrice &&
+      XRPPrice
+    ) {
       const newPrice: FuturesPrice = {
         ETH: ETHPrice,
         BTC: BTCPrice,
         BNB: BNBPrice,
+        MATIC: MATICPrice,
+        ADA: ADAPrice,
+        DOGE: DOGEPrice,
+        XRP: XRPPrice,
       };
       return newPrice;
     } else {
@@ -109,7 +143,15 @@ const Futures: FC = () => {
     return <FuturesMoreInfo />;
   }, []);
   const notice = useMemo(() => {
-    return !showNotice ? <></> : <FuturesNotice onClose={() => {setShowNotice(false)}}/>;
+    return !showNotice ? (
+      <></>
+    ) : (
+      <FuturesNotice
+        onClose={() => {
+          setShowNotice(false);
+        }}
+      />
+    );
   }, [showNotice]);
 
   const mainView = useMemo(() => {
@@ -124,7 +166,7 @@ const Futures: FC = () => {
               maxWidth={"1600px"}
               paddingY={`${paddingY}px`}
             >
-              {notice}
+              {/* {notice} */}
               <Stack
                 direction={"row"}
                 spacing={"16px"}
@@ -151,7 +193,7 @@ const Futures: FC = () => {
             paddingX={`${paddingX}px`}
           >
             <Stack spacing={"16px"} width={"100%"} paddingY={`${paddingY}px`}>
-              {notice}
+              {/* {notice} */}
               {exchangeTvChart()}
               {newOrder()}
               {isBigMobile ? <></> : moreInfo()}
@@ -162,7 +204,6 @@ const Futures: FC = () => {
     }
   }, [
     width,
-    notice,
     paddingY,
     exchangeTvChart,
     orderList,

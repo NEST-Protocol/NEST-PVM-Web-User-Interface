@@ -8,6 +8,7 @@ import {
   TransactionType,
   usePendingTransactions,
 } from "./useTransactionReceipt";
+import { t } from "@lingui/macro";
 
 function useFuturesOrder(data: FuturesOrderV2) {
   const { isPendingOrder } = usePendingTransactions();
@@ -19,9 +20,9 @@ function useFuturesOrder(data: FuturesOrderV2) {
   const showLimitPrice = useMemo(() => {
     return BigNumber.from(data.basePrice.toString()).bigNumberToShowString(
       18,
-      2
+      tokenName.getTokenPriceDecimals()
     );
-  }, [data.basePrice]);
+  }, [data.basePrice, tokenName]);
   const showBalance = useMemo(() => {
     return BigNumber.from(data.balance.toString()).bigNumberToShowString(4, 2);
   }, [data.balance]);
@@ -39,7 +40,7 @@ function useFuturesOrder(data: FuturesOrderV2) {
     );
   }, [data.index, isPendingOrder]);
   const mainButtonTitle = useMemo(() => {
-    return "Close";
+    return t`Close`;
   }, []);
   const mainButtonLoading = useMemo(() => {
     if (closeLimit.isLoading || pending) {
@@ -62,23 +63,34 @@ function useFuturesOrder(data: FuturesOrderV2) {
     const tpNum = data.stopProfitPrice;
     return BigNumber.from("0").eq(tpNum)
       ? String().placeHolder
-      : BigNumber.from(tpNum.toString()).bigNumberToShowString(18, 2);
-  }, [data.stopProfitPrice]);
+      : BigNumber.from(tpNum.toString()).bigNumberToShowString(
+          18,
+          tokenName.getTokenPriceDecimals()
+        );
+  }, [data.stopProfitPrice, tokenName]);
   const sl = useMemo(() => {
     const slNum = data.stopLossPrice;
     return BigNumber.from("0").eq(slNum)
       ? String().placeHolder
-      : BigNumber.from(slNum.toString()).bigNumberToShowString(18, 2);
-  }, [data.stopLossPrice]);
-  
+      : BigNumber.from(slNum.toString()).bigNumberToShowString(
+          18,
+          tokenName.getTokenPriceDecimals()
+        );
+  }, [data.stopLossPrice, tokenName]);
+
   const shareOrder = useMemo(() => {
     const info: Order = {
       owner: data.owner.toString(),
       leverage: `${data.lever.toString()}X`,
-      orientation: data.orientation ? "Long" : "Short",
+      orientation: data.orientation ? t`Long` : t`Short`,
       actualRate: 0,
       index: parseInt(data.index.toString()),
-      openPrice: parseFloat(data.basePrice.bigNumberToShowString(18, 2)),
+      openPrice: parseFloat(
+        data.basePrice.bigNumberToShowString(
+          18,
+          tokenName.getTokenPriceDecimals()
+        )
+      ),
       tokenPair: `${tokenName}/USDT`,
       actualMargin: 0,
       initialMargin: parseFloat(

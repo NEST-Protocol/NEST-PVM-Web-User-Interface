@@ -10,6 +10,7 @@ import LinkButton from "../MainButton/LinkButton";
 import NESTLine from "../NESTLine";
 import SelectListMenu from "../SelectListMemu/SelectListMenu";
 import OneTokenIN from "../TokenIconAndName/OneTokenI&N";
+import { Trans, t } from "@lingui/macro";
 
 interface NESTInputSelectProps {
   tokenName: string;
@@ -103,9 +104,11 @@ const NESTInputSelect: FC<NESTInputSelectProps> = ({ ...props }) => {
               textAlign: "center",
             })}
           >
-            The system will automatically convert USDT to NEST at market price
-            for you to open your position, and you will also receive NEST at
-            settlement.
+            <Trans>
+              The system will automatically convert USDT to NEST at market price
+              for you to open your position, and you will also receive NEST at
+              settlement.
+            </Trans>
           </Box>
         </Stack>
       );
@@ -141,8 +144,10 @@ const NESTInputSelect: FC<NESTInputSelectProps> = ({ ...props }) => {
             alignItems={"center"}
           >
             <Link to={"/swap"}>
-              0 balance. Before trading, you can switch to "Swap" to exchange
-              between USDT and NEST token.
+              <Trans>
+                0 balance. Before trading, you can switch to "Swap" to exchange
+                between USDT and NEST token.
+              </Trans>
             </Link>
             <Link to={"/swap"}>
               <NEXT />
@@ -190,7 +195,7 @@ const NESTInputSelect: FC<NESTInputSelectProps> = ({ ...props }) => {
             },
           })}
           component={"input"}
-          placeholder={"Amount"}
+          placeholder={t`Amount`}
           value={props.nestAmount}
           maxLength={32}
           onChange={(e) =>
@@ -235,9 +240,12 @@ const NESTInputSelect: FC<NESTInputSelectProps> = ({ ...props }) => {
               },
             })}
           >
-            Balance: <span>{`${props.showBalance} ${props.tokenName}`}</span>
+            {t`Balance:`}{" "}
+            <span>{`${props.showBalance} ${props.tokenName}`}</span>
           </Box>
-          <LinkButton onClick={props.maxCallBack}>MAX</LinkButton>
+          <LinkButton onClick={props.maxCallBack}>
+            <Trans>MAX</Trans>
+          </LinkButton>
         </Stack>
         {props.tokenName === "USDT" ? (
           <></>
@@ -257,7 +265,9 @@ const NESTInputSelect: FC<NESTInputSelectProps> = ({ ...props }) => {
                   },
                 }}
               >
-                <p>Swap</p>
+                <p>
+                  <Trans>Swap</Trans>
+                </p>
                 <SwapExchangeSmall />
               </Stack>
             </Link>

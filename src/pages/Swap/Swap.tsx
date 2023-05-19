@@ -15,6 +15,7 @@ import useSwap from "../../hooks/useSwap";
 import useWindowWidth from "../../hooks/useWindowWidth";
 import SwapInputItem, { SwapShowItem } from "./Components/SwapInputItem";
 import SwapSlippageModal from "./Components/SwapSlippageModal";
+import { Trans } from "@lingui/macro";
 
 const SwapBaseStack = styled(Stack)(({ theme }) => {
   return {
@@ -150,7 +151,9 @@ const Swap: FC = () => {
       >
         <Stack spacing={"8px"} width={"100%"} marginBottom={"24px"}>
           <Stack direction={"row"} justifyContent={"space-between"}>
-            <p className="SwapTitle">Swap</p>
+            <p className="SwapTitle">
+              <Trans>Swap</Trans>
+            </p>
             <Stack
               direction={"row"}
               justifyContent={"center"}
@@ -195,7 +198,7 @@ const Swap: FC = () => {
                   fontWeight: 400,
                 })}
               >
-                Add NEST to wallet
+                <Trans>Add NEST to wallet</Trans>
               </Box>
             </Stack>
           </Stack>
@@ -206,7 +209,7 @@ const Swap: FC = () => {
               fontSize: 14,
             })}
           >
-            Trade tokens in instant
+            <Trans>Trade tokens in instant</Trans>
           </Box>
         </Stack>
         <SwapInputItem
@@ -236,7 +239,9 @@ const Swap: FC = () => {
             <></>
           ) : (
             <SettingStack direction={"row"} justifyContent={"space-between"}>
-              <p className="SwapSettingTitle">Slippage Tolerance</p>
+              <p className="SwapSettingTitle">
+                <Trans>Slippage Tolerance</Trans>
+              </p>
               <Stack
                 direction={"row"}
                 justifyContent={"flex-end"}
@@ -251,7 +256,9 @@ const Swap: FC = () => {
           )}
 
           <SettingStack direction={"row"} justifyContent={"space-between"}>
-            <p className="SwapSettingTitle">Price</p>
+            <p className="SwapSettingTitle">
+              <Trans>Price</Trans>
+            </p>
             <Stack
               direction={"row"}
               justifyContent={"flex-end"}

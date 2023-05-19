@@ -4,6 +4,7 @@ import { createContainer } from "unstated-next";
 import { useWaitForTransaction } from "wagmi";
 import { SnackBarType } from "../components/SnackBar/NormalSnackBar";
 import useTransactionSnackBar from "./useNESTSnackBar";
+import { t } from "@lingui/macro";
 
 export enum TransactionType {
   approve,
@@ -25,6 +26,58 @@ export type TransactionInfo = {
   info?: string;
 };
 
+export const getTransactionTypeString = (text: string) => {
+  if (text === `Approve`) {
+    return t`Approve`
+  } else if (text === `Open position`) {
+    return t`Open position`
+  } else if (text === `Open position request`) {
+    return t`Open position request`
+  }  else if (text === `Add position`) {
+    return t`Add position`
+  }  else if (text === `Sell position`) {
+    return t`Sell position`
+  }  else if (text === `Sell position request`) {
+    return t`Sell position request`
+  }  else if (text === `Edit Position`) {
+    return t`Edit Position`
+  }  else if (text === `Edit Limit Order`) {
+    return t`Edit Limit Order`
+  }  else if (text === `Close Limit Order`) {
+    return t`Close Limit Order`
+  }  else if (text === `Swap`) {
+    return t`Swap`
+  } else {
+    return ""
+  }
+}
+
+const getInfoTitle = (type: TransactionType) => {
+  switch (type) {
+    case TransactionType.approve:
+      return `Approve`;
+    case TransactionType.futures_buy:
+      return `Open position`;
+    case TransactionType.futures_buy_request:
+      return `Open position request`;
+    case TransactionType.futures_add:
+      return `Add position`;
+    case TransactionType.futures_sell:
+      return `Sell position`;
+    case TransactionType.futures_sell_request:
+      return `Sell position request`;
+    case TransactionType.futures_editPosition:
+      return `Edit Position`;
+    case TransactionType.futures_editLimit:
+      return `Edit Limit Order`;
+    case TransactionType.futures_closeLimit:
+      return `Close Limit Order`;
+    case TransactionType.swap_uni:
+    case TransactionType.swap_nhbtc:
+      return `Swap`;
+  }
+}
+
 export const usePendingTransactionsBase = () => {
   const [info, setInfo] = useState<TransactionInfo>();
   const { transactionSnackBar } = useTransactionSnackBar();
@@ -32,31 +85,7 @@ export const usePendingTransactionsBase = () => {
   const { isSuccess, isError } = useWaitForTransaction({
     hash: info?.hash as `0x${string}`,
   });
-  const getInfoTitle = useCallback((type: TransactionType) => {
-    switch (type) {
-      case TransactionType.approve:
-        return "Approve";
-      case TransactionType.futures_buy:
-        return "Open position";
-      case TransactionType.futures_buy_request:
-        return "Open position request";
-      case TransactionType.futures_add:
-        return "Add position";
-      case TransactionType.futures_sell:
-        return "Sell position";
-      case TransactionType.futures_sell_request:
-        return "Sell position request";
-      case TransactionType.futures_editPosition:
-        return "Edit Position";
-      case TransactionType.futures_editLimit:
-        return "Edit Limit Order";
-      case TransactionType.futures_closeLimit:
-        return "Close Limit Order";
-      case TransactionType.swap_uni:
-      case TransactionType.swap_nhbtc:
-        return "Swap";
-    }
-  }, []);
+  
   useEffect(() => {
     if ((isSuccess || isError) && info) {
       const type = isSuccess ? SnackBarType.success : SnackBarType.fail;
@@ -69,7 +98,6 @@ export const usePendingTransactionsBase = () => {
     info,
     isError,
     isSuccess,
-    getInfoTitle,
     transactionSnackBar,
     pendingList,
   ]);
