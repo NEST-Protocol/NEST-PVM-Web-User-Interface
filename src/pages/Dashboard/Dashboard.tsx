@@ -518,8 +518,8 @@ const Dashboard: FC = () => {
                 ethers.utils.parseEther(item.openPrice.toFixed(12)),
                 item.orientation === "Long"
               )
-                .div(BigNumber.from(10).pow(16))
-                .toNumber() / 100
+                .div(BigNumber.from(10).pow(12))
+                .toNumber() / 1000000
             ).toLocaleString("en-US", {
               maximumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
             })}{" "}
@@ -781,8 +781,8 @@ const Dashboard: FC = () => {
                     ethers.utils.parseEther(item.openPrice.toFixed(12)),
                     item.orientation === "Long"
                   )
-                    .div(BigNumber.from(10).pow(16))
-                    .toNumber() / 100
+                    .div(BigNumber.from(10).pow(12))
+                    .toNumber() / 1000000
                 ).toLocaleString("en-US", {
                   maximumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
                 })}{" "}
