@@ -77,11 +77,11 @@ msgstr "24h Variação"
 
 #: src/pages/Futures/ExchangeTVChart.tsx
 msgid "24h High"
-msgstr ""
+msgstr "24h alto"
 
 #: src/pages/Futures/ExchangeTVChart.tsx
 msgid "24h Low"
-msgstr ""
+msgstr "24h baixo"
 
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 #: src/pages/Futures/Modal/ProtocolModal.tsx
