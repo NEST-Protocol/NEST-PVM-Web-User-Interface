@@ -6,7 +6,7 @@ import {
 } from "@rainbow-me/rainbowkit";
 import { FC } from "react";
 import { configureChains, createClient, mainnet, WagmiConfig } from "wagmi";
-import { bsc, bscTestnet } from "wagmi/chains";
+import { bsc, bscTestnet, zkSyncTestnet } from "wagmi/chains";
 import { jsonRpcProvider } from "wagmi/providers/jsonRpc";
 
 import {
@@ -30,7 +30,7 @@ import useTheme from "../hooks/useTheme";
 
 const { chains, provider, webSocketProvider } = configureChains(
   // [bsc],
-  [bscTestnet],
+  [bscTestnet, zkSyncTestnet],
   [
     infuraProvider({ apiKey: "be0a9832394640b090fceb2b2107993c" }),
     jsonRpcProvider({
@@ -42,6 +42,10 @@ const { chains, provider, webSocketProvider } = configureChains(
         } else if (chain.id === 56) {
           return {
             http: "https://bsc-dataseed1.defibit.io/",
+          };
+        } else if (chain.id === 280) {
+          return {
+            http: "https://zksync2-testnet.zksync.dev/",
           };
         } else {
           return {

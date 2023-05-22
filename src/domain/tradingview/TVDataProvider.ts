@@ -144,10 +144,12 @@ export class TVDataProvider {
       console.error(error);
     }
     if (!this.lastBar) return;
-
+    if (ticker !== this.lastBar.ticker) {
+      return null
+    }
     const currentPrice = await this.getCurrentPriceOfToken(ticker);
     if (!currentPrice) return null;
-    if (this.lastBar.time && currentCandleTime === this.lastBar.time && ticker === this.lastBar.ticker) {
+    if (this.lastBar.time && currentCandleTime === this.lastBar.time) {
       return {
         ...this.lastBar,
         close: Number(currentPrice),
@@ -156,7 +158,7 @@ export class TVDataProvider {
         ticker,
       };
     } else {
-      const newBar = {
+      this.lastBar = {
         time: currentCandleTime,
         open: Number(this.lastBar.close),
         close: Number(currentPrice),
@@ -164,7 +166,6 @@ export class TVDataProvider {
         low: Math.min(this.lastBar.close, Number(currentPrice)),
         ticker,
       };
-      this.lastBar = newBar;
       return this.lastBar;
     }
   }
