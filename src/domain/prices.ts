@@ -1,6 +1,6 @@
 export async function getChartPricesFromBinance(symbol: string, period: string, limit: number) {
   try {
-    const response = await fetch(`https://api.binance.com/api/v3/klines?symbol=${symbol}USDT&limit=${limit}&interval=${period}`);
+    const response = await fetch(`https://api.nestfi.net/api/oracle/price/klines?symbol=${symbol}USDT&limit=${limit}&interval=${period}`);
     const prices = await response.json();
     return prices.map((price: any) => {
       return {
@@ -13,7 +13,7 @@ export async function getChartPricesFromBinance(symbol: string, period: string, 
     });
   } catch (error) {
     try {
-      const response = await fetch(`https://api.nestfi.net/api/oracle/price/klines?symbol=${symbol}USDT&limit=${limit}&interval=${period}`);
+      const response = await fetch(`https://api.binance.com/api/v3/klines?symbol=${symbol}USDT&limit=${limit}&interval=${period}`);
       const prices = await response.json();
       return prices.map((price: any) => {
         return {
@@ -33,15 +33,15 @@ export async function getChartPricesFromBinance(symbol: string, period: string, 
 
 export async function getCurrentPriceOfToken(symbol: string) {
   try {
-    const response = await fetch(`https://api.binance.com/api/v3/ticker/price?symbol=${symbol}USDT`);
+    const response = await fetch(`https://api.nestfi.net/api/oracle/price/${symbol.toLowerCase()}usdt`);
     const data = await response.json();
-    return Number(data.price);
+    return data.value;
   } catch (e) {
     // eslint-disable-next-line no-console
     try {
-      const response = await fetch(`https://api.nestfi.net/api/oracle/price/${symbol.toLowerCase()}usdt`);
+      const response = await fetch(`https://api.binance.com/api/v3/ticker/price?symbol=${symbol}USDT`);
       const data = await response.json();
-      return data.value;
+      return Number(data.price);
     } catch (e) {
       // eslint-disable-next-line no-console
       console.log(`Error fetching data: ${e}`);
@@ -52,7 +52,7 @@ export async function getCurrentPriceOfToken(symbol: string) {
 
 export async function get24HrFromBinance(symbol: string) {
   try {
-    const res = await fetch(`https://api.binance.com/api/v3/ticker/24hr?symbol=${symbol}USDT`);
+    const res = await fetch(`https://api.nestfi.net/api/oracle/price/ticker/24hr?symbol=${symbol}USDT`);
     const data = await res.json();
     if (data) {
       return {
@@ -63,7 +63,7 @@ export async function get24HrFromBinance(symbol: string) {
     }
     return null;
   } catch (e) {
-    const res = await fetch(`https://api.nestfi.net/api/oracle/price/ticker/24hr?symbol=${symbol}USDT`);
+    const res = await fetch(`https://api.binance.com/api/v3/ticker/24hr?symbol=${symbol}USDT`);
     const data = await res.json();
     if (data) {
       return {
