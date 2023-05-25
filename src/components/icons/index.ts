@@ -66,3 +66,4 @@ export { ReactComponent as MATICTokenLogo } from "./svg/MATICTokenLogo.svg";
 export { ReactComponent as ADATokenLogo } from "./svg/ADATokenLogo.svg";
 export { ReactComponent as DOGETokenLogo } from "./svg/DOGETokenLogo.svg";
 export { ReactComponent as XRPTokenLogo } from "./svg/XRPTokenLogo.svg";
+export { ReactComponent as SearchIcon } from "./svg/SearchIcon.svg";
