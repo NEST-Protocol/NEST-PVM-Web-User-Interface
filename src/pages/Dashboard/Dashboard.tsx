@@ -1,10 +1,10 @@
-import { FC, useCallback, useEffect, useMemo, useState } from "react";
-import { Stack, styled } from "@mui/material";
+import {FC, useCallback, useEffect, useMemo, useState} from "react";
+import {Stack, styled} from "@mui/material";
 import TVChart from "./TVChart/TVChart";
-import { DashboardIcon2, FuturesOrder, Share } from "../../components/icons";
+import {DashboardIcon2, FuturesOrder, Share} from "../../components/icons";
 import NESTTabs from "../../components/NESTTabs/NESTTabs";
 import useWindowWidth from "../../hooks/useWindowWidth";
-import { useAccount } from "wagmi";
+import {useAccount} from "wagmi";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import Box from "@mui/material/Box";
@@ -12,17 +12,18 @@ import FuturesOrderShare from "../Futures/Components/FuturesOrderShare";
 import MainButton from "../../components/MainButton/MainButton";
 import ShareMyDealModal from "./Modal/ShareMyDealModal";
 import ShareMyOrderModal from "./Modal/ShareMyOrderModal";
-import { lipPrice } from "../../hooks/useFuturesNewOrder";
-import { BigNumber, ethers } from "ethers";
+import {lipPrice} from "../../hooks/useFuturesNewOrder";
+import {BigNumber, ethers} from "ethers";
 import useNEST from "../../hooks/useNEST";
 import copy from "copy-to-clipboard";
 import useNESTSnackBar from "../../hooks/useNESTSnackBar";
 import NESTLine from "../../components/NESTLine";
 import FuturesTableTitle from "../Futures/Components/TableTitle";
 import OrderTablePosition from "../Futures/Components/OrderTablePosition";
-import { Trans, t } from "@lingui/macro";
+import {Trans, t} from "@lingui/macro";
+import useSWR from "swr";
 
-const DashboardShare = styled(Box)(({ theme }) => ({
+const DashboardShare = styled(Box)(({theme}) => ({
   borderRadius: "8px",
   border: `1px solid ${theme.normal.border}`,
   minWidth: "40px",
@@ -55,75 +56,75 @@ const DashboardShare = styled(Box)(({ theme }) => ({
   },
 }));
 
-const Title1 = styled("div")(({ theme }) => ({
+const Title1 = styled("div")(({theme}) => ({
   fontWeight: "700",
   fontSize: "16px",
   lineHeight: "22px",
   color: theme.normal.text2,
 }));
 
-const Title2 = styled("div")(({ theme }) => ({
+const Title2 = styled("div")(({theme}) => ({
   fontWeight: "700",
   fontSize: "32px",
   lineHeight: "44px",
   color: theme.normal.text0,
 }));
 
-const Title3 = styled("div")(({ theme }) => ({
+const Title3 = styled("div")(({theme}) => ({
   fontWeight: "700",
   fontSize: "28px",
   lineHeight: "40px",
   color: theme.normal.text0,
 }));
 
-const Title4 = styled("div")(({ theme }) => ({
+const Title4 = styled("div")(({theme}) => ({
   fontWeight: "700",
   fontSize: "24px",
   lineHeight: "32px",
   color: theme.normal.text0,
 }));
 
-const Title5 = styled("div")(({ theme }) => ({
+const Title5 = styled("div")(({theme}) => ({
   fontWeight: "700",
   fontSize: "20px",
   lineHeight: "28px",
 }));
 
-const Caption1 = styled("div")(({ theme }) => ({
+const Caption1 = styled("div")(({theme}) => ({
   fontWeight: "700",
   fontSize: "16px",
   lineHeight: "22px",
   color: theme.normal.text2,
 }));
 
-const Caption2 = styled("div")(({ theme }) => ({
+const Caption2 = styled("div")(({theme}) => ({
   fontWeight: "700",
   fontSize: "14px",
   lineHeight: "20px",
   color: theme.normal.text2,
 }));
 
-const Caption3 = styled("div")(({ theme }) => ({
+const Caption3 = styled("div")(({theme}) => ({
   fontWeight: "400",
   fontSize: "14px",
   lineHeight: "20px",
   color: theme.normal.text2,
 }));
 
-const Caption4 = styled("div")(({ theme }) => ({
+const Caption4 = styled("div")(({theme}) => ({
   fontWeight: "700",
   fontSize: "16px",
   lineHeight: "22px",
   color: theme.normal.text0,
 }));
 
-const Caption5 = styled("div")(({ theme }) => ({
+const Caption5 = styled("div")(({theme}) => ({
   fontWeight: "400",
   fontSize: "12px",
   lineHeight: "16px",
 }));
 
-const Card2 = styled(Stack)(({ theme }) => ({
+const Card2 = styled(Stack)(({theme}) => ({
   width: "100%",
   border: "1px solid",
   borderRadius: "12px",
@@ -131,14 +132,14 @@ const Card2 = styled(Stack)(({ theme }) => ({
   overflow: "hidden",
 }));
 
-const Card3 = styled(Stack)(({ theme }) => ({
+const Card3 = styled(Stack)(({theme}) => ({
   width: "100%",
   borderRadius: "12px",
   background: theme.normal.bg1,
   padding: "40px",
 }));
 
-const Card4 = styled(Stack)(({ theme }) => ({
+const Card4 = styled(Stack)(({theme}) => ({
   width: "100%",
   borderRadius: "12px",
   background: theme.normal.bg1,
@@ -178,9 +179,9 @@ function formatDate(timestamp: number) {
 }
 
 const Dashboard: FC = () => {
-  const { address } = useAccount();
-  const { setShowConnect } = useNEST();
-  const { isBigMobile } = useWindowWidth();
+  const {address} = useAccount();
+  const {setShowConnect} = useNEST();
+  const {isBigMobile} = useWindowWidth();
   const [tabsValue, setTabsValue] = useState(0);
   const [burnedData, setBurnedData] = useState([]);
   const [burnedInfo, setBurnedInfo] = useState({
@@ -207,7 +208,7 @@ const Dashboard: FC = () => {
   const [showShareMyDealModal, setShareMyDealModal] = useState(false);
   const [showShareOrderModal, setShowShareOrderModal] = useState(false);
   const [shareOrder, setShareOrder] = useState<any>(undefined);
-  const { messageSnackBar } = useNESTSnackBar();
+  const {messageSnackBar} = useNESTSnackBar();
 
   const getBurnedData = useCallback(async () => {
     try {
@@ -322,6 +323,8 @@ const Dashboard: FC = () => {
       console.log(e);
     }
   }, [address]);
+
+  const {data: isKol} = useSWR(address ? `https://api.nestfi.net/api/invite/is-kol-whitelist/${address}` : undefined, (url) => fetch(url).then((res) => res.json()));
 
   useEffect(() => {
     getMyTxInfo();
@@ -564,8 +567,8 @@ const Dashboard: FC = () => {
               <span>TP</span>
               {item.sp
                 ? item.sp.toLocaleString("en-US", {
-                    maximumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
-                  })
+                  maximumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
+                })
                 : "-"}{" "}
               USDT
             </Box>
@@ -573,8 +576,8 @@ const Dashboard: FC = () => {
               <span>SL</span>
               {item.sl
                 ? item.sl.toLocaleString("en-US", {
-                    maximumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
-                  })
+                  maximumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
+                })
                 : "-"}{" "}
               USDT
             </Box>
@@ -596,7 +599,7 @@ const Dashboard: FC = () => {
                 });
               }}
             >
-              <Share />
+              <Share/>
             </FuturesOrderShare>
           </Stack>
         </TableCell>
@@ -656,7 +659,7 @@ const Dashboard: FC = () => {
               });
             }}
           >
-            <Share />
+            <Share/>
           </Box>
         </Stack>
         <Stack spacing={"8px"} pt={"20px"}>
@@ -837,17 +840,17 @@ const Dashboard: FC = () => {
         className={""}
         datArray={[
           <Stack direction={"row"} spacing={"4px"} alignItems={"center"}>
-            <FuturesOrder />
+            <FuturesOrder/>
             <p
-              style={{ fontWeight: 700, fontSize: "16px", lineHeight: "22px" }}
+              style={{fontWeight: 700, fontSize: "16px", lineHeight: "22px"}}
             >
               <Trans>Current Positions</Trans>
             </p>
           </Stack>,
           <Stack direction={"row"} spacing={"4px"} alignItems={"center"}>
-            <DashboardIcon2 />
+            <DashboardIcon2/>
             <p
-              style={{ fontWeight: 700, fontSize: "16px", lineHeight: "22px" }}
+              style={{fontWeight: 700, fontSize: "16px", lineHeight: "22px"}}
             >
               <Trans>History</Trans>
             </p>
@@ -865,41 +868,53 @@ const Dashboard: FC = () => {
     <Stack alignItems={"center"} width={"100%"}>
       {shareMyDealModal}
       {shareMyOrderModal}
-      {/*<Stack direction={'row'} width={'100%'} justifyContent={"center"} spacing={'32px'} sx={(theme) => ({*/}
-      {/*  color: theme.normal.text0,*/}
-      {/*  fontWeight: 700,*/}
-      {/*  fontSize: '16px',*/}
-      {/*  lineHeight: '22px',*/}
-      {/*  background: theme.normal.bg1,*/}
-      {/*  borderBottom: `1px solid ${theme.normal.border}`,*/}
-      {/*  borderTop: `1px solid ${theme.normal.border}`,*/}
-      {/*})}>*/}
-      {/*  <Box sx={(theme) => ({*/}
-      {/*    paddingY: '11px',*/}
-      {/*    borderBottom: `2px solid ${theme.normal.primary}`,*/}
-      {/*    a: {*/}
-      {/*      color: theme.normal.primary,*/}
-      {/*      cursor: 'pointer',*/}
-      {/*      '&:hover': {*/}
-      {/*        color: theme.normal.primary,*/}
-      {/*      }*/}
-      {/*    }*/}
-      {/*  })}>*/}
-      {/*    <a href={'/#/dashboard'}>Dashboard</a>*/}
-      {/*  </Box>*/}
-      {/*  <Box sx={(theme) => ({*/}
-      {/*    paddingY: '11px',*/}
-      {/*    a: {*/}
-      {/*      color: theme.normal.text0,*/}
-      {/*      cursor: 'pointer',*/}
-      {/*      '&:hover': {*/}
-      {/*        color: theme.normal.primary,*/}
-      {/*      }*/}
-      {/*    }*/}
-      {/*  })}>*/}
-      {/*    <a href={'/#/dashboard/mine'}>我的管理</a>*/}
-      {/*  </Box>*/}
-      {/*</Stack>*/}
+      {
+        isKol && isKol?.value && (
+          <Stack direction={'row'} width={'100%'} justifyContent={"center"} spacing={'32px'} sx={(theme) => ({
+            color: theme.normal.text0,
+            fontWeight: 700,
+            fontSize: '16px',
+            lineHeight: '22px',
+            background: theme.normal.bg1,
+            borderBottom: `1px solid ${theme.normal.border}`,
+            borderTop: `1px solid ${theme.normal.border}`,
+          })}>
+            <Box sx={(theme) => ({
+              paddingY: '11px',
+              borderBottom: `2px solid ${theme.normal.primary}`,
+              a: {
+                color: theme.normal.primary,
+                cursor: 'pointer',
+                '&:hover': {
+                  color: theme.normal.primary,
+                }
+              }
+            })}>
+              <a href={'/#/dashboard'}>
+                <Trans>
+                  Dashboard
+                </Trans>
+              </a>
+            </Box>
+            <Box sx={(theme) => ({
+              paddingY: '11px',
+              a: {
+                color: theme.normal.text0,
+                cursor: 'pointer',
+                '&:hover': {
+                  color: theme.normal.primary,
+                }
+              }
+            })}>
+              <a href={'/#/dashboard/referral'}>
+                <Trans>
+                  Referral
+                </Trans>
+              </a>
+            </Box>
+          </Stack>
+        )
+      }
       <Stack
         maxWidth={"1600px"}
         px={["0", "0", "20px"]}
@@ -930,15 +945,15 @@ const Dashboard: FC = () => {
                   burnedInfo.totalDestroy === 0
                     ? "-"
                     : burnedInfo.totalDestroy.toLocaleString("en-US", {
-                        maximumFractionDigits: 2,
-                      })
+                      maximumFractionDigits: 2,
+                    })
                 }`}
                 value2={`${
                   burnedInfo.dayDestroy === 0
                     ? "-"
                     : burnedInfo.dayDestroy.toLocaleString("en-US", {
-                        maximumFractionDigits: 2,
-                      })
+                      maximumFractionDigits: 2,
+                    })
                 }`}
                 data={burnedData}
               />
@@ -961,21 +976,21 @@ const Dashboard: FC = () => {
                   txInfo.totalVolume === 0
                     ? "-"
                     : txInfo.totalVolume.toLocaleString("en-US", {
-                        maximumFractionDigits: 2,
-                      })
+                      maximumFractionDigits: 2,
+                    })
                 }`}
                 value2={`${
                   txInfo.dayVolume === 0
                     ? "-"
                     : txInfo.dayVolume.toLocaleString("en-US", {
-                        maximumFractionDigits: 2,
-                      })
+                      maximumFractionDigits: 2,
+                    })
                 }`}
                 data={txData}
               />
             </Stack>
           </Stack>
-          {isBigMobile && <NESTLine />}
+          {isBigMobile && <NESTLine/>}
         </Stack>
         {isBigMobile ? (
           <Stack px={"20px"} spacing={"16px"}>
@@ -1007,7 +1022,7 @@ const Dashboard: FC = () => {
                 />
               </Stack>
             </Stack>
-            <Card4 sx={{ position: "relative" }}>
+            <Card4 sx={{position: "relative"}}>
               {!address && (
                 <Stack
                   position={"absolute"}
@@ -1071,7 +1086,7 @@ const Dashboard: FC = () => {
                         setShareMyDealModal(true);
                       }}
                     >
-                      <Share />
+                      <Share/>
                     </Box>
                   </Stack>
                   <Stack
@@ -1093,7 +1108,7 @@ const Dashboard: FC = () => {
                   </Stack>
                 </Stack>
                 <Box py={"20px"}>
-                  <NESTLine />
+                  <NESTLine/>
                 </Box>
                 <Stack spacing={"22px"}>
                   <Stack direction={"row"} justifyContent={"space-between"}>
@@ -1161,7 +1176,7 @@ const Dashboard: FC = () => {
             </Card4>
           </Stack>
         ) : (
-          <Card2 sx={{ position: "relative" }}>
+          <Card2 sx={{position: "relative"}}>
             {!address && (
               <Stack
                 position={"absolute"}
@@ -1224,7 +1239,7 @@ const Dashboard: FC = () => {
                       setShareMyDealModal(true);
                     }}
                   >
-                    <Share />
+                    <Share/>
                   </DashboardShare>
                 </Stack>
               </Stack>
@@ -1277,7 +1292,7 @@ const Dashboard: FC = () => {
                     {/*className={'color-full'}>{myTxInfo.todayRate > 0 && '+'}{myTxInfo.todayRate}%</span>*/}
                   </Title3>
                   <Caption2
-                    sx={{ paddingTop: "12px" }}
+                    sx={{paddingTop: "12px"}}
                   >{t`Today's PNL`}</Caption2>
                 </Card3>
                 <Card3>
@@ -1301,7 +1316,7 @@ const Dashboard: FC = () => {
                     {/*className={'color-full'}>{myTxInfo.day7Rate > 0 && '+'}{myTxInfo.day7Rate}%</span>*/}
                   </Title3>
                   <Caption2
-                    sx={{ paddingTop: "12px" }}
+                    sx={{paddingTop: "12px"}}
                   >{t`7 Days' PNL`}</Caption2>
                 </Card3>
                 <Card3>
@@ -1325,7 +1340,7 @@ const Dashboard: FC = () => {
                     {/*className={'color-full'}>{myTxInfo.day30Rate > 0 && '+'}{myTxInfo.day30Rate}%</span>*/}
                   </Title3>
                   <Caption2
-                    sx={{ paddingTop: "12px" }}
+                    sx={{paddingTop: "12px"}}
                   >{t`30 Days' PNL`}</Caption2>
                 </Card3>
               </Stack>
@@ -1334,7 +1349,7 @@ const Dashboard: FC = () => {
         )}
         <Stack spacing={"16px"}>
           <Stack
-            style={{ alignItems: "start" }}
+            style={{alignItems: "start"}}
             sx={(theme) => ({
               width: "100%",
               borderBottom: "1px solid",
@@ -1396,23 +1411,23 @@ const Dashboard: FC = () => {
               dataArray={
                 tabsValue === 0
                   ? [
-                      t`Position`,
-                      t`Actual Margin`,
-                      t`Open Price`,
-                      t`Liq Price`,
-                      t`Stop Order`,
-                      t`Operate`,
-                    ]
+                    t`Position`,
+                    t`Actual Margin`,
+                    t`Open Price`,
+                    t`Liq Price`,
+                    t`Stop Order`,
+                    t`Operate`,
+                  ]
                   : [
-                      t`Time`,
-                      t`Position`,
-                      t`Actual Margin`,
-                      t`Open Price`,
-                      t`Liq Price`,
-                      t`Close Price`,
-                      t`Stop Order`,
-                      t`Operate`,
-                    ]
+                    t`Time`,
+                    t`Position`,
+                    t`Actual Margin`,
+                    t`Open Price`,
+                    t`Liq Price`,
+                    t`Close Price`,
+                    t`Stop Order`,
+                    t`Operate`,
+                  ]
               }
               noOrder={
                 (tabsValue === 0 && positionList.length === 0) ||
