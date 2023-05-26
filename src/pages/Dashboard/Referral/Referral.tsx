@@ -84,7 +84,8 @@ const PaginationButton = styled('button')(({theme}) => {
 });
 
 const Referral = () => {
-  const {address} = useAccount();
+  // const {address} = useAccount();
+  const address = "0x871e642fB0047DC6CE7E79297f07C3ee02D81fC0"
   const {messageSnackBar} = useNESTSnackBar()
   const {isBigMobile} = useWindowWidth()
   const [currentPage, setCurrentPage] = useState(1)
