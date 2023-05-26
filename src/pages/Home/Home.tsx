@@ -1,4 +1,4 @@
-import {FC, useEffect, useMemo, useState} from "react";
+import {FC, useMemo, useState} from "react";
 import MainButton from "../../components/MainButton/MainButton";
 import {Grid, Stack} from "@mui/material";
 import {styled} from "@mui/material/styles";
@@ -16,6 +16,7 @@ import useWindowWidth from "../../hooks/useWindowWidth";
 import useTheme from "../../hooks/useTheme";
 import {Link} from "react-router-dom";
 import {t} from '@lingui/macro'
+import useSWR from "swr";
 
 const Header1 = styled("header")(({theme}) => ({
   fontWeight: "700",
@@ -145,40 +146,15 @@ const MobileCard2Title1 = styled('div')(({theme}) => ({
 const Home: FC = () => {
   const [openApplyModal, setOpenApplyModal] = useState(false)
   const {isBigMobile} = useWindowWidth()
-  const [destoryData, setDestoryData] = useState({
-    dayDestroy: 0,
-    totalDestroy: 0,
-  });
-  const [kols, setKols] = useState(0);
   const {nowTheme} = useTheme()
-
-  const fetchKOLCount = () => {
-    fetch('https://api.nestfi.net/api/users/kol/count')
-      .then((res) => res.json())
-      .then((data) => {
-        setKols(data.value)
-      })
-  }
-
-  const fetchDestory = () => {
-    fetch('https://api.nestfi.net/api/dashboard/destory')
-      .then((res) => res.json())
-      .then((data) => {
-        setDestoryData(data.value)
-      })
-  }
-
-  useEffect(() => {
-    fetchDestory()
-    const internal = setInterval(() => {
-      fetchDestory()
-    }, 30_000)
-    return () => clearInterval(internal)
-  }, [])
-
-  useEffect(() => {
-    fetchKOLCount()
-  }, [])
+  const {data: kols} = useSWR('https://api.nestfi.net/api/users/kol/count', (url) => fetch(url)
+    .then((res) => res.json())
+    .then((data) => data.value)
+  );
+  const {data: destoryData} = useSWR('https://api.nestfi.net/api/dashboard/destory', (url) => fetch(url)
+    .then((res) => res.json())
+    .then((data) => data.value)
+  );
 
   const modal = useMemo(() => {
     return (
@@ -247,7 +223,7 @@ const Home: FC = () => {
                          padding={'20px'}>
                     <Stack alignItems={"start"}>
                       <Title1
-                        sx={{fontSize: ['28px', '28px', '32px']}}>{destoryData.totalDestroy === 0 ? '-' : (-1 * destoryData.totalDestroy).toLocaleString('en-US', {
+                        sx={{fontSize: ['28px', '28px', '32px']}}>{destoryData?.totalDestroy === 0 ? '-' : (-1 * destoryData?.totalDestroy).toLocaleString('en-US', {
                         maximumFractionDigits: 2,
                       })} NEST</Title1>
                       <MobileCard1Caption>{t`Total Burned`}</MobileCard1Caption>
@@ -264,7 +240,7 @@ const Home: FC = () => {
                   {t`Total Burned`}
                 </Badge1>
                 <Title1>
-                  {destoryData.totalDestroy === 0 ? '-' : (-1 * destoryData.totalDestroy).toLocaleString('en-US', {
+                  {destoryData?.totalDestroy === 0 ? '-' : (-1 * destoryData?.totalDestroy).toLocaleString('en-US', {
                     maximumFractionDigits: 2,
                   })} <span
                   style={{fontSize: '36px'}}>NEST</span>
@@ -298,7 +274,7 @@ const Home: FC = () => {
                            padding={'20px'} borderRadius={'12px'}>
                       <Stack alignItems={"start"}>
                         <Title1
-                          sx={{fontSize: ['28px', '28px', '32px']}}>{kols === 0 ? '-' : kols.toLocaleString('en-US', {
+                          sx={{fontSize: ['28px', '28px', '32px']}}>{!kols ? '-' : kols?.toLocaleString('en-US', {
                           maximumFractionDigits: 0,
                         })}</Title1>
                         <MobileCard1Caption>{t`Number of KOLs Joined NESTFi`}</MobileCard1Caption>
@@ -337,7 +313,7 @@ const Home: FC = () => {
                     </DashSvg>
                     <Stack spacing={'12px'} justifyContent={"center"} alignItems={'start'}>
                       <Title1>
-                        {kols === 0 ? '-' : kols.toLocaleString('en-US', {
+                        {!kols ? '-' : kols?.toLocaleString('en-US', {
                           maximumFractionDigits: 0,
                         })}
                       </Title1>
