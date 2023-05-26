@@ -13,6 +13,11 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
+#: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "* due to the complexity of financial data, there might be nuances and delay. Data displayed above is for reference only.We sincerely apologize for any inconvenience."
+msgstr ""
+
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useFuturesNewOrder.ts
 msgid "< LIMIT PRICE"
@@ -151,6 +156,10 @@ msgstr "Добавить позицию"
 msgid "Add Position"
 msgstr "Добавить позицию"
 
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Address"
+msgstr ""
+
 #: src/hooks/useFuturesNewOrder.ts
 #: src/pages/Futures/Modal/EditPositionModal.tsx
 msgid "After the limit order is executed, TP and SL price you set will trigger immediately."
@@ -258,6 +267,8 @@ msgstr "Контактная информация (Telegram)"
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
 msgid "Copy Invitation Link"
 msgstr "Копировать ссылку на приглашение"
 
@@ -272,9 +283,24 @@ msgstr "Копировать ссылку"
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "Copy Successfully"
 msgstr "Скопировано успешно"
+
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Cumulative Commission"
+msgstr ""
+
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Cumulative Commissions"
+msgstr ""
+
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Cumulative Invitee Trading Volume"
+msgstr ""
 
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "Current Positions"
@@ -284,6 +310,8 @@ msgstr "Текущие должности"
 msgid "Dark mode"
 msgstr "Темный режим"
 
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Share/Head/NESTHead.tsx
 #: src/pages/Share/Head/NESTHead.tsx
 msgid "Dashboard"
@@ -296,6 +324,10 @@ msgstr "Децентрализованный"
 #: src/pages/Home/Home.tsx
 msgid "Decentralized Perpetual Exchange"
 msgstr "Децентрализованная бессрочная биржа"
+
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Default"
+msgstr ""
 
 #: src/pages/Home/Home.tsx
 msgid "Deflationary"
@@ -410,6 +442,10 @@ msgstr "Недостаточно"
 msgid "Insufficient NEST balance"
 msgstr "Недостаточный баланс NEST"
 
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Invitee transaction volume"
+msgstr ""
+
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 #: src/pages/Share/Modal/LanguageModal.tsx
 #: src/pages/Share/Modal/LanguageModal.tsx
@@ -510,6 +546,11 @@ msgstr "Подробнее"
 msgid "More Info"
 msgstr "Больше информации"
 
+#: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "My commissions"
+msgstr ""
+
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
@@ -544,6 +585,10 @@ msgstr "Экономическая модель NESTFi является дефл
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "News"
 msgstr "Новости"
+
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "No commissions yet"
+msgstr ""
 
 #: src/pages/Home/Home.tsx
 msgid "No Market Makers"
@@ -607,6 +652,11 @@ msgstr "Действие"
 msgid "Order"
 msgstr "Ордер"
 
+#: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Overview"
+msgstr ""
+
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Platform (Youtube, Telegram, Twitter, Instagram, Facebook, Tiktok, Others)"
 msgstr "Платформа (Youtube, Telegram, Twitter, Instagram, Facebook, Tiktok, Другое)"
@@ -657,6 +707,11 @@ msgstr "Цена"
 msgid "Recent transactions"
 msgstr "Последние сделки"
 
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Referral"
+msgstr ""
+
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 #: src/pages/Futures/Modal/ProtocolModal.tsx
 msgid "Risk Warning"
@@ -666,6 +721,10 @@ msgstr "Предупреждение об уровне риска"
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 msgid "Scan and copy the trade"
 msgstr "Сканировать и копировать сделку"
+
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Search"
+msgstr ""
 
 #: src/hooks/useTransactionReceipt.ts
 msgid "Sell position"
@@ -681,6 +740,15 @@ msgstr "Запрос на продажу позиции"
 #: src/pages/Futures/NewOrder.tsx
 msgid "Service Fee"
 msgstr "Сервисная комиссия"
+
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Settled"
+msgstr ""
+
+#: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Settled Commissions"
+msgstr ""
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 msgid "Share"
@@ -836,6 +904,17 @@ msgstr "Прибыль и убытки за сегодня"
 msgid "Total Burned"
 msgstr "Всего сожжено"
 
+#: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Total Commissions"
+msgstr ""
+
+#: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Total Invitees"
+msgstr ""
+
 #: src/pages/Futures/Modal/SharePositionModal.tsx
 #: src/pages/Futures/NewOrder.tsx
 msgid "Total Pay"
@@ -851,6 +930,11 @@ msgstr "Общая прибыль"
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 msgid "Total Profit & Loss"
 msgstr "Общий доход и убыток"
+
+#: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Total Trading Volume"
+msgstr ""
 
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "Total Transaction Volume"
@@ -879,6 +963,11 @@ msgstr "Торговля токенами мгновенно"
 msgid "Trade with me on NESTFi"
 msgstr "Торгуйте со мной на NESTFi"
 
+#: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Traded Invitees"
+msgstr ""
+
 #: src/pages/Home/Home.tsx
 msgid ""
 "trading\n"
@@ -890,6 +979,10 @@ msgstr ""
 #: src/pages/Home/Home.tsx
 msgid "trading fees as"
 msgstr "торговые комиссии в качестве"
+
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Trading Volume"
+msgstr ""
 
 #: src/hooks/useFuturesPOrder.ts
 msgid "Trigger"
@@ -908,6 +1001,15 @@ msgstr "Триггер-позиция"
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 msgid "Twitter"
 msgstr "Твиттер"
+
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Unsettled"
+msgstr ""
+
+#: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Unsettled Commissions"
+msgstr ""
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "User Guide"
