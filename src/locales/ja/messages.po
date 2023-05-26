@@ -587,6 +587,7 @@ msgid "News"
 msgstr "ニュース"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
 msgid "No commissions yet"
 msgstr ""
 
