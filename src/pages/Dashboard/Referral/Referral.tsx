@@ -995,36 +995,40 @@ const Referral = () => {
                     </TableBody>
                   </Table>
                 </TableContainer>
-                <Stack direction={'row'} spacing={'10px'} justifyContent={'end'} px={'20px'}>
-                  <PaginationButton onClick={() => {
-                    if (currentPage > 1) {
-                      setCurrentPage(currentPage - 1)
-                    }
-                  }} disabled={currentPage <= 1}>
-                    {'<'}
-                  </PaginationButton>
-                  {
-                    pageWindow.map((item, index) => {
-                      return (
-                        <PaginationButton key={index} onClick={() => {
-                          setCurrentPage(item)
-                        }} style={{
-                          background: item === currentPage ? '#EAAA00' : '',
-                          color: item === currentPage ? '#1F2329' : ''
-                        }}>
-                          {item}
-                        </PaginationButton>
-                      )
-                    })
-                  }
-                  <PaginationButton onClick={() => {
-                    if (currentPage < totalPage) {
-                      setCurrentPage(currentPage + 1)
-                    }
-                  }} disabled={currentPage >= totalPage}>
-                    {'>'}
-                  </PaginationButton>
-                </Stack>
+                {
+                  inviteeList.length > 0 && (
+                    <Stack direction={'row'} spacing={'10px'} justifyContent={'end'} px={'20px'}>
+                      <PaginationButton onClick={() => {
+                        if (currentPage > 1) {
+                          setCurrentPage(currentPage - 1)
+                        }
+                      }} disabled={currentPage <= 1}>
+                        {'<'}
+                      </PaginationButton>
+                      {
+                        pageWindow.map((item, index) => {
+                          return (
+                            <PaginationButton key={index} onClick={() => {
+                              setCurrentPage(item)
+                            }} style={{
+                              background: item === currentPage ? '#EAAA00' : '',
+                              color: item === currentPage ? '#1F2329' : ''
+                            }}>
+                              {item}
+                            </PaginationButton>
+                          )
+                        })
+                      }
+                      <PaginationButton onClick={() => {
+                        if (currentPage < totalPage) {
+                          setCurrentPage(currentPage + 1)
+                        }
+                      }} disabled={currentPage >= totalPage}>
+                        {'>'}
+                      </PaginationButton>
+                    </Stack>
+                  )
+                }
               </>
             )
           }
