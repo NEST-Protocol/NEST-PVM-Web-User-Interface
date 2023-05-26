@@ -108,7 +108,7 @@ const Referral = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [totalPage, setTotalPage] = useState(0)
   const [sortItem, setSortItem] = useState({
-    key: 'default',
+    key: 'noSettled',
     sort: 'desc',
   })
   const [searchText, setSearchText] = useState('')
