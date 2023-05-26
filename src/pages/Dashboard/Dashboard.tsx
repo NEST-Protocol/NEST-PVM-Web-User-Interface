@@ -1,4 +1,4 @@
-import {FC, useCallback, useEffect, useMemo, useState} from "react";
+import {FC, useMemo, useState} from "react";
 import {Stack, styled} from "@mui/material";
 import TVChart from "./TVChart/TVChart";
 import {DashboardIcon2, FuturesOrder, Share} from "../../components/icons";
@@ -82,12 +82,6 @@ const Title4 = styled("div")(({theme}) => ({
   fontSize: "24px",
   lineHeight: "32px",
   color: theme.normal.text0,
-}));
-
-const Title5 = styled("div")(({theme}) => ({
-  fontWeight: "700",
-  fontSize: "20px",
-  lineHeight: "28px",
 }));
 
 const Caption1 = styled("div")(({theme}) => ({
@@ -183,223 +177,59 @@ const Dashboard: FC = () => {
   const {setShowConnect} = useNEST();
   const {isBigMobile} = useWindowWidth();
   const [tabsValue, setTabsValue] = useState(0);
-  const [burnedData, setBurnedData] = useState([]);
-  const [burnedInfo, setBurnedInfo] = useState({
-    dayDestroy: 0,
-    totalDestroy: 0,
-  });
-  const [txInfo, setTxInfo] = useState({
-    totalVolume: 0,
-    dayVolume: 0,
-  });
-  const [txData, setTxData] = useState([]);
-  const [myTxInfo, setMyTxInfo] = useState({
-    totalValue: 0,
-    // totalRate: 0,
-    todayValue: 0,
-    day7Value: 0,
-    day30Value: 0,
-    // todayRate: 0,
-    // day7Rate: 0,
-    // day30Rate: 0,
-  });
-  const [historyList, setHistoryList] = useState<any[]>([]);
-  const [positionList, setPositionList] = useState<any[]>([]);
   const [showShareMyDealModal, setShareMyDealModal] = useState(false);
   const [showShareOrderModal, setShowShareOrderModal] = useState(false);
   const [shareOrder, setShareOrder] = useState<any>(undefined);
   const {messageSnackBar} = useNESTSnackBar();
 
-  const getBurnedData = useCallback(async () => {
-    try {
-      const today = new Date();
-      const todayStr = today.toISOString().split("T")[0];
-      const res = await fetch(
-        `https://api.nestfi.net/api/dashboard/destory/list?from=2022-11-28&to=${todayStr}`,
-        {
-          method: "get",
-        }
-      );
-      const resJson = await res.json();
-      if (resJson) {
-        setBurnedData(
-          resJson.value.map((item: any) => ({
-            time: item.date,
-            value: item.value,
-          }))
-        );
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
+  const {data: burnedData} = useSWR(`https://api.nestfi.net/api/dashboard/txVolume/list?from=2022-11-28&to=${(new Date()).toISOString().split("T")[0]}`, (url) => fetch(url)
+    .then((res) => res.json())
+    .then((res: any) => res.value)
+    .then((res: any) => res.map((item: any) => ({
+      time: item.date,
+      value: item.value,
+    }))));
 
-  const getTxData = useCallback(async () => {
-    try {
-      const today = new Date();
-      const todayStr = today.toISOString().split("T")[0];
-      const res = await fetch(
-        `https://api.nestfi.net/api/dashboard/txVolume/list?from=2022-11-28&to=${todayStr}`,
-        {
-          method: "get",
-        }
-      );
-      const resJson = await res.json();
-      if (resJson) {
-        setTxData(
-          resJson.value.map((item: any) => ({
-            time: item.date,
-            value: item.value,
-          }))
-        );
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
+  const {data: txData} = useSWR(`https://api.nestfi.net/api/dashboard/txVolume/list?from=2022-11-28&to=${(new Date()).toISOString().split("T")[0]}`, (url) => fetch(url)
+    .then((res) => res.json())
+    .then((res: any) => res.value)
+    .then((res: any) => res.map((item: any) => ({
+      time: item.date,
+      value: item.value,
+      })))
+  )
 
-  const getBurnedInfo = useCallback(async () => {
-    try {
-      const res = await fetch("https://api.nestfi.net/api/dashboard/destory");
-      const resJson = await res.json();
-      if (resJson) {
-        setBurnedInfo(resJson.value);
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  }, []);
+  const {data: burnedInfo} = useSWR("https://api.nestfi.net/api/dashboard/destory", (url) => fetch(url)
+    .then((res) => res.json())
+    .then((res: any) => res.value));
 
-  const getTxInfo = useCallback(async () => {
-    try {
-      const res = await fetch("https://api.nestfi.net/api/dashboard/txVolume");
-      const resJson = await res.json();
-      if (resJson) {
-        setTxInfo(resJson.value);
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  }, []);
+  const {data: txInfo} = useSWR("https://api.nestfi.net/api/dashboard/txVolume", (url) => fetch(url)
+    .then((res) => res.json())
+    .then((res: any) => res.value));
 
-  const getMyTxInfo = useCallback(async () => {
-    try {
-      const res = await fetch(
-        `https://api.nestfi.net/api/dashboard/myTx/info?address=${address}`
-      );
-      const resJson = await res.json();
-      if (resJson) {
-        setMyTxInfo(resJson.value);
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  }, [address]);
+  const {data: myTxInfo} = useSWR(address ? `https://api.nestfi.net/api/dashboard/myTx/info?address=${address}` : undefined, (url) => fetch(url)
+    .then((res) => res.json())
+    .then((res: any) => res.value));
 
-  const getHistoryInfo = useCallback(async () => {
-    try {
-      const res = await fetch(
-        `https://api.nestfi.net/api/dashboard/history/list?address=${address}`
-      );
-      const resJson = await res.json();
-      if (resJson) {
-        setHistoryList(resJson.value.sort((a: any, b: any) => b.time - a.time));
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  }, [address]);
+  const {data: historyList} = useSWR(address ? `https://api.nestfi.net/api/dashboard/history/list?address=${address}` : undefined, (url) => fetch(url)
+    .then((res) => res.json())
+    .then((res: any) => res.value.sort((a: any, b: any) => b.time - a.time)));
 
-  const getPositionList = useCallback(async () => {
-    try {
-      const res = await fetch(
-        `https://api.nestfi.net/api/dashboard/position/list?address=${address}`
-      );
-      const resJson = await res.json();
-      if (resJson) {
-        setPositionList(resJson.value);
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  }, [address]);
+  const {data: positionList} = useSWR(address ? `https://api.nestfi.net/api/dashboard/position/list?address=${address}` : undefined, (url) => fetch(url)
+    .then((res) => res.json())
+    .then((res: any) => res.value));
 
   const {data: isKol} = useSWR(address ? `https://api.nestfi.net/api/invite/is-kol-whitelist/${address}` : undefined, (url) => fetch(url).then((res) => res.json()));
-
-  useEffect(() => {
-    getMyTxInfo();
-    const interval = setInterval(() => {
-      getMyTxInfo();
-    }, 60_000);
-    return () => {
-      clearInterval(interval);
-    };
-  }, [getMyTxInfo]);
-
-  useEffect(() => {
-    getTxInfo();
-    const interval = setInterval(() => {
-      getTxInfo();
-    }, 60_000);
-    return () => {
-      clearInterval(interval);
-    };
-  }, [getTxInfo]);
-
-  useEffect(() => {
-    getPositionList();
-    const interval = setInterval(() => {
-      getPositionList();
-    }, 60_000);
-    return () => {
-      clearInterval(interval);
-    };
-  }, [getPositionList]);
-
-  useEffect(() => {
-    getHistoryInfo();
-    const interval = setInterval(() => {
-      getHistoryInfo();
-    }, 60_000);
-    return () => {
-      clearInterval(interval);
-    };
-  }, [getHistoryInfo]);
-
-  useEffect(() => {
-    getBurnedInfo();
-    const interval = setInterval(() => {
-      getBurnedInfo();
-    }, 60_000);
-    return () => {
-      clearInterval(interval);
-    };
-  }, [getBurnedInfo]);
-
-  useEffect(() => {
-    getBurnedData();
-    const interval = setInterval(() => {
-      getBurnedData();
-    }, 60_000);
-    return () => {
-      clearInterval(interval);
-    };
-  }, [getBurnedData]);
-
-  useEffect(() => {
-    getTxData();
-    const interval = setInterval(() => {
-      getTxData();
-    }, 60_000);
-    return () => {
-      clearInterval(interval);
-    };
-  }, [getTxData]);
 
   const shareMyDealModal = useMemo(() => {
     return (
       <ShareMyDealModal
-        value={myTxInfo}
+        value={myTxInfo || {
+          totalValue: 0,
+          todayValue: 0,
+          day7Value: 0,
+          day30Value: 0,
+        }}
         open={showShareMyDealModal}
         onClose={() => {
           setShareMyDealModal(false);
@@ -942,20 +772,20 @@ const Dashboard: FC = () => {
                 title1={t`NEST Total Burned`}
                 title2={t`Today Burned`}
                 value1={`${
-                  burnedInfo.totalDestroy === 0
+                  !burnedInfo?.totalDestroy
                     ? "-"
                     : burnedInfo.totalDestroy.toLocaleString("en-US", {
                       maximumFractionDigits: 2,
                     })
                 }`}
                 value2={`${
-                  burnedInfo.dayDestroy === 0
+                  !burnedInfo?.dayDestroy
                     ? "-"
                     : burnedInfo.dayDestroy.toLocaleString("en-US", {
                       maximumFractionDigits: 2,
                     })
                 }`}
-                data={burnedData}
+                data={burnedData || []}
               />
             </Stack>
             <Stack
@@ -973,20 +803,20 @@ const Dashboard: FC = () => {
                 title1={t`Total Transaction Volume`}
                 title2={t`Today Volume`}
                 value1={`${
-                  txInfo.totalVolume === 0
+                  !txInfo?.totalVolume
                     ? "-"
-                    : txInfo.totalVolume.toLocaleString("en-US", {
+                    : txInfo?.totalVolume.toLocaleString("en-US", {
                       maximumFractionDigits: 2,
                     })
                 }`}
                 value2={`${
-                  txInfo.dayVolume === 0
+                  !txInfo?.dayVolume
                     ? "-"
-                    : txInfo.dayVolume.toLocaleString("en-US", {
+                    : txInfo?.dayVolume.toLocaleString("en-US", {
                       maximumFractionDigits: 2,
                     })
                 }`}
-                data={txData}
+                data={txData || []}
               />
             </Stack>
           </Stack>
@@ -1095,7 +925,7 @@ const Dashboard: FC = () => {
                     alignItems={"center"}
                   >
                     <Title4>
-                      {myTxInfo.totalValue.toLocaleString("en-US", {
+                      {myTxInfo?.totalValue.toLocaleString("en-US", {
                         maximumFractionDigits: 2,
                       })}{" "}
                       NEST
@@ -1119,7 +949,7 @@ const Dashboard: FC = () => {
                       spacing={"4px"}
                     >
                       <Caption4>
-                        {myTxInfo.todayValue.toLocaleString("en-US", {
+                        {myTxInfo?.todayValue.toLocaleString("en-US", {
                           maximumFractionDigits: 2,
                         })}{" "}
                         NEST
@@ -1139,7 +969,7 @@ const Dashboard: FC = () => {
                       spacing={"4px"}
                     >
                       <Caption4>
-                        {myTxInfo.day7Value.toLocaleString("en-US", {
+                        {myTxInfo?.day7Value.toLocaleString("en-US", {
                           maximumFractionDigits: 2,
                         })}{" "}
                         NEST
@@ -1159,7 +989,7 @@ const Dashboard: FC = () => {
                       spacing={"4px"}
                     >
                       <Caption4>
-                        {myTxInfo.day30Value.toLocaleString("en-US", {
+                        {myTxInfo?.day30Value.toLocaleString("en-US", {
                           maximumFractionDigits: 2,
                         })}{" "}
                         NEST
@@ -1261,7 +1091,7 @@ const Dashboard: FC = () => {
                     },
                   })}
                 >
-                  {myTxInfo.totalValue.toLocaleString("en-US", {
+                  {myTxInfo?.totalValue.toLocaleString("en-US", {
                     maximumFractionDigits: 2,
                   })}{" "}
                   <span>NEST</span>
@@ -1284,7 +1114,7 @@ const Dashboard: FC = () => {
                       },
                     })}
                   >
-                    {myTxInfo.todayValue.toLocaleString("en-US", {
+                    {myTxInfo?.todayValue.toLocaleString("en-US", {
                       maximumFractionDigits: 2,
                     })}{" "}
                     <span>NEST</span>
@@ -1308,7 +1138,7 @@ const Dashboard: FC = () => {
                       },
                     })}
                   >
-                    {myTxInfo.day7Value.toLocaleString("en-US", {
+                    {myTxInfo?.day7Value.toLocaleString("en-US", {
                       maximumFractionDigits: 2,
                     })}{" "}
                     <span>NEST</span>
@@ -1332,7 +1162,7 @@ const Dashboard: FC = () => {
                       },
                     })}
                   >
-                    {myTxInfo.day30Value.toLocaleString("en-US", {
+                    {myTxInfo?.day30Value.toLocaleString("en-US", {
                       maximumFractionDigits: 2,
                     })}{" "}
                     <span>NEST</span>
@@ -1361,9 +1191,9 @@ const Dashboard: FC = () => {
           </Stack>
           {isBigMobile ? (
             <Stack px={"20px"} spacing={"12px"}>
-              {tabsValue === 0 &&
-                (positionList.length > 0 ? (
-                  positionList.map((item, index) =>
+              {tabsValue === 0 && positionList &&
+                (positionList?.length > 0 ? (
+                  positionList.map((item: any, index: number) =>
                     MobileOrderCard(item, index)
                   )
                 ) : (
@@ -1383,9 +1213,9 @@ const Dashboard: FC = () => {
                     {t`No trades yet`}
                   </Stack>
                 ))}
-              {tabsValue === 1 &&
+              {tabsValue === 1 && historyList &&
                 (historyList.length > 0 ? (
-                  historyList.map((item, index) =>
+                  historyList.map((item: any, index: number) =>
                     MobileOrderCard(item, index, true)
                   )
                 ) : (
@@ -1430,16 +1260,16 @@ const Dashboard: FC = () => {
                   ]
               }
               noOrder={
-                (tabsValue === 0 && positionList.length === 0) ||
-                (tabsValue === 1 && historyList.length === 0)
+                (tabsValue === 0 && positionList?.length === 0) ||
+                (tabsValue === 1 && historyList?.length === 0)
               }
             >
-              {tabsValue === 0 &&
-                positionList.map((item, index) =>
+              {tabsValue === 0 && positionList &&
+                positionList?.map((item: any, index: number) =>
                   PCOrderRow(item, index, false)
                 )}
-              {tabsValue === 1 &&
-                historyList.map((item, index) => PCOrderRow(item, index, true))}
+              {tabsValue === 1 && historyList &&
+                historyList.map((item: any, index: number) => PCOrderRow(item, index, true))}
             </FuturesTableTitle>
           )}
         </Stack>
