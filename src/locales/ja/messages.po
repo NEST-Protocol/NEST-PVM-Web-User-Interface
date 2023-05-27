@@ -13,6 +13,11 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
+#: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "* due to the complexity of financial data, there might be nuances and delay. Data displayed above is for reference only.We sincerely apologize for any inconvenience."
+msgstr ""
+
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useFuturesNewOrder.ts
 msgid "< LIMIT PRICE"
@@ -151,6 +156,10 @@ msgstr "ポジションを追加"
 msgid "Add Position"
 msgstr "ポジションを追加"
 
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Address"
+msgstr ""
+
 #: src/hooks/useFuturesNewOrder.ts
 #: src/pages/Futures/Modal/EditPositionModal.tsx
 msgid "After the limit order is executed, TP and SL price you set will trigger immediately."
@@ -258,6 +267,8 @@ msgstr "連絡先情報（Telegram ハンドル）"
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
 msgid "Copy Invitation Link"
 msgstr "招待リンクをコピー"
 
@@ -272,9 +283,24 @@ msgstr "リンクをコピー"
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "Copy Successfully"
 msgstr "コピーしました"
+
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Cumulative Commission"
+msgstr ""
+
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Cumulative Commissions"
+msgstr ""
+
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Cumulative Invitee Trading Volume"
+msgstr ""
 
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "Current Positions"
@@ -284,6 +310,8 @@ msgstr "現在の役職"
 msgid "Dark mode"
 msgstr "ダークモード"
 
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Share/Head/NESTHead.tsx
 #: src/pages/Share/Head/NESTHead.tsx
 msgid "Dashboard"
@@ -296,6 +324,10 @@ msgstr "分散化された"
 #: src/pages/Home/Home.tsx
 msgid "Decentralized Perpetual Exchange"
 msgstr "分散型永続契約取引所"
+
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Default"
+msgstr ""
 
 #: src/pages/Home/Home.tsx
 msgid "Deflationary"
@@ -410,6 +442,10 @@ msgstr "不足"
 msgid "Insufficient NEST balance"
 msgstr "NEST残高不足"
 
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Invitee transaction volume"
+msgstr ""
+
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 #: src/pages/Share/Modal/LanguageModal.tsx
 #: src/pages/Share/Modal/LanguageModal.tsx
@@ -510,6 +546,11 @@ msgstr "もっと見る"
 msgid "More Info"
 msgstr "詳細情報"
 
+#: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "My commissions"
+msgstr ""
+
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
@@ -544,6 +585,11 @@ msgstr "NESTFiの経済モデルはデフレーション的です。ユーザー
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "News"
 msgstr "ニュース"
+
+#: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "No commissions yet"
+msgstr ""
 
 #: src/pages/Home/Home.tsx
 msgid "No Market Makers"
@@ -607,6 +653,11 @@ msgstr "操作"
 msgid "Order"
 msgstr "注文"
 
+#: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Overview"
+msgstr ""
+
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Platform (Youtube, Telegram, Twitter, Instagram, Facebook, Tiktok, Others)"
 msgstr "プラットフォーム（Youtube、Telegram、Twitter、Instagram、Facebook、Tiktok、その他）"
@@ -657,6 +708,11 @@ msgstr "価格"
 msgid "Recent transactions"
 msgstr "最近の取引"
 
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Referral"
+msgstr ""
+
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 #: src/pages/Futures/Modal/ProtocolModal.tsx
 msgid "Risk Warning"
@@ -666,6 +722,10 @@ msgstr "リスク警告"
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 msgid "Scan and copy the trade"
 msgstr "取引をスキャンしてコピー"
+
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Search"
+msgstr ""
 
 #: src/hooks/useTransactionReceipt.ts
 msgid "Sell position"
@@ -681,6 +741,15 @@ msgstr "ポジションの売却リクエスト"
 #: src/pages/Futures/NewOrder.tsx
 msgid "Service Fee"
 msgstr "手数料"
+
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Settled"
+msgstr ""
+
+#: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Settled Commissions"
+msgstr ""
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 msgid "Share"
@@ -836,6 +905,17 @@ msgstr "今日のPNL"
 msgid "Total Burned"
 msgstr "総焼却量"
 
+#: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Total Commissions"
+msgstr ""
+
+#: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Total Invitees"
+msgstr ""
+
 #: src/pages/Futures/Modal/SharePositionModal.tsx
 #: src/pages/Futures/NewOrder.tsx
 msgid "Total Pay"
@@ -851,6 +931,11 @@ msgstr "総利益"
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 msgid "Total Profit & Loss"
 msgstr "総損益"
+
+#: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Total Trading Volume"
+msgstr ""
 
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "Total Transaction Volume"
@@ -879,6 +964,11 @@ msgstr "トークンを瞬時に取引"
 msgid "Trade with me on NESTFi"
 msgstr "NESTFiで私と取引をしてください"
 
+#: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Traded Invitees"
+msgstr ""
+
 #: src/pages/Home/Home.tsx
 msgid ""
 "trading\n"
@@ -888,6 +978,10 @@ msgstr "トレーディング料金"
 #: src/pages/Home/Home.tsx
 msgid "trading fees as"
 msgstr "として取引手数料"
+
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Trading Volume"
+msgstr ""
 
 #: src/hooks/useFuturesPOrder.ts
 msgid "Trigger"
@@ -906,6 +1000,15 @@ msgstr "トリガーポジション"
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 msgid "Twitter"
 msgstr "Twitter"
+
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Unsettled"
+msgstr ""
+
+#: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Unsettled Commissions"
+msgstr ""
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "User Guide"

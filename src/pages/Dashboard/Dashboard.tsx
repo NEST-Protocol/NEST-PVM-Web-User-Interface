@@ -1,10 +1,10 @@
-import { FC, useCallback, useEffect, useMemo, useState } from "react";
-import { Stack, styled } from "@mui/material";
+import {FC, useMemo, useState} from "react";
+import {Stack, styled} from "@mui/material";
 import TVChart from "./TVChart/TVChart";
-import { DashboardIcon2, FuturesOrder, Share } from "../../components/icons";
+import {DashboardIcon2, FuturesOrder, Share} from "../../components/icons";
 import NESTTabs from "../../components/NESTTabs/NESTTabs";
 import useWindowWidth from "../../hooks/useWindowWidth";
-import { useAccount } from "wagmi";
+import {useAccount} from "wagmi";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import Box from "@mui/material/Box";
@@ -12,17 +12,18 @@ import FuturesOrderShare from "../Futures/Components/FuturesOrderShare";
 import MainButton from "../../components/MainButton/MainButton";
 import ShareMyDealModal from "./Modal/ShareMyDealModal";
 import ShareMyOrderModal from "./Modal/ShareMyOrderModal";
-import { lipPrice } from "../../hooks/useFuturesNewOrder";
-import { BigNumber, ethers } from "ethers";
+import {lipPrice} from "../../hooks/useFuturesNewOrder";
+import {BigNumber, ethers} from "ethers";
 import useNEST from "../../hooks/useNEST";
 import copy from "copy-to-clipboard";
 import useNESTSnackBar from "../../hooks/useNESTSnackBar";
 import NESTLine from "../../components/NESTLine";
 import FuturesTableTitle from "../Futures/Components/TableTitle";
 import OrderTablePosition from "../Futures/Components/OrderTablePosition";
-import { Trans, t } from "@lingui/macro";
+import {Trans, t} from "@lingui/macro";
+import useSWR from "swr";
 
-const DashboardShare = styled(Box)(({ theme }) => ({
+const DashboardShare = styled(Box)(({theme}) => ({
   borderRadius: "8px",
   border: `1px solid ${theme.normal.border}`,
   minWidth: "40px",
@@ -55,75 +56,69 @@ const DashboardShare = styled(Box)(({ theme }) => ({
   },
 }));
 
-const Title1 = styled("div")(({ theme }) => ({
+const Title1 = styled("div")(({theme}) => ({
   fontWeight: "700",
   fontSize: "16px",
   lineHeight: "22px",
   color: theme.normal.text2,
 }));
 
-const Title2 = styled("div")(({ theme }) => ({
+const Title2 = styled("div")(({theme}) => ({
   fontWeight: "700",
   fontSize: "32px",
   lineHeight: "44px",
   color: theme.normal.text0,
 }));
 
-const Title3 = styled("div")(({ theme }) => ({
+const Title3 = styled("div")(({theme}) => ({
   fontWeight: "700",
   fontSize: "28px",
   lineHeight: "40px",
   color: theme.normal.text0,
 }));
 
-const Title4 = styled("div")(({ theme }) => ({
+const Title4 = styled("div")(({theme}) => ({
   fontWeight: "700",
   fontSize: "24px",
   lineHeight: "32px",
   color: theme.normal.text0,
 }));
 
-const Title5 = styled("div")(({ theme }) => ({
-  fontWeight: "700",
-  fontSize: "20px",
-  lineHeight: "28px",
-}));
-
-const Caption1 = styled("div")(({ theme }) => ({
+const Caption1 = styled("div")(({theme}) => ({
   fontWeight: "700",
   fontSize: "16px",
   lineHeight: "22px",
   color: theme.normal.text2,
 }));
 
-const Caption2 = styled("div")(({ theme }) => ({
+const Caption2 = styled("div")(({theme}) => ({
   fontWeight: "700",
   fontSize: "14px",
   lineHeight: "20px",
   color: theme.normal.text2,
 }));
 
-const Caption3 = styled("div")(({ theme }) => ({
+const Caption3 = styled("div")(({theme}) => ({
   fontWeight: "400",
   fontSize: "14px",
   lineHeight: "20px",
   color: theme.normal.text2,
 }));
 
-const Caption4 = styled("div")(({ theme }) => ({
+const Caption4 = styled("div")(({theme}) => ({
   fontWeight: "700",
   fontSize: "16px",
   lineHeight: "22px",
   color: theme.normal.text0,
 }));
 
-const Caption5 = styled("div")(({ theme }) => ({
+const Caption5 = styled("div")(({theme}) => ({
   fontWeight: "400",
   fontSize: "12px",
   lineHeight: "16px",
 }));
 
-const Card2 = styled(Stack)(({ theme }) => ({
+const Card2 = styled(Stack)(({theme}) => ({
   width: "100%",
   border: "1px solid",
   borderRadius: "12px",
@@ -131,14 +126,14 @@ const Card2 = styled(Stack)(({ theme }) => ({
   overflow: "hidden",
 }));
 
-const Card3 = styled(Stack)(({ theme }) => ({
+const Card3 = styled(Stack)(({theme}) => ({
   width: "100%",
   borderRadius: "12px",
   background: theme.normal.bg1,
   padding: "40px",
 }));
 
-const Card4 = styled(Stack)(({ theme }) => ({
+const Card4 = styled(Stack)(({theme}) => ({
   width: "100%",
   borderRadius: "12px",
   background: theme.normal.bg1,
@@ -178,225 +173,63 @@ function formatDate(timestamp: number) {
 }
 
 const Dashboard: FC = () => {
-  const { address } = useAccount();
-  const { setShowConnect } = useNEST();
-  const { isBigMobile } = useWindowWidth();
+  const {address} = useAccount();
+  const {setShowConnect} = useNEST();
+  const {isBigMobile} = useWindowWidth();
   const [tabsValue, setTabsValue] = useState(0);
-  const [burnedData, setBurnedData] = useState([]);
-  const [burnedInfo, setBurnedInfo] = useState({
-    dayDestroy: 0,
-    totalDestroy: 0,
-  });
-  const [txInfo, setTxInfo] = useState({
-    totalVolume: 0,
-    dayVolume: 0,
-  });
-  const [txData, setTxData] = useState([]);
-  const [myTxInfo, setMyTxInfo] = useState({
-    totalValue: 0,
-    // totalRate: 0,
-    todayValue: 0,
-    day7Value: 0,
-    day30Value: 0,
-    // todayRate: 0,
-    // day7Rate: 0,
-    // day30Rate: 0,
-  });
-  const [historyList, setHistoryList] = useState<any[]>([]);
-  const [positionList, setPositionList] = useState<any[]>([]);
   const [showShareMyDealModal, setShareMyDealModal] = useState(false);
   const [showShareOrderModal, setShowShareOrderModal] = useState(false);
   const [shareOrder, setShareOrder] = useState<any>(undefined);
-  const { messageSnackBar } = useNESTSnackBar();
+  const {messageSnackBar} = useNESTSnackBar();
 
-  const getBurnedData = useCallback(async () => {
-    try {
-      const today = new Date();
-      const todayStr = today.toISOString().split("T")[0];
-      const res = await fetch(
-        `https://api.nestfi.net/api/dashboard/destory/list?from=2022-11-28&to=${todayStr}`,
-        {
-          method: "get",
-        }
-      );
-      const resJson = await res.json();
-      if (resJson) {
-        setBurnedData(
-          resJson.value.map((item: any) => ({
-            time: item.date,
-            value: item.value,
-          }))
-        );
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
+  const {data: burnedData} = useSWR(`https://api.nestfi.net/api/dashboard/txVolume/list?from=2022-11-28&to=${(new Date()).toISOString().split("T")[0]}`, (url) => fetch(url)
+    .then((res) => res.json())
+    .then((res: any) => res.value)
+    .then((res: any) => res.map((item: any) => ({
+      time: item.date,
+      value: item.value,
+    }))));
 
-  const getTxData = useCallback(async () => {
-    try {
-      const today = new Date();
-      const todayStr = today.toISOString().split("T")[0];
-      const res = await fetch(
-        `https://api.nestfi.net/api/dashboard/txVolume/list?from=2022-11-28&to=${todayStr}`,
-        {
-          method: "get",
-        }
-      );
-      const resJson = await res.json();
-      if (resJson) {
-        setTxData(
-          resJson.value.map((item: any) => ({
-            time: item.date,
-            value: item.value,
-          }))
-        );
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
+  const {data: txData} = useSWR(`https://api.nestfi.net/api/dashboard/txVolume/list?from=2022-11-28&to=${(new Date()).toISOString().split("T")[0]}`, (url) => fetch(url)
+    .then((res) => res.json())
+    .then((res: any) => res.value)
+    .then((res: any) => res.map((item: any) => ({
+      time: item.date,
+      value: item.value,
+      })))
+  )
 
-  const getBurnedInfo = useCallback(async () => {
-    try {
-      const res = await fetch("https://api.nestfi.net/api/dashboard/destory");
-      const resJson = await res.json();
-      if (resJson) {
-        setBurnedInfo(resJson.value);
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  }, []);
+  const {data: burnedInfo} = useSWR("https://api.nestfi.net/api/dashboard/destory", (url) => fetch(url)
+    .then((res) => res.json())
+    .then((res: any) => res.value));
 
-  const getTxInfo = useCallback(async () => {
-    try {
-      const res = await fetch("https://api.nestfi.net/api/dashboard/txVolume");
-      const resJson = await res.json();
-      if (resJson) {
-        setTxInfo(resJson.value);
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  }, []);
+  const {data: txInfo} = useSWR("https://api.nestfi.net/api/dashboard/txVolume", (url) => fetch(url)
+    .then((res) => res.json())
+    .then((res: any) => res.value));
 
-  const getMyTxInfo = useCallback(async () => {
-    try {
-      const res = await fetch(
-        `https://api.nestfi.net/api/dashboard/myTx/info?address=${address}`
-      );
-      const resJson = await res.json();
-      if (resJson) {
-        setMyTxInfo(resJson.value);
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  }, [address]);
+  const {data: myTxInfo} = useSWR(address ? `https://api.nestfi.net/api/dashboard/myTx/info?address=${address}` : undefined, (url) => fetch(url)
+    .then((res) => res.json())
+    .then((res: any) => res.value));
 
-  const getHistoryInfo = useCallback(async () => {
-    try {
-      const res = await fetch(
-        `https://api.nestfi.net/api/dashboard/history/list?address=${address}`
-      );
-      const resJson = await res.json();
-      if (resJson) {
-        setHistoryList(resJson.value.sort((a: any, b: any) => b.time - a.time));
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  }, [address]);
+  const {data: historyList} = useSWR(address ? `https://api.nestfi.net/api/dashboard/history/list?address=${address}` : undefined, (url) => fetch(url)
+    .then((res) => res.json())
+    .then((res: any) => res.value.sort((a: any, b: any) => b.time - a.time)));
 
-  const getPositionList = useCallback(async () => {
-    try {
-      const res = await fetch(
-        `https://api.nestfi.net/api/dashboard/position/list?address=${address}`
-      );
-      const resJson = await res.json();
-      if (resJson) {
-        setPositionList(resJson.value);
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  }, [address]);
+  const {data: positionList} = useSWR(address ? `https://api.nestfi.net/api/dashboard/position/list?address=${address}` : undefined, (url) => fetch(url)
+    .then((res) => res.json())
+    .then((res: any) => res.value));
 
-  useEffect(() => {
-    getMyTxInfo();
-    const interval = setInterval(() => {
-      getMyTxInfo();
-    }, 60_000);
-    return () => {
-      clearInterval(interval);
-    };
-  }, [getMyTxInfo]);
-
-  useEffect(() => {
-    getTxInfo();
-    const interval = setInterval(() => {
-      getTxInfo();
-    }, 60_000);
-    return () => {
-      clearInterval(interval);
-    };
-  }, [getTxInfo]);
-
-  useEffect(() => {
-    getPositionList();
-    const interval = setInterval(() => {
-      getPositionList();
-    }, 60_000);
-    return () => {
-      clearInterval(interval);
-    };
-  }, [getPositionList]);
-
-  useEffect(() => {
-    getHistoryInfo();
-    const interval = setInterval(() => {
-      getHistoryInfo();
-    }, 60_000);
-    return () => {
-      clearInterval(interval);
-    };
-  }, [getHistoryInfo]);
-
-  useEffect(() => {
-    getBurnedInfo();
-    const interval = setInterval(() => {
-      getBurnedInfo();
-    }, 60_000);
-    return () => {
-      clearInterval(interval);
-    };
-  }, [getBurnedInfo]);
-
-  useEffect(() => {
-    getBurnedData();
-    const interval = setInterval(() => {
-      getBurnedData();
-    }, 60_000);
-    return () => {
-      clearInterval(interval);
-    };
-  }, [getBurnedData]);
-
-  useEffect(() => {
-    getTxData();
-    const interval = setInterval(() => {
-      getTxData();
-    }, 60_000);
-    return () => {
-      clearInterval(interval);
-    };
-  }, [getTxData]);
+  const {data: isKol} = useSWR(address ? `https://api.nestfi.net/api/invite/is-kol-whitelist/${address}` : undefined, (url) => fetch(url).then((res) => res.json()));
 
   const shareMyDealModal = useMemo(() => {
     return (
       <ShareMyDealModal
-        value={myTxInfo}
+        value={myTxInfo || {
+          totalValue: 0,
+          todayValue: 0,
+          day7Value: 0,
+          day30Value: 0,
+        }}
         open={showShareMyDealModal}
         onClose={() => {
           setShareMyDealModal(false);
@@ -564,8 +397,8 @@ const Dashboard: FC = () => {
               <span>TP</span>
               {item.sp
                 ? item.sp.toLocaleString("en-US", {
-                    maximumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
-                  })
+                  maximumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
+                })
                 : "-"}{" "}
               USDT
             </Box>
@@ -573,8 +406,8 @@ const Dashboard: FC = () => {
               <span>SL</span>
               {item.sl
                 ? item.sl.toLocaleString("en-US", {
-                    maximumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
-                  })
+                  maximumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
+                })
                 : "-"}{" "}
               USDT
             </Box>
@@ -596,7 +429,7 @@ const Dashboard: FC = () => {
                 });
               }}
             >
-              <Share />
+              <Share/>
             </FuturesOrderShare>
           </Stack>
         </TableCell>
@@ -656,7 +489,7 @@ const Dashboard: FC = () => {
               });
             }}
           >
-            <Share />
+            <Share/>
           </Box>
         </Stack>
         <Stack spacing={"8px"} pt={"20px"}>
@@ -837,17 +670,17 @@ const Dashboard: FC = () => {
         className={""}
         datArray={[
           <Stack direction={"row"} spacing={"4px"} alignItems={"center"}>
-            <FuturesOrder />
+            <FuturesOrder/>
             <p
-              style={{ fontWeight: 700, fontSize: "16px", lineHeight: "22px" }}
+              style={{fontWeight: 700, fontSize: "16px", lineHeight: "22px"}}
             >
               <Trans>Current Positions</Trans>
             </p>
           </Stack>,
           <Stack direction={"row"} spacing={"4px"} alignItems={"center"}>
-            <DashboardIcon2 />
+            <DashboardIcon2/>
             <p
-              style={{ fontWeight: 700, fontSize: "16px", lineHeight: "22px" }}
+              style={{fontWeight: 700, fontSize: "16px", lineHeight: "22px"}}
             >
               <Trans>History</Trans>
             </p>
@@ -865,41 +698,53 @@ const Dashboard: FC = () => {
     <Stack alignItems={"center"} width={"100%"}>
       {shareMyDealModal}
       {shareMyOrderModal}
-      {/*<Stack direction={'row'} width={'100%'} justifyContent={"center"} spacing={'32px'} sx={(theme) => ({*/}
-      {/*  color: theme.normal.text0,*/}
-      {/*  fontWeight: 700,*/}
-      {/*  fontSize: '16px',*/}
-      {/*  lineHeight: '22px',*/}
-      {/*  background: theme.normal.bg1,*/}
-      {/*  borderBottom: `1px solid ${theme.normal.border}`,*/}
-      {/*  borderTop: `1px solid ${theme.normal.border}`,*/}
-      {/*})}>*/}
-      {/*  <Box sx={(theme) => ({*/}
-      {/*    paddingY: '11px',*/}
-      {/*    borderBottom: `2px solid ${theme.normal.primary}`,*/}
-      {/*    a: {*/}
-      {/*      color: theme.normal.primary,*/}
-      {/*      cursor: 'pointer',*/}
-      {/*      '&:hover': {*/}
-      {/*        color: theme.normal.primary,*/}
-      {/*      }*/}
-      {/*    }*/}
-      {/*  })}>*/}
-      {/*    <a href={'/#/dashboard'}>Dashboard</a>*/}
-      {/*  </Box>*/}
-      {/*  <Box sx={(theme) => ({*/}
-      {/*    paddingY: '11px',*/}
-      {/*    a: {*/}
-      {/*      color: theme.normal.text0,*/}
-      {/*      cursor: 'pointer',*/}
-      {/*      '&:hover': {*/}
-      {/*        color: theme.normal.primary,*/}
-      {/*      }*/}
-      {/*    }*/}
-      {/*  })}>*/}
-      {/*    <a href={'/#/dashboard/mine'}>我的管理</a>*/}
-      {/*  </Box>*/}
-      {/*</Stack>*/}
+      {
+        isKol && isKol?.value && (
+          <Stack direction={'row'} width={'100%'} justifyContent={"center"} spacing={'32px'} sx={(theme) => ({
+            color: theme.normal.text0,
+            fontWeight: 700,
+            fontSize: '16px',
+            lineHeight: '22px',
+            background: theme.normal.bg1,
+            borderBottom: `1px solid ${theme.normal.border}`,
+            borderTop: `1px solid ${theme.normal.border}`,
+          })}>
+            <Box sx={(theme) => ({
+              paddingY: '11px',
+              borderBottom: `2px solid ${theme.normal.primary}`,
+              a: {
+                color: theme.normal.primary,
+                cursor: 'pointer',
+                '&:hover': {
+                  color: theme.normal.primary,
+                }
+              }
+            })}>
+              <a href={'/#/dashboard'}>
+                <Trans>
+                  Dashboard
+                </Trans>
+              </a>
+            </Box>
+            <Box sx={(theme) => ({
+              paddingY: '11px',
+              a: {
+                color: theme.normal.text0,
+                cursor: 'pointer',
+                '&:hover': {
+                  color: theme.normal.primary,
+                }
+              }
+            })}>
+              <a href={'/#/dashboard/referral'}>
+                <Trans>
+                  Referral
+                </Trans>
+              </a>
+            </Box>
+          </Stack>
+        )
+      }
       <Stack
         maxWidth={"1600px"}
         px={["0", "0", "20px"]}
@@ -927,20 +772,20 @@ const Dashboard: FC = () => {
                 title1={t`NEST Total Burned`}
                 title2={t`Today Burned`}
                 value1={`${
-                  burnedInfo.totalDestroy === 0
+                  !burnedInfo?.totalDestroy
                     ? "-"
                     : burnedInfo.totalDestroy.toLocaleString("en-US", {
-                        maximumFractionDigits: 2,
-                      })
+                      maximumFractionDigits: 2,
+                    })
                 }`}
                 value2={`${
-                  burnedInfo.dayDestroy === 0
+                  !burnedInfo?.dayDestroy
                     ? "-"
                     : burnedInfo.dayDestroy.toLocaleString("en-US", {
-                        maximumFractionDigits: 2,
-                      })
+                      maximumFractionDigits: 2,
+                    })
                 }`}
-                data={burnedData}
+                data={burnedData || []}
               />
             </Stack>
             <Stack
@@ -958,24 +803,24 @@ const Dashboard: FC = () => {
                 title1={t`Total Transaction Volume`}
                 title2={t`Today Volume`}
                 value1={`${
-                  txInfo.totalVolume === 0
+                  !txInfo?.totalVolume
                     ? "-"
-                    : txInfo.totalVolume.toLocaleString("en-US", {
-                        maximumFractionDigits: 2,
-                      })
+                    : txInfo?.totalVolume.toLocaleString("en-US", {
+                      maximumFractionDigits: 2,
+                    })
                 }`}
                 value2={`${
-                  txInfo.dayVolume === 0
+                  !txInfo?.dayVolume
                     ? "-"
-                    : txInfo.dayVolume.toLocaleString("en-US", {
-                        maximumFractionDigits: 2,
-                      })
+                    : txInfo?.dayVolume.toLocaleString("en-US", {
+                      maximumFractionDigits: 2,
+                    })
                 }`}
-                data={txData}
+                data={txData || []}
               />
             </Stack>
           </Stack>
-          {isBigMobile && <NESTLine />}
+          {isBigMobile && <NESTLine/>}
         </Stack>
         {isBigMobile ? (
           <Stack px={"20px"} spacing={"16px"}>
@@ -1007,7 +852,7 @@ const Dashboard: FC = () => {
                 />
               </Stack>
             </Stack>
-            <Card4 sx={{ position: "relative" }}>
+            <Card4 sx={{position: "relative"}}>
               {!address && (
                 <Stack
                   position={"absolute"}
@@ -1071,7 +916,7 @@ const Dashboard: FC = () => {
                         setShareMyDealModal(true);
                       }}
                     >
-                      <Share />
+                      <Share/>
                     </Box>
                   </Stack>
                   <Stack
@@ -1080,7 +925,7 @@ const Dashboard: FC = () => {
                     alignItems={"center"}
                   >
                     <Title4>
-                      {myTxInfo.totalValue.toLocaleString("en-US", {
+                      {myTxInfo?.totalValue.toLocaleString("en-US", {
                         maximumFractionDigits: 2,
                       })}{" "}
                       NEST
@@ -1093,7 +938,7 @@ const Dashboard: FC = () => {
                   </Stack>
                 </Stack>
                 <Box py={"20px"}>
-                  <NESTLine />
+                  <NESTLine/>
                 </Box>
                 <Stack spacing={"22px"}>
                   <Stack direction={"row"} justifyContent={"space-between"}>
@@ -1104,7 +949,7 @@ const Dashboard: FC = () => {
                       spacing={"4px"}
                     >
                       <Caption4>
-                        {myTxInfo.todayValue.toLocaleString("en-US", {
+                        {myTxInfo?.todayValue.toLocaleString("en-US", {
                           maximumFractionDigits: 2,
                         })}{" "}
                         NEST
@@ -1124,7 +969,7 @@ const Dashboard: FC = () => {
                       spacing={"4px"}
                     >
                       <Caption4>
-                        {myTxInfo.day7Value.toLocaleString("en-US", {
+                        {myTxInfo?.day7Value.toLocaleString("en-US", {
                           maximumFractionDigits: 2,
                         })}{" "}
                         NEST
@@ -1144,7 +989,7 @@ const Dashboard: FC = () => {
                       spacing={"4px"}
                     >
                       <Caption4>
-                        {myTxInfo.day30Value.toLocaleString("en-US", {
+                        {myTxInfo?.day30Value.toLocaleString("en-US", {
                           maximumFractionDigits: 2,
                         })}{" "}
                         NEST
@@ -1161,7 +1006,7 @@ const Dashboard: FC = () => {
             </Card4>
           </Stack>
         ) : (
-          <Card2 sx={{ position: "relative" }}>
+          <Card2 sx={{position: "relative"}}>
             {!address && (
               <Stack
                 position={"absolute"}
@@ -1224,7 +1069,7 @@ const Dashboard: FC = () => {
                       setShareMyDealModal(true);
                     }}
                   >
-                    <Share />
+                    <Share/>
                   </DashboardShare>
                 </Stack>
               </Stack>
@@ -1246,7 +1091,7 @@ const Dashboard: FC = () => {
                     },
                   })}
                 >
-                  {myTxInfo.totalValue.toLocaleString("en-US", {
+                  {myTxInfo?.totalValue.toLocaleString("en-US", {
                     maximumFractionDigits: 2,
                   })}{" "}
                   <span>NEST</span>
@@ -1269,7 +1114,7 @@ const Dashboard: FC = () => {
                       },
                     })}
                   >
-                    {myTxInfo.todayValue.toLocaleString("en-US", {
+                    {myTxInfo?.todayValue.toLocaleString("en-US", {
                       maximumFractionDigits: 2,
                     })}{" "}
                     <span>NEST</span>
@@ -1277,7 +1122,7 @@ const Dashboard: FC = () => {
                     {/*className={'color-full'}>{myTxInfo.todayRate > 0 && '+'}{myTxInfo.todayRate}%</span>*/}
                   </Title3>
                   <Caption2
-                    sx={{ paddingTop: "12px" }}
+                    sx={{paddingTop: "12px"}}
                   >{t`Today's PNL`}</Caption2>
                 </Card3>
                 <Card3>
@@ -1293,7 +1138,7 @@ const Dashboard: FC = () => {
                       },
                     })}
                   >
-                    {myTxInfo.day7Value.toLocaleString("en-US", {
+                    {myTxInfo?.day7Value.toLocaleString("en-US", {
                       maximumFractionDigits: 2,
                     })}{" "}
                     <span>NEST</span>
@@ -1301,7 +1146,7 @@ const Dashboard: FC = () => {
                     {/*className={'color-full'}>{myTxInfo.day7Rate > 0 && '+'}{myTxInfo.day7Rate}%</span>*/}
                   </Title3>
                   <Caption2
-                    sx={{ paddingTop: "12px" }}
+                    sx={{paddingTop: "12px"}}
                   >{t`7 Days' PNL`}</Caption2>
                 </Card3>
                 <Card3>
@@ -1317,7 +1162,7 @@ const Dashboard: FC = () => {
                       },
                     })}
                   >
-                    {myTxInfo.day30Value.toLocaleString("en-US", {
+                    {myTxInfo?.day30Value.toLocaleString("en-US", {
                       maximumFractionDigits: 2,
                     })}{" "}
                     <span>NEST</span>
@@ -1325,7 +1170,7 @@ const Dashboard: FC = () => {
                     {/*className={'color-full'}>{myTxInfo.day30Rate > 0 && '+'}{myTxInfo.day30Rate}%</span>*/}
                   </Title3>
                   <Caption2
-                    sx={{ paddingTop: "12px" }}
+                    sx={{paddingTop: "12px"}}
                   >{t`30 Days' PNL`}</Caption2>
                 </Card3>
               </Stack>
@@ -1334,7 +1179,7 @@ const Dashboard: FC = () => {
         )}
         <Stack spacing={"16px"}>
           <Stack
-            style={{ alignItems: "start" }}
+            style={{alignItems: "start"}}
             sx={(theme) => ({
               width: "100%",
               borderBottom: "1px solid",
@@ -1346,9 +1191,9 @@ const Dashboard: FC = () => {
           </Stack>
           {isBigMobile ? (
             <Stack px={"20px"} spacing={"12px"}>
-              {tabsValue === 0 &&
-                (positionList.length > 0 ? (
-                  positionList.map((item, index) =>
+              {tabsValue === 0 && positionList &&
+                (positionList?.length > 0 ? (
+                  positionList.map((item: any, index: number) =>
                     MobileOrderCard(item, index)
                   )
                 ) : (
@@ -1368,9 +1213,9 @@ const Dashboard: FC = () => {
                     {t`No trades yet`}
                   </Stack>
                 ))}
-              {tabsValue === 1 &&
+              {tabsValue === 1 && historyList &&
                 (historyList.length > 0 ? (
-                  historyList.map((item, index) =>
+                  historyList.map((item: any, index: number) =>
                     MobileOrderCard(item, index, true)
                   )
                 ) : (
@@ -1396,35 +1241,35 @@ const Dashboard: FC = () => {
               dataArray={
                 tabsValue === 0
                   ? [
-                      t`Position`,
-                      t`Actual Margin`,
-                      t`Open Price`,
-                      t`Liq Price`,
-                      t`Stop Order`,
-                      t`Operate`,
-                    ]
+                    t`Position`,
+                    t`Actual Margin`,
+                    t`Open Price`,
+                    t`Liq Price`,
+                    t`Stop Order`,
+                    t`Operate`,
+                  ]
                   : [
-                      t`Time`,
-                      t`Position`,
-                      t`Actual Margin`,
-                      t`Open Price`,
-                      t`Liq Price`,
-                      t`Close Price`,
-                      t`Stop Order`,
-                      t`Operate`,
-                    ]
+                    t`Time`,
+                    t`Position`,
+                    t`Actual Margin`,
+                    t`Open Price`,
+                    t`Liq Price`,
+                    t`Close Price`,
+                    t`Stop Order`,
+                    t`Operate`,
+                  ]
               }
               noOrder={
-                (tabsValue === 0 && positionList.length === 0) ||
-                (tabsValue === 1 && historyList.length === 0)
+                (tabsValue === 0 && positionList?.length === 0) ||
+                (tabsValue === 1 && historyList?.length === 0)
               }
             >
-              {tabsValue === 0 &&
-                positionList.map((item, index) =>
+              {tabsValue === 0 && positionList &&
+                positionList?.map((item: any, index: number) =>
                   PCOrderRow(item, index, false)
                 )}
-              {tabsValue === 1 &&
-                historyList.map((item, index) => PCOrderRow(item, index, true))}
+              {tabsValue === 1 && historyList &&
+                historyList.map((item: any, index: number) => PCOrderRow(item, index, true))}
             </FuturesTableTitle>
           )}
         </Stack>

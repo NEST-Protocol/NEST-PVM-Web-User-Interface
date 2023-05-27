@@ -13,6 +13,11 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
+#: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "* due to the complexity of financial data, there might be nuances and delay. Data displayed above is for reference only.We sincerely apologize for any inconvenience."
+msgstr "* due to the complexity of financial data, there might be nuances and delay. Data displayed above is for reference only.We sincerely apologize for any inconvenience."
+
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useFuturesNewOrder.ts
 msgid "< LIMIT PRICE"
@@ -151,6 +156,10 @@ msgstr "Add position"
 msgid "Add Position"
 msgstr "Add Position"
 
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Address"
+msgstr "Address"
+
 #: src/hooks/useFuturesNewOrder.ts
 #: src/pages/Futures/Modal/EditPositionModal.tsx
 msgid "After the limit order is executed, TP and SL price you set will trigger immediately."
@@ -258,6 +267,8 @@ msgstr "Contact info (Telegram handle)"
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
 msgid "Copy Invitation Link"
 msgstr "Copy Invitation Link"
 
@@ -272,9 +283,24 @@ msgstr "Copy Link"
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "Copy Successfully"
 msgstr "Copy Successfully"
+
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Cumulative Commission"
+msgstr "Cumulative Commission"
+
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Cumulative Commissions"
+msgstr "Cumulative Commissions"
+
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Cumulative Invitee Trading Volume"
+msgstr "Cumulative Invitee Trading Volume"
 
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "Current Positions"
@@ -284,6 +310,8 @@ msgstr "Current Positions"
 msgid "Dark mode"
 msgstr "Dark mode"
 
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Share/Head/NESTHead.tsx
 #: src/pages/Share/Head/NESTHead.tsx
 msgid "Dashboard"
@@ -296,6 +324,10 @@ msgstr "Decentralized"
 #: src/pages/Home/Home.tsx
 msgid "Decentralized Perpetual Exchange"
 msgstr "Decentralized Perpetual Exchange"
+
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Default"
+msgstr "Default"
 
 #: src/pages/Home/Home.tsx
 msgid "Deflationary"
@@ -410,6 +442,10 @@ msgstr "Insufficient"
 msgid "Insufficient NEST balance"
 msgstr "Insufficient NEST balance"
 
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Invitee transaction volume"
+msgstr "Invitee transaction volume"
+
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 #: src/pages/Share/Modal/LanguageModal.tsx
 #: src/pages/Share/Modal/LanguageModal.tsx
@@ -510,6 +546,11 @@ msgstr "More"
 msgid "More Info"
 msgstr "More Info"
 
+#: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "My commissions"
+msgstr "My commissions"
+
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
@@ -544,6 +585,11 @@ msgstr "NESTFi's economic model is deflationary, the more users trade, the more 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "News"
 msgstr "News"
+
+#: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "No commissions yet"
+msgstr "No commissions yet"
 
 #: src/pages/Home/Home.tsx
 msgid "No Market Makers"
@@ -607,6 +653,11 @@ msgstr "Operate"
 msgid "Order"
 msgstr "Order"
 
+#: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Overview"
+msgstr "Overview"
+
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Platform (Youtube, Telegram, Twitter, Instagram, Facebook, Tiktok, Others)"
 msgstr "Platform (Youtube, Telegram, Twitter, Instagram, Facebook, Tiktok, Others)"
@@ -657,6 +708,11 @@ msgstr "Price"
 msgid "Recent transactions"
 msgstr "Recent transactions"
 
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Referral"
+msgstr "Referral"
+
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 #: src/pages/Futures/Modal/ProtocolModal.tsx
 msgid "Risk Warning"
@@ -666,6 +722,10 @@ msgstr "Risk Warning"
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 msgid "Scan and copy the trade"
 msgstr "Scan and copy the trade"
+
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Search"
+msgstr "Search"
 
 #: src/hooks/useTransactionReceipt.ts
 msgid "Sell position"
@@ -681,6 +741,15 @@ msgstr "Sell position request"
 #: src/pages/Futures/NewOrder.tsx
 msgid "Service Fee"
 msgstr "Service Fee"
+
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Settled"
+msgstr "Settled"
+
+#: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Settled Commissions"
+msgstr "Settled Commissions"
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 msgid "Share"
@@ -836,6 +905,17 @@ msgstr "Today\\'s PNL"
 msgid "Total Burned"
 msgstr "Total Burned"
 
+#: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Total Commissions"
+msgstr "Total Commissions"
+
+#: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Total Invitees"
+msgstr "Total Invitees"
+
 #: src/pages/Futures/Modal/SharePositionModal.tsx
 #: src/pages/Futures/NewOrder.tsx
 msgid "Total Pay"
@@ -851,6 +931,11 @@ msgstr "Total Profit"
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 msgid "Total Profit & Loss"
 msgstr "Total Profit & Loss"
+
+#: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Total Trading Volume"
+msgstr "Total Trading Volume"
 
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "Total Transaction Volume"
@@ -879,6 +964,11 @@ msgstr "Trade tokens in instant"
 msgid "Trade with me on NESTFi"
 msgstr "Trade with me on NESTFi"
 
+#: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Traded Invitees"
+msgstr "Traded Invitees"
+
 #: src/pages/Home/Home.tsx
 msgid ""
 "trading\n"
@@ -890,6 +980,10 @@ msgstr ""
 #: src/pages/Home/Home.tsx
 msgid "trading fees as"
 msgstr "trading fees as"
+
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Trading Volume"
+msgstr "Trading Volume"
 
 #: src/hooks/useFuturesPOrder.ts
 msgid "Trigger"
@@ -908,6 +1002,15 @@ msgstr "Trigger Position"
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 msgid "Twitter"
 msgstr "Twitter"
+
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Unsettled"
+msgstr "Unsettled"
+
+#: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Unsettled Commissions"
+msgstr "Unsettled Commissions"
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "User Guide"

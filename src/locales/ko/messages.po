@@ -13,6 +13,11 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
+#: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "* due to the complexity of financial data, there might be nuances and delay. Data displayed above is for reference only.We sincerely apologize for any inconvenience."
+msgstr ""
+
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useFuturesNewOrder.ts
 msgid "< LIMIT PRICE"
@@ -151,6 +156,10 @@ msgstr "포지션 추가"
 msgid "Add Position"
 msgstr "포지션 추가"
 
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Address"
+msgstr ""
+
 #: src/hooks/useFuturesNewOrder.ts
 #: src/pages/Futures/Modal/EditPositionModal.tsx
 msgid "After the limit order is executed, TP and SL price you set will trigger immediately."
@@ -258,6 +267,8 @@ msgstr "연락처 정보 (텔레그램 핸들)"
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
 msgid "Copy Invitation Link"
 msgstr "초대 링크 복사"
 
@@ -272,9 +283,24 @@ msgstr "링크 복사"
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "Copy Successfully"
 msgstr "복사 완료"
+
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Cumulative Commission"
+msgstr ""
+
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Cumulative Commissions"
+msgstr ""
+
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Cumulative Invitee Trading Volume"
+msgstr ""
 
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "Current Positions"
@@ -284,6 +310,8 @@ msgstr "현재 위치"
 msgid "Dark mode"
 msgstr "다크 모드"
 
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Share/Head/NESTHead.tsx
 #: src/pages/Share/Head/NESTHead.tsx
 msgid "Dashboard"
@@ -296,6 +324,10 @@ msgstr "분산형"
 #: src/pages/Home/Home.tsx
 msgid "Decentralized Perpetual Exchange"
 msgstr "분산형 영구 계약 거래소"
+
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Default"
+msgstr ""
 
 #: src/pages/Home/Home.tsx
 msgid "Deflationary"
@@ -410,6 +442,10 @@ msgstr "불충분함"
 msgid "Insufficient NEST balance"
 msgstr "NEST 잔액 부족"
 
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Invitee transaction volume"
+msgstr ""
+
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 #: src/pages/Share/Modal/LanguageModal.tsx
 #: src/pages/Share/Modal/LanguageModal.tsx
@@ -510,6 +546,11 @@ msgstr "자세히 보기"
 msgid "More Info"
 msgstr "자세한 정보"
 
+#: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "My commissions"
+msgstr ""
+
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
@@ -544,6 +585,11 @@ msgstr "NESTFi의 경제 모델은 불충분하며, 더 많은 사용자가 거�
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "News"
 msgstr "뉴스"
+
+#: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "No commissions yet"
+msgstr ""
 
 #: src/pages/Home/Home.tsx
 msgid "No Market Makers"
@@ -607,6 +653,11 @@ msgstr "조작"
 msgid "Order"
 msgstr "주문"
 
+#: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Overview"
+msgstr ""
+
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Platform (Youtube, Telegram, Twitter, Instagram, Facebook, Tiktok, Others)"
 msgstr "플랫폼 (Youtube, Telegram, Twitter, Instagram, Facebook, Tiktok, 기타)"
@@ -657,6 +708,11 @@ msgstr "가격"
 msgid "Recent transactions"
 msgstr "최근 거래"
 
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Referral"
+msgstr ""
+
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 #: src/pages/Futures/Modal/ProtocolModal.tsx
 msgid "Risk Warning"
@@ -666,6 +722,10 @@ msgstr "위험 경고"
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 msgid "Scan and copy the trade"
 msgstr "거래 스캔 및 복사"
+
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Search"
+msgstr ""
 
 #: src/hooks/useTransactionReceipt.ts
 msgid "Sell position"
@@ -681,6 +741,15 @@ msgstr "포지션 매도 요청"
 #: src/pages/Futures/NewOrder.tsx
 msgid "Service Fee"
 msgstr "서비스 수수료"
+
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Settled"
+msgstr ""
+
+#: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Settled Commissions"
+msgstr ""
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 msgid "Share"
@@ -836,6 +905,17 @@ msgstr "오늘의 PNL"
 msgid "Total Burned"
 msgstr "총 소각된 수량"
 
+#: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Total Commissions"
+msgstr ""
+
+#: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Total Invitees"
+msgstr ""
+
 #: src/pages/Futures/Modal/SharePositionModal.tsx
 #: src/pages/Futures/NewOrder.tsx
 msgid "Total Pay"
@@ -851,6 +931,11 @@ msgstr "총 이익"
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 msgid "Total Profit & Loss"
 msgstr "총 수익과 손실"
+
+#: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Total Trading Volume"
+msgstr ""
 
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "Total Transaction Volume"
@@ -879,6 +964,11 @@ msgstr "즉시 토큰 거래"
 msgid "Trade with me on NESTFi"
 msgstr "NESTFi에서 함께 거래해요"
 
+#: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Traded Invitees"
+msgstr ""
+
 #: src/pages/Home/Home.tsx
 msgid ""
 "trading\n"
@@ -888,6 +978,10 @@ msgstr "거래 수수료"
 #: src/pages/Home/Home.tsx
 msgid "trading fees as"
 msgstr "거래 수수료"
+
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Trading Volume"
+msgstr ""
 
 #: src/hooks/useFuturesPOrder.ts
 msgid "Trigger"
@@ -906,6 +1000,15 @@ msgstr "트리거 포지션"
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 msgid "Twitter"
 msgstr "트위터"
+
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Unsettled"
+msgstr ""
+
+#: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Dashboard/Referral/Referral.tsx
+msgid "Unsettled Commissions"
+msgstr ""
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "User Guide"

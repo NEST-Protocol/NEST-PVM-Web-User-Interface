@@ -14,7 +14,7 @@ const HomePage = loadable(() => import("./Home/Home"));
 const FuturesPage = loadable(() => import("./Futures/Futures"));
 const SwapPage = loadable(() => import("./Swap/Swap"));
 const DashboardPage = loadable(() => import("./Dashboard/Dashboard"));
-const MinePage = loadable(() => import("./Dashboard/Mine/Mine"));
+const ReferralPage = loadable(() => import("./Dashboard/Referral/Referral"));
 const App: FC = () => {
   const { headHeight, isBigMobile } = useWindowWidth();
   const { account, chainsData } = useNEST();
@@ -103,7 +103,7 @@ const App: FC = () => {
             <Route path="/futures" element={<FuturesPage />} />
             <Route path="/swap" element={<SwapPage />} />
             <Route path="/dashboard" element={<DashboardPage />} />
-            <Route path="/dashboard/mine" element={<MinePage />} />
+            <Route path="/dashboard/referral" element={<ReferralPage />} />
             <Route path="*" element={<Navigate to="/home" />} />
           </Routes>
           {/* <TestTheme /> */}
