@@ -540,7 +540,7 @@ const Referral = () => {
                   lineHeight: '20px',
                 })}>
                   <Trans>
-                    * due to the complexity of financial data, there might be nuances and delay. Data displayed above
+                    * Due to the complexity of financial data, there might be nuances and delay. Data displayed above
                     is for reference only.We sincerely apologize for any inconvenience.
                   </Trans>
                 </Stack>
