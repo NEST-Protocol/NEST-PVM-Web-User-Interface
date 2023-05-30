@@ -442,15 +442,22 @@ const Home: FC = () => {
             </Stack>
           </Stack>
         </Stack>
-        <Stack width={'100%'} px={['20px', '20px', '20px', '40px']} alignItems={"center"} style={{
-          backgroundImage: 'url(/images/home_2.png)',
+        <Stack width={'100%'} px={['20px', '20px', '20px', '40px']} alignItems={"center"} sx={(theme) => ({
+          backgroundImage: theme.isLight ? 'url(/images/home_3.png)' : 'url(/images/home_2.png)',
           backgroundSize: 'cover',
-        }}>
-          <Stack maxWidth={'1600px'} pb={'80px'} alignItems={"center"} width={'100%'}
+        })}>
+          <Stack maxWidth={'1600px'} pb={'80px'} alignItems={"center"} width={'100%'} height={'100%'}
                  direction={width <= WidthType.lg ? 'column-reverse' : 'row'}
                  spacing={['40px', '40px', '40px', '40px', '40px', '80px']}>
-            <Box width={'100%'}>
+            <Box width={'100%'} sx={(theme) => ({
+              display: theme.isLight ? 'none' : 'block',
+            })}>
               <img src={'/images/home_1.png'} width={'100%'} alt={''}/>
+            </Box>
+            <Box width={'100%'} sx={(theme) => ({
+              display: theme.isLight ? 'block' : 'none',
+            })}>
+              <img src={'/images/home_4.png'} width={'100%'} alt={''}/>
             </Box>
             <Stack spacing={'12px'} alignItems={width <= WidthType.lg ? "center" : "start"}>
               <Box sx={(theme) => ({
