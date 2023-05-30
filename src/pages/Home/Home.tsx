@@ -1,7 +1,15 @@
 import {FC, useMemo, useState} from "react";
 import MainButton from "../../components/MainButton/MainButton";
 import {Grid, Stack} from "@mui/material";
-import {HomeIcon1, HomeIcon2, HomeIcon3, HomeIcon4} from "../../components/icons";
+import {
+  HomeBurned,
+  HomeIcon1,
+  HomeIcon2,
+  HomeIcon3,
+  HomeIcon4,
+  HomeKols,
+  HomeTradingVolume
+} from "../../components/icons";
 import ApplyModal from "./Modal/ApplyModal";
 import useWindowWidth, {WidthType} from "../../hooks/useWindowWidth";
 import useTheme from "../../hooks/useTheme";
@@ -23,6 +31,10 @@ const Home: FC = () => {
     .then((res) => res.json())
     .then((data) => data.value)
   );
+
+  const {data: txInfo} = useSWR("https://api.nestfi.net/api/dashboard/txVolume", (url) => fetch(url)
+    .then((res) => res.json())
+    .then((res: any) => res.value));
 
   const modal = useMemo(() => {
     return (
@@ -110,11 +122,11 @@ const Home: FC = () => {
                   [
                     {
                       title: t`Total Trading Volume (NEST)`,
-                      value: "3,595,647,853.58",
+                      value: txInfo ? Number(txInfo?.totalVolume?.toFixed(2))?.toLocaleString() : '-',
                     },
                     {
                       title: t`Total Burned (NEST)`,
-                      value: destoryData ? (-1 * destoryData?.totalDestroy).toLocaleString() || 0 : '-',
+                      value: destoryData ? Number((-1 * destoryData?.totalDestroy)?.toFixed(2))?.toLocaleString() || 0 : '-',
                     },
                     {
                       title: t`KOLs Joined NESTFi`,
@@ -144,25 +156,32 @@ const Home: FC = () => {
                   [
                     {
                       title: t`Total Trading Volume (NEST)`,
-                      value: "3,595,647,853.58",
-                      icon: '',
+                      value: txInfo ? txInfo?.totalVolume?.toFixed(2)?.toLocaleString() : '-',
+                      icon: <HomeTradingVolume/>,
                     },
                     {
                       title: t`Total Burned (NEST)`,
-                      value: destoryData ? (-1 * destoryData?.totalDestroy).toLocaleString() || 0 : '-',
-                      icon: '',
+                      value: destoryData ? (-1 * destoryData?.totalDestroy)?.toFixed(2)?.toLocaleString() || 0 : '-',
+                      icon: <HomeBurned/>,
                     },
                     {
                       title: t`KOLs Joined NESTFi`,
                       value: kols ? kols.toLocaleString() || 0 : '-',
-                      icon: '',
+                      icon: <HomeKols/>,
                     }
                   ].map((item, index) => (
-                    <Stack sx={(theme) => ({
+                    <Stack p={'20px'} sx={(theme) => ({
                       backgroundColor: theme.normal.bg1,
-                      borderRadius: '12px'
-                    })} direction={'row'}>
-                      <Stack key={index} spacing={'12px'} width={'100%'} p={'20px'} textAlign={"start"}>
+                      borderRadius: '12px',
+                      "svg": {
+                        width: '48px',
+                        height: '48px',
+                        "path": {
+                          fill: theme.normal.text0,
+                        }
+                      }
+                    })} direction={'row'} key={index} alignItems={"center"}>
+                      <Stack spacing={'12px'} width={'100%'} textAlign={"start"}>
                         <Box sx={(theme) => ({
                           fontWeight: "700",
                           fontSize: "28px",
@@ -176,12 +195,22 @@ const Home: FC = () => {
                           color: theme.normal.text2,
                         })}>{item.title}</Box>
                       </Stack>
-                      <Stack>
-
-                      </Stack>
+                      {item.icon}
                     </Stack>
                   ))
                 }
+              </Stack>
+            )
+          }
+          {
+            width >= WidthType.lg && (
+              <Stack sx={(theme) => ({
+                zIndex: 1,
+                background: `linear-gradient(180deg, ${theme.normal.bg1} 0%, ${theme.normal.bg0} 100%)`,
+                height: '80px',
+                width: '100%',
+                borderRadius: '80px 80px 0 0'
+              })}>
               </Stack>
             )
           }
@@ -212,7 +241,7 @@ const Home: FC = () => {
           </Stack>
         )
       }
-      <Stack width={'100%'}
+      <Stack width={'100%'} pt={['60', '60px', '60px', '0px']}
              spacing={['60px', '60px', '60px', '120px', '120px', '160px']}
              sx={(theme) => ({
                background: theme.normal.bg0,
@@ -220,11 +249,12 @@ const Home: FC = () => {
              alignItems={"center"}>
         {
           width >= WidthType.lg && (
-            <Stack width={'100%'} px={['20px', '20px', '20px', '40px',]} pt={['0', '0', '0', '80px']}
+            <Stack width={'100%'}
+                   px={['20px', '20px', '20px', '40px',]}
                    sx={(theme) => ({
-                     background: `linear-gradient(180deg, ${theme.normal.bg1} 0%, ${theme.normal.bg0} 100%)`
+                     background: theme.normal.bg0
                    })}
-                   borderRadius={"80px 80px 0 0"} alignItems={"center"}>
+                   alignItems={"center"}>
               <Stack direction={'row'} width={'100%'} maxWidth={'1600px'}
                      bgcolor={'rgba(234, 170, 0, 0.1)'}
                      borderRadius={'20px'} justifyContent={'space-between'}
@@ -269,22 +299,22 @@ const Home: FC = () => {
                     {
                       icon: <HomeIcon1/>,
                       title: t`Decentralized`,
-                      description: t`Trade directly from your wallet without the risk of misappropriating funds.`
+                      description: t`Trading only with smart contract.No third-party intervention.`
                     },
                     {
                       icon: <HomeIcon2/>,
                       title: t`Deflationary`,
-                      description: t`NEST\'s economic model is deflationary, thus settlement with $NEST will bring higher potential revenue.`,
+                      description: t`NEST's economic model is deflationary. The more users trade, the more $NEST will be burned.`,
                     },
                     {
                       icon: <HomeIcon3/>,
                       title: t`No Market Makers`,
-                      description: t`The smart contract is the only seller of the system, which means there are no market marking costs, no liquidity debt, no slippage costs in the system.`,
+                      description: t`The smart contract is the only seller of the system. No market marking costs and no liquidity debt.`,
                     },
                     {
                       icon: <HomeIcon4/>,
                       title: t`Infinite Liquidity`,
-                      description: t`The smart contract guarantees the infinite liquidity through burning and issuing $NEST. This keeps positions safe from temporary wicks caused by illiquidity.`,
+                      description: t`The smart contract guarantees infinite liquidity through burning and issuing $NEST.`,
                     }
                   ].map((item, index) => {
                     return (
@@ -310,7 +340,7 @@ const Home: FC = () => {
                             {item.title}
                           </Box>
                           <Box sx={(theme) => ({
-                            fontWeight: "400",
+                            fontWeight: ["400", '400', '400', '700'],
                             fontSize: "14px",
                             lineHeight: "20px",
                             color: theme.normal.text2,
@@ -356,19 +386,19 @@ const Home: FC = () => {
               {
                 [
                   {
-                    image: "",
+                    image: "/images/home_trade.png",
                     title: t`How to make your first trade?`,
                     description: t`Trade BTC, ETH and BNB with up to 1-50 leverage. Open a position with USDT or NEST.`,
                     link: ''
                   },
                   {
-                    image: "",
+                    image: "/images/home_follow.png",
                     title: t`How to follow others' trading strategies?`,
                     description: t`Follow excellent traders with only one click to catch your next trading opportunity.`,
                     link: ''
                   },
                   {
-                    image: "",
+                    image: "/images/home_KOL.png",
                     title: t`How to join affiliate program?`,
                     description: t`Boost your earning and influence by joining the NESTFi affiliate program.`,
                     link: ''
@@ -379,6 +409,9 @@ const Home: FC = () => {
                     borderRadius: "20px",
                     overflow: 'hidden',
                   })}>
+                    <Box>
+                      <img src={item.image} width={'100%'} alt={item.title}/>
+                    </Box>
                     <Stack p={'24px'} spacing={'12px'}>
                       <Stack sx={(theme) => ({
                         color: theme.normal.text0,
@@ -392,14 +425,16 @@ const Home: FC = () => {
                         lineHeight: ['20px', '22px'],
                         fontWeight: ['400', '700'],
                       })}>{item.description}</Stack>
-                      <Stack sx={(theme) => ({
-                        color: theme.normal.text2,
-                        fontSize: ['14px', '16px'],
-                        lineHeight: ['20px', '22px'],
-                        fontWeight: '400',
-                      })}>
-                        More {'>'}
-                      </Stack>
+                      <Link to={item.link}>
+                        <Stack sx={(theme) => ({
+                          color: theme.normal.text2,
+                          fontSize: ['14px', '16px'],
+                          lineHeight: ['20px', '22px'],
+                          fontWeight: '400',
+                        })}>
+                          More {'>'}
+                        </Stack>
+                      </Link>
                     </Stack>
                   </Stack>
                 ))
@@ -407,12 +442,16 @@ const Home: FC = () => {
             </Stack>
           </Stack>
         </Stack>
-        <Stack width={'100%'} px={['20px', '20px', '20px', '40px']} alignItems={"center"}>
+        <Stack width={'100%'} px={['20px', '20px', '20px', '40px']} alignItems={"center"} style={{
+          backgroundImage: 'url(/images/home_2.png)',
+          backgroundSize: 'cover',
+        }}>
           <Stack maxWidth={'1600px'} pb={'80px'} alignItems={"center"} width={'100%'}
                  direction={width <= WidthType.lg ? 'column-reverse' : 'row'}
                  spacing={['40px', '40px', '40px', '40px', '40px', '80px']}>
-            <Stack bgcolor={'red'} height={"500px"} width={'100%'}>
-            </Stack>
+            <Box width={'100%'}>
+              <img src={'/images/home_1.png'} width={'100%'} alt={''}/>
+            </Box>
             <Stack spacing={'12px'} alignItems={width <= WidthType.lg ? "center" : "start"}>
               <Box sx={(theme) => ({
                 fontSize: ['24px', "32px"],
@@ -434,14 +473,16 @@ const Home: FC = () => {
               swiftly, and effortlessly.`}
               </Box>
               <Box pt={'28px'}>
-                <MainButton
-                  title={t`Trade Now`}
-                  style={{
-                    width: '135px',
-                    height: '48px',
-                  }}
-                  onClick={() => {
-                  }}/>
+                <Link to={'/futures'}>
+                  <MainButton
+                    title={t`Trade Now`}
+                    style={{
+                      width: '135px',
+                      height: '48px',
+                    }}
+                    onClick={() => {
+                    }}/>
+                </Link>
               </Box>
             </Stack>
           </Stack>
