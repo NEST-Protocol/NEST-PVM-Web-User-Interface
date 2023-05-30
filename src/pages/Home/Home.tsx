@@ -387,18 +387,21 @@ const Home: FC = () => {
                 [
                   {
                     image: "/images/home_trade.png",
+                    image2: "/images/home_6.png",
                     title: t`How to make your first trade?`,
                     description: t`Trade BTC, ETH and BNB with up to 1-50 leverage. Open a position with USDT or NEST.`,
-                    link: ''
+                    link: 'How-to-make-your-first-trade-on-NESTFi'
                   },
                   {
                     image: "/images/home_follow.png",
+                    image2: "/images/home_5.png",
                     title: t`How to follow others' trading strategies?`,
                     description: t`Follow excellent traders with only one click to catch your next trading opportunity.`,
-                    link: ''
+                    link: 'How-to-duplicate-your-own-position'
                   },
                   {
                     image: "/images/home_KOL.png",
+                    image2: "/images/home_7.png",
                     title: t`How to join affiliate program?`,
                     description: t`Boost your earning and influence by joining the NESTFi affiliate program.`,
                     link: ''
@@ -409,8 +412,15 @@ const Home: FC = () => {
                     borderRadius: "20px",
                     overflow: 'hidden',
                   })}>
-                    <Box>
+                    <Box sx={(theme) => ({
+                      display: theme.isLight ? 'none' : 'block',
+                    })}>
                       <img src={item.image} width={'100%'} alt={item.title}/>
+                    </Box>
+                    <Box sx={(theme) => ({
+                      display: theme.isLight ? 'block' : 'none',
+                    })}>
+                      <img src={item.image2} width={'100%'} alt={item.title}/>
                     </Box>
                     <Stack p={'24px'} spacing={'12px'}>
                       <Stack sx={(theme) => ({
