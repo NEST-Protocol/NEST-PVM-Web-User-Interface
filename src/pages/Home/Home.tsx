@@ -390,14 +390,14 @@ const Home: FC = () => {
                     image2: "/images/home_6.png",
                     title: t`How to make your first trade?`,
                     description: t`Trade BTC, ETH and BNB with up to 1-50 leverage. Open a position with USDT or NEST.`,
-                    link: 'How-to-make-your-first-trade-on-NESTFi'
+                    link: 'https://www.nestprotocol.org/blogs/How-to-make-your-first-trade-on-NESTFi'
                   },
                   {
                     image: "/images/home_follow.png",
                     image2: "/images/home_5.png",
                     title: t`How to follow others' trading strategies?`,
                     description: t`Follow excellent traders with only one click to catch your next trading opportunity.`,
-                    link: 'How-to-duplicate-your-own-position'
+                    link: 'https://www.nestprotocol.org/blogs/How-to-duplicate-your-own-position'
                   },
                   {
                     image: "/images/home_KOL.png",
@@ -411,7 +411,10 @@ const Home: FC = () => {
                     background: theme.normal.bg1,
                     borderRadius: "20px",
                     overflow: 'hidden',
-                  })}>
+                    cursor: "pointer",
+                  })} onClick={() => {
+                    window.open(item.link, '_blank')
+                  }}>
                     <Box sx={(theme) => ({
                       display: theme.isLight ? 'none' : 'block',
                     })}>
