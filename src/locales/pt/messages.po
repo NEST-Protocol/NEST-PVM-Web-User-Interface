@@ -14,9 +14,6 @@ msgstr ""
 "Plural-Forms: \n"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
-msgid "* due to the complexity of financial data, there might be nuances and delay. Data displayed above is for reference only.We sincerely apologize for any inconvenience."
-msgstr ""
-
 #: src/pages/Dashboard/Referral/Referral.tsx
 msgid "* Due to the complexity of financial data, there might be nuances and delay. Data displayed above is for reference only.We sincerely apologize for any inconvenience."
 msgstr ""
@@ -309,7 +306,6 @@ msgstr "Modo escuro"
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Share/Head/NESTHead.tsx
-#: src/pages/Share/Head/NESTHead.tsx
 msgid "Dashboard"
 msgstr "Painel de controle"
 
@@ -417,10 +413,6 @@ msgstr "Github"
 msgid "History"
 msgstr "História"
 
-#: src/pages/Share/Head/NESTHead.tsx
-msgid "Home"
-msgstr "Página inicial"
-
 #: src/pages/Home/Home.tsx
 msgid "How to follow others' trading strategies?"
 msgstr ""
@@ -466,7 +458,7 @@ msgid "Insufficient NEST balance"
 msgstr "Saldo insuficiente de NEST"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
-msgid "Invitee transaction volume"
+msgid "Invitee Trading Volume"
 msgstr ""
 
 #: src/pages/Home/Home.tsx
