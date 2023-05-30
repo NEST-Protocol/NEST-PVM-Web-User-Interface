@@ -14,9 +14,6 @@ msgstr ""
 "Plural-Forms: \n"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
-msgid "* due to the complexity of financial data, there might be nuances and delay. Data displayed above is for reference only.We sincerely apologize for any inconvenience."
-msgstr ""
-
 #: src/pages/Dashboard/Referral/Referral.tsx
 msgid "* Due to the complexity of financial data, there might be nuances and delay. Data displayed above is for reference only.We sincerely apologize for any inconvenience."
 msgstr ""
@@ -309,7 +306,6 @@ msgstr "다크 모드"
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Share/Head/NESTHead.tsx
-#: src/pages/Share/Head/NESTHead.tsx
 msgid "Dashboard"
 msgstr "대시보드"
 
@@ -419,10 +415,6 @@ msgstr "깃허브"
 msgid "History"
 msgstr "역사"
 
-#: src/pages/Share/Head/NESTHead.tsx
-msgid "Home"
-msgstr "홈"
-
 #: src/pages/Home/Home.tsx
 msgid "How to follow others' trading strategies?"
 msgstr ""
@@ -468,7 +460,7 @@ msgid "Insufficient NEST balance"
 msgstr "NEST 잔액 부족"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
-msgid "Invitee transaction volume"
+msgid "Invitee Trading Volume"
 msgstr ""
 
 #: src/pages/Home/Home.tsx

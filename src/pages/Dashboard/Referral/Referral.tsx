@@ -553,7 +553,7 @@ const Referral = () => {
                   {
                     [
                       {
-                        title: t`Invitee transaction volume`,
+                        title: t`Invitee Trading Volume`,
                         value: overview?.value?.tradingVolume || 0,
                         unit: 'NEST',
                       },
@@ -706,7 +706,7 @@ const Referral = () => {
                   fontSize: '10px',
                   lineHeight: '14px',
                 })}>
-                  <Trans>* due to the complexity of financial data, there might be nuances and delay. Data displayed above
+                  <Trans>* Due to the complexity of financial data, there might be nuances and delay. Data displayed above
                     is for reference only.We sincerely apologize for any inconvenience.
                   </Trans>
                 </Stack>

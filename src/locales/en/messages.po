@@ -14,9 +14,6 @@ msgstr ""
 "Plural-Forms: \n"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
-msgid "* due to the complexity of financial data, there might be nuances and delay. Data displayed above is for reference only.We sincerely apologize for any inconvenience."
-msgstr "* due to the complexity of financial data, there might be nuances and delay. Data displayed above is for reference only.We sincerely apologize for any inconvenience."
-
 #: src/pages/Dashboard/Referral/Referral.tsx
 msgid "* Due to the complexity of financial data, there might be nuances and delay. Data displayed above is for reference only.We sincerely apologize for any inconvenience."
 msgstr "* Due to the complexity of financial data, there might be nuances and delay. Data displayed above is for reference only.We sincerely apologize for any inconvenience."
@@ -309,7 +306,6 @@ msgstr "Dark mode"
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Share/Head/NESTHead.tsx
-#: src/pages/Share/Head/NESTHead.tsx
 msgid "Dashboard"
 msgstr "Dashboard"
 
@@ -419,10 +415,6 @@ msgstr "Github"
 msgid "History"
 msgstr "History"
 
-#: src/pages/Share/Head/NESTHead.tsx
-msgid "Home"
-msgstr "Home"
-
 #: src/pages/Home/Home.tsx
 msgid "How to follow others' trading strategies?"
 msgstr "How to follow others' trading strategies?"
@@ -468,8 +460,8 @@ msgid "Insufficient NEST balance"
 msgstr "Insufficient NEST balance"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
-msgid "Invitee transaction volume"
-msgstr "Invitee transaction volume"
+msgid "Invitee Trading Volume"
+msgstr "Invitee Trading Volume"
 
 #: src/pages/Home/Home.tsx
 msgid "Join the NESTFi affiliate program and get commission on your referrals."
