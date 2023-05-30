@@ -65,11 +65,6 @@ msgstr "1. O preço de acionamento foi alcançado, mas não há tempo suficiente
 msgid "1. Uncertainty risk of income: The calculation method of NEST perpetual contract is different from the calculation method of perpetual contract of traditional centralized exchange. The NEST perpetual contract converts the future price of the asset based on the historical rate of return of the asset. Therefore, the asset price increases by 100% after the user opens a position. The user's income is not 100%. In extreme cases, even if the asset price is rising, your income may be negative."
 msgstr "1. Risco de incerteza de renda: O método de cálculo do contrato perpétuo NEST é diferente do método de cálculo do contrato perpétuo da troca centralizada tradicional. O contrato perpétuo NEST converte o preço futuro do ativo com base na taxa de retorno histórica do ativo. Portanto, o preço do ativo aumenta em 100% depois que o usuário abre uma posição. A renda do usuário não é de 100%. Em casos extremos, mesmo se o preço do ativo estiver subindo, sua renda pode ser negativa."
 
-#: src/pages/Home/Home.tsx
-#: src/pages/Home/Home.tsx
-msgid "100%"
-msgstr "100%"
-
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 msgid "2. No one picks up the execution order There may be slippage to execute at the trigger price."
 msgstr "2. Ninguém pega a ordem de execução. Pode haver deslizamento para executar no preço de acionamento."
@@ -125,6 +120,10 @@ msgstr "Lucro e Perda de 7 dias"
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 msgid "7 Days\\' PNL"
 msgstr "Lucro e Perda de 7 dias\\'"
+
+#: src/pages/Home/Home.tsx
+msgid "A beginner's guide to using NEST Fi"
+msgstr ""
 
 #: src/pages/Share/Modal/ConnectWalletModal.tsx
 msgid "about connecting wallets"
@@ -185,10 +184,6 @@ msgstr "Aprovação necessária"
 msgid "Approve"
 msgstr "Aprovar"
 
-#: src/pages/Home/Home.tsx
-msgid "as commission for KOLs."
-msgstr "como comissão para os KOLs."
-
 #: src/hooks/useSwap.ts
 msgid "balance"
 msgstr "saldo"
@@ -200,12 +195,14 @@ msgstr "saldo"
 msgid "Balance:"
 msgstr "Saldo:"
 
-#: src/pages/Home/Home.tsx
-#: src/pages/Home/Home.tsx
 #: src/pages/Home/Modal/ApplyModal.tsx
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Become a Trading KOL"
 msgstr "Torne-se um KOL de negociação"
+
+#: src/pages/Home/Home.tsx
+msgid "Boost your earning and influence by joining the NESTFi affiliate program."
+msgstr ""
 
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Channel link"
@@ -237,10 +234,6 @@ msgstr "Preço de fechamento"
 #: src/pages/Futures/Modal/CloseOrderNoticeModal.tsx
 msgid "Close Risk"
 msgstr "Risco de fechamento"
-
-#: src/pages/Home/Home.tsx
-msgid "commission for KOLs"
-msgstr "comissão para KOLs"
 
 #: src/hooks/useFuturesAdd.ts
 #: src/hooks/useFuturesClose.ts
@@ -336,6 +329,10 @@ msgstr ""
 msgid "Deflationary"
 msgstr "Deflacionário"
 
+#: src/pages/Home/Home.tsx
+msgid "Deflationary economic model. The more users trade, the more $NEST will be burned"
+msgstr ""
+
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "Disconnect"
 msgstr "Desligar"
@@ -362,6 +359,11 @@ msgstr "Editar ordem limitada"
 msgid "Edit Position"
 msgstr "Editar posição"
 
+#: src/pages/Home/Home.tsx
+#: src/pages/Home/Home.tsx
+msgid "Engage in"
+msgstr ""
+
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Enter Channel link"
 msgstr "Insira o link do canal"
@@ -377,6 +379,10 @@ msgstr "Preço de entrada"
 #: src/hooks/useNESTSnackBar.tsx
 msgid "Fail Request"
 msgstr "Pedido de reprovação"
+
+#: src/pages/Home/Home.tsx
+msgid "Follow excellent traders with only one click to catch your next trading opportunity."
+msgstr ""
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
@@ -415,9 +421,25 @@ msgstr "História"
 msgid "Home"
 msgstr "Página inicial"
 
+#: src/pages/Home/Home.tsx
+msgid "How to follow others' trading strategies?"
+msgstr ""
+
+#: src/pages/Home/Home.tsx
+msgid "How to join affiliate program?"
+msgstr ""
+
+#: src/pages/Home/Home.tsx
+msgid "How to make your first trade?"
+msgstr ""
+
 #: src/pages/Futures/MoreInfo.tsx
 msgid "How to Play"
 msgstr "Como jogar"
+
+#: src/pages/Home/Home.tsx
+msgid "How to Start?"
+msgstr ""
 
 #: src/pages/Futures/Modal/CloseOrderNoticeModal.tsx
 #: src/pages/Home/Modal/ApplyModal.tsx
@@ -447,6 +469,15 @@ msgstr "Saldo insuficiente de NEST"
 msgid "Invitee transaction volume"
 msgstr ""
 
+#: src/pages/Home/Home.tsx
+msgid "Join the NESTFi affiliate program and get commission on your referrals."
+msgstr ""
+
+#: src/pages/Home/Home.tsx
+#: src/pages/Home/Home.tsx
+msgid "KOLs Joined NESTFi"
+msgstr ""
+
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 #: src/pages/Share/Modal/LanguageModal.tsx
 #: src/pages/Share/Modal/LanguageModal.tsx
@@ -460,6 +491,12 @@ msgstr "Último"
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 msgid "Last Price"
 msgstr "Preço Atual"
+
+#: src/pages/Home/Home.tsx
+msgid ""
+"Leading cryptocurrency decentralized exchange. Trade BTC/USDT, ETH/USDT and BNB/USDT futures securely,\n"
+"swiftly, and effortlessly."
+msgstr ""
 
 #: src/pages/Share/Modal/ConnectWalletModal.tsx
 msgid "Learn more"
@@ -567,21 +604,12 @@ msgid "NEST White Paper"
 msgstr "White Paper NEST"
 
 #: src/pages/Home/Home.tsx
-msgid "NEST\\'s economic model is deflationary, thus settlement with $NEST will bring higher potential revenue."
-msgstr "O modelo econômico da NEST é deflacionário, portanto, a liquidação com $NEST trará receita potencialmente maior."
-
-#: src/pages/Home/Home.tsx
-#: src/pages/Home/Home.tsx
-msgid "NESTFi offers"
-msgstr "Ofertas NESTFi"
+msgid "NEST's economic model is deflationary. The more users trade, the more $NEST will be burned."
+msgstr ""
 
 #: src/pages/Home/Home.tsx
 msgid "NESTFi, A Next-Generation"
 msgstr "NESTFi, Uma Próxima Geração"
-
-#: src/pages/Home/Home.tsx
-msgid "NESTFi's economic model is deflationary, the more users trade, the more $NEST will be burned"
-msgstr "O modelo econômico da NESTFi é deflacionário, quanto mais usuários negociarem, mais $NEST serão queimados"
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "News"
@@ -610,11 +638,6 @@ msgstr "Nenhuma negociação ainda"
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "No Transactions yet"
 msgstr "Ainda não há transacções"
-
-#: src/pages/Home/Home.tsx
-#: src/pages/Home/Home.tsx
-msgid "Number of KOLs Joined NESTFi"
-msgstr "Número de KOLs que se juntaram à NESTFi"
 
 #: src/hooks/useFuturesNewOrder.ts
 msgid "Open"
@@ -855,12 +878,12 @@ msgid "Test BNB"
 msgstr "Teste BNB"
 
 #: src/pages/Home/Home.tsx
-msgid "The smart contract guarantees the infinite liquidity through burning and issuing $NEST. This keeps positions safe from temporary wicks caused by illiquidity."
-msgstr "O contrato inteligente garante a liquidez infinita por meio da queima e emissão de $NEST. Isso mantém as posições seguras contra oscilações temporárias causadas pela falta de liquidez."
+msgid "The smart contract guarantees infinite liquidity through burning and issuing $NEST."
+msgstr ""
 
 #: src/pages/Home/Home.tsx
-msgid "The smart contract is the only seller of the system, which means there are no market marking costs, no liquidity debt, no slippage costs in the system."
-msgstr "O contrato inteligente é o único vendedor do sistema, o que significa que não há custos de marcação de mercado, dívida de liquidez, nem custos de escorregamento no sistema."
+msgid "The smart contract is the only seller of the system. No market marking costs and no liquidity debt."
+msgstr ""
 
 #: src/components/NormalInput/NESTInputSelect.tsx
 msgid "The system will automatically convert USDT to NEST at market price for you to open your position, and you will also receive NEST at settlement."
@@ -903,8 +926,8 @@ msgstr "Hoje\\'s PNL"
 
 #: src/pages/Home/Home.tsx
 #: src/pages/Home/Home.tsx
-msgid "Total Burned"
-msgstr "Total queimado"
+msgid "Total Burned (NEST)"
+msgstr ""
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
@@ -938,6 +961,11 @@ msgstr "Total de lucros e perdas"
 msgid "Total Trading Volume"
 msgstr ""
 
+#: src/pages/Home/Home.tsx
+#: src/pages/Home/Home.tsx
+msgid "Total Trading Volume (NEST)"
+msgstr ""
+
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "Total Transaction Volume"
 msgstr "Volume total de transacções"
@@ -954,8 +982,16 @@ msgid "TP and SL price you set will trigger immediately."
 msgstr "O preço de TP e SL que você definiu será acionado imediatamente."
 
 #: src/pages/Home/Home.tsx
-msgid "Trade directly from your wallet without the risk of misappropriating funds."
-msgstr "Negocie diretamente de sua carteira sem o risco de desviar fundos."
+msgid "Trade BTC, ETH and BNB with up to 1-50 leverage. Open a position with USDT or NEST."
+msgstr ""
+
+#: src/pages/Home/Home.tsx
+msgid "Trade easily anytime and anywhere."
+msgstr ""
+
+#: src/pages/Home/Home.tsx
+msgid "Trade Now"
+msgstr ""
 
 #: src/pages/Swap/Swap.tsx
 msgid "Trade tokens in instant"
@@ -971,16 +1007,8 @@ msgid "Traded Invitees"
 msgstr ""
 
 #: src/pages/Home/Home.tsx
-msgid ""
-"trading\n"
-"fees"
+msgid "Trading only with smart contract.No third-party intervention."
 msgstr ""
-"negociação\n"
-"taxas"
-
-#: src/pages/Home/Home.tsx
-msgid "trading fees as"
-msgstr "comissões de negociação como"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 msgid "Trading Volume"
