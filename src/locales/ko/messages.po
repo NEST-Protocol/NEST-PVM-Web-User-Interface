@@ -65,11 +65,6 @@ msgstr "1. 트리거 가격이 도달했지만 실행에 충분한 시간이 없
 msgid "1. Uncertainty risk of income: The calculation method of NEST perpetual contract is different from the calculation method of perpetual contract of traditional centralized exchange. The NEST perpetual contract converts the future price of the asset based on the historical rate of return of the asset. Therefore, the asset price increases by 100% after the user opens a position. The user's income is not 100%. In extreme cases, even if the asset price is rising, your income may be negative."
 msgstr "1. 수익의 불확실성 위험: NEST 영구 계약의 계산 방법은 전통적인 중앙 집중식 거래소의 영구 계약의 계산 방법과 다릅니다. NEST 영구 계약은 자산의 과거 수익률을 기반으로 자산의 미래 가격을 변환합니다. 따라서 사용자가 포지션을 오픈한 후 자산 가격이 100% 상승합니다. 사용자의 수익은 100%가 아닙니다. 극단적인 경우 자산 가격이 상승하더라도 수익이 음수가 될 수 있습니다."
 
-#: src/pages/Home/Home.tsx
-#: src/pages/Home/Home.tsx
-msgid "100%"
-msgstr "100%"
-
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 msgid "2. No one picks up the execution order There may be slippage to execute at the trigger price."
 msgstr "2. 아무도 실행 주문을 수행하지 않으면 트리거 가격에서 실행될 수 있습니다."
@@ -125,6 +120,10 @@ msgstr "7 일 PNL"
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 msgid "7 Days\\' PNL"
 msgstr "7 일 PNL"
+
+#: src/pages/Home/Home.tsx
+msgid "A beginner's guide to using NEST Fi"
+msgstr ""
 
 #: src/pages/Share/Modal/ConnectWalletModal.tsx
 msgid "about connecting wallets"
@@ -185,10 +184,6 @@ msgstr "승인 필요함"
 msgid "Approve"
 msgstr "승인"
 
-#: src/pages/Home/Home.tsx
-msgid "as commission for KOLs."
-msgstr "KOL의 수수료로."
-
 #: src/hooks/useSwap.ts
 msgid "balance"
 msgstr "잔고"
@@ -200,12 +195,14 @@ msgstr "잔고"
 msgid "Balance:"
 msgstr "잔액:"
 
-#: src/pages/Home/Home.tsx
-#: src/pages/Home/Home.tsx
 #: src/pages/Home/Modal/ApplyModal.tsx
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Become a Trading KOL"
 msgstr "트레이딩 KOL이 되기"
+
+#: src/pages/Home/Home.tsx
+msgid "Boost your earning and influence by joining the NESTFi affiliate program."
+msgstr ""
 
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Channel link"
@@ -237,10 +234,6 @@ msgstr "청산 가격"
 #: src/pages/Futures/Modal/CloseOrderNoticeModal.tsx
 msgid "Close Risk"
 msgstr "청산 위험"
-
-#: src/pages/Home/Home.tsx
-msgid "commission for KOLs"
-msgstr "KOL 수수료"
 
 #: src/hooks/useFuturesAdd.ts
 #: src/hooks/useFuturesClose.ts
@@ -336,6 +329,10 @@ msgstr ""
 msgid "Deflationary"
 msgstr "물가 하락의"
 
+#: src/pages/Home/Home.tsx
+msgid "Deflationary economic model. The more users trade, the more $NEST will be burned"
+msgstr ""
+
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "Disconnect"
 msgstr "연결 해제"
@@ -362,6 +359,11 @@ msgstr "한도 주문 수정"
 msgid "Edit Position"
 msgstr "포지션 수정"
 
+#: src/pages/Home/Home.tsx
+#: src/pages/Home/Home.tsx
+msgid "Engage in"
+msgstr ""
+
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Enter Channel link"
 msgstr "채널 링크를 입력하세요"
@@ -377,6 +379,10 @@ msgstr "진입 가격"
 #: src/hooks/useNESTSnackBar.tsx
 msgid "Fail Request"
 msgstr "요청 실패"
+
+#: src/pages/Home/Home.tsx
+msgid "Follow excellent traders with only one click to catch your next trading opportunity."
+msgstr ""
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
@@ -417,9 +423,25 @@ msgstr "역사"
 msgid "Home"
 msgstr "홈"
 
+#: src/pages/Home/Home.tsx
+msgid "How to follow others' trading strategies?"
+msgstr ""
+
+#: src/pages/Home/Home.tsx
+msgid "How to join affiliate program?"
+msgstr ""
+
+#: src/pages/Home/Home.tsx
+msgid "How to make your first trade?"
+msgstr ""
+
 #: src/pages/Futures/MoreInfo.tsx
 msgid "How to Play"
 msgstr "플레이 방법"
+
+#: src/pages/Home/Home.tsx
+msgid "How to Start?"
+msgstr ""
 
 #: src/pages/Futures/Modal/CloseOrderNoticeModal.tsx
 #: src/pages/Home/Modal/ApplyModal.tsx
@@ -449,6 +471,15 @@ msgstr "NEST 잔액 부족"
 msgid "Invitee transaction volume"
 msgstr ""
 
+#: src/pages/Home/Home.tsx
+msgid "Join the NESTFi affiliate program and get commission on your referrals."
+msgstr ""
+
+#: src/pages/Home/Home.tsx
+#: src/pages/Home/Home.tsx
+msgid "KOLs Joined NESTFi"
+msgstr ""
+
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 #: src/pages/Share/Modal/LanguageModal.tsx
 #: src/pages/Share/Modal/LanguageModal.tsx
@@ -462,6 +493,12 @@ msgstr "마지막"
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 msgid "Last Price"
 msgstr "최종 가격"
+
+#: src/pages/Home/Home.tsx
+msgid ""
+"Leading cryptocurrency decentralized exchange. Trade BTC/USDT, ETH/USDT and BNB/USDT futures securely,\n"
+"swiftly, and effortlessly."
+msgstr ""
 
 #: src/pages/Share/Modal/ConnectWalletModal.tsx
 msgid "Learn more"
@@ -569,21 +606,12 @@ msgid "NEST White Paper"
 msgstr "NEST 화이트페이퍼"
 
 #: src/pages/Home/Home.tsx
-msgid "NEST\\'s economic model is deflationary, thus settlement with $NEST will bring higher potential revenue."
-msgstr "NEST의 경제 모델은 불안정하며, 따라서 $NEST로 결제하면 더 높은 수익이 발생합니다."
-
-#: src/pages/Home/Home.tsx
-#: src/pages/Home/Home.tsx
-msgid "NESTFi offers"
-msgstr "NESTFi는 다음을 제공합니다"
+msgid "NEST's economic model is deflationary. The more users trade, the more $NEST will be burned."
+msgstr ""
 
 #: src/pages/Home/Home.tsx
 msgid "NESTFi, A Next-Generation"
 msgstr "NESTFi, 차세대"
-
-#: src/pages/Home/Home.tsx
-msgid "NESTFi's economic model is deflationary, the more users trade, the more $NEST will be burned"
-msgstr "NESTFi의 경제 모델은 불충분하며, 더 많은 사용자가 거래할수록 더 많은 $NEST가 소멸됩니다"
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "News"
@@ -612,11 +640,6 @@ msgstr "아직 거래 없음"
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "No Transactions yet"
 msgstr "아직 거래 없음"
-
-#: src/pages/Home/Home.tsx
-#: src/pages/Home/Home.tsx
-msgid "Number of KOLs Joined NESTFi"
-msgstr "NESTFi에 가입한 KOL 수"
 
 #: src/hooks/useFuturesNewOrder.ts
 msgid "Open"
@@ -857,12 +880,12 @@ msgid "Test BNB"
 msgstr "테스트 BNB"
 
 #: src/pages/Home/Home.tsx
-msgid "The smart contract guarantees the infinite liquidity through burning and issuing $NEST. This keeps positions safe from temporary wicks caused by illiquidity."
-msgstr "$NEST를 소각하고 발행함으로써 스마트 계약은 무한한 유동성을 보장합니다. 이는 일시적인 유동성 때문에 발생하는 가격 변동으로부터 포지션을 안전하게 보호합니다."
+msgid "The smart contract guarantees infinite liquidity through burning and issuing $NEST."
+msgstr ""
 
 #: src/pages/Home/Home.tsx
-msgid "The smart contract is the only seller of the system, which means there are no market marking costs, no liquidity debt, no slippage costs in the system."
-msgstr "스마트 계약은 시스템의 유일한 판매자이므로 시스템 내에서 시장 메이킹 비용, 유동성 부채 및 슬리피지 비용이 없습니다."
+msgid "The smart contract is the only seller of the system. No market marking costs and no liquidity debt."
+msgstr ""
 
 #: src/components/NormalInput/NESTInputSelect.tsx
 msgid "The system will automatically convert USDT to NEST at market price for you to open your position, and you will also receive NEST at settlement."
@@ -905,8 +928,8 @@ msgstr "오늘의 PNL"
 
 #: src/pages/Home/Home.tsx
 #: src/pages/Home/Home.tsx
-msgid "Total Burned"
-msgstr "총 소각된 수량"
+msgid "Total Burned (NEST)"
+msgstr ""
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
@@ -940,6 +963,11 @@ msgstr "총 수익과 손실"
 msgid "Total Trading Volume"
 msgstr ""
 
+#: src/pages/Home/Home.tsx
+#: src/pages/Home/Home.tsx
+msgid "Total Trading Volume (NEST)"
+msgstr ""
+
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "Total Transaction Volume"
 msgstr "총 거래량"
@@ -956,8 +984,16 @@ msgid "TP and SL price you set will trigger immediately."
 msgstr "설정한 TP 및 SL 가격이 즉시 트리거됩니다."
 
 #: src/pages/Home/Home.tsx
-msgid "Trade directly from your wallet without the risk of misappropriating funds."
-msgstr "자산이 누출될 위험이 없이 월렛에서 직접 거래하세요."
+msgid "Trade BTC, ETH and BNB with up to 1-50 leverage. Open a position with USDT or NEST."
+msgstr ""
+
+#: src/pages/Home/Home.tsx
+msgid "Trade easily anytime and anywhere."
+msgstr ""
+
+#: src/pages/Home/Home.tsx
+msgid "Trade Now"
+msgstr ""
 
 #: src/pages/Swap/Swap.tsx
 msgid "Trade tokens in instant"
@@ -973,14 +1009,8 @@ msgid "Traded Invitees"
 msgstr ""
 
 #: src/pages/Home/Home.tsx
-msgid ""
-"trading\n"
-"fees"
-msgstr "거래 수수료"
-
-#: src/pages/Home/Home.tsx
-msgid "trading fees as"
-msgstr "거래 수수료"
+msgid "Trading only with smart contract.No third-party intervention."
+msgstr ""
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 msgid "Trading Volume"
