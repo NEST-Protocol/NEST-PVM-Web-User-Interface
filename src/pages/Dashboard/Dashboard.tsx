@@ -534,7 +534,7 @@ const Dashboard: FC = () => {
                 {item.actualMargin.toLocaleString("en-US", {
                   maximumFractionDigits: 2,
                 })}{" "}
-                USDT{" "}
+                NEST{" "}
                 <span>
                   {item.actualRate > 0 && "+"}
                   {item.actualRate}%
