@@ -21,12 +21,11 @@ import { NavMenuV2, NavMenuV3 } from "./NavMenuV2Base";
 import useNEST from "../../../hooks/useNEST";
 import { Trans } from "@lingui/macro";
 import LanguageMenu from "./LanguageMenu";
+import {red} from "@mui/material/colors";
 
 export const NavItems = [
-  { path: "/home", content: `Home`, icon: Home, l:<Trans>Home</Trans> },
   { path: "/futures", content: `Futures`, icon: FuturesIcon,l:<Trans>Futures</Trans> },
   { path: "/swap", content: `Swap`, icon: SwapExchangeSmall,l:<Trans>Swap</Trans> },
-  { path: "/dashboard", content: `Dashboard`, icon: Dashboard,l:<Trans>Dashboard</Trans> },
 ];
 
 const NESTHead: FC = () => {
@@ -279,7 +278,9 @@ const NESTHead: FC = () => {
         height={headHeight}
       >
         <LogoBox>
-          <NESTFiLogo />
+          <Link to={'/home'}>
+            <NESTFiLogo />
+          </Link>
         </LogoBox>
       </Stack>
 
