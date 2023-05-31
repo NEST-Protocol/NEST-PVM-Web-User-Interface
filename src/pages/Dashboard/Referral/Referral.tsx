@@ -135,7 +135,7 @@ const Referral = () => {
     }
     setTotalPage(Math.ceil(listData?.value?.length / 10))
     return listData?.value?.filter((item: any) => {
-      return item.walletAddress.toLowerCase().includes(searchText.toLowerCase())
+      return item.inviteeWalletAddress.toLowerCase().includes(searchText.toLowerCase())
     }).sort((a: any, b: any) => {
       if (sortItem.key === 'default') {
         return 0
@@ -168,10 +168,10 @@ const Referral = () => {
               lineHeight: '22px',
               color: theme.normal.text0,
               fontWeight: 700,
-            })}>{props.item?.walletAddress || '0'}</Box>
+            })}>{props.item?.inviteeWalletAddress || '0'}</Box>
             <Box
               onClick={() => {
-                copy(props.item?.walletAddress)
+                copy(props.item?.inviteeWalletAddress)
                 messageSnackBar(t`Copy Successfully`);
               }}
               sx={(theme) => ({
@@ -261,7 +261,7 @@ const Referral = () => {
           borderBottom: `1px solid ${theme.normal.border}`,
           paddingBottom: '8px',
         })}>
-          <Box>{props.item?.walletAddress}</Box>
+          <Box>{props.item?.inviteeWalletAddress}</Box>
           <Box sx={(theme) => ({
             "svg": {
               cursor: 'pointer',
@@ -273,7 +273,7 @@ const Referral = () => {
               },
             }
           })} onClick={() => {
-            copy(props.item?.walletAddress || "");
+            copy(props.item?.inviteeWalletAddress || "");
             messageSnackBar(t`Copy Successfully`);
           }}>
             <Copy/>
