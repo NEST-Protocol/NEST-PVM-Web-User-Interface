@@ -14,7 +14,7 @@ import ApplyModal from "./Modal/ApplyModal";
 import useWindowWidth, {WidthType} from "../../hooks/useWindowWidth";
 import useTheme from "../../hooks/useTheme";
 import {Link} from "react-router-dom";
-import {t} from '@lingui/macro'
+import {t, Trans} from '@lingui/macro'
 import useSWR from "swr";
 import Box from "@mui/material/Box";
 
@@ -104,7 +104,7 @@ const Home: FC = () => {
               textAlign: "center",
               zIndex: 1,
             })}>
-              {t`Deflationary economic model. The more users trade, the more $NEST will be burned`}
+              {t`Deflationary economic model. The more users trade, the more $NEST will be burned.`}
             </Box>
           </Stack>
           <Stack pb={['32px', '40px', '80px']} zIndex={1} px={['0', '20px', '40px']} pt={['32px', '40px']}>
@@ -229,8 +229,8 @@ const Home: FC = () => {
                    textAlign: 'center',
                    paddingX: '20px',
                  })}>
-            <Box>{t`Join the NESTFi affiliate program and get commission on your referrals.`}</Box>
-            <MainButton title={t`Engage in`} style={{
+            <Box>{t`Join NESTFi affiliate program and get commission on your referrals.`}</Box>
+            <MainButton title={t`Join`} style={{
               width: '125px',
               fontSize: '16px',
               fontWeight: "700",
@@ -241,7 +241,7 @@ const Home: FC = () => {
           </Stack>
         )
       }
-      <Stack width={'100%'} pt={['60', '60px', '60px', '0px']}
+      <Stack width={'100%'} pt={['60px', '60px', '60px', '0px']}
              spacing={['60px', '60px', '60px', '120px', '120px', '160px']}
              sx={(theme) => ({
                background: theme.normal.bg0,
@@ -267,8 +267,12 @@ const Home: FC = () => {
                   lineHeight: "40px",
                   color: theme.normal.text0,
                   width: '66%',
-                })}>Join the NESTFi affiliate program and get commission on your referrals.</Box>
-                <MainButton title={t`Engage in`} style={{
+                })}>
+                  <Trans>
+                    Join NESTFi affiliate program and get commission on your referrals.
+                  </Trans>
+                </Box>
+                <MainButton title={t`Join`} style={{
                   width: '125px',
                   height: '48px',
                   fontSize: '16px',
@@ -361,7 +365,7 @@ const Home: FC = () => {
           </Stack>
         </Stack>
         <Stack width={'100%'} px={['20px', '20px', '20px', '40px']} alignItems={"center"}>
-          <Stack maxWidth={'1600px'} width={'100%'} spacing={'40px'}>
+          <Stack maxWidth={'1600px'} width={'100%'} spacing={['20px', '20px', '20px', '40px']}>
             <Stack spacing={'12px'}>
               <Box sx={(theme) => ({
                 fontSize: ['24px', '32px'],
@@ -386,22 +390,22 @@ const Home: FC = () => {
               {
                 [
                   {
-                    image: "/images/home_trade.png",
-                    image2: "/images/home_6.png",
+                    image: "/images/home_10.svg",
+                    image2: "/images/home_6.svg",
                     title: t`How to make your first trade?`,
                     description: t`Trade BTC, ETH and BNB with up to 1-50 leverage. Open a position with USDT or NEST.`,
                     link: 'https://www.nestprotocol.org/blogs/How-to-make-your-first-trade-on-NESTFi'
                   },
                   {
-                    image: "/images/home_follow.png",
-                    image2: "/images/home_5.png",
-                    title: t`How to follow others' trading strategies?`,
-                    description: t`Follow excellent traders with only one click to catch your next trading opportunity.`,
+                    image: "/images/home_8.svg",
+                    image2: "/images/home_5.svg",
+                    title: t`How to duplicate your own position?`,
+                    description: t`NESTFi's new features enable you to open a position with a single click.`,
                     link: 'https://www.nestprotocol.org/blogs/How-to-duplicate-your-own-position'
                   },
                   {
-                    image: "/images/home_KOL.png",
-                    image2: "/images/home_7.png",
+                    image: "/images/home_9.svg",
+                    image2: "/images/home_7.svg",
                     title: t`How to join affiliate program?`,
                     description: t`Boost your earning and influence by joining the NESTFi affiliate program.`,
                     link: ''
@@ -413,7 +417,11 @@ const Home: FC = () => {
                     overflow: 'hidden',
                     cursor: "pointer",
                   })} onClick={() => {
-                    window.open(item.link, '_blank')
+                    if (item.link) {
+                      window.open(item.link, '_blank')
+                    } else {
+                      setOpenApplyModal(true)
+                    }
                   }}>
                     <Box sx={(theme) => ({
                       display: theme.isLight ? 'none' : 'block',
@@ -425,7 +433,7 @@ const Home: FC = () => {
                     })}>
                       <img src={item.image2} width={'100%'} alt={item.title}/>
                     </Box>
-                    <Stack p={'24px'} spacing={'12px'}>
+                    <Stack p={'24px'} spacing={'12px'} position={'relative'} height={'100%'}>
                       <Stack sx={(theme) => ({
                         color: theme.normal.text0,
                         fontSize: ['16px', '20px'],
@@ -437,15 +445,21 @@ const Home: FC = () => {
                         fontSize: ['14px', '16px'],
                         lineHeight: ['20px', '22px'],
                         fontWeight: ['400', '700'],
+                        paddingBottom: '20px',
                       })}>{item.description}</Stack>
                       <Link to={item.link}>
                         <Stack sx={(theme) => ({
+                          position: 'absolute',
+                          bottom: '20px',
                           color: theme.normal.text2,
                           fontSize: ['14px', '16px'],
                           lineHeight: ['20px', '22px'],
                           fontWeight: '400',
                         })}>
-                          More {'>'}
+                          <Trans>
+                            More
+                          </Trans>
+                          {' >'}
                         </Stack>
                       </Link>
                     </Stack>
