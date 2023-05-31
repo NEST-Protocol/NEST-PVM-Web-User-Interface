@@ -326,7 +326,7 @@ msgid "Deflationary"
 msgstr "Deflacionário"
 
 #: src/pages/Home/Home.tsx
-msgid "Deflationary economic model. The more users trade, the more $NEST will be burned"
+msgid "Deflationary economic model. The more users trade, the more $NEST will be burned."
 msgstr ""
 
 #: src/pages/Share/Modal/MyWalletModal.tsx
@@ -355,11 +355,6 @@ msgstr "Editar ordem limitada"
 msgid "Edit Position"
 msgstr "Editar posição"
 
-#: src/pages/Home/Home.tsx
-#: src/pages/Home/Home.tsx
-msgid "Engage in"
-msgstr ""
-
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Enter Channel link"
 msgstr "Insira o link do canal"
@@ -375,10 +370,6 @@ msgstr "Preço de entrada"
 #: src/hooks/useNESTSnackBar.tsx
 msgid "Fail Request"
 msgstr "Pedido de reprovação"
-
-#: src/pages/Home/Home.tsx
-msgid "Follow excellent traders with only one click to catch your next trading opportunity."
-msgstr ""
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
@@ -414,7 +405,7 @@ msgid "History"
 msgstr "História"
 
 #: src/pages/Home/Home.tsx
-msgid "How to follow others' trading strategies?"
+msgid "How to duplicate your own position?"
 msgstr ""
 
 #: src/pages/Home/Home.tsx
@@ -462,7 +453,13 @@ msgid "Invitee Trading Volume"
 msgstr ""
 
 #: src/pages/Home/Home.tsx
-msgid "Join the NESTFi affiliate program and get commission on your referrals."
+#: src/pages/Home/Home.tsx
+msgid "Join"
+msgstr ""
+
+#: src/pages/Home/Home.tsx
+#: src/pages/Home/Home.tsx
+msgid "Join NESTFi affiliate program and get commission on your referrals."
 msgstr ""
 
 #: src/pages/Home/Home.tsx
@@ -568,6 +565,7 @@ msgstr "MÁX"
 msgid "Minimum 50 NEST"
 msgstr "Mínimo de 50 NEST"
 
+#: src/pages/Home/Home.tsx
 #: src/pages/Share/Modal/ConnectWalletModal.tsx
 msgid "More"
 msgstr "Mais"
@@ -602,6 +600,10 @@ msgstr ""
 #: src/pages/Home/Home.tsx
 msgid "NESTFi, A Next-Generation"
 msgstr "NESTFi, Uma Próxima Geração"
+
+#: src/pages/Home/Home.tsx
+msgid "NESTFi's new features enable you to open a position with a single click."
+msgstr ""
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "News"
