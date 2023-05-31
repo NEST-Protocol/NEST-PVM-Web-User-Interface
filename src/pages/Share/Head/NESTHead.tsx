@@ -26,6 +26,7 @@ import {red} from "@mui/material/colors";
 export const NavItems = [
   { path: "/futures", content: `Futures`, icon: FuturesIcon,l:<Trans>Futures</Trans> },
   { path: "/swap", content: `Swap`, icon: SwapExchangeSmall,l:<Trans>Swap</Trans> },
+  { path: "/dashboard", content: `Dashboard`, icon: Dashboard,l:<Trans>Dashboard</Trans> },
 ];
 
 const NESTHead: FC = () => {
@@ -223,7 +224,7 @@ const NESTHead: FC = () => {
         },
       };
     });
-    const liList = NavItems.slice(0, 3).map((item, index) => {
+    const liList = NavItems.slice(0, 2).map((item, index) => {
       return (
         <Link
           className={`nav${
