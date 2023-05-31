@@ -416,6 +416,7 @@ const Home: FC = () => {
                     borderRadius: "20px",
                     overflow: 'hidden',
                     cursor: "pointer",
+                    width: '100%',
                   })} onClick={() => {
                     if (item.link) {
                       window.open(item.link, '_blank')
