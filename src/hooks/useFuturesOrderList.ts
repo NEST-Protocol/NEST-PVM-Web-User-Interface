@@ -1,6 +1,4 @@
-import {
-  FuturesV2Contract
-} from "./../contracts/contractAddress";
+import { FuturesV2Contract } from "./../contracts/contractAddress";
 import { BigNumber } from "ethers/lib/ethers";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import useNEST from "./useNEST";
@@ -153,7 +151,9 @@ function useFuturesOrderList() {
               item["sl"].toString().stringToBigNumber(18) ??
               BigNumber.from("0"),
             status: BigNumber.from("0"),
-            appends: BigNumber.from(item["append"].toString()),
+            appends:
+              item["append"].toString().stringToBigNumber(4) ??
+              BigNumber.from("0"),
             actualMargin: item["actualMargin"].toString(),
           };
         })
