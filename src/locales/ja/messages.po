@@ -306,6 +306,7 @@ msgstr "ダークモード"
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Share/Head/NESTHead.tsx
+#: src/pages/Share/Head/NESTHead.tsx
 msgid "Dashboard"
 msgstr "ダッシュボード"
 

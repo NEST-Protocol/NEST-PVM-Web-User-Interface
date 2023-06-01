@@ -33,8 +33,6 @@ export const ETH: AddressType = {
   5: String().zeroAddress,
   56: String().zeroAddress,
   97: String().zeroAddress,
-  280: String().zeroAddress,
-  534353: String().zeroAddress,
 };
 
 export const BTC: AddressType = {
@@ -42,8 +40,6 @@ export const BTC: AddressType = {
   5: String().zeroAddress,
   56: String().zeroAddress,
   97: String().zeroAddress,
-  280: String().zeroAddress,
-  534353: String().zeroAddress,
 };
 
 export const BNB: AddressType = {
@@ -51,8 +47,6 @@ export const BNB: AddressType = {
   5: String().zeroAddress,
   56: String().zeroAddress,
   97: String().zeroAddress,
-  280: String().zeroAddress,
-  534353: String().zeroAddress,
 };
 
 export const NESTToken: AddressType = {
@@ -60,8 +54,6 @@ export const NESTToken: AddressType = {
   5: "0xE2975bf674617bbCE57D2c72dCfC926716D8AC1F",
   56: "0x98f8669F6481EbB341B522fCD3663f79A3d1A6A7",
   97: "0x821edD79cc386E56FeC9DA5793b87a3A52373cdE",
-  280: "0xdB81715Af37D1d592deb65Ef89d1219a54097D21",
-  534353: "0x48e5c876074549cD4Bb7be0800154450b59b1eB6",
 };
 
 export const USDTToken: AddressType = {
@@ -69,8 +61,6 @@ export const USDTToken: AddressType = {
   5: "0x5cbb73B367FD69807381d06BC2041BEc86d8487d",
   56: "0x55d398326f99059ff775485246999027b3197955",
   97: "0xDd4A68D8236247BDC159F7C5fF92717AA634cBCc",
-  280: "0x6e13D150807D5CB3c6b03e9893C18932863288A1",
-  534353: "0x5cbb73B367FD69807381d06BC2041BEc86d8487d",
 };
 
 export const NHBTCToken: AddressType = {
@@ -78,8 +68,6 @@ export const NHBTCToken: AddressType = {
   5: String().zeroAddress,
   56: String().zeroAddress,
   97: "0xDda3801487a8Bb5ec19dD1E3510b6340BA435863",
-  280: String().zeroAddress,
-  534353: String().zeroAddress,
 };
 
 export const SwapContract: AddressType = {
@@ -87,8 +75,6 @@ export const SwapContract: AddressType = {
   5: "0x68b3465833fb72A70ecDF485E0e4C7bD8665Fc45",
   56: "0x10ED43C718714eb63d5aA57B78B54704E256024E",
   97: "0x7E9747Dd4a7390FCA7D86A400D14F031981Bc1E1",
-  280: "0x7e828A0401D56A55873aeD23439f03cFC258fBcC",
-  534353: "0xF50822767bEce47c277982d3fCFd39f0F561bf2E",
 };
 
 export const NESTFiVault: AddressType = {
@@ -96,8 +82,6 @@ export const NESTFiVault: AddressType = {
   5: String().zeroAddress,
   56: String().zeroAddress,
   97: "0x0649A02C15229Cb970CDcE456f9dd52248023520",
-  280: "0xdB710cBcD54Af196E1CA58E53d28B239321D101b",
-  534353: "0x3948F9ec377110327dE3Fb8176C8Ed46296d76bA",
 };
 
 export const FuturesV2Contract: AddressType = {
@@ -105,8 +89,6 @@ export const FuturesV2Contract: AddressType = {
   5: String().zeroAddress,
   56: "0x02904e03937E6a36D475025212859f1956BeC3f0",
   97: "0x476981D37FaA3bE8E8768E8E7d0d01625433126a",
-  280: "0x488c47d4275a6aBdC068b72E8156904F8C56aA2A",
-  534353: "0xBaC502281e9C6F9c947D9b2a9b0AE828EECe4164",
 };
 
 export const NESTRedeemContract: AddressType = {
@@ -114,8 +96,6 @@ export const NESTRedeemContract: AddressType = {
   5: String().zeroAddress,
   56: String().zeroAddress,
   97: "0x6E9c1edACe6Fc03f9666769f09D557b1383f7F57",
-  280: "0x6E9c1edACe6Fc03f9666769f09D557b1383f7F57",
-  534353: "0x6E9c1edACe6Fc03f9666769f09D557b1383f7F57",
 };
 
 const All18: DecimalsType = {
@@ -123,16 +103,12 @@ const All18: DecimalsType = {
   5: 18,
   56: 18,
   97: 18,
-  280: 18,
-  534353: 18,
 };
 const USDTDecimals: DecimalsType = {
   1: 6,
   5: 6,
   56: 18,
   97: 18,
-  280: 18,
-  534353: 18,
 };
 
 export const TokenList: Array<TokenType> = [
