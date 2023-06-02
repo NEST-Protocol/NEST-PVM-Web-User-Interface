@@ -142,6 +142,7 @@ msgstr "実際の証拠金"
 msgid "Add"
 msgstr "追加"
 
+#: src/pages/DirectPoster/DirectPoster.tsx
 #: src/pages/Swap/Swap.tsx
 msgid "Add NEST to wallet"
 msgstr "NESTをウォレットに追加"
@@ -187,6 +188,7 @@ msgstr "残高"
 
 #: src/components/NormalInput/NESTInput.tsx
 #: src/components/NormalInput/NESTInputSelect.tsx
+#: src/pages/DirectPoster/DirectPoster.tsx
 #: src/pages/Swap/Components/SwapInputItem.tsx
 #: src/pages/Swap/Components/SwapInputItem.tsx
 msgid "Balance:"
@@ -307,6 +309,7 @@ msgstr "ダークモード"
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Share/Head/NESTHead.tsx
 #: src/pages/Share/Head/NESTHead.tsx
+#: src/pages/Share/Head/NESTHead.tsx
 msgid "Dashboard"
 msgstr "ダッシュボード"
 
@@ -372,6 +375,10 @@ msgstr "参入価格"
 msgid "Fail Request"
 msgstr "リクエストに失敗しました"
 
+#: src/pages/Share/Head/NESTHead.tsx
+msgid "Faucet"
+msgstr ""
+
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
@@ -396,8 +403,13 @@ msgid "From"
 msgstr "送信元"
 
 #: src/pages/Share/Head/NESTHead.tsx
+#: src/pages/Share/Head/NESTHead.tsx
 msgid "Futures"
 msgstr "先物"
+
+#: src/pages/DirectPoster/DirectPoster.tsx
+msgid "GET"
+msgstr ""
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "Github"
@@ -873,6 +885,10 @@ msgstr "利益確定"
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "Test BNB"
 msgstr "テスト BNB"
+
+#: src/pages/DirectPoster/DirectPoster.tsx
+msgid "Testnet token"
+msgstr ""
 
 #: src/pages/Home/Home.tsx
 msgid "The smart contract guarantees infinite liquidity through burning and issuing $NEST."

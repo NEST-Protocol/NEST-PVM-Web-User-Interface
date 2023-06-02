@@ -16,6 +16,7 @@ import useWindowWidth from "../../hooks/useWindowWidth";
 import SwapInputItem, { SwapShowItem } from "./Components/SwapInputItem";
 import SwapSlippageModal from "./Components/SwapSlippageModal";
 import { Trans } from "@lingui/macro";
+import useNEST from "../../hooks/useNEST";
 
 const SwapBaseStack = styled(Stack)(({ theme }) => {
   return {
@@ -36,6 +37,7 @@ const SwapBaseStack = styled(Stack)(({ theme }) => {
 
 const Swap: FC = () => {
   const { isMobile } = useWindowWidth();
+  const { addNESTToWallet } = useNEST();
   const [openModal, setOpenModal] = useState(false);
   const {
     swapToken,
@@ -57,7 +59,6 @@ const Swap: FC = () => {
     tokenArray,
     selectToken,
     hideSetting,
-    addNESTToWallet,
   } = useSwap();
 
   const ExchangeIcon = styled("button")(({ theme }) => {
