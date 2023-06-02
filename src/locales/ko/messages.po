@@ -142,6 +142,7 @@ msgstr "실제 마진"
 msgid "Add"
 msgstr "추가"
 
+#: src/pages/DirectPoster/DirectPoster.tsx
 #: src/pages/Swap/Swap.tsx
 msgid "Add NEST to wallet"
 msgstr "월렛에 NEST 추가"
@@ -187,6 +188,7 @@ msgstr "잔고"
 
 #: src/components/NormalInput/NESTInput.tsx
 #: src/components/NormalInput/NESTInputSelect.tsx
+#: src/pages/DirectPoster/DirectPoster.tsx
 #: src/pages/Swap/Components/SwapInputItem.tsx
 #: src/pages/Swap/Components/SwapInputItem.tsx
 msgid "Balance:"
@@ -307,6 +309,7 @@ msgstr "다크 모드"
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Share/Head/NESTHead.tsx
 #: src/pages/Share/Head/NESTHead.tsx
+#: src/pages/Share/Head/NESTHead.tsx
 msgid "Dashboard"
 msgstr "대시보드"
 
@@ -372,6 +375,10 @@ msgstr "진입 가격"
 msgid "Fail Request"
 msgstr "요청 실패"
 
+#: src/pages/Share/Head/NESTHead.tsx
+msgid "Faucet"
+msgstr ""
+
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
@@ -396,8 +403,13 @@ msgid "From"
 msgstr "교환할 토큰"
 
 #: src/pages/Share/Head/NESTHead.tsx
+#: src/pages/Share/Head/NESTHead.tsx
 msgid "Futures"
 msgstr "선물"
+
+#: src/pages/DirectPoster/DirectPoster.tsx
+msgid "GET"
+msgstr ""
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "Github"
@@ -689,7 +701,7 @@ msgstr "인증을 위해 승인을 클릭하면 포지션을 열 수 있으며, 
 
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 msgid "Please note that \"Limit order\" or \"Stop order\" is not guaranteed to be executed. This may include, but is not limited to, the following cases."
-msgstr "\"지정가 주문\" 또는 \"역지정가 주문\"은 실행이 보장되지 않을 수 있습니다. 다음과 같은 경우가 포함될 수 있습니다."
+msgstr "\"지정가 주문\" 또는 \"스탑 오더 주문\"은 실행이 보장되지 않을 수 있습니다. 다음과 같은 경우가 포함될 수 있습니다."
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
@@ -825,17 +837,17 @@ msgstr "손절매"
 #: src/pages/Futures/Components/OrderTable.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 msgid "Stop Order"
-msgstr "역지정가 주문"
+msgstr "스탑 오더"
 
 #: src/hooks/useFuturesEditPosition.ts
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useFuturesNewOrder.ts
 msgid "Stop order fee(after execution) = 15 NEST"
-msgstr "역지정가 주문 수수료 = 15 NEST"
+msgstr "스탑 오더 주문 수수료 = 15 NEST"
 
 #: src/pages/Futures/NewOrder.tsx
 msgid "Stop-Limit"
-msgstr "역지정가"
+msgstr "예약 지정가"
 
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Submit successfully"
@@ -873,6 +885,10 @@ msgstr "익절"
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "Test BNB"
 msgstr "테스트 BNB"
+
+#: src/pages/DirectPoster/DirectPoster.tsx
+msgid "Testnet token"
+msgstr ""
 
 #: src/pages/Home/Home.tsx
 msgid "The smart contract guarantees infinite liquidity through burning and issuing $NEST."

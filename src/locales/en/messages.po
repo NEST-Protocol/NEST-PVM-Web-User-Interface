@@ -142,6 +142,7 @@ msgstr "Actual Margin"
 msgid "Add"
 msgstr "Add"
 
+#: src/pages/DirectPoster/DirectPoster.tsx
 #: src/pages/Swap/Swap.tsx
 msgid "Add NEST to wallet"
 msgstr "Add NEST to wallet"
@@ -187,6 +188,7 @@ msgstr "balance"
 
 #: src/components/NormalInput/NESTInput.tsx
 #: src/components/NormalInput/NESTInputSelect.tsx
+#: src/pages/DirectPoster/DirectPoster.tsx
 #: src/pages/Swap/Components/SwapInputItem.tsx
 #: src/pages/Swap/Components/SwapInputItem.tsx
 msgid "Balance:"
@@ -307,6 +309,7 @@ msgstr "Dark mode"
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Share/Head/NESTHead.tsx
 #: src/pages/Share/Head/NESTHead.tsx
+#: src/pages/Share/Head/NESTHead.tsx
 msgid "Dashboard"
 msgstr "Dashboard"
 
@@ -372,6 +375,10 @@ msgstr "Entry Price"
 msgid "Fail Request"
 msgstr "Fail Request"
 
+#: src/pages/Share/Head/NESTHead.tsx
+msgid "Faucet"
+msgstr "Faucet"
+
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
@@ -396,8 +403,13 @@ msgid "From"
 msgstr "From"
 
 #: src/pages/Share/Head/NESTHead.tsx
+#: src/pages/Share/Head/NESTHead.tsx
 msgid "Futures"
 msgstr "Futures"
+
+#: src/pages/DirectPoster/DirectPoster.tsx
+msgid "GET"
+msgstr "GET"
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "Github"
@@ -875,6 +887,10 @@ msgstr "Take Profit"
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "Test BNB"
 msgstr "Test BNB"
+
+#: src/pages/DirectPoster/DirectPoster.tsx
+msgid "Testnet token"
+msgstr "Testnet token"
 
 #: src/pages/Home/Home.tsx
 msgid "The smart contract guarantees infinite liquidity through burning and issuing $NEST."

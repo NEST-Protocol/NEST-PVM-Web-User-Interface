@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { createContainer } from "unstated-next";
 import {
   useAccount,
@@ -81,6 +81,22 @@ function useMainReact() {
   const navItems = useMemo(() => {
     return chainId === 534353 ? NavItemsForScroll : NavItems;
   }, [chainId]);
+  /**
+   * add nest
+   */
+  const addNESTToWallet = useCallback(async () => {
+    const token = "NEST".getToken();
+    if (chainId && token && account.connector) {
+      const imageURL =
+        "https://raw.githubusercontent.com/FORT-Protocol/Fort-Web-User-Interface/2e289cd29722576329fae529c2bfaa0a905f0148/src/components/Icon/svg/TokenNest.svg";
+      await account.connector.watchAsset?.({
+        address: token.address[chainId], // The address that the token is at.
+        symbol: "NEST", // A ticker symbol or shorthand, up to 5 chars.
+        decimals: 18, // The number of decimals in the token
+        image: imageURL, // A string url of the token logo
+      });
+    }
+  }, [account.connector, chainId]);
   return {
     showConnect,
     setShowConnect,
@@ -91,6 +107,7 @@ function useMainReact() {
     openedSharePosition,
     setOpenedSharePosition,
     navItems,
+    addNESTToWallet
   };
 }
 const NEST = createContainer(useMainReact);
