@@ -48,8 +48,13 @@ msgstr "> マーケット価格"
 msgid "> OPEN PRICE"
 msgstr "> オープン価格"
 
-#: src/components/NormalInput/NESTInput.tsx
 #: src/components/NormalInput/NESTInputSelect.tsx
+msgid ""
+"0 balance. Before trading, you can switch to \"Swap\" to exchange\n"
+"between USDT and NEST token."
+msgstr ""
+
+#: src/components/NormalInput/NESTInput.tsx
 msgid "0 balance. Before trading, you can switch to \"Swap\" to exchange between USDT and NEST token."
 msgstr "0残高です。取引をする前に、「スワップ」に切り替えてUSDTとNESTトークンを交換できます。"
 
@@ -250,6 +255,8 @@ msgstr "確認"
 #: src/hooks/useSwap.ts
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/DirectPoster/useDirectPoster.ts
+#: src/pages/DirectPoster/useDirectPoster.ts
 #: src/pages/Share/Head/ConnectButton.tsx
 #: src/pages/Share/Modal/ConnectWalletModal.tsx
 #: src/pages/Share/Modal/ConnectWalletModal.tsx
@@ -375,6 +382,7 @@ msgstr "参入価格"
 msgid "Fail Request"
 msgstr "リクエストに失敗しました"
 
+#: src/components/NormalInput/NESTInputSelect.tsx
 #: src/pages/Share/Head/NESTHead.tsx
 msgid "Faucet"
 msgstr ""
@@ -408,6 +416,7 @@ msgid "Futures"
 msgstr "先物"
 
 #: src/pages/DirectPoster/DirectPoster.tsx
+#: src/pages/DirectPoster/useDirectPoster.ts
 msgid "GET"
 msgstr ""
 
@@ -699,6 +708,10 @@ msgstr "プラットフォーム（Youtube、Telegram、Twitter、Instagram、Fa
 msgid "Please click Approve for authorization and then you can open the position, this process will consume some GAS."
 msgstr "承認をクリックして承認し、ポジションを開いてください。このプロセスには一定のGASが消費されます。"
 
+#: src/pages/DirectPoster/useDirectPoster.ts
+msgid "Please get ETH testnet token first"
+msgstr ""
+
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 msgid "Please note that \"Limit order\" or \"Stop order\" is not guaranteed to be executed. This may include, but is not limited to, the following cases."
 msgstr "「指値注文」または「ストップ注文」は実行されることが保証されていません。これには以下のケースが含まれる場合があります。"
@@ -887,7 +900,12 @@ msgid "Test BNB"
 msgstr "テスト BNB"
 
 #: src/pages/DirectPoster/DirectPoster.tsx
+#: src/pages/DirectPoster/useDirectPoster.ts
 msgid "Testnet token"
+msgstr ""
+
+#: src/components/NormalInput/NESTInputSelect.tsx
+msgid "The balance is 0. You can go to \"Faucet\" to get test token before trading."
 msgstr ""
 
 #: src/pages/Home/Home.tsx
