@@ -21,6 +21,7 @@ import NESTInputSelect from "../../components/NormalInput/NESTInputSelect";
 import ApproveNoticeModal from "./Modal/ApproveNoticeModal";
 import ErrorLabel from "../../components/ErrorLabel/ErrorLabel";
 import { Trans, t } from "@lingui/macro";
+import useNEST from "../../hooks/useNEST";
 
 interface FuturesNewOrderProps {
   price: FuturesPrice | undefined;
@@ -78,6 +79,7 @@ const FuturesNewOrder: FC<FuturesNewOrderProps> = ({ ...props }) => {
     lastPriceButton,
     stopErrorText,
   } = useFuturesNewOrder(props.price, props.tokenPair);
+  const { chainsData } = useNEST();
   const newOrderTabsData = useMemo(() => {
     return [
       <p>
@@ -88,11 +90,14 @@ const FuturesNewOrder: FC<FuturesNewOrderProps> = ({ ...props }) => {
       </p>,
     ];
   }, []);
+  const inputTokenArray = useMemo(() => {
+    return chainsData.chainId === 534353 ? [inputToken] : INPUT_TOKENS;
+  }, [chainsData.chainId, inputToken]);
   const inputNestAmount = useCallback(() => {
     return (
       <NESTInputSelect
         tokenName={inputToken}
-        tokenArray={INPUT_TOKENS}
+        tokenArray={inputTokenArray}
         selectToken={(tokenName: string) => {
           setInputAmount("");
           setInputToken(tokenName);
@@ -109,16 +114,17 @@ const FuturesNewOrder: FC<FuturesNewOrderProps> = ({ ...props }) => {
       />
     );
   }, [
-    inputToken,
     checkBalance,
     checkMinNEST,
-    showToSwap,
-    showBalance,
-    maxCallBack,
     inputAmount,
-    showNESTPrice,
+    inputToken,
+    inputTokenArray,
+    maxCallBack,
     setInputAmount,
     setInputToken,
+    showBalance,
+    showNESTPrice,
+    showToSwap,
   ]);
 
   const stopPrice = useCallback(() => {

@@ -108,14 +108,6 @@ export const NESTRedeemContract: AddressType = {
   534353: "0x6E9c1edACe6Fc03f9666769f09D557b1383f7F57",
 };
 
-export const NESTDirectPoster: AddressType = {
-  1: String().zeroAddress,
-  5: String().zeroAddress,
-  56: String().zeroAddress,
-  97: String().zeroAddress,
-  534353: "0xd9f3aA57576a6da995fb4B7e7272b4F16f04e681",
-}
-
 const All18: DecimalsType = {
   1: 18,
   5: 18,

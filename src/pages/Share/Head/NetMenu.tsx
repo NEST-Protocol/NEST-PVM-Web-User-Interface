@@ -1,7 +1,7 @@
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
 import { FC, useMemo, useState } from "react";
-import { BNBLogo, NetworkDownIcon } from "../../../components/icons";
+import { BNBLogo, NetworkDownIcon, ScrollIcon } from "../../../components/icons";
 import OneIconWithString from "../../../components/IconWithString/OneIconWithString";
 import SelectListMenu from "../../../components/SelectListMemu/SelectListMenu";
 import useNEST from "../../../hooks/useNEST";
@@ -40,7 +40,7 @@ const networkArray = [
   // { icon: ETHLogo, title: "Ethereum", chainId: 1 },
   // { icon: BNBLogo, title: "BNB", chainId: 56 },
   { icon: BNBLogo, title: "BNBTest", chainId: 97 },
-  { icon: BNBLogo, title: "ScrollTest", chainId: 534353 },
+  { icon: ScrollIcon, title: "ScrollTest", chainId: 534353 },
 ];
 
 const NetMenu: FC = () => {

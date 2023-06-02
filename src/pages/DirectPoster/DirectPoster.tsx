@@ -5,16 +5,27 @@ import Box from "@mui/material/Box";
 import { Trans, t } from "@lingui/macro";
 import { Add } from "../../components/icons";
 import useNEST from "../../hooks/useNEST";
+import { useDirectPoster } from "./useDirectPoster";
+import useWindowWidth from "../../hooks/useWindowWidth";
 
 const DirectPoster: FC = () => {
   const { addNESTToWallet } = useNEST();
+  const {isBigMobile} = useWindowWidth()
+  const {
+    showNESTBalance,
+    showETHBalance,
+    getNESTError,
+    mainButtonTitle,
+    mainButtonAction,
+  } = useDirectPoster();
   return (
     <Stack direction={"row"} justifyContent={"center"} alignItems={"center"}>
       <Stack
         spacing={"40px"}
-        marginTop={"80px"}
+        marginTop={isBigMobile ? "52px" : "80px"}
         maxWidth={"450px"}
         width={"100%"}
+        paddingX={"20px"}
       >
         <Stack
           paddingX={"20px"}
@@ -24,7 +35,15 @@ const DirectPoster: FC = () => {
             border: `1px solid ${theme.normal.border}`,
           })}
         >
-          <DirectPosterItem tokenName="ETH" callBack={() => {}} />
+          <DirectPosterItem
+            balance={showETHBalance}
+            error={undefined}
+            tokenName="ETH"
+            callBack={() => {
+              window.open("https://guide.scroll.io/user-guide/faucet");
+            }}
+            title={t`GET` + ` ETH ` + t`Testnet token`}
+          />
         </Stack>
         <Stack
           paddingX={"20px"}
@@ -35,7 +54,13 @@ const DirectPoster: FC = () => {
             border: `1px solid ${theme.normal.border}`,
           })}
         >
-          <DirectPosterItem tokenName="NEST" callBack={() => {}} />
+          <DirectPosterItem
+            balance={showNESTBalance}
+            error={getNESTError}
+            tokenName="NEST"
+            callBack={mainButtonAction}
+            title={mainButtonTitle}
+          />
           <Stack
             direction={"row"}
             justifyContent={"center"}
@@ -91,6 +116,9 @@ const DirectPoster: FC = () => {
 
 interface DirectPosterItemProps {
   tokenName: string;
+  balance: string;
+  title: string;
+  error: string | undefined;
   callBack: () => void;
 }
 
@@ -115,7 +143,7 @@ const DirectPosterItem: FC<DirectPosterItemProps> = ({ ...props }) => {
               color: theme.normal.text0,
             })}
           >
-            {t`GET` + ` ${props.tokenName} ` + t`Testnet token`}
+            {props.title}
           </Box>
           <Box
             sx={(theme) => ({
@@ -129,7 +157,9 @@ const DirectPosterItem: FC<DirectPosterItemProps> = ({ ...props }) => {
             })}
           >
             {t`Balance:`}
-            <span>- {props.tokenName}</span>
+            <span>
+              {props.balance} {props.tokenName}
+            </span>
           </Box>
         </Stack>
         <Box
@@ -142,6 +172,20 @@ const DirectPosterItem: FC<DirectPosterItemProps> = ({ ...props }) => {
           <TokenIcon />
         </Box>
       </Stack>
+      {props.error ? (
+        <Box
+          sx={(theme) => ({
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: `20px`,
+            color: theme.normal.danger,
+          })}
+        >
+          {props.error}
+        </Box>
+      ) : (
+        <></>
+      )}
       <MainButton
         title={`GET ${props.tokenName}`}
         onClick={props.callBack}
