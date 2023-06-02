@@ -27,7 +27,7 @@ interface NESTInputSelectProps {
 }
 
 const NESTInputSelect: FC<NESTInputSelectProps> = ({ ...props }) => {
-  const { account } = useNEST();
+  const { account, chainsData } = useNEST();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const handleClick = (event: any) => {
     setAnchorEl(event.currentTarget);
@@ -68,6 +68,24 @@ const NESTInputSelect: FC<NESTInputSelectProps> = ({ ...props }) => {
         );
       });
   }, [props]);
+  const noNESTText = useMemo(() => {
+    if (chainsData.chainId === 534353) {
+      return t`The balance is 0. You can go to "Faucet" to get test token before trading.`;
+    } else {
+      return t`0 balance. Before trading, you can switch to "Swap" to exchange
+      between USDT and NEST token.`;
+    }
+  }, [chainsData.chainId]);
+  const swapLink = useMemo(() => {
+    if (chainsData.chainId === 534353) {
+      return "/faucet";
+    } else {
+      return "/swap";
+    }
+  }, [chainsData.chainId]);
+  const swapTitle = useMemo(() => {
+    return chainsData.chainId === 534353 ? t`Faucet` : t`Swap`;
+  }, [chainsData.chainId]);
   const showBottom = useMemo(() => {
     if (props.tokenName === "USDT") {
       return (
@@ -143,13 +161,8 @@ const NESTInputSelect: FC<NESTInputSelectProps> = ({ ...props }) => {
             })}
             alignItems={"center"}
           >
-            <Link to={"/swap"}>
-              <Trans>
-                0 balance. Before trading, you can switch to "Swap" to exchange
-                between USDT and NEST token.
-              </Trans>
-            </Link>
-            <Link to={"/swap"}>
+            <Link to={swapLink}>{noNESTText}</Link>
+            <Link to={swapLink}>
               <NEXT />
             </Link>
           </Stack>
@@ -157,7 +170,7 @@ const NESTInputSelect: FC<NESTInputSelectProps> = ({ ...props }) => {
       }
     }
     return <></>;
-  }, [props.price, props.showToSwap, props.tokenName]);
+  }, [noNESTText, props.price, props.showToSwap, props.tokenName, swapLink]);
   return (
     <Stack
       justifyContent={"flex-start"}
@@ -251,7 +264,7 @@ const NESTInputSelect: FC<NESTInputSelectProps> = ({ ...props }) => {
           <></>
         ) : (
           <LinkButton>
-            <Link to={"/swap"}>
+            <Link to={swapLink}>
               <Stack
                 direction={"row"}
                 justifyContent={"flex-end"}
@@ -265,9 +278,7 @@ const NESTInputSelect: FC<NESTInputSelectProps> = ({ ...props }) => {
                   },
                 }}
               >
-                <p>
-                  <Trans>Swap</Trans>
-                </p>
+                <p>{swapTitle}</p>
                 <SwapExchangeSmall />
               </Stack>
             </Link>

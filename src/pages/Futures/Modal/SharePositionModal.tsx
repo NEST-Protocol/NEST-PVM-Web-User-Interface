@@ -188,36 +188,36 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
     }
   }, [setIsStop, sl, tp]);
   useEffect(() => {
-    if (nestBalance && usdtBalance && !setToken) {
-      if (
-        BigNumber.from("0").eq(nestBalance) &&
-        BigNumber.from("0").eq(usdtBalance)
-      ) {
-        setInputToken("USDT");
-        setInputAmount("200");
-      } else if (
-        !BigNumber.from("0").eq(nestBalance) &&
-        BigNumber.from("0").eq(usdtBalance)
-      ) {
-        setInputToken("NEST");
-        setInputAmount("10000");
-      } else if (uniSwapAmountOut && uniSwapAmountOut[1].lt(nestBalance)) {
-        setInputToken("NEST");
-        setInputAmount("10000");
-      } else {
-        setInputToken("USDT");
-        setInputAmount("200");
+    if (chainsData.chainId !== 534353) {
+      if (nestBalance && usdtBalance && !setToken) {
+        if (
+          BigNumber.from("0").eq(nestBalance) &&
+          BigNumber.from("0").eq(usdtBalance)
+        ) {
+          setInputToken("USDT");
+          setInputAmount("200");
+        } else if (
+          !BigNumber.from("0").eq(nestBalance) &&
+          BigNumber.from("0").eq(usdtBalance)
+        ) {
+          setInputToken("NEST");
+          setInputAmount("10000");
+        } else if (uniSwapAmountOut && uniSwapAmountOut[1].lt(nestBalance)) {
+          setInputToken("NEST");
+          setInputAmount("10000");
+        } else {
+          setInputToken("USDT");
+          setInputAmount("200");
+        }
+        setSetToken(true);
       }
+    } else {
+      setInputToken("NEST");
+      setInputAmount("100");
       setSetToken(true);
     }
-  }, [
-    nestBalance,
-    setInputAmount,
-    setInputToken,
-    setToken,
-    uniSwapAmountOut,
-    usdtBalance,
-  ]);
+    
+  }, [chainsData.chainId, nestBalance, setInputAmount, setInputToken, setToken, uniSwapAmountOut, usdtBalance]);
   const BaseBox = useMemo(() => {
     return styled(Box)(({ theme }) => {
       const width = isMobile ? "100%" : 450;
