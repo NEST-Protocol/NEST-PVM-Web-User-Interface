@@ -73,7 +73,7 @@ msgstr "2. 포지션 청산 리스크: NEST 영구 계약은 1-20 배 레버리�
 
 #: src/pages/Futures/ExchangeTVChart.tsx
 msgid "24h Change"
-msgstr "24시간 종가"
+msgstr "24시간 변화량"
 
 #: src/pages/Futures/ExchangeTVChart.tsx
 msgid "24h High"
@@ -92,11 +92,11 @@ msgstr "3. NEST 토큰 가격 변동 리스크: 마진과 최종 이익과 손�
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 msgid "30 Days' PNL"
-msgstr "30 일 수익/손실"
+msgstr "30 일 손익"
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 msgid "30 Days\\' PNL"
-msgstr "30 일 수익/손실"
+msgstr "30 일 손익"
 
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 #: src/pages/Futures/Modal/ProtocolModal.tsx
@@ -112,11 +112,11 @@ msgstr "5. 스마트 계약 위험: 스마트 계약에 치명적인 알 수 없
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 msgid "7 Days' PNL"
-msgstr "7 일 수익/손실"
+msgstr "7 일 손익"
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 msgid "7 Days\\' PNL"
-msgstr "7 일 수익/손실"
+msgstr "7 일 손익"
 
 #: src/pages/Home/Home.tsx
 msgid "A beginner's guide to using NEST Fi"
@@ -195,7 +195,7 @@ msgstr "잔액:"
 #: src/pages/Home/Modal/ApplyModal.tsx
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Become a Trading KOL"
-msgstr "트레이딩 KOL이 되기"
+msgstr "트레이딩 인플루언서가 되기"
 
 #: src/pages/Home/Home.tsx
 msgid "Boost your earning and influence by joining the NESTFi affiliate program."
@@ -324,7 +324,7 @@ msgstr "기본값"
 
 #: src/pages/Home/Home.tsx
 msgid "Deflationary"
-msgstr "물가 하락의"
+msgstr "물가 하락형"
 
 #: src/pages/Home/Home.tsx
 msgid "Deflationary economic model. The more users trade, the more $NEST will be burned."
@@ -393,7 +393,7 @@ msgstr "NEST 프로토콜 영구 계약을 사용하는 사용자/스마트 계�
 
 #: src/pages/Swap/Components/SwapInputItem.tsx
 msgid "From"
-msgstr "보낸 사람"
+msgstr "교환할 토큰"
 
 #: src/pages/Share/Head/NESTHead.tsx
 msgid "Futures"
@@ -405,7 +405,7 @@ msgstr "깃허브"
 
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "History"
-msgstr "역사"
+msgstr "주문 내역"
 
 #: src/pages/Home/Home.tsx
 msgid "How to duplicate your own position?"
@@ -468,7 +468,7 @@ msgstr "NESTFi 제휴 프로그램에 가입하고 추천에 대한 수수료를
 #: src/pages/Home/Home.tsx
 #: src/pages/Home/Home.tsx
 msgid "KOLs Joined NESTFi"
-msgstr "NESTFi에 KOL이 합류하였습니다."
+msgstr "NESTFi에 합류한 인플루언서"
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 #: src/pages/Share/Modal/LanguageModal.tsx
@@ -668,7 +668,7 @@ msgstr "오픈 가격"
 #: src/pages/Futures/Components/OrderTable.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 msgid "Operate"
-msgstr "실행"
+msgstr "주문"
 
 #: src/pages/Futures/OrderList.tsx
 msgid "Order"
@@ -901,7 +901,7 @@ msgstr "확인 및 종료하십시오."
 
 #: src/pages/Swap/Components/SwapInputItem.tsx
 msgid "To(Estimated)"
-msgstr "대상(예상)"
+msgstr "받을 토큰(예상)"
 
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "Today Burned"
@@ -915,11 +915,11 @@ msgstr "오늘 거래량"
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 msgid "Today's PNL"
-msgstr "오늘의 수익/손실"
+msgstr "오늘의 손익"
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 msgid "Today\\'s PNL"
-msgstr "오늘의 수익/손실"
+msgstr "오늘의 손익"
 
 #: src/pages/Home/Home.tsx
 #: src/pages/Home/Home.tsx
