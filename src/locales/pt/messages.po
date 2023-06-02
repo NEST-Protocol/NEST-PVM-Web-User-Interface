@@ -48,8 +48,13 @@ msgstr "> PREÇO DE MERCADO"
 msgid "> OPEN PRICE"
 msgstr "> PREÇO DE ABERTURA"
 
-#: src/components/NormalInput/NESTInput.tsx
 #: src/components/NormalInput/NESTInputSelect.tsx
+msgid ""
+"0 balance. Before trading, you can switch to \"Swap\" to exchange\n"
+"between USDT and NEST token."
+msgstr ""
+
+#: src/components/NormalInput/NESTInput.tsx
 msgid "0 balance. Before trading, you can switch to \"Swap\" to exchange between USDT and NEST token."
 msgstr "Saldo 0. Antes de negociar, você pode trocar para \"troca\" para trocar entre USDT e token NEST."
 
@@ -250,6 +255,8 @@ msgstr "Confirmar"
 #: src/hooks/useSwap.ts
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/DirectPoster/useDirectPoster.ts
+#: src/pages/DirectPoster/useDirectPoster.ts
 #: src/pages/Share/Head/ConnectButton.tsx
 #: src/pages/Share/Modal/ConnectWalletModal.tsx
 #: src/pages/Share/Modal/ConnectWalletModal.tsx
@@ -375,6 +382,7 @@ msgstr "Preço de entrada"
 msgid "Fail Request"
 msgstr "Pedido de reprovação"
 
+#: src/components/NormalInput/NESTInputSelect.tsx
 #: src/pages/Share/Head/NESTHead.tsx
 msgid "Faucet"
 msgstr ""
@@ -406,6 +414,7 @@ msgid "Futures"
 msgstr "Futuros"
 
 #: src/pages/DirectPoster/DirectPoster.tsx
+#: src/pages/DirectPoster/useDirectPoster.ts
 msgid "GET"
 msgstr ""
 
@@ -699,6 +708,10 @@ msgstr "Plataforma (Youtube, Telegram, Twitter, Instagram, Facebook, Tiktok, out
 msgid "Please click Approve for authorization and then you can open the position, this process will consume some GAS."
 msgstr "Clique em Aprovar para obter autorização e, em seguida, pode abrir a posição, este processo consumirá algum GAS."
 
+#: src/pages/DirectPoster/useDirectPoster.ts
+msgid "Please get ETH testnet token first"
+msgstr ""
+
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 msgid "Please note that \"Limit order\" or \"Stop order\" is not guaranteed to be executed. This may include, but is not limited to, the following cases."
 msgstr "Tenha em atenção que a execução de uma \"ordem de limite\" ou \"ordem de paragem\" não é garantida. Isto pode incluir, mas não se limita a, os seguintes casos."
@@ -887,7 +900,12 @@ msgid "Test BNB"
 msgstr "Teste BNB"
 
 #: src/pages/DirectPoster/DirectPoster.tsx
+#: src/pages/DirectPoster/useDirectPoster.ts
 msgid "Testnet token"
+msgstr ""
+
+#: src/components/NormalInput/NESTInputSelect.tsx
+msgid "The balance is 0. You can go to \"Faucet\" to get test token before trading."
 msgstr ""
 
 #: src/pages/Home/Home.tsx

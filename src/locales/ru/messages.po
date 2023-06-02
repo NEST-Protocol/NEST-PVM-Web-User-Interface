@@ -48,8 +48,13 @@ msgstr "> РЫНОЧНАЯ ЦЕНА"
 msgid "> OPEN PRICE"
 msgstr "> ЦЕНА ОТКРЫТИЯ"
 
-#: src/components/NormalInput/NESTInput.tsx
 #: src/components/NormalInput/NESTInputSelect.tsx
+msgid ""
+"0 balance. Before trading, you can switch to \"Swap\" to exchange\n"
+"between USDT and NEST token."
+msgstr ""
+
+#: src/components/NormalInput/NESTInput.tsx
 msgid "0 balance. Before trading, you can switch to \"Swap\" to exchange between USDT and NEST token."
 msgstr "0 баланса. Перед торговлей вы можете переключиться на \"Обменять\", чтобы обмениваться между токенами USDT и NEST."
 
@@ -250,6 +255,8 @@ msgstr "Подтвердить"
 #: src/hooks/useSwap.ts
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/DirectPoster/useDirectPoster.ts
+#: src/pages/DirectPoster/useDirectPoster.ts
 #: src/pages/Share/Head/ConnectButton.tsx
 #: src/pages/Share/Modal/ConnectWalletModal.tsx
 #: src/pages/Share/Modal/ConnectWalletModal.tsx
@@ -375,6 +382,7 @@ msgstr "Цена входа"
 msgid "Fail Request"
 msgstr "Не удалось выполнить запрос"
 
+#: src/components/NormalInput/NESTInputSelect.tsx
 #: src/pages/Share/Head/NESTHead.tsx
 msgid "Faucet"
 msgstr ""
@@ -408,6 +416,7 @@ msgid "Futures"
 msgstr "Фьючерсы"
 
 #: src/pages/DirectPoster/DirectPoster.tsx
+#: src/pages/DirectPoster/useDirectPoster.ts
 msgid "GET"
 msgstr ""
 
@@ -699,6 +708,10 @@ msgstr "Платформа (Youtube, Telegram, Twitter, Instagram, Facebook, Tik
 msgid "Please click Approve for authorization and then you can open the position, this process will consume some GAS."
 msgstr "Пожалуйста, нажмите \"Approve\" для авторизации, затем вы можете открыть позицию. Этот процесс потребует некоторого количества GAS."
 
+#: src/pages/DirectPoster/useDirectPoster.ts
+msgid "Please get ETH testnet token first"
+msgstr ""
+
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 msgid "Please note that \"Limit order\" or \"Stop order\" is not guaranteed to be executed. This may include, but is not limited to, the following cases."
 msgstr "Обратите внимание, что «лимитный ордер» или «стоп-ордер» не гарантируют исполнение. Это может включать, но не ограничивается следующими случаями."
@@ -887,7 +900,12 @@ msgid "Test BNB"
 msgstr "Тест BNB"
 
 #: src/pages/DirectPoster/DirectPoster.tsx
+#: src/pages/DirectPoster/useDirectPoster.ts
 msgid "Testnet token"
+msgstr ""
+
+#: src/components/NormalInput/NESTInputSelect.tsx
+msgid "The balance is 0. You can go to \"Faucet\" to get test token before trading."
 msgstr ""
 
 #: src/pages/Home/Home.tsx

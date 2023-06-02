@@ -48,8 +48,15 @@ msgstr "> MARKET PRICE"
 msgid "> OPEN PRICE"
 msgstr "> OPEN PRICE"
 
-#: src/components/NormalInput/NESTInput.tsx
 #: src/components/NormalInput/NESTInputSelect.tsx
+msgid ""
+"0 balance. Before trading, you can switch to \"Swap\" to exchange\n"
+"between USDT and NEST token."
+msgstr ""
+"0 balance. Before trading, you can switch to \"Swap\" to exchange\n"
+"between USDT and NEST token."
+
+#: src/components/NormalInput/NESTInput.tsx
 msgid "0 balance. Before trading, you can switch to \"Swap\" to exchange between USDT and NEST token."
 msgstr "0 balance. Before trading, you can switch to \"Swap\" to exchange between USDT and NEST token."
 
@@ -250,6 +257,8 @@ msgstr "Confirm"
 #: src/hooks/useSwap.ts
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/DirectPoster/useDirectPoster.ts
+#: src/pages/DirectPoster/useDirectPoster.ts
 #: src/pages/Share/Head/ConnectButton.tsx
 #: src/pages/Share/Modal/ConnectWalletModal.tsx
 #: src/pages/Share/Modal/ConnectWalletModal.tsx
@@ -375,6 +384,7 @@ msgstr "Entry Price"
 msgid "Fail Request"
 msgstr "Fail Request"
 
+#: src/components/NormalInput/NESTInputSelect.tsx
 #: src/pages/Share/Head/NESTHead.tsx
 msgid "Faucet"
 msgstr "Faucet"
@@ -408,6 +418,7 @@ msgid "Futures"
 msgstr "Futures"
 
 #: src/pages/DirectPoster/DirectPoster.tsx
+#: src/pages/DirectPoster/useDirectPoster.ts
 msgid "GET"
 msgstr "GET"
 
@@ -701,6 +712,10 @@ msgstr "Platform (Youtube, Telegram, Twitter, Instagram, Facebook, Tiktok, Other
 msgid "Please click Approve for authorization and then you can open the position, this process will consume some GAS."
 msgstr "Please click Approve for authorization and then you can open the position, this process will consume some GAS."
 
+#: src/pages/DirectPoster/useDirectPoster.ts
+msgid "Please get ETH testnet token first"
+msgstr "Please get ETH testnet token first"
+
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 msgid "Please note that \"Limit order\" or \"Stop order\" is not guaranteed to be executed. This may include, but is not limited to, the following cases."
 msgstr "Please note that \"Limit order\" or \"Stop order\" is not guaranteed to be executed. This may include, but is not limited to, the following cases."
@@ -889,8 +904,13 @@ msgid "Test BNB"
 msgstr "Test BNB"
 
 #: src/pages/DirectPoster/DirectPoster.tsx
+#: src/pages/DirectPoster/useDirectPoster.ts
 msgid "Testnet token"
 msgstr "Testnet token"
+
+#: src/components/NormalInput/NESTInputSelect.tsx
+msgid "The balance is 0. You can go to \"Faucet\" to get test token before trading."
+msgstr "The balance is 0. You can go to \"Faucet\" to get test token before trading."
 
 #: src/pages/Home/Home.tsx
 msgid "The smart contract guarantees infinite liquidity through burning and issuing $NEST."
