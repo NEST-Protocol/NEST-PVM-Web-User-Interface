@@ -38,8 +38,9 @@ const NetButton = styled("button")(({ theme }) => {
 
 const networkArray = [
   // { icon: ETHLogo, title: "Ethereum", chainId: 1 },
-  { icon: BNBLogo, title: "BNB", chainId: 56 },
-  // { icon: BNBLogo, title: "BNBTest", chainId: 97 },
+  // { icon: BNBLogo, title: "BNB", chainId: 56 },
+  { icon: BNBLogo, title: "BNBTest", chainId: 97 },
+  { icon: BNBLogo, title: "ScrollTest", chainId: 534353 },
 ];
 
 const NetMenu: FC = () => {

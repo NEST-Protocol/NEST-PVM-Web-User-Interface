@@ -1,7 +1,6 @@
 import { FC, useMemo, useState } from "react";
 import { styled } from "@mui/material/styles";
 import Stack from "@mui/material/Stack";
-import { NavItems } from "./NESTHead";
 import { Link, useLocation } from "react-router-dom";
 import { Close, MobileListIcon, NEXT } from "../../../components/icons";
 import NESTLine from "../../../components/NESTLine";
@@ -104,9 +103,9 @@ interface NavMenuV2BaseProps {
 const NavMenuV2Base: FC<NavMenuV2BaseProps> = ({ ...props }) => {
   const { nowTheme, changeTheme } = useTheme();
   const [showLanModal, setShowLanModal] = useState(false);
-  const { chainsData } = useNEST();
+  const { chainsData, navItems } = useNEST();
   const location = useLocation();
-  const navList = NavItems.map((item, index) => {
+  const navList = navItems.map((item, index) => {
     const Icon = item.icon;
     return (
       <Stack

@@ -28,9 +28,35 @@ import {
 } from "../components/icons";
 import useTheme from "../hooks/useTheme";
 
+const scrollAlphaTestnet = {
+  id: 534353,
+  name: "scroll Alpha Testnet",
+  network: "scroll Alpha Testnet",
+  nativeCurrency: {
+    name: "Ether",
+    symbol: "ETH",
+    decimals: 18,
+  },
+  rpcUrls: {
+    default: {
+      http: ["https://alpha-rpc.scroll.io/l2"],
+    },
+    public: {
+      http: ["https://alpha-rpc.scroll.io/l2"],
+    },
+  },
+  blockExplorers: {
+    default: {
+      name: "scrollExplorer",
+      url: "https://blockscout.scroll.io/",
+    },
+  },
+  testnet: true,
+};
+
 const { chains, provider, webSocketProvider } = configureChains(
-  [bsc],
-  // [bscTestnet],
+  // [bsc],
+  [bscTestnet, scrollAlphaTestnet],
   [
     infuraProvider({ apiKey: "be0a9832394640b090fceb2b2107993c" }),
     jsonRpcProvider({
@@ -42,6 +68,10 @@ const { chains, provider, webSocketProvider } = configureChains(
         } else if (chain.id === 56) {
           return {
             http: "https://bsc-dataseed1.defibit.io/",
+          };
+        } else if (chain.id === 534353) {
+          return {
+            http: "https://alpha-rpc.scroll.io/l2",
           };
         } else {
           return {

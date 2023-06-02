@@ -1,8 +1,8 @@
-import { FC, useCallback, useEffect } from "react";
+import { FC, useCallback, useEffect, useMemo } from "react";
 import Stack from "@mui/material/Stack";
 import NESTHead from "./Share/Head/NESTHead";
 import NESTFoot from "./Share/Foot/NESTFoot";
-import TestTheme from "./demo/testTheme";
+// import TestTheme from "./demo/testTheme";
 import { HashRouter, Navigate, Route, Routes } from "react-router-dom";
 import loadable from "@loadable/component";
 import { styled } from "@mui/material/styles";
@@ -15,6 +15,7 @@ const FuturesPage = loadable(() => import("./Futures/Futures"));
 const SwapPage = loadable(() => import("./Swap/Swap"));
 const DashboardPage = loadable(() => import("./Dashboard/Dashboard"));
 const ReferralPage = loadable(() => import("./Dashboard/Referral/Referral"));
+const DirectPosterPage = loadable(() => import("./DirectPoster/DirectPoster"));
 const App: FC = () => {
   const { headHeight, isBigMobile } = useWindowWidth();
   const { account, chainsData } = useNEST();
@@ -93,6 +94,13 @@ const App: FC = () => {
       background: theme.normal.bg0,
     };
   });
+  const swapOrDirectPoster = useMemo(() => {
+    if (chainsData.chainId === 534353) {
+      return <Route path="/faucet" element={<DirectPosterPage />} />;
+    } else {
+      return <Route path="/swap" element={<SwapPage />} />;
+    }
+  }, [chainsData.chainId]);
   return (
     <Stack spacing={0}>
       <HashRouter>
@@ -101,7 +109,7 @@ const App: FC = () => {
           <Routes>
             <Route path="/home" element={<HomePage />} />
             <Route path="/futures" element={<FuturesPage />} />
-            <Route path="/swap" element={<SwapPage />} />
+            {swapOrDirectPoster}
             <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/dashboard/referral" element={<ReferralPage />} />
             <Route path="*" element={<Navigate to="/home" />} />
