@@ -5,7 +5,6 @@ import {
   Dark,
   Dashboard,
   FuturesIcon,
-  Home,
   Light,
   NESTFiLogo,
   SwapExchangeSmall,
@@ -21,24 +20,54 @@ import { NavMenuV2, NavMenuV3 } from "./NavMenuV2Base";
 import useNEST from "../../../hooks/useNEST";
 import { Trans } from "@lingui/macro";
 import LanguageMenu from "./LanguageMenu";
-import {red} from "@mui/material/colors";
 
 export const NavItems = [
-  { path: "/futures", content: `Futures`, icon: FuturesIcon,l:<Trans>Futures</Trans> },
-  { path: "/swap", content: `Swap`, icon: SwapExchangeSmall,l:<Trans>Swap</Trans> },
-  { path: "/dashboard", content: `Dashboard`, icon: Dashboard,l:<Trans>Dashboard</Trans> },
+  {
+    path: "/futures",
+    content: `Futures`,
+    icon: FuturesIcon,
+    l: <Trans>Futures</Trans>,
+  },
+  {
+    path: "/swap",
+    content: `Swap`,
+    icon: SwapExchangeSmall,
+    l: <Trans>Swap</Trans>,
+  },
+  {
+    path: "/dashboard",
+    content: `Dashboard`,
+    icon: Dashboard,
+    l: <Trans>Dashboard</Trans>,
+  },
+];
+
+export const NavItemsForScroll = [
+  {
+    path: "/futures",
+    content: `Futures`,
+    icon: FuturesIcon,
+    l: <Trans>Futures</Trans>,
+  },
+  {
+    path: "/faucet",
+    content: `Faucet`,
+    icon: SwapExchangeSmall,
+    l: <Trans>Faucet</Trans>,
+  },
+  {
+    path: "/dashboard",
+    content: `Dashboard`,
+    icon: Dashboard,
+    l: <Trans>Dashboard</Trans>,
+  },
 ];
 
 const NESTHead: FC = () => {
   const location = useLocation();
-  const {
-    width: widthLv,
-    headHeight,
-    isBigMobile,
-    isPC,
-  } = useWindowWidth();
+  const { width: widthLv, headHeight, isBigMobile, isPC } = useWindowWidth();
   const { nowTheme, changeTheme } = useTheme();
-  const { account, chainsData } = useNEST();
+  const { account, chainsData, navItems } = useNEST();
 
   useEffect(() => {
     const chainIds = chainsData.chains.map((item) => item.id);
@@ -52,7 +81,7 @@ const NESTHead: FC = () => {
         chainsData.switchNetwork(chainsData.chains[0].id);
       } else if (
         //  in futures, switch to eth
-        location.pathname.indexOf(NavItems[1].path) === 0 &&
+        location.pathname.indexOf(NavItems[0].path) === 0 &&
         chainsData.chainId === 1
       ) {
         chainsData.switchNetwork(chainsData.chains[0].id);
@@ -224,7 +253,7 @@ const NESTHead: FC = () => {
         },
       };
     });
-    const liList = NavItems.slice(0, 2).map((item, index) => {
+    const liList = navItems.slice(0, 2).map((item, index) => {
       return (
         <Link
           className={`nav${
@@ -279,7 +308,7 @@ const NESTHead: FC = () => {
         height={headHeight}
       >
         <LogoBox>
-          <Link to={'/home'}>
+          <Link to={"/home"}>
             <NESTFiLogo />
           </Link>
         </LogoBox>
@@ -305,11 +334,7 @@ const NESTHead: FC = () => {
           alignItems={"center"}
           paddingX={isBigMobile ? "0px" : "8px"}
         >
-          {isBigMobile ? (
-            <></>
-          ) : (
-            <LanguageMenu/>
-          )}
+          {isBigMobile ? <></> : <LanguageMenu />}
 
           {!isBigMobile ? (
             <>

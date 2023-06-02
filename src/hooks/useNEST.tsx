@@ -7,10 +7,11 @@ import {
   useNetwork,
   useSwitchNetwork,
 } from "wagmi";
+import { NavItems, NavItemsForScroll } from "../pages/Share/Head/NESTHead";
 
 function useMainReact() {
   const [showConnect, setShowConnect] = useState(false);
-  
+
   /**
    * wallet
    */
@@ -74,6 +75,12 @@ function useMainReact() {
    */
   const [openedSharePosition, setOpenedSharePosition] =
     useState<boolean>(false);
+  /**
+   * nav items from different chain
+   */
+  const navItems = useMemo(() => {
+    return chainId === 534353 ? NavItemsForScroll : NavItems;
+  }, [chainId]);
   return {
     showConnect,
     setShowConnect,
@@ -83,6 +90,7 @@ function useMainReact() {
     disconnect,
     openedSharePosition,
     setOpenedSharePosition,
+    navItems,
   };
 }
 const NEST = createContainer(useMainReact);
