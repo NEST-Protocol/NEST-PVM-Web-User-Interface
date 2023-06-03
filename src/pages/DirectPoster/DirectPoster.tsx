@@ -10,12 +10,14 @@ import useWindowWidth from "../../hooks/useWindowWidth";
 
 const DirectPoster: FC = () => {
   const { addNESTToWallet } = useNEST();
-  const {isBigMobile} = useWindowWidth()
+  const { isBigMobile } = useWindowWidth();
   const {
     showNESTBalance,
     showETHBalance,
     getNESTError,
     mainButtonTitle,
+    mainButtonLoading,
+    mainButtonDis,
     mainButtonAction,
   } = useDirectPoster();
   return (
@@ -60,6 +62,8 @@ const DirectPoster: FC = () => {
             tokenName="NEST"
             callBack={mainButtonAction}
             title={mainButtonTitle}
+            loading={mainButtonLoading}
+            dis={mainButtonDis}
           />
           <Stack
             direction={"row"}
@@ -120,6 +124,8 @@ interface DirectPosterItemProps {
   title: string;
   error: string | undefined;
   callBack: () => void;
+  loading?: boolean;
+  dis?: boolean;
 }
 
 const DirectPosterItem: FC<DirectPosterItemProps> = ({ ...props }) => {
@@ -188,6 +194,8 @@ const DirectPosterItem: FC<DirectPosterItemProps> = ({ ...props }) => {
       )}
       <MainButton
         title={`GET ${props.tokenName}`}
+        disable={props.dis ?? false}
+        isLoading={props.loading ?? false}
         onClick={props.callBack}
         style={{ width: "100%", height: "48px" }}
       />
