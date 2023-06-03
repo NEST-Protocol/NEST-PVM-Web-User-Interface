@@ -24,7 +24,7 @@ const DirectPoster: FC = () => {
     <Stack direction={"row"} justifyContent={"center"} alignItems={"center"}>
       <Stack
         spacing={"40px"}
-        marginTop={isBigMobile ? "52px" : "80px"}
+        marginY={isBigMobile ? "52px" : "80px"}
         maxWidth={"450px"}
         width={"100%"}
         paddingX={"20px"}
