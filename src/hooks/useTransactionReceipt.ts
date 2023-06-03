@@ -83,6 +83,15 @@ const getInfoTitle = (type: TransactionType) => {
   }
 };
 
+const getInfo = (type: TransactionType) => {
+  switch (type) {
+    case TransactionType.faucet_scroll:
+      return t`Successfully received 100NEST test tokens`;
+    default:
+      return "";
+  }
+};
+
 export const usePendingTransactionsBase = () => {
   const [info, setInfo] = useState<TransactionInfo>();
   const { transactionSnackBar } = useTransactionSnackBar();
@@ -94,7 +103,12 @@ export const usePendingTransactionsBase = () => {
   useEffect(() => {
     if ((isSuccess || isError) && info) {
       const type = isSuccess ? SnackBarType.success : SnackBarType.fail;
-      transactionSnackBar(getInfoTitle(info.type), "", type, info.hash);
+      transactionSnackBar(
+        getInfoTitle(info.type),
+        getInfo(info.type),
+        type,
+        info.hash
+      );
       const newList = pendingList.slice(1, pendingList.length - 1);
       setPendingList(newList);
       setInfo(undefined);
