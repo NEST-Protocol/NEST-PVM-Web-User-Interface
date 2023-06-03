@@ -39,10 +39,10 @@ const scrollAlphaTestnet = {
   },
   rpcUrls: {
     default: {
-      http: ["https://alpha-rpc.scroll.io/l2"],
+      http: ["https://scroll-alpha-public.unifra.io"],
     },
     public: {
-      http: ["https://alpha-rpc.scroll.io/l2"],
+      http: ["https://scroll-alpha-public.unifra.io"],
     },
   },
   blockExplorers: {
@@ -71,7 +71,7 @@ const { chains, provider, webSocketProvider } = configureChains(
           };
         } else if (chain.id === 534353) {
           return {
-            http: "https://alpha-rpc.scroll.io/l2",
+            http: "https://scroll-alpha-public.unifra.io",
           };
         } else {
           return {

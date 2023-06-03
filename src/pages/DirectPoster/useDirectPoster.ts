@@ -33,6 +33,7 @@ export function useDirectPoster() {
   }, [account.address, provider]);
 
   const { remain, remainRefetch } = useReadScrollNESTRemain(
+    account.address ?? "",
     account.address ?? ""
   );
   const noRemain = useMemo(() => {
