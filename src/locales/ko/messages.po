@@ -750,6 +750,10 @@ msgstr "포지션"
 msgid "Price"
 msgstr "가격"
 
+#: src/hooks/useTransactionReceipt.ts
+msgid "Received"
+msgstr ""
+
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "Recent transactions"
 msgstr "최근 트랜잭션"
@@ -865,6 +869,10 @@ msgstr "예약 지정가"
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Submit successfully"
 msgstr "성공적으로 제출됨"
+
+#: src/hooks/useTransactionReceipt.ts
+msgid "Successfully received 100NEST test tokens"
+msgstr ""
 
 #: src/components/NormalInput/NESTInput.tsx
 #: src/components/NormalInput/NESTInputSelect.tsx

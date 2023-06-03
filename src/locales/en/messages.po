@@ -754,6 +754,10 @@ msgstr "Positions"
 msgid "Price"
 msgstr "Price"
 
+#: src/hooks/useTransactionReceipt.ts
+msgid "Received"
+msgstr "Received"
+
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "Recent transactions"
 msgstr "Recent transactions"
@@ -869,6 +873,10 @@ msgstr "Stop-Limit"
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Submit successfully"
 msgstr "Submit successfully"
+
+#: src/hooks/useTransactionReceipt.ts
+msgid "Successfully received 100NEST test tokens"
+msgstr "Successfully received 100NEST test tokens"
 
 #: src/components/NormalInput/NESTInput.tsx
 #: src/components/NormalInput/NESTInputSelect.tsx

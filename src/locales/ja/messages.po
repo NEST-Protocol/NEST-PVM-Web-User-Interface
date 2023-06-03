@@ -750,6 +750,10 @@ msgstr "ポジション"
 msgid "Price"
 msgstr "価格"
 
+#: src/hooks/useTransactionReceipt.ts
+msgid "Received"
+msgstr ""
+
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "Recent transactions"
 msgstr "最近の取引"
@@ -865,6 +869,10 @@ msgstr "ストップ・リミット"
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Submit successfully"
 msgstr "送信完了しました"
+
+#: src/hooks/useTransactionReceipt.ts
+msgid "Successfully received 100NEST test tokens"
+msgstr ""
 
 #: src/components/NormalInput/NESTInput.tsx
 #: src/components/NormalInput/NESTInputSelect.tsx
