@@ -48,15 +48,12 @@ msgstr "> PREÇO DE MERCADO"
 msgid "> OPEN PRICE"
 msgstr "> PREÇO DE ABERTURA"
 
+#: src/components/NormalInput/NESTInput.tsx
 #: src/components/NormalInput/NESTInputSelect.tsx
 msgid ""
 "0 balance. Before trading, you can switch to \"Swap\" to exchange\n"
 "between USDT and NEST token."
 msgstr ""
-
-#: src/components/NormalInput/NESTInput.tsx
-msgid "0 balance. Before trading, you can switch to \"Swap\" to exchange between USDT and NEST token."
-msgstr "Saldo 0. Antes de negociar, você pode trocar para \"troca\" para trocar entre USDT e token NEST."
 
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 msgid "1. The trigger price has been reached but there is not enough time to execute."
@@ -382,6 +379,7 @@ msgstr "Preço de entrada"
 msgid "Fail Request"
 msgstr "Pedido de reprovação"
 
+#: src/components/NormalInput/NESTInput.tsx
 #: src/components/NormalInput/NESTInputSelect.tsx
 #: src/pages/Share/Head/NESTHead.tsx
 msgid "Faucet"
@@ -473,6 +471,10 @@ msgstr "Saldo insuficiente de NEST"
 #: src/pages/Dashboard/Referral/Referral.tsx
 msgid "Invitee Trading Volume"
 msgstr "Volume de negociação de convidados"
+
+#: src/pages/DirectPoster/useDirectPoster.ts
+msgid "It's available once in 24 hours. Please come later."
+msgstr ""
 
 #: src/pages/Home/Home.tsx
 #: src/pages/Home/Home.tsx
@@ -754,6 +756,10 @@ msgstr "Preço"
 msgid "Received"
 msgstr ""
 
+#: src/hooks/useTransactionReceipt.ts
+msgid "Received 100NEST test tokens"
+msgstr ""
+
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "Recent transactions"
 msgstr "Transacções recentes"
@@ -870,10 +876,6 @@ msgstr "Stop-Limit"
 msgid "Submit successfully"
 msgstr "Submissão bem sucedida"
 
-#: src/hooks/useTransactionReceipt.ts
-msgid "Successfully received 100NEST test tokens"
-msgstr ""
-
 #: src/components/NormalInput/NESTInput.tsx
 #: src/components/NormalInput/NESTInputSelect.tsx
 #: src/hooks/useSwap.ts
@@ -912,6 +914,7 @@ msgstr "Teste BNB"
 msgid "Testnet token"
 msgstr ""
 
+#: src/components/NormalInput/NESTInput.tsx
 #: src/components/NormalInput/NESTInputSelect.tsx
 msgid "The balance is 0. You can go to \"Faucet\" to get test token before trading."
 msgstr ""

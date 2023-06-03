@@ -48,15 +48,12 @@ msgstr "> 시장 가격"
 msgid "> OPEN PRICE"
 msgstr "> 개장 가격"
 
+#: src/components/NormalInput/NESTInput.tsx
 #: src/components/NormalInput/NESTInputSelect.tsx
 msgid ""
 "0 balance. Before trading, you can switch to \"Swap\" to exchange\n"
 "between USDT and NEST token."
 msgstr ""
-
-#: src/components/NormalInput/NESTInput.tsx
-msgid "0 balance. Before trading, you can switch to \"Swap\" to exchange between USDT and NEST token."
-msgstr "잔액이 없습니다. 거래 전에 \"스왑\"으로 이동하여 USDT와 NEST 토큰을 교환할 수 있습니다."
 
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 msgid "1. The trigger price has been reached but there is not enough time to execute."
@@ -382,6 +379,7 @@ msgstr "진입 가격"
 msgid "Fail Request"
 msgstr "요청 실패"
 
+#: src/components/NormalInput/NESTInput.tsx
 #: src/components/NormalInput/NESTInputSelect.tsx
 #: src/pages/Share/Head/NESTHead.tsx
 msgid "Faucet"
@@ -475,6 +473,10 @@ msgstr "NEST 잔액 부족"
 #: src/pages/Dashboard/Referral/Referral.tsx
 msgid "Invitee Trading Volume"
 msgstr "피추천인의 거래량"
+
+#: src/pages/DirectPoster/useDirectPoster.ts
+msgid "It's available once in 24 hours. Please come later."
+msgstr ""
 
 #: src/pages/Home/Home.tsx
 #: src/pages/Home/Home.tsx
@@ -754,6 +756,10 @@ msgstr "가격"
 msgid "Received"
 msgstr ""
 
+#: src/hooks/useTransactionReceipt.ts
+msgid "Received 100NEST test tokens"
+msgstr ""
+
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "Recent transactions"
 msgstr "최근 트랜잭션"
@@ -870,10 +876,6 @@ msgstr "예약 지정가"
 msgid "Submit successfully"
 msgstr "성공적으로 제출됨"
 
-#: src/hooks/useTransactionReceipt.ts
-msgid "Successfully received 100NEST test tokens"
-msgstr ""
-
 #: src/components/NormalInput/NESTInput.tsx
 #: src/components/NormalInput/NESTInputSelect.tsx
 #: src/hooks/useSwap.ts
@@ -912,6 +914,7 @@ msgstr "테스트 BNB"
 msgid "Testnet token"
 msgstr ""
 
+#: src/components/NormalInput/NESTInput.tsx
 #: src/components/NormalInput/NESTInputSelect.tsx
 msgid "The balance is 0. You can go to \"Faucet\" to get test token before trading."
 msgstr ""
