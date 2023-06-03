@@ -86,7 +86,7 @@ const getInfoTitle = (type: TransactionType) => {
 const getInfo = (type: TransactionType) => {
   switch (type) {
     case TransactionType.faucet_scroll:
-      return t`Successfully received 100NEST test tokens`;
+      return t`Received 100NEST test tokens`;
     default:
       return "";
   }

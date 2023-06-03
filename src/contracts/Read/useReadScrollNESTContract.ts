@@ -1,27 +1,21 @@
 import { BigNumber } from "ethers";
 import { useMemo } from "react";
 import { useContractRead } from "wagmi";
-import useNEST from "../../hooks/useNEST";
 import ScrollNESTABI from "../ABI/ScrollNEST.json";
 import { NESTToken } from "../contractAddress";
 
-export function useReadScrollNESTRemain(to: string | undefined) {
-  const { chainsData } = useNEST();
-  const address = useMemo(() => {
-    if (chainsData.chainId && to) {
-      return NESTToken[chainsData.chainId] as `0x${string}`;
-    }
-  }, [chainsData.chainId, to]);
+export function useReadScrollNESTRemain(target: string) {
   const {
     data: remainData,
     isRefetching: remainIsRefetching,
     isSuccess: remainIsSuccess,
     refetch: remainRefetch,
   } = useContractRead({
-    address: address,
+    address: NESTToken[534353] as `0x${string}`,
     abi: ScrollNESTABI,
     functionName: "remain",
-    args: [to],
+    args: [target],
+    
   });
 
   const remain: BigNumber | undefined = useMemo(() => {

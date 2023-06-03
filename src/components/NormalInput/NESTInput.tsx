@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
-import { FC } from "react";
+import { FC, useMemo } from "react";
 import { Link } from "react-router-dom";
 import useNEST from "../../hooks/useNEST";
 import { NEXT, SwapExchangeSmall } from "../icons";
@@ -20,7 +20,25 @@ interface NESTInputProps {
 }
 
 const NESTInput: FC<NESTInputProps> = ({ ...props }) => {
-  const { account } = useNEST();
+  const { account, chainsData } = useNEST();
+  const noNESTText = useMemo(() => {
+    if (chainsData.chainId === 534353) {
+      return t`The balance is 0. You can go to "Faucet" to get test token before trading.`;
+    } else {
+      return t`0 balance. Before trading, you can switch to "Swap" to exchange
+      between USDT and NEST token.`;
+    }
+  }, [chainsData.chainId]);
+  const swapLink = useMemo(() => {
+    if (chainsData.chainId === 534353) {
+      return "/faucet";
+    } else {
+      return "/swap";
+    }
+  }, [chainsData.chainId]);
+  const swapTitle = useMemo(() => {
+    return chainsData.chainId === 534353 ? t`Faucet` : t`Swap`;
+  }, [chainsData.chainId]);
   return (
     <Stack
       justifyContent={"flex-start"}
@@ -92,7 +110,7 @@ const NESTInput: FC<NESTInputProps> = ({ ...props }) => {
           </LinkButton>
         </Stack>
         <LinkButton>
-          <Link to={"/swap"}>
+          <Link to={swapLink}>
             <Stack
               direction={"row"}
               justifyContent={"flex-end"}
@@ -106,9 +124,7 @@ const NESTInput: FC<NESTInputProps> = ({ ...props }) => {
                 },
               }}
             >
-              <p>
-                <Trans>Swap</Trans>
-              </p>
+              <p>{swapTitle}</p>
               <SwapExchangeSmall />
             </Stack>
           </Link>
@@ -143,13 +159,8 @@ const NESTInput: FC<NESTInputProps> = ({ ...props }) => {
           })}
           alignItems={"center"}
         >
-          <Link to={"/swap"}>
-            <Trans>
-              0 balance. Before trading, you can switch to "Swap" to exchange
-              between USDT and NEST token.
-            </Trans>
-          </Link>
-          <Link to={"/swap"}>
+          <Link to={swapLink}>{noNESTText}</Link>
+          <Link to={swapLink}>
             <NEXT />
           </Link>
         </Stack>

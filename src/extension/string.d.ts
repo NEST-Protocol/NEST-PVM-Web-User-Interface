@@ -53,6 +53,8 @@ String.prototype.hashToChainScan = function (chainId: number | undefined) {
     return `https://bscscan.com/tx/${this}`;
   } else if (chainId === 97) {
     return `https://testnet.bscscan.com/tx/${this}`;
+  } else if (chainId === 534353) {
+    return `https://blockscout.scroll.io/tx/${this}`;
   } else {
     return "";
   }
