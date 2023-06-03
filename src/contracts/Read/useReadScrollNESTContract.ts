@@ -4,7 +4,7 @@ import { useContractRead } from "wagmi";
 import ScrollNESTABI from "../ABI/ScrollNEST.json";
 import { NESTToken } from "../contractAddress";
 
-export function useReadScrollNESTRemain(target: string) {
+export function useReadScrollNESTRemain(account: string, target: string) {
   const {
     data: remainData,
     isRefetching: remainIsRefetching,
@@ -15,7 +15,9 @@ export function useReadScrollNESTRemain(target: string) {
     abi: ScrollNESTABI,
     functionName: "remain",
     args: [target],
-    
+    overrides: {
+      from: account as `0x${string}`,
+    },
   });
 
   const remain: BigNumber | undefined = useMemo(() => {
