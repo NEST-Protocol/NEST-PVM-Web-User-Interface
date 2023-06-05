@@ -616,6 +616,13 @@ msgid "My Positions"
 msgstr "My Positions"
 
 #: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+msgid "My Total Trading Volume"
+msgstr "My Total Trading Volume"
+
+#: src/pages/Dashboard/Dashboard.tsx
 msgid "NEST Total Burned"
 msgstr "NEST Total Burned"
 
@@ -985,6 +992,13 @@ msgstr "Total Commissions"
 #: src/pages/Dashboard/Referral/Referral.tsx
 msgid "Total Invitees"
 msgstr "Total Invitees"
+
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+msgid "Total Number of Trades"
+msgstr "Total Number of Trades"
 
 #: src/pages/Futures/Modal/SharePositionModal.tsx
 #: src/pages/Futures/NewOrder.tsx

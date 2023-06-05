@@ -13,6 +13,7 @@ import copy from "copy-to-clipboard";
 import useNESTSnackBar from "../../../hooks/useNESTSnackBar";
 import CircularProgress from "@mui/material/CircularProgress";
 import {Trans, t} from "@lingui/macro";
+import useNEST from "../../../hooks/useNEST";
 
 const Title1 = styled('div')(({theme}) => ({
   fontWeight: "400",
@@ -108,6 +109,8 @@ const TopStack = styled(Stack)(({theme}) => {
 interface ShareMyDealModalProps {
   value: {
     totalValue: number,
+    totalVolume: number,
+    totalCount: number,
     // totalRate: number,
     todayValue: number,
     day7Value: number,
@@ -127,6 +130,7 @@ const ShareMyDealModal: FC<ShareMyDealModalProps> = ({...props}) => {
   const myShareRef = useRef(null)
   const [dataUrl, setDataUrl] = useState<string | null>(null)
   const {messageSnackBar} = useNESTSnackBar();
+  const {chainsData} = useNEST()
 
   const buildDataUrl = async () => {
     if (!myShareRef.current) {
@@ -189,41 +193,57 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
   const [select, setSelect] = useState({
     totalTrade: true,
     todayTrade: true,
+    totalVolume: true,
+    totalCount: true,
     _7DaysTrade: true,
     _30DaysTrade: true,
   })
   const showList = useMemo(() => {
     let list = []
-    if (select.totalTrade) {
+    if ((chainsData.chainId === 56 || chainsData.chainId === 97) && select.totalTrade) {
       list.push({
         title: t`Total Profit & Loss`,
         value: props.value.totalValue,
-        // rate: props.value.totalRate,
+        unit: "NEST"
+      })
+    }
+    if (chainsData.chainId === 534353 && select.totalVolume) {
+      list.push({
+        title: t`My Total Trading Volume`,
+        value: props.value.totalVolume,
+        unit: "NEST"
+      })
+    }
+    if (chainsData.chainId === 534353 && select.totalCount) {
+      list.push({
+        title: t`Total Number of Trades`,
+        value: props.value.totalCount,
+        unit: ""
       })
     }
     if (select.todayTrade) {
       list.push({
         title: t`Today\'s PNL`,
         value: props.value.todayValue,
-        // rate: props.value.todayRate,
+        unit: "NEST"
       })
     }
     if (select._7DaysTrade) {
       list.push({
         title: t`7 Days\' PNL`,
         value: props.value.day7Value,
-        // rate: props.value.day7Rate,
+        unit: "NEST"
       })
     }
     if (select._30DaysTrade) {
       list.push({
         title: t`30 Days\' PNL`,
         value: props.value.day30Value,
-        // rate: props.value.day30Rate,
+        unit: "NEST"
       })
     }
     return list
-  }, [select])
+  }, [select, chainsData.chainId])
 
   const getSelectContent = () => {
     return (
@@ -251,45 +271,108 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
           </Stack>
         </TopStack>
         <Box height={'20px'}/>
-        <Card1 direction={'row'} sx={(theme) => ({
-          background: select.totalTrade ? theme.normal.bg3 : "transparent",
-        })} onClick={() => setSelect({...select, totalTrade: !select.totalTrade})}>
-          <Stack width={'100%'} spacing={'10px'}>
-            <Title1>
-              {t`Total Profit & Loss`}
-            </Title1>
-            <Stack direction={'row'} spacing={'8px'} alignItems={"center"}>
-              <Caption1>{props.value.totalValue.toLocaleString('en-US', {
-                maximumFractionDigits: 2,
-              })} NEST</Caption1>
-              {/*<Box*/}
-              {/*  sx={(theme) => ({*/}
-              {/*    transform: props.value.totalRate >= 0 ? 'rotate(0deg)' : 'rotate(180deg)',*/}
-              {/*    "& svg": {*/}
-              {/*      display: "block",*/}
-              {/*      "& path": {*/}
-              {/*        fill: props.value.totalRate >= 0 ? theme.normal.success : theme.normal.danger,*/}
-              {/*      }*/}
-              {/*    }*/}
-              {/*  })}*/}
-              {/*>*/}
-              {/*  <UpIcon/>*/}
-              {/*</Box>*/}
-            </Stack>
-          </Stack>
-          <Box sx={(theme) => ({
-            "& svg": {
-              display: "block",
-              width: '22px',
-              height: '22px',
-              "& path": {
-                fill: select.totalTrade ? theme.normal.primary : theme.normal.text3,
-              },
-            },
-          })}>
-            <Success/>
-          </Box>
-        </Card1>
+        {
+          chainsData.chainId === 56 || chainsData.chainId === 97 && (
+            <Card1 direction={'row'} sx={(theme) => ({
+              background: select.totalTrade ? theme.normal.bg3 : "transparent",
+            })} onClick={() => setSelect({...select, totalTrade: !select.totalTrade})}>
+              <Stack width={'100%'} spacing={'10px'}>
+                <Title1>
+                  {t`Total Profit & Loss`}
+                </Title1>
+                <Stack direction={'row'} spacing={'8px'} alignItems={"center"}>
+                  <Caption1>{props.value.totalValue.toLocaleString('en-US', {
+                    maximumFractionDigits: 2,
+                  })} NEST</Caption1>
+                  {/*<Box*/}
+                  {/*  sx={(theme) => ({*/}
+                  {/*    transform: props.value.totalRate >= 0 ? 'rotate(0deg)' : 'rotate(180deg)',*/}
+                  {/*    "& svg": {*/}
+                  {/*      display: "block",*/}
+                  {/*      "& path": {*/}
+                  {/*        fill: props.value.totalRate >= 0 ? theme.normal.success : theme.normal.danger,*/}
+                  {/*      }*/}
+                  {/*    }*/}
+                  {/*  })}*/}
+                  {/*>*/}
+                  {/*  <UpIcon/>*/}
+                  {/*</Box>*/}
+                </Stack>
+              </Stack>
+              <Box sx={(theme) => ({
+                "& svg": {
+                  display: "block",
+                  width: '22px',
+                  height: '22px',
+                  "& path": {
+                    fill: select.totalTrade ? theme.normal.primary : theme.normal.text3,
+                  },
+                },
+              })}>
+                <Success/>
+              </Box>
+            </Card1>
+          )
+        }
+        {
+          chainsData.chainId === 534353 && (
+            <>
+              <Card1 direction={'row'} sx={(theme) => ({
+                background: select.totalVolume ? theme.normal.bg3 : "transparent",
+              })} onClick={() => setSelect({...select, totalVolume: !select.totalVolume})}>
+                <Stack width={'100%'} spacing={'10px'}>
+                  <Title1>
+                    {t`My Total Trading Volume`}
+                  </Title1>
+                  <Stack direction={'row'} spacing={'8px'} alignItems={"center"}>
+                    <Caption1>{props.value.totalVolume.toLocaleString('en-US', {
+                      maximumFractionDigits: 2,
+                    })} NEST</Caption1>
+                  </Stack>
+                </Stack>
+                <Box sx={(theme) => ({
+                  "& svg": {
+                    display: "block",
+                    width: '22px',
+                    height: '22px',
+                    "& path": {
+                      fill: select.totalVolume ? theme.normal.primary : theme.normal.text3,
+                    },
+                  },
+                })}>
+                  <Success/>
+                </Box>
+              </Card1>
+              <Card1 direction={'row'} sx={(theme) => ({
+                background: select.totalCount ? theme.normal.bg3 : "transparent",
+              })} onClick={() => setSelect({...select, totalCount: !select.totalCount})}>
+                <Stack width={'100%'} spacing={'10px'}>
+                  <Title1>
+                    {t`Total Number of Trades`}
+                  </Title1>
+                  <Stack direction={'row'} spacing={'8px'} alignItems={"center"}>
+                    <Caption1>{props.value.totalCount.toLocaleString('en-US', {
+                      maximumFractionDigits: 0,
+                    })}</Caption1>
+                  </Stack>
+                </Stack>
+                <Box sx={(theme) => ({
+                  "& svg": {
+                    display: "block",
+                    width: '22px',
+                    height: '22px',
+                    "& path": {
+                      fill: select.totalCount ? theme.normal.primary : theme.normal.text3,
+                    },
+                  },
+                })}>
+                  <Success/>
+                </Box>
+              </Card1>
+            </>
+          )
+        }
+
         <Card1 direction={'row'} sx={(theme) => ({
           background: select.todayTrade ? theme.normal.bg3 : "transparent",
         })} onClick={() => setSelect({...select, todayTrade: !select.todayTrade})}>
@@ -301,19 +384,6 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
               <Caption1>{props.value.todayValue.toLocaleString('en-US', {
                 maximumFractionDigits: 2,
               })} NEST</Caption1>
-              {/*<Box*/}
-              {/*  sx={(theme) => ({*/}
-              {/*    transform: props.value.todayRate >= 0 ? 'rotate(0deg)' : 'rotate(180deg)',*/}
-              {/*    "& svg": {*/}
-              {/*      display: "block",*/}
-              {/*      "& path": {*/}
-              {/*        fill: props.value.todayRate >= 0 ? theme.normal.success : theme.normal.danger,*/}
-              {/*      }*/}
-              {/*    }*/}
-              {/*  })}*/}
-              {/*>*/}
-              {/*  <UpIcon/>*/}
-              {/*</Box>*/}
             </Stack>
           </Stack>
           <Box sx={(theme) => ({
@@ -340,19 +410,6 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
               <Caption1>{props.value.day7Value.toLocaleString('en-US', {
                 maximumFractionDigits: 2,
               })} NEST</Caption1>
-              {/*<Box*/}
-              {/*  sx={(theme) => ({*/}
-              {/*    transform: props.value.day7Rate >= 0 ? 'rotate(0deg)' : 'rotate(180deg)',*/}
-              {/*    "& svg": {*/}
-              {/*      display: "block",*/}
-              {/*      "& path": {*/}
-              {/*        fill: props.value.day7Rate >= 0 ? theme.normal.success : theme.normal.danger,*/}
-              {/*      }*/}
-              {/*    }*/}
-              {/*  })}*/}
-              {/*>*/}
-              {/*  <UpIcon/>*/}
-              {/*</Box>*/}
             </Stack>
           </Stack>
           <Box sx={(theme) => ({
@@ -379,19 +436,6 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
               <Caption1>{props.value.day30Value.toLocaleString('en-US', {
                 maximumFractionDigits: 2,
               })} NEST</Caption1>
-              {/*<Box*/}
-              {/*  sx={(theme) => ({*/}
-              {/*    transform: props.value.day30Rate >= 0 ? 'rotate(0deg)' : 'rotate(180deg)',*/}
-              {/*    "& svg": {*/}
-              {/*      display: "block",*/}
-              {/*      "& path": {*/}
-              {/*        fill: props.value.day30Rate >= 0 ? theme.normal.success : theme.normal.danger,*/}
-              {/*      }*/}
-              {/*    }*/}
-              {/*  })}*/}
-              {/*>*/}
-              {/*  <UpIcon/>*/}
-              {/*</Box>*/}
             </Stack>
           </Stack>
           <Box sx={(theme) => ({
@@ -445,7 +489,8 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
           dataUrl ? (
             <img src={dataUrl} style={{width: '100%'}} alt={'share'}/>
           ) : (
-            <Stack minHeight={'400px'} height={'calc(min(100vw - 40px, 450px) * 1.46222)'} alignItems={'center'} spacing={'18px'} justifyContent={'center'} sx={(theme) => ({
+            <Stack minHeight={'400px'} height={'calc(min(100vw - 40px, 450px) * 1.46222)'} alignItems={'center'}
+                   spacing={'18px'} justifyContent={'center'} sx={(theme) => ({
               color: '#F9F9F9',
               fontSize: '16px',
               lineHeight: '22px',
@@ -494,11 +539,7 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
                     }
                   }}>{showList[0].value.toLocaleString('en-US', {
                     maximumFractionDigits: 2,
-                  })} <span>NEST</span></Caption3>
-                  {/*<Caption4 sx={(theme) => ({*/}
-                  {/*  paddingTop: '16px',*/}
-                  {/*  color: showList[0].rate >= 0 ? theme.normal.success : theme.normal.danger,*/}
-                  {/*})}>{showList[0].rate}%</Caption4>*/}
+                  })} <span>{showList[0].unit}</span></Caption3>
                 </Stack>
               )
             }
@@ -508,15 +549,9 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
                   !!showList?.[1] && (
                     <Stack spacing={'8px'} width={'50%'}>
                       <Caption5>{showList?.[1].title}</Caption5>
-                      <Caption6
-                        sx={(theme) => ({
-                          'span': {
-                            // color: showList?.[1].rate >= 0 ? theme.normal.success : theme.normal.danger
-                          }
-                        })}
-                      >{showList?.[1].value.toLocaleString('en-US', {
+                      <Caption6>{showList?.[1].value.toLocaleString('en-US', {
                         maximumFractionDigits: 2,
-                      })} NEST
+                      })} {showList[1].unit}
                         {/*<span>{showList?.[1].rate}%</span>*/}
                       </Caption6>
                     </Stack>
@@ -526,39 +561,38 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
                   !!showList?.[2] && (
                     <Stack spacing={'8px'} width={'50%'}>
                       <Caption5>{showList?.[2].title}</Caption5>
-                      <Caption6
-                        sx={(theme) => ({
-                          'span': {
-                            // color: showList?.[2].rate >= 0 ? theme.normal.success : theme.normal.danger
-                          }
-                        })}
-                      >{showList?.[2].value.toLocaleString('en-US', {
+                      <Caption6>{showList?.[2].value.toLocaleString('en-US', {
                         maximumFractionDigits: 2,
-                      })} NEST
-                        {/*<span>{showList?.[2].rate}%</span>*/}
+                      })} {showList[2].unit}
                       </Caption6>
                     </Stack>
                   )
                 }
               </Stack>
+              <Stack direction={'row'} justifyContent={'space-between'}>
               {
                 !!showList?.[3] && (
                   <Stack spacing={'8px'} width={'50%'}>
                     <Caption5>{showList?.[3].title}</Caption5>
-                    <Caption6
-                      sx={(theme) => ({
-                        'span': {
-                          // color: showList?.[3].rate >= 0 ? theme.normal.success : theme.normal.danger
-                        }
-                      })}
-                    >{showList?.[3].value.toLocaleString('en-US', {
+                    <Caption6>{showList?.[3].value.toLocaleString('en-US', {
                       maximumFractionDigits: 2,
-                    })} NEST
-                      {/*<span>{showList?.[3].rate}%</span>*/}
+                    })} {showList[3].unit}
                     </Caption6>
                   </Stack>
                 )
               }
+                {
+                  !!showList?.[4] && (
+                    <Stack spacing={'8px'} width={'50%'}>
+                      <Caption5>{showList?.[4].title}</Caption5>
+                      <Caption6>{showList?.[4].value.toLocaleString('en-US', {
+                        maximumFractionDigits: 2,
+                      })} {showList[4].unit}
+                      </Caption6>
+                    </Stack>
+                  )
+                }
+              </Stack>
             </Stack>
             <Stack height={'80px'}/>
           </Stack>
