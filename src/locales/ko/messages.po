@@ -612,6 +612,13 @@ msgid "My Positions"
 msgstr "내 포지션"
 
 #: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+msgid "My Total Trading Volume"
+msgstr ""
+
+#: src/pages/Dashboard/Dashboard.tsx
 msgid "NEST Total Burned"
 msgstr "총 소각된 NEST"
 
@@ -981,6 +988,13 @@ msgstr "총 수수료"
 #: src/pages/Dashboard/Referral/Referral.tsx
 msgid "Total Invitees"
 msgstr "총 피추천인"
+
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+msgid "Total Number of Trades"
+msgstr ""
 
 #: src/pages/Futures/Modal/SharePositionModal.tsx
 #: src/pages/Futures/NewOrder.tsx
