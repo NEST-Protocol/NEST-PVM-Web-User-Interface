@@ -18,6 +18,8 @@ import useSWR from "swr";
 import {useAccount} from "wagmi";
 import {Trans, t} from "@lingui/macro";
 import {isAddress} from "ethers/lib/utils";
+import NetworkIcon from "../Components/NetworkIcon";
+import useNEST from "../../../hooks/useNEST";
 
 const Select1 = styled("select")(({theme}) => ({
   width: "100%",
@@ -147,7 +149,7 @@ const DownSort = () => {
   return (
     <Stack direction={'row'} spacing={'1.5px'} alignItems={"center"} sx={(theme) => ({
         '& svg': {
-          '& path:first-child': {
+          '& path:first-of-type': {
             fill: theme.normal.text2,
           }
         }
@@ -192,6 +194,7 @@ const Referral = () => {
 
   const {data: overview} = useSWR(queryAddress || address ? `https://api.nestfi.net/api/invite/overview/${queryAddress || address}` : undefined, (url) => fetch(url).then((res) => res.json()));
   const {data: listData} = useSWR(queryAddress || address ? `https://api.nestfi.net/api/invite/list-invitee/${queryAddress || address}` : undefined, (url) => fetch(url).then((res) => res.json()));
+  const {chainsData} = useNEST()
 
   const inviteeList = useMemo(() => {
     if (!listData) {
@@ -481,17 +484,13 @@ const Referral = () => {
             isBigMobile ? (
               <>
                 <Stack direction={'row'} alignItems={"center"} spacing={'8px'} justifyContent={"space-between"}>
-                  <Stack direction={'row'} spacing={'8px'} sx={(theme) => ({
+                  <Stack direction={'row'} spacing={'8px'} alignItems={"center"} sx={(theme) => ({
                     color: theme.normal.text2,
                     fontWeight: 700,
                     fontSize: '16px',
                     lineHeight: '22px',
                   })}>
-                    {/*<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">*/}
-                    {/*  <path fillRule="evenodd" clipRule="evenodd"*/}
-                    {/*        d="M9.00004 0.25L4.01129 2.93049L5.8454 3.92075L9.00004 2.23049L12.1546 3.92075L13.9887 2.93049L9.00004 0.25ZM12.1546 5.32075L13.9887 6.31098V8.29147L10.8341 9.98171V13.3622L9.00004 14.3525L7.16593 13.3622V9.98171L4.01129 8.29147V6.31098L5.8454 5.32075L9.00004 7.01096L12.1546 5.32075ZM13.9887 9.69148V11.672L12.1546 12.6623V10.6817L13.9887 9.69148ZM12.1363 14.0622L15.291 12.3719V8.99145L17.125 8.00125V13.3622L12.1363 16.0427V14.0622ZM15.291 5.61098L13.4568 4.62075L15.291 3.63049L17.125 4.62075V6.60124L15.291 7.5915V5.61098ZM7.16593 16.7598V14.7793L9.00004 15.7695L10.8341 14.7793V16.7598L9.00004 17.75L7.16593 16.7598ZM5.8454 12.6623L4.01129 11.672V9.69148L5.8454 10.6817V12.6623ZM9.00004 5.61098L7.16593 4.62075L9.00004 3.63049L10.8341 4.62075L9.00004 5.61098ZM4.54318 4.62075L2.70908 5.61098V7.5915L0.875 6.60124V4.62075L2.70908 3.63049L4.54318 4.62075ZM0.875 8.00125L2.70908 8.99145V12.3719L5.86371 14.0622V16.0427L0.875 13.3622V8.00125Z"*/}
-                    {/*        fill="#F0B90B"/>*/}
-                    {/*</svg>*/}
+                    <NetworkIcon chainId={chainsData.chainId} />
                     <div>
                       <Trans>Overview</Trans>
                     </div>
@@ -513,21 +512,16 @@ const Referral = () => {
             ) : (
               <>
                 <Stack direction={'row'} width={'100%'} justifyContent={"space-between"} alignItems={"center"}>
-                  <Stack direction={'row'} spacing={'8px'} sx={(theme) => ({
+                  <Stack direction={'row'} spacing={'8px'} alignItems={"center"} sx={(theme) => ({
                     color: theme.normal.text2,
                     fontWeight: 700,
                     fontSize: '14px',
                     lineHeight: '20px',
                   })}>
-                    {/*<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">*/}
-                    {/*  <path fillRule="evenodd" clipRule="evenodd"*/}
-                    {/*        d="M9.00004 0.25L4.01129 2.93049L5.8454 3.92075L9.00004 2.23049L12.1546 3.92075L13.9887 2.93049L9.00004 0.25ZM12.1546 5.32075L13.9887 6.31098V8.29147L10.8341 9.98171V13.3622L9.00004 14.3525L7.16593 13.3622V9.98171L4.01129 8.29147V6.31098L5.8454 5.32075L9.00004 7.01096L12.1546 5.32075ZM13.9887 9.69148V11.672L12.1546 12.6623V10.6817L13.9887 9.69148ZM12.1363 14.0622L15.291 12.3719V8.99145L17.125 8.00125V13.3622L12.1363 16.0427V14.0622ZM15.291 5.61098L13.4568 4.62075L15.291 3.63049L17.125 4.62075V6.60124L15.291 7.5915V5.61098ZM7.16593 16.7598V14.7793L9.00004 15.7695L10.8341 14.7793V16.7598L9.00004 17.75L7.16593 16.7598ZM5.8454 12.6623L4.01129 11.672V9.69148L5.8454 10.6817V12.6623ZM9.00004 5.61098L7.16593 4.62075L9.00004 3.63049L10.8341 4.62075L9.00004 5.61098ZM4.54318 4.62075L2.70908 5.61098V7.5915L0.875 6.60124V4.62075L2.70908 3.63049L4.54318 4.62075ZM0.875 8.00125L2.70908 8.99145V12.3719L5.86371 14.0622V16.0427L0.875 13.3622V8.00125Z"*/}
-                    {/*        fill="#F0B90B"/>*/}
-                    {/*</svg>*/}
+                    <NetworkIcon chainId={chainsData.chainId} />
                     <div>
                       <Trans>Overview</Trans>
                     </div>
-
                   </Stack>
                   <Box>
                     <MainButton
@@ -573,7 +567,7 @@ const Referral = () => {
                         unit: '',
                       }
                     ].map((item, index) => (
-                      <Stack spacing={'12px'} sx={(theme) => ({
+                      <Stack key={index} spacing={'12px'} sx={(theme) => ({
                         width: '100%',
                         minWidth: '200px',
                         overflow: 'hidden',
@@ -726,11 +720,7 @@ const Referral = () => {
                   lineHeight: '22px',
                   borderBottom: `1px solid ${theme.normal.border}`,
                 })}>
-                  {/*<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">*/}
-                  {/*  <path fillRule="evenodd" clipRule="evenodd"*/}
-                  {/*        d="M9.00004 0.25L4.01129 2.93049L5.8454 3.92075L9.00004 2.23049L12.1546 3.92075L13.9887 2.93049L9.00004 0.25ZM12.1546 5.32075L13.9887 6.31098V8.29147L10.8341 9.98171V13.3622L9.00004 14.3525L7.16593 13.3622V9.98171L4.01129 8.29147V6.31098L5.8454 5.32075L9.00004 7.01096L12.1546 5.32075ZM13.9887 9.69148V11.672L12.1546 12.6623V10.6817L13.9887 9.69148ZM12.1363 14.0622L15.291 12.3719V8.99145L17.125 8.00125V13.3622L12.1363 16.0427V14.0622ZM15.291 5.61098L13.4568 4.62075L15.291 3.63049L17.125 4.62075V6.60124L15.291 7.5915V5.61098ZM7.16593 16.7598V14.7793L9.00004 15.7695L10.8341 14.7793V16.7598L9.00004 17.75L7.16593 16.7598ZM5.8454 12.6623L4.01129 11.672V9.69148L5.8454 10.6817V12.6623ZM9.00004 5.61098L7.16593 4.62075L9.00004 3.63049L10.8341 4.62075L9.00004 5.61098ZM4.54318 4.62075L2.70908 5.61098V7.5915L0.875 6.60124V4.62075L2.70908 3.63049L4.54318 4.62075ZM0.875 8.00125L2.70908 8.99145V12.3719L5.86371 14.0622V16.0427L0.875 13.3622V8.00125Z"*/}
-                  {/*        fill="#F0B90B"/>*/}
-                  {/*</svg>*/}
+                  <NetworkIcon chainId={chainsData.chainId} />
                   <div>
                     <Trans>
                       My commissions
@@ -839,11 +829,7 @@ const Referral = () => {
                          borderBottom: `1px solid ${theme.normal.border}`,
                        })}>
                   <Stack direction={'row'} spacing={'8px'} alignItems={"center"} justifyContent={"center"}>
-                    {/*<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">*/}
-                    {/*  <path fillRule="evenodd" clipRule="evenodd"*/}
-                    {/*        d="M9.00004 0.25L4.01129 2.93049L5.8454 3.92075L9.00004 2.23049L12.1546 3.92075L13.9887 2.93049L9.00004 0.25ZM12.1546 5.32075L13.9887 6.31098V8.29147L10.8341 9.98171V13.3622L9.00004 14.3525L7.16593 13.3622V9.98171L4.01129 8.29147V6.31098L5.8454 5.32075L9.00004 7.01096L12.1546 5.32075ZM13.9887 9.69148V11.672L12.1546 12.6623V10.6817L13.9887 9.69148ZM12.1363 14.0622L15.291 12.3719V8.99145L17.125 8.00125V13.3622L12.1363 16.0427V14.0622ZM15.291 5.61098L13.4568 4.62075L15.291 3.63049L17.125 4.62075V6.60124L15.291 7.5915V5.61098ZM7.16593 16.7598V14.7793L9.00004 15.7695L10.8341 14.7793V16.7598L9.00004 17.75L7.16593 16.7598ZM5.8454 12.6623L4.01129 11.672V9.69148L5.8454 10.6817V12.6623ZM9.00004 5.61098L7.16593 4.62075L9.00004 3.63049L10.8341 4.62075L9.00004 5.61098ZM4.54318 4.62075L2.70908 5.61098V7.5915L0.875 6.60124V4.62075L2.70908 3.63049L4.54318 4.62075ZM0.875 8.00125L2.70908 8.99145V12.3719L5.86371 14.0622V16.0427L0.875 13.3622V8.00125Z"*/}
-                    {/*        fill="#F0B90B"/>*/}
-                    {/*</svg>*/}
+                    <NetworkIcon chainId={chainsData.chainId} />
                     <div>
                       <Trans>
                         My commissions
