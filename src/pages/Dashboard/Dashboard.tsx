@@ -182,7 +182,7 @@ const Dashboard: FC = () => {
   const [shareOrder, setShareOrder] = useState<any>(undefined);
   const {messageSnackBar} = useNESTSnackBar();
 
-  const {data: burnedData} = useSWR(`https://api.nestfi.net/api/dashboard/txVolume/list?from=2022-11-28&to=${(new Date()).toISOString().split("T")[0]}`, (url) => fetch(url)
+  const {data: burnedData} = useSWR(`https://api.nestfi.net/api/dashboard/destory/list?from=2022-11-28&to=${(new Date()).toISOString().split("T")[0]}`, (url) => fetch(url)
     .then((res) => res.json())
     .then((res: any) => res.value)
     .then((res: any) => res.map((item: any) => ({
