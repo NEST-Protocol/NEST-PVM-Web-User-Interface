@@ -318,8 +318,8 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
           chainsData.chainId === 534353 && (
             <>
               <Card1 direction={'row'} sx={(theme) => ({
-                background: select.totalTrade ? theme.normal.bg3 : "transparent",
-              })} onClick={() => setSelect({...select, totalTrade: !select.totalTrade})}>
+                background: select.totalVolume ? theme.normal.bg3 : "transparent",
+              })} onClick={() => setSelect({...select, totalVolume: !select.totalVolume})}>
                 <Stack width={'100%'} spacing={'10px'}>
                   <Title1>
                     {t`My Total Trading Volume`}
@@ -336,7 +336,7 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
                     width: '22px',
                     height: '22px',
                     "& path": {
-                      fill: select.totalTrade ? theme.normal.primary : theme.normal.text3,
+                      fill: select.totalVolume ? theme.normal.primary : theme.normal.text3,
                     },
                   },
                 })}>
@@ -344,8 +344,8 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
                 </Box>
               </Card1>
               <Card1 direction={'row'} sx={(theme) => ({
-                background: select.totalTrade ? theme.normal.bg3 : "transparent",
-              })} onClick={() => setSelect({...select, totalTrade: !select.totalTrade})}>
+                background: select.totalCount ? theme.normal.bg3 : "transparent",
+              })} onClick={() => setSelect({...select, totalCount: !select.totalCount})}>
                 <Stack width={'100%'} spacing={'10px'}>
                   <Title1>
                     {t`Total Number of Trades`}
@@ -362,7 +362,7 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
                     width: '22px',
                     height: '22px',
                     "& path": {
-                      fill: select.totalTrade ? theme.normal.primary : theme.normal.text3,
+                      fill: select.totalCount ? theme.normal.primary : theme.normal.text3,
                     },
                   },
                 })}>
