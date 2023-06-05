@@ -22,6 +22,7 @@ import FuturesTableTitle from "../Futures/Components/TableTitle";
 import OrderTablePosition from "../Futures/Components/OrderTablePosition";
 import {Trans, t} from "@lingui/macro";
 import useSWR from "swr";
+import NetworkIcon from "./Components/NetworkIcon";
 
 const DashboardShare = styled(Box)(({theme}) => ({
   borderRadius: "8px",
@@ -174,7 +175,7 @@ function formatDate(timestamp: number) {
 
 const Dashboard: FC = () => {
   const {address} = useAccount();
-  const {setShowConnect} = useNEST();
+  const {setShowConnect, chainsData} = useNEST();
   const {isBigMobile} = useWindowWidth();
   const [tabsValue, setTabsValue] = useState(0);
   const [showShareMyDealModal, setShareMyDealModal] = useState(false);
@@ -196,7 +197,7 @@ const Dashboard: FC = () => {
     .then((res: any) => res.map((item: any) => ({
       time: item.date,
       value: item.value,
-      })))
+    })))
   )
 
   const {data: burnedInfo} = useSWR("https://api.nestfi.net/api/dashboard/destory", (url) => fetch(url)
@@ -829,7 +830,10 @@ const Dashboard: FC = () => {
               justifyContent={"space-between"}
               alignItems={"center"}
             >
-              <Title1>{t`My Positions`}</Title1>
+              <Stack direction={'row'} spacing={'8px'} alignItems={"center"}>
+                <NetworkIcon chainId={chainsData.chainId}/>
+                <Title1>{t`My Positions`}</Title1>
+              </Stack>
               <Stack>
                 <MainButton
                   style={{
@@ -1018,7 +1022,8 @@ const Dashboard: FC = () => {
                   background: "rgba(0, 0, 0, 0.7)",
                 })}
               >
-                <Stack direction={"row"} justifyContent={"space-between"}>
+                <Stack direction={"row"} justifyContent={"space-between"} alignItems={"center"}>
+                  <NetworkIcon chainId={chainsData.chainId}/>
                   <Title1>{t`My Positions`}</Title1>
                 </Stack>
                 <Stack
@@ -1040,7 +1045,11 @@ const Dashboard: FC = () => {
             )}
             <Stack padding={"20px"} width={"100%"} height={"100%"}>
               <Stack direction={"row"} justifyContent={"space-between"}>
-                <Title1>{t`My Positions`}</Title1>
+                <Stack direction={'row'} spacing={'8px'} alignItems={"center"}>
+                  <NetworkIcon chainId={chainsData.chainId}/>
+                  <Title1>{t`My Positions`}</Title1>
+                </Stack>
+
                 <Stack direction={"row"} alignItems={"center"} spacing={"10px"}>
                   <MainButton
                     style={{
@@ -1178,17 +1187,19 @@ const Dashboard: FC = () => {
           </Card2>
         )}
         <Stack spacing={"16px"}>
-          <Stack
-            style={{alignItems: "start"}}
-            sx={(theme) => ({
-              width: "100%",
-              borderBottom: "1px solid",
-              borderColor: theme.normal.border,
-              paddingX: "20px",
-            })}
-          >
-            {getNESTTabs}
+          <Stack direction={'row'} alignItems={"center"} spacing={'16px'}
+                 sx={(theme) => ({
+                   width: "100%",
+                   borderBottom: "1px solid",
+                   borderColor: theme.normal.border,
+                   paddingX: "20px",
+                 })}>
+            <NetworkIcon chainId={chainsData.chainId}/>
+            <Stack style={{alignItems: "start"}}>
+              {getNESTTabs}
+            </Stack>
           </Stack>
+
           {isBigMobile ? (
             <Stack px={"20px"} spacing={"12px"}>
               {tabsValue === 0 && positionList &&
