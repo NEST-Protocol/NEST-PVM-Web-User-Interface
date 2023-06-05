@@ -183,40 +183,40 @@ const Dashboard: FC = () => {
   const [shareOrder, setShareOrder] = useState<any>(undefined);
   const {messageSnackBar} = useNESTSnackBar();
 
-  const {data: burnedData} = useSWR(`https://api.nestfi.net/api/dashboard/destory/list?from=2022-11-28&to=${(new Date()).toISOString().split("T")[0]}`, (url) => fetch(url)
+  const {data: burnedData} = useSWR(`https://api.nestfi.net/api/dashboard/destory/list?chainId=${chainsData.chainId ?? 56}&from=2022-11-28&to=${(new Date()).toISOString().split("T")[0]}`, (url: string) => fetch(url)
     .then((res) => res.json())
     .then((res: any) => res.value)
     .then((res: any) => res.map((item: any) => ({
       time: item.date,
-      value: item.value,
+      value: item.value ?? 0,
     }))));
 
-  const {data: txData} = useSWR(`https://api.nestfi.net/api/dashboard/txVolume/list?from=2022-11-28&to=${(new Date()).toISOString().split("T")[0]}`, (url) => fetch(url)
+  const {data: txData} = useSWR(`https://api.nestfi.net/api/dashboard/txVolume/list?chainId=${chainsData.chainId ?? 56}&from=2022-11-28&to=${(new Date()).toISOString().split("T")[0]}`, (url) => fetch(url)
     .then((res) => res.json())
     .then((res: any) => res.value)
     .then((res: any) => res.map((item: any) => ({
       time: item.date,
-      value: item.value,
+      value: item.value ?? 0,
     })))
   )
 
-  const {data: burnedInfo} = useSWR("https://api.nestfi.net/api/dashboard/destory", (url) => fetch(url)
+  const {data: burnedInfo} = useSWR(`https://api.nestfi.net/api/dashboard/destory?chainId=${chainsData.chainId ?? 56}`, (url) => fetch(url)
     .then((res) => res.json())
     .then((res: any) => res.value));
 
-  const {data: txInfo} = useSWR("https://api.nestfi.net/api/dashboard/txVolume", (url) => fetch(url)
+  const {data: txInfo} = useSWR(`https://api.nestfi.net/api/dashboard/txVolume?chainId=${chainsData.chainId ?? 56}`, (url) => fetch(url)
     .then((res) => res.json())
     .then((res: any) => res.value));
 
-  const {data: myTxInfo} = useSWR(address ? `https://api.nestfi.net/api/dashboard/myTx/info?address=${address}` : undefined, (url) => fetch(url)
+  const {data: myTxInfo} = useSWR(address ? `https://api.nestfi.net/api/dashboard/myTx/info?address=${address}&chainId=${chainsData.chainId ?? 56}` : undefined, (url) => fetch(url)
     .then((res) => res.json())
     .then((res: any) => res.value));
 
-  const {data: historyList} = useSWR(address ? `https://api.nestfi.net/api/dashboard/history/list?address=${address}` : undefined, (url) => fetch(url)
+  const {data: historyList} = useSWR(address ? `https://api.nestfi.net/api/dashboard/history/list?address=${address}&chainId=${chainsData.chainId ?? 56}` : undefined, (url) => fetch(url)
     .then((res) => res.json())
     .then((res: any) => res.value.sort((a: any, b: any) => b.time - a.time)));
 
-  const {data: positionList} = useSWR(address ? `https://api.nestfi.net/api/dashboard/position/list?address=${address}` : undefined, (url) => fetch(url)
+  const {data: positionList} = useSWR(address ? `https://api.nestfi.net/api/dashboard/position/list?address=${address}&chainId=${chainsData.chainId ?? 56}` : undefined, (url) => fetch(url)
     .then((res) => res.json())
     .then((res: any) => res.value));
 
@@ -997,7 +997,9 @@ const Dashboard: FC = () => {
                           alignItems={"center"}
                         >
                           <Title4>
-                            {888}{" "}
+                            {myTxInfo?.totalVolume?.toLocaleString("en-US", {
+                              maximumFractionDigits: 2,
+                            })}{" "}
                             NEST
                           </Title4>
                           {/*<Title5 sx={(theme) => ({*/}
@@ -1017,36 +1019,6 @@ const Dashboard: FC = () => {
                               color: theme.normal.text1,
                             })}
                           >{t`Total Number of Trades`}</Caption2>
-                          <Box
-                            component={"button"}
-                            sx={(theme) => ({
-                              cursor: "pointer",
-                              "& svg": {
-                                width: "20px",
-                                height: "20px",
-                                display: "block",
-                                margin: "0 auto",
-                                "& path": {
-                                  fill: theme.normal.text2,
-                                },
-                              },
-                              "&:hover": {
-                                "& svg path": {
-                                  fill: theme.normal.text0,
-                                },
-                              },
-                              "&:active": {
-                                "& svg path": {
-                                  fill: theme.normal.text0,
-                                },
-                              },
-                            })}
-                            onClick={() => {
-                              setShareMyDealModal(true);
-                            }}
-                          >
-                            <Share/>
-                          </Box>
                         </Stack>
                         <Stack
                           direction={"row"}
@@ -1054,7 +1026,9 @@ const Dashboard: FC = () => {
                           alignItems={"center"}
                         >
                           <Title4>
-                            {999}{" "}
+                            {myTxInfo?.totalCount?.toLocaleString("en-US", {
+                              maximumFractionDigits: 2,
+                            })}{" "}
                             NEST
                           </Title4>
                           {/*<Title5 sx={(theme) => ({*/}
@@ -1175,7 +1149,6 @@ const Dashboard: FC = () => {
                   <NetworkIcon chainId={chainsData.chainId}/>
                   <Title1>{t`My Positions`}</Title1>
                 </Stack>
-
                 <Stack direction={"row"} alignItems={"center"} spacing={"10px"}>
                   <MainButton
                     style={{
@@ -1261,7 +1234,9 @@ const Dashboard: FC = () => {
                             },
                           })}
                         >
-                          {999}{" "}
+                          {myTxInfo?.totalVolume?.toLocaleString("en-US", {
+                            maximumFractionDigits: 2,
+                          })}{" "}
                           <span>NEST</span>
                           {/*<span*/}
                           {/*className={'color-full'}>{myTxInfo.totalRate > 0 && '+'}{myTxInfo.totalRate}%</span>*/}
@@ -1286,7 +1261,9 @@ const Dashboard: FC = () => {
                             },
                           })}
                         >
-                          {100}{" "}
+                          {myTxInfo?.totalCount?.toLocaleString("en-US", {
+                            maximumFractionDigits: 2,
+                          })}{" "}
                           <span>NEST</span>
                           {/*<span*/}
                           {/*className={'color-full'}>{myTxInfo.totalRate > 0 && '+'}{myTxInfo.totalRate}%</span>*/}
