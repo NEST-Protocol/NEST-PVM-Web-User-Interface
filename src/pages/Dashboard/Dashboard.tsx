@@ -885,65 +885,195 @@ const Dashboard: FC = () => {
                 </Stack>
               )}
               <Stack padding={"20px 12px"}>
-                <Stack spacing={"4px"}>
-                  <Stack direction={"row"} justifyContent={"space-between"}>
-                    <Caption2
-                      sx={(theme) => ({
-                        color: theme.normal.text1,
-                      })}
-                    >{t`Total Profit & Loss`}</Caption2>
-                    <Box
-                      component={"button"}
-                      sx={(theme) => ({
-                        cursor: "pointer",
-                        "& svg": {
-                          width: "20px",
-                          height: "20px",
-                          display: "block",
-                          margin: "0 auto",
-                          "& path": {
-                            fill: theme.normal.text2,
-                          },
-                        },
-                        "&:hover": {
-                          "& svg path": {
-                            fill: theme.normal.text0,
-                          },
-                        },
-                        "&:active": {
-                          "& svg path": {
-                            fill: theme.normal.text0,
-                          },
-                        },
-                      })}
-                      onClick={() => {
-                        setShareMyDealModal(true);
-                      }}
-                    >
-                      <Share/>
-                    </Box>
-                  </Stack>
-                  <Stack
-                    direction={"row"}
-                    spacing={"4px"}
-                    alignItems={"center"}
-                  >
-                    <Title4>
-                      {myTxInfo?.totalValue.toLocaleString("en-US", {
-                        maximumFractionDigits: 2,
-                      })}{" "}
-                      NEST
-                    </Title4>
-                    {/*<Title5 sx={(theme) => ({*/}
-                    {/*  color: theme.normal.success*/}
-                    {/*})}>{myTxInfo.totalRate > 0 && '+'}{myTxInfo.totalRate.toLocaleString('en-US', {*/}
-                    {/*  maximumFractionDigits: 2,*/}
-                    {/*})}%</Title5>*/}
-                  </Stack>
-                </Stack>
-                <Box py={"20px"}>
-                  <NESTLine/>
-                </Box>
+                {
+                  chainsData.chainId === 56 || chainsData.chainId === 97 && (
+                    <>
+                      <Stack spacing={"4px"}>
+                        <Stack direction={"row"} justifyContent={"space-between"}>
+                          <Caption2
+                            sx={(theme) => ({
+                              color: theme.normal.text1,
+                            })}
+                          >{t`Total Profit & Loss`}</Caption2>
+                          <Box
+                            component={"button"}
+                            sx={(theme) => ({
+                              cursor: "pointer",
+                              "& svg": {
+                                width: "20px",
+                                height: "20px",
+                                display: "block",
+                                margin: "0 auto",
+                                "& path": {
+                                  fill: theme.normal.text2,
+                                },
+                              },
+                              "&:hover": {
+                                "& svg path": {
+                                  fill: theme.normal.text0,
+                                },
+                              },
+                              "&:active": {
+                                "& svg path": {
+                                  fill: theme.normal.text0,
+                                },
+                              },
+                            })}
+                            onClick={() => {
+                              setShareMyDealModal(true);
+                            }}
+                          >
+                            <Share/>
+                          </Box>
+                        </Stack>
+                        <Stack
+                          direction={"row"}
+                          spacing={"4px"}
+                          alignItems={"center"}
+                        >
+                          <Title4>
+                            {myTxInfo?.totalValue.toLocaleString("en-US", {
+                              maximumFractionDigits: 2,
+                            })}{" "}
+                            NEST
+                          </Title4>
+                          {/*<Title5 sx={(theme) => ({*/}
+                          {/*  color: theme.normal.success*/}
+                          {/*})}>{myTxInfo.totalRate > 0 && '+'}{myTxInfo.totalRate.toLocaleString('en-US', {*/}
+                          {/*  maximumFractionDigits: 2,*/}
+                          {/*})}%</Title5>*/}
+                        </Stack>
+                      </Stack>
+                      <Box py={"20px"}>
+                        <NESTLine/>
+                      </Box>
+                    </>
+                  )
+                }
+                {
+                  chainsData.chainId === 534353 && (
+                    <>
+                      <Stack spacing={"4px"}>
+                        <Stack direction={"row"} justifyContent={"space-between"}>
+                          <Caption2
+                            sx={(theme) => ({
+                              color: theme.normal.text1,
+                            })}
+                          >{t`Total Profit & Loss`}</Caption2>
+                          <Box
+                            component={"button"}
+                            sx={(theme) => ({
+                              cursor: "pointer",
+                              "& svg": {
+                                width: "20px",
+                                height: "20px",
+                                display: "block",
+                                margin: "0 auto",
+                                "& path": {
+                                  fill: theme.normal.text2,
+                                },
+                              },
+                              "&:hover": {
+                                "& svg path": {
+                                  fill: theme.normal.text0,
+                                },
+                              },
+                              "&:active": {
+                                "& svg path": {
+                                  fill: theme.normal.text0,
+                                },
+                              },
+                            })}
+                            onClick={() => {
+                              setShareMyDealModal(true);
+                            }}
+                          >
+                            <Share/>
+                          </Box>
+                        </Stack>
+                        <Stack
+                          direction={"row"}
+                          spacing={"4px"}
+                          alignItems={"center"}
+                        >
+                          <Title4>
+                            {myTxInfo?.totalValue.toLocaleString("en-US", {
+                              maximumFractionDigits: 2,
+                            })}{" "}
+                            NEST
+                          </Title4>
+                          {/*<Title5 sx={(theme) => ({*/}
+                          {/*  color: theme.normal.success*/}
+                          {/*})}>{myTxInfo.totalRate > 0 && '+'}{myTxInfo.totalRate.toLocaleString('en-US', {*/}
+                          {/*  maximumFractionDigits: 2,*/}
+                          {/*})}%</Title5>*/}
+                        </Stack>
+                      </Stack>
+                      <Box py={"20px"}>
+                        <NESTLine/>
+                      </Box>
+                      <Stack spacing={"4px"}>
+                        <Stack direction={"row"} justifyContent={"space-between"}>
+                          <Caption2
+                            sx={(theme) => ({
+                              color: theme.normal.text1,
+                            })}
+                          >{t`Total Profit & Loss`}</Caption2>
+                          <Box
+                            component={"button"}
+                            sx={(theme) => ({
+                              cursor: "pointer",
+                              "& svg": {
+                                width: "20px",
+                                height: "20px",
+                                display: "block",
+                                margin: "0 auto",
+                                "& path": {
+                                  fill: theme.normal.text2,
+                                },
+                              },
+                              "&:hover": {
+                                "& svg path": {
+                                  fill: theme.normal.text0,
+                                },
+                              },
+                              "&:active": {
+                                "& svg path": {
+                                  fill: theme.normal.text0,
+                                },
+                              },
+                            })}
+                            onClick={() => {
+                              setShareMyDealModal(true);
+                            }}
+                          >
+                            <Share/>
+                          </Box>
+                        </Stack>
+                        <Stack
+                          direction={"row"}
+                          spacing={"4px"}
+                          alignItems={"center"}
+                        >
+                          <Title4>
+                            {myTxInfo?.totalValue.toLocaleString("en-US", {
+                              maximumFractionDigits: 2,
+                            })}{" "}
+                            NEST
+                          </Title4>
+                          {/*<Title5 sx={(theme) => ({*/}
+                          {/*  color: theme.normal.success*/}
+                          {/*})}>{myTxInfo.totalRate > 0 && '+'}{myTxInfo.totalRate.toLocaleString('en-US', {*/}
+                          {/*  maximumFractionDigits: 2,*/}
+                          {/*})}%</Title5>*/}
+                        </Stack>
+                      </Stack>
+                      <Box py={"20px"}>
+                        <NESTLine/>
+                      </Box>
+                    </>
+                  )
+                }
                 <Stack spacing={"22px"}>
                   <Stack direction={"row"} justifyContent={"space-between"}>
                     <Caption3>{t`Today's PNL`}</Caption3>
@@ -1082,32 +1212,94 @@ const Dashboard: FC = () => {
                   </DashboardShare>
                 </Stack>
               </Stack>
-              <Stack
-                alignItems={"center"}
-                pt={"26px"}
-                pb={"40px"}
-                spacing={"12px"}
-              >
-                <Title2
-                  sx={(theme) => ({
-                    span: {
-                      fontSize: "28px",
-                      fontWeight: "700",
-                      lineHeight: "40px",
-                    },
-                    ".color-full": {
-                      // color: myTxInfo.totalRate >= 0 ? theme.normal.success : theme.normal.danger,
-                    },
-                  })}
-                >
-                  {myTxInfo?.totalValue.toLocaleString("en-US", {
-                    maximumFractionDigits: 2,
-                  })}{" "}
-                  <span>NEST</span>
-                  {/*<span*/}
-                  {/*className={'color-full'}>{myTxInfo.totalRate > 0 && '+'}{myTxInfo.totalRate}%</span>*/}
-                </Title2>
-                <Caption1>{t`Total Profit & Loss`}</Caption1>
+              <Stack direction={'row'} justifyContent={"space-around"}>
+                {
+                  chainsData.chainId === 56 || chainsData.chainId === 97 && (
+                    <Stack
+                      alignItems={"center"}
+                      pt={"26px"}
+                      pb={"40px"}
+                      spacing={"12px"}
+                    >
+                      <Title2
+                        sx={(theme) => ({
+                          span: {
+                            fontSize: "28px",
+                            fontWeight: "700",
+                            lineHeight: "40px",
+                          },
+                          ".color-full": {
+                            // color: myTxInfo.totalRate >= 0 ? theme.normal.success : theme.normal.danger,
+                          },
+                        })}
+                      >
+                        {myTxInfo?.totalValue.toLocaleString("en-US", {
+                          maximumFractionDigits: 2,
+                        })}{" "}
+                        <span>NEST</span>
+                        {/*<span*/}
+                        {/*className={'color-full'}>{myTxInfo.totalRate > 0 && '+'}{myTxInfo.totalRate}%</span>*/}
+                      </Title2>
+                      <Caption1>{t`Total Profit & Loss`}</Caption1>
+                    </Stack>
+                  )
+                }
+                {
+                  chainsData.chainId === 534353 && (
+                    <>
+                      <Stack
+                        alignItems={"center"}
+                        pt={"26px"}
+                        pb={"40px"}
+                        spacing={"12px"}
+                      >
+                        <Title2
+                          sx={(theme) => ({
+                            span: {
+                              fontSize: "28px",
+                              fontWeight: "700",
+                              lineHeight: "40px",
+                            },
+                            ".color-full": {
+                              // color: myTxInfo.totalRate >= 0 ? theme.normal.success : theme.normal.danger,
+                            },
+                          })}
+                        >
+                          {999}{" "}
+                          <span>NEST</span>
+                          {/*<span*/}
+                          {/*className={'color-full'}>{myTxInfo.totalRate > 0 && '+'}{myTxInfo.totalRate}%</span>*/}
+                        </Title2>
+                        <Caption1>{t`My Total Trading Volume`}</Caption1>
+                      </Stack>
+                      <Stack
+                        alignItems={"center"}
+                        pt={"26px"}
+                        pb={"40px"}
+                        spacing={"12px"}
+                      >
+                        <Title2
+                          sx={(theme) => ({
+                            span: {
+                              fontSize: "28px",
+                              fontWeight: "700",
+                              lineHeight: "40px",
+                            },
+                            ".color-full": {
+                              // color: myTxInfo.totalRate >= 0 ? theme.normal.success : theme.normal.danger,
+                            },
+                          })}
+                        >
+                          {100}{" "}
+                          <span>NEST</span>
+                          {/*<span*/}
+                          {/*className={'color-full'}>{myTxInfo.totalRate > 0 && '+'}{myTxInfo.totalRate}%</span>*/}
+                        </Title2>
+                        <Caption1>{t`Total Number of Trades`}</Caption1>
+                      </Stack>
+                    </>
+                  )
+                }
               </Stack>
               <Stack direction={"row"} spacing={"16px"}>
                 <Card3>
