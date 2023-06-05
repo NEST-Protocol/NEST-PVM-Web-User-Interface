@@ -216,8 +216,15 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
       setInputAmount("100");
       setSetToken(true);
     }
-    
-  }, [chainsData.chainId, nestBalance, setInputAmount, setInputToken, setToken, uniSwapAmountOut, usdtBalance]);
+  }, [
+    chainsData.chainId,
+    nestBalance,
+    setInputAmount,
+    setInputToken,
+    setToken,
+    uniSwapAmountOut,
+    usdtBalance,
+  ]);
   const BaseBox = useMemo(() => {
     return styled(Box)(({ theme }) => {
       const width = isMobile ? "100%" : 450;
@@ -462,11 +469,14 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
       </Stack>
     );
   }, [inputToken, showFee, showFeeHoverText, showPositions, showTotalPay]);
+  const inputTokenArray = useMemo(() => {
+    return chainsData.chainId === 534353 ? [inputToken] : INPUT_TOKENS;
+  }, [chainsData.chainId, inputToken]);
   const inputNestAmount = useMemo(() => {
     return (
       <NESTInputSelect
         tokenName={inputToken}
-        tokenArray={INPUT_TOKENS}
+        tokenArray={inputTokenArray}
         selectToken={(tokenName: string) => {
           setInputAmount("");
           setInputToken(tokenName);
@@ -487,6 +497,7 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
     checkMinNEST,
     inputAmount,
     inputToken,
+    inputTokenArray,
     maxCallBack,
     setInputAmount,
     setInputToken,
@@ -702,8 +713,8 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
               <button
                 className="ModalLeftButton"
                 onClick={() => {
-                  setSl("")
-                  setTp("")
+                  setSl("");
+                  setTp("");
                   getOrderInfo();
                   setIsEdit(false);
                 }}
