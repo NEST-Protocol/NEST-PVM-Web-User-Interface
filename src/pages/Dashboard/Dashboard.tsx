@@ -228,6 +228,8 @@ const Dashboard: FC = () => {
         value={myTxInfo || {
           totalValue: 0,
           todayValue: 0,
+          totalCount: 0,
+          totalVolume: 0,
           day7Value: 0,
           day30Value: 0,
         }}
@@ -1027,9 +1029,8 @@ const Dashboard: FC = () => {
                         >
                           <Title4>
                             {myTxInfo?.totalCount?.toLocaleString("en-US", {
-                              maximumFractionDigits: 2,
+                              maximumFractionDigits: 0,
                             })}{" "}
-                            NEST
                           </Title4>
                           {/*<Title5 sx={(theme) => ({*/}
                           {/*  color: theme.normal.success*/}
@@ -1262,9 +1263,8 @@ const Dashboard: FC = () => {
                           })}
                         >
                           {myTxInfo?.totalCount?.toLocaleString("en-US", {
-                            maximumFractionDigits: 2,
+                            maximumFractionDigits: 0,
                           })}{" "}
-                          <span>NEST</span>
                           {/*<span*/}
                           {/*className={'color-full'}>{myTxInfo.totalRate > 0 && '+'}{myTxInfo.totalRate}%</span>*/}
                         </Title2>
