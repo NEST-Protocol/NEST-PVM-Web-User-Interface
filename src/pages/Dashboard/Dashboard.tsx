@@ -959,7 +959,7 @@ const Dashboard: FC = () => {
                             sx={(theme) => ({
                               color: theme.normal.text1,
                             })}
-                          >{t`Total Profit & Loss`}</Caption2>
+                          >{t`My Total Trading Volume`}</Caption2>
                           <Box
                             component={"button"}
                             sx={(theme) => ({
@@ -997,9 +997,7 @@ const Dashboard: FC = () => {
                           alignItems={"center"}
                         >
                           <Title4>
-                            {myTxInfo?.totalValue.toLocaleString("en-US", {
-                              maximumFractionDigits: 2,
-                            })}{" "}
+                            {888}{" "}
                             NEST
                           </Title4>
                           {/*<Title5 sx={(theme) => ({*/}
@@ -1018,7 +1016,7 @@ const Dashboard: FC = () => {
                             sx={(theme) => ({
                               color: theme.normal.text1,
                             })}
-                          >{t`Total Profit & Loss`}</Caption2>
+                          >{t`Total Number of Trades`}</Caption2>
                           <Box
                             component={"button"}
                             sx={(theme) => ({
@@ -1056,9 +1054,7 @@ const Dashboard: FC = () => {
                           alignItems={"center"}
                         >
                           <Title4>
-                            {myTxInfo?.totalValue.toLocaleString("en-US", {
-                              maximumFractionDigits: 2,
-                            })}{" "}
+                            {999}{" "}
                             NEST
                           </Title4>
                           {/*<Title5 sx={(theme) => ({*/}
