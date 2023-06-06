@@ -200,11 +200,11 @@ const Dashboard: FC = () => {
     })))
   )
 
-  const {data: burnedInfo} = useSWR(`https://api.nestfi.net/api/dashboard/destory?chainId=${chainsData.chainId === 534353 ? 534353 : 56}`, (url: any) => fetch(url)
+  const {data: burnedInfo, isLoading: isBurnedInfoLoading} = useSWR(`https://api.nestfi.net/api/dashboard/destory?chainId=${chainsData.chainId === 534353 ? 534353 : 56}`, (url: any) => fetch(url)
     .then((res) => res.json())
     .then((res: any) => res.value));
 
-  const {data: txInfo} = useSWR(`https://api.nestfi.net/api/dashboard/txVolume?chainId=${chainsData.chainId === 534353 ? 534353 : 56}`, (url: any) => fetch(url)
+  const {data: txInfo, isLoading: isTxInfoLoading} = useSWR(`https://api.nestfi.net/api/dashboard/txVolume?chainId=${chainsData.chainId === 534353 ? 534353 : 56}`, (url: any) => fetch(url)
     .then((res) => res.json())
     .then((res: any) => res.value));
 
@@ -275,6 +275,7 @@ const Dashboard: FC = () => {
                 fontWeight: 700,
                 fontSize: 16,
                 color: theme.normal.text0,
+                whiteSpace: "nowrap",
               })}
             >
               {formatDate(item.time * 1000)}
@@ -294,6 +295,7 @@ const Dashboard: FC = () => {
             spacing={"4px"}
             alignItems={"flex-end"}
             sx={(theme) => ({
+              whiteSpace: "nowrap",
               "& p": {
                 fontWeight: 700,
                 fontSize: 16,
@@ -328,6 +330,7 @@ const Dashboard: FC = () => {
               fontWeight: 700,
               fontSize: 16,
               color: theme.normal.text0,
+              whiteSpace: "nowrap",
             })}
           >
             {item.openPrice.toLocaleString("en-US", {
@@ -343,6 +346,7 @@ const Dashboard: FC = () => {
               fontWeight: 700,
               fontSize: 16,
               color: theme.normal.text0,
+              whiteSpace: "nowrap",
             })}
           >
             {(
@@ -370,6 +374,7 @@ const Dashboard: FC = () => {
                 fontWeight: 700,
                 fontSize: 16,
                 color: theme.normal.text0,
+                whiteSpace: "nowrap",
               })}
             >
               {item.lastPrice.toLocaleString("en-US", {
@@ -383,6 +388,7 @@ const Dashboard: FC = () => {
           <Stack
             spacing={"4px"}
             sx={(theme) => ({
+              whiteSpace: "nowrap",
               "& p": {
                 fontSize: "12px",
                 fontWeight: 400,
@@ -672,15 +678,13 @@ const Dashboard: FC = () => {
         value={tabsValue}
         className={""}
         datArray={[
-          <Stack direction={"row"} spacing={"4px"} alignItems={"center"}>
+          <Stack direction={"row"} spacing={"4px"} alignItems={"center"} whiteSpace={"nowrap"}>
             <FuturesOrder/>
-            <p
-              style={{fontWeight: 700, fontSize: "16px", lineHeight: "22px"}}
-            >
+            <p style={{fontWeight: 700, fontSize: "16px", lineHeight: "22px"}}>
               <Trans>Current Positions</Trans>
             </p>
           </Stack>,
-          <Stack direction={"row"} spacing={"4px"} alignItems={"center"}>
+          <Stack direction={"row"} spacing={"4px"} alignItems={"center"} whiteSpace={"nowrap"}>
             <DashboardIcon2/>
             <p
               style={{fontWeight: 700, fontSize: "16px", lineHeight: "22px"}}
@@ -692,7 +696,7 @@ const Dashboard: FC = () => {
         height={44}
         space={24}
         selectCallBack={(value: number) => setTabsValue(value)}
-        isFull={isBigMobile}
+        isFull={false}
       />
     );
   }, [tabsValue, isBigMobile]);
@@ -775,14 +779,14 @@ const Dashboard: FC = () => {
                 title1={t`NEST Total Burned`}
                 title2={t`Today Burned`}
                 value1={`${
-                  !burnedInfo?.totalDestroy
+                  isBurnedInfoLoading
                     ? "-"
                     : burnedInfo.totalDestroy.toLocaleString("en-US", {
                       maximumFractionDigits: 2,
                     })
                 }`}
                 value2={`${
-                  !burnedInfo?.dayDestroy
+                  isBurnedInfoLoading
                     ? "-"
                     : burnedInfo.dayDestroy.toLocaleString("en-US", {
                       maximumFractionDigits: 2,
@@ -806,14 +810,14 @@ const Dashboard: FC = () => {
                 title1={t`Total Transaction Volume`}
                 title2={t`Today Volume`}
                 value1={`${
-                  !txInfo?.totalVolume
+                  isTxInfoLoading
                     ? "-"
                     : txInfo?.totalVolume.toLocaleString("en-US", {
                       maximumFractionDigits: 2,
                     })
                 }`}
                 value2={`${
-                  !txInfo?.dayVolume
+                  isTxInfoLoading
                     ? "-"
                     : txInfo?.dayVolume.toLocaleString("en-US", {
                       maximumFractionDigits: 2,
