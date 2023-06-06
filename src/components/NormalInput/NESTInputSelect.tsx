@@ -248,6 +248,7 @@ const NESTInputSelect: FC<NESTInputSelectProps> = ({ ...props }) => {
               fontWeight: 400,
               fontSize: 12,
               color: theme.normal.text2,
+              lineHeight: "18px",
               "& span": {
                 color: theme.normal.text0,
               },
@@ -256,7 +257,10 @@ const NESTInputSelect: FC<NESTInputSelectProps> = ({ ...props }) => {
             {t`Balance:`}{" "}
             <span>{`${props.showBalance} ${props.tokenName}`}</span>
           </Box>
-          <LinkButton onClick={props.maxCallBack}>
+          <LinkButton
+            onClick={props.maxCallBack}
+            sx={{ fontSize: "12px", lineHeight: "18px" }}
+          >
             <Trans>MAX</Trans>
           </LinkButton>
         </Stack>

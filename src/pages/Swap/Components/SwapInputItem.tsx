@@ -208,7 +208,7 @@ const SwapInputItem: FC<SwapInputItemProps> = ({ children, ...props }) => {
             {t`Balance:`} <span>{`${props.balance} ${props.tokenName}`}</span>
           </p>
           <Max onClick={props.maxCallBack}>
-            <Trans>Max</Trans>
+            <Trans>MAX</Trans>
           </Max>
         </Stack>
       </ShowInfoStack>
