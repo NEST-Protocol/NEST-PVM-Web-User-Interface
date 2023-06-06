@@ -275,6 +275,10 @@ const NESTInputSelect: FC<NESTInputSelectProps> = ({ ...props }) => {
                 alignItems={"center"}
                 spacing={"4px"}
                 sx={{
+                  "& p": {
+                    fontSize: '12px',
+                    lineHeight: '18px',
+                  },
                   "& svg": {
                     width: 12,
                     height: 12,
