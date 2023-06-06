@@ -200,11 +200,11 @@ const Dashboard: FC = () => {
     })))
   )
 
-  const {data: burnedInfo} = useSWR(`https://api.nestfi.net/api/dashboard/destory?chainId=${chainsData.chainId === 534353 ? 534353 : 56}`, (url: any) => fetch(url)
+  const {data: burnedInfo, isLoading: isBurnedInfoLoading} = useSWR(`https://api.nestfi.net/api/dashboard/destory?chainId=${chainsData.chainId === 534353 ? 534353 : 56}`, (url: any) => fetch(url)
     .then((res) => res.json())
     .then((res: any) => res.value));
 
-  const {data: txInfo} = useSWR(`https://api.nestfi.net/api/dashboard/txVolume?chainId=${chainsData.chainId === 534353 ? 534353 : 56}`, (url: any) => fetch(url)
+  const {data: txInfo, isLoading: isTxInfoLoading} = useSWR(`https://api.nestfi.net/api/dashboard/txVolume?chainId=${chainsData.chainId === 534353 ? 534353 : 56}`, (url: any) => fetch(url)
     .then((res) => res.json())
     .then((res: any) => res.value));
 
@@ -775,14 +775,14 @@ const Dashboard: FC = () => {
                 title1={t`NEST Total Burned`}
                 title2={t`Today Burned`}
                 value1={`${
-                  !burnedInfo?.totalDestroy
+                  isBurnedInfoLoading
                     ? "-"
                     : burnedInfo.totalDestroy.toLocaleString("en-US", {
                       maximumFractionDigits: 2,
                     })
                 }`}
                 value2={`${
-                  !burnedInfo?.dayDestroy
+                  isBurnedInfoLoading
                     ? "-"
                     : burnedInfo.dayDestroy.toLocaleString("en-US", {
                       maximumFractionDigits: 2,
@@ -806,14 +806,14 @@ const Dashboard: FC = () => {
                 title1={t`Total Transaction Volume`}
                 title2={t`Today Volume`}
                 value1={`${
-                  !txInfo?.totalVolume
+                  isTxInfoLoading
                     ? "-"
                     : txInfo?.totalVolume.toLocaleString("en-US", {
                       maximumFractionDigits: 2,
                     })
                 }`}
                 value2={`${
-                  !txInfo?.dayVolume
+                  isTxInfoLoading
                     ? "-"
                     : txInfo?.dayVolume.toLocaleString("en-US", {
                       maximumFractionDigits: 2,
