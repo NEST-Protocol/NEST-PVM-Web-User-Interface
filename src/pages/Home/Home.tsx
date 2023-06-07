@@ -17,22 +17,24 @@ import {Link} from "react-router-dom";
 import {t, Trans} from '@lingui/macro'
 import useSWR from "swr";
 import Box from "@mui/material/Box";
+import useNEST from "../../hooks/useNEST";
 
 const Home: FC = () => {
   const [openApplyModal, setOpenApplyModal] = useState(false)
   const {width} = useWindowWidth()
   const {nowTheme} = useTheme()
+  const {chainsData} = useNEST()
 
   const {data: kols} = useSWR('https://api.nestfi.net/api/users/kol/count', (url) => fetch(url)
     .then((res) => res.json())
     .then((data) => data.value)
   );
-  const {data: destoryData} = useSWR('https://api.nestfi.net/api/dashboard/destory', (url) => fetch(url)
+  const {data: destoryData} = useSWR(`https://api.nestfi.net/api/dashboard/destory?chainId=${chainsData.chainId === 534353 ? 534353 : 56}`, (url: string) => fetch(url)
     .then((res) => res.json())
     .then((data) => data.value)
   );
 
-  const {data: txInfo} = useSWR("https://api.nestfi.net/api/dashboard/txVolume", (url) => fetch(url)
+  const {data: txInfo} = useSWR(`https://api.nestfi.net/api/dashboard/txVolume?chainId=${chainsData.chainId === 534353 ? 534353 : 56}`, (url: string) => fetch(url)
     .then((res) => res.json())
     .then((res: any) => res.value));
 
@@ -123,31 +125,35 @@ const Home: FC = () => {
                     {
                       title: t`Total Trading Volume (NEST)`,
                       value: txInfo ? Number(txInfo?.totalVolume?.toFixed(2))?.toLocaleString() : '-',
+                      chainId: [56, 97, 534353],
                     },
                     {
                       title: t`Total Burned (NEST)`,
                       value: destoryData ? Number((-1 * destoryData?.totalDestroy)?.toFixed(2))?.toLocaleString() || 0 : '-',
+                      chainId: [56, 97, 534353],
                     },
                     {
                       title: t`KOLs Joined NESTFi`,
                       value: kols ? kols.toLocaleString() || 0 : '-',
+                      chainId: [56, 97],
                     }
-                  ].map((item, index) => (
-                    <Stack key={index} spacing={'12px'} width={'100%'}>
-                      <Box sx={(theme) => ({
-                        fontWeight: "700",
-                        fontSize: "48px",
-                        lineHeight: "60px",
-                        color: theme.normal.text0,
-                      })}>{item.value}</Box>
-                      <Box sx={(theme) => ({
-                        fontWeight: "700",
-                        fontSize: "14px",
-                        lineHeight: "20px",
-                        color: theme.normal.text2,
-                      })}>{item.title}</Box>
-                    </Stack>
-                  ))
+                  ].filter((item) => item.chainId.includes(chainsData.chainId ?? 56))
+                    .map((item, index) => (
+                      <Stack key={index} spacing={'12px'} width={'100%'}>
+                        <Box sx={(theme) => ({
+                          fontWeight: "700",
+                          fontSize: "48px",
+                          lineHeight: "60px",
+                          color: theme.normal.text0,
+                        })}>{item.value}</Box>
+                        <Box sx={(theme) => ({
+                          fontWeight: "700",
+                          fontSize: "14px",
+                          lineHeight: "20px",
+                          color: theme.normal.text2,
+                        })}>{item.title}</Box>
+                      </Stack>
+                    ))
                 }
               </Stack>
             ) : (
@@ -158,46 +164,50 @@ const Home: FC = () => {
                       title: t`Total Trading Volume (NEST)`,
                       value: txInfo ? txInfo?.totalVolume?.toFixed(2)?.toLocaleString() : '-',
                       icon: <HomeTradingVolume/>,
+                      chainId: [56, 97, 534353],
                     },
                     {
                       title: t`Total Burned (NEST)`,
                       value: destoryData ? (-1 * destoryData?.totalDestroy)?.toFixed(2)?.toLocaleString() || 0 : '-',
                       icon: <HomeBurned/>,
+                      chainId: [56, 97, 534353],
                     },
                     {
                       title: t`KOLs Joined NESTFi`,
                       value: kols ? kols.toLocaleString() || 0 : '-',
                       icon: <HomeKols/>,
+                      chainId: [56, 97],
                     }
-                  ].map((item, index) => (
-                    <Stack p={'20px'} sx={(theme) => ({
-                      backgroundColor: theme.normal.bg1,
-                      borderRadius: '12px',
-                      "svg": {
-                        width: '48px',
-                        height: '48px',
-                        "path": {
-                          fill: theme.normal.text0,
+                  ].filter((item) => item.chainId.includes(chainsData.chainId ?? 56))
+                    .map((item, index) => (
+                      <Stack p={'20px'} sx={(theme) => ({
+                        backgroundColor: theme.normal.bg1,
+                        borderRadius: '12px',
+                        "svg": {
+                          width: '48px',
+                          height: '48px',
+                          "path": {
+                            fill: theme.normal.text0,
+                          }
                         }
-                      }
-                    })} direction={'row'} key={index} alignItems={"center"}>
-                      <Stack spacing={'12px'} width={'100%'} textAlign={"start"}>
-                        <Box sx={(theme) => ({
-                          fontWeight: "700",
-                          fontSize: "28px",
-                          lineHeight: "40px",
-                          color: theme.normal.text0,
-                        })}>{item.value}</Box>
-                        <Box sx={(theme) => ({
-                          fontWeight: "700",
-                          fontSize: "14px",
-                          lineHeight: "20px",
-                          color: theme.normal.text2,
-                        })}>{item.title}</Box>
+                      })} direction={'row'} key={index} alignItems={"center"}>
+                        <Stack spacing={'12px'} width={'100%'} textAlign={"start"}>
+                          <Box sx={(theme) => ({
+                            fontWeight: "700",
+                            fontSize: "28px",
+                            lineHeight: "40px",
+                            color: theme.normal.text0,
+                          })}>{item.value}</Box>
+                          <Box sx={(theme) => ({
+                            fontWeight: "700",
+                            fontSize: "14px",
+                            lineHeight: "20px",
+                            color: theme.normal.text2,
+                          })}>{item.title}</Box>
+                        </Stack>
+                        {item.icon}
                       </Stack>
-                      {item.icon}
-                    </Stack>
-                  ))
+                    ))
                 }
               </Stack>
             )
@@ -217,7 +227,7 @@ const Home: FC = () => {
         </Stack>
       </Stack>
       {
-        width <= WidthType.md && (
+        width <= WidthType.md && (chainsData.chainId === 56 || chainsData.chainId === 97) && (
           <Stack py={'40px'} width={'100%'} spacing={'40px'} alignItems={"center"}
                  bgcolor={'rgba(234, 170, 0, 0.1)'}
                  sx={(theme) => ({
@@ -248,7 +258,7 @@ const Home: FC = () => {
              })}
              alignItems={"center"}>
         {
-          width >= WidthType.lg && (
+          width >= WidthType.lg && (chainsData.chainId === 56 || chainsData.chainId === 97) && (
             <Stack width={'100%'}
                    px={['20px', '20px', '20px', '40px',]}
                    sx={(theme) => ({
