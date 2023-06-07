@@ -147,7 +147,7 @@ const Home: FC = () => {
                           color: theme.normal.text0,
                         })}>{item.value}</Box>
                         <Box sx={(theme) => ({
-                          fontWeight: "700",
+                          fontWeight: "400",
                           fontSize: "14px",
                           lineHeight: "20px",
                           color: theme.normal.text2,
@@ -199,7 +199,7 @@ const Home: FC = () => {
                             color: theme.normal.text0,
                           })}>{item.value}</Box>
                           <Box sx={(theme) => ({
-                            fontWeight: "700",
+                            fontWeight: "400",
                             fontSize: "14px",
                             lineHeight: "20px",
                             color: theme.normal.text2,
@@ -229,7 +229,6 @@ const Home: FC = () => {
       {
         width <= WidthType.md && (chainsData.chainId === 56 || chainsData.chainId === 97) && (
           <Stack py={'40px'} width={'100%'} spacing={'40px'} alignItems={"center"}
-                 bgcolor={'rgba(234, 170, 0, 0.1)'}
                  sx={(theme) => ({
                    color: theme.normal.text0,
                    fontSize: '24px',
@@ -238,6 +237,7 @@ const Home: FC = () => {
                    borderRadius: '20px',
                    textAlign: 'center',
                    paddingX: '20px',
+                   background: theme.normal.bg1,
                  })}>
             <Box>{t`Join NESTFi affiliate program and get commission on your referrals.`}</Box>
             <MainButton title={t`Join`} style={{
@@ -266,10 +266,12 @@ const Home: FC = () => {
                    })}
                    alignItems={"center"}>
               <Stack direction={'row'} width={'100%'} maxWidth={'1600px'}
-                     bgcolor={'rgba(234, 170, 0, 0.1)'}
                      borderRadius={'20px'} justifyContent={'space-between'}
                      alignItems={"center"}
                      py={['40px', '40px', '40px', '40px', '40px', '44px']} px={'40px'}
+                     sx={(theme) => ({
+                        background: theme.normal.bg1,
+                       })}
               >
                 <Box sx={(theme) => ({
                   fontSize: '28px',
@@ -354,7 +356,7 @@ const Home: FC = () => {
                             {item.title}
                           </Box>
                           <Box sx={(theme) => ({
-                            fontWeight: ["400", '400', '400', '700'],
+                            fontWeight: ["400"],
                             fontSize: "14px",
                             lineHeight: "20px",
                             color: theme.normal.text2,
@@ -455,7 +457,7 @@ const Home: FC = () => {
                         color: theme.normal.text2,
                         fontSize: ['14px', '16px'],
                         lineHeight: ['20px', '22px'],
-                        fontWeight: ['400', '700'],
+                        fontWeight: '400',
                         paddingBottom: '20px',
                       })}>{item.description}</Stack>
                       <Link to={item.link}>
@@ -509,7 +511,7 @@ const Home: FC = () => {
               </Box>
               <Box sx={(theme) => ({
                 fontSize: ['14px', "16px"],
-                fontWeight: ['400', "700"],
+                fontWeight: '400',
                 lineHeight: ['20px', "22px"],
                 color: theme.normal.text2,
                 textAlign: width <= WidthType.lg ? 'center' : 'start',
