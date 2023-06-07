@@ -706,7 +706,7 @@ const Dashboard: FC = () => {
       {shareMyDealModal}
       {shareMyOrderModal}
       {
-        isKol && isKol?.value && (
+        isKol && isKol?.value && chainsData.chainId === 56 && (
           <Stack direction={'row'} width={'100%'} justifyContent={"center"} spacing={'32px'} sx={(theme) => ({
             color: theme.normal.text0,
             fontWeight: 700,
