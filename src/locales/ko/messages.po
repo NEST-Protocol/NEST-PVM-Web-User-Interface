@@ -54,6 +54,8 @@ msgid ""
 "0 balance. Before trading, you can switch to \"Swap\" to exchange\n"
 "between USDT and NEST token."
 msgstr ""
+"0 잔액. 거래하기 전에 \"스왑\"으로 전환하여 \n"
+"USDT와 NEST 토큰으로 교환할 수 있습니다."
 
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 msgid "1. The trigger price has been reached but there is not enough time to execute."
@@ -383,7 +385,7 @@ msgstr "요청 실패"
 #: src/components/NormalInput/NESTInputSelect.tsx
 #: src/pages/Share/Head/NESTHead.tsx
 msgid "Faucet"
-msgstr ""
+msgstr "수도꼭지"
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
@@ -416,7 +418,7 @@ msgstr "선물"
 #: src/pages/DirectPoster/DirectPoster.tsx
 #: src/pages/DirectPoster/useDirectPoster.ts
 msgid "GET"
-msgstr ""
+msgstr "얻다"
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "Github"
@@ -476,7 +478,7 @@ msgstr "피추천인의 거래량"
 
 #: src/pages/DirectPoster/useDirectPoster.ts
 msgid "It's available once in 24 hours. Please come later."
-msgstr ""
+msgstr "24시간에 한 번만 이용할 수 있습니다. 나중에 방문해 주세요."
 
 #: src/pages/Home/Home.tsx
 #: src/pages/Home/Home.tsx
@@ -578,12 +580,9 @@ msgstr "롱"
 msgid "Market"
 msgstr "시장가"
 
-#: src/pages/Swap/Components/SwapInputItem.tsx
-msgid "Max"
-msgstr "최대"
-
 #: src/components/NormalInput/NESTInput.tsx
 #: src/components/NormalInput/NESTInputSelect.tsx
+#: src/pages/Swap/Components/SwapInputItem.tsx
 msgid "MAX"
 msgstr "최대"
 
@@ -616,7 +615,7 @@ msgstr "내 포지션"
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 msgid "My Total Trading Volume"
-msgstr ""
+msgstr "내 총 거래량"
 
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "NEST Total Burned"
@@ -719,7 +718,7 @@ msgstr "인증을 위해 승인을 클릭하면 포지션을 열 수 있으며, 
 
 #: src/pages/DirectPoster/useDirectPoster.ts
 msgid "Please get ETH testnet token first"
-msgstr ""
+msgstr "먼저 이더리움 테스트넷 토큰을 받으세요"
 
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 msgid "Please note that \"Limit order\" or \"Stop order\" is not guaranteed to be executed. This may include, but is not limited to, the following cases."
@@ -761,11 +760,11 @@ msgstr "가격"
 
 #: src/hooks/useTransactionReceipt.ts
 msgid "Received"
-msgstr ""
+msgstr "수신됨"
 
 #: src/hooks/useTransactionReceipt.ts
 msgid "Received 100NEST test tokens"
-msgstr ""
+msgstr "100NEST 테스트 토큰 수령"
 
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "Recent transactions"
@@ -919,12 +918,12 @@ msgstr "테스트 BNB"
 #: src/pages/DirectPoster/DirectPoster.tsx
 #: src/pages/DirectPoster/useDirectPoster.ts
 msgid "Testnet token"
-msgstr ""
+msgstr "테스트넷 토큰"
 
 #: src/components/NormalInput/NESTInput.tsx
 #: src/components/NormalInput/NESTInputSelect.tsx
 msgid "The balance is 0. You can go to \"Faucet\" to get test token before trading."
-msgstr ""
+msgstr "잔액은 0입니다. 거래하기 전에 \"수도꼭지\"로 이동하여 테스트 토큰을 받을 수 있습니다."
 
 #: src/pages/Home/Home.tsx
 msgid "The smart contract guarantees infinite liquidity through burning and issuing $NEST."
@@ -994,7 +993,7 @@ msgstr "총 피추천인"
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 msgid "Total Number of Trades"
-msgstr ""
+msgstr "총 거래 횟수"
 
 #: src/pages/Futures/Modal/SharePositionModal.tsx
 #: src/pages/Futures/NewOrder.tsx

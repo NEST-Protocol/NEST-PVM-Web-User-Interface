@@ -582,12 +582,9 @@ msgstr "Long"
 msgid "Market"
 msgstr "Market"
 
-#: src/pages/Swap/Components/SwapInputItem.tsx
-msgid "Max"
-msgstr "Max"
-
 #: src/components/NormalInput/NESTInput.tsx
 #: src/components/NormalInput/NESTInputSelect.tsx
+#: src/pages/Swap/Components/SwapInputItem.tsx
 msgid "MAX"
 msgstr "MAX"
 

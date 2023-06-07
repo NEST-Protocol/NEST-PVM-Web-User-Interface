@@ -54,6 +54,8 @@ msgid ""
 "0 balance. Before trading, you can switch to \"Swap\" to exchange\n"
 "between USDT and NEST token."
 msgstr ""
+"0 de saldo. Antes de negociar, pode mudar para \"Swap\" para trocar\n"
+"entre o USDT e o token NEST."
 
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 msgid "1. The trigger price has been reached but there is not enough time to execute."
@@ -383,7 +385,7 @@ msgstr "Pedido de reprovação"
 #: src/components/NormalInput/NESTInputSelect.tsx
 #: src/pages/Share/Head/NESTHead.tsx
 msgid "Faucet"
-msgstr ""
+msgstr "Torneira"
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
@@ -414,7 +416,7 @@ msgstr "Futuros"
 #: src/pages/DirectPoster/DirectPoster.tsx
 #: src/pages/DirectPoster/useDirectPoster.ts
 msgid "GET"
-msgstr ""
+msgstr "OBTER"
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "Github"
@@ -474,7 +476,7 @@ msgstr "Volume de negociação de convidados"
 
 #: src/pages/DirectPoster/useDirectPoster.ts
 msgid "It's available once in 24 hours. Please come later."
-msgstr ""
+msgstr "Está disponível uma vez em 24 horas. Por favor, venha mais tarde."
 
 #: src/pages/Home/Home.tsx
 #: src/pages/Home/Home.tsx
@@ -578,12 +580,9 @@ msgstr "Longo"
 msgid "Market"
 msgstr "Mercado"
 
-#: src/pages/Swap/Components/SwapInputItem.tsx
-msgid "Max"
-msgstr "Máx"
-
 #: src/components/NormalInput/NESTInput.tsx
 #: src/components/NormalInput/NESTInputSelect.tsx
+#: src/pages/Swap/Components/SwapInputItem.tsx
 msgid "MAX"
 msgstr "MÁX"
 
@@ -616,7 +615,7 @@ msgstr "Minhas Posições"
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 msgid "My Total Trading Volume"
-msgstr ""
+msgstr "O meu volume total de transacções"
 
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "NEST Total Burned"
@@ -719,7 +718,7 @@ msgstr "Clique em Aprovar para obter autorização e, em seguida, pode abrir a p
 
 #: src/pages/DirectPoster/useDirectPoster.ts
 msgid "Please get ETH testnet token first"
-msgstr ""
+msgstr "Obter primeiro o token ETH testnet"
 
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 msgid "Please note that \"Limit order\" or \"Stop order\" is not guaranteed to be executed. This may include, but is not limited to, the following cases."
@@ -761,11 +760,11 @@ msgstr "Preço"
 
 #: src/hooks/useTransactionReceipt.ts
 msgid "Received"
-msgstr ""
+msgstr "Recebido"
 
 #: src/hooks/useTransactionReceipt.ts
 msgid "Received 100NEST test tokens"
-msgstr ""
+msgstr "Recebeu 100 fichas de teste NEST"
 
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "Recent transactions"
@@ -919,12 +918,12 @@ msgstr "Teste BNB"
 #: src/pages/DirectPoster/DirectPoster.tsx
 #: src/pages/DirectPoster/useDirectPoster.ts
 msgid "Testnet token"
-msgstr ""
+msgstr "Token Testnet"
 
 #: src/components/NormalInput/NESTInput.tsx
 #: src/components/NormalInput/NESTInputSelect.tsx
 msgid "The balance is 0. You can go to \"Faucet\" to get test token before trading."
-msgstr ""
+msgstr "O saldo é de 0. Pode ir a \"Faucet\" para obter um token de teste antes de negociar."
 
 #: src/pages/Home/Home.tsx
 msgid "The smart contract guarantees infinite liquidity through burning and issuing $NEST."
@@ -994,7 +993,7 @@ msgstr "Total de convidados"
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 msgid "Total Number of Trades"
-msgstr ""
+msgstr "Número total de transacções"
 
 #: src/pages/Futures/Modal/SharePositionModal.tsx
 #: src/pages/Futures/NewOrder.tsx
