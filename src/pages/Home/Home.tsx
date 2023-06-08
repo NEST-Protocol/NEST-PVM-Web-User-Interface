@@ -129,7 +129,7 @@ const Home: FC = () => {
                     },
                     {
                       title: t`Total Burned (NEST)`,
-                      value: destoryData ? Number((-1 * destoryData?.totalDestroy)?.toFixed(2))?.toLocaleString() || 0 : '-',
+                      value: destoryData ? Number(destoryData?.totalDestroy?.toFixed(2))?.toLocaleString().replace('-', '') || 0 : '-',
                       chainId: [56, 97, 534353],
                     },
                     {
@@ -168,7 +168,7 @@ const Home: FC = () => {
                     },
                     {
                       title: t`Total Burned (NEST)`,
-                      value: destoryData ? (-1 * destoryData?.totalDestroy)?.toFixed(2)?.toLocaleString() || 0 : '-',
+                      value: destoryData ? Number(destoryData?.totalDestroy?.toFixed(2))?.toLocaleString().replace('-', '') || 0 : '-',
                       icon: <HomeBurned/>,
                       chainId: [56, 97, 534353],
                     },
@@ -270,8 +270,8 @@ const Home: FC = () => {
                      alignItems={"center"}
                      py={['40px', '40px', '40px', '40px', '40px', '44px']} px={'40px'}
                      sx={(theme) => ({
-                        background: theme.normal.bg1,
-                       })}
+                       background: theme.normal.bg1,
+                     })}
               >
                 <Box sx={(theme) => ({
                   fontSize: '28px',
