@@ -42,7 +42,7 @@ const DirectPoster: FC = () => {
             error={undefined}
             tokenName="ETH"
             callBack={() => {
-              window.open("https://guide.scroll.io/user-guide/faucet");
+              window.open("https://www.nestprotocol.org/blogs/Here-are-two-methods-for-obtaining-ETH-test-tokens-on-Scroll-Alpha-Testnet");
             }}
             title={t`GET` + ` ETH ` + t`Testnet token`}
           />
