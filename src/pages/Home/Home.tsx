@@ -429,6 +429,16 @@ const Home: FC = () => {
                     overflow: 'hidden',
                     cursor: "pointer",
                     width: '100%',
+                    "&:hover": {
+                      "#click-button": {
+                        color: theme.normal.primary,
+                      },
+                      "svg": {
+                        "path": {
+                          fill: theme.normal.primary,
+                        }
+                      }
+                    }
                   })} onClick={() => {
                     if (item.link) {
                       window.open(item.link, '_blank')
@@ -461,7 +471,7 @@ const Home: FC = () => {
                         paddingBottom: '20px',
                       })}>{item.description}</Stack>
                       <Link to={item.link}>
-                        <Stack sx={(theme) => ({
+                        <Stack id={'click-button'} sx={(theme) => ({
                           position: 'absolute',
                           bottom: '20px',
                           color: theme.normal.text2,

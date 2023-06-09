@@ -49,7 +49,7 @@ const Value1 = styled("div")(({theme}) => ({
 
 const Title2 = styled("div")(({theme}) => ({
   paddingTop: '4px',
-  fontWeight: "700",
+  fontWeight: "400",
   fontSize: "14px",
   lineHeight: "20px",
   color: theme.normal.text2,
