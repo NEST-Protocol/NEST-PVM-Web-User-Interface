@@ -227,7 +227,7 @@ const Home: FC = () => {
         </Stack>
       </Stack>
       {
-        width <= WidthType.md && (chainsData.chainId === 56 || chainsData.chainId === 97) && (
+        width <= WidthType.md && chainsData.chainId !== 534353 && (
           <Stack py={'40px'} width={'100%'} spacing={'40px'} alignItems={"center"}
                  sx={(theme) => ({
                    color: theme.normal.text0,
@@ -258,7 +258,7 @@ const Home: FC = () => {
              })}
              alignItems={"center"}>
         {
-          width >= WidthType.lg && (chainsData.chainId === 56 || chainsData.chainId === 97) && (
+          width >= WidthType.lg && chainsData.chainId !== 534353 && (
             <Stack width={'100%'}
                    px={['20px', '20px', '20px', '40px',]}
                    sx={(theme) => ({
@@ -390,7 +390,7 @@ const Home: FC = () => {
               </Box>
               <Box sx={(theme) => ({
                 fontSize: ['14px', '16px'],
-                fontWeight: ["400px", "700"],
+                fontWeight: "400px",
                 lineHeight: ['20px', "22px"],
                 textAlign: width <= WidthType.md ? 'center' : 'start',
                 color: theme.normal.text2,
@@ -468,11 +468,16 @@ const Home: FC = () => {
                           fontSize: ['14px', '16px'],
                           lineHeight: ['20px', '22px'],
                           fontWeight: '400',
-                        })}>
+                        })} direction={'row'} alignItems={"center"} justifyContent={"center"}>
                           <Trans>
                             More
                           </Trans>
-                          {' >'}
+                          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                               xmlns="http://www.w3.org/2000/svg">
+                            <path fillRule="evenodd" clipRule="evenodd"
+                                  d="M11.3777 7.76435C11.5079 7.89452 11.5079 8.10557 11.3777 8.23575L5.72086 13.8926C5.59068 14.0228 5.37963 14.0228 5.24945 13.8926L4.76418 13.4073C4.63401 13.2772 4.63401 13.0661 4.76418 12.9359L9.70007 8.00005L4.76418 3.06416C4.63401 2.93399 4.63401 2.72293 4.76418 2.59276L5.24945 2.10749C5.37963 1.97731 5.59068 1.97732 5.72086 2.10749L11.3777 7.76435Z"
+                                  fill="#F9F9F9" fillOpacity="0.6"/>
+                          </svg>
                         </Stack>
                       </Link>
                     </Stack>

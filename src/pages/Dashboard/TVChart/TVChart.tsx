@@ -22,7 +22,7 @@ const TVChartDiv = styled(Stack)(({theme}) => ({
 }))
 
 const Title1 = styled("div")(({theme}) => ({
-  fontWeight: "700",
+  fontWeight: "400",
   fontSize: "14px",
   lineHeight: "20px",
   color: theme.normal.text2
