@@ -58,7 +58,7 @@ const DashboardShare = styled(Box)(({theme}) => ({
 }));
 
 const Title1 = styled("div")(({theme}) => ({
-  fontWeight: "700",
+  fontWeight: "400",
   fontSize: "16px",
   lineHeight: "22px",
   color: theme.normal.text2,
@@ -86,14 +86,14 @@ const Title4 = styled("div")(({theme}) => ({
 }));
 
 const Caption1 = styled("div")(({theme}) => ({
-  fontWeight: "700",
+  fontWeight: "400",
   fontSize: "16px",
   lineHeight: "22px",
   color: theme.normal.text2,
 }));
 
 const Caption2 = styled("div")(({theme}) => ({
-  fontWeight: "700",
+  fontWeight: "400",
   fontSize: "14px",
   lineHeight: "20px",
   color: theme.normal.text2,
@@ -1188,7 +1188,7 @@ const Dashboard: FC = () => {
               </Stack>
               <Stack direction={'row'} justifyContent={"space-around"}>
                 {
-                  chainsData.chainId === 56 || chainsData.chainId === 97 && (
+                  (chainsData.chainId === 56 || chainsData.chainId === 97) && (
                     <Stack
                       alignItems={"center"}
                       pt={"26px"}
@@ -1219,7 +1219,7 @@ const Dashboard: FC = () => {
                   )
                 }
                 {
-                  chainsData.chainId === 534353 && (
+                  (chainsData.chainId === 534353)&& (
                     <>
                       <Stack
                         alignItems={"center"}
