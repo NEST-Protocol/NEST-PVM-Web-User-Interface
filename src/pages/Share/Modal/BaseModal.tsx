@@ -17,16 +17,10 @@ const BaseModal: FC<BaseModalProps> = ({ children, ...props }) => {
   const BaseBox = useMemo(() => {
     return styled(Box)(({ theme }) => {
       const width = isMobile ? "100%" : 450;
-      const config = {
-        position: "absolute" as "absolute",
-        top: "50%",
-        left: "50%",
-        transform: "translate(-50%, -50%)",
-      };
       return {
-        ...config,
+        maxHeight: '100vh',
+        overflow: 'scroll',
         width: width,
-        padding: isMobile ? 20 : 0,
       };
     });
   }, [isMobile]);
@@ -75,23 +69,25 @@ const BaseModal: FC<BaseModalProps> = ({ children, ...props }) => {
   }, [isMobile]);
 
   return (
-    <BaseBox>
-      <BaseModalStack justifyContent="center" alignItems="center" spacing={0}>
-        <TopStack
-          direction={"row"}
-          justifyContent="space-between"
-          alignItems="center"
-          spacing={0}
-        >
-          <button className="ModalLeftButton"></button>
-          <p className="ModalTitle">{props.title}</p>
-          <button onClick={props.onClose}>
-            <Close />
-          </button>
-        </TopStack>
-        {children}
-      </BaseModalStack>
-    </BaseBox>
+    <Stack width={'100vw'} height={'100vh'} justifyContent={"center"} alignItems={"center"} padding={'20px'}>
+      <BaseBox>
+        <BaseModalStack justifyContent="center" alignItems="center" spacing={0}>
+          <TopStack
+            direction={"row"}
+            justifyContent="space-between"
+            alignItems="center"
+            spacing={0}
+          >
+            <button className="ModalLeftButton"></button>
+            <p className="ModalTitle">{props.title}</p>
+            <button onClick={props.onClose}>
+              <Close />
+            </button>
+          </TopStack>
+          {children}
+        </BaseModalStack>
+      </BaseBox>
+    </Stack>
   );
 };
 

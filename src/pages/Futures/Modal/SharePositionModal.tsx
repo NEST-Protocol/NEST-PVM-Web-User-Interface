@@ -2,29 +2,29 @@ import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import Modal from "@mui/material/Modal";
 import Stack from "@mui/material/Stack";
-import { styled } from "@mui/material/styles";
-import { FC, useCallback, useEffect, useMemo, useState } from "react";
-import { Back, Close, Edit, Long, Short } from "../../../components/icons";
+import {styled} from "@mui/material/styles";
+import {FC, useCallback, useEffect, useMemo, useState} from "react";
+import {Back, Close, Edit, Long, Short} from "../../../components/icons";
 import MainButton from "../../../components/MainButton/MainButton";
 import NESTLine from "../../../components/NESTLine";
 import NormalInfo from "../../../components/NormalInfo/NormalInfo";
 import NESTInputSelect from "../../../components/NormalInput/NESTInputSelect";
-import { INPUT_TOKENS } from "../../../hooks/useFuturesNewOrder";
+import {INPUT_TOKENS} from "../../../hooks/useFuturesNewOrder";
 import useFuturesNewOrder from "../../../hooks/useFuturesNewOrder";
 import useWindowWidth from "../../../hooks/useWindowWidth";
-import { getQueryVariable } from "../../../lib/queryVaribale";
-import { FuturesPrice } from "../Futures";
+import {getQueryVariable} from "../../../lib/queryVaribale";
+import {FuturesPrice} from "../Futures";
 import TriggerRiskModal from "./LimitAndPriceModal";
 import ApproveNoticeModal from "./ApproveNoticeModal";
 import useNEST from "../../../hooks/useNEST";
 import useReadTokenBalance from "../../../contracts/Read/useReadTokenContract";
 import useReadSwapAmountOut from "../../../contracts/Read/useReadSwapContract";
-import { BigNumber } from "ethers/lib/ethers";
+import {BigNumber} from "ethers/lib/ethers";
 import LinkButton from "../../../components/MainButton/LinkButton";
 import LeverageSlider from "../Components/LeverageSlider";
 import NormalInput from "../../../components/NormalInput/NormalInput";
 import ErrorLabel from "../../../components/ErrorLabel/ErrorLabel";
-import { Trans, t } from "@lingui/macro";
+import {Trans, t} from "@lingui/macro";
 
 interface SharePositionModalProps {
   open: boolean;
@@ -32,10 +32,10 @@ interface SharePositionModalProps {
   onClose: () => void;
 }
 
-const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
+const SharePositionModal: FC<SharePositionModalProps> = ({...props}) => {
   const [isEdit, setIsEdit] = useState(false);
-  const { account, chainsData } = useNEST();
-  const { isMobile } = useWindowWidth();
+  const {account, chainsData} = useNEST();
+  const {isMobile} = useWindowWidth();
   const [setToken, setSetToken] = useState(false);
   const tokenName_info = useMemo(() => {
     return getQueryVariable("pt");
@@ -71,15 +71,15 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
       return undefined;
     }
   }, [chainsData.chainId]);
-  const { balance: nestBalance } = useReadTokenBalance(
+  const {balance: nestBalance} = useReadTokenBalance(
     (NESTTokenAddress ?? String().zeroAddress) as `0x${string}`,
     account.address ?? ""
   );
-  const { balance: usdtBalance } = useReadTokenBalance(
+  const {balance: usdtBalance} = useReadTokenBalance(
     (USDTTokenAddress ?? String().zeroAddress) as `0x${string}`,
     account.address ?? ""
   );
-  const { uniSwapAmountOut } = useReadSwapAmountOut(usdtBalance, [
+  const {uniSwapAmountOut} = useReadSwapAmountOut(usdtBalance, [
     USDTTokenAddress!,
     NESTTokenAddress!,
   ]);
@@ -140,8 +140,8 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
     setLimitAmount(
       basePrice_info
         ? (
-            parseFloat(basePrice_info) / Math.pow(10, tokenPriceDecimals)
-          ).toFixed(tokenPriceDecimals)
+          parseFloat(basePrice_info) / Math.pow(10, tokenPriceDecimals)
+        ).toFixed(tokenPriceDecimals)
         : ""
     );
     if (
@@ -151,15 +151,15 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
       setTp(
         tp_info
           ? (parseFloat(tp_info) / Math.pow(10, tokenPriceDecimals)).toFixed(
-              tokenPriceDecimals
-            )
+            tokenPriceDecimals
+          )
           : ""
       );
       setSl(
         sl_info
           ? (parseFloat(sl_info) / Math.pow(10, tokenPriceDecimals)).toFixed(
-              tokenPriceDecimals
-            )
+            tokenPriceDecimals
+          )
           : ""
       );
     }
@@ -225,35 +225,8 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
     uniSwapAmountOut,
     usdtBalance,
   ]);
-  const BaseBox = useMemo(() => {
-    return styled(Box)(({ theme }) => {
-      const width = isMobile ? "100%" : 450;
-      const config = {
-        position: "absolute" as "absolute",
-        top: "50%",
-        left: "50%",
-        transform: "translate(-50%, -50%)",
-      };
-      return {
-        ...config,
-        width: width,
-        padding: isMobile ? 20 : 0,
-      };
-    });
-  }, [isMobile]);
-  const BaseModalStack = useMemo(() => {
-    return styled(Stack)(({ theme }) => {
-      const width = isMobile ? "100%" : 450;
-      return {
-        width: width,
-        borderRadius: 12,
-        background: theme.normal.bg2,
-        padding: 20,
-      };
-    });
-  }, [isMobile]);
   const TopStack = useMemo(() => {
-    return styled(Stack)(({ theme }) => {
+    return styled(Stack)(({theme}) => {
       return {
         width: "100%",
         marginBottom: 20,
@@ -307,10 +280,10 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
       >
         <Stack
           direction={"row"}
-          sx={{ "& svg": { width: "24px", height: "24px", display: "block" } }}
+          sx={{"& svg": {width: "24px", height: "24px", display: "block"}}}
         >
-          <TokenIcon style={{ marginRight: "-8px", position: "relative" }} />
-          <BaseToken />
+          <TokenIcon style={{marginRight: "-8px", position: "relative"}}/>
+          <BaseToken/>
         </Stack>
 
         <Box
@@ -373,7 +346,7 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
             },
           })}
         >
-          {longOrShort ? <Long /> : <Short />}
+          {longOrShort ? <Long/> : <Short/>}
           {longOrShort ? (
             <p>
               <Trans>Long</Trans>
@@ -396,12 +369,12 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
           symbol={"USDT"}
         />
         {tp !== "" ? (
-          <NormalInfo title={t`Take Profit`} value={tp} symbol={"USDT"} />
+          <NormalInfo title={t`Take Profit`} value={tp} symbol={"USDT"}/>
         ) : (
           <></>
         )}
         {sl !== "" ? (
-          <NormalInfo title={t`Stop Loss`} value={sl} symbol={"USDT"} />
+          <NormalInfo title={t`Stop Loss`} value={sl} symbol={"USDT"}/>
         ) : (
           <></>
         )}
@@ -429,7 +402,7 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
                 },
               })}
             >
-              <Edit />
+              <Edit/>
               <p>
                 <Trans>Edit</Trans>
               </p>
@@ -465,7 +438,7 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
         ) : (
           <></>
         )}
-        <NormalInfo title={t`Total Pay`} value={showTotalPay} symbol={"NEST"} />
+        <NormalInfo title={t`Total Pay`} value={showTotalPay} symbol={"NEST"}/>
       </Stack>
     );
   }, [inputToken, showFee, showFeeHoverText, showPositions, showTotalPay]);
@@ -523,8 +496,8 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
         >
           <Box
             sx={{
-              "& .ModalLeftButton": { width: "20px !important" },
-              " & .ModalTitle": { textAlign: "center !important" },
+              "& .ModalLeftButton": {width: "20px !important"},
+              " & .ModalTitle": {textAlign: "center !important"},
             }}
           >
             <TriggerRiskModal
@@ -550,10 +523,10 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
         <Stack spacing={"24px"} width={"100%"}>
           <Stack spacing={"8px"} width={"100%"}>
             {inputNestAmount}
-            {showAmountError ? <ErrorLabel title={showAmountError} /> : <></>}
+            {showAmountError ? <ErrorLabel title={showAmountError}/> : <></>}
           </Stack>
           {info1}
-          <NESTLine />
+          <NESTLine/>
           {info2}
           <MainButton
             title={mainButtonTitle}
@@ -697,38 +670,48 @@ const SharePositionModal: FC<SharePositionModalProps> = ({ ...props }) => {
       aria-describedby="modal-modal-description"
     >
       <Box>
-        <BaseBox>
-          <BaseModalStack
-            justifyContent="center"
-            alignItems="center"
-            spacing={0}
-          >
-            {modals}
-            <TopStack
-              direction={"row"}
-              justifyContent="space-between"
-              alignItems="center"
-              spacing={0}
-            >
-              <button
-                className="ModalLeftButton"
-                onClick={() => {
-                  setSl("");
-                  setTp("");
-                  getOrderInfo();
-                  setIsEdit(false);
-                }}
-              >
-                {isEdit ? <Back /> : <></>}
-              </button>
-              {title}
-              <button onClick={props.onClose}>
-                <Close />
-              </button>
-            </TopStack>
-            {isEdit ? editView : normalView}
-          </BaseModalStack>
-        </BaseBox>
+        <Stack width={'100vw'} height={'100vh'} justifyContent={"center"} alignItems={"center"}>
+          <Stack justifyContent={"center"} alignItems={"center"} width={'100vw'} height={'100vh'}>
+            <Box sx={{
+              width: ["100%", "100%", "450px"],
+              padding: '20px',
+              maxHeight: '100vh',
+              overflow: 'scroll',
+            }}>
+              <Stack sx={(theme) => ({
+                width: '100%',
+                borderRadius: "12px",
+                background: theme.normal.bg2,
+                padding: "20px",
+              })} justifyContent="center" alignItems="center" spacing={0}>
+                {modals}
+                <TopStack
+                  direction={"row"}
+                  justifyContent="space-between"
+                  alignItems="center"
+                  spacing={0}
+                >
+                  <button
+                    className="ModalLeftButton"
+                    onClick={() => {
+                      setSl("");
+                      setTp("");
+                      getOrderInfo();
+                      setIsEdit(false);
+                    }}
+                  >
+                    {isEdit ? <Back/> : <></>}
+                  </button>
+                  {title}
+                  <button onClick={props.onClose}>
+                    <Close/>
+                  </button>
+                </TopStack>
+                {isEdit ? editView : normalView}
+              </Stack>
+            </Box>
+          </Stack>
+        </Stack>
       </Box>
     </Modal>
   );

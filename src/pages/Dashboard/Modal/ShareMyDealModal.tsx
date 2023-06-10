@@ -83,12 +83,7 @@ const Card1 = styled(Stack)(({theme}) => ({
 
 const TopStack = styled(Stack)(({theme}) => {
   return {
-    position: 'absolute',
-    top: 0,
-    right: 0,
-    padding: '24px',
     width: '100%',
-    marginBottom: 20,
     "& button": {
       width: 20,
       height: 20,
