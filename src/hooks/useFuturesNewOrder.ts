@@ -679,20 +679,10 @@ function useFuturesNewOrder(
     setSl("");
     setHadSetLimit(false);
   }, [tokenPair]);
-  const changeTabs = useCallback(
-    (value: number) => {
-      setTabsValue(value);
-      if (openPriceBase) {
-        setLimitAmount(
-          openPriceBase.bigNumberToShowString(
-            18,
-            tokenPair.getTokenPriceDecimals()
-          )
-        );
-      }
-    },
-    [openPriceBase, tokenPair]
-  );
+
+  const changeTabs = useCallback((value: number) => {
+    setTabsValue(value);
+  }, []);
 
   return {
     longOrShort,
