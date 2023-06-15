@@ -1009,6 +1009,7 @@ msgstr "Общая прибыль"
 msgid "Total Profit & Loss"
 msgstr "Общий доход и убыток"
 
+#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 msgid "Total Trading Volume"
@@ -1018,10 +1019,6 @@ msgstr ""
 #: src/pages/Home/Home.tsx
 msgid "Total Trading Volume (NEST)"
 msgstr ""
-
-#: src/pages/Dashboard/Dashboard.tsx
-msgid "Total Transaction Volume"
-msgstr "Общий объем сделок"
 
 #: src/pages/Futures/Components/OrderTable.tsx
 #: src/pages/Futures/Components/POrderTable.tsx

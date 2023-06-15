@@ -807,7 +807,7 @@ const Dashboard: FC = () => {
               })}
             >
               <TVChart
-                title1={t`Total Transaction Volume`}
+                title1={t`Total Trading Volume`}
                 title2={t`Today Volume`}
                 value1={`${
                   isTxInfoLoading
