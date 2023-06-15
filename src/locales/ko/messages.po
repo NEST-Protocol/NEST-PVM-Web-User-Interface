@@ -1011,6 +1011,7 @@ msgstr "총 이익"
 msgid "Total Profit & Loss"
 msgstr "총 수익과 손실"
 
+#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 msgid "Total Trading Volume"
@@ -1020,10 +1021,6 @@ msgstr "총 거래량"
 #: src/pages/Home/Home.tsx
 msgid "Total Trading Volume (NEST)"
 msgstr "총 거래량(NEST)"
-
-#: src/pages/Dashboard/Dashboard.tsx
-msgid "Total Transaction Volume"
-msgstr "총 거래량"
 
 #: src/pages/Futures/Components/OrderTable.tsx
 #: src/pages/Futures/Components/POrderTable.tsx

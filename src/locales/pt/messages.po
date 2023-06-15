@@ -1011,6 +1011,7 @@ msgstr "Lucro total"
 msgid "Total Profit & Loss"
 msgstr "Total de lucros e perdas"
 
+#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 msgid "Total Trading Volume"
@@ -1020,10 +1021,6 @@ msgstr "Volume total de transacções"
 #: src/pages/Home/Home.tsx
 msgid "Total Trading Volume (NEST)"
 msgstr "Volume total de transacções (NEST)"
-
-#: src/pages/Dashboard/Dashboard.tsx
-msgid "Total Transaction Volume"
-msgstr "Volume total de transacções"
 
 #: src/pages/Futures/Components/OrderTable.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
