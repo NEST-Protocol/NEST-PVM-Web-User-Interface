@@ -121,7 +121,7 @@ msgid "7 Days\\' PNL"
 msgstr "Прибыль / убыток за 7 дней"
 
 #: src/pages/Home/Home.tsx
-msgid "A beginner's guide to using NEST Fi"
+msgid "A beginner's guide to using NESTFi"
 msgstr ""
 
 #: src/pages/Share/Modal/ConnectWalletModal.tsx

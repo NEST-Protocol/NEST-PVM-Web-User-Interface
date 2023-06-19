@@ -395,7 +395,7 @@ const Home: FC = () => {
                 textAlign: width <= WidthType.md ? 'center' : 'start',
                 color: theme.normal.text2,
               })}>
-                {t`A beginner's guide to using NEST Fi`}
+                {t`A beginner's guide to using NESTFi`}
               </Box>
             </Stack>
             <Stack direction={width <= WidthType.md ? 'column' : 'row'} spacing={'24px'}>

@@ -123,8 +123,8 @@ msgid "7 Days\\' PNL"
 msgstr "7 Days\\' PNL"
 
 #: src/pages/Home/Home.tsx
-msgid "A beginner's guide to using NEST Fi"
-msgstr "A beginner's guide to using NEST Fi"
+msgid "A beginner's guide to using NESTFi"
+msgstr "A beginner's guide to using NESTFi"
 
 #: src/pages/Share/Modal/ConnectWalletModal.tsx
 msgid "about connecting wallets"

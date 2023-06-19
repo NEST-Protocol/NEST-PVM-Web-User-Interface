@@ -1,11 +1,11 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2023-05-11 12:02+0800\n"
+"POT-Creation-Date: 2023-06-19 14:03+0800\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: @lingui/cli\n"
-"Language: pt\n"
+"Language: vi\n"
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: \n"
@@ -16,119 +16,117 @@ msgstr ""
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 msgid "* Due to the complexity of financial data, there might be nuances and delay. Data displayed above is for reference only.We sincerely apologize for any inconvenience."
-msgstr "* Devido à complexidade dos dados financeiros, pode haver nuances e atrasos. Os dados apresentados acima são apenas para referência. Pedimos desculpa por qualquer incómodo."
+msgstr "Doanh thụ ngân hàng thể hiện sự phức tạp, có thể có sự thay đổi nhỏ và chậm trễ. Dữ liệu hiển thị ở trên chỉ mang tính chủ động. Chúng tôi thành thật xin lỗi nếu có gây ra bất kỳ bất tiện nào."
 
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useFuturesNewOrder.ts
 msgid "< LIMIT PRICE"
-msgstr "< PREÇO LIMITE"
+msgstr "< GIÁ GIỚI HẠN"
 
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useFuturesNewOrder.ts
 msgid "< MARKET PRICE"
-msgstr "< PREÇO DE MERCADO"
+msgstr "< GIÁ THỊ TRƯỜNG"
 
 #: src/hooks/useFuturesEditPosition.ts
 #: src/hooks/useFuturesEditPosition.ts
 msgid "< OPEN PRICE"
-msgstr "< PREÇO DE ABERTURA"
+msgstr "< GIÁ MỞ CỬA"
 
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useFuturesNewOrder.ts
 msgid "> LIMIT PRICE"
-msgstr "> PREÇO LIMITE"
+msgstr "> GIÁ GIỚI HẠN"
 
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useFuturesNewOrder.ts
 msgid "> MARKET PRICE"
-msgstr "> PREÇO DE MERCADO"
+msgstr "> GIÁ THỊ TRƯỜNG"
 
 #: src/hooks/useFuturesEditPosition.ts
 #: src/hooks/useFuturesEditPosition.ts
 msgid "> OPEN PRICE"
-msgstr "> PREÇO DE ABERTURA"
+msgstr "> GIÁ MỞ CỬA"
 
 #: src/components/NormalInput/NESTInput.tsx
 #: src/components/NormalInput/NESTInputSelect.tsx
 msgid ""
 "0 balance. Before trading, you can switch to \"Swap\" to exchange\n"
 "between USDT and NEST token."
-msgstr ""
-"0 de saldo. Antes de negociar, pode mudar para \"Swap\" para trocar\n"
-"entre o USDT e o token NEST."
+msgstr "Số dư 0. Trước khi giao dịch, bạn có thể chuyển sang \"Swap\" để hoán đổi giữa USDT và token NEST."
 
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 msgid "1. The trigger price has been reached but there is not enough time to execute."
-msgstr "1. O preço de acionamento foi alcançado, mas não há tempo suficiente para executar."
+msgstr "1.Giá kích hoạt đã được đạt đến nhưng không đủ thời gian để thực hiện."
 
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 #: src/pages/Futures/Modal/ProtocolModal.tsx
 msgid "1. Uncertainty risk of income: The calculation method of NEST perpetual contract is different from the calculation method of perpetual contract of traditional centralized exchange. The NEST perpetual contract converts the future price of the asset based on the historical rate of return of the asset. Therefore, the asset price increases by 100% after the user opens a position. The user's income is not 100%. In extreme cases, even if the asset price is rising, your income may be negative."
-msgstr "1. Risco de incerteza de renda: O método de cálculo do contrato perpétuo NEST é diferente do método de cálculo do contrato perpétuo da troca centralizada tradicional. O contrato perpétuo NEST converte o preço futuro do ativo com base na taxa de retorno histórica do ativo. Portanto, o preço do ativo aumenta em 100% depois que o usuário abre uma posição. A renda do usuário não é de 100%. Em casos extremos, mesmo se o preço do ativo estiver subindo, sua renda pode ser negativa."
+msgstr "1. Rủi ro không chắc chắn về thu nhập: Phương pháp tính toán hợp đồng vĩnh viễn NEST khác với phương pháp tính toán hợp đồng vĩnh viễn của sàn giao dịch trung tâm truyền thống. Hợp đồng vĩnh viễn NEST chuyển đổi giá trị tương lai của tài sản dựa trên tỷ lệ lợi nhuận lịch sử của tài sản. Do đó, giá tài sản tăng thêm 100% sau khi người dùng mở một vị thế. Thu nhập của người dùng không phải là 100%. Trong những trường hợp cực đoan, ngay cả khi giá tài sản đang tăng, thu nhập của bạn có thể là âm."
 
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 msgid "2. No one picks up the execution order There may be slippage to execute at the trigger price."
-msgstr "2. Ninguém pega a ordem de execução. Pode haver deslizamento para executar no preço de acionamento."
+msgstr "2. Không có ai nhận lệnh thực hiện. Có thể xảy ra trượt giá để thực hiện ở giá kích hoạt."
 
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 #: src/pages/Futures/Modal/ProtocolModal.tsx
 msgid "2. Position liquidation risk: NEST perpetual contracts provide leverage of 1-20 times. When your leverage is greater than 1 times leverage, the price fluctuation of the underlying asset may cause liquidation."
-msgstr "2. Risco de liquidação de posição: Os contratos perpétuos NEST fornecem alavancagem de 1-20 vezes. Quando sua alavancagem é maior que 1 vez, a flutuação de preço do ativo subjacente pode causar liquidação."
+msgstr "2. Rủi ro thanh lý vị thế: Hợp đồng vĩnh viễn NEST cung cấp đòn bẩy từ 1-20 lần. Khi đòn bẩy của bạn lớn hơn 1 lần, biến động giá của tài sản cơ bản có thể gây ra thanh lý."
 
 #: src/pages/Futures/ExchangeTVChart.tsx
 msgid "24h Change"
-msgstr "24h Variação"
+msgstr "Thay đổi trong 24 giờ"
 
 #: src/pages/Futures/ExchangeTVChart.tsx
 msgid "24h High"
-msgstr "24h alto"
+msgstr "Giá cao nhất trong 24 giờ"
 
 #: src/pages/Futures/ExchangeTVChart.tsx
 msgid "24h Low"
-msgstr "24h baixo"
+msgstr "Giá thấp nhất trong 24 giờ"
 
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 #: src/pages/Futures/Modal/ProtocolModal.tsx
 msgid "3. NEST Token price fluctuation risk: Both the margin and the final profit and loss use NEST Token, and NEST itself is also a highly volatile asset. In extreme cases, even if your perpetual contract position is profitable, However, due to the fluctuation of the NEST price itself, it may cause you to lose money in terms of fiat currency."
-msgstr "3. Risco de flutuação de preço do token NEST: Tanto a margem quanto o lucro e a perda final usam o token NEST, e o NEST em si é também um ativo altamente volátil. Em casos extremos, mesmo que sua posição em contrato perpétuo seja lucrativa,"
+msgstr "3. Rủi ro biến động giá Token NEST: Cả tiền đặt cọc và lợi nhuận/ thua lỗ cuối cùng đều sử dụng Token NEST, và chính NEST cũng là một tài sản có biến động cao. Trong trường hợp cực đoan, ngay cả khi vị thế hợp đồng vĩnh viễn của bạn có lợi nhuận, Tuy nhiên, do biến động giá của NEST chính nó, điều này có thể làm bạn mất tiền theo đơn vị tiền tệ."
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 msgid "30 Days' PNL"
-msgstr "Lucro e Perda de 30 dias"
+msgstr "30 Ngày PNL"
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 msgid "30 Days\\' PNL"
-msgstr "Lucro e Perda de 30 dias\\'"
+msgstr "30 Ngày\\' PNL"
 
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 #: src/pages/Futures/Modal/ProtocolModal.tsx
 msgid "4. External oracle risk: NEST protocol's perpetual contract price comes from the NEST oracle. If the oracle is attacked or other reasons cause the price to be abnormal, The system may encounter settlement exceptions, which may cause errors in the user's revenue calculation."
-msgstr "4. Risco de oráculo externo: o preço do contrato perpétuo do protocolo NEST vem do oráculo NEST. Se o oráculo for atacado ou outros motivos causarem preço anormal, o sistema poderá encontrar exceções de liquidação, o que pode causar erros no cálculo de receita do usuário."
+msgstr "4. Rủi ro từ nguồn thông tin bên ngoài (external oracle): Giá hợp đồng vĩnh viễn của giao thức NEST đến từ bộ máy truy vấn (oracle) của NEST. Nếu bộ máy truy vấn bị tấn công hoặc các nguyên nhân khác gây ra giá không bình thường, hệ thống có thể gặp phải các trường hợp thanh lý ngoại lệ, từ đó có thể gây sai sót trong tính toán thu nhập của người dùng."
 
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 #: src/pages/Futures/Modal/ProtocolModal.tsx
 msgid "5. Smart contract risk: There may be fatal unknown risks in the smart contract that may cause your principal to be damaged. Please evaluate the risk yourself before deciding whether to participate."
-msgstr "5. Risco de contrato inteligente: pode haver riscos desconhecidos fatais no contrato inteligente que possam causar danos ao seu principal. Por favor, avalie o risco antes de decidir se participa ou não."
+msgstr "5. Rủi ro từ hợp đồng thông minh (smart contract): Có thể có những rủi ro chết người không xác định trong hợp đồng thông minh có thể gây thiệt hại cho số vốn của bạn. Vui lòng tự đánh giá rủi ro trước khi quyết định có tham gia hay không."
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 msgid "7 Days' PNL"
-msgstr "Lucro e Perda de 7 dias"
+msgstr "7 Ngày PNL"
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 msgid "7 Days\\' PNL"
-msgstr "Lucro e Perda de 7 dias\\'"
+msgstr "7 Ngày\\' PNL"
 
 #: src/pages/Home/Home.tsx
 msgid "A beginner's guide to using NESTFi"
-msgstr "Um guia para principiantes na utilização do NEST Fi"
+msgstr "Hướng dẫn cho người mới sử dụng NESTFi"
 
 #: src/pages/Share/Modal/ConnectWalletModal.tsx
 msgid "about connecting wallets"
-msgstr "sobre as carteiras digitais"
+msgstr "về việc kết nối ví"
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
@@ -139,44 +137,44 @@ msgstr "sobre as carteiras digitais"
 #: src/pages/Futures/Components/POrderList.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 msgid "Actual Margin"
-msgstr "Margem Atual"
+msgstr "Biên độ thực tế"
 
 #: src/pages/Futures/Components/POrderList.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 msgid "Add"
-msgstr "Adicionar"
+msgstr "Thêm"
 
 #: src/pages/DirectPoster/DirectPoster.tsx
 #: src/pages/Swap/Swap.tsx
 msgid "Add NEST to wallet"
-msgstr "Adicionar NEST à carteira"
+msgstr "Thêm NEST vào ví"
 
 #: src/hooks/useTransactionReceipt.ts
 msgid "Add position"
-msgstr "Adicionar posição"
+msgstr "Thêm vị thế"
 
 #: src/pages/Futures/Modal/AddModal.tsx
 #: src/pages/Futures/Modal/AddModal.tsx
 msgid "Add Position"
-msgstr "Adicionar Posição"
+msgstr "Thêm vị thế"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 msgid "Address"
-msgstr "Endereço"
+msgstr "Địa chỉ"
 
 #: src/hooks/useFuturesNewOrder.ts
 #: src/pages/Futures/Modal/EditPositionModal.tsx
 msgid "After the limit order is executed, TP and SL price you set will trigger immediately."
-msgstr "Após a execução da ordem limite, o preço TP e SL que você definiu será acionado imediatamente."
+msgstr "Sau khi lệnh giới hạn được thực hiện, giá TP (Take Profit) và giá SL (Stop Loss) mà bạn đã đặt sẽ kích hoạt ngay lập tức."
 
 #: src/components/NormalInput/NESTInput.tsx
 #: src/components/NormalInput/NESTInputSelect.tsx
 msgid "Amount"
-msgstr "Quantidade"
+msgstr "Số lượng"
 
 #: src/pages/Futures/Modal/ApproveNoticeModal.tsx
 msgid "Approval required"
-msgstr "Aprovação necessária"
+msgstr "Yêu cầu phê duyệt"
 
 #: src/hooks/useFuturesAdd.ts
 #: src/hooks/useFuturesNewOrder.ts
@@ -184,11 +182,11 @@ msgstr "Aprovação necessária"
 #: src/hooks/useTransactionReceipt.ts
 #: src/pages/Futures/Modal/ApproveNoticeModal.tsx
 msgid "Approve"
-msgstr "Aprovar"
+msgstr "Phê duyệt"
 
 #: src/hooks/useSwap.ts
 msgid "balance"
-msgstr "saldo"
+msgstr "Số dư"
 
 #: src/components/NormalInput/NESTInput.tsx
 #: src/components/NormalInput/NESTInputSelect.tsx
@@ -196,47 +194,47 @@ msgstr "saldo"
 #: src/pages/Swap/Components/SwapInputItem.tsx
 #: src/pages/Swap/Components/SwapInputItem.tsx
 msgid "Balance:"
-msgstr "Saldo:"
+msgstr "Số dư:"
 
 #: src/pages/Home/Modal/ApplyModal.tsx
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Become a Trading KOL"
-msgstr "Torne-se um KOL de negociação"
+msgstr "Trở thành một Trading KOL"
 
 #: src/pages/Home/Home.tsx
 msgid "Boost your earning and influence by joining the NESTFi affiliate program."
-msgstr "Aumente os seus ganhos e a sua influência aderindo ao programa de afiliados da NESTFi."
+msgstr "Tăng thu nhập và ảnh hưởng của bạn bằng cách tham gia chương trình liên kết NESTFi."
 
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Channel link"
-msgstr "Link do canal"
+msgstr "Liên kết kênh"
 
 #: src/components/NormalInput/NormalInputWithCloseButton.tsx
 #: src/hooks/useFuturesOrder.ts
 #: src/pages/Futures/Components/POrderList.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 msgid "Close"
-msgstr "Fechar"
+msgstr "Đóng"
 
 #: src/hooks/useTransactionReceipt.ts
 msgid "Close Limit Order"
-msgstr "Fechar ordem limite"
+msgstr "Hủy lệnh giới hạn"
 
 #: src/pages/Futures/Modal/CloseModal.tsx
 #: src/pages/Futures/Modal/CloseModal.tsx
 msgid "Close Position"
-msgstr "Fechar posição"
+msgstr "Đóng vị thế"
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Futures/Modal/CloseModal.tsx
 msgid "Close Price"
-msgstr "Preço de fechamento"
+msgstr "Giá đóng cửa"
 
 #: src/pages/Futures/Modal/CloseOrderNoticeModal.tsx
 msgid "Close Risk"
-msgstr "Risco de fechamento"
+msgstr "Đóng rủi ro"
 
 #: src/hooks/useFuturesAdd.ts
 #: src/hooks/useFuturesClose.ts
@@ -247,7 +245,7 @@ msgstr "Risco de fechamento"
 #: src/pages/Home/Modal/ApplyModal.tsx
 #: src/pages/Swap/Components/SwapSlippageModal.tsx
 msgid "Confirm"
-msgstr "Confirmar"
+msgstr "Xác nhận"
 
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useFuturesNewOrder.ts
@@ -260,24 +258,24 @@ msgstr "Confirmar"
 #: src/pages/Share/Modal/ConnectWalletModal.tsx
 #: src/pages/Share/Modal/ConnectWalletModal.tsx
 msgid "Connect Wallet"
-msgstr "Conectar carteira"
+msgstr "Kết nối ví"
 
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Contact info (Telegram handle)"
-msgstr "Informações de contato (Nome de usuário do Telegram)"
+msgstr "Thông tin liên hệ (Tên tài khoản Telegram)"
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 msgid "Copy Invitation Link"
-msgstr "Copiar link de convite"
+msgstr "Sao chép liên kết mời"
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 msgid "Copy Link"
-msgstr "Copiar link"
+msgstr "Sao chép liên kết"
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
@@ -289,27 +287,27 @@ msgstr "Copiar link"
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "Copy Successfully"
-msgstr "Copiado com sucesso"
+msgstr "Sao chép thành công"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 msgid "Cumulative Commission"
-msgstr "Comissão cumulativa"
+msgstr "Hoa hồng tích lũy"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 msgid "Cumulative Commissions"
-msgstr "Comissões acumuladas"
+msgstr "Hoa hồng tích lũy"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 msgid "Cumulative Invitee Trading Volume"
-msgstr "Volume acumulado de transacções com convidados"
+msgstr "Tổng khối lượng giao dịch của người được mời tích lũy"
 
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "Current Positions"
-msgstr "Posições actuais"
+msgstr "Vị thế hiện tại"
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "Dark mode"
-msgstr "Modo escuro"
+msgstr "Chế độ tối"
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
@@ -317,36 +315,36 @@ msgstr "Modo escuro"
 #: src/pages/Share/Head/NESTHead.tsx
 #: src/pages/Share/Head/NESTHead.tsx
 msgid "Dashboard"
-msgstr "Painel de controle"
+msgstr "Bảng điều khiển"
 
 #: src/pages/Home/Home.tsx
 msgid "Decentralized"
-msgstr "Descentralizado"
+msgstr "Phi tập trung"
 
 #: src/pages/Home/Home.tsx
 msgid "Decentralized Perpetual Exchange"
-msgstr "Bolsa Perpétua Descentralizada"
+msgstr "Sàn giao dịch vô thời hạn phi tập trung"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 msgid "Default"
-msgstr "Predefinição"
+msgstr "Mặc định"
 
 #: src/pages/Home/Home.tsx
 msgid "Deflationary"
-msgstr "Deflacionário"
+msgstr "Thu hẹp (deflationary)"
 
 #: src/pages/Home/Home.tsx
 msgid "Deflationary economic model. The more users trade, the more $NEST will be burned."
-msgstr "Modelo económico deflacionário. Quanto mais os utilizadores negociarem, mais $NEST será queimado."
+msgstr "Mô hình kinh tế thu hẹp. Khi người dùng giao dịch nhiều hơn, lượng $NEST bị tiêu hủy càng nhiều."
 
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "Disconnect"
-msgstr "Desligar"
+msgstr "Ngắt kết nối"
 
 #: src/pages/Futures/Components/POrderList.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 msgid "Due to the market volatility, the actual liquidation price may be different from the theoretical liquidation price . Here is the theoretical liquidation price, for reference only."
-msgstr "Devido à volatilidade do mercado, o preço de liquidação real pode ser diferente do preço de liquidação teórico. Aqui está o preço de liquidação teórico, apenas para referência."
+msgstr "Do sự biến động của thị trường, giá thanh lý thực tế có thể khác với giá thanh lý lý thuyết. Dưới đây là giá thanh lý lý thuyết, chỉ để tham khảo."
 
 #: src/hooks/useFuturesPOrder.ts
 #: src/pages/Futures/Components/OrderList.tsx
@@ -354,38 +352,38 @@ msgstr "Devido à volatilidade do mercado, o preço de liquidação real pode se
 #: src/pages/Futures/Modal/SharePositionModal.tsx
 #: src/pages/Futures/Modal/SharePositionModal.tsx
 msgid "Edit"
-msgstr "Editar"
+msgstr "Chỉnh sửa"
 
 #: src/hooks/useTransactionReceipt.ts
 msgid "Edit Limit Order"
-msgstr "Editar ordem limitada"
+msgstr "Chỉnh sửa lệnh giới hạn"
 
 #: src/hooks/useTransactionReceipt.ts
 #: src/pages/Futures/Modal/EditPositionModal.tsx
 msgid "Edit Position"
-msgstr "Editar posição"
+msgstr "Chỉnh sửa vị thế"
 
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Enter Channel link"
-msgstr "Insira o link do canal"
+msgstr "Nhập liên kết kênh"
 
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Enter your Contact info"
-msgstr "Insira suas informações de contato"
+msgstr "Nhập thông tin liên hệ của bạn"
 
 #: src/pages/Futures/NewOrder.tsx
 msgid "Entry Price"
-msgstr "Preço de entrada"
+msgstr "Điểm Và "
 
 #: src/hooks/useNESTSnackBar.tsx
 msgid "Fail Request"
-msgstr "Pedido de reprovação"
+msgstr "Yêu cầu thất bại"
 
 #: src/components/NormalInput/NESTInput.tsx
 #: src/components/NormalInput/NESTInputSelect.tsx
 #: src/pages/Share/Head/NESTHead.tsx
 msgid "Faucet"
-msgstr "Torneira"
+msgstr "Vòi sen"
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
@@ -393,30 +391,32 @@ msgstr "Torneira"
 msgid ""
 "Follow the right person, making money is as easy as breathing.\n"
 "You can follow the right person on NESTFi, here is my refer link"
-msgstr "Seguir a pessoa certa, ganhar dinheiro é tão fácil como respirar.Pode seguir a pessoa certa na NESTFi, aqui está o meu link de referência"
+msgstr ""
+"“Hãy theo dõi người đúng, kiếm tiền như thở.\n"
+"”Bạn có thể theo dõi người đúng trên NESTFi, đây là liên kết giới thiệu của tôi."
 
 #: src/pages/Futures/Components/FuturesNotice.tsx
 msgid "For the positions opened before April 6, 2023, please go to→"
-msgstr "Para as entradas abertas antes de 6 de Abril de 2023, consultar→"
+msgstr "Đối với các vị thế được mở trước ngày 6 tháng 4 năm 2023, vui lòng truy cập→"
 
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 #: src/pages/Futures/Modal/ProtocolModal.tsx
 msgid "For users/smart contracts using NEST Protocol perpetual contracts, please understand its rules and the differences of similar products in the market when performing positions, settlement, liquidation and other related operations. After fully understanding the following possible risks and can bear Participate in the risk situation:"
-msgstr "Para os utilizadores/contratantes inteligentes que utilizam os contratos perpétuos do Protocolo NEST, é importante que compreendam as suas regras e as diferenças entre produtos semelhantes no mercado aquando da realização de posições, liquidação, liquidação e outras operações relacionadas. Depois de compreender plenamente os seguintes riscos possíveis e poder suportar Participar na situação de risco:"
+msgstr "Đối với người dùng/ hợp đồng thông minh sử dụng hợp đồng vô thời hạn của Giao thức NEST, hãy hiểu rõ các quy tắc và sự khác biệt so với các sản phẩm tương tự trên thị trường khi thực hiện các vị thế, thanh lý, thanh lý vị thế và các hoạt động liên quan khác. Sau khi hiểu đầy đủ các nguy cơ có thể xảy ra dưới đây và có thể chấp nhận tham gia vào tình huống rủi ro:"
 
 #: src/pages/Swap/Components/SwapInputItem.tsx
 msgid "From"
-msgstr "From"
+msgstr "Từ"
 
 #: src/pages/Share/Head/NESTHead.tsx
 #: src/pages/Share/Head/NESTHead.tsx
 msgid "Futures"
-msgstr "Futuros"
+msgstr "Hợp đồng tương lai"
 
 #: src/pages/DirectPoster/DirectPoster.tsx
 #: src/pages/DirectPoster/useDirectPoster.ts
 msgid "GET"
-msgstr "OBTER"
+msgstr "NHẬN"
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "Github"
@@ -424,113 +424,113 @@ msgstr "Github"
 
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "History"
-msgstr "História"
+msgstr "Lịch sử"
 
 #: src/pages/Home/Home.tsx
 msgid "How to duplicate your own position?"
-msgstr "Como duplicar a sua própria posição?"
+msgstr "Làm thế nào để tham gia chương trình liên kết?"
 
 #: src/pages/Home/Home.tsx
 msgid "How to join affiliate program?"
-msgstr "Como aderir a um programa de afiliados?"
+msgstr "Làm cách nào để tham gia chương trình liên kết?"
 
 #: src/pages/Home/Home.tsx
 msgid "How to make your first trade?"
-msgstr "Como efectuar a sua primeira transacção?"
+msgstr "Làm cách nào để thực hiện giao dịch đầu tiên của bạn?"
 
 #: src/pages/Futures/MoreInfo.tsx
 msgid "How to Play"
-msgstr "Como jogar"
+msgstr "Cách chơi"
 
 #: src/pages/Home/Home.tsx
 msgid "How to Start?"
-msgstr "Como começar?"
+msgstr "Làm cách nào để bắt đầu?"
 
 #: src/pages/Futures/Modal/CloseOrderNoticeModal.tsx
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "I understand"
-msgstr "Entendi"
+msgstr "Tôi hiểu."
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 msgid "Image"
-msgstr "Imagem"
+msgstr "Hình ảnh"
 
 #: src/pages/Home/Home.tsx
 msgid "Infinite Liquidity"
-msgstr "Liquidez infinita"
+msgstr "Thanh khoản vô tận"
 
 #: src/hooks/useSwap.ts
 msgid "Insufficient"
-msgstr "Insuficiente"
+msgstr "Không đủ"
 
 #: src/hooks/useFuturesAdd.ts
 #: src/hooks/useFuturesNewOrder.ts
 msgid "Insufficient NEST balance"
-msgstr "Saldo insuficiente de NEST"
+msgstr "Số dư NEST không đủ"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 msgid "Invitee Trading Volume"
-msgstr "Volume de negociação de convidados"
+msgstr "Khối lượng giao dịch của người được giới thiệu"
 
 #: src/pages/DirectPoster/useDirectPoster.ts
 msgid "It's available once in 24 hours. Please come later."
-msgstr "Está disponível uma vez em 24 horas. Por favor, venha mais tarde."
+msgstr "Nó chỉ có sẵn một lần trong 24 giờ. Vui lòng quay lại sau."
 
 #: src/pages/Home/Home.tsx
 #: src/pages/Home/Home.tsx
 msgid "Join"
-msgstr "Aderir"
+msgstr "Tham gia"
 
 #: src/pages/Home/Home.tsx
 #: src/pages/Home/Home.tsx
 msgid "Join NESTFi affiliate program and get commission on your referrals."
-msgstr "Adira ao programa de afiliados da NESTFi e receba comissões pelas suas referências."
+msgstr "Tham gia chương trình liên kết NESTFi và nhận hoa hồng từ người được giới thiệu của bạn."
 
 #: src/pages/Home/Home.tsx
 #: src/pages/Home/Home.tsx
 msgid "KOLs Joined NESTFi"
-msgstr "KOLs aderiram à NESTFi"
+msgstr "Các KOL đã tham gia NESTFi"
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 #: src/pages/Share/Modal/LanguageModal.tsx
 #: src/pages/Share/Modal/LanguageModal.tsx
 msgid "Language"
-msgstr "Idioma"
+msgstr "Ngôn ngữ"
 
 #: src/components/NormalInput/NormalInput.tsx
 msgid "Last"
-msgstr "Último"
+msgstr "Cuối cùng"
 
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 msgid "Last Price"
-msgstr "Preço Atual"
+msgstr "Giá cuối cùng"
 
 #: src/pages/Home/Home.tsx
 msgid ""
 "Leading cryptocurrency decentralized exchange. Trade BTC/USDT, ETH/USDT and BNB/USDT futures securely,\n"
 "swiftly, and effortlessly."
 msgstr ""
-"Principal bolsa descentralizada de criptomoedas. Negocie futuros de BTC/USDT, ETH/USDT e BNB/USDT de forma segura,\n"
-"rapidamente e sem esforço."
+"Sàn giao dịch phi tập trung hàng đầu cho tiền điện tử. Giao dịch BTC/USDT, ETH/USDT và BNB/USDT futures một cách an toàn, \n"
+"nhanh chóng và dễ dàng."
 
 #: src/pages/Share/Modal/ConnectWalletModal.tsx
 msgid "Learn more"
-msgstr "Saiba mais"
+msgstr "Tìm hiểu thêm"
 
 #: src/pages/Futures/Components/LeverageSlider.tsx
 msgid "Leverage"
-msgstr "Alavancagem"
+msgstr "Đòn bẩy"
 
 #: src/pages/Futures/NewOrder.tsx
 msgid "Limit"
-msgstr "Limite"
+msgstr "Giới hạn"
 
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useFuturesNewOrder.ts
 msgid "Limit order fee = 15 NEST"
-msgstr "Taxa de ordem de limite = 15 NEST"
+msgstr "Phí đặt lệnh giới hạn = 15 NEST"
 
 #: src/pages/Futures/Modal/EditLimitModal.tsx
 #: src/pages/Futures/Modal/EditLimitModal.tsx
@@ -538,7 +538,7 @@ msgstr "Taxa de ordem de limite = 15 NEST"
 #: src/pages/Futures/Modal/SharePositionModal.tsx
 #: src/pages/Futures/Modal/SharePositionModal.tsx
 msgid "Limit Price"
-msgstr "Preço Limite"
+msgstr "Giá giới hạn"
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
@@ -549,17 +549,17 @@ msgstr "Preço Limite"
 #: src/pages/Futures/Modal/EditPositionModal.tsx
 #: src/pages/Futures/NewOrder.tsx
 msgid "Liq Price"
-msgstr "Preço de Liquidação"
+msgstr "Giá thanh lý"
 
 #: src/hooks/useFuturesPOrderClose.tsx
 msgid "Liquidated"
-msgstr "Liquidado"
+msgstr "Bị thanh lý"
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 msgid "Loading..."
-msgstr "Carregando..."
+msgstr "Đang tải..."
 
 #: src/components/LongOrShort/LongOrShort.tsx
 #: src/hooks/useFuturesAdd.ts
@@ -574,108 +574,108 @@ msgstr "Carregando..."
 #: src/pages/Futures/Components/OrderTablePosition.tsx
 #: src/pages/Futures/Modal/SharePositionModal.tsx
 msgid "Long"
-msgstr "Longo"
+msgstr "Mua"
 
 #: src/pages/Futures/NewOrder.tsx
 msgid "Market"
-msgstr "Mercado"
+msgstr "Thị trường"
 
 #: src/components/NormalInput/NESTInput.tsx
 #: src/components/NormalInput/NESTInputSelect.tsx
 #: src/pages/Swap/Components/SwapInputItem.tsx
 msgid "MAX"
-msgstr "MÁX"
+msgstr "Tối đa"
 
 #: src/hooks/useFuturesNewOrder.ts
 msgid "Minimum 50 NEST"
-msgstr "Mínimo de 50 NEST"
+msgstr "Tối thiểu 50 NEST"
 
 #: src/pages/Home/Home.tsx
 #: src/pages/Share/Modal/ConnectWalletModal.tsx
 msgid "More"
-msgstr "Mais"
+msgstr "Thêm"
 
 #: src/pages/Futures/MoreInfo.tsx
 msgid "More Info"
-msgstr "Mais informações"
+msgstr "Thông tin thêm"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 msgid "My commissions"
-msgstr "As minhas comissões"
+msgstr "Thông tin thêm"
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "My Positions"
-msgstr "Minhas Posições"
+msgstr "Vị trí của tôi"
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 msgid "My Total Trading Volume"
-msgstr "O meu volume total de transacções"
+msgstr "Tổng khối lượng giao dịch của tôi"
 
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "NEST Total Burned"
-msgstr "NEST Queimados no Total"
+msgstr "Tổng số NEST đã được đốt"
 
 #: src/pages/Futures/MoreInfo.tsx
 msgid "NEST White Paper"
-msgstr "White Paper NEST"
+msgstr "Bài viết NEST White Paper"
 
 #: src/pages/Home/Home.tsx
 msgid "NEST's economic model is deflationary. The more users trade, the more $NEST will be burned."
-msgstr "O modelo económico da NEST é deflacionário. Quanto mais os utilizadores transaccionarem, mais $NEST será queimado."
+msgstr "Mô hình kinh tế của NEST là một mô hình giảm phát. Càng có nhiều người dùng giao dịch, số lượng $NEST bị đốt càng nhiều."
 
 #: src/pages/Home/Home.tsx
 msgid "NESTFi, A Next-Generation"
-msgstr "NESTFi, Uma Próxima Geração"
+msgstr "NESTFi, một thế hệ tiếp theo"
 
 #: src/pages/Home/Home.tsx
 msgid "NESTFi's new features enable you to open a position with a single click."
-msgstr "As novas funcionalidades da NESTFi permitem-lhe abrir uma posição com um simples clique."
+msgstr "Các tính năng mới của NESTFi cho phép bạn mở vị trí chỉ bằng một cú nhấp chuột."
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "News"
-msgstr "Notícias"
+msgstr "Tin tức"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 msgid "No commissions yet"
-msgstr "Ainda não há comissões"
+msgstr "Chưa có hoa hồng nào"
 
 #: src/pages/Home/Home.tsx
 msgid "No Market Makers"
-msgstr "Não há formadores de mercado"
+msgstr "Không có nhà cung cấp thanh khoản"
 
 #: src/pages/Futures/Components/TableTitle.tsx
 #: src/pages/Futures/OrderList.tsx
 #: src/pages/Futures/OrderList.tsx
 msgid "No Order"
-msgstr "Nenhum pedido"
+msgstr "Không có lệnh nào"
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "No trades yet"
-msgstr "Nenhuma negociação ainda"
+msgstr "Chưa có giao dịch nào"
 
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "No Transactions yet"
-msgstr "Ainda não há transacções"
+msgstr "Chưa có giao dịch nào"
 
 #: src/hooks/useFuturesNewOrder.ts
 msgid "Open"
-msgstr "Aberto"
+msgstr "Mở"
 
 #: src/hooks/useTransactionReceipt.ts
 msgid "Open position"
-msgstr "Posição aberta"
+msgstr "Mở vị trí"
 
 #: src/hooks/useTransactionReceipt.ts
 msgid "Open position request"
-msgstr "Pedido de posição aberta"
+msgstr "Yêu cầu mở vị trí"
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
@@ -690,39 +690,39 @@ msgstr "Pedido de posição aberta"
 #: src/pages/Futures/Modal/AddModal.tsx
 #: src/pages/Futures/Modal/EditPositionModal.tsx
 msgid "Open Price"
-msgstr "Preço aberto"
+msgstr "Giá mở vị trí"
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Futures/Components/OrderTable.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 msgid "Operate"
-msgstr "Operar"
+msgstr "Vận hành"
 
 #: src/pages/Futures/OrderList.tsx
 msgid "Order"
-msgstr "Encomendar"
+msgstr "Lệnh"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 msgid "Overview"
-msgstr "Visão geral"
+msgstr "Tổng quan"
 
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Platform (Youtube, Telegram, Twitter, Instagram, Facebook, Tiktok, Others)"
-msgstr "Plataforma (Youtube, Telegram, Twitter, Instagram, Facebook, Tiktok, outros)"
+msgstr "Nền tảng (Youtube, Telegram, Twitter, Instagram, Facebook, Tiktok, Các nền tảng khác)"
 
 #: src/pages/Futures/Modal/ApproveNoticeModal.tsx
 msgid "Please click Approve for authorization and then you can open the position, this process will consume some GAS."
-msgstr "Clique em Aprovar para obter autorização e, em seguida, pode abrir a posição, este processo consumirá algum GAS."
+msgstr "Vui lòng nhấp vào \"Approve\" để xác thực và sau đó bạn có thể mở vị trí, quá trình này sẽ tiêu thụ một số GAS."
 
 #: src/pages/DirectPoster/useDirectPoster.ts
 msgid "Please get ETH testnet token first"
-msgstr "Obter primeiro o token ETH testnet"
+msgstr "Vui lòng nhận token ETH trên mạng thử nghiệm trước."
 
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 msgid "Please note that \"Limit order\" or \"Stop order\" is not guaranteed to be executed. This may include, but is not limited to, the following cases."
-msgstr "Tenha em atenção que a execução de uma \"ordem de limite\" ou \"ordem de paragem\" não é garantida. Isto pode incluir, mas não se limita a, os seguintes casos."
+msgstr "Vui lòng lưu ý rằng \"Lệnh giới hạn\" hoặc \"Lệnh dừng\" không được đảm bảo sẽ được thực hiện. Điều này có thể bao gồm, nhưng không giới hạn, các trường hợp sau đây."
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
@@ -730,92 +730,92 @@ msgstr "Tenha em atenção que a execução de uma \"ordem de limite\" ou \"orde
 #: src/pages/Futures/Modal/CloseModal.tsx
 #: src/pages/Futures/Modal/EditPositionModal.tsx
 msgid "Position"
-msgstr "Posição"
+msgstr "Vị trí"
 
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useFuturesNewOrder.ts
 msgid "Position fee = Position * 0.05%"
-msgstr "Taxa de posição = Posição * 0,05%"
+msgstr "Phí vị trí = Vị trí * 0,05%"
 
 #: src/hooks/useFuturesEditPosition.ts
 msgid "Position fee =Position*0.05%"
-msgstr "Taxa de posição = Posição * 0,05%"
+msgstr "Phí vị trí = Vị trí * 0,05%"
 
 #: src/hooks/useFuturesClose.ts
 msgid "Position*0.05%"
-msgstr "Posição * 0,05%"
+msgstr "Vị trí * 0,05%"
 
 #: src/pages/Futures/Modal/SharePositionModal.tsx
 #: src/pages/Futures/NewOrder.tsx
 #: src/pages/Futures/OrderList.tsx
 msgid "Positions"
-msgstr "Posições"
+msgstr "Vị trí"
 
 #: src/pages/Futures/NewOrder.tsx
 #: src/pages/Swap/Swap.tsx
 msgid "Price"
-msgstr "Preço"
+msgstr "Giá"
 
 #: src/hooks/useTransactionReceipt.ts
 msgid "Received"
-msgstr "Recebido"
+msgstr "Đã nhận"
 
 #: src/hooks/useTransactionReceipt.ts
 msgid "Received 100NEST test tokens"
-msgstr "Recebeu 100 fichas de teste NEST"
+msgstr "Đã nhận 100 token NEST thử nghiệm"
 
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "Recent transactions"
-msgstr "Transacções recentes"
+msgstr "Các giao dịch gần đây"
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 msgid "Referral"
-msgstr "Referência"
+msgstr "Giới thiệu"
 
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 #: src/pages/Futures/Modal/ProtocolModal.tsx
 msgid "Risk Warning"
-msgstr "Aviso de Risco"
+msgstr "Cảnh báo rủi ro"
 
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 msgid "Scan and copy the trade"
-msgstr "Escanear e copiar a negociação"
+msgstr "Quét và sao chép giao dịch"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 msgid "Search"
-msgstr "Pesquisar"
+msgstr "Tìm kiếm"
 
 #: src/hooks/useTransactionReceipt.ts
 msgid "Sell position"
-msgstr "Vender posição"
+msgstr "Bán vị trí"
 
 #: src/hooks/useTransactionReceipt.ts
 msgid "Sell position request"
-msgstr "Pedido de venda de posição"
+msgstr "Yêu cầu bán vị trí"
 
 #: src/pages/Futures/Modal/CloseModal.tsx
 #: src/pages/Futures/Modal/EditPositionModal.tsx
 #: src/pages/Futures/Modal/SharePositionModal.tsx
 #: src/pages/Futures/NewOrder.tsx
 msgid "Service Fee"
-msgstr "Taxa de Serviço"
+msgstr "Phí dịch vụ"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 msgid "Settled"
-msgstr "Liquidado"
+msgstr "Đã giải quyết"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 msgid "Settled Commissions"
-msgstr "Comissões liquidadas"
+msgstr "Hoa hồng đã giải quyết"
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 msgid "Share"
-msgstr "Partilhar"
+msgstr "Chia sẻ"
 
 #: src/components/LongOrShort/LongOrShort.tsx
 #: src/hooks/useFuturesAdd.ts
@@ -830,25 +830,25 @@ msgstr "Partilhar"
 #: src/pages/Futures/Components/OrderTablePosition.tsx
 #: src/pages/Futures/Modal/SharePositionModal.tsx
 msgid "Short"
-msgstr "Curto"
+msgstr "Bán"
 
 #: src/pages/Futures/Components/OrderTable.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 msgid "SL"
-msgstr "SL"
+msgstr "Chốt Lỗ"
 
 #: src/pages/Swap/Swap.tsx
 msgid "Slippage Tolerance"
-msgstr "Tolerância ao deslizamento"
+msgstr "Dung sai trong giao dịch"
 
 #: src/pages/Swap/Components/SwapSlippageModal.tsx
 msgid "Slippage Tolerance Setting"
-msgstr "Configuração de Tolerância ao Deslizamento"
+msgstr "Cài đặt dung sai trong giao dịch"
 
 #: src/pages/Home/Home.tsx
 msgid "Start Trading"
-msgstr "Começar a Negociar"
+msgstr "Bắt đầu giao dịch"
 
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 #: src/pages/Futures/Components/OrderList.tsx
@@ -859,28 +859,28 @@ msgstr "Começar a Negociar"
 #: src/pages/Futures/Modal/SharePositionModal.tsx
 #: src/pages/Futures/NewOrder.tsx
 msgid "Stop Loss"
-msgstr "Stop Loss"
+msgstr "Dừng lỗ"
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Futures/Components/OrderTable.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 msgid "Stop Order"
-msgstr "Ordem de Stop"
+msgstr "Lệnh dừng"
 
 #: src/hooks/useFuturesEditPosition.ts
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useFuturesNewOrder.ts
 msgid "Stop order fee(after execution) = 15 NEST"
-msgstr "Taxa da ordem de Stop (após execução) = 15 NEST"
+msgstr "Phí lệnh dừng (sau khi thực hiện) = 15 NEST"
 
 #: src/pages/Futures/NewOrder.tsx
 msgid "Stop-Limit"
-msgstr "Stop-Limit"
+msgstr "Dừng-Giới hạn"
 
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Submit successfully"
-msgstr "Submissão bem sucedida"
+msgstr "Gửi thành công"
 
 #: src/components/NormalInput/NESTInput.tsx
 #: src/components/NormalInput/NESTInputSelect.tsx
@@ -889,16 +889,16 @@ msgstr "Submissão bem sucedida"
 #: src/pages/Share/Head/NESTHead.tsx
 #: src/pages/Swap/Swap.tsx
 msgid "Swap"
-msgstr "Trocar"
+msgstr "Đổi"
 
 #: src/hooks/useNESTSnackBar.tsx
 msgid "Switch network successfully"
-msgstr "Rede trocada com sucesso"
+msgstr "Chuyển mạng thành công"
 
 #: src/pages/Futures/Components/OrderTable.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 msgid "Symbol"
-msgstr "Símbolo"
+msgstr "Biểu tượng"
 
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 #: src/pages/Futures/Components/OrderList.tsx
@@ -909,174 +909,174 @@ msgstr "Símbolo"
 #: src/pages/Futures/Modal/SharePositionModal.tsx
 #: src/pages/Futures/NewOrder.tsx
 msgid "Take Profit"
-msgstr "Obter lucro"
+msgstr "Chốt lời"
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "Test BNB"
-msgstr "Teste BNB"
+msgstr "BNB kiểm thử"
 
 #: src/pages/DirectPoster/DirectPoster.tsx
 #: src/pages/DirectPoster/useDirectPoster.ts
 msgid "Testnet token"
-msgstr "Token Testnet"
+msgstr "Token mạng kiểm thử"
 
 #: src/components/NormalInput/NESTInput.tsx
 #: src/components/NormalInput/NESTInputSelect.tsx
 msgid "The balance is 0. You can go to \"Faucet\" to get test token before trading."
-msgstr "O saldo é de 0. Pode ir a \"Faucet\" para obter um token de teste antes de negociar."
+msgstr "Số dư là 0. Bạn có thể đến \"Faucet\" để nhận token kiểm thử trước khi giao dịch."
 
 #: src/pages/Home/Home.tsx
 msgid "The smart contract guarantees infinite liquidity through burning and issuing $NEST."
-msgstr "O contrato inteligente garante liquidez infinita através da queima e emissão de $NEST."
+msgstr "Hợp đồng thông minh đảm bảo tính thanh khoản vô hạn thông qua việc đốt và phát hành $NEST."
 
 #: src/pages/Home/Home.tsx
 msgid "The smart contract is the only seller of the system. No market marking costs and no liquidity debt."
-msgstr "O contrato inteligente é o único vendedor do sistema. Sem custos de marcação de mercado e sem dívida de liquidez."
+msgstr "Hợp đồng thông minh là người bán duy nhất của hệ thống. Không có chi phí đánh dấu thị trường và không có nợ thanh khoản."
 
 #: src/components/NormalInput/NESTInputSelect.tsx
 msgid "The system will automatically convert USDT to NEST at market price for you to open your position, and you will also receive NEST at settlement."
-msgstr "O sistema converterá automaticamente USDT para NEST ao preço de mercado para você abrir sua posição, e você também receberá NEST na liquidação."
+msgstr "Hệ thống sẽ tự động chuyển đổi USDT thành NEST với giá thị trường để bạn mở vị trí, và bạn cũng sẽ nhận được NEST khi thanh toán."
 
 #: src/hooks/useNESTSnackBar.tsx
 msgid "The transaction failed and the amount has been fully refunded. You can re-trade"
-msgstr "A transação falhou e o valor foi completamente reembolsado. Você pode fazer uma nova negociação"
+msgstr "Giao dịch thất bại và số tiền đã được hoàn trả đầy đủ. Bạn có thể giao dịch lại."
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "Time"
-msgstr "Tempo"
+msgstr "Thời gian"
 
 #: src/pages/Futures/Components/FuturesNotice.tsx
 msgid "to check and close."
-msgstr "para verificar e fechar."
+msgstr "để kiểm tra và đóng."
 
 #: src/pages/Swap/Components/SwapInputItem.tsx
 msgid "To(Estimated)"
-msgstr "Para (Estimado)"
+msgstr "Đến (Ước tính)"
 
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "Today Burned"
-msgstr "Queimado Hoje"
+msgstr "Đã đốt hôm nay"
 
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "Today Volume"
-msgstr "Volume actual"
+msgstr "Khối lượng hôm nay"
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 msgid "Today's PNL"
-msgstr "O PNL de hoje"
+msgstr "Lợi nhuận/nguy cơ hôm nay"
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 msgid "Today\\'s PNL"
-msgstr "Hoje\\'s PNL"
+msgstr "Lợi nhuận/nguy cơ hôm nay"
 
 #: src/pages/Home/Home.tsx
 #: src/pages/Home/Home.tsx
 msgid "Total Burned (NEST)"
-msgstr "Total queimado (NEST)"
+msgstr "Tổng số NEST đã đốt"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 msgid "Total Commissions"
-msgstr "Total das comissões"
+msgstr "Tổng hoa hồng"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 msgid "Total Invitees"
-msgstr "Total de convidados"
+msgstr "Tổng số người được mời"
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 msgid "Total Number of Trades"
-msgstr "Número total de transacções"
+msgstr "Tổng số giao dịch"
 
 #: src/pages/Futures/Modal/SharePositionModal.tsx
 #: src/pages/Futures/NewOrder.tsx
 msgid "Total Pay"
-msgstr "Remuneração total"
+msgstr "Tổng số tiền thanh toán"
 
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 msgid "Total Profit"
-msgstr "Lucro total"
+msgstr "Tổng lợi nhuận"
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 msgid "Total Profit & Loss"
-msgstr "Total de lucros e perdas"
+msgstr "Tổng lợi nhuận & lỗ"
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 msgid "Total Trading Volume"
-msgstr "Volume total de transacções"
+msgstr "Tổng khối lượng giao dịch"
 
 #: src/pages/Home/Home.tsx
 #: src/pages/Home/Home.tsx
 msgid "Total Trading Volume (NEST)"
-msgstr "Volume total de transacções (NEST)"
+msgstr "Tổng khối lượng giao dịch (NEST)"
 
 #: src/pages/Futures/Components/OrderTable.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 msgid "TP"
-msgstr "TP"
+msgstr "Chốt Lời"
 
 #: src/hooks/useFuturesNewOrder.ts
 #: src/pages/Futures/Modal/SharePositionModal.tsx
 msgid "TP and SL price you set will trigger immediately."
-msgstr "O preço de TP e SL que você definiu será acionado imediatamente."
+msgstr "Giá TP và SL bạn đặt sẽ kích hoạt ngay lập tức."
 
 #: src/pages/Home/Home.tsx
 msgid "Trade BTC, ETH and BNB with up to 1-50 leverage. Open a position with USDT or NEST."
-msgstr "Negocie BTC, ETH e BNB com alavancagem de até 1-50. Abrir uma posição com USDT ou NEST"
+msgstr "Giao dịch BTC, ETH và BNB với đòn bẩy từ 1-50. Mở vị trí với USDT hoặc NEST."
 
 #: src/pages/Home/Home.tsx
 msgid "Trade easily anytime and anywhere."
-msgstr "Negoceie facilmente em qualquer altura e em qualquer lugar."
+msgstr "Giao dịch dễ dàng bất cứ lúc nào và ở bất kỳ đâu."
 
 #: src/pages/Home/Home.tsx
 msgid "Trade Now"
-msgstr "Negociar agora"
+msgstr "Giao dịch Ngay"
 
 #: src/pages/Swap/Swap.tsx
 msgid "Trade tokens in instant"
-msgstr "Negocie tokens instantaneamente"
+msgstr "Giao dịch token tức thì"
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 msgid "Trade with me on NESTFi"
-msgstr "Negocie comigo na NESTFi"
+msgstr "Giao dịch với tôi trên NESTFi"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 msgid "Traded Invitees"
-msgstr "Investidos negociados"
+msgstr "Người được mời đã giao dịch"
 
 #: src/pages/Home/Home.tsx
 msgid "Trading only with smart contract.No third-party intervention."
-msgstr "Negociação apenas com contrato inteligente, sem intervenção de terceiros."
+msgstr "Chỉ giao dịch với hợp đồng thông minh. Không có sự can thiệp của bên thứ ba."
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 msgid "Trading Volume"
-msgstr "Investidos negociados"
+msgstr "Khối lượng giao dịch"
 
 #: src/hooks/useFuturesPOrder.ts
 msgid "Trigger"
-msgstr "Gatilho"
+msgstr "Kích hoạt"
 
 #: src/hooks/useFuturesPOrderClose.tsx
 msgid "Trigger executed"
-msgstr "Accionamento executado"
+msgstr "Kích hoạt đã được thực hiện"
 
 #: src/pages/Futures/Modal/EditPositionModal.tsx
 msgid "Trigger Position"
-msgstr "Posição de disparo"
+msgstr "Vị trí kích hoạt"
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
@@ -1086,41 +1086,41 @@ msgstr "Twitter"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 msgid "Unsettled"
-msgstr "Inquieto"
+msgstr "Chưa giải quyết"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 msgid "Unsettled Commissions"
-msgstr "Comissões não liquidadas"
+msgstr "Hoa hồng chưa giải quyết"
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "User Guide"
-msgstr "Guia do usuário"
+msgstr "Hướng dẫn sử dụng"
 
 #: src/components/SnackBar/NormalSnackBar.tsx
 #: src/pages/Futures/Components/FuturesNotice.tsx
 msgid "View"
-msgstr "Ver"
+msgstr "Xem"
 
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "Wallet"
-msgstr "Carteira"
+msgstr "Ví"
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "White Paper"
-msgstr "White paper"
+msgstr "Bản Trắng"
 
 #: src/pages/Home/Home.tsx
 msgid "Why You Should Choose NESTFi"
-msgstr "Por que escolher a NESTFi"
+msgstr "Tại sao bạn nên chọn NESTFi"
 
 #: src/pages/Futures/Modal/CloseOrderNoticeModal.tsx
 msgid "Will not be displayed after closing"
-msgstr "Não será exibido após o fechamento"
+msgstr "Sẽ không được hiển thị sau khi đóng"
 
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 msgid "with 1 click"
-msgstr "com 1 clique"
+msgstr "chỉ với 1 cú nhấp chuột"
 
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Youtube"
