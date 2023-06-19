@@ -501,7 +501,7 @@ const Referral = () => {
                                 onClick={() => {
                                   if (!address) return;
                                   const link =
-                                    "https://finance.nestprotocol.org/?a=" +
+                                    "https://nestfi.org/?a=" +
                                     address.slice(-8).toLowerCase();
                                   copy(link);
                                   messageSnackBar(t`Copy Successfully`);
@@ -537,7 +537,7 @@ const Referral = () => {
                       disable={!address}
                       onClick={() => {
                         if (!address) return;
-                        const link = 'https://finance.nestprotocol.org/?a=' + address.slice(-8).toLowerCase()
+                        const link = 'https://nestfi.org/?a=' + address.slice(-8).toLowerCase()
                         copy(link);
                         messageSnackBar("Copy Successfully");
                       }}/>
