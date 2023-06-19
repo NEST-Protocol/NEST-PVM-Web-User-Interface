@@ -273,6 +273,7 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`;
                     <Caption8>
                       {props.value.openPrice?.toLocaleString("en-US", {
                         maximumFractionDigits: tokenName.getTokenPriceDecimals(),
+                        minimumFractionDigits: tokenName.getTokenPriceDecimals(),
                       })}{" "}
                       USDT
                     </Caption8>
@@ -282,6 +283,7 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`;
                     <Caption8>
                       {props.value.lastPrice?.toLocaleString("en-US", {
                         maximumFractionDigits: tokenName.getTokenPriceDecimals(),
+                        minimumFractionDigits: tokenName.getTokenPriceDecimals(),
                       })}{" "}
                       USDT
                     </Caption8>

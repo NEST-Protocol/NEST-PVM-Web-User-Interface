@@ -252,6 +252,7 @@ const TVChart: FC<TVChartProps> = ({...props}) => {
           <div style={{fontWeight: 400}}>{select.time}</div>
           <div style={{fontWeight: 700}}>{select.value.toLocaleString('en-US', {
             maximumFractionDigits: 2,
+            minimumFractionDigits: 2,
           })} NEST</div>
         </Box>
       </Stack>

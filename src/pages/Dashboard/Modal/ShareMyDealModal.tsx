@@ -278,6 +278,7 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
                 <Stack direction={'row'} spacing={'8px'} alignItems={"center"}>
                   <Caption1>{props.value.totalValue.toLocaleString('en-US', {
                     maximumFractionDigits: 2,
+                    minimumFractionDigits: 2,
                   })} NEST</Caption1>
                   {/*<Box*/}
                   {/*  sx={(theme) => ({*/}
@@ -322,6 +323,7 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
                   <Stack direction={'row'} spacing={'8px'} alignItems={"center"}>
                     <Caption1>{props.value.totalVolume.toLocaleString('en-US', {
                       maximumFractionDigits: 2,
+                      minimumFractionDigits: 2,
                     })} NEST</Caption1>
                   </Stack>
                 </Stack>
@@ -378,6 +380,7 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
             <Stack direction={'row'} spacing={'8px'} alignItems={"center"}>
               <Caption1>{props.value.todayValue.toLocaleString('en-US', {
                 maximumFractionDigits: 2,
+                minimumFractionDigits: 2,
               })} NEST</Caption1>
             </Stack>
           </Stack>
@@ -404,6 +407,7 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
             <Stack direction={'row'} spacing={'8px'} alignItems={"center"}>
               <Caption1>{props.value.day7Value.toLocaleString('en-US', {
                 maximumFractionDigits: 2,
+                minimumFractionDigits: 2,
               })} NEST</Caption1>
             </Stack>
           </Stack>
@@ -430,6 +434,7 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
             <Stack direction={'row'} spacing={'8px'} alignItems={"center"}>
               <Caption1>{props.value.day30Value.toLocaleString('en-US', {
                 maximumFractionDigits: 2,
+                minimumFractionDigits: 2,
               })} NEST</Caption1>
             </Stack>
           </Stack>
@@ -534,6 +539,7 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
                     }
                   }}>{showList[0].value.toLocaleString('en-US', {
                     maximumFractionDigits: 2,
+                    minimumFractionDigits: 2,
                   })} <span>{showList[0].unit}</span></Caption3>
                 </Stack>
               )
@@ -546,6 +552,7 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
                       <Caption5>{showList?.[1].title}</Caption5>
                       <Caption6>{showList?.[1].value.toLocaleString('en-US', {
                         maximumFractionDigits: 2,
+                        minimumFractionDigits: 2,
                       })} {showList[1].unit}
                         {/*<span>{showList?.[1].rate}%</span>*/}
                       </Caption6>
@@ -558,6 +565,7 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
                       <Caption5>{showList?.[2].title}</Caption5>
                       <Caption6>{showList?.[2].value.toLocaleString('en-US', {
                         maximumFractionDigits: 2,
+                        minimumFractionDigits: 2,
                       })} {showList[2].unit}
                       </Caption6>
                     </Stack>
@@ -571,6 +579,7 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
                     <Caption5>{showList?.[3].title}</Caption5>
                     <Caption6>{showList?.[3].value.toLocaleString('en-US', {
                       maximumFractionDigits: 2,
+                      minimumFractionDigits: 2,
                     })} {showList[3].unit}
                     </Caption6>
                   </Stack>
@@ -582,6 +591,7 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
                       <Caption5>{showList?.[4].title}</Caption5>
                       <Caption6>{showList?.[4].value.toLocaleString('en-US', {
                         maximumFractionDigits: 2,
+                        minimumFractionDigits: 2,
                       })} {showList[4].unit}
                       </Caption6>
                     </Stack>

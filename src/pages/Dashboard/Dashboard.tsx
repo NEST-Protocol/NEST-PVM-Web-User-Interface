@@ -314,6 +314,7 @@ const Dashboard: FC = () => {
             <p>
               {item.actualMargin.toLocaleString("en-US", {
                 maximumFractionDigits: 2,
+                minimumFractionDigits: 2,
               })}{" "}
               NEST
             </p>
@@ -335,6 +336,7 @@ const Dashboard: FC = () => {
           >
             {item.openPrice.toLocaleString("en-US", {
               maximumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
+              minimumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
             })}{" "}
             USDT
           </Box>
@@ -362,6 +364,7 @@ const Dashboard: FC = () => {
                 .toNumber() / 1000000
             ).toLocaleString("en-US", {
               maximumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
+              minimumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
             })}{" "}
             USDT
           </Box>
@@ -379,6 +382,7 @@ const Dashboard: FC = () => {
             >
               {item.lastPrice.toLocaleString("en-US", {
                 maximumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
+                minimumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
               })}{" "}
               USDT
             </Box>
@@ -407,6 +411,7 @@ const Dashboard: FC = () => {
               {item.sp
                 ? item.sp.toLocaleString("en-US", {
                   maximumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
+                  minimumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
                 })
                 : "-"}{" "}
               USDT
@@ -416,6 +421,7 @@ const Dashboard: FC = () => {
               {item.sl
                 ? item.sl.toLocaleString("en-US", {
                   maximumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
+                  minimumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
                 })
                 : "-"}{" "}
               USDT
@@ -516,6 +522,7 @@ const Dashboard: FC = () => {
               >
                 {item.openPrice.toLocaleString("en-US", {
                   maximumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
+                  minimumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
                 })}{" "}
                 USDT
               </Caption2>
@@ -542,6 +549,7 @@ const Dashboard: FC = () => {
               >
                 {item.actualMargin.toLocaleString("en-US", {
                   maximumFractionDigits: 2,
+                  minimumFractionDigits: 2,
                 })}{" "}
                 NEST{" "}
                 <span>
@@ -576,6 +584,7 @@ const Dashboard: FC = () => {
               >
                 {item.sp.toLocaleString("en-US", {
                   maximumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
+                  minimumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
                 })}{" "}
                 USDT
               </Caption5>
@@ -595,6 +604,7 @@ const Dashboard: FC = () => {
               >
                 {item.sl.toLocaleString("en-US", {
                   maximumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
+                  minimumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
                 })}{" "}
                 USDT
               </Caption5>
@@ -627,6 +637,7 @@ const Dashboard: FC = () => {
                     .toNumber() / 1000000
                 ).toLocaleString("en-US", {
                   maximumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
+                  minimumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
                 })}{" "}
                 USDT
               </Caption5>
@@ -645,6 +656,7 @@ const Dashboard: FC = () => {
                 >
                   {item.lastPrice.toLocaleString("en-US", {
                     maximumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
+                    minimumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
                   })}{" "}
                   USDT
                 </Caption5>
@@ -783,6 +795,7 @@ const Dashboard: FC = () => {
                     ? "-"
                     : burnedInfo.totalDestroy.toLocaleString("en-US", {
                       maximumFractionDigits: 2,
+                      minimumFractionDigits: 2,
                     })
                 }`}
                 value2={`${
@@ -790,6 +803,7 @@ const Dashboard: FC = () => {
                     ? "-"
                     : burnedInfo.dayDestroy.toLocaleString("en-US", {
                       maximumFractionDigits: 2,
+                      minimumFractionDigits: 2,
                     })
                 }`}
                 data={burnedData || []}
@@ -814,6 +828,7 @@ const Dashboard: FC = () => {
                     ? "-"
                     : txInfo?.totalVolume.toLocaleString("en-US", {
                       maximumFractionDigits: 2,
+                      minimumFractionDigits: 2,
                     })
                 }`}
                 value2={`${
@@ -821,6 +836,7 @@ const Dashboard: FC = () => {
                     ? "-"
                     : txInfo?.dayVolume.toLocaleString("en-US", {
                       maximumFractionDigits: 2,
+                      minimumFractionDigits: 2,
                     })
                 }`}
                 data={txData || []}
@@ -940,6 +956,7 @@ const Dashboard: FC = () => {
                           <Title4>
                             {myTxInfo?.totalValue.toLocaleString("en-US", {
                               maximumFractionDigits: 2,
+                              minimumFractionDigits: 2,
                             })}{" "}
                             NEST
                           </Title4>
@@ -1005,6 +1022,7 @@ const Dashboard: FC = () => {
                           <Title4>
                             {myTxInfo?.totalVolume?.toLocaleString("en-US", {
                               maximumFractionDigits: 2,
+                              minimumFractionDigits: 2,
                             })}{" "}
                             NEST
                           </Title4>
@@ -1060,6 +1078,7 @@ const Dashboard: FC = () => {
                       <Caption4>
                         {myTxInfo?.todayValue.toLocaleString("en-US", {
                           maximumFractionDigits: 2,
+                          minimumFractionDigits: 2,
                         })}{" "}
                         NEST
                       </Caption4>
@@ -1080,6 +1099,7 @@ const Dashboard: FC = () => {
                       <Caption4>
                         {myTxInfo?.day7Value.toLocaleString("en-US", {
                           maximumFractionDigits: 2,
+                          minimumFractionDigits: 2,
                         })}{" "}
                         NEST
                       </Caption4>
@@ -1100,6 +1120,7 @@ const Dashboard: FC = () => {
                       <Caption4>
                         {myTxInfo?.day30Value.toLocaleString("en-US", {
                           maximumFractionDigits: 2,
+                          minimumFractionDigits: 2,
                         })}{" "}
                         NEST
                       </Caption4>
@@ -1209,6 +1230,7 @@ const Dashboard: FC = () => {
                       >
                         {myTxInfo?.totalValue.toLocaleString("en-US", {
                           maximumFractionDigits: 2,
+                          minimumFractionDigits: 2,
                         })}{" "}
                         <span>NEST</span>
                         {/*<span*/}
@@ -1241,6 +1263,7 @@ const Dashboard: FC = () => {
                         >
                           {myTxInfo?.totalVolume?.toLocaleString("en-US", {
                             maximumFractionDigits: 2,
+                            minimumFractionDigits: 2,
                           })}{" "}
                           <span>NEST</span>
                           {/*<span*/}
@@ -1294,6 +1317,7 @@ const Dashboard: FC = () => {
                   >
                     {myTxInfo?.todayValue.toLocaleString("en-US", {
                       maximumFractionDigits: 2,
+                      minimumFractionDigits: 2,
                     })}{" "}
                     <span>NEST</span>
                     {/*<span*/}
@@ -1318,6 +1342,7 @@ const Dashboard: FC = () => {
                   >
                     {myTxInfo?.day7Value.toLocaleString("en-US", {
                       maximumFractionDigits: 2,
+                      minimumFractionDigits: 2,
                     })}{" "}
                     <span>NEST</span>
                     {/*<span*/}
@@ -1342,6 +1367,7 @@ const Dashboard: FC = () => {
                   >
                     {myTxInfo?.day30Value.toLocaleString("en-US", {
                       maximumFractionDigits: 2,
+                      minimumFractionDigits: 2,
                     })}{" "}
                     <span>NEST</span>
                     {/*<span*/}
