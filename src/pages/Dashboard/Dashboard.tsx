@@ -456,7 +456,7 @@ const Dashboard: FC = () => {
                 lineHeight: '14px',
                 padding: '3px 4px',
                 border: '1px solid',
-                borderColor: item.orderType === 'Closed' ? theme.normal.text2 : item.orderType === 'Liquidated' ? theme.normal.danger : theme.normal.success,
+                borderColor: item.orderType === 'Closed' ? theme.normal.border : item.orderType === 'Liquidated' ? theme.normal.danger_light_hover : theme.normal.success_light_hover,
                 color: item.orderType === 'Closed' ? theme.normal.text2 : item.orderType === 'Liquidated' ? theme.normal.danger : theme.normal.success,
                 borderRadius: '4px',
               })}>
@@ -726,7 +726,7 @@ const Dashboard: FC = () => {
                 lineHeight: '14px',
                 borderRadius: '4px',
                 border: '1px solid',
-                borderColor: item.orderType === 'Closed' ? theme.normal.text2 : item.orderType === 'Liquidated' ? theme.normal.danger : theme.normal.success,
+                borderColor: item.orderType === 'Closed' ? theme.normal.border : item.orderType === 'Liquidated' ? theme.normal.danger_light_hover : theme.normal.success_light_hover,
                 color: item.orderType === 'Closed' ? theme.normal.text2 : item.orderType === 'Liquidated' ? theme.normal.danger : theme.normal.success,
               })}>
                 {item.orderType}
