@@ -9,6 +9,7 @@ interface NormalInputProps {
   rightTitle: string;
   value: string;
   changeValue: (value: string) => void;
+  isShare?:boolean;
   error?: boolean;
   style?: React.CSSProperties;
 }
@@ -18,6 +19,7 @@ interface NormalInputWithLastButtonProps {
   value: string;
   changeValue: (value: string) => void;
   rightAction: () => void;
+  isShare?:boolean;
   error?: boolean;
   style?: React.CSSProperties;
 }
@@ -26,7 +28,6 @@ export const NormalInputBaseStack = styled(Stack)(({ theme }) => ({
   width: "100%",
   height: "48px",
   borderRadius: "8px",
-  background: theme.normal.bg1,
   border: `1px solid ${theme.normal.border}`,
   paddingLeft: "12px",
   paddingRight: "12px",
@@ -64,6 +65,9 @@ const NormalInput: FC<NormalInputProps> = ({ ...props }) => {
       alignItems={"center"}
       style={props.style}
       className={props.error ? "error" : ""}
+      sx={(theme) => ({
+        background: props.isShare ? theme.normal.primary_light_hover : theme.normal.bg1,
+      })}
     >
       <input
         placeholder={props.placeHolder}
@@ -86,6 +90,9 @@ export const NormalInputWithLastButton: FC<NormalInputWithLastButtonProps> = ({
       alignItems={"center"}
       style={props.style}
       className={props.error ? "error" : ""}
+      sx={(theme) => ({
+        background: props.isShare ? theme.normal.primary_light_hover : theme.normal.bg1,
+      })}
     >
       <input
         placeholder={props.placeHolder}

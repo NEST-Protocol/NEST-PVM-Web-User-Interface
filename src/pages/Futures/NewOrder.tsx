@@ -78,6 +78,8 @@ const FuturesNewOrder: FC<FuturesNewOrderProps> = ({ ...props }) => {
     slError,
     lastPriceButton,
     stopErrorText,
+    isShareLink,
+    closeShareLink,
   } = useFuturesNewOrder(props.price, props.tokenPair);
   const { chainsData } = useNEST();
   const newOrderTabsData = useMemo(() => {
@@ -107,10 +109,12 @@ const FuturesNewOrder: FC<FuturesNewOrderProps> = ({ ...props }) => {
         showBalance={showBalance}
         maxCallBack={maxCallBack}
         nestAmount={inputAmount}
-        changeNestAmount={(value: string) =>
-          setInputAmount(value.formatInputNum4())
-        }
+        changeNestAmount={(value: string) => {
+          setInputAmount(value.formatInputNum4());
+          closeShareLink();
+        }}
         price={showNESTPrice}
+        isShare={isShareLink}
       />
     );
   }, [
@@ -119,9 +123,11 @@ const FuturesNewOrder: FC<FuturesNewOrderProps> = ({ ...props }) => {
     inputAmount,
     inputToken,
     inputTokenArray,
+    isShareLink,
     maxCallBack,
     setInputAmount,
     setInputToken,
+    closeShareLink,
     showBalance,
     showNESTPrice,
     showToSwap,
@@ -175,8 +181,12 @@ const FuturesNewOrder: FC<FuturesNewOrderProps> = ({ ...props }) => {
                 placeHolder={tpDefault}
                 rightTitle={"USDT"}
                 value={tp}
+                isShare={isShareLink}
                 error={tpError}
-                changeValue={(value: string) => setTp(value.formatInputNum())}
+                changeValue={(value: string) => {
+                  setTp(value.formatInputNum());
+                  closeShareLink();
+                }}
               />
             </Stack>
             <Stack spacing={"8px"} width={"100%"}>
@@ -196,8 +206,12 @@ const FuturesNewOrder: FC<FuturesNewOrderProps> = ({ ...props }) => {
                 placeHolder={slDefault}
                 rightTitle={"USDT"}
                 value={sl}
+                isShare={isShareLink}
                 error={slError}
-                changeValue={(value: string) => setSl(value.formatInputNum())}
+                changeValue={(value: string) => {
+                  setSl(value.formatInputNum());
+                  closeShareLink();
+                }}
               />
             </Stack>
             {tpError || slError ? <ErrorLabel title={stopErrorText} /> : <></>}
@@ -208,7 +222,9 @@ const FuturesNewOrder: FC<FuturesNewOrderProps> = ({ ...props }) => {
       </Stack>
     );
   }, [
+    isShareLink,
     isStop,
+    closeShareLink,
     setIsStop,
     setSl,
     setTp,
@@ -392,9 +408,11 @@ const FuturesNewOrder: FC<FuturesNewOrderProps> = ({ ...props }) => {
               placeHolder={""}
               rightTitle={"USDT"}
               value={limitAmount}
-              changeValue={(value: string) =>
-                setLimitAmount(value.formatInputNum())
-              }
+              isShare={isShareLink}
+              changeValue={(value: string) => {
+                setLimitAmount(value.formatInputNum());
+                closeShareLink();
+              }}
               rightAction={lastPriceButton}
             />
           </Stack>
