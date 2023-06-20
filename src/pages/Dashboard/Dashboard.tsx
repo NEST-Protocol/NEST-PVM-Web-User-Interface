@@ -184,6 +184,22 @@ const Dashboard: FC = () => {
   const [shareOrder, setShareOrder] = useState<any>(undefined);
   const {messageSnackBar} = useNESTSnackBar();
 
+  const getQueryVariable = (variable: string) => {
+    const query = window.location.search.substring(1);
+    if (query) {
+      const vars = query.split("&");
+      for (let i = 0; i < vars.length; i++) {
+        const pair = vars[i].split("=");
+        if (decodeURIComponent(pair[0]) === variable) {
+          return decodeURIComponent(pair[1]);
+        }
+      }
+    }
+    return null;
+  };
+
+  const a = getQueryVariable("address");
+
   const {data: burnedData} = useSWR(`https://api.nestfi.net/api/dashboard/destory/list?chainId=${chainsData.chainId === 534353 ? 534353 : 56}&from=2022-11-28&to=${(new Date()).toISOString().split("T")[0]}`, (url: any) => fetch(url)
     .then((res) => res.json())
     .then((res: any) => res.value)
@@ -209,19 +225,19 @@ const Dashboard: FC = () => {
     .then((res) => res.json())
     .then((res: any) => res.value));
 
-  const {data: myTxInfo} = useSWR(address ? `https://api.nestfi.net/api/dashboard/myTx/info?address=${address}&chainId=${chainsData.chainId === 534353 ? 534353 : 56}` : undefined, (url: any) => fetch(url)
+  const {data: myTxInfo} = useSWR(address ? `https://api.nestfi.net/api/dashboard/myTx/info?address=${a || address}&chainId=${chainsData.chainId === 534353 ? 534353 : 56}` : undefined, (url: any) => fetch(url)
     .then((res) => res.json())
     .then((res: any) => res.value));
 
-  const {data: historyList} = useSWR(address ? `https://api.nestfi.net/api/dashboard/history/list?address=${address}&chainId=${chainsData.chainId === 534353 ? 534353 : 56}` : undefined, (url: any) => fetch(url)
+  const {data: historyList} = useSWR(address ? `https://api.nestfi.net/api/dashboard/history/list?address=${a || address}&chainId=${chainsData.chainId === 534353 ? 534353 : 56}` : undefined, (url: any) => fetch(url)
     .then((res) => res.json())
     .then((res: any) => res.value.sort((a: any, b: any) => b.time - a.time)));
 
-  const {data: positionList} = useSWR(address ? `https://api.nestfi.net/api/dashboard/position/list?address=${address}&chainId=${chainsData.chainId === 534353 ? 534353 : 56}` : undefined, (url: any) => fetch(url)
+  const {data: positionList} = useSWR(address ? `https://api.nestfi.net/api/dashboard/position/list?address=${a || address}&chainId=${chainsData.chainId === 534353 ? 534353 : 56}` : undefined, (url: any) => fetch(url)
     .then((res) => res.json())
     .then((res: any) => res.value));
 
-  const {data: isKol} = useSWR(address ? `https://api.nestfi.net/api/invite/is-kol-whitelist/${address}` : undefined, (url: any) => fetch(url).then((res) => res.json()));
+  const {data: isKol} = useSWR(address ? `https://api.nestfi.net/api/invite/is-kol-whitelist/${a || address}` : undefined, (url: any) => fetch(url).then((res) => res.json()));
 
   const shareMyDealModal = useMemo(() => {
     return (
