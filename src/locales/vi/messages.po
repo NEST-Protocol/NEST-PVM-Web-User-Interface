@@ -236,6 +236,10 @@ msgstr "Giá đóng cửa"
 msgid "Close Risk"
 msgstr "Đóng rủi ro"
 
+#: src/pages/Dashboard/Dashboard.tsx
+msgid "Closed"
+msgstr ""
+
 #: src/hooks/useFuturesAdd.ts
 #: src/hooks/useFuturesClose.ts
 #: src/hooks/useFuturesEditLimit.ts
@@ -552,6 +556,7 @@ msgid "Liq Price"
 msgstr "Giá thanh lý"
 
 #: src/hooks/useFuturesPOrderClose.tsx
+#: src/pages/Dashboard/Dashboard.tsx
 msgid "Liquidated"
 msgstr "Bị thanh lý"
 
@@ -569,6 +574,7 @@ msgstr "Đang tải..."
 #: src/hooks/useFuturesOrder.ts
 #: src/hooks/useFuturesPOrder.ts
 #: src/hooks/useFuturesPOrderClose.tsx
+#: src/pages/Dashboard/Components/MobileOrderTypePosition.tsx
 #: src/pages/Dashboard/Components/ShareOrderPosition.tsx
 #: src/pages/Futures/Components/OrderListPosition.tsx
 #: src/pages/Futures/Components/OrderTablePosition.tsx
@@ -677,7 +683,6 @@ msgstr "Mở vị trí"
 msgid "Open position request"
 msgstr "Yêu cầu mở vị trí"
 
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
@@ -825,6 +830,7 @@ msgstr "Chia sẻ"
 #: src/hooks/useFuturesOrder.ts
 #: src/hooks/useFuturesPOrder.ts
 #: src/hooks/useFuturesPOrderClose.tsx
+#: src/pages/Dashboard/Components/MobileOrderTypePosition.tsx
 #: src/pages/Dashboard/Components/ShareOrderPosition.tsx
 #: src/pages/Futures/Components/OrderListPosition.tsx
 #: src/pages/Futures/Components/OrderTablePosition.tsx
@@ -837,6 +843,10 @@ msgstr "Bán"
 #: src/pages/Futures/Components/POrderTable.tsx
 msgid "SL"
 msgstr "Chốt Lỗ"
+
+#: src/pages/Dashboard/Dashboard.tsx
+msgid "SL Executed"
+msgstr ""
 
 #: src/pages/Swap/Swap.tsx
 msgid "Slippage Tolerance"
@@ -1032,6 +1042,10 @@ msgstr "Chốt Lời"
 #: src/pages/Futures/Modal/SharePositionModal.tsx
 msgid "TP and SL price you set will trigger immediately."
 msgstr "Giá TP và SL bạn đặt sẽ kích hoạt ngay lập tức."
+
+#: src/pages/Dashboard/Dashboard.tsx
+msgid "TP Executed"
+msgstr ""
 
 #: src/pages/Home/Home.tsx
 msgid "Trade BTC, ETH and BNB with up to 1-50 leverage. Open a position with USDT or NEST."

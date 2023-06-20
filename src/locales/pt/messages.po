@@ -238,6 +238,10 @@ msgstr "Preço de fechamento"
 msgid "Close Risk"
 msgstr "Risco de fechamento"
 
+#: src/pages/Dashboard/Dashboard.tsx
+msgid "Closed"
+msgstr "Fechado"
+
 #: src/hooks/useFuturesAdd.ts
 #: src/hooks/useFuturesClose.ts
 #: src/hooks/useFuturesEditLimit.ts
@@ -552,6 +556,7 @@ msgid "Liq Price"
 msgstr "Preço de Liquidação"
 
 #: src/hooks/useFuturesPOrderClose.tsx
+#: src/pages/Dashboard/Dashboard.tsx
 msgid "Liquidated"
 msgstr "Liquidado"
 
@@ -569,6 +574,7 @@ msgstr "Carregando..."
 #: src/hooks/useFuturesOrder.ts
 #: src/hooks/useFuturesPOrder.ts
 #: src/hooks/useFuturesPOrderClose.tsx
+#: src/pages/Dashboard/Components/MobileOrderTypePosition.tsx
 #: src/pages/Dashboard/Components/ShareOrderPosition.tsx
 #: src/pages/Futures/Components/OrderListPosition.tsx
 #: src/pages/Futures/Components/OrderTablePosition.tsx
@@ -677,7 +683,6 @@ msgstr "Posição aberta"
 msgid "Open position request"
 msgstr "Pedido de posição aberta"
 
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
@@ -825,6 +830,7 @@ msgstr "Partilhar"
 #: src/hooks/useFuturesOrder.ts
 #: src/hooks/useFuturesPOrder.ts
 #: src/hooks/useFuturesPOrderClose.tsx
+#: src/pages/Dashboard/Components/MobileOrderTypePosition.tsx
 #: src/pages/Dashboard/Components/ShareOrderPosition.tsx
 #: src/pages/Futures/Components/OrderListPosition.tsx
 #: src/pages/Futures/Components/OrderTablePosition.tsx
@@ -837,6 +843,10 @@ msgstr "Curto"
 #: src/pages/Futures/Components/POrderTable.tsx
 msgid "SL"
 msgstr "SL"
+
+#: src/pages/Dashboard/Dashboard.tsx
+msgid "SL Executed"
+msgstr "SL executado"
 
 #: src/pages/Swap/Swap.tsx
 msgid "Slippage Tolerance"
@@ -1032,6 +1042,10 @@ msgstr "TP"
 #: src/pages/Futures/Modal/SharePositionModal.tsx
 msgid "TP and SL price you set will trigger immediately."
 msgstr "O preço de TP e SL que você definiu será acionado imediatamente."
+
+#: src/pages/Dashboard/Dashboard.tsx
+msgid "TP Executed"
+msgstr "TP executado"
 
 #: src/pages/Home/Home.tsx
 msgid "Trade BTC, ETH and BNB with up to 1-50 leverage. Open a position with USDT or NEST."

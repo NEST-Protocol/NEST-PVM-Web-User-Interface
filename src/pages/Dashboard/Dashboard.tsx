@@ -217,11 +217,17 @@ const Dashboard: FC = () => {
     })))
   )
 
-  const {data: burnedInfo, isLoading: isBurnedInfoLoading} = useSWR(`https://api.nestfi.net/api/dashboard/destory?chainId=${chainsData.chainId === 534353 ? 534353 : 56}`, (url: any) => fetch(url)
+  const {
+    data: burnedInfo,
+    isLoading: isBurnedInfoLoading
+  } = useSWR(`https://api.nestfi.net/api/dashboard/destory?chainId=${chainsData.chainId === 534353 ? 534353 : 56}`, (url: any) => fetch(url)
     .then((res) => res.json())
     .then((res: any) => res.value));
 
-  const {data: txInfo, isLoading: isTxInfoLoading} = useSWR(`https://api.nestfi.net/api/dashboard/txVolume?chainId=${chainsData.chainId === 534353 ? 534353 : 56}`, (url: any) => fetch(url)
+  const {
+    data: txInfo,
+    isLoading: isTxInfoLoading
+  } = useSWR(`https://api.nestfi.net/api/dashboard/txVolume?chainId=${chainsData.chainId === 534353 ? 534353 : 56}`, (url: any) => fetch(url)
     .then((res) => res.json())
     .then((res: any) => res.value));
 
@@ -460,7 +466,10 @@ const Dashboard: FC = () => {
                 color: item.orderType === 'Closed' ? theme.normal.text2 : item.orderType === 'Liquidated' ? theme.normal.danger : theme.normal.success,
                 borderRadius: '4px',
               })}>
-                {item?.orderType}
+                {item.orderType === 'Closed' && <Trans>Closed</Trans>}
+                {item.orderType === 'Liquidated' && <Trans>Liquidated</Trans>}
+                {item.orderType === 'TP Executed' && <Trans>TP Executed</Trans>}
+                {item.orderType === 'SL Executed' && <Trans>SL Executed</Trans>}
               </Box>
             </Stack>
           </TableCell>
@@ -729,7 +738,10 @@ const Dashboard: FC = () => {
                 borderColor: item.orderType === 'Closed' ? theme.normal.border : item.orderType === 'Liquidated' ? theme.normal.danger_light_hover : theme.normal.success_light_hover,
                 color: item.orderType === 'Closed' ? theme.normal.text2 : item.orderType === 'Liquidated' ? theme.normal.danger : theme.normal.success,
               })}>
-                {item.orderType}
+                {item.orderType === 'Closed' && <Trans>Closed</Trans>}
+                {item.orderType === 'Liquidated' && <Trans>Liquidated</Trans>}
+                {item.orderType === 'TP Executed' && <Trans>TP Executed</Trans>}
+                {item.orderType === 'SL Executed' && <Trans>SL Executed</Trans>}
               </Box>
             </Stack>
           )}
@@ -1295,7 +1307,7 @@ const Dashboard: FC = () => {
                   )
                 }
                 {
-                  (chainsData.chainId === 534353)&& (
+                  (chainsData.chainId === 534353) && (
                     <>
                       <Stack
                         alignItems={"center"}

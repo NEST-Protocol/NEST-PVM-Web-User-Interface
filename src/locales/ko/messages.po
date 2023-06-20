@@ -238,6 +238,10 @@ msgstr "가격지정 매도"
 msgid "Close Risk"
 msgstr "위험 경고 닫기"
 
+#: src/pages/Dashboard/Dashboard.tsx
+msgid "Closed"
+msgstr "닫힘"
+
 #: src/hooks/useFuturesAdd.ts
 #: src/hooks/useFuturesClose.ts
 #: src/hooks/useFuturesEditLimit.ts
@@ -552,6 +556,7 @@ msgid "Liq Price"
 msgstr "청산 가격"
 
 #: src/hooks/useFuturesPOrderClose.tsx
+#: src/pages/Dashboard/Dashboard.tsx
 msgid "Liquidated"
 msgstr "청산됨"
 
@@ -569,6 +574,7 @@ msgstr "로딩 중..."
 #: src/hooks/useFuturesOrder.ts
 #: src/hooks/useFuturesPOrder.ts
 #: src/hooks/useFuturesPOrderClose.tsx
+#: src/pages/Dashboard/Components/MobileOrderTypePosition.tsx
 #: src/pages/Dashboard/Components/ShareOrderPosition.tsx
 #: src/pages/Futures/Components/OrderListPosition.tsx
 #: src/pages/Futures/Components/OrderTablePosition.tsx
@@ -677,7 +683,6 @@ msgstr "포지션 열기"
 msgid "Open position request"
 msgstr "포지션 열기 요청"
 
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
@@ -825,6 +830,7 @@ msgstr "공유"
 #: src/hooks/useFuturesOrder.ts
 #: src/hooks/useFuturesPOrder.ts
 #: src/hooks/useFuturesPOrderClose.tsx
+#: src/pages/Dashboard/Components/MobileOrderTypePosition.tsx
 #: src/pages/Dashboard/Components/ShareOrderPosition.tsx
 #: src/pages/Futures/Components/OrderListPosition.tsx
 #: src/pages/Futures/Components/OrderTablePosition.tsx
@@ -837,6 +843,10 @@ msgstr "숏"
 #: src/pages/Futures/Components/POrderTable.tsx
 msgid "SL"
 msgstr "SL"
+
+#: src/pages/Dashboard/Dashboard.tsx
+msgid "SL Executed"
+msgstr "SL 실행됨"
 
 #: src/pages/Swap/Swap.tsx
 msgid "Slippage Tolerance"
@@ -1032,6 +1042,10 @@ msgstr "TP"
 #: src/pages/Futures/Modal/SharePositionModal.tsx
 msgid "TP and SL price you set will trigger immediately."
 msgstr "설정한 TP 및 SL 가격이 즉시 트리거됩니다."
+
+#: src/pages/Dashboard/Dashboard.tsx
+msgid "TP Executed"
+msgstr "TP 실행됨"
 
 #: src/pages/Home/Home.tsx
 msgid "Trade BTC, ETH and BNB with up to 1-50 leverage. Open a position with USDT or NEST."
