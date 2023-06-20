@@ -273,9 +273,8 @@ const Dashboard: FC = () => {
             <Box
               component={"p"}
               sx={(theme) => ({
-                fontWeight: 400,
-                fontSize: "12px",
-                lineHeight: "16px",
+                fontWeight: 700,
+                fontSize: 16,
                 color: theme.normal.text0,
                 whiteSpace: "nowrap",
               })}
@@ -297,7 +296,7 @@ const Dashboard: FC = () => {
               whiteSpace: "nowrap",
               "& p": {
                 fontWeight: 700,
-                fontSize: "12px",
+                fontSize: 16,
                 lineHeight: "16px",
                 color:
                   item.actualRate >= 0
@@ -306,8 +305,7 @@ const Dashboard: FC = () => {
               },
               "& span": {
                 fontWeight: 400,
-                fontSize: "12px",
-                lineHeight: "16px",
+                fontSize: 14,
                 color:
                   item.actualRate >= 0
                     ? theme.normal.success
@@ -335,8 +333,7 @@ const Dashboard: FC = () => {
                 component={"p"}
                 sx={(theme) => ({
                   fontWeight: 700,
-                  fontSize: "12px",
-                  lineHeight: "16px",
+                  fontSize: 16,
                   color: theme.normal.text0,
                   whiteSpace: "nowrap",
                 })}
@@ -355,8 +352,7 @@ const Dashboard: FC = () => {
             component={"p"}
             sx={(theme) => ({
               fontWeight: 700,
-              fontSize: "12px",
-              lineHeight: '16px',
+              fontSize: 16,
               color: theme.normal.text0,
               whiteSpace: "nowrap",
             })}
@@ -391,8 +387,8 @@ const Dashboard: FC = () => {
                 color: theme.normal.text0,
               },
               "& span": {
-                fontWeight: 400,
-                fontSize: "12px",
+                // fontWeight: 400,
+                fontSize: "14px",
                 marginRight: "4px",
                 color: theme.normal.text2,
               },
@@ -427,8 +423,7 @@ const Dashboard: FC = () => {
                 component={"p"}
                 sx={(theme) => ({
                   fontWeight: 700,
-                  fontSize: "12px",
-                  lineHeight: '16px',
+                  fontSize: 16,
                   color: theme.normal.text0,
                   whiteSpace: "nowrap",
                 })}
