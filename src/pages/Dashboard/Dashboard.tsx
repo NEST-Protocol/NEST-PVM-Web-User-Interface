@@ -23,6 +23,7 @@ import OrderTablePosition from "../Futures/Components/OrderTablePosition";
 import {Trans, t} from "@lingui/macro";
 import useSWR from "swr";
 import NetworkIcon from "./Components/NetworkIcon";
+import MobileOrderTypePosition from "./Components/MobileOrderTypePosition";
 
 const DashboardShare = styled(Box)(({theme}) => ({
   borderRadius: "8px",
@@ -272,8 +273,9 @@ const Dashboard: FC = () => {
             <Box
               component={"p"}
               sx={(theme) => ({
-                fontWeight: 700,
-                fontSize: 16,
+                fontWeight: 400,
+                fontSize: "12px",
+                lineHeight: "16px",
                 color: theme.normal.text0,
                 whiteSpace: "nowrap",
               })}
@@ -291,19 +293,21 @@ const Dashboard: FC = () => {
         </TableCell>
         <TableCell>
           <Stack
-            direction={"row"}
-            spacing={"4px"}
-            alignItems={"flex-end"}
             sx={(theme) => ({
               whiteSpace: "nowrap",
               "& p": {
                 fontWeight: 700,
-                fontSize: 16,
-                color: theme.normal.text0,
+                fontSize: "12px",
+                lineHeight: "16px",
+                color:
+                  item.actualRate >= 0
+                    ? theme.normal.success
+                    : theme.normal.danger,
               },
               "& span": {
                 fontWeight: 400,
-                fontSize: 14,
+                fontSize: "12px",
+                lineHeight: "16px",
                 color:
                   item.actualRate >= 0
                     ? theme.normal.success
@@ -319,34 +323,40 @@ const Dashboard: FC = () => {
               NEST
             </p>
             <span>
-              {item.actualRate > 0 && "+"}
-              {item.actualRate}%
+              ({item.actualRate > 0 && "+"}
+              {item.actualRate}%)
             </span>
           </Stack>
         </TableCell>
+        {
+          !isHistory && (
+            <TableCell>
+              <Box
+                component={"p"}
+                sx={(theme) => ({
+                  fontWeight: 700,
+                  fontSize: "12px",
+                  lineHeight: "16px",
+                  color: theme.normal.text0,
+                  whiteSpace: "nowrap",
+                })}
+              >
+                {item.openPrice.toLocaleString("en-US", {
+                  maximumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
+                  minimumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
+                })}{" "}
+                USDT
+              </Box>
+            </TableCell>
+          )
+        }
         <TableCell>
           <Box
             component={"p"}
             sx={(theme) => ({
               fontWeight: 700,
-              fontSize: 16,
-              color: theme.normal.text0,
-              whiteSpace: "nowrap",
-            })}
-          >
-            {item.openPrice.toLocaleString("en-US", {
-              maximumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
-              minimumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
-            })}{" "}
-            USDT
-          </Box>
-        </TableCell>
-        <TableCell>
-          <Box
-            component={"p"}
-            sx={(theme) => ({
-              fontWeight: 700,
-              fontSize: 16,
+              fontSize: "12px",
+              lineHeight: '16px',
               color: theme.normal.text0,
               whiteSpace: "nowrap",
             })}
@@ -369,25 +379,6 @@ const Dashboard: FC = () => {
             USDT
           </Box>
         </TableCell>
-        {isHistory && (
-          <TableCell>
-            <Box
-              component={"p"}
-              sx={(theme) => ({
-                fontWeight: 700,
-                fontSize: 16,
-                color: theme.normal.text0,
-                whiteSpace: "nowrap",
-              })}
-            >
-              {item.lastPrice.toLocaleString("en-US", {
-                maximumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
-                minimumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
-              })}{" "}
-              USDT
-            </Box>
-          </TableCell>
-        )}
         <TableCell>
           <Stack
             spacing={"4px"}
@@ -400,7 +391,8 @@ const Dashboard: FC = () => {
                 color: theme.normal.text0,
               },
               "& span": {
-                fontSize: "14px",
+                fontWeight: 400,
+                fontSize: "12px",
                 marginRight: "4px",
                 color: theme.normal.text2,
               },
@@ -428,6 +420,41 @@ const Dashboard: FC = () => {
             </Box>
           </Stack>
         </TableCell>
+        {isHistory && (
+          <TableCell>
+            <Stack direction={'row'} alignItems={"center"} gap={'12px'}>
+              <Box
+                component={"p"}
+                sx={(theme) => ({
+                  fontWeight: 700,
+                  fontSize: "12px",
+                  lineHeight: '16px',
+                  color: theme.normal.text0,
+                  whiteSpace: "nowrap",
+                })}
+              >
+                {item.lastPrice.toLocaleString("en-US", {
+                  maximumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
+                  minimumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
+                })}{" "}
+                USDT
+              </Box>
+              <Box sx={(theme) => ({
+                fontWeight: 700,
+                fontSize: "10px",
+                lineHeight: '14px',
+                padding: '3px 4px',
+                border: '1px solid',
+                borderColor: item.orderType === 'Closed' ? theme.normal.text2 : item.orderType === 'Liquidated' ? theme.normal.danger : theme.normal.success,
+                color: item.orderType === 'Closed' ? theme.normal.text2 : item.orderType === 'Liquidated' ? theme.normal.danger : theme.normal.success,
+                borderRadius: '4px',
+              })}>
+                {item?.orderType}
+              </Box>
+            </Stack>
+          </TableCell>
+        )}
+
         <TableCell>
           <Stack direction={"row"} justifyContent={"flex-end"} spacing={"8px"}>
             <FuturesOrderShare
@@ -466,7 +493,7 @@ const Dashboard: FC = () => {
         key={index}
       >
         <Stack direction={"row"} justifyContent={"space-between"}>
-          <OrderTablePosition
+          <MobileOrderTypePosition
             tokenName={item.tokenPair.split("/")[0]}
             isLong={item.orientation === "Long"}
             lever={Number(item.leverage.replace("X", ""))}
@@ -677,6 +704,22 @@ const Dashboard: FC = () => {
               >
                 {formatDate(item.time * 1000)}
               </Caption5>
+            </Stack>
+          )}
+          {isHistory && (
+            <Stack direction={'row'}>
+              <Box sx={(theme) => ({
+                padding: '3px 4px',
+                fontSize: '10px',
+                fontWeight: 700,
+                lineHeight: '14px',
+                borderRadius: '4px',
+                border: '1px solid',
+                borderColor: item.orderType === 'Closed' ? theme.normal.text2 : item.orderType === 'Liquidated' ? theme.normal.danger : theme.normal.success,
+                color: item.orderType === 'Closed' ? theme.normal.text2 : item.orderType === 'Liquidated' ? theme.normal.danger : theme.normal.success,
+              })}>
+                {item.orderType}
+              </Box>
             </Stack>
           )}
         </Stack>
@@ -1458,10 +1501,9 @@ const Dashboard: FC = () => {
                     t`Time`,
                     t`Position`,
                     t`Actual Margin`,
-                    t`Open Price`,
                     t`Liq Price`,
-                    t`Close Price`,
                     t`Stop Order`,
+                    t`Close Price`,
                     t`Operate`,
                   ]
               }
