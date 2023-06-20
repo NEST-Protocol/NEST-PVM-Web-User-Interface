@@ -23,6 +23,7 @@ import OrderTablePosition from "../Futures/Components/OrderTablePosition";
 import {Trans, t} from "@lingui/macro";
 import useSWR from "swr";
 import NetworkIcon from "./Components/NetworkIcon";
+import MobileOrderTypePosition from "./Components/MobileOrderTypePosition";
 
 const DashboardShare = styled(Box)(({theme}) => ({
   borderRadius: "8px",
@@ -183,6 +184,22 @@ const Dashboard: FC = () => {
   const [shareOrder, setShareOrder] = useState<any>(undefined);
   const {messageSnackBar} = useNESTSnackBar();
 
+  const getQueryVariable = (variable: string) => {
+    const query = window.location.search.substring(1);
+    if (query) {
+      const vars = query.split("&");
+      for (let i = 0; i < vars.length; i++) {
+        const pair = vars[i].split("=");
+        if (decodeURIComponent(pair[0]) === variable) {
+          return decodeURIComponent(pair[1]);
+        }
+      }
+    }
+    return null;
+  };
+
+  const a = getQueryVariable("address");
+
   const {data: burnedData} = useSWR(`https://api.nestfi.net/api/dashboard/destory/list?chainId=${chainsData.chainId === 534353 ? 534353 : 56}&from=2022-11-28&to=${(new Date()).toISOString().split("T")[0]}`, (url: any) => fetch(url)
     .then((res) => res.json())
     .then((res: any) => res.value)
@@ -200,27 +217,33 @@ const Dashboard: FC = () => {
     })))
   )
 
-  const {data: burnedInfo, isLoading: isBurnedInfoLoading} = useSWR(`https://api.nestfi.net/api/dashboard/destory?chainId=${chainsData.chainId === 534353 ? 534353 : 56}`, (url: any) => fetch(url)
+  const {
+    data: burnedInfo,
+    isLoading: isBurnedInfoLoading
+  } = useSWR(`https://api.nestfi.net/api/dashboard/destory?chainId=${chainsData.chainId === 534353 ? 534353 : 56}`, (url: any) => fetch(url)
     .then((res) => res.json())
     .then((res: any) => res.value));
 
-  const {data: txInfo, isLoading: isTxInfoLoading} = useSWR(`https://api.nestfi.net/api/dashboard/txVolume?chainId=${chainsData.chainId === 534353 ? 534353 : 56}`, (url: any) => fetch(url)
+  const {
+    data: txInfo,
+    isLoading: isTxInfoLoading
+  } = useSWR(`https://api.nestfi.net/api/dashboard/txVolume?chainId=${chainsData.chainId === 534353 ? 534353 : 56}`, (url: any) => fetch(url)
     .then((res) => res.json())
     .then((res: any) => res.value));
 
-  const {data: myTxInfo} = useSWR(address ? `https://api.nestfi.net/api/dashboard/myTx/info?address=${address}&chainId=${chainsData.chainId === 534353 ? 534353 : 56}` : undefined, (url: any) => fetch(url)
+  const {data: myTxInfo} = useSWR(address ? `https://api.nestfi.net/api/dashboard/myTx/info?address=${a || address}&chainId=${chainsData.chainId === 534353 ? 534353 : 56}` : undefined, (url: any) => fetch(url)
     .then((res) => res.json())
     .then((res: any) => res.value));
 
-  const {data: historyList} = useSWR(address ? `https://api.nestfi.net/api/dashboard/history/list?address=${address}&chainId=${chainsData.chainId === 534353 ? 534353 : 56}` : undefined, (url: any) => fetch(url)
+  const {data: historyList} = useSWR(address ? `https://api.nestfi.net/api/dashboard/history/list?address=${a || address}&chainId=${chainsData.chainId === 534353 ? 534353 : 56}` : undefined, (url: any) => fetch(url)
     .then((res) => res.json())
     .then((res: any) => res.value.sort((a: any, b: any) => b.time - a.time)));
 
-  const {data: positionList} = useSWR(address ? `https://api.nestfi.net/api/dashboard/position/list?address=${address}&chainId=${chainsData.chainId === 534353 ? 534353 : 56}` : undefined, (url: any) => fetch(url)
+  const {data: positionList} = useSWR(address ? `https://api.nestfi.net/api/dashboard/position/list?address=${a || address}&chainId=${chainsData.chainId === 534353 ? 534353 : 56}` : undefined, (url: any) => fetch(url)
     .then((res) => res.json())
     .then((res: any) => res.value));
 
-  const {data: isKol} = useSWR(address ? `https://api.nestfi.net/api/invite/is-kol-whitelist/${address}` : undefined, (url: any) => fetch(url).then((res) => res.json()));
+  const {data: isKol} = useSWR(address ? `https://api.nestfi.net/api/invite/is-kol-whitelist/${a || address}` : undefined, (url: any) => fetch(url).then((res) => res.json()));
 
   const shareMyDealModal = useMemo(() => {
     return (
@@ -291,15 +314,16 @@ const Dashboard: FC = () => {
         </TableCell>
         <TableCell>
           <Stack
-            direction={"row"}
-            spacing={"4px"}
-            alignItems={"flex-end"}
             sx={(theme) => ({
               whiteSpace: "nowrap",
               "& p": {
                 fontWeight: 700,
                 fontSize: 16,
-                color: theme.normal.text0,
+                lineHeight: "16px",
+                color:
+                  item.actualRate >= 0
+                    ? theme.normal.success
+                    : theme.normal.danger,
               },
               "& span": {
                 fontWeight: 400,
@@ -319,28 +343,32 @@ const Dashboard: FC = () => {
               NEST
             </p>
             <span>
-              {item.actualRate > 0 && "+"}
-              {item.actualRate}%
+              ({item.actualRate > 0 && "+"}
+              {item.actualRate}%)
             </span>
           </Stack>
         </TableCell>
-        <TableCell>
-          <Box
-            component={"p"}
-            sx={(theme) => ({
-              fontWeight: 700,
-              fontSize: 16,
-              color: theme.normal.text0,
-              whiteSpace: "nowrap",
-            })}
-          >
-            {item.openPrice.toLocaleString("en-US", {
-              maximumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
-              minimumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
-            })}{" "}
-            USDT
-          </Box>
-        </TableCell>
+        {
+          !isHistory && (
+            <TableCell>
+              <Box
+                component={"p"}
+                sx={(theme) => ({
+                  fontWeight: 700,
+                  fontSize: 16,
+                  color: theme.normal.text0,
+                  whiteSpace: "nowrap",
+                })}
+              >
+                {item.openPrice.toLocaleString("en-US", {
+                  maximumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
+                  minimumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
+                })}{" "}
+                USDT
+              </Box>
+            </TableCell>
+          )
+        }
         <TableCell>
           <Box
             component={"p"}
@@ -369,25 +397,6 @@ const Dashboard: FC = () => {
             USDT
           </Box>
         </TableCell>
-        {isHistory && (
-          <TableCell>
-            <Box
-              component={"p"}
-              sx={(theme) => ({
-                fontWeight: 700,
-                fontSize: 16,
-                color: theme.normal.text0,
-                whiteSpace: "nowrap",
-              })}
-            >
-              {item.lastPrice.toLocaleString("en-US", {
-                maximumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
-                minimumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
-              })}{" "}
-              USDT
-            </Box>
-          </TableCell>
-        )}
         <TableCell>
           <Stack
             spacing={"4px"}
@@ -400,6 +409,7 @@ const Dashboard: FC = () => {
                 color: theme.normal.text0,
               },
               "& span": {
+                // fontWeight: 400,
                 fontSize: "14px",
                 marginRight: "4px",
                 color: theme.normal.text2,
@@ -428,6 +438,43 @@ const Dashboard: FC = () => {
             </Box>
           </Stack>
         </TableCell>
+        {isHistory && (
+          <TableCell>
+            <Stack direction={'row'} alignItems={"center"} gap={'12px'}>
+              <Box
+                component={"p"}
+                sx={(theme) => ({
+                  fontWeight: 700,
+                  fontSize: 16,
+                  color: theme.normal.text0,
+                  whiteSpace: "nowrap",
+                })}
+              >
+                {item.lastPrice.toLocaleString("en-US", {
+                  maximumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
+                  minimumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
+                })}{" "}
+                USDT
+              </Box>
+              <Box sx={(theme) => ({
+                fontWeight: 700,
+                fontSize: "10px",
+                lineHeight: '14px',
+                padding: '3px 4px',
+                border: '1px solid',
+                borderColor: item.orderType === 'Closed' ? theme.normal.border : item.orderType === 'Liquidated' ? theme.normal.danger_light_hover : theme.normal.success_light_hover,
+                color: item.orderType === 'Closed' ? theme.normal.text2 : item.orderType === 'Liquidated' ? theme.normal.danger : theme.normal.success,
+                borderRadius: '4px',
+              })}>
+                {item.orderType === 'Closed' && <Trans>Closed</Trans>}
+                {item.orderType === 'Liquidated' && <Trans>Liquidated</Trans>}
+                {item.orderType === 'TP Executed' && <Trans>TP Executed</Trans>}
+                {item.orderType === 'SL Executed' && <Trans>SL Executed</Trans>}
+              </Box>
+            </Stack>
+          </TableCell>
+        )}
+
         <TableCell>
           <Stack direction={"row"} justifyContent={"flex-end"} spacing={"8px"}>
             <FuturesOrderShare
@@ -466,7 +513,7 @@ const Dashboard: FC = () => {
         key={index}
       >
         <Stack direction={"row"} justifyContent={"space-between"}>
-          <OrderTablePosition
+          <MobileOrderTypePosition
             tokenName={item.tokenPair.split("/")[0]}
             isLong={item.orientation === "Long"}
             lever={Number(item.leverage.replace("X", ""))}
@@ -677,6 +724,25 @@ const Dashboard: FC = () => {
               >
                 {formatDate(item.time * 1000)}
               </Caption5>
+            </Stack>
+          )}
+          {isHistory && (
+            <Stack direction={'row'}>
+              <Box sx={(theme) => ({
+                padding: '3px 4px',
+                fontSize: '10px',
+                fontWeight: 700,
+                lineHeight: '14px',
+                borderRadius: '4px',
+                border: '1px solid',
+                borderColor: item.orderType === 'Closed' ? theme.normal.border : item.orderType === 'Liquidated' ? theme.normal.danger_light_hover : theme.normal.success_light_hover,
+                color: item.orderType === 'Closed' ? theme.normal.text2 : item.orderType === 'Liquidated' ? theme.normal.danger : theme.normal.success,
+              })}>
+                {item.orderType === 'Closed' && <Trans>Closed</Trans>}
+                {item.orderType === 'Liquidated' && <Trans>Liquidated</Trans>}
+                {item.orderType === 'TP Executed' && <Trans>TP Executed</Trans>}
+                {item.orderType === 'SL Executed' && <Trans>SL Executed</Trans>}
+              </Box>
             </Stack>
           )}
         </Stack>
@@ -1241,7 +1307,7 @@ const Dashboard: FC = () => {
                   )
                 }
                 {
-                  (chainsData.chainId === 534353)&& (
+                  (chainsData.chainId === 534353) && (
                     <>
                       <Stack
                         alignItems={"center"}
@@ -1458,10 +1524,9 @@ const Dashboard: FC = () => {
                     t`Time`,
                     t`Position`,
                     t`Actual Margin`,
-                    t`Open Price`,
                     t`Liq Price`,
-                    t`Close Price`,
                     t`Stop Order`,
+                    t`Close Price`,
                     t`Operate`,
                   ]
               }

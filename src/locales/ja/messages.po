@@ -236,6 +236,10 @@ msgstr "清算価格"
 msgid "Close Risk"
 msgstr "清算リスク"
 
+#: src/pages/Dashboard/Dashboard.tsx
+msgid "Closed"
+msgstr ""
+
 #: src/hooks/useFuturesAdd.ts
 #: src/hooks/useFuturesClose.ts
 #: src/hooks/useFuturesEditLimit.ts
@@ -550,6 +554,7 @@ msgid "Liq Price"
 msgstr "清算価格"
 
 #: src/hooks/useFuturesPOrderClose.tsx
+#: src/pages/Dashboard/Dashboard.tsx
 msgid "Liquidated"
 msgstr "清算済み"
 
@@ -567,6 +572,7 @@ msgstr "読み込み中..."
 #: src/hooks/useFuturesOrder.ts
 #: src/hooks/useFuturesPOrder.ts
 #: src/hooks/useFuturesPOrderClose.tsx
+#: src/pages/Dashboard/Components/MobileOrderTypePosition.tsx
 #: src/pages/Dashboard/Components/ShareOrderPosition.tsx
 #: src/pages/Futures/Components/OrderListPosition.tsx
 #: src/pages/Futures/Components/OrderTablePosition.tsx
@@ -675,7 +681,6 @@ msgstr "オープンポジション"
 msgid "Open position request"
 msgstr "オープンポジションのリクエスト"
 
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
@@ -823,6 +828,7 @@ msgstr "シェア"
 #: src/hooks/useFuturesOrder.ts
 #: src/hooks/useFuturesPOrder.ts
 #: src/hooks/useFuturesPOrderClose.tsx
+#: src/pages/Dashboard/Components/MobileOrderTypePosition.tsx
 #: src/pages/Dashboard/Components/ShareOrderPosition.tsx
 #: src/pages/Futures/Components/OrderListPosition.tsx
 #: src/pages/Futures/Components/OrderTablePosition.tsx
@@ -835,6 +841,10 @@ msgstr "ショート"
 #: src/pages/Futures/Components/POrderTable.tsx
 msgid "SL"
 msgstr "ストップロス"
+
+#: src/pages/Dashboard/Dashboard.tsx
+msgid "SL Executed"
+msgstr ""
 
 #: src/pages/Swap/Swap.tsx
 msgid "Slippage Tolerance"
@@ -1030,6 +1040,10 @@ msgstr "TP（利確注文）"
 #: src/pages/Futures/Modal/SharePositionModal.tsx
 msgid "TP and SL price you set will trigger immediately."
 msgstr "設定したTP価格とSL価格はすぐにトリガーされます。"
+
+#: src/pages/Dashboard/Dashboard.tsx
+msgid "TP Executed"
+msgstr ""
 
 #: src/pages/Home/Home.tsx
 msgid "Trade BTC, ETH and BNB with up to 1-50 leverage. Open a position with USDT or NEST."
