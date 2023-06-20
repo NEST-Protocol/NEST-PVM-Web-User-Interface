@@ -141,7 +141,7 @@ function useFuturesEditPosition(
       data.basePrice,
       data.orientation
     );
-    return result.bigNumberToShowString(18, tokenPair.getTokenPriceDecimals());
+    return result.bigNumberToShowPrice(18, tokenPair.getTokenPriceDecimals());
   }, [
     data.appends,
     data.balance,

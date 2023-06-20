@@ -105,7 +105,7 @@ const ExchangeTVChart: FC<ExchangeTVChartProps> = ({...props}) => {
 
   const average = useMemo(() => {
     if (props.tokenPair && props.basePrice) {
-      return parseFloat(formatAmount(props.basePrice?.[props.tokenPair], 18, props.tokenPair.getTokenPriceDecimals()))
+      return formatAmount(props.basePrice?.[props.tokenPair], 18, props.tokenPair.getTokenPriceDecimals())
     }
     return '-'
   }, [props.tokenPair, props.basePrice])

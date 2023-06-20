@@ -524,7 +524,7 @@ function useFuturesNewOrder(
   }, [account.address, tokenBalance]);
   const showOpenPrice = useMemo(() => {
     if (openPriceBase) {
-      return openPriceBase.bigNumberToShowString(
+      return openPriceBase.bigNumberToShowPrice(
         18,
         tokenPair.getTokenPriceDecimals()
       );
@@ -554,8 +554,7 @@ function useFuturesNewOrder(
       longOrShort
     );
     return (
-      result.bigNumberToShowString(18, tokenPair.getTokenPriceDecimals()) ??
-      String().placeHolder
+      result.bigNumberToShowPrice(18, tokenPair.getTokenPriceDecimals()) ?? String().placeHolder
     );
   }, [lever, longOrShort, nestAmount, openPrice, tokenPair]);
   const showFeeHoverText = useMemo(() => {

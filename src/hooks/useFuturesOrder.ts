@@ -18,7 +18,7 @@ function useFuturesOrder(data: FuturesOrderV2) {
   const [showShareOrderModal, setShowShareOrderModal] =
     useState<boolean>(false);
   const showLimitPrice = useMemo(() => {
-    return BigNumber.from(data.basePrice.toString()).bigNumberToShowString(
+    return BigNumber.from(data.basePrice.toString()).bigNumberToShowPrice(
       18,
       tokenName.getTokenPriceDecimals()
     );
@@ -63,7 +63,7 @@ function useFuturesOrder(data: FuturesOrderV2) {
     const tpNum = data.stopProfitPrice;
     return BigNumber.from("0").eq(tpNum)
       ? String().placeHolder
-      : BigNumber.from(tpNum.toString()).bigNumberToShowString(
+      : BigNumber.from(tpNum.toString()).bigNumberToShowPrice(
           18,
           tokenName.getTokenPriceDecimals()
         );
@@ -72,7 +72,7 @@ function useFuturesOrder(data: FuturesOrderV2) {
     const slNum = data.stopLossPrice;
     return BigNumber.from("0").eq(slNum)
       ? String().placeHolder
-      : BigNumber.from(slNum.toString()).bigNumberToShowString(
+      : BigNumber.from(slNum.toString()).bigNumberToShowPrice(
           18,
           tokenName.getTokenPriceDecimals()
         );
@@ -86,7 +86,7 @@ function useFuturesOrder(data: FuturesOrderV2) {
       actualRate: 0,
       index: parseInt(data.index.toString()),
       openPrice: parseFloat(
-        data.basePrice.bigNumberToShowString(
+        data.basePrice.bigNumberToShowPrice(
           18,
           tokenName.getTokenPriceDecimals()
         )
