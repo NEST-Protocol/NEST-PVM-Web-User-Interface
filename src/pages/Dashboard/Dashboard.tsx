@@ -348,27 +348,6 @@ const Dashboard: FC = () => {
             </span>
           </Stack>
         </TableCell>
-        {
-          !isHistory && (
-            <TableCell>
-              <Box
-                component={"p"}
-                sx={(theme) => ({
-                  fontWeight: 700,
-                  fontSize: 16,
-                  color: theme.normal.text0,
-                  whiteSpace: "nowrap",
-                })}
-              >
-                {item.openPrice.toLocaleString("en-US", {
-                  maximumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
-                  minimumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
-                })}{" "}
-                USDT
-              </Box>
-            </TableCell>
-          )
-        }
         <TableCell>
           <Box
             component={"p"}
@@ -379,18 +358,7 @@ const Dashboard: FC = () => {
               whiteSpace: "nowrap",
             })}
           >
-            {(
-              lipPrice(
-                ethers.utils.parseEther(item.initialMargin.toFixed(12)),
-                ethers.utils.parseEther(item?.appendMargin?.toFixed(12) || "0"),
-                BigNumber.from(item.leverage.replace("X", "")),
-                ethers.utils.parseEther(item.lastPrice.toFixed(12)),
-                ethers.utils.parseEther(item.openPrice.toFixed(12)),
-                item.orientation === "Long"
-              )
-                .div(BigNumber.from(10).pow(12))
-                .toNumber() / 1000000
-            ).toLocaleString("en-US", {
+            {item.openPrice.toLocaleString("en-US", {
               maximumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
               minimumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
             })}{" "}
@@ -1524,7 +1492,7 @@ const Dashboard: FC = () => {
                     t`Time`,
                     t`Position`,
                     t`Actual Margin`,
-                    t`Liq Price`,
+                    t`Open Price`,
                     t`Stop Order`,
                     t`Close Price`,
                     t`Operate`,
