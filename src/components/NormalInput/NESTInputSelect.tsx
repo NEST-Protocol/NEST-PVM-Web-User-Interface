@@ -22,6 +22,7 @@ interface NESTInputSelectProps {
   maxCallBack: () => void;
   nestAmount: string;
   changeNestAmount: (value: string) => void;
+  isShare?: boolean;
   style?: React.CSSProperties;
   price?: string;
 }
@@ -181,7 +182,9 @@ const NESTInputSelect: FC<NESTInputSelectProps> = ({ ...props }) => {
             : theme.normal.border
         }`,
         borderRadius: "8px",
-        background: theme.normal.bg1,
+        background: props.isShare
+          ? theme.normal.primary_light_hover
+          : theme.normal.bg1,
         width: "100%",
         paddingTop: "12px",
         paddingX: "12px",
@@ -276,8 +279,8 @@ const NESTInputSelect: FC<NESTInputSelectProps> = ({ ...props }) => {
                 spacing={"4px"}
                 sx={{
                   "& p": {
-                    fontSize: '12px',
-                    lineHeight: '18px',
+                    fontSize: "12px",
+                    lineHeight: "18px",
                   },
                   "& svg": {
                     width: 12,

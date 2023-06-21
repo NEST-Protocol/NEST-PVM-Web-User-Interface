@@ -191,9 +191,9 @@ function useFuturesOrderList() {
       clearInterval(time);
     };
   }, [getFutures3List]);
-  useEffect(() => {
-    getClosedOrderList();
-  }, [getClosedOrderList]);
+  // useEffect(() => {
+  //   getClosedOrderList();
+  // }, [getClosedOrderList]);
 
   return { pOrderList, orderList, showClosedOrder, hideOrder };
 }

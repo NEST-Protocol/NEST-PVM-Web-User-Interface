@@ -136,7 +136,7 @@ function useFuturesAdd(
   }, [data.balance, data.lever, data.orientation]);
 
   const showOpenPrice = useMemo(() => {
-    return `${BigNumber.from(data.basePrice.toString()).bigNumberToShowString(
+    return `${BigNumber.from(data.basePrice.toString()).bigNumberToShowPrice(
       18,
       tokenPair.getTokenPriceDecimals()
     )} USDT`;
@@ -155,7 +155,7 @@ function useFuturesAdd(
       data.basePrice,
       data.orientation
     );
-    return result.bigNumberToShowString(18, tokenPair.getTokenPriceDecimals());
+    return result.bigNumberToShowPrice(18, tokenPair.getTokenPriceDecimals());
   }, [data.balance, data.basePrice, data.lever, data.orientation, nestAmount, price, tokenPair]);
   /**
    * main button

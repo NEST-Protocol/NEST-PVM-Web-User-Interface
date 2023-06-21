@@ -123,8 +123,8 @@ msgid "7 Days\\' PNL"
 msgstr "7 Days\\' PNL"
 
 #: src/pages/Home/Home.tsx
-msgid "A beginner's guide to using NEST Fi"
-msgstr "A beginner's guide to using NEST Fi"
+msgid "A beginner's guide to using NESTFi"
+msgstr "A beginner's guide to using NESTFi"
 
 #: src/pages/Share/Modal/ConnectWalletModal.tsx
 msgid "about connecting wallets"
@@ -238,12 +238,16 @@ msgstr "Close Price"
 msgid "Close Risk"
 msgstr "Close Risk"
 
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+msgid "Closed"
+msgstr "Closed"
+
 #: src/hooks/useFuturesAdd.ts
 #: src/hooks/useFuturesClose.ts
 #: src/hooks/useFuturesEditLimit.ts
 #: src/hooks/useFuturesEditPosition.ts
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
-#: src/pages/Futures/Modal/SharePositionModal.tsx
 #: src/pages/Home/Modal/ApplyModal.tsx
 #: src/pages/Swap/Components/SwapSlippageModal.tsx
 msgid "Confirm"
@@ -351,8 +355,6 @@ msgstr "Due to the market volatility, the actual liquidation price may be differ
 #: src/hooks/useFuturesPOrder.ts
 #: src/pages/Futures/Components/OrderList.tsx
 #: src/pages/Futures/Components/OrderTable.tsx
-#: src/pages/Futures/Modal/SharePositionModal.tsx
-#: src/pages/Futures/Modal/SharePositionModal.tsx
 msgid "Edit"
 msgstr "Edit"
 
@@ -537,12 +539,9 @@ msgstr "Limit order fee = 15 NEST"
 #: src/pages/Futures/Modal/EditLimitModal.tsx
 #: src/pages/Futures/Modal/EditLimitModal.tsx
 #: src/pages/Futures/Modal/EditLimitModal.tsx
-#: src/pages/Futures/Modal/SharePositionModal.tsx
-#: src/pages/Futures/Modal/SharePositionModal.tsx
 msgid "Limit Price"
 msgstr "Limit Price"
 
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Futures/Components/POrderList.tsx
@@ -554,6 +553,8 @@ msgid "Liq Price"
 msgstr "Liq Price"
 
 #: src/hooks/useFuturesPOrderClose.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
 msgid "Liquidated"
 msgstr "Liquidated"
 
@@ -571,10 +572,10 @@ msgstr "Loading..."
 #: src/hooks/useFuturesOrder.ts
 #: src/hooks/useFuturesPOrder.ts
 #: src/hooks/useFuturesPOrderClose.tsx
+#: src/pages/Dashboard/Components/MobileOrderTypePosition.tsx
 #: src/pages/Dashboard/Components/ShareOrderPosition.tsx
 #: src/pages/Futures/Components/OrderListPosition.tsx
 #: src/pages/Futures/Components/OrderTablePosition.tsx
-#: src/pages/Futures/Modal/SharePositionModal.tsx
 msgid "Long"
 msgstr "Long"
 
@@ -749,7 +750,6 @@ msgstr "Position fee =Position*0.05%"
 msgid "Position*0.05%"
 msgstr "Position*0.05%"
 
-#: src/pages/Futures/Modal/SharePositionModal.tsx
 #: src/pages/Futures/NewOrder.tsx
 #: src/pages/Futures/OrderList.tsx
 msgid "Positions"
@@ -801,7 +801,6 @@ msgstr "Sell position request"
 
 #: src/pages/Futures/Modal/CloseModal.tsx
 #: src/pages/Futures/Modal/EditPositionModal.tsx
-#: src/pages/Futures/Modal/SharePositionModal.tsx
 #: src/pages/Futures/NewOrder.tsx
 msgid "Service Fee"
 msgstr "Service Fee"
@@ -827,10 +826,10 @@ msgstr "Share"
 #: src/hooks/useFuturesOrder.ts
 #: src/hooks/useFuturesPOrder.ts
 #: src/hooks/useFuturesPOrderClose.tsx
+#: src/pages/Dashboard/Components/MobileOrderTypePosition.tsx
 #: src/pages/Dashboard/Components/ShareOrderPosition.tsx
 #: src/pages/Futures/Components/OrderListPosition.tsx
 #: src/pages/Futures/Components/OrderTablePosition.tsx
-#: src/pages/Futures/Modal/SharePositionModal.tsx
 msgid "Short"
 msgstr "Short"
 
@@ -839,6 +838,11 @@ msgstr "Short"
 #: src/pages/Futures/Components/POrderTable.tsx
 msgid "SL"
 msgstr "SL"
+
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+msgid "SL Executed"
+msgstr "SL Executed"
 
 #: src/pages/Swap/Swap.tsx
 msgid "Slippage Tolerance"
@@ -857,8 +861,6 @@ msgstr "Start Trading"
 #: src/pages/Futures/Components/POrderList.tsx
 #: src/pages/Futures/Components/POrderList.tsx
 #: src/pages/Futures/Modal/EditPositionModal.tsx
-#: src/pages/Futures/Modal/SharePositionModal.tsx
-#: src/pages/Futures/Modal/SharePositionModal.tsx
 #: src/pages/Futures/NewOrder.tsx
 msgid "Stop Loss"
 msgstr "Stop Loss"
@@ -907,8 +909,6 @@ msgstr "Symbol"
 #: src/pages/Futures/Components/POrderList.tsx
 #: src/pages/Futures/Components/POrderList.tsx
 #: src/pages/Futures/Modal/EditPositionModal.tsx
-#: src/pages/Futures/Modal/SharePositionModal.tsx
-#: src/pages/Futures/Modal/SharePositionModal.tsx
 #: src/pages/Futures/NewOrder.tsx
 msgid "Take Profit"
 msgstr "Take Profit"
@@ -997,7 +997,6 @@ msgstr "Total Invitees"
 msgid "Total Number of Trades"
 msgstr "Total Number of Trades"
 
-#: src/pages/Futures/Modal/SharePositionModal.tsx
 #: src/pages/Futures/NewOrder.tsx
 msgid "Total Pay"
 msgstr "Total Pay"
@@ -1031,9 +1030,13 @@ msgid "TP"
 msgstr "TP"
 
 #: src/hooks/useFuturesNewOrder.ts
-#: src/pages/Futures/Modal/SharePositionModal.tsx
 msgid "TP and SL price you set will trigger immediately."
 msgstr "TP and SL price you set will trigger immediately."
+
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+msgid "TP Executed"
+msgstr "TP Executed"
 
 #: src/pages/Home/Home.tsx
 msgid "Trade BTC, ETH and BNB with up to 1-50 leverage. Open a position with USDT or NEST."

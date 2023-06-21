@@ -71,11 +71,6 @@ function useMainReact() {
     }
   }, [account.address, chainId]);
   /**
-   * show share position
-   */
-  const [openedSharePosition, setOpenedSharePosition] =
-    useState<boolean>(false);
-  /**
    * nav items from different chain
    */
   const navItems = useMemo(() => {
@@ -104,8 +99,6 @@ function useMainReact() {
     connectData,
     chainsData,
     disconnect,
-    openedSharePosition,
-    setOpenedSharePosition,
     navItems,
     addNESTToWallet
   };

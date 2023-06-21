@@ -53,7 +53,7 @@ function useFuturesPOrder(
 
   const showBasePrice = BigNumber.from(
     data.basePrice.toString()
-  ).bigNumberToShowString(18, tokenName.getTokenPriceDecimals());
+  ).bigNumberToShowPrice(18, tokenName.getTokenPriceDecimals());
   const showTriggerTitle = useMemo(() => {
     const isEdit =
       BigNumber.from("0").eq(data.stopProfitPrice) &&
@@ -64,7 +64,7 @@ function useFuturesPOrder(
     const tpNum = data.stopProfitPrice;
     return BigNumber.from("0").eq(tpNum)
       ? String().placeHolder
-      : BigNumber.from(tpNum.toString()).bigNumberToShowString(
+      : BigNumber.from(tpNum.toString()).bigNumberToShowPrice(
           18,
           tokenName.getTokenPriceDecimals()
         );
@@ -73,7 +73,7 @@ function useFuturesPOrder(
     const slNum = data.stopLossPrice;
     return BigNumber.from("0").eq(slNum)
       ? String().placeHolder
-      : BigNumber.from(slNum.toString()).bigNumberToShowString(
+      : BigNumber.from(slNum.toString()).bigNumberToShowPrice(
           18,
           tokenName.getTokenPriceDecimals()
         );
@@ -87,7 +87,7 @@ function useFuturesPOrder(
       data.basePrice,
       data.orientation
     );
-    return result.bigNumberToShowString(18, tokenName.getTokenPriceDecimals());
+    return result.bigNumberToShowPrice(18, tokenName.getTokenPriceDecimals());
   }, [
     data.appends,
     data.balance,
@@ -147,7 +147,7 @@ function useFuturesPOrder(
       actualRate: showPercentNum,
       index: parseInt(data.index.toString()),
       openPrice: parseFloat(
-        data.basePrice.bigNumberToShowString(
+        data.basePrice.bigNumberToShowPrice(
           18,
           tokenName.getTokenPriceDecimals()
         )
@@ -161,7 +161,7 @@ function useFuturesPOrder(
       ),
       lastPrice: parseFloat(
         price
-          ? price[tokenName].bigNumberToShowString(
+          ? price[tokenName].bigNumberToShowPrice(
               18,
               tokenName.getTokenPriceDecimals()
             )

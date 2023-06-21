@@ -31,12 +31,13 @@ interface LanguageListProps {
 }
 
 export const LanData = [
-    [`English`, "en"],
-    [`Português`, "pt"],
-    // [`日本語`, "ja"],
-    [`한국어`, "ko"],
-    // [`Русский`, "ru"],
-  ];
+  [`English`, "en"],
+  [`Português`, "pt"],
+  // [`日本語`, "ja"],
+  [`한국어`, "ko"],
+  // [`Русский`, "ru"],
+  [`Tiếng Việt`, "vi"],
+];
 
 export const LanguageList: FC<LanguageListProps> = ({ ...props }) => {
   const nowValue = useMemo(() => {

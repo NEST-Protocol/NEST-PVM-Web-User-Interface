@@ -506,6 +506,75 @@ function useFuturesNewOrder(
   }, [openPriceBase, tokenPair]);
 
   /**
+   * share order
+   */
+  const [isShareLink, setIsShareLink] = useState<boolean>(false);
+  const [hasShowShareLink, setHadShowShareLink] = useState<boolean>(false);
+  const tokenName_info = useMemo(() => {
+    return getQueryVariable("pt");
+  }, []);
+  const orientation_info = useMemo(() => {
+    return getQueryVariable("po") === "0" ? false : true;
+  }, []);
+  const lever_info = useMemo(() => {
+    return getQueryVariable("pl");
+  }, []);
+  const basePrice_info = useMemo(() => {
+    return getQueryVariable("pp");
+  }, []);
+  const tp_info = useMemo(() => {
+    return getQueryVariable("pst");
+  }, []);
+  const sl_info = useMemo(() => {
+    return getQueryVariable("psl");
+  }, []);
+  useEffect(() => {
+    if (
+      lever_info &&
+      basePrice_info &&
+      tp_info &&
+      sl_info &&
+      !hasShowShareLink
+    ) {
+      const tokenPriceDecimals = tokenPair.getTokenPriceDecimals();
+      setTabsValue(1);
+      setLongOrShort(orientation_info);
+      setLever(parseInt(lever_info));
+      setLimitAmount(
+        (parseFloat(basePrice_info) / Math.pow(10, tokenPriceDecimals)).toFixed(
+          tokenPriceDecimals
+        )
+      );
+      if (parseInt(tp_info) > 0 || parseInt(sl_info) > 0) {
+        setIsStop(true);
+        if (parseInt(tp_info) > 0) {
+          setTp(
+            (parseFloat(tp_info) / Math.pow(10, tokenPriceDecimals)).toFixed(
+              tokenPriceDecimals
+            )
+          );
+        }
+        if (parseInt(sl_info) > 0) {
+          setSl(
+            (parseFloat(sl_info) / Math.pow(10, tokenPriceDecimals)).toFixed(
+              tokenPriceDecimals
+            )
+          );
+        }
+      }
+      setIsShareLink(true);
+      setHadShowShareLink(true);
+    }
+  }, [
+    basePrice_info,
+    hasShowShareLink,
+    lever_info,
+    orientation_info,
+    sl_info,
+    tokenPair,
+    tp_info,
+  ]);
+  /**
    * show
    */
   const showToSwap = useMemo(() => {
@@ -524,7 +593,7 @@ function useFuturesNewOrder(
   }, [account.address, tokenBalance]);
   const showOpenPrice = useMemo(() => {
     if (openPriceBase) {
-      return openPriceBase.bigNumberToShowString(
+      return openPriceBase.bigNumberToShowPrice(
         18,
         tokenPair.getTokenPriceDecimals()
       );
@@ -554,7 +623,7 @@ function useFuturesNewOrder(
       longOrShort
     );
     return (
-      result.bigNumberToShowString(18, tokenPair.getTokenPriceDecimals()) ??
+      result.bigNumberToShowPrice(18, tokenPair.getTokenPriceDecimals()) ??
       String().placeHolder
     );
   }, [lever, longOrShort, nestAmount, openPrice, tokenPair]);
@@ -673,26 +742,24 @@ function useFuturesNewOrder(
       setHadSetLimit(true);
     }
   }, [hadSetLimit, limitAmount, openPriceBase, tokenPair]);
+  const closeShareLink = useCallback(() => {
+    if (isShareLink) {
+      setIsShareLink(false);
+    }
+  }, [isShareLink])
   useEffect(() => {
-    setLimitAmount("");
-    setTp("");
-    setSl("");
-    setHadSetLimit(false);
-  }, [tokenPair]);
-  const changeTabs = useCallback(
-    (value: number) => {
-      setTabsValue(value);
-      if (openPriceBase) {
-        setLimitAmount(
-          openPriceBase.bigNumberToShowString(
-            18,
-            tokenPair.getTokenPriceDecimals()
-          )
-        );
-      }
-    },
-    [openPriceBase, tokenPair]
-  );
+    if (tokenName_info !== tokenPair) {
+      setLimitAmount("");
+      setTp("");
+      setSl("");
+      closeShareLink()
+      setHadSetLimit(false);
+    }
+  }, [closeShareLink, tokenName_info, tokenPair]);
+
+  const changeTabs = useCallback((value: number) => {
+    setTabsValue(value);
+  }, []);
 
   return {
     longOrShort,
@@ -732,17 +799,18 @@ function useFuturesNewOrder(
     setInputAmount,
     showNESTPrice,
     showPositions,
-    tpDefault,
-    slDefault,
     showApproveNotice,
     setShowApproveNotice,
     approveNoticeCallBack,
     showAmountError,
+    tpDefault,
+    slDefault,
     tpError,
     slError,
-    setTabsValue,
     lastPriceButton,
     stopErrorText,
+    isShareLink,
+    closeShareLink,
   };
 }
 

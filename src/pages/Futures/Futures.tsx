@@ -7,7 +7,8 @@ import FuturesNewOrder from "./NewOrder";
 import FuturesOrderList from "./OrderList";
 import ExchangeTVChart from "./ExchangeTVChart";
 import { getPriceFromNESTLocal } from "../../lib/NESTRequest";
-import FuturesNotice from "./Components/FuturesNotice";
+// import FuturesNotice from "./Components/FuturesNotice";
+import { getQueryVariable } from "../../lib/queryVaribale";
 
 export interface FuturesPrice {
   [key: string]: BigNumber;
@@ -16,14 +17,26 @@ const UPDATE_PRICE = 15;
 export const priceToken = ["ETH", "BTC", "BNB", "MATIC", "ADA", "DOGE", "XRP"];
 const Futures: FC = () => {
   const { width, isBigMobile } = useWindowWidth();
-  const [tokenPair, setTokenPair] = useState("ETH");
+  const defaultTokenPair = useMemo(() => {
+    let code = getQueryVariable("pt");
+    if (code) {
+      const num = priceToken.filter(
+        (item) => item.toLocaleLowerCase() === code!.toLocaleLowerCase()
+      );
+      if (num && num.length > 0) {
+        return code.toLocaleUpperCase();
+      }
+    }
+    return "ETH";
+  }, []);
+  const [tokenPair, setTokenPair] = useState(defaultTokenPair);
   const [basePrice, setBasePrice] = useState<FuturesPrice>();
   const [orderPrice, setOrderPrice] = useState<FuturesPrice>();
-  const showNoticeDefault = useMemo(() => {
-    const isShow = localStorage.getItem("FuturesNoticeV1");
-    return isShow !== "1";
-  }, []);
-  const [showNotice, setShowNotice] = useState<boolean>(showNoticeDefault);
+  // const showNoticeDefault = useMemo(() => {
+  //   const isShow = localStorage.getItem("FuturesNoticeV1");
+  //   return isShow !== "1";
+  // }, []);
+  // const [showNotice, setShowNotice] = useState<boolean>(showNoticeDefault);
   const getPrice = useCallback(async () => {
     const ETHPriceBase: { [key: string]: string } = await getPriceFromNESTLocal(
       "eth"
@@ -89,6 +102,19 @@ const Futures: FC = () => {
       return undefined;
     }
   }, []);
+  // useEffect(() => {
+  //   let code = getQueryVariable("pt");
+  //   if (code) {
+  //     const num = priceToken.filter(
+  //       (item) => item.toLocaleLowerCase() === code!.toLocaleLowerCase()
+  //     );
+  //     if (num && num.length > 0) {
+  //       setTokenPair(code.toLocaleUpperCase());
+  //     } else {
+  //       setTokenPair('ETH');
+  //     }
+  //   }
+  // }, []);
   // update base price 1s
   useEffect(() => {
     const time = setInterval(() => {
@@ -142,17 +168,17 @@ const Futures: FC = () => {
   const moreInfo = useCallback(() => {
     return <FuturesMoreInfo />;
   }, []);
-  const notice = useMemo(() => {
-    return !showNotice ? (
-      <></>
-    ) : (
-      <FuturesNotice
-        onClose={() => {
-          setShowNotice(false);
-        }}
-      />
-    );
-  }, [showNotice]);
+  // const notice = useMemo(() => {
+  //   return !showNotice ? (
+  //     <></>
+  //   ) : (
+  //     <FuturesNotice
+  //       onClose={() => {
+  //         setShowNotice(false);
+  //       }}
+  //     />
+  //   );
+  // }, [showNotice]);
 
   const mainView = useMemo(() => {
     switch (width) {
