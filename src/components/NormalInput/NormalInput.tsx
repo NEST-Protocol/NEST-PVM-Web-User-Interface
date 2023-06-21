@@ -113,6 +113,7 @@ export const NormalInputWithLastButton: FC<NormalInputWithLastButtonProps> = ({
             lineHeight: `22px`,
             fontSize: `14px`,
             fontWeight: 400,
+            whiteSpace: "nowrap",
           })}
         >
           <Trans>Last</Trans>
