@@ -50,8 +50,10 @@ msgstr "> オープン価格"
 
 #: src/components/NormalInput/NESTInput.tsx
 #: src/components/NormalInput/NESTInputSelect.tsx
-msgid "0 balance. Before trading, you can switch to \"Swap\" to exchange between USDT and NEST token."
-msgstr "0残高です。取引をする前に、「スワップ」に切り替えてUSDTとNESTトークンを交換できます。"
+msgid ""
+"0 balance. Before trading, you can switch to \"Swap\" to exchange\n"
+"between USDT and NEST token."
+msgstr ""
 
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 msgid "1. The trigger price has been reached but there is not enough time to execute."
@@ -119,7 +121,7 @@ msgid "7 Days\\' PNL"
 msgstr "7日間のPNL"
 
 #: src/pages/Home/Home.tsx
-msgid "A beginner's guide to using NEST Fi"
+msgid "A beginner's guide to using NESTFi"
 msgstr ""
 
 #: src/pages/Share/Modal/ConnectWalletModal.tsx
@@ -142,6 +144,7 @@ msgstr "実際の証拠金"
 msgid "Add"
 msgstr "追加"
 
+#: src/pages/DirectPoster/DirectPoster.tsx
 #: src/pages/Swap/Swap.tsx
 msgid "Add NEST to wallet"
 msgstr "NESTをウォレットに追加"
@@ -187,6 +190,7 @@ msgstr "残高"
 
 #: src/components/NormalInput/NESTInput.tsx
 #: src/components/NormalInput/NESTInputSelect.tsx
+#: src/pages/DirectPoster/DirectPoster.tsx
 #: src/pages/Swap/Components/SwapInputItem.tsx
 #: src/pages/Swap/Components/SwapInputItem.tsx
 msgid "Balance:"
@@ -232,12 +236,16 @@ msgstr "清算価格"
 msgid "Close Risk"
 msgstr "清算リスク"
 
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+msgid "Closed"
+msgstr ""
+
 #: src/hooks/useFuturesAdd.ts
 #: src/hooks/useFuturesClose.ts
 #: src/hooks/useFuturesEditLimit.ts
 #: src/hooks/useFuturesEditPosition.ts
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
-#: src/pages/Futures/Modal/SharePositionModal.tsx
 #: src/pages/Home/Modal/ApplyModal.tsx
 #: src/pages/Swap/Components/SwapSlippageModal.tsx
 msgid "Confirm"
@@ -248,6 +256,8 @@ msgstr "確認"
 #: src/hooks/useSwap.ts
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/DirectPoster/useDirectPoster.ts
+#: src/pages/DirectPoster/useDirectPoster.ts
 #: src/pages/Share/Head/ConnectButton.tsx
 #: src/pages/Share/Modal/ConnectWalletModal.tsx
 #: src/pages/Share/Modal/ConnectWalletModal.tsx
@@ -307,6 +317,7 @@ msgstr "ダークモード"
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Share/Head/NESTHead.tsx
 #: src/pages/Share/Head/NESTHead.tsx
+#: src/pages/Share/Head/NESTHead.tsx
 msgid "Dashboard"
 msgstr "ダッシュボード"
 
@@ -342,8 +353,6 @@ msgstr "市場の変動により、実際の清算価格は理論的な清算価
 #: src/hooks/useFuturesPOrder.ts
 #: src/pages/Futures/Components/OrderList.tsx
 #: src/pages/Futures/Components/OrderTable.tsx
-#: src/pages/Futures/Modal/SharePositionModal.tsx
-#: src/pages/Futures/Modal/SharePositionModal.tsx
 msgid "Edit"
 msgstr "編集"
 
@@ -372,6 +381,12 @@ msgstr "参入価格"
 msgid "Fail Request"
 msgstr "リクエストに失敗しました"
 
+#: src/components/NormalInput/NESTInput.tsx
+#: src/components/NormalInput/NESTInputSelect.tsx
+#: src/pages/Share/Head/NESTHead.tsx
+msgid "Faucet"
+msgstr ""
+
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
@@ -396,8 +411,14 @@ msgid "From"
 msgstr "送信元"
 
 #: src/pages/Share/Head/NESTHead.tsx
+#: src/pages/Share/Head/NESTHead.tsx
 msgid "Futures"
 msgstr "先物"
+
+#: src/pages/DirectPoster/DirectPoster.tsx
+#: src/pages/DirectPoster/useDirectPoster.ts
+msgid "GET"
+msgstr ""
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "Github"
@@ -455,6 +476,10 @@ msgstr "NEST残高不足"
 msgid "Invitee Trading Volume"
 msgstr ""
 
+#: src/pages/DirectPoster/useDirectPoster.ts
+msgid "It's available once in 24 hours. Please come later."
+msgstr ""
+
 #: src/pages/Home/Home.tsx
 #: src/pages/Home/Home.tsx
 msgid "Join"
@@ -510,12 +535,9 @@ msgstr "リミットオーダー手数料 = 15 NEST"
 #: src/pages/Futures/Modal/EditLimitModal.tsx
 #: src/pages/Futures/Modal/EditLimitModal.tsx
 #: src/pages/Futures/Modal/EditLimitModal.tsx
-#: src/pages/Futures/Modal/SharePositionModal.tsx
-#: src/pages/Futures/Modal/SharePositionModal.tsx
 msgid "Limit Price"
 msgstr "リミット価格"
 
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Futures/Components/POrderList.tsx
@@ -527,6 +549,8 @@ msgid "Liq Price"
 msgstr "清算価格"
 
 #: src/hooks/useFuturesPOrderClose.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
 msgid "Liquidated"
 msgstr "清算済み"
 
@@ -544,10 +568,10 @@ msgstr "読み込み中..."
 #: src/hooks/useFuturesOrder.ts
 #: src/hooks/useFuturesPOrder.ts
 #: src/hooks/useFuturesPOrderClose.tsx
+#: src/pages/Dashboard/Components/MobileOrderTypePosition.tsx
 #: src/pages/Dashboard/Components/ShareOrderPosition.tsx
 #: src/pages/Futures/Components/OrderListPosition.tsx
 #: src/pages/Futures/Components/OrderTablePosition.tsx
-#: src/pages/Futures/Modal/SharePositionModal.tsx
 msgid "Long"
 msgstr "ロング"
 
@@ -555,12 +579,9 @@ msgstr "ロング"
 msgid "Market"
 msgstr "マーケット"
 
-#: src/pages/Swap/Components/SwapInputItem.tsx
-msgid "Max"
-msgstr "最大"
-
 #: src/components/NormalInput/NESTInput.tsx
 #: src/components/NormalInput/NESTInputSelect.tsx
+#: src/pages/Swap/Components/SwapInputItem.tsx
 msgid "MAX"
 msgstr "最大"
 
@@ -587,6 +608,13 @@ msgstr ""
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "My Positions"
 msgstr "自分のポジション"
+
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+msgid "My Total Trading Volume"
+msgstr ""
 
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "NEST Total Burned"
@@ -687,6 +715,10 @@ msgstr "プラットフォーム（Youtube、Telegram、Twitter、Instagram、Fa
 msgid "Please click Approve for authorization and then you can open the position, this process will consume some GAS."
 msgstr "承認をクリックして承認し、ポジションを開いてください。このプロセスには一定のGASが消費されます。"
 
+#: src/pages/DirectPoster/useDirectPoster.ts
+msgid "Please get ETH testnet token first"
+msgstr ""
+
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 msgid "Please note that \"Limit order\" or \"Stop order\" is not guaranteed to be executed. This may include, but is not limited to, the following cases."
 msgstr "「指値注文」または「ストップ注文」は実行されることが保証されていません。これには以下のケースが含まれる場合があります。"
@@ -714,7 +746,6 @@ msgstr "ポジション手数料 = ポジション*0.05%"
 msgid "Position*0.05%"
 msgstr "ポジション*0.05％"
 
-#: src/pages/Futures/Modal/SharePositionModal.tsx
 #: src/pages/Futures/NewOrder.tsx
 #: src/pages/Futures/OrderList.tsx
 msgid "Positions"
@@ -724,6 +755,14 @@ msgstr "ポジション"
 #: src/pages/Swap/Swap.tsx
 msgid "Price"
 msgstr "価格"
+
+#: src/hooks/useTransactionReceipt.ts
+msgid "Received"
+msgstr ""
+
+#: src/hooks/useTransactionReceipt.ts
+msgid "Received 100NEST test tokens"
+msgstr ""
 
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "Recent transactions"
@@ -758,7 +797,6 @@ msgstr "ポジションの売却リクエスト"
 
 #: src/pages/Futures/Modal/CloseModal.tsx
 #: src/pages/Futures/Modal/EditPositionModal.tsx
-#: src/pages/Futures/Modal/SharePositionModal.tsx
 #: src/pages/Futures/NewOrder.tsx
 msgid "Service Fee"
 msgstr "手数料"
@@ -784,10 +822,10 @@ msgstr "シェア"
 #: src/hooks/useFuturesOrder.ts
 #: src/hooks/useFuturesPOrder.ts
 #: src/hooks/useFuturesPOrderClose.tsx
+#: src/pages/Dashboard/Components/MobileOrderTypePosition.tsx
 #: src/pages/Dashboard/Components/ShareOrderPosition.tsx
 #: src/pages/Futures/Components/OrderListPosition.tsx
 #: src/pages/Futures/Components/OrderTablePosition.tsx
-#: src/pages/Futures/Modal/SharePositionModal.tsx
 msgid "Short"
 msgstr "ショート"
 
@@ -796,6 +834,11 @@ msgstr "ショート"
 #: src/pages/Futures/Components/POrderTable.tsx
 msgid "SL"
 msgstr "ストップロス"
+
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+msgid "SL Executed"
+msgstr ""
 
 #: src/pages/Swap/Swap.tsx
 msgid "Slippage Tolerance"
@@ -814,8 +857,6 @@ msgstr "取引を開始"
 #: src/pages/Futures/Components/POrderList.tsx
 #: src/pages/Futures/Components/POrderList.tsx
 #: src/pages/Futures/Modal/EditPositionModal.tsx
-#: src/pages/Futures/Modal/SharePositionModal.tsx
-#: src/pages/Futures/Modal/SharePositionModal.tsx
 #: src/pages/Futures/NewOrder.tsx
 msgid "Stop Loss"
 msgstr "ストップロス"
@@ -864,8 +905,6 @@ msgstr "銘柄"
 #: src/pages/Futures/Components/POrderList.tsx
 #: src/pages/Futures/Components/POrderList.tsx
 #: src/pages/Futures/Modal/EditPositionModal.tsx
-#: src/pages/Futures/Modal/SharePositionModal.tsx
-#: src/pages/Futures/Modal/SharePositionModal.tsx
 #: src/pages/Futures/NewOrder.tsx
 msgid "Take Profit"
 msgstr "利益確定"
@@ -873,6 +912,16 @@ msgstr "利益確定"
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "Test BNB"
 msgstr "テスト BNB"
+
+#: src/pages/DirectPoster/DirectPoster.tsx
+#: src/pages/DirectPoster/useDirectPoster.ts
+msgid "Testnet token"
+msgstr ""
+
+#: src/components/NormalInput/NESTInput.tsx
+#: src/components/NormalInput/NESTInputSelect.tsx
+msgid "The balance is 0. You can go to \"Faucet\" to get test token before trading."
+msgstr ""
 
 #: src/pages/Home/Home.tsx
 msgid "The smart contract guarantees infinite liquidity through burning and issuing $NEST."
@@ -937,7 +986,13 @@ msgstr ""
 msgid "Total Invitees"
 msgstr ""
 
-#: src/pages/Futures/Modal/SharePositionModal.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+msgid "Total Number of Trades"
+msgstr ""
+
 #: src/pages/Futures/NewOrder.tsx
 msgid "Total Pay"
 msgstr "支払い合計"
@@ -953,6 +1008,7 @@ msgstr "総利益"
 msgid "Total Profit & Loss"
 msgstr "総損益"
 
+#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 msgid "Total Trading Volume"
@@ -963,10 +1019,6 @@ msgstr ""
 msgid "Total Trading Volume (NEST)"
 msgstr ""
 
-#: src/pages/Dashboard/Dashboard.tsx
-msgid "Total Transaction Volume"
-msgstr "総取引量"
-
 #: src/pages/Futures/Components/OrderTable.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
@@ -974,9 +1026,13 @@ msgid "TP"
 msgstr "TP（利確注文）"
 
 #: src/hooks/useFuturesNewOrder.ts
-#: src/pages/Futures/Modal/SharePositionModal.tsx
 msgid "TP and SL price you set will trigger immediately."
 msgstr "設定したTP価格とSL価格はすぐにトリガーされます。"
+
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+msgid "TP Executed"
+msgstr ""
 
 #: src/pages/Home/Home.tsx
 msgid "Trade BTC, ETH and BNB with up to 1-50 leverage. Open a position with USDT or NEST."

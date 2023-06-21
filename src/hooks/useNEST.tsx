@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { createContainer } from "unstated-next";
 import {
   useAccount,
@@ -7,10 +7,11 @@ import {
   useNetwork,
   useSwitchNetwork,
 } from "wagmi";
+import { NavItems, NavItemsForScroll } from "../pages/Share/Head/NESTHead";
 
 function useMainReact() {
   const [showConnect, setShowConnect] = useState(false);
-  
+
   /**
    * wallet
    */
@@ -70,10 +71,27 @@ function useMainReact() {
     }
   }, [account.address, chainId]);
   /**
-   * show share position
+   * nav items from different chain
    */
-  const [openedSharePosition, setOpenedSharePosition] =
-    useState<boolean>(false);
+  const navItems = useMemo(() => {
+    return chainId === 534353 ? NavItemsForScroll : NavItems;
+  }, [chainId]);
+  /**
+   * add nest
+   */
+  const addNESTToWallet = useCallback(async () => {
+    const token = "NEST".getToken();
+    if (chainId && token && account.connector) {
+      const imageURL =
+        "https://raw.githubusercontent.com/FORT-Protocol/Fort-Web-User-Interface/2e289cd29722576329fae529c2bfaa0a905f0148/src/components/Icon/svg/TokenNest.svg";
+      await account.connector.watchAsset?.({
+        address: token.address[chainId], // The address that the token is at.
+        symbol: "NEST", // A ticker symbol or shorthand, up to 5 chars.
+        decimals: 18, // The number of decimals in the token
+        image: imageURL, // A string url of the token logo
+      });
+    }
+  }, [account.connector, chainId]);
   return {
     showConnect,
     setShowConnect,
@@ -81,8 +99,8 @@ function useMainReact() {
     connectData,
     chainsData,
     disconnect,
-    openedSharePosition,
-    setOpenedSharePosition,
+    navItems,
+    addNESTToWallet
   };
 }
 const NEST = createContainer(useMainReact);

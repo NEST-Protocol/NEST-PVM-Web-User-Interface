@@ -2,6 +2,8 @@ import {Box, Stack, styled} from "@mui/material";
 import {FC, useCallback, useEffect, useRef, useState} from "react";
 import {createChart, LineStyle} from "lightweight-charts";
 import useTheme from "../../../hooks/useTheme";
+import NetworkIcon from "../Components/NetworkIcon";
+import {useNetwork} from "wagmi";
 
 interface TVChartProps {
   title1: string;
@@ -20,7 +22,7 @@ const TVChartDiv = styled(Stack)(({theme}) => ({
 }))
 
 const Title1 = styled("div")(({theme}) => ({
-  fontWeight: "700",
+  fontWeight: "400",
   fontSize: "14px",
   lineHeight: "20px",
   color: theme.normal.text2
@@ -47,7 +49,7 @@ const Value1 = styled("div")(({theme}) => ({
 
 const Title2 = styled("div")(({theme}) => ({
   paddingTop: '4px',
-  fontWeight: "700",
+  fontWeight: "400",
   fontSize: "14px",
   lineHeight: "20px",
   color: theme.normal.text2,
@@ -90,6 +92,7 @@ const TVChart: FC<TVChartProps> = ({...props}) => {
     value: 0,
   });
   const {nowTheme} = useTheme();
+  const { chain } = useNetwork()
 
   const getChartOptions = useCallback(
     (width: number, height: number) => ({
@@ -223,7 +226,10 @@ const TVChart: FC<TVChartProps> = ({...props}) => {
   return (
     <TVChartDiv>
       <Stack direction={'row'} width={'100%'} justifyContent={'space-between'}>
-        <Title1>{props.title1}</Title1>
+        <Stack direction={'row'} spacing={'8px'} alignItems={"center"}>
+          <NetworkIcon chainId={chain?.id}/>
+          <Title1>{props.title1}</Title1>
+        </Stack>
         <Title2>{props.title2}</Title2>
       </Stack>
       <Stack direction={'row'} width={'100%'} justifyContent={'space-between'} pt={['4px', '4px', '8px']}>
@@ -246,6 +252,7 @@ const TVChart: FC<TVChartProps> = ({...props}) => {
           <div style={{fontWeight: 400}}>{select.time}</div>
           <div style={{fontWeight: 700}}>{select.value.toLocaleString('en-US', {
             maximumFractionDigits: 2,
+            minimumFractionDigits: 2,
           })} NEST</div>
         </Box>
       </Stack>

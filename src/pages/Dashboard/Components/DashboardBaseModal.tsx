@@ -8,23 +8,23 @@ interface BaseModalProps {
 
 const BaseModal: FC<BaseModalProps> = ({children}) => {
   return (
-    <Box sx={{
-      width: ["100%", "100%", "450px"],
-      position: "absolute",
-      top: "50%",
-      left: "50%",
-      transform: "translate(-50%, -50%)",
-      padding: ['20px', '20px', 0],
-    }}>
-      <Stack sx={(theme) => ({
-        width: '100%',
-        borderRadius: "12px",
-        background: theme.normal.bg2,
-        padding: 0,
-      })} justifyContent="center" alignItems="center" spacing={0}>
-        {children}
-      </Stack>
-    </Box>
+    <Stack justifyContent={"center"} alignItems={"center"} width={'100vw'} height={'100vh'}>
+      <Box sx={{
+        width: ["100%", "100%", "450px"],
+        padding: '20px',
+        maxHeight: '100vh',
+        overflow: 'scroll',
+      }}>
+        <Stack sx={(theme) => ({
+          width: '100%',
+          borderRadius: "12px",
+          background: theme.normal.bg2,
+          padding: 0,
+        })} justifyContent="center" alignItems="center" spacing={0}>
+          {children}
+        </Stack>
+      </Box>
+    </Stack>
   );
 };
 

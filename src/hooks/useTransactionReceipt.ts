@@ -18,6 +18,7 @@ export enum TransactionType {
   futures_closeLimit,
   swap_uni,
   swap_nhbtc,
+  faucet_scroll,
 }
 
 export type TransactionInfo = {
@@ -28,29 +29,31 @@ export type TransactionInfo = {
 
 export const getTransactionTypeString = (text: string) => {
   if (text === `Approve`) {
-    return t`Approve`
+    return t`Approve`;
   } else if (text === `Open position`) {
-    return t`Open position`
+    return t`Open position`;
   } else if (text === `Open position request`) {
-    return t`Open position request`
-  }  else if (text === `Add position`) {
-    return t`Add position`
-  }  else if (text === `Sell position`) {
-    return t`Sell position`
-  }  else if (text === `Sell position request`) {
-    return t`Sell position request`
-  }  else if (text === `Edit Position`) {
-    return t`Edit Position`
-  }  else if (text === `Edit Limit Order`) {
-    return t`Edit Limit Order`
-  }  else if (text === `Close Limit Order`) {
-    return t`Close Limit Order`
-  }  else if (text === `Swap`) {
-    return t`Swap`
+    return t`Open position request`;
+  } else if (text === `Add position`) {
+    return t`Add position`;
+  } else if (text === `Sell position`) {
+    return t`Sell position`;
+  } else if (text === `Sell position request`) {
+    return t`Sell position request`;
+  } else if (text === `Edit Position`) {
+    return t`Edit Position`;
+  } else if (text === `Edit Limit Order`) {
+    return t`Edit Limit Order`;
+  } else if (text === `Close Limit Order`) {
+    return t`Close Limit Order`;
+  } else if (text === `Swap`) {
+    return t`Swap`;
+  } else if (text === `Received`) {
+    return t`Received`;
   } else {
-    return ""
+    return "";
   }
-}
+};
 
 const getInfoTitle = (type: TransactionType) => {
   switch (type) {
@@ -75,8 +78,19 @@ const getInfoTitle = (type: TransactionType) => {
     case TransactionType.swap_uni:
     case TransactionType.swap_nhbtc:
       return `Swap`;
+    case TransactionType.faucet_scroll:
+      return `Received`;
   }
-}
+};
+
+const getInfo = (type: TransactionType) => {
+  switch (type) {
+    case TransactionType.faucet_scroll:
+      return t`Received 100NEST test tokens`;
+    default:
+      return "";
+  }
+};
 
 export const usePendingTransactionsBase = () => {
   const [info, setInfo] = useState<TransactionInfo>();
@@ -85,22 +99,21 @@ export const usePendingTransactionsBase = () => {
   const { isSuccess, isError } = useWaitForTransaction({
     hash: info?.hash as `0x${string}`,
   });
-  
+
   useEffect(() => {
     if ((isSuccess || isError) && info) {
       const type = isSuccess ? SnackBarType.success : SnackBarType.fail;
-      transactionSnackBar(getInfoTitle(info.type), "", type, info.hash);
+      transactionSnackBar(
+        getInfoTitle(info.type),
+        getInfo(info.type),
+        type,
+        info.hash
+      );
       const newList = pendingList.slice(1, pendingList.length - 1);
       setPendingList(newList);
       setInfo(undefined);
     }
-  }, [
-    info,
-    isError,
-    isSuccess,
-    transactionSnackBar,
-    pendingList,
-  ]);
+  }, [info, isError, isSuccess, transactionSnackBar, pendingList]);
   useEffect(() => {
     if (!info && pendingList.length > 0) {
       const thisInfo = pendingList[0];

@@ -4,8 +4,8 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { MobileListIcon } from "../../../components/icons";
 import Box from "@mui/material/Box";
-import { NavItems } from "./NESTHead";
 import { Link, useLocation } from "react-router-dom";
+import useNEST from "../../../hooks/useNEST";
 
 export const MobileListButton = styled("button")(({ theme }) => ({
   "&:hover": {
@@ -22,6 +22,7 @@ export const MobileListButton = styled("button")(({ theme }) => ({
 }));
 
 const NavMenu: FC = () => {
+  const {navItems} = useNEST()
   const location = useLocation();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -91,7 +92,7 @@ const NavMenu: FC = () => {
       },
     },
   }));
-  const liList = NavItems.slice(0, 3).map((item, index) => {
+  const liList = navItems.slice(0, 3).map((item, index) => {
     const Icon = item.icon
     return (
       <MenuItem

@@ -418,20 +418,6 @@ function useSwap() {
     [srcRefetch]
   );
 
-  const addNESTToWallet = useCallback(async () => {
-    const token = "NEST".getToken();
-    if (chainsData.chainId && token && account.connector) {
-      const imageURL =
-        "https://raw.githubusercontent.com/FORT-Protocol/Fort-Web-User-Interface/2e289cd29722576329fae529c2bfaa0a905f0148/src/components/Icon/svg/TokenNest.svg";
-      await account.connector.watchAsset?.({
-        address: token.address[chainsData.chainId], // The address that the token is at.
-        symbol: "NEST", // A ticker symbol or shorthand, up to 5 chars.
-        decimals: 18, // The number of decimals in the token
-        image: imageURL, // A string url of the token logo
-      });
-    }
-  }, [account.connector, chainsData.chainId]);
-
   useEffect(() => {
     if (swapToken.src === "USDT" || swapToken.src === "NEST") {
       //  use swap amount
@@ -492,7 +478,6 @@ function useSwap() {
     tokenArray,
     selectToken,
     hideSetting,
-    addNESTToWallet,
   };
 }
 

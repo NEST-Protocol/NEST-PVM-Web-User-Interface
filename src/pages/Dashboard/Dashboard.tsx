@@ -22,6 +22,8 @@ import FuturesTableTitle from "../Futures/Components/TableTitle";
 import OrderTablePosition from "../Futures/Components/OrderTablePosition";
 import {Trans, t} from "@lingui/macro";
 import useSWR from "swr";
+import NetworkIcon from "./Components/NetworkIcon";
+import MobileOrderTypePosition from "./Components/MobileOrderTypePosition";
 
 const DashboardShare = styled(Box)(({theme}) => ({
   borderRadius: "8px",
@@ -57,7 +59,7 @@ const DashboardShare = styled(Box)(({theme}) => ({
 }));
 
 const Title1 = styled("div")(({theme}) => ({
-  fontWeight: "700",
+  fontWeight: "400",
   fontSize: "16px",
   lineHeight: "22px",
   color: theme.normal.text2,
@@ -85,14 +87,14 @@ const Title4 = styled("div")(({theme}) => ({
 }));
 
 const Caption1 = styled("div")(({theme}) => ({
-  fontWeight: "700",
+  fontWeight: "400",
   fontSize: "16px",
   lineHeight: "22px",
   color: theme.normal.text2,
 }));
 
 const Caption2 = styled("div")(({theme}) => ({
-  fontWeight: "700",
+  fontWeight: "400",
   fontSize: "14px",
   lineHeight: "20px",
   color: theme.normal.text2,
@@ -174,7 +176,7 @@ function formatDate(timestamp: number) {
 
 const Dashboard: FC = () => {
   const {address} = useAccount();
-  const {setShowConnect} = useNEST();
+  const {setShowConnect, chainsData} = useNEST();
   const {isBigMobile} = useWindowWidth();
   const [tabsValue, setTabsValue] = useState(0);
   const [showShareMyDealModal, setShareMyDealModal] = useState(false);
@@ -182,44 +184,66 @@ const Dashboard: FC = () => {
   const [shareOrder, setShareOrder] = useState<any>(undefined);
   const {messageSnackBar} = useNESTSnackBar();
 
-  const {data: burnedData} = useSWR(`https://api.nestfi.net/api/dashboard/destory/list?from=2022-11-28&to=${(new Date()).toISOString().split("T")[0]}`, (url) => fetch(url)
+  const getQueryVariable = (variable: string) => {
+    const query = window.location.search.substring(1);
+    if (query) {
+      const vars = query.split("&");
+      for (let i = 0; i < vars.length; i++) {
+        const pair = vars[i].split("=");
+        if (decodeURIComponent(pair[0]) === variable) {
+          return decodeURIComponent(pair[1]);
+        }
+      }
+    }
+    return null;
+  };
+
+  const a = getQueryVariable("address");
+
+  const {data: burnedData} = useSWR(`https://api.nestfi.net/api/dashboard/destory/list?chainId=${chainsData.chainId === 534353 ? 534353 : 56}&from=2022-11-28&to=${(new Date()).toISOString().split("T")[0]}`, (url: any) => fetch(url)
     .then((res) => res.json())
     .then((res: any) => res.value)
     .then((res: any) => res.map((item: any) => ({
       time: item.date,
-      value: item.value,
+      value: item.value ?? 0,
     }))));
 
-  const {data: txData} = useSWR(`https://api.nestfi.net/api/dashboard/txVolume/list?from=2022-11-28&to=${(new Date()).toISOString().split("T")[0]}`, (url) => fetch(url)
+  const {data: txData} = useSWR(`https://api.nestfi.net/api/dashboard/txVolume/list?chainId=${chainsData.chainId === 534353 ? 534353 : 56}&from=2022-11-28&to=${(new Date()).toISOString().split("T")[0]}`, (url: any) => fetch(url)
     .then((res) => res.json())
     .then((res: any) => res.value)
     .then((res: any) => res.map((item: any) => ({
       time: item.date,
-      value: item.value,
-      })))
+      value: item.value ?? 0,
+    })))
   )
 
-  const {data: burnedInfo} = useSWR("https://api.nestfi.net/api/dashboard/destory", (url) => fetch(url)
+  const {
+    data: burnedInfo,
+    isLoading: isBurnedInfoLoading
+  } = useSWR(`https://api.nestfi.net/api/dashboard/destory?chainId=${chainsData.chainId === 534353 ? 534353 : 56}`, (url: any) => fetch(url)
     .then((res) => res.json())
     .then((res: any) => res.value));
 
-  const {data: txInfo} = useSWR("https://api.nestfi.net/api/dashboard/txVolume", (url) => fetch(url)
+  const {
+    data: txInfo,
+    isLoading: isTxInfoLoading
+  } = useSWR(`https://api.nestfi.net/api/dashboard/txVolume?chainId=${chainsData.chainId === 534353 ? 534353 : 56}`, (url: any) => fetch(url)
     .then((res) => res.json())
     .then((res: any) => res.value));
 
-  const {data: myTxInfo} = useSWR(address ? `https://api.nestfi.net/api/dashboard/myTx/info?address=${address}` : undefined, (url) => fetch(url)
+  const {data: myTxInfo} = useSWR(address ? `https://api.nestfi.net/api/dashboard/myTx/info?address=${a || address}&chainId=${chainsData.chainId === 534353 ? 534353 : 56}` : undefined, (url: any) => fetch(url)
     .then((res) => res.json())
     .then((res: any) => res.value));
 
-  const {data: historyList} = useSWR(address ? `https://api.nestfi.net/api/dashboard/history/list?address=${address}` : undefined, (url) => fetch(url)
+  const {data: historyList} = useSWR(address ? `https://api.nestfi.net/api/dashboard/history/list?address=${a || address}&chainId=${chainsData.chainId === 534353 ? 534353 : 56}` : undefined, (url: any) => fetch(url)
     .then((res) => res.json())
     .then((res: any) => res.value.sort((a: any, b: any) => b.time - a.time)));
 
-  const {data: positionList} = useSWR(address ? `https://api.nestfi.net/api/dashboard/position/list?address=${address}` : undefined, (url) => fetch(url)
+  const {data: positionList} = useSWR(address ? `https://api.nestfi.net/api/dashboard/position/list?address=${a || address}&chainId=${chainsData.chainId === 534353 ? 534353 : 56}` : undefined, (url: any) => fetch(url)
     .then((res) => res.json())
     .then((res: any) => res.value));
 
-  const {data: isKol} = useSWR(address ? `https://api.nestfi.net/api/invite/is-kol-whitelist/${address}` : undefined, (url) => fetch(url).then((res) => res.json()));
+  const {data: isKol} = useSWR(address ? `https://api.nestfi.net/api/invite/is-kol-whitelist/${a || address}` : undefined, (url: any) => fetch(url).then((res) => res.json()));
 
   const shareMyDealModal = useMemo(() => {
     return (
@@ -227,6 +251,8 @@ const Dashboard: FC = () => {
         value={myTxInfo || {
           totalValue: 0,
           todayValue: 0,
+          totalCount: 0,
+          totalVolume: 0,
           day7Value: 0,
           day30Value: 0,
         }}
@@ -272,6 +298,7 @@ const Dashboard: FC = () => {
                 fontWeight: 700,
                 fontSize: 16,
                 color: theme.normal.text0,
+                whiteSpace: "nowrap",
               })}
             >
               {formatDate(item.time * 1000)}
@@ -287,14 +314,16 @@ const Dashboard: FC = () => {
         </TableCell>
         <TableCell>
           <Stack
-            direction={"row"}
-            spacing={"4px"}
-            alignItems={"flex-end"}
             sx={(theme) => ({
+              whiteSpace: "nowrap",
               "& p": {
                 fontWeight: 700,
                 fontSize: 16,
-                color: theme.normal.text0,
+                lineHeight: "16px",
+                color:
+                  item.actualRate >= 0
+                    ? theme.normal.success
+                    : theme.normal.danger,
               },
               "& span": {
                 fontWeight: 400,
@@ -309,12 +338,13 @@ const Dashboard: FC = () => {
             <p>
               {item.actualMargin.toLocaleString("en-US", {
                 maximumFractionDigits: 2,
+                minimumFractionDigits: 2,
               })}{" "}
               NEST
             </p>
             <span>
-              {item.actualRate > 0 && "+"}
-              {item.actualRate}%
+              ({item.actualRate > 0 && "+"}
+              {item.actualRate}%)
             </span>
           </Stack>
         </TableCell>
@@ -325,61 +355,21 @@ const Dashboard: FC = () => {
               fontWeight: 700,
               fontSize: 16,
               color: theme.normal.text0,
+              whiteSpace: "nowrap",
             })}
           >
             {item.openPrice.toLocaleString("en-US", {
               maximumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
+              minimumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
             })}{" "}
             USDT
           </Box>
         </TableCell>
-        <TableCell>
-          <Box
-            component={"p"}
-            sx={(theme) => ({
-              fontWeight: 700,
-              fontSize: 16,
-              color: theme.normal.text0,
-            })}
-          >
-            {(
-              lipPrice(
-                ethers.utils.parseEther(item.initialMargin.toFixed(12)),
-                ethers.utils.parseEther(item?.appendMargin?.toFixed(12) || "0"),
-                BigNumber.from(item.leverage.replace("X", "")),
-                ethers.utils.parseEther(item.lastPrice.toFixed(12)),
-                ethers.utils.parseEther(item.openPrice.toFixed(12)),
-                item.orientation === "Long"
-              )
-                .div(BigNumber.from(10).pow(12))
-                .toNumber() / 1000000
-            ).toLocaleString("en-US", {
-              maximumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
-            })}{" "}
-            USDT
-          </Box>
-        </TableCell>
-        {isHistory && (
-          <TableCell>
-            <Box
-              component={"p"}
-              sx={(theme) => ({
-                fontWeight: 700,
-                fontSize: 16,
-                color: theme.normal.text0,
-              })}
-            >
-              {item.lastPrice.toLocaleString("en-US", {
-                maximumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
-              })}{" "}
-              USDT
-            </Box>
-          </TableCell>
-        )}
         <TableCell>
           <Stack
             spacing={"4px"}
             sx={(theme) => ({
+              whiteSpace: "nowrap",
               "& p": {
                 fontSize: "12px",
                 fontWeight: 400,
@@ -387,6 +377,7 @@ const Dashboard: FC = () => {
                 color: theme.normal.text0,
               },
               "& span": {
+                // fontWeight: 400,
                 fontSize: "14px",
                 marginRight: "4px",
                 color: theme.normal.text2,
@@ -398,6 +389,7 @@ const Dashboard: FC = () => {
               {item.sp
                 ? item.sp.toLocaleString("en-US", {
                   maximumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
+                  minimumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
                 })
                 : "-"}{" "}
               USDT
@@ -407,12 +399,50 @@ const Dashboard: FC = () => {
               {item.sl
                 ? item.sl.toLocaleString("en-US", {
                   maximumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
+                  minimumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
                 })
                 : "-"}{" "}
               USDT
             </Box>
           </Stack>
         </TableCell>
+        {isHistory && (
+          <TableCell>
+            <Stack direction={'row'} alignItems={"center"} gap={'12px'}>
+              <Box
+                component={"p"}
+                sx={(theme) => ({
+                  fontWeight: 700,
+                  fontSize: 16,
+                  color: theme.normal.text0,
+                  whiteSpace: "nowrap",
+                })}
+              >
+                {item.lastPrice.toLocaleString("en-US", {
+                  maximumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
+                  minimumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
+                })}{" "}
+                USDT
+              </Box>
+              <Box sx={(theme) => ({
+                fontWeight: 700,
+                fontSize: "10px",
+                lineHeight: '14px',
+                padding: '3px 4px',
+                border: '1px solid',
+                borderColor: item.orderType === 'Closed' ? theme.normal.border : item.orderType === 'Liquidated' ? theme.normal.danger_light_hover : theme.normal.success_light_hover,
+                color: item.orderType === 'Closed' ? theme.normal.text2 : item.orderType === 'Liquidated' ? theme.normal.danger : theme.normal.success,
+                borderRadius: '4px',
+              })}>
+                {item.orderType === 'Closed' && <Trans>Closed</Trans>}
+                {item.orderType === 'Liquidated' && <Trans>Liquidated</Trans>}
+                {item.orderType === 'TP Executed' && <Trans>TP Executed</Trans>}
+                {item.orderType === 'SL Executed' && <Trans>SL Executed</Trans>}
+              </Box>
+            </Stack>
+          </TableCell>
+        )}
+
         <TableCell>
           <Stack direction={"row"} justifyContent={"flex-end"} spacing={"8px"}>
             <FuturesOrderShare
@@ -451,7 +481,7 @@ const Dashboard: FC = () => {
         key={index}
       >
         <Stack direction={"row"} justifyContent={"space-between"}>
-          <OrderTablePosition
+          <MobileOrderTypePosition
             tokenName={item.tokenPair.split("/")[0]}
             isLong={item.orientation === "Long"}
             lever={Number(item.leverage.replace("X", ""))}
@@ -507,6 +537,7 @@ const Dashboard: FC = () => {
               >
                 {item.openPrice.toLocaleString("en-US", {
                   maximumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
+                  minimumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
                 })}{" "}
                 USDT
               </Caption2>
@@ -533,6 +564,7 @@ const Dashboard: FC = () => {
               >
                 {item.actualMargin.toLocaleString("en-US", {
                   maximumFractionDigits: 2,
+                  minimumFractionDigits: 2,
                 })}{" "}
                 NEST{" "}
                 <span>
@@ -567,6 +599,7 @@ const Dashboard: FC = () => {
               >
                 {item.sp.toLocaleString("en-US", {
                   maximumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
+                  minimumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
                 })}{" "}
                 USDT
               </Caption5>
@@ -586,6 +619,7 @@ const Dashboard: FC = () => {
               >
                 {item.sl.toLocaleString("en-US", {
                   maximumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
+                  minimumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
                 })}{" "}
                 USDT
               </Caption5>
@@ -618,6 +652,7 @@ const Dashboard: FC = () => {
                     .toNumber() / 1000000
                 ).toLocaleString("en-US", {
                   maximumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
+                  minimumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
                 })}{" "}
                 USDT
               </Caption5>
@@ -636,6 +671,7 @@ const Dashboard: FC = () => {
                 >
                   {item.lastPrice.toLocaleString("en-US", {
                     maximumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
+                    minimumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
                   })}{" "}
                   USDT
                 </Caption5>
@@ -658,6 +694,25 @@ const Dashboard: FC = () => {
               </Caption5>
             </Stack>
           )}
+          {isHistory && (
+            <Stack direction={'row'}>
+              <Box sx={(theme) => ({
+                padding: '3px 4px',
+                fontSize: '10px',
+                fontWeight: 700,
+                lineHeight: '14px',
+                borderRadius: '4px',
+                border: '1px solid',
+                borderColor: item.orderType === 'Closed' ? theme.normal.border : item.orderType === 'Liquidated' ? theme.normal.danger_light_hover : theme.normal.success_light_hover,
+                color: item.orderType === 'Closed' ? theme.normal.text2 : item.orderType === 'Liquidated' ? theme.normal.danger : theme.normal.success,
+              })}>
+                {item.orderType === 'Closed' && <Trans>Closed</Trans>}
+                {item.orderType === 'Liquidated' && <Trans>Liquidated</Trans>}
+                {item.orderType === 'TP Executed' && <Trans>TP Executed</Trans>}
+                {item.orderType === 'SL Executed' && <Trans>SL Executed</Trans>}
+              </Box>
+            </Stack>
+          )}
         </Stack>
       </Card4>
     );
@@ -669,15 +724,13 @@ const Dashboard: FC = () => {
         value={tabsValue}
         className={""}
         datArray={[
-          <Stack direction={"row"} spacing={"4px"} alignItems={"center"}>
+          <Stack direction={"row"} spacing={"4px"} alignItems={"center"} whiteSpace={"nowrap"}>
             <FuturesOrder/>
-            <p
-              style={{fontWeight: 700, fontSize: "16px", lineHeight: "22px"}}
-            >
+            <p style={{fontWeight: 700, fontSize: "16px", lineHeight: "22px"}}>
               <Trans>Current Positions</Trans>
             </p>
           </Stack>,
-          <Stack direction={"row"} spacing={"4px"} alignItems={"center"}>
+          <Stack direction={"row"} spacing={"4px"} alignItems={"center"} whiteSpace={"nowrap"}>
             <DashboardIcon2/>
             <p
               style={{fontWeight: 700, fontSize: "16px", lineHeight: "22px"}}
@@ -689,7 +742,7 @@ const Dashboard: FC = () => {
         height={44}
         space={24}
         selectCallBack={(value: number) => setTabsValue(value)}
-        isFull={isBigMobile}
+        isFull={false}
       />
     );
   }, [tabsValue, isBigMobile]);
@@ -699,7 +752,7 @@ const Dashboard: FC = () => {
       {shareMyDealModal}
       {shareMyOrderModal}
       {
-        isKol && isKol?.value && (
+        isKol && isKol?.value && chainsData.chainId === 56 && (
           <Stack direction={'row'} width={'100%'} justifyContent={"center"} spacing={'32px'} sx={(theme) => ({
             color: theme.normal.text0,
             fontWeight: 700,
@@ -772,17 +825,19 @@ const Dashboard: FC = () => {
                 title1={t`NEST Total Burned`}
                 title2={t`Today Burned`}
                 value1={`${
-                  !burnedInfo?.totalDestroy
+                  isBurnedInfoLoading
                     ? "-"
                     : burnedInfo.totalDestroy.toLocaleString("en-US", {
                       maximumFractionDigits: 2,
+                      minimumFractionDigits: 2,
                     })
                 }`}
                 value2={`${
-                  !burnedInfo?.dayDestroy
+                  isBurnedInfoLoading
                     ? "-"
                     : burnedInfo.dayDestroy.toLocaleString("en-US", {
                       maximumFractionDigits: 2,
+                      minimumFractionDigits: 2,
                     })
                 }`}
                 data={burnedData || []}
@@ -800,20 +855,22 @@ const Dashboard: FC = () => {
               })}
             >
               <TVChart
-                title1={t`Total Transaction Volume`}
+                title1={t`Total Trading Volume`}
                 title2={t`Today Volume`}
                 value1={`${
-                  !txInfo?.totalVolume
+                  isTxInfoLoading
                     ? "-"
                     : txInfo?.totalVolume.toLocaleString("en-US", {
                       maximumFractionDigits: 2,
+                      minimumFractionDigits: 2,
                     })
                 }`}
                 value2={`${
-                  !txInfo?.dayVolume
+                  isTxInfoLoading
                     ? "-"
                     : txInfo?.dayVolume.toLocaleString("en-US", {
                       maximumFractionDigits: 2,
+                      minimumFractionDigits: 2,
                     })
                 }`}
                 data={txData || []}
@@ -829,7 +886,10 @@ const Dashboard: FC = () => {
               justifyContent={"space-between"}
               alignItems={"center"}
             >
-              <Title1>{t`My Positions`}</Title1>
+              <Stack direction={'row'} spacing={'8px'} alignItems={"center"}>
+                <NetworkIcon chainId={chainsData.chainId}/>
+                <Title1>{t`My Positions`}</Title1>
+              </Stack>
               <Stack>
                 <MainButton
                   style={{
@@ -844,7 +904,7 @@ const Dashboard: FC = () => {
                   onClick={() => {
                     if (!address) return;
                     const link =
-                      "https://finance.nestprotocol.org/?a=" +
+                      "https://nestfi.org/?a=" +
                       address.slice(-8).toLowerCase();
                     copy(link);
                     messageSnackBar(t`Copy Successfully`);
@@ -881,65 +941,166 @@ const Dashboard: FC = () => {
                 </Stack>
               )}
               <Stack padding={"20px 12px"}>
-                <Stack spacing={"4px"}>
-                  <Stack direction={"row"} justifyContent={"space-between"}>
-                    <Caption2
-                      sx={(theme) => ({
-                        color: theme.normal.text1,
-                      })}
-                    >{t`Total Profit & Loss`}</Caption2>
-                    <Box
-                      component={"button"}
-                      sx={(theme) => ({
-                        cursor: "pointer",
-                        "& svg": {
-                          width: "20px",
-                          height: "20px",
-                          display: "block",
-                          margin: "0 auto",
-                          "& path": {
-                            fill: theme.normal.text2,
-                          },
-                        },
-                        "&:hover": {
-                          "& svg path": {
-                            fill: theme.normal.text0,
-                          },
-                        },
-                        "&:active": {
-                          "& svg path": {
-                            fill: theme.normal.text0,
-                          },
-                        },
-                      })}
-                      onClick={() => {
-                        setShareMyDealModal(true);
-                      }}
-                    >
-                      <Share/>
-                    </Box>
-                  </Stack>
-                  <Stack
-                    direction={"row"}
-                    spacing={"4px"}
-                    alignItems={"center"}
-                  >
-                    <Title4>
-                      {myTxInfo?.totalValue.toLocaleString("en-US", {
-                        maximumFractionDigits: 2,
-                      })}{" "}
-                      NEST
-                    </Title4>
-                    {/*<Title5 sx={(theme) => ({*/}
-                    {/*  color: theme.normal.success*/}
-                    {/*})}>{myTxInfo.totalRate > 0 && '+'}{myTxInfo.totalRate.toLocaleString('en-US', {*/}
-                    {/*  maximumFractionDigits: 2,*/}
-                    {/*})}%</Title5>*/}
-                  </Stack>
-                </Stack>
-                <Box py={"20px"}>
-                  <NESTLine/>
-                </Box>
+                {
+                  chainsData.chainId === 56 || chainsData.chainId === 97 && (
+                    <>
+                      <Stack spacing={"4px"}>
+                        <Stack direction={"row"} justifyContent={"space-between"}>
+                          <Caption2
+                            sx={(theme) => ({
+                              color: theme.normal.text1,
+                            })}
+                          >{t`Total Profit & Loss`}</Caption2>
+                          <Box
+                            component={"button"}
+                            sx={(theme) => ({
+                              cursor: "pointer",
+                              "& svg": {
+                                width: "20px",
+                                height: "20px",
+                                display: "block",
+                                margin: "0 auto",
+                                "& path": {
+                                  fill: theme.normal.text2,
+                                },
+                              },
+                              "&:hover": {
+                                "& svg path": {
+                                  fill: theme.normal.text0,
+                                },
+                              },
+                              "&:active": {
+                                "& svg path": {
+                                  fill: theme.normal.text0,
+                                },
+                              },
+                            })}
+                            onClick={() => {
+                              setShareMyDealModal(true);
+                            }}
+                          >
+                            <Share/>
+                          </Box>
+                        </Stack>
+                        <Stack
+                          direction={"row"}
+                          spacing={"4px"}
+                          alignItems={"center"}
+                        >
+                          <Title4>
+                            {myTxInfo?.totalValue.toLocaleString("en-US", {
+                              maximumFractionDigits: 2,
+                              minimumFractionDigits: 2,
+                            })}{" "}
+                            NEST
+                          </Title4>
+                          {/*<Title5 sx={(theme) => ({*/}
+                          {/*  color: theme.normal.success*/}
+                          {/*})}>{myTxInfo.totalRate > 0 && '+'}{myTxInfo.totalRate.toLocaleString('en-US', {*/}
+                          {/*  maximumFractionDigits: 2,*/}
+                          {/*})}%</Title5>*/}
+                        </Stack>
+                      </Stack>
+                      <Box py={"20px"}>
+                        <NESTLine/>
+                      </Box>
+                    </>
+                  )
+                }
+                {
+                  chainsData.chainId === 534353 && (
+                    <>
+                      <Stack spacing={"4px"}>
+                        <Stack direction={"row"} justifyContent={"space-between"}>
+                          <Caption2
+                            sx={(theme) => ({
+                              color: theme.normal.text1,
+                            })}
+                          >{t`My Total Trading Volume`}</Caption2>
+                          <Box
+                            component={"button"}
+                            sx={(theme) => ({
+                              cursor: "pointer",
+                              "& svg": {
+                                width: "20px",
+                                height: "20px",
+                                display: "block",
+                                margin: "0 auto",
+                                "& path": {
+                                  fill: theme.normal.text2,
+                                },
+                              },
+                              "&:hover": {
+                                "& svg path": {
+                                  fill: theme.normal.text0,
+                                },
+                              },
+                              "&:active": {
+                                "& svg path": {
+                                  fill: theme.normal.text0,
+                                },
+                              },
+                            })}
+                            onClick={() => {
+                              setShareMyDealModal(true);
+                            }}
+                          >
+                            <Share/>
+                          </Box>
+                        </Stack>
+                        <Stack
+                          direction={"row"}
+                          spacing={"4px"}
+                          alignItems={"center"}
+                        >
+                          <Title4>
+                            {myTxInfo?.totalVolume?.toLocaleString("en-US", {
+                              maximumFractionDigits: 2,
+                              minimumFractionDigits: 2,
+                            })}{" "}
+                            NEST
+                          </Title4>
+                          {/*<Title5 sx={(theme) => ({*/}
+                          {/*  color: theme.normal.success*/}
+                          {/*})}>{myTxInfo.totalRate > 0 && '+'}{myTxInfo.totalRate.toLocaleString('en-US', {*/}
+                          {/*  maximumFractionDigits: 2,*/}
+                          {/*})}%</Title5>*/}
+                        </Stack>
+                      </Stack>
+                      <Box py={"20px"}>
+                        <NESTLine/>
+                      </Box>
+                      <Stack spacing={"4px"}>
+                        <Stack direction={"row"} justifyContent={"space-between"}>
+                          <Caption2
+                            sx={(theme) => ({
+                              color: theme.normal.text1,
+                            })}
+                          >{t`Total Number of Trades`}</Caption2>
+                        </Stack>
+                        <Stack
+                          direction={"row"}
+                          spacing={"4px"}
+                          alignItems={"center"}
+                        >
+                          <Title4>
+                            {myTxInfo?.totalCount?.toLocaleString("en-US", {
+                              maximumFractionDigits: 0,
+                            })}{" "}
+                          </Title4>
+                          {/*<Title5 sx={(theme) => ({*/}
+                          {/*  color: theme.normal.success*/}
+                          {/*})}>{myTxInfo.totalRate > 0 && '+'}{myTxInfo.totalRate.toLocaleString('en-US', {*/}
+                          {/*  maximumFractionDigits: 2,*/}
+                          {/*})}%</Title5>*/}
+                        </Stack>
+                      </Stack>
+                      <Box py={"20px"}>
+                        <NESTLine/>
+                      </Box>
+                    </>
+                  )
+                }
                 <Stack spacing={"22px"}>
                   <Stack direction={"row"} justifyContent={"space-between"}>
                     <Caption3>{t`Today's PNL`}</Caption3>
@@ -951,6 +1112,7 @@ const Dashboard: FC = () => {
                       <Caption4>
                         {myTxInfo?.todayValue.toLocaleString("en-US", {
                           maximumFractionDigits: 2,
+                          minimumFractionDigits: 2,
                         })}{" "}
                         NEST
                       </Caption4>
@@ -971,6 +1133,7 @@ const Dashboard: FC = () => {
                       <Caption4>
                         {myTxInfo?.day7Value.toLocaleString("en-US", {
                           maximumFractionDigits: 2,
+                          minimumFractionDigits: 2,
                         })}{" "}
                         NEST
                       </Caption4>
@@ -991,6 +1154,7 @@ const Dashboard: FC = () => {
                       <Caption4>
                         {myTxInfo?.day30Value.toLocaleString("en-US", {
                           maximumFractionDigits: 2,
+                          minimumFractionDigits: 2,
                         })}{" "}
                         NEST
                       </Caption4>
@@ -1018,7 +1182,8 @@ const Dashboard: FC = () => {
                   background: "rgba(0, 0, 0, 0.7)",
                 })}
               >
-                <Stack direction={"row"} justifyContent={"space-between"}>
+                <Stack direction={"row"} justifyContent={"space-between"} alignItems={"center"}>
+                  <NetworkIcon chainId={chainsData.chainId}/>
                   <Title1>{t`My Positions`}</Title1>
                 </Stack>
                 <Stack
@@ -1040,7 +1205,10 @@ const Dashboard: FC = () => {
             )}
             <Stack padding={"20px"} width={"100%"} height={"100%"}>
               <Stack direction={"row"} justifyContent={"space-between"}>
-                <Title1>{t`My Positions`}</Title1>
+                <Stack direction={'row'} spacing={'8px'} alignItems={"center"}>
+                  <NetworkIcon chainId={chainsData.chainId}/>
+                  <Title1>{t`My Positions`}</Title1>
+                </Stack>
                 <Stack direction={"row"} alignItems={"center"} spacing={"10px"}>
                   <MainButton
                     style={{
@@ -1054,7 +1222,7 @@ const Dashboard: FC = () => {
                     onClick={() => {
                       if (!address) return;
                       const link =
-                        "https://finance.nestprotocol.org/?a=" +
+                        "https://nestfi.org/?a=" +
                         address.slice(-8).toLowerCase();
                       copy(link);
                       messageSnackBar(t`Copy Successfully`);
@@ -1073,32 +1241,99 @@ const Dashboard: FC = () => {
                   </DashboardShare>
                 </Stack>
               </Stack>
-              <Stack
-                alignItems={"center"}
-                pt={"26px"}
-                pb={"40px"}
-                spacing={"12px"}
-              >
-                <Title2
-                  sx={(theme) => ({
-                    span: {
-                      fontSize: "28px",
-                      fontWeight: "700",
-                      lineHeight: "40px",
-                    },
-                    ".color-full": {
-                      // color: myTxInfo.totalRate >= 0 ? theme.normal.success : theme.normal.danger,
-                    },
-                  })}
-                >
-                  {myTxInfo?.totalValue.toLocaleString("en-US", {
-                    maximumFractionDigits: 2,
-                  })}{" "}
-                  <span>NEST</span>
-                  {/*<span*/}
-                  {/*className={'color-full'}>{myTxInfo.totalRate > 0 && '+'}{myTxInfo.totalRate}%</span>*/}
-                </Title2>
-                <Caption1>{t`Total Profit & Loss`}</Caption1>
+              <Stack direction={'row'} justifyContent={"space-around"}>
+                {
+                  (chainsData.chainId === 56 || chainsData.chainId === 97) && (
+                    <Stack
+                      alignItems={"center"}
+                      pt={"26px"}
+                      pb={"40px"}
+                      spacing={"12px"}
+                    >
+                      <Title2
+                        sx={(theme) => ({
+                          span: {
+                            fontSize: "28px",
+                            fontWeight: "700",
+                            lineHeight: "40px",
+                          },
+                          ".color-full": {
+                            // color: myTxInfo.totalRate >= 0 ? theme.normal.success : theme.normal.danger,
+                          },
+                        })}
+                      >
+                        {myTxInfo?.totalValue.toLocaleString("en-US", {
+                          maximumFractionDigits: 2,
+                          minimumFractionDigits: 2,
+                        })}{" "}
+                        <span>NEST</span>
+                        {/*<span*/}
+                        {/*className={'color-full'}>{myTxInfo.totalRate > 0 && '+'}{myTxInfo.totalRate}%</span>*/}
+                      </Title2>
+                      <Caption1>{t`Total Profit & Loss`}</Caption1>
+                    </Stack>
+                  )
+                }
+                {
+                  (chainsData.chainId === 534353) && (
+                    <>
+                      <Stack
+                        alignItems={"center"}
+                        pt={"26px"}
+                        pb={"40px"}
+                        spacing={"12px"}
+                      >
+                        <Title2
+                          sx={(theme) => ({
+                            span: {
+                              fontSize: "28px",
+                              fontWeight: "700",
+                              lineHeight: "40px",
+                            },
+                            ".color-full": {
+                              // color: myTxInfo.totalRate >= 0 ? theme.normal.success : theme.normal.danger,
+                            },
+                          })}
+                        >
+                          {myTxInfo?.totalVolume?.toLocaleString("en-US", {
+                            maximumFractionDigits: 2,
+                            minimumFractionDigits: 2,
+                          })}{" "}
+                          <span>NEST</span>
+                          {/*<span*/}
+                          {/*className={'color-full'}>{myTxInfo.totalRate > 0 && '+'}{myTxInfo.totalRate}%</span>*/}
+                        </Title2>
+                        <Caption1>{t`My Total Trading Volume`}</Caption1>
+                      </Stack>
+                      <Stack
+                        alignItems={"center"}
+                        pt={"26px"}
+                        pb={"40px"}
+                        spacing={"12px"}
+                      >
+                        <Title2
+                          sx={(theme) => ({
+                            span: {
+                              fontSize: "28px",
+                              fontWeight: "700",
+                              lineHeight: "40px",
+                            },
+                            ".color-full": {
+                              // color: myTxInfo.totalRate >= 0 ? theme.normal.success : theme.normal.danger,
+                            },
+                          })}
+                        >
+                          {myTxInfo?.totalCount?.toLocaleString("en-US", {
+                            maximumFractionDigits: 0,
+                          })}{" "}
+                          {/*<span*/}
+                          {/*className={'color-full'}>{myTxInfo.totalRate > 0 && '+'}{myTxInfo.totalRate}%</span>*/}
+                        </Title2>
+                        <Caption1>{t`Total Number of Trades`}</Caption1>
+                      </Stack>
+                    </>
+                  )
+                }
               </Stack>
               <Stack direction={"row"} spacing={"16px"}>
                 <Card3>
@@ -1116,6 +1351,7 @@ const Dashboard: FC = () => {
                   >
                     {myTxInfo?.todayValue.toLocaleString("en-US", {
                       maximumFractionDigits: 2,
+                      minimumFractionDigits: 2,
                     })}{" "}
                     <span>NEST</span>
                     {/*<span*/}
@@ -1140,6 +1376,7 @@ const Dashboard: FC = () => {
                   >
                     {myTxInfo?.day7Value.toLocaleString("en-US", {
                       maximumFractionDigits: 2,
+                      minimumFractionDigits: 2,
                     })}{" "}
                     <span>NEST</span>
                     {/*<span*/}
@@ -1164,6 +1401,7 @@ const Dashboard: FC = () => {
                   >
                     {myTxInfo?.day30Value.toLocaleString("en-US", {
                       maximumFractionDigits: 2,
+                      minimumFractionDigits: 2,
                     })}{" "}
                     <span>NEST</span>
                     {/*<span*/}
@@ -1178,17 +1416,19 @@ const Dashboard: FC = () => {
           </Card2>
         )}
         <Stack spacing={"16px"}>
-          <Stack
-            style={{alignItems: "start"}}
-            sx={(theme) => ({
-              width: "100%",
-              borderBottom: "1px solid",
-              borderColor: theme.normal.border,
-              paddingX: "20px",
-            })}
-          >
-            {getNESTTabs}
+          <Stack direction={'row'} alignItems={"center"} spacing={'16px'}
+                 sx={(theme) => ({
+                   width: "100%",
+                   borderBottom: "1px solid",
+                   borderColor: theme.normal.border,
+                   paddingX: "20px",
+                 })}>
+            <NetworkIcon chainId={chainsData.chainId}/>
+            <Stack style={{alignItems: "start"}}>
+              {getNESTTabs}
+            </Stack>
           </Stack>
+
           {isBigMobile ? (
             <Stack px={"20px"} spacing={"12px"}>
               {tabsValue === 0 && positionList &&
@@ -1253,9 +1493,8 @@ const Dashboard: FC = () => {
                     t`Position`,
                     t`Actual Margin`,
                     t`Open Price`,
-                    t`Liq Price`,
-                    t`Close Price`,
                     t`Stop Order`,
+                    t`Close Price`,
                     t`Operate`,
                   ]
               }

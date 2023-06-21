@@ -1,4 +1,4 @@
-import { FC } from "react";
+import {FC} from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -7,8 +7,8 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
-import { NESTTooltipFC } from "../../../components/NESTTooltip/NESTTooltip";
-import { Trans } from "@lingui/macro";
+import {NESTTooltipFC} from "../../../components/NESTTooltip/NESTTooltip";
+import {Trans} from "@lingui/macro";
 
 export interface FuturesTableTitleHelp {
   index: number;
@@ -25,9 +25,9 @@ interface FuturesTableTitleProps {
 }
 
 const FuturesTableTitle: FC<FuturesTableTitleProps> = ({
-  children,
-  ...props
-}) => {
+                                                         children,
+                                                         ...props
+                                                       }) => {
   const cells = props.dataArray.map((item, index) => {
     const help = props.helps
       ? props.helps.filter((item) => item.index === index).length > 0
@@ -38,7 +38,7 @@ const FuturesTableTitle: FC<FuturesTableTitleProps> = ({
       <></>
     );
     const paddingConfig = props.noNeedPadding
-      ? { padding: "0px !important" }
+      ? {padding: "0px !important"}
       : {};
     return (
       <TableCell
@@ -51,9 +51,9 @@ const FuturesTableTitle: FC<FuturesTableTitleProps> = ({
         }
       >
         {help ? (
-          <Stack direction={"row"} alignItems={"center"} spacing={"4px"}>
+          <Stack direction={"row"} alignItems={"center"} spacing={"4px"} whiteSpace={'nowrap'}>
             <Box>{item}</Box>
-            <NESTTooltipFC title={helpInfo} />
+            <NESTTooltipFC title={helpInfo}/>
           </Stack>
         ) : (
           <>{item}</>
@@ -63,7 +63,7 @@ const FuturesTableTitle: FC<FuturesTableTitleProps> = ({
   });
   return (
     <TableContainer component={"div"} style={props.style}>
-      <Table sx={{ width: "100%" }} aria-label="simple table">
+      <Table sx={{width: "100%"}} aria-label="simple table">
         <TableHead
           sx={(theme) => ({
             "& th": {
@@ -90,9 +90,9 @@ const FuturesTableTitle: FC<FuturesTableTitleProps> = ({
         >
           {children}
           {props.noOrder ? (
-            <TableRow sx={{ "& td": { borderBottom: "0px" } }}>
+            <TableRow sx={{"& td": {borderBottom: "0px"}}}>
               <TableCell
-                colSpan={6}
+                colSpan={cells.length}
                 sx={(theme) => ({
                   width: "100%",
                   fontSize: 14,

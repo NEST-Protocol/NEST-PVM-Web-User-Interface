@@ -17,22 +17,24 @@ import {Link} from "react-router-dom";
 import {t, Trans} from '@lingui/macro'
 import useSWR from "swr";
 import Box from "@mui/material/Box";
+import useNEST from "../../hooks/useNEST";
 
 const Home: FC = () => {
   const [openApplyModal, setOpenApplyModal] = useState(false)
   const {width} = useWindowWidth()
   const {nowTheme} = useTheme()
+  const {chainsData} = useNEST()
 
   const {data: kols} = useSWR('https://api.nestfi.net/api/users/kol/count', (url) => fetch(url)
     .then((res) => res.json())
     .then((data) => data.value)
   );
-  const {data: destoryData} = useSWR('https://api.nestfi.net/api/dashboard/destory', (url) => fetch(url)
+  const {data: destoryData} = useSWR(`https://api.nestfi.net/api/dashboard/destory?chainId=${chainsData.chainId === 534353 ? 534353 : 56}`, (url: string) => fetch(url)
     .then((res) => res.json())
     .then((data) => data.value)
   );
 
-  const {data: txInfo} = useSWR("https://api.nestfi.net/api/dashboard/txVolume", (url) => fetch(url)
+  const {data: txInfo} = useSWR(`https://api.nestfi.net/api/dashboard/txVolume?chainId=${chainsData.chainId === 534353 ? 534353 : 56}`, (url: string) => fetch(url)
     .then((res) => res.json())
     .then((res: any) => res.value));
 
@@ -123,31 +125,35 @@ const Home: FC = () => {
                     {
                       title: t`Total Trading Volume (NEST)`,
                       value: txInfo ? Number(txInfo?.totalVolume?.toFixed(2))?.toLocaleString() : '-',
+                      chainId: [56, 97, 534353],
                     },
                     {
                       title: t`Total Burned (NEST)`,
-                      value: destoryData ? Number((-1 * destoryData?.totalDestroy)?.toFixed(2))?.toLocaleString() || 0 : '-',
+                      value: destoryData ? Number(destoryData?.totalDestroy?.toFixed(2))?.toLocaleString().replace('-', '') || 0 : '-',
+                      chainId: [56, 97, 534353],
                     },
                     {
                       title: t`KOLs Joined NESTFi`,
                       value: kols ? kols.toLocaleString() || 0 : '-',
+                      chainId: [56, 97],
                     }
-                  ].map((item, index) => (
-                    <Stack key={index} spacing={'12px'} width={'100%'}>
-                      <Box sx={(theme) => ({
-                        fontWeight: "700",
-                        fontSize: "48px",
-                        lineHeight: "60px",
-                        color: theme.normal.text0,
-                      })}>{item.value}</Box>
-                      <Box sx={(theme) => ({
-                        fontWeight: "700",
-                        fontSize: "14px",
-                        lineHeight: "20px",
-                        color: theme.normal.text2,
-                      })}>{item.title}</Box>
-                    </Stack>
-                  ))
+                  ].filter((item) => item.chainId.includes(chainsData.chainId ?? 56))
+                    .map((item, index) => (
+                      <Stack key={index} spacing={'12px'} width={'100%'}>
+                        <Box sx={(theme) => ({
+                          fontWeight: "700",
+                          fontSize: "48px",
+                          lineHeight: "60px",
+                          color: theme.normal.text0,
+                        })}>{item.value}</Box>
+                        <Box sx={(theme) => ({
+                          fontWeight: "400",
+                          fontSize: "14px",
+                          lineHeight: "20px",
+                          color: theme.normal.text2,
+                        })}>{item.title}</Box>
+                      </Stack>
+                    ))
                 }
               </Stack>
             ) : (
@@ -158,46 +164,50 @@ const Home: FC = () => {
                       title: t`Total Trading Volume (NEST)`,
                       value: txInfo ? txInfo?.totalVolume?.toFixed(2)?.toLocaleString() : '-',
                       icon: <HomeTradingVolume/>,
+                      chainId: [56, 97, 534353],
                     },
                     {
                       title: t`Total Burned (NEST)`,
-                      value: destoryData ? (-1 * destoryData?.totalDestroy)?.toFixed(2)?.toLocaleString() || 0 : '-',
+                      value: destoryData ? Number(destoryData?.totalDestroy?.toFixed(2))?.toLocaleString().replace('-', '') || 0 : '-',
                       icon: <HomeBurned/>,
+                      chainId: [56, 97, 534353],
                     },
                     {
                       title: t`KOLs Joined NESTFi`,
                       value: kols ? kols.toLocaleString() || 0 : '-',
                       icon: <HomeKols/>,
+                      chainId: [56, 97],
                     }
-                  ].map((item, index) => (
-                    <Stack p={'20px'} sx={(theme) => ({
-                      backgroundColor: theme.normal.bg1,
-                      borderRadius: '12px',
-                      "svg": {
-                        width: '48px',
-                        height: '48px',
-                        "path": {
-                          fill: theme.normal.text0,
+                  ].filter((item) => item.chainId.includes(chainsData.chainId ?? 56))
+                    .map((item, index) => (
+                      <Stack p={'20px'} sx={(theme) => ({
+                        backgroundColor: theme.normal.bg1,
+                        borderRadius: '12px',
+                        "svg": {
+                          width: '48px',
+                          height: '48px',
+                          "path": {
+                            fill: theme.normal.text0,
+                          }
                         }
-                      }
-                    })} direction={'row'} key={index} alignItems={"center"}>
-                      <Stack spacing={'12px'} width={'100%'} textAlign={"start"}>
-                        <Box sx={(theme) => ({
-                          fontWeight: "700",
-                          fontSize: "28px",
-                          lineHeight: "40px",
-                          color: theme.normal.text0,
-                        })}>{item.value}</Box>
-                        <Box sx={(theme) => ({
-                          fontWeight: "700",
-                          fontSize: "14px",
-                          lineHeight: "20px",
-                          color: theme.normal.text2,
-                        })}>{item.title}</Box>
+                      })} direction={'row'} key={index} alignItems={"center"}>
+                        <Stack spacing={'12px'} width={'100%'} textAlign={"start"}>
+                          <Box sx={(theme) => ({
+                            fontWeight: "700",
+                            fontSize: "28px",
+                            lineHeight: "40px",
+                            color: theme.normal.text0,
+                          })}>{item.value}</Box>
+                          <Box sx={(theme) => ({
+                            fontWeight: "400",
+                            fontSize: "14px",
+                            lineHeight: "20px",
+                            color: theme.normal.text2,
+                          })}>{item.title}</Box>
+                        </Stack>
+                        {item.icon}
                       </Stack>
-                      {item.icon}
-                    </Stack>
-                  ))
+                    ))
                 }
               </Stack>
             )
@@ -217,9 +227,8 @@ const Home: FC = () => {
         </Stack>
       </Stack>
       {
-        width <= WidthType.md && (
+        width <= WidthType.md && chainsData.chainId !== 534353 && (
           <Stack py={'40px'} width={'100%'} spacing={'40px'} alignItems={"center"}
-                 bgcolor={'rgba(234, 170, 0, 0.1)'}
                  sx={(theme) => ({
                    color: theme.normal.text0,
                    fontSize: '24px',
@@ -228,6 +237,7 @@ const Home: FC = () => {
                    borderRadius: '20px',
                    textAlign: 'center',
                    paddingX: '20px',
+                   background: theme.normal.bg1,
                  })}>
             <Box>{t`Join NESTFi affiliate program and get commission on your referrals.`}</Box>
             <MainButton title={t`Join`} style={{
@@ -248,7 +258,7 @@ const Home: FC = () => {
              })}
              alignItems={"center"}>
         {
-          width >= WidthType.lg && (
+          width >= WidthType.lg && chainsData.chainId !== 534353 && (
             <Stack width={'100%'}
                    px={['20px', '20px', '20px', '40px',]}
                    sx={(theme) => ({
@@ -256,10 +266,12 @@ const Home: FC = () => {
                    })}
                    alignItems={"center"}>
               <Stack direction={'row'} width={'100%'} maxWidth={'1600px'}
-                     bgcolor={'rgba(234, 170, 0, 0.1)'}
                      borderRadius={'20px'} justifyContent={'space-between'}
                      alignItems={"center"}
                      py={['40px', '40px', '40px', '40px', '40px', '44px']} px={'40px'}
+                     sx={(theme) => ({
+                       background: theme.normal.bg1,
+                     })}
               >
                 <Box sx={(theme) => ({
                   fontSize: '28px',
@@ -344,7 +356,7 @@ const Home: FC = () => {
                             {item.title}
                           </Box>
                           <Box sx={(theme) => ({
-                            fontWeight: ["400", '400', '400', '700'],
+                            fontWeight: ["400"],
                             fontSize: "14px",
                             lineHeight: "20px",
                             color: theme.normal.text2,
@@ -378,12 +390,12 @@ const Home: FC = () => {
               </Box>
               <Box sx={(theme) => ({
                 fontSize: ['14px', '16px'],
-                fontWeight: ["400px", "700"],
+                fontWeight: "400px",
                 lineHeight: ['20px', "22px"],
                 textAlign: width <= WidthType.md ? 'center' : 'start',
                 color: theme.normal.text2,
               })}>
-                {t`A beginner's guide to using NEST Fi`}
+                {t`A beginner's guide to using NESTFi`}
               </Box>
             </Stack>
             <Stack direction={width <= WidthType.md ? 'column' : 'row'} spacing={'24px'}>
@@ -417,6 +429,16 @@ const Home: FC = () => {
                     overflow: 'hidden',
                     cursor: "pointer",
                     width: '100%',
+                    "&:hover": {
+                      "#click-button": {
+                        color: theme.normal.primary,
+                      },
+                      "svg": {
+                        "path": {
+                          fill: theme.normal.primary,
+                        }
+                      }
+                    }
                   })} onClick={() => {
                     if (item.link) {
                       window.open(item.link, '_blank')
@@ -445,22 +467,27 @@ const Home: FC = () => {
                         color: theme.normal.text2,
                         fontSize: ['14px', '16px'],
                         lineHeight: ['20px', '22px'],
-                        fontWeight: ['400', '700'],
+                        fontWeight: '400',
                         paddingBottom: '20px',
                       })}>{item.description}</Stack>
                       <Link to={item.link}>
-                        <Stack sx={(theme) => ({
+                        <Stack id={'click-button'} sx={(theme) => ({
                           position: 'absolute',
                           bottom: '20px',
                           color: theme.normal.text2,
                           fontSize: ['14px', '16px'],
                           lineHeight: ['20px', '22px'],
                           fontWeight: '400',
-                        })}>
+                        })} direction={'row'} alignItems={"center"} justifyContent={"center"}>
                           <Trans>
                             More
                           </Trans>
-                          {' >'}
+                          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                               xmlns="http://www.w3.org/2000/svg">
+                            <path fillRule="evenodd" clipRule="evenodd"
+                                  d="M11.3777 7.76435C11.5079 7.89452 11.5079 8.10557 11.3777 8.23575L5.72086 13.8926C5.59068 14.0228 5.37963 14.0228 5.24945 13.8926L4.76418 13.4073C4.63401 13.2772 4.63401 13.0661 4.76418 12.9359L9.70007 8.00005L4.76418 3.06416C4.63401 2.93399 4.63401 2.72293 4.76418 2.59276L5.24945 2.10749C5.37963 1.97731 5.59068 1.97732 5.72086 2.10749L11.3777 7.76435Z"
+                                  fill="#F9F9F9" fillOpacity="0.6"/>
+                          </svg>
                         </Stack>
                       </Link>
                     </Stack>
@@ -499,7 +526,7 @@ const Home: FC = () => {
               </Box>
               <Box sx={(theme) => ({
                 fontSize: ['14px', "16px"],
-                fontWeight: ['400', "700"],
+                fontWeight: '400',
                 lineHeight: ['20px', "22px"],
                 color: theme.normal.text2,
                 textAlign: width <= WidthType.lg ? 'center' : 'start',

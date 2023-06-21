@@ -74,7 +74,7 @@ function useFuturesClose(
     if (!closePrice) {
       return String().placeHolder;
     }
-    return BigNumber.from(closePrice.toString()).bigNumberToShowString(18, tokenPair.getTokenPriceDecimals());
+    return BigNumber.from(closePrice.toString()).bigNumberToShowPrice(18, tokenPair.getTokenPriceDecimals());
   }, [closePrice, tokenPair]);
 
   const showFee = useMemo(() => {
