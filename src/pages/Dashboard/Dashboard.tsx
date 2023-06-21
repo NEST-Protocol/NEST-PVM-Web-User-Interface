@@ -175,8 +175,7 @@ function formatDate(timestamp: number) {
 }
 
 const Dashboard: FC = () => {
-  // const {address} = useAccount();
-  const address = "0x481a74d43ae3A7BdE38B7fE36E46CF9a6cbb4F39"
+  const {address} = useAccount();
   const {setShowConnect, chainsData} = useNEST();
   const {isBigMobile} = useWindowWidth();
   const [tabsValue, setTabsValue] = useState(0);
