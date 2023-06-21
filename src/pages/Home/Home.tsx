@@ -411,7 +411,7 @@ const Home: FC = () => {
                   {
                     image: "/images/home_8.svg",
                     image2: "/images/home_5.svg",
-                    title: t`How to duplicate your own position?`,
+                    title: t`How to copy trading?`,
                     description: t`NESTFi's new features enable you to open a position with a single click.`,
                     link: 'https://www.nestprotocol.org/blogs/How-to-duplicate-your-own-position'
                   },
