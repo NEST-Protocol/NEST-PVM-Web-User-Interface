@@ -431,8 +431,8 @@ msgid "History"
 msgstr "History"
 
 #: src/pages/Home/Home.tsx
-msgid "How to duplicate your own position?"
-msgstr "How to duplicate your own position?"
+msgid "How to copy trading?"
+msgstr "How to copy trading?"
 
 #: src/pages/Home/Home.tsx
 msgid "How to join affiliate program?"
