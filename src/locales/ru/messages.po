@@ -237,6 +237,7 @@ msgid "Close Risk"
 msgstr "Риск закрытия"
 
 #: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
 msgid "Closed"
 msgstr ""
 
@@ -245,7 +246,6 @@ msgstr ""
 #: src/hooks/useFuturesEditLimit.ts
 #: src/hooks/useFuturesEditPosition.ts
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
-#: src/pages/Futures/Modal/SharePositionModal.tsx
 #: src/pages/Home/Modal/ApplyModal.tsx
 #: src/pages/Swap/Components/SwapSlippageModal.tsx
 msgid "Confirm"
@@ -353,8 +353,6 @@ msgstr "Из-за волатильности рынка фактическая �
 #: src/hooks/useFuturesPOrder.ts
 #: src/pages/Futures/Components/OrderList.tsx
 #: src/pages/Futures/Components/OrderTable.tsx
-#: src/pages/Futures/Modal/SharePositionModal.tsx
-#: src/pages/Futures/Modal/SharePositionModal.tsx
 msgid "Edit"
 msgstr "Редактировать"
 
@@ -537,12 +535,9 @@ msgstr "Плата за лимитный ордер = 15 NEST"
 #: src/pages/Futures/Modal/EditLimitModal.tsx
 #: src/pages/Futures/Modal/EditLimitModal.tsx
 #: src/pages/Futures/Modal/EditLimitModal.tsx
-#: src/pages/Futures/Modal/SharePositionModal.tsx
-#: src/pages/Futures/Modal/SharePositionModal.tsx
 msgid "Limit Price"
 msgstr "Цена лимита"
 
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Futures/Components/POrderList.tsx
@@ -554,6 +549,7 @@ msgid "Liq Price"
 msgstr "Цена ликвидации"
 
 #: src/hooks/useFuturesPOrderClose.tsx
+#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "Liquidated"
 msgstr "Ликвидирован"
@@ -576,7 +572,6 @@ msgstr "Загрузка..."
 #: src/pages/Dashboard/Components/ShareOrderPosition.tsx
 #: src/pages/Futures/Components/OrderListPosition.tsx
 #: src/pages/Futures/Components/OrderTablePosition.tsx
-#: src/pages/Futures/Modal/SharePositionModal.tsx
 msgid "Long"
 msgstr "Длинный"
 
@@ -683,6 +678,7 @@ msgstr "Запрос на открытие позиции"
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 #: src/pages/Futures/Components/OrderList.tsx
@@ -750,7 +746,6 @@ msgstr "Комиссия за позицию = Позиция*0,05%"
 msgid "Position*0.05%"
 msgstr "Позиция*0,05%"
 
-#: src/pages/Futures/Modal/SharePositionModal.tsx
 #: src/pages/Futures/NewOrder.tsx
 #: src/pages/Futures/OrderList.tsx
 msgid "Positions"
@@ -802,7 +797,6 @@ msgstr "Запрос на продажу позиции"
 
 #: src/pages/Futures/Modal/CloseModal.tsx
 #: src/pages/Futures/Modal/EditPositionModal.tsx
-#: src/pages/Futures/Modal/SharePositionModal.tsx
 #: src/pages/Futures/NewOrder.tsx
 msgid "Service Fee"
 msgstr "Сервисная комиссия"
@@ -832,7 +826,6 @@ msgstr "Поделиться"
 #: src/pages/Dashboard/Components/ShareOrderPosition.tsx
 #: src/pages/Futures/Components/OrderListPosition.tsx
 #: src/pages/Futures/Components/OrderTablePosition.tsx
-#: src/pages/Futures/Modal/SharePositionModal.tsx
 msgid "Short"
 msgstr "Коротко"
 
@@ -842,6 +835,7 @@ msgstr "Коротко"
 msgid "SL"
 msgstr "Стоп-лосс"
 
+#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "SL Executed"
 msgstr ""
@@ -863,8 +857,6 @@ msgstr "Начать торговлю"
 #: src/pages/Futures/Components/POrderList.tsx
 #: src/pages/Futures/Components/POrderList.tsx
 #: src/pages/Futures/Modal/EditPositionModal.tsx
-#: src/pages/Futures/Modal/SharePositionModal.tsx
-#: src/pages/Futures/Modal/SharePositionModal.tsx
 #: src/pages/Futures/NewOrder.tsx
 msgid "Stop Loss"
 msgstr "Стоп-лосс"
@@ -913,8 +905,6 @@ msgstr "Символ"
 #: src/pages/Futures/Components/POrderList.tsx
 #: src/pages/Futures/Components/POrderList.tsx
 #: src/pages/Futures/Modal/EditPositionModal.tsx
-#: src/pages/Futures/Modal/SharePositionModal.tsx
-#: src/pages/Futures/Modal/SharePositionModal.tsx
 #: src/pages/Futures/NewOrder.tsx
 msgid "Take Profit"
 msgstr "Прибыль"
@@ -1003,7 +993,6 @@ msgstr ""
 msgid "Total Number of Trades"
 msgstr ""
 
-#: src/pages/Futures/Modal/SharePositionModal.tsx
 #: src/pages/Futures/NewOrder.tsx
 msgid "Total Pay"
 msgstr "Общая оплата"
@@ -1037,10 +1026,10 @@ msgid "TP"
 msgstr "TP"
 
 #: src/hooks/useFuturesNewOrder.ts
-#: src/pages/Futures/Modal/SharePositionModal.tsx
 msgid "TP and SL price you set will trigger immediately."
 msgstr "Цена TP и SL, которую вы установили, сработает немедленно."
 
+#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "TP Executed"
 msgstr ""
