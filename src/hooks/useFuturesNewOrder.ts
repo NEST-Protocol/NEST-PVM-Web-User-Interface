@@ -574,6 +574,67 @@ function useFuturesNewOrder(
     tokenPair,
     tp_info,
   ]);
+  const NESTTokenAddress = useMemo(() => {
+    const token = "NEST".getToken();
+    if (token && chainsData.chainId) {
+      return token.address[chainsData.chainId];
+    } else {
+      return undefined;
+    }
+  }, [chainsData.chainId]);
+  const USDTTokenAddress = useMemo(() => {
+    const token = "USDT".getToken();
+    if (token && chainsData.chainId) {
+      return token.address[chainsData.chainId];
+    } else {
+      return undefined;
+    }
+  }, [chainsData.chainId]);
+  const { balance: nestBalance } = useReadTokenBalance(
+    (NESTTokenAddress ?? String().zeroAddress) as `0x${string}`,
+    account.address ?? ""
+  );
+  const { balance: usdtBalance } = useReadTokenBalance(
+    (USDTTokenAddress ?? String().zeroAddress) as `0x${string}`,
+    account.address ?? ""
+  );
+  const { uniSwapAmountOut: uniSwapAmountOutShare } = useReadSwapAmountOut(
+    usdtBalance,
+    [USDTTokenAddress!, NESTTokenAddress!]
+  );
+  useEffect(() => {
+    if (isShareLink) {
+      if (chainsData.chainId !== 534353) {
+        if (nestBalance && usdtBalance) {
+          if (
+            BigNumber.from("0").eq(nestBalance) &&
+            BigNumber.from("0").eq(usdtBalance)
+          ) {
+            setInputToken("USDT");
+            setInputAmount("200");
+          } else if (
+            !BigNumber.from("0").eq(nestBalance) &&
+            BigNumber.from("0").eq(usdtBalance)
+          ) {
+            setInputToken("NEST");
+            setInputAmount("10000");
+          } else if (
+            uniSwapAmountOutShare &&
+            uniSwapAmountOutShare[1].lt(nestBalance)
+          ) {
+            setInputToken("NEST");
+            setInputAmount("10000");
+          } else {
+            setInputToken("USDT");
+            setInputAmount("200");
+          }
+        }
+      } else {
+        setInputToken("NEST");
+        setInputAmount("100");
+      }
+    }
+  }, [chainsData.chainId, isShareLink, nestBalance, uniSwapAmountOutShare, usdtBalance]);
   /**
    * show
    */
@@ -746,13 +807,13 @@ function useFuturesNewOrder(
     if (isShareLink) {
       setIsShareLink(false);
     }
-  }, [isShareLink])
+  }, [isShareLink]);
   useEffect(() => {
     if (tokenName_info !== tokenPair) {
       setLimitAmount("");
       setTp("");
       setSl("");
-      closeShareLink()
+      closeShareLink();
       setHadSetLimit(false);
     }
   }, [closeShareLink, tokenName_info, tokenPair]);
