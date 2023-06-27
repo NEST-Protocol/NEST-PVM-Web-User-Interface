@@ -429,7 +429,7 @@ msgid "History"
 msgstr "История"
 
 #: src/pages/Home/Home.tsx
-msgid "How to duplicate your own position?"
+msgid "How to copy trading?"
 msgstr ""
 
 #: src/pages/Home/Home.tsx

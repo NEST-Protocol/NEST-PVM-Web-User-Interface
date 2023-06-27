@@ -429,8 +429,8 @@ msgid "History"
 msgstr "História"
 
 #: src/pages/Home/Home.tsx
-msgid "How to duplicate your own position?"
-msgstr "Como duplicar a sua própria posição?"
+msgid "How to copy trading?"
+msgstr ""
 
 #: src/pages/Home/Home.tsx
 msgid "How to join affiliate program?"
