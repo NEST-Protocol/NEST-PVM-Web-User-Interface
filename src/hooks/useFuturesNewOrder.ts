@@ -856,9 +856,9 @@ function useFuturesNewOrder(
       }
     };
     getNEST();
-    const time = setTimeout(() => {
+    const time = setInterval(() => {
       getNEST();
-    }, 30000);
+    }, 15000);
     return () => {
       clearInterval(time);
     };

@@ -346,9 +346,9 @@ function useSwap() {
       setNestPrice(NESTPrice);
     };
     getPrice();
-    const time = setTimeout(() => {
+    const time = setInterval(() => {
       getPrice();
-    }, 30000);
+    }, 15000);
     return () => {
       clearInterval(time);
     };
@@ -368,9 +368,9 @@ function useSwap() {
       }
     };
     getNEST();
-    const time = setTimeout(() => {
+    const time = setInterval(() => {
       getNEST();
-    }, 30000);
+    }, 15000);
     return () => {
       clearInterval(time);
     };
