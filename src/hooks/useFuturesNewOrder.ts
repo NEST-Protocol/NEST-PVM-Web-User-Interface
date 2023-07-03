@@ -844,9 +844,10 @@ function useFuturesNewOrder(
 
   useEffect(() => {
     const getNEST = async () => {
-      if (account.address) {
+      if (account.address && chainsData.chainId) {
         const amountBase: { [key: string]: string } = await getNESTAmountForAll(
-          account.address
+          account.address,
+          chainsData.chainId
         );
         const amount = amountBase
           ? amountBase.toString().stringToBigNumber(18)
@@ -861,7 +862,7 @@ function useFuturesNewOrder(
     return () => {
       clearInterval(time);
     };
-  }, [account.address]);
+  }, [account.address, chainsData.chainId]);
 
   const changeTabs = useCallback((value: number) => {
     setTabsValue(value);

@@ -91,50 +91,36 @@ function useSwap() {
   }, [inputAmount, scrDecimals]);
 
   const showPrice = useMemo(() => {
-    if (inputAmount === "") {
-      const destToken = swapToken.src.getToken();
-      if (nestPrice && destToken && destDecimals) {
+    if (nestPrice) {
+      const nest_usdt = nestPrice;
+      const usdt_nest = parseEther("1").mul(parseUnits("1", 18)).div(nestPrice);
+      if (swapToken.src === "USDT") {
         if (samePrice) {
-          return `1 ${swapToken.src} = ${nestPrice.bigNumberToShowString(
-            destDecimals,
+          return `1 ${swapToken.dest} = ${nest_usdt.bigNumberToShowString(
+            18,
+            6
+          )} ${swapToken.src}`;
+        } else {
+          return `1 ${swapToken.src} = ${usdt_nest.bigNumberToShowString(
+            18,
             6
           )} ${swapToken.dest}`;
-        } else {
-          const out = parseUnits("1", destDecimals)
-            .mul(parseUnits("1", 18))
-            .div(nestPrice);
-          return `1 ${swapToken.dest} = ${out.bigNumberToShowString(18, 6)} ${
-            swapToken.src
-          }`;
         }
       } else {
-        return String().placeHolder;
-      }
-    } else {
-      if (outAmount) {
-        const inputNum = parseFloat(inputAmount) === 0 ? "1" : inputAmount;
         if (samePrice) {
-          const out = parseFloat(outAmount) / parseFloat(inputNum);
-          return `1 ${swapToken.src} = ${parseFloat(out.toFixed(6))} ${
-            swapToken.dest
-          }`;
+          return `1 ${swapToken.dest} = ${usdt_nest.bigNumberToShowString(
+            18,
+            6
+          )} ${swapToken.src}`;
         } else {
-          const out = parseFloat(inputNum) / parseFloat(outAmount);
-          return `1 ${swapToken.dest} = ${parseFloat(out.toFixed(6))} ${
-            swapToken.src
-          }`;
+          return `1 ${swapToken.src} = ${nest_usdt.bigNumberToShowString(
+            18,
+            6
+          )} ${swapToken.dest}`;
         }
       }
     }
-  }, [
-    destDecimals,
-    inputAmount,
-    nestPrice,
-    outAmount,
-    samePrice,
-    swapToken.dest,
-    swapToken.src,
-  ]);
+  }, [nestPrice, samePrice, swapToken.dest, swapToken.src]);
 
   /**
    * balance
@@ -333,6 +319,7 @@ function useSwap() {
     if (nestPrice && destDecimals) {
       if (swapToken.src === "NEST") {
         const out = inputAmountTransaction
+          .div(parseEther("1"))
           .mul(nestPrice)
           .bigNumberToShowString(destDecimals, 2);
         amount = out;
@@ -369,9 +356,10 @@ function useSwap() {
 
   useEffect(() => {
     const getNEST = async () => {
-      if (account.address) {
+      if (account.address && chainsData.chainId) {
         const amountBase: { [key: string]: string } = await getNESTAmountForAll(
-          account.address
+          account.address,
+          chainsData.chainId
         );
         const amount = amountBase
           ? amountBase.toString().stringToBigNumber(18)
@@ -386,7 +374,7 @@ function useSwap() {
     return () => {
       clearInterval(time);
     };
-  }, [account.address]);
+  }, [account.address, chainsData.chainId]);
 
   return {
     swapToken,
