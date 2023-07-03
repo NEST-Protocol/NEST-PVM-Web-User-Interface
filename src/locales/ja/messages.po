@@ -344,6 +344,11 @@ msgstr ""
 msgid "Disconnect"
 msgstr "ディスコネクト"
 
+#: src/hooks/useFuturesNewOrder.ts
+#: src/hooks/useSwap.ts
+msgid "Due to our new feature being in the trial phase, you are currently not on the whitelist or your transaction amount exceeds the limit. Please contact Admin in our official group chat(https://t.me/nest_chat), and they will assist you in raising the limit or adding you to the whitelist."
+msgstr ""
+
 #: src/pages/Futures/Components/POrderList.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 msgid "Due to the market volatility, the actual liquidation price may be different from the theoretical liquidation price . Here is the theoretical liquidation price, for reference only."
@@ -716,11 +721,6 @@ msgstr "承認をクリックして承認し、ポジションを開いてくだ
 
 #: src/pages/DirectPoster/useDirectPoster.ts
 msgid "Please get ETH testnet token first"
-msgstr ""
-
-#: src/hooks/useFuturesNewOrder.ts
-#: src/hooks/useSwap.ts
-msgid "Please join our whitelist for using the new version of nestfi. Join our telegram group and contact our admin: https://t.me/nest_chat"
 msgstr ""
 
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx

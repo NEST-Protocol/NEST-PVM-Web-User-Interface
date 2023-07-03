@@ -257,7 +257,7 @@ function useSwap() {
     }
     if (swapToken.src === "NEST" && !checkAllowNEST) {
       messageSnackBar(
-        t`Please join our whitelist for using the new version of nestfi. Join our telegram group and contact our admin: https://t.me/nest_chat`
+        t`Due to our new feature being in the trial phase, you are currently not on the whitelist or your transaction amount exceeds the limit. Please contact Admin in our official group chat(https://t.me/nest_chat), and they will assist you in raising the limit or adding you to the whitelist.`
       );
     } else {
       swap.write?.();

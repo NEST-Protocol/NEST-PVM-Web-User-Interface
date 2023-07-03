@@ -278,7 +278,8 @@ function useFuturesNewOrder(
   }, [basePrice, checkAllowance, checkBalance, inputAmount]);
   const checkAllowNEST = useMemo(() => {
     if (nestAllowAmount) {
-      return inputNESTTransaction.lte(nestAllowAmount);
+      // NEST decimals:4, need mul 10^14
+      return inputNESTTransaction.mul(BigNumber.from("100000000000000")).lte(nestAllowAmount);
     } else {
       return false;
     }
@@ -487,17 +488,17 @@ function useFuturesNewOrder(
     } else if (!checkAllowance) {
       setShowApproveNotice(true);
     } else {
-      if (checkShowTriggerNotice && !showedTriggerNotice) {
-        setShowTriggerNotice(true);
-        return;
-      }
       if (!checkAllowNEST) {
         messageSnackBar(
-          t`Please join our whitelist for using the new version of nestfi. Join our telegram group and contact our admin: https://t.me/nest_chat`
+          t`Due to our new feature being in the trial phase, you are currently not on the whitelist or your transaction amount exceeds the limit. Please contact Admin in our official group chat(https://t.me/nest_chat), and they will assist you in raising the limit or adding you to the whitelist.`
         );
-        return;
+      } else {
+        if (checkShowTriggerNotice && !showedTriggerNotice) {
+          setShowTriggerNotice(true);
+          return;
+        }
+        baseAction();
       }
-      baseAction();
     }
   }, [
     baseAction,
