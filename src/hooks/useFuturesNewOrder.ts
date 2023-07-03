@@ -19,8 +19,9 @@ import {
 } from "./useTransactionReceipt";
 import useReadSwapAmountOut from "../contracts/Read/useReadSwapContract";
 import { getQueryVariable } from "../lib/queryVaribale";
-import { KOLTx } from "../lib/NESTRequest";
+import { KOLTx, getNESTAmountForAll } from "../lib/NESTRequest";
 import { t } from "@lingui/macro";
+import useNESTSnackBar from "./useNESTSnackBar";
 
 export const lipPrice = (
   balance: BigNumber,
@@ -49,7 +50,7 @@ export const lipPrice = (
 
 export const BASE_NEST_FEE = "15";
 const NEW_ORDER_UPDATE = 30;
-export const INPUT_TOKENS = ["NEST", "USDT"];
+export const INPUT_TOKENS = ["NEST"];
 
 function addPricePoint(price: BigNumber, isLong: boolean) {
   const priceBigNumber = BigNumber.from(price.toString());
@@ -76,6 +77,8 @@ function useFuturesNewOrder(
   const [sl, setSl] = useState("");
   const [inputToken, setInputToken] = useState<string>("NEST");
   const [inputAmount, setInputAmount] = useState("");
+  const [nestAllowAmount, setNestAllowAmount] = useState<BigNumber>();
+  const { messageSnackBar } = useNESTSnackBar();
 
   const nowToken = useMemo(() => {
     const token = inputToken.getToken();
@@ -273,6 +276,13 @@ function useFuturesNewOrder(
       return BigNumber.from("0");
     }
   }, [basePrice, checkAllowance, checkBalance, inputAmount]);
+  const checkAllowNEST = useMemo(() => {
+    if (nestAllowAmount) {
+      return inputNESTTransaction.lte(nestAllowAmount);
+    } else {
+      return false;
+    }
+  }, [inputNESTTransaction, nestAllowAmount]);
   const { transaction: tokenApprove } = useTokenApprove(
     (nowToken ?? String().zeroAddress) as `0x${string}`,
     futureContract,
@@ -481,15 +491,23 @@ function useFuturesNewOrder(
         setShowTriggerNotice(true);
         return;
       }
+      if (!checkAllowNEST) {
+        messageSnackBar(
+          t`Please join our whitelist for using the new version of nestfi. Join our telegram group and contact our admin: https://t.me/nest_chat`
+        );
+        return;
+      }
       baseAction();
     }
   }, [
     baseAction,
+    checkAllowNEST,
     checkAllowance,
     checkBalance,
     checkShowTriggerNotice,
     mainButtonLoading,
     mainButtonTitle,
+    messageSnackBar,
     setShowConnect,
     showedTriggerNotice,
     stopDis,
@@ -634,7 +652,13 @@ function useFuturesNewOrder(
         setInputAmount("100");
       }
     }
-  }, [chainsData.chainId, isShareLink, nestBalance, uniSwapAmountOutShare, usdtBalance]);
+  }, [
+    chainsData.chainId,
+    isShareLink,
+    nestBalance,
+    uniSwapAmountOutShare,
+    usdtBalance,
+  ]);
   /**
    * show
    */
@@ -817,6 +841,27 @@ function useFuturesNewOrder(
       setHadSetLimit(false);
     }
   }, [closeShareLink, tokenName_info, tokenPair]);
+
+  useEffect(() => {
+    const getNEST = async () => {
+      if (account.address) {
+        const amountBase: { [key: string]: string } = await getNESTAmountForAll(
+          account.address
+        );
+        const amount = amountBase
+          ? amountBase.toString().stringToBigNumber(18)
+          : undefined;
+        setNestAllowAmount(amount);
+      }
+    };
+    getNEST();
+    const time = setTimeout(() => {
+      getNEST();
+    }, 30000);
+    return () => {
+      clearInterval(time);
+    };
+  }, [account.address]);
 
   const changeTabs = useCallback((value: number) => {
     setTabsValue(value);

@@ -180,7 +180,6 @@ msgstr "Yêu cầu phê duyệt"
 
 #: src/hooks/useFuturesAdd.ts
 #: src/hooks/useFuturesNewOrder.ts
-#: src/hooks/useSwap.ts
 #: src/hooks/useTransactionReceipt.ts
 #: src/pages/Futures/Modal/ApproveNoticeModal.tsx
 msgid "Approve"
@@ -723,6 +722,11 @@ msgstr "Vui lòng nhấp vào \"Approve\" để xác thực và sau đó bạn c
 msgid "Please get ETH testnet token first"
 msgstr "Vui lòng nhận token thử nghiệm ETH trước."
 
+#: src/hooks/useFuturesNewOrder.ts
+#: src/hooks/useSwap.ts
+msgid "Please join our whitelist for using the new version of nestfi. Join our telegram group and contact our admin: https://t.me/nest_chat"
+msgstr ""
+
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 msgid "Please note that \"Limit order\" or \"Stop order\" is not guaranteed to be executed. This may include, but is not limited to, the following cases."
 msgstr "Vui lòng lưu ý rằng \"Lệnh giới hạn\"\\ hoặc \"Lệnh dừng\"\\ không được đảm bảo sẽ được thực hiện. Điều này có thể bao gồm, nhưng không giới hạn, các trường hợp sau đây."
@@ -843,10 +847,6 @@ msgstr "Dừng Lỗ"
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "SL Executed"
 msgstr ""
-
-#: src/pages/Swap/Swap.tsx
-msgid "Slippage Tolerance"
-msgstr "Ngưỡng độ trượt giá"
 
 #: src/pages/Swap/Components/SwapSlippageModal.tsx
 msgid "Slippage Tolerance Setting"

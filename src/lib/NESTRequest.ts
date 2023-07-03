@@ -67,10 +67,16 @@ export function hideFuturesOrder(
   index: string
 ) {
   const url = `order/save/${chainId}?address=${address}&index=${index.toString()}`;
-  
+
   baseRequestPOST(url);
 }
 
 export function getPriceFromNESTLocal(token: string): Promise<any> {
   return baseRequestGet(`https://api.nestfi.net/api/oracle/price/${token}usdt`);
+}
+
+export function getNESTAmountForAll(address: string): Promise<any> {
+  return baseRequestGet(
+    `https://api.nestfi.net/api/oracle/whitelist?adddress=${address}`
+  );
 }

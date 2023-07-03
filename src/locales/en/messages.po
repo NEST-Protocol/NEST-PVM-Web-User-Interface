@@ -180,7 +180,6 @@ msgstr "Approval required"
 
 #: src/hooks/useFuturesAdd.ts
 #: src/hooks/useFuturesNewOrder.ts
-#: src/hooks/useSwap.ts
 #: src/hooks/useTransactionReceipt.ts
 #: src/pages/Futures/Modal/ApproveNoticeModal.tsx
 msgid "Approve"
@@ -723,6 +722,11 @@ msgstr "Please click Approve for authorization and then you can open the positio
 msgid "Please get ETH testnet token first"
 msgstr "Please get ETH testnet token first"
 
+#: src/hooks/useFuturesNewOrder.ts
+#: src/hooks/useSwap.ts
+msgid "Please join our whitelist for using the new version of nestfi. Join our telegram group and contact our admin: https://t.me/nest_chat"
+msgstr "Please join our whitelist for using the new version of nestfi. Join our telegram group and contact our admin: https://t.me/nest_chat"
+
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 msgid "Please note that \"Limit order\" or \"Stop order\" is not guaranteed to be executed. This may include, but is not limited to, the following cases."
 msgstr "Please note that \"Limit order\" or \"Stop order\" is not guaranteed to be executed. This may include, but is not limited to, the following cases."
@@ -843,10 +847,6 @@ msgstr "SL"
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "SL Executed"
 msgstr "SL Executed"
-
-#: src/pages/Swap/Swap.tsx
-msgid "Slippage Tolerance"
-msgstr "Slippage Tolerance"
 
 #: src/pages/Swap/Components/SwapSlippageModal.tsx
 msgid "Slippage Tolerance Setting"

@@ -7,9 +7,7 @@ import {
   Add,
   SwapExchangeBig,
   SwapExchangeSmall,
-  WriteIcon,
 } from "../../components/icons";
-import LinkButton from "../../components/MainButton/LinkButton";
 import MainButton from "../../components/MainButton/MainButton";
 import useSwap from "../../hooks/useSwap";
 import useWindowWidth from "../../hooks/useWindowWidth";
@@ -58,7 +56,6 @@ const Swap: FC = () => {
     mainButtonLoading,
     tokenArray,
     selectToken,
-    hideSetting,
   } = useSwap();
 
   const ExchangeIcon = styled("button")(({ theme }) => {
@@ -236,25 +233,21 @@ const Swap: FC = () => {
           value={showOutAmount}
         />
         <Stack spacing={"12px"} width={"100%"} marginY={"24px"}>
-          {hideSetting ? (
-            <></>
-          ) : (
-            <SettingStack direction={"row"} justifyContent={"space-between"}>
-              <p className="SwapSettingTitle">
-                <Trans>Slippage Tolerance</Trans>
-              </p>
-              <Stack
-                direction={"row"}
-                justifyContent={"flex-end"}
-                spacing={"8px"}
-              >
-                {/* <p>{slippage} %</p> */}
-                <LinkButton onClick={() => setOpenModal(true)}>
-                  <WriteIcon />
-                </LinkButton>
-              </Stack>
-            </SettingStack>
-          )}
+          {/* <SettingStack direction={"row"} justifyContent={"space-between"}>
+            <p className="SwapSettingTitle">
+              <Trans>Slippage Tolerance</Trans>
+            </p>
+            <Stack
+              direction={"row"}
+              justifyContent={"flex-end"}
+              spacing={"8px"}
+            >
+              <p>{slippage} %</p>
+              <LinkButton onClick={() => setOpenModal(true)}>
+                <WriteIcon />
+              </LinkButton>
+            </Stack>
+          </SettingStack> */}
 
           <SettingStack direction={"row"} justifyContent={"space-between"}>
             <p className="SwapSettingTitle">

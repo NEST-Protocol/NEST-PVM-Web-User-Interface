@@ -180,7 +180,6 @@ msgstr "승인 필요함"
 
 #: src/hooks/useFuturesAdd.ts
 #: src/hooks/useFuturesNewOrder.ts
-#: src/hooks/useSwap.ts
 #: src/hooks/useTransactionReceipt.ts
 #: src/pages/Futures/Modal/ApproveNoticeModal.tsx
 msgid "Approve"
@@ -721,6 +720,11 @@ msgstr "인증을 위해 승인을 클릭하면 포지션을 열 수 있으며, 
 msgid "Please get ETH testnet token first"
 msgstr "먼저 이더리움 테스트넷 토큰을 받으세요"
 
+#: src/hooks/useFuturesNewOrder.ts
+#: src/hooks/useSwap.ts
+msgid "Please join our whitelist for using the new version of nestfi. Join our telegram group and contact our admin: https://t.me/nest_chat"
+msgstr ""
+
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 msgid "Please note that \"Limit order\" or \"Stop order\" is not guaranteed to be executed. This may include, but is not limited to, the following cases."
 msgstr "\"지정가 주문\" 또는 \"스탑 오더 주문\"은 실행이 보장되지 않을 수 있습니다. 다음과 같은 경우가 포함될 수 있습니다."
@@ -841,10 +845,6 @@ msgstr "SL"
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "SL Executed"
 msgstr "SL 실행됨"
-
-#: src/pages/Swap/Swap.tsx
-msgid "Slippage Tolerance"
-msgstr "슬리피지 허용 범위"
 
 #: src/pages/Swap/Components/SwapSlippageModal.tsx
 msgid "Slippage Tolerance Setting"

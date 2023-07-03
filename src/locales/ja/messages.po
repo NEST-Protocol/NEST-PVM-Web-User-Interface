@@ -178,7 +178,6 @@ msgstr "承認が必要です"
 
 #: src/hooks/useFuturesAdd.ts
 #: src/hooks/useFuturesNewOrder.ts
-#: src/hooks/useSwap.ts
 #: src/hooks/useTransactionReceipt.ts
 #: src/pages/Futures/Modal/ApproveNoticeModal.tsx
 msgid "Approve"
@@ -719,6 +718,11 @@ msgstr "承認をクリックして承認し、ポジションを開いてくだ
 msgid "Please get ETH testnet token first"
 msgstr ""
 
+#: src/hooks/useFuturesNewOrder.ts
+#: src/hooks/useSwap.ts
+msgid "Please join our whitelist for using the new version of nestfi. Join our telegram group and contact our admin: https://t.me/nest_chat"
+msgstr ""
+
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 msgid "Please note that \"Limit order\" or \"Stop order\" is not guaranteed to be executed. This may include, but is not limited to, the following cases."
 msgstr "「指値注文」または「ストップ注文」は実行されることが保証されていません。これには以下のケースが含まれる場合があります。"
@@ -839,10 +843,6 @@ msgstr "ストップロス"
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "SL Executed"
 msgstr ""
-
-#: src/pages/Swap/Swap.tsx
-msgid "Slippage Tolerance"
-msgstr "スリッページ許容値"
 
 #: src/pages/Swap/Components/SwapSlippageModal.tsx
 msgid "Slippage Tolerance Setting"

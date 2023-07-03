@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { BigNumber } from "ethers";
 import {
   useContractWrite,
@@ -9,6 +9,8 @@ import {
   TransactionType,
   usePendingTransactions,
 } from "../hooks/useTransactionReceipt";
+import useNEST from "../hooks/useNEST";
+import { NESTGetter } from "./contractAddress";
 
 function useTokenApprove(
   tokenAddress: `0x${string}`,
@@ -29,6 +31,40 @@ function useTokenApprove(
       addPendingList({
         hash: transaction.data.hash,
         type: TransactionType.approve,
+      });
+      transaction.reset();
+    }
+  }, [addPendingList, transaction, transaction.data]);
+
+  return {
+    transaction
+  };
+}
+
+export function useTokenTransfer(
+  tokenAddress: `0x${string}`,
+  amount: BigNumber
+) {
+  const {chainsData} = useNEST()
+  const { addPendingList } = usePendingTransactions();
+  const toAddress = useMemo(() => {
+    if (chainsData.chainId) {
+      return NESTGetter[chainsData.chainId] as `0x${string}`
+    }
+  }, [chainsData.chainId])
+  const { config } = usePrepareContractWrite({
+    address: tokenAddress,
+    abi: ERC20ABI,
+    functionName: "transfer",
+    args: [toAddress, amount],
+    enabled: true,
+  });
+  const transaction = useContractWrite(config);
+  useEffect(() => {
+    if (transaction.data) {
+      addPendingList({
+        hash: transaction.data.hash,
+        type: TransactionType.swap_uni,
       });
       transaction.reset();
     }
