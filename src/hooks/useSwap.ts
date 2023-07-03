@@ -311,8 +311,9 @@ function useSwap() {
   useEffect(() => {
     setTimeout(() => {
       srcBalanceRefetch();
+      destBalanceRefetch();
     }, 3000);
-  }, [srcBalanceRefetch]);
+  }, [srcBalanceRefetch, destBalanceRefetch]);
 
   useEffect(() => {
     var amount = "0";

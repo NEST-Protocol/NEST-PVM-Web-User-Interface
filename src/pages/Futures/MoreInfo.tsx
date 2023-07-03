@@ -89,7 +89,7 @@ const FuturesMoreInfo: FC = () => {
           component={"button"}
           onClick={() => {
             window.open(
-              "https://finance.docs.nestprotocol.org/#connect-wallet"
+              "https://www.nestprotocol.org/blogs/How-to-trade-on-NESTFi-Website"
             );
           }}
           sx={(theme) => ({

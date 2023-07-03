@@ -203,7 +203,7 @@ const ConnectWalletModalBase: FC<ConnectWalletModalBaseProps> = ({
   return (
     <BaseStack spacing={0}>
       <p className="WalletLearnMore">
-        <NESTa href="https://www.google.com" target={"_blank"}>
+        <NESTa href="https://finance.docs.nestprotocol.org/#connect-wallet" target={"_blank"}>
           <Trans>Learn more</Trans>{" "}
         </NESTa>
         <Trans>about connecting wallets</Trans>
