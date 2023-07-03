@@ -77,6 +77,6 @@ export function getPriceFromNESTLocal(token: string): Promise<any> {
 
 export function getNESTAmountForAll(address: string, chainId: number): Promise<any> {
   return baseRequestGet(
-    `https://api.nestfi.net/api/oracle/whitelist?adddress=${address}&chainId=${chainId}`
+    `https://api.nestfi.net/api/oracle/whitelist?address=${address}&chainId=${chainId}`
   );
 }
