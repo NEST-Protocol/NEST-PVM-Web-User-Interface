@@ -36,20 +36,31 @@ function useFuturesPOrder(
     signerOrProvider: provider,
   });
   useEffect(() => {
-    (async () => {
-      try {
-        if (!price || !FuturesV2) {
-          return;
+    const time = setInterval(() => {
+      (async () => {
+        try {
+          if (!price || !FuturesV2) {
+            return;
+          }
+          const priceNum = price[tokenName];
+          const value = await FuturesV2.balanceOf(data.index, priceNum);
+  
+          setMarginAssets(value);
+          if (BigNumber.from("15").eq(data.lever)) {
+            console.log(BigNumber.from(value).bigNumberToShowString(18,4))
+          }
+        } catch (error) {
+          console.log(error);
         }
-        const priceNum = price[tokenName];
-        const value = await FuturesV2.balanceOf(data.index, priceNum);
+      })();
+    }, 5 * 1000);
+    return () => {
+      clearInterval(time);
+    };
 
-        setMarginAssets(value);
-      } catch (error) {
-        console.log(error);
-      }
-    })();
-  }, [data.index, FuturesV2, price, tokenName]);
+
+    
+  }, [data.index, FuturesV2, price, tokenName, data.lever]);
 
   const showBasePrice = BigNumber.from(
     data.basePrice.toString()

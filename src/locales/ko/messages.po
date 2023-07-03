@@ -180,7 +180,6 @@ msgstr "승인 필요함"
 
 #: src/hooks/useFuturesAdd.ts
 #: src/hooks/useFuturesNewOrder.ts
-#: src/hooks/useSwap.ts
 #: src/hooks/useTransactionReceipt.ts
 #: src/pages/Futures/Modal/ApproveNoticeModal.tsx
 msgid "Approve"
@@ -346,6 +345,11 @@ msgstr "디플레이션 경제 모델. 더 많은 사용자가 거래할수록 �
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "Disconnect"
 msgstr "연결 해제"
+
+#: src/hooks/useFuturesNewOrder.ts
+#: src/hooks/useSwap.ts
+msgid "Due to our new feature being in the trial phase, you are currently not on the whitelist or your transaction amount exceeds the limit. Please contact Admin in our official group chat(https://t.me/nest_chat), and they will assist you in raising the limit or adding you to the whitelist."
+msgstr "새로운 기능이 시험 단계에 있어서 현재로서는 화이트리스트에 등록되어 있지 않거나 거래 금액이 제한을 초과하고 있습니다. 저희 공식 그룹 채팅(https://t.me/nest_chat)에서 관리자에게 문의하여 한도를 높이거나 화이트리스트에 등록을 도와드릴 수 있습니다."
 
 #: src/pages/Futures/Components/POrderList.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
@@ -841,10 +845,6 @@ msgstr "SL"
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "SL Executed"
 msgstr "SL 실행됨"
-
-#: src/pages/Swap/Swap.tsx
-msgid "Slippage Tolerance"
-msgstr "슬리피지 허용 범위"
 
 #: src/pages/Swap/Components/SwapSlippageModal.tsx
 msgid "Slippage Tolerance Setting"

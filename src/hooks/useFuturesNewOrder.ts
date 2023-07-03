@@ -19,8 +19,9 @@ import {
 } from "./useTransactionReceipt";
 import useReadSwapAmountOut from "../contracts/Read/useReadSwapContract";
 import { getQueryVariable } from "../lib/queryVaribale";
-import { KOLTx } from "../lib/NESTRequest";
+import { KOLTx, getNESTAmountForAll } from "../lib/NESTRequest";
 import { t } from "@lingui/macro";
+import useNESTSnackBar from "./useNESTSnackBar";
 
 export const lipPrice = (
   balance: BigNumber,
@@ -49,7 +50,7 @@ export const lipPrice = (
 
 export const BASE_NEST_FEE = "15";
 const NEW_ORDER_UPDATE = 30;
-export const INPUT_TOKENS = ["NEST", "USDT"];
+export const INPUT_TOKENS = ["NEST"];
 
 function addPricePoint(price: BigNumber, isLong: boolean) {
   const priceBigNumber = BigNumber.from(price.toString());
@@ -76,6 +77,8 @@ function useFuturesNewOrder(
   const [sl, setSl] = useState("");
   const [inputToken, setInputToken] = useState<string>("NEST");
   const [inputAmount, setInputAmount] = useState("");
+  const [nestAllowAmount, setNestAllowAmount] = useState<BigNumber>();
+  const { messageSnackBar } = useNESTSnackBar();
 
   const nowToken = useMemo(() => {
     const token = inputToken.getToken();
@@ -273,6 +276,14 @@ function useFuturesNewOrder(
       return BigNumber.from("0");
     }
   }, [basePrice, checkAllowance, checkBalance, inputAmount]);
+  const checkAllowNEST = useMemo(() => {
+    if (nestAllowAmount) {
+      // NEST decimals:4, need mul 10^14
+      return inputNESTTransaction.mul(BigNumber.from("100000000000000")).lte(nestAllowAmount);
+    } else {
+      return false;
+    }
+  }, [inputNESTTransaction, nestAllowAmount]);
   const { transaction: tokenApprove } = useTokenApprove(
     (nowToken ?? String().zeroAddress) as `0x${string}`,
     futureContract,
@@ -477,19 +488,27 @@ function useFuturesNewOrder(
     } else if (!checkAllowance) {
       setShowApproveNotice(true);
     } else {
-      if (checkShowTriggerNotice && !showedTriggerNotice) {
-        setShowTriggerNotice(true);
-        return;
+      if (!checkAllowNEST) {
+        messageSnackBar(
+          t`Due to our new feature being in the trial phase, you are currently not on the whitelist or your transaction amount exceeds the limit. Please contact Admin in our official group chat(https://t.me/nest_chat), and they will assist you in raising the limit or adding you to the whitelist.`
+        );
+      } else {
+        if (checkShowTriggerNotice && !showedTriggerNotice) {
+          setShowTriggerNotice(true);
+          return;
+        }
+        baseAction();
       }
-      baseAction();
     }
   }, [
     baseAction,
+    checkAllowNEST,
     checkAllowance,
     checkBalance,
     checkShowTriggerNotice,
     mainButtonLoading,
     mainButtonTitle,
+    messageSnackBar,
     setShowConnect,
     showedTriggerNotice,
     stopDis,
@@ -634,7 +653,13 @@ function useFuturesNewOrder(
         setInputAmount("100");
       }
     }
-  }, [chainsData.chainId, isShareLink, nestBalance, uniSwapAmountOutShare, usdtBalance]);
+  }, [
+    chainsData.chainId,
+    isShareLink,
+    nestBalance,
+    uniSwapAmountOutShare,
+    usdtBalance,
+  ]);
   /**
    * show
    */
@@ -817,6 +842,28 @@ function useFuturesNewOrder(
       setHadSetLimit(false);
     }
   }, [closeShareLink, tokenName_info, tokenPair]);
+
+  useEffect(() => {
+    const getNEST = async () => {
+      if (account.address && chainsData.chainId) {
+        const amountBase: { [key: string]: string } = await getNESTAmountForAll(
+          account.address,
+          chainsData.chainId
+        );
+        const amount = amountBase
+          ? amountBase.toString().stringToBigNumber(18)
+          : undefined;
+        setNestAllowAmount(amount);
+      }
+    };
+    getNEST();
+    const time = setInterval(() => {
+      getNEST();
+    }, 15000);
+    return () => {
+      clearInterval(time);
+    };
+  }, [account.address, chainsData.chainId]);
 
   const changeTabs = useCallback((value: number) => {
     setTabsValue(value);

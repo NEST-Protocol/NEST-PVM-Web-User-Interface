@@ -264,7 +264,7 @@ const NavMenuV2Base: FC<NavMenuV2BaseProps> = ({ ...props }) => {
           component={"button"}
           onClick={() => {
             window.open(
-              "https://finance.docs.nestprotocol.org/#connect-wallet"
+              "https://www.nestprotocol.org/blogs/How-to-trade-on-NESTFi-Mobile"
             );
           }}
         >
