@@ -806,6 +806,8 @@ msgstr "Yêu cầu bán vị thế"
 #: src/pages/Futures/Modal/CloseModal.tsx
 #: src/pages/Futures/Modal/EditPositionModal.tsx
 #: src/pages/Futures/NewOrder.tsx
+#: src/pages/Swap/Swap.tsx
+#: src/pages/Swap/Swap.tsx
 msgid "Service Fee"
 msgstr "Phí dịch vụ"
 

@@ -804,6 +804,8 @@ msgstr "포지션 매도 요청"
 #: src/pages/Futures/Modal/CloseModal.tsx
 #: src/pages/Futures/Modal/EditPositionModal.tsx
 #: src/pages/Futures/NewOrder.tsx
+#: src/pages/Swap/Swap.tsx
+#: src/pages/Swap/Swap.tsx
 msgid "Service Fee"
 msgstr "서비스 수수료"
 

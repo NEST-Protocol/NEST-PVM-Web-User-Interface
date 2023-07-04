@@ -802,6 +802,8 @@ msgstr "Запрос на продажу позиции"
 #: src/pages/Futures/Modal/CloseModal.tsx
 #: src/pages/Futures/Modal/EditPositionModal.tsx
 #: src/pages/Futures/NewOrder.tsx
+#: src/pages/Swap/Swap.tsx
+#: src/pages/Swap/Swap.tsx
 msgid "Service Fee"
 msgstr "Сервисная комиссия"
 
