@@ -13,8 +13,9 @@ import useSwap from "../../hooks/useSwap";
 import useWindowWidth from "../../hooks/useWindowWidth";
 import SwapInputItem, { SwapShowItem } from "./Components/SwapInputItem";
 import SwapSlippageModal from "./Components/SwapSlippageModal";
-import { Trans } from "@lingui/macro";
+import { Trans, t } from "@lingui/macro";
 import useNEST from "../../hooks/useNEST";
+import { NESTTooltipFC } from "../../components/NESTTooltip/NESTTooltip";
 
 const SwapBaseStack = styled(Stack)(({ theme }) => {
   return {
@@ -56,6 +57,7 @@ const Swap: FC = () => {
     mainButtonLoading,
     tokenArray,
     selectToken,
+    showServiceFee,
   } = useSwap();
 
   const ExchangeIcon = styled("button")(({ theme }) => {
@@ -262,6 +264,22 @@ const Swap: FC = () => {
               <LittleExchangeIcon onClick={exchangePrice}>
                 <SwapExchangeSmall />
               </LittleExchangeIcon>
+            </Stack>
+          </SettingStack>
+          <SettingStack direction={"row"} justifyContent={"space-between"}>
+            <Stack direction={"row"} spacing={"5px"} alignItems={"center"}>
+              <p className="SwapSettingTitle">
+                <Trans>Service Fee</Trans>
+              </p>
+              <NESTTooltipFC title={t`Service Fee` + " = 0.2%"} />
+            </Stack>
+
+            <Stack
+              direction={"row"}
+              justifyContent={"flex-end"}
+              spacing={"8px"}
+            >
+              <p>{showServiceFee}</p>
             </Stack>
           </SettingStack>
         </Stack>

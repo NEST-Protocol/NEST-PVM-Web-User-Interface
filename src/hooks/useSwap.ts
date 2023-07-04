@@ -185,6 +185,7 @@ function useSwap() {
       return String().placeHolder;
     }
   }, [destBalance, swapToken.dest, chainsData.chainId]);
+
   /**
    * check
    */
@@ -219,6 +220,17 @@ function useSwap() {
     scrAddress as `0x${string}`,
     inputAmountTransaction
   );
+
+  const showServiceFee = useMemo(() => {
+    if (swapToken.src === "NEST") {
+      return (
+        inputAmountTransaction.mul(2).div(1000).bigNumberToShowString(18, 2) +
+        " NEST"
+      );
+    } else {
+      return ((parseFloat(outAmount) * 2) / 1000).toFixed(2) + " NEST";
+    }
+  }, [inputAmountTransaction, outAmount, swapToken.src]);
 
   /**
    * show button title
@@ -397,6 +409,7 @@ function useSwap() {
     mainButtonLoading,
     tokenArray,
     selectToken,
+    showServiceFee,
   };
 }
 
