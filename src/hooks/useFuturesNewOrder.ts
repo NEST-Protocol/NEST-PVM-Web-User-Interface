@@ -488,7 +488,7 @@ function useFuturesNewOrder(
     } else if (!checkAllowance) {
       setShowApproveNotice(true);
     } else {
-      if (!checkAllowNEST) {
+      if (!checkAllowNEST && chainsData.chainId !== 534353) {
         messageSnackBar(
           t`Due to our new feature being in the trial phase, you are currently not on the whitelist or your transaction amount exceeds the limit. Please contact Admin in our official group chat(https://t.me/nest_chat), and they will assist you in raising the limit or adding you to the whitelist.`
         );
@@ -500,19 +500,7 @@ function useFuturesNewOrder(
         baseAction();
       }
     }
-  }, [
-    baseAction,
-    checkAllowNEST,
-    checkAllowance,
-    checkBalance,
-    checkShowTriggerNotice,
-    mainButtonLoading,
-    mainButtonTitle,
-    messageSnackBar,
-    setShowConnect,
-    showedTriggerNotice,
-    stopDis,
-  ]);
+  }, [baseAction, chainsData.chainId, checkAllowNEST, checkAllowance, checkBalance, checkShowTriggerNotice, mainButtonLoading, mainButtonTitle, messageSnackBar, setShowConnect, showedTriggerNotice, stopDis]);
   const lastPriceButton = useCallback(() => {
     if (openPriceBase) {
       setLimitAmount(
