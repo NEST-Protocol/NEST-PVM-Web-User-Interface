@@ -279,7 +279,9 @@ function useFuturesNewOrder(
   const checkAllowNEST = useMemo(() => {
     if (nestAllowAmount) {
       // NEST decimals:4, need mul 10^14
-      return inputNESTTransaction.mul(BigNumber.from("100000000000000")).lte(nestAllowAmount);
+      return inputNESTTransaction
+        .mul(BigNumber.from("100000000000000"))
+        .lte(nestAllowAmount);
     } else {
       return false;
     }
@@ -466,12 +468,8 @@ function useFuturesNewOrder(
     tabsValue,
   ]);
   const baseAction = useCallback(() => {
-    if (inputToken === "USDT") {
-      newOrderWithUSDT.write?.();
-    } else {
-      newOrder.write?.();
-    }
-  }, [inputToken, newOrder, newOrderWithUSDT]);
+    newOrder.write?.();
+  }, [newOrder]);
   const triggerNoticeCallback = useCallback(() => {
     setShowedTriggerNotice(true);
     baseAction();
@@ -500,7 +498,20 @@ function useFuturesNewOrder(
         baseAction();
       }
     }
-  }, [baseAction, chainsData.chainId, checkAllowNEST, checkAllowance, checkBalance, checkShowTriggerNotice, mainButtonLoading, mainButtonTitle, messageSnackBar, setShowConnect, showedTriggerNotice, stopDis]);
+  }, [
+    baseAction,
+    chainsData.chainId,
+    checkAllowNEST,
+    checkAllowance,
+    checkBalance,
+    checkShowTriggerNotice,
+    mainButtonLoading,
+    mainButtonTitle,
+    messageSnackBar,
+    setShowConnect,
+    showedTriggerNotice,
+    stopDis,
+  ]);
   const lastPriceButton = useCallback(() => {
     if (openPriceBase) {
       setLimitAmount(
@@ -612,30 +623,8 @@ function useFuturesNewOrder(
   useEffect(() => {
     if (isShareLink) {
       if (chainsData.chainId !== 534353) {
-        if (nestBalance && usdtBalance) {
-          if (
-            BigNumber.from("0").eq(nestBalance) &&
-            BigNumber.from("0").eq(usdtBalance)
-          ) {
-            setInputToken("USDT");
-            setInputAmount("200");
-          } else if (
-            !BigNumber.from("0").eq(nestBalance) &&
-            BigNumber.from("0").eq(usdtBalance)
-          ) {
-            setInputToken("NEST");
-            setInputAmount("10000");
-          } else if (
-            uniSwapAmountOutShare &&
-            uniSwapAmountOutShare[1].lt(nestBalance)
-          ) {
-            setInputToken("NEST");
-            setInputAmount("10000");
-          } else {
-            setInputToken("USDT");
-            setInputAmount("200");
-          }
-        }
+        setInputToken("NEST");
+        setInputAmount("10000");
       } else {
         setInputToken("NEST");
         setInputAmount("100");
