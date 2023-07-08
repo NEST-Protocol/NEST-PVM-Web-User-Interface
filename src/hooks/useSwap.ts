@@ -33,7 +33,7 @@ function useSwap() {
   const [outAmount, setOutAmount] = useState<string>("");
   const [samePrice, setSamePrice] = useState<boolean>(true);
   const [nestPrice, setNestPrice] = useState<BigNumber>();
-  const [nestAmount, setNestAmount] = useState<BigNumber>();
+  const [nestAmount, setNestAmount] = useState<BigNumber | undefined>();
   const { isPendingType } = usePendingTransactions();
   const { messageSnackBar } = useNESTSnackBar();
   const tokenArray = useMemo(() => {
@@ -271,6 +271,10 @@ function useSwap() {
       messageSnackBar(
         t`Due to our new feature being in the trial phase, you are currently not on the whitelist or your transaction amount exceeds the limit. Please contact Admin in our official group chat(https://t.me/nest_chat), and they will assist you in raising the limit or adding you to the whitelist.`
       );
+    } else if (swapToken.src === "USDT" && nestAmount === undefined) {
+      messageSnackBar(
+        t`Due to our new feature being in the trial phase, you are currently not on the whitelist or your transaction amount exceeds the limit. Please contact Admin in our official group chat(https://t.me/nest_chat), and they will assist you in raising the limit or adding you to the whitelist.`
+      );
     } else {
       swap.write?.();
     }
@@ -280,6 +284,7 @@ function useSwap() {
     checkBalance,
     mainButtonLoading,
     messageSnackBar,
+    nestAmount,
     setShowConnect,
     swap,
     swapToken.src,
@@ -370,14 +375,18 @@ function useSwap() {
   useEffect(() => {
     const getNEST = async () => {
       if (account.address && chainsData.chainId) {
-        const amountBase: { [key: string]: string } = await getNESTAmountForAll(
+        const amountBase: string = await getNESTAmountForAll(
           account.address,
           chainsData.chainId
         );
-        const amount = amountBase
-          ? amountBase.toString().stringToBigNumber(18)
-          : undefined;
-        setNestAmount(amount);
+        if (parseInt(amountBase) === -1 || parseInt(amountBase) === -2) {
+          setNestAmount(undefined);
+        } else {
+          const amount = amountBase
+            ? amountBase.toString().stringToBigNumber(18)
+            : undefined;
+          setNestAmount(amount);
+        }
       }
     };
     getNEST();
