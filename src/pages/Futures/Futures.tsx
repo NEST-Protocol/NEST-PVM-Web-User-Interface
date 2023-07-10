@@ -9,6 +9,9 @@ import ExchangeTVChart from "./ExchangeTVChart";
 import { getPriceFromNESTLocal } from "../../lib/NESTRequest";
 // import FuturesNotice from "./Components/FuturesNotice";
 import { getQueryVariable } from "../../lib/queryVaribale";
+import Modal from "@mui/material/Modal";
+import StopTransactionModal from "../Share/Modal/StopTransactionModal";
+import Box from "@mui/material/Box";
 
 export interface FuturesPrice {
   [key: string]: BigNumber;
@@ -32,11 +35,9 @@ const Futures: FC = () => {
   const [tokenPair, setTokenPair] = useState(defaultTokenPair);
   const [basePrice, setBasePrice] = useState<FuturesPrice>();
   const [orderPrice, setOrderPrice] = useState<FuturesPrice>();
-  // const showNoticeDefault = useMemo(() => {
-  //   const isShow = localStorage.getItem("FuturesNoticeV1");
-  //   return isShow !== "1";
-  // }, []);
-  // const [showNotice, setShowNotice] = useState<boolean>(showNoticeDefault);
+
+  const [openModal, setOpenModal] = useState(true);
+
   const getPrice = useCallback(async () => {
     const ETHPriceBase: { [key: string]: string } = await getPriceFromNESTLocal(
       "eth"
@@ -220,6 +221,7 @@ const Futures: FC = () => {
           >
             <Stack spacing={"16px"} width={"100%"} paddingY={`${paddingY}px`}>
               {/* {notice} */}
+
               {exchangeTvChart()}
               {newOrder()}
               {isBigMobile ? <></> : moreInfo()}
@@ -238,7 +240,21 @@ const Futures: FC = () => {
     paddingX,
     isBigMobile,
   ]);
-  return <>{mainView}</>;
+  return (
+    <>
+      <Modal
+        open={openModal}
+        onClose={() => setOpenModal(false)}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box>
+          <StopTransactionModal onClose={() => setOpenModal(false)} />
+        </Box>
+      </Modal>
+      {mainView}
+    </>
+  );
 };
 
 export default Futures;

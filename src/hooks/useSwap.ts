@@ -20,7 +20,7 @@ interface SwapToken {
 const SWAP_UPDATE = 30;
 
 function useSwap() {
-  const { chainsData, account, setShowConnect } = useNEST();
+  const { chainsData, account, setShowConnect, stopAll } = useNEST();
   const swapTokenOfChain = useCallback(() => {
     return {
       src: "USDT",
@@ -267,7 +267,10 @@ function useSwap() {
     } else if (mainButtonLoading || !checkBalance) {
       return;
     }
-    if (swapToken.src === "NEST" && !checkAllowNEST) {
+    if (stopAll) {
+      messageSnackBar(t`待定文案`);
+      return;
+    } else if (swapToken.src === "NEST" && !checkAllowNEST) {
       messageSnackBar(
         t`Due to our new feature being in the trial phase, you are currently not on the whitelist or your transaction amount exceeds the limit. Please contact Admin in our official group chat(https://t.me/nest_chat), and they will assist you in raising the limit or adding you to the whitelist.`
       );
@@ -286,6 +289,7 @@ function useSwap() {
     messageSnackBar,
     nestAmount,
     setShowConnect,
+    stopAll,
     swap,
     swapToken.src,
   ]);

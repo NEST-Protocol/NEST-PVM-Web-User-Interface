@@ -9,8 +9,12 @@ import {
   usePendingTransactions,
 } from "./useTransactionReceipt";
 import { t } from "@lingui/macro";
+import useNEST from "./useNEST";
+import useNESTSnackBar from "./useNESTSnackBar";
 
 function useFuturesOrder(data: FuturesOrderV2) {
+  const { stopAll } = useNEST();
+  const { messageSnackBar } = useNESTSnackBar();
   const { isPendingOrder } = usePendingTransactions();
   const tokenName = priceToken[parseInt(data.channelIndex.toString())];
   const isLong = data.orientation;
@@ -55,10 +59,13 @@ function useFuturesOrder(data: FuturesOrderV2) {
   const mainButtonAction = useCallback(() => {
     if (mainButtonLoading) {
       return;
+    } else if (stopAll) {
+      messageSnackBar(t`待定文案`);
+      return;
     } else {
       closeLimit.write?.();
     }
-  }, [closeLimit, mainButtonLoading]);
+  }, [closeLimit, mainButtonLoading, messageSnackBar, stopAll]);
   const tp = useMemo(() => {
     const tpNum = data.stopProfitPrice;
     return BigNumber.from("0").eq(tpNum)

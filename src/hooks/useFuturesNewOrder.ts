@@ -66,7 +66,7 @@ function useFuturesNewOrder(
   tokenPair: string
 ) {
   const { isPendingType } = usePendingTransactions();
-  const { account, chainsData, setShowConnect } = useNEST();
+  const { account, chainsData, setShowConnect, stopAll } = useNEST();
   const [longOrShort, setLongOrShort] = useState(true);
   const [tabsValue, setTabsValue] = useState(0);
   const [nestAmount, setNestAmount] = useState("");
@@ -483,6 +483,9 @@ function useFuturesNewOrder(
       setShowConnect(true);
     } else if (mainButtonLoading || !checkBalance || stopDis) {
       return;
+    } else if (stopAll) {
+      messageSnackBar(t`待定文案`);
+      return;
     } else if (!checkAllowance) {
       setShowApproveNotice(true);
     } else {
@@ -510,6 +513,7 @@ function useFuturesNewOrder(
     messageSnackBar,
     setShowConnect,
     showedTriggerNotice,
+    stopAll,
     stopDis,
   ]);
   const lastPriceButton = useCallback(() => {

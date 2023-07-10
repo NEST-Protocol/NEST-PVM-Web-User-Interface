@@ -16,6 +16,7 @@ import SwapSlippageModal from "./Components/SwapSlippageModal";
 import { Trans, t } from "@lingui/macro";
 import useNEST from "../../hooks/useNEST";
 import { NESTTooltipFC } from "../../components/NESTTooltip/NESTTooltip";
+import StopTransactionModal from "../Share/Modal/StopTransactionModal";
 
 const SwapBaseStack = styled(Stack)(({ theme }) => {
   return {
@@ -38,6 +39,7 @@ const Swap: FC = () => {
   const { isMobile } = useWindowWidth();
   const { addNESTToWallet } = useNEST();
   const [openModal, setOpenModal] = useState(false);
+  const [openModalForStop, setOpenModalForStop] = useState(true);
   const {
     swapToken,
     exchangeButton,
@@ -137,6 +139,16 @@ const Swap: FC = () => {
             nowSelected={slippage}
             selectedCallBack={(num) => setSlippage(num)}
           />
+        </Box>
+      </Modal>
+      <Modal
+        open={openModalForStop}
+        onClose={() => setOpenModalForStop(false)}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box>
+          <StopTransactionModal onClose={() => setOpenModalForStop(false)} />
         </Box>
       </Modal>
       <SwapBaseStack
