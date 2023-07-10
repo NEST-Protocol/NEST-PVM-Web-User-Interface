@@ -7,16 +7,16 @@ import {
   Add,
   SwapExchangeBig,
   SwapExchangeSmall,
+  WriteIcon,
 } from "../../components/icons";
+import LinkButton from "../../components/MainButton/LinkButton";
 import MainButton from "../../components/MainButton/MainButton";
 import useSwap from "../../hooks/useSwap";
 import useWindowWidth from "../../hooks/useWindowWidth";
 import SwapInputItem, { SwapShowItem } from "./Components/SwapInputItem";
 import SwapSlippageModal from "./Components/SwapSlippageModal";
-import { Trans, t } from "@lingui/macro";
+import { Trans } from "@lingui/macro";
 import useNEST from "../../hooks/useNEST";
-import { NESTTooltipFC } from "../../components/NESTTooltip/NESTTooltip";
-import StopTransactionModal from "../Share/Modal/StopTransactionModal";
 import ChangeNewTokenModal from "../Share/Modal/ChangeNewTokenModal";
 
 const SwapBaseStack = styled(Stack)(({ theme }) => {
@@ -40,8 +40,7 @@ const Swap: FC = () => {
   const { isMobile } = useWindowWidth();
   const { addNESTToWallet, account } = useNEST();
   const [openModal, setOpenModal] = useState(false);
-  // TODO
-  const [openModalForStop, setOpenModalForStop] = useState(true);
+
   const openChangeModalDefault = useMemo(() => {
     if (account) {
       const isShow = localStorage.getItem("ChangeToken");
@@ -51,7 +50,7 @@ const Swap: FC = () => {
     }
   }, [account]);
   const [openChangeModal, setOpenChangeModal] = useState(
-    false
+    openChangeModalDefault
   );
   const {
     swapToken,
@@ -72,7 +71,7 @@ const Swap: FC = () => {
     mainButtonLoading,
     tokenArray,
     selectToken,
-    showServiceFee,
+    hideSetting,
   } = useSwap();
 
   const ExchangeIcon = styled("button")(({ theme }) => {
@@ -152,16 +151,6 @@ const Swap: FC = () => {
             nowSelected={slippage}
             selectedCallBack={(num) => setSlippage(num)}
           />
-        </Box>
-      </Modal>
-      <Modal
-        open={openModalForStop}
-        onClose={() => setOpenModalForStop(false)}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box>
-          <StopTransactionModal onClose={() => setOpenModalForStop(false)} />
         </Box>
       </Modal>
       <Modal
@@ -274,21 +263,25 @@ const Swap: FC = () => {
           value={showOutAmount}
         />
         <Stack spacing={"12px"} width={"100%"} marginY={"24px"}>
-          {/* <SettingStack direction={"row"} justifyContent={"space-between"}>
-            <p className="SwapSettingTitle">
-              <Trans>Slippage Tolerance</Trans>
-            </p>
-            <Stack
-              direction={"row"}
-              justifyContent={"flex-end"}
-              spacing={"8px"}
-            >
-              <p>{slippage} %</p>
-              <LinkButton onClick={() => setOpenModal(true)}>
-                <WriteIcon />
-              </LinkButton>
-            </Stack>
-          </SettingStack> */}
+          {hideSetting ? (
+            <></>
+          ) : (
+            <SettingStack direction={"row"} justifyContent={"space-between"}>
+              <p className="SwapSettingTitle">
+                <Trans>Slippage Tolerance</Trans>
+              </p>
+              <Stack
+                direction={"row"}
+                justifyContent={"flex-end"}
+                spacing={"8px"}
+              >
+                {/* <p>{slippage} %</p> */}
+                <LinkButton onClick={() => setOpenModal(true)}>
+                  <WriteIcon />
+                </LinkButton>
+              </Stack>
+            </SettingStack>
+          )}
 
           <SettingStack direction={"row"} justifyContent={"space-between"}>
             <p className="SwapSettingTitle">
@@ -303,22 +296,6 @@ const Swap: FC = () => {
               <LittleExchangeIcon onClick={exchangePrice}>
                 <SwapExchangeSmall />
               </LittleExchangeIcon>
-            </Stack>
-          </SettingStack>
-          <SettingStack direction={"row"} justifyContent={"space-between"}>
-            <Stack direction={"row"} spacing={"5px"} alignItems={"center"}>
-              <p className="SwapSettingTitle">
-                <Trans>Service Fee</Trans>
-              </p>
-              <NESTTooltipFC title={t`Service Fee` + " = 0.2%"} />
-            </Stack>
-
-            <Stack
-              direction={"row"}
-              justifyContent={"flex-end"}
-              spacing={"8px"}
-            >
-              <p>{showServiceFee}</p>
             </Stack>
           </SettingStack>
         </Stack>

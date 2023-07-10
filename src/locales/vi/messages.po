@@ -185,6 +185,7 @@ msgstr "Yêu cầu phê duyệt"
 
 #: src/hooks/useFuturesAdd.ts
 #: src/hooks/useFuturesNewOrder.ts
+#: src/hooks/useSwap.ts
 #: src/hooks/useTransactionReceipt.ts
 #: src/pages/Futures/Modal/ApproveNoticeModal.tsx
 msgid "Approve"
@@ -358,11 +359,6 @@ msgstr "Mô hình kinh tế giảm phát. Khi càng nhiều người dùng giao 
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "Disconnect"
 msgstr "Ngắt kết nối"
-
-#: src/hooks/useSwap.ts
-#: src/hooks/useSwap.ts
-msgid "Due to our new feature being in the trial phase, you are currently not on the whitelist or your transaction amount exceeds the limit. Please contact Admin in our official group chat(https://t.me/nest_chat), and they will assist you in raising the limit or adding you to the whitelist."
-msgstr "Do tính năng mới của chúng tôi đang trong giai đoạn thử nghiệm, hiện tại bạn không nằm trong danh sách cho phép hoặc số tiền giao dịch của bạn vượt quá giới hạn. Vui lòng liên hệ với Quản trị viên trong nhóm chat chính thức của chúng tôi (https://t.me/nest_chat), và họ sẽ hỗ trợ bạn tăng giới hạn hoặc thêm bạn vào danh sách cho phép."
 
 #: src/pages/Futures/Components/POrderList.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
@@ -670,16 +666,6 @@ msgstr "NESTFi, một thế hệ tiếp theo"
 msgid "NESTFi's new features enable you to open a position with a single click."
 msgstr "Các tính năng mới của NESTFi cho phép bạn mở vị thế chỉ bằng một cú nhấp chuột."
 
-#: src/hooks/useFuturesAdd.ts
-#: src/hooks/useFuturesClose.ts
-#: src/hooks/useFuturesEditLimit.ts
-#: src/hooks/useFuturesEditPosition.ts
-#: src/hooks/useFuturesNewOrder.ts
-#: src/hooks/useFuturesOrder.ts
-#: src/hooks/useSwap.ts
-msgid "NESTfi's trading services will be temporarily unavailable for approximately 1-2 hours due to the airdrop of NEST 2.0"
-msgstr "Dịch vụ giao dịch của NESTFi sẽ tạm thời không khả dụng trong khoảng 1-2 giờ do airdrop của NEST 2.0."
-
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "News"
 msgstr "Tin tức"
@@ -850,8 +836,6 @@ msgstr "Yêu cầu bán vị thế"
 #: src/pages/Futures/Modal/CloseModal.tsx
 #: src/pages/Futures/Modal/EditPositionModal.tsx
 #: src/pages/Futures/NewOrder.tsx
-#: src/pages/Swap/Swap.tsx
-#: src/pages/Swap/Swap.tsx
 msgid "Service Fee"
 msgstr "Phí dịch vụ"
 
@@ -897,6 +881,10 @@ msgstr "Dừng Lỗ"
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "SL Executed"
 msgstr ""
+
+#: src/pages/Swap/Swap.tsx
+msgid "Slippage Tolerance"
+msgstr "Dung sai Slippage"
 
 #: src/pages/Swap/Components/SwapSlippageModal.tsx
 msgid "Slippage Tolerance Setting"

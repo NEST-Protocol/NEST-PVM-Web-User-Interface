@@ -10,7 +10,6 @@ import { getPriceFromNESTLocal } from "../../lib/NESTRequest";
 // import FuturesNotice from "./Components/FuturesNotice";
 import { getQueryVariable } from "../../lib/queryVaribale";
 import Modal from "@mui/material/Modal";
-import StopTransactionModal from "../Share/Modal/StopTransactionModal";
 import Box from "@mui/material/Box";
 import FuturesNotice from "./Components/FuturesNotice";
 import ChangeNewTokenModal from "../Share/Modal/ChangeNewTokenModal";
@@ -23,7 +22,7 @@ const UPDATE_PRICE = 15;
 export const priceToken = ["ETH", "BTC", "BNB", "MATIC", "ADA", "DOGE", "XRP"];
 const Futures: FC = () => {
   const { width, isBigMobile } = useWindowWidth();
-  const {account} = useNEST()
+  const { account } = useNEST();
   const defaultTokenPair = useMemo(() => {
     let code = getQueryVariable("pt");
     if (code) {
@@ -44,18 +43,17 @@ const Futures: FC = () => {
   //   return isShow !== "1";
   // }, []);
   const [showNotice, setShowNotice] = useState<boolean>(true);
-  // TODO
-  const [openModal, setOpenModal] = useState(true);
+
   const openChangeModalDefault = useMemo(() => {
     if (account) {
       const isShow = localStorage.getItem("ChangeToken");
       return isShow !== "1";
     } else {
-      return false
+      return false;
     }
   }, [account]);
   const [openChangeModal, setOpenChangeModal] = useState(
-    false
+    openChangeModalDefault
   );
 
   const getPrice = useCallback(async () => {
@@ -213,7 +211,7 @@ const Futures: FC = () => {
               maxWidth={"1600px"}
               paddingY={`${paddingY}px`}
             >
-              {/* {notice} */}
+              {notice}
               <Stack
                 direction={"row"}
                 spacing={"16px"}
@@ -240,7 +238,7 @@ const Futures: FC = () => {
             paddingX={`${paddingX}px`}
           >
             <Stack spacing={"16px"} width={"100%"} paddingY={`${paddingY}px`}>
-              {/* {notice} */}
+              {notice}
 
               {exchangeTvChart()}
               {newOrder()}
@@ -250,20 +248,20 @@ const Futures: FC = () => {
           </Stack>
         );
     }
-  }, [width, paddingY, exchangeTvChart, orderList, newOrder, moreInfo, paddingX, isBigMobile]);
+  }, [
+    width,
+    paddingY,
+    notice,
+    exchangeTvChart,
+    orderList,
+    newOrder,
+    moreInfo,
+    paddingX,
+    isBigMobile,
+  ]);
 
   return (
     <>
-      <Modal
-        open={openModal}
-        onClose={() => setOpenModal(false)}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box>
-          <StopTransactionModal onClose={() => setOpenModal(false)} />
-        </Box>
-      </Modal>
       <Modal
         open={openChangeModal}
         onClose={() => setOpenChangeModal(false)}
@@ -273,9 +271,7 @@ const Futures: FC = () => {
         <Box>
           <ChangeNewTokenModal
             onClose={() => {
-              
               setOpenChangeModal(false);
-              
             }}
           />
         </Box>

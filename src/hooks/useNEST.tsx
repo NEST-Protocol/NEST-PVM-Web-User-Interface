@@ -11,7 +11,6 @@ import { NavItems, NavItemsForScroll } from "../pages/Share/Head/NESTHead";
 
 function useMainReact() {
   const [showConnect, setShowConnect] = useState(false);
-  const stopAll = true
 
   /**
    * wallet
@@ -101,8 +100,7 @@ function useMainReact() {
     chainsData,
     disconnect,
     navItems,
-    addNESTToWallet,
-    stopAll
+    addNESTToWallet
   };
 }
 const NEST = createContainer(useMainReact);
