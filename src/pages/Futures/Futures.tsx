@@ -213,7 +213,7 @@ const Futures: FC = () => {
               maxWidth={"1600px"}
               paddingY={`${paddingY}px`}
             >
-              {notice}
+              {/* {notice} */}
               <Stack
                 direction={"row"}
                 spacing={"16px"}
@@ -240,7 +240,7 @@ const Futures: FC = () => {
             paddingX={`${paddingX}px`}
           >
             <Stack spacing={"16px"} width={"100%"} paddingY={`${paddingY}px`}>
-              {notice}
+              {/* {notice} */}
 
               {exchangeTvChart()}
               {newOrder()}
@@ -250,17 +250,7 @@ const Futures: FC = () => {
           </Stack>
         );
     }
-  }, [
-    width,
-    paddingY,
-    notice,
-    exchangeTvChart,
-    orderList,
-    newOrder,
-    moreInfo,
-    paddingX,
-    isBigMobile,
-  ]);
+  }, [width, paddingY, exchangeTvChart, orderList, newOrder, moreInfo, paddingX, isBigMobile]);
 
   return (
     <>
