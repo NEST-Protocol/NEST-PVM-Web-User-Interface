@@ -8,12 +8,16 @@ import {
   usePendingTransactions,
 } from "./useTransactionReceipt";
 import { t } from "@lingui/macro";
+import useNEST from "./useNEST";
+import useNESTSnackBar from "./useNESTSnackBar";
 
 function useFuturesClose(
   data: FuturesOrderV2,
   price: FuturesPrice | undefined,
   onClose: () => void
 ) {
+  const { stopAll } = useNEST();
+  const { messageSnackBar } = useNESTSnackBar();
   const { isPendingOrder } = usePendingTransactions();
   const [send, setSend] = useState(false);
   const showPosition = useMemo(() => {
@@ -25,8 +29,8 @@ function useFuturesClose(
     return `${lever}X ${longOrShort} ${balance} NEST`;
   }, [data.balance, data.lever, data.orientation]);
   const tokenPair = useMemo(() => {
-    return priceToken[parseInt(data.channelIndex.toString())]
-  }, [data.channelIndex])
+    return priceToken[parseInt(data.channelIndex.toString())];
+  }, [data.channelIndex]);
 
   const closePrice = useMemo(() => {
     const nestBigNumber = BigNumber.from(data.balance.toString())
@@ -69,12 +73,22 @@ function useFuturesClose(
     } else {
       return undefined;
     }
-  }, [data.balance, data.basePrice, data.lever, data.orientation, price, tokenPair]);
+  }, [
+    data.balance,
+    data.basePrice,
+    data.lever,
+    data.orientation,
+    price,
+    tokenPair,
+  ]);
   const showClosePrice = useMemo(() => {
     if (!closePrice) {
       return String().placeHolder;
     }
-    return BigNumber.from(closePrice.toString()).bigNumberToShowPrice(18, tokenPair.getTokenPriceDecimals());
+    return BigNumber.from(closePrice.toString()).bigNumberToShowPrice(
+      18,
+      tokenPair.getTokenPriceDecimals()
+    );
   }, [closePrice, tokenPair]);
 
   const showFee = useMemo(() => {
@@ -127,10 +141,13 @@ function useFuturesClose(
     return false;
   }, []);
   const mainButtonAction = useCallback(() => {
-    if (!mainButtonLoading) {
+    if (stopAll) {
+      messageSnackBar(t`NESTfi's trading services will be temporarily unavailable for approximately 1-2 hours due to the airdrop of NEST 2.0`);
+      return;
+    } else if (!mainButtonLoading) {
       sell.write?.();
     }
-  }, [mainButtonLoading, sell]);
+  }, [mainButtonLoading, messageSnackBar, sell, stopAll]);
   return {
     showPosition,
     showClosePrice,

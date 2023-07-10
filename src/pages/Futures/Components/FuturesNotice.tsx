@@ -4,8 +4,8 @@ import useWindowWidth from "../../../hooks/useWindowWidth";
 import { Close, Notice } from "../../../components/icons";
 import MainButton from "../../../components/MainButton/MainButton";
 import Box from "@mui/material/Box";
-import LinkButton from "../../../components/MainButton/LinkButton";
 import { Trans, t } from "@lingui/macro";
+import useNEST from "../../../hooks/useNEST";
 
 interface FuturesNoticeProps {
   onClose: () => void;
@@ -13,6 +13,7 @@ interface FuturesNoticeProps {
 
 const FuturesNotice: FC<FuturesNoticeProps> = ({ ...props }) => {
   const { isBigMobile } = useWindowWidth();
+  const { addNESTToWallet } = useNEST();
   return (
     <Stack
       direction={"row"}
@@ -58,18 +59,9 @@ const FuturesNotice: FC<FuturesNoticeProps> = ({ ...props }) => {
 
         <p>
           <Trans>
-            For the positions opened before April 6, 2023, please go to→
+          NEST 2.0 token has been airdropped to your wallet, please add NEST 2.0 token to your wallet.  
           </Trans>
-          <span> </span>
-          <LinkButton
-            onClick={() => {
-              window.open("https://previous.nestfi.org");
-            }}
-            sx={{ fontSize: "14px" }}
-          >
-            previous.nestfi.org
-          </LinkButton>{" "}
-          <Trans>to check and close.</Trans>
+          
         </p>
       </Stack>
       <Stack
@@ -79,13 +71,11 @@ const FuturesNotice: FC<FuturesNoticeProps> = ({ ...props }) => {
         alignItems={"center"}
       >
         <MainButton
-          title={t`View`}
-          onClick={() => {
-            window.open("https://previous.nestfi.org/#/futures");
-          }}
+          title={t`Add NEST 2.0 to wallet`}
+          onClick={addNESTToWallet}
           style={{
-            height: "24px",
-            width: "49px",
+            height: "40px",
+            width: "130px",
             fontSize: 10,
             borderRadius: 4,
           }}
@@ -105,7 +95,6 @@ const FuturesNotice: FC<FuturesNoticeProps> = ({ ...props }) => {
             },
           })}
           onClick={() => {
-            localStorage.setItem("FuturesNoticeV1", "1");
             props.onClose();
           }}
         >

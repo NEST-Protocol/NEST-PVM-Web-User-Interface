@@ -9,12 +9,16 @@ import {
   usePendingTransactions,
 } from "./useTransactionReceipt";
 import { t } from "@lingui/macro";
+import useNEST from "./useNEST";
+import useNESTSnackBar from "./useNESTSnackBar";
 
 function useFuturesEditPosition(
   data: FuturesOrderV2,
   price: FuturesPrice | undefined,
   onClose: () => void
 ) {
+  const { stopAll } = useNEST();
+  const { messageSnackBar } = useNESTSnackBar();
   const { isPendingOrder } = usePendingTransactions();
   const [send, setSend] = useState(false);
   const tokenPair = useMemo(() => {
@@ -206,6 +210,9 @@ function useFuturesEditPosition(
   const mainButtonAction = useCallback(() => {
     if (mainButtonLoading || tpError || slError) {
       return;
+    } else if (stopAll) {
+      messageSnackBar(t`NESTfi's trading services will be temporarily unavailable for approximately 1-2 hours due to the airdrop of NEST 2.0`);
+      return;
     } else {
       if (checkShowTriggerNotice && !showedTriggerNotice) {
         setShowTriggerNotice(true);
@@ -217,8 +224,10 @@ function useFuturesEditPosition(
     checkShowTriggerNotice,
     edit,
     mainButtonLoading,
+    messageSnackBar,
     showedTriggerNotice,
     slError,
+    stopAll,
     tpError,
   ]);
   const closeTP = useCallback(() => {

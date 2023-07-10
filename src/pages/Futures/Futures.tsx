@@ -9,6 +9,12 @@ import ExchangeTVChart from "./ExchangeTVChart";
 import { getPriceFromNESTLocal } from "../../lib/NESTRequest";
 // import FuturesNotice from "./Components/FuturesNotice";
 import { getQueryVariable } from "../../lib/queryVaribale";
+import Modal from "@mui/material/Modal";
+import StopTransactionModal from "../Share/Modal/StopTransactionModal";
+import Box from "@mui/material/Box";
+import FuturesNotice from "./Components/FuturesNotice";
+import ChangeNewTokenModal from "../Share/Modal/ChangeNewTokenModal";
+import useNEST from "../../hooks/useNEST";
 
 export interface FuturesPrice {
   [key: string]: BigNumber;
@@ -17,6 +23,7 @@ const UPDATE_PRICE = 15;
 export const priceToken = ["ETH", "BTC", "BNB", "MATIC", "ADA", "DOGE", "XRP"];
 const Futures: FC = () => {
   const { width, isBigMobile } = useWindowWidth();
+  const {account} = useNEST()
   const defaultTokenPair = useMemo(() => {
     let code = getQueryVariable("pt");
     if (code) {
@@ -33,10 +40,24 @@ const Futures: FC = () => {
   const [basePrice, setBasePrice] = useState<FuturesPrice>();
   const [orderPrice, setOrderPrice] = useState<FuturesPrice>();
   // const showNoticeDefault = useMemo(() => {
-  //   const isShow = localStorage.getItem("FuturesNoticeV1");
+  //   const isShow = localStorage.getItem("FuturesNoticeChangeToken");
   //   return isShow !== "1";
   // }, []);
-  // const [showNotice, setShowNotice] = useState<boolean>(showNoticeDefault);
+  const [showNotice, setShowNotice] = useState<boolean>(true);
+  // TODO
+  const [openModal, setOpenModal] = useState(true);
+  const openChangeModalDefault = useMemo(() => {
+    if (account) {
+      const isShow = localStorage.getItem("ChangeToken");
+      return isShow !== "1";
+    } else {
+      return false
+    }
+  }, [account]);
+  const [openChangeModal, setOpenChangeModal] = useState(
+    false
+  );
+
   const getPrice = useCallback(async () => {
     const ETHPriceBase: { [key: string]: string } = await getPriceFromNESTLocal(
       "eth"
@@ -168,17 +189,17 @@ const Futures: FC = () => {
   const moreInfo = useCallback(() => {
     return <FuturesMoreInfo />;
   }, []);
-  // const notice = useMemo(() => {
-  //   return !showNotice ? (
-  //     <></>
-  //   ) : (
-  //     <FuturesNotice
-  //       onClose={() => {
-  //         setShowNotice(false);
-  //       }}
-  //     />
-  //   );
-  // }, [showNotice]);
+  const notice = useMemo(() => {
+    return !showNotice ? (
+      <></>
+    ) : (
+      <FuturesNotice
+        onClose={() => {
+          setShowNotice(false);
+        }}
+      />
+    );
+  }, [showNotice]);
 
   const mainView = useMemo(() => {
     switch (width) {
@@ -220,6 +241,7 @@ const Futures: FC = () => {
           >
             <Stack spacing={"16px"} width={"100%"} paddingY={`${paddingY}px`}>
               {/* {notice} */}
+
               {exchangeTvChart()}
               {newOrder()}
               {isBigMobile ? <></> : moreInfo()}
@@ -228,17 +250,39 @@ const Futures: FC = () => {
           </Stack>
         );
     }
-  }, [
-    width,
-    paddingY,
-    exchangeTvChart,
-    orderList,
-    newOrder,
-    moreInfo,
-    paddingX,
-    isBigMobile,
-  ]);
-  return <>{mainView}</>;
+  }, [width, paddingY, exchangeTvChart, orderList, newOrder, moreInfo, paddingX, isBigMobile]);
+
+  return (
+    <>
+      <Modal
+        open={openModal}
+        onClose={() => setOpenModal(false)}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box>
+          <StopTransactionModal onClose={() => setOpenModal(false)} />
+        </Box>
+      </Modal>
+      <Modal
+        open={openChangeModal}
+        onClose={() => setOpenChangeModal(false)}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box>
+          <ChangeNewTokenModal
+            onClose={() => {
+              
+              setOpenChangeModal(false);
+              
+            }}
+          />
+        </Box>
+      </Modal>
+      {mainView}
+    </>
+  );
 };
 
 export default Futures;

@@ -146,6 +146,11 @@ msgstr "Tiền Ký quỹ thực có"
 msgid "Add"
 msgstr "Thêm"
 
+#: src/pages/Futures/Components/FuturesNotice.tsx
+#: src/pages/Share/Modal/ChangeNewTokenModal.tsx
+msgid "Add NEST 2.0 to wallet"
+msgstr "Thêm NEST 2.0 vào ví"
+
 #: src/pages/DirectPoster/DirectPoster.tsx
 #: src/pages/Swap/Swap.tsx
 msgid "Add NEST to wallet"
@@ -322,6 +327,14 @@ msgstr "Chế độ tối"
 msgid "Dashboard"
 msgstr "Bảng điều khiển"
 
+#: src/pages/Share/Modal/ChangeNewTokenModal.tsx
+msgid "Dear NESTFi Community,"
+msgstr "Cộng đồng NESTFi thân mến,"
+
+#: src/pages/Share/Modal/StopTransactionModal.tsx
+msgid "Dear NESTfi Users,"
+msgstr "Kính gửi các người dùng NESTfi,"
+
 #: src/pages/Home/Home.tsx
 msgid "Decentralized"
 msgstr "Phi tập trung"
@@ -346,7 +359,7 @@ msgstr "Mô hình kinh tế giảm phát. Khi càng nhiều người dùng giao 
 msgid "Disconnect"
 msgstr "Ngắt kết nối"
 
-#: src/hooks/useFuturesNewOrder.ts
+#: src/hooks/useSwap.ts
 #: src/hooks/useSwap.ts
 msgid "Due to our new feature being in the trial phase, you are currently not on the whitelist or your transaction amount exceeds the limit. Please contact Admin in our official group chat(https://t.me/nest_chat), and they will assist you in raising the limit or adding you to the whitelist."
 msgstr "Do tính năng mới của chúng tôi đang trong giai đoạn thử nghiệm, hiện tại bạn không nằm trong danh sách cho phép hoặc số tiền giao dịch của bạn vượt quá giới hạn. Vui lòng liên hệ với Quản trị viên trong nhóm chat chính thức của chúng tôi (https://t.me/nest_chat), và họ sẽ hỗ trợ bạn tăng giới hạn hoặc thêm bạn vào danh sách cho phép."
@@ -355,6 +368,10 @@ msgstr "Do tính năng mới của chúng tôi đang trong giai đoạn thử ng
 #: src/pages/Futures/Components/POrderTable.tsx
 msgid "Due to the market volatility, the actual liquidation price may be different from the theoretical liquidation price . Here is the theoretical liquidation price, for reference only."
 msgstr "Do sự biến động của thị trường, giá thanh lý thực tế có thể khác với giá thanh lý lý thuyết. Dưới đây là giá thanh lý lý thuyết, chỉ để tham khảo."
+
+#: src/pages/Share/Modal/StopTransactionModal.tsx
+msgid "During the airdrop period, NESTfi's trading services will be temporarily unavailable for approximately 1-2 hours. This suspension is necessary to ensure a smooth and successful airdrop of NEST 2.0 tokens to all eligible participants. We apologize for any inconvenience caused during this temporary interruption of services."
+msgstr "Trong thời gian diễn ra airdrop, dịch vụ giao dịch của NESTfi sẽ tạm thời không khả dụng trong khoảng 1-2 giờ. Việc tạm ngừng này là cần thiết để đảm bảo một airdrop suôn sẻ và thành công của token NEST 2.0 cho tất cả các người tham gia đủ điều kiện. Chúng tôi xin lỗi vì bất kỳ bất tiện nào trong thời gian tạm ngừng dịch vụ này."
 
 #: src/hooks/useFuturesPOrder.ts
 #: src/pages/Futures/Components/OrderList.tsx
@@ -402,10 +419,6 @@ msgid ""
 msgstr ""
 "“Chỉ cần theo dõi đúng người, việc kiếm tiền dễ như là thở.\n"
 "”Bạn có thể theo dõi người có năng lực tốt trên NESTFi, đây là liên kết giới thiệu của tôi."
-
-#: src/pages/Futures/Components/FuturesNotice.tsx
-msgid "For the positions opened before April 6, 2023, please go to→"
-msgstr "Đối với các vị thế được mở trước ngày 6 tháng 4 năm 2023, vui lòng truy cập →"
 
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 #: src/pages/Futures/Modal/ProtocolModal.tsx
@@ -456,14 +469,23 @@ msgstr "Làm cách nào để bắt đầu?"
 
 #: src/pages/Futures/Modal/CloseOrderNoticeModal.tsx
 #: src/pages/Home/Modal/ApplyModal.tsx
+#: src/pages/Share/Modal/StopTransactionModal.tsx
 msgid "I understand"
 msgstr "Tôi hiểu."
+
+#: src/pages/Share/Modal/StopTransactionModal.tsx
+msgid "If you have any questions or require further assistance, please feel free to reach out to our support team. We are here to help and provide guidance throughout this process."
+msgstr "Nếu bạn có bất kỳ câu hỏi hoặc cần hỗ trợ thêm, xin vui lòng liên hệ với đội ngũ hỗ trợ của chúng tôi. Chúng tôi sẽ ở đây để giúp đỡ và cung cấp hướng dẫn trong suốt quá trình này."
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 msgid "Image"
 msgstr "Hình ảnh"
+
+#: src/pages/Share/Modal/StopTransactionModal.tsx
+msgid "Important Announcement: Temporary Suspension of Trading Services on NESTfi"
+msgstr "Thông báo Quan trọng: Tạm ngừng Tạm thời Dịch vụ Giao dịch trên NESTFi"
 
 #: src/pages/Home/Home.tsx
 msgid "Infinite Liquidity"
@@ -624,6 +646,10 @@ msgstr "Vị thế của tôi"
 msgid "My Total Trading Volume"
 msgstr "Tổng khối lượng giao dịch của tôi"
 
+#: src/pages/Futures/Components/FuturesNotice.tsx
+msgid "NEST 2.0 token has been airdropped to your wallet, please add NEST 2.0 token to your wallet."
+msgstr "Token NEST 2.0 đã được airdrop vào ví của bạn, vui lòng thêm token NEST 2.0 vào ví của bạn."
+
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "NEST Total Burned"
 msgstr "Tổng số NEST đã được đốt"
@@ -643,6 +669,16 @@ msgstr "NESTFi, một thế hệ tiếp theo"
 #: src/pages/Home/Home.tsx
 msgid "NESTFi's new features enable you to open a position with a single click."
 msgstr "Các tính năng mới của NESTFi cho phép bạn mở vị thế chỉ bằng một cú nhấp chuột."
+
+#: src/hooks/useFuturesAdd.ts
+#: src/hooks/useFuturesClose.ts
+#: src/hooks/useFuturesEditLimit.ts
+#: src/hooks/useFuturesEditPosition.ts
+#: src/hooks/useFuturesNewOrder.ts
+#: src/hooks/useFuturesOrder.ts
+#: src/hooks/useSwap.ts
+msgid "NESTfi's trading services will be temporarily unavailable for approximately 1-2 hours due to the airdrop of NEST 2.0"
+msgstr "Dịch vụ giao dịch của NESTFi sẽ tạm thời không khả dụng trong khoảng 1-2 giờ do airdrop của NEST 2.0."
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "News"
@@ -671,6 +707,10 @@ msgstr "Chưa có giao dịch mua bán nào"
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "No Transactions yet"
 msgstr "Chưa có lệnh giao dịch nào"
+
+#: src/pages/Share/Modal/StopTransactionModal.tsx
+msgid "Once the airdrop is completed, NESTfi will only support trading with NEST 2.0 tokens. The previous version of NEST tokens (NEST 1.0) will become obsolete and will no longer be accepted for trading or other activities on the platform."
+msgstr "Sau khi hoàn thành airdrop, NESTfi sẽ chỉ hỗ trợ giao dịch với token NEST 2.0. Phiên bản trước đó của token NEST (NEST 1.0) sẽ trở nên lỗi thời và sẽ không được chấp nhận cho giao dịch hoặc các hoạt động khác trên nền tảng."
 
 #: src/hooks/useFuturesNewOrder.ts
 msgid "Open"
@@ -730,6 +770,10 @@ msgstr "Vui lòng nhận token thử nghiệm ETH trước."
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 msgid "Please note that \"Limit order\" or \"Stop order\" is not guaranteed to be executed. This may include, but is not limited to, the following cases."
 msgstr "Vui lòng lưu ý rằng \"Lệnh giới hạn\"\\ hoặc \"Lệnh dừng\"\\ không được đảm bảo sẽ được thực hiện. Điều này có thể bao gồm, nhưng không giới hạn, các trường hợp sau đây."
+
+#: src/pages/Share/Modal/ChangeNewTokenModal.tsx
+msgid "Please note that NEST 1.0 tokens have been officially deprecated and will no longer be supported. To continue participating in the NESTFi ecosystem and enjoy its benefits, it is crucial that you add NEST 2.0 tokens to your wallet. We have provided a button below for your convenience to add NEST 2.0 tokens to your wallet effortlessly."
+msgstr "Xin lưu ý rằng token NEST 1.0 đã chính thức bị loại bỏ và sẽ không được hỗ trợ nữa. Để tiếp tục tham gia vào hệ sinh thái của NESTFi và tận hưởng các lợi ích của nó, việc bạn thêm token NEST 2.0 vào ví là rất quan trọng. Dưới đây là một nút bấm để bạn dễ dàng thêm token NEST 2.0 vào ví của mình."
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
@@ -839,6 +883,10 @@ msgstr "Chia sẻ"
 msgid "Short"
 msgstr "Bán"
 
+#: src/pages/Share/Modal/StopTransactionModal.tsx
+msgid "Sincerely,"
+msgstr "Trân trọng,"
+
 #: src/pages/Futures/Components/OrderTable.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
@@ -929,6 +977,14 @@ msgstr "Token mạng thử nghiệm"
 msgid "The balance is 0. You can go to \"Faucet\" to get test token before trading."
 msgstr "Số dư là 0. Bạn có thể đến \"Faucet\" để nhận token thử nghiệm trước khi giao dịch."
 
+#: src/pages/Share/Modal/StopTransactionModal.tsx
+msgid "The NESTfi Team"
+msgstr "Nhóm NESTfi"
+
+#: src/pages/Share/Modal/ChangeNewTokenModal.tsx
+msgid "The NESTFi Team"
+msgstr "Nhóm NESTfi"
+
 #: src/pages/Home/Home.tsx
 msgid "The smart contract guarantees infinite liquidity through burning and issuing $NEST."
 msgstr "Hợp đồng thông minh đảm bảo tính thanh khoản vô hạn thông qua việc đốt và phát hành $NEST."
@@ -949,10 +1005,6 @@ msgstr "Giao dịch thất bại và số tiền đã được hoàn trả đầ
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "Time"
 msgstr "Thời gian"
-
-#: src/pages/Futures/Components/FuturesNotice.tsx
-msgid "to check and close."
-msgstr "để kiểm tra và đóng."
 
 #: src/pages/Swap/Components/SwapInputItem.tsx
 msgid "To(Estimated)"
@@ -1100,18 +1152,29 @@ msgstr "Chưa thanh toán"
 msgid "Unsettled Commissions"
 msgstr "Hoa hồng chưa được thanh toán"
 
+#: src/pages/Share/Modal/ChangeNewTokenModal.tsx
+msgid "Update: NEST 2.0 Airdrop Completed - NESTFi Services Now Available"
+msgstr "Cập nhật: Airdrop NEST 2.0 Hoàn tất - Dịch vụ NESTFi Đã Khả dụng"
+
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "User Guide"
 msgstr "Hướng dẫn sử dụng"
 
 #: src/components/SnackBar/NormalSnackBar.tsx
-#: src/pages/Futures/Components/FuturesNotice.tsx
 msgid "View"
 msgstr "Xem"
 
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "Wallet"
 msgstr "Ví"
+
+#: src/pages/Share/Modal/ChangeNewTokenModal.tsx
+msgid "We are delighted to inform you that the NEST 2.0 token airdrop has been successfully completed. As a result, NESTFi services are now fully operational, and you can resume using the platform as usual."
+msgstr "Chúng tôi rất vui mừng thông báo rằng airdrop token NEST 2.0 đã được hoàn thành thành công. Như vậy, dịch vụ của NESTFi hiện đã hoạt động đầy đủ và bạn có thể tiếp tục sử dụng nền tảng như bình thường."
+
+#: src/pages/Share/Modal/StopTransactionModal.tsx
+msgid "We would like to inform you about an upcoming event regarding the NEST token. We are currently conducting an airdrop of NEST 2.0 tokens, which will bring significant upgrades and improvements to the NEST protocol."
+msgstr "Chúng tôi xin thông báo về sự kiện sắp diễn ra liên quan đến token NEST. Hiện tại, chúng tôi đang tiến hành airdrop token NEST 2.0, đồng thời mang đến nâng cấp và cải tiến đáng kể cho giao thức NEST."
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "White Paper"

@@ -66,7 +66,7 @@ function useFuturesNewOrder(
   tokenPair: string
 ) {
   const { isPendingType } = usePendingTransactions();
-  const { account, chainsData, setShowConnect } = useNEST();
+  const { account, chainsData, setShowConnect, stopAll } = useNEST();
   const [longOrShort, setLongOrShort] = useState(true);
   const [tabsValue, setTabsValue] = useState(0);
   const [nestAmount, setNestAmount] = useState("");
@@ -276,16 +276,16 @@ function useFuturesNewOrder(
       return BigNumber.from("0");
     }
   }, [basePrice, checkAllowance, checkBalance, inputAmount]);
-  const checkAllowNEST = useMemo(() => {
-    if (nestAllowAmount) {
-      // NEST decimals:4, need mul 10^14
-      return inputNESTTransaction
-        .mul(BigNumber.from("100000000000000"))
-        .lte(nestAllowAmount);
-    } else {
-      return false;
-    }
-  }, [inputNESTTransaction, nestAllowAmount]);
+  // const checkAllowNEST = useMemo(() => {
+  //   if (nestAllowAmount) {
+  //     // NEST decimals:4, need mul 10^14
+  //     return inputNESTTransaction
+  //       .mul(BigNumber.from("100000000000000"))
+  //       .lte(nestAllowAmount);
+  //   } else {
+  //     return false;
+  //   }
+  // }, [inputNESTTransaction, nestAllowAmount]);
   const { transaction: tokenApprove } = useTokenApprove(
     (nowToken ?? String().zeroAddress) as `0x${string}`,
     futureContract,
@@ -483,25 +483,34 @@ function useFuturesNewOrder(
       setShowConnect(true);
     } else if (mainButtonLoading || !checkBalance || stopDis) {
       return;
+    } else if (stopAll) {
+      messageSnackBar(
+        t`NESTfi's trading services will be temporarily unavailable for approximately 1-2 hours due to the airdrop of NEST 2.0`
+      );
+      return;
     } else if (!checkAllowance) {
       setShowApproveNotice(true);
     } else {
-      if (!checkAllowNEST && chainsData.chainId !== 534353) {
-        messageSnackBar(
-          t`Due to our new feature being in the trial phase, you are currently not on the whitelist or your transaction amount exceeds the limit. Please contact Admin in our official group chat(https://t.me/nest_chat), and they will assist you in raising the limit or adding you to the whitelist.`
-        );
-      } else {
-        if (checkShowTriggerNotice && !showedTriggerNotice) {
-          setShowTriggerNotice(true);
-          return;
-        }
-        baseAction();
+      if (checkShowTriggerNotice && !showedTriggerNotice) {
+        setShowTriggerNotice(true);
+        return;
       }
+      baseAction();
+
+      // if (!checkAllowNEST && chainsData.chainId !== 534353) {
+      //   messageSnackBar(
+      //     t`Due to our new feature being in the trial phase, you are currently not on the whitelist or your transaction amount exceeds the limit. Please contact Admin in our official group chat(https://t.me/nest_chat), and they will assist you in raising the limit or adding you to the whitelist.`
+      //   );
+      // } else {
+      //   if (checkShowTriggerNotice && !showedTriggerNotice) {
+      //     setShowTriggerNotice(true);
+      //     return;
+      //   }
+      //   baseAction();
+      // }
     }
   }, [
     baseAction,
-    chainsData.chainId,
-    checkAllowNEST,
     checkAllowance,
     checkBalance,
     checkShowTriggerNotice,
@@ -510,6 +519,7 @@ function useFuturesNewOrder(
     messageSnackBar,
     setShowConnect,
     showedTriggerNotice,
+    stopAll,
     stopDis,
   ]);
   const lastPriceButton = useCallback(() => {

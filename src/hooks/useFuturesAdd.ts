@@ -16,13 +16,15 @@ import {
   usePendingTransactions,
 } from "./useTransactionReceipt";
 import { t } from "@lingui/macro";
+import useNESTSnackBar from "./useNESTSnackBar";
 
 function useFuturesAdd(
   data: FuturesOrderV2,
   price: FuturesPrice | undefined,
   onClose: () => void
 ) {
-  const { account, chainsData } = useNEST();
+  const { account, chainsData, stopAll } = useNEST();
+  const { messageSnackBar } = useNESTSnackBar();
   const [nestAmount, setNestAmount] = useState("");
   const { isPendingOrder, isPendingType } = usePendingTransactions();
   const [send, setSend] = useState(false);
@@ -33,8 +35,8 @@ function useFuturesAdd(
     }
   }, [chainsData.chainId]);
   const tokenPair = useMemo(() => {
-    return priceToken[parseInt(data.channelIndex.toString())]
-  }, [data.channelIndex])
+    return priceToken[parseInt(data.channelIndex.toString())];
+  }, [data.channelIndex]);
   /**
    * futures contract
    */
@@ -149,14 +151,20 @@ function useFuturesAdd(
         ? BigNumber.from("0")
         : nestAmount.stringToBigNumber(4)!,
       data.lever,
-      price
-        ? price[tokenPair]
-        : data.basePrice,
+      price ? price[tokenPair] : data.basePrice,
       data.basePrice,
       data.orientation
     );
     return result.bigNumberToShowPrice(18, tokenPair.getTokenPriceDecimals());
-  }, [data.balance, data.basePrice, data.lever, data.orientation, nestAmount, price, tokenPair]);
+  }, [
+    data.balance,
+    data.basePrice,
+    data.lever,
+    data.orientation,
+    nestAmount,
+    price,
+    tokenPair,
+  ]);
   /**
    * main button
    */
@@ -206,12 +214,23 @@ function useFuturesAdd(
   const mainButtonAction = useCallback(() => {
     if (mainButtonLoading || !checkBalance) {
       return;
+    } else if (stopAll) {
+      messageSnackBar(t`NESTfi's trading services will be temporarily unavailable for approximately 1-2 hours due to the airdrop of NEST 2.0`);
+      return;
     } else if (!checkAllowance) {
       tokenApprove.write?.();
     } else {
       add.write?.();
     }
-  }, [add, checkAllowance, checkBalance, mainButtonLoading, tokenApprove]);
+  }, [
+    add,
+    checkAllowance,
+    checkBalance,
+    mainButtonLoading,
+    messageSnackBar,
+    stopAll,
+    tokenApprove,
+  ]);
   return {
     checkBalance,
     showToSwap,
