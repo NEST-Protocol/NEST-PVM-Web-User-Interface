@@ -2,7 +2,7 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
-import { FC, useState } from "react";
+import { FC, useMemo, useState } from "react";
 import {
   Add,
   SwapExchangeBig,
@@ -17,6 +17,7 @@ import { Trans, t } from "@lingui/macro";
 import useNEST from "../../hooks/useNEST";
 import { NESTTooltipFC } from "../../components/NESTTooltip/NESTTooltip";
 import StopTransactionModal from "../Share/Modal/StopTransactionModal";
+import ChangeNewTokenModal from "../Share/Modal/ChangeNewTokenModal";
 
 const SwapBaseStack = styled(Stack)(({ theme }) => {
   return {
@@ -37,9 +38,21 @@ const SwapBaseStack = styled(Stack)(({ theme }) => {
 
 const Swap: FC = () => {
   const { isMobile } = useWindowWidth();
-  const { addNESTToWallet } = useNEST();
+  const { addNESTToWallet, account } = useNEST();
   const [openModal, setOpenModal] = useState(false);
-  const [openModalForStop, setOpenModalForStop] = useState(true);
+  // TODO
+  const [openModalForStop, setOpenModalForStop] = useState(false);
+  const openChangeModalDefault = useMemo(() => {
+    if (account) {
+      const isShow = localStorage.getItem("ChangeToken");
+      return isShow !== "1";
+    } else {
+      return false;
+    }
+  }, [account]);
+  const [openChangeModal, setOpenChangeModal] = useState(
+    openChangeModalDefault
+  );
   const {
     swapToken,
     exchangeButton,
@@ -149,6 +162,20 @@ const Swap: FC = () => {
       >
         <Box>
           <StopTransactionModal onClose={() => setOpenModalForStop(false)} />
+        </Box>
+      </Modal>
+      <Modal
+        open={openChangeModal}
+        onClose={() => setOpenChangeModal(false)}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box>
+          <ChangeNewTokenModal
+            onClose={() => {
+              setOpenChangeModal(false);
+            }}
+          />
         </Box>
       </Modal>
       <SwapBaseStack

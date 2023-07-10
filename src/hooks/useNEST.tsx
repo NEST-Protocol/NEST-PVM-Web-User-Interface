@@ -11,7 +11,7 @@ import { NavItems, NavItemsForScroll } from "../pages/Share/Head/NESTHead";
 
 function useMainReact() {
   const [showConnect, setShowConnect] = useState(false);
-  const stopAll = true
+  const stopAll = false
 
   /**
    * wallet

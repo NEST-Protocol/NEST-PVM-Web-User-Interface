@@ -12,6 +12,9 @@ import { getQueryVariable } from "../../lib/queryVaribale";
 import Modal from "@mui/material/Modal";
 import StopTransactionModal from "../Share/Modal/StopTransactionModal";
 import Box from "@mui/material/Box";
+import FuturesNotice from "./Components/FuturesNotice";
+import ChangeNewTokenModal from "../Share/Modal/ChangeNewTokenModal";
+import useNEST from "../../hooks/useNEST";
 
 export interface FuturesPrice {
   [key: string]: BigNumber;
@@ -20,6 +23,7 @@ const UPDATE_PRICE = 15;
 export const priceToken = ["ETH", "BTC", "BNB", "MATIC", "ADA", "DOGE", "XRP"];
 const Futures: FC = () => {
   const { width, isBigMobile } = useWindowWidth();
+  const {account} = useNEST()
   const defaultTokenPair = useMemo(() => {
     let code = getQueryVariable("pt");
     if (code) {
@@ -35,8 +39,24 @@ const Futures: FC = () => {
   const [tokenPair, setTokenPair] = useState(defaultTokenPair);
   const [basePrice, setBasePrice] = useState<FuturesPrice>();
   const [orderPrice, setOrderPrice] = useState<FuturesPrice>();
-
-  const [openModal, setOpenModal] = useState(true);
+  // const showNoticeDefault = useMemo(() => {
+  //   const isShow = localStorage.getItem("FuturesNoticeChangeToken");
+  //   return isShow !== "1";
+  // }, []);
+  const [showNotice, setShowNotice] = useState<boolean>(true);
+  // TODO
+  const [openModal, setOpenModal] = useState(false);
+  const openChangeModalDefault = useMemo(() => {
+    if (account) {
+      const isShow = localStorage.getItem("ChangeToken");
+      return isShow !== "1";
+    } else {
+      return false
+    }
+  }, [account]);
+  const [openChangeModal, setOpenChangeModal] = useState(
+    openChangeModalDefault
+  );
 
   const getPrice = useCallback(async () => {
     const ETHPriceBase: { [key: string]: string } = await getPriceFromNESTLocal(
@@ -169,17 +189,17 @@ const Futures: FC = () => {
   const moreInfo = useCallback(() => {
     return <FuturesMoreInfo />;
   }, []);
-  // const notice = useMemo(() => {
-  //   return !showNotice ? (
-  //     <></>
-  //   ) : (
-  //     <FuturesNotice
-  //       onClose={() => {
-  //         setShowNotice(false);
-  //       }}
-  //     />
-  //   );
-  // }, [showNotice]);
+  const notice = useMemo(() => {
+    return !showNotice ? (
+      <></>
+    ) : (
+      <FuturesNotice
+        onClose={() => {
+          setShowNotice(false);
+        }}
+      />
+    );
+  }, [showNotice]);
 
   const mainView = useMemo(() => {
     switch (width) {
@@ -193,7 +213,7 @@ const Futures: FC = () => {
               maxWidth={"1600px"}
               paddingY={`${paddingY}px`}
             >
-              {/* {notice} */}
+              {notice}
               <Stack
                 direction={"row"}
                 spacing={"16px"}
@@ -220,7 +240,7 @@ const Futures: FC = () => {
             paddingX={`${paddingX}px`}
           >
             <Stack spacing={"16px"} width={"100%"} paddingY={`${paddingY}px`}>
-              {/* {notice} */}
+              {notice}
 
               {exchangeTvChart()}
               {newOrder()}
@@ -233,6 +253,7 @@ const Futures: FC = () => {
   }, [
     width,
     paddingY,
+    notice,
     exchangeTvChart,
     orderList,
     newOrder,
@@ -240,6 +261,7 @@ const Futures: FC = () => {
     paddingX,
     isBigMobile,
   ]);
+
   return (
     <>
       <Modal
@@ -250,6 +272,22 @@ const Futures: FC = () => {
       >
         <Box>
           <StopTransactionModal onClose={() => setOpenModal(false)} />
+        </Box>
+      </Modal>
+      <Modal
+        open={openChangeModal}
+        onClose={() => setOpenChangeModal(false)}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box>
+          <ChangeNewTokenModal
+            onClose={() => {
+              
+              setOpenChangeModal(false);
+              
+            }}
+          />
         </Box>
       </Modal>
       {mainView}

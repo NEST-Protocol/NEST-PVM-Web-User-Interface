@@ -6,6 +6,7 @@ import MainButton from "../../../components/MainButton/MainButton";
 import Box from "@mui/material/Box";
 import LinkButton from "../../../components/MainButton/LinkButton";
 import { Trans, t } from "@lingui/macro";
+import useNEST from "../../../hooks/useNEST";
 
 interface FuturesNoticeProps {
   onClose: () => void;
@@ -13,6 +14,7 @@ interface FuturesNoticeProps {
 
 const FuturesNotice: FC<FuturesNoticeProps> = ({ ...props }) => {
   const { isBigMobile } = useWindowWidth();
+  const { addNESTToWallet } = useNEST();
   return (
     <Stack
       direction={"row"}
@@ -79,13 +81,11 @@ const FuturesNotice: FC<FuturesNoticeProps> = ({ ...props }) => {
         alignItems={"center"}
       >
         <MainButton
-          title={t`View`}
-          onClick={() => {
-            window.open("https://previous.nestfi.org/#/futures");
-          }}
+          title={t`Add NEST to wallet`}
+          onClick={addNESTToWallet}
           style={{
             height: "24px",
-            width: "49px",
+            width: "130px",
             fontSize: 10,
             borderRadius: 4,
           }}
@@ -105,7 +105,6 @@ const FuturesNotice: FC<FuturesNoticeProps> = ({ ...props }) => {
             },
           })}
           onClick={() => {
-            localStorage.setItem("FuturesNoticeV1", "1");
             props.onClose();
           }}
         >
