@@ -16,15 +16,13 @@ import {
   usePendingTransactions,
 } from "./useTransactionReceipt";
 import { t } from "@lingui/macro";
-import useNESTSnackBar from "./useNESTSnackBar";
 
 function useFuturesAdd(
   data: FuturesOrderV2,
   price: FuturesPrice | undefined,
   onClose: () => void
 ) {
-  const { account, chainsData, stopAll } = useNEST();
-  const { messageSnackBar } = useNESTSnackBar();
+  const { account, chainsData } = useNEST();
   const [nestAmount, setNestAmount] = useState("");
   const { isPendingOrder, isPendingType } = usePendingTransactions();
   const [send, setSend] = useState(false);
@@ -214,9 +212,6 @@ function useFuturesAdd(
   const mainButtonAction = useCallback(() => {
     if (mainButtonLoading || !checkBalance) {
       return;
-    } else if (stopAll) {
-      messageSnackBar(t`NESTfi's trading services will be temporarily unavailable for approximately 1-2 hours due to the airdrop of NEST 2.0`);
-      return;
     } else if (!checkAllowance) {
       tokenApprove.write?.();
     } else {
@@ -227,8 +222,6 @@ function useFuturesAdd(
     checkAllowance,
     checkBalance,
     mainButtonLoading,
-    messageSnackBar,
-    stopAll,
     tokenApprove,
   ]);
   return {

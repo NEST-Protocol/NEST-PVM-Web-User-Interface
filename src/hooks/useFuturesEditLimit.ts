@@ -8,12 +8,8 @@ import {
 import { BigNumber } from "ethers";
 import { t } from "@lingui/macro";
 import { priceToken } from "../pages/Futures/Futures";
-import useNESTSnackBar from "./useNESTSnackBar";
-import useNEST from "./useNEST";
 
 function useFuturesEditLimit(data: FuturesOrderV2, onClose: () => void) {
-  const { stopAll } = useNEST();
-  const { messageSnackBar } = useNESTSnackBar();
   const { isPendingOrder } = usePendingTransactions();
   const [send, setSend] = useState(false);
   const tokenPair = useMemo(() => {
@@ -65,15 +61,12 @@ function useFuturesEditLimit(data: FuturesOrderV2, onClose: () => void) {
     return false;
   }, []);
   const mainButtonAction = useCallback(() => {
-    if (stopAll) {
-      messageSnackBar(t`NESTfi's trading services will be temporarily unavailable for approximately 1-2 hours due to the airdrop of NEST 2.0`);
-      return;
-    } else if (mainButtonLoading) {
+    if (mainButtonLoading) {
       return;
     } else {
       edit.write?.();
     }
-  }, [edit, mainButtonLoading, messageSnackBar, stopAll]);
+  }, [edit, mainButtonLoading]);
   return {
     limitPrice,
     setLimitPrice,

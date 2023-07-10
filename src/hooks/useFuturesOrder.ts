@@ -9,12 +9,8 @@ import {
   usePendingTransactions,
 } from "./useTransactionReceipt";
 import { t } from "@lingui/macro";
-import useNEST from "./useNEST";
-import useNESTSnackBar from "./useNESTSnackBar";
 
 function useFuturesOrder(data: FuturesOrderV2) {
-  const { stopAll } = useNEST();
-  const { messageSnackBar } = useNESTSnackBar();
   const { isPendingOrder } = usePendingTransactions();
   const tokenName = priceToken[parseInt(data.channelIndex.toString())];
   const isLong = data.orientation;
@@ -59,13 +55,10 @@ function useFuturesOrder(data: FuturesOrderV2) {
   const mainButtonAction = useCallback(() => {
     if (mainButtonLoading) {
       return;
-    } else if (stopAll) {
-      messageSnackBar(t`NESTfi's trading services will be temporarily unavailable for approximately 1-2 hours due to the airdrop of NEST 2.0`);
-      return;
     } else {
       closeLimit.write?.();
     }
-  }, [closeLimit, mainButtonLoading, messageSnackBar, stopAll]);
+  }, [closeLimit, mainButtonLoading]);
   const tp = useMemo(() => {
     const tpNum = data.stopProfitPrice;
     return BigNumber.from("0").eq(tpNum)

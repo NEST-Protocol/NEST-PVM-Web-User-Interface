@@ -1,16 +1,22 @@
-import { parseEther, parseUnits } from "ethers/lib/utils.js";
+import { parseUnits } from "ethers/lib/utils.js";
+import { MaxUint256 } from "@ethersproject/constants";
 import { BigNumber } from "ethers";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import useReadTokenBalance from "../contracts/Read/useReadTokenContract";
+import useReadTokenBalance, {
+  useReadTokenAllowance,
+} from "../contracts/Read/useReadTokenContract";
 import useNEST from "./useNEST";
+import useReadSwapAmountOut from "../contracts/Read/useReadSwapContract";
+import { NESTRedeemContract, SwapContract } from "../contracts/contractAddress";
+import useTokenApprove from "../contracts/useTokenContract";
+import useSwapExactTokensForTokens, {
+  useSwapNHBTCToNEST,
+} from "../contracts/useSwapContract";
 import {
   TransactionType,
   usePendingTransactions,
 } from "./useTransactionReceipt";
 import { t } from "@lingui/macro";
-import { getNESTAmountForAll, getPriceFromNESTLocal } from "../lib/NESTRequest";
-import { useTokenTransfer } from "../contracts/useTokenContract";
-import useNESTSnackBar from "./useNESTSnackBar";
 
 interface SwapToken {
   src: string;
@@ -20,28 +26,69 @@ interface SwapToken {
 const SWAP_UPDATE = 30;
 
 function useSwap() {
-  const { chainsData, account, setShowConnect, stopAll } = useNEST();
+  const { chainsData, account, setShowConnect } = useNEST();
   const swapTokenOfChain = useCallback(() => {
-    return {
-      src: "USDT",
-      dest: "NEST",
-    };
-  }, []);
+    if (chainsData.chainId === 1) {
+      return {
+        src: "NHBTC",
+        dest: "NEST",
+      };
+    } else {
+      return {
+        src: "USDT",
+        dest: "NEST",
+      };
+    }
+  }, [chainsData.chainId]);
   const [swapToken, setSwapToken] = useState<SwapToken>(swapTokenOfChain());
   const [slippage, setSlippage] = useState<number>(0.1);
   const [inputAmount, setInputAmount] = useState<string>("");
   const [outAmount, setOutAmount] = useState<string>("");
   const [samePrice, setSamePrice] = useState<boolean>(true);
-  const [nestPrice, setNestPrice] = useState<BigNumber>();
-  const [nestAmount, setNestAmount] = useState<BigNumber | undefined>();
   const { isPendingType } = usePendingTransactions();
-  const { messageSnackBar } = useNESTSnackBar();
   const tokenArray = useMemo(() => {
-    return ["USDT", "NEST"];
-  }, []);
+    if (chainsData.chainId === 1 || chainsData.chainId === 5) {
+      return ["NHBTC"];
+    } else if (chainsData.chainId === 56 || chainsData.chainId === 97) {
+      return ["USDT", "NEST"];
+    }
+  }, [chainsData.chainId]);
   useEffect(() => {
     setSwapToken(swapTokenOfChain());
   }, [swapTokenOfChain]);
+  /**
+   * swap contract
+   */
+  const swapContract = useMemo(() => {
+    if (chainsData.chainId && swapToken.src === "NHBTC") {
+      return NESTRedeemContract[chainsData.chainId];
+    } else if (chainsData.chainId) {
+      return SwapContract[chainsData.chainId];
+    } else {
+      return undefined;
+    }
+  }, [chainsData.chainId, swapToken.src]);
+  const swapPath = useMemo(() => {
+    if (swapToken.src === "NHBTC") {
+      return ["NHBTC", "NEST"];
+    } else if (swapToken.src === "USDT") {
+      return ["USDT", "NEST"];
+    } else if (swapToken.src === "NEST") {
+      return ["NEST", "USDT"];
+    } else {
+      return undefined;
+    }
+  }, [swapToken.src]);
+  const swapPathAddress = useMemo(() => {
+    if (swapPath && chainsData.chainId) {
+      const pathAddress = swapPath.map((item) => {
+        return item.getToken()!.address[chainsData.chainId!];
+      });
+      return pathAddress;
+    } else {
+      return undefined;
+    }
+  }, [chainsData.chainId, swapPath]);
 
   /**
    * swap token address
@@ -90,37 +137,77 @@ function useSwap() {
     }
   }, [inputAmount, scrDecimals]);
 
+  const { uniSwapAmountOut, uniSwapAmountOutRefetch } = useReadSwapAmountOut(
+    inputToBigNumber && !inputToBigNumber.eq(BigNumber.from("0"))
+      ? inputToBigNumber
+      : "1".stringToBigNumber(18)!,
+    [scrAddress ?? String().zeroAddress, destAddress ?? String().zeroAddress]
+  );
+
+  const amountOutMin = useMemo(() => {
+    if (uniSwapAmountOut) {
+      return uniSwapAmountOut[1].sub(
+        uniSwapAmountOut[1]
+          .mul(BigNumber.from((slippage * 10).toString()))
+          .div(BigNumber.from("1000"))
+      );
+    } else {
+      return MaxUint256;
+    }
+  }, [slippage, uniSwapAmountOut]);
+
   const showPrice = useMemo(() => {
-    if (nestPrice) {
-      const nest_usdt = nestPrice;
-      const usdt_nest = parseEther("1").mul(parseUnits("1", 18)).div(nestPrice);
-      if (swapToken.src === "USDT") {
+    if (inputAmount === "") {
+      const destToken = swapToken.src.getToken();
+      if (swapToken.src === "NHBTC") {
         if (samePrice) {
-          return `1 ${swapToken.dest} = ${nest_usdt.bigNumberToShowString(
-            18,
-            6
-          )} ${swapToken.src}`;
+          return `1 ${swapToken.src} = 0.5 ${swapToken.dest}`;
         } else {
-          return `1 ${swapToken.src} = ${usdt_nest.bigNumberToShowString(
-            18,
-            6
-          )} ${swapToken.dest}`;
+          return `1 ${swapToken.dest} = 2 ${swapToken.src}`;
+        }
+      } else if (uniSwapAmountOut && destToken && destDecimals) {
+        if (samePrice) {
+          return `1 ${
+            swapToken.src
+          } = ${uniSwapAmountOut[1].bigNumberToShowString(destDecimals, 6)} ${
+            swapToken.dest
+          }`;
+        } else {
+          const out = parseUnits("1", destDecimals)
+            .mul(parseUnits("1", 18))
+            .div(uniSwapAmountOut[1]);
+          return `1 ${swapToken.dest} = ${out.bigNumberToShowString(18, 6)} ${
+            swapToken.src
+          }`;
         }
       } else {
+        return String().placeHolder;
+      }
+    } else {
+      if (outAmount) {
+        const inputNum = parseFloat(inputAmount) === 0 ? "1" : inputAmount;
         if (samePrice) {
-          return `1 ${swapToken.dest} = ${usdt_nest.bigNumberToShowString(
-            18,
-            6
-          )} ${swapToken.src}`;
+          const out = parseFloat(outAmount) / parseFloat(inputNum);
+          return `1 ${swapToken.src} = ${parseFloat(out.toFixed(6))} ${
+            swapToken.dest
+          }`;
         } else {
-          return `1 ${swapToken.src} = ${nest_usdt.bigNumberToShowString(
-            18,
-            6
-          )} ${swapToken.dest}`;
+          const out = parseFloat(inputNum) / parseFloat(outAmount);
+          return `1 ${swapToken.dest} = ${parseFloat(out.toFixed(6))} ${
+            swapToken.src
+          }`;
         }
       }
     }
-  }, [nestPrice, samePrice, swapToken.dest, swapToken.src]);
+  }, [
+    destDecimals,
+    inputAmount,
+    outAmount,
+    samePrice,
+    swapToken.dest,
+    swapToken.src,
+    uniSwapAmountOut,
+  ]);
 
   /**
    * balance
@@ -134,6 +221,15 @@ function useSwap() {
     useReadTokenBalance(
       (destAddress ?? String().zeroAddress) as `0x${string}`,
       account.address ?? ""
+    );
+  /**
+   * allowance
+   */
+  const { allowance: srcAllowance, allowanceRefetch: srcRefetch } =
+    useReadTokenAllowance(
+      (scrAddress ?? String().zeroAddress) as `0x${string}`,
+      account.address,
+      swapContract
     );
   /**
    * max button
@@ -185,10 +281,20 @@ function useSwap() {
       return String().placeHolder;
     }
   }, [destBalance, swapToken.dest, chainsData.chainId]);
-
+  const hideSetting = useMemo(() => {
+    return swapToken.src === "NHBTC";
+  }, [swapToken.src]);
   /**
    * check
    */
+  const checkAllowance = useMemo(() => {
+    if (scrDecimals && srcAllowance) {
+      const inputBigNumber = inputToBigNumber ?? BigNumber.from("0");
+      return inputBigNumber.lte(srcAllowance);
+    } else {
+      return true;
+    }
+  }, [inputToBigNumber, scrDecimals, srcAllowance]);
   const checkBalance = useMemo(() => {
     if (scrDecimals && scrBalance) {
       const inputBigNumber = inputToBigNumber ?? BigNumber.from("0");
@@ -201,37 +307,24 @@ function useSwap() {
    * action
    */
   const inputAmountTransaction = useMemo(() => {
-    if (inputToBigNumber && checkBalance) {
+    if (inputToBigNumber && checkAllowance && checkBalance) {
       return inputToBigNumber;
     } else {
       return BigNumber.from("0");
     }
-  }, [checkBalance, inputToBigNumber]);
-
-  const checkAllowNEST = useMemo(() => {
-    if (nestAmount) {
-      return inputAmountTransaction.lte(nestAmount);
-    } else {
-      return false;
-    }
-  }, [inputAmountTransaction, nestAmount]);
-
-  const { transaction: swap } = useTokenTransfer(
-    scrAddress as `0x${string}`,
-    inputAmountTransaction
+  }, [checkAllowance, checkBalance, inputToBigNumber]);
+  const { transaction: tokenApprove } = useTokenApprove(
+    (scrAddress ?? String().zeroAddress) as `0x${string}`,
+    swapContract,
+    MaxUint256
   );
-
-  const showServiceFee = useMemo(() => {
-    if (swapToken.src === "NEST") {
-      return (
-        inputAmountTransaction.mul(2).div(1000).bigNumberToShowString(18, 2) +
-        " NEST"
-      );
-    } else {
-      return ((parseFloat(outAmount) * 2) / 1000).toFixed(2) + " NEST";
-    }
-  }, [inputAmountTransaction, outAmount, swapToken.src]);
-
+  const { transaction: swapTTT } = useSwapExactTokensForTokens(
+    inputAmountTransaction,
+    amountOutMin,
+    swapPathAddress,
+    account.address
+  );
+  const { transaction: swapNHBTC } = useSwapNHBTCToNEST(inputAmountTransaction);
   /**
    * show button title
    */
@@ -240,20 +333,25 @@ function useSwap() {
       return t`Connect Wallet`;
     } else if (!checkBalance) {
       return `${t`Insufficient`} ${swapToken.src} ${t`balance`}`;
-    } else {
+    } else if (checkAllowance) {
       return t`Swap`;
+    } else {
+      return t`Approve`;
     }
-  }, [account.address, checkBalance, swapToken.src]);
+  }, [account.address, checkAllowance, checkBalance, swapToken.src]);
   const pending = useMemo(() => {
-    return isPendingType(TransactionType.swap_uni);
+    return (
+      isPendingType(TransactionType.swap_uni) ||
+      isPendingType(TransactionType.approve)
+    );
   }, [isPendingType]);
   const mainButtonLoading = useMemo(() => {
-    if (swap.isLoading || pending) {
+    if (tokenApprove.isLoading || swapTTT.isLoading || pending) {
       return true;
     } else {
       return false;
     }
-  }, [pending, swap.isLoading]);
+  }, [swapTTT.isLoading, pending, tokenApprove.isLoading]);
   const mainButtonDis = useMemo(() => {
     if (!account.address) {
       return false;
@@ -263,42 +361,37 @@ function useSwap() {
   const mainButtonAction = useCallback(() => {
     if (!account.address) {
       setShowConnect(true);
-      return;
     } else if (mainButtonLoading || !checkBalance) {
       return;
-    }
-    if (stopAll) {
-      messageSnackBar(
-        t`NESTfi's trading services will be temporarily unavailable for approximately 1-2 hours due to the airdrop of NEST 2.0`
-      );
-      return;
-    } else if (swapToken.src === "NEST" && !checkAllowNEST) {
-      messageSnackBar(
-        t`Due to our new feature being in the trial phase, you are currently not on the whitelist or your transaction amount exceeds the limit. Please contact Admin in our official group chat(https://t.me/nest_chat), and they will assist you in raising the limit or adding you to the whitelist.`
-      );
-    } else if (swapToken.src === "USDT" && nestAmount === undefined) {
-      messageSnackBar(
-        t`Due to our new feature being in the trial phase, you are currently not on the whitelist or your transaction amount exceeds the limit. Please contact Admin in our official group chat(https://t.me/nest_chat), and they will assist you in raising the limit or adding you to the whitelist.`
-      );
+    } else if (!checkAllowance) {
+      tokenApprove.write?.();
     } else {
-      swap.write?.();
+      if (swapToken.src === "NHBTC") {
+        swapNHBTC.reset();
+        swapNHBTC.write?.();
+      } else {
+        swapTTT.reset();
+        swapTTT.write?.();
+      }
     }
   }, [
     account.address,
-    checkAllowNEST,
+    checkAllowance,
     checkBalance,
     mainButtonLoading,
-    messageSnackBar,
-    nestAmount,
     setShowConnect,
-    stopAll,
-    swap,
+    swapNHBTC,
+    swapTTT,
     swapToken.src,
+    tokenApprove,
   ]);
   /**
    * exchange button
    */
   const exchangeButton = useCallback(() => {
+    if (swapToken.src === "NHBTC") {
+      return;
+    }
     const newSwapToken = { ...swapToken };
     newSwapToken.src = swapToken.dest;
     newSwapToken.dest = swapToken.src;
@@ -309,100 +402,60 @@ function useSwap() {
   /**
    * select token
    */
-  const selectToken = useCallback((tokenName: string) => {
-    if (tokenName === "USDT") {
-      setSwapToken({ src: tokenName, dest: "NEST" });
-    } else if (tokenName === "NEST") {
-      setSwapToken({ src: tokenName, dest: "USDT" });
+  const selectToken = useCallback(
+    (tokenName: string) => {
+      if (tokenName === "USDT") {
+        setSwapToken({ src: tokenName, dest: "NEST" });
+      } else if (tokenName === "NEST") {
+        setSwapToken({ src: tokenName, dest: "USDT" });
+      } else if (tokenName === "NHBTC") {
+        setSwapToken({ src: tokenName, dest: "NEST" });
+      }
+      setInputAmount("");
+      setSamePrice(true);
+      srcRefetch();
+    },
+    [srcRefetch]
+  );
+
+  useEffect(() => {
+    if (swapToken.src === "USDT" || swapToken.src === "NEST") {
+      //  use swap amount
+      if (uniSwapAmountOut && destDecimals) {
+        setOutAmount(
+          uniSwapAmountOut[1].bigNumberToShowString(destDecimals, 2)
+        );
+      }
+    } else if (swapToken.src === "NHBTC" && destDecimals) {
+      setOutAmount(`${parseFloat((parseFloat(inputAmount) / 2).toFixed(2))}`);
     }
-    setInputAmount("");
-    setSamePrice(true);
-  }, []);
+  }, [destDecimals, inputAmount, swapToken.src, uniSwapAmountOut]);
   /**
    * update
    */
   useEffect(() => {
     const time = setInterval(() => {
+      uniSwapAmountOutRefetch();
       srcBalanceRefetch();
       destBalanceRefetch();
+      srcRefetch();
     }, SWAP_UPDATE * 1000);
     return () => {
       clearInterval(time);
     };
-  }, [destBalanceRefetch, srcBalanceRefetch]);
+  }, [
+    destBalanceRefetch,
+    srcBalanceRefetch,
+    srcRefetch,
+    uniSwapAmountOutRefetch,
+  ]);
 
   useEffect(() => {
     setTimeout(() => {
+      srcRefetch();
       srcBalanceRefetch();
-      destBalanceRefetch();
     }, 3000);
-  }, [srcBalanceRefetch, destBalanceRefetch]);
-
-  useEffect(() => {
-    var amount = "0";
-    if (nestPrice && destDecimals) {
-      if (swapToken.src === "NEST") {
-        const out = inputAmountTransaction
-          .div(parseEther("1"))
-          .mul(nestPrice)
-          .bigNumberToShowString(destDecimals, 2);
-        amount = out;
-      } else if (swapToken.src === "USDT") {
-        const out = inputAmountTransaction
-          .mul(parseEther("1"))
-          .div(nestPrice)
-          .bigNumberToShowString(destDecimals, 2);
-        amount = out;
-      }
-    }
-    setOutAmount(amount);
-  }, [destDecimals, inputAmountTransaction, nestPrice, swapToken.src]);
-
-  // get price
-  useEffect(() => {
-    const getPrice = async () => {
-      const NESTPriceBase: { [key: string]: string } =
-        await getPriceFromNESTLocal("nest");
-      console.log(NESTPriceBase["value"].toString());
-      const NESTPrice = NESTPriceBase
-        ? NESTPriceBase["value"].toString().stringToBigNumber(18)
-        : undefined;
-      setNestPrice(NESTPrice);
-    };
-    getPrice();
-    const time = setInterval(() => {
-      getPrice();
-    }, 15000);
-    return () => {
-      clearInterval(time);
-    };
-  }, []);
-
-  useEffect(() => {
-    const getNEST = async () => {
-      if (account.address && chainsData.chainId) {
-        const amountBase: string = await getNESTAmountForAll(
-          account.address,
-          chainsData.chainId
-        );
-        if (parseInt(amountBase) === -1 || parseInt(amountBase) === -2) {
-          setNestAmount(undefined);
-        } else {
-          const amount = amountBase
-            ? amountBase.toString().stringToBigNumber(18)
-            : undefined;
-          setNestAmount(amount);
-        }
-      }
-    };
-    getNEST();
-    const time = setInterval(() => {
-      getNEST();
-    }, 15000);
-    return () => {
-      clearInterval(time);
-    };
-  }, [account.address, chainsData.chainId]);
+  }, [srcRefetch, pending, srcBalanceRefetch]);
 
   return {
     swapToken,
@@ -424,7 +477,7 @@ function useSwap() {
     mainButtonLoading,
     tokenArray,
     selectToken,
-    showServiceFee,
+    hideSetting,
   };
 }
 
