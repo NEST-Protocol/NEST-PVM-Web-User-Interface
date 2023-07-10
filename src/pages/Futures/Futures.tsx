@@ -45,7 +45,7 @@ const Futures: FC = () => {
   // }, []);
   const [showNotice, setShowNotice] = useState<boolean>(true);
   // TODO
-  const [openModal, setOpenModal] = useState(false);
+  const [openModal, setOpenModal] = useState(true);
   const openChangeModalDefault = useMemo(() => {
     if (account) {
       const isShow = localStorage.getItem("ChangeToken");

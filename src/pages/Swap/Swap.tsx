@@ -41,7 +41,7 @@ const Swap: FC = () => {
   const { addNESTToWallet, account } = useNEST();
   const [openModal, setOpenModal] = useState(false);
   // TODO
-  const [openModalForStop, setOpenModalForStop] = useState(false);
+  const [openModalForStop, setOpenModalForStop] = useState(true);
   const openChangeModalDefault = useMemo(() => {
     if (account) {
       const isShow = localStorage.getItem("ChangeToken");
