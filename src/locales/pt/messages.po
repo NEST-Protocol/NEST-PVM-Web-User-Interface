@@ -185,6 +185,7 @@ msgstr "Aprovação necessária"
 
 #: src/hooks/useFuturesAdd.ts
 #: src/hooks/useFuturesNewOrder.ts
+#: src/hooks/useSwap.ts
 #: src/hooks/useTransactionReceipt.ts
 #: src/pages/Futures/Modal/ApproveNoticeModal.tsx
 msgid "Approve"
@@ -358,11 +359,6 @@ msgstr "Modelo económico deflacionário. Quanto mais os utilizadores negociarem
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "Disconnect"
 msgstr "Desligar"
-
-#: src/hooks/useSwap.ts
-#: src/hooks/useSwap.ts
-msgid "Due to our new feature being in the trial phase, you are currently not on the whitelist or your transaction amount exceeds the limit. Please contact Admin in our official group chat(https://t.me/nest_chat), and they will assist you in raising the limit or adding you to the whitelist."
-msgstr "Devido ao nosso novo recurso estar na fase de teste, você atualmente não está na lista de permissões ou o valor da sua transação excede o limite. Por favor, entre em contato com o Administrador no nosso grupo de chat oficial (https://t.me/nest_chat), e eles irão ajudá-lo a aumentar o limite ou adicioná-lo à lista de permissões."
 
 #: src/pages/Futures/Components/POrderList.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
@@ -668,16 +664,6 @@ msgstr "NESTFi, Uma Próxima Geração"
 msgid "NESTFi's new features enable you to open a position with a single click."
 msgstr "As novas funcionalidades da NESTFi permitem-lhe abrir uma posição com um simples clique."
 
-#: src/hooks/useFuturesAdd.ts
-#: src/hooks/useFuturesClose.ts
-#: src/hooks/useFuturesEditLimit.ts
-#: src/hooks/useFuturesEditPosition.ts
-#: src/hooks/useFuturesNewOrder.ts
-#: src/hooks/useFuturesOrder.ts
-#: src/hooks/useSwap.ts
-msgid "NESTfi's trading services will be temporarily unavailable for approximately 1-2 hours due to the airdrop of NEST 2.0"
-msgstr "Os serviços de negociação da NESTFi estarão temporariamente indisponíveis por aproximadamente 1-2 horas devido ao airdrop do NEST 2.0."
-
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "News"
 msgstr "Notícias"
@@ -848,8 +834,6 @@ msgstr "Pedido de venda de posição"
 #: src/pages/Futures/Modal/CloseModal.tsx
 #: src/pages/Futures/Modal/EditPositionModal.tsx
 #: src/pages/Futures/NewOrder.tsx
-#: src/pages/Swap/Swap.tsx
-#: src/pages/Swap/Swap.tsx
 msgid "Service Fee"
 msgstr "Taxa de Serviço"
 
@@ -895,6 +879,10 @@ msgstr "SL"
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "SL Executed"
 msgstr "SL executado"
+
+#: src/pages/Swap/Swap.tsx
+msgid "Slippage Tolerance"
+msgstr "Tolerância de Deslizamento"
 
 #: src/pages/Swap/Components/SwapSlippageModal.tsx
 msgid "Slippage Tolerance Setting"
