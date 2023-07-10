@@ -144,6 +144,14 @@ msgstr "Фактический залог"
 msgid "Add"
 msgstr "Добавить"
 
+#: src/pages/Share/Modal/ChangeNewTokenModal.tsx
+msgid "Add NEST 2.0 to wallet"
+msgstr ""
+
+#: src/pages/Futures/Components/FuturesNotice.tsx
+msgid "Add NEST 2.0 to wallet."
+msgstr ""
+
 #: src/pages/DirectPoster/DirectPoster.tsx
 #: src/pages/Swap/Swap.tsx
 msgid "Add NEST to wallet"
@@ -320,6 +328,14 @@ msgstr "Темный режим"
 msgid "Dashboard"
 msgstr "Панель управления"
 
+#: src/pages/Share/Modal/ChangeNewTokenModal.tsx
+msgid "Dear NESTFi Community,"
+msgstr ""
+
+#: src/pages/Share/Modal/StopTransactionModal.tsx
+msgid "Dear NESTfi Users,"
+msgstr ""
+
 #: src/pages/Home/Home.tsx
 msgid "Decentralized"
 msgstr "Децентрализованный"
@@ -346,6 +362,7 @@ msgstr "Отключить"
 
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useSwap.ts
+#: src/hooks/useSwap.ts
 msgid "Due to our new feature being in the trial phase, you are currently not on the whitelist or your transaction amount exceeds the limit. Please contact Admin in our official group chat(https://t.me/nest_chat), and they will assist you in raising the limit or adding you to the whitelist."
 msgstr ""
 
@@ -353,6 +370,10 @@ msgstr ""
 #: src/pages/Futures/Components/POrderTable.tsx
 msgid "Due to the market volatility, the actual liquidation price may be different from the theoretical liquidation price . Here is the theoretical liquidation price, for reference only."
 msgstr "Из-за волатильности рынка фактическая цена ликвидации может отличаться от теоретической. Это только теоретическая цена ликвидации, предназначенная только для справки."
+
+#: src/pages/Share/Modal/StopTransactionModal.tsx
+msgid "During the airdrop period, NESTfi's trading services will be temporarily unavailable for approximately 1-2 hours. This suspension is necessary to ensure a smooth and successful airdrop of NEST 2.0 tokens to all eligible participants. We apologize for any inconvenience caused during this temporary interruption of services."
+msgstr ""
 
 #: src/hooks/useFuturesPOrder.ts
 #: src/pages/Futures/Components/OrderList.tsx
@@ -400,10 +421,6 @@ msgid ""
 msgstr ""
 "Следите за правильным человеком, зарабатывать деньги так же легко, как дышать.\n"
 "Вы можете следить за правильным человеком на NESTFi, вот моя ссылка-приглашение"
-
-#: src/pages/Futures/Components/FuturesNotice.tsx
-msgid "For the positions opened before April 6, 2023, please go to→"
-msgstr "Для позиций, открытых до 6 апреля 2023 года, перейдите по ссылке→"
 
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 #: src/pages/Futures/Modal/ProtocolModal.tsx
@@ -454,14 +471,23 @@ msgstr ""
 
 #: src/pages/Futures/Modal/CloseOrderNoticeModal.tsx
 #: src/pages/Home/Modal/ApplyModal.tsx
+#: src/pages/Share/Modal/StopTransactionModal.tsx
 msgid "I understand"
 msgstr "Я понимаю"
+
+#: src/pages/Share/Modal/StopTransactionModal.tsx
+msgid "If you have any questions or require further assistance, please feel free to reach out to our support team. We are here to help and provide guidance throughout this process."
+msgstr ""
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 msgid "Image"
 msgstr "Изображение"
+
+#: src/pages/Share/Modal/StopTransactionModal.tsx
+msgid "Important Announcement: Temporary Suspension of Trading Services on NESTfi"
+msgstr ""
 
 #: src/pages/Home/Home.tsx
 msgid "Infinite Liquidity"
@@ -620,6 +646,10 @@ msgstr "Мои позиции"
 msgid "My Total Trading Volume"
 msgstr ""
 
+#: src/pages/Futures/Components/FuturesNotice.tsx
+msgid "NEST 2.0 token has been airdropped to your wallet, please add NEST 2.0 token to your wallet."
+msgstr ""
+
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "NEST Total Burned"
 msgstr "Всего сожжено NEST"
@@ -638,6 +668,16 @@ msgstr "NESTFi - следующее поколение"
 
 #: src/pages/Home/Home.tsx
 msgid "NESTFi's new features enable you to open a position with a single click."
+msgstr ""
+
+#: src/hooks/useFuturesAdd.ts
+#: src/hooks/useFuturesClose.ts
+#: src/hooks/useFuturesEditLimit.ts
+#: src/hooks/useFuturesEditPosition.ts
+#: src/hooks/useFuturesNewOrder.ts
+#: src/hooks/useFuturesOrder.ts
+#: src/hooks/useSwap.ts
+msgid "NESTfi's trading services will be temporarily unavailable for approximately 1-2 hours due to the airdrop of NEST 2.0"
 msgstr ""
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
@@ -667,6 +707,10 @@ msgstr "Транзакции отсутствуют"
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "No Transactions yet"
 msgstr "Сделок пока нет"
+
+#: src/pages/Share/Modal/StopTransactionModal.tsx
+msgid "Once the airdrop is completed, NESTfi will only support trading with NEST 2.0 tokens. The previous version of NEST tokens (NEST 1.0) will become obsolete and will no longer be accepted for trading or other activities on the platform."
+msgstr ""
 
 #: src/hooks/useFuturesNewOrder.ts
 msgid "Open"
@@ -726,6 +770,10 @@ msgstr ""
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 msgid "Please note that \"Limit order\" or \"Stop order\" is not guaranteed to be executed. This may include, but is not limited to, the following cases."
 msgstr "Обратите внимание, что «лимитный ордер» или «стоп-ордер» не гарантируют исполнение. Это может включать, но не ограничивается следующими случаями."
+
+#: src/pages/Share/Modal/ChangeNewTokenModal.tsx
+msgid "Please note that NEST 1.0 tokens have been officially deprecated and will no longer be supported. To continue participating in the NESTFi ecosystem and enjoy its benefits, it is crucial that you add NEST 2.0 tokens to your wallet. We have provided a button below for your convenience to add NEST 2.0 tokens to your wallet effortlessly."
+msgstr ""
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
@@ -835,6 +883,10 @@ msgstr "Поделиться"
 msgid "Short"
 msgstr "Коротко"
 
+#: src/pages/Share/Modal/StopTransactionModal.tsx
+msgid "Sincerely,"
+msgstr ""
+
 #: src/pages/Futures/Components/OrderTable.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
@@ -925,6 +977,14 @@ msgstr ""
 msgid "The balance is 0. You can go to \"Faucet\" to get test token before trading."
 msgstr ""
 
+#: src/pages/Share/Modal/StopTransactionModal.tsx
+msgid "The NESTfi Team"
+msgstr ""
+
+#: src/pages/Share/Modal/ChangeNewTokenModal.tsx
+msgid "The NESTFi Team"
+msgstr ""
+
 #: src/pages/Home/Home.tsx
 msgid "The smart contract guarantees infinite liquidity through burning and issuing $NEST."
 msgstr ""
@@ -945,10 +1005,6 @@ msgstr "Транзакция не удалась, и сумма была пол�
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "Time"
 msgstr "Время"
-
-#: src/pages/Futures/Components/FuturesNotice.tsx
-msgid "to check and close."
-msgstr "чтобы проверить и закрыть."
 
 #: src/pages/Swap/Components/SwapInputItem.tsx
 msgid "To(Estimated)"
@@ -1096,18 +1152,29 @@ msgstr ""
 msgid "Unsettled Commissions"
 msgstr ""
 
+#: src/pages/Share/Modal/ChangeNewTokenModal.tsx
+msgid "Update: NEST 2.0 Airdrop Completed - NESTFi Services Now Available"
+msgstr ""
+
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "User Guide"
 msgstr "Руководство пользователя"
 
 #: src/components/SnackBar/NormalSnackBar.tsx
-#: src/pages/Futures/Components/FuturesNotice.tsx
 msgid "View"
 msgstr "Просмотр"
 
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "Wallet"
 msgstr "Кошелек"
+
+#: src/pages/Share/Modal/ChangeNewTokenModal.tsx
+msgid "We are delighted to inform you that the NEST 2.0 token airdrop has been successfully completed. As a result, NESTFi services are now fully operational, and you can resume using the platform as usual."
+msgstr ""
+
+#: src/pages/Share/Modal/StopTransactionModal.tsx
+msgid "We would like to inform you about an upcoming event regarding the NEST token. We are currently conducting an airdrop of NEST 2.0 tokens, which will bring significant upgrades and improvements to the NEST protocol."
+msgstr ""
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "White Paper"

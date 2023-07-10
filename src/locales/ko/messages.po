@@ -146,6 +146,14 @@ msgstr "실제 마진"
 msgid "Add"
 msgstr "추가"
 
+#: src/pages/Share/Modal/ChangeNewTokenModal.tsx
+msgid "Add NEST 2.0 to wallet"
+msgstr "지갑에 NEST 2.0 추가하기"
+
+#: src/pages/Futures/Components/FuturesNotice.tsx
+msgid "Add NEST 2.0 to wallet."
+msgstr "지갑에 NEST 2.0 추가하기."
+
 #: src/pages/DirectPoster/DirectPoster.tsx
 #: src/pages/Swap/Swap.tsx
 msgid "Add NEST to wallet"
@@ -322,6 +330,14 @@ msgstr "다크 모드"
 msgid "Dashboard"
 msgstr "대시보드"
 
+#: src/pages/Share/Modal/ChangeNewTokenModal.tsx
+msgid "Dear NESTFi Community,"
+msgstr "NESTFi 커뮤니티 여러분께,"
+
+#: src/pages/Share/Modal/StopTransactionModal.tsx
+msgid "Dear NESTfi Users,"
+msgstr "NESTfi 사용자 여러분께,"
+
 #: src/pages/Home/Home.tsx
 msgid "Decentralized"
 msgstr "분산형"
@@ -348,6 +364,7 @@ msgstr "연결 해제"
 
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useSwap.ts
+#: src/hooks/useSwap.ts
 msgid "Due to our new feature being in the trial phase, you are currently not on the whitelist or your transaction amount exceeds the limit. Please contact Admin in our official group chat(https://t.me/nest_chat), and they will assist you in raising the limit or adding you to the whitelist."
 msgstr "새로운 기능이 시험 단계에 있어서 현재로서는 화이트리스트에 등록되어 있지 않거나 거래 금액이 제한을 초과하고 있습니다. 저희 공식 그룹 채팅(https://t.me/nest_chat)에서 관리자에게 문의하여 한도를 높이거나 화이트리스트에 등록을 도와드릴 수 있습니다."
 
@@ -355,6 +372,10 @@ msgstr "새로운 기능이 시험 단계에 있어서 현재로서는 화이트
 #: src/pages/Futures/Components/POrderTable.tsx
 msgid "Due to the market volatility, the actual liquidation price may be different from the theoretical liquidation price . Here is the theoretical liquidation price, for reference only."
 msgstr "시장 변동성으로 인해 실제 청산 가격은 이론적인 청산 가격과 다를 수 있습니다. 이곳에서는 참고용 이론적 청산 가격이 제시됩니다."
+
+#: src/pages/Share/Modal/StopTransactionModal.tsx
+msgid "During the airdrop period, NESTfi's trading services will be temporarily unavailable for approximately 1-2 hours. This suspension is necessary to ensure a smooth and successful airdrop of NEST 2.0 tokens to all eligible participants. We apologize for any inconvenience caused during this temporary interruption of services."
+msgstr "에어드롭 기간 동안 NESTfi의 거래 서비스는 약 1-2시간 동안 일시적으로 사용할 수 없습니다. 이러한 일시적인 중단은 모든 자격을 갖춘 참가자에게 NEST 2.0 토큰의 원활하고 성공적인 에어드롭을 보장하기 위해 필요합니다. 이러한 일시적인 서비스 중단으로 인한 불편을 사과드립니다."
 
 #: src/hooks/useFuturesPOrder.ts
 #: src/pages/Futures/Components/OrderList.tsx
@@ -402,10 +423,6 @@ msgid ""
 msgstr ""
 "올바른 사람을 따라가면 돈 버는 것은 숨 쉬는 것만큼 쉽습니다.\n"
 "NESTFi에서 올바른 사람을 팔로우할 수 있습니다. 여기는 제 추천 링크입니다."
-
-#: src/pages/Futures/Components/FuturesNotice.tsx
-msgid "For the positions opened before April 6, 2023, please go to→"
-msgstr "2023년 4월 6일 이전에 열린 포지션은 여기로 이동하세요 →"
 
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 #: src/pages/Futures/Modal/ProtocolModal.tsx
@@ -456,14 +473,23 @@ msgstr "어떻게 시작하나요?"
 
 #: src/pages/Futures/Modal/CloseOrderNoticeModal.tsx
 #: src/pages/Home/Modal/ApplyModal.tsx
+#: src/pages/Share/Modal/StopTransactionModal.tsx
 msgid "I understand"
 msgstr "이해했습니다"
+
+#: src/pages/Share/Modal/StopTransactionModal.tsx
+msgid "If you have any questions or require further assistance, please feel free to reach out to our support team. We are here to help and provide guidance throughout this process."
+msgstr "질문이 있거나 추가 도움이 필요한 경우 지원팀에 문의해주시기 바랍니다. 이 과정 전반에 걸쳐 도움과 안내를 제공하기 위해 준비되어 있습니다."
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 msgid "Image"
 msgstr "이미지"
+
+#: src/pages/Share/Modal/StopTransactionModal.tsx
+msgid "Important Announcement: Temporary Suspension of Trading Services on NESTfi"
+msgstr "중요 공지: NESTFi의 거래 서비스 일시 중단"
 
 #: src/pages/Home/Home.tsx
 msgid "Infinite Liquidity"
@@ -622,6 +648,10 @@ msgstr "내 포지션"
 msgid "My Total Trading Volume"
 msgstr "내 총 거래량"
 
+#: src/pages/Futures/Components/FuturesNotice.tsx
+msgid "NEST 2.0 token has been airdropped to your wallet, please add NEST 2.0 token to your wallet."
+msgstr "NEST 2.0 토큰이 지갑에 에어드롭되었습니다. NEST 2.0 토큰을 지갑에 추가해주세요."
+
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "NEST Total Burned"
 msgstr "총 소각된 NEST"
@@ -641,6 +671,16 @@ msgstr "NESTFi, 차세대"
 #: src/pages/Home/Home.tsx
 msgid "NESTFi's new features enable you to open a position with a single click."
 msgstr "NESTFi의 새로운 기능은 클릭 한 번으로 포지션을 개설할 수 있습니다."
+
+#: src/hooks/useFuturesAdd.ts
+#: src/hooks/useFuturesClose.ts
+#: src/hooks/useFuturesEditLimit.ts
+#: src/hooks/useFuturesEditPosition.ts
+#: src/hooks/useFuturesNewOrder.ts
+#: src/hooks/useFuturesOrder.ts
+#: src/hooks/useSwap.ts
+msgid "NESTfi's trading services will be temporarily unavailable for approximately 1-2 hours due to the airdrop of NEST 2.0"
+msgstr "NESTFi의 거래 서비스는 NEST 2.0의 에어드롭으로 인해 약 1-2시간 동안 일시적으로 사용할 수 없습니다."
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "News"
@@ -669,6 +709,10 @@ msgstr "아직 거래 없음"
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "No Transactions yet"
 msgstr "아직 트랜잭션 없음"
+
+#: src/pages/Share/Modal/StopTransactionModal.tsx
+msgid "Once the airdrop is completed, NESTfi will only support trading with NEST 2.0 tokens. The previous version of NEST tokens (NEST 1.0) will become obsolete and will no longer be accepted for trading or other activities on the platform."
+msgstr "에어드롭이 완료되면 NESTfi는 NEST 2.0 토큰과만 거래를 지원할 예정입니다. 이전 버전인 NEST 토큰(NEST 1.0)은 사용되지 않으며 플랫폼에서의 거래나 기타 활동에 사용할 수 없게 될 것입니다."
 
 #: src/hooks/useFuturesNewOrder.ts
 msgid "Open"
@@ -728,6 +772,10 @@ msgstr "먼저 이더리움 테스트넷 토큰을 받으세요"
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 msgid "Please note that \"Limit order\" or \"Stop order\" is not guaranteed to be executed. This may include, but is not limited to, the following cases."
 msgstr "\"지정가 주문\" 또는 \"스탑 오더 주문\"은 실행이 보장되지 않을 수 있습니다. 다음과 같은 경우가 포함될 수 있습니다."
+
+#: src/pages/Share/Modal/ChangeNewTokenModal.tsx
+msgid "Please note that NEST 1.0 tokens have been officially deprecated and will no longer be supported. To continue participating in the NESTFi ecosystem and enjoy its benefits, it is crucial that you add NEST 2.0 tokens to your wallet. We have provided a button below for your convenience to add NEST 2.0 tokens to your wallet effortlessly."
+msgstr "NEST 1.0 토큰은 공식적으로 지원이 중단되었으며, 더 이상 지원되지 않습니다. NESTFi 생태계에 계속 참여하고 혜택을 누리기 위해서는 반드시 지갑에 NEST 2.0 토큰을 추가해야 합니다. 편의를 위해 아래에 NEST 2.0 토큰을 간편하게 지갑에 추가할 수 있는 버튼을 제공하였습니다."
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
@@ -837,6 +885,10 @@ msgstr "공유"
 msgid "Short"
 msgstr "숏"
 
+#: src/pages/Share/Modal/StopTransactionModal.tsx
+msgid "Sincerely,"
+msgstr "감사합니다,"
+
 #: src/pages/Futures/Components/OrderTable.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
@@ -927,6 +979,14 @@ msgstr "테스트넷 토큰"
 msgid "The balance is 0. You can go to \"Faucet\" to get test token before trading."
 msgstr "잔액은 0입니다. 거래하기 전에 \"수도꼭지\"로 이동하여 테스트 토큰을 받을 수 있습니다."
 
+#: src/pages/Share/Modal/StopTransactionModal.tsx
+msgid "The NESTfi Team"
+msgstr "NESTfi 팀 드림"
+
+#: src/pages/Share/Modal/ChangeNewTokenModal.tsx
+msgid "The NESTFi Team"
+msgstr "NESTfi 팀 드림"
+
 #: src/pages/Home/Home.tsx
 msgid "The smart contract guarantees infinite liquidity through burning and issuing $NEST."
 msgstr "스마트 컨트랙트는 $NEST 소각 및 발행을 통해 무한한 유동성을 보장합니다."
@@ -947,10 +1007,6 @@ msgstr "트랜잭션이 실패하고 모든 금액이 환불되었습니다. 재
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "Time"
 msgstr "시간"
-
-#: src/pages/Futures/Components/FuturesNotice.tsx
-msgid "to check and close."
-msgstr "확인 및 종료하십시오."
 
 #: src/pages/Swap/Components/SwapInputItem.tsx
 msgid "To(Estimated)"
@@ -1098,18 +1154,29 @@ msgstr "미정"
 msgid "Unsettled Commissions"
 msgstr "미정산 수수료"
 
+#: src/pages/Share/Modal/ChangeNewTokenModal.tsx
+msgid "Update: NEST 2.0 Airdrop Completed - NESTFi Services Now Available"
+msgstr "업데이트: NEST 2.0 에어드롭 완료 - NESTFi 서비스 이용 가능"
+
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "User Guide"
 msgstr "사용자 가이드"
 
 #: src/components/SnackBar/NormalSnackBar.tsx
-#: src/pages/Futures/Components/FuturesNotice.tsx
 msgid "View"
 msgstr "보기"
 
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "Wallet"
 msgstr "지갑"
+
+#: src/pages/Share/Modal/ChangeNewTokenModal.tsx
+msgid "We are delighted to inform you that the NEST 2.0 token airdrop has been successfully completed. As a result, NESTFi services are now fully operational, and you can resume using the platform as usual."
+msgstr "NEST 2.0 토큰의 에어드롭이 성공적으로 완료되었음을 기쁘게 알려드립니다. 이에 따라 NESTFi 서비스가 정상적으로 운영 중이며, 플랫폼을 평소처럼 사용하실 수 있습니다."
+
+#: src/pages/Share/Modal/StopTransactionModal.tsx
+msgid "We would like to inform you about an upcoming event regarding the NEST token. We are currently conducting an airdrop of NEST 2.0 tokens, which will bring significant upgrades and improvements to the NEST protocol."
+msgstr "NEST 토큰에 관한 다가오는 이벤트에 대해 알려드리고자 합니다. 저희는 현재 NEST 2.0 토큰의 에어드롭을 진행 중이며, 이는 NEST 프로토콜에 상당한 업그레이드와 개선 사항을 가져올 것입니다."
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "White Paper"

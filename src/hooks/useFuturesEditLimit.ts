@@ -66,7 +66,7 @@ function useFuturesEditLimit(data: FuturesOrderV2, onClose: () => void) {
   }, []);
   const mainButtonAction = useCallback(() => {
     if (stopAll) {
-      messageSnackBar(t`待定文案`);
+      messageSnackBar(t`NESTfi's trading services will be temporarily unavailable for approximately 1-2 hours due to the airdrop of NEST 2.0`);
       return;
     } else if (mainButtonLoading) {
       return;
