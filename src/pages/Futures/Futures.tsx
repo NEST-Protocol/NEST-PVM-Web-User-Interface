@@ -55,7 +55,7 @@ const Futures: FC = () => {
     }
   }, [account]);
   const [openChangeModal, setOpenChangeModal] = useState(
-    openChangeModalDefault
+    false
   );
 
   const getPrice = useCallback(async () => {

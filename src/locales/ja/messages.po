@@ -144,12 +144,9 @@ msgstr "実際の証拠金"
 msgid "Add"
 msgstr "追加"
 
+#: src/pages/Futures/Components/FuturesNotice.tsx
 #: src/pages/Share/Modal/ChangeNewTokenModal.tsx
 msgid "Add NEST 2.0 to wallet"
-msgstr ""
-
-#: src/pages/Futures/Components/FuturesNotice.tsx
-msgid "Add NEST 2.0 to wallet."
 msgstr ""
 
 #: src/pages/DirectPoster/DirectPoster.tsx
@@ -360,7 +357,6 @@ msgstr ""
 msgid "Disconnect"
 msgstr "ディスコネクト"
 
-#: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useSwap.ts
 #: src/hooks/useSwap.ts
 msgid "Due to our new feature being in the trial phase, you are currently not on the whitelist or your transaction amount exceeds the limit. Please contact Admin in our official group chat(https://t.me/nest_chat), and they will assist you in raising the limit or adding you to the whitelist."

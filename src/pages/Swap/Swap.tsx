@@ -51,7 +51,7 @@ const Swap: FC = () => {
     }
   }, [account]);
   const [openChangeModal, setOpenChangeModal] = useState(
-    openChangeModalDefault
+    false
   );
   const {
     swapToken,

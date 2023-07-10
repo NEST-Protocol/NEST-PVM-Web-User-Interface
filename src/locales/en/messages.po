@@ -146,13 +146,10 @@ msgstr "Actual Margin"
 msgid "Add"
 msgstr "Add"
 
+#: src/pages/Futures/Components/FuturesNotice.tsx
 #: src/pages/Share/Modal/ChangeNewTokenModal.tsx
 msgid "Add NEST 2.0 to wallet"
 msgstr "Add NEST 2.0 to wallet"
-
-#: src/pages/Futures/Components/FuturesNotice.tsx
-msgid "Add NEST 2.0 to wallet."
-msgstr "Add NEST 2.0 to wallet."
 
 #: src/pages/DirectPoster/DirectPoster.tsx
 #: src/pages/Swap/Swap.tsx
@@ -362,7 +359,6 @@ msgstr "Deflationary economic model. The more users trade, the more $NEST will b
 msgid "Disconnect"
 msgstr "Disconnect"
 
-#: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useSwap.ts
 #: src/hooks/useSwap.ts
 msgid "Due to our new feature being in the trial phase, you are currently not on the whitelist or your transaction amount exceeds the limit. Please contact Admin in our official group chat(https://t.me/nest_chat), and they will assist you in raising the limit or adding you to the whitelist."

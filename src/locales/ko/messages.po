@@ -146,13 +146,10 @@ msgstr "실제 마진"
 msgid "Add"
 msgstr "추가"
 
+#: src/pages/Futures/Components/FuturesNotice.tsx
 #: src/pages/Share/Modal/ChangeNewTokenModal.tsx
 msgid "Add NEST 2.0 to wallet"
 msgstr "지갑에 NEST 2.0 추가하기"
-
-#: src/pages/Futures/Components/FuturesNotice.tsx
-msgid "Add NEST 2.0 to wallet."
-msgstr "지갑에 NEST 2.0 추가하기."
 
 #: src/pages/DirectPoster/DirectPoster.tsx
 #: src/pages/Swap/Swap.tsx
@@ -362,7 +359,6 @@ msgstr "디플레이션 경제 모델. 더 많은 사용자가 거래할수록 �
 msgid "Disconnect"
 msgstr "연결 해제"
 
-#: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useSwap.ts
 #: src/hooks/useSwap.ts
 msgid "Due to our new feature being in the trial phase, you are currently not on the whitelist or your transaction amount exceeds the limit. Please contact Admin in our official group chat(https://t.me/nest_chat), and they will assist you in raising the limit or adding you to the whitelist."

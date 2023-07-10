@@ -71,10 +71,10 @@ const FuturesNotice: FC<FuturesNoticeProps> = ({ ...props }) => {
         alignItems={"center"}
       >
         <MainButton
-          title={t`Add NEST 2.0 to wallet.`}
+          title={t`Add NEST 2.0 to wallet`}
           onClick={addNESTToWallet}
           style={{
-            height: "24px",
+            height: "40px",
             width: "130px",
             fontSize: 10,
             borderRadius: 4,
