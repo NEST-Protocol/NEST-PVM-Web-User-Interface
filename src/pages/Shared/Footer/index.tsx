@@ -109,7 +109,7 @@ const Footer: FC = () => {
         >
           <SafeIcon className={`${footer}-right-safe`} />
         </a>
-        <a href="https://discord.com/invite/nestprotocol" target="view_window">
+        <a href="https://discord.gg/GWMhV4kdFg" target="view_window">
           <DisIcon className={`${footer}-right-disIcon`} />
         </a>
         <a
