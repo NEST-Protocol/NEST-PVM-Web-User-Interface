@@ -11,7 +11,7 @@ const Header: FC = () => {
   const header = "header";
   const [showTopNotice, setShowTopNotice] = useState(false);
   const routes = [
-    { path: "/futures", content: t`Futures` },
+    // { path: "/futures", content: t`Futures` },
     // { path: "/options", content: t`Options` },
     // { path: "/win", content: t`Win` },
     { path: "/NFTAuction", content: "NFT" },

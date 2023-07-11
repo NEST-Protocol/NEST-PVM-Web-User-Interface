@@ -38,7 +38,7 @@ const MobileHeader: FC = () => {
   const location = useLocation();
   const { pendingList } = useTransactionListCon();
   const routes = [
-    { path: "/futures", content: `Futures` },
+    // { path: "/futures", content: `Futures` },
     // { path: "/options", content: `Options` },
     // { path: "/win", content: `Win` },
     { path: "/NFTAuction", content: "NFT" },

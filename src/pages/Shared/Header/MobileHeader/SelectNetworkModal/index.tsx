@@ -2,7 +2,6 @@ import { FC, MouseEventHandler } from "react";
 import BaseModal from "../../../../../components/BaseModal";
 import {
   LittleBSC,
-  LittleETH,
   NetworkNow,
   TokenNest,
 } from "../../../../../components/Icon";
@@ -27,7 +26,7 @@ const SelectNetworkModal: FC<Props> = ({ ...props }) => {
     >
       <ul>
         <li onClick={() => changeNetwork(SupportedChains[1].chainId)}>
-          <LittleETH />
+        <LittleBSC />
           <p>{SupportedChains[1].name}</p>
           {SupportedChains[1].chainId === chainId ? <NetworkNow /> : <></>}
         </li>

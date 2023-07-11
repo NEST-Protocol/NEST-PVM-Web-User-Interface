@@ -1,7 +1,6 @@
 import { FC, useCallback } from "react";
 import {
   LittleBSC,
-  LittleETH,
   NetworkNow,
 } from "../../../../../components/Icon";
 import MainCard from "../../../../../components/MainCard";
@@ -25,7 +24,7 @@ const SelectNetwork: FC = () => {
     if (chainId === 1 || chainId === 5) {
       return (
         <>
-          <LittleETH />
+          <LittleBSC />
           <p>{chainId === 1 ? "Ethereum" : "Goerli"}</p>
         </>
       );
@@ -47,7 +46,7 @@ const SelectNetwork: FC = () => {
           <p>Select a network</p>
           <ul>
             <li onClick={() => changeNetwork(SupportedChains[1].chainId)}>
-              <LittleETH />
+              <LittleBSC />
               <p>{SupportedChains[1].name}</p>
               {SupportedChains[1].chainId === chainId ? <NetworkNow /> : <></>}
             </li>
@@ -56,7 +55,6 @@ const SelectNetwork: FC = () => {
               <p>{SupportedChains[0].name}</p>
               {SupportedChains[0].chainId === chainId ? <NetworkNow /> : <></>}
             </li>
-            
           </ul>
         </MainCard>
       </div>

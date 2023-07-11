@@ -17,7 +17,7 @@ import axios from "axios";
 // import NFTAuction from "./NFTAuction";
 
 const Home = loadable(() => import("./Home"));
-const Perpetuals = loadable(() => import("./Futures"));
+// const Perpetuals = loadable(() => import("./Futures"));
 const Dashboard = loadable(() => import("./Dashboard"));
 // const Option = loadable(() => import("./Options"));
 // const Mining = loadable(() => import("./Farm"));
@@ -86,9 +86,9 @@ const App: FC = () => {
         <HashRouter>
           {checkWidth() ? <Header /> : <MobileHeader />}
           <Switch>
-            <Route path="/futures">
+            {/* <Route path="/futures">
               <Perpetuals />
-            </Route>
+            </Route> */}
             {/* <Route path="/options">
               <Option />
             </Route> */}

@@ -125,8 +125,8 @@ export const tokenList: { [key: string]: TokenType } = {
     addresses: {
       1: "0x04abEdA201850aC0124161F037Efd70c74ddC74C",
       5: "0xE2975bf674617bbCE57D2c72dCfC926716D8AC1F",
-      56: "0x98f8669F6481EbB341B522fCD3663f79A3d1A6A7",
-      97: "0x821edD79cc386E56FeC9DA5793b87a3A52373cdE",
+      56: "0xcd6926193308d3b371fdd6a6219067e550000000",
+      97: "0xcd6926193308d3b371fdd6a6219067e550000000",
     },
     pairIndex: {
       1: "",

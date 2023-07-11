@@ -92,5 +92,5 @@ export const Ethereum = {
   explorers: [],
 };
 
-export const SupportedChains: Array<Chain> = [BNB, Ethereum];
+export const SupportedChains: Array<Chain> = [BNBTest, BNB];
 // export const SupportedChains: Array<Chain> = [BNBTest,Goerli, BNB];
