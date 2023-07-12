@@ -55,11 +55,11 @@ function useMainReact() {
    * user: connect wallet
    */
   useEffect(() => {
-    if (chainId !== 97 && account.address) {
+    if (account.address) {
       (async () => {
         try {
           await fetch(
-            `https://api.nestfi.net/api/users/users/setwallet?address=${account.address}`,
+            `https://api.nestfi.net/api/users/users/setwallet?address=${account.address}&chainId=${chainId}`,
             {
               method: "POST",
             }
