@@ -13,7 +13,7 @@ import useNEST from "../../../hooks/useNEST";
 import useWindowWidth from "../../../hooks/useWindowWidth";
 
 export const FootArray = [
-  { icon: DiscordIcon, link: "https://discord.com/invite/nestprotocol" },
+  { icon: DiscordIcon, link: "https://discord.gg/GWMhV4kdFg" },
   { icon: TelegramIcon, link: "https://t.me/nest_chat" },
   { icon: TwitterIcon, link: "https://twitter.com/NEST_protocol" },
   { icon: GithubIcon, link: "https://github.com/NEST-Protocol" },
