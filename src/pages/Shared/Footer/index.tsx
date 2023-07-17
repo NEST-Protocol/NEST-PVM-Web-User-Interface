@@ -109,9 +109,6 @@ const Footer: FC = () => {
         >
           <SafeIcon className={`${footer}-right-safe`} />
         </a>
-        <a href="https://discord.gg/GWMhV4kdFg" target="view_window">
-          <DisIcon className={`${footer}-right-disIcon`} />
-        </a>
         <a
           href="https://finance.docs.nestprotocol.org/#connect-wallet"
           target="view_window"
