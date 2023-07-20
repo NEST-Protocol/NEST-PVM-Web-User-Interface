@@ -154,7 +154,7 @@ function useFuturesPOrder(
     const info: Order = {
       owner: data.owner.toString(),
       leverage: `${data.lever.toString()}X`,
-      orientation: data.orientation ? t`Long` : t`Short`,
+      orientation: data.orientation ? `Long` : `Short`,
       actualRate: showPercentNum,
       index: parseInt(data.index.toString()),
       openPrice: parseFloat(
