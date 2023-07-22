@@ -1,7 +1,6 @@
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import { FC, useMemo } from "react";
-import { Link } from "react-router-dom";
 import useNEST from "../../hooks/useNEST";
 import { NEXT, SwapExchangeSmall } from "../icons";
 import LinkButton from "../MainButton/LinkButton";
@@ -16,6 +15,8 @@ interface NESTInputProps {
   maxCallBack: () => void;
   nestAmount: string;
   changeNestAmount: (value: string) => void;
+  otherCallBack: () => void;
+  hideSwapTitle?: boolean;
   style?: React.CSSProperties;
 }
 
@@ -25,19 +26,11 @@ const NESTInput: FC<NESTInputProps> = ({ ...props }) => {
     if (chainsData.chainId === 534353) {
       return t`The balance is 0. You can go to "Faucet" to get test token before trading.`;
     } else {
-      return t`0 balance. Before trading, you can switch to "Swap" to exchange
-      between USDT and NEST token.`;
-    }
-  }, [chainsData.chainId]);
-  const swapLink = useMemo(() => {
-    if (chainsData.chainId === 534353) {
-      return "/faucet";
-    } else {
-      return "/swap";
+      return t`Your balance is 0. Before making any transactions, please click on "Deposit" to complete a quick deposit.`;
     }
   }, [chainsData.chainId]);
   const swapTitle = useMemo(() => {
-    return chainsData.chainId === 534353 ? t`Faucet` : t`Swap`;
+    return chainsData.chainId === 534353 ? t`Faucet` : t`Deposit`;
   }, [chainsData.chainId]);
   return (
     <Stack
@@ -109,26 +102,25 @@ const NESTInput: FC<NESTInputProps> = ({ ...props }) => {
             <Trans>MAX</Trans>
           </LinkButton>
         </Stack>
-        <LinkButton>
-          <Link to={swapLink}>
-            <Stack
-              direction={"row"}
-              justifyContent={"flex-end"}
-              alignItems={"center"}
-              spacing={"4px"}
-              sx={{
-                "& svg": {
-                  width: 12,
-                  height: 12,
-                  display: "block",
-                },
-              }}
-            >
-              <p>{swapTitle}</p>
-              <SwapExchangeSmall />
-            </Stack>
-          </Link>
-        </LinkButton>
+        
+        <Stack
+          direction={"row"}
+          justifyContent={"flex-end"}
+          alignItems={"center"}
+          spacing={"4px"}
+          sx={{
+            "& svg": {
+              width: 12,
+              height: 12,
+              display: "block",
+            },
+          }}
+          component={"button"}
+          onClick={props.otherCallBack}
+        >
+          <LinkButton><p>{props.hideSwapTitle ? <></> : swapTitle}</p></LinkButton>
+          <LinkButton>{props.hideSwapTitle ? <></> : <SwapExchangeSmall />}</LinkButton>
+        </Stack>
       </Stack>
       {props.showToSwap ? (
         <Stack
@@ -141,11 +133,9 @@ const NESTInput: FC<NESTInputProps> = ({ ...props }) => {
             paddingX: "8px",
             borderRadius: "4px",
             background: theme.normal.danger_light_hover,
-            "& a": {
-              color: theme.normal.danger,
+            color: theme.normal.danger,
               fontSize: 12,
               fontWeight: 400,
-            },
 
             marginBottom: "12px",
             "& svg": {
@@ -158,11 +148,11 @@ const NESTInput: FC<NESTInputProps> = ({ ...props }) => {
             },
           })}
           alignItems={"center"}
+          component={"button"}
+          onClick={props.otherCallBack}
         >
-          <Link to={swapLink}>{noNESTText}</Link>
-          <Link to={swapLink}>
-            <NEXT />
-          </Link>
+          {noNESTText}
+          <NEXT />
         </Stack>
       ) : (
         <></>

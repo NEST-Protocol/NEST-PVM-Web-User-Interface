@@ -121,19 +121,7 @@ const Futures: FC = () => {
       return undefined;
     }
   }, []);
-  // useEffect(() => {
-  //   let code = getQueryVariable("pt");
-  //   if (code) {
-  //     const num = priceToken.filter(
-  //       (item) => item.toLocaleLowerCase() === code!.toLocaleLowerCase()
-  //     );
-  //     if (num && num.length > 0) {
-  //       setTokenPair(code.toLocaleUpperCase());
-  //     } else {
-  //       setTokenPair('ETH');
-  //     }
-  //   }
-  // }, []);
+
   // update base price 1s
   useEffect(() => {
     const time = setInterval(() => {
@@ -160,6 +148,7 @@ const Futures: FC = () => {
       clearInterval(time);
     };
   }, [getPrice]);
+  
 
   const paddingY = useMemo(() => {
     return isBigMobile ? 0 : 24;
@@ -276,6 +265,7 @@ const Futures: FC = () => {
           />
         </Box>
       </Modal>
+
       {mainView}
     </>
   );

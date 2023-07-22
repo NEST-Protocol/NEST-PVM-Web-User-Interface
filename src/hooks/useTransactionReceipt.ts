@@ -19,6 +19,7 @@ export enum TransactionType {
   swap_uni,
   swap_nhbtc,
   faucet_scroll,
+  deposit,
 }
 
 export type TransactionInfo = {
@@ -50,6 +51,8 @@ export const getTransactionTypeString = (text: string) => {
     return t`Swap`;
   } else if (text === `Received`) {
     return t`Received`;
+  } else if (text === "Deposit") {
+    return t`Deposit`;
   } else {
     return "";
   }
@@ -80,6 +83,8 @@ const getInfoTitle = (type: TransactionType) => {
       return `Swap`;
     case TransactionType.faucet_scroll:
       return `Received`;
+    case TransactionType.deposit:
+      return `Deposit`;
   }
 };
 

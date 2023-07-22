@@ -9,9 +9,17 @@ import {
 } from "wagmi";
 import { NavItems, NavItemsForScroll } from "../pages/Share/Head/NESTHead";
 
+export interface signatureData {
+  address: string;
+  chainId: number;
+  signature: string;
+}
+
 function useMainReact() {
   const [showConnect, setShowConnect] = useState(false);
-
+  const [signature, setSignature] = useState<signatureData | undefined>(
+    undefined
+  );
   /**
    * wallet
    */
@@ -92,6 +100,41 @@ function useMainReact() {
       });
     }
   }, [account.connector, chainId]);
+  /**
+   * checkSigned
+   */
+
+  useEffect(() => {
+    if (!chainsData.chainId || !account.address) {
+      setSignature(undefined);
+      return;
+    }
+    var cache = localStorage.getItem("signature");
+    if (!cache) {
+      setSignature(undefined);
+      return;
+    }
+    const signsData = JSON.parse(cache);
+    const same: [signatureData] = signsData.filter(
+      (item: signatureData) =>
+        (item["address"] as string).toLocaleLowerCase() ===
+          account.address?.toLocaleLowerCase() &&
+        item["chainId"] === chainsData.chainId
+    );
+    if (same.length > 0) {
+      setSignature(same[0]);
+    } else {
+      setSignature(undefined);
+    }
+  }, [account.address, chainsData.chainId]);
+  const checkSigned = useMemo(() => {
+    if (signature) {
+      return true;
+    } else {
+      return false;
+    }
+  }, [signature]);
+
   return {
     showConnect,
     setShowConnect,
@@ -100,7 +143,10 @@ function useMainReact() {
     chainsData,
     disconnect,
     navItems,
-    addNESTToWallet
+    addNESTToWallet,
+    checkSigned,
+    signature,
+    setSignature,
   };
 }
 const NEST = createContainer(useMainReact);

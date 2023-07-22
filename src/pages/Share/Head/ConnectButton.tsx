@@ -8,6 +8,7 @@ import useNEST from "../../../hooks/useNEST";
 import useWalletIcon from "../../../hooks/uswWalletIcon";
 import MyWalletModal from "../Modal/MyWalletModal";
 import { t } from "@lingui/macro";
+import { Link } from "react-router-dom";
 
 const ConnectButton: FC = () => {
   const { account, setShowConnect } = useNEST();
@@ -58,16 +59,18 @@ const ConnectButton: FC = () => {
       </Modal>
 
       {account.isConnected ? (
-        <AddressStack
-          direction={"row"}
-          justifyContent="space-between"
-          alignItems="center"
-          spacing={"10px"}
-          onClick={() => setOpenModal(true)}
-        >
-          {walletIcon}
-          <p>{account.address?.toString().showAddress()}</p>
-        </AddressStack>
+        <Link to={"/account"}>
+          <AddressStack
+            direction={"row"}
+            justifyContent="space-between"
+            alignItems="center"
+            spacing={"10px"}
+            onClick={() => setOpenModal(true)}
+          >
+            {walletIcon}
+            <p>{account.address?.toString().showAddress()}</p>
+          </AddressStack>
+        </Link>
       ) : (
         <MainButton
           title={t`Connect Wallet`}

@@ -6,7 +6,7 @@ import { FC, useMemo } from "react";
 import { Share } from "../../../components/icons";
 import MainButton from "../../../components/MainButton/MainButton";
 import useFuturesOrder from "../../../hooks/useFuturesOrder";
-import { FuturesOrderV2 } from "../../../hooks/useFuturesOrderList";
+import { FuturesOrderService } from "../../../hooks/useFuturesOrderList";
 import ShareNewOrderModal from "../../Dashboard/Modal/ShareNewOrderModal";
 import { FuturesModalInfo, FuturesModalType } from "../OrderList";
 import FuturesOrderShare from "./FuturesOrderShare";
@@ -15,7 +15,7 @@ import FuturesTableTitle from "./TableTitle";
 import { Trans, t } from "@lingui/macro";
 
 interface FuturesOrderListProps {
-  dataArray: Array<FuturesOrderV2>;
+  dataArray: Array<FuturesOrderService>;
   buttonCallBack: (value: FuturesModalInfo) => void;
   style?: React.CSSProperties;
 }
@@ -54,7 +54,7 @@ const OrderTable: FC<FuturesOrderListProps> = ({ ...props }) => {
 };
 
 interface OrderTableRowProps {
-  data: FuturesOrderV2;
+  data: FuturesOrderService;
   buttonCallBack: (value: FuturesModalInfo) => void;
 }
 

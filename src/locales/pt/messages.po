@@ -18,6 +18,10 @@ msgstr ""
 msgid "* Due to the complexity of financial data, there might be nuances and delay. Data displayed above is for reference only.We sincerely apologize for any inconvenience."
 msgstr "* Devido à complexidade dos dados financeiros, pode haver nuances e atrasos. Os dados apresentados acima são apenas para referência. Pedimos desculpa por qualquer incómodo."
 
+#: src/pages/Share/Modal/DepositModal.tsx
+msgid "*NESTFi only supports NEST withdrawals."
+msgstr ""
+
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useFuturesNewOrder.ts
 msgid "< LIMIT PRICE"
@@ -48,7 +52,6 @@ msgstr "> PREÇO DE MERCADO"
 msgid "> OPEN PRICE"
 msgstr "> PREÇO DE ABERTURA"
 
-#: src/components/NormalInput/NESTInput.tsx
 #: src/components/NormalInput/NESTInputSelect.tsx
 msgid ""
 "0 balance. Before trading, you can switch to \"Swap\" to exchange\n"
@@ -122,6 +125,23 @@ msgstr "Lucro e Perda de 7 dias"
 msgid "7 Days\\' PNL"
 msgstr "Lucro e Perda de 7 dias\\'"
 
+#: src/pages/Account/Components/TransactionTable.tsx
+msgid "操作"
+msgstr ""
+
+#: src/pages/Account/Components/MoneyTable.tsx
+msgid "金额"
+msgstr ""
+
+#: src/pages/Account/Components/MoneyTable.tsx
+#: src/pages/Account/Components/TransactionTable.tsx
+msgid "时间"
+msgstr ""
+
+#: src/pages/Account/Components/MoneyTable.tsx
+msgid "状态"
+msgstr ""
+
 #: src/pages/Home/Home.tsx
 msgid "A beginner's guide to using NESTFi"
 msgstr "Um guia para principiantes na utilização do NEST Fi"
@@ -135,7 +155,6 @@ msgstr "sobre as carteiras digitais"
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Futures/Components/OrderList.tsx
 #: src/pages/Futures/Components/OrderTable.tsx
-#: src/pages/Futures/Components/POrderList.tsx
 #: src/pages/Futures/Components/POrderList.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 msgid "Actual Margin"
@@ -183,8 +202,6 @@ msgstr "Quantidade"
 msgid "Approval required"
 msgstr "Aprovação necessária"
 
-#: src/hooks/useFuturesAdd.ts
-#: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useSwap.ts
 #: src/hooks/useTransactionReceipt.ts
 #: src/pages/Futures/Modal/ApproveNoticeModal.tsx
@@ -192,6 +209,7 @@ msgid "Approve"
 msgstr "Aprovar"
 
 #: src/hooks/useSwap.ts
+#: src/pages/Share/Modal/DepositModal.tsx
 msgid "balance"
 msgstr "saldo"
 
@@ -258,6 +276,10 @@ msgstr "Fechado"
 msgid "Confirm"
 msgstr "Confirmar"
 
+#: src/pages/Share/Modal/SignModal.tsx
+msgid "Confirm you are the owner of this wallet"
+msgstr ""
+
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useSwap.ts
@@ -288,6 +310,7 @@ msgstr "Copiar link de convite"
 msgid "Copy Link"
 msgstr "Copiar link"
 
+#: src/pages/Account/Account.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
@@ -356,6 +379,16 @@ msgstr "Deflacionário"
 msgid "Deflationary economic model. The more users trade, the more $NEST will be burned."
 msgstr "Modelo económico deflacionário. Quanto mais os utilizadores negociarem, mais $NEST será queimado."
 
+#: src/components/NormalInput/NESTInput.tsx
+#: src/hooks/useDepositModal.ts
+#: src/hooks/useTransactionReceipt.ts
+#: src/pages/Account/Account.tsx
+#: src/pages/Account/Account.tsx
+#: src/pages/Share/Modal/DepositModal.tsx
+#: src/pages/Share/Modal/DepositModal.tsx
+msgid "Deposit"
+msgstr ""
+
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "Disconnect"
 msgstr "Desligar"
@@ -396,6 +429,10 @@ msgstr "Insira suas informações de contato"
 msgid "Entry Price"
 msgstr "Preço de entrada"
 
+#: src/pages/Share/Modal/WithdrawModal.tsx
+msgid "Exceed maximum withdrawal amount."
+msgstr ""
+
 #: src/hooks/useNESTSnackBar.tsx
 msgid "Fail Request"
 msgstr "Pedido de reprovação"
@@ -433,6 +470,10 @@ msgstr "Futuros"
 msgid "GET"
 msgstr "OBTER"
 
+#: src/pages/Share/Modal/DepositModal.tsx
+msgid "Get NEST"
+msgstr ""
+
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "Github"
 msgstr "Github"
@@ -467,6 +508,10 @@ msgstr "Como começar?"
 msgid "I understand"
 msgstr "Entendi"
 
+#: src/pages/Share/Modal/SignModal.tsx
+msgid "If you are using a secure device that you own. Selecting this option can expose your keys and information to others if you are on a public or non-secured device."
+msgstr ""
+
 #: src/pages/Share/Modal/StopTransactionModal.tsx
 msgid "If you have any questions or require further assistance, please feel free to reach out to our support team. We are here to help and provide guidance throughout this process."
 msgstr "Se você tiver alguma dúvida ou precisar de assistência adicional, não hesite em entrar em contato com nossa equipe de suporte. Estamos aqui para ajudar e fornecer orientações durante todo esse processo."
@@ -486,6 +531,7 @@ msgid "Infinite Liquidity"
 msgstr "Liquidez infinita"
 
 #: src/hooks/useSwap.ts
+#: src/pages/Share/Modal/DepositModal.tsx
 msgid "Insufficient"
 msgstr "Insuficiente"
 
@@ -562,9 +608,13 @@ msgstr "Taxa de ordem de limite = 15 NEST"
 msgid "Limit Price"
 msgstr "Preço Limite"
 
+#: src/pages/Share/Modal/SignModal.tsx
+#: src/pages/Share/Modal/SignModal.tsx
+msgid "Link wallet"
+msgstr ""
+
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Futures/Components/POrderList.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 #: src/pages/Futures/Modal/AddModal.tsx
 #: src/pages/Futures/Modal/EditPositionModal.tsx
@@ -572,7 +622,6 @@ msgstr "Preço Limite"
 msgid "Liq Price"
 msgstr "Preço de Liquidação"
 
-#: src/hooks/useFuturesPOrderClose.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "Liquidated"
@@ -589,9 +638,6 @@ msgstr "Carregando..."
 #: src/hooks/useFuturesClose.ts
 #: src/hooks/useFuturesEditPosition.ts
 #: src/hooks/useFuturesNewOrder.ts
-#: src/hooks/useFuturesOrder.ts
-#: src/hooks/useFuturesPOrder.ts
-#: src/hooks/useFuturesPOrderClose.tsx
 #: src/pages/Dashboard/Components/MobileOrderTypePosition.tsx
 #: src/pages/Dashboard/Components/ShareOrderPosition.tsx
 #: src/pages/Futures/Components/OrderListPosition.tsx
@@ -621,6 +667,10 @@ msgstr "Mais"
 #: src/pages/Futures/MoreInfo.tsx
 msgid "More Info"
 msgstr "Mais informações"
+
+#: src/pages/Account/Account.tsx
+msgid "My balance"
+msgstr ""
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
@@ -716,7 +766,6 @@ msgstr "Pedido de posição aberta"
 #: src/pages/Futures/Components/OrderList.tsx
 #: src/pages/Futures/Components/OrderTable.tsx
 #: src/pages/Futures/Components/POrderList.tsx
-#: src/pages/Futures/Components/POrderList.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 #: src/pages/Futures/Modal/AddModal.tsx
 #: src/pages/Futures/Modal/EditPositionModal.tsx
@@ -788,6 +837,7 @@ msgid "Positions"
 msgstr "Posições"
 
 #: src/pages/Futures/NewOrder.tsx
+#: src/pages/Share/Modal/DepositModal.tsx
 #: src/pages/Swap/Swap.tsx
 msgid "Price"
 msgstr "Preço"
@@ -834,6 +884,7 @@ msgstr "Pedido de venda de posição"
 #: src/pages/Futures/Modal/CloseModal.tsx
 #: src/pages/Futures/Modal/EditPositionModal.tsx
 #: src/pages/Futures/NewOrder.tsx
+#: src/pages/Share/Modal/WithdrawModal.tsx
 msgid "Service Fee"
 msgstr "Taxa de Serviço"
 
@@ -855,9 +906,6 @@ msgstr "Partilhar"
 #: src/hooks/useFuturesClose.ts
 #: src/hooks/useFuturesEditPosition.ts
 #: src/hooks/useFuturesNewOrder.ts
-#: src/hooks/useFuturesOrder.ts
-#: src/hooks/useFuturesPOrder.ts
-#: src/hooks/useFuturesPOrderClose.tsx
 #: src/pages/Dashboard/Components/MobileOrderTypePosition.tsx
 #: src/pages/Dashboard/Components/ShareOrderPosition.tsx
 #: src/pages/Futures/Components/OrderListPosition.tsx
@@ -865,12 +913,15 @@ msgstr "Partilhar"
 msgid "Short"
 msgstr "Curto"
 
+#: src/hooks/useSignModal.ts
+msgid "Sign message"
+msgstr ""
+
 #: src/pages/Share/Modal/StopTransactionModal.tsx
 msgid "Sincerely,"
 msgstr "Atenciosamente,"
 
 #: src/pages/Futures/Components/OrderTable.tsx
-#: src/pages/Futures/Components/POrderTable.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 msgid "SL"
 msgstr "SL"
@@ -894,7 +945,6 @@ msgstr "Começar a Negociar"
 
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 #: src/pages/Futures/Components/OrderList.tsx
-#: src/pages/Futures/Components/POrderList.tsx
 #: src/pages/Futures/Components/POrderList.tsx
 #: src/pages/Futures/Modal/EditPositionModal.tsx
 #: src/pages/Futures/NewOrder.tsx
@@ -922,7 +972,11 @@ msgstr "Stop-Limit"
 msgid "Submit successfully"
 msgstr "Submissão bem sucedida"
 
-#: src/components/NormalInput/NESTInput.tsx
+#: src/pages/Account/Components/MobileList.tsx
+#: src/pages/Account/Components/MoneyTable.tsx
+msgid "success"
+msgstr ""
+
 #: src/components/NormalInput/NESTInputSelect.tsx
 #: src/hooks/useSwap.ts
 #: src/hooks/useTransactionReceipt.ts
@@ -943,7 +997,6 @@ msgstr "Símbolo"
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 #: src/pages/Futures/Components/OrderList.tsx
 #: src/pages/Futures/Components/POrderList.tsx
-#: src/pages/Futures/Components/POrderList.tsx
 #: src/pages/Futures/Modal/EditPositionModal.tsx
 #: src/pages/Futures/NewOrder.tsx
 msgid "Take Profit"
@@ -963,6 +1016,10 @@ msgstr "Token Testnet"
 msgid "The balance is 0. You can go to \"Faucet\" to get test token before trading."
 msgstr "O saldo é de 0. Pode ir a \"Faucet\" para obter um token de teste antes de negociar."
 
+#: src/pages/Share/Modal/DepositModal.tsx
+msgid "The maximum amount allowed for a single deposit is"
+msgstr ""
+
 #: src/pages/Share/Modal/StopTransactionModal.tsx
 msgid "The NESTfi Team"
 msgstr "A Equipe NESTfi"
@@ -978,10 +1035,6 @@ msgstr "O contrato inteligente garante liquidez infinita através da queima e em
 #: src/pages/Home/Home.tsx
 msgid "The smart contract is the only seller of the system. No market marking costs and no liquidity debt."
 msgstr "O contrato inteligente é o único vendedor do sistema. Sem custos de marcação de mercado e sem dívida de liquidez."
-
-#: src/components/NormalInput/NESTInputSelect.tsx
-msgid "The system will automatically convert USDT to NEST at market price for you to open your position, and you will also receive NEST at settlement."
-msgstr "O sistema converterá automaticamente USDT para NEST ao preço de mercado para você abrir sua posição, e você também receberá NEST na liquidação."
 
 #: src/hooks/useNESTSnackBar.tsx
 msgid "The transaction failed and the amount has been fully refunded. You can re-trade"
@@ -1065,7 +1118,6 @@ msgstr "Volume total de transacções (NEST)"
 
 #: src/pages/Futures/Components/OrderTable.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
-#: src/pages/Futures/Components/POrderTable.tsx
 msgid "TP"
 msgstr "TP"
 
@@ -1111,13 +1163,13 @@ msgstr "Negociação apenas com contrato inteligente, sem intervenção de terce
 msgid "Trading Volume"
 msgstr "Investidos negociados"
 
+#: src/pages/Account/Account.tsx
+msgid "Transaction"
+msgstr ""
+
 #: src/hooks/useFuturesPOrder.ts
 msgid "Trigger"
 msgstr "Gatilho"
-
-#: src/hooks/useFuturesPOrderClose.tsx
-msgid "Trigger executed"
-msgstr "Accionamento executado"
 
 #: src/pages/Futures/Modal/EditPositionModal.tsx
 msgid "Trigger Position"
@@ -1145,6 +1197,10 @@ msgstr "Atualização: Airdrop NEST 2.0 Concluído - Serviços NESTFi Agora Disp
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "User Guide"
 msgstr "Guia do usuário"
+
+#: src/pages/Share/Modal/SignModal.tsx
+msgid "Verify ownership"
+msgstr ""
 
 #: src/components/SnackBar/NormalSnackBar.tsx
 msgid "View"
@@ -1177,6 +1233,21 @@ msgstr "Não será exibido após o fechamento"
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 msgid "with 1 click"
 msgstr "com 1 clique"
+
+#: src/pages/Account/Account.tsx
+#: src/pages/Account/Account.tsx
+#: src/pages/Share/Modal/WithdrawModal.tsx
+#: src/pages/Share/Modal/WithdrawModal.tsx
+msgid "Withdraw"
+msgstr ""
+
+#: src/hooks/useWithDrawModal.ts
+msgid "WithDraw"
+msgstr ""
+
+#: src/components/NormalInput/NESTInput.tsx
+msgid "Your balance is 0. Before making any transactions, please click on \"Deposit\" to complete a quick deposit."
+msgstr ""
 
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Youtube"

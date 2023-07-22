@@ -68,3 +68,5 @@ export { ReactComponent as HomeBurned } from "./svg/home_burned.svg";
 export { ReactComponent as HomeKols } from "./svg/home_kols.svg";
 export { ReactComponent as HomeTradingVolume } from "./svg/home_trading_volume.svg";
 export { ReactComponent as ScrollIcon } from "./svg/scrollIcon.svg";
+export { ReactComponent as Deposit } from "./svg/deposit.svg";
+export { ReactComponent as Withdraw } from "./svg/withdraw.svg";

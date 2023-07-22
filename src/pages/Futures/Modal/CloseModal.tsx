@@ -7,7 +7,7 @@ import MainButton from "../../../components/MainButton/MainButton";
 import NESTLine from "../../../components/NESTLine";
 import NormalInfo from "../../../components/NormalInfo/NormalInfo";
 import useFuturesClose from "../../../hooks/useFuturesClose";
-import { FuturesOrderV2 } from "../../../hooks/useFuturesOrderList";
+import { FuturesOrderService } from "../../../hooks/useFuturesOrderList";
 import useWindowWidth from "../../../hooks/useWindowWidth";
 import BaseDrawer from "../../Share/Modal/BaseDrawer";
 import BaseModal from "../../Share/Modal/BaseModal";
@@ -15,7 +15,7 @@ import { FuturesPrice } from "../Futures";
 import { t } from "@lingui/macro";
 
 interface CloseModalBaseProps {
-  data: FuturesOrderV2;
+  data: FuturesOrderService;
   price: FuturesPrice | undefined;
   onClose: () => void;
 }
@@ -61,7 +61,7 @@ const CloseModalBase: FC<CloseModalBaseProps> = ({ ...props }) => {
 };
 
 interface CloseModalProps {
-  data: FuturesOrderV2;
+  data: FuturesOrderService;
   price: FuturesPrice | undefined;
   open: boolean;
   onClose: () => void;

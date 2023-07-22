@@ -7,14 +7,14 @@ import MainButton from "../../../components/MainButton/MainButton";
 import NESTLine from "../../../components/NESTLine";
 import NormalInput from "../../../components/NormalInput/NormalInput";
 import useFuturesEditLimit from "../../../hooks/useFuturesEditLimit";
-import { FuturesOrderV2 } from "../../../hooks/useFuturesOrderList";
+import { FuturesOrderService } from "../../../hooks/useFuturesOrderList";
 import useWindowWidth from "../../../hooks/useWindowWidth";
 import BaseDrawer from "../../Share/Modal/BaseDrawer";
 import BaseModal from "../../Share/Modal/BaseModal";
 import { t } from "@lingui/macro";
 
 interface EditLimitModalBaseProps {
-  data: FuturesOrderV2;
+  data: FuturesOrderService;
   onClose: () => void;
 }
 
@@ -48,7 +48,7 @@ const EditLimitModalBase: FC<EditLimitModalBaseProps> = ({ ...props }) => {
 };
 
 interface EditLimitModalProps {
-  data: FuturesOrderV2;
+  data: FuturesOrderService;
   open: boolean;
   onClose: () => void;
 }

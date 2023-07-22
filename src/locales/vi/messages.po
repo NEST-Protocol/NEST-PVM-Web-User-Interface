@@ -18,6 +18,10 @@ msgstr ""
 msgid "* Due to the complexity of financial data, there might be nuances and delay. Data displayed above is for reference only.We sincerely apologize for any inconvenience."
 msgstr "Do sự phức tạp của dữ liệu tài chính, do đó có thể bị sai số̉ và chậm trễ. Dữ liệu được hiển thị ở trên chỉ mang tính chất tham khảo. Chúng tôi thành thật xin lỗi nếu có bất kỳ sự bất tiện không đáng có nào xảy ra."
 
+#: src/pages/Share/Modal/DepositModal.tsx
+msgid "*NESTFi only supports NEST withdrawals."
+msgstr ""
+
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useFuturesNewOrder.ts
 msgid "< LIMIT PRICE"
@@ -48,7 +52,6 @@ msgstr "> GIÁ THỊ TRƯỜNG"
 msgid "> OPEN PRICE"
 msgstr "> GIÁ MỞ CỬA"
 
-#: src/components/NormalInput/NESTInput.tsx
 #: src/components/NormalInput/NESTInputSelect.tsx
 msgid ""
 "0 balance. Before trading, you can switch to \"Swap\" to exchange\n"
@@ -122,6 +125,23 @@ msgstr "PNL 7 Ngày"
 msgid "7 Days\\' PNL"
 msgstr "PNL\\' 7 ngày"
 
+#: src/pages/Account/Components/TransactionTable.tsx
+msgid "操作"
+msgstr ""
+
+#: src/pages/Account/Components/MoneyTable.tsx
+msgid "金额"
+msgstr ""
+
+#: src/pages/Account/Components/MoneyTable.tsx
+#: src/pages/Account/Components/TransactionTable.tsx
+msgid "时间"
+msgstr ""
+
+#: src/pages/Account/Components/MoneyTable.tsx
+msgid "状态"
+msgstr ""
+
 #: src/pages/Home/Home.tsx
 msgid "A beginner's guide to using NESTFi"
 msgstr "Hướng dẫn sử dụng NESTFi cho người mới"
@@ -135,7 +155,6 @@ msgstr "về việc kết nối ví"
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Futures/Components/OrderList.tsx
 #: src/pages/Futures/Components/OrderTable.tsx
-#: src/pages/Futures/Components/POrderList.tsx
 #: src/pages/Futures/Components/POrderList.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 msgid "Actual Margin"
@@ -183,8 +202,6 @@ msgstr "Số lượng"
 msgid "Approval required"
 msgstr "Yêu cầu phê duyệt"
 
-#: src/hooks/useFuturesAdd.ts
-#: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useSwap.ts
 #: src/hooks/useTransactionReceipt.ts
 #: src/pages/Futures/Modal/ApproveNoticeModal.tsx
@@ -192,6 +209,7 @@ msgid "Approve"
 msgstr "Phê duyệt"
 
 #: src/hooks/useSwap.ts
+#: src/pages/Share/Modal/DepositModal.tsx
 msgid "balance"
 msgstr "Số dư"
 
@@ -258,6 +276,10 @@ msgstr ""
 msgid "Confirm"
 msgstr "Xác nhận"
 
+#: src/pages/Share/Modal/SignModal.tsx
+msgid "Confirm you are the owner of this wallet"
+msgstr ""
+
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useSwap.ts
@@ -288,6 +310,7 @@ msgstr "Sao chép liên kết mời"
 msgid "Copy Link"
 msgstr "Sao chép liên kết"
 
+#: src/pages/Account/Account.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
@@ -356,6 +379,16 @@ msgstr "giảm phát"
 msgid "Deflationary economic model. The more users trade, the more $NEST will be burned."
 msgstr "Mô hình kinh tế giảm phát. Khi càng nhiều người dùng giao dịch, lượng $NEST bị tiêu hủy càng nhiều."
 
+#: src/components/NormalInput/NESTInput.tsx
+#: src/hooks/useDepositModal.ts
+#: src/hooks/useTransactionReceipt.ts
+#: src/pages/Account/Account.tsx
+#: src/pages/Account/Account.tsx
+#: src/pages/Share/Modal/DepositModal.tsx
+#: src/pages/Share/Modal/DepositModal.tsx
+msgid "Deposit"
+msgstr ""
+
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "Disconnect"
 msgstr "Ngắt kết nối"
@@ -396,6 +429,10 @@ msgstr "Nhập thông tin liên hệ của bạn"
 msgid "Entry Price"
 msgstr "Giá vào lệnh "
 
+#: src/pages/Share/Modal/WithdrawModal.tsx
+msgid "Exceed maximum withdrawal amount."
+msgstr ""
+
 #: src/hooks/useNESTSnackBar.tsx
 msgid "Fail Request"
 msgstr "Yêu cầu thất bại"
@@ -435,6 +472,10 @@ msgstr "Hợp đồng tương lai"
 msgid "GET"
 msgstr "NHẬN"
 
+#: src/pages/Share/Modal/DepositModal.tsx
+msgid "Get NEST"
+msgstr ""
+
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "Github"
 msgstr "Github"
@@ -469,6 +510,10 @@ msgstr "Làm cách nào để bắt đầu?"
 msgid "I understand"
 msgstr "Tôi hiểu."
 
+#: src/pages/Share/Modal/SignModal.tsx
+msgid "If you are using a secure device that you own. Selecting this option can expose your keys and information to others if you are on a public or non-secured device."
+msgstr ""
+
 #: src/pages/Share/Modal/StopTransactionModal.tsx
 msgid "If you have any questions or require further assistance, please feel free to reach out to our support team. We are here to help and provide guidance throughout this process."
 msgstr "Nếu bạn có bất kỳ câu hỏi hoặc cần hỗ trợ thêm, xin vui lòng liên hệ với đội ngũ hỗ trợ của chúng tôi. Chúng tôi sẽ ở đây để giúp đỡ và cung cấp hướng dẫn trong suốt quá trình này."
@@ -488,6 +533,7 @@ msgid "Infinite Liquidity"
 msgstr "Thanh khoản vô hạn"
 
 #: src/hooks/useSwap.ts
+#: src/pages/Share/Modal/DepositModal.tsx
 msgid "Insufficient"
 msgstr "Không đủ"
 
@@ -564,9 +610,13 @@ msgstr "Phí đặt lệnh giới hạn = 15 NEST"
 msgid "Limit Price"
 msgstr "Giá giới hạn"
 
+#: src/pages/Share/Modal/SignModal.tsx
+#: src/pages/Share/Modal/SignModal.tsx
+msgid "Link wallet"
+msgstr ""
+
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Futures/Components/POrderList.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 #: src/pages/Futures/Modal/AddModal.tsx
 #: src/pages/Futures/Modal/EditPositionModal.tsx
@@ -574,7 +624,6 @@ msgstr "Giá giới hạn"
 msgid "Liq Price"
 msgstr "Giá thanh lý"
 
-#: src/hooks/useFuturesPOrderClose.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "Liquidated"
@@ -591,9 +640,6 @@ msgstr "Đang tải..."
 #: src/hooks/useFuturesClose.ts
 #: src/hooks/useFuturesEditPosition.ts
 #: src/hooks/useFuturesNewOrder.ts
-#: src/hooks/useFuturesOrder.ts
-#: src/hooks/useFuturesPOrder.ts
-#: src/hooks/useFuturesPOrderClose.tsx
 #: src/pages/Dashboard/Components/MobileOrderTypePosition.tsx
 #: src/pages/Dashboard/Components/ShareOrderPosition.tsx
 #: src/pages/Futures/Components/OrderListPosition.tsx
@@ -623,6 +669,10 @@ msgstr "Thêm"
 #: src/pages/Futures/MoreInfo.tsx
 msgid "More Info"
 msgstr "Thông tin thêm"
+
+#: src/pages/Account/Account.tsx
+msgid "My balance"
+msgstr ""
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
@@ -718,7 +768,6 @@ msgstr "Yêu cầu mở vị thế"
 #: src/pages/Futures/Components/OrderList.tsx
 #: src/pages/Futures/Components/OrderTable.tsx
 #: src/pages/Futures/Components/POrderList.tsx
-#: src/pages/Futures/Components/POrderList.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 #: src/pages/Futures/Modal/AddModal.tsx
 #: src/pages/Futures/Modal/EditPositionModal.tsx
@@ -790,6 +839,7 @@ msgid "Positions"
 msgstr "Vị thế"
 
 #: src/pages/Futures/NewOrder.tsx
+#: src/pages/Share/Modal/DepositModal.tsx
 #: src/pages/Swap/Swap.tsx
 msgid "Price"
 msgstr "Giá"
@@ -836,6 +886,7 @@ msgstr "Yêu cầu bán vị thế"
 #: src/pages/Futures/Modal/CloseModal.tsx
 #: src/pages/Futures/Modal/EditPositionModal.tsx
 #: src/pages/Futures/NewOrder.tsx
+#: src/pages/Share/Modal/WithdrawModal.tsx
 msgid "Service Fee"
 msgstr "Phí dịch vụ"
 
@@ -857,9 +908,6 @@ msgstr "Chia sẻ"
 #: src/hooks/useFuturesClose.ts
 #: src/hooks/useFuturesEditPosition.ts
 #: src/hooks/useFuturesNewOrder.ts
-#: src/hooks/useFuturesOrder.ts
-#: src/hooks/useFuturesPOrder.ts
-#: src/hooks/useFuturesPOrderClose.tsx
 #: src/pages/Dashboard/Components/MobileOrderTypePosition.tsx
 #: src/pages/Dashboard/Components/ShareOrderPosition.tsx
 #: src/pages/Futures/Components/OrderListPosition.tsx
@@ -867,12 +915,15 @@ msgstr "Chia sẻ"
 msgid "Short"
 msgstr "Bán"
 
+#: src/hooks/useSignModal.ts
+msgid "Sign message"
+msgstr ""
+
 #: src/pages/Share/Modal/StopTransactionModal.tsx
 msgid "Sincerely,"
 msgstr "Trân trọng,"
 
 #: src/pages/Futures/Components/OrderTable.tsx
-#: src/pages/Futures/Components/POrderTable.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 msgid "SL"
 msgstr "Dừng Lỗ"
@@ -896,7 +947,6 @@ msgstr "Bắt đầu giao dịch"
 
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 #: src/pages/Futures/Components/OrderList.tsx
-#: src/pages/Futures/Components/POrderList.tsx
 #: src/pages/Futures/Components/POrderList.tsx
 #: src/pages/Futures/Modal/EditPositionModal.tsx
 #: src/pages/Futures/NewOrder.tsx
@@ -924,7 +974,11 @@ msgstr "Dừng-Giới hạn"
 msgid "Submit successfully"
 msgstr "Gửi thành công"
 
-#: src/components/NormalInput/NESTInput.tsx
+#: src/pages/Account/Components/MobileList.tsx
+#: src/pages/Account/Components/MoneyTable.tsx
+msgid "success"
+msgstr ""
+
 #: src/components/NormalInput/NESTInputSelect.tsx
 #: src/hooks/useSwap.ts
 #: src/hooks/useTransactionReceipt.ts
@@ -945,7 +999,6 @@ msgstr "Biểu tượng"
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 #: src/pages/Futures/Components/OrderList.tsx
 #: src/pages/Futures/Components/POrderList.tsx
-#: src/pages/Futures/Components/POrderList.tsx
 #: src/pages/Futures/Modal/EditPositionModal.tsx
 #: src/pages/Futures/NewOrder.tsx
 msgid "Take Profit"
@@ -965,6 +1018,10 @@ msgstr "Token mạng thử nghiệm"
 msgid "The balance is 0. You can go to \"Faucet\" to get test token before trading."
 msgstr "Số dư là 0. Bạn có thể đến \"Faucet\" để nhận token thử nghiệm trước khi giao dịch."
 
+#: src/pages/Share/Modal/DepositModal.tsx
+msgid "The maximum amount allowed for a single deposit is"
+msgstr ""
+
 #: src/pages/Share/Modal/StopTransactionModal.tsx
 msgid "The NESTfi Team"
 msgstr "Nhóm NESTfi"
@@ -980,10 +1037,6 @@ msgstr "Hợp đồng thông minh đảm bảo tính thanh khoản vô hạn th�
 #: src/pages/Home/Home.tsx
 msgid "The smart contract is the only seller of the system. No market marking costs and no liquidity debt."
 msgstr "Hợp đồng thông minh là người bán duy nhất của hệ thống. Không có chi phí đánh dấu thị trường và không có nợ thanh khoản."
-
-#: src/components/NormalInput/NESTInputSelect.tsx
-msgid "The system will automatically convert USDT to NEST at market price for you to open your position, and you will also receive NEST at settlement."
-msgstr "Hệ thống sẽ tự động chuyển đổi USDT thành NEST với giá thị trường khi bạn mở vị thế, và bạn cũng sẽ nhận được NEST khi thanh toán."
 
 #: src/hooks/useNESTSnackBar.tsx
 msgid "The transaction failed and the amount has been fully refunded. You can re-trade"
@@ -1067,7 +1120,6 @@ msgstr "Tổng khối lượng giao dịch (NEST)"
 
 #: src/pages/Futures/Components/OrderTable.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
-#: src/pages/Futures/Components/POrderTable.tsx
 msgid "TP"
 msgstr "Chốt Lời"
 
@@ -1113,13 +1165,13 @@ msgstr "Chỉ giao dịch với hợp đồng thông minh. Không có sự can t
 msgid "Trading Volume"
 msgstr "Khối lượng giao dịch"
 
+#: src/pages/Account/Account.tsx
+msgid "Transaction"
+msgstr ""
+
 #: src/hooks/useFuturesPOrder.ts
 msgid "Trigger"
 msgstr "Kích hoạt"
-
-#: src/hooks/useFuturesPOrderClose.tsx
-msgid "Trigger executed"
-msgstr "Kích hoạt đã được thực hiện"
 
 #: src/pages/Futures/Modal/EditPositionModal.tsx
 msgid "Trigger Position"
@@ -1147,6 +1199,10 @@ msgstr "Cập nhật: Airdrop NEST 2.0 Hoàn tất - Dịch vụ NESTFi Đã Kh�
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "User Guide"
 msgstr "Hướng dẫn sử dụng"
+
+#: src/pages/Share/Modal/SignModal.tsx
+msgid "Verify ownership"
+msgstr ""
 
 #: src/components/SnackBar/NormalSnackBar.tsx
 msgid "View"
@@ -1179,6 +1235,21 @@ msgstr "Sẽ không được hiển thị sau khi đóng"
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 msgid "with 1 click"
 msgstr "chỉ với 1 cú nhấp chuột"
+
+#: src/pages/Account/Account.tsx
+#: src/pages/Account/Account.tsx
+#: src/pages/Share/Modal/WithdrawModal.tsx
+#: src/pages/Share/Modal/WithdrawModal.tsx
+msgid "Withdraw"
+msgstr ""
+
+#: src/hooks/useWithDrawModal.ts
+msgid "WithDraw"
+msgstr ""
+
+#: src/components/NormalInput/NESTInput.tsx
+msgid "Your balance is 0. Before making any transactions, please click on \"Deposit\" to complete a quick deposit."
+msgstr ""
 
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Youtube"

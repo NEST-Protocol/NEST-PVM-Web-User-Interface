@@ -18,6 +18,10 @@ msgstr ""
 msgid "* Due to the complexity of financial data, there might be nuances and delay. Data displayed above is for reference only.We sincerely apologize for any inconvenience."
 msgstr ""
 
+#: src/pages/Share/Modal/DepositModal.tsx
+msgid "*NESTFi only supports NEST withdrawals."
+msgstr ""
+
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useFuturesNewOrder.ts
 msgid "< LIMIT PRICE"
@@ -48,7 +52,6 @@ msgstr "> マーケット価格"
 msgid "> OPEN PRICE"
 msgstr "> オープン価格"
 
-#: src/components/NormalInput/NESTInput.tsx
 #: src/components/NormalInput/NESTInputSelect.tsx
 msgid ""
 "0 balance. Before trading, you can switch to \"Swap\" to exchange\n"
@@ -120,6 +123,23 @@ msgstr "7日間のPNL"
 msgid "7 Days\\' PNL"
 msgstr "7日間のPNL"
 
+#: src/pages/Account/Components/TransactionTable.tsx
+msgid "操作"
+msgstr ""
+
+#: src/pages/Account/Components/MoneyTable.tsx
+msgid "金额"
+msgstr ""
+
+#: src/pages/Account/Components/MoneyTable.tsx
+#: src/pages/Account/Components/TransactionTable.tsx
+msgid "时间"
+msgstr ""
+
+#: src/pages/Account/Components/MoneyTable.tsx
+msgid "状态"
+msgstr ""
+
 #: src/pages/Home/Home.tsx
 msgid "A beginner's guide to using NESTFi"
 msgstr ""
@@ -133,7 +153,6 @@ msgstr "コネクティングウォレットについて"
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Futures/Components/OrderList.tsx
 #: src/pages/Futures/Components/OrderTable.tsx
-#: src/pages/Futures/Components/POrderList.tsx
 #: src/pages/Futures/Components/POrderList.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 msgid "Actual Margin"
@@ -181,8 +200,6 @@ msgstr "金額"
 msgid "Approval required"
 msgstr "承認が必要です"
 
-#: src/hooks/useFuturesAdd.ts
-#: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useSwap.ts
 #: src/hooks/useTransactionReceipt.ts
 #: src/pages/Futures/Modal/ApproveNoticeModal.tsx
@@ -190,6 +207,7 @@ msgid "Approve"
 msgstr "承認"
 
 #: src/hooks/useSwap.ts
+#: src/pages/Share/Modal/DepositModal.tsx
 msgid "balance"
 msgstr "残高"
 
@@ -256,6 +274,10 @@ msgstr ""
 msgid "Confirm"
 msgstr "確認"
 
+#: src/pages/Share/Modal/SignModal.tsx
+msgid "Confirm you are the owner of this wallet"
+msgstr ""
+
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useSwap.ts
@@ -286,6 +308,7 @@ msgstr "招待リンクをコピー"
 msgid "Copy Link"
 msgstr "リンクをコピー"
 
+#: src/pages/Account/Account.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
@@ -354,6 +377,16 @@ msgstr "デフレーション"
 msgid "Deflationary economic model. The more users trade, the more $NEST will be burned."
 msgstr ""
 
+#: src/components/NormalInput/NESTInput.tsx
+#: src/hooks/useDepositModal.ts
+#: src/hooks/useTransactionReceipt.ts
+#: src/pages/Account/Account.tsx
+#: src/pages/Account/Account.tsx
+#: src/pages/Share/Modal/DepositModal.tsx
+#: src/pages/Share/Modal/DepositModal.tsx
+msgid "Deposit"
+msgstr ""
+
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "Disconnect"
 msgstr "ディスコネクト"
@@ -394,6 +427,10 @@ msgstr "連絡先情報を入力してください"
 msgid "Entry Price"
 msgstr "参入価格"
 
+#: src/pages/Share/Modal/WithdrawModal.tsx
+msgid "Exceed maximum withdrawal amount."
+msgstr ""
+
 #: src/hooks/useNESTSnackBar.tsx
 msgid "Fail Request"
 msgstr "リクエストに失敗しました"
@@ -433,6 +470,10 @@ msgstr "先物"
 msgid "GET"
 msgstr ""
 
+#: src/pages/Share/Modal/DepositModal.tsx
+msgid "Get NEST"
+msgstr ""
+
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "Github"
 msgstr "Github"
@@ -467,6 +508,10 @@ msgstr ""
 msgid "I understand"
 msgstr "理解しました"
 
+#: src/pages/Share/Modal/SignModal.tsx
+msgid "If you are using a secure device that you own. Selecting this option can expose your keys and information to others if you are on a public or non-secured device."
+msgstr ""
+
 #: src/pages/Share/Modal/StopTransactionModal.tsx
 msgid "If you have any questions or require further assistance, please feel free to reach out to our support team. We are here to help and provide guidance throughout this process."
 msgstr ""
@@ -486,6 +531,7 @@ msgid "Infinite Liquidity"
 msgstr "無限の流動性"
 
 #: src/hooks/useSwap.ts
+#: src/pages/Share/Modal/DepositModal.tsx
 msgid "Insufficient"
 msgstr "不足"
 
@@ -560,9 +606,13 @@ msgstr "リミットオーダー手数料 = 15 NEST"
 msgid "Limit Price"
 msgstr "リミット価格"
 
+#: src/pages/Share/Modal/SignModal.tsx
+#: src/pages/Share/Modal/SignModal.tsx
+msgid "Link wallet"
+msgstr ""
+
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Futures/Components/POrderList.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 #: src/pages/Futures/Modal/AddModal.tsx
 #: src/pages/Futures/Modal/EditPositionModal.tsx
@@ -570,7 +620,6 @@ msgstr "リミット価格"
 msgid "Liq Price"
 msgstr "清算価格"
 
-#: src/hooks/useFuturesPOrderClose.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "Liquidated"
@@ -587,9 +636,6 @@ msgstr "読み込み中..."
 #: src/hooks/useFuturesClose.ts
 #: src/hooks/useFuturesEditPosition.ts
 #: src/hooks/useFuturesNewOrder.ts
-#: src/hooks/useFuturesOrder.ts
-#: src/hooks/useFuturesPOrder.ts
-#: src/hooks/useFuturesPOrderClose.tsx
 #: src/pages/Dashboard/Components/MobileOrderTypePosition.tsx
 #: src/pages/Dashboard/Components/ShareOrderPosition.tsx
 #: src/pages/Futures/Components/OrderListPosition.tsx
@@ -619,6 +665,10 @@ msgstr "もっと見る"
 #: src/pages/Futures/MoreInfo.tsx
 msgid "More Info"
 msgstr "詳細情報"
+
+#: src/pages/Account/Account.tsx
+msgid "My balance"
+msgstr ""
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
@@ -714,7 +764,6 @@ msgstr "オープンポジションのリクエスト"
 #: src/pages/Futures/Components/OrderList.tsx
 #: src/pages/Futures/Components/OrderTable.tsx
 #: src/pages/Futures/Components/POrderList.tsx
-#: src/pages/Futures/Components/POrderList.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 #: src/pages/Futures/Modal/AddModal.tsx
 #: src/pages/Futures/Modal/EditPositionModal.tsx
@@ -786,6 +835,7 @@ msgid "Positions"
 msgstr "ポジション"
 
 #: src/pages/Futures/NewOrder.tsx
+#: src/pages/Share/Modal/DepositModal.tsx
 #: src/pages/Swap/Swap.tsx
 msgid "Price"
 msgstr "価格"
@@ -832,6 +882,7 @@ msgstr "ポジションの売却リクエスト"
 #: src/pages/Futures/Modal/CloseModal.tsx
 #: src/pages/Futures/Modal/EditPositionModal.tsx
 #: src/pages/Futures/NewOrder.tsx
+#: src/pages/Share/Modal/WithdrawModal.tsx
 msgid "Service Fee"
 msgstr "手数料"
 
@@ -853,9 +904,6 @@ msgstr "シェア"
 #: src/hooks/useFuturesClose.ts
 #: src/hooks/useFuturesEditPosition.ts
 #: src/hooks/useFuturesNewOrder.ts
-#: src/hooks/useFuturesOrder.ts
-#: src/hooks/useFuturesPOrder.ts
-#: src/hooks/useFuturesPOrderClose.tsx
 #: src/pages/Dashboard/Components/MobileOrderTypePosition.tsx
 #: src/pages/Dashboard/Components/ShareOrderPosition.tsx
 #: src/pages/Futures/Components/OrderListPosition.tsx
@@ -863,12 +911,15 @@ msgstr "シェア"
 msgid "Short"
 msgstr "ショート"
 
+#: src/hooks/useSignModal.ts
+msgid "Sign message"
+msgstr ""
+
 #: src/pages/Share/Modal/StopTransactionModal.tsx
 msgid "Sincerely,"
 msgstr ""
 
 #: src/pages/Futures/Components/OrderTable.tsx
-#: src/pages/Futures/Components/POrderTable.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 msgid "SL"
 msgstr "ストップロス"
@@ -892,7 +943,6 @@ msgstr "取引を開始"
 
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 #: src/pages/Futures/Components/OrderList.tsx
-#: src/pages/Futures/Components/POrderList.tsx
 #: src/pages/Futures/Components/POrderList.tsx
 #: src/pages/Futures/Modal/EditPositionModal.tsx
 #: src/pages/Futures/NewOrder.tsx
@@ -920,7 +970,11 @@ msgstr "ストップ・リミット"
 msgid "Submit successfully"
 msgstr "送信完了しました"
 
-#: src/components/NormalInput/NESTInput.tsx
+#: src/pages/Account/Components/MobileList.tsx
+#: src/pages/Account/Components/MoneyTable.tsx
+msgid "success"
+msgstr ""
+
 #: src/components/NormalInput/NESTInputSelect.tsx
 #: src/hooks/useSwap.ts
 #: src/hooks/useTransactionReceipt.ts
@@ -941,7 +995,6 @@ msgstr "銘柄"
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 #: src/pages/Futures/Components/OrderList.tsx
 #: src/pages/Futures/Components/POrderList.tsx
-#: src/pages/Futures/Components/POrderList.tsx
 #: src/pages/Futures/Modal/EditPositionModal.tsx
 #: src/pages/Futures/NewOrder.tsx
 msgid "Take Profit"
@@ -961,6 +1014,10 @@ msgstr ""
 msgid "The balance is 0. You can go to \"Faucet\" to get test token before trading."
 msgstr ""
 
+#: src/pages/Share/Modal/DepositModal.tsx
+msgid "The maximum amount allowed for a single deposit is"
+msgstr ""
+
 #: src/pages/Share/Modal/StopTransactionModal.tsx
 msgid "The NESTfi Team"
 msgstr ""
@@ -976,10 +1033,6 @@ msgstr ""
 #: src/pages/Home/Home.tsx
 msgid "The smart contract is the only seller of the system. No market marking costs and no liquidity debt."
 msgstr ""
-
-#: src/components/NormalInput/NESTInputSelect.tsx
-msgid "The system will automatically convert USDT to NEST at market price for you to open your position, and you will also receive NEST at settlement."
-msgstr "システムは市場価格でUSDTをNESTに自動変換し、ポジションを開設するためのNESTも受け取ります。"
 
 #: src/hooks/useNESTSnackBar.tsx
 msgid "The transaction failed and the amount has been fully refunded. You can re-trade"
@@ -1063,7 +1116,6 @@ msgstr ""
 
 #: src/pages/Futures/Components/OrderTable.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
-#: src/pages/Futures/Components/POrderTable.tsx
 msgid "TP"
 msgstr "TP（利確注文）"
 
@@ -1109,13 +1161,13 @@ msgstr ""
 msgid "Trading Volume"
 msgstr ""
 
+#: src/pages/Account/Account.tsx
+msgid "Transaction"
+msgstr ""
+
 #: src/hooks/useFuturesPOrder.ts
 msgid "Trigger"
 msgstr "トリガー"
-
-#: src/hooks/useFuturesPOrderClose.tsx
-msgid "Trigger executed"
-msgstr "トリガー実行済み"
 
 #: src/pages/Futures/Modal/EditPositionModal.tsx
 msgid "Trigger Position"
@@ -1143,6 +1195,10 @@ msgstr ""
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "User Guide"
 msgstr "ユーザーガイド"
+
+#: src/pages/Share/Modal/SignModal.tsx
+msgid "Verify ownership"
+msgstr ""
 
 #: src/components/SnackBar/NormalSnackBar.tsx
 msgid "View"
@@ -1175,6 +1231,21 @@ msgstr "閉じた後は表示されません"
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 msgid "with 1 click"
 msgstr "1クリックで"
+
+#: src/pages/Account/Account.tsx
+#: src/pages/Account/Account.tsx
+#: src/pages/Share/Modal/WithdrawModal.tsx
+#: src/pages/Share/Modal/WithdrawModal.tsx
+msgid "Withdraw"
+msgstr ""
+
+#: src/hooks/useWithDrawModal.ts
+msgid "WithDraw"
+msgstr ""
+
+#: src/components/NormalInput/NESTInput.tsx
+msgid "Your balance is 0. Before making any transactions, please click on \"Deposit\" to complete a quick deposit."
+msgstr ""
 
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Youtube"

@@ -24,7 +24,6 @@ interface NESTInputSelectProps {
   changeNestAmount: (value: string) => void;
   isShare?: boolean;
   style?: React.CSSProperties;
-  price?: string;
 }
 
 const NESTInputSelect: FC<NESTInputSelectProps> = ({ ...props }) => {
@@ -88,90 +87,45 @@ const NESTInputSelect: FC<NESTInputSelectProps> = ({ ...props }) => {
     return chainsData.chainId === 534353 ? t`Faucet` : t`Swap`;
   }, [chainsData.chainId]);
   const showBottom = useMemo(() => {
-    if (props.tokenName === "USDT") {
+    if (props.showToSwap) {
       return (
         <Stack
+          direction={"row"}
           spacing={"4px"}
           justifyContent={"space-between"}
           sx={(theme) => ({
             width: "100%",
-            paddingY: "12px",
+            paddingY: "4px",
             paddingX: "8px",
             borderRadius: "4px",
-            background: theme.normal.bg4,
+            background: theme.normal.danger_light_hover,
+            "& a": {
+              color: theme.normal.danger,
+              fontSize: 12,
+              fontWeight: 400,
+            },
+
             marginBottom: "12px",
+            "& svg": {
+              width: "24px",
+              height: "12px",
+              display: "block",
+              "& path": {
+                fill: theme.normal.danger,
+              },
+            },
           })}
           alignItems={"center"}
         >
-          <Box
-            component={"p"}
-            sx={(theme) => ({
-              fontSize: 14,
-              color: theme.normal.text0,
-              fontWeight: 700,
-              textAlign: "center",
-            })}
-          >
-            {props.price}
-          </Box>
-          <Box
-            component={"p"}
-            sx={(theme) => ({
-              fontSize: 12,
-              color: theme.normal.text2,
-              fontWeight: 400,
-              textAlign: "center",
-            })}
-          >
-            <Trans>
-              The system will automatically convert USDT to NEST at market price
-              for you to open your position, and you will also receive NEST at
-              settlement.
-            </Trans>
-          </Box>
+          <Link to={swapLink}>{noNESTText}</Link>
+          <Link to={swapLink}>
+            <NEXT />
+          </Link>
         </Stack>
       );
-    } else {
-      if (props.showToSwap) {
-        return (
-          <Stack
-            direction={"row"}
-            spacing={"4px"}
-            justifyContent={"space-between"}
-            sx={(theme) => ({
-              width: "100%",
-              paddingY: "4px",
-              paddingX: "8px",
-              borderRadius: "4px",
-              background: theme.normal.danger_light_hover,
-              "& a": {
-                color: theme.normal.danger,
-                fontSize: 12,
-                fontWeight: 400,
-              },
-
-              marginBottom: "12px",
-              "& svg": {
-                width: "24px",
-                height: "12px",
-                display: "block",
-                "& path": {
-                  fill: theme.normal.danger,
-                },
-              },
-            })}
-            alignItems={"center"}
-          >
-            <Link to={swapLink}>{noNESTText}</Link>
-            <Link to={swapLink}>
-              <NEXT />
-            </Link>
-          </Stack>
-        );
-      }
     }
     return <></>;
-  }, [noNESTText, props.price, props.showToSwap, props.tokenName, swapLink]);
+  }, [noNESTText, props.showToSwap, swapLink]);
   return (
     <Stack
       justifyContent={"flex-start"}
@@ -267,10 +221,7 @@ const NESTInputSelect: FC<NESTInputSelectProps> = ({ ...props }) => {
             <Trans>MAX</Trans>
           </LinkButton>
         </Stack>
-        {props.tokenName === "USDT" ? (
-          <></>
-        ) : (
-          <LinkButton>
+        {<LinkButton>
             <Link to={swapLink}>
               <Stack
                 direction={"row"}
@@ -293,8 +244,7 @@ const NESTInputSelect: FC<NESTInputSelectProps> = ({ ...props }) => {
                 <SwapExchangeSmall />
               </Stack>
             </Link>
-          </LinkButton>
-        )}
+          </LinkButton>}
       </Stack>
       {showBottom}
     </Stack>

@@ -8,7 +8,7 @@ import NESTLine from "../../../components/NESTLine";
 import NormalInfo from "../../../components/NormalInfo/NormalInfo";
 import NESTInput from "../../../components/NormalInput/NESTInput";
 import useFuturesAdd from "../../../hooks/useFuturesAdd";
-import { FuturesOrderV2 } from "../../../hooks/useFuturesOrderList";
+import { FuturesOrderService } from "../../../hooks/useFuturesOrderList";
 import useWindowWidth from "../../../hooks/useWindowWidth";
 import BaseDrawer from "../../Share/Modal/BaseDrawer";
 import BaseModal from "../../Share/Modal/BaseModal";
@@ -16,7 +16,7 @@ import { FuturesPrice } from "../Futures";
 import { t } from "@lingui/macro";
 
 interface AddModalBaseProps {
-  data: FuturesOrderV2;
+  data: FuturesOrderService;
   price: FuturesPrice | undefined;
   onClose: () => void;
 }
@@ -48,6 +48,7 @@ const AddModalBase: FC<AddModalBaseProps> = ({ ...props }) => {
         changeNestAmount={(value: string) =>
           setNestAmount(value.formatInputNum4())
         }
+        otherCallBack={() => {}}
       />
     );
   }, [
@@ -83,7 +84,7 @@ const AddModalBase: FC<AddModalBaseProps> = ({ ...props }) => {
 };
 
 interface AddModalProps {
-  data: FuturesOrderV2;
+  data: FuturesOrderService;
   price: FuturesPrice | undefined;
   open: boolean;
   onClose: () => void;

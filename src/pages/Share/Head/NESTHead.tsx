@@ -1,4 +1,4 @@
-import { FC, useMemo, useEffect } from "react";
+import { FC, useMemo, useEffect, useState } from "react";
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
 import {
@@ -20,6 +20,7 @@ import { NavMenuV2, NavMenuV3 } from "./NavMenuV2Base";
 import useNEST from "../../../hooks/useNEST";
 import { Trans } from "@lingui/macro";
 import LanguageMenu from "./LanguageMenu";
+import SignModal from "../Modal/SignModal";
 
 export const NavItems = [
   {
@@ -67,8 +68,16 @@ const NESTHead: FC = () => {
   const location = useLocation();
   const { width: widthLv, headHeight, isBigMobile, isPC } = useWindowWidth();
   const { nowTheme, changeTheme } = useTheme();
-  const { account, chainsData, navItems } = useNEST();
+  const { account, chainsData, navItems, checkSigned } = useNEST();
 
+  const [openSignModal, setOpenSignModal] = useState(false);
+  useEffect(() => {
+    if (account.address) {
+      setOpenSignModal(!checkSigned);
+    } else {
+      setOpenSignModal(false);
+    }
+  }, [account.address, checkSigned]);
   useEffect(() => {
     const chainIds = chainsData.chains.map((item) => item.id);
     if (
@@ -300,6 +309,7 @@ const NESTHead: FC = () => {
       alignItems="center"
       spacing={0}
     >
+      <SignModal open={openSignModal} onClose={() => setOpenSignModal(false)} />
       <Stack
         direction="row"
         justifyContent="flex-start"
