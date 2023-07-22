@@ -1,4 +1,3 @@
-import { MIN_NEST_BIG_NUMBER } from "./../contracts/useFuturesBuyV2";
 import { BigNumber } from "ethers";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import useReadTokenBalance from "../contracts/Read/useReadTokenContract";
@@ -9,6 +8,13 @@ import { getQueryVariable } from "../lib/queryVaribale";
 import { serviceOpen } from "../lib/NESTRequest";
 import { t } from "@lingui/macro";
 import useService from "../contracts/useService";
+import {
+  TransactionType,
+  usePendingTransactionsBase,
+} from "./useTransactionReceipt";
+import { SnackBarType } from "../components/SnackBar/NormalSnackBar";
+
+export const MIN_NEST_BIG_NUMBER = BigNumber.from("500000");
 
 export const lipPrice = (
   balance: BigNumber,
@@ -65,6 +71,7 @@ function useFuturesNewOrder(
   const [tokenBalance, setTokenBalance] = useState<BigNumber>();
   const [loading, setLoading] = useState<boolean>(false);
   const { service_balance } = useService();
+  const { addTransactionNotice } = usePendingTransactionsBase();
 
   // const nowToken = useMemo(() => {
   //   const token = inputToken.getToken();
@@ -212,11 +219,17 @@ function useFuturesNewOrder(
       );
       if (Number(openBase["errorCode"]) === 0) {
         getBalance();
+        addTransactionNotice({
+          type: TransactionType.futures_buy,
+          info: "",
+          result: SnackBarType.success,
+        });
       }
     }
     setLoading(false);
   }, [
     account.address,
+    addTransactionNotice,
     basePrice,
     chainsData.chainId,
     getBalance,

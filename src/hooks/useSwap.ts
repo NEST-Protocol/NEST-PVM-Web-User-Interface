@@ -9,9 +9,7 @@ import useNEST from "./useNEST";
 import useReadSwapAmountOut from "../contracts/Read/useReadSwapContract";
 import { NESTRedeemContract, SwapContract } from "../contracts/contractAddress";
 import useTokenApprove from "../contracts/useTokenContract";
-import useSwapExactTokensForTokens, {
-  useSwapNHBTCToNEST,
-} from "../contracts/useSwapContract";
+import useSwapExactTokensForTokens from "../contracts/useSwapContract";
 import {
   TransactionType,
   usePendingTransactions,
@@ -324,7 +322,6 @@ function useSwap() {
     swapPathAddress,
     account.address
   );
-  const { transaction: swapNHBTC } = useSwapNHBTCToNEST(inputAmountTransaction);
   /**
    * show button title
    */
@@ -366,13 +363,8 @@ function useSwap() {
     } else if (!checkAllowance) {
       tokenApprove.write?.();
     } else {
-      if (swapToken.src === "NHBTC") {
-        swapNHBTC.reset();
-        swapNHBTC.write?.();
-      } else {
-        swapTTT.reset();
-        swapTTT.write?.();
-      }
+      swapTTT.reset();
+      swapTTT.write?.();
     }
   }, [
     account.address,
@@ -380,9 +372,7 @@ function useSwap() {
     checkBalance,
     mainButtonLoading,
     setShowConnect,
-    swapNHBTC,
     swapTTT,
-    swapToken.src,
     tokenApprove,
   ]);
   /**

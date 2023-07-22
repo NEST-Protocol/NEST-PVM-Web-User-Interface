@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import useNEST from "./useNEST";
 import { serviceList } from "../lib/NESTRequest";
+import { usePendingTransactionsBase } from "./useTransactionReceipt";
 
 export interface FuturesOrderService {
   id: number;
@@ -21,7 +22,7 @@ export interface FuturesOrderService {
   status: number;
 }
 
-const UPDATE_LIST_TIME = 15;
+const UPDATE_LIST_TIME = 3;
 
 function useFuturesOrderList() {
   const { account, chainsData, signature } = useNEST();
@@ -31,6 +32,7 @@ function useFuturesOrderList() {
   const [orderListV2, setOrderListV2] = useState<Array<FuturesOrderService>>(
     []
   );
+  const { transactionNotice } = usePendingTransactionsBase();
 
   const getList = useCallback(async () => {
     try {
@@ -40,7 +42,6 @@ function useFuturesOrderList() {
       const baseList = await serviceList(chainsData.chainId, account.address, {
         Authorization: signature.signature,
       });
-      console.log(baseList)
       if (Number(baseList["errorCode"]) === 0) {
         const list: Array<FuturesOrderService> = baseList["value"]
           .map((item: { [x: string]: any }) => {
