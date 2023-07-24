@@ -4,6 +4,11 @@ import { FuturesOrderService } from "./useFuturesOrderList";
 import { t } from "@lingui/macro";
 import useNEST from "./useNEST";
 import { serviceCancel } from "../lib/NESTRequest";
+import {
+  TransactionType,
+  usePendingTransactionsBase,
+} from "./useTransactionReceipt";
+import { SnackBarType } from "../components/SnackBar/NormalSnackBar";
 
 function useFuturesOrder(data: FuturesOrderService) {
   const { chainsData, signature } = useNEST();
@@ -19,6 +24,7 @@ function useFuturesOrder(data: FuturesOrderService) {
   const showBalance = useMemo(() => {
     return data.margin.toFixed(2);
   }, [data.margin]);
+  const { addTransactionNotice } = usePendingTransactionsBase();
   /**
    * action
    */
@@ -30,9 +36,17 @@ function useFuturesOrder(data: FuturesOrderService) {
       );
       if (Number(closeBase["errorCode"]) === 0) {
       }
+      addTransactionNotice({
+        type: TransactionType.futures_closeLimit,
+        info: "",
+        result:
+          Number(closeBase["errorCode"]) === 0
+            ? SnackBarType.success
+            : SnackBarType.fail,
+      });
     }
     setLoading(false);
-  }, [chainsData.chainId, data.id, signature]);
+  }, [addTransactionNotice, chainsData.chainId, data.id, signature]);
   /**
    * main button
    */

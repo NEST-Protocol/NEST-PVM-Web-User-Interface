@@ -13,6 +13,10 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
+#: src/pages/Account/Components/TransactionTable.tsx
+msgid "{0}"
+msgstr ""
+
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 msgid "* Due to the complexity of financial data, there might be nuances and delay. Data displayed above is for reference only.We sincerely apologize for any inconvenience."
@@ -125,23 +129,6 @@ msgstr "Lucro e Perda de 7 dias"
 msgid "7 Days\\' PNL"
 msgstr "Lucro e Perda de 7 dias\\'"
 
-#: src/pages/Account/Components/TransactionTable.tsx
-msgid "操作"
-msgstr ""
-
-#: src/pages/Account/Components/MoneyTable.tsx
-msgid "金额"
-msgstr ""
-
-#: src/pages/Account/Components/MoneyTable.tsx
-#: src/pages/Account/Components/TransactionTable.tsx
-msgid "时间"
-msgstr ""
-
-#: src/pages/Account/Components/MoneyTable.tsx
-msgid "状态"
-msgstr ""
-
 #: src/pages/Home/Home.tsx
 msgid "A beginner's guide to using NESTFi"
 msgstr "Um guia para principiantes na utilização do NEST Fi"
@@ -149,6 +136,10 @@ msgstr "Um guia para principiantes na utilização do NEST Fi"
 #: src/pages/Share/Modal/ConnectWalletModal.tsx
 msgid "about connecting wallets"
 msgstr "sobre as carteiras digitais"
+
+#: src/pages/Account/Components/TransactionTable.tsx
+msgid "Action"
+msgstr ""
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
@@ -176,6 +167,7 @@ msgid "Add NEST to wallet"
 msgstr "Adicionar NEST à carteira"
 
 #: src/hooks/useTransactionReceipt.ts
+#: src/hooks/useTransactionReceipt.ts
 msgid "Add position"
 msgstr "Adicionar posição"
 
@@ -195,6 +187,7 @@ msgstr "Após a execução da ordem limite, o preço TP e SL que você definiu s
 
 #: src/components/NormalInput/NESTInput.tsx
 #: src/components/NormalInput/NESTInputSelect.tsx
+#: src/pages/Account/Components/MoneyTable.tsx
 msgid "Amount"
 msgstr "Quantidade"
 
@@ -241,6 +234,7 @@ msgstr "Link do canal"
 msgid "Close"
 msgstr "Fechar"
 
+#: src/hooks/useTransactionReceipt.ts
 #: src/hooks/useTransactionReceipt.ts
 msgid "Close Limit Order"
 msgstr "Fechar ordem limite"
@@ -409,9 +403,11 @@ msgid "Edit"
 msgstr "Editar"
 
 #: src/hooks/useTransactionReceipt.ts
+#: src/hooks/useTransactionReceipt.ts
 msgid "Edit Limit Order"
 msgstr "Editar ordem limitada"
 
+#: src/hooks/useTransactionReceipt.ts
 #: src/hooks/useTransactionReceipt.ts
 #: src/pages/Futures/Modal/EditPositionModal.tsx
 msgid "Edit Position"
@@ -431,6 +427,11 @@ msgstr "Preço de entrada"
 
 #: src/pages/Share/Modal/WithdrawModal.tsx
 msgid "Exceed maximum withdrawal amount."
+msgstr ""
+
+#: src/pages/Account/Components/MobileList.tsx
+#: src/pages/Account/Components/MoneyTable.tsx
+msgid "Fail"
 msgstr ""
 
 #: src/hooks/useNESTSnackBar.tsx
@@ -727,6 +728,7 @@ msgstr "Ainda não há comissões"
 msgid "No Market Makers"
 msgstr "Não há formadores de mercado"
 
+#: src/pages/Account/Account.tsx
 #: src/pages/Futures/Components/TableTitle.tsx
 #: src/pages/Futures/OrderList.tsx
 #: src/pages/Futures/OrderList.tsx
@@ -751,12 +753,10 @@ msgid "Open"
 msgstr "Aberto"
 
 #: src/hooks/useTransactionReceipt.ts
+#: src/hooks/useTransactionReceipt.ts
+#: src/hooks/useTransactionReceipt.ts
 msgid "Open position"
 msgstr "Posição aberta"
-
-#: src/hooks/useTransactionReceipt.ts
-msgid "Open position request"
-msgstr "Pedido de posição aberta"
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
@@ -787,6 +787,11 @@ msgstr "Encomendar"
 #: src/pages/Dashboard/Referral/Referral.tsx
 msgid "Overview"
 msgstr "Visão geral"
+
+#: src/pages/Account/Components/MobileList.tsx
+#: src/pages/Account/Components/MoneyTable.tsx
+msgid "Pending"
+msgstr ""
 
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Platform (Youtube, Telegram, Twitter, Instagram, Facebook, Tiktok, Others)"
@@ -874,12 +879,9 @@ msgid "Search"
 msgstr "Pesquisar"
 
 #: src/hooks/useTransactionReceipt.ts
+#: src/hooks/useTransactionReceipt.ts
 msgid "Sell position"
 msgstr "Vender posição"
-
-#: src/hooks/useTransactionReceipt.ts
-msgid "Sell position request"
-msgstr "Pedido de venda de posição"
 
 #: src/pages/Futures/Modal/CloseModal.tsx
 #: src/pages/Futures/Modal/EditPositionModal.tsx
@@ -943,6 +945,10 @@ msgstr "Configuração de Tolerância ao Deslizamento"
 msgid "Start Trading"
 msgstr "Começar a Negociar"
 
+#: src/pages/Account/Components/MoneyTable.tsx
+msgid "Status"
+msgstr ""
+
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 #: src/pages/Futures/Components/OrderList.tsx
 #: src/pages/Futures/Components/POrderList.tsx
@@ -974,7 +980,7 @@ msgstr "Submissão bem sucedida"
 
 #: src/pages/Account/Components/MobileList.tsx
 #: src/pages/Account/Components/MoneyTable.tsx
-msgid "success"
+msgid "Success"
 msgstr ""
 
 #: src/components/NormalInput/NESTInputSelect.tsx
@@ -1040,6 +1046,8 @@ msgstr "O contrato inteligente é o único vendedor do sistema. Sem custos de ma
 msgid "The transaction failed and the amount has been fully refunded. You can re-trade"
 msgstr "A transação falhou e o valor foi completamente reembolsado. Você pode fazer uma nova negociação"
 
+#: src/pages/Account/Components/MoneyTable.tsx
+#: src/pages/Account/Components/TransactionTable.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "Time"
@@ -1234,6 +1242,7 @@ msgstr "Não será exibido após o fechamento"
 msgid "with 1 click"
 msgstr "com 1 clique"
 
+#: src/hooks/useTransactionReceipt.ts
 #: src/pages/Account/Account.tsx
 #: src/pages/Account/Account.tsx
 #: src/pages/Share/Modal/WithdrawModal.tsx

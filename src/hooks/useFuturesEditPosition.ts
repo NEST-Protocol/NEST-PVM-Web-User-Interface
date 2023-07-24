@@ -6,6 +6,11 @@ import { FuturesPrice } from "../pages/Futures/Futures";
 import { t } from "@lingui/macro";
 import { serviceUpdateStopPrice } from "../lib/NESTRequest";
 import useNEST from "./useNEST";
+import {
+  TransactionType,
+  usePendingTransactionsBase,
+} from "./useTransactionReceipt";
+import { SnackBarType } from "../components/SnackBar/NormalSnackBar";
 
 function useFuturesEditPosition(
   data: FuturesOrderService,
@@ -17,6 +22,7 @@ function useFuturesEditPosition(
   const tokenPair = useMemo(() => {
     return data.product.split("/")[0];
   }, [data.product]);
+  const { addTransactionNotice } = usePendingTransactionsBase();
   /**
    * futures modal
    */
@@ -93,9 +99,18 @@ function useFuturesEditPosition(
       );
       if (Number(updateBase["errorCode"]) === 0) {
       }
+      addTransactionNotice({
+        type: TransactionType.futures_editPosition,
+        info: "",
+        result:
+          Number(updateBase["errorCode"]) === 0
+            ? SnackBarType.success
+            : SnackBarType.fail,
+      });
     }
     setLoading(false);
   }, [
+    addTransactionNotice,
     chainsData.chainId,
     data.id,
     signature,

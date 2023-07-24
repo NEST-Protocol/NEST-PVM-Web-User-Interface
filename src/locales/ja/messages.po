@@ -13,6 +13,10 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
+#: src/pages/Account/Components/TransactionTable.tsx
+msgid "{0}"
+msgstr ""
+
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 msgid "* Due to the complexity of financial data, there might be nuances and delay. Data displayed above is for reference only.We sincerely apologize for any inconvenience."
@@ -123,23 +127,6 @@ msgstr "7日間のPNL"
 msgid "7 Days\\' PNL"
 msgstr "7日間のPNL"
 
-#: src/pages/Account/Components/TransactionTable.tsx
-msgid "操作"
-msgstr ""
-
-#: src/pages/Account/Components/MoneyTable.tsx
-msgid "金额"
-msgstr ""
-
-#: src/pages/Account/Components/MoneyTable.tsx
-#: src/pages/Account/Components/TransactionTable.tsx
-msgid "时间"
-msgstr ""
-
-#: src/pages/Account/Components/MoneyTable.tsx
-msgid "状态"
-msgstr ""
-
 #: src/pages/Home/Home.tsx
 msgid "A beginner's guide to using NESTFi"
 msgstr ""
@@ -147,6 +134,10 @@ msgstr ""
 #: src/pages/Share/Modal/ConnectWalletModal.tsx
 msgid "about connecting wallets"
 msgstr "コネクティングウォレットについて"
+
+#: src/pages/Account/Components/TransactionTable.tsx
+msgid "Action"
+msgstr ""
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
@@ -174,6 +165,7 @@ msgid "Add NEST to wallet"
 msgstr "NESTをウォレットに追加"
 
 #: src/hooks/useTransactionReceipt.ts
+#: src/hooks/useTransactionReceipt.ts
 msgid "Add position"
 msgstr "ポジションを追加"
 
@@ -193,6 +185,7 @@ msgstr "指値注文が実行されると、設定したTP価格とSL価格が�
 
 #: src/components/NormalInput/NESTInput.tsx
 #: src/components/NormalInput/NESTInputSelect.tsx
+#: src/pages/Account/Components/MoneyTable.tsx
 msgid "Amount"
 msgstr "金額"
 
@@ -239,6 +232,7 @@ msgstr "チャンネルリンク"
 msgid "Close"
 msgstr "閉じる"
 
+#: src/hooks/useTransactionReceipt.ts
 #: src/hooks/useTransactionReceipt.ts
 msgid "Close Limit Order"
 msgstr "リミット注文を閉じる"
@@ -407,9 +401,11 @@ msgid "Edit"
 msgstr "編集"
 
 #: src/hooks/useTransactionReceipt.ts
+#: src/hooks/useTransactionReceipt.ts
 msgid "Edit Limit Order"
 msgstr "リミットオーダーを編集"
 
+#: src/hooks/useTransactionReceipt.ts
 #: src/hooks/useTransactionReceipt.ts
 #: src/pages/Futures/Modal/EditPositionModal.tsx
 msgid "Edit Position"
@@ -429,6 +425,11 @@ msgstr "参入価格"
 
 #: src/pages/Share/Modal/WithdrawModal.tsx
 msgid "Exceed maximum withdrawal amount."
+msgstr ""
+
+#: src/pages/Account/Components/MobileList.tsx
+#: src/pages/Account/Components/MoneyTable.tsx
+msgid "Fail"
 msgstr ""
 
 #: src/hooks/useNESTSnackBar.tsx
@@ -725,6 +726,7 @@ msgstr ""
 msgid "No Market Makers"
 msgstr "マーケットメーカーなし"
 
+#: src/pages/Account/Account.tsx
 #: src/pages/Futures/Components/TableTitle.tsx
 #: src/pages/Futures/OrderList.tsx
 #: src/pages/Futures/OrderList.tsx
@@ -749,12 +751,10 @@ msgid "Open"
 msgstr "オープン"
 
 #: src/hooks/useTransactionReceipt.ts
+#: src/hooks/useTransactionReceipt.ts
+#: src/hooks/useTransactionReceipt.ts
 msgid "Open position"
 msgstr "オープンポジション"
-
-#: src/hooks/useTransactionReceipt.ts
-msgid "Open position request"
-msgstr "オープンポジションのリクエスト"
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
@@ -784,6 +784,11 @@ msgstr "注文"
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 msgid "Overview"
+msgstr ""
+
+#: src/pages/Account/Components/MobileList.tsx
+#: src/pages/Account/Components/MoneyTable.tsx
+msgid "Pending"
 msgstr ""
 
 #: src/pages/Home/Modal/ApplyModal.tsx
@@ -872,12 +877,9 @@ msgid "Search"
 msgstr ""
 
 #: src/hooks/useTransactionReceipt.ts
+#: src/hooks/useTransactionReceipt.ts
 msgid "Sell position"
 msgstr "ポジションを売る"
-
-#: src/hooks/useTransactionReceipt.ts
-msgid "Sell position request"
-msgstr "ポジションの売却リクエスト"
 
 #: src/pages/Futures/Modal/CloseModal.tsx
 #: src/pages/Futures/Modal/EditPositionModal.tsx
@@ -941,6 +943,10 @@ msgstr "スリッページトレランス設定"
 msgid "Start Trading"
 msgstr "取引を開始"
 
+#: src/pages/Account/Components/MoneyTable.tsx
+msgid "Status"
+msgstr ""
+
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 #: src/pages/Futures/Components/OrderList.tsx
 #: src/pages/Futures/Components/POrderList.tsx
@@ -972,7 +978,7 @@ msgstr "送信完了しました"
 
 #: src/pages/Account/Components/MobileList.tsx
 #: src/pages/Account/Components/MoneyTable.tsx
-msgid "success"
+msgid "Success"
 msgstr ""
 
 #: src/components/NormalInput/NESTInputSelect.tsx
@@ -1038,6 +1044,8 @@ msgstr ""
 msgid "The transaction failed and the amount has been fully refunded. You can re-trade"
 msgstr "取引に失敗し、金額は全額返金されました。再度取引できます"
 
+#: src/pages/Account/Components/MoneyTable.tsx
+#: src/pages/Account/Components/TransactionTable.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "Time"
@@ -1232,6 +1240,7 @@ msgstr "閉じた後は表示されません"
 msgid "with 1 click"
 msgstr "1クリックで"
 
+#: src/hooks/useTransactionReceipt.ts
 #: src/pages/Account/Account.tsx
 #: src/pages/Account/Account.tsx
 #: src/pages/Share/Modal/WithdrawModal.tsx

@@ -13,6 +13,10 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
+#: src/pages/Account/Components/TransactionTable.tsx
+msgid "{0}"
+msgstr ""
+
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 msgid "* Due to the complexity of financial data, there might be nuances and delay. Data displayed above is for reference only.We sincerely apologize for any inconvenience."
@@ -123,23 +127,6 @@ msgstr "Прибыль / убыток за 7 дней"
 msgid "7 Days\\' PNL"
 msgstr "Прибыль / убыток за 7 дней"
 
-#: src/pages/Account/Components/TransactionTable.tsx
-msgid "操作"
-msgstr ""
-
-#: src/pages/Account/Components/MoneyTable.tsx
-msgid "金额"
-msgstr ""
-
-#: src/pages/Account/Components/MoneyTable.tsx
-#: src/pages/Account/Components/TransactionTable.tsx
-msgid "时间"
-msgstr ""
-
-#: src/pages/Account/Components/MoneyTable.tsx
-msgid "状态"
-msgstr ""
-
 #: src/pages/Home/Home.tsx
 msgid "A beginner's guide to using NESTFi"
 msgstr ""
@@ -147,6 +134,10 @@ msgstr ""
 #: src/pages/Share/Modal/ConnectWalletModal.tsx
 msgid "about connecting wallets"
 msgstr "о подключении кошельков"
+
+#: src/pages/Account/Components/TransactionTable.tsx
+msgid "Action"
+msgstr ""
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
@@ -174,6 +165,7 @@ msgid "Add NEST to wallet"
 msgstr "Добавить NEST в кошелек"
 
 #: src/hooks/useTransactionReceipt.ts
+#: src/hooks/useTransactionReceipt.ts
 msgid "Add position"
 msgstr "Добавить позицию"
 
@@ -193,6 +185,7 @@ msgstr "После выполнения лимитного ордера, уст�
 
 #: src/components/NormalInput/NESTInput.tsx
 #: src/components/NormalInput/NESTInputSelect.tsx
+#: src/pages/Account/Components/MoneyTable.tsx
 msgid "Amount"
 msgstr "Количество"
 
@@ -239,6 +232,7 @@ msgstr "Ссылка на канал"
 msgid "Close"
 msgstr "Закрыть"
 
+#: src/hooks/useTransactionReceipt.ts
 #: src/hooks/useTransactionReceipt.ts
 msgid "Close Limit Order"
 msgstr "Закрыть лимитную заявку"
@@ -407,9 +401,11 @@ msgid "Edit"
 msgstr "Редактировать"
 
 #: src/hooks/useTransactionReceipt.ts
+#: src/hooks/useTransactionReceipt.ts
 msgid "Edit Limit Order"
 msgstr "Редактировать лимитный ордер"
 
+#: src/hooks/useTransactionReceipt.ts
 #: src/hooks/useTransactionReceipt.ts
 #: src/pages/Futures/Modal/EditPositionModal.tsx
 msgid "Edit Position"
@@ -429,6 +425,11 @@ msgstr "Цена входа"
 
 #: src/pages/Share/Modal/WithdrawModal.tsx
 msgid "Exceed maximum withdrawal amount."
+msgstr ""
+
+#: src/pages/Account/Components/MobileList.tsx
+#: src/pages/Account/Components/MoneyTable.tsx
+msgid "Fail"
 msgstr ""
 
 #: src/hooks/useNESTSnackBar.tsx
@@ -725,6 +726,7 @@ msgstr ""
 msgid "No Market Makers"
 msgstr "Нет рыночных мейкеров"
 
+#: src/pages/Account/Account.tsx
 #: src/pages/Futures/Components/TableTitle.tsx
 #: src/pages/Futures/OrderList.tsx
 #: src/pages/Futures/OrderList.tsx
@@ -749,12 +751,10 @@ msgid "Open"
 msgstr "Открыть"
 
 #: src/hooks/useTransactionReceipt.ts
+#: src/hooks/useTransactionReceipt.ts
+#: src/hooks/useTransactionReceipt.ts
 msgid "Open position"
 msgstr "Открыть позицию"
-
-#: src/hooks/useTransactionReceipt.ts
-msgid "Open position request"
-msgstr "Запрос на открытие позиции"
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
@@ -784,6 +784,11 @@ msgstr "Ордер"
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 msgid "Overview"
+msgstr ""
+
+#: src/pages/Account/Components/MobileList.tsx
+#: src/pages/Account/Components/MoneyTable.tsx
+msgid "Pending"
 msgstr ""
 
 #: src/pages/Home/Modal/ApplyModal.tsx
@@ -872,12 +877,9 @@ msgid "Search"
 msgstr ""
 
 #: src/hooks/useTransactionReceipt.ts
+#: src/hooks/useTransactionReceipt.ts
 msgid "Sell position"
 msgstr "Продать позицию"
-
-#: src/hooks/useTransactionReceipt.ts
-msgid "Sell position request"
-msgstr "Запрос на продажу позиции"
 
 #: src/pages/Futures/Modal/CloseModal.tsx
 #: src/pages/Futures/Modal/EditPositionModal.tsx
@@ -941,6 +943,10 @@ msgstr "Настройка допустимого отклонения цены"
 msgid "Start Trading"
 msgstr "Начать торговлю"
 
+#: src/pages/Account/Components/MoneyTable.tsx
+msgid "Status"
+msgstr ""
+
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 #: src/pages/Futures/Components/OrderList.tsx
 #: src/pages/Futures/Components/POrderList.tsx
@@ -972,7 +978,7 @@ msgstr "Успешно отправлено"
 
 #: src/pages/Account/Components/MobileList.tsx
 #: src/pages/Account/Components/MoneyTable.tsx
-msgid "success"
+msgid "Success"
 msgstr ""
 
 #: src/components/NormalInput/NESTInputSelect.tsx
@@ -1038,6 +1044,8 @@ msgstr ""
 msgid "The transaction failed and the amount has been fully refunded. You can re-trade"
 msgstr "Транзакция не удалась, и сумма была полностью возмещена. Вы можете повторно торговать"
 
+#: src/pages/Account/Components/MoneyTable.tsx
+#: src/pages/Account/Components/TransactionTable.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "Time"
@@ -1232,6 +1240,7 @@ msgstr "Не будет отображаться после закрытия"
 msgid "with 1 click"
 msgstr "в 1 клик"
 
+#: src/hooks/useTransactionReceipt.ts
 #: src/pages/Account/Account.tsx
 #: src/pages/Account/Account.tsx
 #: src/pages/Share/Modal/WithdrawModal.tsx

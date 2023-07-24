@@ -13,6 +13,10 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
+#: src/pages/Account/Components/TransactionTable.tsx
+msgid "{0}"
+msgstr ""
+
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 msgid "* Due to the complexity of financial data, there might be nuances and delay. Data displayed above is for reference only.We sincerely apologize for any inconvenience."
@@ -125,23 +129,6 @@ msgstr "7 일 손익"
 msgid "7 Days\\' PNL"
 msgstr "7 일 손익"
 
-#: src/pages/Account/Components/TransactionTable.tsx
-msgid "操作"
-msgstr ""
-
-#: src/pages/Account/Components/MoneyTable.tsx
-msgid "金额"
-msgstr ""
-
-#: src/pages/Account/Components/MoneyTable.tsx
-#: src/pages/Account/Components/TransactionTable.tsx
-msgid "时间"
-msgstr ""
-
-#: src/pages/Account/Components/MoneyTable.tsx
-msgid "状态"
-msgstr ""
-
 #: src/pages/Home/Home.tsx
 msgid "A beginner's guide to using NESTFi"
 msgstr "NEST Fi 사용 초보자 가이드"
@@ -149,6 +136,10 @@ msgstr "NEST Fi 사용 초보자 가이드"
 #: src/pages/Share/Modal/ConnectWalletModal.tsx
 msgid "about connecting wallets"
 msgstr "지갑 연결 정보"
+
+#: src/pages/Account/Components/TransactionTable.tsx
+msgid "Action"
+msgstr ""
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
@@ -176,6 +167,7 @@ msgid "Add NEST to wallet"
 msgstr "월렛에 NEST 추가"
 
 #: src/hooks/useTransactionReceipt.ts
+#: src/hooks/useTransactionReceipt.ts
 msgid "Add position"
 msgstr "포지션 추가"
 
@@ -195,6 +187,7 @@ msgstr "지정가 주문이 실행된 후 설정한 TP 및 SL 가격이 즉시 �
 
 #: src/components/NormalInput/NESTInput.tsx
 #: src/components/NormalInput/NESTInputSelect.tsx
+#: src/pages/Account/Components/MoneyTable.tsx
 msgid "Amount"
 msgstr "수량"
 
@@ -241,6 +234,7 @@ msgstr "채널 링크"
 msgid "Close"
 msgstr "매도"
 
+#: src/hooks/useTransactionReceipt.ts
 #: src/hooks/useTransactionReceipt.ts
 msgid "Close Limit Order"
 msgstr "지정가 주문 매도"
@@ -409,9 +403,11 @@ msgid "Edit"
 msgstr "편집"
 
 #: src/hooks/useTransactionReceipt.ts
+#: src/hooks/useTransactionReceipt.ts
 msgid "Edit Limit Order"
 msgstr "지정가 주문 수정"
 
+#: src/hooks/useTransactionReceipt.ts
 #: src/hooks/useTransactionReceipt.ts
 #: src/pages/Futures/Modal/EditPositionModal.tsx
 msgid "Edit Position"
@@ -431,6 +427,11 @@ msgstr "진입 가격"
 
 #: src/pages/Share/Modal/WithdrawModal.tsx
 msgid "Exceed maximum withdrawal amount."
+msgstr ""
+
+#: src/pages/Account/Components/MobileList.tsx
+#: src/pages/Account/Components/MoneyTable.tsx
+msgid "Fail"
 msgstr ""
 
 #: src/hooks/useNESTSnackBar.tsx
@@ -727,6 +728,7 @@ msgstr "아직 수수료 없음"
 msgid "No Market Makers"
 msgstr "시장 메이커 없음"
 
+#: src/pages/Account/Account.tsx
 #: src/pages/Futures/Components/TableTitle.tsx
 #: src/pages/Futures/OrderList.tsx
 #: src/pages/Futures/OrderList.tsx
@@ -751,12 +753,10 @@ msgid "Open"
 msgstr "열기"
 
 #: src/hooks/useTransactionReceipt.ts
+#: src/hooks/useTransactionReceipt.ts
+#: src/hooks/useTransactionReceipt.ts
 msgid "Open position"
 msgstr "포지션 열기"
-
-#: src/hooks/useTransactionReceipt.ts
-msgid "Open position request"
-msgstr "포지션 열기 요청"
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
@@ -787,6 +787,11 @@ msgstr "주문"
 #: src/pages/Dashboard/Referral/Referral.tsx
 msgid "Overview"
 msgstr "개요"
+
+#: src/pages/Account/Components/MobileList.tsx
+#: src/pages/Account/Components/MoneyTable.tsx
+msgid "Pending"
+msgstr ""
 
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Platform (Youtube, Telegram, Twitter, Instagram, Facebook, Tiktok, Others)"
@@ -874,12 +879,9 @@ msgid "Search"
 msgstr "검색"
 
 #: src/hooks/useTransactionReceipt.ts
+#: src/hooks/useTransactionReceipt.ts
 msgid "Sell position"
 msgstr "포지션 매도"
-
-#: src/hooks/useTransactionReceipt.ts
-msgid "Sell position request"
-msgstr "포지션 매도 요청"
 
 #: src/pages/Futures/Modal/CloseModal.tsx
 #: src/pages/Futures/Modal/EditPositionModal.tsx
@@ -943,6 +945,10 @@ msgstr "슬리피지 허용 범위 설정"
 msgid "Start Trading"
 msgstr "거래 시작하기"
 
+#: src/pages/Account/Components/MoneyTable.tsx
+msgid "Status"
+msgstr ""
+
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 #: src/pages/Futures/Components/OrderList.tsx
 #: src/pages/Futures/Components/POrderList.tsx
@@ -974,7 +980,7 @@ msgstr "성공적으로 제출됨"
 
 #: src/pages/Account/Components/MobileList.tsx
 #: src/pages/Account/Components/MoneyTable.tsx
-msgid "success"
+msgid "Success"
 msgstr ""
 
 #: src/components/NormalInput/NESTInputSelect.tsx
@@ -1040,6 +1046,8 @@ msgstr "스마트 컨트랙트는 시스템의 유일한 판매자입니다. 시
 msgid "The transaction failed and the amount has been fully refunded. You can re-trade"
 msgstr "트랜잭션이 실패하고 모든 금액이 환불되었습니다. 재거래할 수 있습니다."
 
+#: src/pages/Account/Components/MoneyTable.tsx
+#: src/pages/Account/Components/TransactionTable.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "Time"
@@ -1234,6 +1242,7 @@ msgstr "닫은 후에는 표시되지 않습니다"
 msgid "with 1 click"
 msgstr "1 클릭으로"
 
+#: src/hooks/useTransactionReceipt.ts
 #: src/pages/Account/Account.tsx
 #: src/pages/Account/Account.tsx
 #: src/pages/Share/Modal/WithdrawModal.tsx

@@ -47,7 +47,7 @@ export interface FuturesHideOrderModalInfo {
   hash: string;
 }
 
-const NoOrderMobile = styled(Box)(({ theme }) => ({
+export const NoOrderMobile = styled(Box)(({ theme }) => ({
   borderRadius: "12px",
   width: "100%",
   height: "60px",

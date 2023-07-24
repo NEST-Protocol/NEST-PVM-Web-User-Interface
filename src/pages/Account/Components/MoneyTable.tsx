@@ -1,32 +1,38 @@
-import { FC } from "react";
+import { FC, useMemo } from "react";
 import FuturesTableTitle from "../../Futures/Components/TableTitle";
-import { Trans, t } from "@lingui/macro";
+import { t } from "@lingui/macro";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
-import { Deposit, NEXT } from "../../../components/icons";
+import { Deposit, NEXT, Withdraw } from "../../../components/icons";
+import { AccountListData } from "../../../hooks/useAccount";
+import { AccountListType } from "./MobileList";
 
 interface MoneyTableProps {
+  list: Array<AccountListData>;
+  type: AccountListType;
   style?: React.CSSProperties;
 }
 
 const MoneyTable: FC<MoneyTableProps> = ({ ...props }) => {
-  const rows = [1, 2, 3, 4, 5, 6].map((item, index) => {
+  const rows = props.list.map((item, index) => {
+    const time = new Date(item.time * 1000);
     return (
       <MoneyTableRow
         key={`MoneyTableRow + ${index}`}
-        text={"11"}
-        time={"22"}
-        state={"33"}
-        link={"44"}
+        text={item.text}
+        time={`${time.toLocaleDateString()} ${time.toLocaleTimeString()}`}
+        state={item.status}
+        link={item.hash ? item.hash.hashToChainScan(item.chainId) : ""}
+        type={props.type}
       />
     );
   });
   return (
     <FuturesTableTitle
-      dataArray={[t`金额`, t`时间`, t`状态`, ""]}
-      noOrder={true}
+      dataArray={[t`Amount`, t`Time`, t`Status`, ""]}
+      noOrder={props.list.length === 0}
       helps={[]}
       style={props.style}
       noNeedPadding
@@ -41,11 +47,23 @@ export default MoneyTable;
 interface MoneyTableRowProps {
   text: string;
   time: string;
-  state: string;
+  state: number;
   link: string;
+  type: AccountListType;
 }
 
 const MoneyTableRow: FC<MoneyTableRowProps> = ({ ...props }) => {
+  const state = useMemo(() => {
+    if (props.state === -1) {
+      return t`Fail`;
+    } else if (props.state === 0) {
+      return t`Pending`;
+    } else if (props.state === 1) {
+      return t`Success`;
+    } else {
+      return "";
+    }
+  }, [props.state]);
   return (
     <TableRow
       sx={(theme) => ({ "&: hover": { background: theme.normal.bg1 } })}
@@ -62,7 +80,11 @@ const MoneyTableRow: FC<MoneyTableRowProps> = ({ ...props }) => {
               },
             }}
           >
-            <Deposit />
+            {props.type === AccountListType.deposit ? (
+              <Deposit />
+            ) : (
+              <Withdraw />
+            )}
           </Box>
           <Box
             sx={(theme) => ({
@@ -72,7 +94,7 @@ const MoneyTableRow: FC<MoneyTableRowProps> = ({ ...props }) => {
               color: theme.normal.text0,
             })}
           >
-            100 NEST
+            {props.text}
           </Box>
         </Stack>
       </TableCell>
@@ -81,7 +103,7 @@ const MoneyTableRow: FC<MoneyTableRowProps> = ({ ...props }) => {
           padding: "0px !important",
         }}
       >
-        2023-04-45 10:44:33
+        {props.time}
       </TableCell>
       <TableCell
         sx={{
@@ -89,22 +111,28 @@ const MoneyTableRow: FC<MoneyTableRowProps> = ({ ...props }) => {
         }}
       >
         <Stack direction={"row"} alignItems={"center"}>
-        <Box
-          sx={(theme) => ({
-            padding: "4px",
-            borderRadius: "4px",
-            fontSize: "10px",
-            fontWeight: "700",
-            lineHeight: "14px",
-            border: `1px solid ${theme.normal.success}`,
-            color: theme.normal.success,
-          })}
-        >
-          <Trans>success</Trans>
-        </Box>
+          <Box
+            sx={(theme) => {
+              const color =
+                props.state === -1
+                  ? theme.normal.danger
+                  : props.state === 0
+                  ? theme.normal.primary
+                  : theme.normal.success;
+              return {
+                padding: "4px",
+                borderRadius: "4px",
+                fontSize: "10px",
+                fontWeight: "700",
+                lineHeight: "14px",
+                border: `1px solid ${color}`,
+                color: color,
+              };
+            }}
+          >
+            {state}
+          </Box>
         </Stack>
-        
-        
       </TableCell>
       <TableCell>
         <Stack
@@ -121,6 +149,12 @@ const MoneyTableRow: FC<MoneyTableRowProps> = ({ ...props }) => {
               borderRadius: "4px",
               border: `1px solid ${theme.normal.border}`,
             })}
+            component={"button"}
+            onClick={() => {
+              if (props.link !== "") {
+                window.open(props.link);
+              }
+            }}
           >
             <Box
               sx={(theme) => ({

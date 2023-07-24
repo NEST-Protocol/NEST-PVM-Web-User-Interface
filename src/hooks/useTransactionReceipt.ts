@@ -41,8 +41,6 @@ export const getTransactionTypeString = (text: string) => {
     return t`Add position`;
   } else if (text === `Sell position`) {
     return t`Sell position`;
-  } else if (text === `Sell position request`) {
-    return t`Sell position request`;
   } else if (text === `Edit Position`) {
     return t`Edit Position`;
   } else if (text === `Edit Limit Order`) {
@@ -57,6 +55,26 @@ export const getTransactionTypeString = (text: string) => {
     return t`Deposit`;
   } else if (text === "Withdraw") {
     return t`Withdraw`;
+  } else {
+    return "";
+  }
+};
+
+export const serviceTypeToWebTypeString = (text: string) => {
+  if (text === "BUY") {
+    return t`Open position`;
+  } else if (text === "ADD") {
+    return t`Add position`;
+  } else if (text === "SELL") {
+    return t`Sell position`;
+  } else if (text === "LIMIT_REQUEST") {
+    return t`Open position`;
+  } else if (text === "LIMIT_EDIT") {
+    return t`Edit Limit Order`;
+  } else if (text === "TPSL_EDIT") {
+    return t`Edit Position`;
+  } else if (text === "LIMIT_CANCELL") {
+    return t`Close Limit Order`;
   } else {
     return "";
   }
@@ -120,7 +138,7 @@ export const usePendingTransactionsBase = () => {
         transactionNotice.info,
         transactionNotice.result
       );
-      setTransactionNotice(undefined)
+      setTransactionNotice(undefined);
     }
   }, [transactionNotice, transactionSnackBarService]);
 

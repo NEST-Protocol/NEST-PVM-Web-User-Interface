@@ -17,6 +17,7 @@ import TransactionTable from "./Components/TransactionTable";
 import useAccount from "../../hooks/useAccount";
 import DepositModal from "../Share/Modal/DepositModal";
 import WithDrawModal from "../Share/Modal/WithdrawModal";
+import { NoOrderMobile } from "../Futures/OrderList";
 
 const Account: FC = () => {
   const { isBigMobile } = useWindowWidth();
@@ -24,8 +25,15 @@ const Account: FC = () => {
   const { account } = useNEST();
   const { messageSnackBar } = useNESTSnackBar();
   const [tabsValue, setTabsValue] = useState(0);
-  const { showDeposit, setShowDeposit, showWithdraw, setShowWithdraw } =
-    useAccount();
+  const {
+    showDeposit,
+    setShowDeposit,
+    showWithdraw,
+    setShowWithdraw,
+    showBalance,
+    moneyList,
+    historyList,
+  } = useAccount();
 
   const NESTIcon = useMemo(() => {
     return "NEST".getToken()!.icon;
@@ -70,14 +78,27 @@ const Account: FC = () => {
     }
   }, [tabsValue]);
   const list = useMemo(() => {
+    const ordertype = tabsValue === 0 ? "DEPOSIT" : "WITHDRAW";
+    const filterList = moneyList.filter((item) => item.ordertype === ordertype);
     if (isBigMobile) {
+      if (
+        (tabsValue <= 1 && filterList.length === 0) ||
+        (tabsValue === 2 && historyList.length === 0)
+      ) {
+        return (
+          <NoOrderMobile>
+            <Trans>No Order</Trans>
+          </NoOrderMobile>
+        );
+      }
       return (
         <Stack spacing={"16px"}>
-          {[1, 2, 3, 4, 5, 6, 7, 8].map((item, index) => {
+          {(tabsValue === 2 ? historyList : filterList).map((item, index) => {
             return (
               <MobileList
                 key={`AccountMobileList + ${index}`}
                 type={listType}
+                data={item}
               />
             );
           })}
@@ -85,12 +106,12 @@ const Account: FC = () => {
       );
     } else {
       if (tabsValue <= 1) {
-        return <MoneyTable />;
+        return <MoneyTable list={filterList} type={listType} />;
       } else {
-        return <TransactionTable />;
+        return <TransactionTable list={historyList} />;
       }
     }
-  }, [isBigMobile, listType, tabsValue]);
+  }, [historyList, isBigMobile, listType, moneyList, tabsValue]);
   return (
     <>
       <DepositModal open={showDeposit} onClose={() => setShowDeposit(false)} />
@@ -182,7 +203,7 @@ const Account: FC = () => {
                       color: theme.normal.text0,
                     })}
                   >
-                    45674.34
+                    {showBalance}
                   </Box>
                   <Box
                     sx={() => ({

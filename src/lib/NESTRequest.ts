@@ -242,3 +242,25 @@ export function serviceList(
     info
   );
 }
+
+export function serviceAccountList(
+  chainId: number,
+  address: string,
+  info: RequestBodyInterface
+) {
+  return baseRequestGetWithHeader(
+    `https://api.nestfi.net/nestfi/op/user/depositWithdraw/list?chainId=${chainId}&walletAddress=${address}`,
+    info
+  );
+}
+
+export function serviceHistory(
+  chainId: number,
+  address: string,
+  info: RequestBodyInterface
+) {
+  return baseRequestGetWithHeader(
+    `https://api.nestfi.net/nestfi/op/future/history?chainId=${chainId}&walletAddress=${address}`,
+    info
+  );
+}

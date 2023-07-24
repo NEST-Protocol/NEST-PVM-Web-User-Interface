@@ -3,6 +3,11 @@ import { FuturesOrderService } from "./useFuturesOrderList";
 import { t } from "@lingui/macro";
 import useNEST from "./useNEST";
 import { serviceUpdateLimitPrice } from "../lib/NESTRequest";
+import {
+  TransactionType,
+  usePendingTransactionsBase,
+} from "./useTransactionReceipt";
+import { SnackBarType } from "../components/SnackBar/NormalSnackBar";
 
 function useFuturesEditLimit(data: FuturesOrderService, onClose: () => void) {
   const { chainsData, signature } = useNEST();
@@ -21,6 +26,7 @@ function useFuturesEditLimit(data: FuturesOrderService, onClose: () => void) {
     }
   }, [data.orderPrice, tokenPair]);
   const [limitPrice, setLimitPrice] = useState(defaultLimitPrice);
+  const { addTransactionNotice } = usePendingTransactionsBase();
   /**
    * action
    */
@@ -34,9 +40,24 @@ function useFuturesEditLimit(data: FuturesOrderService, onClose: () => void) {
       if (Number(updateBase["errorCode"]) === 0) {
         onClose();
       }
+      addTransactionNotice({
+        type: TransactionType.futures_editLimit,
+        info: "",
+        result:
+          Number(updateBase["errorCode"]) === 0
+            ? SnackBarType.success
+            : SnackBarType.fail,
+      });
     }
     setLoading(false);
-  }, [chainsData.chainId, data.id, limitPrice, onClose, signature]);
+  }, [
+    addTransactionNotice,
+    chainsData.chainId,
+    data.id,
+    limitPrice,
+    onClose,
+    signature,
+  ]);
 
   /**
    * main button

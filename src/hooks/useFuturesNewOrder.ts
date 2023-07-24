@@ -1,11 +1,9 @@
 import { BigNumber } from "ethers";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import useReadTokenBalance from "../contracts/Read/useReadTokenContract";
 import { FuturesPrice } from "../pages/Futures/Futures";
 import useNEST from "./useNEST";
-import useReadSwapAmountOut from "../contracts/Read/useReadSwapContract";
 import { getQueryVariable } from "../lib/queryVaribale";
-import { serviceOpen } from "../lib/NESTRequest";
+import { KOLTx, serviceOpen } from "../lib/NESTRequest";
 import { t } from "@lingui/macro";
 import useService from "../contracts/useService";
 import {
@@ -219,12 +217,20 @@ function useFuturesNewOrder(
       );
       if (Number(openBase["errorCode"]) === 0) {
         getBalance();
-        addTransactionNotice({
-          type: TransactionType.futures_buy,
-          info: "",
-          result: SnackBarType.success,
+        KOLTx({
+          kolLink: window.location.href,
+          hash: "",
+          positionIndex: openBase["value"],
         });
       }
+      addTransactionNotice({
+        type: TransactionType.futures_buy,
+        info: "",
+        result:
+          Number(openBase["errorCode"]) === 0
+            ? SnackBarType.success
+            : SnackBarType.fail,
+      });
     }
     setLoading(false);
   }, [
@@ -428,34 +434,7 @@ function useFuturesNewOrder(
     tokenPair,
     tp_info,
   ]);
-  const NESTTokenAddress = useMemo(() => {
-    const token = "NEST".getToken();
-    if (token && chainsData.chainId) {
-      return token.address[chainsData.chainId];
-    } else {
-      return undefined;
-    }
-  }, [chainsData.chainId]);
-  const USDTTokenAddress = useMemo(() => {
-    const token = "USDT".getToken();
-    if (token && chainsData.chainId) {
-      return token.address[chainsData.chainId];
-    } else {
-      return undefined;
-    }
-  }, [chainsData.chainId]);
-  const { balance: nestBalance } = useReadTokenBalance(
-    (NESTTokenAddress ?? String().zeroAddress) as `0x${string}`,
-    account.address ?? ""
-  );
-  const { balance: usdtBalance } = useReadTokenBalance(
-    (USDTTokenAddress ?? String().zeroAddress) as `0x${string}`,
-    account.address ?? ""
-  );
-  const { uniSwapAmountOut: uniSwapAmountOutShare } = useReadSwapAmountOut(
-    usdtBalance,
-    [USDTTokenAddress!, NESTTokenAddress!]
-  );
+
   useEffect(() => {
     if (isShareLink) {
       if (chainsData.chainId !== 534353) {
@@ -466,13 +445,7 @@ function useFuturesNewOrder(
         setInputAmount("100");
       }
     }
-  }, [
-    chainsData.chainId,
-    isShareLink,
-    nestBalance,
-    uniSwapAmountOutShare,
-    usdtBalance,
-  ]);
+  }, [chainsData.chainId, isShareLink]);
   /**
    * show
    */

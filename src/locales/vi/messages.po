@@ -13,6 +13,10 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
+#: src/pages/Account/Components/TransactionTable.tsx
+msgid "{0}"
+msgstr ""
+
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 msgid "* Due to the complexity of financial data, there might be nuances and delay. Data displayed above is for reference only.We sincerely apologize for any inconvenience."
@@ -125,23 +129,6 @@ msgstr "PNL 7 Ngày"
 msgid "7 Days\\' PNL"
 msgstr "PNL\\' 7 ngày"
 
-#: src/pages/Account/Components/TransactionTable.tsx
-msgid "操作"
-msgstr ""
-
-#: src/pages/Account/Components/MoneyTable.tsx
-msgid "金额"
-msgstr ""
-
-#: src/pages/Account/Components/MoneyTable.tsx
-#: src/pages/Account/Components/TransactionTable.tsx
-msgid "时间"
-msgstr ""
-
-#: src/pages/Account/Components/MoneyTable.tsx
-msgid "状态"
-msgstr ""
-
 #: src/pages/Home/Home.tsx
 msgid "A beginner's guide to using NESTFi"
 msgstr "Hướng dẫn sử dụng NESTFi cho người mới"
@@ -149,6 +136,10 @@ msgstr "Hướng dẫn sử dụng NESTFi cho người mới"
 #: src/pages/Share/Modal/ConnectWalletModal.tsx
 msgid "about connecting wallets"
 msgstr "về việc kết nối ví"
+
+#: src/pages/Account/Components/TransactionTable.tsx
+msgid "Action"
+msgstr ""
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
@@ -176,6 +167,7 @@ msgid "Add NEST to wallet"
 msgstr "Thêm NEST vào ví"
 
 #: src/hooks/useTransactionReceipt.ts
+#: src/hooks/useTransactionReceipt.ts
 msgid "Add position"
 msgstr "Thêm vị thế"
 
@@ -195,6 +187,7 @@ msgstr "Sau khi lệnh giới hạn được thực hiện, giá TP (Take Profit
 
 #: src/components/NormalInput/NESTInput.tsx
 #: src/components/NormalInput/NESTInputSelect.tsx
+#: src/pages/Account/Components/MoneyTable.tsx
 msgid "Amount"
 msgstr "Số lượng"
 
@@ -241,6 +234,7 @@ msgstr "Liên kết kênh"
 msgid "Close"
 msgstr "Đóng"
 
+#: src/hooks/useTransactionReceipt.ts
 #: src/hooks/useTransactionReceipt.ts
 msgid "Close Limit Order"
 msgstr "Đóng lệnh giới hạn"
@@ -409,9 +403,11 @@ msgid "Edit"
 msgstr "Chỉnh sửa"
 
 #: src/hooks/useTransactionReceipt.ts
+#: src/hooks/useTransactionReceipt.ts
 msgid "Edit Limit Order"
 msgstr "Chỉnh sửa lệnh giới hạn"
 
+#: src/hooks/useTransactionReceipt.ts
 #: src/hooks/useTransactionReceipt.ts
 #: src/pages/Futures/Modal/EditPositionModal.tsx
 msgid "Edit Position"
@@ -431,6 +427,11 @@ msgstr "Giá vào lệnh "
 
 #: src/pages/Share/Modal/WithdrawModal.tsx
 msgid "Exceed maximum withdrawal amount."
+msgstr ""
+
+#: src/pages/Account/Components/MobileList.tsx
+#: src/pages/Account/Components/MoneyTable.tsx
+msgid "Fail"
 msgstr ""
 
 #: src/hooks/useNESTSnackBar.tsx
@@ -729,6 +730,7 @@ msgstr "Chưa có hoa hồng nào"
 msgid "No Market Makers"
 msgstr "Không có nhà tạo lập thị trường"
 
+#: src/pages/Account/Account.tsx
 #: src/pages/Futures/Components/TableTitle.tsx
 #: src/pages/Futures/OrderList.tsx
 #: src/pages/Futures/OrderList.tsx
@@ -753,12 +755,10 @@ msgid "Open"
 msgstr "Mở"
 
 #: src/hooks/useTransactionReceipt.ts
+#: src/hooks/useTransactionReceipt.ts
+#: src/hooks/useTransactionReceipt.ts
 msgid "Open position"
 msgstr "Vị thế mở"
-
-#: src/hooks/useTransactionReceipt.ts
-msgid "Open position request"
-msgstr "Yêu cầu mở vị thế"
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
@@ -789,6 +789,11 @@ msgstr "Lệnh"
 #: src/pages/Dashboard/Referral/Referral.tsx
 msgid "Overview"
 msgstr "Tổng quan"
+
+#: src/pages/Account/Components/MobileList.tsx
+#: src/pages/Account/Components/MoneyTable.tsx
+msgid "Pending"
+msgstr ""
 
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Platform (Youtube, Telegram, Twitter, Instagram, Facebook, Tiktok, Others)"
@@ -876,12 +881,9 @@ msgid "Search"
 msgstr "Tìm kiếm"
 
 #: src/hooks/useTransactionReceipt.ts
+#: src/hooks/useTransactionReceipt.ts
 msgid "Sell position"
 msgstr "Vị thế bán"
-
-#: src/hooks/useTransactionReceipt.ts
-msgid "Sell position request"
-msgstr "Yêu cầu bán vị thế"
 
 #: src/pages/Futures/Modal/CloseModal.tsx
 #: src/pages/Futures/Modal/EditPositionModal.tsx
@@ -945,6 +947,10 @@ msgstr "Cài đặt ngưỡng độ trượt giá"
 msgid "Start Trading"
 msgstr "Bắt đầu giao dịch"
 
+#: src/pages/Account/Components/MoneyTable.tsx
+msgid "Status"
+msgstr ""
+
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 #: src/pages/Futures/Components/OrderList.tsx
 #: src/pages/Futures/Components/POrderList.tsx
@@ -976,7 +982,7 @@ msgstr "Gửi thành công"
 
 #: src/pages/Account/Components/MobileList.tsx
 #: src/pages/Account/Components/MoneyTable.tsx
-msgid "success"
+msgid "Success"
 msgstr ""
 
 #: src/components/NormalInput/NESTInputSelect.tsx
@@ -1042,6 +1048,8 @@ msgstr "Hợp đồng thông minh là người bán duy nhất của hệ thốn
 msgid "The transaction failed and the amount has been fully refunded. You can re-trade"
 msgstr "Giao dịch thất bại và số tiền đã được hoàn trả đầy đủ. Bạn có thể giao dịch lại."
 
+#: src/pages/Account/Components/MoneyTable.tsx
+#: src/pages/Account/Components/TransactionTable.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "Time"
@@ -1236,6 +1244,7 @@ msgstr "Sẽ không được hiển thị sau khi đóng"
 msgid "with 1 click"
 msgstr "chỉ với 1 cú nhấp chuột"
 
+#: src/hooks/useTransactionReceipt.ts
 #: src/pages/Account/Account.tsx
 #: src/pages/Account/Account.tsx
 #: src/pages/Share/Modal/WithdrawModal.tsx

@@ -8,6 +8,8 @@ import { FuturesPrice } from "../pages/Futures/Futures";
 import { t } from "@lingui/macro";
 import useService from "../contracts/useService";
 import { serviceAdd } from "../lib/NESTRequest";
+import { TransactionType, usePendingTransactionsBase } from "./useTransactionReceipt";
+import { SnackBarType } from "../components/SnackBar/NormalSnackBar";
 
 function useFuturesAdd(
   data: FuturesOrderService,
@@ -19,6 +21,7 @@ function useFuturesAdd(
   const { service_balance } = useService();
   const [tokenBalance, setTokenBalance] = useState<BigNumber>();
   const [loading, setLoading] = useState<boolean>(false);
+  const { addTransactionNotice } = usePendingTransactionsBase();
   const tokenPair = useMemo(() => {
     return data.product.split("/")[0];
   }, [data.product]);
@@ -59,9 +62,17 @@ function useFuturesAdd(
       if (Number(addBase["errorCode"]) === 0) {
         getBalance();
       }
+      addTransactionNotice({
+        type: TransactionType.futures_add,
+        info: "",
+        result:
+          Number(addBase["errorCode"]) === 0
+            ? SnackBarType.success
+            : SnackBarType.fail,
+      });
     }
     setLoading(false);
-  }, [chainsData.chainId, data.id, getBalance, nestAmount, signature]);
+  }, [addTransactionNotice, chainsData.chainId, data.id, getBalance, nestAmount, signature]);
 
   const maxCallBack = useCallback(() => {
     if (tokenBalance) {
