@@ -17,7 +17,7 @@ import { t } from "@lingui/macro";
 interface CloseModalBaseProps {
   data: FuturesOrderService;
   price: FuturesPrice | undefined;
-  onClose: () => void;
+  onClose: (result?: boolean) => void;
 }
 
 const CloseModalBase: FC<CloseModalBaseProps> = ({ ...props }) => {
@@ -64,7 +64,7 @@ interface CloseModalProps {
   data: FuturesOrderService;
   price: FuturesPrice | undefined;
   open: boolean;
-  onClose: () => void;
+  onClose: (result?: boolean) => void;
 }
 
 const CloseModal: FC<CloseModalProps> = ({ ...props }) => {
@@ -74,7 +74,7 @@ const CloseModal: FC<CloseModalProps> = ({ ...props }) => {
       <Drawer
         anchor={"bottom"}
         open={props.open}
-        onClose={props.onClose}
+        onClose={() => props.onClose()}
         sx={{
           "& .MuiPaper-root": { background: "none", backgroundImage: "none" },
         }}

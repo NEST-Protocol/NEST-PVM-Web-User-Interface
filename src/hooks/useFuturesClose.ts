@@ -5,20 +5,14 @@ import { FuturesOrderService } from "./useFuturesOrderList";
 import { t } from "@lingui/macro";
 import { serviceClose } from "../lib/NESTRequest";
 import useNEST from "./useNEST";
-import {
-  TransactionType,
-  usePendingTransactionsBase,
-} from "./useTransactionReceipt";
-import { SnackBarType } from "../components/SnackBar/NormalSnackBar";
 
 function useFuturesClose(
   data: FuturesOrderService,
   price: FuturesPrice | undefined,
-  onClose: () => void
+  onClose: (result: boolean) => void
 ) {
   const [loading, setLoading] = useState<boolean>(false);
   const { chainsData, signature } = useNEST();
-  const { addTransactionNotice } = usePendingTransactionsBase();
   const showPosition = useMemo(() => {
     const lever = data.leverage.toString();
     const longOrShort = data.direction ? t`Long` : t`Short`;
@@ -113,19 +107,11 @@ function useFuturesClose(
         { Authorization: signature.signature }
       );
       if (Number(closeBase["errorCode"]) === 0) {
-        onClose();
+        onClose(Number(closeBase["errorCode"]) === 0);
       }
-      addTransactionNotice({
-        type: TransactionType.futures_sell,
-        info: "",
-        result:
-          Number(closeBase["errorCode"]) === 0
-            ? SnackBarType.success
-            : SnackBarType.fail,
-      });
     }
     setLoading(false);
-  }, [addTransactionNotice, chainsData.chainId, data.id, onClose, signature]);
+  }, [chainsData.chainId, data.id, onClose, signature]);
 
   /**
    * main button

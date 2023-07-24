@@ -1,13 +1,7 @@
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import { BigNumber } from "ethers";
-import {
-  FC,
-  useLayoutEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import { FC, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { FuturesOrder, FuturesLimitOrder } from "../../components/icons";
 import NESTTabs from "../../components/NESTTabs/NESTTabs";
 import useFuturesOrderList, {
@@ -25,6 +19,11 @@ import EditLimitModal from "./Modal/EditLimitModal";
 import EditPositionModal from "./Modal/EditPositionModal";
 import { styled } from "@mui/material/styles";
 import { Trans } from "@lingui/macro";
+import {
+  TransactionType,
+  usePendingTransactionsBase,
+} from "../../hooks/useTransactionReceipt";
+import { SnackBarType } from "../../components/SnackBar/NormalSnackBar";
 
 interface FuturesOrderListProps {
   price: FuturesPrice | undefined;
@@ -67,6 +66,7 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
   };
   const [tabsValue, setTabsValue] = useState(0);
   const { pOrderListV2, orderListV2: limitOrderList } = useFuturesOrderList();
+  const { addTransactionNotice } = usePendingTransactionsBase();
   /**
    * this width
    */
@@ -155,7 +155,14 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
         </Stack>
       );
     }
-  }, [isBigMobile, limitOrderList, pOrderListV2, props.price, tabsValue, width]);
+  }, [
+    isBigMobile,
+    limitOrderList,
+    pOrderListV2,
+    props.price,
+    tabsValue,
+    width,
+  ]);
 
   const tabs = useMemo(() => {
     const orderTabsData = [
@@ -192,7 +199,16 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
           data={modalInfo.data}
           price={props.price}
           open={true}
-          onClose={() => setModalInfo(undefined)}
+          onClose={(result?: boolean) => {
+            setModalInfo(undefined);
+            if (result !== undefined) {
+              addTransactionNotice({
+                type: TransactionType.futures_sell,
+                info: "",
+                result: result ? SnackBarType.success : SnackBarType.fail,
+              });
+            }
+          }}
         />
       );
     } else if (modalInfo && modalInfo.type === FuturesModalType.add) {
@@ -224,7 +240,7 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
     } else {
       return <></>;
     }
-  }, [modalInfo, props.price]);
+  }, [addTransactionNotice, modalInfo, props.price]);
   return (
     <Stack spacing={"16px"} width={"100%"} ref={ref}>
       {addModal}

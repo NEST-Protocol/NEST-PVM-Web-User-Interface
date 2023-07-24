@@ -6,7 +6,7 @@ import FuturesMoreInfo from "./MoreInfo";
 import FuturesNewOrder from "./NewOrder";
 import FuturesOrderList from "./OrderList";
 import ExchangeTVChart from "./ExchangeTVChart";
-import { getPriceFromNESTLocal } from "../../lib/NESTRequest";
+import {  getPriceList } from "../../lib/NESTRequest";
 // import FuturesNotice from "./Components/FuturesNotice";
 import { getQueryVariable } from "../../lib/queryVaribale";
 import Modal from "@mui/material/Modal";
@@ -38,10 +38,6 @@ const Futures: FC = () => {
   const [tokenPair, setTokenPair] = useState(defaultTokenPair);
   const [basePrice, setBasePrice] = useState<FuturesPrice>();
   const [orderPrice, setOrderPrice] = useState<FuturesPrice>();
-  // const showNoticeDefault = useMemo(() => {
-  //   const isShow = localStorage.getItem("FuturesNoticeChangeToken");
-  //   return isShow !== "1";
-  // }, []);
   const [showNotice, setShowNotice] = useState<boolean>(true);
 
   const openChangeModalDefault = useMemo(() => {
@@ -57,45 +53,47 @@ const Futures: FC = () => {
   );
 
   const getPrice = useCallback(async () => {
-    const ETHPriceBase: { [key: string]: string } = await getPriceFromNESTLocal(
-      "eth"
-    );
-    const BTCPriceBase: { [key: string]: string } = await getPriceFromNESTLocal(
-      "btc"
-    );
-    const BNBPriceBase: { [key: string]: string } = await getPriceFromNESTLocal(
-      "bnb"
-    );
-    const MATICPriceBase: { [key: string]: string } =
-      await getPriceFromNESTLocal("matic");
-    const ADAPriceBase: { [key: string]: string } = await getPriceFromNESTLocal(
-      "ada"
-    );
-    const DOGEPriceBase: { [key: string]: string } =
-      await getPriceFromNESTLocal("doge");
-    const XRPPriceBase: { [key: string]: string } = await getPriceFromNESTLocal(
-      "xrp"
-    );
-    const ETHPrice = ETHPriceBase
-      ? ETHPriceBase["value"].toString().stringToBigNumber(18)
+    // const ETHPriceBase: { [key: string]: string } = await getPriceFromNESTLocal(
+    //   "eth"
+    // );
+    // const BTCPriceBase: { [key: string]: string } = await getPriceFromNESTLocal(
+    //   "btc"
+    // );
+    // const BNBPriceBase: { [key: string]: string } = await getPriceFromNESTLocal(
+    //   "bnb"
+    // );
+    // const MATICPriceBase: { [key: string]: string } =
+    //   await getPriceFromNESTLocal("matic");
+    // const ADAPriceBase: { [key: string]: string } = await getPriceFromNESTLocal(
+    //   "ada"
+    // );
+    // const DOGEPriceBase: { [key: string]: string } =
+    //   await getPriceFromNESTLocal("doge");
+    // const XRPPriceBase: { [key: string]: string } = await getPriceFromNESTLocal(
+    //   "xrp"
+    // );
+    const listPriceBase: {[key:string]: any} = await getPriceList()
+    
+    const ETHPrice = listPriceBase
+      ? listPriceBase["value"]["ETHUSDT"].toString().stringToBigNumber(18)
       : undefined;
-    const BTCPrice = BTCPriceBase
-      ? BTCPriceBase["value"].toString().stringToBigNumber(18)
+    const BTCPrice = listPriceBase
+    ? listPriceBase["value"]["BTCUSDT"].toString().stringToBigNumber(18)
       : undefined;
-    const BNBPrice = BNBPriceBase
-      ? BNBPriceBase["value"].toString().stringToBigNumber(18)
+    const BNBPrice = listPriceBase
+    ? listPriceBase["value"]["BNBUSDT"].toString().stringToBigNumber(18)
       : undefined;
-    const MATICPrice = MATICPriceBase
-      ? MATICPriceBase["value"].toString().stringToBigNumber(18)
+    const MATICPrice = listPriceBase
+    ? listPriceBase["value"]["MATICUSDT"].toString().stringToBigNumber(18)
       : undefined;
-    const ADAPrice = ADAPriceBase
-      ? ADAPriceBase["value"].toString().stringToBigNumber(18)
+    const ADAPrice = listPriceBase
+    ? listPriceBase["value"]["ADAUSDT"].toString().stringToBigNumber(18)
       : undefined;
-    const DOGEPrice = DOGEPriceBase
-      ? DOGEPriceBase["value"].toString().stringToBigNumber(18)
+    const DOGEPrice = listPriceBase
+    ? listPriceBase["value"]["DOGEUSDT"].toString().stringToBigNumber(18)
       : undefined;
-    const XRPPrice = XRPPriceBase
-      ? XRPPriceBase["value"].toString().stringToBigNumber(18)
+    const XRPPrice = listPriceBase
+    ? listPriceBase["value"]["XRPUSDT"].toString().stringToBigNumber(18)
       : undefined;
 
     if (

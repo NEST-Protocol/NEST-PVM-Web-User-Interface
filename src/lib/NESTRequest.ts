@@ -108,6 +108,10 @@ export function getPriceFromNESTLocal(token: string): Promise<any> {
   return baseRequestGet(`https://api.nestfi.net/api/oracle/price/${token}usdt`);
 }
 
+export function getPriceList(): Promise<any> {
+  return baseRequestGet(`https://api.nestfi.net/api/oracle/price/list`);
+}
+
 export function getNESTAmountForAll(
   address: string,
   chainId: number
