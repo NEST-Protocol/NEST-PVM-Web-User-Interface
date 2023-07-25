@@ -72,8 +72,8 @@ const NESTHead: FC = () => {
 
   const [openSignModal, setOpenSignModal] = useState(false);
   useEffect(() => {
-    if (account.address) {
-      setOpenSignModal(!checkSigned);
+    if (account.address && !checkSigned) {
+      setOpenSignModal(true);
     } else {
       setOpenSignModal(false);
     }

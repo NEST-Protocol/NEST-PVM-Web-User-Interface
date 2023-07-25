@@ -71,7 +71,7 @@ function useFuturesNewOrder(
   const [loading, setLoading] = useState<boolean>(false);
   const { service_balance } = useService();
   const { addTransactionNotice } = usePendingTransactionsBase();
-
+  const [showDeposit, setShowDeposit] = useState(false);
   // const nowToken = useMemo(() => {
   //   const token = inputToken.getToken();
   //   if (chainsData.chainId && token) {
@@ -660,6 +660,8 @@ function useFuturesNewOrder(
     stopErrorText,
     isShareLink,
     closeShareLink,
+    showDeposit,
+    setShowDeposit,
   };
 }
 

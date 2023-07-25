@@ -2,7 +2,7 @@ import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import Modal from "@mui/material/Modal";
 import Stack from "@mui/material/Stack";
-import { FC, useMemo } from "react";
+import { FC, useMemo, useState } from "react";
 import MainButton from "../../../components/MainButton/MainButton";
 import NESTLine from "../../../components/NESTLine";
 import NormalInfo from "../../../components/NormalInfo/NormalInfo";
@@ -14,6 +14,7 @@ import BaseModal from "../../Share/Modal/BaseModal";
 import { FuturesPrice } from "../Futures";
 import { t } from "@lingui/macro";
 import { FuturesOrderService } from "../OrderList";
+import DepositModal from "../../Share/Modal/DepositModal";
 
 interface AddModalBaseProps {
   data: FuturesOrderService;
@@ -38,6 +39,7 @@ const AddModalBase: FC<AddModalBaseProps> = ({ ...props }) => {
     mainButtonDis,
     mainButtonAction,
   } = useFuturesAdd(props.data, props.price, props.onClose, props.updateList);
+  const [showDeposit, setShowDeposit] = useState(false);
   const input = useMemo(() => {
     return (
       <NESTInput
@@ -49,7 +51,7 @@ const AddModalBase: FC<AddModalBaseProps> = ({ ...props }) => {
         changeNestAmount={(value: string) =>
           setNestAmount(value.formatInputNum4())
         }
-        otherCallBack={() => {}}
+        otherCallBack={() => setShowDeposit(true)}
       />
     );
   }, [
@@ -62,6 +64,7 @@ const AddModalBase: FC<AddModalBaseProps> = ({ ...props }) => {
   ]);
   return (
     <Stack spacing={"24px"} width={"100%"}>
+      <DepositModal open={showDeposit} onClose={() => setShowDeposit(false)} />
       {input}
       <NESTLine />
       <Stack spacing={"8px"}>

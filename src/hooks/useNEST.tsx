@@ -17,9 +17,7 @@ export interface signatureData {
 
 function useMainReact() {
   const [showConnect, setShowConnect] = useState(false);
-  const [signature, setSignature] = useState<signatureData | undefined>(
-    undefined
-  );
+
   /**
    * wallet
    */
@@ -103,15 +101,12 @@ function useMainReact() {
   /**
    * checkSigned
    */
-
-  useEffect(() => {
+  const defaultSignature = useMemo(() => {
     if (!chainsData.chainId || !account.address) {
-      setSignature(undefined);
       return;
     }
     var cache = localStorage.getItem("signature");
     if (!cache) {
-      setSignature(undefined);
       return;
     }
     const signsData = JSON.parse(cache);
@@ -122,11 +117,17 @@ function useMainReact() {
         item["chainId"] === chainsData.chainId
     );
     if (same.length > 0) {
-      setSignature(same[0]);
-    } else {
-      setSignature(undefined);
+      return same[0];
     }
+    return;
   }, [account.address, chainsData.chainId]);
+  const [signature, setSignature] = useState<signatureData | undefined>(
+    defaultSignature
+  );
+
+  useEffect(() => {
+    setSignature(defaultSignature);
+  }, [defaultSignature]);
   const checkSigned = useMemo(() => {
     if (signature) {
       return true;
