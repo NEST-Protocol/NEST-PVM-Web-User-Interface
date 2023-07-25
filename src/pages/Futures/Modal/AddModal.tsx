@@ -19,8 +19,7 @@ import DepositModal from "../../Share/Modal/DepositModal";
 interface AddModalBaseProps {
   data: FuturesOrderService;
   price: FuturesPrice | undefined;
-  onClose: () => void;
-  updateList: () => void;
+  onClose: (res?: boolean) => void;
 }
 
 const AddModalBase: FC<AddModalBaseProps> = ({ ...props }) => {
@@ -38,7 +37,7 @@ const AddModalBase: FC<AddModalBaseProps> = ({ ...props }) => {
     mainButtonLoading,
     mainButtonDis,
     mainButtonAction,
-  } = useFuturesAdd(props.data, props.price, props.onClose, props.updateList);
+  } = useFuturesAdd(props.data, props.price, props.onClose);
   const [showDeposit, setShowDeposit] = useState(false);
   const input = useMemo(() => {
     return (
@@ -91,8 +90,7 @@ interface AddModalProps {
   data: FuturesOrderService;
   price: FuturesPrice | undefined;
   open: boolean;
-  onClose: () => void;
-  updateList: () => void;
+  onClose: (res?: boolean) => void;
 }
 
 const AddModal: FC<AddModalProps> = ({ ...props }) => {
@@ -102,35 +100,47 @@ const AddModal: FC<AddModalProps> = ({ ...props }) => {
       <Drawer
         anchor={"bottom"}
         open={props.open}
-        onClose={props.onClose}
+        onClose={() => {
+          props.onClose(undefined);
+        }}
         sx={{
           "& .MuiPaper-root": { background: "none", backgroundImage: "none" },
         }}
         keepMounted
       >
-        <BaseDrawer title={t`Add Position`} onClose={props.onClose}>
+        <BaseDrawer
+          title={t`Add Position`}
+          onClose={() => {
+            props.onClose(undefined);
+          }}
+        >
           <AddModalBase
             data={props.data}
             price={props.price}
             onClose={props.onClose}
-            updateList={props.updateList}
           />
         </BaseDrawer>
       </Drawer>
     ) : (
       <Modal
         open={props.open}
-        onClose={() => props.onClose()}
+        onClose={() => {
+          props.onClose(undefined);
+        }}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
         <Box>
-          <BaseModal title={t`Add Position`} onClose={props.onClose}>
+          <BaseModal
+            title={t`Add Position`}
+            onClose={() => {
+              props.onClose(undefined);
+            }}
+          >
             <AddModalBase
               data={props.data}
               price={props.price}
               onClose={props.onClose}
-              updateList={props.updateList}
             />
           </BaseModal>
         </Box>

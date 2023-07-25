@@ -115,6 +115,14 @@ export const NESTService: AddressType = {
   534353: "0xd9f3aA57576a6da995fb4B7e7272b4F16f04e681",
 };
 
+export const NESTServiceOther: AddressType = {
+  1: "0x28e14eac4e41e146eca05a9679604a0fe6959a39",
+  5: "0x28e14eac4e41e146eca05a9679604a0fe6959a39",
+  56: "0x28e14eac4e41e146eca05a9679604a0fe6959a39",
+  97: "0x28e14eac4e41e146eca05a9679604a0fe6959a39",
+  534353: "0x28e14eac4e41e146eca05a9679604a0fe6959a39",
+};
+
 const All18: DecimalsType = {
   1: 18,
   5: 18,

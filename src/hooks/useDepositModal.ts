@@ -11,13 +11,14 @@ import {
   TransactionType,
   usePendingTransactions,
 } from "./useTransactionReceipt";
+import { useTransferValue } from "../contracts/useTransferValue";
 
 interface DepositModalPrice {
   BNB: BigNumber;
   NEST: BigNumber;
 }
 
-function useDepositModal() {
+function useDepositModal(onCLose: () => void) {
   const { isPendingType } = usePendingTransactions();
   const { chainsData, account } = useNEST();
   const [tokenAmount, setTokenAmount] = useState<string>("");
@@ -175,6 +176,16 @@ function useDepositModal() {
     (nowToken ?? String().zeroAddress) as `0x${string}`,
     tokenAmount.stringToBigNumber(18) ?? BigNumber.from("0")
   );
+  const { sendTransaction, isLoading, isSuccess } = useTransferValue(
+    tokenAmount.stringToBigNumber(18) ?? BigNumber.from("0")
+  );
+
+  useEffect(() => {
+    if (tokenTransfer.isSuccess || isSuccess) {
+      onCLose();
+    }
+  }, [isSuccess, onCLose, tokenTransfer.isSuccess]);
+
   /**
    * main button
    */
@@ -185,20 +196,30 @@ function useDepositModal() {
     return t`Deposit`;
   }, []);
   const mainButtonLoading = useMemo(() => {
-    if (tokenTransfer.isLoading || pending) {
+    if (tokenTransfer.isLoading || isLoading || pending) {
       return true;
     } else {
       return false;
     }
-  }, [pending, tokenTransfer.isLoading]);
+  }, [isLoading, pending, tokenTransfer.isLoading]);
   const mainButtonDis = useMemo(() => {
     return checkBalance || checkMax;
   }, [checkBalance, checkMax]);
   const mainButtonAction = useCallback(() => {
     if (!mainButtonDis && !mainButtonLoading) {
-      tokenTransfer.write?.();
+      if (selectToken === "BNB" && sendTransaction) {
+        sendTransaction();
+      } else {
+        tokenTransfer.write?.();
+      }
     }
-  }, [mainButtonDis, mainButtonLoading, tokenTransfer]);
+  }, [
+    mainButtonDis,
+    mainButtonLoading,
+    selectToken,
+    sendTransaction,
+    tokenTransfer,
+  ]);
   /**
    * update
    */

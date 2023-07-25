@@ -15,7 +15,11 @@ import ErrorLabel from "../../../components/ErrorLabel/ErrorLabel";
 
 const depositTokens = ["NEST", "USDT", "BNB"];
 
-const DepositModalBase: FC = () => {
+interface DepositModalBaseProps {
+  onClose: () => void;
+}
+
+const DepositModalBase: FC<DepositModalBaseProps> = ({ ...props }) => {
   const {
     tokenAmount,
     setTokenAmount,
@@ -36,7 +40,7 @@ const DepositModalBase: FC = () => {
     mainButtonLoading,
     mainButtonDis,
     mainButtonAction,
-  } = useDepositModal();
+  } = useDepositModal(props.onClose);
 
   const midText = useMemo(() => {
     if (checkMax) {
@@ -193,7 +197,7 @@ const DepositModal: FC<DepositModalProps> = ({ ...props }) => {
         keepMounted
       >
         <BaseDrawer title={t`Deposit`} onClose={props.onClose}>
-          <DepositModalBase />
+          <DepositModalBase onClose={props.onClose} />
         </BaseDrawer>
       </Drawer>
     ) : (
@@ -205,7 +209,7 @@ const DepositModal: FC<DepositModalProps> = ({ ...props }) => {
       >
         <Box>
           <BaseModal title={t`Deposit`} onClose={props.onClose}>
-            <DepositModalBase />
+            <DepositModalBase onClose={props.onClose} />
           </BaseModal>
         </Box>
       </Modal>

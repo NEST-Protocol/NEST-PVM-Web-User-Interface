@@ -39,7 +39,6 @@ export const lipPrice = (
   return BigNumber.from("0").gt(result) ? BigNumber.from("0") : result;
 };
 
-export const BASE_NEST_FEE = "15";
 export const INPUT_TOKENS = ["NEST"];
 
 function addPricePoint(price: BigNumber, isLong: boolean) {
@@ -118,18 +117,12 @@ function useFuturesNewOrder(
    */
   const allValue = useCallback(
     (value: BigNumber) => {
-      const top = BigNumber.from("1000").mul(
-        value.sub(
-          tabsValue === 1
-            ? BASE_NEST_FEE.stringToBigNumber(18)!
-            : BigNumber.from("0")
-        )
-      );
+      const top = BigNumber.from("1000").mul(value);
       const bottom = (lever + 1000) * 1;
       const nestNum = top.div(BigNumber.from(bottom.toString()));
       return nestNum.sub("0.1".stringToBigNumber(18)!);
     },
-    [lever, tabsValue]
+    [lever]
   );
   useEffect(() => {
     setNestAmount(inputAmount);
@@ -163,12 +156,8 @@ function useFuturesNewOrder(
       .mul(BigNumber.from(lever.toString()))
       .mul(BigNumber.from("5"))
       .div(BigNumber.from("10000"));
-    var limitFee = BigNumber.from("0");
-    if (tabsValue === 1) {
-      limitFee = BASE_NEST_FEE.stringToBigNumber(18) ?? BigNumber.from("0");
-    }
-    return baseFee.add(limitFee);
-  }, [lever, nestAmount, tabsValue]);
+    return baseFee;
+  }, [lever, nestAmount]);
   /**
    * check
    */
@@ -470,13 +459,8 @@ function useFuturesNewOrder(
     }
   }, [openPriceBase, tokenPair]);
   const showFee = useMemo(() => {
-    if (tabsValue === 0 && isStop) {
-      return fee
-        .add(BASE_NEST_FEE.stringToBigNumber(18)!)
-        .bigNumberToShowString(18, 2);
-    }
     return fee.bigNumberToShowString(18, 2);
-  }, [fee, isStop, tabsValue]);
+  }, [fee]);
   const showLiqPrice = useMemo(() => {
     if (!openPrice || nestAmount === "" || nestAmount === "0") {
       return String().placeHolder;
@@ -501,16 +485,9 @@ function useFuturesNewOrder(
     } else if (tabsValue === 1 && !isStop) {
       return [t`Position fee = Position * 0.05%`, t`Limit order fee = 15 NEST`];
     } else if (tabsValue === 0 && isStop) {
-      return [
-        t`Position fee = Position * 0.05%`,
-        t`Stop order fee(after execution) = 15 NEST`,
-      ];
+      return [t`Position fee = Position * 0.05%`];
     } else {
-      return [
-        t`Position fee = Position * 0.05%`,
-        t`Limit order fee = 15 NEST`,
-        t`Stop order fee(after execution) = 15 NEST`,
-      ];
+      return [t`Position fee = Position * 0.05%`, t`Limit order fee = 15 NEST`];
     }
   }, [isStop, tabsValue]);
   const showPositions = useMemo(() => {

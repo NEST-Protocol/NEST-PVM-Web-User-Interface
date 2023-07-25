@@ -7,7 +7,7 @@ import {
   usePendingTransactions,
 } from "../hooks/useTransactionReceipt";
 import useNEST from "../hooks/useNEST";
-import { NESTService } from "./contractAddress";
+import { NESTService, NESTServiceOther, USDTToken } from "./contractAddress";
 
 function useTokenApprove(
   tokenAddress: `0x${string}`,
@@ -46,9 +46,15 @@ export function useTokenTransfer(
   const { addPendingList } = usePendingTransactions();
   const toAddress = useMemo(() => {
     if (chainsData.chainId) {
+      if (
+        tokenAddress.toLocaleLowerCase() ===
+        USDTToken[chainsData.chainId].toLocaleLowerCase()
+      ) {
+        return NESTServiceOther[chainsData.chainId] as `0x${string}`;
+      }
       return NESTService[chainsData.chainId] as `0x${string}`;
     }
-  }, [chainsData.chainId]);
+  }, [chainsData.chainId, tokenAddress]);
   const { config } = usePrepareContractWrite({
     address: tokenAddress,
     abi: ERC20ABI,

@@ -20,8 +20,7 @@ import { FuturesOrderService } from "../OrderList";
 interface EditPositionModalBaseProps {
   data: FuturesOrderService;
   price: FuturesPrice | undefined;
-  onClose: () => void;
-  updateList: () => void;
+  onClose: (res?: boolean) => void;
 }
 
 const EditPositionModalBase: FC<EditPositionModalBaseProps> = ({
@@ -35,27 +34,19 @@ const EditPositionModalBase: FC<EditPositionModalBaseProps> = ({
     showPosition,
     showOpenPrice,
     showLiqPrice,
-    showTriggerFee,
     mainButtonTitle,
     mainButtonLoading,
     mainButtonDis,
     mainButtonAction,
     placeHolder,
-    isEdit,
     closeTP,
     closeSL,
-    feeTip,
     showTriggerNotice,
     setShowTriggerNotice,
     triggerNoticeCallback,
     tpError,
     slError,
-  } = useFuturesEditPosition(
-    props.data,
-    props.price,
-    props.onClose,
-    props.updateList
-  );
+  } = useFuturesEditPosition(props.data, props.price, props.onClose);
   const triggerNoticeModal = useMemo(() => {
     return (
       <Modal
@@ -142,23 +133,6 @@ const EditPositionModalBase: FC<EditPositionModalBaseProps> = ({
           symbol={"USDT"}
         />
         <NormalInfo title={t`Liq Price`} value={showLiqPrice} symbol={"USDT"} />
-        {isEdit ? (
-          <></>
-        ) : (
-          <NormalInfo
-            title={t`Service Fee`}
-            value={showTriggerFee}
-            symbol={"NEST"}
-            help
-            helpInfo={
-              <>
-                {feeTip.map((item, index) => (
-                  <p key={`EditPositionFeeTips + ${index}`}>{item}</p>
-                ))}
-              </>
-            }
-          />
-        )}
       </Stack>
       <MainButton
         title={mainButtonTitle}
@@ -175,8 +149,7 @@ interface EditPositionModalProps {
   data: FuturesOrderService;
   price: FuturesPrice | undefined;
   open: boolean;
-  onClose: () => void;
-  updateList: () => void;
+  onClose: (res?: boolean) => void;
 }
 
 const EditPositionModal: FC<EditPositionModalProps> = ({ ...props }) => {
@@ -191,17 +164,23 @@ const EditPositionModal: FC<EditPositionModalProps> = ({ ...props }) => {
       <Drawer
         anchor={"bottom"}
         open={props.open}
-        onClose={props.onClose}
+        onClose={() => {
+          props.onClose(undefined);
+        }}
         sx={{
           "& .MuiPaper-root": { background: "none", backgroundImage: "none" },
         }}
       >
-        <BaseDrawer title={title} onClose={props.onClose}>
+        <BaseDrawer
+          title={title}
+          onClose={() => {
+            props.onClose(undefined);
+          }}
+        >
           <EditPositionModalBase
             data={props.data}
             price={props.price}
             onClose={props.onClose}
-            updateList={props.updateList}
           />
         </BaseDrawer>
       </Drawer>
@@ -213,12 +192,16 @@ const EditPositionModal: FC<EditPositionModalProps> = ({ ...props }) => {
         aria-describedby="modal-modal-description"
       >
         <Box>
-          <BaseModal title={title} onClose={props.onClose}>
+          <BaseModal
+            title={title}
+            onClose={() => {
+              props.onClose(undefined);
+            }}
+          >
             <EditPositionModalBase
               data={props.data}
               price={props.price}
               onClose={props.onClose}
-              updateList={props.updateList}
             />
           </BaseModal>
         </Box>

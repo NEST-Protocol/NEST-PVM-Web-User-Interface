@@ -13,7 +13,11 @@ import ErrorLabel from "../../../components/ErrorLabel/ErrorLabel";
 import TokenAmountButtons from "./TokenAmountButtons";
 import useWithDrawModal from "../../../hooks/useWithDrawModal";
 
-const WithDrawModalBase: FC = () => {
+interface WithDrawModalBaseProps {
+  onClose: () => void;
+}
+
+const WithDrawModalBase: FC<WithDrawModalBaseProps> = ({ ...props }) => {
   const {
     tokenAmount,
     setTokenAmount,
@@ -27,7 +31,7 @@ const WithDrawModalBase: FC = () => {
     mainButtonLoading,
     mainButtonDis,
     mainButtonAction,
-  } = useWithDrawModal();
+  } = useWithDrawModal(props.onClose);
 
   const inputNestAmount = useMemo(() => {
     return (
@@ -42,9 +46,7 @@ const WithDrawModalBase: FC = () => {
           setTokenAmount(value.formatInputNum4());
           setSelectButton(0);
         }}
-        otherCallBack={() => {
-          
-        }}
+        otherCallBack={() => {}}
       />
     );
   }, [
@@ -125,7 +127,7 @@ const WithDrawModal: FC<WithDrawModalProps> = ({ ...props }) => {
         keepMounted
       >
         <BaseDrawer title={t`Withdraw`} onClose={props.onClose}>
-          <WithDrawModalBase />
+          <WithDrawModalBase onClose={props.onClose} />
         </BaseDrawer>
       </Drawer>
     ) : (
@@ -137,7 +139,7 @@ const WithDrawModal: FC<WithDrawModalProps> = ({ ...props }) => {
       >
         <Box>
           <BaseModal title={t`Withdraw`} onClose={props.onClose}>
-            <WithDrawModalBase />
+            <WithDrawModalBase onClose={props.onClose} />
           </BaseModal>
         </Box>
       </Modal>

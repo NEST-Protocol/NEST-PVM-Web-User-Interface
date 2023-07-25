@@ -4,14 +4,20 @@ import { BigNumber } from "ethers/lib/ethers";
 import useService from "../contracts/useService";
 import { t } from "@lingui/macro";
 import { serviceWithdraw } from "../lib/NESTRequest";
+import {
+  TransactionType,
+  usePendingTransactionsBase,
+} from "./useTransactionReceipt";
+import { SnackBarType } from "../components/SnackBar/NormalSnackBar";
 
-function useWithDrawModal() {
+function useWithDrawModal(onClose: () => void) {
   const [tokenAmount, setTokenAmount] = useState<string>("");
   const [selectButton, setSelectButton] = useState<number>();
   const { chainsData, account, signature } = useNEST();
   const { service_balance } = useService();
   const [tokenBalance, setTokenBalance] = useState<BigNumber>();
   const [loading, setLoading] = useState<boolean>(false);
+  const { addTransactionNotice } = usePendingTransactionsBase();
 
   /**
    * balance
@@ -76,13 +82,29 @@ function useWithDrawModal() {
           account.address,
           { Authorization: signature.signature }
         );
+        addTransactionNotice({
+          type: TransactionType.futures_add,
+          info: "",
+          result:
+            Number(withDrawBase["errorCode"]) === 0
+              ? SnackBarType.success
+              : SnackBarType.fail,
+        });
+
         if (Number(withDrawBase["errorCode"]) === 0) {
           getBalance();
         }
       }
     }
     setLoading(false);
-  }, [account.address, chainsData.chainId, getBalance, signature, tokenAmount]);
+  }, [
+    account.address,
+    addTransactionNotice,
+    chainsData.chainId,
+    getBalance,
+    signature,
+    tokenAmount,
+  ]);
 
   /**
    * main button
@@ -104,7 +126,7 @@ function useWithDrawModal() {
       return;
     } else {
       setLoading(true);
-      withdraw()
+      withdraw();
     }
   }, [mainButtonDis, mainButtonLoading, withdraw]);
 

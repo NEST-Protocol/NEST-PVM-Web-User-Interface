@@ -7,24 +7,17 @@ import { FuturesPrice } from "../pages/Futures/Futures";
 import { t } from "@lingui/macro";
 import { serviceUpdateStopPrice } from "../lib/NESTRequest";
 import useNEST from "./useNEST";
-import {
-  TransactionType,
-  usePendingTransactionsBase,
-} from "./useTransactionReceipt";
-import { SnackBarType } from "../components/SnackBar/NormalSnackBar";
 
 function useFuturesEditPosition(
   data: FuturesOrderService,
   price: FuturesPrice | undefined,
-  onClose: () => void,
-  updateList: () => void
+  onClose: (res?: boolean) => void
 ) {
   const { chainsData, signature } = useNEST();
   const [loading, setLoading] = useState<boolean>(false);
   const tokenPair = useMemo(() => {
     return data.product.split("/")[0];
   }, [data.product]);
-  const { addTransactionNotice } = usePendingTransactionsBase();
   /**
    * futures modal
    */
@@ -65,9 +58,6 @@ function useFuturesEditPosition(
     }
     return false;
   }, [stopLossPriceInput]);
-  const isEdit = useMemo(() => {
-    return !(data.takeProfitPrice === 0 && data.stopLossPrice === 0);
-  }, [data.stopLossPrice, data.takeProfitPrice]);
   const baseOpenPrice = useMemo(() => {
     return data.orderPrice.floor(tokenPair.getTokenPriceDecimals());
   }, [data.orderPrice, tokenPair]);
@@ -95,31 +85,22 @@ function useFuturesEditPosition(
     if (chainsData.chainId && signature) {
       const updateBase: { [key: string]: any } = await serviceUpdateStopPrice(
         data.id.toString(),
-        stopLossPriceInput,
-        stopProfitPriceInput,
+        stopLossPriceInput === "" ? "0" : stopLossPriceInput,
+        stopProfitPriceInput === "" ? "0" : stopProfitPriceInput,
         { Authorization: signature.signature }
       );
       if (Number(updateBase["errorCode"]) === 0) {
-        updateList();
       }
-      addTransactionNotice({
-        type: TransactionType.futures_editPosition,
-        info: "",
-        result:
-          Number(updateBase["errorCode"]) === 0
-            ? SnackBarType.success
-            : SnackBarType.fail,
-      });
+      onClose(Number(updateBase["errorCode"]) === 0);
     }
     setLoading(false);
   }, [
-    addTransactionNotice,
     chainsData.chainId,
     data.id,
+    onClose,
     signature,
     stopLossPriceInput,
     stopProfitPriceInput,
-    updateList,
   ]);
   /**
    * show
@@ -167,16 +148,7 @@ function useFuturesEditPosition(
     price,
     tokenPair,
   ]);
-  const showTriggerFee = useMemo(() => {
-    const fee = (data.leverage * data.balance * 5) / 10000 + 15;
-    return fee.floor(2);
-  }, [data.balance, data.leverage]);
-  const feeTip = useMemo(() => {
-    return [
-      t`Position fee =Position*0.05%`,
-      t`Stop order fee(after execution) = 15 NEST`,
-    ];
-  }, []);
+
   /**
    * main button
    */
@@ -232,7 +204,6 @@ function useFuturesEditPosition(
     showPosition,
     showOpenPrice,
     showLiqPrice,
-    showTriggerFee,
     mainButtonTitle,
     mainButtonLoading,
     mainButtonDis,
@@ -240,10 +211,8 @@ function useFuturesEditPosition(
     placeHolder,
     isEditTP,
     isEditSL,
-    isEdit,
     closeTP,
     closeSL,
-    feeTip,
     showTriggerNotice,
     setShowTriggerNotice,
     triggerNoticeCallback,

@@ -129,6 +129,7 @@ function useMainReact() {
     setSignature(defaultSignature);
   }, [defaultSignature]);
   const checkSigned = useMemo(() => {
+    console.log(signature)
     if (signature) {
       return true;
     } else {

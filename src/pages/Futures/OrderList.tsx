@@ -217,16 +217,16 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
           data={modalInfo.data}
           price={props.price}
           open={true}
-          onClose={(result?: boolean) => {
-            setModalInfo(undefined);
-            if (result !== undefined) {
+          onClose={(res?: boolean) => {
+            if (res !== undefined) {
               addTransactionNotice({
                 type: TransactionType.futures_sell,
                 info: "",
-                result: result ? SnackBarType.success : SnackBarType.fail,
+                result: res ? SnackBarType.success : SnackBarType.fail,
               });
               props.updateList();
             }
+            setModalInfo(undefined);
           }}
         />
       );
@@ -236,8 +236,17 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
           data={modalInfo.data}
           price={props.price}
           open={true}
-          onClose={() => setModalInfo(undefined)}
-          updateList={props.updateList}
+          onClose={(res?: boolean) => {
+            if (res !== undefined) {
+              addTransactionNotice({
+                type: TransactionType.futures_add,
+                info: "",
+                result: res ? SnackBarType.success : SnackBarType.fail,
+              });
+              props.updateList();
+            }
+            setModalInfo(undefined);
+          }}
         />
       );
     } else if (modalInfo && modalInfo.type === FuturesModalType.editLimit) {
@@ -245,8 +254,17 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
         <EditLimitModal
           data={modalInfo.data}
           open={true}
-          onClose={() => setModalInfo(undefined)}
-          updateList={props.updateList}
+          onClose={(res?: boolean) => {
+            if (res !== undefined) {
+              addTransactionNotice({
+                type: TransactionType.futures_editLimit,
+                info: "",
+                result: res ? SnackBarType.success : SnackBarType.fail,
+              });
+              props.updateList();
+            }
+            setModalInfo(undefined);
+          }}
         />
       );
     } else if (modalInfo && modalInfo.type === FuturesModalType.trigger) {
@@ -255,8 +273,17 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
           data={modalInfo.data}
           price={props.price}
           open={true}
-          onClose={() => setModalInfo(undefined)}
-          updateList={props.updateList}
+          onClose={(res?: boolean) => {
+            if (res !== undefined) {
+              addTransactionNotice({
+                type: TransactionType.futures_editPosition,
+                info: "",
+                result: res ? SnackBarType.success : SnackBarType.fail,
+              });
+              props.updateList();
+            }
+            setModalInfo(undefined);
+          }}
         />
       );
     } else {

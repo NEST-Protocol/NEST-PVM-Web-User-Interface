@@ -127,10 +127,11 @@ export function getNESTAmountForAll(
 export function serviceLogin(
   chainId: number,
   address: string,
+  remember: boolean,
   info: RequestBodyInterface
 ): Promise<any> {
   return baseRequestPOSTWithBody_return(
-    `https://api.nestfi.net/nestfi/op/user/login?chainId=${chainId}&walletAddress=${address}`,
+    `https://api.nestfi.net/nestfi/op/user/login?chainId=${chainId}&walletAddress=${address}&remember=${remember}`,
     info,
     {}
   );

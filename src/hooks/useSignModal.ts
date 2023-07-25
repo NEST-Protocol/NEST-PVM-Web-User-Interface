@@ -29,6 +29,7 @@ function useSignModal() {
         const loginBase: { [key: string]: string } = await serviceLogin(
           chainsData.chainId,
           account.address,
+          remember,
           info
         );
         if (Number(loginBase["errorCode"]) === 0) {

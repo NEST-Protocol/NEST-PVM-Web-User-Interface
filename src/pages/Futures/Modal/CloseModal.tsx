@@ -74,12 +74,19 @@ const CloseModal: FC<CloseModalProps> = ({ ...props }) => {
       <Drawer
         anchor={"bottom"}
         open={props.open}
-        onClose={() => props.onClose()}
+        onClose={() => {
+          props.onClose(undefined);
+        }}
         sx={{
           "& .MuiPaper-root": { background: "none", backgroundImage: "none" },
         }}
       >
-        <BaseDrawer title={t`Close Position`} onClose={props.onClose}>
+        <BaseDrawer
+          title={t`Close Position`}
+          onClose={() => {
+            props.onClose(undefined);
+          }}
+        >
           <CloseModalBase
             data={props.data}
             price={props.price}
@@ -90,12 +97,19 @@ const CloseModal: FC<CloseModalProps> = ({ ...props }) => {
     ) : (
       <Modal
         open={props.open}
-        onClose={() => props.onClose()}
+        onClose={() => {
+          props.onClose(undefined);
+        }}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
         <Box>
-          <BaseModal title={t`Close Position`} onClose={props.onClose}>
+          <BaseModal
+            title={t`Close Position`}
+            onClose={() => {
+              props.onClose(undefined);
+            }}
+          >
             <CloseModalBase
               data={props.data}
               price={props.price}

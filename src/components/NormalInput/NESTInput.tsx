@@ -151,7 +151,7 @@ const NESTInput: FC<NESTInputProps> = ({ ...props }) => {
           component={"button"}
           onClick={props.otherCallBack}
         >
-          {noNESTText}
+          <Box textAlign={"left"}>{noNESTText}</Box>
           <NEXT />
         </Stack>
       ) : (
