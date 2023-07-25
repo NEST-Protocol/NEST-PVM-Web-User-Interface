@@ -191,6 +191,7 @@ function useFuturesNewOrder(
 
   const open = useCallback(async () => {
     if (chainsData.chainId && account.address && basePrice && signature) {
+      console.log("进来一次")
       const orderPrice = basePrice.bigNumberToShowString(18, 5);
       const openBase: { [key: string]: any } = await serviceOpen(
         chainsData.chainId,

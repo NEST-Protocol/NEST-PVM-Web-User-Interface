@@ -238,7 +238,16 @@ const Account: FC = () => {
                   alignItems={"center"}
                   component={"button"}
                   onClick={() => setShowDeposit(true)}
-                  sx={{ cursor: "pointer" }}
+                  sx={(theme) => ({
+                    fontWeight: 400,
+                    fontSize: "10px",
+                    lineHeight: "14px",
+                    color: theme.normal.text0,
+                    "&:hover": {
+                      color: theme.normal.primary,
+                    },
+                    cursor: "pointer",
+                  })}
                 >
                   <Box
                     sx={{
@@ -252,14 +261,7 @@ const Account: FC = () => {
                   >
                     <Deposit />
                   </Box>
-                  <Box
-                    sx={(theme) => ({
-                      fontWeight: 400,
-                      fontSize: "10px",
-                      lineHeight: "14px",
-                      color: theme.normal.text0,
-                    })}
-                  >
+                  <Box>
                     <Trans>Deposit</Trans>
                   </Box>
                 </Stack>
@@ -269,7 +271,16 @@ const Account: FC = () => {
                   alignItems={"center"}
                   component={"button"}
                   onClick={() => setShowWithdraw(true)}
-                  sx={{ cursor: "pointer" }}
+                  sx={(theme) => ({
+                    fontWeight: 400,
+                    fontSize: "10px",
+                    lineHeight: "14px",
+                    color: theme.normal.text0,
+                    "&:hover": {
+                      color: theme.normal.primary,
+                    },
+                    cursor: "pointer",
+                  })}
                 >
                   <Box
                     sx={{
@@ -283,14 +294,7 @@ const Account: FC = () => {
                   >
                     <Withdraw />
                   </Box>
-                  <Box
-                    sx={(theme) => ({
-                      fontWeight: 400,
-                      fontSize: "10px",
-                      lineHeight: "14px",
-                      color: theme.normal.text0,
-                    })}
-                  >
+                  <Box>
                     <Trans>Withdraw</Trans>
                   </Box>
                 </Stack>

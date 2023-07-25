@@ -99,9 +99,13 @@ const MoneyTableRow: FC<MoneyTableRowProps> = ({ ...props }) => {
         </Stack>
       </TableCell>
       <TableCell
-        sx={{
+        sx={(theme) => ({
           padding: "0px !important",
-        }}
+          fontSize: "12px",
+          fontWeight: "700",
+          lineHeight: "16px",
+          color: theme.normal.text0,
+        })}
       >
         {props.time}
       </TableCell>
@@ -148,6 +152,21 @@ const MoneyTableRow: FC<MoneyTableRowProps> = ({ ...props }) => {
               height: "24px",
               borderRadius: "4px",
               border: `1px solid ${theme.normal.border}`,
+              "&:hover": {
+                cursor: "pointer",
+                border: `1px solid ${theme.normal.grey_hover}`,
+                background: theme.normal.grey_hover,
+                "& svg path": {
+                  fill: theme.normal.text0,
+                },
+              },
+              "&:active": {
+                border: `1px solid ${theme.normal.grey_active}`,
+                background: theme.normal.grey_active,
+                "& svg path": {
+                  fill: theme.normal.text0,
+                },
+              },
             })}
             component={"button"}
             onClick={() => {

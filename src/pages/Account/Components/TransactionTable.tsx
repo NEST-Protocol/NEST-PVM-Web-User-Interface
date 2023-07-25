@@ -92,6 +92,12 @@ const TransactionTableRow: FC<TransactionTableRowProps> = ({ ...props }) => {
           direction={"row"}
           justifyContent={"flex-end"}
           alignItems={"center"}
+          sx={(theme) => ({
+            fontSize: "12px",
+            fontWeight: "700",
+            lineHeight: "16px",
+            color: theme.normal.text0,
+          })}
         >
           <Box>{props.time}</Box>
         </Stack>

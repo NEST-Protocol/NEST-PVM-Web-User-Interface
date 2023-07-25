@@ -116,7 +116,11 @@ function useWithDrawModal(onClose: () => void) {
     return loading;
   }, [loading]);
   const mainButtonDis = useMemo(() => {
-    if (!account.address || parseFloat(tokenAmount) === 0) {
+    if (
+      !account.address ||
+      parseFloat(tokenAmount) === 0 ||
+      tokenAmount === ""
+    ) {
       return true;
     }
     return checkBalance;

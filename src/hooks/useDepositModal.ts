@@ -203,8 +203,13 @@ function useDepositModal(onCLose: () => void) {
     }
   }, [isLoading, pending, tokenTransfer.isLoading]);
   const mainButtonDis = useMemo(() => {
-    return checkBalance || checkMax;
-  }, [checkBalance, checkMax]);
+    return (
+      checkBalance ||
+      checkMax ||
+      tokenAmount === "" ||
+      parseFloat(tokenAmount) === 0
+    );
+  }, [checkBalance, checkMax, tokenAmount]);
   const mainButtonAction = useCallback(() => {
     if (!mainButtonDis && !mainButtonLoading) {
       if (selectToken === "BNB" && sendTransaction) {
