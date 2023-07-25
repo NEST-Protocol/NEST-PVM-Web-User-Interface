@@ -6,12 +6,15 @@ import TableRow from "@mui/material/TableRow";
 import { FC, useMemo } from "react";
 import { Share } from "../../../components/icons";
 import MainButton from "../../../components/MainButton/MainButton";
-import { FuturesOrderService } from "../../../hooks/useFuturesOrderList";
 import useFuturesPOrder from "../../../hooks/useFuturesPOrder";
 
 import ShareMyOrderModal from "../../Dashboard/Modal/ShareMyOrderModal";
 import { FuturesPrice } from "../Futures";
-import { FuturesModalInfo, FuturesModalType } from "../OrderList";
+import {
+  FuturesModalInfo,
+  FuturesModalType,
+  FuturesOrderService,
+} from "../OrderList";
 import FuturesOrderShare from "./FuturesOrderShare";
 import OrderTablePosition from "./OrderTablePosition";
 import FuturesTableTitle from "./TableTitle";

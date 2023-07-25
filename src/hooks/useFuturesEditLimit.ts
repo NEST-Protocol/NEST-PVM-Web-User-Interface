@@ -1,5 +1,6 @@
 import { useCallback, useMemo, useState } from "react";
-import { FuturesOrderService } from "./useFuturesOrderList";
+import { FuturesOrderService } from "../pages/Futures/OrderList";
+
 import { t } from "@lingui/macro";
 import useNEST from "./useNEST";
 import { serviceUpdateLimitPrice } from "../lib/NESTRequest";
@@ -9,7 +10,11 @@ import {
 } from "./useTransactionReceipt";
 import { SnackBarType } from "../components/SnackBar/NormalSnackBar";
 
-function useFuturesEditLimit(data: FuturesOrderService, onClose: () => void) {
+function useFuturesEditLimit(
+  data: FuturesOrderService,
+  onClose: () => void,
+  updateList: () => void
+) {
   const { chainsData, signature } = useNEST();
   const [loading, setLoading] = useState<boolean>(false);
   const tokenPair = useMemo(() => {
@@ -38,7 +43,8 @@ function useFuturesEditLimit(data: FuturesOrderService, onClose: () => void) {
         { Authorization: signature.signature }
       );
       if (Number(updateBase["errorCode"]) === 0) {
-        onClose();
+        updateList();
+        // onClose();
       }
       addTransactionNotice({
         type: TransactionType.futures_editLimit,
@@ -55,8 +61,8 @@ function useFuturesEditLimit(data: FuturesOrderService, onClose: () => void) {
     chainsData.chainId,
     data.id,
     limitPrice,
-    onClose,
     signature,
+    updateList,
   ]);
 
   /**

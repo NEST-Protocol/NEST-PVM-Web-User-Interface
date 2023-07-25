@@ -3,9 +3,9 @@ import Stack from "@mui/material/Stack";
 import { FC } from "react";
 import MainButton from "../../../components/MainButton/MainButton";
 import useFuturesOrder from "../../../hooks/useFuturesOrder";
-import { FuturesOrderService } from "../../../hooks/useFuturesOrderList";
+
 import ShareNewOrderModal from "../../Dashboard/Modal/ShareNewOrderModal";
-import { FuturesModalInfo, FuturesModalType } from "../OrderList";
+import { FuturesModalInfo, FuturesModalType, FuturesOrderService } from "../OrderList";
 import FuturesOrderListInfo, {
   FuturesOrderListInfoMain,
 } from "./FuturesOrderListInfo";

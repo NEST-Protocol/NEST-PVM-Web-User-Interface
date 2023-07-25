@@ -4,11 +4,14 @@ import { FC } from "react";
 import MainButton from "../../../components/MainButton/MainButton";
 import NESTLine from "../../../components/NESTLine";
 import { NESTTooltipFC } from "../../../components/NESTTooltip/NESTTooltip";
-import { FuturesOrderService } from "../../../hooks/useFuturesOrderList";
 import useFuturesPOrder from "../../../hooks/useFuturesPOrder";
 import ShareMyOrderModal from "../../Dashboard/Modal/ShareMyOrderModal";
 import { FuturesPrice } from "../Futures";
-import { FuturesModalInfo, FuturesModalType } from "../OrderList";
+import {
+  FuturesModalInfo,
+  FuturesModalType,
+  FuturesOrderService,
+} from "../OrderList";
 import FuturesOrderListInfo, {
   FuturesOrderListInfoMain,
 } from "./FuturesOrderListInfo";

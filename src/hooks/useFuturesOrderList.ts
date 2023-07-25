@@ -2,25 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import useNEST from "./useNEST";
 import { serviceList } from "../lib/NESTRequest";
 import { usePendingTransactionsBase } from "./useTransactionReceipt";
-
-export interface FuturesOrderService {
-  id: number;
-  timestamp: number;
-  walletAddress: string;
-  chainId: number;
-  product: string;
-  leverage: number;
-  orderPrice: number;
-  limitPrice: number;
-  direction: boolean;
-  margin: number;
-  append: number;
-  balance: number;
-  fees: number;
-  stopLossPrice: number;
-  takeProfitPrice: number;
-  status: number;
-}
+import { FuturesOrderService } from "../pages/Futures/OrderList";
 
 const UPDATE_LIST_TIME = 3;
 

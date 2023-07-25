@@ -4,9 +4,6 @@ import { BigNumber } from "ethers";
 import { FC, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { FuturesOrder, FuturesLimitOrder } from "../../components/icons";
 import NESTTabs from "../../components/NESTTabs/NESTTabs";
-import useFuturesOrderList, {
-  FuturesOrderService,
-} from "../../hooks/useFuturesOrderList";
 import useWindowWidth from "../../hooks/useWindowWidth";
 import OrderList from "./Components/OrderList";
 import OrderTable from "./Components/OrderTable";
@@ -25,8 +22,30 @@ import {
 } from "../../hooks/useTransactionReceipt";
 import { SnackBarType } from "../../components/SnackBar/NormalSnackBar";
 
+export interface FuturesOrderService {
+  id: number;
+  timestamp: number;
+  walletAddress: string;
+  chainId: number;
+  product: string;
+  leverage: number;
+  orderPrice: number;
+  limitPrice: number;
+  direction: boolean;
+  margin: number;
+  append: number;
+  balance: number;
+  fees: number;
+  stopLossPrice: number;
+  takeProfitPrice: number;
+  status: number;
+}
+
 interface FuturesOrderListProps {
   price: FuturesPrice | undefined;
+  pOrderListV2: FuturesOrderService[];
+  limitOrderList: FuturesOrderService[];
+  updateList: () => void;
 }
 
 export enum FuturesModalType {
@@ -65,7 +84,6 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
     setModalInfo(value);
   };
   const [tabsValue, setTabsValue] = useState(0);
-  const { pOrderListV2, orderListV2: limitOrderList } = useFuturesOrderList();
   const { addTransactionNotice } = usePendingTransactionsBase();
   /**
    * this width
@@ -82,7 +100,7 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
     if (tabsValue === 0 && width > 890) {
       return (
         <POrderTable
-          dataArray={pOrderListV2}
+          dataArray={props.pOrderListV2}
           closeOrder={[]}
           price={props.price}
           buttonCallBack={setModalInfoValue}
@@ -91,12 +109,12 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
     } else if (tabsValue === 1 && width > 890) {
       return (
         <OrderTable
-          dataArray={limitOrderList}
+          dataArray={props.limitOrderList}
           buttonCallBack={setModalInfoValue}
         />
       );
     } else if (tabsValue === 0) {
-      const noOrder = pOrderListV2.length === 0;
+      const noOrder = props.pOrderListV2.length === 0;
       return (
         <Stack
           spacing={"16px"}
@@ -106,7 +124,7 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
             paddingBottom: "24px",
           }}
         >
-          {pOrderListV2.map((item, index) => {
+          {props.pOrderListV2.map((item, index) => {
             return (
               <POrderList
                 key={`POrderList + ${index}`}
@@ -126,7 +144,7 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
         </Stack>
       );
     } else if (tabsValue === 1) {
-      const noOrder = limitOrderList.length === 0;
+      const noOrder = props.limitOrderList.length === 0;
       return (
         <Stack
           spacing={"16px"}
@@ -136,7 +154,7 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
             paddingBottom: "24px",
           }}
         >
-          {limitOrderList.map((item, index) => {
+          {props.limitOrderList.map((item, index) => {
             return (
               <OrderList
                 key={`OrderList + ${index}`}
@@ -157,8 +175,8 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
     }
   }, [
     isBigMobile,
-    limitOrderList,
-    pOrderListV2,
+    props.limitOrderList,
+    props.pOrderListV2,
     props.price,
     tabsValue,
     width,
@@ -207,6 +225,7 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
                 info: "",
                 result: result ? SnackBarType.success : SnackBarType.fail,
               });
+              props.updateList();
             }
           }}
         />
@@ -218,6 +237,7 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
           price={props.price}
           open={true}
           onClose={() => setModalInfo(undefined)}
+          updateList={props.updateList}
         />
       );
     } else if (modalInfo && modalInfo.type === FuturesModalType.editLimit) {
@@ -226,6 +246,7 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
           data={modalInfo.data}
           open={true}
           onClose={() => setModalInfo(undefined)}
+          updateList={props.updateList}
         />
       );
     } else if (modalInfo && modalInfo.type === FuturesModalType.trigger) {
@@ -235,12 +256,13 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
           price={props.price}
           open={true}
           onClose={() => setModalInfo(undefined)}
+          updateList={props.updateList}
         />
       );
     } else {
       return <></>;
     }
-  }, [addTransactionNotice, modalInfo, props.price]);
+  }, [addTransactionNotice, modalInfo, props]);
   return (
     <Stack spacing={"16px"} width={"100%"} ref={ref}>
       {addModal}

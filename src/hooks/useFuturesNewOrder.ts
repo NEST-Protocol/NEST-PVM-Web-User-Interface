@@ -53,7 +53,8 @@ function addPricePoint(price: BigNumber, isLong: boolean) {
 
 function useFuturesNewOrder(
   price: FuturesPrice | undefined,
-  tokenPair: string
+  tokenPair: string,
+  updateList: () => void
 ) {
   const { account, chainsData, setShowConnect, signature } = useNEST();
   const [longOrShort, setLongOrShort] = useState(true);
@@ -222,6 +223,7 @@ function useFuturesNewOrder(
           hash: "",
           positionIndex: openBase["value"],
         });
+        updateList();
       }
       addTransactionNotice({
         type: TransactionType.futures_buy,
@@ -247,6 +249,7 @@ function useFuturesNewOrder(
     tabsValue,
     tokenPair,
     tp,
+    updateList,
   ]);
   const showTotalPay = useMemo(() => {
     if (nestAmount !== "") {
@@ -572,6 +575,12 @@ function useFuturesNewOrder(
    */
   useEffect(() => {
     getBalance();
+    const time = setInterval(() => {
+      getBalance();
+    }, 5 * 1000);
+    return () => {
+      clearInterval(time);
+    };
   }, [getBalance]);
 
   const [hadSetLimit, setHadSetLimit] = useState(false);

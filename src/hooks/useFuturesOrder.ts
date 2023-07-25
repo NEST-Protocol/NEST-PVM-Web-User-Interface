@@ -1,6 +1,5 @@
 import { useCallback, useMemo, useState } from "react";
 import { Order } from "../pages/Dashboard/Dashboard";
-import { FuturesOrderService } from "./useFuturesOrderList";
 import { t } from "@lingui/macro";
 import useNEST from "./useNEST";
 import { serviceCancel } from "../lib/NESTRequest";
@@ -9,6 +8,7 @@ import {
   usePendingTransactionsBase,
 } from "./useTransactionReceipt";
 import { SnackBarType } from "../components/SnackBar/NormalSnackBar";
+import { FuturesOrderService } from "../pages/Futures/OrderList";
 
 function useFuturesOrder(data: FuturesOrderService) {
   const { chainsData, signature } = useNEST();

@@ -8,7 +8,6 @@ import NESTLine from "../../../components/NESTLine";
 import NormalInfo from "../../../components/NormalInfo/NormalInfo";
 import NormalInputWithCloseButton from "../../../components/NormalInput/NormalInputWithCloseButton";
 import useFuturesEditPosition from "../../../hooks/useFuturesEditPosition";
-import { FuturesOrderService } from "../../../hooks/useFuturesOrderList";
 import useWindowWidth from "../../../hooks/useWindowWidth";
 import BaseDrawer from "../../Share/Modal/BaseDrawer";
 import BaseModal from "../../Share/Modal/BaseModal";
@@ -16,11 +15,13 @@ import { FuturesPrice } from "../Futures";
 import TriggerRiskModal from "./LimitAndPriceModal";
 import ErrorLabel from "../../../components/ErrorLabel/ErrorLabel";
 import { Trans, t } from "@lingui/macro";
+import { FuturesOrderService } from "../OrderList";
 
 interface EditPositionModalBaseProps {
   data: FuturesOrderService;
   price: FuturesPrice | undefined;
   onClose: () => void;
+  updateList: () => void;
 }
 
 const EditPositionModalBase: FC<EditPositionModalBaseProps> = ({
@@ -49,7 +50,12 @@ const EditPositionModalBase: FC<EditPositionModalBaseProps> = ({
     triggerNoticeCallback,
     tpError,
     slError,
-  } = useFuturesEditPosition(props.data, props.price, props.onClose);
+  } = useFuturesEditPosition(
+    props.data,
+    props.price,
+    props.onClose,
+    props.updateList
+  );
   const triggerNoticeModal = useMemo(() => {
     return (
       <Modal
@@ -170,6 +176,7 @@ interface EditPositionModalProps {
   price: FuturesPrice | undefined;
   open: boolean;
   onClose: () => void;
+  updateList: () => void;
 }
 
 const EditPositionModal: FC<EditPositionModalProps> = ({ ...props }) => {
@@ -194,6 +201,7 @@ const EditPositionModal: FC<EditPositionModalProps> = ({ ...props }) => {
             data={props.data}
             price={props.price}
             onClose={props.onClose}
+            updateList={props.updateList}
           />
         </BaseDrawer>
       </Drawer>
@@ -210,6 +218,7 @@ const EditPositionModal: FC<EditPositionModalProps> = ({ ...props }) => {
               data={props.data}
               price={props.price}
               onClose={props.onClose}
+              updateList={props.updateList}
             />
           </BaseModal>
         </Box>

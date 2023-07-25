@@ -1,5 +1,6 @@
 import { useCallback, useMemo, useState } from "react";
-import { FuturesOrderService } from "./useFuturesOrderList";
+import { FuturesOrderService } from "../pages/Futures/OrderList";
+
 import { BigNumber } from "ethers";
 import { lipPrice } from "./useFuturesNewOrder";
 import { FuturesPrice } from "../pages/Futures/Futures";
@@ -15,7 +16,8 @@ import { SnackBarType } from "../components/SnackBar/NormalSnackBar";
 function useFuturesEditPosition(
   data: FuturesOrderService,
   price: FuturesPrice | undefined,
-  onClose: () => void
+  onClose: () => void,
+  updateList: () => void
 ) {
   const { chainsData, signature } = useNEST();
   const [loading, setLoading] = useState<boolean>(false);
@@ -98,6 +100,7 @@ function useFuturesEditPosition(
         { Authorization: signature.signature }
       );
       if (Number(updateBase["errorCode"]) === 0) {
+        updateList();
       }
       addTransactionNotice({
         type: TransactionType.futures_editPosition,
@@ -116,6 +119,7 @@ function useFuturesEditPosition(
     signature,
     stopLossPriceInput,
     stopProfitPriceInput,
+    updateList,
   ]);
   /**
    * show

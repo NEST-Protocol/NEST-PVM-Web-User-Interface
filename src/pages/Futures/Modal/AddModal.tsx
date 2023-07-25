@@ -8,17 +8,18 @@ import NESTLine from "../../../components/NESTLine";
 import NormalInfo from "../../../components/NormalInfo/NormalInfo";
 import NESTInput from "../../../components/NormalInput/NESTInput";
 import useFuturesAdd from "../../../hooks/useFuturesAdd";
-import { FuturesOrderService } from "../../../hooks/useFuturesOrderList";
 import useWindowWidth from "../../../hooks/useWindowWidth";
 import BaseDrawer from "../../Share/Modal/BaseDrawer";
 import BaseModal from "../../Share/Modal/BaseModal";
 import { FuturesPrice } from "../Futures";
 import { t } from "@lingui/macro";
+import { FuturesOrderService } from "../OrderList";
 
 interface AddModalBaseProps {
   data: FuturesOrderService;
   price: FuturesPrice | undefined;
   onClose: () => void;
+  updateList: () => void;
 }
 
 const AddModalBase: FC<AddModalBaseProps> = ({ ...props }) => {
@@ -36,7 +37,7 @@ const AddModalBase: FC<AddModalBaseProps> = ({ ...props }) => {
     mainButtonLoading,
     mainButtonDis,
     mainButtonAction,
-  } = useFuturesAdd(props.data, props.price, props.onClose);
+  } = useFuturesAdd(props.data, props.price, props.onClose, props.updateList);
   const input = useMemo(() => {
     return (
       <NESTInput
@@ -88,6 +89,7 @@ interface AddModalProps {
   price: FuturesPrice | undefined;
   open: boolean;
   onClose: () => void;
+  updateList: () => void;
 }
 
 const AddModal: FC<AddModalProps> = ({ ...props }) => {
@@ -108,6 +110,7 @@ const AddModal: FC<AddModalProps> = ({ ...props }) => {
             data={props.data}
             price={props.price}
             onClose={props.onClose}
+            updateList={props.updateList}
           />
         </BaseDrawer>
       </Drawer>
@@ -124,6 +127,7 @@ const AddModal: FC<AddModalProps> = ({ ...props }) => {
               data={props.data}
               price={props.price}
               onClose={props.onClose}
+              updateList={props.updateList}
             />
           </BaseModal>
         </Box>

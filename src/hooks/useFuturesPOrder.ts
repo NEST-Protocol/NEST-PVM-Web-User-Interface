@@ -3,10 +3,10 @@ import { useMemo, useState } from "react";
 
 import { FuturesPrice } from "../pages/Futures/Futures";
 import { lipPrice } from "./useFuturesNewOrder";
-import { FuturesOrderService } from "./useFuturesOrderList";
 
 import { Order } from "../pages/Dashboard/Dashboard";
 import { t } from "@lingui/macro";
+import { FuturesOrderService } from "../pages/Futures/OrderList";
 
 function useFuturesPOrder(
   data: FuturesOrderService,

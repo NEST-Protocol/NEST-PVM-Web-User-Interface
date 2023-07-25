@@ -6,9 +6,9 @@ import { FC, useMemo } from "react";
 import { Share } from "../../../components/icons";
 import MainButton from "../../../components/MainButton/MainButton";
 import useFuturesOrder from "../../../hooks/useFuturesOrder";
-import { FuturesOrderService } from "../../../hooks/useFuturesOrderList";
+
 import ShareNewOrderModal from "../../Dashboard/Modal/ShareNewOrderModal";
-import { FuturesModalInfo, FuturesModalType } from "../OrderList";
+import { FuturesModalInfo, FuturesModalType,FuturesOrderService } from "../OrderList";
 import FuturesOrderShare from "./FuturesOrderShare";
 import OrderTablePosition from "./OrderTablePosition";
 import FuturesTableTitle from "./TableTitle";

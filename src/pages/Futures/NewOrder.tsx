@@ -22,6 +22,7 @@ import NESTInput from "../../components/NormalInput/NESTInput";
 interface FuturesNewOrderProps {
   price: FuturesPrice | undefined;
   tokenPair: string;
+  updateList: () => void;
 }
 
 const FuturesNewOrder: FC<FuturesNewOrderProps> = ({ ...props }) => {
@@ -70,7 +71,7 @@ const FuturesNewOrder: FC<FuturesNewOrderProps> = ({ ...props }) => {
     stopErrorText,
     isShareLink,
     closeShareLink,
-  } = useFuturesNewOrder(props.price, props.tokenPair);
+  } = useFuturesNewOrder(props.price, props.tokenPair, props.updateList);
   const newOrderTabsData = useMemo(() => {
     return [
       <p>

@@ -1,7 +1,8 @@
 import { BigNumber } from "ethers";
 import { useCallback, useMemo, useState } from "react";
 import { FuturesPrice } from "../pages/Futures/Futures";
-import { FuturesOrderService } from "./useFuturesOrderList";
+import { FuturesOrderService } from "../pages/Futures/OrderList";
+
 import { t } from "@lingui/macro";
 import { serviceClose } from "../lib/NESTRequest";
 import useNEST from "./useNEST";

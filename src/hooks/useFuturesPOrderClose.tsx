@@ -3,8 +3,9 @@ import { useMemo, useState } from "react";
 import { Order } from "../pages/Dashboard/Dashboard";
 import { FuturesPrice, priceToken } from "../pages/Futures/Futures";
 import { lipPrice } from "./useFuturesNewOrder";
-import { FuturesOrderService } from "./useFuturesOrderList";
+
 import { t } from "@lingui/macro";
+import { FuturesOrderService } from "../pages/Futures/OrderList";
 
 function useFuturesPOrderClose(
   data: FuturesOrderService,

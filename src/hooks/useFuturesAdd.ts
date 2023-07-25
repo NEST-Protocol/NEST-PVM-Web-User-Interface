@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 
-import { FuturesOrderService } from "./useFuturesOrderList";
+import { FuturesOrderService } from "../pages/Futures/OrderList";
 import useNEST from "./useNEST";
 import { BigNumber } from "ethers";
 import { lipPrice } from "./useFuturesNewOrder";
@@ -8,13 +8,17 @@ import { FuturesPrice } from "../pages/Futures/Futures";
 import { t } from "@lingui/macro";
 import useService from "../contracts/useService";
 import { serviceAdd } from "../lib/NESTRequest";
-import { TransactionType, usePendingTransactionsBase } from "./useTransactionReceipt";
+import {
+  TransactionType,
+  usePendingTransactionsBase,
+} from "./useTransactionReceipt";
 import { SnackBarType } from "../components/SnackBar/NormalSnackBar";
 
 function useFuturesAdd(
   data: FuturesOrderService,
   price: FuturesPrice | undefined,
-  onClose: () => void
+  onClose: () => void,
+  updateList: () => void
 ) {
   const { account, chainsData, signature } = useNEST();
   const [nestAmount, setNestAmount] = useState("");
@@ -61,6 +65,7 @@ function useFuturesAdd(
       );
       if (Number(addBase["errorCode"]) === 0) {
         getBalance();
+        updateList();
       }
       addTransactionNotice({
         type: TransactionType.futures_add,
@@ -72,7 +77,15 @@ function useFuturesAdd(
       });
     }
     setLoading(false);
-  }, [addTransactionNotice, chainsData.chainId, data.id, getBalance, nestAmount, signature]);
+  }, [
+    addTransactionNotice,
+    chainsData.chainId,
+    data.id,
+    getBalance,
+    nestAmount,
+    signature,
+    updateList,
+  ]);
 
   const maxCallBack = useCallback(() => {
     if (tokenBalance) {
@@ -173,6 +186,12 @@ function useFuturesAdd(
    */
   useEffect(() => {
     getBalance();
+    const time = setInterval(() => {
+      getBalance();
+    }, 5 * 1000);
+    return () => {
+      clearInterval(time);
+    };
   }, [getBalance]);
   return {
     checkBalance,

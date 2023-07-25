@@ -93,6 +93,12 @@ function useAccount() {
    */
   useEffect(() => {
     getBalance();
+    const time = setInterval(() => {
+      getBalance();
+    }, 5 * 1000);
+    return () => {
+      clearInterval(time);
+    };
   }, [getBalance]);
 
   useEffect(() => {

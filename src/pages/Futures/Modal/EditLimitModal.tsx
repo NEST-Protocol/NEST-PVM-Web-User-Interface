@@ -7,15 +7,16 @@ import MainButton from "../../../components/MainButton/MainButton";
 import NESTLine from "../../../components/NESTLine";
 import NormalInput from "../../../components/NormalInput/NormalInput";
 import useFuturesEditLimit from "../../../hooks/useFuturesEditLimit";
-import { FuturesOrderService } from "../../../hooks/useFuturesOrderList";
 import useWindowWidth from "../../../hooks/useWindowWidth";
 import BaseDrawer from "../../Share/Modal/BaseDrawer";
 import BaseModal from "../../Share/Modal/BaseModal";
 import { t } from "@lingui/macro";
+import { FuturesOrderService } from "../OrderList";
 
 interface EditLimitModalBaseProps {
   data: FuturesOrderService;
   onClose: () => void;
+  updateList: () => void;
 }
 
 const EditLimitModalBase: FC<EditLimitModalBaseProps> = ({ ...props }) => {
@@ -26,7 +27,7 @@ const EditLimitModalBase: FC<EditLimitModalBaseProps> = ({ ...props }) => {
     mainButtonLoading,
     mainButtonDis,
     mainButtonAction,
-  } = useFuturesEditLimit(props.data, props.onClose);
+  } = useFuturesEditLimit(props.data, props.onClose, props.updateList);
   return (
     <Stack spacing={"24px"} width={"100%"}>
       <NormalInput
@@ -51,6 +52,7 @@ interface EditLimitModalProps {
   data: FuturesOrderService;
   open: boolean;
   onClose: () => void;
+  updateList: () => void;
 }
 
 const EditLimitModal: FC<EditLimitModalProps> = ({ ...props }) => {
@@ -66,7 +68,11 @@ const EditLimitModal: FC<EditLimitModalProps> = ({ ...props }) => {
         }}
       >
         <BaseDrawer title={t`Limit Price`} onClose={props.onClose}>
-          <EditLimitModalBase data={props.data} onClose={props.onClose} />
+          <EditLimitModalBase
+            data={props.data}
+            onClose={props.onClose}
+            updateList={props.updateList}
+          />
         </BaseDrawer>
       </Drawer>
     ) : (
@@ -78,7 +84,11 @@ const EditLimitModal: FC<EditLimitModalProps> = ({ ...props }) => {
       >
         <Box>
           <BaseModal title={t`Limit Price`} onClose={props.onClose}>
-            <EditLimitModalBase data={props.data} onClose={props.onClose} />
+            <EditLimitModalBase
+              data={props.data}
+              onClose={props.onClose}
+              updateList={props.updateList}
+            />
           </BaseModal>
         </Box>
       </Modal>
