@@ -148,13 +148,8 @@ function useDepositModal(onClose: () => void) {
   const MAX_Amount: {
     [key: string]: number;
   } = useMemo(() => {
-    const maxUSDT = 10000;
-    const NESTPrice = basePrice?.NEST.bigNumberToShowPrice(18, 5);
-    const maxNEST = 10000 / parseFloat(NESTPrice ?? "1");
-    const BNBPrice = basePrice?.BNB.bigNumberToShowPrice(18, 5);
-    const maxBNB = 10000 / parseFloat(BNBPrice ?? "1");
-    return { USDT: maxUSDT, NEST: maxNEST, BNB: maxBNB };
-  }, [basePrice?.BNB, basePrice?.NEST]);
+    return { USDT: 10000, NEST: 1000000, BNB: 30 };
+  }, []);
   const checkMax = useMemo(() => {
     if (parseFloat(tokenAmount) > MAX_Amount[selectToken]) {
       return true;
