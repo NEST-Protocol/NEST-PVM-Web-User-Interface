@@ -19,6 +19,7 @@ import ErrorLabel from "../../components/ErrorLabel/ErrorLabel";
 import { Trans, t } from "@lingui/macro";
 import NESTInput from "../../components/NormalInput/NESTInput";
 import DepositModal from "../Share/Modal/DepositModal";
+import SignModal from "../Share/Modal/SignModal";
 
 interface FuturesNewOrderProps {
   price: FuturesPrice | undefined;
@@ -74,6 +75,9 @@ const FuturesNewOrder: FC<FuturesNewOrderProps> = ({ ...props }) => {
     closeShareLink,
     showDeposit,
     setShowDeposit,
+    showSignModal,
+    setShowSignModal,
+    signature,
   } = useFuturesNewOrder(props.price, props.tokenPair, props.updateList);
   const newOrderTabsData = useMemo(() => {
     return [
@@ -97,7 +101,13 @@ const FuturesNewOrder: FC<FuturesNewOrderProps> = ({ ...props }) => {
           setInputAmount(value.formatInputNum4());
           closeShareLink();
         }}
-        otherCallBack={() => setShowDeposit(true)}
+        otherCallBack={() => {
+          if (signature) {
+            setShowDeposit(true);
+          } else {
+            setShowSignModal(true);
+          }
+        }}
       />
     );
   }, [
@@ -108,7 +118,9 @@ const FuturesNewOrder: FC<FuturesNewOrderProps> = ({ ...props }) => {
     maxCallBack,
     setInputAmount,
     setShowDeposit,
+    setShowSignModal,
     showBalance,
+    signature,
   ]);
 
   const stopPrice = useCallback(() => {
@@ -334,12 +346,18 @@ const FuturesNewOrder: FC<FuturesNewOrderProps> = ({ ...props }) => {
           open={showDeposit}
           onClose={() => setShowDeposit(false)}
         />
+        <SignModal
+          open={showSignModal}
+          onClose={() => setShowSignModal(false)}
+        />
       </>
     );
   }, [
     setShowDeposit,
+    setShowSignModal,
     setShowTriggerNotice,
     showDeposit,
+    showSignModal,
     showTriggerNotice,
     triggerNoticeCallback,
   ]);

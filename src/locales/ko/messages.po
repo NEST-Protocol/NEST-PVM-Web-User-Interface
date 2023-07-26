@@ -801,6 +801,10 @@ msgstr "플랫폼 (유튜브, 텔레그램, 트위터, 인스타그램, 페이�
 msgid "Please click Approve for authorization and then you can open the position, this process will consume some GAS."
 msgstr "인증을 위해 승인을 클릭하면 포지션을 열 수 있으며, 이 과정에서 일부 GAS가 소비됩니다."
 
+#: src/components/NormalInput/NESTInput.tsx
+msgid "Please complete your sign"
+msgstr ""
+
 #: src/pages/DirectPoster/useDirectPoster.ts
 msgid "Please get ETH testnet token first"
 msgstr "먼저 이더리움 테스트넷 토큰을 받으세요"

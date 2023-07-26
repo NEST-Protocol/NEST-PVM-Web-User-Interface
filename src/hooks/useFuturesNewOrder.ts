@@ -71,6 +71,7 @@ function useFuturesNewOrder(
   const { service_balance } = useService();
   const { addTransactionNotice } = usePendingTransactionsBase();
   const [showDeposit, setShowDeposit] = useState(false);
+  const [showSignModal, setShowSignModal] = useState(false);
   // const nowToken = useMemo(() => {
   //   const token = inputToken.getToken();
   //   if (chainsData.chainId && token) {
@@ -447,7 +448,7 @@ function useFuturesNewOrder(
       if (tokenBalance) {
         return tokenBalance.bigNumberToShowString(18, 2);
       } else {
-        return "0"
+        return "0";
       }
     } else {
       return String().placeHolder;
@@ -644,6 +645,9 @@ function useFuturesNewOrder(
     closeShareLink,
     showDeposit,
     setShowDeposit,
+    showSignModal,
+    setShowSignModal,
+    signature
   };
 }
 

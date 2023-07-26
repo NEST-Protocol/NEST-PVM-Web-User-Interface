@@ -799,6 +799,10 @@ msgstr "プラットフォーム（Youtube、Telegram、Twitter、Instagram、Fa
 msgid "Please click Approve for authorization and then you can open the position, this process will consume some GAS."
 msgstr "承認をクリックして承認し、ポジションを開いてください。このプロセスには一定のGASが消費されます。"
 
+#: src/components/NormalInput/NESTInput.tsx
+msgid "Please complete your sign"
+msgstr ""
+
 #: src/pages/DirectPoster/useDirectPoster.ts
 msgid "Please get ETH testnet token first"
 msgstr ""

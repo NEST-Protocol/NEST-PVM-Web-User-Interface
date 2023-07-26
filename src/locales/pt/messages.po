@@ -801,6 +801,10 @@ msgstr "Plataforma (Youtube, Telegram, Twitter, Instagram, Facebook, Tiktok, out
 msgid "Please click Approve for authorization and then you can open the position, this process will consume some GAS."
 msgstr "Clique em Aprovar para obter autorização e, em seguida, pode abrir a posição, este processo consumirá algum GAS."
 
+#: src/components/NormalInput/NESTInput.tsx
+msgid "Please complete your sign"
+msgstr ""
+
 #: src/pages/DirectPoster/useDirectPoster.ts
 msgid "Please get ETH testnet token first"
 msgstr "Obter primeiro o token ETH testnet"

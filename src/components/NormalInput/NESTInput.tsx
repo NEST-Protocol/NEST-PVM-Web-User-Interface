@@ -21,14 +21,18 @@ interface NESTInputProps {
 }
 
 const NESTInput: FC<NESTInputProps> = ({ ...props }) => {
-  const { account, chainsData } = useNEST();
+  const { account, chainsData, checkSigned } = useNEST();
   const noNESTText = useMemo(() => {
     if (chainsData.chainId === 534353) {
       return t`The balance is 0. You can go to "Faucet" to get test token before trading.`;
     } else {
-      return t`Your balance is 0. Before making any transactions, please click on "Deposit" to complete a quick deposit.`;
+      if (checkSigned) {
+        return t`Your balance is 0. Before making any transactions, please click on "Deposit" to complete a quick deposit.`;
+      } else {
+        return t`Please complete your sign`;
+      }
     }
-  }, [chainsData.chainId]);
+  }, [chainsData.chainId, checkSigned]);
   const swapTitle = useMemo(() => {
     return chainsData.chainId === 534353 ? t`Faucet` : t`Deposit`;
   }, [chainsData.chainId]);
@@ -102,7 +106,7 @@ const NESTInput: FC<NESTInputProps> = ({ ...props }) => {
             <Trans>MAX</Trans>
           </LinkButton>
         </Stack>
-        
+
         <Stack
           direction={"row"}
           justifyContent={"flex-end"}
@@ -118,8 +122,16 @@ const NESTInput: FC<NESTInputProps> = ({ ...props }) => {
           component={"button"}
           onClick={props.otherCallBack}
         >
-          <LinkButton><p>{props.hideSwapTitle ? <></> : swapTitle}</p></LinkButton>
-          <LinkButton>{props.hideSwapTitle ? <></> : <SwapExchangeSmall />}</LinkButton>
+          <LinkButton>
+            <p>{props.hideSwapTitle || !checkSigned ? <></> : swapTitle}</p>
+          </LinkButton>
+          <LinkButton>
+            {props.hideSwapTitle || !checkSigned ? (
+              <></>
+            ) : (
+              <SwapExchangeSmall />
+            )}
+          </LinkButton>
         </Stack>
       </Stack>
       {props.showToSwap ? (
@@ -134,8 +146,8 @@ const NESTInput: FC<NESTInputProps> = ({ ...props }) => {
             borderRadius: "4px",
             background: theme.normal.danger_light_hover,
             color: theme.normal.danger,
-              fontSize: 12,
-              fontWeight: 400,
+            fontSize: 12,
+            fontWeight: 400,
 
             marginBottom: "12px",
             "& svg": {
