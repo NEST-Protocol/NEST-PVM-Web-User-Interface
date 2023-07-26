@@ -31,6 +31,8 @@ const WithDrawModalBase: FC<WithDrawModalBaseProps> = ({ ...props }) => {
     mainButtonLoading,
     mainButtonDis,
     mainButtonAction,
+    showTotal,
+    errorLabel
   } = useWithDrawModal(props.onClose);
 
   const inputNestAmount = useMemo(() => {
@@ -62,7 +64,7 @@ const WithDrawModalBase: FC<WithDrawModalBaseProps> = ({ ...props }) => {
       <Stack spacing={"16px"}>
         {inputNestAmount}
         {isError ? (
-          <ErrorLabel title={t`Exceed maximum withdrawal amount.`} />
+          <ErrorLabel title={errorLabel} />
         ) : (
           <></>
         )}
@@ -72,31 +74,59 @@ const WithDrawModalBase: FC<WithDrawModalBaseProps> = ({ ...props }) => {
           callBack={selectButtonCallBack}
         />
       </Stack>
-      <Stack
-        direction={"row"}
-        justifyContent={"space-between"}
-        alignItems={"center"}
-        sx={{
-          fontSize: "14px",
-          fontWeight: "400",
-          lineHeight: "20px",
-        }}
-      >
-        <Box
-          sx={(theme) => ({
-            color: theme.normal.text2,
-          })}
+      <Stack spacing={"8px"}>
+        <Stack
+          direction={"row"}
+          justifyContent={"space-between"}
+          alignItems={"center"}
+          sx={{
+            fontSize: "14px",
+            fontWeight: "400",
+            lineHeight: "20px",
+          }}
         >
-          <Trans>Service Fee</Trans>
-        </Box>
-        <Box
-          sx={(theme) => ({
-            color: theme.normal.text0,
-          })}
+          <Box
+            sx={(theme) => ({
+              color: theme.normal.text2,
+            })}
+          >
+            <Trans>Service Fee</Trans>
+          </Box>
+          <Box
+            sx={(theme) => ({
+              color: theme.normal.text0,
+            })}
+          >
+            15 NEST
+          </Box>
+        </Stack>
+        <Stack
+          direction={"row"}
+          justifyContent={"space-between"}
+          alignItems={"center"}
+          sx={{
+            fontSize: "14px",
+            fontWeight: "400",
+            lineHeight: "20px",
+          }}
         >
-          15 NEST
-        </Box>
+          <Box
+            sx={(theme) => ({
+              color: theme.normal.text2,
+            })}
+          >
+            <Trans>Total</Trans>
+          </Box>
+          <Box
+            sx={(theme) => ({
+              color: theme.normal.text0,
+            })}
+          >
+            {`${showTotal} NEST`}
+          </Box>
+        </Stack>
       </Stack>
+
       <MainButton
         title={mainButtonTitle}
         disable={mainButtonDis}

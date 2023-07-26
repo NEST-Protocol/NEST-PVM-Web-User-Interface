@@ -213,22 +213,24 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
   const addModal = useMemo(() => {
     if (modalInfo && modalInfo.type === FuturesModalType.close) {
       return (
-        <CloseModal
-          data={modalInfo.data}
-          price={props.price}
-          open={true}
-          onClose={(res?: boolean) => {
-            if (res !== undefined) {
-              addTransactionNotice({
-                type: TransactionType.futures_sell,
-                info: "",
-                result: res ? SnackBarType.success : SnackBarType.fail,
-              });
-              props.updateList();
-            }
-            setModalInfo(undefined);
-          }}
-        />
+        <>
+          <CloseModal
+            data={modalInfo.data}
+            price={props.price}
+            open={true}
+            onClose={(res?: boolean) => {
+              if (res !== undefined) {
+                addTransactionNotice({
+                  type: TransactionType.futures_sell,
+                  info: "",
+                  result: res ? SnackBarType.success : SnackBarType.fail,
+                });
+                props.updateList();
+              }
+              setModalInfo(undefined);
+            }}
+          />
+        </>
       );
     } else if (modalInfo && modalInfo.type === FuturesModalType.add) {
       return (

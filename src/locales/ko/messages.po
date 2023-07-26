@@ -430,10 +430,6 @@ msgstr "연락처 정보를 입력하세요"
 msgid "Entry Price"
 msgstr "진입 가격"
 
-#: src/pages/Share/Modal/WithdrawModal.tsx
-msgid "Exceed maximum withdrawal amount."
-msgstr ""
-
 #: src/pages/Account/Components/MobileList.tsx
 #: src/pages/Account/Components/MoneyTable.tsx
 msgid "Fail"
@@ -547,6 +543,10 @@ msgstr "불충분함"
 #: src/hooks/useFuturesNewOrder.ts
 msgid "Insufficient NEST balance"
 msgstr "NEST 잔액 부족"
+
+#: src/hooks/useWithDrawModal.ts
+msgid "Insufficient NEXT balance"
+msgstr ""
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 msgid "Invitee Trading Volume"
@@ -1020,6 +1020,10 @@ msgstr "잔액은 0입니다. 거래하기 전에 \"수도꼭지\"로 이동하�
 msgid "The maximum amount allowed for a single deposit is"
 msgstr ""
 
+#: src/hooks/useWithDrawModal.ts
+msgid "The minimum withdrawal amount  greater than 15NEST"
+msgstr ""
+
 #: src/pages/Share/Modal/StopTransactionModal.tsx
 msgid "The NESTfi Team"
 msgstr "NESTfi 팀 드림"
@@ -1068,6 +1072,10 @@ msgstr "오늘의 손익"
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 msgid "Today\\'s PNL"
 msgstr "오늘의 손익"
+
+#: src/pages/Share/Modal/WithdrawModal.tsx
+msgid "Total"
+msgstr ""
 
 #: src/pages/Home/Home.tsx
 #: src/pages/Home/Home.tsx

@@ -430,10 +430,6 @@ msgstr "Nhập thông tin liên hệ của bạn"
 msgid "Entry Price"
 msgstr "Giá vào lệnh "
 
-#: src/pages/Share/Modal/WithdrawModal.tsx
-msgid "Exceed maximum withdrawal amount."
-msgstr ""
-
 #: src/pages/Account/Components/MobileList.tsx
 #: src/pages/Account/Components/MoneyTable.tsx
 msgid "Fail"
@@ -547,6 +543,10 @@ msgstr "Không đủ"
 #: src/hooks/useFuturesNewOrder.ts
 msgid "Insufficient NEST balance"
 msgstr "Số dư NEST không đủ"
+
+#: src/hooks/useWithDrawModal.ts
+msgid "Insufficient NEXT balance"
+msgstr ""
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 msgid "Invitee Trading Volume"
@@ -1022,6 +1022,10 @@ msgstr "Số dư là 0. Bạn có thể đến \"Faucet\" để nhận token th�
 msgid "The maximum amount allowed for a single deposit is"
 msgstr ""
 
+#: src/hooks/useWithDrawModal.ts
+msgid "The minimum withdrawal amount  greater than 15NEST"
+msgstr ""
+
 #: src/pages/Share/Modal/StopTransactionModal.tsx
 msgid "The NESTfi Team"
 msgstr "Nhóm NESTfi"
@@ -1070,6 +1074,10 @@ msgstr "PNL hôm nay"
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 msgid "Today\\'s PNL"
 msgstr "PNL\\ hôm nay"
+
+#: src/pages/Share/Modal/WithdrawModal.tsx
+msgid "Total"
+msgstr ""
 
 #: src/pages/Home/Home.tsx
 #: src/pages/Home/Home.tsx

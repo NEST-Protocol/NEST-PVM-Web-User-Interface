@@ -56,9 +56,17 @@ function useWithDrawModal(onClose: (res?: boolean) => void) {
     return false;
   }, [tokenAmount, tokenBalance]);
   const isError = useMemo(() => {
-    return checkBalance ?? false;
-  }, [checkBalance]);
-
+    return checkBalance || parseFloat(tokenAmount) <= 15;
+  }, [checkBalance, tokenAmount]);
+  const errorLabel = useMemo(() => {
+    if (checkBalance) {
+      return t`Insufficient NEXT balance`;
+    }
+    if (parseFloat(tokenAmount) <= 15) {
+      return t`The minimum withdrawal amount  greater than 15NEST`;
+    }
+    return "";
+  }, [checkBalance, tokenAmount]);
   /**
    * show
    */
@@ -73,6 +81,15 @@ function useWithDrawModal(onClose: (res?: boolean) => void) {
       return String().placeHolder;
     }
   }, [account.address, tokenBalance]);
+
+  const showTotal = useMemo(() => {
+    const total = parseFloat(tokenAmount) - 15;
+    if (total > 0) {
+      return total.floor(2);
+    } else {
+      return "0";
+    }
+  }, [tokenAmount]);
 
   const withdraw = useCallback(async () => {
     if (chainsData.chainId && account.address && signature) {
@@ -124,7 +141,7 @@ function useWithDrawModal(onClose: (res?: boolean) => void) {
   const mainButtonDis = useMemo(() => {
     if (
       !account.address ||
-      parseFloat(tokenAmount) === 0 ||
+      parseFloat(tokenAmount) <= 15 ||
       tokenAmount === ""
     ) {
       return true;
@@ -160,6 +177,8 @@ function useWithDrawModal(onClose: (res?: boolean) => void) {
     mainButtonLoading,
     mainButtonDis,
     mainButtonAction,
+    showTotal,
+    errorLabel,
   };
 }
 
