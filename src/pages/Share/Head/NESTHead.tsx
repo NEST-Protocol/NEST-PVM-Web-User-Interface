@@ -338,7 +338,7 @@ const NESTHead: FC = () => {
       >
         {!isBigMobile ? dashboard() : <></>}
         <NetMenu />
-        <ConnectButton />
+        <ConnectButton signCallBack={() => setOpenSignModal(true)} />
         <Stack
           direction={"row"}
           spacing={"16px"}

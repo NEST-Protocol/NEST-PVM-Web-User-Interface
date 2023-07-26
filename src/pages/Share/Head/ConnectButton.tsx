@@ -41,6 +41,9 @@ const AddressStack = styled(Stack)(({ theme }) => ({
     width: 20,
     height: 20,
   },
+  "& svg.warning path": {
+    fill: theme.normal.primary,
+  },
 }));
 
 const IconBox = styled(Box)(({ theme }) => ({
@@ -79,8 +82,12 @@ const AccountListStack = styled(Stack)(({ theme }) => ({
   },
 }));
 
-const ConnectButton: FC = () => {
-  const { account, setShowConnect, checkSigned } = useNEST();
+interface ConnectButtonProps {
+  signCallBack: () => void;
+}
+
+const ConnectButton: FC<ConnectButtonProps> = ({ ...props }) => {
+  const { account, setShowConnect, checkSigned, disconnect } = useNEST();
   const [openModal, setOpenModal] = useState(false);
   const walletIcon = useWalletIcon();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -113,11 +120,11 @@ const ConnectButton: FC = () => {
         <MainButton
           title={t`Sign message`}
           style={{ height: "24px", borderRadius: "4px", fontSize: "10px" }}
-          onClick={() => {}}
+          onClick={props.signCallBack}
         />
       </Stack>
     );
-  }, []);
+  }, [props.signCallBack]);
 
   return (
     <div>
@@ -229,6 +236,9 @@ const ConnectButton: FC = () => {
                 spacing={"8px"}
                 justifyContent={"flex-start"}
                 alignItems={"center"}
+                onClick={() => {
+                  disconnect.disconnect();
+                }}
               >
                 <IconBox className="AccountListIconBox">
                   <AccountOut />

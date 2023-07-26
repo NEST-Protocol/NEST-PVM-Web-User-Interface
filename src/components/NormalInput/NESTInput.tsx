@@ -134,7 +134,7 @@ const NESTInput: FC<NESTInputProps> = ({ ...props }) => {
           </LinkButton>
         </Stack>
       </Stack>
-      {props.showToSwap ? (
+      {props.showToSwap && account.address ? (
         <Stack
           direction={"row"}
           spacing={"4px"}
