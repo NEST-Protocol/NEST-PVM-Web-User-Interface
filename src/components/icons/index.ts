@@ -70,3 +70,6 @@ export { ReactComponent as HomeTradingVolume } from "./svg/home_trading_volume.s
 export { ReactComponent as ScrollIcon } from "./svg/scrollIcon.svg";
 export { ReactComponent as Deposit } from "./svg/deposit.svg";
 export { ReactComponent as Withdraw } from "./svg/withdraw.svg";
+export { ReactComponent as AccountIcon } from "./svg/AccountIcon.svg";
+export { ReactComponent as AccountDashboard } from "./svg/AccountDashboard.svg";
+export { ReactComponent as AccountOut } from "./svg/AccountOut.svg";
