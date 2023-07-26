@@ -190,7 +190,7 @@ const ConnectButton: FC = () => {
                     </AccountListStack>
                   </Link>
 
-                  <AccountListStack
+                  {/* <AccountListStack
                     direction={"row"}
                     spacing={"8px"}
                     justifyContent={"flex-start"}
@@ -202,7 +202,7 @@ const ConnectButton: FC = () => {
                     <Box>
                       <Trans>Dashboard</Trans>
                     </Box>
-                  </AccountListStack>
+                  </AccountListStack> */}
                 </>
               ) : (
                 <>{signView}</>

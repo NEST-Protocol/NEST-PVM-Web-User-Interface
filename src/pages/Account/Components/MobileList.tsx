@@ -40,7 +40,7 @@ const MobileList: FC<MobileListProps> = ({ ...props }) => {
   const state = useMemo(() => {
     if (props.data.status === -1) {
       return t`Fail`;
-    } else if (props.data.status === 0) {
+    } else if (props.data.status === 0 || props.data.status === 255) {
       return t`Pending`;
     } else if (props.data.status === 1) {
       return t`Success`;
@@ -139,7 +139,7 @@ const MobileList: FC<MobileListProps> = ({ ...props }) => {
               const color =
                 props.data.status === -1
                   ? theme.normal.danger
-                  : props.data.status === 0
+                  : props.data.status === 0 || props.data.status === 255
                   ? theme.normal.primary
                   : theme.normal.success;
               return {

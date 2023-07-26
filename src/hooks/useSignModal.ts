@@ -26,7 +26,7 @@ function useSignModal() {
           content: BASE_SIGN_CONTENT,
           signature: signature,
         };
-        const loginBase: { [key: string]: string } = await serviceLogin(
+        const loginBase: { [key: string]: any } = await serviceLogin(
           chainsData.chainId,
           account.address,
           remember,
@@ -36,7 +36,8 @@ function useSignModal() {
           const signatureData: signatureData = {
             address: account.address,
             chainId: chainsData.chainId,
-            signature: loginBase["value"],
+            signature: loginBase["value"]["token"],
+            expirationTime: loginBase["value"]["expirationTime"],
           };
           setSignature(signatureData);
           if (remember) {
@@ -46,9 +47,13 @@ function useSignModal() {
                   account.address?.toLocaleLowerCase() &&
                 item["chainId"] === chainsData.chainId
             );
-            if (same.length === 0) {
+            if (same.length > 0) {
+              const itemIndex = signsData.indexOf(same[0]);
+              const newSignsData = [...signsData];
+              newSignsData[itemIndex] = signatureData;
+              localStorage.setItem(`signature`, JSON.stringify(newSignsData));
+            } else {
               const newSignsData = [...signsData, signatureData];
-
               localStorage.setItem(`signature`, JSON.stringify(newSignsData));
             }
           }

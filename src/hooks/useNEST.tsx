@@ -13,6 +13,7 @@ export interface signatureData {
   address: string;
   chainId: number;
   signature: string;
+  expirationTime: number;
 }
 
 function useMainReact() {
@@ -117,7 +118,12 @@ function useMainReact() {
         item["chainId"] === chainsData.chainId
     );
     if (same.length > 0) {
-      return same[0];
+      const timestamp = Date.now();
+      if (same[0].expirationTime > (timestamp / 1000)) {
+        return same[0];
+      } else {
+        return undefined;
+      }
     }
     return;
   }, [account.address, chainsData.chainId]);
@@ -129,7 +135,7 @@ function useMainReact() {
     setSignature(defaultSignature);
   }, [defaultSignature]);
   const checkSigned = useMemo(() => {
-    console.log(signature)
+    console.log(signature);
     if (signature) {
       return true;
     } else {

@@ -18,14 +18,14 @@ interface DepositModalPrice {
   NEST: BigNumber;
 }
 
-function useDepositModal(onCLose: () => void) {
+function useDepositModal(onClose: () => void) {
   const { isPendingType } = usePendingTransactions();
   const { chainsData, account } = useNEST();
   const [tokenAmount, setTokenAmount] = useState<string>("");
   const [selectToken, setSelectToken] = useState<string>("NEST");
   const [selectButton, setSelectButton] = useState<number>();
   const [basePrice, setBasePrice] = useState<DepositModalPrice>();
-
+  const [send, setSend] = useState(false);
   const MAX_Amount: {
     [key: string]: number;
   } = useMemo(() => {
@@ -176,15 +176,9 @@ function useDepositModal(onCLose: () => void) {
     (nowToken ?? String().zeroAddress) as `0x${string}`,
     tokenAmount.stringToBigNumber(18) ?? BigNumber.from("0")
   );
-  const { sendTransaction, isLoading, isSuccess } = useTransferValue(
+  const { sendTransaction, isLoading } = useTransferValue(
     tokenAmount.stringToBigNumber(18) ?? BigNumber.from("0")
   );
-
-  useEffect(() => {
-    if (tokenTransfer.isSuccess || isSuccess) {
-      onCLose();
-    }
-  }, [isSuccess, onCLose, tokenTransfer.isSuccess]);
 
   /**
    * main button
@@ -192,6 +186,14 @@ function useDepositModal(onCLose: () => void) {
   const pending = useMemo(() => {
     return isPendingType(TransactionType.deposit);
   }, [isPendingType]);
+  useEffect(() => {
+    if (send && !pending) {
+      onClose();
+    } else if (!send && pending) {
+      setSend(true);
+    }
+  }, [onClose, pending, send]);
+
   const mainButtonTitle = useMemo(() => {
     return t`Deposit`;
   }, []);

@@ -18,6 +18,11 @@ import useAccount from "../../hooks/useAccount";
 import DepositModal from "../Share/Modal/DepositModal";
 import WithDrawModal from "../Share/Modal/WithdrawModal";
 import { NoOrderMobile } from "../Futures/OrderList";
+import {
+  TransactionType,
+  usePendingTransactionsBase,
+} from "../../hooks/useTransactionReceipt";
+import { SnackBarType } from "../../components/SnackBar/NormalSnackBar";
 
 const Account: FC = () => {
   const { isBigMobile } = useWindowWidth();
@@ -25,6 +30,7 @@ const Account: FC = () => {
   const { account } = useNEST();
   const { messageSnackBar } = useNESTSnackBar();
   const [tabsValue, setTabsValue] = useState(0);
+  const { addTransactionNotice } = usePendingTransactionsBase();
   const {
     showDeposit,
     setShowDeposit,
@@ -33,6 +39,7 @@ const Account: FC = () => {
     showBalance,
     moneyList,
     historyList,
+    getAssetsList,
   } = useAccount();
 
   const NESTIcon = useMemo(() => {
@@ -117,7 +124,17 @@ const Account: FC = () => {
       <DepositModal open={showDeposit} onClose={() => setShowDeposit(false)} />
       <WithDrawModal
         open={showWithdraw}
-        onClose={() => setShowWithdraw(false)}
+        onClose={(res?: boolean) => {
+          if (res !== undefined) {
+            addTransactionNotice({
+              type: TransactionType.withdraw,
+              info: "",
+              result: res ? SnackBarType.success : SnackBarType.fail,
+            });
+            getAssetsList();
+          }
+          setShowWithdraw(false);
+        }}
       />
       <Stack
         direction={"row"}

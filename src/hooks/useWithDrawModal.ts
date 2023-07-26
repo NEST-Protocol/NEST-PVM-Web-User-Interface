@@ -10,7 +10,7 @@ import {
 } from "./useTransactionReceipt";
 import { SnackBarType } from "../components/SnackBar/NormalSnackBar";
 
-function useWithDrawModal(onClose: () => void) {
+function useWithDrawModal(onClose: (res?: boolean) => void) {
   const [tokenAmount, setTokenAmount] = useState<string>("");
   const [selectButton, setSelectButton] = useState<number>();
   const { chainsData, account, signature } = useNEST();
@@ -94,6 +94,7 @@ function useWithDrawModal(onClose: () => void) {
         if (Number(withDrawBase["errorCode"]) === 0) {
           getBalance();
         }
+        onClose(Number(withDrawBase["errorCode"]) === 0);
       }
     }
     setLoading(false);
@@ -102,6 +103,7 @@ function useWithDrawModal(onClose: () => void) {
     addTransactionNotice,
     chainsData.chainId,
     getBalance,
+    onClose,
     signature,
     tokenAmount,
   ]);

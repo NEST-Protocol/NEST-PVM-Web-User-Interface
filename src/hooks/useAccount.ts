@@ -103,11 +103,15 @@ function useAccount() {
 
   useEffect(() => {
     getAssetsList();
-  }, [getAssetsList]);
-
-  useEffect(() => {
     getTransactionList();
-  }, [getTransactionList]);
+    const time = setInterval(() => {
+      getAssetsList();
+      getTransactionList();
+    }, 20 * 1000);
+    return () => {
+      clearInterval(time);
+    };
+  }, [getAssetsList, getTransactionList]);
 
   return {
     showDeposit,
@@ -117,6 +121,7 @@ function useAccount() {
     showBalance,
     moneyList,
     historyList,
+    getAssetsList,
   };
 }
 

@@ -56,7 +56,7 @@ const MoneyTableRow: FC<MoneyTableRowProps> = ({ ...props }) => {
   const state = useMemo(() => {
     if (props.state === -1) {
       return t`Fail`;
-    } else if (props.state === 0) {
+    } else if (props.state === 0 || props.state === 255) {
       return t`Pending`;
     } else if (props.state === 1) {
       return t`Success`;
@@ -120,7 +120,7 @@ const MoneyTableRow: FC<MoneyTableRowProps> = ({ ...props }) => {
               const color =
                 props.state === -1
                   ? theme.normal.danger
-                  : props.state === 0
+                  : props.state === 0 || props.state === 255
                   ? theme.normal.primary
                   : theme.normal.success;
               return {

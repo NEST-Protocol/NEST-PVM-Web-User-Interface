@@ -14,7 +14,7 @@ import TokenAmountButtons from "./TokenAmountButtons";
 import useWithDrawModal from "../../../hooks/useWithDrawModal";
 
 interface WithDrawModalBaseProps {
-  onClose: () => void;
+  onClose: (res?: boolean) => void;
 }
 
 const WithDrawModalBase: FC<WithDrawModalBaseProps> = ({ ...props }) => {
@@ -110,7 +110,7 @@ const WithDrawModalBase: FC<WithDrawModalBaseProps> = ({ ...props }) => {
 
 interface WithDrawModalProps {
   open: boolean;
-  onClose: () => void;
+  onClose: (res?: boolean) => void;
 }
 
 const WithDrawModal: FC<WithDrawModalProps> = ({ ...props }) => {
@@ -120,25 +120,39 @@ const WithDrawModal: FC<WithDrawModalProps> = ({ ...props }) => {
       <Drawer
         anchor={"bottom"}
         open={props.open}
-        onClose={props.onClose}
+        onClose={() => {
+          props.onClose(undefined);
+        }}
         sx={{
           "& .MuiPaper-root": { background: "none", backgroundImage: "none" },
         }}
         keepMounted
       >
-        <BaseDrawer title={t`Withdraw`} onClose={props.onClose}>
+        <BaseDrawer
+          title={t`Withdraw`}
+          onClose={() => {
+            props.onClose(undefined);
+          }}
+        >
           <WithDrawModalBase onClose={props.onClose} />
         </BaseDrawer>
       </Drawer>
     ) : (
       <Modal
         open={props.open}
-        onClose={() => props.onClose()}
+        onClose={() => {
+          props.onClose(undefined);
+        }}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
         <Box>
-          <BaseModal title={t`Withdraw`} onClose={props.onClose}>
+          <BaseModal
+            title={t`Withdraw`}
+            onClose={() => {
+              props.onClose(undefined);
+            }}
+          >
             <WithDrawModalBase onClose={props.onClose} />
           </BaseModal>
         </Box>
