@@ -9,10 +9,7 @@ import ExchangeTVChart from "./ExchangeTVChart";
 import { getPriceList, serviceList } from "../../lib/NESTRequest";
 // import FuturesNotice from "./Components/FuturesNotice";
 import { getQueryVariable } from "../../lib/queryVaribale";
-import Modal from "@mui/material/Modal";
-import Box from "@mui/material/Box";
 import FuturesNotice from "./Components/FuturesNotice";
-import ChangeNewTokenModal from "../Share/Modal/ChangeNewTokenModal";
 import useNEST from "../../hooks/useNEST";
 
 export interface FuturesPrice {
@@ -45,18 +42,6 @@ const Futures: FC = () => {
     Array<FuturesOrderService>
   >([]);
   const [showNotice, setShowNotice] = useState<boolean>(true);
-
-  const openChangeModalDefault = useMemo(() => {
-    if (account) {
-      const isShow = localStorage.getItem("ChangeToken");
-      return isShow !== "1";
-    } else {
-      return false;
-    }
-  }, [account]);
-  const [openChangeModal, setOpenChangeModal] = useState(
-    openChangeModalDefault
-  );
 
   const getPrice = useCallback(async () => {
     const listPriceBase: { [key: string]: any } = await getPriceList();
@@ -304,26 +289,7 @@ const Futures: FC = () => {
     isBigMobile,
   ]);
 
-  return (
-    <>
-      <Modal
-        open={openChangeModal}
-        onClose={() => setOpenChangeModal(false)}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box>
-          <ChangeNewTokenModal
-            onClose={() => {
-              setOpenChangeModal(false);
-            }}
-          />
-        </Box>
-      </Modal>
-
-      {mainView}
-    </>
-  );
+  return <>{mainView}</>;
 };
 
 export default Futures;

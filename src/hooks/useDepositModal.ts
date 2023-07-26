@@ -26,11 +26,7 @@ function useDepositModal(onClose: () => void) {
   const [selectButton, setSelectButton] = useState<number>();
   const [basePrice, setBasePrice] = useState<DepositModalPrice>();
   const [send, setSend] = useState(false);
-  const MAX_Amount: {
-    [key: string]: number;
-  } = useMemo(() => {
-    return { USDT: 10000, BNB: 10000 };
-  }, []);
+
   const nowToken = useMemo(() => {
     const token = selectToken.getToken();
     if (chainsData.chainId && token) {
@@ -149,11 +145,19 @@ function useDepositModal(onClose: () => void) {
   /**
    * check
    */
+  const MAX_Amount: {
+    [key: string]: number;
+  } = useMemo(() => {
+    const maxUSDT = 10000;
+    const NESTPrice = basePrice?.NEST.bigNumberToShowPrice(18, 5);
+    const maxNEST = 10000 / parseFloat(NESTPrice ?? "1");
+    const BNBPrice = basePrice?.BNB.bigNumberToShowPrice(18, 5);
+    const maxBNB = 10000 / parseFloat(BNBPrice ?? "1");
+    return { USDT: maxUSDT, NEST: maxNEST, BNB: maxBNB };
+  }, [basePrice?.BNB, basePrice?.NEST]);
   const checkMax = useMemo(() => {
-    if (selectToken !== "NEST") {
-      if (parseFloat(tokenAmount) > MAX_Amount[selectToken]) {
-        return true;
-      }
+    if (parseFloat(tokenAmount) > MAX_Amount[selectToken]) {
+      return true;
     }
     return false;
   }, [MAX_Amount, selectToken, tokenAmount]);
