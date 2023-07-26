@@ -48,7 +48,10 @@ const MobileList: FC<MobileListProps> = ({ ...props }) => {
       return "";
     }
   }, [props.data.status]);
-  const time = new Date(props.data.time * 1000);
+  const time =
+    props.data.status === 0 || props.data.status === 255
+      ? new Date((props.data.applyTime ?? 0) * 1000)
+      : new Date(props.data.time * 1000);
   const hash = props.data.hash
     ? props.data.hash.hashToChainScan(props.data.chainId)
     : "";

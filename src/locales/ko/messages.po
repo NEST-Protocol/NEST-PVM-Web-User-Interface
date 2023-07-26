@@ -137,6 +137,10 @@ msgstr "NEST Fi 사용 초보자 가이드"
 msgid "about connecting wallets"
 msgstr "지갑 연결 정보"
 
+#: src/pages/Share/Head/ConnectButton.tsx
+msgid "Account"
+msgstr ""
+
 #: src/pages/Account/Components/TransactionTable.tsx
 msgid "Action"
 msgstr ""
@@ -383,6 +387,7 @@ msgstr "디플레이션 경제 모델. 더 많은 사용자가 거래할수록 �
 msgid "Deposit"
 msgstr ""
 
+#: src/pages/Share/Head/ConnectButton.tsx
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "Disconnect"
 msgstr "연결 해제"
@@ -597,11 +602,6 @@ msgstr "레버리지"
 #: src/pages/Futures/NewOrder.tsx
 msgid "Limit"
 msgstr "지정가"
-
-#: src/hooks/useFuturesNewOrder.ts
-#: src/hooks/useFuturesNewOrder.ts
-msgid "Limit order fee = 15 NEST"
-msgstr "지정가 주문 수수료 = 15 NEST"
 
 #: src/pages/Futures/Modal/EditLimitModal.tsx
 #: src/pages/Futures/Modal/EditLimitModal.tsx
@@ -828,10 +828,6 @@ msgstr "포지션"
 msgid "Position fee = Position * 0.05%"
 msgstr "포지션 수수료 = 포지션 * 0.05%"
 
-#: src/hooks/useFuturesEditPosition.ts
-msgid "Position fee =Position*0.05%"
-msgstr "포지션 수수료 = 포지션 * 0.05%"
-
 #: src/hooks/useFuturesClose.ts
 msgid "Position*0.05%"
 msgstr "포지션 * 0.05%"
@@ -884,7 +880,6 @@ msgid "Sell position"
 msgstr "포지션 매도"
 
 #: src/pages/Futures/Modal/CloseModal.tsx
-#: src/pages/Futures/Modal/EditPositionModal.tsx
 #: src/pages/Futures/NewOrder.tsx
 #: src/pages/Share/Modal/WithdrawModal.tsx
 msgid "Service Fee"
@@ -916,6 +911,7 @@ msgid "Short"
 msgstr "숏"
 
 #: src/hooks/useSignModal.ts
+#: src/pages/Share/Head/ConnectButton.tsx
 msgid "Sign message"
 msgstr ""
 
@@ -963,12 +959,6 @@ msgstr "손절매"
 #: src/pages/Futures/Components/POrderTable.tsx
 msgid "Stop Order"
 msgstr "스탑 오더"
-
-#: src/hooks/useFuturesEditPosition.ts
-#: src/hooks/useFuturesNewOrder.ts
-#: src/hooks/useFuturesNewOrder.ts
-msgid "Stop order fee(after execution) = 15 NEST"
-msgstr "스탑 오더 주문 수수료 = 15 NEST"
 
 #: src/pages/Futures/NewOrder.tsx
 msgid "Stop-Limit"
@@ -1208,6 +1198,10 @@ msgstr "사용자 가이드"
 
 #: src/pages/Share/Modal/SignModal.tsx
 msgid "Verify ownership"
+msgstr ""
+
+#: src/pages/Share/Head/ConnectButton.tsx
+msgid "Verify ownership, Confirm you are the owner of this wallet."
 msgstr ""
 
 #: src/components/SnackBar/NormalSnackBar.tsx

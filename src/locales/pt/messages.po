@@ -137,6 +137,10 @@ msgstr "Um guia para principiantes na utilização do NEST Fi"
 msgid "about connecting wallets"
 msgstr "sobre as carteiras digitais"
 
+#: src/pages/Share/Head/ConnectButton.tsx
+msgid "Account"
+msgstr ""
+
 #: src/pages/Account/Components/TransactionTable.tsx
 msgid "Action"
 msgstr ""
@@ -383,6 +387,7 @@ msgstr "Modelo económico deflacionário. Quanto mais os utilizadores negociarem
 msgid "Deposit"
 msgstr ""
 
+#: src/pages/Share/Head/ConnectButton.tsx
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "Disconnect"
 msgstr "Desligar"
@@ -597,11 +602,6 @@ msgstr "Alavancagem"
 #: src/pages/Futures/NewOrder.tsx
 msgid "Limit"
 msgstr "Limite"
-
-#: src/hooks/useFuturesNewOrder.ts
-#: src/hooks/useFuturesNewOrder.ts
-msgid "Limit order fee = 15 NEST"
-msgstr "Taxa de ordem de limite = 15 NEST"
 
 #: src/pages/Futures/Modal/EditLimitModal.tsx
 #: src/pages/Futures/Modal/EditLimitModal.tsx
@@ -828,10 +828,6 @@ msgstr "Posição"
 msgid "Position fee = Position * 0.05%"
 msgstr "Taxa de posição = Posição * 0,05%"
 
-#: src/hooks/useFuturesEditPosition.ts
-msgid "Position fee =Position*0.05%"
-msgstr "Taxa de posição = Posição * 0,05%"
-
 #: src/hooks/useFuturesClose.ts
 msgid "Position*0.05%"
 msgstr "Posição * 0,05%"
@@ -884,7 +880,6 @@ msgid "Sell position"
 msgstr "Vender posição"
 
 #: src/pages/Futures/Modal/CloseModal.tsx
-#: src/pages/Futures/Modal/EditPositionModal.tsx
 #: src/pages/Futures/NewOrder.tsx
 #: src/pages/Share/Modal/WithdrawModal.tsx
 msgid "Service Fee"
@@ -916,6 +911,7 @@ msgid "Short"
 msgstr "Curto"
 
 #: src/hooks/useSignModal.ts
+#: src/pages/Share/Head/ConnectButton.tsx
 msgid "Sign message"
 msgstr ""
 
@@ -963,12 +959,6 @@ msgstr "Stop Loss"
 #: src/pages/Futures/Components/POrderTable.tsx
 msgid "Stop Order"
 msgstr "Ordem de Stop"
-
-#: src/hooks/useFuturesEditPosition.ts
-#: src/hooks/useFuturesNewOrder.ts
-#: src/hooks/useFuturesNewOrder.ts
-msgid "Stop order fee(after execution) = 15 NEST"
-msgstr "Taxa da ordem de Stop (após execução) = 15 NEST"
 
 #: src/pages/Futures/NewOrder.tsx
 msgid "Stop-Limit"
@@ -1208,6 +1198,10 @@ msgstr "Guia do usuário"
 
 #: src/pages/Share/Modal/SignModal.tsx
 msgid "Verify ownership"
+msgstr ""
+
+#: src/pages/Share/Head/ConnectButton.tsx
+msgid "Verify ownership, Confirm you are the owner of this wallet."
 msgstr ""
 
 #: src/components/SnackBar/NormalSnackBar.tsx

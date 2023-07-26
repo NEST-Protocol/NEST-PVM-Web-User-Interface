@@ -63,12 +63,16 @@ function useWithDrawModal(onClose: (res?: boolean) => void) {
    * show
    */
   const showBalance = useMemo(() => {
-    if (tokenBalance) {
-      return tokenBalance.bigNumberToShowString(18, 2);
+    if (account.address) {
+      if (tokenBalance) {
+        return tokenBalance.bigNumberToShowString(18, 2);
+      } else {
+        return "0";
+      }
     } else {
       return String().placeHolder;
     }
-  }, [tokenBalance]);
+  }, [account.address, tokenBalance]);
 
   const withdraw = useCallback(async () => {
     if (chainsData.chainId && account.address && signature) {

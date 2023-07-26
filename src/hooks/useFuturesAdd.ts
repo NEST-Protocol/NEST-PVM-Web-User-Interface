@@ -80,8 +80,12 @@ function useFuturesAdd(
     }
   }, [account.address, tokenBalance]);
   const showBalance = useMemo(() => {
-    if (account.address && tokenBalance) {
-      return tokenBalance.bigNumberToShowString(18, 2);
+    if (account.address) {
+      if (tokenBalance) {
+        return tokenBalance.bigNumberToShowString(18, 2);
+      } else {
+        return "0";
+      }
     } else {
       return String().placeHolder;
     }

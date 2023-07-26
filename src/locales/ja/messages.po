@@ -135,6 +135,10 @@ msgstr ""
 msgid "about connecting wallets"
 msgstr "コネクティングウォレットについて"
 
+#: src/pages/Share/Head/ConnectButton.tsx
+msgid "Account"
+msgstr ""
+
 #: src/pages/Account/Components/TransactionTable.tsx
 msgid "Action"
 msgstr ""
@@ -381,6 +385,7 @@ msgstr ""
 msgid "Deposit"
 msgstr ""
 
+#: src/pages/Share/Head/ConnectButton.tsx
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "Disconnect"
 msgstr "ディスコネクト"
@@ -595,11 +600,6 @@ msgstr "レバレッジ"
 #: src/pages/Futures/NewOrder.tsx
 msgid "Limit"
 msgstr "リミット"
-
-#: src/hooks/useFuturesNewOrder.ts
-#: src/hooks/useFuturesNewOrder.ts
-msgid "Limit order fee = 15 NEST"
-msgstr "リミットオーダー手数料 = 15 NEST"
 
 #: src/pages/Futures/Modal/EditLimitModal.tsx
 #: src/pages/Futures/Modal/EditLimitModal.tsx
@@ -826,10 +826,6 @@ msgstr "ポジション"
 msgid "Position fee = Position * 0.05%"
 msgstr "ポジション料金 = ポジション * 0.05"
 
-#: src/hooks/useFuturesEditPosition.ts
-msgid "Position fee =Position*0.05%"
-msgstr "ポジション手数料 = ポジション*0.05%"
-
 #: src/hooks/useFuturesClose.ts
 msgid "Position*0.05%"
 msgstr "ポジション*0.05％"
@@ -882,7 +878,6 @@ msgid "Sell position"
 msgstr "ポジションを売る"
 
 #: src/pages/Futures/Modal/CloseModal.tsx
-#: src/pages/Futures/Modal/EditPositionModal.tsx
 #: src/pages/Futures/NewOrder.tsx
 #: src/pages/Share/Modal/WithdrawModal.tsx
 msgid "Service Fee"
@@ -914,6 +909,7 @@ msgid "Short"
 msgstr "ショート"
 
 #: src/hooks/useSignModal.ts
+#: src/pages/Share/Head/ConnectButton.tsx
 msgid "Sign message"
 msgstr ""
 
@@ -961,12 +957,6 @@ msgstr "ストップロス"
 #: src/pages/Futures/Components/POrderTable.tsx
 msgid "Stop Order"
 msgstr "ストップオーダー"
-
-#: src/hooks/useFuturesEditPosition.ts
-#: src/hooks/useFuturesNewOrder.ts
-#: src/hooks/useFuturesNewOrder.ts
-msgid "Stop order fee(after execution) = 15 NEST"
-msgstr "ストップオーダー手数料(執行後) = 15 NEST"
 
 #: src/pages/Futures/NewOrder.tsx
 msgid "Stop-Limit"
@@ -1206,6 +1196,10 @@ msgstr "ユーザーガイド"
 
 #: src/pages/Share/Modal/SignModal.tsx
 msgid "Verify ownership"
+msgstr ""
+
+#: src/pages/Share/Head/ConnectButton.tsx
+msgid "Verify ownership, Confirm you are the owner of this wallet."
 msgstr ""
 
 #: src/components/SnackBar/NormalSnackBar.tsx

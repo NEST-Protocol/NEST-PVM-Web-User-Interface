@@ -8,6 +8,7 @@ export interface AccountListData {
   text: string;
   time: number;
   status: number;
+  applyTime?: number;
   chainId?: number;
   hash?: string;
   ordertype?: string;
@@ -38,6 +39,7 @@ function useAccount() {
           const one: AccountListData = {
             text: `${Number(item["amount"]).floor(2)} ${item["token"]}`,
             time: item["timestamp"],
+            applyTime: item["applyTime"],
             status: item["status"],
             chainId: item["chainId"],
             hash: item["hash"],
@@ -81,8 +83,12 @@ function useAccount() {
   }, [service_balance]);
 
   const showBalance = useMemo(() => {
-    if (account.address && tokenBalance) {
-      return tokenBalance.floor(2);
+    if (account.address) {
+      if (tokenBalance) {
+        return tokenBalance.floor(2);
+      } else {
+        return "0";
+      }
     } else {
       return String().placeHolder;
     }

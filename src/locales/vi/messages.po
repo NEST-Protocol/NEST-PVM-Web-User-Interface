@@ -137,6 +137,10 @@ msgstr "Hướng dẫn sử dụng NESTFi cho người mới"
 msgid "about connecting wallets"
 msgstr "về việc kết nối ví"
 
+#: src/pages/Share/Head/ConnectButton.tsx
+msgid "Account"
+msgstr ""
+
 #: src/pages/Account/Components/TransactionTable.tsx
 msgid "Action"
 msgstr ""
@@ -383,6 +387,7 @@ msgstr "Mô hình kinh tế giảm phát. Khi càng nhiều người dùng giao 
 msgid "Deposit"
 msgstr ""
 
+#: src/pages/Share/Head/ConnectButton.tsx
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "Disconnect"
 msgstr "Ngắt kết nối"
@@ -599,11 +604,6 @@ msgstr "Đòn bẩy"
 #: src/pages/Futures/NewOrder.tsx
 msgid "Limit"
 msgstr "Giới hạn"
-
-#: src/hooks/useFuturesNewOrder.ts
-#: src/hooks/useFuturesNewOrder.ts
-msgid "Limit order fee = 15 NEST"
-msgstr "Phí đặt lệnh giới hạn = 15 NEST"
 
 #: src/pages/Futures/Modal/EditLimitModal.tsx
 #: src/pages/Futures/Modal/EditLimitModal.tsx
@@ -830,10 +830,6 @@ msgstr "Vị thế"
 msgid "Position fee = Position * 0.05%"
 msgstr "Phí vị thế = Vị thế * 0,05%"
 
-#: src/hooks/useFuturesEditPosition.ts
-msgid "Position fee =Position*0.05%"
-msgstr "Phí vị thế = Vị thế * 0,05%"
-
 #: src/hooks/useFuturesClose.ts
 msgid "Position*0.05%"
 msgstr "Vị thế * 0,05%"
@@ -886,7 +882,6 @@ msgid "Sell position"
 msgstr "Vị thế bán"
 
 #: src/pages/Futures/Modal/CloseModal.tsx
-#: src/pages/Futures/Modal/EditPositionModal.tsx
 #: src/pages/Futures/NewOrder.tsx
 #: src/pages/Share/Modal/WithdrawModal.tsx
 msgid "Service Fee"
@@ -918,6 +913,7 @@ msgid "Short"
 msgstr "Bán"
 
 #: src/hooks/useSignModal.ts
+#: src/pages/Share/Head/ConnectButton.tsx
 msgid "Sign message"
 msgstr ""
 
@@ -965,12 +961,6 @@ msgstr "Dừng lỗ"
 #: src/pages/Futures/Components/POrderTable.tsx
 msgid "Stop Order"
 msgstr "Lệnh dừng"
-
-#: src/hooks/useFuturesEditPosition.ts
-#: src/hooks/useFuturesNewOrder.ts
-#: src/hooks/useFuturesNewOrder.ts
-msgid "Stop order fee(after execution) = 15 NEST"
-msgstr "Phí lệnh dừng (sau khi thực hiện) = 15 NEST"
 
 #: src/pages/Futures/NewOrder.tsx
 msgid "Stop-Limit"
@@ -1210,6 +1200,10 @@ msgstr "Hướng dẫn sử dụng"
 
 #: src/pages/Share/Modal/SignModal.tsx
 msgid "Verify ownership"
+msgstr ""
+
+#: src/pages/Share/Head/ConnectButton.tsx
+msgid "Verify ownership, Confirm you are the owner of this wallet."
 msgstr ""
 
 #: src/components/SnackBar/NormalSnackBar.tsx

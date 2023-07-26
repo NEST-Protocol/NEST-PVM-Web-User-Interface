@@ -191,7 +191,7 @@ function useFuturesNewOrder(
 
   const open = useCallback(async () => {
     if (chainsData.chainId && account.address && basePrice && signature) {
-      console.log("进来一次")
+      console.log("进来一次");
       const orderPrice = basePrice.bigNumberToShowString(18, 5);
       const openBase: { [key: string]: any } = await serviceOpen(
         chainsData.chainId,
@@ -443,8 +443,12 @@ function useFuturesNewOrder(
    * show
    */
   const showBalance = useMemo(() => {
-    if (account.address && tokenBalance) {
-      return tokenBalance.bigNumberToShowString(18, 2);
+    if (account.address) {
+      if (tokenBalance) {
+        return tokenBalance.bigNumberToShowString(18, 2);
+      } else {
+        return "0"
+      }
     } else {
       return String().placeHolder;
     }
@@ -484,11 +488,11 @@ function useFuturesNewOrder(
     if (tabsValue === 0 && !isStop) {
       return [t`Position fee = Position * 0.05%`];
     } else if (tabsValue === 1 && !isStop) {
-      return [t`Position fee = Position * 0.05%`, t`Limit order fee = 15 NEST`];
+      return [t`Position fee = Position * 0.05%`];
     } else if (tabsValue === 0 && isStop) {
       return [t`Position fee = Position * 0.05%`];
     } else {
-      return [t`Position fee = Position * 0.05%`, t`Limit order fee = 15 NEST`];
+      return [t`Position fee = Position * 0.05%`];
     }
   }, [isStop, tabsValue]);
   const showPositions = useMemo(() => {

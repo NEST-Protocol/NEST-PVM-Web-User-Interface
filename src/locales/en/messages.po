@@ -137,6 +137,10 @@ msgstr "A beginner's guide to using NESTFi"
 msgid "about connecting wallets"
 msgstr "about connecting wallets"
 
+#: src/pages/Share/Head/ConnectButton.tsx
+msgid "Account"
+msgstr "Account"
+
 #: src/pages/Account/Components/TransactionTable.tsx
 msgid "Action"
 msgstr "Action"
@@ -383,6 +387,7 @@ msgstr "Deflationary economic model. The more users trade, the more $NEST will b
 msgid "Deposit"
 msgstr "Deposit"
 
+#: src/pages/Share/Head/ConnectButton.tsx
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "Disconnect"
 msgstr "Disconnect"
@@ -599,11 +604,6 @@ msgstr "Leverage"
 #: src/pages/Futures/NewOrder.tsx
 msgid "Limit"
 msgstr "Limit"
-
-#: src/hooks/useFuturesNewOrder.ts
-#: src/hooks/useFuturesNewOrder.ts
-msgid "Limit order fee = 15 NEST"
-msgstr "Limit order fee = 15 NEST"
 
 #: src/pages/Futures/Modal/EditLimitModal.tsx
 #: src/pages/Futures/Modal/EditLimitModal.tsx
@@ -830,10 +830,6 @@ msgstr "Position"
 msgid "Position fee = Position * 0.05%"
 msgstr "Position fee = Position * 0.05%"
 
-#: src/hooks/useFuturesEditPosition.ts
-msgid "Position fee =Position*0.05%"
-msgstr "Position fee =Position*0.05%"
-
 #: src/hooks/useFuturesClose.ts
 msgid "Position*0.05%"
 msgstr "Position*0.05%"
@@ -886,7 +882,6 @@ msgid "Sell position"
 msgstr "Sell position"
 
 #: src/pages/Futures/Modal/CloseModal.tsx
-#: src/pages/Futures/Modal/EditPositionModal.tsx
 #: src/pages/Futures/NewOrder.tsx
 #: src/pages/Share/Modal/WithdrawModal.tsx
 msgid "Service Fee"
@@ -918,6 +913,7 @@ msgid "Short"
 msgstr "Short"
 
 #: src/hooks/useSignModal.ts
+#: src/pages/Share/Head/ConnectButton.tsx
 msgid "Sign message"
 msgstr "Sign message"
 
@@ -965,12 +961,6 @@ msgstr "Stop Loss"
 #: src/pages/Futures/Components/POrderTable.tsx
 msgid "Stop Order"
 msgstr "Stop Order"
-
-#: src/hooks/useFuturesEditPosition.ts
-#: src/hooks/useFuturesNewOrder.ts
-#: src/hooks/useFuturesNewOrder.ts
-msgid "Stop order fee(after execution) = 15 NEST"
-msgstr "Stop order fee(after execution) = 15 NEST"
 
 #: src/pages/Futures/NewOrder.tsx
 msgid "Stop-Limit"
@@ -1211,6 +1201,10 @@ msgstr "User Guide"
 #: src/pages/Share/Modal/SignModal.tsx
 msgid "Verify ownership"
 msgstr "Verify ownership"
+
+#: src/pages/Share/Head/ConnectButton.tsx
+msgid "Verify ownership, Confirm you are the owner of this wallet."
+msgstr "Verify ownership, Confirm you are the owner of this wallet."
 
 #: src/components/SnackBar/NormalSnackBar.tsx
 msgid "View"

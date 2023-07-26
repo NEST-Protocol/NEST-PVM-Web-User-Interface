@@ -152,13 +152,16 @@ const ConnectButton: FC = () => {
             {walletIcon}
             <p>{account.address?.toString().showAddress()}</p>
             <Box
-              sx={() => ({
+              sx={(theme) => ({
                 width: "8px",
                 height: "8px",
                 "& svg": {
                   display: "block",
                   width: "8px",
                   height: "8px",
+                  "& path": {
+                    fill: theme.normal.text2,
+                  },
                 },
               })}
             >
@@ -170,8 +173,11 @@ const ConnectButton: FC = () => {
             anchorEl={anchorEl}
             open={open}
             onClose={handleClose}
+            sx={{
+              maxWidth: "160px",
+            }}
           >
-            <Stack spacing={"12px"} maxWidth={"160px"}>
+            <Stack spacing={"12px"}>
               {checkSigned ? (
                 <>
                   <Link to={"/account"}>
@@ -207,14 +213,17 @@ const ConnectButton: FC = () => {
               ) : (
                 <>{signView}</>
               )}
-              <Divider
-                orientation="horizontal"
-                sx={(theme) => ({
-                  borderColor: theme.normal.border,
-                  height: "1px",
-                  width: "100%",
-                })}
-              />
+              <Stack paddingX={"16px"} width={"100%"}>
+                <Divider
+                  orientation="horizontal"
+                  sx={(theme) => ({
+                    borderColor: theme.normal.border,
+                    height: "1px",
+                    width: "100%",
+                  })}
+                />
+              </Stack>
+
               <AccountListStack
                 direction={"row"}
                 spacing={"8px"}
