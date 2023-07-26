@@ -133,7 +133,7 @@ function useMainReact() {
 
   useEffect(() => {
     setSignature(defaultSignature);
-  }, [defaultSignature]);
+  }, [defaultSignature, account.address]);
   const checkSigned = useMemo(() => {
     console.log(signature);
     if (signature) {

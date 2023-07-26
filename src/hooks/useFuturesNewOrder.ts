@@ -118,10 +118,9 @@ function useFuturesNewOrder(
    */
   const allValue = useCallback(
     (value: BigNumber) => {
-      const top = BigNumber.from("1000").mul(value);
-      const bottom = (lever + 1000) * 1;
-      const nestNum = top.div(BigNumber.from(bottom.toString()));
-      return nestNum.sub("0.1".stringToBigNumber(18)!);
+      return value
+        .mul(BigNumber.from("10000"))
+        .div(BigNumber.from(`${10000 + lever * 5}`));
     },
     [lever]
   );
@@ -192,7 +191,6 @@ function useFuturesNewOrder(
 
   const open = useCallback(async () => {
     if (chainsData.chainId && account.address && basePrice && signature) {
-      console.log("进来一次");
       const orderPrice = basePrice.bigNumberToShowString(18, 5);
       const openBase: { [key: string]: any } = await serviceOpen(
         chainsData.chainId,
@@ -515,21 +513,12 @@ function useFuturesNewOrder(
   }, [checkBalance, checkMinNEST]);
 
   const maxCallBack = useCallback(() => {
-    if (inputToken === "USDT" && tokenBalance) {
+    if (tokenBalance) {
       setInputAmount(
-        tokenBalance
-          .sub("0.1".stringToBigNumber(18)!)
-          .bigNumberToShowString(18, 2)
-          .formatInputNum4()
+        allValue(tokenBalance).bigNumberToShowString(18, 2).formatInputNum4()
       );
-    } else {
-      if (tokenBalance) {
-        setInputAmount(
-          allValue(tokenBalance).bigNumberToShowString(18, 2).formatInputNum4()
-        );
-      }
     }
-  }, [inputToken, tokenBalance, allValue]);
+  }, [tokenBalance, allValue]);
 
   const tpDefault = useMemo(() => {
     if (tabsValue === 0) {
@@ -647,7 +636,7 @@ function useFuturesNewOrder(
     setShowDeposit,
     showSignModal,
     setShowSignModal,
-    signature
+    signature,
   };
 }
 
