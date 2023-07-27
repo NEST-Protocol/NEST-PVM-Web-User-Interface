@@ -7,7 +7,7 @@ import {
   useNetwork,
   useSwitchNetwork,
 } from "wagmi";
-import { NavItems, NavItemsForScroll } from "../pages/Share/Head/NESTHead";
+import { NavItems } from "../pages/Share/Head/NESTHead";
 
 export interface signatureData {
   address: string;
@@ -78,12 +78,6 @@ function useMainReact() {
     }
   }, [account.address, chainId]);
   /**
-   * nav items from different chain
-   */
-  const navItems = useMemo(() => {
-    return chainId === 534353 ? NavItemsForScroll : NavItems;
-  }, [chainId]);
-  /**
    * add nest
    */
   const addNESTToWallet = useCallback(async () => {
@@ -119,7 +113,7 @@ function useMainReact() {
     );
     if (same.length > 0) {
       const timestamp = Date.now();
-      if (same[0].expirationTime > (timestamp / 1000)) {
+      if (same[0].expirationTime > timestamp / 1000) {
         return same[0];
       } else {
         return undefined;
@@ -142,6 +136,17 @@ function useMainReact() {
       return false;
     }
   }, [signature]);
+
+  /**
+   * nav items from different chain
+   */
+  const navItems = useMemo(() => {
+    if (account.address && checkSigned) {
+      return NavItems;
+    } else {
+      return NavItems.filter((item) => item.content !== "Account");
+    }
+  }, [account.address, checkSigned]);
 
   return {
     showConnect,

@@ -270,7 +270,7 @@ const NESTHead: FC = () => {
         },
       };
     });
-    const liList = navItems.slice(0, 3).map((item, index) => {
+    const liList = navItems.slice(0, navItems.length-1).map((item, index) => {
       return (
         <Link
           className={`nav${
