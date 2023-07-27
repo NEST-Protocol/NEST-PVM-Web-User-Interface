@@ -2,7 +2,11 @@ import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import { BigNumber } from "ethers";
 import { FC, useLayoutEffect, useMemo, useRef, useState } from "react";
-import { FuturesOrder, FuturesLimitOrder } from "../../components/icons";
+import {
+  FuturesOrder,
+  FuturesLimitOrder,
+  HistoryIcon,
+} from "../../components/icons";
 import NESTTabs from "../../components/NESTTabs/NESTTabs";
 import useWindowWidth from "../../hooks/useWindowWidth";
 import OrderList from "./Components/OrderList";
@@ -21,6 +25,8 @@ import {
   usePendingTransactionsBase,
 } from "../../hooks/useTransactionReceipt";
 import { SnackBarType } from "../../components/SnackBar/NormalSnackBar";
+import LinkButton from "../../components/MainButton/LinkButton";
+import { Link } from "react-router-dom";
 
 export interface FuturesOrderService {
   id: number;
@@ -205,10 +211,10 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
         height={44}
         space={24}
         selectCallBack={(value: number) => setTabsValue(value)}
-        isFull={isBigMobile}
+        isFull={false}
       />
     );
-  }, [isBigMobile, tabsValue]);
+  }, [tabsValue]);
 
   const addModal = useMemo(() => {
     if (modalInfo && modalInfo.type === FuturesModalType.close) {
@@ -297,7 +303,8 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
       {addModal}
       <Stack
         direction={"row"}
-        justifyContent={"flex-start"}
+        justifyContent={"space-between"}
+        alignItems={"center"}
         sx={(theme) => ({
           paddingX: "20px",
           height: "44px",
@@ -307,6 +314,30 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
         })}
       >
         {tabs}
+        <Link to={"/dashboard"}>
+          <Box
+            sx={(theme) => ({
+              width: "20px",
+              height: "20px",
+              cursor: "pointer",
+              "& svg": {
+                width: "20px",
+                height: "20px",
+                display: "block",
+                "& path": {
+                  fill: theme.normal.text2,
+                },
+              },
+              "&:hover": {
+                "& svg path": {
+                  fill: theme.normal.primary,
+                },
+              },
+            })}
+          >
+            <HistoryIcon />
+          </Box>
+        </Link>
       </Stack>
       {orderList}
     </Stack>

@@ -119,23 +119,40 @@ const Account: FC = () => {
       }
     }
   }, [historyList, isBigMobile, listType, moneyList, tabsValue]);
+  const addModal = useMemo(() => {
+    return (
+      <>
+        <DepositModal
+          open={showDeposit}
+          onClose={() => setShowDeposit(false)}
+        />
+        <WithDrawModal
+          open={showWithdraw}
+          onClose={(res?: boolean) => {
+            if (res !== undefined) {
+              addTransactionNotice({
+                type: TransactionType.withdraw,
+                info: "",
+                result: res ? SnackBarType.success : SnackBarType.fail,
+              });
+              getAssetsList();
+            }
+            setShowWithdraw(false);
+          }}
+        />
+      </>
+    );
+  }, [
+    addTransactionNotice,
+    getAssetsList,
+    setShowDeposit,
+    setShowWithdraw,
+    showDeposit,
+    showWithdraw,
+  ]);
   return (
     <>
-      <DepositModal open={showDeposit} onClose={() => setShowDeposit(false)} />
-      <WithDrawModal
-        open={showWithdraw}
-        onClose={(res?: boolean) => {
-          if (res !== undefined) {
-            addTransactionNotice({
-              type: TransactionType.withdraw,
-              info: "",
-              result: res ? SnackBarType.success : SnackBarType.fail,
-            });
-            getAssetsList();
-          }
-          setShowWithdraw(false);
-        }}
-      />
+      {addModal}
       <Stack
         direction={"row"}
         justifyContent={"space-around"}
