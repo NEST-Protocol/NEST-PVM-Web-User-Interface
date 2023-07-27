@@ -116,6 +116,7 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
         <OrderTable
           dataArray={props.limitOrderList}
           buttonCallBack={setModalInfoValue}
+          updateList={props.updateList}
         />
       );
     } else if (tabsValue === 0) {
@@ -165,6 +166,7 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
                 key={`OrderList + ${index}`}
                 data={item}
                 buttonCallBack={setModalInfoValue}
+                updateList={props.updateList}
               />
             );
           })}
@@ -183,6 +185,7 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
     props.limitOrderList,
     props.pOrderListV2,
     props.price,
+    props.updateList,
     tabsValue,
     width,
   ]);

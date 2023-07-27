@@ -10,7 +10,7 @@ import {
 import { SnackBarType } from "../components/SnackBar/NormalSnackBar";
 import { FuturesOrderService } from "../pages/Futures/OrderList";
 
-function useFuturesOrder(data: FuturesOrderService) {
+function useFuturesOrder(data: FuturesOrderService, updateList: () => void) {
   const { chainsData, signature } = useNEST();
   const [loading, setLoading] = useState<boolean>(false);
   const tokenName = data.product.split("/")[0];
@@ -35,6 +35,7 @@ function useFuturesOrder(data: FuturesOrderService) {
         { Authorization: signature.signature }
       );
       if (Number(closeBase["errorCode"]) === 0) {
+        updateList();
       }
       addTransactionNotice({
         type: TransactionType.futures_closeLimit,
@@ -46,7 +47,7 @@ function useFuturesOrder(data: FuturesOrderService) {
       });
     }
     setLoading(false);
-  }, [addTransactionNotice, chainsData.chainId, data.id, signature]);
+  }, [addTransactionNotice, chainsData.chainId, data.id, signature, updateList]);
   /**
    * main button
    */

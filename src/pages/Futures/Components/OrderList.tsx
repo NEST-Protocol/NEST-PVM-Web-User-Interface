@@ -15,6 +15,7 @@ import { Trans, t } from "@lingui/macro";
 interface OrderListProps {
   data: FuturesOrderService;
   buttonCallBack: (value: FuturesModalInfo) => void;
+  updateList: () => void;
 }
 
 const OrderList: FC<OrderListProps> = ({ ...props }) => {
@@ -33,7 +34,7 @@ const OrderList: FC<OrderListProps> = ({ ...props }) => {
     shareOrder,
     tp,
     sl,
-  } = useFuturesOrder(props.data);
+  } = useFuturesOrder(props.data, props.updateList);
   return (
     <Stack
       spacing={"20px"}

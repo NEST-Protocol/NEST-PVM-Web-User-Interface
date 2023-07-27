@@ -17,6 +17,7 @@ import { Trans, t } from "@lingui/macro";
 interface FuturesOrderListProps {
   dataArray: Array<FuturesOrderService>;
   buttonCallBack: (value: FuturesModalInfo) => void;
+  updateList: () => void;
   style?: React.CSSProperties;
 }
 
@@ -27,6 +28,7 @@ const OrderTable: FC<FuturesOrderListProps> = ({ ...props }) => {
         key={`OrderTable + ${index}`}
         data={item}
         buttonCallBack={props.buttonCallBack}
+        updateList={props.updateList}
       />
     );
   });
@@ -56,6 +58,7 @@ const OrderTable: FC<FuturesOrderListProps> = ({ ...props }) => {
 interface OrderTableRowProps {
   data: FuturesOrderService;
   buttonCallBack: (value: FuturesModalInfo) => void;
+  updateList: () => void;
 }
 
 const OrderTableRow: FC<OrderTableRowProps> = ({ ...props }) => {
@@ -74,7 +77,7 @@ const OrderTableRow: FC<OrderTableRowProps> = ({ ...props }) => {
     shareOrder,
     tp,
     sl,
-  } = useFuturesOrder(props.data);
+  } = useFuturesOrder(props.data, props.updateList);
   return (
     <TableRow
       sx={(theme) => ({ "&: hover": { background: theme.normal.bg1 } })}

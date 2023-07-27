@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import useNEST, { signatureData } from "./useNEST";
 import { RequestBodyInterface, serviceLogin } from "../lib/NESTRequest";
 import { t } from "@lingui/macro";
-import { useSignMessage } from "wagmi";
+import { useSignMessage, useSignTypedData } from "wagmi";
 
 const BASE_SIGN_CONTENT = "https://nestfi.org";
 
@@ -67,6 +67,22 @@ function useSignModal() {
   const { data, isSuccess, signMessage } = useSignMessage({
     message: BASE_SIGN_CONTENT,
   });
+  // const { data, isError, isLoading, isSuccess, signTypedData:signMessage } =
+  //   useSignTypedData({
+  //     domain: {
+  //       name: BASE_SIGN_CONTENT,
+  //       version: '1',
+  //       chainId: 97,
+  //     },
+  //     types: {
+  //       Sign: [
+  //         { name: 'msg', type: 'string' },
+  //       ]
+  //     },
+  //     value: {
+  //       msg: BASE_SIGN_CONTENT
+  //     }
+  //   })
 
   const mainButtonTitle = useMemo(() => {
     return t`Send request`;
