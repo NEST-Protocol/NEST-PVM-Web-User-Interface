@@ -122,24 +122,29 @@ const Account: FC = () => {
   const addModal = useMemo(() => {
     return (
       <>
-        <DepositModal
-          open={showDeposit}
-          onClose={() => setShowDeposit(false)}
-        />
-        <WithDrawModal
-          open={showWithdraw}
-          onClose={(res?: boolean) => {
-            if (res !== undefined) {
-              addTransactionNotice({
-                type: TransactionType.withdraw,
-                info: "",
-                result: res ? SnackBarType.success : SnackBarType.fail,
-              });
-              getAssetsList();
-            }
-            setShowWithdraw(false);
-          }}
-        />
+        {showDeposit ? (
+          <DepositModal open={true} onClose={() => setShowDeposit(false)} />
+        ) : (
+          <></>
+        )}
+        {showWithdraw ? (
+          <WithDrawModal
+            open={true}
+            onClose={(res?: boolean) => {
+              if (res !== undefined) {
+                addTransactionNotice({
+                  type: TransactionType.withdraw,
+                  info: "",
+                  result: res ? SnackBarType.success : SnackBarType.fail,
+                });
+                getAssetsList();
+              }
+              setShowWithdraw(false);
+            }}
+          />
+        ) : (
+          <></>
+        )}
       </>
     );
   }, [
