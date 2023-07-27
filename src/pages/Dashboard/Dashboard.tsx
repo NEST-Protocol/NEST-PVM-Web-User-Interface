@@ -1,4 +1,4 @@
-import {FC, useMemo, useState} from "react";
+import {FC, useEffect, useMemo, useState} from "react";
 import {Stack, styled} from "@mui/material";
 import TVChart from "./TVChart/TVChart";
 import {DashboardIcon2, FuturesOrder, Share} from "../../components/icons";
@@ -24,6 +24,7 @@ import {Trans, t} from "@lingui/macro";
 import useSWR from "swr";
 import NetworkIcon from "./Components/NetworkIcon";
 import MobileOrderTypePosition from "./Components/MobileOrderTypePosition";
+import {useParams, useSearchParams} from "react-router-dom";
 
 const DashboardShare = styled(Box)(({theme}) => ({
   borderRadius: "8px",
@@ -183,22 +184,17 @@ const Dashboard: FC = () => {
   const [showShareOrderModal, setShowShareOrderModal] = useState(false);
   const [shareOrder, setShareOrder] = useState<any>(undefined);
   const {messageSnackBar} = useNESTSnackBar();
+  let [searchParams, ] = useSearchParams();
 
-  const getQueryVariable = (variable: string) => {
-    const query = window.location.search.substring(1);
-    if (query) {
-      const vars = query.split("&");
-      for (let i = 0; i < vars.length; i++) {
-        const pair = vars[i].split("=");
-        if (decodeURIComponent(pair[0]) === variable) {
-          return decodeURIComponent(pair[1]);
-        }
-      }
+  useEffect(() => {
+    if (searchParams.get('t') === 'history') {
+      setTabsValue(1)
+    } else {
+      setTabsValue(0)
     }
-    return null;
-  };
+  }, [searchParams])
 
-  const a = getQueryVariable("address");
+  const a = searchParams.get('address');
 
   const {data: burnedData} = useSWR(`https://api.nestfi.net/api/dashboard/destory/list?chainId=${chainsData.chainId === 534353 ? 534353 : 56}&from=2022-11-28&to=${(new Date()).toISOString().split("T")[0]}`, (url: any) => fetch(url)
     .then((res) => res.json())
