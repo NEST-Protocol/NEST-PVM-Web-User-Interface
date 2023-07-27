@@ -101,7 +101,7 @@ function useAccount() {
     getBalance();
     const time = setInterval(() => {
       getBalance();
-    }, 5 * 1000);
+    }, 10 * 1000);
     return () => {
       clearInterval(time);
     };
@@ -113,7 +113,7 @@ function useAccount() {
     const time = setInterval(() => {
       getAssetsList();
       // getTransactionList();
-    }, 20 * 1000);
+    }, 10 * 1000);
     return () => {
       clearInterval(time);
     };

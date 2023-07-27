@@ -187,6 +187,7 @@ function useDepositModal(onClose: () => void) {
   }, [isPendingType]);
   useEffect(() => {
     if (send && !pending) {
+      setSend(false);
       onClose();
     } else if (!send && pending) {
       setSend(true);
