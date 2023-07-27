@@ -885,6 +885,11 @@ msgstr "Search"
 msgid "Sell position"
 msgstr "Sell position"
 
+#: src/hooks/useSignModal.ts
+#: src/pages/Share/Head/ConnectButton.tsx
+msgid "Send request"
+msgstr "Send request"
+
 #: src/pages/Futures/Modal/CloseModal.tsx
 #: src/pages/Futures/NewOrder.tsx
 #: src/pages/Share/Modal/WithdrawModal.tsx
@@ -915,11 +920,6 @@ msgstr "Share"
 #: src/pages/Futures/Components/OrderTablePosition.tsx
 msgid "Short"
 msgstr "Short"
-
-#: src/hooks/useSignModal.ts
-#: src/pages/Share/Head/ConnectButton.tsx
-msgid "Sign message"
-msgstr "Sign message"
 
 #: src/pages/Share/Modal/StopTransactionModal.tsx
 msgid "Sincerely,"
@@ -1247,16 +1247,13 @@ msgid "with 1 click"
 msgstr "with 1 click"
 
 #: src/hooks/useTransactionReceipt.ts
+#: src/hooks/useWithDrawModal.ts
 #: src/pages/Account/Account.tsx
 #: src/pages/Account/Account.tsx
 #: src/pages/Share/Modal/WithdrawModal.tsx
 #: src/pages/Share/Modal/WithdrawModal.tsx
 msgid "Withdraw"
 msgstr "Withdraw"
-
-#: src/hooks/useWithDrawModal.ts
-msgid "WithDraw"
-msgstr "WithDraw"
 
 #: src/components/NormalInput/NESTInput.tsx
 msgid "Your balance is 0. Before making any transactions, please click on \"Deposit\" to complete a quick deposit."

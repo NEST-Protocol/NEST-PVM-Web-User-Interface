@@ -133,7 +133,7 @@ function useWithDrawModal(onClose: (res?: boolean) => void) {
    * main button
    */
   const mainButtonTitle = useMemo(() => {
-    return t`WithDraw`;
+    return t`Withdraw`;
   }, []);
   const mainButtonLoading = useMemo(() => {
     return loading;

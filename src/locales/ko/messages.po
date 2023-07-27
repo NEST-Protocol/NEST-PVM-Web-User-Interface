@@ -15,7 +15,7 @@ msgstr ""
 
 #: src/pages/Account/Components/TransactionTable.tsx
 msgid "{0}"
-msgstr ""
+msgstr "{0}"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
@@ -24,7 +24,7 @@ msgstr "*금융 데이터의 복잡성으로 인해 미묘한 차이와 지연�
 
 #: src/pages/Share/Modal/DepositModal.tsx
 msgid "*NESTFi only supports NEST withdrawals."
-msgstr ""
+msgstr "*NESTFi는 NEST 인출만 지원합니다."
 
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useFuturesNewOrder.ts
@@ -139,11 +139,11 @@ msgstr "지갑 연결 정보"
 
 #: src/pages/Share/Head/NESTHead.tsx
 msgid "Account"
-msgstr ""
+msgstr "계정"
 
 #: src/pages/Account/Components/TransactionTable.tsx
 msgid "Action"
-msgstr ""
+msgstr "행동"
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
@@ -276,7 +276,7 @@ msgstr "확인"
 
 #: src/pages/Share/Modal/SignModal.tsx
 msgid "Confirm you are the owner of this wallet"
-msgstr ""
+msgstr "이 지갑의 소유자임을 확인하십시오."
 
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useFuturesNewOrder.ts
@@ -385,7 +385,7 @@ msgstr "디플레이션 경제 모델. 더 많은 사용자가 거래할수록 �
 #: src/pages/Share/Modal/DepositModal.tsx
 #: src/pages/Share/Modal/DepositModal.tsx
 msgid "Deposit"
-msgstr ""
+msgstr "입금"
 
 #: src/pages/Share/Head/ConnectButton.tsx
 #: src/pages/Share/Modal/MyWalletModal.tsx
@@ -433,7 +433,7 @@ msgstr "진입 가격"
 #: src/pages/Account/Components/MobileList.tsx
 #: src/pages/Account/Components/MoneyTable.tsx
 msgid "Fail"
-msgstr ""
+msgstr "실패"
 
 #: src/hooks/useNESTSnackBar.tsx
 msgid "Fail Request"
@@ -476,7 +476,7 @@ msgstr "얻다"
 
 #: src/pages/Share/Modal/DepositModal.tsx
 msgid "Get NEST"
-msgstr ""
+msgstr "얻다 NEST"
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "Github"
@@ -514,7 +514,7 @@ msgstr "이해했습니다"
 
 #: src/pages/Share/Modal/SignModal.tsx
 msgid "If you are using a secure device that you own. Selecting this option can expose your keys and information to others if you are on a public or non-secured device."
-msgstr ""
+msgstr "당신이 소유한 안전한 장치를 사용하고 있다면, 이 옵션을 선택하는 것은 공공장치나 보안이 되지 않은 장치에서 키와 정보가 다른 사람들에게 노출될 수 있습니다."
 
 #: src/pages/Share/Modal/StopTransactionModal.tsx
 msgid "If you have any questions or require further assistance, please feel free to reach out to our support team. We are here to help and provide guidance throughout this process."
@@ -546,7 +546,7 @@ msgstr "NEST 잔액 부족"
 
 #: src/hooks/useWithDrawModal.ts
 msgid "Insufficient NEXT balance"
-msgstr ""
+msgstr "NEXT 잔액 부족"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 msgid "Invitee Trading Volume"
@@ -612,7 +612,7 @@ msgstr "지정가 가격"
 #: src/pages/Share/Modal/SignModal.tsx
 #: src/pages/Share/Modal/SignModal.tsx
 msgid "Link wallet"
-msgstr ""
+msgstr "링크 지갑"
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
@@ -671,7 +671,7 @@ msgstr "자세한 정보"
 
 #: src/pages/Account/Account.tsx
 msgid "My balance"
-msgstr ""
+msgstr "내 잔액"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
@@ -791,7 +791,7 @@ msgstr "개요"
 #: src/pages/Account/Components/MobileList.tsx
 #: src/pages/Account/Components/MoneyTable.tsx
 msgid "Pending"
-msgstr ""
+msgstr "Pendente"
 
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Platform (Youtube, Telegram, Twitter, Instagram, Facebook, Tiktok, Others)"
@@ -803,7 +803,7 @@ msgstr "인증을 위해 승인을 클릭하면 포지션을 열 수 있으며, 
 
 #: src/components/NormalInput/NESTInput.tsx
 msgid "Please complete your sign"
-msgstr ""
+msgstr "서명을 완료하세요."
 
 #: src/pages/DirectPoster/useDirectPoster.ts
 msgid "Please get ETH testnet token first"
@@ -883,6 +883,11 @@ msgstr "검색"
 msgid "Sell position"
 msgstr "포지션 매도"
 
+#: src/hooks/useSignModal.ts
+#: src/pages/Share/Head/ConnectButton.tsx
+msgid "Send request"
+msgstr "요청 보내기"
+
 #: src/pages/Futures/Modal/CloseModal.tsx
 #: src/pages/Futures/NewOrder.tsx
 #: src/pages/Share/Modal/WithdrawModal.tsx
@@ -914,11 +919,6 @@ msgstr "공유"
 msgid "Short"
 msgstr "숏"
 
-#: src/hooks/useSignModal.ts
-#: src/pages/Share/Head/ConnectButton.tsx
-msgid "Sign message"
-msgstr ""
-
 #: src/pages/Share/Modal/StopTransactionModal.tsx
 msgid "Sincerely,"
 msgstr "감사합니다,"
@@ -947,7 +947,7 @@ msgstr "거래 시작하기"
 
 #: src/pages/Account/Components/MoneyTable.tsx
 msgid "Status"
-msgstr ""
+msgstr "상태"
 
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 #: src/pages/Futures/Components/OrderList.tsx
@@ -975,7 +975,7 @@ msgstr "성공적으로 제출됨"
 #: src/pages/Account/Components/MobileList.tsx
 #: src/pages/Account/Components/MoneyTable.tsx
 msgid "Success"
-msgstr ""
+msgstr "성공"
 
 #: src/components/NormalInput/NESTInputSelect.tsx
 #: src/hooks/useSwap.ts
@@ -1018,11 +1018,11 @@ msgstr "잔액은 0입니다. 거래하기 전에 \"수도꼭지\"로 이동하�
 
 #: src/pages/Share/Modal/DepositModal.tsx
 msgid "The maximum amount allowed for a single deposit is"
-msgstr ""
+msgstr "The maximum amount allowed for a single deposit is"
 
 #: src/hooks/useWithDrawModal.ts
 msgid "The minimum withdrawal amount  greater than 15NEST"
-msgstr ""
+msgstr "최소 출금 금액은 15 NEST보다 커야 합니다."
 
 #: src/pages/Share/Modal/StopTransactionModal.tsx
 msgid "The NESTfi Team"
@@ -1075,7 +1075,7 @@ msgstr "오늘의 손익"
 
 #: src/pages/Share/Modal/WithdrawModal.tsx
 msgid "Total"
-msgstr ""
+msgstr "총액"
 
 #: src/pages/Home/Home.tsx
 #: src/pages/Home/Home.tsx
@@ -1206,11 +1206,11 @@ msgstr "사용자 가이드"
 
 #: src/pages/Share/Modal/SignModal.tsx
 msgid "Verify ownership"
-msgstr ""
+msgstr "소유권 확인"
 
 #: src/pages/Share/Head/ConnectButton.tsx
 msgid "Verify ownership, Confirm you are the owner of this wallet."
-msgstr ""
+msgstr "이 지갑의 소유자임을 확인하십시오. 서명은 무료이며 거래를 보내지 않습니다."
 
 #: src/components/SnackBar/NormalSnackBar.tsx
 msgid "View"
@@ -1245,21 +1245,18 @@ msgid "with 1 click"
 msgstr "1 클릭으로"
 
 #: src/hooks/useTransactionReceipt.ts
+#: src/hooks/useWithDrawModal.ts
 #: src/pages/Account/Account.tsx
 #: src/pages/Account/Account.tsx
 #: src/pages/Share/Modal/WithdrawModal.tsx
 #: src/pages/Share/Modal/WithdrawModal.tsx
 msgid "Withdraw"
-msgstr ""
-
-#: src/hooks/useWithDrawModal.ts
-msgid "WithDraw"
-msgstr ""
+msgstr "인출"
 
 #: src/components/NormalInput/NESTInput.tsx
 msgid "Your balance is 0. Before making any transactions, please click on \"Deposit\" to complete a quick deposit."
-msgstr ""
+msgstr "귀하의 잔액은 0입니다. 거래를 진행하기 전에 \"입금\"을 클릭하여 빠른 충전을 완료해주십시오."
 
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Youtube"
-msgstr "유튜브"
+msgstr "Youtube"

@@ -61,9 +61,16 @@ const AddModalBase: FC<AddModalBaseProps> = ({ ...props }) => {
     showBalance,
     showToSwap,
   ]);
+  const depositModal = useMemo(() => {
+    return showDeposit ? (
+      <DepositModal open={true} onClose={() => setShowDeposit(false)} />
+    ) : (
+      <></>
+    );
+  }, [showDeposit]);
   return (
     <Stack spacing={"24px"} width={"100%"}>
-      <DepositModal open={showDeposit} onClose={() => setShowDeposit(false)} />
+      {depositModal}
       {input}
       <NESTLine />
       <Stack spacing={"8px"}>

@@ -15,7 +15,7 @@ msgstr ""
 
 #: src/pages/Account/Components/TransactionTable.tsx
 msgid "{0}"
-msgstr ""
+msgstr "{0}"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
@@ -24,7 +24,7 @@ msgstr "* Devido à complexidade dos dados financeiros, pode haver nuances e atr
 
 #: src/pages/Share/Modal/DepositModal.tsx
 msgid "*NESTFi only supports NEST withdrawals."
-msgstr ""
+msgstr "*NESTFi suporta apenas saques de NEST."
 
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useFuturesNewOrder.ts
@@ -139,11 +139,11 @@ msgstr "sobre as carteiras digitais"
 
 #: src/pages/Share/Head/NESTHead.tsx
 msgid "Account"
-msgstr ""
+msgstr "conta"
 
 #: src/pages/Account/Components/TransactionTable.tsx
 msgid "Action"
-msgstr ""
+msgstr "ação"
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
@@ -276,7 +276,7 @@ msgstr "Confirmar"
 
 #: src/pages/Share/Modal/SignModal.tsx
 msgid "Confirm you are the owner of this wallet"
-msgstr ""
+msgstr "Confirme que você é o proprietário desta carteira."
 
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useFuturesNewOrder.ts
@@ -385,7 +385,7 @@ msgstr "Modelo económico deflacionário. Quanto mais os utilizadores negociarem
 #: src/pages/Share/Modal/DepositModal.tsx
 #: src/pages/Share/Modal/DepositModal.tsx
 msgid "Deposit"
-msgstr ""
+msgstr "Depósito"
 
 #: src/pages/Share/Head/ConnectButton.tsx
 #: src/pages/Share/Modal/MyWalletModal.tsx
@@ -433,7 +433,7 @@ msgstr "Preço de entrada"
 #: src/pages/Account/Components/MobileList.tsx
 #: src/pages/Account/Components/MoneyTable.tsx
 msgid "Fail"
-msgstr ""
+msgstr "falha"
 
 #: src/hooks/useNESTSnackBar.tsx
 msgid "Fail Request"
@@ -474,7 +474,7 @@ msgstr "OBTER"
 
 #: src/pages/Share/Modal/DepositModal.tsx
 msgid "Get NEST"
-msgstr ""
+msgstr "OBTER NEST"
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "Github"
@@ -486,7 +486,7 @@ msgstr "História"
 
 #: src/pages/Home/Home.tsx
 msgid "How to copy trading?"
-msgstr ""
+msgstr "Como copiar trading?"
 
 #: src/pages/Home/Home.tsx
 msgid "How to join affiliate program?"
@@ -512,7 +512,7 @@ msgstr "Entendi"
 
 #: src/pages/Share/Modal/SignModal.tsx
 msgid "If you are using a secure device that you own. Selecting this option can expose your keys and information to others if you are on a public or non-secured device."
-msgstr ""
+msgstr "Se você estiver usando um dispositivo seguro de sua propriedade. Selecionar essa opção pode expor suas chaves e informações a terceiros se você estiver em um dispositivo público ou não seguro."
 
 #: src/pages/Share/Modal/StopTransactionModal.tsx
 msgid "If you have any questions or require further assistance, please feel free to reach out to our support team. We are here to help and provide guidance throughout this process."
@@ -544,7 +544,7 @@ msgstr "Saldo insuficiente de NEST"
 
 #: src/hooks/useWithDrawModal.ts
 msgid "Insufficient NEXT balance"
-msgstr ""
+msgstr "Saldo insuficiente de NEXT"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 msgid "Invitee Trading Volume"
@@ -612,7 +612,7 @@ msgstr "Preço Limite"
 #: src/pages/Share/Modal/SignModal.tsx
 #: src/pages/Share/Modal/SignModal.tsx
 msgid "Link wallet"
-msgstr ""
+msgstr "Carteira Link"
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
@@ -671,7 +671,7 @@ msgstr "Mais informações"
 
 #: src/pages/Account/Account.tsx
 msgid "My balance"
-msgstr ""
+msgstr "Meu saldo"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
@@ -791,7 +791,7 @@ msgstr "Visão geral"
 #: src/pages/Account/Components/MobileList.tsx
 #: src/pages/Account/Components/MoneyTable.tsx
 msgid "Pending"
-msgstr ""
+msgstr "대기 중"
 
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Platform (Youtube, Telegram, Twitter, Instagram, Facebook, Tiktok, Others)"
@@ -803,7 +803,7 @@ msgstr "Clique em Aprovar para obter autorização e, em seguida, pode abrir a p
 
 #: src/components/NormalInput/NESTInput.tsx
 msgid "Please complete your sign"
-msgstr ""
+msgstr "Por favor, complete sua assinatura. "
 
 #: src/pages/DirectPoster/useDirectPoster.ts
 msgid "Please get ETH testnet token first"
@@ -883,6 +883,11 @@ msgstr "Pesquisar"
 msgid "Sell position"
 msgstr "Vender posição"
 
+#: src/hooks/useSignModal.ts
+#: src/pages/Share/Head/ConnectButton.tsx
+msgid "Send request"
+msgstr "Enviar solicitações"
+
 #: src/pages/Futures/Modal/CloseModal.tsx
 #: src/pages/Futures/NewOrder.tsx
 #: src/pages/Share/Modal/WithdrawModal.tsx
@@ -914,11 +919,6 @@ msgstr "Partilhar"
 msgid "Short"
 msgstr "Curto"
 
-#: src/hooks/useSignModal.ts
-#: src/pages/Share/Head/ConnectButton.tsx
-msgid "Sign message"
-msgstr ""
-
 #: src/pages/Share/Modal/StopTransactionModal.tsx
 msgid "Sincerely,"
 msgstr "Atenciosamente,"
@@ -947,7 +947,7 @@ msgstr "Começar a Negociar"
 
 #: src/pages/Account/Components/MoneyTable.tsx
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 #: src/pages/Futures/Components/OrderList.tsx
@@ -975,7 +975,7 @@ msgstr "Submissão bem sucedida"
 #: src/pages/Account/Components/MobileList.tsx
 #: src/pages/Account/Components/MoneyTable.tsx
 msgid "Success"
-msgstr ""
+msgstr "Sucesso"
 
 #: src/components/NormalInput/NESTInputSelect.tsx
 #: src/hooks/useSwap.ts
@@ -1018,11 +1018,11 @@ msgstr "O saldo é de 0. Pode ir a \"Faucet\" para obter um token de teste antes
 
 #: src/pages/Share/Modal/DepositModal.tsx
 msgid "The maximum amount allowed for a single deposit is"
-msgstr ""
+msgstr "O valor máximo permitido para depósito em uma única transação é de"
 
 #: src/hooks/useWithDrawModal.ts
 msgid "The minimum withdrawal amount  greater than 15NEST"
-msgstr ""
+msgstr "O valor mínimo de saque deve ser superior a 15 NEST."
 
 #: src/pages/Share/Modal/StopTransactionModal.tsx
 msgid "The NESTfi Team"
@@ -1075,7 +1075,7 @@ msgstr "Hoje\\'s PNL"
 
 #: src/pages/Share/Modal/WithdrawModal.tsx
 msgid "Total"
-msgstr ""
+msgstr "Total"
 
 #: src/pages/Home/Home.tsx
 #: src/pages/Home/Home.tsx
@@ -1206,11 +1206,11 @@ msgstr "Guia do usuário"
 
 #: src/pages/Share/Modal/SignModal.tsx
 msgid "Verify ownership"
-msgstr ""
+msgstr "Verificar propriedade"
 
 #: src/pages/Share/Head/ConnectButton.tsx
 msgid "Verify ownership, Confirm you are the owner of this wallet."
-msgstr ""
+msgstr "Confirme que você é o proprietário desta carteira. Assinar é gratuito e não enviará uma transação."
 
 #: src/components/SnackBar/NormalSnackBar.tsx
 msgid "View"
@@ -1245,20 +1245,17 @@ msgid "with 1 click"
 msgstr "com 1 clique"
 
 #: src/hooks/useTransactionReceipt.ts
+#: src/hooks/useWithDrawModal.ts
 #: src/pages/Account/Account.tsx
 #: src/pages/Account/Account.tsx
 #: src/pages/Share/Modal/WithdrawModal.tsx
 #: src/pages/Share/Modal/WithdrawModal.tsx
 msgid "Withdraw"
-msgstr ""
-
-#: src/hooks/useWithDrawModal.ts
-msgid "WithDraw"
-msgstr ""
+msgstr "Retirar"
 
 #: src/components/NormalInput/NESTInput.tsx
 msgid "Your balance is 0. Before making any transactions, please click on \"Deposit\" to complete a quick deposit."
-msgstr ""
+msgstr "Seu saldo é 0. Antes de fazer qualquer transação, clique em \"Recarregar\" para fazer uma depósito rápida."
 
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Youtube"

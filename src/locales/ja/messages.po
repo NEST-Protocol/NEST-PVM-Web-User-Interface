@@ -881,6 +881,11 @@ msgstr ""
 msgid "Sell position"
 msgstr "ポジションを売る"
 
+#: src/hooks/useSignModal.ts
+#: src/pages/Share/Head/ConnectButton.tsx
+msgid "Send request"
+msgstr ""
+
 #: src/pages/Futures/Modal/CloseModal.tsx
 #: src/pages/Futures/NewOrder.tsx
 #: src/pages/Share/Modal/WithdrawModal.tsx
@@ -911,11 +916,6 @@ msgstr "シェア"
 #: src/pages/Futures/Components/OrderTablePosition.tsx
 msgid "Short"
 msgstr "ショート"
-
-#: src/hooks/useSignModal.ts
-#: src/pages/Share/Head/ConnectButton.tsx
-msgid "Sign message"
-msgstr ""
 
 #: src/pages/Share/Modal/StopTransactionModal.tsx
 msgid "Sincerely,"
@@ -1243,15 +1243,12 @@ msgid "with 1 click"
 msgstr "1クリックで"
 
 #: src/hooks/useTransactionReceipt.ts
+#: src/hooks/useWithDrawModal.ts
 #: src/pages/Account/Account.tsx
 #: src/pages/Account/Account.tsx
 #: src/pages/Share/Modal/WithdrawModal.tsx
 #: src/pages/Share/Modal/WithdrawModal.tsx
 msgid "Withdraw"
-msgstr ""
-
-#: src/hooks/useWithDrawModal.ts
-msgid "WithDraw"
 msgstr ""
 
 #: src/components/NormalInput/NESTInput.tsx

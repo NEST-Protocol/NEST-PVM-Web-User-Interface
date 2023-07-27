@@ -15,7 +15,7 @@ msgstr ""
 
 #: src/pages/Account/Components/TransactionTable.tsx
 msgid "{0}"
-msgstr ""
+msgstr "{0}"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
@@ -24,7 +24,7 @@ msgstr "Do sự phức tạp của dữ liệu tài chính, do đó có thể b�
 
 #: src/pages/Share/Modal/DepositModal.tsx
 msgid "*NESTFi only supports NEST withdrawals."
-msgstr ""
+msgstr "NESTFi는 NEST 인출만 지원합니다."
 
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useFuturesNewOrder.ts
@@ -139,11 +139,11 @@ msgstr "về việc kết nối ví"
 
 #: src/pages/Share/Head/NESTHead.tsx
 msgid "Account"
-msgstr ""
+msgstr "tài khoản"
 
 #: src/pages/Account/Components/TransactionTable.tsx
 msgid "Action"
-msgstr ""
+msgstr "hành động"
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
@@ -262,7 +262,7 @@ msgstr "Đóng rủi ro"
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "Closed"
-msgstr ""
+msgstr "Closed"
 
 #: src/hooks/useFuturesAdd.ts
 #: src/hooks/useFuturesClose.ts
@@ -276,7 +276,7 @@ msgstr "Xác nhận"
 
 #: src/pages/Share/Modal/SignModal.tsx
 msgid "Confirm you are the owner of this wallet"
-msgstr ""
+msgstr "Xác nhận bạn là chủ sở hữu của ví này."
 
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useFuturesNewOrder.ts
@@ -385,7 +385,7 @@ msgstr "Mô hình kinh tế giảm phát. Khi càng nhiều người dùng giao 
 #: src/pages/Share/Modal/DepositModal.tsx
 #: src/pages/Share/Modal/DepositModal.tsx
 msgid "Deposit"
-msgstr ""
+msgstr "Nạp tiền"
 
 #: src/pages/Share/Head/ConnectButton.tsx
 #: src/pages/Share/Modal/MyWalletModal.tsx
@@ -433,7 +433,7 @@ msgstr "Giá vào lệnh "
 #: src/pages/Account/Components/MobileList.tsx
 #: src/pages/Account/Components/MoneyTable.tsx
 msgid "Fail"
-msgstr ""
+msgstr "thất bại"
 
 #: src/hooks/useNESTSnackBar.tsx
 msgid "Fail Request"
@@ -476,7 +476,7 @@ msgstr "NHẬN"
 
 #: src/pages/Share/Modal/DepositModal.tsx
 msgid "Get NEST"
-msgstr ""
+msgstr "NHẬN NEST"
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "Github"
@@ -500,7 +500,7 @@ msgstr "Làm cách nào để thực hiện giao dịch đầu tiên của bạn
 
 #: src/pages/Futures/MoreInfo.tsx
 msgid "How to Play"
-msgstr ""
+msgstr "Cách chơi "
 
 #: src/pages/Home/Home.tsx
 msgid "How to Start?"
@@ -514,7 +514,7 @@ msgstr "Tôi hiểu."
 
 #: src/pages/Share/Modal/SignModal.tsx
 msgid "If you are using a secure device that you own. Selecting this option can expose your keys and information to others if you are on a public or non-secured device."
-msgstr ""
+msgstr "Nếu bạn đang sử dụng một thiết bị an toàn mà bạn sở hữu. Lựa chọn này có thể tiếp xúc các khóa và thông tin của bạn với người khác nếu bạn đang sử dụng một thiết bị công cộng hoặc không được bảo mật."
 
 #: src/pages/Share/Modal/StopTransactionModal.tsx
 msgid "If you have any questions or require further assistance, please feel free to reach out to our support team. We are here to help and provide guidance throughout this process."
@@ -546,7 +546,7 @@ msgstr "Số dư NEST không đủ"
 
 #: src/hooks/useWithDrawModal.ts
 msgid "Insufficient NEXT balance"
-msgstr ""
+msgstr "Số dư NEXT không đủ"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 msgid "Invitee Trading Volume"
@@ -614,7 +614,7 @@ msgstr "Giá giới hạn"
 #: src/pages/Share/Modal/SignModal.tsx
 #: src/pages/Share/Modal/SignModal.tsx
 msgid "Link wallet"
-msgstr ""
+msgstr "Ví Link"
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
@@ -673,7 +673,7 @@ msgstr "Thông tin thêm"
 
 #: src/pages/Account/Account.tsx
 msgid "My balance"
-msgstr ""
+msgstr "Số dư của tôi "
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
@@ -793,7 +793,7 @@ msgstr "Tổng quan"
 #: src/pages/Account/Components/MobileList.tsx
 #: src/pages/Account/Components/MoneyTable.tsx
 msgid "Pending"
-msgstr ""
+msgstr "Đang chờ"
 
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Platform (Youtube, Telegram, Twitter, Instagram, Facebook, Tiktok, Others)"
@@ -805,7 +805,7 @@ msgstr "Vui lòng nhấp vào \"Approve\" để xác thực và sau đó bạn c
 
 #: src/components/NormalInput/NESTInput.tsx
 msgid "Please complete your sign"
-msgstr ""
+msgstr "Vui lòng hoàn thành chữ ký của bạn."
 
 #: src/pages/DirectPoster/useDirectPoster.ts
 msgid "Please get ETH testnet token first"
@@ -885,6 +885,11 @@ msgstr "Tìm kiếm"
 msgid "Sell position"
 msgstr "Vị thế bán"
 
+#: src/hooks/useSignModal.ts
+#: src/pages/Share/Head/ConnectButton.tsx
+msgid "Send request"
+msgstr "Gửi yêu cầu"
+
 #: src/pages/Futures/Modal/CloseModal.tsx
 #: src/pages/Futures/NewOrder.tsx
 #: src/pages/Share/Modal/WithdrawModal.tsx
@@ -916,11 +921,6 @@ msgstr "Chia sẻ"
 msgid "Short"
 msgstr "Bán"
 
-#: src/hooks/useSignModal.ts
-#: src/pages/Share/Head/ConnectButton.tsx
-msgid "Sign message"
-msgstr ""
-
 #: src/pages/Share/Modal/StopTransactionModal.tsx
 msgid "Sincerely,"
 msgstr "Trân trọng,"
@@ -933,7 +933,7 @@ msgstr "Dừng Lỗ"
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "SL Executed"
-msgstr ""
+msgstr "SL Executed"
 
 #: src/pages/Swap/Swap.tsx
 msgid "Slippage Tolerance"
@@ -949,7 +949,7 @@ msgstr "Bắt đầu giao dịch"
 
 #: src/pages/Account/Components/MoneyTable.tsx
 msgid "Status"
-msgstr ""
+msgstr "Trạng thái"
 
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 #: src/pages/Futures/Components/OrderList.tsx
@@ -977,7 +977,7 @@ msgstr "Gửi thành công"
 #: src/pages/Account/Components/MobileList.tsx
 #: src/pages/Account/Components/MoneyTable.tsx
 msgid "Success"
-msgstr ""
+msgstr "Thành công"
 
 #: src/components/NormalInput/NESTInputSelect.tsx
 #: src/hooks/useSwap.ts
@@ -1020,11 +1020,11 @@ msgstr "Số dư là 0. Bạn có thể đến \"Faucet\" để nhận token th�
 
 #: src/pages/Share/Modal/DepositModal.tsx
 msgid "The maximum amount allowed for a single deposit is"
-msgstr ""
+msgstr "O valor máximo permitido para depósito em uma única transação é de"
 
 #: src/hooks/useWithDrawModal.ts
 msgid "The minimum withdrawal amount  greater than 15NEST"
-msgstr ""
+msgstr "Số tiền rút tối thiểu phải lớn hơn 15 NEST."
 
 #: src/pages/Share/Modal/StopTransactionModal.tsx
 msgid "The NESTfi Team"
@@ -1077,7 +1077,7 @@ msgstr "PNL\\ hôm nay"
 
 #: src/pages/Share/Modal/WithdrawModal.tsx
 msgid "Total"
-msgstr ""
+msgstr "Tổng cộng"
 
 #: src/pages/Home/Home.tsx
 #: src/pages/Home/Home.tsx
@@ -1140,7 +1140,7 @@ msgstr "Giá TP và SL bạn đặt sẽ kích hoạt ngay lập tức."
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "TP Executed"
-msgstr ""
+msgstr "TP Executed"
 
 #: src/pages/Home/Home.tsx
 msgid "Trade BTC, ETH and BNB with up to 1-50 leverage. Open a position with USDT or NEST."
@@ -1208,11 +1208,11 @@ msgstr "Hướng dẫn sử dụng"
 
 #: src/pages/Share/Modal/SignModal.tsx
 msgid "Verify ownership"
-msgstr ""
+msgstr "Xác minh sở hữu"
 
 #: src/pages/Share/Head/ConnectButton.tsx
 msgid "Verify ownership, Confirm you are the owner of this wallet."
-msgstr ""
+msgstr "Xác nhận bạn là chủ sở hữu của ví này. Việc ký là miễn phí và sẽ không gửi giao dịch."
 
 #: src/components/SnackBar/NormalSnackBar.tsx
 msgid "View"
@@ -1236,7 +1236,7 @@ msgstr "White Paper"
 
 #: src/pages/Home/Home.tsx
 msgid "Why You Should Choose NESTFi"
-msgstr ""
+msgstr "Tại sao bạn nên chọn NESTFi."
 
 #: src/pages/Futures/Modal/CloseOrderNoticeModal.tsx
 msgid "Will not be displayed after closing"
@@ -1247,20 +1247,17 @@ msgid "with 1 click"
 msgstr "chỉ với 1 cú nhấp chuột"
 
 #: src/hooks/useTransactionReceipt.ts
+#: src/hooks/useWithDrawModal.ts
 #: src/pages/Account/Account.tsx
 #: src/pages/Account/Account.tsx
 #: src/pages/Share/Modal/WithdrawModal.tsx
 #: src/pages/Share/Modal/WithdrawModal.tsx
 msgid "Withdraw"
-msgstr ""
-
-#: src/hooks/useWithDrawModal.ts
-msgid "WithDraw"
-msgstr ""
+msgstr "Rút tiền"
 
 #: src/components/NormalInput/NESTInput.tsx
 msgid "Your balance is 0. Before making any transactions, please click on \"Deposit\" to complete a quick deposit."
-msgstr ""
+msgstr "Số dư của bạn là 0. Trước khi thực hiện bất kỳ giao dịch nào, vui lòng nhấp vào \"Nạp tiền\" để hoàn tất quá trình nạp tiền nhanh chóng."
 
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Youtube"

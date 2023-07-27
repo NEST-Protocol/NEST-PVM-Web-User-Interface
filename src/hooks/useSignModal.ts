@@ -69,7 +69,7 @@ function useSignModal() {
   });
 
   const mainButtonTitle = useMemo(() => {
-    return t`Sign message`;
+    return t`Send request`;
   }, []);
   const mainButtonLoading = useMemo(() => {
     return loading;

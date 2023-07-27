@@ -25,7 +25,6 @@ import {
   usePendingTransactionsBase,
 } from "../../hooks/useTransactionReceipt";
 import { SnackBarType } from "../../components/SnackBar/NormalSnackBar";
-import LinkButton from "../../components/MainButton/LinkButton";
 import { Link } from "react-router-dom";
 
 export interface FuturesOrderService {
@@ -314,7 +313,7 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
         })}
       >
         {tabs}
-        <Link to={"/dashboard"}>
+        <Link to={"/dashboard?t=history"}>
           <Box
             sx={(theme) => ({
               width: "20px",

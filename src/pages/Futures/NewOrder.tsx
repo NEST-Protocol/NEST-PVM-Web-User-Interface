@@ -342,10 +342,12 @@ const FuturesNewOrder: FC<FuturesNewOrderProps> = ({ ...props }) => {
             />
           </Box>
         </Modal>
-        <DepositModal
-          open={showDeposit}
-          onClose={() => setShowDeposit(false)}
-        />
+        {showDeposit ? (
+          <DepositModal open={true} onClose={() => setShowDeposit(false)} />
+        ) : (
+          <></>
+        )}
+
         <SignModal
           open={showSignModal}
           onClose={() => setShowSignModal(false)}

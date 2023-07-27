@@ -118,7 +118,7 @@ const ConnectButton: FC<ConnectButtonProps> = ({ ...props }) => {
         </Box>
 
         <MainButton
-          title={t`Sign message`}
+          title={t`Send request`}
           style={{ height: "24px", borderRadius: "4px", fontSize: "10px" }}
           onClick={props.signCallBack}
         />
