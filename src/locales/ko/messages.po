@@ -137,7 +137,7 @@ msgstr "NEST Fi 사용 초보자 가이드"
 msgid "about connecting wallets"
 msgstr "지갑 연결 정보"
 
-#: src/pages/Share/Head/ConnectButton.tsx
+#: src/pages/Share/Head/NESTHead.tsx
 msgid "Account"
 msgstr ""
 
@@ -1172,10 +1172,6 @@ msgstr "스마트 컨트랙트로만 거래하며 제3자 개입이 없습니다
 #: src/pages/Dashboard/Referral/Referral.tsx
 msgid "Trading Volume"
 msgstr "거래량"
-
-#: src/pages/Account/Account.tsx
-msgid "Transaction"
-msgstr ""
 
 #: src/hooks/useFuturesPOrder.ts
 msgid "Trigger"

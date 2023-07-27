@@ -109,15 +109,15 @@ function useAccount() {
 
   useEffect(() => {
     getAssetsList();
-    getTransactionList();
+    // getTransactionList();
     const time = setInterval(() => {
       getAssetsList();
-      getTransactionList();
+      // getTransactionList();
     }, 20 * 1000);
     return () => {
       clearInterval(time);
     };
-  }, [getAssetsList, getTransactionList]);
+  }, [getAssetsList]);
 
   return {
     showDeposit,

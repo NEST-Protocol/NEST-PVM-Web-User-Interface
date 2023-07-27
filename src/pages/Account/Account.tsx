@@ -57,11 +57,11 @@ const Account: FC = () => {
           <Trans>Withdraw</Trans>
         </p>
       </Stack>,
-      <Stack direction={"row"} alignItems={"center"} spacing={"4px"}>
-        <p>
-          <Trans>Transaction</Trans>
-        </p>
-      </Stack>,
+      // <Stack direction={"row"} alignItems={"center"} spacing={"4px"}>
+      //   <p>
+      //     <Trans>Transaction</Trans>
+      //   </p>
+      // </Stack>,
     ];
     return (
       <NESTTabs

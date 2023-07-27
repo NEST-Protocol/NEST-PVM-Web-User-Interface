@@ -137,7 +137,7 @@ msgstr "Um guia para principiantes na utilização do NEST Fi"
 msgid "about connecting wallets"
 msgstr "sobre as carteiras digitais"
 
-#: src/pages/Share/Head/ConnectButton.tsx
+#: src/pages/Share/Head/NESTHead.tsx
 msgid "Account"
 msgstr ""
 
@@ -1172,10 +1172,6 @@ msgstr "Negociação apenas com contrato inteligente, sem intervenção de terce
 #: src/pages/Dashboard/Referral/Referral.tsx
 msgid "Trading Volume"
 msgstr "Investidos negociados"
-
-#: src/pages/Account/Account.tsx
-msgid "Transaction"
-msgstr ""
 
 #: src/hooks/useFuturesPOrder.ts
 msgid "Trigger"

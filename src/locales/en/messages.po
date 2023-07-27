@@ -137,7 +137,7 @@ msgstr "A beginner's guide to using NESTFi"
 msgid "about connecting wallets"
 msgstr "about connecting wallets"
 
-#: src/pages/Share/Head/ConnectButton.tsx
+#: src/pages/Share/Head/NESTHead.tsx
 msgid "Account"
 msgstr "Account"
 
@@ -1174,10 +1174,6 @@ msgstr "Trading only with smart contract.No third-party intervention."
 #: src/pages/Dashboard/Referral/Referral.tsx
 msgid "Trading Volume"
 msgstr "Trading Volume"
-
-#: src/pages/Account/Account.tsx
-msgid "Transaction"
-msgstr "Transaction"
 
 #: src/hooks/useFuturesPOrder.ts
 msgid "Trigger"

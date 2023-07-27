@@ -137,7 +137,7 @@ msgstr "Hướng dẫn sử dụng NESTFi cho người mới"
 msgid "about connecting wallets"
 msgstr "về việc kết nối ví"
 
-#: src/pages/Share/Head/ConnectButton.tsx
+#: src/pages/Share/Head/NESTHead.tsx
 msgid "Account"
 msgstr ""
 
@@ -1174,10 +1174,6 @@ msgstr "Chỉ giao dịch với hợp đồng thông minh. Không có sự can t
 #: src/pages/Dashboard/Referral/Referral.tsx
 msgid "Trading Volume"
 msgstr "Khối lượng giao dịch"
-
-#: src/pages/Account/Account.tsx
-msgid "Transaction"
-msgstr ""
 
 #: src/hooks/useFuturesPOrder.ts
 msgid "Trigger"

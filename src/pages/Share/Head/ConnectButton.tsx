@@ -187,7 +187,7 @@ const ConnectButton: FC<ConnectButtonProps> = ({ ...props }) => {
             <Stack spacing={"12px"}>
               {checkSigned ? (
                 <>
-                  <Link to={"/account"}>
+                  {/* <Link to={"/account"}>
                     <AccountListStack
                       direction={"row"}
                       spacing={"8px"}
@@ -201,7 +201,7 @@ const ConnectButton: FC<ConnectButtonProps> = ({ ...props }) => {
                         <Trans>Account</Trans>
                       </Box>
                     </AccountListStack>
-                  </Link>
+                  </Link> */}
 
                   {/* <AccountListStack
                     direction={"row"}
@@ -220,7 +220,7 @@ const ConnectButton: FC<ConnectButtonProps> = ({ ...props }) => {
               ) : (
                 <>{signView}</>
               )}
-              <Stack paddingX={"16px"} width={"100%"}>
+              {/* <Stack paddingX={"16px"} width={"100%"}>
                 <Divider
                   orientation="horizontal"
                   sx={(theme) => ({
@@ -229,7 +229,7 @@ const ConnectButton: FC<ConnectButtonProps> = ({ ...props }) => {
                     width: "100%",
                   })}
                 />
-              </Stack>
+              </Stack> */}
 
               <AccountListStack
                 direction={"row"}

@@ -135,7 +135,7 @@ msgstr ""
 msgid "about connecting wallets"
 msgstr "コネクティングウォレットについて"
 
-#: src/pages/Share/Head/ConnectButton.tsx
+#: src/pages/Share/Head/NESTHead.tsx
 msgid "Account"
 msgstr ""
 
@@ -1169,10 +1169,6 @@ msgstr ""
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 msgid "Trading Volume"
-msgstr ""
-
-#: src/pages/Account/Account.tsx
-msgid "Transaction"
 msgstr ""
 
 #: src/hooks/useFuturesPOrder.ts

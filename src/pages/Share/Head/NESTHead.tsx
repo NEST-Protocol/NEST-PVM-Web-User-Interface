@@ -2,6 +2,7 @@ import { FC, useMemo, useEffect, useState } from "react";
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
 import {
+  AccountIcon,
   Dark,
   Dashboard,
   FuturesIcon,
@@ -34,6 +35,12 @@ export const NavItems = [
     content: `Swap`,
     icon: SwapExchangeSmall,
     l: <Trans>Swap</Trans>,
+  },
+  {
+    path: "/account",
+    content: `Account`,
+    icon: AccountIcon,
+    l: <Trans>Account</Trans>,
   },
   {
     path: "/dashboard",
@@ -263,7 +270,7 @@ const NESTHead: FC = () => {
         },
       };
     });
-    const liList = navItems.slice(0, 2).map((item, index) => {
+    const liList = navItems.slice(0, 3).map((item, index) => {
       return (
         <Link
           className={`nav${
