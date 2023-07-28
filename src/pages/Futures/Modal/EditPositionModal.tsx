@@ -2,14 +2,12 @@ import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import Modal from "@mui/material/Modal";
 import Stack from "@mui/material/Stack";
-import { BigNumber } from "ethers/lib/ethers";
 import { FC, useMemo } from "react";
 import MainButton from "../../../components/MainButton/MainButton";
 import NESTLine from "../../../components/NESTLine";
 import NormalInfo from "../../../components/NormalInfo/NormalInfo";
 import NormalInputWithCloseButton from "../../../components/NormalInput/NormalInputWithCloseButton";
 import useFuturesEditPosition from "../../../hooks/useFuturesEditPosition";
-import { FuturesOrderV2 } from "../../../hooks/useFuturesOrderList";
 import useWindowWidth from "../../../hooks/useWindowWidth";
 import BaseDrawer from "../../Share/Modal/BaseDrawer";
 import BaseModal from "../../Share/Modal/BaseModal";
@@ -17,11 +15,12 @@ import { FuturesPrice } from "../Futures";
 import TriggerRiskModal from "./LimitAndPriceModal";
 import ErrorLabel from "../../../components/ErrorLabel/ErrorLabel";
 import { Trans, t } from "@lingui/macro";
+import { FuturesOrderService } from "../OrderList";
 
 interface EditPositionModalBaseProps {
-  data: FuturesOrderV2;
+  data: FuturesOrderService;
   price: FuturesPrice | undefined;
-  onClose: () => void;
+  onClose: (res?: boolean) => void;
 }
 
 const EditPositionModalBase: FC<EditPositionModalBaseProps> = ({
@@ -35,16 +34,13 @@ const EditPositionModalBase: FC<EditPositionModalBaseProps> = ({
     showPosition,
     showOpenPrice,
     showLiqPrice,
-    showTriggerFee,
     mainButtonTitle,
     mainButtonLoading,
     mainButtonDis,
     mainButtonAction,
     placeHolder,
-    isEdit,
     closeTP,
     closeSL,
-    feeTip,
     showTriggerNotice,
     setShowTriggerNotice,
     triggerNoticeCallback,
@@ -137,23 +133,6 @@ const EditPositionModalBase: FC<EditPositionModalBaseProps> = ({
           symbol={"USDT"}
         />
         <NormalInfo title={t`Liq Price`} value={showLiqPrice} symbol={"USDT"} />
-        {isEdit ? (
-          <></>
-        ) : (
-          <NormalInfo
-            title={t`Service Fee`}
-            value={showTriggerFee}
-            symbol={"NEST"}
-            help
-            helpInfo={
-              <>
-                {feeTip.map((item, index) => (
-                  <p key={`EditPositionFeeTips + ${index}`}>{item}</p>
-                ))}
-              </>
-            }
-          />
-        )}
       </Stack>
       <MainButton
         title={mainButtonTitle}
@@ -167,33 +146,37 @@ const EditPositionModalBase: FC<EditPositionModalBaseProps> = ({
 };
 
 interface EditPositionModalProps {
-  data: FuturesOrderV2;
+  data: FuturesOrderService;
   price: FuturesPrice | undefined;
   open: boolean;
-  onClose: () => void;
+  onClose: (res?: boolean) => void;
 }
 
 const EditPositionModal: FC<EditPositionModalProps> = ({ ...props }) => {
   const { isMobile } = useWindowWidth();
   const title = useMemo(() => {
-    return !(
-      BigNumber.from("0").eq(props.data.stopLossPrice) &&
-      BigNumber.from("0").eq(props.data.stopProfitPrice)
-    )
+    return !(props.data.stopLossPrice === 0 && props.data.takeProfitPrice === 0)
       ? t`Edit Position`
       : t`Trigger Position`;
-  }, [props.data.stopLossPrice, props.data.stopProfitPrice]);
+  }, [props.data.stopLossPrice, props.data.takeProfitPrice]);
   const view = useMemo(() => {
     return isMobile ? (
       <Drawer
         anchor={"bottom"}
         open={props.open}
-        onClose={props.onClose}
+        onClose={() => {
+          props.onClose(undefined);
+        }}
         sx={{
           "& .MuiPaper-root": { background: "none", backgroundImage: "none" },
         }}
       >
-        <BaseDrawer title={title} onClose={props.onClose}>
+        <BaseDrawer
+          title={title}
+          onClose={() => {
+            props.onClose(undefined);
+          }}
+        >
           <EditPositionModalBase
             data={props.data}
             price={props.price}
@@ -209,7 +192,12 @@ const EditPositionModal: FC<EditPositionModalProps> = ({ ...props }) => {
         aria-describedby="modal-modal-description"
       >
         <Box>
-          <BaseModal title={title} onClose={props.onClose}>
+          <BaseModal
+            title={title}
+            onClose={() => {
+              props.onClose(undefined);
+            }}
+          >
             <EditPositionModalBase
               data={props.data}
               price={props.price}

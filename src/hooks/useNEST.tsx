@@ -7,7 +7,14 @@ import {
   useNetwork,
   useSwitchNetwork,
 } from "wagmi";
-import { NavItems, NavItemsForScroll } from "../pages/Share/Head/NESTHead";
+import { NavItems } from "../pages/Share/Head/NESTHead";
+
+export interface signatureData {
+  address: string;
+  chainId: number;
+  signature: string;
+  expirationTime: number;
+}
 
 function useMainReact() {
   const [showConnect, setShowConnect] = useState(false);
@@ -71,12 +78,6 @@ function useMainReact() {
     }
   }, [account.address, chainId]);
   /**
-   * nav items from different chain
-   */
-  const navItems = useMemo(() => {
-    return chainId === 534353 ? NavItemsForScroll : NavItems;
-  }, [chainId]);
-  /**
    * add nest
    */
   const addNESTToWallet = useCallback(async () => {
@@ -92,6 +93,61 @@ function useMainReact() {
       });
     }
   }, [account.connector, chainId]);
+  /**
+   * checkSigned
+   */
+  const defaultSignature = useMemo(() => {
+    if (!chainsData.chainId || !account.address) {
+      return;
+    }
+    var cache = localStorage.getItem("signature");
+    if (!cache) {
+      return;
+    }
+    const signsData = JSON.parse(cache);
+    const same: [signatureData] = signsData.filter(
+      (item: signatureData) =>
+        (item["address"] as string).toLocaleLowerCase() ===
+          account.address?.toLocaleLowerCase() &&
+        item["chainId"] === chainsData.chainId
+    );
+    if (same.length > 0) {
+      const timestamp = Date.now();
+      if (same[0].expirationTime > timestamp / 1000) {
+        return same[0];
+      } else {
+        return undefined;
+      }
+    }
+    return;
+  }, [account.address, chainsData.chainId]);
+  const [signature, setSignature] = useState<signatureData | undefined>(
+    defaultSignature
+  );
+
+  useEffect(() => {
+    setSignature(defaultSignature);
+  }, [defaultSignature, account.address]);
+  const checkSigned = useMemo(() => {
+    console.log(signature);
+    if (signature) {
+      return true;
+    } else {
+      return false;
+    }
+  }, [signature]);
+
+  /**
+   * nav items from different chain
+   */
+  const navItems = useMemo(() => {
+    if (account.address && checkSigned) {
+      return NavItems;
+    } else {
+      return NavItems.filter((item) => item.content !== "Account");
+    }
+  }, [account.address, checkSigned]);
+
   return {
     showConnect,
     setShowConnect,
@@ -100,7 +156,10 @@ function useMainReact() {
     chainsData,
     disconnect,
     navItems,
-    addNESTToWallet
+    addNESTToWallet,
+    checkSigned,
+    signature,
+    setSignature,
   };
 }
 const NEST = createContainer(useMainReact);

@@ -12,6 +12,7 @@ import { KOLClick, KOLWallet } from "../lib/NESTRequest";
 
 const HomePage = loadable(() => import("./Home/Home"));
 const FuturesPage = loadable(() => import("./Futures/Futures"));
+const AccountPage = loadable(() => import("./Account/Account"));
 const SwapPage = loadable(() => import("./Swap/Swap"));
 const DashboardPage = loadable(() => import("./Dashboard/Dashboard"));
 const ReferralPage = loadable(() => import("./Dashboard/Referral/Referral"));
@@ -44,7 +45,6 @@ const App: FC = () => {
           .split("?position=")[0];
       }
     }
-    console.log(inviteCode);
 
     if (inviteCode && account.address) {
       if (
@@ -110,6 +110,7 @@ const App: FC = () => {
             <Route path="/home" element={<HomePage />} />
             <Route path="/futures" element={<FuturesPage />} />
             {swapOrDirectPoster}
+            <Route path="/account" element={<AccountPage/>}/>
             <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/dashboard/referral" element={<ReferralPage />} />
             <Route path="*" element={<Navigate to="/home" />} />

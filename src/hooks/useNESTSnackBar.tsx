@@ -9,6 +9,8 @@ import useWindowWidth from "./useWindowWidth";
 import { t } from "@lingui/macro";
 import { getTransactionTypeString } from "./useTransactionReceipt";
 
+
+
 function useTransactionSnackBar() {
   const { isBigMobile } = useWindowWidth();
   const { chainsData } = useNEST();
@@ -72,6 +74,30 @@ function useTransactionSnackBar() {
     }
   };
 
+  const transactionSnackBarService = (
+    title: string,
+    info: string,
+    type: SnackBarType
+  ) => {
+    enqueueSnackbar("", {
+      preventDuplicate: true,
+      anchorOrigin: {
+        vertical: "top",
+        horizontal: isBigMobile ? "center" : "right",
+      },
+      content: (key, message) => (
+        <NormalSnackBar
+          id={key}
+          title={getTransactionTypeString(title)}
+          info={info}
+          type={type}
+          message={message}
+          closeSnackbar={closeSnackbar}
+        />
+      ),
+    });
+  };
+
   const switchNetWork = useCallback(() => {
     enqueueSnackbar("", {
       preventDuplicate: true,
@@ -132,6 +158,7 @@ function useTransactionSnackBar() {
 
   return {
     transactionSnackBar,
+    transactionSnackBarService,
     closeSnackbar,
     messageSnackBar,
     switchNetWork,

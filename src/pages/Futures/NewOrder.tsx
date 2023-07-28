@@ -4,9 +4,7 @@ import useWindowWidth from "../../hooks/useWindowWidth";
 import LongOrShort from "../../components/LongOrShort/LongOrShort";
 import NESTTabs from "../../components/NESTTabs/NESTTabs";
 import MainButton from "../../components/MainButton/MainButton";
-import useFuturesNewOrder, {
-  INPUT_TOKENS,
-} from "../../hooks/useFuturesNewOrder";
+import useFuturesNewOrder from "../../hooks/useFuturesNewOrder";
 import Box from "@mui/material/Box";
 import LeverageSlider from "./Components/LeverageSlider";
 import NormalInput, {
@@ -17,14 +15,16 @@ import NormalInfo from "../../components/NormalInfo/NormalInfo";
 import { FuturesPrice } from "./Futures";
 import Modal from "@mui/material/Modal";
 import TriggerRiskModal from "./Modal/LimitAndPriceModal";
-import NESTInputSelect from "../../components/NormalInput/NESTInputSelect";
-import ApproveNoticeModal from "./Modal/ApproveNoticeModal";
 import ErrorLabel from "../../components/ErrorLabel/ErrorLabel";
 import { Trans, t } from "@lingui/macro";
+import NESTInput from "../../components/NormalInput/NESTInput";
+import DepositModal from "../Share/Modal/DepositModal";
+import SignModal from "../Share/Modal/SignModal";
 
 interface FuturesNewOrderProps {
   price: FuturesPrice | undefined;
   tokenPair: string;
+  updateList: () => void;
 }
 
 const FuturesNewOrder: FC<FuturesNewOrderProps> = ({ ...props }) => {
@@ -34,7 +34,6 @@ const FuturesNewOrder: FC<FuturesNewOrderProps> = ({ ...props }) => {
     setLongOrShort,
     tabsValue,
     changeTabs,
-    showToSwap,
     lever,
     setLever,
     limitAmount,
@@ -62,14 +61,9 @@ const FuturesNewOrder: FC<FuturesNewOrderProps> = ({ ...props }) => {
     setShowTriggerNotice,
     triggerNoticeCallback,
     inputToken,
-    setInputToken,
     inputAmount,
     setInputAmount,
-    showNESTPrice,
     showPositions,
-    showApproveNotice,
-    setShowApproveNotice,
-    approveNoticeCallBack,
     showAmountError,
     tpDefault,
     slDefault,
@@ -79,7 +73,12 @@ const FuturesNewOrder: FC<FuturesNewOrderProps> = ({ ...props }) => {
     stopErrorText,
     isShareLink,
     closeShareLink,
-  } = useFuturesNewOrder(props.price, props.tokenPair);
+    showDeposit,
+    setShowDeposit,
+    showSignModal,
+    setShowSignModal,
+    signature,
+  } = useFuturesNewOrder(props.price, props.tokenPair, props.updateList);
   const newOrderTabsData = useMemo(() => {
     return [
       <p>
@@ -92,15 +91,9 @@ const FuturesNewOrder: FC<FuturesNewOrderProps> = ({ ...props }) => {
   }, []);
   const inputNestAmount = useCallback(() => {
     return (
-      <NESTInputSelect
-        tokenName={inputToken}
-        tokenArray={INPUT_TOKENS}
-        selectToken={(tokenName: string) => {
-          setInputAmount("");
-          setInputToken(tokenName);
-        }}
-        error={!checkBalance || checkMinNEST}
-        showToSwap={showToSwap}
+      <NESTInput
+        checkBalance={!(!checkBalance || checkMinNEST)}
+        showToSwap={!checkBalance}
         showBalance={showBalance}
         maxCallBack={maxCallBack}
         nestAmount={inputAmount}
@@ -108,23 +101,26 @@ const FuturesNewOrder: FC<FuturesNewOrderProps> = ({ ...props }) => {
           setInputAmount(value.formatInputNum4());
           closeShareLink();
         }}
-        price={showNESTPrice}
-        isShare={isShareLink}
+        otherCallBack={() => {
+          if (signature) {
+            setShowDeposit(true);
+          } else {
+            setShowSignModal(true);
+          }
+        }}
       />
     );
   }, [
     checkBalance,
     checkMinNEST,
+    closeShareLink,
     inputAmount,
-    inputToken,
-    isShareLink,
     maxCallBack,
     setInputAmount,
-    setInputToken,
-    closeShareLink,
+    setShowDeposit,
+    setShowSignModal,
     showBalance,
-    showNESTPrice,
-    showToSwap,
+    signature,
   ]);
 
   const stopPrice = useCallback(() => {
@@ -328,12 +324,6 @@ const FuturesNewOrder: FC<FuturesNewOrderProps> = ({ ...props }) => {
   const modals = useMemo(() => {
     return (
       <>
-        <ApproveNoticeModal
-          open={showApproveNotice}
-          isSuccess={true}
-          onClose={() => setShowApproveNotice(false)}
-          callBack={approveNoticeCallBack}
-        />
         <Modal
           open={showTriggerNotice}
           onClose={() => setShowTriggerNotice(false)}
@@ -352,13 +342,24 @@ const FuturesNewOrder: FC<FuturesNewOrderProps> = ({ ...props }) => {
             />
           </Box>
         </Modal>
+        {showDeposit ? (
+          <DepositModal open={true} onClose={() => setShowDeposit(false)} />
+        ) : (
+          <></>
+        )}
+
+        <SignModal
+          open={showSignModal}
+          onClose={() => setShowSignModal(false)}
+        />
       </>
     );
   }, [
-    approveNoticeCallBack,
-    setShowApproveNotice,
+    setShowDeposit,
+    setShowSignModal,
     setShowTriggerNotice,
-    showApproveNotice,
+    showDeposit,
+    showSignModal,
     showTriggerNotice,
     triggerNoticeCallback,
   ]);

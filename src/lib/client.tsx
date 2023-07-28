@@ -55,8 +55,9 @@ const scrollAlphaTestnet = {
 };
 
 const { chains, provider, webSocketProvider } = configureChains(
-  [bsc, scrollAlphaTestnet],
   // [bsc, scrollAlphaTestnet],
+  // [bscTestnet],
+  [bsc],
   [
     infuraProvider({ apiKey: "be0a9832394640b090fceb2b2107993c" }),
     jsonRpcProvider({

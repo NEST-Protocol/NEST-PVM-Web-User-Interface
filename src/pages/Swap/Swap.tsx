@@ -2,7 +2,7 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
-import { FC, useMemo, useState } from "react";
+import { FC, useState } from "react";
 import {
   Add,
   SwapExchangeBig,
@@ -17,7 +17,6 @@ import SwapInputItem, { SwapShowItem } from "./Components/SwapInputItem";
 import SwapSlippageModal from "./Components/SwapSlippageModal";
 import { Trans } from "@lingui/macro";
 import useNEST from "../../hooks/useNEST";
-import ChangeNewTokenModal from "../Share/Modal/ChangeNewTokenModal";
 
 const SwapBaseStack = styled(Stack)(({ theme }) => {
   return {
@@ -38,20 +37,8 @@ const SwapBaseStack = styled(Stack)(({ theme }) => {
 
 const Swap: FC = () => {
   const { isMobile } = useWindowWidth();
-  const { addNESTToWallet, account } = useNEST();
+  const { addNESTToWallet } = useNEST();
   const [openModal, setOpenModal] = useState(false);
-
-  const openChangeModalDefault = useMemo(() => {
-    if (account) {
-      const isShow = localStorage.getItem("ChangeToken");
-      return isShow !== "1";
-    } else {
-      return false;
-    }
-  }, [account]);
-  const [openChangeModal, setOpenChangeModal] = useState(
-    openChangeModalDefault
-  );
   const {
     swapToken,
     exchangeButton,
@@ -150,20 +137,6 @@ const Swap: FC = () => {
             onClose={() => setOpenModal(false)}
             nowSelected={slippage}
             selectedCallBack={(num) => setSlippage(num)}
-          />
-        </Box>
-      </Modal>
-      <Modal
-        open={openChangeModal}
-        onClose={() => setOpenChangeModal(false)}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box>
-          <ChangeNewTokenModal
-            onClose={() => {
-              setOpenChangeModal(false);
-            }}
           />
         </Box>
       </Modal>

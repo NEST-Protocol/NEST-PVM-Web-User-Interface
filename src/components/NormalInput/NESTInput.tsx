@@ -1,7 +1,6 @@
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import { FC, useMemo } from "react";
-import { Link } from "react-router-dom";
 import useNEST from "../../hooks/useNEST";
 import { NEXT, SwapExchangeSmall } from "../icons";
 import LinkButton from "../MainButton/LinkButton";
@@ -16,28 +15,26 @@ interface NESTInputProps {
   maxCallBack: () => void;
   nestAmount: string;
   changeNestAmount: (value: string) => void;
+  otherCallBack: () => void;
+  hideSwapTitle?: boolean;
   style?: React.CSSProperties;
 }
 
 const NESTInput: FC<NESTInputProps> = ({ ...props }) => {
-  const { account, chainsData } = useNEST();
+  const { account, chainsData, checkSigned } = useNEST();
   const noNESTText = useMemo(() => {
     if (chainsData.chainId === 534353) {
       return t`The balance is 0. You can go to "Faucet" to get test token before trading.`;
     } else {
-      return t`0 balance. Before trading, you can switch to "Swap" to exchange
-      between USDT and NEST token.`;
+      if (checkSigned) {
+        return t`Insufficient balance. Please deposit to start the lightning trade.`;
+      } else {
+        return t`Please complete your sign`;
+      }
     }
-  }, [chainsData.chainId]);
-  const swapLink = useMemo(() => {
-    if (chainsData.chainId === 534353) {
-      return "/faucet";
-    } else {
-      return "/swap";
-    }
-  }, [chainsData.chainId]);
+  }, [chainsData.chainId, checkSigned]);
   const swapTitle = useMemo(() => {
-    return chainsData.chainId === 534353 ? t`Faucet` : t`Swap`;
+    return chainsData.chainId === 534353 ? t`Faucet` : t`Deposit`;
   }, [chainsData.chainId]);
   return (
     <Stack
@@ -109,28 +106,35 @@ const NESTInput: FC<NESTInputProps> = ({ ...props }) => {
             <Trans>MAX</Trans>
           </LinkButton>
         </Stack>
-        <LinkButton>
-          <Link to={swapLink}>
-            <Stack
-              direction={"row"}
-              justifyContent={"flex-end"}
-              alignItems={"center"}
-              spacing={"4px"}
-              sx={{
-                "& svg": {
-                  width: 12,
-                  height: 12,
-                  display: "block",
-                },
-              }}
-            >
-              <p>{swapTitle}</p>
+
+        <Stack
+          direction={"row"}
+          justifyContent={"flex-end"}
+          alignItems={"center"}
+          spacing={"4px"}
+          sx={{
+            "& svg": {
+              width: 12,
+              height: 12,
+              display: "block",
+            },
+          }}
+          component={"button"}
+          onClick={props.otherCallBack}
+        >
+          <LinkButton>
+            <p>{props.hideSwapTitle || !checkSigned ? <></> : swapTitle}</p>
+          </LinkButton>
+          <LinkButton>
+            {props.hideSwapTitle || !checkSigned ? (
+              <></>
+            ) : (
               <SwapExchangeSmall />
-            </Stack>
-          </Link>
-        </LinkButton>
+            )}
+          </LinkButton>
+        </Stack>
       </Stack>
-      {props.showToSwap ? (
+      {props.showToSwap && account.address ? (
         <Stack
           direction={"row"}
           spacing={"4px"}
@@ -141,11 +145,9 @@ const NESTInput: FC<NESTInputProps> = ({ ...props }) => {
             paddingX: "8px",
             borderRadius: "4px",
             background: theme.normal.danger_light_hover,
-            "& a": {
-              color: theme.normal.danger,
-              fontSize: 12,
-              fontWeight: 400,
-            },
+            color: theme.normal.danger,
+            fontSize: 12,
+            fontWeight: 400,
 
             marginBottom: "12px",
             "& svg": {
@@ -158,11 +160,11 @@ const NESTInput: FC<NESTInputProps> = ({ ...props }) => {
             },
           })}
           alignItems={"center"}
+          component={"button"}
+          onClick={props.otherCallBack}
         >
-          <Link to={swapLink}>{noNESTText}</Link>
-          <Link to={swapLink}>
-            <NEXT />
-          </Link>
+          <Box textAlign={"left"}>{noNESTText}</Box>
+          <NEXT />
         </Stack>
       ) : (
         <></>

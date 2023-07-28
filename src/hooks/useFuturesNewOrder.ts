@@ -1,26 +1,18 @@
-import {
-  MIN_NEST_BIG_NUMBER,
-  useNewBuyRequest,
-  useNewBuyRequestWithUSDT,
-} from "./../contracts/useFuturesBuyV2";
-import { FuturesV2Contract } from "./../contracts/contractAddress";
-import { MaxUint256 } from "@ethersproject/constants";
 import { BigNumber } from "ethers";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import useReadTokenBalance, {
-  useReadTokenAllowance,
-} from "../contracts/Read/useReadTokenContract";
-import { FuturesPrice, priceToken } from "../pages/Futures/Futures";
+import { FuturesPrice } from "../pages/Futures/Futures";
 import useNEST from "./useNEST";
-import useTokenApprove from "../contracts/useTokenContract";
+import { getQueryVariable } from "../lib/queryVaribale";
+import { KOLTx, serviceOpen } from "../lib/NESTRequest";
+import { t } from "@lingui/macro";
+import useService from "../contracts/useService";
 import {
   TransactionType,
-  usePendingTransactions,
+  usePendingTransactionsBase,
 } from "./useTransactionReceipt";
-import useReadSwapAmountOut from "../contracts/Read/useReadSwapContract";
-import { getQueryVariable } from "../lib/queryVaribale";
-import { KOLTx } from "../lib/NESTRequest";
-import { t } from "@lingui/macro";
+import { SnackBarType } from "../components/SnackBar/NormalSnackBar";
+
+export const MIN_NEST_BIG_NUMBER = BigNumber.from("500000");
 
 export const lipPrice = (
   balance: BigNumber,
@@ -47,8 +39,6 @@ export const lipPrice = (
   return BigNumber.from("0").gt(result) ? BigNumber.from("0") : result;
 };
 
-export const BASE_NEST_FEE = "15";
-const NEW_ORDER_UPDATE = 30;
 export const INPUT_TOKENS = ["NEST"];
 
 function addPricePoint(price: BigNumber, isLong: boolean) {
@@ -62,10 +52,10 @@ function addPricePoint(price: BigNumber, isLong: boolean) {
 
 function useFuturesNewOrder(
   price: FuturesPrice | undefined,
-  tokenPair: string
+  tokenPair: string,
+  updateList: () => void
 ) {
-  const { isPendingType } = usePendingTransactions();
-  const { account, chainsData, setShowConnect } = useNEST();
+  const { account, chainsData, setShowConnect, signature } = useNEST();
   const [longOrShort, setLongOrShort] = useState(true);
   const [tabsValue, setTabsValue] = useState(0);
   const [nestAmount, setNestAmount] = useState("");
@@ -76,21 +66,18 @@ function useFuturesNewOrder(
   const [sl, setSl] = useState("");
   const [inputToken, setInputToken] = useState<string>("NEST");
   const [inputAmount, setInputAmount] = useState("");
-
-  const nowToken = useMemo(() => {
-    const token = inputToken.getToken();
-    if (chainsData.chainId && token) {
-      return token.address[chainsData.chainId];
-    }
-  }, [chainsData.chainId, inputToken]);
-  const tokenDecimals = useMemo(() => {
-    const token = inputToken.getToken();
-    if (token && chainsData.chainId) {
-      return token.decimals[chainsData.chainId];
-    } else {
-      return undefined;
-    }
-  }, [chainsData.chainId, inputToken]);
+  const [tokenBalance, setTokenBalance] = useState<BigNumber>();
+  const [loading, setLoading] = useState<boolean>(false);
+  const { service_balance } = useService();
+  const { addTransactionNotice } = usePendingTransactionsBase();
+  const [showDeposit, setShowDeposit] = useState(false);
+  const [showSignModal, setShowSignModal] = useState(false);
+  // const nowToken = useMemo(() => {
+  //   const token = inputToken.getToken();
+  //   if (chainsData.chainId && token) {
+  //     return token.address[chainsData.chainId];
+  //   }
+  // }, [chainsData.chainId, inputToken]);
   const openPriceBase = useMemo(() => {
     if (price) {
       const nowPrice = price[tokenPair];
@@ -129,41 +116,17 @@ function useFuturesNewOrder(
   /**
    * uniswap out amount
    */
-  const { uniSwapAmountOut } = useReadSwapAmountOut(
-    (inputAmount === "" ? "1" : inputAmount).stringToBigNumber(tokenDecimals),
-    [
-      "USDT".getToken()!.address[chainsData.chainId ?? 56],
-      "NEST".getToken()!.address[chainsData.chainId ?? 56],
-    ]
-  );
   const allValue = useCallback(
     (value: BigNumber) => {
-      const top = BigNumber.from("1000").mul(
-        value.sub(
-          tabsValue === 1
-            ? BASE_NEST_FEE.stringToBigNumber(18)!
-            : BigNumber.from("0")
-        )
-      );
-      const bottom = (lever + 1000) * 1;
-      const nestNum = top.div(BigNumber.from(bottom.toString()));
-      return nestNum.sub("0.1".stringToBigNumber(18)!);
+      return value
+        .mul(BigNumber.from("10000"))
+        .div(BigNumber.from(`${10000 + lever * 5}`));
     },
-    [lever, tabsValue]
+    [lever]
   );
   useEffect(() => {
-    if (inputToken === "NEST") {
-      setNestAmount(inputAmount);
-    } else {
-      if (inputAmount !== "" && uniSwapAmountOut) {
-        setNestAmount(
-          allValue(uniSwapAmountOut[1]).bigNumberToShowString(18, 4)
-        );
-      } else {
-        setNestAmount("");
-      }
-    }
-  }, [allValue, inputAmount, inputToken, uniSwapAmountOut]);
+    setNestAmount(inputAmount);
+  }, [inputAmount]);
 
   /**
    * futures modal
@@ -174,32 +137,15 @@ function useFuturesNewOrder(
   }, []);
   const [showTriggerNotice, setShowTriggerNotice] = useState(false);
   const [showedTriggerNotice, setShowedTriggerNotice] = useState(false);
-  const [showApproveNotice, setShowApproveNotice] = useState(false);
-  /**
-   * futures contract
-   */
-  const futureContract = useMemo(() => {
-    if (chainsData.chainId) {
-      return FuturesV2Contract[chainsData.chainId];
-    }
-  }, [chainsData.chainId]);
-  /**
-   * allowance
-   */
-  const { allowance: tokenAllowance, allowanceRefetch: tokenAllowanceRefetch } =
-    useReadTokenAllowance(
-      (nowToken ?? String().zeroAddress) as `0x${string}`,
-      account.address ?? "",
-      futureContract
-    );
   /**
    * balance
    */
-  const { balance: tokenBalance, balanceOfRefetch: tokenBalanceRefetch } =
-    useReadTokenBalance(
-      (nowToken ?? String().zeroAddress) as `0x${string}`,
-      account.address ?? ""
-    );
+  const getBalance = useCallback(async () => {
+    service_balance((result: number) => {
+      const balance_bigNumber = result.toString().stringToBigNumber(18);
+      setTokenBalance(balance_bigNumber ?? BigNumber.from("0"));
+    });
+  }, [service_balance]);
 
   const fee = useMemo(() => {
     if (nestAmount === "") {
@@ -210,30 +156,11 @@ function useFuturesNewOrder(
       .mul(BigNumber.from(lever.toString()))
       .mul(BigNumber.from("5"))
       .div(BigNumber.from("10000"));
-    var limitFee = BigNumber.from("0");
-    if (tabsValue === 1) {
-      limitFee = BASE_NEST_FEE.stringToBigNumber(18) ?? BigNumber.from("0");
-    }
-    return baseFee.add(limitFee);
-  }, [lever, nestAmount, tabsValue]);
+    return baseFee;
+  }, [lever, nestAmount]);
   /**
    * check
    */
-  const checkAllowance = useMemo(() => {
-    const inputAmountNumber =
-      inputAmount === ""
-        ? BigNumber.from("0")
-        : inputAmount.stringToBigNumber(18)!;
-    if (tokenAllowance) {
-      if (inputToken !== "NEST") {
-        return inputAmountNumber.lte(tokenAllowance);
-      } else {
-        return fee.add(inputAmountNumber).lte(tokenAllowance);
-      }
-    } else {
-      return true;
-    }
-  }, [fee, inputAmount, inputToken, tokenAllowance]);
   const checkBalance = useMemo(() => {
     const inputAmountNumber =
       inputAmount === ""
@@ -241,15 +168,11 @@ function useFuturesNewOrder(
         : inputAmount.stringToBigNumber(18)!;
 
     if (tokenBalance) {
-      if (inputToken !== "NEST") {
-        return inputAmountNumber.lte(tokenBalance);
-      } else {
-        return fee.add(inputAmountNumber).lte(tokenBalance);
-      }
+      return fee.add(inputAmountNumber).lte(tokenBalance);
     } else {
       return false;
     }
-  }, [fee, inputAmount, inputToken, tokenBalance]);
+  }, [fee, inputAmount, tokenBalance]);
   /**
    * action
    */
@@ -265,58 +188,57 @@ function useFuturesNewOrder(
       return undefined;
     }
   }, [limitAmount, longOrShort, openPriceBase, tabsValue]);
-  const inputNESTTransaction = useMemo(() => {
-    const amount = inputAmount.stringToBigNumber(4);
-    if (checkAllowance && checkBalance && amount && basePrice) {
-      return amount;
-    } else {
-      return BigNumber.from("0");
+
+  const open = useCallback(async () => {
+    if (chainsData.chainId && account.address && basePrice && signature) {
+      const orderPrice = basePrice.bigNumberToShowString(18, 5);
+      const openBase: { [key: string]: any } = await serviceOpen(
+        chainsData.chainId,
+        account.address,
+        longOrShort,
+        lever,
+        tabsValue === 1,
+        Number(inputAmount),
+        Number(orderPrice),
+        `${tokenPair}/USDT`,
+        Number(sl),
+        Number(tp),
+        { Authorization: signature.signature }
+      );
+      if (Number(openBase["errorCode"]) === 0) {
+        getBalance();
+        KOLTx({
+          kolLink: window.location.href,
+          hash: "",
+          positionIndex: openBase["value"],
+        });
+        updateList();
+      }
+      addTransactionNotice({
+        type: TransactionType.futures_buy,
+        info: "",
+        result:
+          Number(openBase["errorCode"]) === 0
+            ? SnackBarType.success
+            : SnackBarType.fail,
+      });
     }
-  }, [basePrice, checkAllowance, checkBalance, inputAmount]);
-  // const checkAllowNEST = useMemo(() => {
-  //   if (nestAllowAmount) {
-  //     // NEST decimals:4, need mul 10^14
-  //     return inputNESTTransaction
-  //       .mul(BigNumber.from("100000000000000"))
-  //       .lte(nestAllowAmount);
-  //   } else {
-  //     return false;
-  //   }
-  // }, [inputNESTTransaction, nestAllowAmount]);
-  const { transaction: tokenApprove } = useTokenApprove(
-    (nowToken ?? String().zeroAddress) as `0x${string}`,
-    futureContract,
-    MaxUint256
-  );
-  const { transaction: newOrder } = useNewBuyRequest(
-    BigNumber.from(priceToken.indexOf(tokenPair).toString()),
-    BigNumber.from(lever.toString()),
-    longOrShort,
-    inputNESTTransaction,
-    basePrice,
-    tabsValue === 1,
-    tp.stringToBigNumber(18) ?? BigNumber.from("0"),
-    sl.stringToBigNumber(18) ?? BigNumber.from("0")
-  );
-  const USDTAmount = useMemo(() => {
-    if (
-      inputToken !== "USDT" ||
-      !tokenDecimals ||
-      !checkAllowance ||
-      !checkBalance ||
-      !basePrice
-    ) {
-      return undefined;
-    } else {
-      return inputAmount.stringToBigNumber(tokenDecimals);
-    }
+    setLoading(false);
   }, [
+    account.address,
+    addTransactionNotice,
     basePrice,
-    checkAllowance,
-    checkBalance,
+    chainsData.chainId,
+    getBalance,
     inputAmount,
-    inputToken,
-    tokenDecimals,
+    lever,
+    longOrShort,
+    signature,
+    sl,
+    tabsValue,
+    tokenPair,
+    tp,
+    updateList,
   ]);
   const showTotalPay = useMemo(() => {
     if (nestAmount !== "") {
@@ -326,62 +248,9 @@ function useFuturesNewOrder(
     }
     return fee.bigNumberToShowString(18, 2);
   }, [fee, nestAmount]);
-  const USDTWithMinNEST = useMemo(() => {
-    const NESTToBigNumber = showTotalPay.stringToBigNumber(18);
-    return NESTToBigNumber
-      ? NESTToBigNumber.sub(
-          NESTToBigNumber.mul(BigNumber.from("1")).div(BigNumber.from("1000"))
-        )
-      : undefined;
-  }, [showTotalPay]);
-  const { transaction: newOrderWithUSDT } = useNewBuyRequestWithUSDT(
-    USDTAmount,
-    USDTWithMinNEST,
-    BigNumber.from(priceToken.indexOf(tokenPair).toString()),
-    BigNumber.from(lever.toString()),
-    longOrShort,
-    basePrice,
-    tabsValue === 1,
-    tp.stringToBigNumber(18) ?? BigNumber.from("0"),
-    sl.stringToBigNumber(18) ?? BigNumber.from("0")
-  );
-  // count KOL Link with address
-  useEffect(() => {
-    let code = getQueryVariable("pt");
-    if (
-      code &&
-      account.address &&
-      chainsData.chainId !== 97 &&
-      tabsValue === 1 &&
-      (newOrder.data?.hash || newOrderWithUSDT.data?.hash)
-    ) {
-      if (newOrder.isSuccess || newOrderWithUSDT.isSuccess) {
-        const hash = newOrder.data?.hash
-          ? newOrder.data!.hash
-          : newOrderWithUSDT.data!.hash;
-        KOLTx({ kolLink: window.location.href, hash: hash });
-      }
-    }
-  }, [
-    account.address,
-    chainsData.chainId,
-    newOrder.data,
-    newOrder.isSuccess,
-    newOrderWithUSDT.data,
-    newOrderWithUSDT.isSuccess,
-    tabsValue,
-  ]);
   /**
    * main button
    */
-  const pending = useMemo(() => {
-    return (
-      isPendingType(TransactionType.futures_buy) ||
-      isPendingType(TransactionType.futures_buy_request) ||
-      isPendingType(TransactionType.approve)
-    );
-  }, [isPendingType]);
-
   const checkMinNEST = useMemo(() => {
     return (nestAmount.stringToBigNumber(4) ?? BigNumber.from("0")).lt(
       MIN_NEST_BIG_NUMBER
@@ -415,33 +284,17 @@ function useFuturesNewOrder(
   const mainButtonTitle = useMemo(() => {
     if (!account.address) {
       return t`Connect Wallet`;
-    } else if (checkAllowance) {
+    } else {
       return `${t`Open`} ${longOrShort ? t`Long` : t`Short`}`;
-    } else {
-      return t`Approve`;
     }
-  }, [account.address, checkAllowance, longOrShort]);
+  }, [account.address, longOrShort]);
   const mainButtonLoading = useMemo(() => {
-    if (
-      tokenApprove.isLoading ||
-      newOrder.isLoading ||
-      newOrderWithUSDT.isLoading ||
-      pending
-    ) {
-      return true;
-    } else {
-      return false;
-    }
-  }, [
-    newOrder.isLoading,
-    newOrderWithUSDT.isLoading,
-    pending,
-    tokenApprove.isLoading,
-  ]);
+    return loading;
+  }, [loading]);
   const mainButtonDis = useMemo(() => {
     if (!account.address) {
       return false;
-    } else if (checkAllowance && checkMinNEST) {
+    } else if (checkMinNEST) {
       return true;
     } else if (stopDis) {
       return true;
@@ -457,7 +310,6 @@ function useFuturesNewOrder(
     return !checkBalance;
   }, [
     account.address,
-    checkAllowance,
     checkBalance,
     checkMinNEST,
     limitAmount,
@@ -465,23 +317,18 @@ function useFuturesNewOrder(
     tabsValue,
   ]);
   const baseAction = useCallback(() => {
-    newOrder.write?.();
-  }, [newOrder]);
+    setLoading(true);
+    open();
+  }, [open]);
   const triggerNoticeCallback = useCallback(() => {
     setShowedTriggerNotice(true);
     baseAction();
   }, [baseAction]);
-  const approveNoticeCallBack = useCallback(() => {
-    tokenApprove.write?.();
-    setShowApproveNotice(false);
-  }, [tokenApprove]);
   const mainButtonAction = useCallback(() => {
     if (mainButtonTitle === t`Connect Wallet`) {
       setShowConnect(true);
     } else if (mainButtonLoading || !checkBalance || stopDis) {
       return;
-    }else if (!checkAllowance) {
-      setShowApproveNotice(true);
     } else {
       if (checkShowTriggerNotice && !showedTriggerNotice) {
         setShowTriggerNotice(true);
@@ -491,7 +338,6 @@ function useFuturesNewOrder(
     }
   }, [
     baseAction,
-    checkAllowance,
     checkBalance,
     checkShowTriggerNotice,
     mainButtonLoading,
@@ -580,34 +426,7 @@ function useFuturesNewOrder(
     tokenPair,
     tp_info,
   ]);
-  const NESTTokenAddress = useMemo(() => {
-    const token = "NEST".getToken();
-    if (token && chainsData.chainId) {
-      return token.address[chainsData.chainId];
-    } else {
-      return undefined;
-    }
-  }, [chainsData.chainId]);
-  const USDTTokenAddress = useMemo(() => {
-    const token = "USDT".getToken();
-    if (token && chainsData.chainId) {
-      return token.address[chainsData.chainId];
-    } else {
-      return undefined;
-    }
-  }, [chainsData.chainId]);
-  const { balance: nestBalance } = useReadTokenBalance(
-    (NESTTokenAddress ?? String().zeroAddress) as `0x${string}`,
-    account.address ?? ""
-  );
-  const { balance: usdtBalance } = useReadTokenBalance(
-    (USDTTokenAddress ?? String().zeroAddress) as `0x${string}`,
-    account.address ?? ""
-  );
-  const { uniSwapAmountOut: uniSwapAmountOutShare } = useReadSwapAmountOut(
-    usdtBalance,
-    [USDTTokenAddress!, NESTTokenAddress!]
-  );
+
   useEffect(() => {
     if (isShareLink) {
       if (chainsData.chainId !== 534353) {
@@ -618,26 +437,17 @@ function useFuturesNewOrder(
         setInputAmount("100");
       }
     }
-  }, [
-    chainsData.chainId,
-    isShareLink,
-    nestBalance,
-    uniSwapAmountOutShare,
-    usdtBalance,
-  ]);
+  }, [chainsData.chainId, isShareLink]);
   /**
    * show
    */
-  const showToSwap = useMemo(() => {
-    if (account.address && tokenBalance) {
-      return BigNumber.from("0").eq(tokenBalance) ? true : false;
-    } else {
-      return false;
-    }
-  }, [account.address, tokenBalance]);
   const showBalance = useMemo(() => {
-    if (account.address && tokenBalance) {
-      return tokenBalance.bigNumberToShowString(18, 2);
+    if (account.address) {
+      if (tokenBalance) {
+        return tokenBalance.bigNumberToShowString(18, 2);
+      } else {
+        return "0";
+      }
     } else {
       return String().placeHolder;
     }
@@ -653,13 +463,8 @@ function useFuturesNewOrder(
     }
   }, [openPriceBase, tokenPair]);
   const showFee = useMemo(() => {
-    if (tabsValue === 0 && isStop) {
-      return fee
-        .add(BASE_NEST_FEE.stringToBigNumber(18)!)
-        .bigNumberToShowString(18, 2);
-    }
     return fee.bigNumberToShowString(18, 2);
-  }, [fee, isStop, tabsValue]);
+  }, [fee]);
   const showLiqPrice = useMemo(() => {
     if (!openPrice || nestAmount === "" || nestAmount === "0") {
       return String().placeHolder;
@@ -682,28 +487,13 @@ function useFuturesNewOrder(
     if (tabsValue === 0 && !isStop) {
       return [t`Position fee = Position * 0.05%`];
     } else if (tabsValue === 1 && !isStop) {
-      return [t`Position fee = Position * 0.05%`, t`Limit order fee = 15 NEST`];
+      return [t`Position fee = Position * 0.05%`];
     } else if (tabsValue === 0 && isStop) {
-      return [
-        t`Position fee = Position * 0.05%`,
-        t`Stop order fee(after execution) = 15 NEST`,
-      ];
+      return [t`Position fee = Position * 0.05%`];
     } else {
-      return [
-        t`Position fee = Position * 0.05%`,
-        t`Limit order fee = 15 NEST`,
-        t`Stop order fee(after execution) = 15 NEST`,
-      ];
+      return [t`Position fee = Position * 0.05%`];
     }
   }, [isStop, tabsValue]);
-  const showNESTPrice = useMemo(() => {
-    const outAmount = uniSwapAmountOut
-      ? uniSwapAmountOut[1].bigNumberToShowString(18, 2)
-      : String().placeHolder;
-    return `${inputAmount === "" ? "1" : inputAmount} USDT = ${
-      nestAmount === "" ? outAmount : showTotalPay
-    } NEST`;
-  }, [inputAmount, nestAmount, showTotalPay, uniSwapAmountOut]);
   const showPositions = useMemo(() => {
     const nestAmountNumber = nestAmount.stringToBigNumber(18);
     if (nestAmountNumber && nestAmountNumber.gte(BigNumber.from("0"))) {
@@ -723,21 +513,12 @@ function useFuturesNewOrder(
   }, [checkBalance, checkMinNEST]);
 
   const maxCallBack = useCallback(() => {
-    if (inputToken === "USDT" && tokenBalance) {
+    if (tokenBalance) {
       setInputAmount(
-        tokenBalance
-          .sub("0.1".stringToBigNumber(18)!)
-          .bigNumberToShowString(18, 2)
-          .formatInputNum4()
+        allValue(tokenBalance).bigNumberToShowString(18, 2).formatInputNum4()
       );
-    } else {
-      if (tokenBalance) {
-        setInputAmount(
-          allValue(tokenBalance).bigNumberToShowString(18, 2).formatInputNum4()
-        );
-      }
     }
-  }, [inputToken, tokenBalance, allValue]);
+  }, [tokenBalance, allValue]);
 
   const tpDefault = useMemo(() => {
     if (tabsValue === 0) {
@@ -765,20 +546,15 @@ function useFuturesNewOrder(
    * update
    */
   useEffect(() => {
+    getBalance();
     const time = setInterval(() => {
-      tokenAllowanceRefetch();
-      tokenBalanceRefetch();
-    }, NEW_ORDER_UPDATE * 1000);
+      getBalance();
+    }, 5 * 1000);
     return () => {
       clearInterval(time);
     };
-  }, [tokenAllowanceRefetch, tokenBalanceRefetch]);
-  useEffect(() => {
-    setTimeout(() => {
-      tokenAllowanceRefetch();
-      tokenBalanceRefetch();
-    }, 3000);
-  }, [tokenAllowanceRefetch, tokenBalanceRefetch, pending]);
+  }, [getBalance]);
+
   const [hadSetLimit, setHadSetLimit] = useState(false);
   useEffect(() => {
     if (limitAmount === "" && !hadSetLimit && openPriceBase) {
@@ -817,7 +593,6 @@ function useFuturesNewOrder(
     setLongOrShort,
     tabsValue,
     changeTabs,
-    showToSwap,
     lever,
     setLever,
     limitAmount,
@@ -845,14 +620,9 @@ function useFuturesNewOrder(
     setShowTriggerNotice,
     triggerNoticeCallback,
     inputToken,
-    setInputToken,
     inputAmount,
     setInputAmount,
-    showNESTPrice,
     showPositions,
-    showApproveNotice,
-    setShowApproveNotice,
-    approveNoticeCallBack,
     showAmountError,
     tpDefault,
     slDefault,
@@ -862,6 +632,11 @@ function useFuturesNewOrder(
     stopErrorText,
     isShareLink,
     closeShareLink,
+    showDeposit,
+    setShowDeposit,
+    showSignModal,
+    setShowSignModal,
+    signature,
   };
 }
 

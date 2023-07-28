@@ -7,15 +7,15 @@ import MainButton from "../../../components/MainButton/MainButton";
 import NESTLine from "../../../components/NESTLine";
 import NormalInput from "../../../components/NormalInput/NormalInput";
 import useFuturesEditLimit from "../../../hooks/useFuturesEditLimit";
-import { FuturesOrderV2 } from "../../../hooks/useFuturesOrderList";
 import useWindowWidth from "../../../hooks/useWindowWidth";
 import BaseDrawer from "../../Share/Modal/BaseDrawer";
 import BaseModal from "../../Share/Modal/BaseModal";
 import { t } from "@lingui/macro";
+import { FuturesOrderService } from "../OrderList";
 
 interface EditLimitModalBaseProps {
-  data: FuturesOrderV2;
-  onClose: () => void;
+  data: FuturesOrderService;
+  onClose: (res?: boolean) => void;
 }
 
 const EditLimitModalBase: FC<EditLimitModalBaseProps> = ({ ...props }) => {
@@ -48,9 +48,9 @@ const EditLimitModalBase: FC<EditLimitModalBaseProps> = ({ ...props }) => {
 };
 
 interface EditLimitModalProps {
-  data: FuturesOrderV2;
+  data: FuturesOrderService;
   open: boolean;
-  onClose: () => void;
+  onClose: (res?: boolean) => void;
 }
 
 const EditLimitModal: FC<EditLimitModalProps> = ({ ...props }) => {
@@ -60,24 +60,38 @@ const EditLimitModal: FC<EditLimitModalProps> = ({ ...props }) => {
       <Drawer
         anchor={"bottom"}
         open={props.open}
-        onClose={props.onClose}
+        onClose={() => {
+          props.onClose(undefined);
+        }}
         sx={{
           "& .MuiPaper-root": { background: "none", backgroundImage: "none" },
         }}
       >
-        <BaseDrawer title={t`Limit Price`} onClose={props.onClose}>
+        <BaseDrawer
+          title={t`Limit Price`}
+          onClose={() => {
+            props.onClose(undefined);
+          }}
+        >
           <EditLimitModalBase data={props.data} onClose={props.onClose} />
         </BaseDrawer>
       </Drawer>
     ) : (
       <Modal
         open={props.open}
-        onClose={() => props.onClose()}
+        onClose={() => {
+          props.onClose(undefined);
+        }}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
         <Box>
-          <BaseModal title={t`Limit Price`} onClose={props.onClose}>
+          <BaseModal
+            title={t`Limit Price`}
+            onClose={() => {
+              props.onClose(undefined);
+            }}
+          >
             <EditLimitModalBase data={props.data} onClose={props.onClose} />
           </BaseModal>
         </Box>

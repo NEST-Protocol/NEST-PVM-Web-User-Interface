@@ -205,7 +205,8 @@ const SwapInputItem: FC<SwapInputItemProps> = ({ children, ...props }) => {
           justifyContent={"flex-end"}
         >
           <p className="SwapInfoBalance">
-            {t`Balance:`} <span>{`${props.balance} ${props.tokenName}`}</span>
+            {t`Wallet` + ":"}{" "}
+            <span>{`${props.balance} ${props.tokenName}`}</span>
           </p>
           <Max onClick={props.maxCallBack}>
             <Trans>MAX</Trans>
@@ -240,7 +241,8 @@ export const SwapShowItem: FC<SwapShowItemProps> = ({ ...props }) => {
           justifyContent={"flex-end"}
         >
           <p className="SwapInfoBalance">
-            {t`Balance:`} <span>{`${props.balance} ${props.tokenName}`}</span>
+            {t`Wallet` + ":"}{" "}
+            <span>{`${props.balance} ${props.tokenName}`}</span>
           </p>
         </Stack>
       </ShowInfoStack>

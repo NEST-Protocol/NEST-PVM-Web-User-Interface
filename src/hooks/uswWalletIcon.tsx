@@ -8,11 +8,15 @@ import {
   OKX,
   TrustWallet,
   WalletConnect,
+  Warning,
 } from "../components/icons";
 
 function useWalletIcon() {
-  const { account } = useNEST();
+  const { account, checkSigned } = useNEST();
   const walletIcon = useMemo(() => {
+    if (!checkSigned) {
+      return <Warning className="warning" />;
+    }
     if (account.connector?.id === "metaMask") {
       return <MetaMask />;
     } else if (account.connector?.id === "coinbase") {
@@ -26,7 +30,7 @@ function useWalletIcon() {
     } else {
       return <DefaultWallet />;
     }
-  }, [account.connector?.id]);
+  }, [account.connector?.id, checkSigned]);
   return walletIcon;
 }
 
