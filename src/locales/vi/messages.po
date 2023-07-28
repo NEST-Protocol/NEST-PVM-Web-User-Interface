@@ -1218,6 +1218,7 @@ msgstr "Xác nhận bạn là chủ sở hữu của ví này. Việc ký là mi
 msgid "View"
 msgstr "Xem"
 
+#: src/pages/Share/Modal/DepositModal.tsx
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "Wallet"
 msgstr "Ví"

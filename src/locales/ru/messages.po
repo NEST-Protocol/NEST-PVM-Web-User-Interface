@@ -1214,6 +1214,7 @@ msgstr ""
 msgid "View"
 msgstr "Просмотр"
 
+#: src/pages/Share/Modal/DepositModal.tsx
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "Wallet"
 msgstr "Кошелек"

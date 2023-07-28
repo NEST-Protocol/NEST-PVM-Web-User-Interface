@@ -1216,6 +1216,7 @@ msgstr "Confirme que você é o proprietário desta carteira. Assinar é gratuit
 msgid "View"
 msgstr "Ver"
 
+#: src/pages/Share/Modal/DepositModal.tsx
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "Wallet"
 msgstr "Carteira"

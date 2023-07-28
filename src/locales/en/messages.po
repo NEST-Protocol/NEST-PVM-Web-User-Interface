@@ -1218,6 +1218,7 @@ msgstr "Verify ownership, Confirm you are the owner of this wallet."
 msgid "View"
 msgstr "View"
 
+#: src/pages/Share/Modal/DepositModal.tsx
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "Wallet"
 msgstr "Wallet"

@@ -22,6 +22,7 @@ interface NESTInputSelectProps {
   maxCallBack: () => void;
   nestAmount: string;
   changeNestAmount: (value: string) => void;
+  balanceTitle?: string;
   isShare?: boolean;
   style?: React.CSSProperties;
 }
@@ -211,7 +212,7 @@ const NESTInputSelect: FC<NESTInputSelectProps> = ({ ...props }) => {
               },
             })}
           >
-            {t`Balance:`}{" "}
+            {props.balanceTitle ? props.balanceTitle : t`Balance:`}{" "}
             <span>{`${props.showBalance} ${props.tokenName}`}</span>
           </Box>
           <LinkButton
@@ -221,7 +222,8 @@ const NESTInputSelect: FC<NESTInputSelectProps> = ({ ...props }) => {
             <Trans>MAX</Trans>
           </LinkButton>
         </Stack>
-        {<LinkButton>
+        {
+          <LinkButton>
             <Link to={swapLink}>
               <Stack
                 direction={"row"}
@@ -244,7 +246,8 @@ const NESTInputSelect: FC<NESTInputSelectProps> = ({ ...props }) => {
                 <SwapExchangeSmall />
               </Stack>
             </Link>
-          </LinkButton>}
+          </LinkButton>
+        }
       </Stack>
       {showBottom}
     </Stack>

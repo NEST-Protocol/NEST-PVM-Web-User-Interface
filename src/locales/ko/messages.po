@@ -1216,6 +1216,7 @@ msgstr "이 지갑의 소유자임을 확인하십시오. 서명은 무료이며
 msgid "View"
 msgstr "보기"
 
+#: src/pages/Share/Modal/DepositModal.tsx
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "Wallet"
 msgstr "지갑"
