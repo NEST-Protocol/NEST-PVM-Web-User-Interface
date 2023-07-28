@@ -27,7 +27,7 @@ const NESTInput: FC<NESTInputProps> = ({ ...props }) => {
       return t`The balance is 0. You can go to "Faucet" to get test token before trading.`;
     } else {
       if (checkSigned) {
-        return t`Your balance is 0. Before making any transactions, please click on "Deposit" to complete a quick deposit.`;
+        return t`Insufficient balance. Please deposit to start the lightning trade.`;
       } else {
         return t`Please complete your sign`;
       }

@@ -211,8 +211,6 @@ msgstr "баланс"
 #: src/components/NormalInput/NESTInput.tsx
 #: src/components/NormalInput/NESTInputSelect.tsx
 #: src/pages/DirectPoster/DirectPoster.tsx
-#: src/pages/Swap/Components/SwapInputItem.tsx
-#: src/pages/Swap/Components/SwapInputItem.tsx
 msgid "Balance:"
 msgstr "Баланс:"
 
@@ -536,6 +534,10 @@ msgstr "Бесконечная ликвидность"
 #: src/pages/Share/Modal/DepositModal.tsx
 msgid "Insufficient"
 msgstr "Недостаточно"
+
+#: src/components/NormalInput/NESTInput.tsx
+msgid "Insufficient balance. Please deposit to start the lightning trade."
+msgstr ""
 
 #: src/hooks/useFuturesAdd.ts
 #: src/hooks/useFuturesNewOrder.ts
@@ -1216,6 +1218,8 @@ msgstr "Просмотр"
 
 #: src/pages/Share/Modal/DepositModal.tsx
 #: src/pages/Share/Modal/MyWalletModal.tsx
+#: src/pages/Swap/Components/SwapInputItem.tsx
+#: src/pages/Swap/Components/SwapInputItem.tsx
 msgid "Wallet"
 msgstr "Кошелек"
 
@@ -1250,10 +1254,6 @@ msgstr "в 1 клик"
 #: src/pages/Share/Modal/WithdrawModal.tsx
 #: src/pages/Share/Modal/WithdrawModal.tsx
 msgid "Withdraw"
-msgstr ""
-
-#: src/components/NormalInput/NESTInput.tsx
-msgid "Your balance is 0. Before making any transactions, please click on \"Deposit\" to complete a quick deposit."
 msgstr ""
 
 #: src/pages/Home/Modal/ApplyModal.tsx

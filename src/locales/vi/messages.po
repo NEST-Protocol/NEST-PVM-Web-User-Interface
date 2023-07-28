@@ -213,8 +213,6 @@ msgstr "Số dư"
 #: src/components/NormalInput/NESTInput.tsx
 #: src/components/NormalInput/NESTInputSelect.tsx
 #: src/pages/DirectPoster/DirectPoster.tsx
-#: src/pages/Swap/Components/SwapInputItem.tsx
-#: src/pages/Swap/Components/SwapInputItem.tsx
 msgid "Balance:"
 msgstr "Số dư:"
 
@@ -538,6 +536,10 @@ msgstr "Thanh khoản vô hạn"
 #: src/pages/Share/Modal/DepositModal.tsx
 msgid "Insufficient"
 msgstr "Không đủ"
+
+#: src/components/NormalInput/NESTInput.tsx
+msgid "Insufficient balance. Please deposit to start the lightning trade."
+msgstr "Số dư không đủ. Vui lòng nạp tiền để bắt đầu giao dịch nhanh."
 
 #: src/hooks/useFuturesAdd.ts
 #: src/hooks/useFuturesNewOrder.ts
@@ -1220,6 +1222,8 @@ msgstr "Xem"
 
 #: src/pages/Share/Modal/DepositModal.tsx
 #: src/pages/Share/Modal/MyWalletModal.tsx
+#: src/pages/Swap/Components/SwapInputItem.tsx
+#: src/pages/Swap/Components/SwapInputItem.tsx
 msgid "Wallet"
 msgstr "Ví"
 
@@ -1255,10 +1259,6 @@ msgstr "chỉ với 1 cú nhấp chuột"
 #: src/pages/Share/Modal/WithdrawModal.tsx
 msgid "Withdraw"
 msgstr "Rút tiền"
-
-#: src/components/NormalInput/NESTInput.tsx
-msgid "Your balance is 0. Before making any transactions, please click on \"Deposit\" to complete a quick deposit."
-msgstr "Số dư của bạn là 0. Trước khi thực hiện bất kỳ giao dịch nào, vui lòng nhấp vào \"Nạp tiền\" để hoàn tất quá trình nạp tiền nhanh chóng."
 
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Youtube"

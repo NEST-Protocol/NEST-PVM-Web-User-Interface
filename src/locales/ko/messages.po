@@ -213,8 +213,6 @@ msgstr "잔고"
 #: src/components/NormalInput/NESTInput.tsx
 #: src/components/NormalInput/NESTInputSelect.tsx
 #: src/pages/DirectPoster/DirectPoster.tsx
-#: src/pages/Swap/Components/SwapInputItem.tsx
-#: src/pages/Swap/Components/SwapInputItem.tsx
 msgid "Balance:"
 msgstr "잔액:"
 
@@ -538,6 +536,10 @@ msgstr "무한한 유동성"
 #: src/pages/Share/Modal/DepositModal.tsx
 msgid "Insufficient"
 msgstr "불충분함"
+
+#: src/components/NormalInput/NESTInput.tsx
+msgid "Insufficient balance. Please deposit to start the lightning trade."
+msgstr "잔액이 부족합니다. 번개 거래를 시작하려면 입금하세요."
 
 #: src/hooks/useFuturesAdd.ts
 #: src/hooks/useFuturesNewOrder.ts
@@ -1218,6 +1220,8 @@ msgstr "보기"
 
 #: src/pages/Share/Modal/DepositModal.tsx
 #: src/pages/Share/Modal/MyWalletModal.tsx
+#: src/pages/Swap/Components/SwapInputItem.tsx
+#: src/pages/Swap/Components/SwapInputItem.tsx
 msgid "Wallet"
 msgstr "지갑"
 
@@ -1253,10 +1257,6 @@ msgstr "1 클릭으로"
 #: src/pages/Share/Modal/WithdrawModal.tsx
 msgid "Withdraw"
 msgstr "인출"
-
-#: src/components/NormalInput/NESTInput.tsx
-msgid "Your balance is 0. Before making any transactions, please click on \"Deposit\" to complete a quick deposit."
-msgstr "귀하의 잔액은 0입니다. 거래를 진행하기 전에 \"입금\"을 클릭하여 빠른 충전을 완료해주십시오."
 
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Youtube"
