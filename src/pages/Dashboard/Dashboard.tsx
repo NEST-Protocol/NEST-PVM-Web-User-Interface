@@ -184,7 +184,7 @@ const Dashboard: FC = () => {
   const [showShareOrderModal, setShowShareOrderModal] = useState(false);
   const [shareOrder, setShareOrder] = useState<any>(undefined);
   const {messageSnackBar} = useNESTSnackBar();
-  let [searchParams, ] = useSearchParams();
+  let [searchParams,] = useSearchParams();
 
   const a = searchParams.get('address');
 
@@ -225,7 +225,9 @@ const Dashboard: FC = () => {
 
   const {data: historyList} = useSWR(address ? `https://api.nestfi.net/api/dashboard/history/list?address=${a || address}&chainId=${chainsData.chainId === 534353 ? 534353 : 56}` : undefined, (url: any) => fetch(url)
     .then((res) => res.json())
-    .then((res: any) => res.value.sort((a: any, b: any) => b.time - a.time)));
+    .then((res: any) => res.value.sort((a: any, b: any) => b.time - a.time)), {
+    refreshInterval: 3000,
+  });
 
   const {data: isKol} = useSWR(address ? `https://api.nestfi.net/api/invite/is-kol-whitelist/${a || address}` : undefined, (url: any) => fetch(url).then((res) => res.json()));
 
