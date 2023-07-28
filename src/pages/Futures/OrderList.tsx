@@ -316,7 +316,7 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
         })}
       >
         {tabs}
-        <Link to={"/dashboard?t=history"}>
+        <Link to={"/dashboard"}>
           <Box
             sx={(theme) => ({
               width: "20px",

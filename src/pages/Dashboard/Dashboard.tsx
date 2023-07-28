@@ -1,7 +1,7 @@
-import {FC, useEffect, useMemo, useState} from "react";
+import {FC, useMemo, useState} from "react";
 import {Stack, styled} from "@mui/material";
 import TVChart from "./TVChart/TVChart";
-import {DashboardIcon2, FuturesOrder, Share} from "../../components/icons";
+import {DashboardIcon2, Share} from "../../components/icons";
 import NESTTabs from "../../components/NESTTabs/NESTTabs";
 import useWindowWidth from "../../hooks/useWindowWidth";
 import {useAccount} from "wagmi";
@@ -24,7 +24,7 @@ import {Trans, t} from "@lingui/macro";
 import useSWR from "swr";
 import NetworkIcon from "./Components/NetworkIcon";
 import MobileOrderTypePosition from "./Components/MobileOrderTypePosition";
-import {useParams, useSearchParams} from "react-router-dom";
+import {useSearchParams} from "react-router-dom";
 
 const DashboardShare = styled(Box)(({theme}) => ({
   borderRadius: "8px",
@@ -186,14 +186,6 @@ const Dashboard: FC = () => {
   const {messageSnackBar} = useNESTSnackBar();
   let [searchParams, ] = useSearchParams();
 
-  useEffect(() => {
-    if (searchParams.get('t') === 'history') {
-      setTabsValue(1)
-    } else {
-      setTabsValue(0)
-    }
-  }, [searchParams])
-
   const a = searchParams.get('address');
 
   const {data: burnedData} = useSWR(`https://api.nestfi.net/api/dashboard/destory/list?chainId=${chainsData.chainId === 534353 ? 534353 : 56}&from=2022-11-28&to=${(new Date()).toISOString().split("T")[0]}`, (url: any) => fetch(url)
@@ -235,10 +227,6 @@ const Dashboard: FC = () => {
     .then((res) => res.json())
     .then((res: any) => res.value.sort((a: any, b: any) => b.time - a.time)));
 
-  const {data: positionList} = useSWR(address ? `https://api.nestfi.net/api/dashboard/position/list?address=${a || address}&chainId=${chainsData.chainId === 534353 ? 534353 : 56}` : undefined, (url: any) => fetch(url)
-    .then((res) => res.json())
-    .then((res: any) => res.value));
-
   const {data: isKol} = useSWR(address ? `https://api.nestfi.net/api/invite/is-kol-whitelist/${a || address}` : undefined, (url: any) => fetch(url).then((res) => res.json()));
 
   const shareMyDealModal = useMemo(() => {
@@ -271,7 +259,7 @@ const Dashboard: FC = () => {
         onClose={() => {
           setShowShareOrderModal(false);
         }}
-        isClosed={tabsValue === 1}
+        isClosed={showShareOrderModal}
       />
     );
   }, [showShareOrderModal]);
@@ -286,21 +274,19 @@ const Dashboard: FC = () => {
           },
         })}
       >
-        {isHistory && (
-          <TableCell>
-            <Box
-              component={"p"}
-              sx={(theme) => ({
-                fontWeight: 700,
-                fontSize: 16,
-                color: theme.normal.text0,
-                whiteSpace: "nowrap",
-              })}
-            >
-              {formatDate(item.time * 1000)}
-            </Box>
-          </TableCell>
-        )}
+        <TableCell>
+          <Box
+            component={"p"}
+            sx={(theme) => ({
+              fontWeight: 700,
+              fontSize: 16,
+              color: theme.normal.text0,
+              whiteSpace: "nowrap",
+            })}
+          >
+            {formatDate(item.time * 1000)}
+          </Box>
+        </TableCell>
         <TableCell>
           <OrderTablePosition
             tokenName={item.tokenPair.split("/")[0]}
@@ -706,41 +692,37 @@ const Dashboard: FC = () => {
               </Stack>
             )}
           </Stack>
-          {isHistory && (
-            <Stack direction={"row"} width={"50%"} spacing={"4px"}>
-              <Caption5
-                sx={(theme) => ({
-                  color: theme.normal.text2,
-                })}
-              >{t`Time`}</Caption5>
-              <Caption5
-                sx={(theme) => ({
-                  color: theme.normal.text0,
-                })}
-              >
-                {formatDate(item.time * 1000)}
-              </Caption5>
-            </Stack>
-          )}
-          {isHistory && (
-            <Stack direction={'row'}>
-              <Box sx={(theme) => ({
-                padding: '3px 4px',
-                fontSize: '10px',
-                fontWeight: 700,
-                lineHeight: '14px',
-                borderRadius: '4px',
-                border: '1px solid',
-                borderColor: item.orderType === 'Closed' ? theme.normal.border : item.orderType === 'Liquidated' ? theme.normal.danger_light_hover : theme.normal.success_light_hover,
-                color: item.orderType === 'Closed' ? theme.normal.text2 : item.orderType === 'Liquidated' ? theme.normal.danger : theme.normal.success,
-              })}>
-                {item.orderType === 'Closed' && <Trans>Closed</Trans>}
-                {item.orderType === 'Liquidated' && <Trans>Liquidated</Trans>}
-                {item.orderType === 'TP Executed' && <Trans>TP Executed</Trans>}
-                {item.orderType === 'SL Executed' && <Trans>SL Executed</Trans>}
-              </Box>
-            </Stack>
-          )}
+          <Stack direction={"row"} width={"50%"} spacing={"4px"}>
+            <Caption5
+              sx={(theme) => ({
+                color: theme.normal.text2,
+              })}
+            >{t`Time`}</Caption5>
+            <Caption5
+              sx={(theme) => ({
+                color: theme.normal.text0,
+              })}
+            >
+              {formatDate(item.time * 1000)}
+            </Caption5>
+          </Stack>
+          <Stack direction={'row'}>
+            <Box sx={(theme) => ({
+              padding: '3px 4px',
+              fontSize: '10px',
+              fontWeight: 700,
+              lineHeight: '14px',
+              borderRadius: '4px',
+              border: '1px solid',
+              borderColor: item.orderType === 'Closed' ? theme.normal.border : item.orderType === 'Liquidated' ? theme.normal.danger_light_hover : theme.normal.success_light_hover,
+              color: item.orderType === 'Closed' ? theme.normal.text2 : item.orderType === 'Liquidated' ? theme.normal.danger : theme.normal.success,
+            })}>
+              {item.orderType === 'Closed' && <Trans>Closed</Trans>}
+              {item.orderType === 'Liquidated' && <Trans>Liquidated</Trans>}
+              {item.orderType === 'TP Executed' && <Trans>TP Executed</Trans>}
+              {item.orderType === 'SL Executed' && <Trans>SL Executed</Trans>}
+            </Box>
+          </Stack>
         </Stack>
       </Card4>
     );
@@ -752,12 +734,6 @@ const Dashboard: FC = () => {
         value={tabsValue}
         className={""}
         datArray={[
-          <Stack direction={"row"} spacing={"4px"} alignItems={"center"} whiteSpace={"nowrap"}>
-            <FuturesOrder/>
-            <p style={{fontWeight: 700, fontSize: "16px", lineHeight: "22px"}}>
-              <Trans>Current Positions</Trans>
-            </p>
-          </Stack>,
           <Stack direction={"row"} spacing={"4px"} alignItems={"center"} whiteSpace={"nowrap"}>
             <DashboardIcon2/>
             <p
@@ -1459,29 +1435,7 @@ const Dashboard: FC = () => {
 
           {isBigMobile ? (
             <Stack px={"20px"} spacing={"12px"}>
-              {tabsValue === 0 && positionList &&
-                (positionList?.length > 0 ? (
-                  positionList.map((item: any, index: number) =>
-                    MobileOrderCard(item, index)
-                  )
-                ) : (
-                  <Stack
-                    sx={(theme) => ({
-                      padding: "20px 0",
-                      background: theme.normal.bg1,
-                      justifyContent: "center",
-                      alignItems: "center",
-                      fontSize: "14px",
-                      fontWeight: "400",
-                      lineHeight: "20px",
-                      borderRadius: "12px",
-                      color: theme.normal.text2,
-                    })}
-                  >
-                    {t`No trades yet`}
-                  </Stack>
-                ))}
-              {tabsValue === 1 && historyList &&
+              {historyList &&
                 (historyList.length > 0 ? (
                   historyList.map((item: any, index: number) =>
                     MobileOrderCard(item, index, true)
@@ -1507,36 +1461,18 @@ const Dashboard: FC = () => {
           ) : (
             <FuturesTableTitle
               dataArray={
-                tabsValue === 0
-                  ? [
-                    t`Position`,
-                    t`Actual Margin`,
-                    t`Open Price`,
-                    t`Liq Price`,
-                    t`Stop Order`,
-                    t`Operate`,
-                  ]
-                  : [
-                    t`Time`,
-                    t`Position`,
-                    t`Actual Margin`,
-                    t`Open Price`,
-                    t`Stop Order`,
-                    t`Close Price`,
-                    t`Operate`,
-                  ]
+                [
+                  t`Time`,
+                  t`Position`,
+                  t`Actual Margin`,
+                  t`Open Price`,
+                  t`Stop Order`,
+                  t`Close Price`,
+                  t`Operate`,
+                ]
               }
-              noOrder={
-                (tabsValue === 0 && positionList?.length === 0) ||
-                (tabsValue === 1 && historyList?.length === 0)
-              }
-            >
-              {tabsValue === 0 && positionList &&
-                positionList?.map((item: any, index: number) =>
-                  PCOrderRow(item, index, false)
-                )}
-              {tabsValue === 1 && historyList &&
-                historyList.map((item: any, index: number) => PCOrderRow(item, index, true))}
+              noOrder={historyList?.length === 0}>
+              {historyList && historyList.map((item: any, index: number) => PCOrderRow(item, index, true))}
             </FuturesTableTitle>
           )}
         </Stack>
