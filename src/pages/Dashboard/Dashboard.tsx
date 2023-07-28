@@ -936,7 +936,7 @@ const Dashboard: FC = () => {
                   onClick={() => {
                     if (!address) return;
                     const link =
-                      "https://nestfi.org/?a=" +
+                      "https://scroll.nestfi.org/?a=" +
                       address.slice(-8).toLowerCase();
                     copy(link);
                     messageSnackBar(t`Copy Successfully`);
@@ -1254,7 +1254,7 @@ const Dashboard: FC = () => {
                     onClick={() => {
                       if (!address) return;
                       const link =
-                        "https://nestfi.org/?a=" +
+                        "https://scroll.nestfi.org/?a=" +
                         address.slice(-8).toLowerCase();
                       copy(link);
                       messageSnackBar(t`Copy Successfully`);

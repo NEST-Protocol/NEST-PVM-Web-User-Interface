@@ -180,7 +180,7 @@ const ShareMyDealModal: FC<ShareMyDealModalProps> = ({...props}) => {
   }
 
   const tweet = () => {
-    const link = `https://nestfi.org/?a=${address?.slice(-8).toLowerCase()}`
+    const link = `https://scroll.nestfi.org/?a=${address?.slice(-8).toLowerCase()}`
     const text = `${t`Follow the right person, making money is as easy as breathing.
 You can follow the right person on NESTFi, here is my refer link`}: ${link}`
     window.open(`https://twitter.com/intent/tweet?text=${encodeURI(text)}&hashtags=NEST,btc,eth&via=NEST_Protocol`)
@@ -614,7 +614,7 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
             </Stack>
             <Box style={{width: '64px', height: '64px', background: 'white', padding: '3px'}}>
               <QRCodeCanvas
-                value={`https://nestfi.org/?a=${address?.slice(-8).toLowerCase()}`}
+                value={`https://scroll.nestfi.org/?a=${address?.slice(-8).toLowerCase()}`}
                 size={58}/>
             </Box>
           </Stack>
@@ -631,7 +631,7 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
               disable={!address}
               title={t`Copy Link`} onClick={() => {
               if (!address) return;
-              const link = `https://nestfi.org/?a=${address?.slice(-8).toLowerCase()}`;
+              const link = `https://scroll.nestfi.org/?a=${address?.slice(-8).toLowerCase()}`;
               copy(link);
               messageSnackBar(t`Copy Successfully`);
             }}/>

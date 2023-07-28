@@ -142,7 +142,7 @@ const ShareNewOrderModal: FC<ShareNewOrderModalProps> = ({...props}) => {
     const sp = order.sp ? parseUnits(order.sp!.toString(), tokenName.getTokenPriceDecimals()).toString() : "0";
     const sl = order.sl ? parseUnits(order.sl!.toString(), tokenName.getTokenPriceDecimals()).toString() : "0";
     const orderString = `&pt=${tokenName}&po=${orientation}&pl=${lever}&pp=${basePrice}&pst=${sp}&psl=${sl}`;
-    return `https://nestfi.org/?a=${address
+    return `https://scroll.nestfi.org/?a=${address
       ?.slice(-8)
       .toLowerCase()}${orderString}/#/futures`;
   }, [address, props.value, tokenName]);
