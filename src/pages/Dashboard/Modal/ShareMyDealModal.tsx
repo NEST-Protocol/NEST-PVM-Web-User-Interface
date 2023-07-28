@@ -218,21 +218,21 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
     }
     if (select.todayTrade) {
       list.push({
-        title: t`Today\'s PNL`,
+        title: t`Today's PNL`,
         value: props.value.todayValue,
         unit: "NEST"
       })
     }
     if (select._7DaysTrade) {
       list.push({
-        title: t`7 Days\' PNL`,
+        title: t`7 Days' PNL`,
         value: props.value.day7Value,
         unit: "NEST"
       })
     }
     if (select._30DaysTrade) {
       list.push({
-        title: t`30 Days\' PNL`,
+        title: t`30 Days' PNL`,
         value: props.value.day30Value,
         unit: "NEST"
       })
@@ -475,7 +475,7 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
             }
           }
         }}>
-          <Stack direction={'row'} justifyContent={'end'}>
+          <Stack direction={'row'} justifyContent={'end'} position={'absolute'} right={'20px'} top={'20px'}>
             <button onClick={() => {
               setShowPage(false)
               setDataUrl(null)
