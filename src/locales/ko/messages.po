@@ -1143,8 +1143,8 @@ msgid "TP Executed"
 msgstr "TP 실행됨"
 
 #: src/pages/Home/Home.tsx
-msgid "Trade BTC, ETH and BNB with up to 1-50 leverage. Open a position with USDT or NEST."
-msgstr "최대 1-50 레버리지로 BTC, ETH, BNB를 거래하세요. USDT 또는 NEST로 포지션을 개설하세요."
+msgid "Trade BTC, ETH and BNB with up to 1-50 leverage. Open a position with NEST."
+msgstr ""
 
 #: src/pages/Home/Home.tsx
 msgid "Trade easily anytime and anywhere."

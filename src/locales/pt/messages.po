@@ -1143,8 +1143,8 @@ msgid "TP Executed"
 msgstr "TP executado"
 
 #: src/pages/Home/Home.tsx
-msgid "Trade BTC, ETH and BNB with up to 1-50 leverage. Open a position with USDT or NEST."
-msgstr "Negocie BTC, ETH e BNB com alavancagem de até 1-50. Abrir uma posição com USDT ou NEST"
+msgid "Trade BTC, ETH and BNB with up to 1-50 leverage. Open a position with NEST."
+msgstr "Negocie BTC, ETH e BNB com alavancagem de até 1-50. Abrir uma posição com NEST"
 
 #: src/pages/Home/Home.tsx
 msgid "Trade easily anytime and anywhere."
