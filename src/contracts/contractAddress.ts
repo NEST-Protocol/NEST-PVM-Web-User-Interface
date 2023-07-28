@@ -110,7 +110,7 @@ export const NESTRedeemContract: AddressType = {
 export const NESTService: AddressType = {
   1: "0xfBDeADbF08BC5B61a9A5cb9a00c1523d39256A43",
   5: "0xfBDeADbF08BC5B61a9A5cb9a00c1523d39256A43",
-  56: "0xd9f3aA57576a6da995fb4B7e7272b4F16f04e681",
+  56: "0xFDbb1365a6478Dc48a41d1180a680b4d66583064",
   97: "0xd9f3aA57576a6da995fb4B7e7272b4F16f04e681",
   534353: "0xd9f3aA57576a6da995fb4B7e7272b4F16f04e681",
 };
@@ -118,7 +118,7 @@ export const NESTService: AddressType = {
 export const NESTServiceOther: AddressType = {
   1: "0x28e14eac4e41e146eca05a9679604a0fe6959a39",
   5: "0x28e14eac4e41e146eca05a9679604a0fe6959a39",
-  56: "0x28e14eac4e41e146eca05a9679604a0fe6959a39",
+  56: "0x01B0d8a88aDE02ce7493829986A33Ea53FaB54C9",
   97: "0x28e14eac4e41e146eca05a9679604a0fe6959a39",
   534353: "0x28e14eac4e41e146eca05a9679604a0fe6959a39",
 };
