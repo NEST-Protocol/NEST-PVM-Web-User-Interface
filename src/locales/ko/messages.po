@@ -147,7 +147,6 @@ msgstr "행동"
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Futures/Components/OrderList.tsx
 #: src/pages/Futures/Components/OrderTable.tsx
 #: src/pages/Futures/Components/POrderList.tsx
@@ -330,10 +329,6 @@ msgstr "누적 수수료"
 #: src/pages/Dashboard/Referral/Referral.tsx
 msgid "Cumulative Invitee Trading Volume"
 msgstr "누적 피추천인 거래량"
-
-#: src/pages/Dashboard/Dashboard.tsx
-msgid "Current Positions"
-msgstr "현재 포지션"
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "Dark mode"
@@ -617,7 +612,6 @@ msgid "Link wallet"
 msgstr "링크 지갑"
 
 #: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 #: src/pages/Futures/Modal/AddModal.tsx
 #: src/pages/Futures/Modal/EditPositionModal.tsx
@@ -738,7 +732,6 @@ msgid "No Order"
 msgstr "주문 없음"
 
 #: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
 msgid "No trades yet"
 msgstr "아직 거래 없음"
 
@@ -762,7 +755,6 @@ msgstr "포지션 열기"
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 #: src/pages/Futures/Components/OrderList.tsx
@@ -774,7 +766,6 @@ msgstr "포지션 열기"
 msgid "Open Price"
 msgstr "오픈 가격"
 
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Futures/Components/OrderTable.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
@@ -819,7 +810,6 @@ msgstr "\"지정가 주문\" 또는 \"스탑 오더 주문\"은 실행이 보장
 msgid "Please note that NEST 1.0 tokens have been officially deprecated and will no longer be supported. To continue participating in the NESTFi ecosystem and enjoy its benefits, it is crucial that you add NEST 2.0 tokens to your wallet. We have provided a button below for your convenience to add NEST 2.0 tokens to your wallet effortlessly."
 msgstr "NEST 1.0 토큰은 공식적으로 지원이 중단되었으며, 더 이상 지원되지 않습니다. NESTFi 생태계에 계속 참여하고 혜택을 누리기 위해서는 반드시 지갑에 NEST 2.0 토큰을 추가해야 합니다. 편의를 위해 아래에 NEST 2.0 토큰을 간편하게 지갑에 추가할 수 있는 버튼을 제공하였습니다."
 
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Futures/Modal/AddModal.tsx
 #: src/pages/Futures/Modal/CloseModal.tsx
@@ -959,7 +949,6 @@ msgstr "상태"
 msgid "Stop Loss"
 msgstr "손절매"
 
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Futures/Components/OrderTable.tsx
 #: src/pages/Futures/Components/POrderTable.tsx

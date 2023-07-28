@@ -5,6 +5,7 @@ import messagesKo from "./ko/messages.js"
 import messagesPt from "./pt/messages.js"
 import messagesRu from "./ru/messages.js"
 import messagesVi from "./vi/messages.js"
+import messagesTr from "./tr/messages.js"
 
 export const defaultLocale = "en";
 i18n.load('en', messagesEn)
@@ -13,6 +14,7 @@ i18n.load('ko', messagesKo)
 i18n.load('pt', messagesPt)
 i18n.load('ru', messagesRu)
 i18n.load('vi', messagesVi)
+i18n.load('tr', messagesTr)
 /**
  * We do a dynamic import of just the catalog that we need
  * @param locale any locale string

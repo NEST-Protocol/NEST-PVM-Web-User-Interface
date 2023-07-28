@@ -147,7 +147,6 @@ msgstr "ação"
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Futures/Components/OrderList.tsx
 #: src/pages/Futures/Components/OrderTable.tsx
 #: src/pages/Futures/Components/POrderList.tsx
@@ -330,10 +329,6 @@ msgstr "Comissões acumuladas"
 #: src/pages/Dashboard/Referral/Referral.tsx
 msgid "Cumulative Invitee Trading Volume"
 msgstr "Volume acumulado de transacções com convidados"
-
-#: src/pages/Dashboard/Dashboard.tsx
-msgid "Current Positions"
-msgstr "Posições actuais"
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "Dark mode"
@@ -617,7 +612,6 @@ msgid "Link wallet"
 msgstr "Carteira Link"
 
 #: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 #: src/pages/Futures/Modal/AddModal.tsx
 #: src/pages/Futures/Modal/EditPositionModal.tsx
@@ -738,7 +732,6 @@ msgid "No Order"
 msgstr "Nenhum pedido"
 
 #: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
 msgid "No trades yet"
 msgstr "Nenhuma negociação ainda"
 
@@ -762,7 +755,6 @@ msgstr "Posição aberta"
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 #: src/pages/Futures/Components/OrderList.tsx
@@ -774,7 +766,6 @@ msgstr "Posição aberta"
 msgid "Open Price"
 msgstr "Preço aberto"
 
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Futures/Components/OrderTable.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
@@ -819,7 +810,6 @@ msgstr "Tenha em atenção que a execução de uma \"ordem de limite\" ou \"orde
 msgid "Please note that NEST 1.0 tokens have been officially deprecated and will no longer be supported. To continue participating in the NESTFi ecosystem and enjoy its benefits, it is crucial that you add NEST 2.0 tokens to your wallet. We have provided a button below for your convenience to add NEST 2.0 tokens to your wallet effortlessly."
 msgstr "Por favor, observe que os tokens NEST 1.0 foram oficialmente descontinuados e não serão mais suportados. Para continuar participando do ecossistema da NESTFi e desfrutar de seus benefícios, é crucial que você adicione os tokens NEST 2.0 à sua carteira. Abaixo, fornecemos um botão para sua conveniência, permitindo que você adicione os tokens NEST 2.0 à sua carteira sem esforço."
 
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Futures/Modal/AddModal.tsx
 #: src/pages/Futures/Modal/CloseModal.tsx
@@ -959,7 +949,6 @@ msgstr "Status"
 msgid "Stop Loss"
 msgstr "Stop Loss"
 
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Futures/Components/OrderTable.tsx
 #: src/pages/Futures/Components/POrderTable.tsx

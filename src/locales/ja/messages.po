@@ -145,7 +145,6 @@ msgstr ""
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Futures/Components/OrderList.tsx
 #: src/pages/Futures/Components/OrderTable.tsx
 #: src/pages/Futures/Components/POrderList.tsx
@@ -328,10 +327,6 @@ msgstr ""
 #: src/pages/Dashboard/Referral/Referral.tsx
 msgid "Cumulative Invitee Trading Volume"
 msgstr ""
-
-#: src/pages/Dashboard/Dashboard.tsx
-msgid "Current Positions"
-msgstr "現在の役職"
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "Dark mode"
@@ -615,7 +610,6 @@ msgid "Link wallet"
 msgstr ""
 
 #: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 #: src/pages/Futures/Modal/AddModal.tsx
 #: src/pages/Futures/Modal/EditPositionModal.tsx
@@ -736,7 +730,6 @@ msgid "No Order"
 msgstr "注文なし"
 
 #: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
 msgid "No trades yet"
 msgstr "まだ取引がありません"
 
@@ -760,7 +753,6 @@ msgstr "オープンポジション"
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 #: src/pages/Futures/Components/OrderList.tsx
@@ -772,7 +764,6 @@ msgstr "オープンポジション"
 msgid "Open Price"
 msgstr "オープン価格"
 
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Futures/Components/OrderTable.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
@@ -817,7 +808,6 @@ msgstr "「指値注文」または「ストップ注文」は実行されるこ
 msgid "Please note that NEST 1.0 tokens have been officially deprecated and will no longer be supported. To continue participating in the NESTFi ecosystem and enjoy its benefits, it is crucial that you add NEST 2.0 tokens to your wallet. We have provided a button below for your convenience to add NEST 2.0 tokens to your wallet effortlessly."
 msgstr ""
 
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Futures/Modal/AddModal.tsx
 #: src/pages/Futures/Modal/CloseModal.tsx
@@ -957,7 +947,6 @@ msgstr ""
 msgid "Stop Loss"
 msgstr "ストップロス"
 
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Futures/Components/OrderTable.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
