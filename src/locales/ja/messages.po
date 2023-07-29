@@ -100,12 +100,9 @@ msgstr "3. NESTトークン価格変動リスク：マージンと最終的な�
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 msgid "30 Days' PNL"
 msgstr "30日間の損益"
-
-#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
-msgid "30 Days\\' PNL"
-msgstr "30日PNL"
 
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 #: src/pages/Futures/Modal/ProtocolModal.tsx
@@ -120,11 +117,8 @@ msgstr "5. スマートコントラクトリスク：スマートコントラク
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
-msgid "7 Days' PNL"
-msgstr "7日間のPNL"
-
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
-msgid "7 Days\\' PNL"
+msgid "7 Days' PNL"
 msgstr "7日間のPNL"
 
 #: src/pages/Home/Home.tsx
@@ -1055,12 +1049,9 @@ msgstr "今日の出来高"
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 msgid "Today's PNL"
 msgstr "今日の利益と損失"
-
-#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
-msgid "Today\\'s PNL"
-msgstr "今日のPNL"
 
 #: src/pages/Share/Modal/WithdrawModal.tsx
 msgid "Total"

@@ -100,12 +100,9 @@ msgstr "3. Риск колебания цены токена NEST: Исполь�
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 msgid "30 Days' PNL"
 msgstr "ПНЛ за 30 дней'"
-
-#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
-msgid "30 Days\\' PNL"
-msgstr "30 дней\\' PNL"
 
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 #: src/pages/Futures/Modal/ProtocolModal.tsx
@@ -120,11 +117,8 @@ msgstr "5. Риск смарт-контракта: В смарт-контрак�
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
-msgid "7 Days' PNL"
-msgstr "Прибыль / убыток за 7 дней"
-
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
-msgid "7 Days\\' PNL"
+msgid "7 Days' PNL"
 msgstr "Прибыль / убыток за 7 дней"
 
 #: src/pages/Home/Home.tsx
@@ -1055,11 +1049,8 @@ msgstr "Сегодняшний объем"
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
-msgid "Today's PNL"
-msgstr "Прибыль и убытки за сегодня"
-
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
-msgid "Today\\'s PNL"
+msgid "Today's PNL"
 msgstr "Прибыль и убытки за сегодня"
 
 #: src/pages/Share/Modal/WithdrawModal.tsx

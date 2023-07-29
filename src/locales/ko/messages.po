@@ -102,11 +102,8 @@ msgstr "3. NEST 토큰 가격 변동 리스크: 마진과 최종 이익과 손�
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
-msgid "30 Days' PNL"
-msgstr "30 일 손익"
-
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
-msgid "30 Days\\' PNL"
+msgid "30 Days' PNL"
 msgstr "30 일 손익"
 
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
@@ -122,11 +119,8 @@ msgstr "5. 스마트 계약 위험: 스마트 계약에 치명적인 알 수 없
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
-msgid "7 Days' PNL"
-msgstr "7 일 손익"
-
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
-msgid "7 Days\\' PNL"
+msgid "7 Days' PNL"
 msgstr "7 일 손익"
 
 #: src/pages/Home/Home.tsx
@@ -1057,11 +1051,8 @@ msgstr "오늘 거래량"
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
-msgid "Today's PNL"
-msgstr "오늘의 손익"
-
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
-msgid "Today\\'s PNL"
+msgid "Today's PNL"
 msgstr "오늘의 손익"
 
 #: src/pages/Share/Modal/WithdrawModal.tsx
