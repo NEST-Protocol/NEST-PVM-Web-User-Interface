@@ -37,6 +37,7 @@ export const LanData = [
   [`한국어`, "ko"],
   // [`Русский`, "ru"],
   [`Tiếng Việt`, "vi"],
+  [`Türkçe`, "tr"]
 ];
 
 export const LanguageList: FC<LanguageListProps> = ({ ...props }) => {

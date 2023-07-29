@@ -60,6 +60,7 @@ export function useTokenTransfer(
       return tokenAddress;
     }
   }, [toAddress, tokenAddress]);
+
   const { config } = usePrepareContractWrite({
     address: token,
     abi: ERC20ABI,
@@ -67,7 +68,10 @@ export function useTokenTransfer(
     args: [toAddress, amount],
     enabled: true,
   });
-  const transaction = useContractWrite(config);
+  const transaction = useContractWrite({
+    ...config,
+    request: { ...config.request, value: BigNumber.from("0") },
+  });
   useEffect(() => {
     if (transaction.data) {
       addPendingList({

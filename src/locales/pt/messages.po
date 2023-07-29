@@ -102,12 +102,9 @@ msgstr "3. Risco de flutuação de preço do token NEST: Tanto a margem quanto o
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 msgid "30 Days' PNL"
 msgstr "Lucro e Perda de 30 dias"
-
-#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
-msgid "30 Days\\' PNL"
-msgstr "Lucro e Perda de 30 dias\\'"
 
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 #: src/pages/Futures/Modal/ProtocolModal.tsx
@@ -122,12 +119,9 @@ msgstr "5. Risco de contrato inteligente: pode haver riscos desconhecidos fatais
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 msgid "7 Days' PNL"
 msgstr "Lucro e Perda de 7 dias"
-
-#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
-msgid "7 Days\\' PNL"
-msgstr "Lucro e Perda de 7 dias\\'"
 
 #: src/pages/Home/Home.tsx
 msgid "A beginner's guide to using NESTFi"
@@ -1057,12 +1051,9 @@ msgstr "Volume actual"
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 msgid "Today's PNL"
 msgstr "O PNL de hoje"
-
-#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
-msgid "Today\\'s PNL"
-msgstr "Hoje\\'s PNL"
 
 #: src/pages/Share/Modal/WithdrawModal.tsx
 msgid "Total"
