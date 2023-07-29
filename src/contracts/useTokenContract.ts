@@ -55,14 +55,23 @@ export function useTokenTransfer(
       return NESTService[chainsData.chainId] as `0x${string}`;
     }
   }, [chainsData.chainId, tokenAddress]);
+  const token = useMemo(() => {
+    if (toAddress) {
+      return tokenAddress;
+    }
+  }, [toAddress, tokenAddress]);
+
   const { config } = usePrepareContractWrite({
-    address: tokenAddress,
+    address: token,
     abi: ERC20ABI,
     functionName: "transfer",
     args: [toAddress, amount],
     enabled: true,
   });
-  const transaction = useContractWrite(config);
+  const transaction = useContractWrite({
+    ...config,
+    request: { ...config.request, value: BigNumber.from("0") },
+  });
   useEffect(() => {
     if (transaction.data) {
       addPendingList({
