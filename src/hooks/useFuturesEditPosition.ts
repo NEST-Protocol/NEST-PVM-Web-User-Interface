@@ -87,6 +87,7 @@ function useFuturesEditPosition(
         data.id.toString(),
         stopLossPriceInput === "" ? "0" : stopLossPriceInput,
         stopProfitPriceInput === "" ? "0" : stopProfitPriceInput,
+        chainsData.chainId,
         { Authorization: signature.signature }
       );
       if (Number(updateBase["errorCode"]) === 0) {

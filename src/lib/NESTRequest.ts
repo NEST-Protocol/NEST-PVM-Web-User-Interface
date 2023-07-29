@@ -124,6 +124,14 @@ export function getNESTAmountForAll(
 /**
  * service
  */
+
+export function serviceBaseURL(chainId: number) {
+  if (chainId === 56) {
+    return "https://api.nestfi.net";
+  } else {
+    return "https://dev.nestfi.net";
+  }
+}
 export function serviceLogin(
   chainId: number,
   address: string,
@@ -131,7 +139,9 @@ export function serviceLogin(
   info: RequestBodyInterface
 ): Promise<any> {
   return baseRequestPOSTWithBody_return(
-    `https://api.nestfi.net/nestfi/op/user/login?chainId=${chainId}&walletAddress=${address}&remember=${remember}`,
+    `${serviceBaseURL(
+      chainId
+    )}/nestfi/op/user/login?chainId=${chainId}&walletAddress=${address}&remember=${remember}`,
     info,
     {}
   );
@@ -151,7 +161,9 @@ export function serviceOpen(
   header: RequestBodyInterface
 ): Promise<any> {
   return baseRequestPOSTWithBody_return(
-    `https://api.nestfi.net/nestfi/op/future/open?chainId=${chainId}&direction=${direction}&leverage=${leverage}&limit=${limit}&margin=${margin}&orderPrice=${orderPrice}&product=${product}&stopLossPrice=${stopLossPrice}&takeProfitPrice=${takeProfitPrice}&walletAddress=${address}`,
+    `${serviceBaseURL(
+      chainId
+    )}/nestfi/op/future/open?chainId=${chainId}&direction=${direction}&leverage=${leverage}&limit=${limit}&margin=${margin}&orderPrice=${orderPrice}&product=${product}&stopLossPrice=${stopLossPrice}&takeProfitPrice=${takeProfitPrice}&walletAddress=${address}`,
     header,
     {}
   );
@@ -159,12 +171,14 @@ export function serviceOpen(
 
 export function serviceAdd(
   append: string,
-  chainId: string,
+  chainId: number,
   id: string,
   header: RequestBodyInterface
 ): Promise<any> {
   return baseRequestPOSTWithBody_return(
-    `https://api.nestfi.net/nestfi/op/future/add?append=${append}&chainId=${chainId}&id=${id}`,
+    `${serviceBaseURL(
+      chainId
+    )}/nestfi/op/future/add?append=${append}&chainId=${chainId}&id=${id}`,
     header,
     {}
   );
@@ -174,10 +188,13 @@ export function serviceUpdateStopPrice(
   id: string,
   stopLossPrice: string,
   takeProfitPrice: string,
+  chainId: number,
   header: RequestBodyInterface
 ): Promise<any> {
   return baseRequestPOSTWithBody_return(
-    `https://api.nestfi.net/nestfi/op/future/updateStopPrice?id=${id}&stopLossPrice=${stopLossPrice}&takeProfitPrice=${takeProfitPrice}`,
+    `${serviceBaseURL(
+      chainId
+    )}/nestfi/op/future/updateStopPrice?id=${id}&stopLossPrice=${stopLossPrice}&takeProfitPrice=${takeProfitPrice}`,
     header,
     {}
   );
@@ -186,18 +203,25 @@ export function serviceUpdateStopPrice(
 export function serviceUpdateLimitPrice(
   id: string,
   limitPrice: string,
+  chainId: number,
   header: RequestBodyInterface
 ): Promise<any> {
   return baseRequestPOSTWithBody_return(
-    `https://api.nestfi.net/nestfi/op/future/updateLimitPrice?id=${id}&limitPrice=${limitPrice}`,
+    `${serviceBaseURL(
+      chainId
+    )}/nestfi/op/future/updateLimitPrice?id=${id}&limitPrice=${limitPrice}`,
     header,
     {}
   );
 }
 
-export function serviceCancel(id: string, header: RequestBodyInterface) {
+export function serviceCancel(
+  id: string,
+  chainId: number,
+  header: RequestBodyInterface
+) {
   return baseRequestPOSTWithBody_return(
-    `https://api.nestfi.net/nestfi/op/future/cancel?id=${id}`,
+    `${serviceBaseURL(chainId)}/nestfi/op/future/cancel?id=${id}`,
     header,
     {}
   );
@@ -212,15 +236,21 @@ export function serviceWithdraw(
   header: RequestBodyInterface
 ) {
   return baseRequestPOSTWithBody_return(
-    `https://api.nestfi.net/nestfi/op/user/withdraw?amount=${amount}&chainId=${chainId}&token=${token}&tokenAddress=${tokenAddress}&walletAddress=${walletAddress}`,
+    `${serviceBaseURL(
+      chainId
+    )}/nestfi/op/user/withdraw?amount=${amount}&chainId=${chainId}&token=${token}&tokenAddress=${tokenAddress}&walletAddress=${walletAddress}`,
     header,
     {}
   );
 }
 
-export function serviceClose(id: string, header: RequestBodyInterface) {
+export function serviceClose(
+  id: string,
+  chainId: number,
+  header: RequestBodyInterface
+) {
   return baseRequestPOSTWithBody_return(
-    `https://api.nestfi.net/nestfi/op/future/close?id=${id}`,
+    `${serviceBaseURL(chainId)}/nestfi/op/future/close?id=${id}`,
     header,
     {}
   );
@@ -232,7 +262,7 @@ export function serviceAsset(
   info: RequestBodyInterface
 ): Promise<any> {
   return baseRequestGetWithHeader(
-    `https://api.nestfi.net/nestfi/op/user/asset?chainId=${chainId}&walletAddress=${address}`,
+    `${serviceBaseURL(chainId)}/nestfi/op/user/asset?chainId=${chainId}&walletAddress=${address}`,
     info
   );
 }
@@ -243,7 +273,7 @@ export function serviceList(
   info: RequestBodyInterface
 ): Promise<any> {
   return baseRequestGetWithHeader(
-    `https://api.nestfi.net/nestfi/op/future/list?chainId=${chainId}&walletAddress=${address}`,
+    `${serviceBaseURL(chainId)}/nestfi/op/future/list?chainId=${chainId}&walletAddress=${address}`,
     info
   );
 }
@@ -254,7 +284,7 @@ export function serviceAccountList(
   info: RequestBodyInterface
 ) {
   return baseRequestGetWithHeader(
-    `https://api.nestfi.net/nestfi/op/user/depositWithdraw/list?chainId=${chainId}&walletAddress=${address}`,
+    `${serviceBaseURL(chainId)}/nestfi/op/user/depositWithdraw/list?chainId=${chainId}&walletAddress=${address}`,
     info
   );
 }
@@ -265,7 +295,7 @@ export function serviceHistory(
   info: RequestBodyInterface
 ) {
   return baseRequestGetWithHeader(
-    `https://api.nestfi.net/nestfi/op/future/history?chainId=${chainId}&walletAddress=${address}`,
+    `${serviceBaseURL(chainId)}/nestfi/op/future/history?chainId=${chainId}&walletAddress=${address}`,
     info
   );
 }

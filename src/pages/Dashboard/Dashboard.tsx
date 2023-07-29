@@ -320,7 +320,7 @@ const Dashboard: FC = () => {
             })}
           >
             <p>
-              {item.actualMargin.toLocaleString("en-US", {
+              {item.actualMargin?.toLocaleString("en-US", {
                 maximumFractionDigits: 2,
                 minimumFractionDigits: 2,
               })}{" "}

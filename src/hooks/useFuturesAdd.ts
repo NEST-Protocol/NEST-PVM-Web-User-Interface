@@ -52,7 +52,7 @@ function useFuturesAdd(
     if (chainsData.chainId && signature) {
       const addBase: { [key: string]: any } = await serviceAdd(
         nestAmount,
-        chainsData.chainId.toString(),
+        chainsData.chainId,
         data.id.toString(),
         { Authorization: signature.signature }
       );
