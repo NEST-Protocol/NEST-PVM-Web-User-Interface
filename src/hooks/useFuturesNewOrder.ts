@@ -465,8 +465,11 @@ function useFuturesNewOrder(
     tabsValue,
   ]);
   const baseAction = useCallback(() => {
-    // newOrder.write?.();
-  }, []);
+    if (chainsData.chainId !== 56) {
+      newOrder.write?.();
+    }
+    
+  }, [chainsData.chainId, newOrder]);
   const triggerNoticeCallback = useCallback(() => {
     setShowedTriggerNotice(true);
     baseAction();
