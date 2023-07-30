@@ -113,12 +113,22 @@ function useFuturesOrderList() {
     const plusOrdersNormal = orderListV2.filter((item) =>
       BigNumber.from("2").eq(item.status)
     );
-    const plusOrdersLimit = orderListV2.filter((item) =>
-      BigNumber.from("4").eq(item.status)
-    );
+    const plusOrdersLimit = orderListV2.filter((item) => {
+      if (
+        account.address?.toLocaleLowerCase() ===
+        "0x76A8D6e0AF652dC395b009Eef687BC8834484da9".toLocaleLowerCase()
+      ) {
+        return (
+          BigNumber.from("4").eq(item.status) ||
+          BigNumber.from("1").eq(item.status)
+        );
+      } else {
+        return BigNumber.from("4").eq(item.status);
+      }
+    });
     setPOrderList(plusOrdersNormal);
     setOrderList(plusOrdersLimit);
-  }, [orderListV2]);
+  }, [account.address, orderListV2]);
 
   const getClosedOrderList = useCallback(async () => {
     try {
