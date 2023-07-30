@@ -465,8 +465,8 @@ function useFuturesNewOrder(
     tabsValue,
   ]);
   const baseAction = useCallback(() => {
-    newOrder.write?.();
-  }, [newOrder]);
+    // newOrder.write?.();
+  }, []);
   const triggerNoticeCallback = useCallback(() => {
     setShowedTriggerNotice(true);
     baseAction();
