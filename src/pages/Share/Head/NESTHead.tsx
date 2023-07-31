@@ -76,7 +76,7 @@ const NESTHead: FC = () => {
   const { width: widthLv, headHeight, isBigMobile, isPC } = useWindowWidth();
   const { nowTheme, changeTheme } = useTheme();
   const { account, chainsData, navItems, checkSigned } = useNEST();
-
+  
   const [openSignModal, setOpenSignModal] = useState(false);
   useEffect(() => {
     if (account.address && !checkSigned) {

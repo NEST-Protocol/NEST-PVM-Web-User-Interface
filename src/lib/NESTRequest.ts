@@ -29,9 +29,14 @@ async function baseRequestPOSTWithBody_return(
   body: RequestBodyInterface
 ) {
   try {
+    const currentTimestampInSeconds = Math.floor(Date.now() / 1000);
     const res = await fetch(url, {
       method: "POST",
-      headers: { ...header, "Content-Type": "application/json" },
+      headers: {
+        ...header,
+        "Content-Type": "application/json",
+        token: currentTimestampInSeconds.toString(),
+      },
       body: JSON.stringify(body),
     });
     const resJson = await res.json();
@@ -262,7 +267,9 @@ export function serviceAsset(
   info: RequestBodyInterface
 ): Promise<any> {
   return baseRequestGetWithHeader(
-    `${serviceBaseURL(chainId)}/nestfi/op/user/asset?chainId=${chainId}&walletAddress=${address}`,
+    `${serviceBaseURL(
+      chainId
+    )}/nestfi/op/user/asset?chainId=${chainId}&walletAddress=${address}`,
     info
   );
 }
@@ -273,7 +280,9 @@ export function serviceList(
   info: RequestBodyInterface
 ): Promise<any> {
   return baseRequestGetWithHeader(
-    `${serviceBaseURL(chainId)}/nestfi/op/future/list?chainId=${chainId}&walletAddress=${address}`,
+    `${serviceBaseURL(
+      chainId
+    )}/nestfi/op/future/list?chainId=${chainId}&walletAddress=${address}`,
     info
   );
 }
@@ -284,7 +293,9 @@ export function serviceAccountList(
   info: RequestBodyInterface
 ) {
   return baseRequestGetWithHeader(
-    `${serviceBaseURL(chainId)}/nestfi/op/user/depositWithdraw/list?chainId=${chainId}&walletAddress=${address}`,
+    `${serviceBaseURL(
+      chainId
+    )}/nestfi/op/user/depositWithdraw/list?chainId=${chainId}&walletAddress=${address}`,
     info
   );
 }
@@ -295,7 +306,9 @@ export function serviceHistory(
   info: RequestBodyInterface
 ) {
   return baseRequestGetWithHeader(
-    `${serviceBaseURL(chainId)}/nestfi/op/future/history?chainId=${chainId}&walletAddress=${address}`,
+    `${serviceBaseURL(
+      chainId
+    )}/nestfi/op/future/history?chainId=${chainId}&walletAddress=${address}`,
     info
   );
 }

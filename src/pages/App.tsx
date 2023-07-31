@@ -101,6 +101,7 @@ const App: FC = () => {
       return <Route path="/swap" element={<SwapPage />} />;
     }
   }, [chainsData.chainId]);
+  
   return (
     <Stack spacing={0}>
       <HashRouter>

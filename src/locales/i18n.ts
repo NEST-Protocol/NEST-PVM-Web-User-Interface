@@ -15,6 +15,7 @@ i18n.load('pt', messagesPt)
 i18n.load('ru', messagesRu)
 i18n.load('vi', messagesVi)
 i18n.load('tr', messagesTr)
+i18n.load('es', messagesTr)
 /**
  * We do a dynamic import of just the catalog that we need
  * @param locale any locale string
