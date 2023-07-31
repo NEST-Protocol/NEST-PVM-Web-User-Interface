@@ -92,14 +92,14 @@ const ReCharts: FC<ChartsProps> = ({...props}) => {
             )
           }
           <Bar dataKey="longOpen" yAxisId={'left'} barSize={20} fill={nowTheme.normal.success} stackId="a"
-               unit={' NEST'} minPointSize={0.5}
+               unit={' NEST'} minPointSize={1}
           />
           <Bar dataKey="longClose" yAxisId={'left'} barSize={20} fill={nowTheme.normal.success_light_active}
-               stackId="a" unit={' NEST'} minPointSize={0.5}/>
+               stackId="a" unit={' NEST'}/>
           <Bar dataKey="shortOpen" yAxisId={'left'} barSize={20} fill={nowTheme.normal.danger}
-               stackId="a" unit={' NEST'} minPointSize={0.5}/>
+               stackId="a" unit={' NEST'}/>
           <Bar dataKey="shortClose" yAxisId={'left'} barSize={20} fill={nowTheme.normal.danger_light_active}
-               stackId="a" unit={' NEST'} minPointSize={0.5}/>
+               stackId="a" unit={' NEST'}/>
           <Line type="monotone" yAxisId={'right'} dataKey="cumulative" stroke="#EAAA00" dot={false}
                 strokeWidth={2} unit={' NEST'}/>
         </ComposedChart>

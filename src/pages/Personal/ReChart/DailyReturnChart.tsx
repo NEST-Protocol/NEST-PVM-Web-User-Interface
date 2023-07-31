@@ -50,8 +50,8 @@ const ReCharts: FC<ChartsProps> = ({...props}) => {
               <Tooltip content={<CustomTooltip />} />
             )
           }
-          <Bar dataKey="get" barSize={20} fill={nowTheme.normal.success} unit={' NEST'} minPointSize={0.25} stackId={'a'}/>
-          <Bar dataKey="loss" barSize={20} fill={nowTheme.normal.danger} unit={' NEST'} minPointSize={0.25} stackId={'a'}/>
+          <Bar dataKey="get" barSize={20} fill={nowTheme.normal.success} unit={' NEST'} minPointSize={1} stackId={'a'}/>
+          <Bar dataKey="loss" barSize={20} fill={nowTheme.normal.danger} unit={' NEST'} stackId={'a'}/>
         </ComposedChart>
       </ResponsiveContainer>
     </>

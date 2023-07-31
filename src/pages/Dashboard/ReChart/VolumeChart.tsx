@@ -66,13 +66,13 @@ const ReCharts: FC<ReChartsProps> = ({...props}) => {
           }}
         />
         <Bar yAxisId="left" dataKey="longOpen" barSize={20} fill={nowTheme.normal.success} stackId="a"
-             minPointSize={0.5} unit={' NEST'}/>
+             minPointSize={1} unit={' NEST'}/>
         <Bar yAxisId="left" dataKey="longClose" barSize={20} fill={nowTheme.normal.success_light_active} stackId="a"
-             minPointSize={0.5} unit={' NEST'}/>
+             unit={' NEST'}/>
         <Bar yAxisId="left" dataKey="shortOpen" barSize={20} fill={nowTheme.normal.danger} stackId="a"
-             minPointSize={0.5} unit={' NEST'}/>
+             unit={' NEST'}/>
         <Bar yAxisId="left" dataKey="shortClose" barSize={20} fill={nowTheme.normal.danger_light_active} stackId="a"
-             minPointSize={0.5} unit={' NEST'}/>
+             unit={' NEST'}/>
         <Line yAxisId="right" type="monotone" dataKey="cumulative" stroke="#EAAA00" dot={false} strokeWidth={2} unit={' NEST'}/>
       </ComposedChart>
     </ResponsiveContainer>

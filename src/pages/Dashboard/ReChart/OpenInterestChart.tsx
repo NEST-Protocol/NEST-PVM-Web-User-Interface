@@ -66,9 +66,8 @@ const ReCharts: FC<ReChartsProps> = ({...props}) => {
           }}
         />
         <Bar dataKey="long" barSize={20} fill={nowTheme.normal.success} stackId={'a'} unit={' NEST'}
-             minPointSize={0.5}/>
-        <Bar dataKey="short" barSize={20} fill={nowTheme.normal.danger} stackId={'a'} unit={' NEST'}
-             minPointSize={0.5}/>
+             minPointSize={1}/>
+        <Bar dataKey="short" barSize={20} fill={nowTheme.normal.danger} stackId={'a'} unit={' NEST'}/>
       </ComposedChart>
     </ResponsiveContainer>
   )

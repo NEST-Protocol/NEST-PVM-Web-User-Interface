@@ -67,7 +67,7 @@ const ReCharts: FC<ReChartsProps> = ({...props}) => {
           }}
         />
         <Bar yAxisId={'left'} dataKey="daily" barSize={20} fill={nowTheme.normal.success} stackId="a"
-             minPointSize={0.5}/>
+             minPointSize={1}/>
         <Line yAxisId={'right'} type="monotone" dataKey="cumulative" dot={false} stroke={nowTheme.normal.primary} strokeWidth={2} />
       </ComposedChart>
     </ResponsiveContainer>
