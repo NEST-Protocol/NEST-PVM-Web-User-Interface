@@ -11,6 +11,8 @@ import "@fontsource/open-sans/400.css";
 import "@fontsource/open-sans/500.css";
 import "@fontsource/open-sans/600.css";
 import "@fontsource/open-sans/700.css";
+import 'react-date-range/dist/styles.css';
+import './share/react-date-range.css';
 
 window.Buffer = buffer.Buffer;
 

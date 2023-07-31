@@ -15,8 +15,9 @@ const FuturesPage = loadable(() => import("./Futures/Futures"));
 const AccountPage = loadable(() => import("./Account/Account"));
 const SwapPage = loadable(() => import("./Swap/Swap"));
 const DashboardPage = loadable(() => import("./Dashboard/Dashboard"));
-const ReferralPage = loadable(() => import("./Dashboard/Referral/Referral"));
+const ReferralPage = loadable(() => import("./Personal/Referral/Referral"));
 const DirectPosterPage = loadable(() => import("./DirectPoster/DirectPoster"));
+const PersonalPage = loadable(() => import("./Personal/Personal"));
 const App: FC = () => {
   const { headHeight, isBigMobile } = useWindowWidth();
   const { account, chainsData } = useNEST();
@@ -107,12 +108,19 @@ const App: FC = () => {
         <NESTHead />
         <MainContent>
           <Routes>
-            <Route path="/home" element={<HomePage />} />
-            <Route path="/futures" element={<FuturesPage />} />
+            <Route path="home" element={<HomePage />} />
+            <Route path="futures" element={<FuturesPage />} />
             {swapOrDirectPoster}
-            <Route path="/account" element={<AccountPage/>}/>
-            <Route path="/dashboard" element={<DashboardPage />} />
-            <Route path="/dashboard/referral" element={<ReferralPage />} />
+            <Route path="account" element={<AccountPage/>}/>
+            <Route path="dashboard" element={<DashboardPage />} />
+            <Route path="user">
+              <Route path=":address" element={<PersonalPage />}/>
+              <Route path="" element={<PersonalPage />}/>
+            </Route>
+            <Route path="referral">
+              <Route path={':address'} element={<ReferralPage />}/>
+              <Route path={''} element={<ReferralPage />}/>
+            </Route>
             <Route path="*" element={<Navigate to="/home" />} />
           </Routes>
           {/* <TestTheme /> */}

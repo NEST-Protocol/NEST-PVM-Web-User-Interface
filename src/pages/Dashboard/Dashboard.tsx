@@ -1,146 +1,13 @@
-import {FC, useMemo, useState} from "react";
-import {Stack, styled} from "@mui/material";
-import TVChart from "./TVChart/TVChart";
-import {DashboardIcon2, Share} from "../../components/icons";
-import NESTTabs from "../../components/NESTTabs/NESTTabs";
-import useWindowWidth from "../../hooks/useWindowWidth";
-import {useAccount} from "wagmi";
-import TableRow from "@mui/material/TableRow";
-import TableCell from "@mui/material/TableCell";
-import Box from "@mui/material/Box";
-import FuturesOrderShare from "../Futures/Components/FuturesOrderShare";
-import MainButton from "../../components/MainButton/MainButton";
-import ShareMyDealModal from "./Modal/ShareMyDealModal";
-import ShareMyOrderModal from "./Modal/ShareMyOrderModal";
-import {lipPrice} from "../../hooks/useFuturesNewOrder";
-import {BigNumber, ethers} from "ethers";
-import useNEST from "../../hooks/useNEST";
-import copy from "copy-to-clipboard";
-import useNESTSnackBar from "../../hooks/useNESTSnackBar";
-import NESTLine from "../../components/NESTLine";
-import FuturesTableTitle from "../Futures/Components/TableTitle";
-import OrderTablePosition from "../Futures/Components/OrderTablePosition";
-import {Trans, t} from "@lingui/macro";
+import {FC, useState} from "react";
+import {Stack, Grid} from "@mui/material";
+import VolumeChart from "./ReChart/VolumeChart";
+import BurnedChart from "./ReChart/BurnedChart";
+import OpenInterestChart from "./ReChart/OpenInterestChart";
+import UserChart from "./ReChart/UserChart";
 import useSWR from "swr";
-import NetworkIcon from "./Components/NetworkIcon";
-import MobileOrderTypePosition from "./Components/MobileOrderTypePosition";
-import {useSearchParams} from "react-router-dom";
-
-const DashboardShare = styled(Box)(({theme}) => ({
-  borderRadius: "8px",
-  border: `1px solid ${theme.normal.border}`,
-  minWidth: "40px",
-  minHeight: "40px",
-  alignItems: "center",
-  justifyContent: "center",
-  "& svg": {
-    width: "20px",
-    height: "20px",
-    display: "block",
-    margin: "0 auto",
-    "& path": {
-      fill: theme.normal.text2,
-    },
-  },
-  "&:hover": {
-    cursor: "pointer",
-    border: `1px solid ${theme.normal.grey_hover}`,
-    background: theme.normal.grey_hover,
-    "& svg path": {
-      fill: theme.normal.text0,
-    },
-  },
-  "&:active": {
-    border: `1px solid ${theme.normal.grey_active}`,
-    background: theme.normal.grey_active,
-    "& svg path": {
-      fill: theme.normal.text0,
-    },
-  },
-}));
-
-const Title1 = styled("div")(({theme}) => ({
-  fontWeight: "400",
-  fontSize: "16px",
-  lineHeight: "22px",
-  color: theme.normal.text2,
-}));
-
-const Title2 = styled("div")(({theme}) => ({
-  fontWeight: "700",
-  fontSize: "32px",
-  lineHeight: "44px",
-  color: theme.normal.text0,
-}));
-
-const Title3 = styled("div")(({theme}) => ({
-  fontWeight: "700",
-  fontSize: "28px",
-  lineHeight: "40px",
-  color: theme.normal.text0,
-}));
-
-const Title4 = styled("div")(({theme}) => ({
-  fontWeight: "700",
-  fontSize: "24px",
-  lineHeight: "32px",
-  color: theme.normal.text0,
-}));
-
-const Caption1 = styled("div")(({theme}) => ({
-  fontWeight: "400",
-  fontSize: "16px",
-  lineHeight: "22px",
-  color: theme.normal.text2,
-}));
-
-const Caption2 = styled("div")(({theme}) => ({
-  fontWeight: "400",
-  fontSize: "14px",
-  lineHeight: "20px",
-  color: theme.normal.text2,
-}));
-
-const Caption3 = styled("div")(({theme}) => ({
-  fontWeight: "400",
-  fontSize: "14px",
-  lineHeight: "20px",
-  color: theme.normal.text2,
-}));
-
-const Caption4 = styled("div")(({theme}) => ({
-  fontWeight: "700",
-  fontSize: "16px",
-  lineHeight: "22px",
-  color: theme.normal.text0,
-}));
-
-const Caption5 = styled("div")(({theme}) => ({
-  fontWeight: "400",
-  fontSize: "12px",
-  lineHeight: "16px",
-}));
-
-const Card2 = styled(Stack)(({theme}) => ({
-  width: "100%",
-  border: "1px solid",
-  borderRadius: "12px",
-  borderColor: theme.normal.border,
-  overflow: "hidden",
-}));
-
-const Card3 = styled(Stack)(({theme}) => ({
-  width: "100%",
-  borderRadius: "12px",
-  background: theme.normal.bg1,
-  padding: "40px",
-}));
-
-const Card4 = styled(Stack)(({theme}) => ({
-  width: "100%",
-  borderRadius: "12px",
-  background: theme.normal.bg1,
-}));
+import {DateRange, Range} from "react-date-range";
+import Box from "@mui/material/Box";
+import useTheme from "../../hooks/useTheme";
 
 export type Order = {
   owner: string;
@@ -157,1328 +24,230 @@ export type Order = {
   sp: number;
   sl: number;
 };
-
-function formatDate(timestamp: number) {
-  const date = new Date(timestamp);
-  return (
-    date.getFullYear() +
-    "-" +
-    (date.getMonth() + 1).toString().padStart(2, "0") +
-    "-" +
-    date.getDate().toString().padStart(2, "0") +
-    " " +
-    date.getHours().toString().padStart(2, "0") +
-    ":" +
-    date.getMinutes().toString().padStart(2, "0") +
-    ":" +
-    date.getSeconds().toString().padStart(2, "0")
-  );
-}
-
 const Dashboard: FC = () => {
-  const {address} = useAccount();
-  const {setShowConnect, chainsData} = useNEST();
-  const {isBigMobile} = useWindowWidth();
-  const [tabsValue, setTabsValue] = useState(0);
-  const [showShareMyDealModal, setShareMyDealModal] = useState(false);
-  const [showShareOrderModal, setShowShareOrderModal] = useState(false);
-  const [shareOrder, setShareOrder] = useState<any>(undefined);
-  const {messageSnackBar} = useNESTSnackBar();
-  let [searchParams,] = useSearchParams();
-
-  const a = searchParams.get('address');
-
-  const {data: burnedData} = useSWR(`https://api.nestfi.net/api/dashboard/destory/list?chainId=${chainsData.chainId === 534353 ? 534353 : 56}&from=2022-11-28&to=${(new Date()).toISOString().split("T")[0]}`, (url: any) => fetch(url)
-    .then((res) => res.json())
-    .then((res: any) => res.value)
-    .then((res: any) => res.map((item: any) => ({
-      time: item.date,
-      value: item.value ?? 0,
-    }))));
-
-  const {data: txData} = useSWR(`https://api.nestfi.net/api/dashboard/txVolume/list?chainId=${chainsData.chainId === 534353 ? 534353 : 56}&from=2022-11-28&to=${(new Date()).toISOString().split("T")[0]}`, (url: any) => fetch(url)
-    .then((res) => res.json())
-    .then((res: any) => res.value)
-    .then((res: any) => res.map((item: any) => ({
-      time: item.date,
-      value: item.value ?? 0,
-    })))
-  )
-
-  const {
-    data: burnedInfo,
-    isLoading: isBurnedInfoLoading
-  } = useSWR(`https://api.nestfi.net/api/dashboard/destory?chainId=${chainsData.chainId === 534353 ? 534353 : 56}`, (url: any) => fetch(url)
+  const {data: infoData} = useSWR(`https://api.nestfi.net/api/dashboard/v2/entirety/info?chainId=56`, (url: any) => fetch(url)
     .then((res) => res.json())
     .then((res: any) => res.value));
-
-  const {
-    data: txInfo,
-    isLoading: isTxInfoLoading
-  } = useSWR(`https://api.nestfi.net/api/dashboard/txVolume?chainId=${chainsData.chainId === 534353 ? 534353 : 56}`, (url: any) => fetch(url)
-    .then((res) => res.json())
-    .then((res: any) => res.value));
-
-  const {data: myTxInfo} = useSWR(address ? `https://api.nestfi.net/api/dashboard/myTx/info?address=${a || address}&chainId=${chainsData.chainId === 534353 ? 534353 : 56}` : undefined, (url: any) => fetch(url)
-    .then((res) => res.json())
-    .then((res: any) => res.value));
-
-  const {data: historyList} = useSWR(address ? `https://api.nestfi.net/api/dashboard/history/list?address=${a || address}&chainId=${chainsData.chainId === 534353 ? 534353 : 56}` : undefined, (url: any) => fetch(url)
-    .then((res) => res.json())
-    .then((res: any) => res.value.sort((a: any, b: any) => b.time - a.time)), {
-    refreshInterval: 3000,
+  const [range, setRange] = useState<Range>({
+    startDate: new Date(new Date().getTime() - 30 * 24 * 60 * 60 * 1000),
+    endDate: new Date(),
+    key: 'selection'
   });
-
-  const {data: isKol} = useSWR(address ? `https://api.nestfi.net/api/invite/is-kol-whitelist/${a || address}` : undefined, (url: any) => fetch(url).then((res) => res.json()));
-
-  const shareMyDealModal = useMemo(() => {
-    return (
-      <ShareMyDealModal
-        value={myTxInfo || {
-          totalValue: 0,
-          todayValue: 0,
-          totalCount: 0,
-          totalVolume: 0,
-          day7Value: 0,
-          day30Value: 0,
-        }}
-        open={showShareMyDealModal}
-        onClose={() => {
-          setShareMyDealModal(false);
-        }}
-      />
-    );
-  }, [showShareMyDealModal]);
-
-  const shareMyOrderModal = useMemo(() => {
-    if (!shareOrder) {
-      return <></>;
-    }
-    return (
-      <ShareMyOrderModal
-        value={shareOrder}
-        open={showShareOrderModal}
-        onClose={() => {
-          setShowShareOrderModal(false);
-        }}
-        isClosed={showShareOrderModal}
-      />
-    );
-  }, [showShareOrderModal]);
-
-  const PCOrderRow = (item: any, index: number, isHistory: boolean = false) => {
-    return (
-      <TableRow
-        key={index}
-        sx={(theme) => ({
-          ":hover": {
-            background: theme.normal.bg1,
-          },
-        })}
-      >
-        <TableCell>
-          <Box
-            component={"p"}
-            sx={(theme) => ({
-              fontWeight: 700,
-              fontSize: 16,
-              color: theme.normal.text0,
-              whiteSpace: "nowrap",
-            })}
-          >
-            {formatDate(item.time * 1000)}
-          </Box>
-        </TableCell>
-        <TableCell>
-          <OrderTablePosition
-            tokenName={item.tokenPair.split("/")[0]}
-            isLong={item.orientation === "Long"}
-            lever={Number(item.leverage.replace("X", ""))}
-          />
-        </TableCell>
-        <TableCell>
-          <Stack
-            sx={(theme) => ({
-              whiteSpace: "nowrap",
-              "& p": {
-                fontWeight: 700,
-                fontSize: 16,
-                lineHeight: "16px",
-                color:
-                  item.actualRate >= 0
-                    ? theme.normal.success
-                    : theme.normal.danger,
-              },
-              "& span": {
-                fontWeight: 400,
-                fontSize: 14,
-                color:
-                  item.actualRate >= 0
-                    ? theme.normal.success
-                    : theme.normal.danger,
-              },
-            })}
-          >
-            <p>
-              {item.actualMargin?.toLocaleString("en-US", {
-                maximumFractionDigits: 2,
-                minimumFractionDigits: 2,
-              })}{" "}
-              NEST
-            </p>
-            <span>
-              ({item.actualRate > 0 && "+"}
-              {item.actualRate}%)
-            </span>
-          </Stack>
-        </TableCell>
-        <TableCell>
-          <Box
-            component={"p"}
-            sx={(theme) => ({
-              fontWeight: 700,
-              fontSize: 16,
-              color: theme.normal.text0,
-              whiteSpace: "nowrap",
-            })}
-          >
-            {item.openPrice.toLocaleString("en-US", {
-              maximumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
-              minimumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
-            })}{" "}
-            USDT
-          </Box>
-        </TableCell>
-        {
-          !isHistory && (
-            <TableCell>
-              <Box
-                component={"p"}
-                sx={(theme) => ({
-                  fontWeight: 700,
-                  fontSize: 16,
-                  color: theme.normal.text0,
-                  whiteSpace: "nowrap",
-                })}
-              >
-                {(
-                  lipPrice(
-                    ethers.utils.parseEther(item.initialMargin.toFixed(12)),
-                    ethers.utils.parseEther(item?.appendMargin?.toFixed(12) || "0"),
-                    BigNumber.from(item.leverage.replace("X", "")),
-                    ethers.utils.parseEther(item.lastPrice.toFixed(12)),
-                    ethers.utils.parseEther(item.openPrice.toFixed(12)),
-                    item.orientation === "Long"
-                  )
-                    .div(BigNumber.from(10).pow(12))
-                    .toNumber() / 1000000
-                ).toLocaleString("en-US", {
-                  maximumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
-                  minimumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
-                })}{" "}
-                USDT
-              </Box>
-            </TableCell>
-          )
-        }
-        <TableCell>
-          <Stack
-            spacing={"4px"}
-            sx={(theme) => ({
-              whiteSpace: "nowrap",
-              "& p": {
-                fontSize: "12px",
-                fontWeight: 400,
-                lineHeight: "16px",
-                color: theme.normal.text0,
-              },
-              "& span": {
-                // fontWeight: 400,
-                fontSize: "14px",
-                marginRight: "4px",
-                color: theme.normal.text2,
-              },
-            })}
-          >
-            <Box component={"p"}>
-              <span>TP</span>
-              {item.sp
-                ? item.sp.toLocaleString("en-US", {
-                  maximumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
-                  minimumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
-                })
-                : "-"}{" "}
-              USDT
-            </Box>
-            <Box component={"p"}>
-              <span>SL</span>
-              {item.sl
-                ? item.sl.toLocaleString("en-US", {
-                  maximumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
-                  minimumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
-                })
-                : "-"}{" "}
-              USDT
-            </Box>
-          </Stack>
-        </TableCell>
-        {isHistory && (
-          <TableCell>
-            <Stack direction={'row'} alignItems={"center"} gap={'12px'}>
-              <Box
-                component={"p"}
-                sx={(theme) => ({
-                  fontWeight: 700,
-                  fontSize: 16,
-                  color: theme.normal.text0,
-                  whiteSpace: "nowrap",
-                })}
-              >
-                {item.lastPrice.toLocaleString("en-US", {
-                  maximumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
-                  minimumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
-                })}{" "}
-                USDT
-              </Box>
-              <Box sx={(theme) => ({
-                fontWeight: 700,
-                fontSize: "10px",
-                lineHeight: '14px',
-                padding: '3px 4px',
-                border: '1px solid',
-                borderColor: item.orderType === 'Closed' ? theme.normal.border : item.orderType === 'Liquidated' ? theme.normal.danger_light_hover : theme.normal.success_light_hover,
-                color: item.orderType === 'Closed' ? theme.normal.text2 : item.orderType === 'Liquidated' ? theme.normal.danger : theme.normal.success,
-                borderRadius: '4px',
-              })}>
-                {item.orderType === 'Closed' && <Trans>Closed</Trans>}
-                {item.orderType === 'Liquidated' && <Trans>Liquidated</Trans>}
-                {item.orderType === 'TP Executed' && <Trans>TP Executed</Trans>}
-                {item.orderType === 'SL Executed' && <Trans>SL Executed</Trans>}
-              </Box>
-            </Stack>
-          </TableCell>
-        )}
-
-        <TableCell>
-          <Stack direction={"row"} justifyContent={"flex-end"} spacing={"8px"}>
-            <FuturesOrderShare
-              component={"button"}
-              sx={{
-                cursor: "pointer",
-              }}
-              onClick={() => {
-                setShowShareOrderModal(true);
-                setShareOrder({
-                  ...item,
-                  sp: Number(item.sp.toFixed(item.tokenPair.split("/")[0].getTokenPriceDecimals())),
-                  sl: Number(item.sl.toFixed(item.tokenPair.split("/")[0].getTokenPriceDecimals())),
-                });
-              }}
-            >
-              <Share/>
-            </FuturesOrderShare>
-          </Stack>
-        </TableCell>
-      </TableRow>
-    );
-  };
-
-  const MobileOrderCard = (
-    item: any,
-    index: number,
-    isHistory: boolean = false
-  ) => {
-    return (
-      <Card4
-        sx={{
-          paddingX: "16px",
-          paddingY: "12px",
-        }}
-        key={index}
-      >
-        <Stack direction={"row"} justifyContent={"space-between"}>
-          <MobileOrderTypePosition
-            tokenName={item.tokenPair.split("/")[0]}
-            isLong={item.orientation === "Long"}
-            lever={Number(item.leverage.replace("X", ""))}
-          />
-          <Box
-            component={"button"}
-            sx={(theme) => ({
-              cursor: "pointer",
-              "& svg": {
-                width: "20px",
-                height: "20px",
-                display: "block",
-                margin: "0 auto",
-                "& path": {
-                  fill: theme.normal.text2,
-                },
-              },
-              "&:hover": {
-                "& svg path": {
-                  fill: theme.normal.text0,
-                },
-              },
-              "&:active": {
-                "& svg path": {
-                  fill: theme.normal.text0,
-                },
-              },
-            })}
-            onClick={() => {
-              setShowShareOrderModal(true);
-              setShareOrder({
-                ...item,
-                sp: Number(item.sp.toFixed(item.tokenPair.split("/")[0].getTokenPriceDecimals())),
-                sl: Number(item.sl.toFixed(item.tokenPair.split("/")[0].getTokenPriceDecimals())),
-              });
-            }}
-          >
-            <Share/>
-          </Box>
-        </Stack>
-        <Stack spacing={"8px"} pt={"20px"}>
-          <Stack direction={"row"}>
-            <Stack width={"50%"} spacing={"4px"}>
-              <Caption5
-                sx={(theme) => ({
-                  color: theme.normal.text2,
-                })}
-              >{t`Open Price`}</Caption5>
-              <Caption2
-                sx={(theme) => ({
-                  color: theme.normal.text0,
-                })}
-              >
-                {item.openPrice.toLocaleString("en-US", {
-                  maximumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
-                  minimumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
-                })}{" "}
-                USDT
-              </Caption2>
-            </Stack>
-            <Stack width={"50%"} spacing={"4px"}>
-              <Caption5
-                sx={(theme) => ({
-                  color: theme.normal.text2,
-                })}
-              >{t`Actual Margin`}</Caption5>
-              <Caption2
-                sx={(theme) => ({
-                  color: theme.normal.text0,
-                  span: {
-                    fontWeight: "400",
-                    fontSize: "10px",
-                    lineHeight: "14px",
-                    color:
-                      item.actualRate >= 0
-                        ? theme.normal.success
-                        : theme.normal.danger,
-                  },
-                })}
-              >
-                {item.actualMargin.toLocaleString("en-US", {
-                  maximumFractionDigits: 2,
-                  minimumFractionDigits: 2,
-                })}{" "}
-                NEST{" "}
-                <span>
-                  {item.actualRate > 0 && "+"}
-                  {item.actualRate}%
-                </span>
-              </Caption2>
-            </Stack>
-          </Stack>
-          <Box py={"8px"}>
-            <Box
-              sx={(theme) => ({
-                width: "100%",
-                borderBottom: "1px solid",
-                borderColor: theme.normal.border,
-              })}
-            />
-          </Box>
-          <Stack direction={"row"}>
-            <Stack direction={"row"} width={"50%"} spacing={"4px"}>
-              <Caption5
-                sx={(theme) => ({
-                  color: theme.normal.text2,
-                })}
-              >
-                Take Profit
-              </Caption5>
-              <Caption5
-                sx={(theme) => ({
-                  color: theme.normal.text0,
-                })}
-              >
-                {item.sp.toLocaleString("en-US", {
-                  maximumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
-                  minimumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
-                })}{" "}
-                USDT
-              </Caption5>
-            </Stack>
-            <Stack direction={"row"} width={"50%"} spacing={"4px"}>
-              <Caption5
-                sx={(theme) => ({
-                  color: theme.normal.text2,
-                })}
-              >
-                Stop Loss
-              </Caption5>
-              <Caption5
-                sx={(theme) => ({
-                  color: theme.normal.text0,
-                })}
-              >
-                {item.sl.toLocaleString("en-US", {
-                  maximumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
-                  minimumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
-                })}{" "}
-                USDT
-              </Caption5>
-            </Stack>
-          </Stack>
-          <Stack direction={"row"}>
-            <Stack direction={"row"} width={"50%"} spacing={"4px"}>
-              <Caption5
-                sx={(theme) => ({
-                  color: theme.normal.text2,
-                })}
-              >{t`Liq Price`}</Caption5>
-              <Caption5
-                sx={(theme) => ({
-                  color: theme.normal.text0,
-                })}
-              >
-                {(
-                  lipPrice(
-                    ethers.utils.parseEther(item.initialMargin.toFixed(12)),
-                    ethers.utils.parseEther(
-                      item?.appendMargin?.toFixed(12) || "0"
-                    ),
-                    BigNumber.from(item.leverage.replace("X", "")),
-                    ethers.utils.parseEther(item.lastPrice.toFixed(12)),
-                    ethers.utils.parseEther(item.openPrice.toFixed(12)),
-                    item.orientation === "Long"
-                  )
-                    .div(BigNumber.from(10).pow(12))
-                    .toNumber() / 1000000
-                ).toLocaleString("en-US", {
-                  maximumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
-                  minimumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
-                })}{" "}
-                USDT
-              </Caption5>
-            </Stack>
-            {isHistory && (
-              <Stack direction={"row"} width={"50%"} spacing={"4px"}>
-                <Caption5
-                  sx={(theme) => ({
-                    color: theme.normal.text2,
-                  })}
-                >{t`Close Price`}</Caption5>
-                <Caption5
-                  sx={(theme) => ({
-                    color: theme.normal.text0,
-                  })}
-                >
-                  {item.lastPrice.toLocaleString("en-US", {
-                    maximumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
-                    minimumFractionDigits: item.tokenPair.split("/")[0].getTokenPriceDecimals(),
-                  })}{" "}
-                  USDT
-                </Caption5>
-              </Stack>
-            )}
-          </Stack>
-          <Stack direction={"row"} width={"50%"} spacing={"4px"}>
-            <Caption5
-              sx={(theme) => ({
-                color: theme.normal.text2,
-              })}
-            >{t`Time`}</Caption5>
-            <Caption5
-              sx={(theme) => ({
-                color: theme.normal.text0,
-              })}
-            >
-              {formatDate(item.time * 1000)}
-            </Caption5>
-          </Stack>
-          <Stack direction={'row'}>
-            <Box sx={(theme) => ({
-              padding: '3px 4px',
-              fontSize: '10px',
-              fontWeight: 700,
-              lineHeight: '14px',
-              borderRadius: '4px',
-              border: '1px solid',
-              borderColor: item.orderType === 'Closed' ? theme.normal.border : item.orderType === 'Liquidated' ? theme.normal.danger_light_hover : theme.normal.success_light_hover,
-              color: item.orderType === 'Closed' ? theme.normal.text2 : item.orderType === 'Liquidated' ? theme.normal.danger : theme.normal.success,
-            })}>
-              {item.orderType === 'Closed' && <Trans>Closed</Trans>}
-              {item.orderType === 'Liquidated' && <Trans>Liquidated</Trans>}
-              {item.orderType === 'TP Executed' && <Trans>TP Executed</Trans>}
-              {item.orderType === 'SL Executed' && <Trans>SL Executed</Trans>}
-            </Box>
-          </Stack>
-        </Stack>
-      </Card4>
-    );
-  };
-
-  const getNESTTabs = useMemo(() => {
-    return (
-      <NESTTabs
-        value={tabsValue}
-        className={""}
-        datArray={[
-          <Stack direction={"row"} spacing={"4px"} alignItems={"center"} whiteSpace={"nowrap"}>
-            <DashboardIcon2/>
-            <p
-              style={{fontWeight: 700, fontSize: "16px", lineHeight: "22px"}}
-            >
-              <Trans>History</Trans>
-            </p>
-          </Stack>,
-        ]}
-        height={44}
-        space={24}
-        selectCallBack={(value: number) => setTabsValue(value)}
-        isFull={false}
-      />
-    );
-  }, [tabsValue, isBigMobile]);
+  const [showrdr, setShowrdr] = useState(false);
+  const {nowTheme} = useTheme()
 
   return (
-    <Stack alignItems={"center"} width={"100%"}>
-      {shareMyDealModal}
-      {shareMyOrderModal}
-      {
-        isKol && isKol?.value && chainsData.chainId === 56 && (
-          <Stack direction={'row'} width={'100%'} justifyContent={"center"} spacing={'32px'} sx={(theme) => ({
+    <Stack alignItems={"center"}>
+      <Stack maxWidth={'1600px'} width={'100%'} mt={['20px', '20px', '20px', '40px']}>
+        <Stack px={'20px'} sx={(theme) => ({
+          [theme.breakpoints.down('md')]: {
+            color: theme.normal.text2,
+            fontSize: '14px',
+            lineHeight: '20px',
+          },
+          [theme.breakpoints.up('md')]: {
             color: theme.normal.text0,
-            fontWeight: 700,
-            fontSize: '16px',
-            lineHeight: '22px',
-            background: theme.normal.bg1,
-            borderBottom: `1px solid ${theme.normal.border}`,
-            borderTop: `1px solid ${theme.normal.border}`,
-          })}>
-            <Box sx={(theme) => ({
-              paddingY: '11px',
-              borderBottom: `2px solid ${theme.normal.primary}`,
-              a: {
-                color: theme.normal.primary,
-                cursor: 'pointer',
-                '&:hover': {
-                  color: theme.normal.primary,
-                }
-              }
-            })}>
-              <a href={'/#/dashboard'}>
-                <Trans>
-                  Dashboard
-                </Trans>
-              </a>
-            </Box>
-            <Box sx={(theme) => ({
-              paddingY: '11px',
-              a: {
-                color: theme.normal.text0,
-                cursor: 'pointer',
-                '&:hover': {
-                  color: theme.normal.primary,
-                }
-              }
-            })}>
-              <a href={'/#/dashboard/referral'}>
-                <Trans>
-                  Referral
-                </Trans>
-              </a>
-            </Box>
-          </Stack>
-        )
-      }
-      <Stack
-        maxWidth={"1600px"}
-        px={["0", "0", "20px"]}
-        width={"100%"}
-        spacing={["20px", "20px", "40px"]}
-        py={["20px", "20px", "40px"]}
-      >
-        <Stack>
-          <Stack
-            direction={["column", "column", "row"]}
-            gap={["0px", "0px", "24px"]}
-          >
-            <Stack
-              sx={(theme) => ({
-                width: "100%",
-                border: "1px solid",
-                borderRadius: "12px",
-                borderColor: theme.normal.border,
-                [theme.breakpoints.down("sm")]: {
-                  border: "0px",
-                },
-              })}
-            >
-              <TVChart
-                title1={t`NEST Total Burned`}
-                title2={t`Today Burned`}
-                value1={`${
-                  isBurnedInfoLoading
-                    ? "-"
-                    : burnedInfo.totalDestroy.toLocaleString("en-US", {
-                      maximumFractionDigits: 2,
-                      minimumFractionDigits: 2,
-                    })
-                }`}
-                value2={`${
-                  isBurnedInfoLoading
-                    ? "-"
-                    : burnedInfo.dayDestroy.toLocaleString("en-US", {
-                      maximumFractionDigits: 2,
-                      minimumFractionDigits: 2,
-                    })
-                }`}
-                data={burnedData || []}
-              />
-            </Stack>
-            <Stack
-              sx={(theme) => ({
-                width: "100%",
-                border: "1px solid",
-                borderRadius: "12px",
-                borderColor: theme.normal.border,
-                [theme.breakpoints.down("sm")]: {
-                  border: "0px",
-                },
-              })}
-            >
-              <TVChart
-                title1={t`Total Trading Volume`}
-                title2={t`Today Volume`}
-                value1={`${
-                  isTxInfoLoading
-                    ? "-"
-                    : txInfo?.totalVolume.toLocaleString("en-US", {
-                      maximumFractionDigits: 2,
-                      minimumFractionDigits: 2,
-                    })
-                }`}
-                value2={`${
-                  isTxInfoLoading
-                    ? "-"
-                    : txInfo?.dayVolume.toLocaleString("en-US", {
-                      maximumFractionDigits: 2,
-                      minimumFractionDigits: 2,
-                    })
-                }`}
-                data={txData || []}
-              />
-            </Stack>
-          </Stack>
-          {isBigMobile && <NESTLine/>}
+            fontSize: '20px',
+            lineHeight: '28px',
+          },
+          fontWeight: 'bold',
+        })}>
+          Dashboard / BNB Smart Chain
         </Stack>
-        {isBigMobile ? (
-          <Stack px={"20px"} spacing={"16px"}>
-            <Stack
-              direction={"row"}
-              justifyContent={"space-between"}
-              alignItems={"center"}
-            >
-              <Stack direction={'row'} spacing={'8px'} alignItems={"center"}>
-                <NetworkIcon chainId={chainsData.chainId}/>
-                <Title1>{t`My Positions`}</Title1>
-              </Stack>
-              <Stack>
-                <MainButton
-                  style={{
-                    padding: "0px 12px",
-                    height: "36px",
-                    fontSize: "12px",
-                    fontWeight: 700,
-                    lineHeight: "16px",
-                  }}
-                  title={t`Copy Invitation Link`}
-                  disable={!address}
-                  onClick={() => {
-                    if (!address) return;
-                    const link =
-                      "https://nestfi.org/?a=" +
-                      address.slice(-8).toLowerCase();
-                    copy(link);
-                    messageSnackBar(t`Copy Successfully`);
-                  }}
-                />
-              </Stack>
-            </Stack>
-            <Card4 sx={{position: "relative"}}>
-              {!address && (
-                <Stack
-                  position={"absolute"}
-                  width={"100%"}
-                  height={"100%"}
-                  sx={(theme) => ({
-                    backdropFilter: "blur(6px)",
-                    background: "rgba(0, 0, 0, 0.7)",
-                  })}
-                >
-                  <Stack
-                    width={"100%"}
-                    height={"100%"}
-                    alignItems={"center"}
-                    justifyContent={"center"}
-                  >
-                    <Stack width={"170px"}>
-                      <MainButton
-                        title={t`Connect Wallet`}
-                        onClick={() => {
-                          setShowConnect(true);
-                        }}
-                      />
-                    </Stack>
-                  </Stack>
-                </Stack>
-              )}
-              <Stack padding={"20px 12px"}>
+        <Stack mt={['16px', '16px', '16px', '36px']} px={'20px'}>
+          <Grid container spacing={'16px'}>
+            {
+              [
                 {
-                  chainsData.chainId === 56 || chainsData.chainId === 97 && (
-                    <>
-                      <Stack spacing={"4px"}>
-                        <Stack direction={"row"} justifyContent={"space-between"}>
-                          <Caption2
-                            sx={(theme) => ({
-                              color: theme.normal.text1,
-                            })}
-                          >{t`Total Profit & Loss`}</Caption2>
-                          <Box
-                            component={"button"}
-                            sx={(theme) => ({
-                              cursor: "pointer",
-                              "& svg": {
-                                width: "20px",
-                                height: "20px",
-                                display: "block",
-                                margin: "0 auto",
-                                "& path": {
-                                  fill: theme.normal.text2,
-                                },
-                              },
-                              "&:hover": {
-                                "& svg path": {
-                                  fill: theme.normal.text0,
-                                },
-                              },
-                              "&:active": {
-                                "& svg path": {
-                                  fill: theme.normal.text0,
-                                },
-                              },
-                            })}
-                            onClick={() => {
-                              setShareMyDealModal(true);
-                            }}
-                          >
-                            <Share/>
-                          </Box>
-                        </Stack>
-                        <Stack
-                          direction={"row"}
-                          spacing={"4px"}
-                          alignItems={"center"}
-                        >
-                          <Title4>
-                            {myTxInfo?.totalValue.toLocaleString("en-US", {
-                              maximumFractionDigits: 2,
-                              minimumFractionDigits: 2,
-                            })}{" "}
-                            NEST
-                          </Title4>
-                          {/*<Title5 sx={(theme) => ({*/}
-                          {/*  color: theme.normal.success*/}
-                          {/*})}>{myTxInfo.totalRate > 0 && '+'}{myTxInfo.totalRate.toLocaleString('en-US', {*/}
-                          {/*  maximumFractionDigits: 2,*/}
-                          {/*})}%</Title5>*/}
-                        </Stack>
-                      </Stack>
-                      <Box py={"20px"}>
-                        <NESTLine/>
-                      </Box>
-                    </>
-                  )
-                }
+                  title: 'Total Volume',
+                  value: Number(infoData?.totalVolume ?? 0).toLocaleString('en-US', {
+                    maximumFractionDigits: 2,
+                    minimumFractionDigits: 2,
+                  }) ?? '-',
+                  unit: 'NEST'
+                },
                 {
-                  chainsData.chainId === 534353 && (
-                    <>
-                      <Stack spacing={"4px"}>
-                        <Stack direction={"row"} justifyContent={"space-between"}>
-                          <Caption2
-                            sx={(theme) => ({
-                              color: theme.normal.text1,
-                            })}
-                          >{t`My Total Trading Volume`}</Caption2>
-                          <Box
-                            component={"button"}
-                            sx={(theme) => ({
-                              cursor: "pointer",
-                              "& svg": {
-                                width: "20px",
-                                height: "20px",
-                                display: "block",
-                                margin: "0 auto",
-                                "& path": {
-                                  fill: theme.normal.text2,
-                                },
-                              },
-                              "&:hover": {
-                                "& svg path": {
-                                  fill: theme.normal.text0,
-                                },
-                              },
-                              "&:active": {
-                                "& svg path": {
-                                  fill: theme.normal.text0,
-                                },
-                              },
-                            })}
-                            onClick={() => {
-                              setShareMyDealModal(true);
-                            }}
-                          >
-                            <Share/>
-                          </Box>
-                        </Stack>
-                        <Stack
-                          direction={"row"}
-                          spacing={"4px"}
-                          alignItems={"center"}
-                        >
-                          <Title4>
-                            {myTxInfo?.totalVolume?.toLocaleString("en-US", {
-                              maximumFractionDigits: 2,
-                              minimumFractionDigits: 2,
-                            })}{" "}
-                            NEST
-                          </Title4>
-                          {/*<Title5 sx={(theme) => ({*/}
-                          {/*  color: theme.normal.success*/}
-                          {/*})}>{myTxInfo.totalRate > 0 && '+'}{myTxInfo.totalRate.toLocaleString('en-US', {*/}
-                          {/*  maximumFractionDigits: 2,*/}
-                          {/*})}%</Title5>*/}
-                        </Stack>
-                      </Stack>
-                      <Box py={"20px"}>
-                        <NESTLine/>
-                      </Box>
-                      <Stack spacing={"4px"}>
-                        <Stack direction={"row"} justifyContent={"space-between"}>
-                          <Caption2
-                            sx={(theme) => ({
-                              color: theme.normal.text1,
-                            })}
-                          >{t`Total Number of Trades`}</Caption2>
-                        </Stack>
-                        <Stack
-                          direction={"row"}
-                          spacing={"4px"}
-                          alignItems={"center"}
-                        >
-                          <Title4>
-                            {myTxInfo?.totalCount?.toLocaleString("en-US", {
-                              maximumFractionDigits: 0,
-                            })}{" "}
-                          </Title4>
-                          {/*<Title5 sx={(theme) => ({*/}
-                          {/*  color: theme.normal.success*/}
-                          {/*})}>{myTxInfo.totalRate > 0 && '+'}{myTxInfo.totalRate.toLocaleString('en-US', {*/}
-                          {/*  maximumFractionDigits: 2,*/}
-                          {/*})}%</Title5>*/}
-                        </Stack>
-                      </Stack>
-                      <Box py={"20px"}>
-                        <NESTLine/>
-                      </Box>
-                    </>
-                  )
-                }
-                <Stack spacing={"22px"}>
-                  <Stack direction={"row"} justifyContent={"space-between"}>
-                    <Caption3>{t`Today's PNL`}</Caption3>
-                    <Stack
-                      direction={"row"}
-                      alignItems={"center"}
-                      spacing={"4px"}
-                    >
-                      <Caption4>
-                        {myTxInfo?.todayValue.toLocaleString("en-US", {
-                          maximumFractionDigits: 2,
-                          minimumFractionDigits: 2,
-                        })}{" "}
-                        NEST
-                      </Caption4>
-                      {/*<Caption5 sx={(theme) => ({*/}
-                      {/*  color: theme.normal.success*/}
-                      {/*})}>{myTxInfo.todayRate > 0 && '+'}{myTxInfo.todayRate.toLocaleString('en-US', {*/}
-                      {/*  maximumFractionDigits: 2,*/}
-                      {/*})}%</Caption5>*/}
-                    </Stack>
-                  </Stack>
-                  <Stack direction={"row"} justifyContent={"space-between"}>
-                    <Caption3>{t`7 Days' PNL`}</Caption3>
-                    <Stack
-                      direction={"row"}
-                      alignItems={"center"}
-                      spacing={"4px"}
-                    >
-                      <Caption4>
-                        {myTxInfo?.day7Value.toLocaleString("en-US", {
-                          maximumFractionDigits: 2,
-                          minimumFractionDigits: 2,
-                        })}{" "}
-                        NEST
-                      </Caption4>
-                      {/*<Caption5 sx={(theme) => ({*/}
-                      {/*  color: theme.normal.success*/}
-                      {/*})}>{myTxInfo.day7Rate > 0 && '+'}{myTxInfo.day7Rate.toLocaleString('en-US', {*/}
-                      {/*  maximumFractionDigits: 2,*/}
-                      {/*})}%</Caption5>*/}
-                    </Stack>
-                  </Stack>
-                  <Stack direction={"row"} justifyContent={"space-between"}>
-                    <Caption3>{t`30 Days' PNL`}</Caption3>
-                    <Stack
-                      direction={"row"}
-                      alignItems={"center"}
-                      spacing={"4px"}
-                    >
-                      <Caption4>
-                        {myTxInfo?.day30Value.toLocaleString("en-US", {
-                          maximumFractionDigits: 2,
-                          minimumFractionDigits: 2,
-                        })}{" "}
-                        NEST
-                      </Caption4>
-                      {/*<Caption5 sx={(theme) => ({*/}
-                      {/*  color: theme.normal.success*/}
-                      {/*})}>{myTxInfo.day30Rate > 0 && '+'}{myTxInfo.day30Rate.toLocaleString('en-US', {*/}
-                      {/*  maximumFractionDigits: 2,*/}
-                      {/*})}%</Caption5>*/}
-                    </Stack>
-                  </Stack>
-                </Stack>
-              </Stack>
-            </Card4>
-          </Stack>
-        ) : (
-          <Card2 sx={{position: "relative"}}>
-            {!address && (
-              <Stack
-                position={"absolute"}
-                width={"100%"}
-                p={"20px"}
-                height={"100%"}
-                sx={(theme) => ({
-                  backdropFilter: "blur(6px)",
-                  background: "rgba(0, 0, 0, 0.7)",
-                })}
-              >
-                <Stack direction={"row"} justifyContent={"space-between"} alignItems={"center"}>
-                  <NetworkIcon chainId={chainsData.chainId}/>
-                  <Title1>{t`My Positions`}</Title1>
-                </Stack>
-                <Stack
-                  width={"100%"}
-                  height={"100%"}
-                  alignItems={"center"}
-                  justifyContent={"center"}
-                >
-                  <Stack width={"170px"}>
-                    <MainButton
-                      title={t`Connect Wallet`}
-                      onClick={() => {
-                        setShowConnect(true);
-                      }}
-                    />
-                  </Stack>
-                </Stack>
-              </Stack>
-            )}
-            <Stack padding={"20px"} width={"100%"} height={"100%"}>
-              <Stack direction={"row"} justifyContent={"space-between"}>
-                <Stack direction={'row'} spacing={'8px'} alignItems={"center"}>
-                  <NetworkIcon chainId={chainsData.chainId}/>
-                  <Title1>{t`My Positions`}</Title1>
-                </Stack>
-                <Stack direction={"row"} alignItems={"center"} spacing={"10px"}>
-                  <MainButton
-                    style={{
-                      height: "40px",
-                      padding: "10px 16px",
-                      fontSize: "14px",
-                      fontWeight: "700",
-                      lineHeight: "20px",
-                    }}
-                    title={t`Copy Invitation Link`}
-                    onClick={() => {
-                      if (!address) return;
-                      const link =
-                        "https://nestfi.org/?a=" +
-                        address.slice(-8).toLowerCase();
-                      copy(link);
-                      messageSnackBar(t`Copy Successfully`);
-                    }}
-                  />
-                  <DashboardShare
-                    component={"button"}
-                    sx={{
-                      cursor: "pointer",
-                    }}
-                    onClick={() => {
-                      setShareMyDealModal(true);
-                    }}
-                  >
-                    <Share/>
-                  </DashboardShare>
-                </Stack>
-              </Stack>
-              <Stack direction={'row'} justifyContent={"space-around"}>
+                  title: 'Total Burned',
+                  value: Number(infoData?.totalBurned ?? 0).toLocaleString('en-US', {
+                    maximumFractionDigits: 2,
+                    minimumFractionDigits: 2,
+                  }) ?? '-',
+                  unit: 'NEST'
+                },
                 {
-                  (chainsData.chainId === 56 || chainsData.chainId === 97) && (
-                    <Stack
-                      alignItems={"center"}
-                      pt={"26px"}
-                      pb={"40px"}
-                      spacing={"12px"}
-                    >
-                      <Title2
-                        sx={(theme) => ({
-                          span: {
-                            fontSize: "28px",
-                            fontWeight: "700",
-                            lineHeight: "40px",
-                          },
-                          ".color-full": {
-                            // color: myTxInfo.totalRate >= 0 ? theme.normal.success : theme.normal.danger,
-                          },
-                        })}
-                      >
-                        {myTxInfo?.totalValue.toLocaleString("en-US", {
-                          maximumFractionDigits: 2,
-                          minimumFractionDigits: 2,
-                        })}{" "}
-                        <span>NEST</span>
-                        {/*<span*/}
-                        {/*className={'color-full'}>{myTxInfo.totalRate > 0 && '+'}{myTxInfo.totalRate}%</span>*/}
-                      </Title2>
-                      <Caption1>{t`Total Profit & Loss`}</Caption1>
-                    </Stack>
-                  )
-                }
+                  title: 'Total User',
+                  value: Number(infoData?.totalUser ?? 0).toLocaleString('en-US') ?? '-',
+                  unit: ''
+                },
                 {
-                  (chainsData.chainId === 534353) && (
-                    <>
-                      <Stack
-                        alignItems={"center"}
-                        pt={"26px"}
-                        pb={"40px"}
-                        spacing={"12px"}
-                      >
-                        <Title2
-                          sx={(theme) => ({
-                            span: {
-                              fontSize: "28px",
-                              fontWeight: "700",
-                              lineHeight: "40px",
-                            },
-                            ".color-full": {
-                              // color: myTxInfo.totalRate >= 0 ? theme.normal.success : theme.normal.danger,
-                            },
-                          })}
-                        >
-                          {myTxInfo?.totalVolume?.toLocaleString("en-US", {
-                            maximumFractionDigits: 2,
-                            minimumFractionDigits: 2,
-                          })}{" "}
-                          <span>NEST</span>
-                          {/*<span*/}
-                          {/*className={'color-full'}>{myTxInfo.totalRate > 0 && '+'}{myTxInfo.totalRate}%</span>*/}
-                        </Title2>
-                        <Caption1>{t`My Total Trading Volume`}</Caption1>
-                      </Stack>
-                      <Stack
-                        alignItems={"center"}
-                        pt={"26px"}
-                        pb={"40px"}
-                        spacing={"12px"}
-                      >
-                        <Title2
-                          sx={(theme) => ({
-                            span: {
-                              fontSize: "28px",
-                              fontWeight: "700",
-                              lineHeight: "40px",
-                            },
-                            ".color-full": {
-                              // color: myTxInfo.totalRate >= 0 ? theme.normal.success : theme.normal.danger,
-                            },
-                          })}
-                        >
-                          {myTxInfo?.totalCount?.toLocaleString("en-US", {
-                            maximumFractionDigits: 0,
-                          })}{" "}
-                          {/*<span*/}
-                          {/*className={'color-full'}>{myTxInfo.totalRate > 0 && '+'}{myTxInfo.totalRate}%</span>*/}
-                        </Title2>
-                        <Caption1>{t`Total Number of Trades`}</Caption1>
-                      </Stack>
-                    </>
-                  )
-                }
-              </Stack>
-              <Stack direction={"row"} spacing={"16px"}>
-                <Card3>
-                  <Title3
-                    sx={(theme) => ({
-                      span: {
-                        fontSize: "24px",
-                        fontWeight: "700",
-                        lineHeight: "32px",
-                      },
-                      ".color-full": {
-                        // color: myTxInfo.todayRate >= 0 ? theme.normal.success : theme.normal.danger,
-                      },
-                    })}
-                  >
-                    {myTxInfo?.todayValue.toLocaleString("en-US", {
-                      maximumFractionDigits: 2,
-                      minimumFractionDigits: 2,
-                    })}{" "}
-                    <span>NEST</span>
-                    {/*<span*/}
-                    {/*className={'color-full'}>{myTxInfo.todayRate > 0 && '+'}{myTxInfo.todayRate}%</span>*/}
-                  </Title3>
-                  <Caption2
-                    sx={{paddingTop: "12px"}}
-                  >{t`Today's PNL`}</Caption2>
-                </Card3>
-                <Card3>
-                  <Title3
-                    sx={(theme) => ({
-                      span: {
-                        fontSize: "24px",
-                        fontWeight: "700",
-                        lineHeight: "32px",
-                      },
-                      ".color-full": {
-                        // color: myTxInfo.day7Rate >= 0 ? theme.normal.success : theme.normal.danger,
-                      },
-                    })}
-                  >
-                    {myTxInfo?.day7Value.toLocaleString("en-US", {
-                      maximumFractionDigits: 2,
-                      minimumFractionDigits: 2,
-                    })}{" "}
-                    <span>NEST</span>
-                    {/*<span*/}
-                    {/*className={'color-full'}>{myTxInfo.day7Rate > 0 && '+'}{myTxInfo.day7Rate}%</span>*/}
-                  </Title3>
-                  <Caption2
-                    sx={{paddingTop: "12px"}}
-                  >{t`7 Days' PNL`}</Caption2>
-                </Card3>
-                <Card3>
-                  <Title3
-                    sx={(theme) => ({
-                      span: {
-                        fontSize: "24px",
-                        fontWeight: "700",
-                        lineHeight: "32px",
-                      },
-                      ".color-full": {
-                        // color: myTxInfo.day30Rate >= 0 ? theme.normal.success : theme.normal.danger,
-                      },
-                    })}
-                  >
-                    {myTxInfo?.day30Value.toLocaleString("en-US", {
-                      maximumFractionDigits: 2,
-                      minimumFractionDigits: 2,
-                    })}{" "}
-                    <span>NEST</span>
-                    {/*<span*/}
-                    {/*className={'color-full'}>{myTxInfo.day30Rate > 0 && '+'}{myTxInfo.day30Rate}%</span>*/}
-                  </Title3>
-                  <Caption2
-                    sx={{paddingTop: "12px"}}
-                  >{t`30 Days' PNL`}</Caption2>
-                </Card3>
-              </Stack>
-            </Stack>
-          </Card2>
-        )}
-        <Stack spacing={"16px"}>
-          <Stack direction={'row'} alignItems={"center"} spacing={'16px'}
-                 sx={(theme) => ({
-                   width: "100%",
-                   borderBottom: "1px solid",
-                   borderColor: theme.normal.border,
-                   paddingX: "20px",
-                 })}>
-            <NetworkIcon chainId={chainsData.chainId}/>
-            <Stack style={{alignItems: "start"}}>
-              {getNESTTabs}
-            </Stack>
-          </Stack>
-
-          {isBigMobile ? (
-            <Stack px={"20px"} spacing={"12px"}>
-              {historyList &&
-                (historyList.length > 0 ? (
-                  historyList.map((item: any, index: number) =>
-                    MobileOrderCard(item, index, true)
-                  )
-                ) : (
-                  <Stack
-                    sx={(theme) => ({
-                      padding: "20px 0",
-                      background: theme.normal.bg1,
-                      justifyContent: "center",
-                      alignItems: "center",
-                      fontSize: "14px",
-                      fontWeight: "400",
-                      lineHeight: "20px",
-                      borderRadius: "12px",
+                  title: 'Open Interest',
+                  value: Number(infoData?.openInterest ?? 0).toLocaleString('en-US', {
+                    maximumFractionDigits: 2,
+                    minimumFractionDigits: 2,
+                  }) ?? '-',
+                  unit: 'NEST'
+                },
+              ].map((item, index) => (
+                <Grid item xs={12} sm={6} md={6} lg={3} key={index}>
+                  <Stack sx={(theme) => ({
+                    [theme.breakpoints.down('md')]: {
+                      padding: '20px 12px',
+                    },
+                    [theme.breakpoints.up('md')]: {
+                      padding: '40px',
+                    },
+                    borderRadius: '12px',
+                    backgroundColor: theme.normal.bg1,
+                  })} spacing={'4px'} height={'100%'}>
+                    <Stack sx={(theme) => ({
                       color: theme.normal.text2,
-                    })}
-                  >
-                    {t`No trades yet`}
+                      fontSize: '14px',
+                      fontWeight: 'bold',
+                      lineHeight: '20px',
+                    })}>{item.title}</Stack>
+                    <Stack direction={'row'} gap={['4px', '4px', '4px', '12px']} alignItems={'end'}>
+                      <Stack sx={(theme) => ({
+                        color: theme.normal.text0,
+                        fontSize: ['24px', '28px'],
+                        fontWeight: 'bold',
+                        lineHeight: ['32px', '40px'],
+                      })}>
+                        {item.value} {item.unit}
+                      </Stack>
+                    </Stack>
                   </Stack>
-                ))}
-            </Stack>
-          ) : (
-            <FuturesTableTitle
-              dataArray={
-                [
-                  t`Time`,
-                  t`Position`,
-                  t`Actual Margin`,
-                  t`Open Price`,
-                  t`Stop Order`,
-                  t`Close Price`,
-                  t`Operate`,
-                ]
-              }
-              noOrder={historyList?.length === 0}>
-              {historyList && historyList.map((item: any, index: number) => PCOrderRow(item, index, true))}
-            </FuturesTableTitle>
-          )}
+                </Grid>
+              ))
+            }
+          </Grid>
         </Stack>
+        <Stack mt={['16px', '16px', '16px', '40px']} mb={['20px', '20px', '20px', '24px']} px={'20px'}
+               width={['100%', '280px']}
+               position={'relative'}>
+          <button style={{
+            cursor: 'pointer',
+            width: '100%',
+          }}
+                  onClick={() => {
+                    setShowrdr(!showrdr);
+                  }}
+          >
+            <Stack direction={'row'} padding={'8px 12px'} width={'100%'} sx={(theme) => ({
+              borderRadius: '8px',
+              backgroundColor: theme.normal.bg1,
+              border: `1px solid ${theme.normal.border}`,
+              color: theme.normal.text0,
+              fontSize: '14px',
+              fontWeight: 'bold',
+              lineHeight: '20px',
+              height: '40px',
+            })} spacing={'4px'} alignItems={"center"}>
+              <Stack>{range?.startDate?.toLocaleDateString()}</Stack>
+              <Box>~</Box>
+              <Stack>{range?.endDate?.toLocaleDateString()}</Stack>
+              <Stack flexGrow={1}></Stack>
+              <Stack sx={(theme) => ({
+                '& svg': {
+                  path: {
+                    fill: theme.normal.text2,
+                  }
+                }
+              })}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path fillRule="evenodd" clipRule="evenodd"
+                        d="M4.66667 0.583008C4.98883 0.583008 5.25 0.844175 5.25 1.16634V1.45801H8.75V1.16634C8.75 0.844175 9.01117 0.583008 9.33333 0.583008C9.6555 0.583008 9.91667 0.844175 9.91667 1.16634V1.45801H11.9583C12.6027 1.45801 13.125 1.98035 13.125 2.62467V5.54134V11.6663C13.125 12.3107 12.6027 12.833 11.9583 12.833H2.04167C1.39734 12.833 0.875 12.3107 0.875 11.6663V5.54134V2.62467C0.875 1.98034 1.39733 1.45801 2.04167 1.45801H4.08333V1.16634C4.08333 0.844175 4.3445 0.583008 4.66667 0.583008ZM8.75 2.62467V3.49967C8.75 3.82184 9.01117 4.08301 9.33333 4.08301C9.6555 4.08301 9.91667 3.82184 9.91667 3.49967V2.62467H11.9583V4.95801H2.04167V2.62467H4.08333V3.49967C4.08333 3.82184 4.3445 4.08301 4.66667 4.08301C4.98883 4.08301 5.25 3.82184 5.25 3.49967V2.62467H8.75ZM11.9583 6.12467H2.04167V11.6663H11.9583V6.12467ZM7.58333 9.91634C7.58333 9.59417 7.8445 9.33301 8.16667 9.33301H9.91667C10.2388 9.33301 10.5 9.59417 10.5 9.91634C10.5 10.2385 10.2388 10.4997 9.91667 10.4997H8.16667C7.8445 10.4997 7.58333 10.2385 7.58333 9.91634ZM4.08333 9.33301C3.76117 9.33301 3.5 9.59417 3.5 9.91634C3.5 10.2385 3.76117 10.4997 4.08333 10.4997H5.83333C6.1555 10.4997 6.41667 10.2385 6.41667 9.91634C6.41667 9.59417 6.1555 9.33301 5.83333 9.33301H4.08333ZM7.58333 7.58301C7.58333 7.26084 7.8445 6.99967 8.16667 6.99967H9.91667C10.2388 6.99967 10.5 7.26084 10.5 7.58301C10.5 7.90517 10.2388 8.16634 9.91667 8.16634H8.16667C7.8445 8.16634 7.58333 7.90517 7.58333 7.58301ZM4.08333 6.99967C3.76117 6.99967 3.5 7.26084 3.5 7.58301C3.5 7.90517 3.76117 8.16634 4.08333 8.16634H5.83333C6.1555 8.16634 6.41667 7.90517 6.41667 7.58301C6.41667 7.26084 6.1555 6.99967 5.83333 6.99967H4.08333Z"
+                        fill="#F9F9F9" fillOpacity="0.6"/>
+                </svg>
+              </Stack>
+            </Stack>
+          </button>
+          {
+            showrdr && (
+              <>
+                <Stack width={'fit-content'} position={'absolute'} top={'44px'} zIndex={50}>
+                  <DateRange
+                    months={1}
+                    onChange={item => setRange(item.selection)}
+                    moveRangeOnFirstSelection={false}
+                    ranges={[range]}
+                    showMonthArrow={true}
+                    showPreview={false}
+                    showDateDisplay={false}
+                    showMonthAndYearPickers={false}
+                    className={nowTheme.isLight ? '' : 'dark'}
+                  />
+                </Stack>
+                <button style={{
+                  width: '100vw',
+                  height: '100vh',
+                  position: 'fixed',
+                  top: 0,
+                  left: 0,
+                  zIndex: 49,
+                }} onClick={() => {
+                  if (showrdr) {
+                    setShowrdr(false);
+                  }
+                }}></button>
+              </>
+            )
+          }
+        </Stack>
+        <Grid container spacing={'24px'} px={['0', '0', '0', '20px']}>
+          {
+            [
+              {
+                title: 'Volume',
+                chart: <VolumeChart from={range.startDate?.toLocaleDateString().replaceAll('/', '-')}
+                                    to={range.endDate?.toLocaleDateString().replaceAll('/', '-')}/>,
+              },
+              {
+                title: 'Burned',
+                chart: <BurnedChart from={range.startDate?.toLocaleDateString().replaceAll('/', '-')}
+                                    to={range.endDate?.toLocaleDateString().replaceAll('/', '-')}/>
+              },
+              {
+                title: 'User',
+                chart: <UserChart from={range.startDate?.toLocaleDateString().replaceAll('/', '-')}
+                                  to={range.endDate?.toLocaleDateString().replaceAll('/', '-')}/>
+              },
+              {
+                title: 'Open Interest',
+                chart: <OpenInterestChart from={range.startDate?.toLocaleDateString().replaceAll('/', '-')}
+                                          to={range.endDate?.toLocaleDateString().replaceAll('/', '-')}/>
+              },
+            ].map((item, index) => (
+              <Grid item xs={12} md={6} key={index}>
+                <Stack sx={(theme) => ({
+                  [theme.breakpoints.down('md')]: {
+                    height: '340px',
+                    width: '100%',
+                    paddingBottom: '20px',
+                    borderBottom: `1px solid ${theme.normal.border}`,
+                  },
+                  [theme.breakpoints.up('md')]: {
+                    height: '306px',
+                    borderRadius: '12px',
+                    border: `1px solid ${theme.normal.border}`,
+                    padding: '20px',
+                  },
+                })} spacing={'12px'} px={'20px'}>
+                  <Stack sx={(theme) => ({
+                    color: theme.normal.text2,
+                    fontSize: '14px',
+                    fontWeight: 'bold',
+                    lineHeight: '20px',
+                  })}>
+                    {item.title}
+                  </Stack>
+                  {item.chart}
+                </Stack>
+              </Grid>
+            ))
+          }
+        </Grid>
       </Stack>
+      <Stack height={'80px'}></Stack>
     </Stack>
   );
 };
