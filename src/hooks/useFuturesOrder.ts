@@ -32,6 +32,7 @@ function useFuturesOrder(data: FuturesOrderService, updateList: () => void) {
     if (chainsData.chainId && signature) {
       const closeBase: { [key: string]: any } = await serviceCancel(
         data.id.toString(),
+        chainsData.chainId,
         { Authorization: signature.signature }
       );
       if (Number(closeBase["errorCode"]) === 0) {

@@ -32,6 +32,7 @@ function useFuturesEditLimit(
       const updateBase: { [key: string]: any } = await serviceUpdateLimitPrice(
         data.id.toString(),
         limitPrice,
+        chainsData.chainId,
         { Authorization: signature.signature }
       );
       if (Number(updateBase["errorCode"]) === 0) {

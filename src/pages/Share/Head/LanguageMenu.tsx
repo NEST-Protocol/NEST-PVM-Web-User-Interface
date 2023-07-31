@@ -37,7 +37,8 @@ export const LanData = [
   [`한국어`, "ko"],
   // [`Русский`, "ru"],
   [`Tiếng Việt`, "vi"],
-  [`Türkçe`, "tr"]
+  [`Türkçe`, "tr"],
+  [`Español`, "es"],
 ];
 
 export const LanguageList: FC<LanguageListProps> = ({ ...props }) => {
@@ -48,7 +49,7 @@ export const LanguageList: FC<LanguageListProps> = ({ ...props }) => {
   const selectAction = (index: number) => {
     localStorage.setItem("Language", LanData[index][1] as string);
     dynamicActivate(LanData[index][1] as string);
-    window.location.reload()
+    window.location.reload();
   };
   const liArray = () => {
     return LanData.map((item, index) => {
@@ -103,7 +104,11 @@ export const LanguageList: FC<LanguageListProps> = ({ ...props }) => {
       );
     });
   };
-  return <Stack spacing={`${props.spacing}px`} width={"100%"}>{liArray()}</Stack>;
+  return (
+    <Stack spacing={`${props.spacing}px`} width={"100%"}>
+      {liArray()}
+    </Stack>
+  );
 };
 
 const LanguageMenu: FC = () => {
@@ -133,7 +138,7 @@ const LanguageMenu: FC = () => {
         open={open}
         onClose={handleClose}
       >
-        <LanguageList spacing={0} paddingX={16} selectCallBack={handleClose}/>
+        <LanguageList spacing={0} paddingX={16} selectCallBack={handleClose} />
       </SelectListMenu>
     </>
   );

@@ -105,6 +105,7 @@ function useFuturesClose(
     if (chainsData.chainId && signature) {
       const closeBase: { [key: string]: any } = await serviceClose(
         data.id.toString(),
+        chainsData.chainId,
         { Authorization: signature.signature }
       );
       if (Number(closeBase["errorCode"]) === 0) {
