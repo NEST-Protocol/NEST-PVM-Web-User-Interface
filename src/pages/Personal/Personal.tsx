@@ -629,7 +629,7 @@ const Personal = () => {
             )
           }
         </Stack>
-        <Grid container spacing={'24px'}>
+        <Grid container spacing={'24px'} px={'20px'}>
           {
             [
               {
