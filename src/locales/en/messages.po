@@ -717,8 +717,8 @@ msgstr "No Market Makers"
 #: src/pages/Futures/OrderList.tsx
 #: src/pages/Futures/OrderList.tsx
 #: src/pages/Futures/OrderList.tsx
-msgid "No Order"
-msgstr "No Order"
+msgid "No Orders"
+msgstr "No Orders"
 
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "No Transactions yet"

@@ -60,10 +60,10 @@ function useWithDrawModal(onClose: (res?: boolean) => void) {
   }, [checkBalance, tokenAmount]);
   const errorLabel = useMemo(() => {
     if (checkBalance) {
-      return t`Insufficient NEXT balance`;
+      return t`Insufficient balance`;
     }
     if (parseFloat(tokenAmount) <= 15) {
-      return t`The minimum withdrawal amount  greater than 15NEST`;
+      return t`The minimum withdrawal amount greater than 15NEST`;
     }
     return "";
   }, [checkBalance, tokenAmount]);

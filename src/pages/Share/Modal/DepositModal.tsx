@@ -47,7 +47,7 @@ const DepositModalBase: FC<DepositModalBaseProps> = ({ ...props }) => {
       return (
         <ErrorLabel
           title={
-            t`The maximum amount allowed for a single deposit is` +
+            t`The maximum deposit amount is` +
             ` ` +
             `${MAX_Amount[selectToken].floor(2)} ${selectToken}`
           }

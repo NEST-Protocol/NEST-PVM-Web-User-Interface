@@ -52,7 +52,7 @@ export const getTransactionTypeString = (text: string) => {
   } else if (text === `Received`) {
     return t`Received`;
   } else if (text === "Deposit") {
-    return t`Deposit`;
+    return t`Deposit Request`;
   } else if (text === "Withdraw") {
     return t`Withdraw`;
   } else {
@@ -101,7 +101,7 @@ const getInfoTitle = (type: TransactionType) => {
     case TransactionType.faucet_scroll:
       return `Received`;
     case TransactionType.deposit:
-      return `Deposit`;
+      return `Deposit Request`;
     case TransactionType.withdraw:
       return `Withdraw`;
   }

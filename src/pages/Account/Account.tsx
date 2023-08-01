@@ -94,7 +94,7 @@ const Account: FC = () => {
       ) {
         return (
           <NoOrderMobile>
-            <Trans>No Order</Trans>
+            <Trans>No Orders</Trans>
           </NoOrderMobile>
         );
       }

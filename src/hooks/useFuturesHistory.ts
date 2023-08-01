@@ -1,7 +1,6 @@
 
 import { useMemo, useState } from "react";
 import { Order } from "../pages/Dashboard/Dashboard";
-import { t } from "@lingui/macro";
 
 export interface FuturesHistoryService {
   actualMargin: number;

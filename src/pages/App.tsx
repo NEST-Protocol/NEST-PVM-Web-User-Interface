@@ -102,7 +102,7 @@ const App: FC = () => {
       return <Route path="/swap" element={<SwapPage />} />;
     }
   }, [chainsData.chainId]);
-  
+
   return (
     <Stack spacing={0}>
       <HashRouter>
@@ -112,15 +112,15 @@ const App: FC = () => {
             <Route path="home" element={<HomePage />} />
             <Route path="futures" element={<FuturesPage />} />
             {swapOrDirectPoster}
-            <Route path="account" element={<AccountPage/>}/>
+            <Route path="account" element={<AccountPage />} />
             <Route path="dashboard" element={<DashboardPage />} />
             <Route path="user">
-              <Route path=":address" element={<PersonalPage />}/>
-              <Route path="" element={<PersonalPage />}/>
+              <Route path=":address" element={<PersonalPage />} />
+              <Route path="" element={<PersonalPage />} />
             </Route>
             <Route path="referral">
-              <Route path={':address'} element={<ReferralPage />}/>
-              <Route path={''} element={<ReferralPage />}/>
+              <Route path={":address"} element={<ReferralPage />} />
+              <Route path={""} element={<ReferralPage />} />
             </Route>
             <Route path="*" element={<Navigate to="/home" />} />
           </Routes>

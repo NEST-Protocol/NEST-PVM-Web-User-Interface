@@ -149,7 +149,7 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
           })}
           {noOrder ? (
             <NoOrderMobile>
-              <Trans>No Order</Trans>
+              <Trans>No Orders</Trans>
             </NoOrderMobile>
           ) : (
             <></>
@@ -179,7 +179,7 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
           })}
           {noOrder ? (
             <NoOrderMobile>
-              <Trans>No Order</Trans>
+              <Trans>No Orders</Trans>
             </NoOrderMobile>
           ) : (
             <></>
@@ -208,7 +208,7 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
           })}
           {noOrder ? (
             <NoOrderMobile>
-              <Trans>No Order</Trans>
+              <Trans>No Orders</Trans>
             </NoOrderMobile>
           ) : (
             <></>
@@ -238,7 +238,7 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
       <Stack direction={"row"} alignItems={"center"} spacing={"4px"}>
         <FuturesLimitOrder />
         <p>
-          <Trans>Order</Trans>
+          <Trans>Orders</Trans>
         </p>
       </Stack>,
       <Stack direction={"row"} alignItems={"center"} spacing={"4px"}>

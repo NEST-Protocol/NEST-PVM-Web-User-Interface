@@ -99,7 +99,7 @@ const FuturesMoreInfo: FC = () => {
           })}
         >
           <InfoBox component={"p"}>
-            <Trans>How to Play</Trans>
+            <Trans>How to Trade</Trans>
           </InfoBox>
           <NextBox>
             <NEXT />

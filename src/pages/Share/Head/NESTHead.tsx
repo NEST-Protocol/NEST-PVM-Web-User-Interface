@@ -26,7 +26,7 @@ import SignModal from "../Modal/SignModal";
 export const NavItems = [
   {
     path: "/futures",
-    content: `Futures`,
+    content: `Future`,
     icon: FuturesIcon,
     l: <Trans>Futures</Trans>,
   },
@@ -53,7 +53,7 @@ export const NavItems = [
 export const NavItemsForScroll = [
   {
     path: "/futures",
-    content: `Futures`,
+    content: `Future`,
     icon: FuturesIcon,
     l: <Trans>Futures</Trans>,
   },
