@@ -475,7 +475,7 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
             <Close/>
           </button>
         </Stack>
-        <Stack maxHeight={['80vh', '70vh', '60vh']} overflow={'scroll'}>
+        <Stack maxHeight={['70vh', '70vh', '70vh', '80vh']} overflow={'scroll'}>
           <Stack ref={myShareRef} width={'100%'}>
             <Stack pt={'50px'} px={'24px'} bgcolor={'#0B0C0D'}
                    style={{
@@ -619,9 +619,8 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
                     <Stack width={'100%'} height={'240px'} sx={() => ({
                       backgroundColor: "#171A1F",
                       borderRadius: '12px',
-                      overflow: 'hidden',
                       flexShrink: 0,
-                    })} px={'12px'} pt={'20px'}>
+                    })} px={'12px'} py={'20px'}>
                       <Stack spacing={'8px'}>
                         <Stack sx={() => ({
                           fontSize: '14px',
@@ -630,7 +629,7 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
                           color: "rgba(249, 249, 249, 0.6)",
                         })}>Volume</Stack>
                       </Stack>
-                      <Stack width={'100%'} height={'100%'} spacing={'20px'}>
+                      <Stack width={'100%'} height={'100%'} spacing={'20px'} position={'relative'}>
                         <VolumeChart simple address={props.value.address} from={props.value.from} to={props.value.to}/>
                       </Stack>
                     </Stack>
@@ -641,9 +640,8 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
                     <Stack width={'100%'} height={'240px'} sx={() => ({
                       backgroundColor: "#171A1F",
                       borderRadius: '12px',
-                      overflow: 'hidden',
                       flexShrink: 0,
-                    })} px={'12px'} pt={'20px'}>
+                    })} px={'12px'} py={'20px'}>
                       <Stack spacing={'8px'}>
                         <Stack sx={() => ({
                           fontSize: '14px',
@@ -652,7 +650,7 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
                           color: "rgba(249, 249, 249, 0.6)",
                         })}>Cumulative return</Stack>
                       </Stack>
-                      <Stack width={'100%'} height={'100%'} spacing={'20px'}>
+                      <Stack width={'100%'} height={'100%'} spacing={'20px'} position={'relative'}>
                         <CumulativeReturnChart simple address={props.value.address} from={props.value.from}
                                                to={props.value.to}/>
                       </Stack>
@@ -664,9 +662,8 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
                     <Stack width={'100%'} height={'240px'} sx={() => ({
                       backgroundColor: "#171A1F",
                       borderRadius: '12px',
-                      overflow: 'hidden',
                       flexShrink: 0,
-                    })} px={'12px'} pt={'20px'}>
+                    })} px={'12px'} py={'20px'}>
                       <Stack spacing={'8px'}>
                         <Stack sx={() => ({
                           fontSize: '14px',
@@ -675,7 +672,7 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
                           color: "rgba(249, 249, 249, 0.6)",
                         })}>Total asset value</Stack>
                       </Stack>
-                      <Stack width={'100%'} height={'100%'} spacing={'20px'}>
+                      <Stack width={'100%'} height={'100%'} spacing={'20px'} position={'relative'}>
                         <TotalAssetValueChart simple address={props.value.address} from={props.value.from}
                                               to={props.value.to}/>
                       </Stack>
@@ -687,9 +684,8 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
                     <Stack width={'100%'} height={'240px'} sx={() => ({
                       backgroundColor: "#171A1F",
                       borderRadius: '12px',
-                      overflow: 'hidden',
                       flexShrink: 0,
-                    })} px={'12px'} pt={'20px'}>
+                    })} px={'12px'} py={'20px'}>
                       <Stack spacing={'8px'}>
                         <Stack sx={() => ({
                           fontSize: '14px',
@@ -698,7 +694,7 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
                           color: "rgba(249, 249, 249, 0.6)",
                         })}>Daily return</Stack>
                       </Stack>
-                      <Stack width={'100%'} height={'100%'} spacing={'20px'}>
+                      <Stack width={'100%'} height={'100%'} spacing={'20px'} position={'relative'}>
                         <DailyReturnChart simple address={props.value.address} from={props.value.from}
                                           to={props.value.to}/>
                       </Stack>

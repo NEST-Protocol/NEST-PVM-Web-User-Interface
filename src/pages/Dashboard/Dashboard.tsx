@@ -8,6 +8,7 @@ import useSWR from "swr";
 import {DateRange, Range} from "react-date-range";
 import Box from "@mui/material/Box";
 import useTheme from "../../hooks/useTheme";
+import {Trans, t} from "@lingui/macro";
 
 export type Order = {
   owner: string;
@@ -39,27 +40,12 @@ const Dashboard: FC = () => {
   return (
     <Stack alignItems={"center"}>
       <Stack maxWidth={'1600px'} width={'100%'} mt={['20px', '20px', '20px', '40px']}>
-        <Stack px={'20px'} sx={(theme) => ({
-          [theme.breakpoints.down('md')]: {
-            color: theme.normal.text2,
-            fontSize: '14px',
-            lineHeight: '20px',
-          },
-          [theme.breakpoints.up('md')]: {
-            color: theme.normal.text0,
-            fontSize: '20px',
-            lineHeight: '28px',
-          },
-          fontWeight: 'bold',
-        })}>
-          Dashboard / BNB Smart Chain
-        </Stack>
-        <Stack mt={['16px', '16px', '16px', '36px']} px={'20px'}>
+        <Stack px={'20px'}>
           <Grid container spacing={'16px'}>
             {
               [
                 {
-                  title: 'Total Volume',
+                  title: t`Total Volume`,
                   value: Number(infoData?.totalVolume ?? 0).toLocaleString('en-US', {
                     maximumFractionDigits: 2,
                     minimumFractionDigits: 2,
@@ -67,7 +53,7 @@ const Dashboard: FC = () => {
                   unit: 'NEST'
                 },
                 {
-                  title: 'Total Burned',
+                  title: t`Total Burned`,
                   value: Number(infoData?.totalBurned ?? 0).toLocaleString('en-US', {
                     maximumFractionDigits: 2,
                     minimumFractionDigits: 2,
@@ -75,12 +61,12 @@ const Dashboard: FC = () => {
                   unit: 'NEST'
                 },
                 {
-                  title: 'Total User',
+                  title: t`Total User`,
                   value: Number(infoData?.totalUser ?? 0).toLocaleString('en-US') ?? '-',
                   unit: ''
                 },
                 {
-                  title: 'Open Interest',
+                  title: t`Open Interest`,
                   value: Number(infoData?.openInterest ?? 0).toLocaleString('en-US', {
                     maximumFractionDigits: 2,
                     minimumFractionDigits: 2,
@@ -197,22 +183,22 @@ const Dashboard: FC = () => {
           {
             [
               {
-                title: 'Volume',
+                title: t`Volume`,
                 chart: <VolumeChart from={range.startDate?.toLocaleDateString().replaceAll('/', '-')}
                                     to={range.endDate?.toLocaleDateString().replaceAll('/', '-')}/>,
               },
               {
-                title: 'Burned',
+                title: t`Burned`,
                 chart: <BurnedChart from={range.startDate?.toLocaleDateString().replaceAll('/', '-')}
                                     to={range.endDate?.toLocaleDateString().replaceAll('/', '-')}/>
               },
               {
-                title: 'User',
+                title: t`User`,
                 chart: <UserChart from={range.startDate?.toLocaleDateString().replaceAll('/', '-')}
                                   to={range.endDate?.toLocaleDateString().replaceAll('/', '-')}/>
               },
               {
-                title: 'Open Interest',
+                title: t`Open Interest`,
                 chart: <OpenInterestChart from={range.startDate?.toLocaleDateString().replaceAll('/', '-')}
                                           to={range.endDate?.toLocaleDateString().replaceAll('/', '-')}/>
               },

@@ -12,7 +12,7 @@ import { KOLClick, KOLWallet } from "../lib/NESTRequest";
 
 const HomePage = loadable(() => import("./Home/Home"));
 const FuturesPage = loadable(() => import("./Futures/Futures"));
-const AccountPage = loadable(() => import("./Account/Account"));
+const OverviewPage = loadable(() => import("./Overview/Overview"));
 const SwapPage = loadable(() => import("./Swap/Swap"));
 const DashboardPage = loadable(() => import("./Dashboard/Dashboard"));
 const ReferralPage = loadable(() => import("./Personal/Referral/Referral"));
@@ -112,12 +112,12 @@ const App: FC = () => {
             <Route path="home" element={<HomePage />} />
             <Route path="futures" element={<FuturesPage />} />
             {swapOrDirectPoster}
-            <Route path="account" element={<AccountPage />} />
             <Route path="dashboard" element={<DashboardPage />} />
-            <Route path="user">
-              <Route path=":address" element={<PersonalPage />} />
-              <Route path="" element={<PersonalPage />} />
+            <Route path="account">
+              <Route path=":address" element={<PersonalPage />}/>
+              <Route path="" element={<PersonalPage />}/>
             </Route>
+            <Route path="overview" element={<OverviewPage/>}/>
             <Route path="referral">
               <Route path={":address"} element={<ReferralPage />} />
               <Route path={""} element={<ReferralPage />} />

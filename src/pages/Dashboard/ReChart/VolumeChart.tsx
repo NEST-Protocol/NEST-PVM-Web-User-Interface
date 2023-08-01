@@ -33,7 +33,7 @@ const ReCharts: FC<ReChartsProps> = ({...props}) => {
         data={data}
         syncId={'dashboard'}
       >
-        <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.08)"/>
+        <CartesianGrid strokeDasharray="3 3" stroke={nowTheme.normal.border} />
         <XAxis dataKey="date" scale="auto" axisLine={false} tickLine={false} tick={{fontSize: '10px'}}/>
         <YAxis yAxisId="left" orientation="left" axisLine={false} tickLine={false} tick={{fontSize: '10px'}}/>
         <YAxis domain={['dataMin', 'dataMax']} yAxisId="right" orientation="right" axisLine={false} tickLine={false} tick={{fontSize: '10px'}}/>
