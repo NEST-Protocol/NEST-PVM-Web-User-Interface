@@ -475,7 +475,7 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
             <Close/>
           </button>
         </Stack>
-        <Stack maxHeight={['80vh', '70vh', '60vh']} overflow={'scroll'}>
+        <Stack maxHeight={['70vh', '70vh', '70vh', '80vh']} overflow={'scroll'}>
           <Stack ref={myShareRef} width={'100%'}>
             <Stack pt={'50px'} px={'24px'} bgcolor={'#0B0C0D'}
                    style={{

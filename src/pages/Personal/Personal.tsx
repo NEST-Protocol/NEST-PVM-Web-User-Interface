@@ -385,9 +385,10 @@ const Personal = () => {
           })}>
             My Positions
           </Stack>
-          <Stack sx={(theme) => ({
+          <Stack alignItems={"center"} justifyContent={'center'} sx={(theme) => ({
             border: `1px solid ${theme.normal.border}`,
-            padding: '8px',
+            height: '36px',
+            width: '36px',
             borderRadius: '8px',
             [theme.breakpoints.down('md')]: {
               'svg': {
@@ -427,6 +428,10 @@ const Personal = () => {
               "& svg path": {
                 fill: theme.normal.text0,
               },
+            },
+            "& svg": {
+              width: 20,
+              height: 20,
             },
           })} onClick={() => setShareMyDealModal(true)}>
             <Share/>
