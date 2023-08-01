@@ -1,9 +1,7 @@
-import { BigNumber } from "ethers";
+
 import { useMemo, useState } from "react";
-import { lipPrice } from "./useFuturesNewOrder";
 import { Order } from "../pages/Dashboard/Dashboard";
 import { t } from "@lingui/macro";
-import { FuturesOrderService } from "../pages/Futures/OrderList";
 
 export interface FuturesHistoryService {
   actualMargin: number;
@@ -41,39 +39,14 @@ function useFuturesHistory(data: FuturesHistoryService) {
       ? data.sl.toFixed(tokenName.getTokenPriceDecimals())
       : String().placeHolder;
   }, [data.sl, tokenName]);
-  const showLiqPrice = useMemo(() => {
-    const balance =
-      data.actualMargin?.toString().stringToBigNumber(18) ??
-      BigNumber.from("0");
-    const append =
-      data.appendMargin?.toString().stringToBigNumber(18) ??
-      BigNumber.from("0");
-    const lastPrice =
-      data.lastPrice?.toString().stringToBigNumber(18) ?? BigNumber.from("0");
-    const orderPrice =
-      data.openPrice?.toString().stringToBigNumber(18) ?? BigNumber.from("0");
-    const result = lipPrice(
-      balance,
-      append,
-      BigNumber.from(lever.toString()),
-      lastPrice,
-      orderPrice,
-      isLong
-    );
-    if (result) {
-      return result.bigNumberToShowPrice(18, tokenName.getTokenPriceDecimals());
+  const showOpenPrice = useMemo(() => {
+    
+    if (data.openPrice) {
+      return data.openPrice.toFixed(tokenName.getTokenPriceDecimals());
     } else {
       return String().placeHolder;
     }
-  }, [
-    data.actualMargin,
-    data.appendMargin,
-    data.lastPrice,
-    data.openPrice,
-    isLong,
-    lever,
-    tokenName,
-  ]);
+  }, [data.openPrice, tokenName]);
   const showMarginAssets = useMemo(() => {
     return data.actualMargin
       ? data.actualMargin.floor(2)
@@ -92,7 +65,7 @@ function useFuturesHistory(data: FuturesHistoryService) {
   }, [data.lastPrice]);
 
   const showPercentNum = useMemo(() => {
-    return data.actualRate ? data.actualRate * 100 : 0;
+    return data.actualRate ? data.actualRate : 0;
   }, [data.actualRate]);
   const showPercent = useMemo(() => {
     if (showPercentNum > 0) {
@@ -144,7 +117,7 @@ function useFuturesHistory(data: FuturesHistoryService) {
     lever,
     tp,
     sl,
-    showLiqPrice,
+    showOpenPrice,
     showMarginAssets,
     showPercent,
     isRed,

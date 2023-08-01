@@ -25,9 +25,9 @@ import {
   usePendingTransactionsBase,
 } from "../../hooks/useTransactionReceipt";
 import { SnackBarType } from "../../components/SnackBar/NormalSnackBar";
-import { Link } from "react-router-dom";
 import HistoryTable from "./Components/HistoryTable";
 import { FuturesHistoryService } from "../../hooks/useFuturesHistory";
+import HistoryList from "./Components/HistoryList";
 
 export interface FuturesOrderService {
   id: number;
@@ -123,7 +123,9 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
         />
       );
     } else if (tabsValue === 2 && width > 890) {
-      return <HistoryTable dataArray={props.historyList} buttonCallBack={() => {}} />;
+      return (
+        <HistoryTable dataArray={props.historyList} buttonCallBack={() => {}} />
+      );
     } else if (tabsValue === 0) {
       const noOrder = props.pOrderListV2.length === 0;
       return (
@@ -172,6 +174,35 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
                 data={item}
                 buttonCallBack={setModalInfoValue}
                 updateList={props.updateList}
+              />
+            );
+          })}
+          {noOrder ? (
+            <NoOrderMobile>
+              <Trans>No Order</Trans>
+            </NoOrderMobile>
+          ) : (
+            <></>
+          )}
+        </Stack>
+      );
+    } else if (tabsValue === 2) {
+      const noOrder = props.historyList.length === 0;
+      return (
+        <Stack
+          spacing={"16px"}
+          sx={{
+            marginTop: "16px",
+            paddingX: isBigMobile ? "20px" : "0px",
+            paddingBottom: "24px",
+          }}
+        >
+          {props.historyList.map((item, index) => {
+            return (
+              <HistoryList
+                key={`HistoryList + ${index}`}
+                data={item}
+                buttonCallBack={setModalInfoValue}
               />
             );
           })}
@@ -328,30 +359,6 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
         })}
       >
         {tabs}
-        <Link to={"/dashboard"}>
-          <Box
-            sx={(theme) => ({
-              width: "20px",
-              height: "20px",
-              cursor: "pointer",
-              "& svg": {
-                width: "20px",
-                height: "20px",
-                display: "block",
-                "& path": {
-                  fill: theme.normal.text2,
-                },
-              },
-              "&:hover": {
-                "& svg path": {
-                  fill: theme.normal.primary,
-                },
-              },
-            })}
-          >
-            <HistoryIcon />
-          </Box>
-        </Link>
       </Stack>
       {orderList}
     </Stack>

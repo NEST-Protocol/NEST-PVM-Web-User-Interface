@@ -39,7 +39,7 @@ const HistoryTable: FC<FuturesHistoryListProps> = ({ ...props }) => {
       dataArray={[
         t`Symbol`,
         t`Actual Margin`,
-        t`Liq Price`,
+        t`Open Price`,
         t`Stop Order`,
         t`Close Price`,
         t`Time`,
@@ -70,7 +70,7 @@ const HistoryTableRow: FC<HistoryTableRowProps> = ({ ...props }) => {
     lever,
     tp,
     sl,
-    showLiqPrice,
+    showOpenPrice,
     showMarginAssets,
     showPercent,
     isRed,
@@ -132,7 +132,7 @@ const HistoryTableRow: FC<HistoryTableRowProps> = ({ ...props }) => {
             color: theme.normal.text0,
           })}
         >
-          {showLiqPrice}USDT
+          {showOpenPrice}USDT
         </Box>
       </TableCell>
       <TableCell sx={tdNoPadding}>
@@ -175,13 +175,14 @@ const HistoryTableRow: FC<HistoryTableRowProps> = ({ ...props }) => {
               {showClosePrice}USDT
             </Box>
             <Box
+            component={"p"}
               sx={(theme) => ({
                 fontWeight: 700,
                 fontSize: "10px",
                 lineHeight: "14px",
                 padding: "3px 4px",
                 border: "1px solid",
-                width: "auto",
+                width: "fit-content",
                 borderColor:
                   props.data.orderType === "Closed"
                     ? theme.normal.border

@@ -19,6 +19,8 @@ msgstr "{0}"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "* Due to the complexity of financial data, there might be nuances and delay. Data displayed above is for reference only.We sincerely apologize for any inconvenience."
 msgstr "Do sự phức tạp của dữ liệu tài chính, do đó có thể bị sai số̉ và chậm trễ. Dữ liệu được hiển thị ở trên chỉ mang tính chất tham khảo. Chúng tôi thành thật xin lỗi nếu có bất kỳ sự bất tiện không đáng có nào xảy ra."
 
@@ -99,8 +101,6 @@ msgstr "Giá thấp nhất trong 24 giờ"
 msgid "3. NEST Token price fluctuation risk: Both the margin and the final profit and loss use NEST Token, and NEST itself is also a highly volatile asset. In extreme cases, even if your perpetual contract position is profitable, However, due to the fluctuation of the NEST price itself, it may cause you to lose money in terms of fiat currency."
 msgstr "3. Rủi ro biến động giá Token NEST: Cả tiền ký quỹ và lãi lỗ cuối cùng đều sử dụng Token NEST, và chính NEST cũng là một tài sản có biến động cao. Trong trường hợp xấu nhất, ngay cả khi vị thế hợp đồng vĩnh viễn của bạn có lợi nhuận, Tuy nhiên, đối với biến động giá của chính NEST, nó có thể làm bạn mất tiền theo đơn vị tiền tệ."
 
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 msgid "30 Days' PNL"
@@ -116,8 +116,6 @@ msgstr "4. Rủi ro từ nguồn thông tin bên ngoài (external oracle): Giá 
 msgid "5. Smart contract risk: There may be fatal unknown risks in the smart contract that may cause your principal to be damaged. Please evaluate the risk yourself before deciding whether to participate."
 msgstr "5. Rủi ro từ hợp đồng thông minh (smart contract): Có thể có những rủi ro chết người không xác định trong hợp đồng thông minh có thể gây thiệt hại cho số tiền của bạn. Vui lòng tự đánh giá rủi ro trước khi quyết định có tham gia hay không."
 
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 msgid "7 Days' PNL"
@@ -139,8 +137,8 @@ msgstr "tài khoản"
 msgid "Action"
 msgstr "hành động"
 
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Futures/Components/HistoryList.tsx
+#: src/pages/Futures/Components/HistoryTable.tsx
 #: src/pages/Futures/Components/OrderList.tsx
 #: src/pages/Futures/Components/OrderTable.tsx
 #: src/pages/Futures/Components/POrderList.tsx
@@ -174,6 +172,7 @@ msgid "Add Position"
 msgstr "Thêm vị thế"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Address"
 msgstr "Địa chỉ"
 
@@ -239,9 +238,9 @@ msgstr "Đóng lệnh giới hạn"
 msgid "Close Position"
 msgstr "Đóng vị thế"
 
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
+#: src/pages/Futures/Components/HistoryList.tsx
+#: src/pages/Futures/Components/HistoryTable.tsx
 #: src/pages/Futures/Modal/CloseModal.tsx
 msgid "Close Price"
 msgstr "Giá đóng cửa"
@@ -250,8 +249,8 @@ msgstr "Giá đóng cửa"
 msgid "Close Risk"
 msgstr "Đóng rủi ro"
 
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Futures/Components/HistoryList.tsx
+#: src/pages/Futures/Components/HistoryTable.tsx
 msgid "Closed"
 msgstr "Closed"
 
@@ -272,8 +271,6 @@ msgstr "Xác nhận bạn là chủ sở hữu của ví này."
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useSwap.ts
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/DirectPoster/useDirectPoster.ts
 #: src/pages/DirectPoster/useDirectPoster.ts
 #: src/pages/Share/Head/ConnectButton.tsx
@@ -286,50 +283,58 @@ msgstr "Kết nối ví"
 msgid "Contact info (Telegram handle)"
 msgstr "Thông tin liên hệ (Tên tài khoản Telegram)"
 
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Copy Invitation Link"
 msgstr "Sao chép liên kết mời"
 
-#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 msgid "Copy Link"
 msgstr "Sao chép liên kết"
 
 #: src/pages/Account/Account.tsx
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "Copy Successfully"
 msgstr "Sao chép thành công"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Cumulative Commission"
 msgstr "Hoa hồng tích lũy"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Cumulative Commissions"
 msgstr "Hoa hồng tích lũy"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Cumulative Invitee Trading Volume"
 msgstr "Tổng khối lượng giao dịch của người được mời tích lũy"
+
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+msgid "Cumulative return"
+msgstr ""
+
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+msgid "Daily return"
+msgstr ""
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "Dark mode"
 msgstr "Chế độ tối"
 
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Share/Head/NESTHead.tsx
 #: src/pages/Share/Head/NESTHead.tsx
 #: src/pages/Share/Head/NESTHead.tsx
@@ -353,6 +358,7 @@ msgid "Decentralized Perpetual Exchange"
 msgstr "Sàn giao dịch vô thời hạn phi tập trung"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Default"
 msgstr "Mặc định"
 
@@ -469,7 +475,7 @@ msgstr "NHẬN NEST"
 msgid "Github"
 msgstr "Github"
 
-#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Futures/OrderList.tsx
 msgid "History"
 msgstr "Lịch sử"
 
@@ -540,6 +546,7 @@ msgid "Insufficient NEXT balance"
 msgstr "Số dư NEXT không đủ"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Invitee Trading Volume"
 msgstr "Khối lượng giao dịch của người được giới thiệu"
 
@@ -607,7 +614,6 @@ msgstr "Giá giới hạn"
 msgid "Link wallet"
 msgstr "Ví Link"
 
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 #: src/pages/Futures/Modal/AddModal.tsx
 #: src/pages/Futures/Modal/EditPositionModal.tsx
@@ -615,12 +621,11 @@ msgstr "Ví Link"
 msgid "Liq Price"
 msgstr "Giá thanh lý"
 
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Futures/Components/HistoryList.tsx
+#: src/pages/Futures/Components/HistoryTable.tsx
 msgid "Liquidated"
 msgstr "Bị thanh lý"
 
-#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 msgid "Loading..."
@@ -667,29 +672,14 @@ msgstr "Số dư của tôi "
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "My commissions"
 msgstr "Hoa hồng của tôi"
-
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
-msgid "My Positions"
-msgstr "Vị thế của tôi"
-
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
-#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
-msgid "My Total Trading Volume"
-msgstr "Tổng khối lượng giao dịch của tôi"
 
 #: src/pages/Futures/Components/FuturesNotice.tsx
 msgid "NEST 2.0 token has been airdropped to your wallet, please add NEST 2.0 token to your wallet."
 msgstr "Token NEST 2.0 đã được airdrop vào ví của bạn, vui lòng thêm token NEST 2.0 vào ví của bạn."
-
-#: src/pages/Dashboard/Dashboard.tsx
-msgid "NEST Total Burned"
-msgstr "Tổng số NEST đã được đốt"
 
 #: src/pages/Futures/MoreInfo.tsx
 msgid "NEST White Paper"
@@ -713,6 +703,8 @@ msgstr "Tin tức"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "No commissions yet"
 msgstr "Chưa có hoa hồng nào"
 
@@ -724,12 +716,9 @@ msgstr "Không có nhà tạo lập thị trường"
 #: src/pages/Futures/Components/TableTitle.tsx
 #: src/pages/Futures/OrderList.tsx
 #: src/pages/Futures/OrderList.tsx
+#: src/pages/Futures/OrderList.tsx
 msgid "No Order"
 msgstr "Không có lệnh nào"
-
-#: src/pages/Dashboard/Dashboard.tsx
-msgid "No trades yet"
-msgstr "Chưa có giao dịch mua bán nào"
 
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "No Transactions yet"
@@ -749,10 +738,10 @@ msgstr "Mở"
 msgid "Open position"
 msgstr "Vị thế mở"
 
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
+#: src/pages/Futures/Components/HistoryList.tsx
+#: src/pages/Futures/Components/HistoryTable.tsx
 #: src/pages/Futures/Components/OrderList.tsx
 #: src/pages/Futures/Components/OrderTable.tsx
 #: src/pages/Futures/Components/POrderList.tsx
@@ -762,7 +751,7 @@ msgstr "Vị thế mở"
 msgid "Open Price"
 msgstr "Giá mở vị thế"
 
-#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Futures/Components/HistoryTable.tsx
 #: src/pages/Futures/Components/OrderTable.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 msgid "Operate"
@@ -774,6 +763,8 @@ msgstr "Lệnh"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Overview"
 msgstr "Tổng quan"
 
@@ -781,6 +772,12 @@ msgstr "Tổng quan"
 #: src/pages/Account/Components/MoneyTable.tsx
 msgid "Pending"
 msgstr "Đang chờ"
+
+#: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Personal.tsx
+#: src/pages/Personal/Referral/Referral.tsx
+msgid "Personal"
+msgstr ""
 
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Platform (Youtube, Telegram, Twitter, Instagram, Facebook, Tiktok, Others)"
@@ -806,7 +803,6 @@ msgstr "Vui lòng lưu ý rằng \"Lệnh giới hạn\"\\ hoặc \"Lệnh dừn
 msgid "Please note that NEST 1.0 tokens have been officially deprecated and will no longer be supported. To continue participating in the NESTFi ecosystem and enjoy its benefits, it is crucial that you add NEST 2.0 tokens to your wallet. We have provided a button below for your convenience to add NEST 2.0 tokens to your wallet effortlessly."
 msgstr "Xin lưu ý rằng token NEST 1.0 đã chính thức bị loại bỏ và sẽ không được hỗ trợ nữa. Để tiếp tục tham gia vào hệ sinh thái của NESTFi và tận hưởng các lợi ích của nó, việc bạn thêm token NEST 2.0 vào ví là rất quan trọng. Dưới đây là một nút bấm để bạn dễ dàng thêm token NEST 2.0 vào ví của mình."
 
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Futures/Modal/AddModal.tsx
 #: src/pages/Futures/Modal/CloseModal.tsx
 #: src/pages/Futures/Modal/EditPositionModal.tsx
@@ -847,8 +843,9 @@ msgstr "Đã nhận 100 token NEST thử nghiệm"
 msgid "Recent transactions"
 msgstr "Các lệnh giao dịch gần đây"
 
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Personal.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Referral"
 msgstr "Giới thiệu"
 
@@ -863,6 +860,7 @@ msgid "Scan and copy the trade"
 msgstr "Quét và sao chép giao dịch"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Search"
 msgstr "Tìm kiếm"
 
@@ -883,11 +881,14 @@ msgid "Service Fee"
 msgstr "Phí dịch vụ"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Settled"
 msgstr "Đã thanh toán"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Settled Commissions"
 msgstr "Hoa hồng đã thanh toán"
 
@@ -911,13 +912,14 @@ msgstr "Bán"
 msgid "Sincerely,"
 msgstr "Trân trọng,"
 
+#: src/pages/Futures/Components/HistoryTable.tsx
 #: src/pages/Futures/Components/OrderTable.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 msgid "SL"
 msgstr "Dừng Lỗ"
 
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Futures/Components/HistoryList.tsx
+#: src/pages/Futures/Components/HistoryTable.tsx
 msgid "SL Executed"
 msgstr "SL Executed"
 
@@ -938,6 +940,7 @@ msgid "Status"
 msgstr "Trạng thái"
 
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
+#: src/pages/Futures/Components/HistoryList.tsx
 #: src/pages/Futures/Components/OrderList.tsx
 #: src/pages/Futures/Components/POrderList.tsx
 #: src/pages/Futures/Modal/EditPositionModal.tsx
@@ -945,7 +948,7 @@ msgstr "Trạng thái"
 msgid "Stop Loss"
 msgstr "Dừng lỗ"
 
-#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Futures/Components/HistoryTable.tsx
 #: src/pages/Futures/Components/OrderTable.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 msgid "Stop Order"
@@ -976,12 +979,14 @@ msgstr "Đổi"
 msgid "Switch network successfully"
 msgstr "Chuyển mạng thành công"
 
+#: src/pages/Futures/Components/HistoryTable.tsx
 #: src/pages/Futures/Components/OrderTable.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 msgid "Symbol"
 msgstr "Biểu tượng"
 
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
+#: src/pages/Futures/Components/HistoryList.tsx
 #: src/pages/Futures/Components/OrderList.tsx
 #: src/pages/Futures/Components/POrderList.tsx
 #: src/pages/Futures/Modal/EditPositionModal.tsx
@@ -1033,8 +1038,8 @@ msgstr "Giao dịch thất bại và số tiền đã được hoàn trả đầ
 
 #: src/pages/Account/Components/MoneyTable.tsx
 #: src/pages/Account/Components/TransactionTable.tsx
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Futures/Components/HistoryList.tsx
+#: src/pages/Futures/Components/HistoryTable.tsx
 msgid "Time"
 msgstr "Thời gian"
 
@@ -1042,16 +1047,6 @@ msgstr "Thời gian"
 msgid "To(Estimated)"
 msgstr "Đến (Ước tính)"
 
-#: src/pages/Dashboard/Dashboard.tsx
-msgid "Today Burned"
-msgstr "Đã đốt hôm nay"
-
-#: src/pages/Dashboard/Dashboard.tsx
-msgid "Today Volume"
-msgstr "Khối lượng hôm nay"
-
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 msgid "Today's PNL"
@@ -1061,6 +1056,10 @@ msgstr "PNL hôm nay"
 msgid "Total"
 msgstr "Tổng cộng"
 
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+msgid "Total asset value"
+msgstr ""
+
 #: src/pages/Home/Home.tsx
 #: src/pages/Home/Home.tsx
 msgid "Total Burned (NEST)"
@@ -1069,20 +1068,18 @@ msgstr "Tổng số NEST đã đốt"
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Total Commissions"
 msgstr "Tổng hoa hồng"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Total Invitees"
 msgstr "Tổng số người mời được"
-
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
-#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
-msgid "Total Number of Trades"
-msgstr "Tổng số giao dịch"
 
 #: src/pages/Futures/NewOrder.tsx
 msgid "Total Pay"
@@ -1092,16 +1089,15 @@ msgstr "Tổng số tiền thanh toán"
 msgid "Total Profit"
 msgstr "Tổng lợi nhuận"
 
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 msgid "Total Profit & Loss"
 msgstr "Tổng lợi nhuận & lỗ"
 
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Total Trading Volume"
 msgstr "Tổng khối lượng giao dịch"
 
@@ -1110,6 +1106,7 @@ msgstr "Tổng khối lượng giao dịch"
 msgid "Total Trading Volume (NEST)"
 msgstr "Tổng khối lượng giao dịch (NEST)"
 
+#: src/pages/Futures/Components/HistoryTable.tsx
 #: src/pages/Futures/Components/OrderTable.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 msgid "TP"
@@ -1119,8 +1116,8 @@ msgstr "Chốt Lời"
 msgid "TP and SL price you set will trigger immediately."
 msgstr "Giá TP và SL bạn đặt sẽ kích hoạt ngay lập tức."
 
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Futures/Components/HistoryList.tsx
+#: src/pages/Futures/Components/HistoryTable.tsx
 msgid "TP Executed"
 msgstr "TP Executed"
 
@@ -1146,6 +1143,8 @@ msgstr "Giao dịch với tôi trên NESTFi"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Traded Invitees"
 msgstr "Người được mời đã giao dịch"
 
@@ -1154,6 +1153,7 @@ msgid "Trading only with smart contract.No third-party intervention."
 msgstr "Chỉ giao dịch với hợp đồng thông minh. Không có sự can thiệp của bên thứ ba."
 
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Trading Volume"
 msgstr "Khối lượng giao dịch"
 
@@ -1172,11 +1172,14 @@ msgid "Twitter"
 msgstr "Twitter"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Unsettled"
 msgstr "Chưa thanh toán"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Unsettled Commissions"
 msgstr "Hoa hồng chưa được thanh toán"
 
@@ -1199,6 +1202,10 @@ msgstr "Xác nhận bạn là chủ sở hữu của ví này. Việc ký là mi
 #: src/components/SnackBar/NormalSnackBar.tsx
 msgid "View"
 msgstr "Xem"
+
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+msgid "Volume"
+msgstr ""
 
 #: src/pages/Share/Modal/DepositModal.tsx
 #: src/pages/Share/Modal/MyWalletModal.tsx

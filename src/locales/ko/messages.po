@@ -19,6 +19,8 @@ msgstr "{0}"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "* Due to the complexity of financial data, there might be nuances and delay. Data displayed above is for reference only.We sincerely apologize for any inconvenience."
 msgstr "*금융 데이터의 복잡성으로 인해 미묘한 차이와 지연이 있을 수 있습니다. 위에 표시된 데이터는 참고용일 뿐이며, 불편을 드려 죄송합니다."
 
@@ -99,8 +101,6 @@ msgstr "24시간 저가"
 msgid "3. NEST Token price fluctuation risk: Both the margin and the final profit and loss use NEST Token, and NEST itself is also a highly volatile asset. In extreme cases, even if your perpetual contract position is profitable, However, due to the fluctuation of the NEST price itself, it may cause you to lose money in terms of fiat currency."
 msgstr "3. NEST 토큰 가격 변동 리스크: 마진과 최종 이익과 손실 모두 NEST 토큰을 사용하며, NEST 자체도 매우 불안정한 자산입니다. 극단적인 경우, 영구 계약 포지션이 이익을 낼 수 있더라도, NEST 자체의 가격 변동으로 인해, 당신은 법정 화폐로 손해를 볼 수 있습니다."
 
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 msgid "30 Days' PNL"
@@ -116,8 +116,6 @@ msgstr "4. 외부 오라클 리스크: NEST 프로토콜의 영구 계약 가격
 msgid "5. Smart contract risk: There may be fatal unknown risks in the smart contract that may cause your principal to be damaged. Please evaluate the risk yourself before deciding whether to participate."
 msgstr "5. 스마트 계약 위험: 스마트 계약에 치명적인 알 수 없는 위험이 있을 수 있으며, 참여 여부를 결정하기 전에 위험을 스스로 평가하십시오."
 
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 msgid "7 Days' PNL"
@@ -139,8 +137,8 @@ msgstr "계정"
 msgid "Action"
 msgstr "행동"
 
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Futures/Components/HistoryList.tsx
+#: src/pages/Futures/Components/HistoryTable.tsx
 #: src/pages/Futures/Components/OrderList.tsx
 #: src/pages/Futures/Components/OrderTable.tsx
 #: src/pages/Futures/Components/POrderList.tsx
@@ -174,6 +172,7 @@ msgid "Add Position"
 msgstr "포지션 추가"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Address"
 msgstr "주소"
 
@@ -239,9 +238,9 @@ msgstr "지정가 주문 매도"
 msgid "Close Position"
 msgstr "포지션 매도"
 
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
+#: src/pages/Futures/Components/HistoryList.tsx
+#: src/pages/Futures/Components/HistoryTable.tsx
 #: src/pages/Futures/Modal/CloseModal.tsx
 msgid "Close Price"
 msgstr "가격지정 매도"
@@ -250,8 +249,8 @@ msgstr "가격지정 매도"
 msgid "Close Risk"
 msgstr "위험 경고 닫기"
 
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Futures/Components/HistoryList.tsx
+#: src/pages/Futures/Components/HistoryTable.tsx
 msgid "Closed"
 msgstr "닫힘"
 
@@ -272,8 +271,6 @@ msgstr "이 지갑의 소유자임을 확인하십시오."
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useSwap.ts
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/DirectPoster/useDirectPoster.ts
 #: src/pages/DirectPoster/useDirectPoster.ts
 #: src/pages/Share/Head/ConnectButton.tsx
@@ -286,50 +283,58 @@ msgstr "지갑 연결"
 msgid "Contact info (Telegram handle)"
 msgstr "연락처 정보 (텔레그램 핸들)"
 
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Copy Invitation Link"
 msgstr "초대 링크 복사"
 
-#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 msgid "Copy Link"
 msgstr "링크 복사"
 
 #: src/pages/Account/Account.tsx
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "Copy Successfully"
 msgstr "복사 완료"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Cumulative Commission"
 msgstr "누적 수수료"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Cumulative Commissions"
 msgstr "누적 수수료"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Cumulative Invitee Trading Volume"
 msgstr "누적 피추천인 거래량"
+
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+msgid "Cumulative return"
+msgstr ""
+
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+msgid "Daily return"
+msgstr ""
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "Dark mode"
 msgstr "다크 모드"
 
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Share/Head/NESTHead.tsx
 #: src/pages/Share/Head/NESTHead.tsx
 #: src/pages/Share/Head/NESTHead.tsx
@@ -353,6 +358,7 @@ msgid "Decentralized Perpetual Exchange"
 msgstr "분산형 영구 계약 거래소"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Default"
 msgstr "기본값"
 
@@ -469,7 +475,7 @@ msgstr "얻다 NEST"
 msgid "Github"
 msgstr "깃허브"
 
-#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Futures/OrderList.tsx
 msgid "History"
 msgstr "주문 내역"
 
@@ -540,6 +546,7 @@ msgid "Insufficient NEXT balance"
 msgstr "NEXT 잔액 부족"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Invitee Trading Volume"
 msgstr "피추천인의 거래량"
 
@@ -605,7 +612,6 @@ msgstr "지정가 가격"
 msgid "Link wallet"
 msgstr "링크 지갑"
 
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 #: src/pages/Futures/Modal/AddModal.tsx
 #: src/pages/Futures/Modal/EditPositionModal.tsx
@@ -613,12 +619,11 @@ msgstr "링크 지갑"
 msgid "Liq Price"
 msgstr "청산 가격"
 
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Futures/Components/HistoryList.tsx
+#: src/pages/Futures/Components/HistoryTable.tsx
 msgid "Liquidated"
 msgstr "청산됨"
 
-#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 msgid "Loading..."
@@ -665,29 +670,14 @@ msgstr "내 잔액"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "My commissions"
 msgstr "내 수수료"
-
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
-msgid "My Positions"
-msgstr "내 포지션"
-
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
-#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
-msgid "My Total Trading Volume"
-msgstr "내 총 거래량"
 
 #: src/pages/Futures/Components/FuturesNotice.tsx
 msgid "NEST 2.0 token has been airdropped to your wallet, please add NEST 2.0 token to your wallet."
 msgstr "NEST 2.0 토큰이 지갑에 에어드롭되었습니다. NEST 2.0 토큰을 지갑에 추가해주세요."
-
-#: src/pages/Dashboard/Dashboard.tsx
-msgid "NEST Total Burned"
-msgstr "총 소각된 NEST"
 
 #: src/pages/Futures/MoreInfo.tsx
 msgid "NEST White Paper"
@@ -711,6 +701,8 @@ msgstr "뉴스"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "No commissions yet"
 msgstr "아직 수수료 없음"
 
@@ -722,12 +714,9 @@ msgstr "시장 메이커 없음"
 #: src/pages/Futures/Components/TableTitle.tsx
 #: src/pages/Futures/OrderList.tsx
 #: src/pages/Futures/OrderList.tsx
+#: src/pages/Futures/OrderList.tsx
 msgid "No Order"
 msgstr "주문 없음"
-
-#: src/pages/Dashboard/Dashboard.tsx
-msgid "No trades yet"
-msgstr "아직 거래 없음"
 
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "No Transactions yet"
@@ -747,10 +736,10 @@ msgstr "열기"
 msgid "Open position"
 msgstr "포지션 열기"
 
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
+#: src/pages/Futures/Components/HistoryList.tsx
+#: src/pages/Futures/Components/HistoryTable.tsx
 #: src/pages/Futures/Components/OrderList.tsx
 #: src/pages/Futures/Components/OrderTable.tsx
 #: src/pages/Futures/Components/POrderList.tsx
@@ -760,7 +749,7 @@ msgstr "포지션 열기"
 msgid "Open Price"
 msgstr "오픈 가격"
 
-#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Futures/Components/HistoryTable.tsx
 #: src/pages/Futures/Components/OrderTable.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 msgid "Operate"
@@ -772,6 +761,8 @@ msgstr "주문"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Overview"
 msgstr "개요"
 
@@ -779,6 +770,12 @@ msgstr "개요"
 #: src/pages/Account/Components/MoneyTable.tsx
 msgid "Pending"
 msgstr "Pendente"
+
+#: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Personal.tsx
+#: src/pages/Personal/Referral/Referral.tsx
+msgid "Personal"
+msgstr ""
 
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Platform (Youtube, Telegram, Twitter, Instagram, Facebook, Tiktok, Others)"
@@ -804,7 +801,6 @@ msgstr "\"지정가 주문\" 또는 \"스탑 오더 주문\"은 실행이 보장
 msgid "Please note that NEST 1.0 tokens have been officially deprecated and will no longer be supported. To continue participating in the NESTFi ecosystem and enjoy its benefits, it is crucial that you add NEST 2.0 tokens to your wallet. We have provided a button below for your convenience to add NEST 2.0 tokens to your wallet effortlessly."
 msgstr "NEST 1.0 토큰은 공식적으로 지원이 중단되었으며, 더 이상 지원되지 않습니다. NESTFi 생태계에 계속 참여하고 혜택을 누리기 위해서는 반드시 지갑에 NEST 2.0 토큰을 추가해야 합니다. 편의를 위해 아래에 NEST 2.0 토큰을 간편하게 지갑에 추가할 수 있는 버튼을 제공하였습니다."
 
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Futures/Modal/AddModal.tsx
 #: src/pages/Futures/Modal/CloseModal.tsx
 #: src/pages/Futures/Modal/EditPositionModal.tsx
@@ -845,8 +841,9 @@ msgstr "100NEST 테스트 토큰 수령"
 msgid "Recent transactions"
 msgstr "최근 트랜잭션"
 
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Personal.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Referral"
 msgstr "추천"
 
@@ -861,6 +858,7 @@ msgid "Scan and copy the trade"
 msgstr "거래 스캔 및 복사"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Search"
 msgstr "검색"
 
@@ -881,11 +879,14 @@ msgid "Service Fee"
 msgstr "서비스 수수료"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Settled"
 msgstr "해결됨"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Settled Commissions"
 msgstr "정산 수수료"
 
@@ -909,13 +910,14 @@ msgstr "숏"
 msgid "Sincerely,"
 msgstr "감사합니다,"
 
+#: src/pages/Futures/Components/HistoryTable.tsx
 #: src/pages/Futures/Components/OrderTable.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 msgid "SL"
 msgstr "SL"
 
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Futures/Components/HistoryList.tsx
+#: src/pages/Futures/Components/HistoryTable.tsx
 msgid "SL Executed"
 msgstr "SL 실행됨"
 
@@ -936,6 +938,7 @@ msgid "Status"
 msgstr "상태"
 
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
+#: src/pages/Futures/Components/HistoryList.tsx
 #: src/pages/Futures/Components/OrderList.tsx
 #: src/pages/Futures/Components/POrderList.tsx
 #: src/pages/Futures/Modal/EditPositionModal.tsx
@@ -943,7 +946,7 @@ msgstr "상태"
 msgid "Stop Loss"
 msgstr "손절매"
 
-#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Futures/Components/HistoryTable.tsx
 #: src/pages/Futures/Components/OrderTable.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 msgid "Stop Order"
@@ -974,12 +977,14 @@ msgstr "스왑"
 msgid "Switch network successfully"
 msgstr "네트워크 변경 성공"
 
+#: src/pages/Futures/Components/HistoryTable.tsx
 #: src/pages/Futures/Components/OrderTable.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 msgid "Symbol"
 msgstr "심볼"
 
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
+#: src/pages/Futures/Components/HistoryList.tsx
 #: src/pages/Futures/Components/OrderList.tsx
 #: src/pages/Futures/Components/POrderList.tsx
 #: src/pages/Futures/Modal/EditPositionModal.tsx
@@ -1031,8 +1036,8 @@ msgstr "트랜잭션이 실패하고 모든 금액이 환불되었습니다. 재
 
 #: src/pages/Account/Components/MoneyTable.tsx
 #: src/pages/Account/Components/TransactionTable.tsx
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Futures/Components/HistoryList.tsx
+#: src/pages/Futures/Components/HistoryTable.tsx
 msgid "Time"
 msgstr "시간"
 
@@ -1040,16 +1045,6 @@ msgstr "시간"
 msgid "To(Estimated)"
 msgstr "받을 토큰(예상)"
 
-#: src/pages/Dashboard/Dashboard.tsx
-msgid "Today Burned"
-msgstr "오늘 소각량"
-
-#: src/pages/Dashboard/Dashboard.tsx
-msgid "Today Volume"
-msgstr "오늘 거래량"
-
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 msgid "Today's PNL"
@@ -1059,6 +1054,10 @@ msgstr "오늘의 손익"
 msgid "Total"
 msgstr "총액"
 
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+msgid "Total asset value"
+msgstr ""
+
 #: src/pages/Home/Home.tsx
 #: src/pages/Home/Home.tsx
 msgid "Total Burned (NEST)"
@@ -1067,20 +1066,18 @@ msgstr "총 소각량(NEST)"
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Total Commissions"
 msgstr "총 수수료"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Total Invitees"
 msgstr "총 피추천인"
-
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
-#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
-msgid "Total Number of Trades"
-msgstr "총 거래 횟수"
 
 #: src/pages/Futures/NewOrder.tsx
 msgid "Total Pay"
@@ -1090,16 +1087,15 @@ msgstr "총 지불"
 msgid "Total Profit"
 msgstr "총 이익"
 
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 msgid "Total Profit & Loss"
 msgstr "총 수익과 손실"
 
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Total Trading Volume"
 msgstr "총 거래량"
 
@@ -1108,6 +1104,7 @@ msgstr "총 거래량"
 msgid "Total Trading Volume (NEST)"
 msgstr "총 거래량(NEST)"
 
+#: src/pages/Futures/Components/HistoryTable.tsx
 #: src/pages/Futures/Components/OrderTable.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 msgid "TP"
@@ -1117,8 +1114,8 @@ msgstr "TP"
 msgid "TP and SL price you set will trigger immediately."
 msgstr "설정한 TP 및 SL 가격이 즉시 트리거됩니다."
 
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Futures/Components/HistoryList.tsx
+#: src/pages/Futures/Components/HistoryTable.tsx
 msgid "TP Executed"
 msgstr "TP 실행됨"
 
@@ -1144,6 +1141,8 @@ msgstr "NESTFi에서 함께 거래해요"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Traded Invitees"
 msgstr "트레이딩을 완료한 피추천인"
 
@@ -1152,6 +1151,7 @@ msgid "Trading only with smart contract.No third-party intervention."
 msgstr "스마트 컨트랙트로만 거래하며 제3자 개입이 없습니다."
 
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Trading Volume"
 msgstr "거래량"
 
@@ -1170,11 +1170,14 @@ msgid "Twitter"
 msgstr "트위터"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Unsettled"
 msgstr "미정"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Unsettled Commissions"
 msgstr "미정산 수수료"
 
@@ -1197,6 +1200,10 @@ msgstr "이 지갑의 소유자임을 확인하십시오. 서명은 무료이며
 #: src/components/SnackBar/NormalSnackBar.tsx
 msgid "View"
 msgstr "보기"
+
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+msgid "Volume"
+msgstr ""
 
 #: src/pages/Share/Modal/DepositModal.tsx
 #: src/pages/Share/Modal/MyWalletModal.tsx
