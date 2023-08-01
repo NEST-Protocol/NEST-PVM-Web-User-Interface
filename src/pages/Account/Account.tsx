@@ -11,9 +11,9 @@ import useNESTSnackBar from "../../hooks/useNESTSnackBar";
 import Divider from "@mui/material/Divider";
 import Box from "@mui/material/Box";
 import NESTTabs from "../../components/NESTTabs/NESTTabs";
-import MobileList, { AccountListType } from "./Components/MobileList";
-import MoneyTable from "./Components/MoneyTable";
-import TransactionTable from "./Components/TransactionTable";
+import MobileList, { AccountListType } from "../Overview/Components/MobileList";
+
+import TransactionTable from "../Overview/Components/TransactionTable";
 import useAccount from "../../hooks/useAccount";
 import DepositModal from "../Share/Modal/DepositModal";
 import WithDrawModal from "../Share/Modal/WithdrawModal";
@@ -23,6 +23,7 @@ import {
   usePendingTransactionsBase,
 } from "../../hooks/useTransactionReceipt";
 import { SnackBarType } from "../../components/SnackBar/NormalSnackBar";
+import MoneyTable from "../Overview/Components/MoneyTable";
 
 const Account: FC = () => {
   const { isBigMobile } = useWindowWidth();

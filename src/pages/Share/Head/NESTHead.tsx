@@ -28,7 +28,7 @@ export const NavItems = [
     path: "/futures",
     content: `Future`,
     icon: FuturesIcon,
-    l: <Trans>Futures</Trans>,
+    l: <Trans>Future</Trans>,
   },
   {
     path: "/swap",
@@ -55,7 +55,7 @@ export const NavItemsForScroll = [
     path: "/futures",
     content: `Future`,
     icon: FuturesIcon,
-    l: <Trans>Futures</Trans>,
+    l: <Trans>Future</Trans>,
   },
   {
     path: "/faucet",

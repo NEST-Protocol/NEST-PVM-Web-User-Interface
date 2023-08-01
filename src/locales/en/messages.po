@@ -13,7 +13,7 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/pages/Account/Components/TransactionTable.tsx
+#: src/pages/Overview/Components/TransactionTable.tsx
 msgid "{0}"
 msgstr "{0}"
 
@@ -103,6 +103,8 @@ msgstr "3. NEST Token price fluctuation risk: Both the margin and the final prof
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Personal/Personal.tsx
+#: src/pages/Personal/Personal.tsx
 msgid "30 Days' PNL"
 msgstr "30 Days' PNL"
 
@@ -118,6 +120,8 @@ msgstr "5. Smart contract risk: There may be fatal unknown risks in the smart co
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Personal/Personal.tsx
+#: src/pages/Personal/Personal.tsx
 msgid "7 Days' PNL"
 msgstr "7 Days' PNL"
 
@@ -129,11 +133,13 @@ msgstr "A beginner's guide to using NESTFi"
 msgid "about connecting wallets"
 msgstr "about connecting wallets"
 
+#: src/pages/Overview/Overview.tsx
+#: src/pages/Overview/Overview.tsx
 #: src/pages/Share/Head/NESTHead.tsx
 msgid "Account"
 msgstr "Account"
 
-#: src/pages/Account/Components/TransactionTable.tsx
+#: src/pages/Overview/Components/TransactionTable.tsx
 msgid "Action"
 msgstr "Action"
 
@@ -183,7 +189,7 @@ msgstr "After the limit order is executed, TP and SL price you set will trigger 
 
 #: src/components/NormalInput/NESTInput.tsx
 #: src/components/NormalInput/NESTInputSelect.tsx
-#: src/pages/Account/Components/MoneyTable.tsx
+#: src/pages/Overview/Components/MoneyTable.tsx
 msgid "Amount"
 msgstr "Amount"
 
@@ -216,6 +222,10 @@ msgstr "Become a Trading KOL"
 #: src/pages/Home/Home.tsx
 msgid "Boost your earning and influence by joining the NESTFi affiliate program."
 msgstr "Boost your earning and influence by joining the NESTFi affiliate program."
+
+#: src/pages/Dashboard/Dashboard.tsx
+msgid "Burned"
+msgstr "Burned"
 
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Channel link"
@@ -301,6 +311,7 @@ msgstr "Copy Link"
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Personal.tsx
 #: src/pages/Personal/Referral/Referral.tsx
 #: src/pages/Personal/Referral/Referral.tsx
 #: src/pages/Personal/Referral/Referral.tsx
@@ -324,10 +335,12 @@ msgid "Cumulative Invitee Trading Volume"
 msgstr "Cumulative Invitee Trading Volume"
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Personal/Personal.tsx
 msgid "Cumulative return"
 msgstr "Cumulative return"
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Personal/Personal.tsx
 msgid "Daily return"
 msgstr "Daily return"
 
@@ -372,13 +385,18 @@ msgstr "Deflationary economic model. The more users trade, the more $NEST will b
 
 #: src/components/NormalInput/NESTInput.tsx
 #: src/hooks/useDepositModal.ts
-#: src/hooks/useTransactionReceipt.ts
 #: src/pages/Account/Account.tsx
 #: src/pages/Account/Account.tsx
+#: src/pages/Overview/Overview.tsx
+#: src/pages/Personal/Personal.tsx
 #: src/pages/Share/Modal/DepositModal.tsx
 #: src/pages/Share/Modal/DepositModal.tsx
 msgid "Deposit"
 msgstr "Deposit"
+
+#: src/hooks/useTransactionReceipt.ts
+msgid "Deposit Request"
+msgstr "Deposit Request"
 
 #: src/pages/Share/Head/ConnectButton.tsx
 #: src/pages/Share/Modal/MyWalletModal.tsx
@@ -423,8 +441,8 @@ msgstr "Enter your Contact info"
 msgid "Entry Price"
 msgstr "Entry Price"
 
-#: src/pages/Account/Components/MobileList.tsx
-#: src/pages/Account/Components/MoneyTable.tsx
+#: src/pages/Overview/Components/MobileList.tsx
+#: src/pages/Overview/Components/MoneyTable.tsx
 msgid "Fail"
 msgstr "Fail"
 
@@ -459,8 +477,8 @@ msgstr "From"
 
 #: src/pages/Share/Head/NESTHead.tsx
 #: src/pages/Share/Head/NESTHead.tsx
-msgid "Futures"
-msgstr "Futures"
+msgid "Future"
+msgstr "Future"
 
 #: src/pages/DirectPoster/DirectPoster.tsx
 #: src/pages/DirectPoster/useDirectPoster.ts
@@ -491,13 +509,13 @@ msgstr "How to join affiliate program?"
 msgid "How to make your first trade?"
 msgstr "How to make your first trade?"
 
-#: src/pages/Futures/MoreInfo.tsx
-msgid "How to Play"
-msgstr "How to Play"
-
 #: src/pages/Home/Home.tsx
 msgid "How to Start?"
 msgstr "How to Start?"
+
+#: src/pages/Futures/MoreInfo.tsx
+msgid "How to Trade"
+msgstr "How to Trade"
 
 #: src/pages/Futures/Modal/CloseOrderNoticeModal.tsx
 #: src/pages/Home/Modal/ApplyModal.tsx
@@ -532,6 +550,10 @@ msgstr "Infinite Liquidity"
 msgid "Insufficient"
 msgstr "Insufficient"
 
+#: src/hooks/useWithDrawModal.ts
+msgid "Insufficient balance"
+msgstr "Insufficient balance"
+
 #: src/components/NormalInput/NESTInput.tsx
 msgid "Insufficient balance. Please deposit to start the lightning trade."
 msgstr "Insufficient balance. Please deposit to start the lightning trade."
@@ -540,10 +562,6 @@ msgstr "Insufficient balance. Please deposit to start the lightning trade."
 #: src/hooks/useFuturesNewOrder.ts
 msgid "Insufficient NEST balance"
 msgstr "Insufficient NEST balance"
-
-#: src/hooks/useWithDrawModal.ts
-msgid "Insufficient NEXT balance"
-msgstr "Insufficient NEXT balance"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Personal/Referral/Referral.tsx
@@ -667,6 +685,7 @@ msgid "More Info"
 msgstr "More Info"
 
 #: src/pages/Account/Account.tsx
+#: src/pages/Personal/Personal.tsx
 msgid "My balance"
 msgstr "My balance"
 
@@ -712,6 +731,10 @@ msgstr "No commissions yet"
 msgid "No Market Makers"
 msgstr "No Market Makers"
 
+#: src/pages/Overview/Overview.tsx
+msgid "No Order"
+msgstr "No Order"
+
 #: src/pages/Account/Account.tsx
 #: src/pages/Futures/Components/TableTitle.tsx
 #: src/pages/Futures/OrderList.tsx
@@ -731,6 +754,11 @@ msgstr "Once the airdrop is completed, NESTfi will only support trading with NES
 #: src/hooks/useFuturesNewOrder.ts
 msgid "Open"
 msgstr "Open"
+
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+msgid "Open Interest"
+msgstr "Open Interest"
 
 #: src/hooks/useTransactionReceipt.ts
 #: src/hooks/useTransactionReceipt.ts
@@ -758,18 +786,20 @@ msgid "Operate"
 msgstr "Operate"
 
 #: src/pages/Futures/OrderList.tsx
-msgid "Order"
-msgstr "Order"
+msgid "Orders"
+msgstr "Orders"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Overview/Overview.tsx
+#: src/pages/Personal/Personal.tsx
 #: src/pages/Personal/Referral/Referral.tsx
 #: src/pages/Personal/Referral/Referral.tsx
 msgid "Overview"
 msgstr "Overview"
 
-#: src/pages/Account/Components/MobileList.tsx
-#: src/pages/Account/Components/MoneyTable.tsx
+#: src/pages/Overview/Components/MobileList.tsx
+#: src/pages/Overview/Components/MoneyTable.tsx
 msgid "Pending"
 msgstr "Pending"
 
@@ -935,7 +965,7 @@ msgstr "Slippage Tolerance Setting"
 msgid "Start Trading"
 msgstr "Start Trading"
 
-#: src/pages/Account/Components/MoneyTable.tsx
+#: src/pages/Overview/Components/MoneyTable.tsx
 msgid "Status"
 msgstr "Status"
 
@@ -962,8 +992,8 @@ msgstr "Stop-Limit"
 msgid "Submit successfully"
 msgstr "Submit successfully"
 
-#: src/pages/Account/Components/MobileList.tsx
-#: src/pages/Account/Components/MoneyTable.tsx
+#: src/pages/Overview/Components/MobileList.tsx
+#: src/pages/Overview/Components/MoneyTable.tsx
 msgid "Success"
 msgstr "Success"
 
@@ -1009,12 +1039,12 @@ msgid "The balance is 0. You can go to \"Faucet\" to get test token before tradi
 msgstr "The balance is 0. You can go to \"Faucet\" to get test token before trading."
 
 #: src/pages/Share/Modal/DepositModal.tsx
-msgid "The maximum amount allowed for a single deposit is"
-msgstr "The maximum amount allowed for a single deposit is"
+msgid "The maximum deposit amount is"
+msgstr "The maximum deposit amount is"
 
 #: src/hooks/useWithDrawModal.ts
-msgid "The minimum withdrawal amount  greater than 15NEST"
-msgstr "The minimum withdrawal amount  greater than 15NEST"
+msgid "The minimum withdrawal amount greater than 15NEST"
+msgstr "The minimum withdrawal amount greater than 15NEST"
 
 #: src/pages/Share/Modal/StopTransactionModal.tsx
 msgid "The NESTfi Team"
@@ -1036,10 +1066,10 @@ msgstr "The smart contract is the only seller of the system. No market marking c
 msgid "The transaction failed and the amount has been fully refunded. You can re-trade"
 msgstr "The transaction failed and the amount has been fully refunded. You can re-trade"
 
-#: src/pages/Account/Components/MoneyTable.tsx
-#: src/pages/Account/Components/TransactionTable.tsx
 #: src/pages/Futures/Components/HistoryList.tsx
 #: src/pages/Futures/Components/HistoryTable.tsx
+#: src/pages/Overview/Components/MoneyTable.tsx
+#: src/pages/Overview/Components/TransactionTable.tsx
 msgid "Time"
 msgstr "Time"
 
@@ -1049,6 +1079,8 @@ msgstr "To(Estimated)"
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Personal/Personal.tsx
+#: src/pages/Personal/Personal.tsx
 msgid "Today's PNL"
 msgstr "Today's PNL"
 
@@ -1057,8 +1089,13 @@ msgid "Total"
 msgstr "Total"
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Personal/Personal.tsx
 msgid "Total asset value"
 msgstr "Total asset value"
+
+#: src/pages/Dashboard/Dashboard.tsx
+msgid "Total Burned"
+msgstr "Total Burned"
 
 #: src/pages/Home/Home.tsx
 #: src/pages/Home/Home.tsx
@@ -1091,6 +1128,7 @@ msgstr "Total Profit"
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Personal/Personal.tsx
 msgid "Total Profit & Loss"
 msgstr "Total Profit & Loss"
 
@@ -1105,6 +1143,14 @@ msgstr "Total Trading Volume"
 #: src/pages/Home/Home.tsx
 msgid "Total Trading Volume (NEST)"
 msgstr "Total Trading Volume (NEST)"
+
+#: src/pages/Dashboard/Dashboard.tsx
+msgid "Total User"
+msgstr "Total User"
+
+#: src/pages/Dashboard/Dashboard.tsx
+msgid "Total Volume"
+msgstr "Total Volume"
 
 #: src/pages/Futures/Components/HistoryTable.tsx
 #: src/pages/Futures/Components/OrderTable.tsx
@@ -1187,6 +1233,10 @@ msgstr "Unsettled Commissions"
 msgid "Update: NEST 2.0 Airdrop Completed - NESTFi Services Now Available"
 msgstr "Update: NEST 2.0 Airdrop Completed - NESTFi Services Now Available"
 
+#: src/pages/Dashboard/Dashboard.tsx
+msgid "User"
+msgstr "User"
+
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "User Guide"
 msgstr "User Guide"
@@ -1203,7 +1253,9 @@ msgstr "Verify ownership, Confirm you are the owner of this wallet."
 msgid "View"
 msgstr "View"
 
+#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Personal/Personal.tsx
 msgid "Volume"
 msgstr "Volume"
 
@@ -1242,6 +1294,8 @@ msgstr "with 1 click"
 #: src/hooks/useWithDrawModal.ts
 #: src/pages/Account/Account.tsx
 #: src/pages/Account/Account.tsx
+#: src/pages/Overview/Overview.tsx
+#: src/pages/Personal/Personal.tsx
 #: src/pages/Share/Modal/WithdrawModal.tsx
 #: src/pages/Share/Modal/WithdrawModal.tsx
 msgid "Withdraw"

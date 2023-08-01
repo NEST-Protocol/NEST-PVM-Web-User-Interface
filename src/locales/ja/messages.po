@@ -13,7 +13,7 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/pages/Account/Components/TransactionTable.tsx
+#: src/pages/Overview/Components/TransactionTable.tsx
 msgid "{0}"
 msgstr ""
 
@@ -101,6 +101,8 @@ msgstr "3. NESTトークン価格変動リスク：マージンと最終的な�
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Personal/Personal.tsx
+#: src/pages/Personal/Personal.tsx
 msgid "30 Days' PNL"
 msgstr "30日間の損益"
 
@@ -116,6 +118,8 @@ msgstr "5. スマートコントラクトリスク：スマートコントラク
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Personal/Personal.tsx
+#: src/pages/Personal/Personal.tsx
 msgid "7 Days' PNL"
 msgstr "7日間のPNL"
 
@@ -127,11 +131,13 @@ msgstr ""
 msgid "about connecting wallets"
 msgstr "コネクティングウォレットについて"
 
+#: src/pages/Overview/Overview.tsx
+#: src/pages/Overview/Overview.tsx
 #: src/pages/Share/Head/NESTHead.tsx
 msgid "Account"
 msgstr ""
 
-#: src/pages/Account/Components/TransactionTable.tsx
+#: src/pages/Overview/Components/TransactionTable.tsx
 msgid "Action"
 msgstr ""
 
@@ -181,7 +187,7 @@ msgstr "指値注文が実行されると、設定したTP価格とSL価格が�
 
 #: src/components/NormalInput/NESTInput.tsx
 #: src/components/NormalInput/NESTInputSelect.tsx
-#: src/pages/Account/Components/MoneyTable.tsx
+#: src/pages/Overview/Components/MoneyTable.tsx
 msgid "Amount"
 msgstr "金額"
 
@@ -213,6 +219,10 @@ msgstr "トレーディングKOLになる"
 
 #: src/pages/Home/Home.tsx
 msgid "Boost your earning and influence by joining the NESTFi affiliate program."
+msgstr ""
+
+#: src/pages/Dashboard/Dashboard.tsx
+msgid "Burned"
 msgstr ""
 
 #: src/pages/Home/Modal/ApplyModal.tsx
@@ -299,6 +309,7 @@ msgstr "リンクをコピー"
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Personal.tsx
 #: src/pages/Personal/Referral/Referral.tsx
 #: src/pages/Personal/Referral/Referral.tsx
 #: src/pages/Personal/Referral/Referral.tsx
@@ -322,10 +333,12 @@ msgid "Cumulative Invitee Trading Volume"
 msgstr ""
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Personal/Personal.tsx
 msgid "Cumulative return"
 msgstr ""
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Personal/Personal.tsx
 msgid "Daily return"
 msgstr ""
 
@@ -370,12 +383,17 @@ msgstr ""
 
 #: src/components/NormalInput/NESTInput.tsx
 #: src/hooks/useDepositModal.ts
-#: src/hooks/useTransactionReceipt.ts
 #: src/pages/Account/Account.tsx
 #: src/pages/Account/Account.tsx
+#: src/pages/Overview/Overview.tsx
+#: src/pages/Personal/Personal.tsx
 #: src/pages/Share/Modal/DepositModal.tsx
 #: src/pages/Share/Modal/DepositModal.tsx
 msgid "Deposit"
+msgstr ""
+
+#: src/hooks/useTransactionReceipt.ts
+msgid "Deposit Request"
 msgstr ""
 
 #: src/pages/Share/Head/ConnectButton.tsx
@@ -421,8 +439,8 @@ msgstr "連絡先情報を入力してください"
 msgid "Entry Price"
 msgstr "参入価格"
 
-#: src/pages/Account/Components/MobileList.tsx
-#: src/pages/Account/Components/MoneyTable.tsx
+#: src/pages/Overview/Components/MobileList.tsx
+#: src/pages/Overview/Components/MoneyTable.tsx
 msgid "Fail"
 msgstr ""
 
@@ -457,8 +475,8 @@ msgstr "送信元"
 
 #: src/pages/Share/Head/NESTHead.tsx
 #: src/pages/Share/Head/NESTHead.tsx
-msgid "Futures"
-msgstr "先物"
+msgid "Future"
+msgstr ""
 
 #: src/pages/DirectPoster/DirectPoster.tsx
 #: src/pages/DirectPoster/useDirectPoster.ts
@@ -489,12 +507,12 @@ msgstr ""
 msgid "How to make your first trade?"
 msgstr ""
 
-#: src/pages/Futures/MoreInfo.tsx
-msgid "How to Play"
-msgstr "遊び方"
-
 #: src/pages/Home/Home.tsx
 msgid "How to Start?"
+msgstr ""
+
+#: src/pages/Futures/MoreInfo.tsx
+msgid "How to Trade"
 msgstr ""
 
 #: src/pages/Futures/Modal/CloseOrderNoticeModal.tsx
@@ -530,6 +548,10 @@ msgstr "無限の流動性"
 msgid "Insufficient"
 msgstr "不足"
 
+#: src/hooks/useWithDrawModal.ts
+msgid "Insufficient balance"
+msgstr ""
+
 #: src/components/NormalInput/NESTInput.tsx
 msgid "Insufficient balance. Please deposit to start the lightning trade."
 msgstr ""
@@ -538,10 +560,6 @@ msgstr ""
 #: src/hooks/useFuturesNewOrder.ts
 msgid "Insufficient NEST balance"
 msgstr "NEST残高不足"
-
-#: src/hooks/useWithDrawModal.ts
-msgid "Insufficient NEXT balance"
-msgstr ""
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Personal/Referral/Referral.tsx
@@ -663,6 +681,7 @@ msgid "More Info"
 msgstr "詳細情報"
 
 #: src/pages/Account/Account.tsx
+#: src/pages/Personal/Personal.tsx
 msgid "My balance"
 msgstr ""
 
@@ -708,13 +727,17 @@ msgstr ""
 msgid "No Market Makers"
 msgstr "マーケットメーカーなし"
 
+#: src/pages/Overview/Overview.tsx
+msgid "No Order"
+msgstr "注文なし"
+
 #: src/pages/Account/Account.tsx
 #: src/pages/Futures/Components/TableTitle.tsx
 #: src/pages/Futures/OrderList.tsx
 #: src/pages/Futures/OrderList.tsx
 #: src/pages/Futures/OrderList.tsx
-msgid "No Order"
-msgstr "注文なし"
+msgid "No Orders"
+msgstr ""
 
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "No Transactions yet"
@@ -727,6 +750,11 @@ msgstr ""
 #: src/hooks/useFuturesNewOrder.ts
 msgid "Open"
 msgstr "オープン"
+
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+msgid "Open Interest"
+msgstr ""
 
 #: src/hooks/useTransactionReceipt.ts
 #: src/hooks/useTransactionReceipt.ts
@@ -754,18 +782,20 @@ msgid "Operate"
 msgstr "操作"
 
 #: src/pages/Futures/OrderList.tsx
-msgid "Order"
-msgstr "注文"
+msgid "Orders"
+msgstr ""
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Overview/Overview.tsx
+#: src/pages/Personal/Personal.tsx
 #: src/pages/Personal/Referral/Referral.tsx
 #: src/pages/Personal/Referral/Referral.tsx
 msgid "Overview"
 msgstr ""
 
-#: src/pages/Account/Components/MobileList.tsx
-#: src/pages/Account/Components/MoneyTable.tsx
+#: src/pages/Overview/Components/MobileList.tsx
+#: src/pages/Overview/Components/MoneyTable.tsx
 msgid "Pending"
 msgstr ""
 
@@ -931,7 +961,7 @@ msgstr "スリッページトレランス設定"
 msgid "Start Trading"
 msgstr "取引を開始"
 
-#: src/pages/Account/Components/MoneyTable.tsx
+#: src/pages/Overview/Components/MoneyTable.tsx
 msgid "Status"
 msgstr ""
 
@@ -958,8 +988,8 @@ msgstr "ストップ・リミット"
 msgid "Submit successfully"
 msgstr "送信完了しました"
 
-#: src/pages/Account/Components/MobileList.tsx
-#: src/pages/Account/Components/MoneyTable.tsx
+#: src/pages/Overview/Components/MobileList.tsx
+#: src/pages/Overview/Components/MoneyTable.tsx
 msgid "Success"
 msgstr ""
 
@@ -1005,11 +1035,11 @@ msgid "The balance is 0. You can go to \"Faucet\" to get test token before tradi
 msgstr ""
 
 #: src/pages/Share/Modal/DepositModal.tsx
-msgid "The maximum amount allowed for a single deposit is"
+msgid "The maximum deposit amount is"
 msgstr ""
 
 #: src/hooks/useWithDrawModal.ts
-msgid "The minimum withdrawal amount  greater than 15NEST"
+msgid "The minimum withdrawal amount greater than 15NEST"
 msgstr ""
 
 #: src/pages/Share/Modal/StopTransactionModal.tsx
@@ -1032,10 +1062,10 @@ msgstr ""
 msgid "The transaction failed and the amount has been fully refunded. You can re-trade"
 msgstr "取引に失敗し、金額は全額返金されました。再度取引できます"
 
-#: src/pages/Account/Components/MoneyTable.tsx
-#: src/pages/Account/Components/TransactionTable.tsx
 #: src/pages/Futures/Components/HistoryList.tsx
 #: src/pages/Futures/Components/HistoryTable.tsx
+#: src/pages/Overview/Components/MoneyTable.tsx
+#: src/pages/Overview/Components/TransactionTable.tsx
 msgid "Time"
 msgstr "時間"
 
@@ -1045,6 +1075,8 @@ msgstr "受取先（見積もり）"
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Personal/Personal.tsx
+#: src/pages/Personal/Personal.tsx
 msgid "Today's PNL"
 msgstr "今日の利益と損失"
 
@@ -1053,7 +1085,12 @@ msgid "Total"
 msgstr ""
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Personal/Personal.tsx
 msgid "Total asset value"
+msgstr ""
+
+#: src/pages/Dashboard/Dashboard.tsx
+msgid "Total Burned"
 msgstr ""
 
 #: src/pages/Home/Home.tsx
@@ -1087,6 +1124,7 @@ msgstr "総利益"
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Personal/Personal.tsx
 msgid "Total Profit & Loss"
 msgstr "総損益"
 
@@ -1100,6 +1138,14 @@ msgstr ""
 #: src/pages/Home/Home.tsx
 #: src/pages/Home/Home.tsx
 msgid "Total Trading Volume (NEST)"
+msgstr ""
+
+#: src/pages/Dashboard/Dashboard.tsx
+msgid "Total User"
+msgstr ""
+
+#: src/pages/Dashboard/Dashboard.tsx
+msgid "Total Volume"
 msgstr ""
 
 #: src/pages/Futures/Components/HistoryTable.tsx
@@ -1183,6 +1229,10 @@ msgstr ""
 msgid "Update: NEST 2.0 Airdrop Completed - NESTFi Services Now Available"
 msgstr ""
 
+#: src/pages/Dashboard/Dashboard.tsx
+msgid "User"
+msgstr ""
+
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "User Guide"
 msgstr "ユーザーガイド"
@@ -1199,7 +1249,9 @@ msgstr ""
 msgid "View"
 msgstr "表示"
 
+#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Personal/Personal.tsx
 msgid "Volume"
 msgstr ""
 
@@ -1238,6 +1290,8 @@ msgstr "1クリックで"
 #: src/hooks/useWithDrawModal.ts
 #: src/pages/Account/Account.tsx
 #: src/pages/Account/Account.tsx
+#: src/pages/Overview/Overview.tsx
+#: src/pages/Personal/Personal.tsx
 #: src/pages/Share/Modal/WithdrawModal.tsx
 #: src/pages/Share/Modal/WithdrawModal.tsx
 msgid "Withdraw"
