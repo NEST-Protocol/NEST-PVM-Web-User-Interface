@@ -31,7 +31,7 @@ const ReCharts: FC<ChartsProps> = ({...props}) => {
   return (
     <>
       {
-        props.simple && data.length > 0 && (
+        props.simple && data?.length > 0 && (
           <Stack sx={() => ({
             fontSize: '18px',
             lineHeight: '24px',

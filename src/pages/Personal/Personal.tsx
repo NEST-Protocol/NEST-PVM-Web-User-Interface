@@ -9,17 +9,30 @@ import VolumeChart from "./ReChart/VolumeChart";
 import TotalAssetValue from "./ReChart/TotalAssetValueChart";
 import DailyReturnChart from "./ReChart/DailyReturnChart";
 import CumulativeReturnChart from "./ReChart/CumulativeReturnChart";
-import {Share} from "../../components/icons";
+import {Copy, Share} from "../../components/icons";
 import Box from "@mui/material/Box";
 import {DateRange, Range} from "react-date-range";
 import useTheme from "../../hooks/useTheme";
-import {Trans} from "@lingui/macro";
+import {t, Trans} from "@lingui/macro";
 import useWindowWidth from "../../hooks/useWindowWidth";
-import {useAccount} from "wagmi";
+import useAccount from "../../hooks/useAccount";
+import DepositModal from "../Share/Modal/DepositModal";
+import WithDrawModal from "../Share/Modal/WithdrawModal";
+import {
+  TransactionType,
+  usePendingTransactionsBase,
+} from "../../hooks/useTransactionReceipt";
+import {SnackBarType} from "../../components/SnackBar/NormalSnackBar";
+import useNEST from "../../hooks/useNEST";
+import useWalletIcon from "../../hooks/uswWalletIcon";
+import LinkButton from "../../components/MainButton/LinkButton";
+import copy from "copy-to-clipboard";
+import useNESTSnackBar from "../../hooks/useNESTSnackBar";
+import {useLocalStorage} from "react-use";
 
 const Personal = () => {
   const {address} = useParams()
-  const {address: user} = useAccount()
+  const {account} = useNEST();
   const {isBigMobile} = useWindowWidth()
   const [showShareMyDealModal, setShareMyDealModal] = useState(false);
   const [range, setRange] = useState<Range>({
@@ -29,36 +42,62 @@ const Personal = () => {
   });
   const [showrdr, setShowrdr] = useState(false);
   const {nowTheme} = useTheme()
+  const {addTransactionNotice} = usePendingTransactionsBase();
+  const {
+    showDeposit,
+    setShowDeposit,
+    showWithdraw,
+    setShowWithdraw,
+    showBalance,
+    getAssetsList,
+    moneyList,
+    historyList,
+  } = useAccount();
+  const walletIcon = useWalletIcon();
+  const {messageSnackBar} = useNESTSnackBar();
+  const [messagesStr,] = useLocalStorage(`nest.messages`, '{}');
 
   const {
-    data: positons,
-  } = useSWR(`https://api.nestfi.net/api/dashboard/v2/personal/positons?address=${address ?? user}&chainId=56`, (url: any) => fetch(url)
+    data: positions,
+  } = useSWR(`https://api.nestfi.net/api/dashboard/v2/personal/positons?address=${address ?? account.address}&chainId=56`, (url: any) => fetch(url)
     .then((res) => res.json())
     .then((res: any) => res.value));
 
-  const {
-    data: trading,
-  } = useSWR(`https://api.nestfi.net/api/dashboard/v2/personal/trading?address=${address ?? user}&chainId=56`, (url: any) => fetch(url)
-    .then((res) => res.json())
-    .then((res: any) => res.value));
-
-  const {data: isKol} = useSWR(address ? `https://api.nestfi.net/api/invite/is-kol-whitelist/${address ?? user}` : undefined, (url: any) => fetch(url)
+  const {data: isKol} = useSWR(address ? `https://api.nestfi.net/api/invite/is-kol-whitelist/${address ?? account.address}` : undefined, (url: any) => fetch(url)
     .then((res) => res.json())
     .then((res: any) => res.value))
+
+  const isNotice = useMemo(() => {
+    if (!address && !account.address) {
+      return false;
+    }
+    const messages = JSON.parse(messagesStr ?? '{}')
+    const lastReads = messages?.[`${address ?? account.address}`] ?? [0, 0]
+    if (lastReads[0] < moneyList.length) {
+      return 'deposit'
+    } else if (lastReads[1] < historyList.length) {
+      return 'withdraw'
+    }
+    return false;
+  }, [moneyList.length, historyList.length, messagesStr, account.address, address])
+
+  const NESTIcon = useMemo(() => {
+    return "NEST".getToken()!.icon;
+  }, []);
 
   const shareMyDealModal = useMemo(() => {
     return (
       <ShareMyDealModal
         value={{
-          address: address ?? user,
-          totalProfitLoss: positons?.totalProfitAndLoss ?? 0,
-          totalRate: positons?.totalRate ?? 0,
-          todayPNL: positons?.todayPnl ?? 0,
-          todayRate: positons?.todayRate ?? 0,
-          _7daysPNL: positons?.days7Pnl ?? 0,
-          _7daysRate: positons?.days7Rate ?? 0,
-          _30daysPNL: positons?.days30Pnl ?? 0,
-          _30daysRate: positons?.days30Rate ?? 0,
+          address: address ?? account.address,
+          totalProfitLoss: positions?.totalProfitAndLoss ?? 0,
+          totalRate: positions?.totalRate ?? 0,
+          todayPNL: positions?.todayPnl ?? 0,
+          todayRate: positions?.todayRate ?? 0,
+          _7daysPNL: positions?.days7Pnl ?? 0,
+          _7daysRate: positions?.days7Rate ?? 0,
+          _30daysPNL: positions?.days30Pnl ?? 0,
+          _30daysRate: positions?.days30Rate ?? 0,
           from: range.startDate?.toLocaleDateString().replaceAll('/', '-'),
           to: range.endDate?.toLocaleDateString().replaceAll('/', '-'),
         }}
@@ -68,11 +107,49 @@ const Personal = () => {
         }}
       />
     );
-  }, [showShareMyDealModal]);
+  }, [showShareMyDealModal, positions]);
+
+  const addModal = useMemo(() => {
+    return (
+      <>
+        {showDeposit ? (
+          <DepositModal open={true} onClose={() => setShowDeposit(false)}/>
+        ) : (
+          <></>
+        )}
+        {showWithdraw ? (
+          <WithDrawModal
+            open={true}
+            onClose={(res?: boolean) => {
+              if (res !== undefined) {
+                addTransactionNotice({
+                  type: TransactionType.withdraw,
+                  info: "",
+                  result: res ? SnackBarType.success : SnackBarType.fail,
+                });
+                getAssetsList();
+              }
+              setShowWithdraw(false);
+            }}
+          />
+        ) : (
+          <></>
+        )}
+      </>
+    );
+  }, [
+    addTransactionNotice,
+    getAssetsList,
+    setShowDeposit,
+    setShowWithdraw,
+    showDeposit,
+    showWithdraw,
+  ]);
 
   return (
     <Stack alignItems={"center"}>
       {shareMyDealModal}
+      {addModal}
       {
         isKol && (
           <Stack direction={'row'} width={'100%'} justifyContent={"center"} spacing={'32px'} sx={(theme) => ({
@@ -122,6 +199,163 @@ const Personal = () => {
         )
       }
       <Stack maxWidth={'1600px'} width={'100%'} mt={['20px', '40px']}>
+        <Stack px={'20px'} pb={'44px'}>
+          <Stack direction={['column', 'column', 'column', 'row']} padding={'4px'} borderRadius={'12px'} sx={(theme) => ({
+            backgroundColor: theme.normal.bg1
+          })}>
+            <Stack height={'160px'} px={'40px'} justifyContent={"center"} alignItems={'center'}
+                   borderRadius={'12px'}
+                   spacing={'12px'} sx={(theme) => ({
+              backgroundColor: theme.normal.bg0
+            })}>
+              {walletIcon}
+              <Stack direction={'row'} spacing={'8px'}>
+                <Box sx={(theme) => ({
+                  color: theme.normal.text0,
+                  fontSize: '20px',
+                  fontWeight: 700,
+                  lineHeight: '28px',
+                })}>{account.address?.showAddress()}</Box>
+                <LinkButton
+                  onClick={() => {
+                    copy(account.address ? account.address : "");
+                    messageSnackBar(t`Copy Successfully`);
+                  }}
+                >
+                  <Copy style={{width: "16px", height: "16px"}}/>
+                </LinkButton>
+              </Stack>
+            </Stack>
+            <Stack height={['100%','100%','100%', '160px']}
+                   direction={['column', 'column', 'column', 'row']}
+                   justifyContent={"space-between"}
+                   alignItems={"center"}
+                   width={'100%'}
+                   paddingBottom={['20px', '20px', '20px', '0']}
+            >
+              <Stack p={'40px'} justifyContent={"center"} height={'100%'} spacing={'18px'}>
+                <Box sx={(theme) => ({
+                  color: theme.normal.text1,
+                  fontSize: '12px',
+                  fontWeight: 400,
+                  lineHeight: '16px',
+                })}>
+                  <Trans>My balance</Trans>
+                </Box>
+                <Stack direction={'row'} spacing={'8px'} justifyContent={"start"} alignItems={"center"}
+                       sx={(theme) => ({
+                         color: theme.normal.text0,
+                         fontSize: '28px',
+                         fontWeight: 700,
+                         lineHeight: '40px',
+                         "& svg": {
+                           width: "28px",
+                           height: "28px",
+                         },
+                       })}>
+                  <NESTIcon/>
+                  <Box>{Number(showBalance ?? '0').toLocaleString('en-US')}</Box>
+                </Stack>
+              </Stack>
+              <Stack direction={'row'} alignItems={"center"} pr={['0', '0', '0', '40px']} spacing={['12px', '12px', '12px', '24px']}>
+                <Stack px={'16px'} py={'10px'} spacing={'10px'} direction={'row'} alignItems={"center"}
+                       sx={(theme) => ({
+                         fontSize: '14px',
+                         fontWeight: "700",
+                         lineHeight: '20px',
+                         color: theme.normal.text0,
+                         backgroundColor: theme.normal.grey_hover,
+                         borderRadius: '8px',
+                         cursor: "pointer",
+                         "&:hover": {
+                           backgroundColor: theme.normal.grey_active,
+                         },
+                       })} onClick={() => setShowWithdraw(true)}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
+                    <path fillRule="evenodd" clipRule="evenodd"
+                          d="M14.4997 7.33325C14.8679 7.33325 15.1663 7.63173 15.1663 7.99992V13.9999C15.1663 14.3681 14.8679 14.6666 14.4997 14.6666H2.49967C2.13148 14.6666 1.83301 14.3681 1.83301 13.9999V8.00269C1.83301 7.6345 2.13148 7.33602 2.49967 7.33602C2.86786 7.33602 3.16634 7.6345 3.16634 8.00269V13.3333H13.833V7.99992C13.833 7.63173 14.1315 7.33325 14.4997 7.33325Z"
+                          fill="#F9F9F9" fillOpacity="0.6"/>
+                    <path fillRule="evenodd" clipRule="evenodd"
+                          d="M5.02827 5.47132C4.76792 5.21097 4.76792 4.78886 5.02827 4.52851L8.02827 1.52851C8.28862 1.26816 8.71073 1.26816 8.97108 1.52851L11.9711 4.52851C12.2314 4.78886 12.2314 5.21097 11.9711 5.47132C11.7107 5.73167 11.2886 5.73167 11.0283 5.47132L8.49967 2.94273L5.97108 5.47132C5.71073 5.73167 5.28862 5.73167 5.02827 5.47132Z"
+                          fill="#F9F9F9" fillOpacity="0.6"/>
+                    <path fillRule="evenodd" clipRule="evenodd"
+                          d="M8.49691 11.3333C8.12872 11.3333 7.83024 11.0348 7.83024 10.6666V1.99992C7.83024 1.63173 8.12872 1.33325 8.49691 1.33325C8.8651 1.33325 9.16357 1.63173 9.16357 1.99992V10.6666C9.16357 11.0348 8.8651 11.3333 8.49691 11.3333Z"
+                          fill="#F9F9F9" fillOpacity="0.6"/>
+                  </svg>
+                  <Trans>
+                    Withdraw
+                  </Trans>
+                </Stack>
+                <Stack px={'16px'} py={'10px'} spacing={'10px'} direction={'row'} alignItems={"center"}
+                       sx={(theme) => ({
+                         fontSize: '14px',
+                         fontWeight: "700",
+                         lineHeight: '20px',
+                         color: theme.normal.highDark,
+                         backgroundColor: theme.normal.primary,
+                         borderRadius: '8px',
+                         cursor: 'pointer',
+                         "&:hover": {
+                           backgroundColor: theme.normal.primary_hover,
+                         },
+                         "&:active": {
+                           backgroundColor: theme.normal.primary_active,
+                         },
+                       })} onClick={() => setShowDeposit(true)}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path fillRule="evenodd" clipRule="evenodd"
+                          d="M14.0007 7.33325C14.3688 7.33325 14.6673 7.63173 14.6673 7.99992V13.9999C14.6673 14.3681 14.3688 14.6666 14.0007 14.6666H2.00065C1.63246 14.6666 1.33398 14.3681 1.33398 13.9999V8.00269C1.33398 7.6345 1.63246 7.33602 2.00065 7.33602C2.36884 7.33602 2.66732 7.6345 2.66732 8.00269V13.3333H13.334V7.99992C13.334 7.63173 13.6325 7.33325 14.0007 7.33325Z"
+                          fill="#030308"/>
+                    <path fillRule="evenodd" clipRule="evenodd"
+                          d="M4.52925 7.19518C4.7896 6.93483 5.21171 6.93483 5.47206 7.19518L8.00065 9.72378L10.5292 7.19518C10.7896 6.93483 11.2117 6.93483 11.4721 7.19518C11.7324 7.45553 11.7324 7.87764 11.4721 8.13799L8.47206 11.138C8.21171 11.3983 7.7896 11.3983 7.52925 11.138L4.52925 8.13799C4.2689 7.87764 4.2689 7.45553 4.52925 7.19518Z"
+                          fill="#030308"/>
+                    <path fillRule="evenodd" clipRule="evenodd"
+                          d="M7.99788 1.33325C8.36607 1.33325 8.66455 1.63173 8.66455 1.99992V10.6666C8.66455 11.0348 8.36607 11.3333 7.99788 11.3333C7.62969 11.3333 7.33122 11.0348 7.33122 10.6666V1.99992C7.33122 1.63173 7.62969 1.33325 7.99788 1.33325Z"
+                          fill="#030308"/>
+                  </svg>
+                  <Trans>
+                    Deposit
+                  </Trans>
+                </Stack>
+                <a href={`/#/overview?type=${isNotice === 'withdraw' ? 'withdraw' : 'deposit'}`}>
+                  <Stack px={'16px'} py={'10px'} spacing={'10px'} direction={'row'} alignItems={"center"}
+                         sx={(theme) => ({
+                           fontSize: '14px',
+                           fontWeight: "700",
+                           lineHeight: '20px',
+                           color: theme.normal.text0,
+                           backgroundColor: theme.normal.grey_hover,
+                           borderRadius: '8px',
+                           cursor: 'pointer',
+                           "&:hover": {
+                             backgroundColor: theme.normal.grey_active,
+                           },
+                         })}
+                         position={'relative'}
+                  >
+                    {
+                      isNotice && (
+                        <Stack position={'absolute'} right={'-5px'} top={'-5px'}>
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <circle cx="8" cy="8" r="7" fill="#FF4F33" stroke="#1F2329" strokeWidth="2"/>
+                          </svg>
+                        </Stack>
+                      )
+                    }
+                    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
+                      <path fillRule="evenodd" clipRule="evenodd"
+                            d="M2.83268 2.66659C2.64859 2.66659 2.49935 2.81582 2.49935 2.99992V3.99992H14.4993V2.99992C14.4993 2.81582 14.3501 2.66659 14.166 2.66659H2.83268ZM15.8327 2.99992C15.8327 2.07944 15.0865 1.33325 14.166 1.33325H2.83268C1.91221 1.33325 1.16602 2.07944 1.16602 2.99992V12.9999C1.16602 13.9204 1.91221 14.6666 2.83268 14.6666H14.166C15.0865 14.6666 15.8327 13.9204 15.8327 12.9999V2.99992ZM14.4993 5.33325H2.49935V12.9999C2.49935 13.184 2.64859 13.3333 2.83268 13.3333H14.166C14.3501 13.3333 14.4993 13.184 14.4993 12.9999V5.33325ZM3.83268 7.99992C3.83268 7.63173 4.13116 7.33325 4.49935 7.33325H5.16602C5.5342 7.33325 5.83268 7.63173 5.83268 7.99992C5.83268 8.36811 5.5342 8.66659 5.16602 8.66659H4.49935C4.13116 8.66659 3.83268 8.36811 3.83268 7.99992ZM6.49935 7.99992C6.49935 7.63173 6.79783 7.33325 7.16602 7.33325H12.4993C12.8675 7.33325 13.166 7.63173 13.166 7.99992C13.166 8.36811 12.8675 8.66659 12.4993 8.66659H7.16602C6.79783 8.66659 6.49935 8.36811 6.49935 7.99992ZM3.83268 10.6666C3.83268 10.2984 4.13116 9.99992 4.49935 9.99992H5.16602C5.5342 9.99992 5.83268 10.2984 5.83268 10.6666C5.83268 11.0348 5.5342 11.3333 5.16602 11.3333H4.49935C4.13116 11.3333 3.83268 11.0348 3.83268 10.6666ZM6.49935 10.6666C6.49935 10.2984 6.79783 9.99992 7.16602 9.99992H12.4993C12.8675 9.99992 13.166 10.2984 13.166 10.6666C13.166 11.0348 12.8675 11.3333 12.4993 11.3333H7.16602C6.79783 11.3333 6.49935 11.0348 6.49935 10.6666Z"
+                            fill="#F9F9F9" fillOpacity="0.6"/>
+                    </svg>
+                    <Trans>
+                      Overview
+                    </Trans>
+                  </Stack>
+                </a>
+              </Stack>
+            </Stack>
+          </Stack>
+        </Stack>
         <Stack px={'20px'} direction={'row'} justifyContent={'space-between'} alignItems={"center"}>
           <Stack sx={(theme) => ({
             [theme.breakpoints.down('md')]: {
@@ -136,7 +370,7 @@ const Personal = () => {
             },
             fontWeight: 'bold',
           })}>
-            Dashboard / Personal
+            My Positions
           </Stack>
           <Stack sx={(theme) => ({
             border: `1px solid ${theme.normal.border}`,
@@ -185,243 +419,28 @@ const Personal = () => {
             <Share/>
           </Stack>
         </Stack>
-        {/*PC My Trading*/}
-        <Stack px={'20px'}>
-          <Stack mt={'24px'} sx={(theme) => ({
-            border: `1px solid ${theme.normal.border}`,
-            padding: '20px',
-            borderRadius: '12px',
-            [theme.breakpoints.down('md')]: {
-              display: 'none',
-            }
-          })}>
-            <Stack sx={(theme) => ({
-              color: theme.normal.text2,
-              fontSize: '14px',
-              fontWeight: 'bold',
-              lineHeight: '20px',
-            })}>
-              My Trading
-            </Stack>
-            <Stack alignItems={"center"} spacing={'12px'} my={'40px'}>
-              <Stack sx={(theme) => ({
-                color: theme.normal.text2,
-                fontSize: '16px',
-                fontWeight: 'bold',
-                lineHeight: '22px',
-              })}>balance</Stack>
-              <Stack direction={'row'} alignItems={'end'} sx={(theme) => ({
-                color: theme.normal.text0,
-                '& span:first-of-type': {
-                  fontSize: '32px',
-                  fontWeight: 'bold',
-                  lineHeight: '44px',
-                },
-                '& span:last-of-type': {
-                  fontSize: '28px',
-                  fontWeight: 'bold',
-                  lineHeight: '40px',
-                  marginLeft: '8px',
-                },
-              })}>
-              <span>{Number(trading?.balance ?? 0).toLocaleString('en-US', {
-                maximumFractionDigits: 2
-              })}</span>
-                <span>NEST</span>
-              </Stack>
-            </Stack>
-            <Grid container spacing={'16px'}>
-              {
-                [
-                  {
-                    title: 'Total trading volume',
-                    value: trading?.volume,
-                    unit: ' NEST',
-                  },
-                  {
-                    title: 'Total asset value',
-                    value: trading?.assetValue,
-                    unit: ' NEST',
-                  },
-                  {
-                    title: 'Total number of trades',
-                    value: trading?.trades,
-                    unit: '',
-                  },
-                ].map((item, index) => (
-                  <Grid item xs={12} md={4} key={index}>
-                    <Stack spacing={'12px'} sx={(theme) => ({
-                      backgroundColor: theme.normal.bg1,
-                      padding: '40px',
-                      borderRadius: '12px',
-                    })}>
-                      <Stack sx={(theme) => ({
-                        color: theme.normal.text2,
-                        fontSize: '14px',
-                        fontWeight: 'bold',
-                        lineHeight: '20px',
-                      })}>{item.title}</Stack>
-                      <Stack sx={(theme) => ({
-                        color: theme.normal.text0,
-                        fontSize: '28px',
-                        fontWeight: 'bold',
-                        lineHeight: '40px',
-                      })}>{Number(item?.value ?? 0).toLocaleString('en-US', {
-                        maximumFractionDigits: 2
-                      })}{item.unit}</Stack>
-                    </Stack>
-                  </Grid>
-                ))
-              }
-            </Grid>
-          </Stack>
-        </Stack>
-
-        {/*Mobile My Trading*/}
-        <Stack px={'20px'}>
-          <Stack mt={'16px'} sx={(theme) => ({
-            [theme.breakpoints.up('md')]: {
-              display: 'none',
-            },
-            padding: '20px 12px',
-            backgroundColor: theme.normal.bg1,
-            borderRadius: '12px',
-          })}>
-            <Stack spacing={'4px'}>
-              <Stack sx={(theme) => ({
-                color: theme.normal.text1,
-                fontSize: '14px',
-                fontWeight: 'bold',
-                lineHeight: '20px',
-              })}>balance</Stack>
-              <Stack sx={(theme) => ({
-                color: theme.normal.text0,
-                fontSize: '24px',
-                fontWeight: 'bold',
-                lineHeight: '32px',
-              })}>{Number(trading?.balance ?? 0).toLocaleString('en-US', {
-                maximumFractionDigits: 2
-              }) ?? 0} NEST</Stack>
-            </Stack>
-            <Divider sx={(theme) => ({
-              backgroundColor: theme.normal.border,
-              margin: '20px 0',
-            })}/>
-            {
-              [
-                {
-                  title: 'Total trading volume',
-                  value: trading?.volume,
-                  unit: ' NEST',
-                },
-                {
-                  title: 'Total asset value',
-                  value: trading?.assetValue,
-                  unit: ' NEST',
-                },
-                {
-                  title: 'Total number of trades',
-                  value: trading?.trades,
-                  unit: '',
-                },
-              ].map((item, index) => (
-                <Stack direction={'row'} justifyContent={'space-between'} mb={'20px'} key={index}>
-                  <Stack sx={(theme) => ({
-                    color: theme.normal.text2,
-                    fontSize: '14px',
-                    fontWeight: '400',
-                    lineHeight: '20px',
-                  })}>{item.title}</Stack>
-                  <Stack sx={(theme) => ({
-                    color: theme.normal.text0,
-                    fontSize: '16px',
-                    fontWeight: '700',
-                    lineHeight: '22px',
-                  })}>{Number(item?.value ?? 0).toLocaleString('en-US', {
-                    maximumFractionDigits: 2
-                  })}{item.unit}</Stack>
-                </Stack>
-              ))
-            }
-          </Stack>
-        </Stack>
-
         {/*PC My Positions*/}
         <Stack px={'20px'}>
-          <Stack px={'20px'} mt={'24px'} sx={(theme) => ({
-            border: `1px solid ${theme.normal.border}`,
-            padding: '20px',
-            borderRadius: '12px',
+          <Stack mt={'24px'} sx={(theme) => ({
             [theme.breakpoints.down('md')]: {
               display: 'none',
             }
           })}>
-            <Stack sx={(theme) => ({
-              color: theme.normal.text2,
-              fontSize: '14px',
-              fontWeight: 'bold',
-              lineHeight: '20px',
-            })}>
-              My Positions
-            </Stack>
-            <Stack alignItems={"center"} spacing={'12px'} my={'40px'}>
-              <Stack sx={(theme) => ({
-                color: theme.normal.text2,
-                fontSize: '16px',
-                fontWeight: 'bold',
-                lineHeight: '22px',
-              })}>Total Profit & Loss</Stack>
-              <Stack direction={'row'} alignItems={'end'} sx={(theme) => ({
-                '& span:first-of-type': {
-                  color: theme.normal.text0,
-                  fontSize: '32px',
-                  fontWeight: 'bold',
-                  lineHeight: '44px',
-                },
-                '& span:nth-of-type(2)': {
-                  color: theme.normal.text0,
-                  fontSize: '28px',
-                  fontWeight: 'bold',
-                  lineHeight: '40px',
-                  marginLeft: '8px',
-                },
-                '& span:last-of-type': {
-                  color: positons?.totalRate >= 0 ? theme.normal.success : theme.normal.danger,
-                  fontSize: '28px',
-                  fontWeight: 'bold',
-                  lineHeight: '40px',
-                  marginLeft: '8px',
-                }
-              })}>
-              <span>{Number(positons?.totalProfitAndLoss ?? 0).toLocaleString('en-US', {
-                maximumFractionDigits: 2
-              })}</span>
-                <span>NEST</span>
-                <span>{positons?.totalRate >= 0 ? '+' : ''}{Number(positons?.totalRate ?? 0).toLocaleString('en-US', {
-                  maximumFractionDigits: 2
-                })} %</span>
-              </Stack>
-            </Stack>
             <Grid container spacing={'16px'}>
               {
                 [
                   {
-                    title: 'Today\'s PNL',
-                    value: positons?.todayPnl,
-                    rate: positons?.todayRate,
+                    title: 'Positions Value',
+                    value: positions?.positionValue,
+                    rate: null,
                   },
                   {
-                    title: '7 Days\' PNL',
-                    value: positons?.days7Pnl,
-                    rate: positons?.days7Rate,
-                  },
-                  {
-                    title: '30 Days\' PNL',
-                    value: positons?.days30Pnl,
-                    rate: positons?.days30Rate,
+                    title: 'Total Profit & Loss',
+                    value: positions?.totalProfitAndLoss,
+                    rate: positions?.totalRate,
                   },
                 ].map((item, index) => (
-                  <Grid item xs={12} md={4} key={index}>
+                  <Grid item xs={6} md={6} key={index}>
                     <Stack spacing={'12px'} sx={(theme) => ({
                       backgroundColor: theme.normal.bg1,
                       padding: '40px',
@@ -434,27 +453,91 @@ const Personal = () => {
                         lineHeight: '20px',
                       })}>{item.title}</Stack>
                       <Stack sx={(theme) => ({
-                        '& span:first-of-type': {
+                        '& div:first-of-type': {
                           color: theme.normal.text0,
                           fontSize: '28px',
                           fontWeight: 'bold',
                           lineHeight: '40px',
                           whiteSpace: 'nowrap',
                         },
-                        '& span:last-of-type': {
+                        '& div:last-of-type': {
                           color: item?.rate >= 0 ? theme.normal.success : theme.normal.danger,
                           fontSize: '24px',
                           fontWeight: 'bold',
                           lineHeight: '32px',
                           whiteSpace: 'nowrap',
                         }
-                      })} direction={'row'} spacing={'4px'} alignItems={'end'}>
-                      <span>{Number(item?.value ?? 0).toLocaleString('en-US', {
-                        maximumFractionDigits: 2
-                      })} NEST</span>
-                        <span>{item?.rate > 0 ? '+' : ''}{Number(item?.rate ?? 0).toLocaleString('en-US', {
+                      })} spacing={'8px'}>
+                        <div>{Number(item?.value ?? 0).toLocaleString('en-US', {
                           maximumFractionDigits: 2
-                        })}%</span>
+                        })} NEST
+                        </div>
+                        <div
+                          style={{opacity: item.rate !== null ? 1 : 0}}>{item?.rate > 0 ? '+' : ''}{Number(item?.rate ?? 0).toLocaleString('en-US', {
+                          maximumFractionDigits: 2
+                        })}%
+                        </div>
+                      </Stack>
+                    </Stack>
+                  </Grid>
+                ))
+              }
+            </Grid>
+            <Grid container spacing={'16px'} mt={'8px'}>
+              {
+                [
+                  {
+                    title: t`Today's PNL`,
+                    value: positions?.todayPnl,
+                    rate: positions?.todayRate,
+                  },
+                  {
+                    title: t`7 Days' PNL`,
+                    value: positions?.days7Pnl,
+                    rate: positions?.days7Rate,
+                  },
+                  {
+                    title: t`30 Days' PNL`,
+                    value: positions?.days30Pnl,
+                    rate: positions?.days30Rate,
+                  },
+                ].map((item, index) => (
+                  <Grid item xs={12} md={4} key={index}>
+                    <Stack spacing={'12px'} sx={(theme) => ({
+                      backgroundColor: theme.normal.bg1,
+                      padding: '40px',
+                      borderRadius: '12px',
+                    })}>
+                      <Stack sx={(theme) => ({
+                        color: theme.normal.text2,
+                        fontSize: '14px',
+                        fontWeight: 'bold',
+                        lineHeight: '20px',
+                      })}>{item.title}</Stack>
+                      <Stack sx={(theme) => ({
+                        '& div:first-of-type': {
+                          color: theme.normal.text0,
+                          fontSize: '28px',
+                          fontWeight: 'bold',
+                          lineHeight: '40px',
+                          whiteSpace: 'nowrap',
+                        },
+                        '& div:last-of-type': {
+                          color: item?.rate >= 0 ? theme.normal.success : theme.normal.danger,
+                          fontSize: '24px',
+                          fontWeight: 'bold',
+                          lineHeight: '32px',
+                          whiteSpace: 'nowrap',
+                        }
+                      })} spacing={'8px'}>
+                        <div>{Number(item?.value ?? 0).toLocaleString('en-US', {
+                          maximumFractionDigits: 2
+                        })} NEST
+                        </div>
+                        <div>{item?.rate > 0 ? '+' : ''}{Number(item?.rate ?? 0).toLocaleString('en-US', {
+                          maximumFractionDigits: 2
+                        })}%
+                        </div>
                       </Stack>
                     </Stack>
                   </Grid>
@@ -479,7 +562,11 @@ const Personal = () => {
                 fontSize: '14px',
                 fontWeight: 'bold',
                 lineHeight: '20px',
-              })}>Total Profit & Loss</Stack>
+              })}>
+                <Trans>
+                  Total Profit & Loss
+                </Trans>
+              </Stack>
               <Stack sx={(theme) => ({
                 '& span:first-of-type': {
                   color: theme.normal.text0,
@@ -488,16 +575,16 @@ const Personal = () => {
                   lineHeight: '32px',
                 },
                 '& span:last-of-type': {
-                  color: positons?.totalRate >= 0 ? theme.normal.success : theme.normal.danger,
+                  color: positions?.totalRate >= 0 ? theme.normal.success : theme.normal.danger,
                   fontSize: '20px',
                   fontWeight: 'bold',
                   lineHeight: '28px',
                 },
               })} spacing={'4px'} alignItems={'end'} direction={'row'}>
-              <span>{Number(positons?.totalProfitAndLoss ?? 0).toLocaleString('en-US', {
+              <span>{Number(positions?.totalProfitAndLoss ?? 0).toLocaleString('en-US', {
                 maximumFractionDigits: 2
               }) ?? 0} NEST</span>
-                <span>{positons?.totalRate > 0 ? '+' : ''}{Number(positons?.totalRate ?? 0).toLocaleString('en-US', {
+                <span>{positions?.totalRate > 0 ? '+' : ''}{Number(positions?.totalRate ?? 0).toLocaleString('en-US', {
                   maximumFractionDigits: 2
                 })}%</span>
               </Stack>
@@ -509,19 +596,19 @@ const Personal = () => {
             {
               [
                 {
-                  title: 'Today\'s PNL',
-                  value: positons?.todayPnl,
-                  rate: positons?.todayRate,
+                  title: t`Today's PNL`,
+                  value: positions?.todayPnl,
+                  rate: positions?.todayRate,
                 },
                 {
-                  title: '7 Days\' PNL',
-                  value: positons?.days7Pnl,
-                  rate: positons?.days7Rate,
+                  title: t`7 Days' PNL`,
+                  value: positions?.days7Pnl,
+                  rate: positions?.days7Rate,
                 },
                 {
-                  title: '30 Days\' PNL',
-                  value: positons?.days30Pnl,
-                  rate: positons?.days30Rate,
+                  title: t`30 Days' PNL`,
+                  value: positions?.days30Pnl,
+                  rate: positions?.days30Rate,
                 },
               ].map((item, index) => (
                 <Stack key={index} direction={'row'} justifyContent={'space-between'} mb={'20px'}>
@@ -555,7 +642,6 @@ const Personal = () => {
             }
           </Stack>
         </Stack>
-
         <Stack
           mt={['16px', '40px']} mb={['20px', '24px']} px={'20px'}
           width={['100%', '280px']}
@@ -633,24 +719,24 @@ const Personal = () => {
           {
             [
               {
-                title: 'Volume',
+                title: t`Volume`,
                 chart: <VolumeChart address={address} from={range.startDate?.toLocaleDateString().replaceAll('/', '-')}
                                     to={range.endDate?.toLocaleDateString().replaceAll('/', '-')}/>,
               },
               {
-                title: 'Total asset value',
+                title: t`Total asset value`,
                 chart: <TotalAssetValue address={address}
                                         from={range.startDate?.toLocaleDateString().replaceAll('/', '-')}
                                         to={range.endDate?.toLocaleDateString().replaceAll('/', '-')}/>
               },
               {
-                title: 'Daily return',
+                title: t`Daily return`,
                 chart: <DailyReturnChart address={address}
                                          from={range.startDate?.toLocaleDateString().replaceAll('/', '-')}
                                          to={range.endDate?.toLocaleDateString().replaceAll('/', '-')}/>
               },
               {
-                title: 'Cumulative return',
+                title: t`Cumulative return`,
                 chart: <CumulativeReturnChart address={address}
                                               from={range.startDate?.toLocaleDateString().replaceAll('/', '-')}
                                               to={range.endDate?.toLocaleDateString().replaceAll('/', '-')}/>
