@@ -1,5 +1,5 @@
 import {useParams} from "react-router-dom";
-import {useMemo, useState} from "react";
+import {useEffect, useMemo, useState} from "react";
 import ShareMyDealModal from "../Dashboard/Modal/ShareMyDealModal";
 import useSWR from "swr";
 import Stack from "@mui/material/Stack";
@@ -32,7 +32,7 @@ import {useLocalStorage} from "react-use";
 
 const Personal = () => {
   const {address} = useParams()
-  const {account} = useNEST();
+  const {account, checkSigned} = useNEST();
   const {isBigMobile} = useWindowWidth()
   const [showShareMyDealModal, setShareMyDealModal] = useState(false);
   const [range, setRange] = useState<Range>({
@@ -65,7 +65,7 @@ const Personal = () => {
 
   const {data: isKol} = useSWR(address ? `https://api.nestfi.net/api/invite/is-kol-whitelist/${address ?? account.address}` : undefined, (url: any) => fetch(url)
     .then((res) => res.json())
-    .then((res: any) => res.value))
+    .then((res: any) => res.value));
 
   const isNotice = useMemo(() => {
     if (!address && !account.address) {
@@ -145,6 +145,12 @@ const Personal = () => {
     showDeposit,
     showWithdraw,
   ]);
+
+  useEffect(() => {
+    if (!checkSigned) {
+      window.location.replace('/#/futures')
+    }
+  }, [checkSigned])
 
   return (
     <Stack alignItems={"center"}>

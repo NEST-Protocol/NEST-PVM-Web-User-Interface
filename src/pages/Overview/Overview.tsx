@@ -17,7 +17,7 @@ const Overview: FC = () => {
   const {isBigMobile} = useWindowWidth();
   const [searchParams, setSearchParams] = useSearchParams()
   const [tabsValue, setTabsValue] = useState( searchParams.get('type') === 'withdraw' ? 1 : 0);
-  const {account} = useNEST()
+  const {account, checkSigned} = useNEST()
   const {
     moneyList,
     historyList,
@@ -37,6 +37,12 @@ const Overview: FC = () => {
   useEffect(() => {
     updateRead()
   }, [updateRead])
+
+  useEffect(() => {
+    if (!checkSigned) {
+      window.location.replace('/#/futures')
+    }
+  }, [checkSigned])
 
   const tabs = useMemo(() => {
     const accountTabsData = [
