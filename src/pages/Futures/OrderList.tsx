@@ -26,6 +26,8 @@ import {
 } from "../../hooks/useTransactionReceipt";
 import { SnackBarType } from "../../components/SnackBar/NormalSnackBar";
 import { Link } from "react-router-dom";
+import HistoryTable from "./Components/HistoryTable";
+import { FuturesHistoryService } from "../../hooks/useFuturesHistory";
 
 export interface FuturesOrderService {
   id: number;
@@ -50,6 +52,7 @@ interface FuturesOrderListProps {
   price: FuturesPrice | undefined;
   pOrderListV2: FuturesOrderService[];
   limitOrderList: FuturesOrderService[];
+  historyList: FuturesHistoryService[];
   updateList: () => void;
 }
 
@@ -119,6 +122,8 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
           updateList={props.updateList}
         />
       );
+    } else if (tabsValue === 2 && width > 890) {
+      return <HistoryTable dataArray={props.historyList} buttonCallBack={() => {}} />;
     } else if (tabsValue === 0) {
       const noOrder = props.pOrderListV2.length === 0;
       return (
@@ -182,6 +187,7 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
     }
   }, [
     isBigMobile,
+    props.historyList,
     props.limitOrderList,
     props.pOrderListV2,
     props.price,
@@ -202,6 +208,12 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
         <FuturesLimitOrder />
         <p>
           <Trans>Order</Trans>
+        </p>
+      </Stack>,
+      <Stack direction={"row"} alignItems={"center"} spacing={"4px"}>
+        <HistoryIcon />
+        <p>
+          <Trans>History</Trans>
         </p>
       </Stack>,
     ];
