@@ -3,40 +3,38 @@ import {FC, useCallback, useEffect, useMemo, useState} from "react";
 import useWindowWidth from "../../hooks/useWindowWidth";
 import {Trans} from "@lingui/macro";
 import NESTTabs from "../../components/NESTTabs/NESTTabs";
-import MobileList, {AccountListType} from "./Components/MobileList";
+import {AccountListType} from "./Components/MobileList";
 import MoneyTable from "./Components/MoneyTable";
-import TransactionTable from "./Components/TransactionTable";
 import useAccount from "../../hooks/useAccount";
 import {NoOrderMobile} from "../Futures/OrderList";
 import Box from "@mui/material/Box";
 import useNEST from "../../hooks/useNEST";
 import {useLocalStorage} from "react-use";
-import { useSearchParams } from "react-router-dom";
+import {useSearchParams} from "react-router-dom";
 
 const Overview: FC = () => {
   const {isBigMobile} = useWindowWidth();
   const [searchParams, setSearchParams] = useSearchParams()
-  const [tabsValue, setTabsValue] = useState( searchParams.get('type') === 'withdraw' ? 1 : 0);
+  const [tabsValue, setTabsValue] = useState(searchParams.get('type') === 'withdraw' ? 1 : 0);
   const {account, checkSigned} = useNEST()
-  const {
-    moneyList,
-    historyList,
-  } = useAccount();
+  const {moneyList} = useAccount();
   const [messagesStr, setMessagesStr] = useLocalStorage(`nest.messages`, '{}');
 
-  const updateRead = useCallback(() => {
-    if (moneyList.length > 0 || historyList.length > 0) {
+  const updateMessages = useCallback(() => {
+    if (moneyList.length > 0) {
+      const depositLength = moneyList.filter((item) => item.ordertype === 'DEPOSIT').length
+      const withdrawLength = moneyList.filter((item) => item.ordertype === 'WITHDRAW').length
       const messages = JSON.parse(messagesStr ?? '{}')
       setMessagesStr(JSON.stringify({
         ...messages,
-        [`${account.address}`]: [moneyList.length, historyList.length]
+        [`${account.address}`]: [depositLength, withdrawLength]
       }))
     }
-  }, [moneyList.length, historyList.length, messagesStr, account.address])
+  }, [moneyList.length, messagesStr, account.address])
 
   useEffect(() => {
-    updateRead()
-  }, [updateRead])
+    updateMessages()
+  }, [updateMessages])
 
   useEffect(() => {
     if (!checkSigned) {
@@ -89,37 +87,17 @@ const Overview: FC = () => {
     const ordertype = tabsValue === 0 ? "DEPOSIT" : "WITHDRAW";
     const filterList = moneyList.filter((item) => item.ordertype === ordertype);
     if (isBigMobile) {
-      if (
-        (tabsValue <= 1 && filterList.length === 0) ||
-        (tabsValue === 2 && historyList.length === 0)
-      ) {
+      if (filterList.length === 0) {
         return (
           <NoOrderMobile>
             <Trans>No Order</Trans>
           </NoOrderMobile>
         );
       }
-      return (
-        <Stack spacing={"16px"}>
-          {(tabsValue === 2 ? historyList : filterList).map((item, index) => {
-            return (
-              <MobileList
-                key={`AccountMobileList + ${index}`}
-                type={listType}
-                data={item}
-              />
-            );
-          })}
-        </Stack>
-      );
     } else {
-      if (tabsValue <= 1) {
-        return <MoneyTable list={filterList} type={listType}/>;
-      } else {
-        return <TransactionTable list={historyList}/>;
-      }
+      return <MoneyTable list={filterList} type={listType}/>;
     }
-  }, [historyList, isBigMobile, listType, moneyList, tabsValue]);
+  }, [isBigMobile, listType, moneyList, tabsValue]);
   return (
     <>
       <Stack

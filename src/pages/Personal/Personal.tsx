@@ -51,7 +51,6 @@ const Personal = () => {
     showBalance,
     getAssetsList,
     moneyList,
-    historyList,
   } = useAccount();
   const walletIcon = useWalletIcon();
   const {messageSnackBar} = useNESTSnackBar();
@@ -73,13 +72,15 @@ const Personal = () => {
     }
     const messages = JSON.parse(messagesStr ?? '{}')
     const lastReads = messages?.[`${address ?? account.address}`] ?? [0, 0]
-    if (lastReads[0] < moneyList.length) {
+    const depositLength = moneyList.filter((item) => item.ordertype === 'DEPOSIT').length
+    const withdrawLength = moneyList.filter((item) => item.ordertype === 'WITHDRAW').length
+    if (lastReads[0] < depositLength) {
       return 'deposit'
-    } else if (lastReads[1] < historyList.length) {
+    } else if (lastReads[1] < withdrawLength) {
       return 'withdraw'
     }
     return false;
-  }, [moneyList.length, historyList.length, messagesStr, account.address, address])
+  }, [moneyList.length, messagesStr, account.address, address])
 
   const NESTIcon = useMemo(() => {
     return "NEST".getToken()!.icon;
