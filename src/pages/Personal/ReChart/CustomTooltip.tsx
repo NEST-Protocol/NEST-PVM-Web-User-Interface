@@ -9,6 +9,7 @@ export const CustomTooltip = ({ active, payload, label }: any) => {
         color: '#000',
         padding: '8px 12px',
         borderRadius: '12px',
+        border: `1px solid ${theme.normal.border}`,
       })}>
         <Box sx={(theme) => ({
           fontWeight: 400,
@@ -18,7 +19,7 @@ export const CustomTooltip = ({ active, payload, label }: any) => {
           fontWeight: 700,
           fontSize: '12px',
           lineHeight: '20px',
-        })}>daily : {payload[0].value !== 0 ? payload[0].value : payload[1].value } NEST</Box>
+        })}>daily : {payload[0].value !== 0 ? payload[0].value.toFixed(2) : payload[1].value.toFixed(2) } NEST</Box>
       </Stack>
     );
   }

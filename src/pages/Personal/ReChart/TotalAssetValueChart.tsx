@@ -21,7 +21,6 @@ type ChartsProps = {
 const ReCharts: FC<ChartsProps> = ({...props}) => {
   const {nowTheme} = useTheme()
   const to = props.to ?? new Date().toLocaleDateString().replaceAll('/', '-')
-  // from 为30天之前的日期
   const from = props.from ?? new Date(new Date().getTime() - 30 * 24 * 60 * 60 * 1000).toLocaleDateString().replaceAll('/', '-')
 
   const {data} = useSWR(`https://api.nestfi.net/api/dashboard/v2/personal/asset?address=${props.address}&chainId=56&from=${from}&to=${to}`,
@@ -54,8 +53,8 @@ const ReCharts: FC<ChartsProps> = ({...props}) => {
                   backgroundColor: '#fff',
                   color: '#000',
                   fontWeight: 700,
-                  fontSize: '14px',
                   borderRadius: '12px',
+                  border: `1px solid ${nowTheme.normal.border}`,
                 }}
                 labelStyle={{
                   fontSize: '12px',
