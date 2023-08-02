@@ -123,7 +123,6 @@ const Overview: FC = () => {
           spacing={"24px"}
           maxWidth={"1100px"}
           width={"100%"}
-          paddingX={"24px"}
           paddingY={['0', '0', '0', '40px']}
         >
           {
@@ -138,9 +137,11 @@ const Overview: FC = () => {
                   '& svg path': {
                     fill: theme.normal.text2,
                   }
-                })} direction={'row'} alignItems={"center"} spacing={'8px'} paddingY={'16px'}>
+                })} direction={'row'} alignItems={"center"} spacing={'8px'} paddingY={'16px'} paddingX={"24px"}>
                   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fillRule="evenodd" clipRule="evenodd" d="M4.76413 8.23565C4.63396 8.10548 4.63396 7.89442 4.76414 7.76425L10.421 2.1074C10.5512 1.97722 10.7622 1.97722 10.8924 2.1074L11.3777 2.59267C11.5078 2.72284 11.5078 2.9339 11.3777 3.06407L6.44178 7.99995L11.3777 12.9358C11.5078 13.066 11.5078 13.2771 11.3777 13.4072L10.8924 13.8925C10.7622 14.0227 10.5512 14.0227 10.421 13.8925L4.76413 8.23565Z" fill="#F9F9F9" fillOpacity="0.6"/>
+                    <path fillRule="evenodd" clipRule="evenodd"
+                          d="M4.76413 8.23565C4.63396 8.10548 4.63396 7.89442 4.76414 7.76425L10.421 2.1074C10.5512 1.97722 10.7622 1.97722 10.8924 2.1074L11.3777 2.59267C11.5078 2.72284 11.5078 2.9339 11.3777 3.06407L6.44178 7.99995L11.3777 12.9358C11.5078 13.066 11.5078 13.2771 11.3777 13.4072L10.8924 13.8925C10.7622 14.0227 10.5512 14.0227 10.421 13.8925L4.76413 8.23565Z"
+                          fill="#F9F9F9" fillOpacity="0.6"/>
                   </svg>
                   <span>
                     <Trans>
@@ -193,7 +194,7 @@ const Overview: FC = () => {
               </Stack>
             )
           }
-          <Stack spacing={['12px', '12px', '12px', '16px']}>
+          <Stack spacing={['12px', '12px', '12px', '16px']} paddingX={["24px", "24px", "24px", '24px', 0]}>
             <Stack
               direction={"row"}
               justifyContent={"start"}
