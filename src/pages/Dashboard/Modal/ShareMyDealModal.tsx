@@ -627,32 +627,12 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
                           lineHeight: '20px',
                           fontWeight: '400',
                           color: "rgba(249, 249, 249, 0.6)",
-                        })}>Volume</Stack>
+                        })}>
+                          <Trans>Volume</Trans>
+                        </Stack>
                       </Stack>
                       <Stack width={'100%'} height={'100%'} position={'relative'}>
                         <VolumeChart simple address={props.value.address} from={props.value.from} to={props.value.to}/>
-                      </Stack>
-                    </Stack>
-                  )
-                }
-                {
-                  select.cumlulativeReturn && (
-                    <Stack width={'100%'} height={'240px'} sx={() => ({
-                      backgroundColor: "#171A1F",
-                      borderRadius: '12px',
-                      flexShrink: 0,
-                    })} px={'12px'} py={'20px'}>
-                      <Stack spacing={'8px'}>
-                        <Stack sx={() => ({
-                          fontSize: '14px',
-                          lineHeight: '20px',
-                          fontWeight: '400',
-                          color: "rgba(249, 249, 249, 0.6)",
-                        })}>Cumulative return</Stack>
-                      </Stack>
-                      <Stack width={'100%'} height={'100%'} position={'relative'}>
-                        <CumulativeReturnChart simple address={props.value.address} from={props.value.from}
-                                               to={props.value.to}/>
                       </Stack>
                     </Stack>
                   )
@@ -696,11 +676,39 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
                           lineHeight: '20px',
                           fontWeight: '400',
                           color: "rgba(249, 249, 249, 0.6)",
-                        })}>Daily return</Stack>
+                        })}>
+                          <Trans>Daily Return</Trans>
+                        </Stack>
                       </Stack>
                       <Stack width={'100%'} height={'100%'} position={'relative'}>
                         <DailyReturnChart simple address={props.value.address} from={props.value.from}
                                           to={props.value.to}/>
+                      </Stack>
+                    </Stack>
+                  )
+                }
+                {
+                  select.cumlulativeReturn && (
+                    <Stack width={'100%'} height={'240px'} sx={() => ({
+                      backgroundColor: "#171A1F",
+                      borderRadius: '12px',
+                      flexShrink: 0,
+                    })} px={'12px'} py={'20px'}>
+                      <Stack spacing={'8px'}>
+                        <Stack sx={() => ({
+                          fontSize: '14px',
+                          lineHeight: '20px',
+                          fontWeight: '400',
+                          color: "rgba(249, 249, 249, 0.6)",
+                        })}>
+                          <Trans>
+                            Cumulative Return
+                          </Trans>
+                        </Stack>
+                      </Stack>
+                      <Stack width={'100%'} height={'100%'} position={'relative'}>
+                        <CumulativeReturnChart simple address={props.value.address} from={props.value.from}
+                                               to={props.value.to}/>
                       </Stack>
                     </Stack>
                   )

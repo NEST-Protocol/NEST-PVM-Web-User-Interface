@@ -12,6 +12,7 @@ import useSWR from "swr";
 import useTheme from "../../../hooks/useTheme";
 import {CustomTooltip} from "./CustomTooltip";
 import numeral from "numeral";
+import {Stack} from "@mui/system";
 
 type ChartsProps = {
   address: string | undefined
@@ -36,7 +37,6 @@ const ReCharts: FC<ChartsProps> = ({...props}) => {
 
   return (
     <>
-      <div></div>
       <ResponsiveContainer width="100%" height="100%">
         <ComposedChart
           data={data}
@@ -58,6 +58,22 @@ const ReCharts: FC<ChartsProps> = ({...props}) => {
           <Bar dataKey="loss" barSize={20} fill={nowTheme.normal.danger} unit={' NEST'} stackId={'a'}/>
         </ComposedChart>
       </ResponsiveContainer>
+      {
+        props.simple && data?.length > 0 && (
+          <Stack sx={() => ({
+            fontSize: '18px',
+            lineHeight: '24px',
+            fontWeight: '700',
+            color: "#F9F9F9",
+            position:  'absolute',
+            top: 0,
+            left: 0,
+          })}>{Number(data[data.length - 1]?.get === 0 ? data[data.length - 1]?.loss : data[data.length - 1]?.get).toLocaleString('en-US', {
+            maximumFractionDigits: 2,
+          })
+          } NEST</Stack>
+        )
+      }
     </>
   )
 }

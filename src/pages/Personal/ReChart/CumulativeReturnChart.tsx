@@ -82,7 +82,7 @@ const ReCharts: FC<ChartsProps> = ({...props}) => {
           })}>{Number(data[data.length - 1]?.daily ?? 0).toLocaleString('en-US', {
             maximumFractionDigits: 2,
           })
-          } NEST</Stack>
+          } %</Stack>
         )
       }
     </>
