@@ -31,7 +31,20 @@ const ReCharts: FC<ChartsProps> = ({...props}) => {
       .then((res: any) => res.value))
 
   return (
-    <>
+    <Stack height={'100%'} width={'100%'}>
+      {
+        props.simple && data?.length > 0 && (
+          <Stack sx={() => ({
+            fontSize: '18px',
+            lineHeight: '24px',
+            fontWeight: '700',
+            color: "#F9F9F9",
+          })}>{Number(data[data.length - 1]?.cumulative ?? 0).toLocaleString('en-US', {
+            maximumFractionDigits: 2,
+          })
+          } NEST</Stack>
+        )
+      }
       <ResponsiveContainer width="100%" height="100%">
         <ComposedChart
           data={data}
@@ -103,20 +116,7 @@ const ReCharts: FC<ChartsProps> = ({...props}) => {
                 strokeWidth={2} unit={' NEST'}/>
         </ComposedChart>
       </ResponsiveContainer>
-      {
-        props.simple && data?.length > 0 && (
-          <Stack position={'absolute'} sx={() => ({
-            fontSize: '18px',
-            lineHeight: '24px',
-            fontWeight: '700',
-            color: "#F9F9F9",
-          })}>{Number(data[data.length - 1]?.cumulative ?? 0).toLocaleString('en-US', {
-            maximumFractionDigits: 2,
-          })
-          } NEST</Stack>
-        )
-      }
-    </>
+    </Stack>
   )
 }
 

@@ -28,7 +28,23 @@ const ReCharts: FC<ChartsProps> = ({...props}) => {
       .then((res: any) => res.value))
 
   return (
-    <>
+    <Stack width={'100%'} height={'100%'}>
+      {
+        props.simple && data?.length > 0 && (
+          <Stack sx={() => ({
+            fontSize: '18px',
+            lineHeight: '24px',
+            fontWeight: '700',
+            color: "#F9F9F9",
+            position: 'absolute',
+            top: 0,
+            left: 0,
+          })}>{Number(data[data.length - 1]?.daily ?? 0).toLocaleString('en-US', {
+            maximumFractionDigits: 2,
+          })
+          } %</Stack>
+        )
+      }
       <ResponsiveContainer width="100%" height="100%">
         <ComposedChart
           data={data}
@@ -75,23 +91,7 @@ const ReCharts: FC<ChartsProps> = ({...props}) => {
                 unit={'%'}/>
         </ComposedChart>
       </ResponsiveContainer>
-      {
-        props.simple && data?.length > 0 && (
-          <Stack sx={() => ({
-            fontSize: '18px',
-            lineHeight: '24px',
-            fontWeight: '700',
-            color: "#F9F9F9",
-            position: 'absolute',
-            top: 0,
-            left: 0,
-          })}>{Number(data[data.length - 1]?.daily ?? 0).toLocaleString('en-US', {
-            maximumFractionDigits: 2,
-          })
-          } %</Stack>
-        )
-      }
-    </>
+    </Stack>
   )
 }
 
