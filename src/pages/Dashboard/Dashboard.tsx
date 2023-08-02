@@ -31,11 +31,11 @@ const Dashboard: FC = () => {
     .then((res: any) => res.value), {
     refreshInterval: 10_000,
   });
-  const [range, setRange] = useState<Range>({
+  const [range, setRange] = useState<Range[]>([{
     startDate: new Date(new Date().getTime() - 30 * 24 * 60 * 60 * 1000),
     endDate: new Date(),
     key: 'selection'
-  });
+  }]);
   const [showrdr, setShowrdr] = useState(false);
   const {nowTheme} = useTheme()
 
@@ -130,9 +130,9 @@ const Dashboard: FC = () => {
               lineHeight: '20px',
               height: '40px',
             })} spacing={'4px'} alignItems={"center"}>
-              <Stack>{range?.startDate?.toLocaleDateString()}</Stack>
+              <Stack>{range?.[0]?.startDate?.toLocaleDateString()}</Stack>
               <Box>~</Box>
-              <Stack>{range?.endDate?.toLocaleDateString()}</Stack>
+              <Stack>{range?.[0]?.endDate?.toLocaleDateString()}</Stack>
               <Stack flexGrow={1}></Stack>
               <Stack sx={(theme) => ({
                 '& svg': {
@@ -155,14 +155,15 @@ const Dashboard: FC = () => {
                 <Stack width={'fit-content'} position={'absolute'} top={'44px'} zIndex={50}>
                   <DateRange
                     months={1}
-                    onChange={item => setRange(item.selection)}
+                    onChange={item => setRange([item.selection])}
                     moveRangeOnFirstSelection={false}
-                    ranges={[range]}
+                    ranges={range}
                     showMonthArrow={true}
                     showPreview={false}
                     showDateDisplay={false}
                     showMonthAndYearPickers={false}
                     className={nowTheme.isLight ? '' : 'dark'}
+                    maxDate={new Date()}
                   />
                 </Stack>
                 <button style={{
@@ -186,23 +187,23 @@ const Dashboard: FC = () => {
             [
               {
                 title: t`Volume`,
-                chart: <VolumeChart from={range.startDate?.toLocaleDateString().replaceAll('/', '-')}
-                                    to={range.endDate?.toLocaleDateString().replaceAll('/', '-')}/>,
+                chart: <VolumeChart from={range?.[0]?.startDate?.toLocaleDateString().replaceAll('/', '-')}
+                                    to={range?.[0]?.endDate?.toLocaleDateString().replaceAll('/', '-')}/>,
               },
               {
                 title: t`Burned`,
-                chart: <BurnedChart from={range.startDate?.toLocaleDateString().replaceAll('/', '-')}
-                                    to={range.endDate?.toLocaleDateString().replaceAll('/', '-')}/>
+                chart: <BurnedChart from={range?.[0]?.startDate?.toLocaleDateString().replaceAll('/', '-')}
+                                    to={range?.[0]?.endDate?.toLocaleDateString().replaceAll('/', '-')}/>
               },
               {
                 title: t`User`,
-                chart: <UserChart from={range.startDate?.toLocaleDateString().replaceAll('/', '-')}
-                                  to={range.endDate?.toLocaleDateString().replaceAll('/', '-')}/>
+                chart: <UserChart from={range?.[0]?.startDate?.toLocaleDateString().replaceAll('/', '-')}
+                                  to={range?.[0]?.endDate?.toLocaleDateString().replaceAll('/', '-')}/>
               },
               {
                 title: t`Open Interest`,
-                chart: <OpenInterestChart from={range.startDate?.toLocaleDateString().replaceAll('/', '-')}
-                                          to={range.endDate?.toLocaleDateString().replaceAll('/', '-')}/>
+                chart: <OpenInterestChart from={range?.[0]?.startDate?.toLocaleDateString().replaceAll('/', '-')}
+                                          to={range?.[0]?.endDate?.toLocaleDateString().replaceAll('/', '-')}/>
               },
             ].map((item, index) => (
               <Grid item xs={12} md={6} key={index}>

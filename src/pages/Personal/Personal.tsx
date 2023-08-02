@@ -33,11 +33,11 @@ const Personal = () => {
   const {account, checkSigned} = useNEST();
   const {isBigMobile} = useWindowWidth()
   const [showShareMyDealModal, setShareMyDealModal] = useState(false);
-  const [range, setRange] = useState<Range>({
+  const [range, setRange] = useState<Range[]>([{
     startDate: new Date(new Date().getTime() - 30 * 24 * 60 * 60 * 1000),
     endDate: new Date(),
     key: 'selection'
-  });
+  }]);
   const [showrdr, setShowrdr] = useState(false);
   const {nowTheme} = useTheme()
   const {addTransactionNotice} = usePendingTransactionsBase();
@@ -99,8 +99,8 @@ const Personal = () => {
           _7daysRate: positions?.days7Rate ?? 0,
           _30daysPNL: positions?.days30Pnl ?? 0,
           _30daysRate: positions?.days30Rate ?? 0,
-          from: range.startDate?.toLocaleDateString().replaceAll('/', '-'),
-          to: range.endDate?.toLocaleDateString().replaceAll('/', '-'),
+          from: range?.[0]?.startDate?.toLocaleDateString().replaceAll('/', '-'),
+          to: range?.[0]?.endDate?.toLocaleDateString().replaceAll('/', '-'),
         }}
         open={showShareMyDealModal}
         onClose={() => {
@@ -110,7 +110,7 @@ const Personal = () => {
     );
   }, [address, account.address, positions?.totalProfitAndLoss, positions?.totalRate, positions?.todayPnl,
     positions?.todayRate, positions?.days7Pnl, positions?.days7Rate, positions?.days30Pnl, positions?.days30Rate,
-    range.startDate, range.endDate, showShareMyDealModal]);
+    range?.[0]?.startDate, range?.[0]?.endDate, showShareMyDealModal]);
 
   const addModal = useMemo(() => {
     return (
@@ -733,9 +733,9 @@ const Personal = () => {
               lineHeight: '20px',
               height: '40px',
             })} spacing={'4px'} alignItems={"center"}>
-              <Stack>{range?.startDate?.toLocaleDateString()}</Stack>
+              <Stack>{range?.[0].startDate?.toLocaleDateString()}</Stack>
               <Box>~</Box>
-              <Stack>{range?.endDate?.toLocaleDateString()}</Stack>
+              <Stack>{range?.[0].endDate?.toLocaleDateString()}</Stack>
               <Stack flexGrow={1}></Stack>
               <Stack sx={(theme) => ({
                 '& svg': {
@@ -758,14 +758,15 @@ const Personal = () => {
                 <Stack width={'fit-content'} position={'absolute'} top={'44px'} zIndex={50}>
                   <DateRange
                     months={1}
-                    onChange={item => setRange(item.selection)}
+                    onChange={item => setRange([item.selection])}
                     moveRangeOnFirstSelection={false}
-                    ranges={[range]}
+                    ranges={range}
                     showMonthArrow={true}
                     showPreview={false}
                     showDateDisplay={false}
                     showMonthAndYearPickers={false}
                     className={nowTheme.isLight ? '' : 'dark'}
+                    maxDate={new Date()}
                   />
                 </Stack>
                 <button style={{
@@ -790,26 +791,26 @@ const Personal = () => {
               {
                 title: t`Volume`,
                 chart: <VolumeChart address={address ?? account.address}
-                                    from={range.startDate?.toLocaleDateString().replaceAll('/', '-')}
-                                    to={range.endDate?.toLocaleDateString().replaceAll('/', '-')}/>,
+                                    from={range?.[0]?.startDate?.toLocaleDateString().replaceAll('/', '-')}
+                                    to={range?.[0]?.endDate?.toLocaleDateString().replaceAll('/', '-')}/>,
               },
               {
                 title: t`Total Asset Value`,
                 chart: <TotalAssetValue address={address ?? account.address}
-                                        from={range.startDate?.toLocaleDateString().replaceAll('/', '-')}
-                                        to={range.endDate?.toLocaleDateString().replaceAll('/', '-')}/>
+                                        from={range?.[0]?.startDate?.toLocaleDateString().replaceAll('/', '-')}
+                                        to={range?.[0]?.endDate?.toLocaleDateString().replaceAll('/', '-')}/>
               },
               {
                 title: t`Daily Return`,
                 chart: <DailyReturnChart address={address ?? account.address}
-                                         from={range.startDate?.toLocaleDateString().replaceAll('/', '-')}
-                                         to={range.endDate?.toLocaleDateString().replaceAll('/', '-')}/>
+                                         from={range?.[0]?.startDate?.toLocaleDateString().replaceAll('/', '-')}
+                                         to={range?.[0]?.endDate?.toLocaleDateString().replaceAll('/', '-')}/>
               },
               {
                 title: t`Cumulative Return`,
                 chart: <CumulativeReturnChart address={address ?? account.address}
-                                              from={range.startDate?.toLocaleDateString().replaceAll('/', '-')}
-                                              to={range.endDate?.toLocaleDateString().replaceAll('/', '-')}/>
+                                              from={range?.[0]?.startDate?.toLocaleDateString().replaceAll('/', '-')}
+                                              to={range?.[0]?.endDate?.toLocaleDateString().replaceAll('/', '-')}/>
               },
             ].map((item, index) => (
               <Grid item xs={12} md={6} key={index}>
