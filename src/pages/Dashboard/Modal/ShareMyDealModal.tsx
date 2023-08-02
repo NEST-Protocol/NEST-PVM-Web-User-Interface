@@ -164,7 +164,7 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
       })
     }
     return list
-  }, [select])
+  }, [select, props.value])
 
   const getSelectContent = () => {
     return (
