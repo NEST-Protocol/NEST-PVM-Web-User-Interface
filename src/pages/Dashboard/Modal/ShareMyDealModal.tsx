@@ -190,7 +190,7 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
             </button>
           </Stack>
         </TopStack>
-        <Box height={'20px'}/>
+        <Box height={'8px'}/>
         <Stack width={'100%'} spacing={'12px'} maxHeight={'50vh'} overflow={'auto'}>
           <Card1 direction={'row'} sx={(theme) => ({
             background: select.totalProfitLoss ? theme.normal.bg3 : "transparent",
