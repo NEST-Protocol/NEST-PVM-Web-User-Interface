@@ -4,7 +4,6 @@ import ShareMyDealModal from "../Dashboard/Modal/ShareMyDealModal";
 import useSWR from "swr";
 import Stack from "@mui/material/Stack";
 import {Grid} from "@mui/material";
-import Divider from "@mui/material/Divider";
 import VolumeChart from "./ReChart/VolumeChart";
 import TotalAssetValue from "./ReChart/TotalAssetValueChart";
 import DailyReturnChart from "./ReChart/DailyReturnChart";
@@ -204,10 +203,11 @@ const Personal = () => {
         )
       }
       <Stack maxWidth={'1600px'} width={'100%'} mt={['20px', '40px']}>
-        <Stack px={'20px'} pb={'44px'}>
-          <Stack direction={['column', 'column', 'column', 'row']} padding={'4px'} borderRadius={'12px'} sx={(theme) => ({
-            backgroundColor: theme.normal.bg1
-          })}>
+        <Stack px={'20px'} pb={['26px', '26px', '26px', '44px']}>
+          <Stack direction={['column', 'column', 'column', 'row']} padding={'4px'} borderRadius={'12px'}
+                 sx={(theme) => ({
+                   backgroundColor: theme.normal.bg1
+                 })}>
             <Stack height={'160px'} px={'40px'} justifyContent={"center"} alignItems={'center'}
                    borderRadius={'12px'}
                    spacing={'12px'} sx={(theme) => ({
@@ -231,7 +231,7 @@ const Personal = () => {
                 </LinkButton>
               </Stack>
             </Stack>
-            <Stack height={['100%','100%','100%', '160px']}
+            <Stack height={['100%', '100%', '100%', '160px']}
                    direction={['column', 'column', 'column', 'row']}
                    justifyContent={"space-between"}
                    alignItems={"center"}
@@ -245,7 +245,7 @@ const Personal = () => {
                   fontWeight: 400,
                   lineHeight: '16px',
                 })}>
-                  <Trans>My balance</Trans>
+                  <Trans>My Balance</Trans>
                 </Box>
                 <Stack direction={'row'} spacing={'8px'} justifyContent={"start"} alignItems={"center"}
                        sx={(theme) => ({
@@ -262,7 +262,8 @@ const Personal = () => {
                   <Box>{Number(showBalance ?? '0').toLocaleString('en-US')}</Box>
                 </Stack>
               </Stack>
-              <Stack direction={'row'} alignItems={"center"} pr={['0', '0', '0', '40px']} spacing={['12px', '12px', '12px', '24px']}>
+              <Stack direction={'row'} alignItems={"center"} pr={['0', '0', '0', '40px']}
+                     spacing={['12px', '12px', '12px', '24px']}>
                 <Stack px={'16px'} py={'10px'} spacing={'10px'} direction={'row'} alignItems={"center"}
                        sx={(theme) => ({
                          fontSize: '14px',
@@ -393,7 +394,9 @@ const Personal = () => {
             },
             fontWeight: 'bold',
           })}>
-            My Positions
+            <Trans>
+              My Positions
+            </Trans>
           </Stack>
           <Stack alignItems={"center"} justifyContent={'center'} sx={(theme) => ({
             border: `1px solid ${theme.normal.border}`,
@@ -458,12 +461,12 @@ const Personal = () => {
               {
                 [
                   {
-                    title: 'Positions Value',
+                    title: t`Positions Value`,
                     value: positions?.positionValue,
                     rate: null,
                   },
                   {
-                    title: 'Total Profit & Loss',
+                    title: t`Total Profit & Loss`,
                     value: positions?.totalProfitAndLoss,
                     rate: positions?.totalRate,
                   },
@@ -479,7 +482,9 @@ const Personal = () => {
                         fontSize: '14px',
                         fontWeight: 'bold',
                         lineHeight: '20px',
-                      })}>{item.title}</Stack>
+                      })}>
+                        {item.title}
+                      </Stack>
                       <Stack sx={(theme) => ({
                         '& div:first-of-type': {
                           color: theme.normal.text0,
@@ -576,102 +581,103 @@ const Personal = () => {
         </Stack>
         {/*Mobile My Positions*/}
         <Stack px={'20px'}>
-          <Stack mt={'16px'} sx={(theme) => ({
+          <Stack mt={'16px'} spacing={'16px'} sx={(theme) => ({
             [theme.breakpoints.up('md')]: {
               display: 'none',
             },
-            padding: '20px 12px',
-            backgroundColor: theme.normal.bg1,
-            borderRadius: '12px',
           })}>
-            <Stack spacing={'4px'}>
-              <Stack sx={(theme) => ({
-                color: theme.normal.text1,
-                fontSize: '14px',
-                fontWeight: 'bold',
-                lineHeight: '20px',
-              })}>
-                <Trans>
-                  Total Profit & Loss
-                </Trans>
-              </Stack>
-              <Stack sx={(theme) => ({
-                '& span:first-of-type': {
+            <Stack spacing={'4px'} sx={(theme) => ({
+              padding: '20px 12px',
+              backgroundColor: theme.normal.bg1,
+              borderRadius: '12px',
+            })}>
+              <Stack direction={'row'} justifyContent={'space-between'}>
+                <Stack sx={(theme) => ({
+                  color: theme.normal.text2,
+                  fontSize: '14px',
+                  fontWeight: '400',
+                  lineHeight: '20px',
+                })}>
+                  <Trans>
+                    Positions Value
+                  </Trans>
+                </Stack>
+                <Stack sx={(theme) => ({
                   color: theme.normal.text0,
-                  fontSize: '24px',
+                  fontSize: '16px',
                   fontWeight: 'bold',
-                  lineHeight: '32px',
-                },
-                '& span:last-of-type': {
-                  color: positions?.totalRate >= 0 ? theme.normal.success : theme.normal.danger,
-                  fontSize: '20px',
-                  fontWeight: 'bold',
-                  lineHeight: '28px',
-                },
-              })} spacing={'4px'} alignItems={'end'} direction={'row'}>
-              <span>{Number(positions?.totalProfitAndLoss ?? 0).toLocaleString('en-US', {
-                maximumFractionDigits: 2
-              }) ?? 0} NEST</span>
-                <span>{positions?.totalRate > 0 ? '+' : ''}{Number(positions?.totalRate ?? 0).toLocaleString('en-US', {
-                  maximumFractionDigits: 2
-                })}%</span>
+                  lineHeight: '22px',
+                })}>
+                  {positions?.positionValue} NEST
+                </Stack>
               </Stack>
             </Stack>
-            <Divider sx={(theme) => ({
-              backgroundColor: theme.normal.border,
-              margin: '20px 0',
-            })}/>
-            {
-              [
-                {
-                  title: t`Today's PNL`,
-                  value: positions?.todayPnl,
-                  rate: positions?.todayRate,
-                },
-                {
-                  title: t`7 Days' PNL`,
-                  value: positions?.days7Pnl,
-                  rate: positions?.days7Rate,
-                },
-                {
-                  title: t`30 Days' PNL`,
-                  value: positions?.days30Pnl,
-                  rate: positions?.days30Rate,
-                },
-              ].map((item, index) => (
-                <Stack key={index} direction={'row'} justifyContent={'space-between'} mb={'20px'}>
-                  <Stack sx={(theme) => ({
-                    color: theme.normal.text2,
-                    fontSize: '14px',
-                    fontWeight: '400',
-                    lineHeight: '20px',
-                  })}>{item.title}</Stack>
-                  <Stack direction={'row'} alignItems={"end"} sx={(theme) => ({
-                    '& span:first-of-type': {
-                      color: theme.normal.text0,
-                      fontSize: '16px',
-                      fontWeight: '700',
-                      lineHeight: '22px',
-                    },
-                    '& span:last-of-type': {
-                      color: item?.rate >= 0 ? theme.normal.success : theme.normal.danger,
-                      fontSize: '12px',
+            <Stack sx={(theme) => ({
+              padding: '20px 12px',
+              backgroundColor: theme.normal.bg1,
+              borderRadius: '12px',
+            })} spacing={'22px'}>
+              {
+                [
+                  {
+                    title: t`Total Profit & Loss`,
+                    value: positions?.totalProfitLoss,
+                    rate: positions?.totalRate,
+                  },
+                  {
+                    title: t`Today's PNL`,
+                    value: positions?.todayPnl,
+                    rate: positions?.todayRate,
+                  },
+                  {
+                    title: t`7 Days' PNL`,
+                    value: positions?.days7Pnl,
+                    rate: positions?.days7Rate,
+                  },
+                  {
+                    title: t`30 Days' PNL`,
+                    value: positions?.days30Pnl,
+                    rate: positions?.days30Rate,
+                  },
+                ].map((item, index) => (
+                  <Stack key={index} direction={'row'} justifyContent={'space-between'}>
+                    <Stack sx={(theme) => ({
+                      color: theme.normal.text2,
+                      fontSize: '14px',
                       fontWeight: '400',
-                      lineHeight: '16px',
-                    },
-                  })} spacing={'4px'}>
+                      lineHeight: '20px',
+                    })}>{item.title}</Stack>
+                    <Stack direction={'row'} alignItems={"end"} sx={(theme) => ({
+                      '& span:first-of-type': {
+                        color: theme.normal.text0,
+                        fontSize: '16px',
+                        fontWeight: '700',
+                        lineHeight: '22px',
+                      },
+                      '& span:last-of-type': {
+                        color: item?.rate >= 0 ? theme.normal.success : theme.normal.danger,
+                        fontSize: '12px',
+                        fontWeight: '400',
+                        lineHeight: '16px',
+                      },
+                    })} spacing={'4px'}>
                   <span>{Number(item?.value ?? 0).toLocaleString('en-US', {
                     maximumFractionDigits: 2
                   })} NEST</span>
-                    <span>{item.rate > 0 ? `+${item?.rate}` : item?.rate}%</span>
+                      <span>{item.rate > 0 ? `+${Number(item?.rate ?? 0).toLocaleString('en-US', {
+                        maximumFractionDigits: 2
+                      })}` : Number(item?.rate ?? 0).toLocaleString('en-US', {
+                        maximumFractionDigits: 2
+                      })}%</span>
+                    </Stack>
                   </Stack>
-                </Stack>
-              ))
-            }
+                ))
+              }
+            </Stack>
           </Stack>
         </Stack>
         <Stack
-          mt={['16px', '40px']} mb={['20px', '24px']} px={'20px'}
+          mt={['16px', '16px', '16px', '40px']} mb={['20px', '20px', '20px', '24px']} px={'20px'}
           width={['100%', '280px']}
           position={'relative'}>
           <button style={{
@@ -753,19 +759,19 @@ const Personal = () => {
                                     to={range.endDate?.toLocaleDateString().replaceAll('/', '-')}/>,
               },
               {
-                title: t`Total asset value`,
+                title: t`Total Asset Value`,
                 chart: <TotalAssetValue address={address ?? account.address}
                                         from={range.startDate?.toLocaleDateString().replaceAll('/', '-')}
                                         to={range.endDate?.toLocaleDateString().replaceAll('/', '-')}/>
               },
               {
-                title: t`Daily return`,
+                title: t`Daily Return`,
                 chart: <DailyReturnChart address={address ?? account.address}
                                          from={range.startDate?.toLocaleDateString().replaceAll('/', '-')}
                                          to={range.endDate?.toLocaleDateString().replaceAll('/', '-')}/>
               },
               {
-                title: t`Cumulative return`,
+                title: t`Cumulative Return`,
                 chart: <CumulativeReturnChart address={address ?? account.address}
                                               from={range.startDate?.toLocaleDateString().replaceAll('/', '-')}
                                               to={range.endDate?.toLocaleDateString().replaceAll('/', '-')}/>

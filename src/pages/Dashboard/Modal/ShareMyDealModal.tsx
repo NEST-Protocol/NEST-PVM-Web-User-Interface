@@ -378,7 +378,7 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
           })} onClick={() => setSelect({...select, cumlulativeReturn: !select.cumlulativeReturn})}>
             <Stack width={'100%'} spacing={'10px'}>
               <Title1>
-                {t`Cumulative return`}
+                {t`Cumulative Return`}
               </Title1>
             </Stack>
             <Box sx={(theme) => ({
@@ -399,7 +399,7 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
           })} onClick={() => setSelect({...select, totalAssetValue: !select.totalAssetValue})}>
             <Stack width={'100%'} spacing={'10px'}>
               <Title1>
-                {t`Total asset value`}
+                {t`Total Asset Value`}
               </Title1>
             </Stack>
             <Box sx={(theme) => ({
@@ -420,7 +420,7 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
           })} onClick={() => setSelect({...select, dailyReturn: !select.dailyReturn})}>
             <Stack width={'100%'} spacing={'10px'}>
               <Title1>
-                {t`Daily return`}
+                {t`Daily Return`}
               </Title1>
             </Stack>
             <Box sx={(theme) => ({
@@ -670,7 +670,11 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
                           lineHeight: '20px',
                           fontWeight: '400',
                           color: "rgba(249, 249, 249, 0.6)",
-                        })}>Total asset value</Stack>
+                        })}>
+                          <Trans>
+                            Total Asset Value
+                          </Trans>
+                        </Stack>
                       </Stack>
                       <Stack width={'100%'} height={'100%'} position={'relative'}>
                         <TotalAssetValueChart simple address={props.value.address} from={props.value.from}
