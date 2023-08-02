@@ -140,7 +140,7 @@ const DepositModalBase: FC<DepositModalBaseProps> = ({ ...props }) => {
         showBalance={showBalance}
         maxCallBack={maxCallBack}
         nestAmount={tokenAmount}
-        balanceTitle={t`Wallet`}
+        balanceTitle={t`Wallet Balance` + ":"}
         changeNestAmount={(value: string) => {
           setTokenAmount(value.formatInputNum4());
           setSelectButton(0);
