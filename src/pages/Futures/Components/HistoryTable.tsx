@@ -91,7 +91,7 @@ const HistoryTableRow: FC<HistoryTableRowProps> = ({ ...props }) => {
         onClose={() => {
           setShowShareOrderModal(false);
         }}
-        isClosed={false}
+        isClosed={true}
       />
       <TableCell>
         <OrderTablePosition

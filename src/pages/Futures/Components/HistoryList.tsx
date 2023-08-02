@@ -52,7 +52,7 @@ const HistoryList: FC<HistoryListProps> = ({ ...props }) => {
         onClose={() => {
           setShowShareOrderModal(false);
         }}
-        isClosed={false}
+        isClosed={true}
       />
       <OrderListPosition
         tokenName={tokenName}
