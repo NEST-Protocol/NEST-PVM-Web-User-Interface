@@ -265,7 +265,7 @@ const Personal = () => {
                    width={'100%'}
                    paddingBottom={['20px', '20px', '20px', '0']}
             >
-              <Stack pl={[0, 0, 0, '40px']} pb={'40px'} pt={['20px', '20px', '20px', '40px']} justifyContent={"center"} alignItems={["center", "center", 'center', 'start']} height={'100%'} spacing={'18px'}>
+              <Stack pl={[0, 0, 0, '40px']} pb={'40px'} pt={['20px', '20px', '20px', '40px']} justifyContent={"center"} alignItems={["center", "center", 'center', 'start']} height={'100%'} spacing={['12px', '12px', '12px', '18px']}>
                 <Box sx={(theme) => ({
                   color: theme.normal.text1,
                   fontSize: '12px',
