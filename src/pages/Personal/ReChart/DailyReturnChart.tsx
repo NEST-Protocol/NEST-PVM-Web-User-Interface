@@ -42,7 +42,11 @@ const ReCharts: FC<ChartsProps> = ({...props}) => {
           data={data}
           syncId={'personal'}
         >
-          <CartesianGrid strokeDasharray="3 3" stroke={nowTheme.normal.border} />
+          {
+            !props.simple && (
+              <CartesianGrid strokeDasharray="3 3" stroke={nowTheme.normal.border}/>
+            )
+          }
           <XAxis dataKey="date" scale="auto" axisLine={false} hide={props.simple} tickLine={false} tick={{fontSize: '10px'}}/>
           <YAxis axisLine={false} tickLine={false} hide={props.simple} width={30}
                  tickFormatter={(value, index) => {

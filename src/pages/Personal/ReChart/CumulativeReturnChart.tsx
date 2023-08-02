@@ -34,8 +34,13 @@ const ReCharts: FC<ChartsProps> = ({...props}) => {
           data={data}
           syncId={'personal'}
         >
-          <CartesianGrid strokeDasharray="3 3" stroke={nowTheme.normal.border} />
-          <XAxis dataKey="date" scale="auto" axisLine={false} hide={props.simple} tickLine={false} tick={{fontSize: '10px'}}/>
+          {
+            !props.simple && (
+              <CartesianGrid strokeDasharray="3 3" stroke={nowTheme.normal.border}/>
+            )
+          }
+          <XAxis dataKey="date" scale="auto" axisLine={false} hide={props.simple} tickLine={false}
+                 tick={{fontSize: '10px'}}/>
           <YAxis axisLine={false} tickLine={false} hide={props.simple} tick={{fontSize: '10px'}} width={30}
                  tickFormatter={(value, index) => {
                    return numeral(value / 100).format('0%').toUpperCase()
@@ -66,7 +71,8 @@ const ReCharts: FC<ChartsProps> = ({...props}) => {
               />
             )
           }
-          <Line type="monotone" dataKey="daily" stroke={nowTheme.normal.primary} dot={false} strokeWidth={2} unit={'%'}/>
+          <Line type="monotone" dataKey="daily" stroke={nowTheme.normal.primary} dot={false} strokeWidth={2}
+                unit={'%'}/>
         </ComposedChart>
       </ResponsiveContainer>
       {
@@ -76,7 +82,7 @@ const ReCharts: FC<ChartsProps> = ({...props}) => {
             lineHeight: '24px',
             fontWeight: '700',
             color: "#F9F9F9",
-            position:  'absolute',
+            position: 'absolute',
             top: 0,
             left: 0,
           })}>{Number(data[data.length - 1]?.daily ?? 0).toLocaleString('en-US', {
