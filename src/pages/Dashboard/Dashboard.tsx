@@ -233,7 +233,7 @@ const Dashboard: FC = () => {
           }
         </Grid>
       </Stack>
-      <Stack height={'80px'}></Stack>
+      <Stack height={['24px', '24px', '24px', '80px']}></Stack>
     </Stack>
   );
 };

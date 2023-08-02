@@ -19,7 +19,11 @@ export const CustomTooltip = ({ active, payload, label }: any) => {
           fontWeight: 700,
           fontSize: '12px',
           lineHeight: '20px',
-        })}>daily : {payload[0].value !== 0 ? payload[0].value.toFixed(2) : payload[1].value.toFixed(2) } NEST</Box>
+        })}>daily : {payload[0].value !== 0 ? payload[0].value.toLocaleString('en-US', {
+          maximumFractionDigits: 2,
+        }) : payload[1].value.toLocaleString('en-US', {
+          maximumFractionDigits: 2,
+        }) } NEST</Box>
       </Stack>
     );
   }

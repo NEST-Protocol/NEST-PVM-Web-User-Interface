@@ -106,7 +106,9 @@ const Personal = () => {
         }}
       />
     );
-  }, [showShareMyDealModal, positions]);
+  }, [address, account.address, positions?.totalProfitAndLoss, positions?.totalRate, positions?.todayPnl,
+    positions?.todayRate, positions?.days7Pnl, positions?.days7Rate, positions?.days30Pnl, positions?.days30Rate,
+    range.startDate, range.endDate, showShareMyDealModal]);
 
   const addModal = useMemo(() => {
     return (
@@ -838,7 +840,7 @@ const Personal = () => {
           }
         </Grid>
       </Stack>
-      <Stack height={'80px'}></Stack>
+      <Stack height={['24px', '24px', '24px', '80px']}></Stack>
     </Stack>
   )
 }
