@@ -201,7 +201,7 @@ const Personal = () => {
           </Stack>
         )
       }
-      <Stack maxWidth={'1600px'} width={'100%'} mt={['20px', '40px']}>
+      <Stack maxWidth={'1600px'} width={'100%'} mt={['20px', '20px', '20px', '40px']}>
         <Stack px={'20px'} pb={['26px', '26px', '26px', '44px']}>
           <Stack direction={['column', 'column', 'column', 'row']} padding={'4px'} borderRadius={'12px'}
                  sx={(theme) => ({
@@ -241,10 +241,10 @@ const Personal = () => {
                     },
                   },
                 })}
-                  onClick={() => {
-                    copy(account.address ? account.address : "");
-                    messageSnackBar(t`Copy Successfully`);
-                  }}
+                       onClick={() => {
+                         copy(account.address ? account.address : "");
+                         messageSnackBar(t`Copy Successfully`);
+                       }}
                 >
                   <Copy style={{width: "16px", height: "16px"}}/>
                 </Stack>
@@ -378,7 +378,11 @@ const Personal = () => {
                   >
                     {
                       isNotice && (
-                        <Stack position={'absolute'} right={'-5px'} top={'-5px'}>
+                        <Stack position={'absolute'} right={'-5px'} top={'-5px'} sx={(theme) => ({
+                          '& svg circle': {
+                            stroke: theme.normal.bg1
+                          }
+                        })}>
                           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                             <circle cx="8" cy="8" r="7" fill="#FF4F33" stroke="#1F2329" strokeWidth="2"/>
                           </svg>
@@ -633,7 +637,9 @@ const Personal = () => {
                   fontWeight: 'bold',
                   lineHeight: '22px',
                 })}>
-                  {positions?.positionValue} NEST
+                  {Number(positions?.positionValue ?? 0).toLocaleString('en-US', {
+                    maximumFractionDigits: 2
+                  })} NEST
                 </Stack>
               </Stack>
             </Stack>
@@ -646,7 +652,7 @@ const Personal = () => {
                 [
                   {
                     title: t`Total Profit & Loss`,
-                    value: positions?.totalProfitLoss,
+                    value: positions?.totalProfitAndLoss,
                     rate: positions?.totalRate,
                   },
                   {
@@ -774,7 +780,7 @@ const Personal = () => {
             )
           }
         </Stack>
-        <Grid container spacing={'24px'} px={'20px'}>
+        <Grid container spacing={'24px'} px={[0, 0, 0, '20px']}>
           {
             [
               {
@@ -807,6 +813,7 @@ const Personal = () => {
                   [theme.breakpoints.down('md')]: {
                     height: '340px',
                     width: '100%',
+                    borderBottom: index < 3 ? `1px solid ${theme.normal.border}` : '',
                     paddingBottom: '24px',
                   },
                   [theme.breakpoints.up('md')]: {
@@ -815,7 +822,7 @@ const Personal = () => {
                     border: `1px solid ${theme.normal.border}`,
                     padding: '20px',
                   },
-                })} spacing={'12px'}>
+                })} spacing={'12px'} px={'20px'}>
                   <Stack sx={(theme) => ({
                     color: theme.normal.text2,
                     fontSize: '14px',
