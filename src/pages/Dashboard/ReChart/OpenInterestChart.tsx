@@ -11,6 +11,7 @@ import {
 import {FC} from "react";
 import useSWR from "swr";
 import useTheme from "../../../hooks/useTheme";
+import numeral from "numeral";
 
 type ReChartsProps = {
   from?: string
@@ -36,7 +37,11 @@ const ReCharts: FC<ReChartsProps> = ({...props}) => {
       >
         <CartesianGrid strokeDasharray="3 3" stroke={nowTheme.normal.border} />
         <XAxis dataKey="date" scale="auto" axisLine={false} tickLine={false} tick={{fontSize: '10px'}}/>
-        <YAxis axisLine={false} tickLine={false} tick={{fontSize: '10px'}}/>
+        <YAxis axisLine={false} tickLine={false} tick={{fontSize: '10px'}}
+               tickFormatter={(value, index) => {
+                 return numeral(value).format('0a').toUpperCase()
+               }} width={30}
+        />
         <Tooltip
           itemStyle={{
             fontSize: '12px',

@@ -10,6 +10,7 @@ import {FC} from "react";
 import useSWR from "swr";
 import useTheme from "../../../hooks/useTheme";
 import {Stack} from "@mui/material";
+import numeral from "numeral";
 
 type ChartsProps = {
   address: string | undefined
@@ -37,7 +38,11 @@ const ReCharts: FC<ChartsProps> = ({...props}) => {
         >
           <CartesianGrid strokeDasharray="3 3" stroke={nowTheme.normal.border} />
           <XAxis dataKey="date" scale="auto" axisLine={false} hide={props.simple} tickLine={false} tick={{fontSize: '10px'}}/>
-          <YAxis axisLine={false} width={30} tickLine={false} hide={props.simple} tick={{fontSize: '10px'}}/>
+          <YAxis axisLine={false} tickLine={false} hide={props.simple} width={30}
+                 tickFormatter={(value, index) => {
+                   return numeral(value).format('0a').toUpperCase()
+                 }}
+                 tick={{fontSize: '10px'}}/>
           {
             !props.simple && (
               <Tooltip

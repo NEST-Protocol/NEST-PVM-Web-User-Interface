@@ -3199,6 +3199,11 @@
   "resolved" "https://registry.npmmirror.com/@types/node/-/node-12.20.55.tgz"
   "version" "12.20.55"
 
+"@types/numeral@^2.0.2":
+  "integrity" "sha512-A8F30k2gYJ/6e07spSCPpkuZu79LCnkPTvqmIWQzNGcrzwFKpVOydG41lNt5wZXjSI149qjyzC2L1+F2PD/NUA=="
+  "resolved" "https://registry.npmjs.org/@types/numeral/-/numeral-2.0.2.tgz"
+  "version" "2.0.2"
+
 "@types/parse-json@^4.0.0":
   "integrity" "sha512-//oorEZjL6sbPcKUaCdIGlIUeH26mgzimjBB77G6XRgnDl/L5wOnpyBGRe/Mmf5CVW3PwEBE1NjiMZ/ssFh4wA=="
   "resolved" "https://registry.npmmirror.com/@types/parse-json/-/parse-json-4.0.0.tgz"
@@ -9368,6 +9373,11 @@
   "version" "2.1.1"
   dependencies:
     "boolbase" "^1.0.0"
+
+"numeral@^2.0.6":
+  "integrity" "sha512-qaKRmtYPZ5qdw4jWJD6bxEf1FJEqllJrwxCLIm0sQU/A7v2/czigzOb+C2uSiFsa9lBUzeH7M1oK+Q+OLxL3kA=="
+  "resolved" "https://registry.npmjs.org/numeral/-/numeral-2.0.6.tgz"
+  "version" "2.0.6"
 
 "nwsapi@^2.2.0":
   "integrity" "sha512-90yv+6538zuvUMnN+zCr8LuV6bPFdq50304114vJYJ8RDyK8D5O9Phpbd6SZWgI7PwzmmfN1upeOJlvybDSgCw=="
