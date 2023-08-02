@@ -9,7 +9,8 @@ interface BaseDrawerProps {
 const BaseDrawer: FC<BaseDrawerProps> = ({children}) => {
   return (
     <Box width={'100%'}>
-      <Stack borderTop={"12px"} spacing={0} sx={(theme) => ({
+      <Stack spacing={0} sx={(theme) => ({
+        borderRadius: '12px 12px 0 0',
         background: theme.normal.bg2,
         justifyContent: "center",
         alignItems: "center",

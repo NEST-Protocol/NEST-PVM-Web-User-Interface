@@ -103,7 +103,7 @@ const FuturesTableTitle: FC<FuturesTableTitleProps> = ({
                   lineHeight: "168px",
                 })}
               >
-                <Trans>No Order</Trans>
+                <Trans>No Orders</Trans>
               </TableCell>
             </TableRow>
           ) : (

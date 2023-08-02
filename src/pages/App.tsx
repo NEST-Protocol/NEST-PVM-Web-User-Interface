@@ -12,11 +12,12 @@ import { KOLClick, KOLWallet } from "../lib/NESTRequest";
 
 const HomePage = loadable(() => import("./Home/Home"));
 const FuturesPage = loadable(() => import("./Futures/Futures"));
-const AccountPage = loadable(() => import("./Account/Account"));
+const OverviewPage = loadable(() => import("./Overview/Overview"));
 const SwapPage = loadable(() => import("./Swap/Swap"));
 const DashboardPage = loadable(() => import("./Dashboard/Dashboard"));
-const ReferralPage = loadable(() => import("./Dashboard/Referral/Referral"));
+const ReferralPage = loadable(() => import("./Personal/Referral/Referral"));
 const DirectPosterPage = loadable(() => import("./DirectPoster/DirectPoster"));
+const PersonalPage = loadable(() => import("./Personal/Personal"));
 const App: FC = () => {
   const { headHeight, isBigMobile } = useWindowWidth();
   const { account, chainsData } = useNEST();
@@ -101,19 +102,26 @@ const App: FC = () => {
       return <Route path="/swap" element={<SwapPage />} />;
     }
   }, [chainsData.chainId]);
-  
+
   return (
     <Stack spacing={0}>
       <HashRouter>
         <NESTHead />
         <MainContent>
           <Routes>
-            <Route path="/home" element={<HomePage />} />
-            <Route path="/futures" element={<FuturesPage />} />
+            <Route path="home" element={<HomePage />} />
+            <Route path="futures" element={<FuturesPage />} />
             {swapOrDirectPoster}
-            <Route path="/account" element={<AccountPage/>}/>
-            <Route path="/dashboard" element={<DashboardPage />} />
-            <Route path="/dashboard/referral" element={<ReferralPage />} />
+            <Route path="dashboard" element={<DashboardPage />} />
+            <Route path="account">
+              <Route path=":address" element={<PersonalPage />}/>
+              <Route path="" element={<PersonalPage />}/>
+            </Route>
+            <Route path="overview" element={<OverviewPage/>}/>
+            <Route path="referral">
+              <Route path={":address"} element={<ReferralPage />} />
+              <Route path={""} element={<ReferralPage />} />
+            </Route>
             <Route path="*" element={<Navigate to="/home" />} />
           </Routes>
           {/* <TestTheme /> */}

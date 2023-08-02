@@ -47,7 +47,7 @@ const DepositModalBase: FC<DepositModalBaseProps> = ({ ...props }) => {
       return (
         <ErrorLabel
           title={
-            t`The maximum amount allowed for a single deposit is` +
+            t`The maximum deposit amount is` +
             ` ` +
             `${MAX_Amount[selectToken].floor(2)} ${selectToken}`
           }
@@ -140,7 +140,7 @@ const DepositModalBase: FC<DepositModalBaseProps> = ({ ...props }) => {
         showBalance={showBalance}
         maxCallBack={maxCallBack}
         nestAmount={tokenAmount}
-        balanceTitle={t`Wallet`}
+        balanceTitle={t`Wallet Balance` + ":"}
         changeNestAmount={(value: string) => {
           setTokenAmount(value.formatInputNum4());
           setSelectButton(0);

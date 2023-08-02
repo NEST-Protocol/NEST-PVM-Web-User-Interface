@@ -25,7 +25,9 @@ import {
   usePendingTransactionsBase,
 } from "../../hooks/useTransactionReceipt";
 import { SnackBarType } from "../../components/SnackBar/NormalSnackBar";
-import { Link } from "react-router-dom";
+import HistoryTable from "./Components/HistoryTable";
+import { FuturesHistoryService } from "../../hooks/useFuturesHistory";
+import HistoryList from "./Components/HistoryList";
 
 export interface FuturesOrderService {
   id: number;
@@ -50,6 +52,7 @@ interface FuturesOrderListProps {
   price: FuturesPrice | undefined;
   pOrderListV2: FuturesOrderService[];
   limitOrderList: FuturesOrderService[];
+  historyList: FuturesHistoryService[];
   updateList: () => void;
 }
 
@@ -119,6 +122,10 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
           updateList={props.updateList}
         />
       );
+    } else if (tabsValue === 2 && width > 890) {
+      return (
+        <HistoryTable dataArray={props.historyList} buttonCallBack={() => {}} />
+      );
     } else if (tabsValue === 0) {
       const noOrder = props.pOrderListV2.length === 0;
       return (
@@ -142,7 +149,7 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
           })}
           {noOrder ? (
             <NoOrderMobile>
-              <Trans>No Order</Trans>
+              <Trans>No Orders</Trans>
             </NoOrderMobile>
           ) : (
             <></>
@@ -172,7 +179,36 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
           })}
           {noOrder ? (
             <NoOrderMobile>
-              <Trans>No Order</Trans>
+              <Trans>No Orders</Trans>
+            </NoOrderMobile>
+          ) : (
+            <></>
+          )}
+        </Stack>
+      );
+    } else if (tabsValue === 2) {
+      const noOrder = props.historyList.length === 0;
+      return (
+        <Stack
+          spacing={"16px"}
+          sx={{
+            marginTop: "16px",
+            paddingX: isBigMobile ? "20px" : "0px",
+            paddingBottom: "24px",
+          }}
+        >
+          {props.historyList.map((item, index) => {
+            return (
+              <HistoryList
+                key={`HistoryList + ${index}`}
+                data={item}
+                buttonCallBack={setModalInfoValue}
+              />
+            );
+          })}
+          {noOrder ? (
+            <NoOrderMobile>
+              <Trans>No Orders</Trans>
             </NoOrderMobile>
           ) : (
             <></>
@@ -182,6 +218,7 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
     }
   }, [
     isBigMobile,
+    props.historyList,
     props.limitOrderList,
     props.pOrderListV2,
     props.price,
@@ -193,15 +230,21 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
   const tabs = useMemo(() => {
     const orderTabsData = [
       <Stack direction={"row"} alignItems={"center"} spacing={"4px"}>
-        <FuturesOrder />
+        {/* <FuturesOrder /> */}
         <p>
           <Trans>Positions</Trans>
         </p>
       </Stack>,
       <Stack direction={"row"} alignItems={"center"} spacing={"4px"}>
-        <FuturesLimitOrder />
+        {/* <FuturesLimitOrder /> */}
         <p>
-          <Trans>Order</Trans>
+          <Trans>Orders</Trans>
+        </p>
+      </Stack>,
+      <Stack direction={"row"} alignItems={"center"} spacing={"4px"}>
+        {/* <HistoryIcon /> */}
+        <p>
+          <Trans>History</Trans>
         </p>
       </Stack>,
     ];
@@ -316,30 +359,6 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
         })}
       >
         {tabs}
-        <Link to={"/dashboard"}>
-          <Box
-            sx={(theme) => ({
-              width: "20px",
-              height: "20px",
-              cursor: "pointer",
-              "& svg": {
-                width: "20px",
-                height: "20px",
-                display: "block",
-                "& path": {
-                  fill: theme.normal.text2,
-                },
-              },
-              "&:hover": {
-                "& svg path": {
-                  fill: theme.normal.primary,
-                },
-              },
-            })}
-          >
-            <HistoryIcon />
-          </Box>
-        </Link>
       </Stack>
       {orderList}
     </Stack>

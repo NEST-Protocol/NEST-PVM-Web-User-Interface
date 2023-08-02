@@ -13,12 +13,14 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/pages/Account/Components/TransactionTable.tsx
+#: src/pages/Overview/Components/TransactionTable.tsx
 msgid "{0}"
 msgstr "{0}"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "* Due to the complexity of financial data, there might be nuances and delay. Data displayed above is for reference only.We sincerely apologize for any inconvenience."
 msgstr "* Finansal verilerin karmaşıklığı nedeniyle nüanslar ve gecikmeler olabilir. Yukarıda gösterilen veriler sadece referans içindir. Herhangi bir rahatsızlık için içtenlikle özür dileriz."
 
@@ -97,10 +99,10 @@ msgstr "24 saatlik Düşük"
 msgid "3. NEST Token price fluctuation risk: Both the margin and the final profit and loss use NEST Token, and NEST itself is also a highly volatile asset. In extreme cases, even if your perpetual contract position is profitable, However, due to the fluctuation of the NEST price itself, it may cause you to lose money in terms of fiat currency."
 msgstr "3. NEST Token fiyat dalgalanma riski: Marj ve son kar zarar NEST Token kullanır ve NEST kendisi de oldukça oynak bir varlıktır. Aşırı durumlarda, sürekli kontrat pozisyonunuz karlı olsa bile, NEST fiyatındaki dalgalanma nedeniyle, nakit para birimi cinsinden para kaybetmenize neden olabilir."
 
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Personal/Personal.tsx
+#: src/pages/Personal/Personal.tsx
 msgid "30 Days' PNL"
 msgstr "30 Gün Kar/Zarar"
 
@@ -114,10 +116,10 @@ msgstr "4. Harici oracle riski: NEST protokolünün sürekli kontrat fiyatı NES
 msgid "5. Smart contract risk: There may be fatal unknown risks in the smart contract that may cause your principal to be damaged. Please evaluate the risk yourself before deciding whether to participate."
 msgstr "5. Akıllı sözleşme riski: Akıllı sözleşmede ölümcül bilinmeyen riskler olabilir ve ana paranızın zarar görmesine yol açabilir. Lütfen katılmaya karar vermeden önce riski kendiniz değerlendirin."
 
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Personal/Personal.tsx
+#: src/pages/Personal/Personal.tsx
 msgid "7 Days' PNL"
 msgstr "7 Gün Kar/Zarar"
 
@@ -129,16 +131,18 @@ msgstr "NESTFi kullanımına yönelik bir başlangıç ​​rehberi"
 msgid "about connecting wallets"
 msgstr "cüzdanları bağlamak hakkında"
 
+#: src/pages/Overview/Overview.tsx
+#: src/pages/Overview/Overview.tsx
 #: src/pages/Share/Head/NESTHead.tsx
 msgid "Account"
 msgstr "Hesap"
 
-#: src/pages/Account/Components/TransactionTable.tsx
+#: src/pages/Overview/Components/TransactionTable.tsx
 msgid "Action"
 msgstr "İşlem"
 
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Futures/Components/HistoryList.tsx
+#: src/pages/Futures/Components/HistoryTable.tsx
 #: src/pages/Futures/Components/OrderList.tsx
 #: src/pages/Futures/Components/OrderTable.tsx
 #: src/pages/Futures/Components/POrderList.tsx
@@ -172,6 +176,7 @@ msgid "Add Position"
 msgstr "Pozisyon ekle"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Address"
 msgstr "Adres"
 
@@ -182,7 +187,7 @@ msgstr "Limit emir gerçekleştikten sonra, belirlediğiniz TP ve SL fiyatları 
 
 #: src/components/NormalInput/NESTInput.tsx
 #: src/components/NormalInput/NESTInputSelect.tsx
-#: src/pages/Account/Components/MoneyTable.tsx
+#: src/pages/Overview/Components/MoneyTable.tsx
 msgid "Amount"
 msgstr "Miktar"
 
@@ -216,6 +221,10 @@ msgstr "Bir Trading KOL olun"
 msgid "Boost your earning and influence by joining the NESTFi affiliate program."
 msgstr "NESTFi bağlı kuruluş programına katılarak kazancınızı ve etkinliğinizi artırın."
 
+#: src/pages/Dashboard/Dashboard.tsx
+msgid "Burned"
+msgstr "Yakıldı"
+
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Channel link"
 msgstr "Kanal bağlantısı"
@@ -237,9 +246,9 @@ msgstr "Limit Emri Kapat"
 msgid "Close Position"
 msgstr "Pozisyonu Kapat"
 
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
+#: src/pages/Futures/Components/HistoryList.tsx
+#: src/pages/Futures/Components/HistoryTable.tsx
 #: src/pages/Futures/Modal/CloseModal.tsx
 msgid "Close Price"
 msgstr "Kapanış Fiyatı"
@@ -248,8 +257,8 @@ msgstr "Kapanış Fiyatı"
 msgid "Close Risk"
 msgstr "Kapanış Riski"
 
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Futures/Components/HistoryList.tsx
+#: src/pages/Futures/Components/HistoryTable.tsx
 msgid "Closed"
 msgstr "Closed"
 
@@ -270,8 +279,6 @@ msgstr "Bu cüzdanın sahibi olduğunuzu onaylayın"
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useSwap.ts
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/DirectPoster/useDirectPoster.ts
 #: src/pages/DirectPoster/useDirectPoster.ts
 #: src/pages/Share/Head/ConnectButton.tsx
@@ -284,50 +291,62 @@ msgstr "Cüzdanı Bağla"
 msgid "Contact info (Telegram handle)"
 msgstr "İletişim bilgileri (Telegram kullanıcı adı)"
 
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Copy Invitation Link"
 msgstr "Davet Bağlantısını Kopyala"
 
-#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 msgid "Copy Link"
 msgstr "Bağlantıyı Kopyala"
 
-#: src/pages/Account/Account.tsx
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Personal.tsx
+#: src/pages/Personal/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "Copy Successfully"
 msgstr "Başarıyla Kopyalandı"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Cumulative Commission"
 msgstr "Toplam Komisyon"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Cumulative Commissions"
 msgstr "Toplam Komisyon"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Cumulative Invitee Trading Volume"
 msgstr "Toplam Davet Edilen Kullanıcıların İşlem Hacmi"
+
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Personal/Personal.tsx
+msgid "Cumulative Return"
+msgstr "Birikmiş Getiri"
+
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Personal/Personal.tsx
+msgid "Daily Return"
+msgstr "Günlük Getiri"
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "Dark mode"
 msgstr "Koyu Mod"
 
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Share/Head/NESTHead.tsx
 #: src/pages/Share/Head/NESTHead.tsx
 #: src/pages/Share/Head/NESTHead.tsx
@@ -351,6 +370,7 @@ msgid "Decentralized Perpetual Exchange"
 msgstr "Merkezi Olmayan Sürekli Değişim"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Default"
 msgstr "Varsayılan"
 
@@ -364,13 +384,16 @@ msgstr "Deflasyonist ekonomik model. Kullanıcılar ne kadar çok işlem yaparsa
 
 #: src/components/NormalInput/NESTInput.tsx
 #: src/hooks/useDepositModal.ts
-#: src/hooks/useTransactionReceipt.ts
-#: src/pages/Account/Account.tsx
-#: src/pages/Account/Account.tsx
+#: src/pages/Overview/Overview.tsx
+#: src/pages/Personal/Personal.tsx
 #: src/pages/Share/Modal/DepositModal.tsx
 #: src/pages/Share/Modal/DepositModal.tsx
 msgid "Deposit"
 msgstr "Yatır"
+
+#: src/hooks/useTransactionReceipt.ts
+msgid "Deposit Request"
+msgstr "Depozito İsteği"
 
 #: src/pages/Share/Head/ConnectButton.tsx
 #: src/pages/Share/Modal/MyWalletModal.tsx
@@ -415,8 +438,8 @@ msgstr "İletişim bilgilerinizi girin"
 msgid "Entry Price"
 msgstr "Giriş Fiyatı"
 
-#: src/pages/Account/Components/MobileList.tsx
-#: src/pages/Account/Components/MoneyTable.tsx
+#: src/pages/Overview/Components/MobileList.tsx
+#: src/pages/Overview/Components/MoneyTable.tsx
 msgid "Fail"
 msgstr "Başarısız"
 
@@ -451,8 +474,8 @@ msgstr "Gönderen"
 
 #: src/pages/Share/Head/NESTHead.tsx
 #: src/pages/Share/Head/NESTHead.tsx
-msgid "Futures"
-msgstr "Vadeli İşlemler"
+msgid "Future"
+msgstr "Gelecek"
 
 #: src/pages/DirectPoster/DirectPoster.tsx
 #: src/pages/DirectPoster/useDirectPoster.ts
@@ -467,7 +490,7 @@ msgstr "NEST Al"
 msgid "Github"
 msgstr "Github"
 
-#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Futures/OrderList.tsx
 msgid "History"
 msgstr "Geçmiş"
 
@@ -483,13 +506,13 @@ msgstr "Ortaklık programına nasıl katılınır?"
 msgid "How to make your first trade?"
 msgstr "İlk işleminizi nasıl yaparsınız?"
 
-#: src/pages/Futures/MoreInfo.tsx
-msgid "How to Play"
-msgstr "Nasıl Oynanır"
-
 #: src/pages/Home/Home.tsx
 msgid "How to Start?"
 msgstr "Nasıl Başlanır?"
+
+#: src/pages/Futures/MoreInfo.tsx
+msgid "How to Trade"
+msgstr "Nasıl Ticaret Yapılır"
 
 #: src/pages/Futures/Modal/CloseOrderNoticeModal.tsx
 #: src/pages/Home/Modal/ApplyModal.tsx
@@ -524,6 +547,10 @@ msgstr "Sonsuz Likidite"
 msgid "Insufficient"
 msgstr "Yetersiz"
 
+#: src/hooks/useWithDrawModal.ts
+msgid "Insufficient balance"
+msgstr "Yetersiz bakiye"
+
 #: src/components/NormalInput/NESTInput.tsx
 msgid "Insufficient balance. Please deposit to start the lightning trade."
 msgstr "Yetersiz bakiye. Hızlı işlem yapmaya başlamak için lütfen para yatırın."
@@ -533,11 +560,8 @@ msgstr "Yetersiz bakiye. Hızlı işlem yapmaya başlamak için lütfen para yat
 msgid "Insufficient NEST balance"
 msgstr "Yetersiz NEST bakiyesi"
 
-#: src/hooks/useWithDrawModal.ts
-msgid "Insufficient NEXT balance"
-msgstr "Yetersiz NEST bakiyesi"
-
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Invitee Trading Volume"
 msgstr "Davet Edilen Kullanıcıların İşlem Hacmi"
 
@@ -605,7 +629,6 @@ msgstr "Limit Fiyatı"
 msgid "Link wallet"
 msgstr "Cüzdanı Bağla"
 
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 #: src/pages/Futures/Modal/AddModal.tsx
 #: src/pages/Futures/Modal/EditPositionModal.tsx
@@ -613,12 +636,11 @@ msgstr "Cüzdanı Bağla"
 msgid "Liq Price"
 msgstr "Liq Price"
 
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Futures/Components/HistoryList.tsx
+#: src/pages/Futures/Components/HistoryTable.tsx
 msgid "Liquidated"
 msgstr "Likidasyon"
 
-#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 msgid "Loading..."
@@ -659,35 +681,24 @@ msgstr "Daha Fazla"
 msgid "More Info"
 msgstr "Daha Fazla Bilgi"
 
-#: src/pages/Account/Account.tsx
-msgid "My balance"
+#: src/pages/Personal/Personal.tsx
+msgid "My Balance"
 msgstr "Bakiyem"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "My commissions"
 msgstr "Komisyonlarım"
 
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Personal/Personal.tsx
 msgid "My Positions"
 msgstr "Pozisyonlarım"
-
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
-#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
-msgid "My Total Trading Volume"
-msgstr "Toplam İşlem Hacmim"
 
 #: src/pages/Futures/Components/FuturesNotice.tsx
 msgid "NEST 2.0 token has been airdropped to your wallet, please add NEST 2.0 token to your wallet."
 msgstr "NEST 2.0 jetonu cüzdanınıza dağıtıldı, lütfen NEST 2.0 jetonunu cüzdanınıza ekleyin."
-
-#: src/pages/Dashboard/Dashboard.tsx
-msgid "NEST Total Burned"
-msgstr "Yakılan Toplam NEST"
 
 #: src/pages/Futures/MoreInfo.tsx
 msgid "NEST White Paper"
@@ -711,6 +722,8 @@ msgstr "Haberler"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "No commissions yet"
 msgstr "Henüz komisyon yok"
 
@@ -718,16 +731,16 @@ msgstr "Henüz komisyon yok"
 msgid "No Market Makers"
 msgstr "Piyasa Yapıcı Yok"
 
-#: src/pages/Account/Account.tsx
-#: src/pages/Futures/Components/TableTitle.tsx
-#: src/pages/Futures/OrderList.tsx
-#: src/pages/Futures/OrderList.tsx
+#: src/pages/Overview/Overview.tsx
 msgid "No Order"
 msgstr "Sipariş Yok"
 
-#: src/pages/Dashboard/Dashboard.tsx
-msgid "No trades yet"
-msgstr "Henüz işlem yok"
+#: src/pages/Futures/Components/TableTitle.tsx
+#: src/pages/Futures/OrderList.tsx
+#: src/pages/Futures/OrderList.tsx
+#: src/pages/Futures/OrderList.tsx
+msgid "No Orders"
+msgstr "Sipariş Yok"
 
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "No Transactions yet"
@@ -741,16 +754,21 @@ msgstr "Airdrop tamamlandığında, NESTfi yalnızca NEST 2.0 jetonları ile tic
 msgid "Open"
 msgstr "Aç"
 
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+msgid "Open Interest"
+msgstr "Açık Pozisyonlar"
+
 #: src/hooks/useTransactionReceipt.ts
 #: src/hooks/useTransactionReceipt.ts
 #: src/hooks/useTransactionReceipt.ts
 msgid "Open position"
 msgstr "Pozisyon Aç"
 
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
+#: src/pages/Futures/Components/HistoryList.tsx
+#: src/pages/Futures/Components/HistoryTable.tsx
 #: src/pages/Futures/Components/OrderList.tsx
 #: src/pages/Futures/Components/OrderTable.tsx
 #: src/pages/Futures/Components/POrderList.tsx
@@ -760,25 +778,35 @@ msgstr "Pozisyon Aç"
 msgid "Open Price"
 msgstr "Açılış Fiyatı"
 
-#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Futures/Components/HistoryTable.tsx
 #: src/pages/Futures/Components/OrderTable.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 msgid "Operate"
 msgstr "İşlem Yap"
 
 #: src/pages/Futures/OrderList.tsx
-msgid "Order"
-msgstr "Sipariş"
+msgid "Orders"
+msgstr "Siparişler"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Overview/Overview.tsx
+#: src/pages/Personal/Personal.tsx
+#: src/pages/Personal/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Overview"
 msgstr "Genel Bakış"
 
-#: src/pages/Account/Components/MobileList.tsx
-#: src/pages/Account/Components/MoneyTable.tsx
+#: src/pages/Overview/Components/MobileList.tsx
+#: src/pages/Overview/Components/MoneyTable.tsx
 msgid "Pending"
 msgstr "Beklemede"
+
+#: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Personal.tsx
+#: src/pages/Personal/Referral/Referral.tsx
+msgid "Personal"
+msgstr "Kişisel"
 
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Platform (Youtube, Telegram, Twitter, Instagram, Facebook, Tiktok, Others)"
@@ -806,7 +834,6 @@ msgstr ""
 msgid "Please note that NEST 1.0 tokens have been officially deprecated and will no longer be supported. To continue participating in the NESTFi ecosystem and enjoy its benefits, it is crucial that you add NEST 2.0 tokens to your wallet. We have provided a button below for your convenience to add NEST 2.0 tokens to your wallet effortlessly."
 msgstr "Lütfen unutmayın ki NEST 1.0 jetonları resmi olarak kullanımdan kaldırılmıştır ve artık desteklenmeyecektir. NESTFi ekosistemine katılmaya ve faydalarından yararlanmaya devam etmek için cüzdanınıza NEST 2.0 jetonlarını eklemeniz önemlidir. Aşağıda, cüzdanınıza NEST 2.0 jetonlarını kolayca eklemek için sizin için bir düğme sağladık."
 
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Futures/Modal/AddModal.tsx
 #: src/pages/Futures/Modal/CloseModal.tsx
 #: src/pages/Futures/Modal/EditPositionModal.tsx
@@ -829,6 +856,11 @@ msgstr "Pozisyon*0.05%"
 msgid "Positions"
 msgstr "Pozisyonlar"
 
+#: src/pages/Personal/Personal.tsx
+#: src/pages/Personal/Personal.tsx
+msgid "Positions Value"
+msgstr "Pozisyon Değeri"
+
 #: src/pages/Futures/NewOrder.tsx
 #: src/pages/Share/Modal/DepositModal.tsx
 #: src/pages/Swap/Swap.tsx
@@ -847,8 +879,9 @@ msgstr "100 NEST test jetonu alındı"
 msgid "Recent transactions"
 msgstr "Son işlemler"
 
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Personal.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Referral"
 msgstr "Yönlendirme"
 
@@ -863,6 +896,7 @@ msgid "Scan and copy the trade"
 msgstr "İşlemi tarayın ve kopyalayın"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Search"
 msgstr "Arama"
 
@@ -883,11 +917,14 @@ msgid "Service Fee"
 msgstr "Hizmet Ücreti"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Settled"
 msgstr "Hesaplandı"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Settled Commissions"
 msgstr "Hesaplanan Komisyonlar"
 
@@ -911,13 +948,14 @@ msgstr "Kısa"
 msgid "Sincerely,"
 msgstr "Saygılarımla"
 
+#: src/pages/Futures/Components/HistoryTable.tsx
 #: src/pages/Futures/Components/OrderTable.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 msgid "SL"
 msgstr "SL"
 
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Futures/Components/HistoryList.tsx
+#: src/pages/Futures/Components/HistoryTable.tsx
 msgid "SL Executed"
 msgstr "SL Yürütüldü"
 
@@ -933,11 +971,12 @@ msgstr "Kayma Toleransı Ayarı"
 msgid "Start Trading"
 msgstr "Ticarete Başla"
 
-#: src/pages/Account/Components/MoneyTable.tsx
+#: src/pages/Overview/Components/MoneyTable.tsx
 msgid "Status"
 msgstr "Durum"
 
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
+#: src/pages/Futures/Components/HistoryList.tsx
 #: src/pages/Futures/Components/OrderList.tsx
 #: src/pages/Futures/Components/POrderList.tsx
 #: src/pages/Futures/Modal/EditPositionModal.tsx
@@ -945,7 +984,7 @@ msgstr "Durum"
 msgid "Stop Loss"
 msgstr "Zararı Durdur"
 
-#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Futures/Components/HistoryTable.tsx
 #: src/pages/Futures/Components/OrderTable.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 msgid "Stop Order"
@@ -959,8 +998,8 @@ msgstr "Stop-Limit"
 msgid "Submit successfully"
 msgstr "Başarıyla Gönderildi"
 
-#: src/pages/Account/Components/MobileList.tsx
-#: src/pages/Account/Components/MoneyTable.tsx
+#: src/pages/Overview/Components/MobileList.tsx
+#: src/pages/Overview/Components/MoneyTable.tsx
 msgid "Success"
 msgstr "Başarı"
 
@@ -976,12 +1015,14 @@ msgstr "Takas"
 msgid "Switch network successfully"
 msgstr "Ağ başarıyla değiştirildi"
 
+#: src/pages/Futures/Components/HistoryTable.tsx
 #: src/pages/Futures/Components/OrderTable.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 msgid "Symbol"
 msgstr "Sembol"
 
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
+#: src/pages/Futures/Components/HistoryList.tsx
 #: src/pages/Futures/Components/OrderList.tsx
 #: src/pages/Futures/Components/POrderList.tsx
 #: src/pages/Futures/Modal/EditPositionModal.tsx
@@ -1004,12 +1045,12 @@ msgid "The balance is 0. You can go to \"Faucet\" to get test token before tradi
 msgstr "The balance is 0. You can go to \"Faucet\" to get test token before trading."
 
 #: src/pages/Share/Modal/DepositModal.tsx
-msgid "The maximum amount allowed for a single deposit is"
-msgstr "Tek bir yatırım için izin verilen maksimum miktar"
+msgid "The maximum deposit amount is"
+msgstr "Maksimum depozito tutarı"
 
 #: src/hooks/useWithDrawModal.ts
-msgid "The minimum withdrawal amount  greater than 15NEST"
-msgstr "Minimum çekim miktarı 15NEST'den büyük"
+msgid "The minimum withdrawal amount greater than 15NEST"
+msgstr "15NEST'den büyük minimum çekim miktarı"
 
 #: src/pages/Share/Modal/StopTransactionModal.tsx
 msgid "The NESTfi Team"
@@ -1031,10 +1072,10 @@ msgstr "Akıllı sözleşme sistemdeki tek satıcıdır. Piyasa işaretleme mali
 msgid "The transaction failed and the amount has been fully refunded. You can re-trade"
 msgstr "İşlem başarısız oldu ve miktar tamamen iade edildi. Yeniden işlem yapabilirsiniz."
 
-#: src/pages/Account/Components/MoneyTable.tsx
-#: src/pages/Account/Components/TransactionTable.tsx
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Futures/Components/HistoryList.tsx
+#: src/pages/Futures/Components/HistoryTable.tsx
+#: src/pages/Overview/Components/MoneyTable.tsx
+#: src/pages/Overview/Components/TransactionTable.tsx
 msgid "Time"
 msgstr "Zaman"
 
@@ -1042,24 +1083,26 @@ msgstr "Zaman"
 msgid "To(Estimated)"
 msgstr "Hedeflenen (Tahmini) Zaman"
 
-#: src/pages/Dashboard/Dashboard.tsx
-msgid "Today Burned"
-msgstr "Bugün Yakılan"
-
-#: src/pages/Dashboard/Dashboard.tsx
-msgid "Today Volume"
-msgstr "Bugünkü Hacim"
-
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Personal/Personal.tsx
+#: src/pages/Personal/Personal.tsx
 msgid "Today's PNL"
 msgstr "Bugünkü Kar/Zarar"
 
 #: src/pages/Share/Modal/WithdrawModal.tsx
 msgid "Total"
 msgstr "Toplam"
+
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Personal/Personal.tsx
+msgid "Total Asset Value"
+msgstr "Toplam Varlık Değeri"
+
+#: src/pages/Dashboard/Dashboard.tsx
+msgid "Total Burned"
+msgstr "Toplam Yakılan"
 
 #: src/pages/Home/Home.tsx
 #: src/pages/Home/Home.tsx
@@ -1069,20 +1112,18 @@ msgstr "Toplam Yakılan (NEST)"
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Total Commissions"
 msgstr "Toplam Komisyonlar"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Total Invitees"
 msgstr "Toplam Davet Edilenler"
-
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
-#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
-msgid "Total Number of Trades"
-msgstr "Toplam İşlem Sayısı"
 
 #: src/pages/Futures/NewOrder.tsx
 msgid "Total Pay"
@@ -1092,16 +1133,17 @@ msgstr "Toplam Ödeme"
 msgid "Total Profit"
 msgstr "Toplam Kar"
 
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Personal/Personal.tsx
+#: src/pages/Personal/Personal.tsx
 msgid "Total Profit & Loss"
 msgstr "Toplam Kar ve Zarar"
 
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Total Trading Volume"
 msgstr "Toplam Kar ve Zarar"
 
@@ -1110,6 +1152,15 @@ msgstr "Toplam Kar ve Zarar"
 msgid "Total Trading Volume (NEST)"
 msgstr "Toplam İşlem Hacmi (NEST)"
 
+#: src/pages/Dashboard/Dashboard.tsx
+msgid "Total User"
+msgstr "Toplam Kullanıcı"
+
+#: src/pages/Dashboard/Dashboard.tsx
+msgid "Total Volume"
+msgstr "Toplam Hacim"
+
+#: src/pages/Futures/Components/HistoryTable.tsx
 #: src/pages/Futures/Components/OrderTable.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 msgid "TP"
@@ -1119,8 +1170,8 @@ msgstr "TP"
 msgid "TP and SL price you set will trigger immediately."
 msgstr "Belirlediğiniz TP ve SL fiyatları hemen tetiklenecektir."
 
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Futures/Components/HistoryList.tsx
+#: src/pages/Futures/Components/HistoryTable.tsx
 msgid "TP Executed"
 msgstr "TP Yürütüldü"
 
@@ -1146,6 +1197,8 @@ msgstr "NESTFi'de benimle işlem yapın"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Traded Invitees"
 msgstr "İşlem Yapan Davetliler"
 
@@ -1154,6 +1207,7 @@ msgid "Trading only with smart contract.No third-party intervention."
 msgstr "Sadece akıllı sözleşme ile işlem yapın. Üçüncü taraf müdahalesi yok."
 
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Trading Volume"
 msgstr "İşlem Hacmi"
 
@@ -1172,17 +1226,24 @@ msgid "Twitter"
 msgstr "Twitter"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Unsettled"
 msgstr "Hesaplanmamış"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Unsettled Commissions"
 msgstr "Hesaplanmamış Komisyonlar"
 
 #: src/pages/Share/Modal/ChangeNewTokenModal.tsx
 msgid "Update: NEST 2.0 Airdrop Completed - NESTFi Services Now Available"
 msgstr "Güncelleme: NEST 2.0 Airdrop Tamamlandı - NESTFi Hizmetleri Şimdi Kullanılabilir"
+
+#: src/pages/Dashboard/Dashboard.tsx
+msgid "User"
+msgstr "Kullanıcı"
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "User Guide"
@@ -1200,12 +1261,22 @@ msgstr "Sahipliği doğrulayın, Bu cüzdanın sahibi olduğunuzu onaylayın."
 msgid "View"
 msgstr "Görüntüle"
 
-#: src/pages/Share/Modal/DepositModal.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Personal/Personal.tsx
+msgid "Volume"
+msgstr "Hacim"
+
 #: src/pages/Share/Modal/MyWalletModal.tsx
-#: src/pages/Swap/Components/SwapInputItem.tsx
-#: src/pages/Swap/Components/SwapInputItem.tsx
 msgid "Wallet"
 msgstr "Cüzdan"
+
+#: src/pages/Share/Modal/DepositModal.tsx
+#: src/pages/Swap/Components/SwapInputItem.tsx
+#: src/pages/Swap/Components/SwapInputItem.tsx
+msgid "Wallet Balance"
+msgstr "Cüzdan Bakiyesi"
 
 #: src/pages/Share/Modal/ChangeNewTokenModal.tsx
 msgid "We are delighted to inform you that the NEST 2.0 token airdrop has been successfully completed. As a result, NESTFi services are now fully operational, and you can resume using the platform as usual."
@@ -1233,8 +1304,8 @@ msgstr "1 tıklamayla"
 
 #: src/hooks/useTransactionReceipt.ts
 #: src/hooks/useWithDrawModal.ts
-#: src/pages/Account/Account.tsx
-#: src/pages/Account/Account.tsx
+#: src/pages/Overview/Overview.tsx
+#: src/pages/Personal/Personal.tsx
 #: src/pages/Share/Modal/WithdrawModal.tsx
 #: src/pages/Share/Modal/WithdrawModal.tsx
 msgid "Withdraw"

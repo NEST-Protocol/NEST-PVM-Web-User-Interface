@@ -6,11 +6,16 @@ import FuturesMoreInfo from "./MoreInfo";
 import FuturesNewOrder from "./NewOrder";
 import FuturesOrderList, { FuturesOrderService } from "./OrderList";
 import ExchangeTVChart from "./ExchangeTVChart";
-import { getPriceList, serviceList } from "../../lib/NESTRequest";
+import {
+  futuresHistory,
+  getPriceList,
+  serviceList,
+} from "../../lib/NESTRequest";
 // import FuturesNotice from "./Components/FuturesNotice";
 import { getQueryVariable } from "../../lib/queryVaribale";
 import FuturesNotice from "./Components/FuturesNotice";
 import useNEST from "../../hooks/useNEST";
+import { FuturesHistoryService } from "../../hooks/useFuturesHistory";
 
 export interface FuturesPrice {
   [key: string]: BigNumber;
@@ -41,6 +46,9 @@ const Futures: FC = () => {
   const [limitOrderList, setLimitOrderList] = useState<
     Array<FuturesOrderService>
   >([]);
+  const [historyList, setHistoryList] = useState<Array<FuturesHistoryService>>(
+    []
+  );
   const [showNotice, setShowNotice] = useState<boolean>(true);
 
   const getPrice = useCallback(async () => {
@@ -136,9 +144,48 @@ const Futures: FC = () => {
       console.log(error);
     }
   }, [account.address, chainsData.chainId, signature]);
+  const getHistoryList = useCallback(async () => {
+    try {
+      if (!chainsData.chainId || !account.address || !signature) {
+        return;
+      }
+      const baseList = await futuresHistory(
+        account.address,
+        chainsData.chainId
+      );
+      console.log(baseList);
+      if (Number(baseList["errorCode"]) === 0) {
+        const list: Array<FuturesHistoryService> = baseList["value"].map(
+          (item: { [x: string]: any }) => {
+            return {
+              actualMargin: item["actualMargin"],
+              actualRate: item["actualRate"],
+              appendMargin: item["appendMargin"],
+              index: item["index"],
+              initialMargin: item["initialMargin"],
+              lastPrice: item["lastPrice"],
+              leverage: item["leverage"],
+              openPrice: item["openPrice"],
+              orderType: item["orderType"],
+              orientation: item["orientation"],
+              owner: item["owner"],
+              sl: item["sl"],
+              sp: item["sp"],
+              time: item["time"],
+              tokenPair: item["tokenPair"],
+            };
+          }
+        );
+        setHistoryList(list);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }, [account.address, chainsData.chainId, signature]);
   const handleUpdateList = useCallback(() => {
     getList();
-  }, [getList]);
+    getHistoryList();
+  }, [getHistoryList, getList]);
 
   // update base price 1s
   useEffect(() => {
@@ -169,13 +216,15 @@ const Futures: FC = () => {
   // update list
   useEffect(() => {
     getList();
+    getHistoryList();
     const time = setInterval(() => {
       getList();
+      getHistoryList();
     }, 5 * 1000);
     return () => {
       clearInterval(time);
     };
-  }, [getList]);
+  }, [getHistoryList, getList]);
 
   const paddingY = useMemo(() => {
     return isBigMobile ? 0 : 24;
@@ -200,10 +249,11 @@ const Futures: FC = () => {
         price={orderPrice}
         pOrderListV2={pOrderListV2}
         limitOrderList={limitOrderList}
+        historyList={historyList}
         updateList={handleUpdateList}
       />
     );
-  }, [handleUpdateList, limitOrderList, orderPrice, pOrderListV2]);
+  }, [handleUpdateList, historyList, limitOrderList, orderPrice, pOrderListV2]);
   const newOrder = useCallback(() => {
     return (
       <FuturesNewOrder
