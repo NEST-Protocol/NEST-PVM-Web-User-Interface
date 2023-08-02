@@ -51,7 +51,7 @@ export const getTransactionTypeString = (text: string) => {
     return t`Swap`;
   } else if (text === `Received`) {
     return t`Received`;
-  } else if (text === "Deposit") {
+  } else if (text === "Deposit Request") {
     return t`Deposit Request`;
   } else if (text === "Withdraw") {
     return t`Withdraw`;
