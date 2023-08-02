@@ -215,7 +215,7 @@ const Personal = () => {
                    pb={['24px', '24px', '24px', 0]}
                    justifyContent={"center"} alignItems={'center'} direction={['row', 'row', 'row', 'column']}
                    gap={['8px', '8px', '8px', '12px']} sx={(theme) => ({
-              background: `linear-gradient(${theme.normal.bg0}, ${theme.normal.bg1})`,
+              background: `linear-gradient(${theme.normal.bg0}66, ${theme.normal.bg1})`,
               [theme.breakpoints.down('md')]: {
                 borderRadius: "12px 12px 0 0"
               },
