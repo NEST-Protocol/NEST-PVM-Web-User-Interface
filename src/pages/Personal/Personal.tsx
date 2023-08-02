@@ -62,7 +62,7 @@ const Personal = () => {
     refreshInterval: 3_000,
   });
 
-  const {data: isKol} = useSWR(address ? `https://api.nestfi.net/api/invite/is-kol-whitelist/${address ?? account.address}` : undefined, (url: any) => fetch(url)
+  const {data: isKol} = useSWR((address || account.address) ? `https://api.nestfi.net/api/invite/is-kol-whitelist/${address ?? account.address}` : undefined, (url: any) => fetch(url)
     .then((res) => res.json())
     .then((res: any) => res.value));
 
