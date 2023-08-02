@@ -449,8 +449,16 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
 
   const getSharePage = () => {
     return (
-      <Stack width={'100%'} bgcolor={'rgba(29, 30, 34, 1)'} position={'relative'} borderRadius={'12px'}
-             overflow={'auto'}>
+      <Stack width={'100%'} bgcolor={'rgba(29, 30, 34, 1)'} position={'relative'} overflow={'auto'}
+             sx={(theme) => ({
+               [theme.breakpoints.down('md')]: {
+                 borderRadius: '12px 12px 0 0',
+               },
+               [theme.breakpoints.up('md')]: {
+                 borderRadius: '12px'
+               },
+             })}
+      >
         <Stack position={'absolute'} right={'24px'} top={'24px'}
                sx={() => ({
                  "& button": {
@@ -785,6 +793,27 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
         <Box>
           <BaseDrawer>
             {getSelectContent()}
+          </BaseDrawer>
+        </Box>
+      </Drawer>
+    )
+  }
+
+  if (isBigMobile && showPage) {
+    return (
+      <Drawer
+        anchor={"bottom"}
+        open={props.open}
+        onClose={() => {
+          props.onClose()
+        }}
+        sx={{
+          "& .MuiPaper-root": {background: "none", backgroundImage: "none"},
+        }}
+      >
+        <Box>
+          <BaseDrawer>
+            {getSharePage()}
           </BaseDrawer>
         </Box>
       </Drawer>
