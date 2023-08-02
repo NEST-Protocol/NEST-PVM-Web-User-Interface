@@ -748,24 +748,25 @@ const Personal = () => {
             [
               {
                 title: t`Volume`,
-                chart: <VolumeChart address={address} from={range.startDate?.toLocaleDateString().replaceAll('/', '-')}
+                chart: <VolumeChart address={address ?? account.address}
+                                    from={range.startDate?.toLocaleDateString().replaceAll('/', '-')}
                                     to={range.endDate?.toLocaleDateString().replaceAll('/', '-')}/>,
               },
               {
                 title: t`Total asset value`,
-                chart: <TotalAssetValue address={address}
+                chart: <TotalAssetValue address={address ?? account.address}
                                         from={range.startDate?.toLocaleDateString().replaceAll('/', '-')}
                                         to={range.endDate?.toLocaleDateString().replaceAll('/', '-')}/>
               },
               {
                 title: t`Daily return`,
-                chart: <DailyReturnChart address={address}
+                chart: <DailyReturnChart address={address ?? account.address}
                                          from={range.startDate?.toLocaleDateString().replaceAll('/', '-')}
                                          to={range.endDate?.toLocaleDateString().replaceAll('/', '-')}/>
               },
               {
                 title: t`Cumulative return`,
-                chart: <CumulativeReturnChart address={address}
+                chart: <CumulativeReturnChart address={address ?? account.address}
                                               from={range.startDate?.toLocaleDateString().replaceAll('/', '-')}
                                               to={range.endDate?.toLocaleDateString().replaceAll('/', '-')}/>
               },
