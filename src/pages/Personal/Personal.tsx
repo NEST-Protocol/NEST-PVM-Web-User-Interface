@@ -99,8 +99,8 @@ const Personal = () => {
           _7daysRate: positions?.days7Rate ?? 0,
           _30daysPNL: positions?.days30Pnl ?? 0,
           _30daysRate: positions?.days30Rate ?? 0,
-          from: range?.[0]?.startDate?.toLocaleDateString().replaceAll('/', '-'),
-          to: range?.[0]?.endDate?.toLocaleDateString().replaceAll('/', '-'),
+          from: range?.[0]?.startDate?.toISOString().slice(0,10),
+          to: range?.[0]?.endDate?.toISOString().slice(0,10),
         }}
         open={showShareMyDealModal}
         onClose={() => {
@@ -797,26 +797,26 @@ const Personal = () => {
               {
                 title: t`Volume`,
                 chart: <VolumeChart address={address ?? account.address}
-                                    from={range?.[0]?.startDate?.toLocaleDateString().replaceAll('/', '-')}
-                                    to={range?.[0]?.endDate?.toLocaleDateString().replaceAll('/', '-')}/>,
+                                    from={range?.[0]?.startDate?.toISOString().slice(0,10)}
+                                    to={range?.[0]?.endDate?.toISOString().slice(0,10)}/>,
               },
               {
                 title: t`Total Asset Value`,
                 chart: <TotalAssetValue address={address ?? account.address}
-                                        from={range?.[0]?.startDate?.toLocaleDateString().replaceAll('/', '-')}
-                                        to={range?.[0]?.endDate?.toLocaleDateString().replaceAll('/', '-')}/>
+                                        from={range?.[0]?.startDate?.toISOString().slice(0,10)}
+                                        to={range?.[0]?.endDate?.toISOString().slice(0,10)}/>
               },
               {
                 title: t`Daily Return`,
                 chart: <DailyReturnChart address={address ?? account.address}
-                                         from={range?.[0]?.startDate?.toLocaleDateString().replaceAll('/', '-')}
-                                         to={range?.[0]?.endDate?.toLocaleDateString().replaceAll('/', '-')}/>
+                                         from={range?.[0]?.startDate?.toISOString().slice(0,10)}
+                                         to={range?.[0]?.endDate?.toISOString().slice(0,10)}/>
               },
               {
                 title: t`Cumulative Return`,
                 chart: <CumulativeReturnChart address={address ?? account.address}
-                                              from={range?.[0]?.startDate?.toLocaleDateString().replaceAll('/', '-')}
-                                              to={range?.[0]?.endDate?.toLocaleDateString().replaceAll('/', '-')}/>
+                                              from={range?.[0]?.startDate?.toISOString().slice(0,10)}
+                                              to={range?.[0]?.endDate?.toISOString().slice(0,10)}/>
               },
             ].map((item, index) => (
               <Grid item xs={12} md={6} key={index}>
