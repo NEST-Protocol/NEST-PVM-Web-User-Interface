@@ -332,10 +332,12 @@ msgid "Cumulative Invitee Trading Volume"
 msgstr ""
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Personal/Personal.tsx
 msgid "Cumulative Return"
 msgstr ""
 
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Personal/Personal.tsx
 msgid "Daily Return"
@@ -1256,6 +1258,7 @@ msgid "View"
 msgstr "Просмотр"
 
 #: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Personal/Personal.tsx
 msgid "Volume"

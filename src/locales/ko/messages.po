@@ -225,7 +225,7 @@ msgstr "NESTFi 제휴 프로그램에 가입하여 수익과 영향력을 높이
 
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "Burned"
-msgstr ""
+msgstr "소각된"
 
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Channel link"
@@ -334,14 +334,16 @@ msgid "Cumulative Invitee Trading Volume"
 msgstr "누적 피추천인 거래량"
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Personal/Personal.tsx
 msgid "Cumulative Return"
-msgstr ""
+msgstr "누적 수익률"
 
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Personal/Personal.tsx
 msgid "Daily Return"
-msgstr ""
+msgstr "일일 수익률"
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "Dark mode"
@@ -393,7 +395,7 @@ msgstr "입금"
 
 #: src/hooks/useTransactionReceipt.ts
 msgid "Deposit Request"
-msgstr ""
+msgstr "예금 요청"
 
 #: src/pages/Share/Head/ConnectButton.tsx
 #: src/pages/Share/Modal/MyWalletModal.tsx
@@ -475,7 +477,7 @@ msgstr "교환할 토큰"
 #: src/pages/Share/Head/NESTHead.tsx
 #: src/pages/Share/Head/NESTHead.tsx
 msgid "Future"
-msgstr ""
+msgstr "미래"
 
 #: src/pages/DirectPoster/DirectPoster.tsx
 #: src/pages/DirectPoster/useDirectPoster.ts
@@ -512,7 +514,7 @@ msgstr "어떻게 시작하나요?"
 
 #: src/pages/Futures/MoreInfo.tsx
 msgid "How to Trade"
-msgstr ""
+msgstr "거래 방법"
 
 #: src/pages/Futures/Modal/CloseOrderNoticeModal.tsx
 #: src/pages/Home/Modal/ApplyModal.tsx
@@ -549,7 +551,7 @@ msgstr "불충분함"
 
 #: src/hooks/useWithDrawModal.ts
 msgid "Insufficient balance"
-msgstr ""
+msgstr "잔액 부족"
 
 #: src/components/NormalInput/NESTInput.tsx
 msgid "Insufficient balance. Please deposit to start the lightning trade."
@@ -681,7 +683,7 @@ msgstr "자세한 정보"
 
 #: src/pages/Personal/Personal.tsx
 msgid "My Balance"
-msgstr ""
+msgstr "내 잔고"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
@@ -692,7 +694,7 @@ msgstr "내 수수료"
 
 #: src/pages/Personal/Personal.tsx
 msgid "My Positions"
-msgstr ""
+msgstr "내 포지션"
 
 #: src/pages/Futures/Components/FuturesNotice.tsx
 msgid "NEST 2.0 token has been airdropped to your wallet, please add NEST 2.0 token to your wallet."
@@ -738,7 +740,7 @@ msgstr "주문 없음"
 #: src/pages/Futures/OrderList.tsx
 #: src/pages/Futures/OrderList.tsx
 msgid "No Orders"
-msgstr ""
+msgstr "주문 없음"
 
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "No Transactions yet"
@@ -755,7 +757,7 @@ msgstr "열기"
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "Open Interest"
-msgstr ""
+msgstr "미결제약정"
 
 #: src/hooks/useTransactionReceipt.ts
 #: src/hooks/useTransactionReceipt.ts
@@ -784,7 +786,7 @@ msgstr "주문"
 
 #: src/pages/Futures/OrderList.tsx
 msgid "Orders"
-msgstr ""
+msgstr "주문"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
@@ -804,7 +806,7 @@ msgstr "Pendente"
 #: src/pages/Personal/Personal.tsx
 #: src/pages/Personal/Referral/Referral.tsx
 msgid "Personal"
-msgstr ""
+msgstr "개인"
 
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Platform (Youtube, Telegram, Twitter, Instagram, Facebook, Tiktok, Others)"
@@ -855,7 +857,7 @@ msgstr "포지션"
 #: src/pages/Personal/Personal.tsx
 #: src/pages/Personal/Personal.tsx
 msgid "Positions Value"
-msgstr ""
+msgstr "포지션 가치"
 
 #: src/pages/Futures/NewOrder.tsx
 #: src/pages/Share/Modal/DepositModal.tsx
@@ -1042,11 +1044,11 @@ msgstr "잔액은 0입니다. 거래하기 전에 \"수도꼭지\"로 이동하�
 
 #: src/pages/Share/Modal/DepositModal.tsx
 msgid "The maximum deposit amount is"
-msgstr ""
+msgstr "최대 예금 금액은"
 
 #: src/hooks/useWithDrawModal.ts
 msgid "The minimum withdrawal amount greater than 15NEST"
-msgstr ""
+msgstr "최소 인출 금액은 15NEST보다 큼"
 
 #: src/pages/Share/Modal/StopTransactionModal.tsx
 msgid "The NESTfi Team"
@@ -1094,11 +1096,11 @@ msgstr "총액"
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Personal/Personal.tsx
 msgid "Total Asset Value"
-msgstr ""
+msgstr "총 자산 가치"
 
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "Total Burned"
-msgstr ""
+msgstr "총 소각된"
 
 #: src/pages/Home/Home.tsx
 #: src/pages/Home/Home.tsx
@@ -1150,11 +1152,11 @@ msgstr "총 거래량(NEST)"
 
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "Total User"
-msgstr ""
+msgstr "총 사용자"
 
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "Total Volume"
-msgstr ""
+msgstr "총 거래량"
 
 #: src/pages/Futures/Components/HistoryTable.tsx
 #: src/pages/Futures/Components/OrderTable.tsx
@@ -1173,7 +1175,7 @@ msgstr "TP 실행됨"
 
 #: src/pages/Home/Home.tsx
 msgid "Trade BTC, ETH and BNB with up to 1-50 leverage. Open a position with NEST."
-msgstr ""
+msgstr "NEST로 BTC, ETH 및 BNB를 1-50 레버리지로 거래하십시오. 포지션을 열어보십시오."
 
 #: src/pages/Home/Home.tsx
 msgid "Trade easily anytime and anywhere."
@@ -1239,7 +1241,7 @@ msgstr "업데이트: NEST 2.0 에어드롭 완료 - NESTFi 서비스 이용 가
 
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "User"
-msgstr ""
+msgstr "사용자"
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "User Guide"
@@ -1259,9 +1261,10 @@ msgstr "보기"
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Personal/Personal.tsx
 msgid "Volume"
-msgstr ""
+msgstr "거래량"
 
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "Wallet"
@@ -1271,7 +1274,7 @@ msgstr "지갑"
 #: src/pages/Swap/Components/SwapInputItem.tsx
 #: src/pages/Swap/Components/SwapInputItem.tsx
 msgid "Wallet Balance"
-msgstr ""
+msgstr "지갑 잔고"
 
 #: src/pages/Share/Modal/ChangeNewTokenModal.tsx
 msgid "We are delighted to inform you that the NEST 2.0 token airdrop has been successfully completed. As a result, NESTFi services are now fully operational, and you can resume using the platform as usual."

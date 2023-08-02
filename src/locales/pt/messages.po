@@ -225,7 +225,7 @@ msgstr "Aumente os seus ganhos e a sua influência aderindo ao programa de afili
 
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "Burned"
-msgstr ""
+msgstr "Queimado"
 
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Channel link"
@@ -334,14 +334,16 @@ msgid "Cumulative Invitee Trading Volume"
 msgstr "Volume acumulado de transacções com convidados"
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Personal/Personal.tsx
 msgid "Cumulative Return"
-msgstr ""
+msgstr "Retorno Cumulativo"
 
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Personal/Personal.tsx
 msgid "Daily Return"
-msgstr ""
+msgstr "Retorno Diário"
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "Dark mode"
@@ -393,7 +395,7 @@ msgstr "Depósito"
 
 #: src/hooks/useTransactionReceipt.ts
 msgid "Deposit Request"
-msgstr ""
+msgstr "Solicitação de Depósito"
 
 #: src/pages/Share/Head/ConnectButton.tsx
 #: src/pages/Share/Modal/MyWalletModal.tsx
@@ -473,7 +475,7 @@ msgstr "From"
 #: src/pages/Share/Head/NESTHead.tsx
 #: src/pages/Share/Head/NESTHead.tsx
 msgid "Future"
-msgstr ""
+msgstr "Futuro"
 
 #: src/pages/DirectPoster/DirectPoster.tsx
 #: src/pages/DirectPoster/useDirectPoster.ts
@@ -510,7 +512,7 @@ msgstr "Como começar?"
 
 #: src/pages/Futures/MoreInfo.tsx
 msgid "How to Trade"
-msgstr ""
+msgstr "Como Negociar"
 
 #: src/pages/Futures/Modal/CloseOrderNoticeModal.tsx
 #: src/pages/Home/Modal/ApplyModal.tsx
@@ -547,7 +549,7 @@ msgstr "Insuficiente"
 
 #: src/hooks/useWithDrawModal.ts
 msgid "Insufficient balance"
-msgstr ""
+msgstr "Saldo insuficiente"
 
 #: src/components/NormalInput/NESTInput.tsx
 msgid "Insufficient balance. Please deposit to start the lightning trade."
@@ -681,7 +683,7 @@ msgstr "Mais informações"
 
 #: src/pages/Personal/Personal.tsx
 msgid "My Balance"
-msgstr ""
+msgstr "Meu Saldo"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
@@ -692,7 +694,7 @@ msgstr "As minhas comissões"
 
 #: src/pages/Personal/Personal.tsx
 msgid "My Positions"
-msgstr ""
+msgstr "Minhas Posições"
 
 #: src/pages/Futures/Components/FuturesNotice.tsx
 msgid "NEST 2.0 token has been airdropped to your wallet, please add NEST 2.0 token to your wallet."
@@ -738,7 +740,7 @@ msgstr "Nenhum pedido"
 #: src/pages/Futures/OrderList.tsx
 #: src/pages/Futures/OrderList.tsx
 msgid "No Orders"
-msgstr ""
+msgstr "Sem Ordens"
 
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "No Transactions yet"
@@ -755,7 +757,7 @@ msgstr "Aberto"
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "Open Interest"
-msgstr ""
+msgstr "Interesse Aberto"
 
 #: src/hooks/useTransactionReceipt.ts
 #: src/hooks/useTransactionReceipt.ts
@@ -784,7 +786,7 @@ msgstr "Operar"
 
 #: src/pages/Futures/OrderList.tsx
 msgid "Orders"
-msgstr ""
+msgstr "Ordens"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
@@ -804,7 +806,7 @@ msgstr "대기 중"
 #: src/pages/Personal/Personal.tsx
 #: src/pages/Personal/Referral/Referral.tsx
 msgid "Personal"
-msgstr ""
+msgstr "Pessoal"
 
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Platform (Youtube, Telegram, Twitter, Instagram, Facebook, Tiktok, Others)"
@@ -855,7 +857,7 @@ msgstr "Posições"
 #: src/pages/Personal/Personal.tsx
 #: src/pages/Personal/Personal.tsx
 msgid "Positions Value"
-msgstr ""
+msgstr "Valor das Posições"
 
 #: src/pages/Futures/NewOrder.tsx
 #: src/pages/Share/Modal/DepositModal.tsx
@@ -1042,11 +1044,11 @@ msgstr "O saldo é de 0. Pode ir a \"Faucet\" para obter um token de teste antes
 
 #: src/pages/Share/Modal/DepositModal.tsx
 msgid "The maximum deposit amount is"
-msgstr ""
+msgstr "O valor máximo de depósito é"
 
 #: src/hooks/useWithDrawModal.ts
 msgid "The minimum withdrawal amount greater than 15NEST"
-msgstr ""
+msgstr "O valor mínimo de retirada é maior que 15 NEST"
 
 #: src/pages/Share/Modal/StopTransactionModal.tsx
 msgid "The NESTfi Team"
@@ -1094,11 +1096,11 @@ msgstr "Total"
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Personal/Personal.tsx
 msgid "Total Asset Value"
-msgstr ""
+msgstr "Valor Total do Ativo"
 
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "Total Burned"
-msgstr ""
+msgstr "Total Queimado"
 
 #: src/pages/Home/Home.tsx
 #: src/pages/Home/Home.tsx
@@ -1150,11 +1152,11 @@ msgstr "Volume total de transacções (NEST)"
 
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "Total User"
-msgstr ""
+msgstr "Total de Usuários"
 
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "Total Volume"
-msgstr ""
+msgstr "Volume Total"
 
 #: src/pages/Futures/Components/HistoryTable.tsx
 #: src/pages/Futures/Components/OrderTable.tsx
@@ -1239,7 +1241,7 @@ msgstr "Atualização: Airdrop NEST 2.0 Concluído - Serviços NESTFi Agora Disp
 
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "User"
-msgstr ""
+msgstr "Usuário"
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "User Guide"
@@ -1259,9 +1261,10 @@ msgstr "Ver"
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Personal/Personal.tsx
 msgid "Volume"
-msgstr ""
+msgstr "Volume"
 
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "Wallet"
@@ -1271,7 +1274,7 @@ msgstr "Carteira"
 #: src/pages/Swap/Components/SwapInputItem.tsx
 #: src/pages/Swap/Components/SwapInputItem.tsx
 msgid "Wallet Balance"
-msgstr ""
+msgstr "Saldo da Carteira"
 
 #: src/pages/Share/Modal/ChangeNewTokenModal.tsx
 msgid "We are delighted to inform you that the NEST 2.0 token airdrop has been successfully completed. As a result, NESTFi services are now fully operational, and you can resume using the platform as usual."

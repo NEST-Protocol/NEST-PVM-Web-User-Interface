@@ -225,7 +225,7 @@ msgstr "Tăng thu nhập và ảnh hưởng của bạn bằng cách tham gia ch
 
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "Burned"
-msgstr ""
+msgstr "Đã đốt cháy"
 
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Channel link"
@@ -334,14 +334,16 @@ msgid "Cumulative Invitee Trading Volume"
 msgstr "Tổng khối lượng giao dịch của người được mời tích lũy"
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Personal/Personal.tsx
 msgid "Cumulative Return"
-msgstr ""
+msgstr "Lợi nhuận tích lũy"
 
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Personal/Personal.tsx
 msgid "Daily Return"
-msgstr ""
+msgstr "Lợi nhuận hàng ngày"
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "Dark mode"
@@ -393,7 +395,7 @@ msgstr "Nạp tiền"
 
 #: src/hooks/useTransactionReceipt.ts
 msgid "Deposit Request"
-msgstr ""
+msgstr "Yêu cầu nạp tiền"
 
 #: src/pages/Share/Head/ConnectButton.tsx
 #: src/pages/Share/Modal/MyWalletModal.tsx
@@ -475,7 +477,7 @@ msgstr "Từ"
 #: src/pages/Share/Head/NESTHead.tsx
 #: src/pages/Share/Head/NESTHead.tsx
 msgid "Future"
-msgstr ""
+msgstr "Tương lai"
 
 #: src/pages/DirectPoster/DirectPoster.tsx
 #: src/pages/DirectPoster/useDirectPoster.ts
@@ -512,7 +514,7 @@ msgstr "Làm cách nào để bắt đầu?"
 
 #: src/pages/Futures/MoreInfo.tsx
 msgid "How to Trade"
-msgstr ""
+msgstr "Cách giao dịch"
 
 #: src/pages/Futures/Modal/CloseOrderNoticeModal.tsx
 #: src/pages/Home/Modal/ApplyModal.tsx
@@ -549,7 +551,7 @@ msgstr "Không đủ"
 
 #: src/hooks/useWithDrawModal.ts
 msgid "Insufficient balance"
-msgstr ""
+msgstr "Số dư không đủ"
 
 #: src/components/NormalInput/NESTInput.tsx
 msgid "Insufficient balance. Please deposit to start the lightning trade."
@@ -683,7 +685,7 @@ msgstr "Thông tin thêm"
 
 #: src/pages/Personal/Personal.tsx
 msgid "My Balance"
-msgstr ""
+msgstr "Số dư của tôi"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
@@ -694,7 +696,7 @@ msgstr "Hoa hồng của tôi"
 
 #: src/pages/Personal/Personal.tsx
 msgid "My Positions"
-msgstr ""
+msgstr "Vị thế của tôi"
 
 #: src/pages/Futures/Components/FuturesNotice.tsx
 msgid "NEST 2.0 token has been airdropped to your wallet, please add NEST 2.0 token to your wallet."
@@ -740,7 +742,7 @@ msgstr "Không có lệnh nào"
 #: src/pages/Futures/OrderList.tsx
 #: src/pages/Futures/OrderList.tsx
 msgid "No Orders"
-msgstr ""
+msgstr "Không có đơn hàng"
 
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "No Transactions yet"
@@ -757,7 +759,7 @@ msgstr "Mở"
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "Open Interest"
-msgstr ""
+msgstr "Lãi suất mở cửa"
 
 #: src/hooks/useTransactionReceipt.ts
 #: src/hooks/useTransactionReceipt.ts
@@ -786,7 +788,7 @@ msgstr "Hoạt động"
 
 #: src/pages/Futures/OrderList.tsx
 msgid "Orders"
-msgstr ""
+msgstr "Đơn hàng"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
@@ -806,7 +808,7 @@ msgstr "Đang chờ"
 #: src/pages/Personal/Personal.tsx
 #: src/pages/Personal/Referral/Referral.tsx
 msgid "Personal"
-msgstr ""
+msgstr "Cá nhân"
 
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Platform (Youtube, Telegram, Twitter, Instagram, Facebook, Tiktok, Others)"
@@ -857,7 +859,7 @@ msgstr "Vị thế"
 #: src/pages/Personal/Personal.tsx
 #: src/pages/Personal/Personal.tsx
 msgid "Positions Value"
-msgstr ""
+msgstr "Giá trị vị thế"
 
 #: src/pages/Futures/NewOrder.tsx
 #: src/pages/Share/Modal/DepositModal.tsx
@@ -1044,11 +1046,11 @@ msgstr "Số dư là 0. Bạn có thể đến \"Faucet\" để nhận token th�
 
 #: src/pages/Share/Modal/DepositModal.tsx
 msgid "The maximum deposit amount is"
-msgstr ""
+msgstr "Số tiền nạp tối đa là"
 
 #: src/hooks/useWithDrawModal.ts
 msgid "The minimum withdrawal amount greater than 15NEST"
-msgstr ""
+msgstr "Số tiền rút tối thiểu lớn hơn 15NEST"
 
 #: src/pages/Share/Modal/StopTransactionModal.tsx
 msgid "The NESTfi Team"
@@ -1096,11 +1098,11 @@ msgstr "Tổng cộng"
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Personal/Personal.tsx
 msgid "Total Asset Value"
-msgstr ""
+msgstr "Giá trị tài sản tổng cộng"
 
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "Total Burned"
-msgstr ""
+msgstr "Tổng số đã đốt cháy"
 
 #: src/pages/Home/Home.tsx
 #: src/pages/Home/Home.tsx
@@ -1152,11 +1154,11 @@ msgstr "Tổng khối lượng giao dịch (NEST)"
 
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "Total User"
-msgstr ""
+msgstr "Tổng số người dùng"
 
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "Total Volume"
-msgstr ""
+msgstr "Tổng số lượng giao dịch"
 
 #: src/pages/Futures/Components/HistoryTable.tsx
 #: src/pages/Futures/Components/OrderTable.tsx
@@ -1241,7 +1243,7 @@ msgstr "Cập nhật: Airdrop NEST 2.0 Hoàn tất - Dịch vụ NESTFi Đã Kh�
 
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "User"
-msgstr ""
+msgstr "Người dùng"
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "User Guide"
@@ -1261,9 +1263,10 @@ msgstr "Xem"
 
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Personal/Personal.tsx
 msgid "Volume"
-msgstr ""
+msgstr "Khối lượng"
 
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "Wallet"
@@ -1273,7 +1276,7 @@ msgstr "Ví"
 #: src/pages/Swap/Components/SwapInputItem.tsx
 #: src/pages/Swap/Components/SwapInputItem.tsx
 msgid "Wallet Balance"
-msgstr ""
+msgstr "Số dư ví"
 
 #: src/pages/Share/Modal/ChangeNewTokenModal.tsx
 msgid "We are delighted to inform you that the NEST 2.0 token airdrop has been successfully completed. As a result, NESTFi services are now fully operational, and you can resume using the platform as usual."
