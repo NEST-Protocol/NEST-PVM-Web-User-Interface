@@ -488,15 +488,16 @@ const Referral = () => {
                   </Stack>
                   <Box width={'145px'}>
                     <MainButton title={t`Copy Invitation Link`}
+                                disable={!address && !user}
                                 style={{height: '36px', fontSize: '12px', lineHeight: '16px', fontWeight: 700}}
                                 onClick={() => {
-                                  if (!user || !address) return;
-                                  let link = ''
+                                  if (!user && !address) return;
+                                  let link = 'https://nestfi.org/'
                                   if (address) {
                                     link =
                                       "https://nestfi.org/?a=" +
                                       address.slice(-8).toLowerCase();
-                                  } else {
+                                  } else if (user) {
                                     link =
                                       "https://nestfi.org/?a=" +
                                       user.slice(-8).toLowerCase();
@@ -532,13 +533,13 @@ const Referral = () => {
                         borderRadius: '8px',
                       }}
                       title={t`Copy Invitation Link`}
-                      disable={!address || !user}
+                      disable={!address && !user}
                       onClick={() => {
-                        if (!address || !user) return;
-                        let link;
+                        if (!address && !user) return;
+                        let link = "https://nestfi.org/";
                         if (address) {
                           link = 'https://nestfi.org/?a=' + address.slice(-8).toLowerCase()
-                        } else {
+                        } else if (user) {
                           link = 'https://nestfi.org/?a=' + user.slice(-8).toLowerCase()
                         }
                         copy(link);
