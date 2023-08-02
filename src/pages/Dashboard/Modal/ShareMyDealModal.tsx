@@ -449,16 +449,7 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
 
   const getSharePage = () => {
     return (
-      <Stack width={'100%'} bgcolor={'rgba(29, 30, 34, 1)'} position={'relative'} overflow={'auto'}
-             sx={(theme) => ({
-               [theme.breakpoints.down('md')]: {
-                 borderRadius: '12px 12px 0 0',
-               },
-               [theme.breakpoints.up('md')]: {
-                 borderRadius: '12px'
-               },
-             })}
-      >
+      <Stack width={'100%'} bgcolor={'rgba(29, 30, 34, 1)'} position={'relative'} overflow={'auto'} borderRadius={'12px'}>
         <Stack position={'absolute'} right={'24px'} top={'24px'}
                sx={() => ({
                  "& button": {
@@ -629,15 +620,13 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
                       borderRadius: '12px',
                       flexShrink: 0,
                     })} px={'12px'} py={'20px'}>
-                      <Stack spacing={'8px'}>
-                        <Stack sx={() => ({
-                          fontSize: '14px',
-                          lineHeight: '20px',
-                          fontWeight: '400',
-                          color: "rgba(249, 249, 249, 0.6)",
-                        })}>
-                          <Trans>Volume</Trans>
-                        </Stack>
+                      <Stack sx={() => ({
+                        fontSize: '14px',
+                        lineHeight: '20px',
+                        fontWeight: '400',
+                        color: "rgba(249, 249, 249, 0.6)",
+                      })}>
+                        <Trans>Volume</Trans>
                       </Stack>
                       <Stack width={'100%'} height={'100%'} position={'relative'}>
                         <VolumeChart simple address={props.value.address} from={props.value.from} to={props.value.to}/>
@@ -652,17 +641,15 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
                       borderRadius: '12px',
                       flexShrink: 0,
                     })} px={'12px'} py={'20px'}>
-                      <Stack spacing={'8px'}>
-                        <Stack sx={() => ({
-                          fontSize: '14px',
-                          lineHeight: '20px',
-                          fontWeight: '400',
-                          color: "rgba(249, 249, 249, 0.6)",
-                        })}>
-                          <Trans>
-                            Total Asset Value
-                          </Trans>
-                        </Stack>
+                      <Stack sx={() => ({
+                        fontSize: '14px',
+                        lineHeight: '20px',
+                        fontWeight: '400',
+                        color: "rgba(249, 249, 249, 0.6)",
+                      })}>
+                        <Trans>
+                          Total Asset Value
+                        </Trans>
                       </Stack>
                       <Stack width={'100%'} height={'100%'} position={'relative'}>
                         <TotalAssetValueChart simple address={props.value.address} from={props.value.from}
@@ -678,15 +665,13 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
                       borderRadius: '12px',
                       flexShrink: 0,
                     })} px={'12px'} py={'20px'}>
-                      <Stack spacing={'8px'}>
-                        <Stack sx={() => ({
-                          fontSize: '14px',
-                          lineHeight: '20px',
-                          fontWeight: '400',
-                          color: "rgba(249, 249, 249, 0.6)",
-                        })}>
-                          <Trans>Daily Return</Trans>
-                        </Stack>
+                      <Stack sx={() => ({
+                        fontSize: '14px',
+                        lineHeight: '20px',
+                        fontWeight: '400',
+                        color: "rgba(249, 249, 249, 0.6)",
+                      })}>
+                        <Trans>Daily Return</Trans>
                       </Stack>
                       <Stack width={'100%'} height={'100%'} position={'relative'}>
                         <DailyReturnChart simple address={props.value.address} from={props.value.from}
@@ -702,17 +687,15 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
                       borderRadius: '12px',
                       flexShrink: 0,
                     })} px={'12px'} py={'20px'}>
-                      <Stack spacing={'8px'}>
-                        <Stack sx={() => ({
-                          fontSize: '14px',
-                          lineHeight: '20px',
-                          fontWeight: '400',
-                          color: "rgba(249, 249, 249, 0.6)",
-                        })}>
-                          <Trans>
-                            Cumulative Return
-                          </Trans>
-                        </Stack>
+                      <Stack sx={() => ({
+                        fontSize: '14px',
+                        lineHeight: '20px',
+                        fontWeight: '400',
+                        color: "rgba(249, 249, 249, 0.6)",
+                      })}>
+                        <Trans>
+                          Cumulative Return
+                        </Trans>
                       </Stack>
                       <Stack width={'100%'} height={'100%'} position={'relative'}>
                         <CumulativeReturnChart simple address={props.value.address} from={props.value.from}
@@ -793,27 +776,6 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
         <Box>
           <BaseDrawer>
             {getSelectContent()}
-          </BaseDrawer>
-        </Box>
-      </Drawer>
-    )
-  }
-
-  if (isBigMobile && showPage) {
-    return (
-      <Drawer
-        anchor={"bottom"}
-        open={props.open}
-        onClose={() => {
-          props.onClose()
-        }}
-        sx={{
-          "& .MuiPaper-root": {background: "none", backgroundImage: "none"},
-        }}
-      >
-        <Box>
-          <BaseDrawer>
-            {getSharePage()}
           </BaseDrawer>
         </Box>
       </Drawer>
