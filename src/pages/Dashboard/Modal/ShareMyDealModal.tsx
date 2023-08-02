@@ -629,7 +629,7 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
                           color: "rgba(249, 249, 249, 0.6)",
                         })}>Volume</Stack>
                       </Stack>
-                      <Stack width={'100%'} height={'100%'} spacing={'20px'} position={'relative'}>
+                      <Stack width={'100%'} height={'100%'} position={'relative'}>
                         <VolumeChart simple address={props.value.address} from={props.value.from} to={props.value.to}/>
                       </Stack>
                     </Stack>
@@ -650,7 +650,7 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
                           color: "rgba(249, 249, 249, 0.6)",
                         })}>Cumulative return</Stack>
                       </Stack>
-                      <Stack width={'100%'} height={'100%'} spacing={'20px'} position={'relative'}>
+                      <Stack width={'100%'} height={'100%'} position={'relative'}>
                         <CumulativeReturnChart simple address={props.value.address} from={props.value.from}
                                                to={props.value.to}/>
                       </Stack>
@@ -672,7 +672,7 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
                           color: "rgba(249, 249, 249, 0.6)",
                         })}>Total asset value</Stack>
                       </Stack>
-                      <Stack width={'100%'} height={'100%'} spacing={'20px'} position={'relative'}>
+                      <Stack width={'100%'} height={'100%'} position={'relative'}>
                         <TotalAssetValueChart simple address={props.value.address} from={props.value.from}
                                               to={props.value.to}/>
                       </Stack>
@@ -694,7 +694,7 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
                           color: "rgba(249, 249, 249, 0.6)",
                         })}>Daily return</Stack>
                       </Stack>
-                      <Stack width={'100%'} height={'100%'} spacing={'20px'} position={'relative'}>
+                      <Stack width={'100%'} height={'100%'} position={'relative'}>
                         <DailyReturnChart simple address={props.value.address} from={props.value.from}
                                           to={props.value.to}/>
                       </Stack>

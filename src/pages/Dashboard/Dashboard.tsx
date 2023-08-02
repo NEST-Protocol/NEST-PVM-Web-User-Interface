@@ -208,8 +208,7 @@ const Dashboard: FC = () => {
                   [theme.breakpoints.down('md')]: {
                     height: '340px',
                     width: '100%',
-                    paddingBottom: '20px',
-                    borderBottom: `1px solid ${theme.normal.border}`,
+                    paddingBottom: '24px',
                   },
                   [theme.breakpoints.up('md')]: {
                     height: '306px',

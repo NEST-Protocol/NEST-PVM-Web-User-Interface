@@ -44,7 +44,7 @@ const ReCharts: FC<ChartsProps> = ({...props}) => {
         >
           <CartesianGrid strokeDasharray="3 3" stroke={nowTheme.normal.border} />
           <XAxis dataKey="date" scale="auto" axisLine={false} hide={props.simple} tickLine={false} tick={{fontSize: '10px'}}/>
-          <YAxis axisLine={false} tickLine={false} hide={props.simple} tick={{fontSize: '10px'}}/>
+          <YAxis axisLine={false} width={30} tickLine={false} hide={props.simple} tick={{fontSize: '10px'}}/>
           {
             !props.simple && (
               <Tooltip content={<CustomTooltip />} />

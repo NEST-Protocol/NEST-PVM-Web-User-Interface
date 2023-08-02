@@ -441,7 +441,7 @@ const Referral = () => {
             }
           }
         })}>
-          <a href={`/#/user`}>
+          <a href={`/#/account`}>
             <Trans>Personal</Trans>
           </a>
         </Stack>
