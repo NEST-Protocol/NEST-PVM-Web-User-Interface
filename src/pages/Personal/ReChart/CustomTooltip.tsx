@@ -9,6 +9,7 @@ export const CustomTooltip = ({ active, payload, label }: any) => {
         color: '#000',
         padding: '8px 12px',
         borderRadius: '12px',
+        border: `1px solid ${theme.normal.border}`,
       })}>
         <Box sx={(theme) => ({
           fontWeight: 400,

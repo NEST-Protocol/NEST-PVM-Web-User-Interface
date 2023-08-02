@@ -53,8 +53,8 @@ const ReCharts: FC<ChartsProps> = ({...props}) => {
                   backgroundColor: '#fff',
                   color: '#000',
                   fontWeight: 700,
-                  fontSize: '14px',
                   borderRadius: '12px',
+                  border: `1px solid ${nowTheme.normal.border}`,
                 }}
                 labelStyle={{
                   fontSize: '12px',
