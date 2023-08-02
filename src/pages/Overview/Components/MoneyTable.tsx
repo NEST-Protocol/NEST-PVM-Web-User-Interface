@@ -73,15 +73,16 @@ const MoneyTableRow: FC<MoneyTableRowProps> = ({ ...props }) => {
     >
       <TableCell>
         <Stack direction={"row"} spacing={"12px"} alignItems={"center"}>
-          <Box
+          <Stack
+            justifyContent={"center"} alignItems={"center"}
             sx={(theme) => ({
               background: theme.normal.grey_hover,
               borderRadius: '2px',
               width: "16px",
               height: "16px",
               "& svg": {
-                width: "16px",
-                height: "16px",
+                width: "12px",
+                height: "12px",
                 'path': {
                   fill: theme.normal.text2
                 }
@@ -101,7 +102,7 @@ const MoneyTableRow: FC<MoneyTableRowProps> = ({ ...props }) => {
                   <path fillRule="evenodd" clipRule="evenodd" d="M5.99792 8.5C5.72178 8.5 5.49792 8.27614 5.49792 8V1.5C5.49792 1.22386 5.72178 1 5.99792 1C6.27407 1 6.49792 1.22386 6.49792 1.5V8C6.49792 8.27614 6.27407 8.5 5.99792 8.5Z" fill="#F9F9F9" fillOpacity="0.6"/>
                 </svg>
               )}
-          </Box>
+          </Stack>
           <Box
             sx={(theme) => ({
               fontSize: "12px",

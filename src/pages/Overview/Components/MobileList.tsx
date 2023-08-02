@@ -85,29 +85,24 @@ const MobileList: FC<MobileListProps> = ({ ...props }) => {
         justifyContent={"space-between"}
         alignItems={"center"}
       >
-        <Box
-          sx={(theme) => {
-            const fill =
-              props.type === AccountListType.transaction
-                ? props.data.status === 1
-                  ? theme.normal.success
-                  : theme.normal.danger
-                : "normal";
-            return {
-              width: "16px",
-              height: "16px",
-              "& svg": {
-                width: "16px",
-                height: "16px",
-                "& path": {
-                  fill: fill,
-                },
-              },
-            };
-          }}
+        <Stack
+          justifyContent={"center"} alignItems={"center"}
+          sx={(theme) => ({
+            background: theme.normal.grey_hover,
+            borderRadius: '2px',
+            width: "16px",
+            height: "16px",
+            "& svg": {
+              width: "12px",
+              height: "12px",
+              'path': {
+                fill: theme.normal.text2
+              }
+            },
+          })}
         >
           {icon}
-        </Box>
+        </Stack>
         <Stack
           spacing={"10px"}
           justifyContent={"space-between"}

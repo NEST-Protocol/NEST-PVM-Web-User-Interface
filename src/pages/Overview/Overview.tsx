@@ -3,7 +3,7 @@ import {FC, useCallback, useEffect, useMemo, useState} from "react";
 import useWindowWidth from "../../hooks/useWindowWidth";
 import {Trans} from "@lingui/macro";
 import NESTTabs from "../../components/NESTTabs/NESTTabs";
-import {AccountListType} from "./Components/MobileList";
+import MobileList, {AccountListType} from "./Components/MobileList";
 import MoneyTable from "./Components/MoneyTable";
 import useAccount from "../../hooks/useAccount";
 import {NoOrderMobile} from "../Futures/OrderList";
@@ -94,6 +94,20 @@ const Overview: FC = () => {
           </NoOrderMobile>
         );
       }
+      return (
+        <Stack spacing={"16px"}>
+          {filterList.map((item, index) => {
+            return (
+              <MobileList
+                key={`AccountMobileList + ${index}`}
+                type={listType}
+                data={item}
+              />
+            );
+          })}
+        </Stack>
+      )
+
     } else {
       return <MoneyTable list={filterList} type={listType}/>;
     }
@@ -121,17 +135,18 @@ const Overview: FC = () => {
                   fontWeight: '400',
                   color: theme.normal.text0,
                   borderBottom: `1px solid ${theme.normal.border}`,
+                  '& svg path': {
+                    fill: theme.normal.text2,
+                  }
                 })} direction={'row'} alignItems={"center"} spacing={'8px'} paddingY={'16px'}>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
-                    <path fillRule="evenodd" clipRule="evenodd"
-                          d="M0.764135 6.23565C0.63396 6.10548 0.63396 5.89442 0.764135 5.76425L6.42099 0.107397C6.55116 -0.022778 6.76222 -0.0227781 6.89239 0.107397L7.37766 0.592666C7.50784 0.722841 7.50784 0.933896 7.37766 1.06407L2.44178 5.99995L7.37766 10.9358C7.50784 11.066 7.50784 11.2771 7.37766 11.4072L6.89239 11.8925C6.76222 12.0227 6.55116 12.0227 6.42099 11.8925L0.764135 6.23565Z"
-                          fill="#F9F9F9" fillOpacity="0.6"/>
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fillRule="evenodd" clipRule="evenodd" d="M4.76413 8.23565C4.63396 8.10548 4.63396 7.89442 4.76414 7.76425L10.421 2.1074C10.5512 1.97722 10.7622 1.97722 10.8924 2.1074L11.3777 2.59267C11.5078 2.72284 11.5078 2.9339 11.3777 3.06407L6.44178 7.99995L11.3777 12.9358C11.5078 13.066 11.5078 13.2771 11.3777 13.4072L10.8924 13.8925C10.7622 14.0227 10.5512 14.0227 10.421 13.8925L4.76413 8.23565Z" fill="#F9F9F9" fillOpacity="0.6"/>
                   </svg>
                   <span>
-              <Trans>
-                Account
-              </Trans>
-            </span>
+                    <Trans>
+                      Account
+                    </Trans>
+                  </span>
                 </Stack>
               </a>
             ) : (
