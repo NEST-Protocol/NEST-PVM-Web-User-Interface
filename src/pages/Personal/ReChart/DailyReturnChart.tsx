@@ -36,13 +36,30 @@ const ReCharts: FC<ChartsProps> = ({...props}) => {
       }))))
 
   return (
-    <>
+    <Stack width={'100%'} height={'100%'}>
+      {
+        props.simple && data?.length > 0 && (
+          <Stack sx={() => ({
+            fontSize: '18px',
+            lineHeight: '24px',
+            fontWeight: '700',
+            color: "#F9F9F9",
+          })}>{Number(data[data.length - 1]?.get === 0 ? data[data.length - 1]?.loss : data[data.length - 1]?.get).toLocaleString('en-US', {
+            maximumFractionDigits: 2,
+          })
+          } NEST</Stack>
+        )
+      }
       <ResponsiveContainer width="100%" height="100%">
         <ComposedChart
           data={data}
           syncId={'personal'}
         >
-          <CartesianGrid strokeDasharray="3 3" stroke={nowTheme.normal.border} />
+          {
+            !props.simple && (
+              <CartesianGrid strokeDasharray="3 3" stroke={nowTheme.normal.border}/>
+            )
+          }
           <XAxis dataKey="date" scale="auto" axisLine={false} hide={props.simple} tickLine={false} tick={{fontSize: '10px'}}/>
           <YAxis axisLine={false} tickLine={false} hide={props.simple} width={30}
                  tickFormatter={(value, index) => {
@@ -58,23 +75,7 @@ const ReCharts: FC<ChartsProps> = ({...props}) => {
           <Bar dataKey="loss" barSize={20} fill={nowTheme.normal.danger} unit={' NEST'} stackId={'a'}/>
         </ComposedChart>
       </ResponsiveContainer>
-      {
-        props.simple && data?.length > 0 && (
-          <Stack sx={() => ({
-            fontSize: '18px',
-            lineHeight: '24px',
-            fontWeight: '700',
-            color: "#F9F9F9",
-            position:  'absolute',
-            top: 0,
-            left: 0,
-          })}>{Number(data[data.length - 1]?.get === 0 ? data[data.length - 1]?.loss : data[data.length - 1]?.get).toLocaleString('en-US', {
-            maximumFractionDigits: 2,
-          })
-          } NEST</Stack>
-        )
-      }
-    </>
+    </Stack>
   )
 }
 

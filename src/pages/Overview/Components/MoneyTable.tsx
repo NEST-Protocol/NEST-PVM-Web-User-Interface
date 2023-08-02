@@ -140,13 +140,19 @@ const MoneyTableRow: FC<MoneyTableRowProps> = ({ ...props }) => {
                   : props.state === 0 || props.state === 255
                   ? theme.normal.primary
                   : theme.normal.success;
+              const borderColor =
+                props.state === -1
+                  ? theme.normal.danger_light_hover
+                  : props.state === 0 || props.state === 255
+                    ? theme.normal.primary_light_hover
+                    : theme.normal.success_light_hover;
               return {
                 padding: "4px",
                 borderRadius: "4px",
                 fontSize: "10px",
                 fontWeight: "700",
                 lineHeight: "14px",
-                border: `1px solid ${color}`,
+                border: `1px solid ${borderColor}`,
                 color: color,
               };
             }}
