@@ -482,7 +482,7 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
                      backgroundSize: 'contain',
                    }}
             >
-              <Box sx={{
+              <Box pb={'44px'} sx={{
                 "& svg": {
                   height: '48px',
                   display: "block",
@@ -495,7 +495,7 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
               </Box>
               {
                 !!showList?.[0] && (
-                  <Stack pt={'44px'}>
+                  <Stack pb={'64px'}>
                     <Box sx={{
                       fontWeight: "700",
                       fontSize: '14px',
@@ -529,88 +529,92 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
                   </Stack>
                 )
               }
-              <Stack spacing={'24px'} pt={'64px'}>
-                <Stack direction={'row'} justifyContent={'space-between'}>
-                  {
-                    !!showList?.[1] && (
-                      <Stack spacing={'8px'} width={'50%'}>
-                        <Box sx={{
-                          fontWeight: "400",
-                          fontSize: '13px',
-                          lineHeight: '17.333px',
-                          color: "rgba(249, 249, 249, 0.6)",
-                        }}>{showList?.[1].title}</Box>
-                        <Box sx={(theme) => ({
-                          fontWeight: "700",
-                          fontSize: '15.6px',
-                          lineHeight: '20px',
-                          color: "#F9F9F9",
-                          span: {
-                            color: showList?.[1].rate >= 0 ? theme.normal.success : theme.normal.danger,
-                          }
-                        })}>{showList?.[1].value.toLocaleString('en-US', {
-                          maximumFractionDigits: 2,
-                          minimumFractionDigits: 2,
-                        })} {showList?.[1].unit} <span>{showList?.[1].rate}%</span>
-                        </Box>
-                      </Stack>
-                    )
-                  }
-                  {
-                    !!showList?.[2] && (
-                      <Stack spacing={'8px'} width={'50%'}>
-                        <Box sx={{
-                          fontWeight: "400",
-                          fontSize: '13px',
-                          lineHeight: '17.333px',
-                          color: "rgba(249, 249, 249, 0.6)",
-                        }}>{showList?.[2].title}</Box>
-                        <Box sx={(theme) => ({
-                          fontWeight: "700",
-                          fontSize: '15.6px',
-                          lineHeight: '20px',
-                          color: "#F9F9F9",
-                          span: {
-                            color: showList?.[2].rate >= 0 ? theme.normal.success : theme.normal.danger,
-                          }
-                        })}>{showList?.[2].value.toLocaleString('en-US', {
-                          maximumFractionDigits: 2,
-                          minimumFractionDigits: 2,
-                        })} {showList?.[2].unit} <span>{showList?.[2].rate}%</span>
-                        </Box>
-                      </Stack>
-                    )
-                  }
-                </Stack>
-                <Stack direction={'row'} justifyContent={'space-between'}>
-                  {
-                    !!showList?.[3] && (
-                      <Stack spacing={'8px'} width={'50%'}>
-                        <Box sx={{
-                          fontWeight: "400",
-                          fontSize: '13px',
-                          lineHeight: '17.333px',
-                          color: "rgba(249, 249, 249, 0.6)",
-                        }}>{showList?.[3].title}</Box>
-                        <Box sx={(theme) => ({
-                          fontWeight: "700",
-                          fontSize: '15.6px',
-                          lineHeight: '20px',
-                          color: "#F9F9F9",
-                          span: {
-                            color: showList?.[3]?.rate >= 0 ? theme.normal.success : theme.normal.danger,
-                          }
-                        })}>{showList?.[3]?.value.toLocaleString('en-US', {
-                          maximumFractionDigits: 2,
-                          minimumFractionDigits: 2,
-                        })} {showList?.[3]?.unit} <span>{showList?.[3]?.rate}%</span>
-                        </Box>
-                      </Stack>
-                    )
-                  }
-                </Stack>
-              </Stack>
-              <Stack spacing={'24px'} pt={'40px'}>
+              {
+                showList?.[1] && (
+                  <Stack spacing={'24px'} pb={'40px'}>
+                    <Stack direction={'row'} justifyContent={'space-between'}>
+                      {
+                        !!showList?.[1] && (
+                          <Stack spacing={'8px'} width={'50%'}>
+                            <Box sx={{
+                              fontWeight: "400",
+                              fontSize: '13px',
+                              lineHeight: '17.333px',
+                              color: "rgba(249, 249, 249, 0.6)",
+                            }}>{showList?.[1].title}</Box>
+                            <Box sx={(theme) => ({
+                              fontWeight: "700",
+                              fontSize: '15.6px',
+                              lineHeight: '20px',
+                              color: "#F9F9F9",
+                              span: {
+                                color: showList?.[1].rate >= 0 ? theme.normal.success : theme.normal.danger,
+                              }
+                            })}>{showList?.[1].value.toLocaleString('en-US', {
+                              maximumFractionDigits: 2,
+                              minimumFractionDigits: 2,
+                            })} {showList?.[1].unit} <span>{showList?.[1].rate}%</span>
+                            </Box>
+                          </Stack>
+                        )
+                      }
+                      {
+                        !!showList?.[2] && (
+                          <Stack spacing={'8px'} width={'50%'}>
+                            <Box sx={{
+                              fontWeight: "400",
+                              fontSize: '13px',
+                              lineHeight: '17.333px',
+                              color: "rgba(249, 249, 249, 0.6)",
+                            }}>{showList?.[2].title}</Box>
+                            <Box sx={(theme) => ({
+                              fontWeight: "700",
+                              fontSize: '15.6px',
+                              lineHeight: '20px',
+                              color: "#F9F9F9",
+                              span: {
+                                color: showList?.[2].rate >= 0 ? theme.normal.success : theme.normal.danger,
+                              }
+                            })}>{showList?.[2].value.toLocaleString('en-US', {
+                              maximumFractionDigits: 2,
+                              minimumFractionDigits: 2,
+                            })} {showList?.[2].unit} <span>{showList?.[2].rate}%</span>
+                            </Box>
+                          </Stack>
+                        )
+                      }
+                    </Stack>
+                    <Stack direction={'row'} justifyContent={'space-between'}>
+                      {
+                        !!showList?.[3] && (
+                          <Stack spacing={'8px'} width={'50%'}>
+                            <Box sx={{
+                              fontWeight: "400",
+                              fontSize: '13px',
+                              lineHeight: '17.333px',
+                              color: "rgba(249, 249, 249, 0.6)",
+                            }}>{showList?.[3].title}</Box>
+                            <Box sx={(theme) => ({
+                              fontWeight: "700",
+                              fontSize: '15.6px',
+                              lineHeight: '20px',
+                              color: "#F9F9F9",
+                              span: {
+                                color: showList?.[3]?.rate >= 0 ? theme.normal.success : theme.normal.danger,
+                              }
+                            })}>{showList?.[3]?.value.toLocaleString('en-US', {
+                              maximumFractionDigits: 2,
+                              minimumFractionDigits: 2,
+                            })} {showList?.[3]?.unit} <span>{showList?.[3]?.rate}%</span>
+                            </Box>
+                          </Stack>
+                        )
+                      }
+                    </Stack>
+                  </Stack>
+                )
+              }
+              <Stack spacing={'24px'}>
                 {
                   select.volume && (
                     <Stack width={'100%'} height={'240px'} sx={() => ({
