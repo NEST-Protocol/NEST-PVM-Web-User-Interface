@@ -218,18 +218,20 @@ const ConnectButton: FC<ConnectButtonProps> = ({ ...props }) => {
                   </AccountListStack> */}
                 </>
               ) : (
-                <>{signView}</>
+                <>
+                  {signView}
+                  <Stack paddingX={"16px"} width={"100%"}>
+                    <Divider
+                      orientation="horizontal"
+                      sx={(theme) => ({
+                        borderColor: theme.normal.border,
+                        height: "1px",
+                        width: "100%",
+                      })}
+                    />
+                  </Stack>
+                </>
               )}
-              {/* <Stack paddingX={"16px"} width={"100%"}>
-                <Divider
-                  orientation="horizontal"
-                  sx={(theme) => ({
-                    borderColor: theme.normal.border,
-                    height: "1px",
-                    width: "100%",
-                  })}
-                />
-              </Stack> */}
 
               <AccountListStack
                 direction={"row"}
