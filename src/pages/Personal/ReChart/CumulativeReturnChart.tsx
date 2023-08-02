@@ -38,7 +38,7 @@ const ReCharts: FC<ChartsProps> = ({...props}) => {
           <XAxis dataKey="date" scale="auto" axisLine={false} hide={props.simple} tickLine={false} tick={{fontSize: '10px'}}/>
           <YAxis axisLine={false} tickLine={false} hide={props.simple} tick={{fontSize: '10px'}} width={30}
                  tickFormatter={(value, index) => {
-                   return numeral(value).format('0a').toUpperCase()
+                   return numeral(value / 100).format('0%').toUpperCase()
                  }}
           />
           {
@@ -66,7 +66,7 @@ const ReCharts: FC<ChartsProps> = ({...props}) => {
               />
             )
           }
-          <Line type="monotone" dataKey="daily" stroke={nowTheme.normal.primary} dot={false} strokeWidth={2} unit={' NEST'}/>
+          <Line type="monotone" dataKey="daily" stroke={nowTheme.normal.primary} dot={false} strokeWidth={2} unit={'%'}/>
         </ComposedChart>
       </ResponsiveContainer>
       {
