@@ -211,11 +211,11 @@ const Personal = () => {
                  sx={(theme) => ({
                    backgroundColor: theme.normal.bg1
                  })}>
-            <Stack height={['100%', '100%', '100%', '160px']} px={'40px'} pt={['40px', '40px', '40px', 0]}
-                   pb={['24px', '24px', '24px', 0]}
+            <Stack px={'40px'} pt={['40px', '40px', '40px', 0]}
+                   pb={['24px', '24px', '24px', '40px']}
                    justifyContent={"center"} alignItems={'center'} direction={['row', 'row', 'row', 'column']}
                    gap={['8px', '8px', '8px', '12px']} sx={(theme) => ({
-              background: `linear-gradient(${theme.normal.bg0}66, ${theme.normal.bg1})`,
+              background: `linear-gradient(${theme.normal.bg0}66, ${theme.normal.bg0})`,
               [theme.breakpoints.down('md')]: {
                 borderRadius: "12px 12px 0 0"
               },
