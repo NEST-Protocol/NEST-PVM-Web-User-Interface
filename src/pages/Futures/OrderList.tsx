@@ -230,21 +230,21 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
   const tabs = useMemo(() => {
     const orderTabsData = [
       <Stack direction={"row"} alignItems={"center"} spacing={"4px"}>
-        <FuturesOrder />
+        {/* <FuturesOrder /> */}
         <p>
-          {/* <Trans>Positions</Trans> */}
+          <Trans>Positions</Trans>
         </p>
       </Stack>,
       <Stack direction={"row"} alignItems={"center"} spacing={"4px"}>
-        <FuturesLimitOrder />
+        {/* <FuturesLimitOrder /> */}
         <p>
-          {/* <Trans>Orders</Trans> */}
+          <Trans>Orders</Trans>
         </p>
       </Stack>,
       <Stack direction={"row"} alignItems={"center"} spacing={"4px"}>
-        <HistoryIcon />
+        {/* <HistoryIcon /> */}
         <p>
-          {/* <Trans>History</Trans> */}
+          <Trans>History</Trans>
         </p>
       </Stack>,
     ];
