@@ -8,7 +8,7 @@ import useSWR from "swr";
 import {DateRange, Range} from "react-date-range";
 import Box from "@mui/material/Box";
 import useTheme from "../../hooks/useTheme";
-import {Trans, t} from "@lingui/macro";
+import {t} from "@lingui/macro";
 
 export type Order = {
   owner: string;
@@ -130,9 +130,9 @@ const Dashboard: FC = () => {
               lineHeight: '20px',
               height: '40px',
             })} spacing={'4px'} alignItems={"center"}>
-              <Stack>{range?.[0]?.startDate?.toLocaleDateString()}</Stack>
+              <Stack>{range?.[0]?.startDate?.toISOString().slice(0,10)}</Stack>
               <Box>~</Box>
-              <Stack>{range?.[0]?.endDate?.toLocaleDateString()}</Stack>
+              <Stack>{range?.[0]?.endDate?.toISOString().slice(0,10)}</Stack>
               <Stack flexGrow={1}></Stack>
               <Stack sx={(theme) => ({
                 '& svg': {
@@ -187,23 +187,23 @@ const Dashboard: FC = () => {
             [
               {
                 title: t`Volume`,
-                chart: <VolumeChart from={range?.[0]?.startDate?.toLocaleDateString().replaceAll('/', '-')}
-                                    to={range?.[0]?.endDate?.toLocaleDateString().replaceAll('/', '-')}/>,
+                chart: <VolumeChart from={range?.[0]?.startDate?.toISOString().slice(0,10)}
+                                    to={range?.[0]?.endDate?.toISOString().slice(0,10)}/>,
               },
               {
                 title: t`Burned`,
-                chart: <BurnedChart from={range?.[0]?.startDate?.toLocaleDateString().replaceAll('/', '-')}
-                                    to={range?.[0]?.endDate?.toLocaleDateString().replaceAll('/', '-')}/>
+                chart: <BurnedChart from={range?.[0]?.startDate?.toISOString().slice(0,10)}
+                                    to={range?.[0]?.endDate?.toISOString().slice(0,10)}/>
               },
               {
                 title: t`User`,
-                chart: <UserChart from={range?.[0]?.startDate?.toLocaleDateString().replaceAll('/', '-')}
-                                  to={range?.[0]?.endDate?.toLocaleDateString().replaceAll('/', '-')}/>
+                chart: <UserChart from={range?.[0]?.startDate?.toISOString().slice(0,10)}
+                                  to={range?.[0]?.endDate?.toISOString().slice(0,10)}/>
               },
               {
                 title: t`Open Interest`,
-                chart: <OpenInterestChart from={range?.[0]?.startDate?.toLocaleDateString().replaceAll('/', '-')}
-                                          to={range?.[0]?.endDate?.toLocaleDateString().replaceAll('/', '-')}/>
+                chart: <OpenInterestChart from={range?.[0]?.startDate?.toISOString().slice(0,10)}
+                                          to={range?.[0]?.endDate?.toISOString().slice(0,10)}/>
               },
             ].map((item, index) => (
               <Grid item xs={12} md={6} key={index}>
