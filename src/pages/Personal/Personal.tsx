@@ -433,10 +433,10 @@ const Personal = () => {
           </Stack>
           <Stack alignItems={"center"} justifyContent={'center'} sx={(theme) => ({
             border: `1px solid ${theme.normal.border}`,
-            height: '36px',
-            width: '36px',
             borderRadius: '8px',
             [theme.breakpoints.down('md')]: {
+              height: '32px',
+              width: '32px',
               'svg': {
                 "path": {
                   fill: theme.normal.text2,
@@ -446,6 +446,8 @@ const Personal = () => {
               }
             },
             [theme.breakpoints.up('md')]: {
+              height: '36px',
+              width: '36px',
               'svg': {
                 "path": {
                   fill: theme.normal.text2,
