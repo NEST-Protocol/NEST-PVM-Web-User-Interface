@@ -385,19 +385,6 @@ const Personal = () => {
                          position={'relative'}
                   >
                     {
-                      isNotice && (
-                        <Stack position={'absolute'} right={'-5px'} top={'-5px'} sx={(theme) => ({
-                          '& svg circle': {
-                            stroke: theme.normal.bg1
-                          }
-                        })}>
-                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                            <circle cx="8" cy="8" r="7" fill="#FF4F33" stroke="#1F2329" strokeWidth="2"/>
-                          </svg>
-                        </Stack>
-                      )
-                    }
-                    {
                       !isBigMobile && (
                         <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
                           <path fillRule="evenodd" clipRule="evenodd"
@@ -411,6 +398,19 @@ const Personal = () => {
                         Overview
                       </Trans>
                     </div>
+                    {
+                      isNotice && (
+                        <Stack position={'absolute'} right={'-5px'} top={'-5px'} sx={(theme) => ({
+                          '& svg circle': {
+                            stroke: theme.normal.bg1
+                          }
+                        })}>
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <circle cx="8" cy="8" r="7" fill="#FF4F33" stroke="#1F2329" strokeWidth="2"/>
+                          </svg>
+                        </Stack>
+                      )
+                    }
                   </Stack>
                 </a>
               </Stack>
