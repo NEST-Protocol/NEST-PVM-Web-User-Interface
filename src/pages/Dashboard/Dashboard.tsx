@@ -28,7 +28,9 @@ export type Order = {
 const Dashboard: FC = () => {
   const {data: infoData} = useSWR(`https://api.nestfi.net/api/dashboard/v2/entirety/info?chainId=56`, (url: any) => fetch(url)
     .then((res) => res.json())
-    .then((res: any) => res.value));
+    .then((res: any) => res.value), {
+    refreshInterval: 10_000,
+  });
   const [range, setRange] = useState<Range>({
     startDate: new Date(new Date().getTime() - 30 * 24 * 60 * 60 * 1000),
     endDate: new Date(),

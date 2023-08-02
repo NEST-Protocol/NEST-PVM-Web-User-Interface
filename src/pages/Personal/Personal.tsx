@@ -58,7 +58,9 @@ const Personal = () => {
     data: positions,
   } = useSWR(`https://api.nestfi.net/api/dashboard/v2/personal/positons?address=${address ?? account.address}&chainId=56`, (url: any) => fetch(url)
     .then((res) => res.json())
-    .then((res: any) => res.value));
+    .then((res: any) => res.value), {
+    refreshInterval: 3_000,
+  });
 
   const {data: isKol} = useSWR(address ? `https://api.nestfi.net/api/invite/is-kol-whitelist/${address ?? account.address}` : undefined, (url: any) => fetch(url)
     .then((res) => res.json())
