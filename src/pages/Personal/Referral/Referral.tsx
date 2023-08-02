@@ -490,10 +490,17 @@ const Referral = () => {
                     <MainButton title={t`Copy Invitation Link`}
                                 style={{height: '36px', fontSize: '12px', lineHeight: '16px', fontWeight: 700}}
                                 onClick={() => {
-                                  if (!address) return;
-                                  const link =
-                                    "https://nestfi.org/?a=" +
-                                    address.slice(-8).toLowerCase();
+                                  if (!user || !address) return;
+                                  let link = ''
+                                  if (address) {
+                                    link =
+                                      "https://nestfi.org/?a=" +
+                                      address.slice(-8).toLowerCase();
+                                  } else {
+                                    link =
+                                      "https://nestfi.org/?a=" +
+                                      user.slice(-8).toLowerCase();
+                                  }
                                   copy(link);
                                   messageSnackBar(t`Copy Successfully`);
                                 }}/>
@@ -525,10 +532,15 @@ const Referral = () => {
                         borderRadius: '8px',
                       }}
                       title={t`Copy Invitation Link`}
-                      disable={!address}
+                      disable={!address || !user}
                       onClick={() => {
-                        if (!address) return;
-                        const link = 'https://nestfi.org/?a=' + address.slice(-8).toLowerCase()
+                        if (!address || !user) return;
+                        let link;
+                        if (address) {
+                          link = 'https://nestfi.org/?a=' + address.slice(-8).toLowerCase()
+                        } else {
+                          link = 'https://nestfi.org/?a=' + user.slice(-8).toLowerCase()
+                        }
                         copy(link);
                         messageSnackBar("Copy Successfully");
                       }}/>
