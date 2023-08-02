@@ -24,7 +24,6 @@ import {
 import {SnackBarType} from "../../components/SnackBar/NormalSnackBar";
 import useNEST from "../../hooks/useNEST";
 import useWalletIcon from "../../hooks/uswWalletIcon";
-import LinkButton from "../../components/MainButton/LinkButton";
 import copy from "copy-to-clipboard";
 import useNESTSnackBar from "../../hooks/useNESTSnackBar";
 import {useLocalStorage} from "react-use";
@@ -209,9 +208,14 @@ const Personal = () => {
                    backgroundColor: theme.normal.bg1
                  })}>
             <Stack height={'160px'} px={'40px'} justifyContent={"center"} alignItems={'center'}
-                   borderRadius={'12px'}
                    spacing={'12px'} sx={(theme) => ({
-              backgroundColor: theme.normal.bg0
+              background: `linear-gradient(${theme.normal.bg0}, ${theme.normal.bg1})`,
+              [theme.breakpoints.down('md')]: {
+                borderRadius: "12px 12px 0 0"
+              },
+              [theme.breakpoints.up('md')]: {
+                borderRadius: "12px 0 0 12px"
+              },
             })}>
               {walletIcon}
               <Stack direction={'row'} spacing={'8px'}>
@@ -221,14 +225,29 @@ const Personal = () => {
                   fontWeight: 700,
                   lineHeight: '28px',
                 })}>{account.address?.showAddress()}</Box>
-                <LinkButton
+                <Stack justifyContent={"center"} sx={(theme) => ({
+                  cursor: "pointer",
+                  "& svg path": {
+                    fill: theme.normal.text2,
+                  },
+                  "&:hover": {
+                    "& svg path": {
+                      fill: theme.normal.primary_hover,
+                    },
+                  },
+                  "&:active": {
+                    "& svg path": {
+                      fill: theme.normal.primary_active,
+                    },
+                  },
+                })}
                   onClick={() => {
                     copy(account.address ? account.address : "");
                     messageSnackBar(t`Copy Successfully`);
                   }}
                 >
                   <Copy style={{width: "16px", height: "16px"}}/>
-                </LinkButton>
+                </Stack>
               </Stack>
             </Stack>
             <Stack height={['100%', '100%', '100%', '160px']}
@@ -276,6 +295,9 @@ const Personal = () => {
                          "&:hover": {
                            backgroundColor: theme.normal.grey_active,
                          },
+                         "& svg path": {
+                           fill: theme.normal.text0,
+                         }
                        })} onClick={() => setShowWithdraw(true)}>
                   {
                     !isBigMobile && (
@@ -348,6 +370,9 @@ const Personal = () => {
                            "&:hover": {
                              backgroundColor: theme.normal.grey_active,
                            },
+                           "& svg path": {
+                             fill: theme.normal.text0,
+                           }
                          })}
                          position={'relative'}
                   >
