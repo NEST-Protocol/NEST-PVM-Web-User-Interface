@@ -211,8 +211,10 @@ const Personal = () => {
                  sx={(theme) => ({
                    backgroundColor: theme.normal.bg1
                  })}>
-            <Stack height={'160px'} px={'40px'} justifyContent={"center"} alignItems={'center'}
-                   spacing={'12px'} sx={(theme) => ({
+            <Stack height={['100%', '100%', '100%', '160px']} px={'40px'} pt={['40px', '40px', '40px', 0]}
+                   pb={['24px', '24px', '24px', 0]}
+                   justifyContent={"center"} alignItems={'center'} direction={['row', 'row', 'row', 'column']}
+                   gap={['8px', '8px', '8px', '12px']} sx={(theme) => ({
               background: `linear-gradient(${theme.normal.bg0}, ${theme.normal.bg1})`,
               [theme.breakpoints.down('md')]: {
                 borderRadius: "12px 12px 0 0"
@@ -221,7 +223,9 @@ const Personal = () => {
                 borderRadius: "12px 0 0 12px"
               },
             })}>
-              {walletIcon}
+              <Stack>
+                {walletIcon}
+              </Stack>
               <Stack direction={'row'} spacing={'8px'}>
                 <Box sx={(theme) => ({
                   color: theme.normal.text0,
@@ -261,7 +265,7 @@ const Personal = () => {
                    width={'100%'}
                    paddingBottom={['20px', '20px', '20px', '0']}
             >
-              <Stack p={'40px'} justifyContent={"center"} height={'100%'} spacing={'18px'}>
+              <Stack pl={[0, 0, 0, '40px']} pb={'40px'} pt={['20px', '20px', '20px', '40px']} justifyContent={"center"} alignItems={["center", "center", 'center', 'start']} height={'100%'} spacing={'18px'}>
                 <Box sx={(theme) => ({
                   color: theme.normal.text1,
                   fontSize: '12px',
