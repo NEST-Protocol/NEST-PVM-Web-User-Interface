@@ -1,7 +1,6 @@
 import {Box, Drawer, Modal, Stack} from "@mui/material";
 import {FC, useMemo, useRef, useState} from "react";
 import domtoimage from "../../../lib/dom-to-image";
-import {useAccount} from "wagmi";
 import useWindowWidth from "../../../hooks/useWindowWidth";
 import MainButton from "../../../components/MainButton/MainButton";
 import {Close, NESTFiLogo, NESTLogo, Success, UpIcon} from "../../../components/icons";
@@ -79,12 +78,11 @@ interface ShareMyDealModalProps {
 }
 
 const ShareMyDealModal: FC<ShareMyDealModalProps> = ({...props}) => {
-  const {address} = useAccount()
   const [showPage, setShowPage] = useState(false)
   const {isBigMobile} = useWindowWidth()
   const myShareRef = useRef(null)
 
-  const download = async () => {
+  const download = async (address: string) => {
     const node = myShareRef.current;
     try {
       if (node) {
@@ -113,7 +111,7 @@ const ShareMyDealModal: FC<ShareMyDealModalProps> = ({...props}) => {
     }
   }
 
-  const tweet = () => {
+  const tweet = (address: string) => {
     const link = `https://nestfi.org/?a=${address?.slice(-8).toLowerCase()}`
     const text = `${t`Follow the right person, making money is as easy as breathing.
 You can follow the right person on NESTFi, here is my refer link`}: ${link}`
@@ -730,7 +728,7 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
               </Stack>
               <Box style={{width: '64px', height: '64px', background: 'white', padding: '3px'}}>
                 <QRCodeCanvas
-                  value={`https://nestfi.org/?a=${address?.slice(-8).toLowerCase()}`}
+                  value={`https://nestfi.org/?a=${props?.value?.address?.slice(-8).toLowerCase()}`}
                   size={58}/>
               </Box>
             </Stack>
@@ -747,14 +745,14 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`
                 lineHeight: '22px',
               }}
               title={t`Image`}
-              onClick={download}
+              onClick={() => download(props?.value?.address ?? 'share')}
             />
             <MainButton style={{
               height: '48px',
               fontSize: '16px',
               fontWeight: '700',
               lineHeight: '22px',
-            }} title={t`Twitter`} onClick={tweet}/>
+            }} title={t`Twitter`} onClick={() => tweet(props?.value?.address ?? 'share')}/>
           </Stack>
         </Stack>
       </Stack>
