@@ -36,9 +36,6 @@ const ReCharts: FC<ChartsProps> = ({...props}) => {
             lineHeight: '24px',
             fontWeight: '700',
             color: "#F9F9F9",
-            position: 'absolute',
-            top: 0,
-            left: 0,
           })}>{Number(data[data.length - 1]?.daily ?? 0).toLocaleString('en-US', {
             maximumFractionDigits: 2,
           })
