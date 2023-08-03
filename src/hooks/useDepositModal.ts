@@ -1,22 +1,30 @@
+import { NESTService, WBNBToken } from "./../contracts/contractAddress";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import useReadTokenBalance from "../contracts/Read/useReadTokenContract";
+import useReadTokenBalance, {
+  useReadTokenAllowance,
+} from "../contracts/Read/useReadTokenContract";
 import useNEST from "./useNEST";
 import { useBalance } from "wagmi";
-import { getPriceFromNESTLocal } from "../lib/NESTRequest";
 import { parseEther } from "ethers/lib/utils.js";
 import { BigNumber } from "ethers/lib/ethers";
 import { t } from "@lingui/macro";
-import { useTokenTransfer } from "../contracts/useTokenContract";
+import useTokenApprove, {
+  useTokenTransfer,
+} from "../contracts/useTokenContract";
 import {
   TransactionType,
   usePendingTransactions,
 } from "./useTransactionReceipt";
-import { useTransferValue } from "../contracts/useTransferValue";
-
-interface DepositModalPrice {
-  BNB: BigNumber;
-  NEST: BigNumber;
-}
+import {
+  NESTToken,
+  SwapContract,
+  USDTToken,
+} from "../contracts/contractAddress";
+import { MaxUint256 } from "@ethersproject/constants";
+import useSwapExactTokensForTokens, {
+  useSwapExactETHForTokens,
+} from "../contracts/useSwapContract";
+import useReadSwapAmountOut from "../contracts/Read/useReadSwapContract";
 
 function useDepositModal(onClose: () => void) {
   const { isPendingType } = usePendingTransactions();
@@ -24,7 +32,6 @@ function useDepositModal(onClose: () => void) {
   const [tokenAmount, setTokenAmount] = useState<string>("");
   const [selectToken, setSelectToken] = useState<string>("NEST");
   const [selectButton, setSelectButton] = useState<number>();
-  const [basePrice, setBasePrice] = useState<DepositModalPrice>();
   const [send, setSend] = useState(false);
 
   const nowToken = useMemo(() => {
@@ -34,31 +41,6 @@ function useDepositModal(onClose: () => void) {
     }
   }, [chainsData.chainId, selectToken]);
   /**
-   * get price
-   */
-  const getPrice = useCallback(async () => {
-    const BNBPriceBase: { [key: string]: string } = await getPriceFromNESTLocal(
-      "bnb"
-    );
-    const NESTPriceBase: { [key: string]: string } =
-      await getPriceFromNESTLocal("nest");
-    const BNBPrice = BNBPriceBase
-      ? BNBPriceBase["value"].toString().stringToBigNumber(18)
-      : undefined;
-    const NESTPrice = NESTPriceBase
-      ? NESTPriceBase["value"].toString().stringToBigNumber(18)
-      : undefined;
-    if (BNBPrice && NESTPrice) {
-      const newPrice: DepositModalPrice = {
-        BNB: BNBPrice,
-        NEST: NESTPrice,
-      };
-      return newPrice;
-    } else {
-      return undefined;
-    }
-  }, []);
-  /**
    * balance
    */
   const { balance: tokenBalance, balanceOfRefetch: tokenBalanceRefetch } =
@@ -66,9 +48,49 @@ function useDepositModal(onClose: () => void) {
       (nowToken ?? String().zeroAddress) as `0x${string}`,
       account.address ?? ""
     );
-  const { data: ETHBalance } = useBalance({
+  const { data: ETHBalance, refetch: ETHrefetch } = useBalance({
     address: account.address,
   });
+  /**
+   * allowance
+   */
+  const USDT = useMemo(() => {
+    if (chainsData.chainId) {
+      return USDTToken[chainsData.chainId];
+    } else {
+      return String().zeroAddress;
+    }
+  }, [chainsData.chainId]);
+  const NEST = useMemo(() => {
+    if (chainsData.chainId) {
+      return NESTToken[chainsData.chainId];
+    } else {
+      return String().zeroAddress;
+    }
+  }, [chainsData.chainId]);
+  const WBNB = useMemo(() => {
+    if (chainsData.chainId) {
+      return WBNBToken[chainsData.chainId];
+    } else {
+      return String().zeroAddress;
+    }
+  }, [chainsData.chainId]);
+  const NEST_Service = useMemo(() => {
+    if (chainsData.chainId) {
+      return NESTService[chainsData.chainId];
+    } else {
+      return undefined;
+    }
+  }, [chainsData.chainId]);
+  const swapContract = useMemo(() => {
+    if (chainsData.chainId) {
+      return SwapContract[chainsData.chainId];
+    } else {
+      return undefined;
+    }
+  }, [chainsData.chainId]);
+  const { allowance: USDTAllowance, allowanceRefetch: USDTAllowanceRefetch } =
+    useReadTokenAllowance(USDT as `0x${string}`, account.address, swapContract);
 
   /**
    * call back
@@ -121,20 +143,46 @@ function useDepositModal(onClose: () => void) {
       return String().placeHolder;
     }
   }, [ETHBalance, account.address, selectToken, tokenBalance]);
+  const tokenAmountToBigNumber = useMemo(() => {
+    if (tokenAmount !== "") {
+      return tokenAmount.stringToBigNumber(18);
+    } else {
+      return undefined;
+    }
+  }, [tokenAmount]);
+  const defaultInput = useMemo(() => {
+    if (
+      tokenAmountToBigNumber &&
+      !tokenAmountToBigNumber.eq(BigNumber.from("0"))
+    ) {
+      return tokenAmountToBigNumber;
+    } else {
+      return "1".stringToBigNumber(18)!;
+    }
+  }, [tokenAmountToBigNumber]);
+  const swapPathAddress = useMemo(() => {
+    if (selectToken === "USDT" && USDT && NEST) {
+      return [USDT, NEST];
+    } else if (selectToken === "BNB" && WBNB && USDT && NEST) {
+      return [WBNB, USDT, NEST];
+    } else {
+      return undefined;
+    }
+  }, [NEST, USDT, WBNB, selectToken]);
+  const { uniSwapAmountOut, uniSwapAmountOutRefetch } = useReadSwapAmountOut(
+    defaultInput,
+    swapPathAddress
+  );
   const showPrice = useMemo(() => {
-    if (basePrice && selectToken === "USDT") {
+    if (uniSwapAmountOut && selectToken !== "NEST") {
       return parseEther("1")
-        .mul(parseEther("1"))
-        .div(basePrice.NEST)
-        .bigNumberToShowPrice(18, 2);
-    } else if (basePrice && selectToken === "BNB") {
-      return basePrice.BNB.mul(parseEther("1"))
-        .div(basePrice.NEST)
+        .mul(uniSwapAmountOut[1])
+        .div(defaultInput)
         .bigNumberToShowPrice(18, 2);
     } else {
       return String().placeHolder;
     }
-  }, [basePrice, selectToken]);
+  }, [selectToken, defaultInput, uniSwapAmountOut]);
   const showGetNEST = useMemo(() => {
     if (showPrice !== String().placeHolder && tokenAmount !== "") {
       return (parseFloat(tokenAmount) * parseFloat(showPrice)).toFixed(2);
@@ -167,6 +215,15 @@ function useDepositModal(onClose: () => void) {
     }
     return false;
   }, [ETHBalance, selectToken, tokenAmount, tokenBalance]);
+
+  const checkAllowance = useMemo(() => {
+    if (USDTAllowance) {
+      const inputBigNumber = tokenAmountToBigNumber ?? BigNumber.from("0");
+      return inputBigNumber.lte(USDTAllowance);
+    } else {
+      return true;
+    }
+  }, [USDTAllowance, tokenAmountToBigNumber]);
   const isError = useMemo(() => {
     return checkMax || (checkBalance ?? false);
   }, [checkBalance, checkMax]);
@@ -175,35 +232,84 @@ function useDepositModal(onClose: () => void) {
     (nowToken ?? String().zeroAddress) as `0x${string}`,
     tokenAmount.stringToBigNumber(18) ?? BigNumber.from("0")
   );
-  const { sendTransaction, isLoading } = useTransferValue(
-    tokenAmount.stringToBigNumber(18) ?? BigNumber.from("0")
+  const { transaction: tokenApprove } = useTokenApprove(
+    USDT as `0x${string}`,
+    swapContract,
+    MaxUint256
+  );
+
+  const amountOutMin = useMemo(() => {
+    if (uniSwapAmountOut) {
+      return uniSwapAmountOut[1].sub(
+        uniSwapAmountOut[1].mul(BigNumber.from("1")).div(BigNumber.from("1000"))
+      );
+    } else {
+      return MaxUint256;
+    }
+  }, [uniSwapAmountOut]);
+  const { transaction: swapTTT } = useSwapExactTokensForTokens(
+    tokenAmountToBigNumber ?? BigNumber.from("0"),
+    amountOutMin,
+    selectToken === "USDT" ? swapPathAddress : undefined,
+    NEST_Service,
+    TransactionType.deposit
+  );
+  const { transaction: swapETT} = useSwapExactETHForTokens(
+    tokenAmountToBigNumber ?? BigNumber.from("0"),
+    amountOutMin,
+    selectToken === "BNB" ? swapPathAddress : undefined,
+    NEST_Service,
+    TransactionType.deposit
   );
 
   /**
    * main button
    */
   const pending = useMemo(() => {
-    return isPendingType(TransactionType.deposit);
+    return (
+      isPendingType(TransactionType.deposit) ||
+      isPendingType(TransactionType.approve)
+    );
   }, [isPendingType]);
   useEffect(() => {
     if (send && !pending) {
       setSend(false);
       onClose();
-    } else if (!send && pending) {
+    } else if (!send && pending && !isPendingType(TransactionType.approve)) {
       setSend(true);
     }
-  }, [onClose, pending, send]);
+  }, [isPendingType, onClose, pending, send]);
 
   const mainButtonTitle = useMemo(() => {
-    return t`Deposit`;
-  }, []);
+    if (selectToken === "USDT") {
+      if (checkAllowance) {
+        return t`Deposit`;
+      } else {
+        return t`Approve`;
+      }
+    } else {
+      return t`Deposit`;
+    }
+  }, [checkAllowance, selectToken]);
   const mainButtonLoading = useMemo(() => {
-    if (tokenTransfer.isLoading || isLoading || pending) {
+    if (
+      tokenTransfer.isLoading ||
+      tokenApprove.isLoading ||
+      swapTTT.isLoading ||
+      swapETT.isLoading ||
+      pending
+    ) {
       return true;
     } else {
       return false;
     }
-  }, [isLoading, pending, tokenTransfer.isLoading]);
+  }, [
+    pending,
+    swapETT.isLoading,
+    swapTTT.isLoading,
+    tokenApprove.isLoading,
+    tokenTransfer.isLoading,
+  ]);
   const mainButtonDis = useMemo(() => {
     return (
       checkBalance ||
@@ -214,43 +320,45 @@ function useDepositModal(onClose: () => void) {
   }, [checkBalance, checkMax, tokenAmount]);
   const mainButtonAction = useCallback(() => {
     if (!mainButtonDis && !mainButtonLoading) {
-      if (selectToken === "BNB" && sendTransaction) {
-        sendTransaction();
+      if (selectToken === "USDT") {
+        if (!checkAllowance) {
+          tokenApprove.write?.();
+        } else {
+          swapTTT.reset();
+          swapTTT.write?.();
+        }
+      } else if (selectToken === "BNB") {
+        swapETT.reset();
+        swapETT.write?.();
       } else {
+        tokenTransfer.reset();
         tokenTransfer.write?.();
       }
     }
-  }, [
-    mainButtonDis,
-    mainButtonLoading,
-    selectToken,
-    sendTransaction,
-    tokenTransfer,
-  ]);
+  }, [checkAllowance, mainButtonDis, mainButtonLoading, selectToken, swapETT, swapTTT, tokenApprove, tokenTransfer]);
   /**
    * update
    */
   useEffect(() => {
     const time = setInterval(() => {
-      tokenBalanceRefetch();
+      if (selectToken !== "BNB") {
+        tokenBalanceRefetch();
+      } else {
+        ETHrefetch();
+        uniSwapAmountOutRefetch();
+        USDTAllowanceRefetch();
+      }
     }, 5 * 1000);
     return () => {
       clearInterval(time);
     };
-  }, [tokenBalanceRefetch]);
-  useEffect(() => {
-    const get = async () => {
-      const newPrice = await getPrice();
-      setBasePrice(newPrice);
-    };
-    const time = setInterval(() => {
-      get();
-    }, 10000);
-    get();
-    return () => {
-      clearInterval(time);
-    };
-  }, [getPrice]);
+  }, [
+    ETHrefetch,
+    USDTAllowanceRefetch,
+    selectToken,
+    tokenBalanceRefetch,
+    uniSwapAmountOutRefetch,
+  ]);
   return {
     tokenAmount,
     setTokenAmount,

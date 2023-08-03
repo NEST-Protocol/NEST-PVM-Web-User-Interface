@@ -62,7 +62,7 @@ const Personal = () => {
     refreshInterval: 3_000,
   });
 
-  const {data: isKol} = useSWR(address ? `https://api.nestfi.net/api/invite/is-kol-whitelist/${address ?? account.address}` : undefined, (url: any) => fetch(url)
+  const {data: isKol} = useSWR((address || account.address) ? `https://api.nestfi.net/api/invite/is-kol-whitelist/${address ?? account.address}` : undefined, (url: any) => fetch(url)
     .then((res) => res.json())
     .then((res: any) => res.value));
 
@@ -99,8 +99,8 @@ const Personal = () => {
           _7daysRate: positions?.days7Rate ?? 0,
           _30daysPNL: positions?.days30Pnl ?? 0,
           _30daysRate: positions?.days30Rate ?? 0,
-          from: range?.[0]?.startDate?.toLocaleDateString().replaceAll('/', '-'),
-          to: range?.[0]?.endDate?.toLocaleDateString().replaceAll('/', '-'),
+          from: range?.[0]?.startDate?.toISOString().slice(0,10),
+          to: range?.[0]?.endDate?.toISOString().slice(0,10),
         }}
         open={showShareMyDealModal}
         onClose={() => {
@@ -739,9 +739,9 @@ const Personal = () => {
               lineHeight: '20px',
               height: '40px',
             })} spacing={'4px'} alignItems={"center"}>
-              <Stack>{range?.[0].startDate?.toLocaleDateString()}</Stack>
+              <Stack>{range?.[0].startDate?.toLocaleDateString('zh-CN', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\//g, '-')}</Stack>
               <Box>~</Box>
-              <Stack>{range?.[0].endDate?.toLocaleDateString()}</Stack>
+              <Stack>{range?.[0].endDate?.toLocaleDateString('zh-CN', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\//g, '-')}</Stack>
               <Stack flexGrow={1}></Stack>
               <Stack sx={(theme) => ({
                 '& svg': {
@@ -773,6 +773,7 @@ const Personal = () => {
                     showMonthAndYearPickers={false}
                     className={nowTheme.isLight ? '' : 'dark'}
                     maxDate={new Date()}
+                    minDate={new Date('2023-04-01')}
                   />
                 </Stack>
                 <button style={{
@@ -797,26 +798,26 @@ const Personal = () => {
               {
                 title: t`Volume`,
                 chart: <VolumeChart address={address ?? account.address}
-                                    from={range?.[0]?.startDate?.toLocaleDateString().replaceAll('/', '-')}
-                                    to={range?.[0]?.endDate?.toLocaleDateString().replaceAll('/', '-')}/>,
+                                    from={range?.[0]?.startDate?.toLocaleDateString('zh-CN', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\//g, '-')}
+                                    to={range?.[0]?.endDate?.toLocaleDateString('zh-CN', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\//g, '-')}/>,
               },
               {
                 title: t`Total Asset Value`,
                 chart: <TotalAssetValue address={address ?? account.address}
-                                        from={range?.[0]?.startDate?.toLocaleDateString().replaceAll('/', '-')}
-                                        to={range?.[0]?.endDate?.toLocaleDateString().replaceAll('/', '-')}/>
+                                        from={range?.[0]?.startDate?.toLocaleDateString('zh-CN', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\//g, '-')}
+                                        to={range?.[0]?.endDate?.toLocaleDateString('zh-CN', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\//g, '-')}/>
               },
               {
                 title: t`Daily Return`,
                 chart: <DailyReturnChart address={address ?? account.address}
-                                         from={range?.[0]?.startDate?.toLocaleDateString().replaceAll('/', '-')}
-                                         to={range?.[0]?.endDate?.toLocaleDateString().replaceAll('/', '-')}/>
+                                         from={range?.[0]?.startDate?.toLocaleDateString('zh-CN', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\//g, '-')}
+                                         to={range?.[0]?.endDate?.toLocaleDateString('zh-CN', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\//g, '-')}/>
               },
               {
                 title: t`Cumulative Return`,
                 chart: <CumulativeReturnChart address={address ?? account.address}
-                                              from={range?.[0]?.startDate?.toLocaleDateString().replaceAll('/', '-')}
-                                              to={range?.[0]?.endDate?.toLocaleDateString().replaceAll('/', '-')}/>
+                                              from={range?.[0]?.startDate?.toLocaleDateString('zh-CN', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\//g, '-')}
+                                              to={range?.[0]?.endDate?.toLocaleDateString('zh-CN', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\//g, '-')}/>
               },
             ].map((item, index) => (
               <Grid item xs={12} md={6} key={index}>

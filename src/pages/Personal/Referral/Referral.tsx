@@ -488,12 +488,20 @@ const Referral = () => {
                   </Stack>
                   <Box width={'145px'}>
                     <MainButton title={t`Copy Invitation Link`}
+                                disable={!address && !user}
                                 style={{height: '36px', fontSize: '12px', lineHeight: '16px', fontWeight: 700}}
                                 onClick={() => {
-                                  if (!address) return;
-                                  const link =
-                                    "https://nestfi.org/?a=" +
-                                    address.slice(-8).toLowerCase();
+                                  if (!user && !address) return;
+                                  let link = 'https://nestfi.org/'
+                                  if (address) {
+                                    link =
+                                      "https://nestfi.org/?a=" +
+                                      address.slice(-8).toLowerCase();
+                                  } else if (user) {
+                                    link =
+                                      "https://nestfi.org/?a=" +
+                                      user.slice(-8).toLowerCase();
+                                  }
                                   copy(link);
                                   messageSnackBar(t`Copy Successfully`);
                                 }}/>
@@ -525,10 +533,15 @@ const Referral = () => {
                         borderRadius: '8px',
                       }}
                       title={t`Copy Invitation Link`}
-                      disable={!address}
+                      disable={!address && !user}
                       onClick={() => {
-                        if (!address) return;
-                        const link = 'https://nestfi.org/?a=' + address.slice(-8).toLowerCase()
+                        if (!address && !user) return;
+                        let link = "https://nestfi.org/";
+                        if (address) {
+                          link = 'https://nestfi.org/?a=' + address.slice(-8).toLowerCase()
+                        } else if (user) {
+                          link = 'https://nestfi.org/?a=' + user.slice(-8).toLowerCase()
+                        }
                         copy(link);
                         messageSnackBar("Copy Successfully");
                       }}/>

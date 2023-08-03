@@ -7,7 +7,7 @@ import { SwapContract } from "../contractAddress";
 
 function useReadSwapAmountOut(
   amountIn: BigNumber | undefined,
-  path: Array<string>
+  path?: Array<string>
 ) {
   const { chainsData } = useNEST();
   const address = useMemo(() => {

@@ -14,7 +14,8 @@ function useSwapExactTokensForTokens(
   amountIn: BigNumber,
   amountOutMin: BigNumber,
   path: Array<string> | undefined,
-  to: string | undefined
+  to: string | undefined,
+  type?: TransactionType
 ) {
   const { chainsData } = useNEST();
   const { addPendingList } = usePendingTransactions();
@@ -46,14 +47,59 @@ function useSwapExactTokensForTokens(
     if (transaction.data) {
       addPendingList({
         hash: transaction.data.hash,
-        type: TransactionType.swap_uni,
+        type: type ?? TransactionType.swap_uni,
       });
       transaction.reset();
     }
-  }, [addPendingList, transaction, transaction.data]);
+  }, [addPendingList, transaction, transaction.data, type]);
 
   return {
     transaction,
+  };
+}
+
+export function useSwapExactETHForTokens(
+  amountIn: BigNumber,
+  amountOutMin: BigNumber,
+  path: Array<string> | undefined,
+  to: string | undefined,
+  type?: TransactionType
+) {
+  
+  const { chainsData } = useNEST();
+  const { addPendingList } = usePendingTransactions();
+  const time = new Date().getTime() / 1000 + 600;
+  const address = useMemo(() => {
+    if (chainsData.chainId && path && to) {
+      return SwapContract[chainsData.chainId] as `0x${string}`;
+    }
+  }, [chainsData.chainId, path, to]);
+  const { config, refetch } = usePrepareContractWrite({
+    address: address,
+    abi: UNISwapV2ABI,
+    functionName: "swapExactETHForTokens",
+    args: [amountOutMin, path, to, BigNumber.from(time.toFixed(0).toString())],
+    enabled: true,
+    overrides: {value: amountIn}
+  });
+  const gasLimit = useAddGasLimit(config, 30);
+  const transaction = useContractWrite({
+    ...config,
+    request: { ...config.request, gasLimit: gasLimit },
+  });
+  
+  useEffect(() => {
+    if (transaction.data) {
+      addPendingList({
+        hash: transaction.data.hash,
+        type: type ?? TransactionType.swap_uni,
+      });
+      transaction.reset();
+    }
+  }, [addPendingList, transaction, transaction.data, type]);
+
+  return {
+    transaction,refetch
   };
 }
 
