@@ -65,29 +65,28 @@ export function useSwapExactETHForTokens(
   to: string | undefined,
   type?: TransactionType
 ) {
-  
   const { chainsData } = useNEST();
   const { addPendingList } = usePendingTransactions();
   const time = new Date().getTime() / 1000 + 600;
   const address = useMemo(() => {
-    if (chainsData.chainId && path && to) {
+    if (chainsData.chainId && path && to && !BigNumber.from("0").eq(amountIn)) {
       return SwapContract[chainsData.chainId] as `0x${string}`;
     }
-  }, [chainsData.chainId, path, to]);
+  }, [amountIn, chainsData.chainId, path, to]);
   const { config, refetch } = usePrepareContractWrite({
     address: address,
     abi: UNISwapV2ABI,
     functionName: "swapExactETHForTokens",
     args: [amountOutMin, path, to, BigNumber.from(time.toFixed(0).toString())],
     enabled: true,
-    overrides: {value: amountIn}
+    overrides: { value: amountIn },
   });
   const gasLimit = useAddGasLimit(config, 30);
   const transaction = useContractWrite({
     ...config,
     request: { ...config.request, gasLimit: gasLimit },
   });
-  
+
   useEffect(() => {
     if (transaction.data) {
       addPendingList({
@@ -99,7 +98,8 @@ export function useSwapExactETHForTokens(
   }, [addPendingList, transaction, transaction.data, type]);
 
   return {
-    transaction,refetch
+    transaction,
+    refetch,
   };
 }
 

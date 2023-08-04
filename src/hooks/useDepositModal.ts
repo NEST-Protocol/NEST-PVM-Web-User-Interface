@@ -175,8 +175,9 @@ function useDepositModal(onClose: () => void) {
   );
   const showPrice = useMemo(() => {
     if (uniSwapAmountOut && selectToken !== "NEST") {
+      console.log(uniSwapAmountOut);
       return parseEther("1")
-        .mul(uniSwapAmountOut[1])
+        .mul(uniSwapAmountOut[uniSwapAmountOut.length - 1])
         .div(defaultInput)
         .bigNumberToShowPrice(18, 2);
     } else {
@@ -250,7 +251,7 @@ function useDepositModal(onClose: () => void) {
   const { transaction: swapTTT } = useSwapExactTokensForTokens(
     tokenAmountToBigNumber ?? BigNumber.from("0"),
     amountOutMin,
-    selectToken === "USDT" ? swapPathAddress : undefined,
+    selectToken === "USDT" && checkAllowance ? swapPathAddress : undefined,
     NEST_Service,
     TransactionType.deposit
   );
