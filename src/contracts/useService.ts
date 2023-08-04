@@ -12,7 +12,7 @@ function useService() {
             { Authorization: signature.signature }
           );
           if (Number(balanceBase["errorCode"]) === 0) {
-            const value: { [key: string]: number } = balanceBase["value"];
+            const value: { [key: string]: number } = balanceBase["value"] ?? 0;
             const balance = value["availableBalance"];
             back(balance)
           }
