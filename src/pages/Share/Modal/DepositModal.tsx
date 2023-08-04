@@ -39,9 +39,7 @@ const DepositModalBase: FC<DepositModalBaseProps> = ({ ...props }) => {
     mainButtonTitle,
     mainButtonLoading,
     mainButtonDis,
-    mainButtonAction,
-    swapTTT,
-    swapETT
+    mainButtonAction
   } = useDepositModal(props.onClose);
 
   const midText = useMemo(() => {
@@ -146,12 +144,19 @@ const DepositModalBase: FC<DepositModalBaseProps> = ({ ...props }) => {
         changeNestAmount={(value: string) => {
           setTokenAmount(value.formatInputNum4());
           setSelectButton(0);
-          swapTTT.reset()
-          swapETT.reset()
         }}
       />
     );
-  }, [isError, maxCallBack, selectToken, setSelectButton, setSelectToken, setTokenAmount, showBalance, swapETT, swapTTT, tokenAmount]);
+  }, [
+    isError,
+    maxCallBack,
+    selectToken,
+    setSelectButton,
+    setSelectToken,
+    setTokenAmount,
+    showBalance,
+    tokenAmount,
+  ]);
   const button = useMemo(() => {
     return (
       <MainButton

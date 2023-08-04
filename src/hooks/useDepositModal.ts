@@ -249,22 +249,15 @@ function useDepositModal(onClose: () => void) {
       return MaxUint256;
     }
   }, [uniSwapAmountOut]);
-  const {
-    transaction: swapTTT,
-    refetch: swapTTTRefetch,
-    isRefetching: swapTTTIsRefetching,
-  } = useSwapExactTokensForTokens(
-    tokenAmountToBigNumber ?? BigNumber.from("0"),
-    amountOutMin,
-    selectToken === "USDT" && checkAllowance ? swapPathAddress : undefined,
-    NEST_Service,
-    TransactionType.deposit
-  );
-  const {
-    transaction: swapETT,
-    refetch: swapETTRefetch,
-    isRefetching: swapETTIsRefetching,
-  } = useSwapExactETHForTokens(
+  const { transaction: swapTTT, isError: swapTTTIsError } =
+    useSwapExactTokensForTokens(
+      tokenAmountToBigNumber ?? BigNumber.from("0"),
+      amountOutMin,
+      selectToken === "USDT" && checkAllowance ? swapPathAddress : undefined,
+      NEST_Service,
+      TransactionType.deposit
+    );
+  const { transaction: swapETT, isError: swapETTIsError } = useSwapExactETHForTokens(
     tokenAmountToBigNumber ?? BigNumber.from("0"),
     amountOutMin,
     selectToken === "BNB" ? swapPathAddress : undefined,
@@ -308,8 +301,7 @@ function useDepositModal(onClose: () => void) {
       swapTTT.isLoading ||
       swapETT.isLoading ||
       uniSwapAmountOutIsLoading ||
-      swapTTTIsRefetching ||
-      swapETTIsRefetching ||
+      swapTTTIsError || swapETTIsError ||
       pending
     ) {
       return true;
@@ -317,11 +309,11 @@ function useDepositModal(onClose: () => void) {
       return false;
     }
   }, [
+    swapTTTIsError,
+    swapETTIsError,
     pending,
     swapETT.isLoading,
-    swapETTIsRefetching,
     swapTTT.isLoading,
-    swapTTTIsRefetching,
     tokenApprove.isLoading,
     tokenTransfer.isLoading,
     uniSwapAmountOutIsLoading,
@@ -405,8 +397,6 @@ function useDepositModal(onClose: () => void) {
     mainButtonLoading,
     mainButtonDis,
     mainButtonAction,
-    swapTTT,
-    swapETT
   };
 }
 
