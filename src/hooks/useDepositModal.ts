@@ -340,26 +340,24 @@ function useDepositModal(onClose: () => void) {
         if (!checkAllowance) {
           tokenApprove.write?.();
         } else {
-          swapTTTRefetch();
+          swapTTT.reset();
           swapTTT.write?.();
         }
       } else if (selectToken === "BNB") {
-        swapETTRefetch();
+        swapETT.reset();
         swapETT.write?.();
       } else {
         tokenTransfer.write?.();
       }
     }
   }, [
-    checkAllowance,
     mainButtonDis,
     mainButtonLoading,
     selectToken,
-    swapETT,
-    swapETTRefetch,
-    swapTTT,
-    swapTTTRefetch,
+    checkAllowance,
     tokenApprove,
+    swapTTT,
+    swapETT,
     tokenTransfer,
   ]);
   /**
@@ -407,6 +405,8 @@ function useDepositModal(onClose: () => void) {
     mainButtonLoading,
     mainButtonDis,
     mainButtonAction,
+    swapTTT,
+    swapETT
   };
 }
 

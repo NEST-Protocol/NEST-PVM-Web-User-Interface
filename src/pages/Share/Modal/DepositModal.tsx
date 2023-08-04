@@ -40,6 +40,8 @@ const DepositModalBase: FC<DepositModalBaseProps> = ({ ...props }) => {
     mainButtonLoading,
     mainButtonDis,
     mainButtonAction,
+    swapTTT,
+    swapETT
   } = useDepositModal(props.onClose);
 
   const midText = useMemo(() => {
@@ -144,11 +146,23 @@ const DepositModalBase: FC<DepositModalBaseProps> = ({ ...props }) => {
         changeNestAmount={(value: string) => {
           setTokenAmount(value.formatInputNum4());
           setSelectButton(0);
+          swapTTT.reset()
+          swapETT.reset()
         }}
       />
     );
-  }, [isError, maxCallBack, selectToken, setSelectButton, setSelectToken, setTokenAmount, showBalance, tokenAmount]);
-
+  }, [isError, maxCallBack, selectToken, setSelectButton, setSelectToken, setTokenAmount, showBalance, swapETT, swapTTT, tokenAmount]);
+  const button = useMemo(() => {
+    return (
+      <MainButton
+        title={mainButtonTitle}
+        disable={mainButtonDis}
+        isLoading={mainButtonLoading}
+        onClick={mainButtonAction}
+        style={{ height: "48px" }}
+      />
+    );
+  }, [mainButtonTitle, mainButtonDis, mainButtonLoading, mainButtonAction]);
   return (
     <Stack spacing={"24px"} width={"100%"}>
       <Stack spacing={"16px"}>
@@ -160,13 +174,7 @@ const DepositModalBase: FC<DepositModalBaseProps> = ({ ...props }) => {
         />
       </Stack>
       {otherInfo}
-      <MainButton
-        title={mainButtonTitle}
-        disable={mainButtonDis}
-        isLoading={mainButtonLoading}
-        onClick={mainButtonAction}
-        style={{ height: "48px" }}
-      />
+      {button}
     </Stack>
   );
 };
