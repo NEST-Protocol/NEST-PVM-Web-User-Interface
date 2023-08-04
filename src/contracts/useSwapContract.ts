@@ -26,7 +26,7 @@ function useSwapExactTokensForTokens(
     }
   }, [amountIn, chainsData.chainId, path, to]);
 
-  const { config, isLoading, refetch } = usePrepareContractWrite({
+  const { config, refetch } = usePrepareContractWrite({
     address: address,
     abi: UNISwapV2ABI,
     functionName: "swapExactTokensForTokens",
@@ -38,8 +38,9 @@ function useSwapExactTokensForTokens(
       BigNumber.from(time.toFixed(0).toString()),
     ],
     enabled: true,
-    cacheTime: 20_000,
-    staleTime: 20_000
+    onError: () => {
+      refetch();
+    },
   });
   const gasLimit = useAddGasLimit(config, 30);
   const transaction = useContractWrite({
@@ -58,8 +59,6 @@ function useSwapExactTokensForTokens(
 
   return {
     transaction,
-    isLoading,
-    refetch,
   };
 }
 
@@ -78,7 +77,7 @@ export function useSwapExactETHForTokens(
       return SwapContract[chainsData.chainId] as `0x${string}`;
     }
   }, [amountIn, chainsData.chainId, path, to]);
-  const { config, isError, refetch } = usePrepareContractWrite({
+  const { config, refetch } = usePrepareContractWrite({
     address: address,
     abi: UNISwapV2ABI,
     functionName: "swapExactETHForTokens",
@@ -107,8 +106,6 @@ export function useSwapExactETHForTokens(
 
   return {
     transaction,
-    isError,
-    refetch,
   };
 }
 
