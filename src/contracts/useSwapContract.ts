@@ -25,7 +25,8 @@ function useSwapExactTokensForTokens(
       return SwapContract[chainsData.chainId] as `0x${string}`;
     }
   }, [amountIn, chainsData.chainId, path, to]);
-  const { config } = usePrepareContractWrite({
+
+  const { config, refetch } = usePrepareContractWrite({
     address: address,
     abi: UNISwapV2ABI,
     functionName: "swapExactTokensForTokens",
@@ -55,6 +56,7 @@ function useSwapExactTokensForTokens(
 
   return {
     transaction,
+    refetch,
   };
 }
 

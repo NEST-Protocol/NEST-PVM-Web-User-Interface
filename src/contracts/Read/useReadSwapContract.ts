@@ -23,6 +23,7 @@ function useReadSwapAmountOut(
   const {
     data: uniSwapAmountOutData,
     isRefetching: uniSwapAmountOutIsRefetching,
+    isLoading: uniSwapAmountOutIsLoading,
     isSuccess: uniSwapAmountOutIsSuccess,
     refetch: uniSwapAmountOutRefetch,
   } = useContractRead({
@@ -48,6 +49,7 @@ function useReadSwapAmountOut(
     uniSwapAmountOutIsRefetching,
     uniSwapAmountOutIsSuccess,
     uniSwapAmountOutRefetch,
+    uniSwapAmountOutIsLoading,
   };
 }
 
