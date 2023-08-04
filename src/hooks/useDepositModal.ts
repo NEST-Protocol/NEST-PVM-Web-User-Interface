@@ -249,15 +249,22 @@ function useDepositModal(onClose: () => void) {
       return MaxUint256;
     }
   }, [uniSwapAmountOut]);
-  const { transaction: swapTTT, refetch: swapTTTRefetch } =
-    useSwapExactTokensForTokens(
-      tokenAmountToBigNumber ?? BigNumber.from("0"),
-      amountOutMin,
-      selectToken === "USDT" && checkAllowance ? swapPathAddress : undefined,
-      NEST_Service,
-      TransactionType.deposit
-    );
-  const { transaction: swapETT } = useSwapExactETHForTokens(
+  const {
+    transaction: swapTTT,
+    refetch: swapTTTRefetch,
+    isRefetching: swapTTTIsRefetching,
+  } = useSwapExactTokensForTokens(
+    tokenAmountToBigNumber ?? BigNumber.from("0"),
+    amountOutMin,
+    selectToken === "USDT" && checkAllowance ? swapPathAddress : undefined,
+    NEST_Service,
+    TransactionType.deposit
+  );
+  const {
+    transaction: swapETT,
+    refetch: swapETTRefetch,
+    isRefetching: swapETTIsRefetching,
+  } = useSwapExactETHForTokens(
     tokenAmountToBigNumber ?? BigNumber.from("0"),
     amountOutMin,
     selectToken === "BNB" ? swapPathAddress : undefined,
@@ -301,6 +308,8 @@ function useDepositModal(onClose: () => void) {
       swapTTT.isLoading ||
       swapETT.isLoading ||
       uniSwapAmountOutIsLoading ||
+      swapTTTIsRefetching ||
+      swapETTIsRefetching ||
       pending
     ) {
       return true;
@@ -310,7 +319,9 @@ function useDepositModal(onClose: () => void) {
   }, [
     pending,
     swapETT.isLoading,
+    swapETTIsRefetching,
     swapTTT.isLoading,
+    swapTTTIsRefetching,
     tokenApprove.isLoading,
     tokenTransfer.isLoading,
     uniSwapAmountOutIsLoading,
@@ -329,13 +340,13 @@ function useDepositModal(onClose: () => void) {
         if (!checkAllowance) {
           tokenApprove.write?.();
         } else {
+          swapTTTRefetch();
           swapTTT.write?.();
         }
       } else if (selectToken === "BNB") {
-        swapETT.reset();
+        swapETTRefetch();
         swapETT.write?.();
       } else {
-        tokenTransfer.reset();
         tokenTransfer.write?.();
       }
     }
@@ -345,7 +356,9 @@ function useDepositModal(onClose: () => void) {
     mainButtonLoading,
     selectToken,
     swapETT,
+    swapETTRefetch,
     swapTTT,
+    swapTTTRefetch,
     tokenApprove,
     tokenTransfer,
   ]);
@@ -394,7 +407,6 @@ function useDepositModal(onClose: () => void) {
     mainButtonLoading,
     mainButtonDis,
     mainButtonAction,
-    swapTTTRefetch,
   };
 }
 

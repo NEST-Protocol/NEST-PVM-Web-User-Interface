@@ -26,7 +26,7 @@ function useSwapExactTokensForTokens(
     }
   }, [amountIn, chainsData.chainId, path, to]);
 
-  const { config, refetch } = usePrepareContractWrite({
+  const { config, refetch, isRefetching } = usePrepareContractWrite({
     address: address,
     abi: UNISwapV2ABI,
     functionName: "swapExactTokensForTokens",
@@ -57,6 +57,7 @@ function useSwapExactTokensForTokens(
   return {
     transaction,
     refetch,
+    isRefetching,
   };
 }
 
@@ -75,7 +76,7 @@ export function useSwapExactETHForTokens(
       return SwapContract[chainsData.chainId] as `0x${string}`;
     }
   }, [amountIn, chainsData.chainId, path, to]);
-  const { config, refetch } = usePrepareContractWrite({
+  const { config, refetch, isRefetching } = usePrepareContractWrite({
     address: address,
     abi: UNISwapV2ABI,
     functionName: "swapExactETHForTokens",
@@ -102,6 +103,7 @@ export function useSwapExactETHForTokens(
   return {
     transaction,
     refetch,
+    isRefetching,
   };
 }
 
