@@ -254,7 +254,7 @@ function useDepositModal(onClose: () => void) {
     NEST_Service,
     TransactionType.deposit
   );
-  const { transaction: swapETT} = useSwapExactETHForTokens(
+  const { transaction: swapETT } = useSwapExactETHForTokens(
     tokenAmountToBigNumber ?? BigNumber.from("0"),
     amountOutMin,
     selectToken === "BNB" ? swapPathAddress : undefined,
@@ -335,18 +335,29 @@ function useDepositModal(onClose: () => void) {
         tokenTransfer.write?.();
       }
     }
-  }, [checkAllowance, mainButtonDis, mainButtonLoading, selectToken, swapETT, swapTTT, tokenApprove, tokenTransfer]);
+  }, [
+    checkAllowance,
+    mainButtonDis,
+    mainButtonLoading,
+    selectToken,
+    swapETT,
+    swapTTT,
+    tokenApprove,
+    tokenTransfer,
+  ]);
   /**
    * update
    */
   useEffect(() => {
     const time = setInterval(() => {
-      if (selectToken !== "BNB") {
-        tokenBalanceRefetch();
-      } else {
-        ETHrefetch();
-        uniSwapAmountOutRefetch();
+      if (selectToken !== "NEST") {
         USDTAllowanceRefetch();
+        uniSwapAmountOutRefetch();
+        if (selectToken === "BNB") {
+          ETHrefetch();
+        } else {
+          tokenBalanceRefetch();
+        }
       }
     }, 5 * 1000);
     return () => {
