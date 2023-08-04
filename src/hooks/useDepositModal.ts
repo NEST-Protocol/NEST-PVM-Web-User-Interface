@@ -249,21 +249,25 @@ function useDepositModal(onClose: () => void) {
       return MaxUint256;
     }
   }, [uniSwapAmountOut]);
-  const { transaction: swapTTT, isError: swapTTTIsError } =
-    useSwapExactTokensForTokens(
-      tokenAmountToBigNumber ?? BigNumber.from("0"),
-      amountOutMin,
-      selectToken === "USDT" && checkAllowance ? swapPathAddress : undefined,
-      NEST_Service,
-      TransactionType.deposit
-    );
-  const { transaction: swapETT, isError: swapETTIsError } = useSwapExactETHForTokens(
+  const {
+    transaction: swapTTT,
+    isLoading: swapTTTIsLoading,
+    refetch: swapTTTRefetch,
+  } = useSwapExactTokensForTokens(
     tokenAmountToBigNumber ?? BigNumber.from("0"),
     amountOutMin,
-    selectToken === "BNB" ? swapPathAddress : undefined,
+    selectToken === "USDT" && checkAllowance ? swapPathAddress : undefined,
     NEST_Service,
     TransactionType.deposit
   );
+  const { transaction: swapETT, isError: swapETTIsError } =
+    useSwapExactETHForTokens(
+      tokenAmountToBigNumber ?? BigNumber.from("0"),
+      amountOutMin,
+      selectToken === "BNB" ? swapPathAddress : undefined,
+      NEST_Service,
+      TransactionType.deposit
+    );
 
   /**
    * main button
@@ -301,7 +305,8 @@ function useDepositModal(onClose: () => void) {
       swapTTT.isLoading ||
       swapETT.isLoading ||
       uniSwapAmountOutIsLoading ||
-      swapTTTIsError || swapETTIsError ||
+      swapTTTIsLoading ||
+      swapETTIsError ||
       pending
     ) {
       return true;
@@ -309,14 +314,14 @@ function useDepositModal(onClose: () => void) {
       return false;
     }
   }, [
-    swapTTTIsError,
+    tokenTransfer.isLoading,
+    tokenApprove.isLoading,
+    swapTTT.isLoading,
+    swapETT.isLoading,
+    uniSwapAmountOutIsLoading,
+    swapTTTIsLoading,
     swapETTIsError,
     pending,
-    swapETT.isLoading,
-    swapTTT.isLoading,
-    tokenApprove.isLoading,
-    tokenTransfer.isLoading,
-    uniSwapAmountOutIsLoading,
   ]);
   const mainButtonDis = useMemo(() => {
     return (
@@ -332,8 +337,13 @@ function useDepositModal(onClose: () => void) {
         if (!checkAllowance) {
           tokenApprove.write?.();
         } else {
-          swapTTT.reset();
-          swapTTT.write?.();
+          (async() => {
+            swapTTTRefetch().then((data) => {
+              console.log(data);
+              swapTTT.reset();
+              swapTTT.write?.();
+            });
+          })()
         }
       } else if (selectToken === "BNB") {
         swapETT.reset();
@@ -348,6 +358,7 @@ function useDepositModal(onClose: () => void) {
     selectToken,
     checkAllowance,
     tokenApprove,
+    swapTTTRefetch,
     swapTTT,
     swapETT,
     tokenTransfer,

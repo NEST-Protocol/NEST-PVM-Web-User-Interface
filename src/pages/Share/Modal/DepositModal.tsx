@@ -39,7 +39,7 @@ const DepositModalBase: FC<DepositModalBaseProps> = ({ ...props }) => {
     mainButtonTitle,
     mainButtonLoading,
     mainButtonDis,
-    mainButtonAction
+    mainButtonAction,
   } = useDepositModal(props.onClose);
 
   const midText = useMemo(() => {
@@ -147,16 +147,7 @@ const DepositModalBase: FC<DepositModalBaseProps> = ({ ...props }) => {
         }}
       />
     );
-  }, [
-    isError,
-    maxCallBack,
-    selectToken,
-    setSelectButton,
-    setSelectToken,
-    setTokenAmount,
-    showBalance,
-    tokenAmount,
-  ]);
+  }, [isError, maxCallBack, selectToken, setSelectButton, setSelectToken, setTokenAmount, showBalance, tokenAmount]);
   const button = useMemo(() => {
     return (
       <MainButton
