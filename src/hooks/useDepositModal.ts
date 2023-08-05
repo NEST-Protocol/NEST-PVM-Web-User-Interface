@@ -265,34 +265,27 @@ function useDepositModal(onClose: () => void) {
     selectToken,
     swapPathAddress,
   ]);
-  const {
-    transaction: swapTTT,
-    isSuccess: swapTTTIsSuccess,
-    isError: swapTTTIsError,
-    config: swapTTTConfig,
-  } = useSwapExactTokensForTokens(
-    uniInputAmount,
-    amountOutMin,
-    TTTPath,
-    NEST_Service,
-    TransactionType.deposit
-  );
+  const { transaction: swapTTT, isLoading: swapTTTIsLoading } =
+    useSwapExactTokensForTokens(
+      uniInputAmount,
+      amountOutMin,
+      TTTPath,
+      NEST_Service,
+      TransactionType.deposit
+    );
   const ETTPath = useMemo(() => {
     return selectToken === "BNB" && amountOutMin.lt(MaxUint256) && !checkBalance
       ? swapPathAddress
       : undefined;
   }, [amountOutMin, checkBalance, selectToken, swapPathAddress]);
-  const {
-    transaction: swapETT,
-    isSuccess: swapETTIsSuccess,
-    isError: swapETTIsError,
-  } = useSwapExactETHForTokens(
-    uniInputAmount,
-    amountOutMin,
-    ETTPath,
-    NEST_Service,
-    TransactionType.deposit
-  );
+  const { transaction: swapETT, isLoading: swapETTIsLoading } =
+    useSwapExactETHForTokens(
+      uniInputAmount,
+      amountOutMin,
+      ETTPath,
+      NEST_Service,
+      TransactionType.deposit
+    );
 
   /**
    * main button
@@ -328,14 +321,26 @@ function useDepositModal(onClose: () => void) {
       tokenTransfer.isLoading ||
       tokenApprove.isLoading ||
       swapTTT.isLoading ||
-      swapETT.isLoading  || swapTTTConfig.request === undefined || 
+      swapETT.isLoading ||
+      swapETTIsLoading ||
+      swapTTTIsLoading ||
+      uniSwapAmountOutIsLoading ||
       pending
     ) {
       return true;
     } else {
       return false;
     }
-  }, [tokenTransfer.isLoading, tokenApprove.isLoading, swapTTT.isLoading, swapETT.isLoading, swapTTTConfig.request, pending]);
+  }, [
+    tokenTransfer.isLoading,
+    tokenApprove.isLoading,
+    swapTTT.isLoading,
+    swapETT.isLoading,
+    swapETTIsLoading,
+    swapTTTIsLoading,
+    uniSwapAmountOutIsLoading,
+    pending,
+  ]);
   const mainButtonDis = useMemo(() => {
     return (
       checkBalance ||
@@ -344,19 +349,15 @@ function useDepositModal(onClose: () => void) {
       parseFloat(tokenAmount) === 0
     );
   }, [checkBalance, checkMax, tokenAmount]);
-  useEffect(() => {
-    
-  }, [uniInputAmount])
+  useEffect(() => {}, [uniInputAmount]);
   const mainButtonAction = useCallback(() => {
-    console.log("点击V2");
+    console.log("点击V3");
     if (!mainButtonDis && !mainButtonLoading) {
-      console.log("点击V3");
+      console.log("点击V4");
       if (selectToken === "USDT") {
         if (!checkAllowance) {
           tokenApprove.write?.();
         } else {
-          console.log(swapTTTIsSuccess, swapTTTIsError);
-          console.log(swapTTTConfig);
           // swapTTT.reset();
           swapTTT.write?.();
         }
@@ -373,9 +374,6 @@ function useDepositModal(onClose: () => void) {
     selectToken,
     checkAllowance,
     tokenApprove,
-    swapTTTIsSuccess,
-    swapTTTIsError,
-    swapTTTConfig,
     swapTTT,
     swapETT,
     tokenTransfer,
@@ -388,13 +386,13 @@ function useDepositModal(onClose: () => void) {
       if (selectToken !== "NEST") {
         USDTAllowanceRefetch();
         uniSwapAmountOutRefetch();
-        if (selectToken === "BNB") {
-          ETHrefetch();
-        } else {
-          tokenBalanceRefetch();
-        }
       }
-    }, 5 * 1000);
+      if (selectToken === "BNB") {
+        ETHrefetch();
+      } else {
+        tokenBalanceRefetch();
+      }
+    }, 30 * 1000);
     return () => {
       clearInterval(time);
     };
