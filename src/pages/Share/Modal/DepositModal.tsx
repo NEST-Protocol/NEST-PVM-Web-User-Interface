@@ -147,7 +147,16 @@ const DepositModalBase: FC<DepositModalBaseProps> = ({ ...props }) => {
         }}
       />
     );
-  }, [isError, maxCallBack, selectToken, setSelectButton, setSelectToken, setTokenAmount, showBalance, tokenAmount]);
+  }, [
+    isError,
+    maxCallBack,
+    selectToken,
+    setSelectButton,
+    setSelectToken,
+    setTokenAmount,
+    showBalance,
+    tokenAmount,
+  ]);
   const button = useMemo(() => {
     return (
       <MainButton

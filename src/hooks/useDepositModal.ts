@@ -344,18 +344,18 @@ function useDepositModal(onClose: () => void) {
     );
   }, [checkBalance, checkMax, tokenAmount]);
   const mainButtonAction = useCallback(() => {
-    console.log("点击V1")
+    console.log("点击V2")
     if (!mainButtonDis && !mainButtonLoading) {
-      console.log("点击V2")
+      console.log("点击V3")
       if (selectToken === "USDT") {
         if (!checkAllowance) {
           tokenApprove.write?.();
         } else {
-          swapTTT.reset();
+          // swapTTT.reset();
           swapTTT.write?.();
         }
       } else if (selectToken === "BNB") {
-        swapETT.reset();
+        // swapETT.reset();
         swapETT.write?.();
       } else {
         tokenTransfer.write?.();
