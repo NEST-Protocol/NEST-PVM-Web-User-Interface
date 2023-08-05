@@ -38,9 +38,6 @@ function useSwapExactTokensForTokens(
       BigNumber.from(time.toFixed(0).toString()),
     ],
     enabled: true,
-    onError: () => {
-      refetch();
-    },
   });
   const gasLimit = useAddGasLimit(config, 30);
   const transaction = useContractWrite({
@@ -84,9 +81,6 @@ export function useSwapExactETHForTokens(
     args: [amountOutMin, path, to, BigNumber.from(time.toFixed(0).toString())],
     enabled: true,
     overrides: { value: amountIn },
-    onError: () => {
-      refetch();
-    },
   });
   const gasLimit = useAddGasLimit(config, 30);
   const transaction = useContractWrite({

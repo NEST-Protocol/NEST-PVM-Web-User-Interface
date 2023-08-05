@@ -176,7 +176,6 @@ function useDepositModal(onClose: () => void) {
   } = useReadSwapAmountOut(defaultInput, swapPathAddress);
   const showPrice = useMemo(() => {
     if (uniSwapAmountOut && selectToken !== "NEST") {
-      console.log(uniSwapAmountOut);
       return parseEther("1")
         .mul(uniSwapAmountOut[uniSwapAmountOut.length - 1])
         .div(defaultInput)
@@ -249,17 +248,39 @@ function useDepositModal(onClose: () => void) {
       return MaxUint256;
     }
   }, [uniSwapAmountOut]);
-  const { transaction: swapTTT } = useSwapExactTokensForTokens(
-    tokenAmountToBigNumber ?? BigNumber.from("0"),
+  const uniInputAmount = useMemo(() => {
+    return tokenAmountToBigNumber ?? BigNumber.from("0");
+  }, [tokenAmountToBigNumber]);
+  const TTTPath = useMemo(() => {
+    return selectToken === "USDT" &&
+      checkAllowance &&
+      amountOutMin.lt(MaxUint256) &&
+      !checkBalance
+      ? swapPathAddress
+      : undefined;
+  }, [
     amountOutMin,
-    selectToken === "USDT" && checkAllowance ? swapPathAddress : undefined,
+    checkAllowance,
+    checkBalance,
+    selectToken,
+    swapPathAddress,
+  ]);
+  const { transaction: swapTTT } = useSwapExactTokensForTokens(
+    uniInputAmount,
+    amountOutMin,
+    TTTPath,
     NEST_Service,
     TransactionType.deposit
   );
+  const ETTPath = useMemo(() => {
+    return selectToken === "BNB" && amountOutMin.lt(MaxUint256) && !checkBalance
+      ? swapPathAddress
+      : undefined;
+  }, [amountOutMin, checkBalance, selectToken, swapPathAddress]);
   const { transaction: swapETT } = useSwapExactETHForTokens(
-    tokenAmountToBigNumber ?? BigNumber.from("0"),
+    uniInputAmount,
     amountOutMin,
-    selectToken === "BNB" ? swapPathAddress : undefined,
+    ETTPath,
     NEST_Service,
     TransactionType.deposit
   );
