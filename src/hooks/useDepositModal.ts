@@ -25,6 +25,7 @@ import useSwapExactTokensForTokens, {
   useSwapExactETHForTokens,
 } from "../contracts/useSwapContract";
 import useReadSwapAmountOut from "../contracts/Read/useReadSwapContract";
+import { sleep } from "../lib/sleep";
 
 function useDepositModal(onClose: () => void) {
   const { isPendingType } = usePendingTransactions();
@@ -33,6 +34,7 @@ function useDepositModal(onClose: () => void) {
   const [selectToken, setSelectToken] = useState<string>("NEST");
   const [selectButton, setSelectButton] = useState<number>();
   const [send, setSend] = useState(false);
+  const [sendApprove, setSendApprove] = useState(false);
 
   const nowToken = useMemo(() => {
     const token = selectToken.getToken();
@@ -253,8 +255,8 @@ function useDepositModal(onClose: () => void) {
   }, [tokenAmountToBigNumber]);
   const TTTPath = useMemo(() => {
     return selectToken === "USDT" &&
-      checkAllowance &&
       amountOutMin.lt(MaxUint256) &&
+      checkAllowance &&
       !checkBalance
       ? swapPathAddress
       : undefined;
@@ -304,6 +306,20 @@ function useDepositModal(onClose: () => void) {
       setSend(true);
     }
   }, [isPendingType, onClose, pending, send]);
+
+  useEffect(() => {
+    if (sendApprove && !pending) {
+      sleep(2000);
+      USDTAllowanceRefetch();
+      setSendApprove(false);
+    } else if (
+      !sendApprove &&
+      pending &&
+      isPendingType(TransactionType.approve)
+    ) {
+      setSendApprove(true);
+    }
+  }, [USDTAllowanceRefetch, isPendingType, pending, sendApprove]);
 
   const mainButtonTitle = useMemo(() => {
     if (selectToken === "USDT") {
@@ -384,25 +400,35 @@ function useDepositModal(onClose: () => void) {
   useEffect(() => {
     const time = setInterval(() => {
       if (selectToken !== "NEST") {
-        USDTAllowanceRefetch();
         uniSwapAmountOutRefetch();
       }
+    }, 30_000);
+    return () => {
+      clearInterval(time);
+    };
+  }, [selectToken, uniSwapAmountOutRefetch]);
+  useEffect(() => {
+    const time = setInterval(() => {
       if (selectToken === "BNB") {
         ETHrefetch();
       } else {
         tokenBalanceRefetch();
       }
-    }, 30 * 1000);
+    }, 30_000);
     return () => {
       clearInterval(time);
     };
-  }, [
-    ETHrefetch,
-    USDTAllowanceRefetch,
-    selectToken,
-    tokenBalanceRefetch,
-    uniSwapAmountOutRefetch,
-  ]);
+  }, [ETHrefetch, selectToken, tokenBalanceRefetch]);
+  useEffect(() => {
+    const time = setInterval(() => {
+      if (selectToken === "USDT") {
+        USDTAllowanceRefetch();
+      }
+    }, 30_000);
+    return () => {
+      clearInterval(time);
+    };
+  }, [USDTAllowanceRefetch, selectToken]);
   return {
     tokenAmount,
     setTokenAmount,
