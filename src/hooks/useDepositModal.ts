@@ -344,7 +344,9 @@ function useDepositModal(onClose: () => void) {
     );
   }, [checkBalance, checkMax, tokenAmount]);
   const mainButtonAction = useCallback(() => {
+    console.log("点击V1")
     if (!mainButtonDis && !mainButtonLoading) {
+      console.log("点击V2")
       if (selectToken === "USDT") {
         if (!checkAllowance) {
           tokenApprove.write?.();
