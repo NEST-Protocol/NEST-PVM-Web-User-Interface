@@ -342,11 +342,6 @@ const FuturesNewOrder: FC<FuturesNewOrderProps> = ({ ...props }) => {
             />
           </Box>
         </Modal>
-        {showDeposit ? (
-          <DepositModal open={true} onClose={() => setShowDeposit(false)} />
-        ) : (
-          <></>
-        )}
 
         <SignModal
           open={showSignModal}
@@ -355,14 +350,19 @@ const FuturesNewOrder: FC<FuturesNewOrderProps> = ({ ...props }) => {
       </>
     );
   }, [
-    setShowDeposit,
     setShowSignModal,
     setShowTriggerNotice,
-    showDeposit,
     showSignModal,
     showTriggerNotice,
     triggerNoticeCallback,
   ]);
+  const depositModal = useMemo(() => {
+    return showDeposit ? (
+      <DepositModal open={true} onClose={() => setShowDeposit(false)} />
+    ) : (
+      <></>
+    )
+  }, [setShowDeposit, showDeposit])
   return (
     <Stack
       sx={(theme) => ({
@@ -374,6 +374,7 @@ const FuturesNewOrder: FC<FuturesNewOrderProps> = ({ ...props }) => {
       })}
     >
       {modals}
+      {depositModal}
       <LongOrShort
         value={longOrShort}
         changeValue={(value: boolean) => setLongOrShort(value)}

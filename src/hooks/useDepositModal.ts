@@ -265,7 +265,12 @@ function useDepositModal(onClose: () => void) {
     selectToken,
     swapPathAddress,
   ]);
-  const { transaction: swapTTT } = useSwapExactTokensForTokens(
+  const {
+    transaction: swapTTT,
+    isSuccess: swapTTTIsSuccess,
+    isError: swapTTTIsError,
+    config: swapTTTConfig,
+  } = useSwapExactTokensForTokens(
     uniInputAmount,
     amountOutMin,
     TTTPath,
@@ -277,7 +282,11 @@ function useDepositModal(onClose: () => void) {
       ? swapPathAddress
       : undefined;
   }, [amountOutMin, checkBalance, selectToken, swapPathAddress]);
-  const { transaction: swapETT } = useSwapExactETHForTokens(
+  const {
+    transaction: swapETT,
+    isSuccess: swapETTIsSuccess,
+    isError: swapETTIsError,
+  } = useSwapExactETHForTokens(
     uniInputAmount,
     amountOutMin,
     ETTPath,
@@ -319,22 +328,14 @@ function useDepositModal(onClose: () => void) {
       tokenTransfer.isLoading ||
       tokenApprove.isLoading ||
       swapTTT.isLoading ||
-      swapETT.isLoading ||
-      uniSwapAmountOutIsLoading ||
+      swapETT.isLoading  || swapTTTConfig.request === undefined || 
       pending
     ) {
       return true;
     } else {
       return false;
     }
-  }, [
-    tokenTransfer.isLoading,
-    tokenApprove.isLoading,
-    swapTTT.isLoading,
-    swapETT.isLoading,
-    uniSwapAmountOutIsLoading,
-    pending,
-  ]);
+  }, [tokenTransfer.isLoading, tokenApprove.isLoading, swapTTT.isLoading, swapETT.isLoading, swapTTTConfig.request, pending]);
   const mainButtonDis = useMemo(() => {
     return (
       checkBalance ||
@@ -343,14 +344,19 @@ function useDepositModal(onClose: () => void) {
       parseFloat(tokenAmount) === 0
     );
   }, [checkBalance, checkMax, tokenAmount]);
+  useEffect(() => {
+    
+  }, [uniInputAmount])
   const mainButtonAction = useCallback(() => {
-    console.log("点击V2")
+    console.log("点击V2");
     if (!mainButtonDis && !mainButtonLoading) {
-      console.log("点击V3")
+      console.log("点击V3");
       if (selectToken === "USDT") {
         if (!checkAllowance) {
           tokenApprove.write?.();
         } else {
+          console.log(swapTTTIsSuccess, swapTTTIsError);
+          console.log(swapTTTConfig);
           // swapTTT.reset();
           swapTTT.write?.();
         }
@@ -367,6 +373,9 @@ function useDepositModal(onClose: () => void) {
     selectToken,
     checkAllowance,
     tokenApprove,
+    swapTTTIsSuccess,
+    swapTTTIsError,
+    swapTTTConfig,
     swapTTT,
     swapETT,
     tokenTransfer,
