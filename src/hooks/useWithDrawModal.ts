@@ -153,7 +153,7 @@ function useWithDrawModal(onClose: (res?: boolean) => void) {
       return;
     } else {
       setLoading(true);
-      // withdraw();
+      withdraw();
     }
   }, [mainButtonDis, mainButtonLoading, withdraw]);
 

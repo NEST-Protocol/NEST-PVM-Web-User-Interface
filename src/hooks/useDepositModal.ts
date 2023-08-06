@@ -215,12 +215,12 @@ function useDepositModal(onClose: () => void) {
   const mainButtonAction = useCallback(() => {
     if (!mainButtonDis && !mainButtonLoading) {
       if (selectToken === "BNB" && sendTransaction) {
-        // sendTransaction();
+        sendTransaction();
       } else {
-        // tokenTransfer.write?.();
+        tokenTransfer.write?.();
       }
     }
-  }, [mainButtonDis, mainButtonLoading, selectToken, sendTransaction]);
+  }, [mainButtonDis, mainButtonLoading, selectToken, sendTransaction, tokenTransfer]);
   /**
    * update
    */
