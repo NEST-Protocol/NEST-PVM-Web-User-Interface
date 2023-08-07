@@ -19,7 +19,7 @@ function useTokenApprove(
     address: tokenAddress,
     abi: ERC20ABI,
     functionName: "approve",
-    args: [to, amount],
+    args: [to, BigInt(amount.toString())],
     enabled: true,
   });
   const transaction = useContractWrite(config);
@@ -65,12 +65,12 @@ export function useTokenTransfer(
     address: token,
     abi: ERC20ABI,
     functionName: "transfer",
-    args: [toAddress, amount],
+    args: [toAddress, BigInt(amount.toString())],
     enabled: true,
   });
   const transaction = useContractWrite({
     ...config,
-    request: { ...config.request, value: BigNumber.from("0") },
+    request: { ...config.request, value: BigInt(0) },
   });
   useEffect(() => {
     if (transaction.data) {

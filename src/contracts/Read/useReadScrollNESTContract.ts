@@ -15,9 +15,7 @@ export function useReadScrollNESTRemain(account: string, target: string) {
     abi: ScrollNESTABI,
     functionName: "remain",
     args: [target],
-    overrides: {
-      from: account as `0x${string}`,
-    },
+    account: account as `0x${string}`,
   });
 
   const remain: BigNumber | undefined = useMemo(() => {
@@ -25,7 +23,7 @@ export function useReadScrollNESTRemain(account: string, target: string) {
       if (remainData === undefined) {
         return undefined;
       }
-      return remainData as BigNumber;
+      return (remainData as BigInt).toBigNumber();
     } else {
       return undefined;
     }

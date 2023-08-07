@@ -152,9 +152,9 @@ const SwapInputItem: FC<SwapInputItemProps> = ({ children, ...props }) => {
                   background: theme.normal.bg1,
                 },
               })}
+              key={`SelectTokenList + ${index}`}
             >
               <OneIconWithString
-                key={`SelectTokenList + ${index}`}
                 icon={item.icon}
                 title={item.title}
                 selected={props.tokenName === item.title}

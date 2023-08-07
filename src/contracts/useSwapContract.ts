@@ -25,24 +25,22 @@ function useSwapExactTokensForTokens(
       return SwapContract[chainsData.chainId] as `0x${string}`;
     }
   }, [amountIn, chainsData.chainId, path, to]);
-
   const { config, isLoading } = usePrepareContractWrite({
     address: address,
     abi: UNISwapV2ABI,
     functionName: "swapExactTokensForTokens",
     args: [
-      amountIn,
-      amountOutMin,
+      BigInt(amountIn.toString()),
+      BigInt(amountOutMin.toString()),
       path,
       to,
-      BigNumber.from(time.toFixed(0).toString()),
+      BigInt(time.toFixed(0)),
     ],
     enabled: true,
   });
   const gasLimit = useAddGasLimit(config, 30);
   const transaction = useContractWrite({
     ...config,
-    request: { ...config.request, gasLimit: gasLimit },
   });
   useEffect(() => {
     if (transaction.data) {
@@ -79,14 +77,13 @@ export function useSwapExactETHForTokens(
     address: address,
     abi: UNISwapV2ABI,
     functionName: "swapExactETHForTokens",
-    args: [amountOutMin, path, to, BigNumber.from(time.toFixed(0).toString())],
+    args: [amountOutMin.toBigInt(), path, to, BigInt(time.toFixed(0))],
     enabled: true,
-    overrides: { value: amountIn },
+    value: amountIn.toBigInt(),
   });
   const gasLimit = useAddGasLimit(config, 30);
   const transaction = useContractWrite({
     ...config,
-    request: { ...config.request, gasLimit: gasLimit },
   });
 
   useEffect(() => {

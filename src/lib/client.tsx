@@ -5,7 +5,7 @@ import {
   lightTheme,
 } from "@rainbow-me/rainbowkit";
 import { FC } from "react";
-import { configureChains, createClient, mainnet, WagmiConfig } from "wagmi";
+import { configureChains, createConfig, mainnet, WagmiConfig } from "wagmi";
 import { bsc, bscTestnet } from "wagmi/chains";
 import { jsonRpcProvider } from "wagmi/providers/jsonRpc";
 
@@ -14,11 +14,12 @@ import {
   coinbaseWallet,
   walletConnectWallet,
   trustWallet,
+  okxWallet,
 } from "@rainbow-me/rainbowkit/wallets";
 
 import { infuraProvider } from "wagmi/providers/infura";
 import { ProviderProps } from "./provider";
-import { okxWallet } from "./okxWallet";
+
 import {
   MetaMask,
   CoinbaseWallet,
@@ -54,7 +55,7 @@ const scrollAlphaTestnet = {
   testnet: true,
 };
 
-const { chains, provider, webSocketProvider } = configureChains(
+const { chains, publicClient } = configureChains(
   // [bsc, scrollAlphaTestnet],
   [bscTestnet],
   // [bsc],
@@ -81,18 +82,17 @@ const { chains, provider, webSocketProvider } = configureChains(
         }
       },
     }),
-  ],
-  { targetQuorum: 1 }
+  ]
 );
 
 export const Wallets = [
   {
-    wallet: metaMaskWallet({ chains }),
+    wallet: metaMaskWallet({ projectId: "NEST", chains: chains }),
     icon: MetaMask,
     name: "MetaMask",
   },
   {
-    wallet: walletConnectWallet({ chains }),
+    wallet: walletConnectWallet({ projectId: "NEST", chains: chains }),
     icon: WalletConnect,
     name: "WalletConnect",
   },
@@ -101,11 +101,19 @@ export const Wallets = [
     icon: CoinbaseWallet,
     name: "coinbase Wallet",
   },
-  { wallet: trustWallet({ chains }), icon: TrustWallet, name: "Trust Wallet" },
-  { wallet: okxWallet({ chains }), icon: OKX, name: "OKX Wallet" },
+  {
+    wallet: trustWallet({ projectId: "NEST", chains: chains }),
+    icon: TrustWallet,
+    name: "Trust Wallet",
+  },
+  {
+    wallet: okxWallet({ projectId: "NEST", chains: chains }),
+    icon: OKX,
+    name: "OKX Wallet",
+  },
 ];
 
-const client = createClient({
+const config = createConfig({
   autoConnect: true,
   connectors: connectorsForWallets([
     {
@@ -113,14 +121,13 @@ const client = createClient({
       wallets: Wallets.map((item) => item.wallet),
     },
   ]),
-  provider,
-  webSocketProvider,
+  publicClient,
 });
 
 const WalletProvider: FC<ProviderProps> = ({ children }) => {
   const { nowTheme } = useTheme();
   return (
-    <WagmiConfig client={client}>
+    <WagmiConfig config={config}>
       <RainbowKitProvider
         theme={nowTheme.isLight ? lightTheme() : darkTheme()}
         chains={chains}

@@ -30,7 +30,7 @@ function useReadSwapAmountOut(
     address: address,
     abi: UNISwapABI,
     functionName: "getAmountsOut",
-    args: [amountIn, path],
+    args: [amountIn ? BigInt(amountIn.toString()) : BigInt(0), path],
   });
 
   const uniSwapAmountOut: BigNumber[] | undefined = useMemo(() => {
@@ -38,7 +38,9 @@ function useReadSwapAmountOut(
       if (uniSwapAmountOutData === undefined) {
         return undefined;
       }
-      return uniSwapAmountOutData as BigNumber[];
+      return (uniSwapAmountOutData as any[]).map((item) =>
+        BigNumber.from(item.toString())
+      );
     } else {
       return undefined;
     }
