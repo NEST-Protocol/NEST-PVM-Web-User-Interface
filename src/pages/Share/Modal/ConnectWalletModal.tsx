@@ -88,46 +88,16 @@ const ConnectWalletModalBase: FC<ConnectWalletModalBaseProps> = ({
       alignItems={"center"}
       marginTop={"16px"}
     >
-      {wallets.slice(0, 3).map((item, index) => {
-        const Icon = Wallets[index].icon;
-        const name = Wallets[index].name;
+      {Wallets.slice(0, 3).map((item, index) => {
+        const Icon = item.icon;
         return (
           <ItemBox
             key={`WalletModalRow1 + ${index}`}
-            // eslint-disable-next-line react-hooks/rules-of-hooks
-            onClick={useCallback(async () => {
-              if (isBigMobile) {
-                item.connect?.();
-                let callbackFired = false;
-
-                item.onConnecting?.(async () => {
-                  if (callbackFired) return;
-                  callbackFired = true;
-
-                  if (item.mobile?.getUri) {
-                    const mobileUri = await item.mobile.getUri();
-
-                    if (item.connector.id === "walletConnect") {
-                      setWalletConnectDeepLink({ mobileUri, name });
-                    }
-
-                    if (mobileUri.startsWith("http")) {
-                      const link = document.createElement("a");
-                      link.href = mobileUri;
-                      link.target = "_blank";
-                      link.rel = "noreferrer noopener";
-                      link.click();
-                    } else {
-                      window.location.href = mobileUri;
-                    }
-                  }
-                });
-              } else {
-                connectData.connect({
-                  connector: connectData.connectors[index],
-                });
-              }
-            }, [index, item, name])}
+            onClick={async () => {
+              connectData.connect({
+                connector: connectData.connectors[index],
+              });
+            }}
           >
             <div className="WalletIcon">
               <Icon />
@@ -146,46 +116,16 @@ const ConnectWalletModalBase: FC<ConnectWalletModalBaseProps> = ({
       alignItems={"center"}
       marginTop={"16px"}
     >
-      {wallets.slice(3, 5).map((item, index) => {
-        const Icon = Wallets[index + 3].icon;
-        const name = Wallets[index + 3].name;
+      {Wallets.slice(3, 5).map((item, index) => {
+        const Icon = item.icon;
         return (
           <ItemBox
             key={`WalletModalRow2 + ${index}`}
-            // eslint-disable-next-line react-hooks/rules-of-hooks
-            onClick={useCallback(async () => {
-              if (isBigMobile) {
-                item.connect?.();
-                let callbackFired = false;
-
-                item.onConnecting?.(async () => {
-                  if (callbackFired) return;
-                  callbackFired = true;
-
-                  if (item.mobile?.getUri) {
-                    const mobileUri = await item.mobile.getUri();
-
-                    if (item.connector.id === "walletConnect") {
-                      setWalletConnectDeepLink({ mobileUri, name });
-                    }
-
-                    if (mobileUri.startsWith("http")) {
-                      const link = document.createElement("a");
-                      link.href = mobileUri;
-                      link.target = "_blank";
-                      link.rel = "noreferrer noopener";
-                      link.click();
-                    } else {
-                      window.location.href = mobileUri;
-                    }
-                  }
-                });
-              } else {
-                connectData.connect({
-                  connector: connectData.connectors[index + 3],
-                });
-              }
-            }, [index, item, name])}
+            onClick={async () => {
+              connectData.connect({
+                connector: connectData.connectors[index],
+              });
+            }}
           >
             <div className="WalletIcon">
               <Icon />
