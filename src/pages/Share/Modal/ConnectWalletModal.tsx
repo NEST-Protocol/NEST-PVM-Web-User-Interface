@@ -89,14 +89,37 @@ const ConnectWalletModalBase: FC<ConnectWalletModalBaseProps> = ({
       marginTop={"16px"}
     >
       {Wallets.slice(0, 3).map((item, index) => {
-        const Icon = item.icon;
+        const Icon = Wallets[index].icon;
+        const name = Wallets[index].name;
         return (
           <ItemBox
             key={`WalletModalRow1 + ${index}`}
             onClick={async () => {
-              connectData.connect({
-                connector: connectData.connectors[index],
-              });
+              if (isBigMobile) {
+                const connector = connectData.connectors[index];
+                connector.connect?.();
+                const mobileUri = item.wallet.downloadUrls?.mobile;
+
+                if (mobileUri) {
+                  if (connector.id === "walletConnect") {
+                    setWalletConnectDeepLink({ mobileUri, name });
+                  }
+
+                  if (mobileUri.startsWith("http")) {
+                    const link = document.createElement("a");
+                    link.href = mobileUri;
+                    link.target = "_blank";
+                    link.rel = "noreferrer noopener";
+                    link.click();
+                  } else {
+                    window.location.href = mobileUri;
+                  }
+                }
+              } else {
+                connectData.connect({
+                  connector: connectData.connectors[index],
+                });
+              }
             }}
           >
             <div className="WalletIcon">
@@ -116,16 +139,46 @@ const ConnectWalletModalBase: FC<ConnectWalletModalBaseProps> = ({
       alignItems={"center"}
       marginTop={"16px"}
     >
-      {Wallets.slice(3, 5).map((item, index) => {
-        const Icon = item.icon;
+      {wallets.slice(3, 5).map((item, index) => {
+        const Icon = Wallets[index + 3].icon;
+        const name = Wallets[index + 3].name;
         return (
           <ItemBox
             key={`WalletModalRow2 + ${index}`}
-            onClick={async () => {
-              connectData.connect({
-                connector: connectData.connectors[index],
-              });
-            }}
+            // eslint-disable-next-line react-hooks/rules-of-hooks
+            onClick={useCallback(async () => {
+              if (isBigMobile) {
+                item.connect?.();
+                let callbackFired = false;
+
+                item.onConnecting?.(async () => {
+                  if (callbackFired) return;
+                  callbackFired = true;
+
+                  if (item.mobile?.getUri) {
+                    const mobileUri = await item.mobile.getUri();
+
+                    if (item.connector.id === "walletConnect") {
+                      setWalletConnectDeepLink({ mobileUri, name });
+                    }
+
+                    if (mobileUri.startsWith("http")) {
+                      const link = document.createElement("a");
+                      link.href = mobileUri;
+                      link.target = "_blank";
+                      link.rel = "noreferrer noopener";
+                      link.click();
+                    } else {
+                      window.location.href = mobileUri;
+                    }
+                  }
+                });
+              } else {
+                connectData.connect({
+                  connector: connectData.connectors[index + 3],
+                });
+              }
+            }, [index, item, name])}
           >
             <div className="WalletIcon">
               <Icon />
@@ -143,7 +196,10 @@ const ConnectWalletModalBase: FC<ConnectWalletModalBaseProps> = ({
   return (
     <BaseStack spacing={0}>
       <p className="WalletLearnMore">
-        <NESTa href="https://finance.docs.nestprotocol.org/#connect-wallet" target={"_blank"}>
+        <NESTa
+          href="https://finance.docs.nestprotocol.org/#connect-wallet"
+          target={"_blank"}
+        >
           <Trans>Learn more</Trans>{" "}
         </NESTa>
         <Trans>about connecting wallets</Trans>
@@ -152,7 +208,9 @@ const ConnectWalletModalBase: FC<ConnectWalletModalBaseProps> = ({
       {isMore ? (
         Row2
       ) : (
-        <MoreButton onClick={() => setIsMore(!isMore)}><Trans>More</Trans></MoreButton>
+        <MoreButton onClick={() => setIsMore(!isMore)}>
+          <Trans>More</Trans>
+        </MoreButton>
       )}
     </BaseStack>
   );
