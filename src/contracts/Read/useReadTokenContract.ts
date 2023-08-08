@@ -31,7 +31,7 @@ function useReadTokenBalance(tokenAddress: `0x${string}`, account: string) {
       if (balanceOfData === undefined) {
         return undefined;
       }
-      return (balanceOfData as BigInt).toBigNumber();
+      return BigNumber.from((balanceOfData as any).toString());
     } else {
       return undefined;
     }
@@ -67,7 +67,7 @@ export function useReadTokenAllowance(
       if (allowanceData === undefined) {
         return undefined;
       }
-      return (allowanceData as BigInt).toBigNumber();
+      return BigNumber.from((allowanceData as any).toString());
     } else {
       return undefined;
     }

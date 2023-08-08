@@ -97,7 +97,6 @@ const ConnectWalletModalBase: FC<ConnectWalletModalBaseProps> = ({
             key={`WalletModalRow1 + ${index}`}
             // eslint-disable-next-line react-hooks/rules-of-hooks
             onClick={useCallback(async () => {
-              item.connect?.()
               if (isBigMobile) {
                 let callbackFired = false;
 
@@ -123,6 +122,18 @@ const ConnectWalletModalBase: FC<ConnectWalletModalBaseProps> = ({
                     }
                   }
                 });
+              } else {
+                if (item.ready) {
+                  item.connect?.()
+                }
+                const getDesktopDeepLink = item.desktop?.getUri;
+                if (getDesktopDeepLink) {
+                  // if desktop deep link, wait for uri
+                  setTimeout(async () => {
+                    const uri = await getDesktopDeepLink();
+                    window.open(uri, '_self');
+                  }, 0);
+                }
               }
             }, [item, name])}
           >
