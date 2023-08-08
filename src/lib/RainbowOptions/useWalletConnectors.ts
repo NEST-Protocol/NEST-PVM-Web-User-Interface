@@ -1,7 +1,6 @@
 import { Connector, useConnect } from "wagmi";
 import { flatten } from "./flatten";
 import { indexBy } from "./indexBy";
-import { isNotNullish } from "./isNotNullish";
 import {
   useInitialChainId,
   useRainbowKitChains,
@@ -65,11 +64,8 @@ export function useWalletConnectors(): WalletConnector[] {
     (walletInstance) => walletInstance.id
   );
 
-  const MAX_RECENT_WALLETS = 3;
   const recentWallets: WalletInstance[] = getRecentWalletIds()
     .map((walletId) => walletInstanceById[walletId])
-    .filter(isNotNullish)
-    .slice(0, MAX_RECENT_WALLETS);
 
   const groupedWallets: WalletInstance[] = [
     ...recentWallets,
