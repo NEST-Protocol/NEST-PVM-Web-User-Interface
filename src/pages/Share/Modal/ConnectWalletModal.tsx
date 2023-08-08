@@ -88,39 +88,48 @@ const ConnectWalletModalBase: FC<ConnectWalletModalBaseProps> = ({
       alignItems={"center"}
       marginTop={"16px"}
     >
-      {Wallets.slice(0, 3).map((item, index) => {
-        const Icon = Wallets[index].icon;
-        const name = Wallets[index].name;
+      {wallets.slice(0, 3).map((item, index) => {
+        const Icon = Wallets.filter((item2) => item2.wallet.id === item.id)[0]
+          .icon;
+        const name = item.name;
         return (
           <ItemBox
             key={`WalletModalRow1 + ${index}`}
-            onClick={async () => {
+            // eslint-disable-next-line react-hooks/rules-of-hooks
+            onClick={useCallback(async () => {
               if (isBigMobile) {
-                const connector = connectData.connectors[index];
-                connector.connect?.();
-                const mobileUri = item.wallet.downloadUrls?.mobile;
+                item.connect?.();
 
-                if (mobileUri) {
-                  if (connector.id === "walletConnect") {
-                    setWalletConnectDeepLink({ mobileUri, name });
-                  }
+                let callbackFired = false;
 
-                  if (mobileUri.startsWith("http")) {
-                    const link = document.createElement("a");
-                    link.href = mobileUri;
-                    link.target = "_blank";
-                    link.rel = "noreferrer noopener";
-                    link.click();
-                  } else {
-                    window.location.href = mobileUri;
+                item.onConnecting?.(async () => {
+                  if (callbackFired) return;
+                  callbackFired = true;
+                  const getMobileUri = item.mobile?.getUri;
+                  if (getMobileUri) {
+                    const mobileUri = await getMobileUri();
+
+                    if (item.connector.id === "walletConnect") {
+                      setWalletConnectDeepLink({ mobileUri, name });
+                    }
+
+                    if (mobileUri.startsWith("http")) {
+                      const link = document.createElement("a");
+                      link.href = mobileUri;
+                      link.target = "_blank";
+                      link.rel = "noreferrer noopener";
+                      link.click();
+                    } else {
+                      window.location.href = mobileUri;
+                    }
                   }
-                }
+                });
               } else {
                 connectData.connect({
                   connector: connectData.connectors[index],
                 });
               }
-            }}
+            }, [index, item, name])}
           >
             <div className="WalletIcon">
               <Icon />
@@ -139,39 +148,48 @@ const ConnectWalletModalBase: FC<ConnectWalletModalBaseProps> = ({
       alignItems={"center"}
       marginTop={"16px"}
     >
-      {Wallets.slice(3, 5).map((item, index) => {
-        const Icon = Wallets[index + 3].icon;
-        const name = Wallets[index + 3].name;
+      {wallets.slice(3, 5).map((item, index) => {
+        const Icon = Wallets.filter((item2) => item2.wallet.id === item.id)[0]
+          .icon;
+        const name = item.name;
         return (
           <ItemBox
             key={`WalletModalRow2 + ${index}`}
-            onClick={async () => {
+            // eslint-disable-next-line react-hooks/rules-of-hooks
+            onClick={useCallback(async () => {
               if (isBigMobile) {
-                const connector = connectData.connectors[index+3];
-                connector.connect?.();
-                const mobileUri = item.wallet.downloadUrls?.mobile;
+                item.connect?.();
 
-                if (mobileUri) {
-                  if (connector.id === "walletConnect") {
-                    setWalletConnectDeepLink({ mobileUri, name });
-                  }
+                let callbackFired = false;
 
-                  if (mobileUri.startsWith("http")) {
-                    const link = document.createElement("a");
-                    link.href = mobileUri;
-                    link.target = "_blank";
-                    link.rel = "noreferrer noopener";
-                    link.click();
-                  } else {
-                    window.location.href = mobileUri;
+                item.onConnecting?.(async () => {
+                  if (callbackFired) return;
+                  callbackFired = true;
+                  const getMobileUri = item.mobile?.getUri;
+                  if (getMobileUri) {
+                    const mobileUri = await getMobileUri();
+
+                    if (item.connector.id === "walletConnect") {
+                      setWalletConnectDeepLink({ mobileUri, name });
+                    }
+
+                    if (mobileUri.startsWith("http")) {
+                      const link = document.createElement("a");
+                      link.href = mobileUri;
+                      link.target = "_blank";
+                      link.rel = "noreferrer noopener";
+                      link.click();
+                    } else {
+                      window.location.href = mobileUri;
+                    }
                   }
-                }
+                });
               } else {
                 connectData.connect({
-                  connector: connectData.connectors[index +3],
+                  connector: connectData.connectors[index],
                 });
               }
-            }}
+            }, [index, item, name])}
           >
             <div className="WalletIcon">
               <Icon />

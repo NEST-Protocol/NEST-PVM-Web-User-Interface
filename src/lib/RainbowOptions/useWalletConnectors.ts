@@ -23,6 +23,8 @@ export interface WalletConnector extends WalletInstance {
   onConnecting?: (fn: () => void) => void;
   showWalletConnectModal?: () => void;
   recent: boolean;
+  mobileDownloadUrl?: string;
+  extensionDownloadUrl?: string;
 }
 
 export function useWalletConnectors(): WalletConnector[] {
