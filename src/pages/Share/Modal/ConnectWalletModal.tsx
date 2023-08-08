@@ -97,11 +97,8 @@ const ConnectWalletModalBase: FC<ConnectWalletModalBaseProps> = ({
             key={`WalletModalRow1 + ${index}`}
             // eslint-disable-next-line react-hooks/rules-of-hooks
             onClick={useCallback(async () => {
+              item.connect?.()
               if (isBigMobile) {
-                alert(item.connector)
-                connectData.connect({
-                  connector: item.connector,
-                });
                 let callbackFired = false;
 
                 item.onConnecting?.(async () => {
@@ -125,10 +122,6 @@ const ConnectWalletModalBase: FC<ConnectWalletModalBaseProps> = ({
                       window.location.href = mobileUri;
                     }
                   }
-                });
-              } else {
-                connectData.connect({
-                  connector: item.connector,
                 });
               }
             }, [item, name])}
@@ -159,10 +152,8 @@ const ConnectWalletModalBase: FC<ConnectWalletModalBaseProps> = ({
             key={`WalletModalRow2 + ${index}`}
             // eslint-disable-next-line react-hooks/rules-of-hooks
             onClick={useCallback(async () => {
+              item.connect?.()
               if (isBigMobile) {
-                connectData.connect({
-                  connector: item.connector,
-                });
                 let callbackFired = false;
 
                 item.onConnecting?.(async () => {
@@ -186,10 +177,6 @@ const ConnectWalletModalBase: FC<ConnectWalletModalBaseProps> = ({
                       window.location.href = mobileUri;
                     }
                   }
-                });
-              } else {
-                connectData.connect({
-                  connector: item.connector,
                 });
               }
             }, [item, name])}
