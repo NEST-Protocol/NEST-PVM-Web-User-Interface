@@ -84,19 +84,17 @@ const { chains, publicClient } = configureChains(
     }),
   ]
 );
-
+const PROJECT_ID = "4ea5acecf1faa0887415ff933691f96f";
 export const Wallets = [
   {
-    wallet: metaMaskWallet({ projectId: "NEST", chains: chains }),
+    wallet: metaMaskWallet({ projectId: PROJECT_ID, chains: chains }),
     icon: MetaMask,
     name: "MetaMask",
   },
   {
     wallet: walletConnectWallet({
       chains: chains,
-      options: { projectId: "NEST", showQrModal: true },
-      projectId: "NEST",
-      version: "2",
+      projectId: PROJECT_ID,
     }),
     icon: WalletConnect,
     name: "WalletConnect",
@@ -107,12 +105,12 @@ export const Wallets = [
     name: "coinbase Wallet",
   },
   {
-    wallet: trustWallet({ projectId: "NEST", chains: chains, walletConnectVersion: "2" }),
+    wallet: trustWallet({ projectId: PROJECT_ID, chains: chains }),
     icon: TrustWallet,
     name: "Trust Wallet",
   },
   {
-    wallet: okxWallet({ projectId: "NEST", chains: chains,walletConnectVersion:"2" }),
+    wallet: okxWallet({ projectId: PROJECT_ID, chains: chains }),
     icon: OKX,
     name: "OKX Wallet",
   },
