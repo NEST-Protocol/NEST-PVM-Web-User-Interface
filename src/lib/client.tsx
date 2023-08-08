@@ -92,7 +92,12 @@ export const Wallets = [
     name: "MetaMask",
   },
   {
-    wallet: walletConnectWallet({ projectId: "NEST", chains: chains }),
+    wallet: walletConnectWallet({
+      chains: chains,
+      options: { projectId: "NEST", showQrModal: true },
+      projectId: "NEST",
+      version: "2",
+    }),
     icon: WalletConnect,
     name: "WalletConnect",
   },
@@ -102,12 +107,12 @@ export const Wallets = [
     name: "coinbase Wallet",
   },
   {
-    wallet: trustWallet({ projectId: "NEST", chains: chains }),
+    wallet: trustWallet({ projectId: "NEST", chains: chains, walletConnectVersion: "2" }),
     icon: TrustWallet,
     name: "Trust Wallet",
   },
   {
-    wallet: okxWallet({ projectId: "NEST", chains: chains }),
+    wallet: okxWallet({ projectId: "NEST", chains: chains,walletConnectVersion:"2" }),
     icon: OKX,
     name: "OKX Wallet",
   },
