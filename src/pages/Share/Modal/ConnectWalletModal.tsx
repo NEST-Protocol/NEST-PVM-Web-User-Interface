@@ -98,6 +98,7 @@ const ConnectWalletModalBase: FC<ConnectWalletModalBaseProps> = ({
             // eslint-disable-next-line react-hooks/rules-of-hooks
             onClick={useCallback(async () => {
               if (isBigMobile) {
+                alert(item.connector)
                 connectData.connect({
                   connector: item.connector,
                 });
