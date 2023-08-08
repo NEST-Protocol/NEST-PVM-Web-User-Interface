@@ -97,9 +97,13 @@ const ConnectWalletModalBase: FC<ConnectWalletModalBaseProps> = ({
             key={`WalletModalRow1 + ${index}`}
             // eslint-disable-next-line react-hooks/rules-of-hooks
             onClick={useCallback(async () => {
+              const connector = connectData.connectors.filter(
+                (item2) => item2.id === item.id
+              )[0];
               if (isBigMobile) {
-                item.connect?.();
-
+                connectData.connect({
+                  connector: connector,
+                });
                 let callbackFired = false;
 
                 item.onConnecting?.(async () => {
@@ -126,10 +130,10 @@ const ConnectWalletModalBase: FC<ConnectWalletModalBaseProps> = ({
                 });
               } else {
                 connectData.connect({
-                  connector: connectData.connectors[index],
+                  connector: connector,
                 });
               }
-            }, [index, item, name])}
+            }, [item, name])}
           >
             <div className="WalletIcon">
               <Icon />
@@ -157,9 +161,13 @@ const ConnectWalletModalBase: FC<ConnectWalletModalBaseProps> = ({
             key={`WalletModalRow2 + ${index}`}
             // eslint-disable-next-line react-hooks/rules-of-hooks
             onClick={useCallback(async () => {
+              const connector = connectData.connectors.filter(
+                (item2) => item2.id === item.id
+              )[0];
               if (isBigMobile) {
-                item.connect?.();
-
+                connectData.connect({
+                  connector: connector,
+                });
                 let callbackFired = false;
 
                 item.onConnecting?.(async () => {
@@ -186,10 +194,10 @@ const ConnectWalletModalBase: FC<ConnectWalletModalBaseProps> = ({
                 });
               } else {
                 connectData.connect({
-                  connector: connectData.connectors[index],
+                  connector: connector,
                 });
               }
-            }, [index, item, name])}
+            }, [item, name])}
           >
             <div className="WalletIcon">
               <Icon />
