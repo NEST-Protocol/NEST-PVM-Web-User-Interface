@@ -91,7 +91,7 @@ const ConnectWalletModalBase: FC<ConnectWalletModalBaseProps> = ({
         if (item.name === "trustwallet") {
           connectData.connect({
             connector: connectData.connectors.filter(
-              (item) => item.id === "inject"
+              (item) => item.id === "injected"
             )[0],
           });
         } else {
