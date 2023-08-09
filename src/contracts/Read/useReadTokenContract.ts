@@ -19,6 +19,7 @@ function useReadTokenBalance(tokenAddress: `0x${string}`, account: string) {
     isRefetching: balanceOfIsRefetching,
     isSuccess: balanceOfIsSuccess,
     refetch: balanceOfRefetch,
+    error
   } = useContractRead({
     address: token,
     abi: ERC20ABI,
@@ -42,6 +43,7 @@ function useReadTokenBalance(tokenAddress: `0x${string}`, account: string) {
     balanceOfIsRefetching,
     balanceOfIsSuccess,
     balanceOfRefetch,
+    error
   };
 }
 
