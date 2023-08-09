@@ -197,6 +197,7 @@ msgstr "Số lượng"
 msgid "Approval required"
 msgstr "Yêu cầu phê duyệt"
 
+#: src/hooks/useDepositModal.ts
 #: src/hooks/useSwap.ts
 #: src/hooks/useTransactionReceipt.ts
 #: src/pages/Futures/Modal/ApproveNoticeModal.tsx
@@ -385,6 +386,7 @@ msgid "Deflationary economic model. The more users trade, the more $NEST will be
 msgstr "Mô hình kinh tế giảm phát. Khi càng nhiều người dùng giao dịch, lượng $NEST bị tiêu hủy càng nhiều."
 
 #: src/components/NormalInput/NESTInput.tsx
+#: src/hooks/useDepositModal.ts
 #: src/hooks/useDepositModal.ts
 #: src/pages/Overview/Overview.tsx
 #: src/pages/Personal/Personal.tsx

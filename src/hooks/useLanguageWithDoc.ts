@@ -14,6 +14,8 @@ function useLanguageWithDoc() {
       return "https://www.nestprotocol.org/blogs/Vietnamese-How-to-make-your-first-trade-on-NESTFi-with-Lightning-Trade-feature";
     } else if (locale === "tr") {
       return "https://www.nestprotocol.org/blogs/Turkish-How-to-make-your-first-trade-on-NESTFi-with-Lightning-Trade-feature";
+    } else if (locale === "ru") {
+      return "https://www.nestprotocol.org/blogs/Russian-How-to-make-your-first-trade-on-NESTFi-with-Lightning-Trade-feature";
     } else {
       return "https://www.nestprotocol.org/blogs/How-to-make-your-first-trade-on-NESTFi-with-Lightning-Trade-feature";
     }

@@ -7,6 +7,7 @@ import {
 } from "./RainbowKitChainContext";
 import { addRecentWalletId, getRecentWalletIds } from "./recentWalletIds";
 import { Wallet } from "@rainbow-me/rainbowkit";
+import useNEST from "../../hooks/useNEST";
 
 export type WalletInstance = Omit<Wallet, "createConnector" | "hidden"> &
   ReturnType<Wallet["createConnector"]> & {
@@ -29,7 +30,10 @@ export interface WalletConnector extends WalletInstance {
 export function useWalletConnectors(): WalletConnector[] {
   const rainbowKitChains = useRainbowKitChains();
   const intialChainId = useInitialChainId();
-  const { connectAsync, connectors: defaultConnectors_untyped } = useConnect();
+  const {connectData} = useNEST()
+  const connectAsync =  connectData.connectAsync
+  const defaultConnectors_untyped = connectData.connectors
+  // const { connectAsync, connectors: defaultConnectors_untyped } = useConnect();
   const defaultConnectors = defaultConnectors_untyped as Connector[];
 
   async function connectWallet(walletId: string, connector: Connector) {

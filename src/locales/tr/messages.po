@@ -195,6 +195,7 @@ msgstr "Miktar"
 msgid "Approval required"
 msgstr "Onay gerekiyor"
 
+#: src/hooks/useDepositModal.ts
 #: src/hooks/useSwap.ts
 #: src/hooks/useTransactionReceipt.ts
 #: src/pages/Futures/Modal/ApproveNoticeModal.tsx
@@ -383,6 +384,7 @@ msgid "Deflationary economic model. The more users trade, the more $NEST will be
 msgstr "Deflasyonist ekonomik model. Kullanıcılar ne kadar çok işlem yaparsa, o kadar çok $NEST yakılır."
 
 #: src/components/NormalInput/NESTInput.tsx
+#: src/hooks/useDepositModal.ts
 #: src/hooks/useDepositModal.ts
 #: src/pages/Overview/Overview.tsx
 #: src/pages/Personal/Personal.tsx

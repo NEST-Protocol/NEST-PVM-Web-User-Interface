@@ -55,7 +55,7 @@ const scrollAlphaTestnet = {
   testnet: true,
 };
 
-const { chains, publicClient } = configureChains(
+const { chains, publicClient, webSocketPublicClient } = configureChains(
   // [bsc, scrollAlphaTestnet],
   [bscTestnet],
   // [bsc],
@@ -125,6 +125,7 @@ const config = createConfig({
     },
   ]),
   publicClient,
+  webSocketPublicClient
 });
 
 const WalletProvider: FC<ProviderProps> = ({ children }) => {

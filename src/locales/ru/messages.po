@@ -15,18 +15,18 @@ msgstr ""
 
 #: src/pages/Overview/Components/TransactionTable.tsx
 msgid "{0}"
-msgstr ""
+msgstr "{0}"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Personal/Referral/Referral.tsx
 #: src/pages/Personal/Referral/Referral.tsx
 msgid "* Due to the complexity of financial data, there might be nuances and delay. Data displayed above is for reference only.We sincerely apologize for any inconvenience."
-msgstr ""
+msgstr "* Из-за сложности финансовых данных возможны нюансы и задержки. Приведенные выше данные предоставлены только для ознакомления. Мы искренне приносим извинения за возможные неудобства."
 
 #: src/pages/Share/Modal/DepositModal.tsx
 msgid "*NESTFi only supports NEST withdrawals."
-msgstr ""
+msgstr "*NESTFi поддерживает только вывод NEST."
 
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useFuturesNewOrder.ts
@@ -63,6 +63,8 @@ msgid ""
 "0 balance. Before trading, you can switch to \"Swap\" to exchange\n"
 "between USDT and NEST token."
 msgstr ""
+"Баланс 0. Перед торговлей вы можете переключиться на «Swap» для обмена\n"
+"между USDT и токеном NEST."
 
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 msgid "1. The trigger price has been reached but there is not enough time to execute."
@@ -84,15 +86,15 @@ msgstr "2. Риск ликвидации позиции: вечные контр
 
 #: src/pages/Futures/ExchangeTVChart.tsx
 msgid "24h Change"
-msgstr ""
+msgstr "24h Change"
 
 #: src/pages/Futures/ExchangeTVChart.tsx
 msgid "24h High"
-msgstr ""
+msgstr "24h High"
 
 #: src/pages/Futures/ExchangeTVChart.tsx
 msgid "24h Low"
-msgstr ""
+msgstr "24h Low"
 
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 #: src/pages/Futures/Modal/ProtocolModal.tsx
@@ -125,7 +127,7 @@ msgstr "Прибыль / убыток за 7 дней"
 
 #: src/pages/Home/Home.tsx
 msgid "A beginner's guide to using NESTFi"
-msgstr ""
+msgstr "Руководство для начинающих по использованию NESTFi"
 
 #: src/pages/Share/Modal/ConnectWalletModal.tsx
 msgid "about connecting wallets"
@@ -135,11 +137,11 @@ msgstr "о подключении кошельков"
 #: src/pages/Overview/Overview.tsx
 #: src/pages/Share/Head/NESTHead.tsx
 msgid "Account"
-msgstr ""
+msgstr "Аккаунт"
 
 #: src/pages/Overview/Components/TransactionTable.tsx
 msgid "Action"
-msgstr ""
+msgstr "Действие"
 
 #: src/pages/Futures/Components/HistoryList.tsx
 #: src/pages/Futures/Components/HistoryTable.tsx
@@ -158,7 +160,7 @@ msgstr "Добавить"
 #: src/pages/Futures/Components/FuturesNotice.tsx
 #: src/pages/Share/Modal/ChangeNewTokenModal.tsx
 msgid "Add NEST 2.0 to wallet"
-msgstr ""
+msgstr "Добавление NEST 2.0 в кошелек"
 
 #: src/pages/DirectPoster/DirectPoster.tsx
 #: src/pages/Swap/Swap.tsx
@@ -178,7 +180,7 @@ msgstr "Добавить позицию"
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Personal/Referral/Referral.tsx
 msgid "Address"
-msgstr ""
+msgstr "Адрес"
 
 #: src/hooks/useFuturesNewOrder.ts
 #: src/pages/Futures/Modal/EditPositionModal.tsx
@@ -195,6 +197,7 @@ msgstr "Количество"
 msgid "Approval required"
 msgstr "Требуется подтверждение"
 
+#: src/hooks/useDepositModal.ts
 #: src/hooks/useSwap.ts
 #: src/hooks/useTransactionReceipt.ts
 #: src/pages/Futures/Modal/ApproveNoticeModal.tsx
@@ -219,11 +222,11 @@ msgstr "Станьте Торговым KOL"
 
 #: src/pages/Home/Home.tsx
 msgid "Boost your earning and influence by joining the NESTFi affiliate program."
-msgstr ""
+msgstr "Увеличьте свой доход и влияние, присоединившись к партнерской программе NESTFi."
 
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "Burned"
-msgstr ""
+msgstr "Сожжено"
 
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Channel link"
@@ -260,7 +263,7 @@ msgstr "Риск закрытия"
 #: src/pages/Futures/Components/HistoryList.tsx
 #: src/pages/Futures/Components/HistoryTable.tsx
 msgid "Closed"
-msgstr ""
+msgstr "Закрыто"
 
 #: src/hooks/useFuturesAdd.ts
 #: src/hooks/useFuturesClose.ts
@@ -274,7 +277,7 @@ msgstr "Подтвердить"
 
 #: src/pages/Share/Modal/SignModal.tsx
 msgid "Confirm you are the owner of this wallet"
-msgstr ""
+msgstr "Подтвердите, что вы владелец этого кошелька."
 
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useFuturesNewOrder.ts
@@ -319,29 +322,29 @@ msgstr "Скопировано успешно"
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Personal/Referral/Referral.tsx
 msgid "Cumulative Commission"
-msgstr ""
+msgstr "Накопительная комиссия"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Personal/Referral/Referral.tsx
 msgid "Cumulative Commissions"
-msgstr ""
+msgstr "Накопленные комиссии"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Personal/Referral/Referral.tsx
 msgid "Cumulative Invitee Trading Volume"
-msgstr ""
+msgstr "Накопительный объем торговли приглашенных пользователей"
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Personal/Personal.tsx
 msgid "Cumulative Return"
-msgstr ""
+msgstr "Накопительный доход"
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Personal/Personal.tsx
 msgid "Daily Return"
-msgstr ""
+msgstr "Дневной доход"
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "Dark mode"
@@ -355,11 +358,11 @@ msgstr "Панель управления"
 
 #: src/pages/Share/Modal/ChangeNewTokenModal.tsx
 msgid "Dear NESTFi Community,"
-msgstr ""
+msgstr "Уважаемое сообщество NESTFi,"
 
 #: src/pages/Share/Modal/StopTransactionModal.tsx
 msgid "Dear NESTfi Users,"
-msgstr ""
+msgstr "Уважаемые пользователи NESTfi,"
 
 #: src/pages/Home/Home.tsx
 msgid "Decentralized"
@@ -372,7 +375,7 @@ msgstr "Децентрализованная бессрочная биржа"
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Personal/Referral/Referral.tsx
 msgid "Default"
-msgstr ""
+msgstr "По умолчанию"
 
 #: src/pages/Home/Home.tsx
 msgid "Deflationary"
@@ -380,20 +383,21 @@ msgstr "Дефляционный"
 
 #: src/pages/Home/Home.tsx
 msgid "Deflationary economic model. The more users trade, the more $NEST will be burned."
-msgstr ""
+msgstr "Дефляционная экономическая модель. Чем больше пользователи торгуют, тем больше $NEST будет сожжено."
 
 #: src/components/NormalInput/NESTInput.tsx
+#: src/hooks/useDepositModal.ts
 #: src/hooks/useDepositModal.ts
 #: src/pages/Overview/Overview.tsx
 #: src/pages/Personal/Personal.tsx
 #: src/pages/Share/Modal/DepositModal.tsx
 #: src/pages/Share/Modal/DepositModal.tsx
 msgid "Deposit"
-msgstr ""
+msgstr "Депозит"
 
 #: src/hooks/useTransactionReceipt.ts
 msgid "Deposit Request"
-msgstr ""
+msgstr "Запрос на депозит"
 
 #: src/pages/Share/Head/ConnectButton.tsx
 #: src/pages/Share/Modal/MyWalletModal.tsx
@@ -407,7 +411,7 @@ msgstr "Из-за волатильности рынка фактическая �
 
 #: src/pages/Share/Modal/StopTransactionModal.tsx
 msgid "During the airdrop period, NESTfi's trading services will be temporarily unavailable for approximately 1-2 hours. This suspension is necessary to ensure a smooth and successful airdrop of NEST 2.0 tokens to all eligible participants. We apologize for any inconvenience caused during this temporary interruption of services."
-msgstr ""
+msgstr "Во время периода рассылки токенов NEST 2.0, услуги торговли NESTfi будут временно недоступны примерно 1-2 часа. Эта приостановка необходима для обеспечения плавной и успешной рассылки токенов NEST 2.0 всем участникам, имеющим на это право. Приносим извинения за возможные неудобства, вызванные временным прерыванием услуг."
 
 #: src/hooks/useFuturesPOrder.ts
 #: src/pages/Futures/Components/OrderList.tsx
@@ -441,7 +445,7 @@ msgstr "Цена входа"
 #: src/pages/Overview/Components/MobileList.tsx
 #: src/pages/Overview/Components/MoneyTable.tsx
 msgid "Fail"
-msgstr ""
+msgstr "Неудача"
 
 #: src/hooks/useNESTSnackBar.tsx
 msgid "Fail Request"
@@ -451,7 +455,7 @@ msgstr "Не удалось выполнить запрос"
 #: src/components/NormalInput/NESTInputSelect.tsx
 #: src/pages/Share/Head/NESTHead.tsx
 msgid "Faucet"
-msgstr ""
+msgstr "Кран"
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
@@ -475,16 +479,16 @@ msgstr "От"
 #: src/pages/Share/Head/NESTHead.tsx
 #: src/pages/Share/Head/NESTHead.tsx
 msgid "Future"
-msgstr ""
+msgstr "Будущее"
 
 #: src/pages/DirectPoster/DirectPoster.tsx
 #: src/pages/DirectPoster/useDirectPoster.ts
 msgid "GET"
-msgstr ""
+msgstr "ПОЛУЧИТЬ"
 
 #: src/pages/Share/Modal/DepositModal.tsx
 msgid "Get NEST"
-msgstr ""
+msgstr "Получить NEST"
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "Github"
@@ -496,23 +500,23 @@ msgstr "История"
 
 #: src/pages/Home/Home.tsx
 msgid "How to copy trading?"
-msgstr ""
+msgstr "Как копировать торговлю?"
 
 #: src/pages/Home/Home.tsx
 msgid "How to join affiliate program?"
-msgstr ""
+msgstr "Как присоединиться к партнерской программе?"
 
 #: src/pages/Home/Home.tsx
 msgid "How to make your first trade?"
-msgstr ""
+msgstr "Как совершить свою первую сделку?"
 
 #: src/pages/Home/Home.tsx
 msgid "How to Start?"
-msgstr ""
+msgstr "Как начать?"
 
 #: src/pages/Futures/MoreInfo.tsx
 msgid "How to Trade"
-msgstr ""
+msgstr "Как торговать"
 
 #: src/pages/Futures/Modal/CloseOrderNoticeModal.tsx
 #: src/pages/Home/Modal/ApplyModal.tsx
@@ -522,11 +526,11 @@ msgstr "Я понимаю"
 
 #: src/pages/Share/Modal/SignModal.tsx
 msgid "If you are using a secure device that you own. Selecting this option can expose your keys and information to others if you are on a public or non-secured device."
-msgstr ""
+msgstr "Если вы используете безопасное устройство, принадлежащее вам. Выбор этой опции может раскрыть ваши ключи и информацию другим, если вы находитесь на публичном или незащищенном устройстве."
 
 #: src/pages/Share/Modal/StopTransactionModal.tsx
 msgid "If you have any questions or require further assistance, please feel free to reach out to our support team. We are here to help and provide guidance throughout this process."
-msgstr ""
+msgstr "Если у вас возникли вопросы или вам требуется дополнительная помощь, не стесняйтесь обращаться к нашей службе поддержки. Мы здесь, чтобы помочь и предоставить руководство на протяжении всего процесса."
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
@@ -536,7 +540,7 @@ msgstr "Изображение"
 
 #: src/pages/Share/Modal/StopTransactionModal.tsx
 msgid "Important Announcement: Temporary Suspension of Trading Services on NESTfi"
-msgstr ""
+msgstr "Важное объявление: Временное приостановление услуг по торговле на NESTfi."
 
 #: src/pages/Home/Home.tsx
 msgid "Infinite Liquidity"
@@ -549,11 +553,11 @@ msgstr "Недостаточно"
 
 #: src/hooks/useWithDrawModal.ts
 msgid "Insufficient balance"
-msgstr ""
+msgstr "Недостаточный баланс"
 
 #: src/components/NormalInput/NESTInput.tsx
 msgid "Insufficient balance. Please deposit to start the lightning trade."
-msgstr ""
+msgstr "Недостаточный баланс. Пожалуйста, пополните счет, чтобы начать моментальную торговлю."
 
 #: src/hooks/useFuturesAdd.ts
 #: src/hooks/useFuturesNewOrder.ts
@@ -563,26 +567,26 @@ msgstr "Недостаточный баланс NEST"
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Personal/Referral/Referral.tsx
 msgid "Invitee Trading Volume"
-msgstr ""
+msgstr "Объем торговли приглашенных пользователей"
 
 #: src/pages/DirectPoster/useDirectPoster.ts
 msgid "It's available once in 24 hours. Please come later."
-msgstr ""
+msgstr "Доступно раз в 24 часа. Пожалуйста, приходите позже."
 
 #: src/pages/Home/Home.tsx
 #: src/pages/Home/Home.tsx
 msgid "Join"
-msgstr ""
+msgstr "Присоединиться"
 
 #: src/pages/Home/Home.tsx
 #: src/pages/Home/Home.tsx
 msgid "Join NESTFi affiliate program and get commission on your referrals."
-msgstr ""
+msgstr "Присоединяйтесь к партнерской программе NESTFi и получайте комиссию за ваши рефералы."
 
 #: src/pages/Home/Home.tsx
 #: src/pages/Home/Home.tsx
 msgid "KOLs Joined NESTFi"
-msgstr ""
+msgstr "KOL'ы присоединились к NESTFi."
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 #: src/pages/Share/Modal/LanguageModal.tsx
@@ -603,6 +607,8 @@ msgid ""
 "Leading cryptocurrency decentralized exchange. Trade BTC/USDT, ETH/USDT and BNB/USDT futures securely,\n"
 "swiftly, and effortlessly."
 msgstr ""
+"Ведущая децентрализованная криптовалютная биржа. Торгуйте безопасно фьючерсами BTC/USDT, ETH/USDT и BNB/USDT\n"
+"быстро и легко."
 
 #: src/pages/Share/Modal/ConnectWalletModal.tsx
 msgid "Learn more"
@@ -625,7 +631,7 @@ msgstr "Цена лимита"
 #: src/pages/Share/Modal/SignModal.tsx
 #: src/pages/Share/Modal/SignModal.tsx
 msgid "Link wallet"
-msgstr ""
+msgstr "Связать кошелек"
 
 #: src/pages/Futures/Components/POrderTable.tsx
 #: src/pages/Futures/Modal/AddModal.tsx
@@ -681,22 +687,22 @@ msgstr "Больше информации"
 
 #: src/pages/Personal/Personal.tsx
 msgid "My Balance"
-msgstr ""
+msgstr "Мой баланс"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Personal/Referral/Referral.tsx
 #: src/pages/Personal/Referral/Referral.tsx
 msgid "My commissions"
-msgstr ""
+msgstr "Мои комиссии"
 
 #: src/pages/Personal/Personal.tsx
 msgid "My Positions"
-msgstr ""
+msgstr "Мои позиции"
 
 #: src/pages/Futures/Components/FuturesNotice.tsx
 msgid "NEST 2.0 token has been airdropped to your wallet, please add NEST 2.0 token to your wallet."
-msgstr ""
+msgstr "Токен NEST 2.0 был отправлен на ваш кошелек, пожалуйста, добавьте токен NEST 2.0 в свой кошелек."
 
 #: src/pages/Futures/MoreInfo.tsx
 msgid "NEST White Paper"
@@ -704,7 +710,7 @@ msgstr "Белая книга NEST"
 
 #: src/pages/Home/Home.tsx
 msgid "NEST's economic model is deflationary. The more users trade, the more $NEST will be burned."
-msgstr ""
+msgstr "Экономическая модель NEST является дефляционной. Чем больше пользователи торгуют, тем больше $NEST будет сожжено."
 
 #: src/pages/Home/Home.tsx
 msgid "NESTFi, A Next-Generation"
@@ -712,7 +718,7 @@ msgstr "NESTFi - следующее поколение"
 
 #: src/pages/Home/Home.tsx
 msgid "NESTFi's new features enable you to open a position with a single click."
-msgstr ""
+msgstr "Новые функции NESTFi позволяют вам открывать позицию одним нажатием."
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "News"
@@ -723,7 +729,7 @@ msgstr "Новости"
 #: src/pages/Personal/Referral/Referral.tsx
 #: src/pages/Personal/Referral/Referral.tsx
 msgid "No commissions yet"
-msgstr ""
+msgstr "Пока нет комиссий."
 
 #: src/pages/Home/Home.tsx
 msgid "No Market Makers"
@@ -738,7 +744,7 @@ msgstr "Нет ордеров"
 #: src/pages/Futures/OrderList.tsx
 #: src/pages/Futures/OrderList.tsx
 msgid "No Orders"
-msgstr ""
+msgstr "Нет ордеров"
 
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "No Transactions yet"
@@ -746,7 +752,7 @@ msgstr "Сделок пока нет"
 
 #: src/pages/Share/Modal/StopTransactionModal.tsx
 msgid "Once the airdrop is completed, NESTfi will only support trading with NEST 2.0 tokens. The previous version of NEST tokens (NEST 1.0) will become obsolete and will no longer be accepted for trading or other activities on the platform."
-msgstr ""
+msgstr "После завершения рассылки токенов, NESTfi будет поддерживать только торговлю токенами NEST 2.0. Предыдущая версия токенов NEST (NEST 1.0) станет устаревшей и больше не будет приниматься для торговли или других операций на платформе."
 
 #: src/hooks/useFuturesNewOrder.ts
 msgid "Open"
@@ -755,7 +761,7 @@ msgstr "Открыть"
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "Open Interest"
-msgstr ""
+msgstr "Открытый интерес"
 
 #: src/hooks/useTransactionReceipt.ts
 #: src/hooks/useTransactionReceipt.ts
@@ -784,7 +790,7 @@ msgstr "Действие"
 
 #: src/pages/Futures/OrderList.tsx
 msgid "Orders"
-msgstr ""
+msgstr "Ордера"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
@@ -793,18 +799,18 @@ msgstr ""
 #: src/pages/Personal/Referral/Referral.tsx
 #: src/pages/Personal/Referral/Referral.tsx
 msgid "Overview"
-msgstr ""
+msgstr "Обзор"
 
 #: src/pages/Overview/Components/MobileList.tsx
 #: src/pages/Overview/Components/MoneyTable.tsx
 msgid "Pending"
-msgstr ""
+msgstr "В ожидании"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Personal/Personal.tsx
 #: src/pages/Personal/Referral/Referral.tsx
 msgid "Personal"
-msgstr ""
+msgstr "Личное"
 
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Platform (Youtube, Telegram, Twitter, Instagram, Facebook, Tiktok, Others)"
@@ -816,11 +822,11 @@ msgstr "Пожалуйста, нажмите \"Approve\" для авториза
 
 #: src/components/NormalInput/NESTInput.tsx
 msgid "Please complete your sign"
-msgstr ""
+msgstr "Пожалуйста, завершите вашу регистрацию."
 
 #: src/pages/DirectPoster/useDirectPoster.ts
 msgid "Please get ETH testnet token first"
-msgstr ""
+msgstr "Пожалуйста, сначала получите тестовые токены ETH."
 
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 msgid "Please note that \"Limit order\" or \"Stop order\" is not guaranteed to be executed. This may include, but is not limited to, the following cases."
@@ -828,7 +834,7 @@ msgstr "Обратите внимание, что «лимитный ордер�
 
 #: src/pages/Share/Modal/ChangeNewTokenModal.tsx
 msgid "Please note that NEST 1.0 tokens have been officially deprecated and will no longer be supported. To continue participating in the NESTFi ecosystem and enjoy its benefits, it is crucial that you add NEST 2.0 tokens to your wallet. We have provided a button below for your convenience to add NEST 2.0 tokens to your wallet effortlessly."
-msgstr ""
+msgstr "Пожалуйста, обратите внимание, что токены NEST 1.0 были официально прекращены и больше не будут поддерживаться. Для продолжения участия в экосистеме NESTFi и получения ее преимуществ крайне важно добавить токены NEST 2.0 в ваш кошелек. Мы предоставили кнопку ниже для вашего удобства, чтобы легко добавить токены NEST 2.0 в ваш кошелек."
 
 #: src/pages/Futures/Modal/AddModal.tsx
 #: src/pages/Futures/Modal/CloseModal.tsx
@@ -855,7 +861,7 @@ msgstr "Позиции"
 #: src/pages/Personal/Personal.tsx
 #: src/pages/Personal/Personal.tsx
 msgid "Positions Value"
-msgstr ""
+msgstr "Стоимость позиций"
 
 #: src/pages/Futures/NewOrder.tsx
 #: src/pages/Share/Modal/DepositModal.tsx
@@ -865,11 +871,11 @@ msgstr "Цена"
 
 #: src/hooks/useTransactionReceipt.ts
 msgid "Received"
-msgstr ""
+msgstr "Получено"
 
 #: src/hooks/useTransactionReceipt.ts
 msgid "Received 100NEST test tokens"
-msgstr ""
+msgstr "Получено 100 тестовых токенов NEST"
 
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "Recent transactions"
@@ -879,7 +885,7 @@ msgstr "Последние сделки"
 #: src/pages/Personal/Personal.tsx
 #: src/pages/Personal/Referral/Referral.tsx
 msgid "Referral"
-msgstr ""
+msgstr "Реферал"
 
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 #: src/pages/Futures/Modal/ProtocolModal.tsx
@@ -894,7 +900,7 @@ msgstr "Сканировать и копировать сделку"
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Personal/Referral/Referral.tsx
 msgid "Search"
-msgstr ""
+msgstr "Поиск"
 
 #: src/hooks/useTransactionReceipt.ts
 #: src/hooks/useTransactionReceipt.ts
@@ -904,7 +910,7 @@ msgstr "Продать позицию"
 #: src/hooks/useSignModal.ts
 #: src/pages/Share/Head/ConnectButton.tsx
 msgid "Send request"
-msgstr ""
+msgstr "Отправить запрос"
 
 #: src/pages/Futures/Modal/CloseModal.tsx
 #: src/pages/Futures/NewOrder.tsx
@@ -915,14 +921,14 @@ msgstr "Сервисная комиссия"
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Personal/Referral/Referral.tsx
 msgid "Settled"
-msgstr ""
+msgstr "Урегулировано"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Personal/Referral/Referral.tsx
 #: src/pages/Personal/Referral/Referral.tsx
 msgid "Settled Commissions"
-msgstr ""
+msgstr "Урегулированные комиссии"
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 msgid "Share"
@@ -942,22 +948,22 @@ msgstr "Коротко"
 
 #: src/pages/Share/Modal/StopTransactionModal.tsx
 msgid "Sincerely,"
-msgstr ""
+msgstr "С уважением"
 
 #: src/pages/Futures/Components/HistoryTable.tsx
 #: src/pages/Futures/Components/OrderTable.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 msgid "SL"
-msgstr "Стоп-лосс"
+msgstr "SL"
 
 #: src/pages/Futures/Components/HistoryList.tsx
 #: src/pages/Futures/Components/HistoryTable.tsx
 msgid "SL Executed"
-msgstr ""
+msgstr "SL Выполнено"
 
 #: src/pages/Swap/Swap.tsx
 msgid "Slippage Tolerance"
-msgstr ""
+msgstr "Допустимый уровень проскальзывания"
 
 #: src/pages/Swap/Components/SwapSlippageModal.tsx
 msgid "Slippage Tolerance Setting"
@@ -969,7 +975,7 @@ msgstr "Начать торговлю"
 
 #: src/pages/Overview/Components/MoneyTable.tsx
 msgid "Status"
-msgstr ""
+msgstr "Статус"
 
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 #: src/pages/Futures/Components/HistoryList.tsx
@@ -997,7 +1003,7 @@ msgstr "Успешно отправлено"
 #: src/pages/Overview/Components/MobileList.tsx
 #: src/pages/Overview/Components/MoneyTable.tsx
 msgid "Success"
-msgstr ""
+msgstr "Успешно"
 
 #: src/components/NormalInput/NESTInputSelect.tsx
 #: src/hooks/useSwap.ts
@@ -1033,36 +1039,36 @@ msgstr "Тест BNB"
 #: src/pages/DirectPoster/DirectPoster.tsx
 #: src/pages/DirectPoster/useDirectPoster.ts
 msgid "Testnet token"
-msgstr ""
+msgstr "Тестовый токен"
 
 #: src/components/NormalInput/NESTInput.tsx
 #: src/components/NormalInput/NESTInputSelect.tsx
 msgid "The balance is 0. You can go to \"Faucet\" to get test token before trading."
-msgstr ""
+msgstr "Баланс равен 0. Вы можете перейти к разделу «Кран» и получить тестовый токен перед торговлей."
 
 #: src/pages/Share/Modal/DepositModal.tsx
 msgid "The maximum deposit amount is"
-msgstr ""
+msgstr "Максимальная сумма депозита составляет"
 
 #: src/hooks/useWithDrawModal.ts
 msgid "The minimum withdrawal amount greater than 15NEST"
-msgstr ""
+msgstr "Минимальная сумма вывода больше 15 NEST"
 
 #: src/pages/Share/Modal/StopTransactionModal.tsx
 msgid "The NESTfi Team"
-msgstr ""
+msgstr "Команда NESTfi"
 
 #: src/pages/Share/Modal/ChangeNewTokenModal.tsx
 msgid "The NESTFi Team"
-msgstr ""
+msgstr "Команда NESTfi"
 
 #: src/pages/Home/Home.tsx
 msgid "The smart contract guarantees infinite liquidity through burning and issuing $NEST."
-msgstr ""
+msgstr "Умный контракт обеспечивает бесконечную ликвидность путем сжигания и выпуска $NEST."
 
 #: src/pages/Home/Home.tsx
 msgid "The smart contract is the only seller of the system. No market marking costs and no liquidity debt."
-msgstr ""
+msgstr "Умный контракт - единственный продавец в системе. Нет затрат на формирование рынка и нет долгов по ликвидности."
 
 #: src/hooks/useNESTSnackBar.tsx
 msgid "The transaction failed and the amount has been fully refunded. You can re-trade"
@@ -1088,22 +1094,22 @@ msgstr "Прибыль и убытки за сегодня"
 
 #: src/pages/Share/Modal/WithdrawModal.tsx
 msgid "Total"
-msgstr ""
+msgstr "Всего"
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Personal/Personal.tsx
 msgid "Total Asset Value"
-msgstr ""
+msgstr "Общая стоимость активов"
 
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "Total Burned"
-msgstr ""
+msgstr "Всего сожжено"
 
 #: src/pages/Home/Home.tsx
 #: src/pages/Home/Home.tsx
 msgid "Total Burned (NEST)"
-msgstr ""
+msgstr "Всего сожжено (NEST)"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
@@ -1112,14 +1118,14 @@ msgstr ""
 #: src/pages/Personal/Referral/Referral.tsx
 #: src/pages/Personal/Referral/Referral.tsx
 msgid "Total Commissions"
-msgstr ""
+msgstr "Общие комиссии"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Personal/Referral/Referral.tsx
 #: src/pages/Personal/Referral/Referral.tsx
 msgid "Total Invitees"
-msgstr ""
+msgstr "Общее количество приглашенных"
 
 #: src/pages/Futures/NewOrder.tsx
 msgid "Total Pay"
@@ -1141,20 +1147,20 @@ msgstr "Общий доход и убыток"
 #: src/pages/Personal/Referral/Referral.tsx
 #: src/pages/Personal/Referral/Referral.tsx
 msgid "Total Trading Volume"
-msgstr ""
+msgstr "Общий объем торговли"
 
 #: src/pages/Home/Home.tsx
 #: src/pages/Home/Home.tsx
 msgid "Total Trading Volume (NEST)"
-msgstr ""
+msgstr "Общий объем торговли (NEST)"
 
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "Total User"
-msgstr ""
+msgstr "Общее количество пользователей"
 
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "Total Volume"
-msgstr ""
+msgstr "Общий объем"
 
 #: src/pages/Futures/Components/HistoryTable.tsx
 #: src/pages/Futures/Components/OrderTable.tsx
@@ -1169,19 +1175,19 @@ msgstr "Цена TP и SL, которую вы установили, срабо�
 #: src/pages/Futures/Components/HistoryList.tsx
 #: src/pages/Futures/Components/HistoryTable.tsx
 msgid "TP Executed"
-msgstr ""
+msgstr "TP Выполнено"
 
 #: src/pages/Home/Home.tsx
 msgid "Trade BTC, ETH and BNB with up to 1-50 leverage. Open a position with NEST."
-msgstr ""
+msgstr "Торгуйте BTC, ETH и BNB с плечом от 1 до 50. Открывайте позиции с использованием NEST."
 
 #: src/pages/Home/Home.tsx
 msgid "Trade easily anytime and anywhere."
-msgstr ""
+msgstr "Торгуйте легко в любое время и в любом месте."
 
 #: src/pages/Home/Home.tsx
 msgid "Trade Now"
-msgstr ""
+msgstr "Торговать сейчас"
 
 #: src/pages/Swap/Swap.tsx
 msgid "Trade tokens in instant"
@@ -1196,16 +1202,16 @@ msgstr "Торгуйте со мной на NESTFi"
 #: src/pages/Personal/Referral/Referral.tsx
 #: src/pages/Personal/Referral/Referral.tsx
 msgid "Traded Invitees"
-msgstr ""
+msgstr "Торговые приглашенные"
 
 #: src/pages/Home/Home.tsx
 msgid "Trading only with smart contract.No third-party intervention."
-msgstr ""
+msgstr "Торговля только с помощью смарт-контракта. Нет вмешательства сторонних лиц."
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Personal/Referral/Referral.tsx
 msgid "Trading Volume"
-msgstr ""
+msgstr "Объем торговли"
 
 #: src/hooks/useFuturesPOrder.ts
 msgid "Trigger"
@@ -1219,27 +1225,27 @@ msgstr "Триггер-позиция"
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 msgid "Twitter"
-msgstr "Твиттер"
+msgstr "Twitter"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Personal/Referral/Referral.tsx
 msgid "Unsettled"
-msgstr ""
+msgstr "Неурегулировано"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Personal/Referral/Referral.tsx
 #: src/pages/Personal/Referral/Referral.tsx
 msgid "Unsettled Commissions"
-msgstr ""
+msgstr "Неурегулированные комиссии"
 
 #: src/pages/Share/Modal/ChangeNewTokenModal.tsx
 msgid "Update: NEST 2.0 Airdrop Completed - NESTFi Services Now Available"
-msgstr ""
+msgstr "Обновление: Рассылка токенов NEST 2.0 завершена - услуги NESTFi теперь доступны"
 
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "User"
-msgstr ""
+msgstr "Пользователь"
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "User Guide"
@@ -1247,11 +1253,11 @@ msgstr "Руководство пользователя"
 
 #: src/pages/Share/Modal/SignModal.tsx
 msgid "Verify ownership"
-msgstr ""
+msgstr "Подтвердить владение"
 
 #: src/pages/Share/Head/ConnectButton.tsx
 msgid "Verify ownership, Confirm you are the owner of this wallet."
-msgstr ""
+msgstr "Подтвердите владение, Подтвердите, что вы являетесь владельцем этого кошелька."
 
 #: src/components/SnackBar/NormalSnackBar.tsx
 msgid "View"
@@ -1262,7 +1268,7 @@ msgstr "Просмотр"
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Personal/Personal.tsx
 msgid "Volume"
-msgstr ""
+msgstr "Объем"
 
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "Wallet"
@@ -1272,15 +1278,15 @@ msgstr "Кошелек"
 #: src/pages/Swap/Components/SwapInputItem.tsx
 #: src/pages/Swap/Components/SwapInputItem.tsx
 msgid "Wallet Balance"
-msgstr ""
+msgstr "Баланс кошелька"
 
 #: src/pages/Share/Modal/ChangeNewTokenModal.tsx
 msgid "We are delighted to inform you that the NEST 2.0 token airdrop has been successfully completed. As a result, NESTFi services are now fully operational, and you can resume using the platform as usual."
-msgstr ""
+msgstr "Мы радостно сообщаем вам, что рассылка токенов NEST 2.0 успешно завершена. В результате, услуги NESTFi теперь полностью операционны, и вы можете продолжить использовать платформу как обычно."
 
 #: src/pages/Share/Modal/StopTransactionModal.tsx
 msgid "We would like to inform you about an upcoming event regarding the NEST token. We are currently conducting an airdrop of NEST 2.0 tokens, which will bring significant upgrades and improvements to the NEST protocol."
-msgstr ""
+msgstr "Мы хотели бы проинформировать вас о предстоящем событии, касающемся токена NEST. В настоящее время мы проводим рассылку токенов NEST 2.0, которая принесет значительные обновления и улучшения протоколу NEST."
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "White Paper"
@@ -1305,8 +1311,8 @@ msgstr "в 1 клик"
 #: src/pages/Share/Modal/WithdrawModal.tsx
 #: src/pages/Share/Modal/WithdrawModal.tsx
 msgid "Withdraw"
-msgstr ""
+msgstr "Вывести"
 
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Youtube"
-msgstr "Ютуб"
+msgstr "Youtube"

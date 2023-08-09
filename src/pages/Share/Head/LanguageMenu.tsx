@@ -35,7 +35,7 @@ export const LanData = [
   [`Português`, "pt"],
   // [`日本語`, "ja"],
   [`한국어`, "ko"],
-  // [`Русский`, "ru"],
+  [`Русский`, "ru"],
   [`Tiếng Việt`, "vi"],
   [`Türkçe`, "tr"],
   [`Español`, "es"],
