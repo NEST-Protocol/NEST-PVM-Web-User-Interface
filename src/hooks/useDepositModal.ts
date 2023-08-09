@@ -367,6 +367,7 @@ function useDepositModal(onClose: () => void) {
   }, [checkBalance, checkMax, tokenAmount]);
   useEffect(() => {}, [uniInputAmount]);
   const mainButtonAction = useCallback(() => {
+    alert(`balance:${tokenBalance}-/n uniSwapAmountOut:${uniSwapAmountOut}`)
     console.log("点击V3");
     if (!mainButtonDis && !mainButtonLoading) {
       console.log("点击V4");
@@ -384,16 +385,7 @@ function useDepositModal(onClose: () => void) {
         tokenTransfer.write?.();
       }
     }
-  }, [
-    mainButtonDis,
-    mainButtonLoading,
-    selectToken,
-    checkAllowance,
-    tokenApprove,
-    swapTTT,
-    swapETT,
-    tokenTransfer,
-  ]);
+  }, [tokenBalance, uniSwapAmountOut, mainButtonDis, mainButtonLoading, selectToken, checkAllowance, tokenApprove, swapTTT, swapETT, tokenTransfer]);
   /**
    * update
    */
