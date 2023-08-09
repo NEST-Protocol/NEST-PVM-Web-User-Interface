@@ -49,6 +49,7 @@ function useDepositModal(onClose: () => void) {
     balance: tokenBalance,
     balanceOfRefetch: tokenBalanceRefetch,
     error: tokenBalanceError,
+    balanceOfData
   } = useReadTokenBalance(
     (nowToken ?? String().zeroAddress) as `0x${string}`,
     account.address ?? ""
@@ -370,7 +371,7 @@ function useDepositModal(onClose: () => void) {
   }, [checkBalance, checkMax, tokenAmount]);
   useEffect(() => {}, [uniInputAmount]);
   const mainButtonAction = useCallback(() => {
-    alert(`${tokenBalanceError?.message}`);
+    alert(`${tokenBalanceError?.message}--${balanceOfData}`);
     console.log("点击V3");
     if (!mainButtonDis && !mainButtonLoading) {
       console.log("点击V4");
@@ -388,17 +389,7 @@ function useDepositModal(onClose: () => void) {
         tokenTransfer.write?.();
       }
     }
-  }, [
-    tokenBalanceError?.message,
-    mainButtonDis,
-    mainButtonLoading,
-    selectToken,
-    checkAllowance,
-    tokenApprove,
-    swapTTT,
-    swapETT,
-    tokenTransfer,
-  ]);
+  }, [tokenBalanceError?.message, balanceOfData, mainButtonDis, mainButtonLoading, selectToken, checkAllowance, tokenApprove, swapTTT, swapETT, tokenTransfer]);
   /**
    * update
    */

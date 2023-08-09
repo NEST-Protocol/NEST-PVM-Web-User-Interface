@@ -43,7 +43,8 @@ function useReadTokenBalance(tokenAddress: `0x${string}`, account: string) {
     balanceOfIsRefetching,
     balanceOfIsSuccess,
     balanceOfRefetch,
-    error
+    error,
+    balanceOfData
   };
 }
 
