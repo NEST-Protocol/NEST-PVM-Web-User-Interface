@@ -88,7 +88,7 @@ const ConnectWalletModalBase: FC<ConnectWalletModalBaseProps> = ({
     async (item: WalletConnector) => {
       if (isBigMobile) {
         alert(`${item.name}-${item.connector.id}-${item.connector.name}`)
-        if (item.name === "trustwallet") {
+        if (item.name === "Trust Wallet") {
           connectData.connect({
             connector: connectData.connectors.filter(
               (item) => item.name === "Injected_Trust"
