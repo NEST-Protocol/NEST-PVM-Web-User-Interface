@@ -197,6 +197,7 @@ msgstr "수량"
 msgid "Approval required"
 msgstr "승인 필요함"
 
+#: src/hooks/useDepositModal.ts
 #: src/hooks/useSwap.ts
 #: src/hooks/useTransactionReceipt.ts
 #: src/pages/Futures/Modal/ApproveNoticeModal.tsx
@@ -385,6 +386,7 @@ msgid "Deflationary economic model. The more users trade, the more $NEST will be
 msgstr "디플레이션 경제 모델. 더 많은 사용자가 거래할수록 더 많은 $NEST가 소각됩니다."
 
 #: src/components/NormalInput/NESTInput.tsx
+#: src/hooks/useDepositModal.ts
 #: src/hooks/useDepositModal.ts
 #: src/pages/Overview/Overview.tsx
 #: src/pages/Personal/Personal.tsx
