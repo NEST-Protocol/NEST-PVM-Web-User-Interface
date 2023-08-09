@@ -16,8 +16,8 @@ import {
   walletConnectWallet,
   trustWallet,
   okxWallet,
-  injectedWallet,
 } from "@rainbow-me/rainbowkit/wallets";
+import { InjectedConnector } from 'wagmi/connectors/injected'
 
 import { infuraProvider } from "wagmi/providers/infura";
 import { ProviderProps } from "./provider";
@@ -119,14 +119,22 @@ export const Wallets = [
   },
 ];
 
+const connectors = connectorsForWallets([
+  {
+    groupName: "main",
+    wallets: Wallets.map((item) => item.wallet),
+  },
+])()
+
 const config = createConfig({
   autoConnect: true,
-  connectors: connectorsForWallets([
-    {
-      groupName: "main",
-      wallets: Wallets.map((item) => item.wallet),
+  connectors: [...connectors, new InjectedConnector({
+    chains,
+    options: {
+      name: 'Injected_Trust',
+      shimDisconnect: true,
     },
-  ]),
+  })],
   publicClient,
   webSocketPublicClient
 });
