@@ -8,6 +8,7 @@ import { FC } from "react";
 import { configureChains, createConfig, mainnet, WagmiConfig } from "wagmi";
 import { bsc, bscTestnet } from "wagmi/chains";
 import { jsonRpcProvider } from "wagmi/providers/jsonRpc";
+import { publicProvider } from 'wagmi/providers/public'
 
 import {
   metaMaskWallet,
@@ -60,7 +61,7 @@ const { chains, publicClient, webSocketPublicClient } = configureChains(
   [bscTestnet],
   // [bsc],
   [
-    infuraProvider({ apiKey: "be0a9832394640b090fceb2b2107993c" }),
+    publicProvider(),
     jsonRpcProvider({
       rpc: (chain) => {
         if (chain.id === 97) {
@@ -82,6 +83,7 @@ const { chains, publicClient, webSocketPublicClient } = configureChains(
         }
       },
     }),
+    infuraProvider({ apiKey: "be0a9832394640b090fceb2b2107993c" }),
   ]
 );
 const PROJECT_ID = "4ea5acecf1faa0887415ff933691f96f";
