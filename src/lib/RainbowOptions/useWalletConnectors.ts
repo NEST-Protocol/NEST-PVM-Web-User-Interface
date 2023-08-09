@@ -7,7 +7,6 @@ import {
 } from "./RainbowKitChainContext";
 import { addRecentWalletId, getRecentWalletIds } from "./recentWalletIds";
 import { Wallet } from "@rainbow-me/rainbowkit";
-import useNEST from "../../hooks/useNEST";
 
 export type WalletInstance = Omit<Wallet, "createConnector" | "hidden"> &
   ReturnType<Wallet["createConnector"]> & {
@@ -30,10 +29,7 @@ export interface WalletConnector extends WalletInstance {
 export function useWalletConnectors(): WalletConnector[] {
   const rainbowKitChains = useRainbowKitChains();
   const intialChainId = useInitialChainId();
-  const {connectData} = useNEST()
-  const connectAsync =  connectData.connectAsync
-  const defaultConnectors_untyped = connectData.connectors
-  // const { connectAsync, connectors: defaultConnectors_untyped } = useConnect();
+  const { connectAsync, connectors: defaultConnectors_untyped } = useConnect();
   const defaultConnectors = defaultConnectors_untyped as Connector[];
 
   async function connectWallet(walletId: string, connector: Connector) {
@@ -63,29 +59,12 @@ export function useWalletConnectors(): WalletConnector[] {
     })
   ).sort((a, b) => a.index - b.index);
 
-  const walletInstanceById = indexBy(
-    walletInstances,
-    (walletInstance) => walletInstance.id
-  );
-
-  const recentWallets: WalletInstance[] = getRecentWalletIds()
-    .map((walletId) => walletInstanceById[walletId])
-
-  const groupedWallets: WalletInstance[] = [
-    ...recentWallets,
-    ...walletInstances.filter(
-      (walletInstance) => !recentWallets.includes(walletInstance)
-    ),
-  ];
-
   const walletConnectors: WalletConnector[] = [];
 
-  groupedWallets.forEach((wallet: WalletInstance) => {
+  walletInstances.forEach((wallet: WalletInstance) => {
     if (!wallet) {
       return;
     }
-
-    const recent = recentWallets.includes(wallet);
 
     walletConnectors.push({
       ...wallet,
@@ -96,7 +75,7 @@ export function useWalletConnectors(): WalletConnector[] {
           type === "connecting" ? fn() : undefined
         ),
       ready: (wallet.installed ?? true) && wallet.connector.ready,
-      recent,
+      recent: false,
       showWalletConnectModal: wallet.walletConnectModalConnector
         ? async () => {
             try {

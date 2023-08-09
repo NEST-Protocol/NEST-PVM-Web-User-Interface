@@ -365,7 +365,7 @@ function useDepositModal(onClose: () => void) {
       parseFloat(tokenAmount) === 0
     );
   }, [checkBalance, checkMax, tokenAmount]);
-  useEffect(() => {}, [uniInputAmount]);
+  
   const mainButtonAction = useCallback(() => {
     console.log("点击V3");
     if (!mainButtonDis && !mainButtonLoading) {
