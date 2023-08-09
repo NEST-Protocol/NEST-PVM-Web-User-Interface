@@ -121,6 +121,7 @@ const ConnectWalletModalBase: FC<ConnectWalletModalBaseProps> = ({
         });
       } else {
         if (item.ready) {
+          console.log(`${item.connector.id}-${item.connector.name}`)
           if (
             item.connector.id === "walletConnect" ||
             item.connector.id === "walletConnectLegacy"
