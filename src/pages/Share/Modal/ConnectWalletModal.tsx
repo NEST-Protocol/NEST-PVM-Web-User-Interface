@@ -87,8 +87,9 @@ const ConnectWalletModalBase: FC<ConnectWalletModalBaseProps> = ({
   const selectWallet = useCallback(
     async (item: WalletConnector) => {
       if (isBigMobile) {
-        alert(`${item.connector.id}-${item.connector.name}`)
-        item.connect?.();
+        connectData.connect({
+          connector: item.connector,
+        });
         let callbackFired = false;
 
         item.onConnecting?.(async () => {

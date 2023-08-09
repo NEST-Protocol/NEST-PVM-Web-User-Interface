@@ -16,6 +16,7 @@ import {
   walletConnectWallet,
   trustWallet,
   okxWallet,
+  injectedWallet,
 } from "@rainbow-me/rainbowkit/wallets";
 
 import { infuraProvider } from "wagmi/providers/infura";
