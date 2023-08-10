@@ -21,6 +21,64 @@ interface ConnectWalletModalBaseProps {
   onClose: () => void;
 }
 
+const BaseStack = styled(Stack)(({ theme }) => {
+  return {
+    width: "100%",
+    overflow: "auto",
+    "& .WalletLearnMore": {
+      fontSize: 12,
+      fontWeight: 400,
+      color: theme.normal.text2,
+    },
+  };
+});
+
+const ItemBox = styled(Box)(({ theme }) => {
+  return {
+    width: "100%",
+    borderRadius: 8,
+    paddingTop: 20,
+    paddingBottom: 20,
+    "&:hover": {
+      background: theme.normal.bg3,
+      cursor: "pointer",
+    },
+    "& .WalletIcon": {
+      height: 48,
+      width: "100%",
+      marginBottom: 12,
+      "& svg": {
+        display: "block",
+        margin: "auto auto",
+      },
+    },
+    "& p": {
+      width: "100%",
+      color: theme.normal.text0,
+      fontSize: 14,
+      fontWeight: 700,
+      textAlign: "center",
+    },
+  };
+});
+
+const MoreButton = styled("button")(({ theme }) => {
+  return {
+    width: "100%",
+    height: 48,
+    fontSize: 17,
+    fontWeight: 700,
+    color: theme.normal.primary,
+    "&:hover": {
+      color: theme.normal.primary_hover,
+      cursor: "pointer",
+    },
+    "&:active": {
+      color: theme.normal.primary_active,
+    },
+  };
+});
+
 const ConnectWalletModalBase: FC<ConnectWalletModalBaseProps> = ({
   ...props
 }) => {
@@ -28,61 +86,7 @@ const ConnectWalletModalBase: FC<ConnectWalletModalBaseProps> = ({
   const { isBigMobile } = useWindowWidth();
   const [isMore, setIsMore] = useState(false);
   const { connectData } = useNEST();
-  const BaseStack = styled(Stack)(({ theme }) => {
-    return {
-      width: "100%",
-      overflow: "auto",
-      "& .WalletLearnMore": {
-        fontSize: 12,
-        fontWeight: 400,
-        color: theme.normal.text2,
-      },
-    };
-  });
-  const ItemBox = styled(Box)(({ theme }) => {
-    return {
-      width: "100%",
-      borderRadius: 8,
-      paddingTop: 20,
-      paddingBottom: 20,
-      "&:hover": {
-        background: theme.normal.bg3,
-        cursor: "pointer",
-      },
-      "& .WalletIcon": {
-        height: 48,
-        width: "100%",
-        marginBottom: 12,
-        "& svg": {
-          display: "block",
-          margin: "auto auto",
-        },
-      },
-      "& p": {
-        width: "100%",
-        color: theme.normal.text0,
-        fontSize: 14,
-        fontWeight: 700,
-        textAlign: "center",
-      },
-    };
-  });
-  const MoreButton = styled("button")(({ theme }) => {
-    return {
-      width: "100%",
-      height: 48,
-      fontSize: 17,
-      fontWeight: 700,
-      color: theme.normal.primary,
-      "&:hover": {
-        color: theme.normal.primary_hover,
-        cursor: "pointer",
-      },
-      "&:active": {
-        color: theme.normal.primary_active,
-      },
-    };
-  });
+  
 
   const selectWallet = useCallback(
     async (item: WalletConnector) => {
