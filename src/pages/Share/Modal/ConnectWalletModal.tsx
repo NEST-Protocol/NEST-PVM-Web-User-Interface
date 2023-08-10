@@ -87,7 +87,6 @@ const ConnectWalletModalBase: FC<ConnectWalletModalBaseProps> = ({
   const selectWallet = useCallback(
     async (item: WalletConnector) => {
       if (isBigMobile) {
-        alert(`${item.name}-${item.connector.id}-${item.connector.name}`)
         if (item.name === "Trust Wallet") {
           connectData.connect({
             connector: connectData.connectors.filter(
@@ -129,7 +128,6 @@ const ConnectWalletModalBase: FC<ConnectWalletModalBaseProps> = ({
         });
       } else {
         if (item.ready) {
-          console.log(`${item.connector.id}-${item.connector.name}`)
           if (
             item.connector.id === "walletConnect" ||
             item.connector.id === "walletConnectLegacy"

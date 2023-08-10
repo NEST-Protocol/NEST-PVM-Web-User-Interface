@@ -106,7 +106,7 @@ msgstr "3. Риск колебания цены токена NEST: Исполь�
 #: src/pages/Personal/Personal.tsx
 #: src/pages/Personal/Personal.tsx
 msgid "30 Days' PNL"
-msgstr "ПНЛ за 30 дней'"
+msgstr "PNL за 30 дней'"
 
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 #: src/pages/Futures/Modal/ProtocolModal.tsx
@@ -338,7 +338,7 @@ msgstr "Накопительный объем торговли приглаше�
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Personal/Personal.tsx
 msgid "Cumulative Return"
-msgstr "Накопительный доход"
+msgstr "Суммарный доход"
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
@@ -479,7 +479,7 @@ msgstr "От"
 #: src/pages/Share/Head/NESTHead.tsx
 #: src/pages/Share/Head/NESTHead.tsx
 msgid "Future"
-msgstr "Будущее"
+msgstr "Фьючерсы"
 
 #: src/pages/DirectPoster/DirectPoster.tsx
 #: src/pages/DirectPoster/useDirectPoster.ts
@@ -660,7 +660,7 @@ msgstr "Загрузка..."
 #: src/pages/Futures/Components/OrderListPosition.tsx
 #: src/pages/Futures/Components/OrderTablePosition.tsx
 msgid "Long"
-msgstr "Длинный"
+msgstr "Лонг"
 
 #: src/pages/Futures/NewOrder.tsx
 msgid "Market"
@@ -916,7 +916,7 @@ msgstr "Отправить запрос"
 #: src/pages/Futures/NewOrder.tsx
 #: src/pages/Share/Modal/WithdrawModal.tsx
 msgid "Service Fee"
-msgstr "Сервисная комиссия"
+msgstr "Сервисный сбор"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Personal/Referral/Referral.tsx
@@ -944,7 +944,7 @@ msgstr "Поделиться"
 #: src/pages/Futures/Components/OrderListPosition.tsx
 #: src/pages/Futures/Components/OrderTablePosition.tsx
 msgid "Short"
-msgstr "Коротко"
+msgstr "Шорт"
 
 #: src/pages/Share/Modal/StopTransactionModal.tsx
 msgid "Sincerely,"
@@ -1021,7 +1021,7 @@ msgstr "Успешно переключена сеть"
 #: src/pages/Futures/Components/OrderTable.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 msgid "Symbol"
-msgstr "Символ"
+msgstr "Тикет"
 
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 #: src/pages/Futures/Components/HistoryList.tsx
@@ -1090,7 +1090,7 @@ msgstr "Для (приблизительно)"
 #: src/pages/Personal/Personal.tsx
 #: src/pages/Personal/Personal.tsx
 msgid "Today's PNL"
-msgstr "Прибыль и убытки за сегодня"
+msgstr "Прибыли и убытки or Прибыль и убыток"
 
 #: src/pages/Share/Modal/WithdrawModal.tsx
 msgid "Total"
