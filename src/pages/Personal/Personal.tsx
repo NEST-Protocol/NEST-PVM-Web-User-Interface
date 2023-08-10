@@ -148,11 +148,12 @@ const Personal = () => {
   const addModal = useMemo(() => {
     return (
       <>
-        {showDeposit ? (
+        {/* {showDeposit ? (
           <DepositModal open={true} onClose={() => setShowDeposit(false)} />
         ) : (
           <></>
-        )}
+        )} */}
+
         {showWithdraw ? (
           <WithDrawModal
             open={true}
@@ -173,14 +174,7 @@ const Personal = () => {
         )}
       </>
     );
-  }, [
-    addTransactionNotice,
-    getAssetsList,
-    setShowDeposit,
-    setShowWithdraw,
-    showDeposit,
-    showWithdraw,
-  ]);
+  }, [addTransactionNotice, getAssetsList, setShowWithdraw, showWithdraw]);
 
   useEffect(() => {
     if (!checkSigned) {
