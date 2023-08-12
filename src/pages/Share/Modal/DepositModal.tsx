@@ -72,6 +72,7 @@ const DepositModalBase: FC<DepositModalBaseProps> = ({ ...props }) => {
       );
     }
   }, [MAX_Amount, checkBalance, checkMax, selectToken]);
+
   const otherInfo = useMemo(() => {
     if (selectToken !== "NEST") {
       return (

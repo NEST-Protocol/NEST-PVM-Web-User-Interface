@@ -8,6 +8,7 @@ import {
 } from "../hooks/useTransactionReceipt";
 import useNEST from "../hooks/useNEST";
 import { NESTService, NESTServiceOther, USDTToken } from "./contractAddress";
+import useAddGasLimit from "./useAddGasLimit";
 
 function useTokenApprove(
   tokenAddress: `0x${string}`,
@@ -68,9 +69,12 @@ export function useTokenTransfer(
     args: [toAddress, BigInt(amount.toString())],
     enabled: true,
   });
+  
+  // const gasLimit = useAddGasLimit(config, 10)
+  
   const transaction = useContractWrite({
     ...config,
-    request: { ...config.request, value: BigInt(0) },
+    request: { ...config.request, value: BigInt(0)},
   });
   useEffect(() => {
     if (transaction.data) {

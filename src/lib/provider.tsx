@@ -38,18 +38,17 @@ const MainProvider: FC<ProviderProps> = ({ children }) => {
 
 const ConnectWallet: FC = () => {
   const { showConnect, setShowConnect } = useNEST();
-  const { openConnectModal } = useConnectModal();
-  useEffect(() => {
-    if (showConnect) {
-      openConnectModal?.();
-    }
-  }, [openConnectModal, showConnect]);
+  // const { openConnectModal } = useConnectModal();
+  // useEffect(() => {
+  //   if (showConnect) {
+  //     openConnectModal?.();
+  //   }
+  // }, [openConnectModal, showConnect]);
   return (
-    <></>
-    // <ConnectWalletModal
-    //   open={showConnect}
-    //   onClose={() => setShowConnect(false)}
-    // />
+    <ConnectWalletModal
+      open={showConnect}
+      onClose={() => setShowConnect(false)}
+    />
   );
 };
 

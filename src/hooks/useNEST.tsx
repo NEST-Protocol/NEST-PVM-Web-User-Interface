@@ -84,7 +84,7 @@ function useMainReact() {
     const token = "NEST".getToken();
     if (chainId && token && account.connector) {
       const imageURL =
-        "https://raw.githubusercontent.com/FORT-Protocol/Fort-Web-User-Interface/2e289cd29722576329fae529c2bfaa0a905f0148/src/components/Icon/svg/TokenNest.svg";
+        "https://bafybeidwmzhy6njm66meh5g5tyuva3sl6yaz7ncjfquv4or7xfctjj3ylq.ipfs.nftstorage.link/n.svg";
       await account.connector.watchAsset?.({
         address: token.address[chainId], // The address that the token is at.
         symbol: "NEST", // A ticker symbol or shorthand, up to 5 chars.

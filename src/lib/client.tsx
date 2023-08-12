@@ -85,7 +85,7 @@ const { chains, publicClient, webSocketPublicClient } = configureChains(
       },
     }),
     infuraProvider({ apiKey: "be0a9832394640b090fceb2b2107993c" }),
-  ]
+  ],{ retryCount: 5 }
 );
 const PROJECT_ID = "4ea5acecf1faa0887415ff933691f96f";
 export const Wallets = [

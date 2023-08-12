@@ -1,23 +1,24 @@
-import { FC, useCallback, useEffect, useMemo } from "react";
+import { FC, Suspense, lazy, useCallback, useEffect, useMemo } from "react";
 import Stack from "@mui/material/Stack";
 import NESTHead from "./Share/Head/NESTHead";
 import NESTFoot from "./Share/Foot/NESTFoot";
-// import TestTheme from "./demo/testTheme";
 import { HashRouter, Navigate, Route, Routes } from "react-router-dom";
 import loadable from "@loadable/component";
 import { styled } from "@mui/material/styles";
 import useWindowWidth from "../hooks/useWindowWidth";
 import useNEST from "../hooks/useNEST";
 import { KOLClick, KOLWallet } from "../lib/NESTRequest";
+import Personal from "./Personal/Personal";
 
-const HomePage = loadable(() => import("./Home/Home"));
-const FuturesPage = loadable(() => import("./Futures/Futures"));
-const OverviewPage = loadable(() => import("./Overview/Overview"));
-const SwapPage = loadable(() => import("./Swap/Swap"));
-const DashboardPage = loadable(() => import("./Dashboard/Dashboard"));
-const ReferralPage = loadable(() => import("./Personal/Referral/Referral"));
-const DirectPosterPage = loadable(() => import("./DirectPoster/DirectPoster"));
-const PersonalPage = loadable(() => import("./Personal/Personal"));
+// const HomePage = lazy(() => import("./Home/Home"));
+const HomePage = lazy(() => import("./Home/Home"));
+const FuturesPage = lazy(() => import("./Futures/Futures"));
+const OverviewPage = lazy(() => import("./Overview/Overview"));
+const SwapPage = lazy(() => import("./Swap/Swap"));
+const DashboardPage = lazy(() => import("./Dashboard/Dashboard"));
+const ReferralPage = lazy(() => import("./Personal/Referral/Referral"));
+const DirectPosterPage = lazy(() => import("./DirectPoster/DirectPoster"));
+const PersonalPage = lazy(() => import("./Personal/Personal"));
 const App: FC = () => {
   const { headHeight, isBigMobile } = useWindowWidth();
   const { account, chainsData } = useNEST();
@@ -108,6 +109,7 @@ const App: FC = () => {
       <HashRouter>
         <NESTHead />
         <MainContent>
+          <Suspense fallback={<></>}>
           <Routes>
             <Route path="home" element={<HomePage />} />
             <Route path="futures" element={<FuturesPage />} />
@@ -124,6 +126,8 @@ const App: FC = () => {
             </Route>
             <Route path="*" element={<Navigate to="/home" />} />
           </Routes>
+          </Suspense>
+          
           {/* <TestTheme /> */}
         </MainContent>
         <NESTFoot />
