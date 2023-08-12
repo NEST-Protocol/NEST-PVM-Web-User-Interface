@@ -195,7 +195,6 @@ msgstr "Miktar"
 msgid "Approval required"
 msgstr "Onay gerekiyor"
 
-#: src/hooks/useDepositModal.ts
 #: src/hooks/useSwap.ts
 #: src/hooks/useTransactionReceipt.ts
 #: src/pages/Futures/Modal/ApproveNoticeModal.tsx
@@ -384,7 +383,6 @@ msgid "Deflationary economic model. The more users trade, the more $NEST will be
 msgstr "Deflasyonist ekonomik model. Kullanıcılar ne kadar çok işlem yaparsa, o kadar çok $NEST yakılır."
 
 #: src/components/NormalInput/NESTInput.tsx
-#: src/hooks/useDepositModal.ts
 #: src/hooks/useDepositModal.ts
 #: src/pages/Overview/Overview.tsx
 #: src/pages/Personal/Personal.tsx
@@ -887,6 +885,10 @@ msgstr "Son işlemler"
 msgid "Referral"
 msgstr "Yönlendirme"
 
+#: src/pages/Share/Modal/SignModal.tsx
+msgid "Remember me"
+msgstr "beni hatırla"
+
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 #: src/pages/Futures/Modal/ProtocolModal.tsx
 msgid "Risk Warning"
@@ -1300,6 +1302,7 @@ msgstr "NESTFi'yi Neden Seçmelisiniz"
 msgid "Will not be displayed after closing"
 msgstr "Kapatıldıktan sonra görüntülenmeyecek"
 
+#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 msgid "with 1 click"
 msgstr "1 tıklamayla"
