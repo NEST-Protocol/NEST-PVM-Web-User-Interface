@@ -197,7 +197,6 @@ msgstr "수량"
 msgid "Approval required"
 msgstr "승인 필요함"
 
-#: src/hooks/useDepositModal.ts
 #: src/hooks/useSwap.ts
 #: src/hooks/useTransactionReceipt.ts
 #: src/pages/Futures/Modal/ApproveNoticeModal.tsx
@@ -386,7 +385,6 @@ msgid "Deflationary economic model. The more users trade, the more $NEST will be
 msgstr "디플레이션 경제 모델. 더 많은 사용자가 거래할수록 더 많은 $NEST가 소각됩니다."
 
 #: src/components/NormalInput/NESTInput.tsx
-#: src/hooks/useDepositModal.ts
 #: src/hooks/useDepositModal.ts
 #: src/pages/Overview/Overview.tsx
 #: src/pages/Personal/Personal.tsx
@@ -885,6 +883,10 @@ msgstr "최근 트랜잭션"
 msgid "Referral"
 msgstr "추천"
 
+#: src/pages/Share/Modal/SignModal.tsx
+msgid "Remember me"
+msgstr "나를 기억해주세요"
+
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 #: src/pages/Futures/Modal/ProtocolModal.tsx
 msgid "Risk Warning"
@@ -1298,6 +1300,7 @@ msgstr "NESTFi를 선택해야 하는 이유"
 msgid "Will not be displayed after closing"
 msgstr "닫은 후에는 표시되지 않습니다"
 
+#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 msgid "with 1 click"
 msgstr "1 클릭으로"

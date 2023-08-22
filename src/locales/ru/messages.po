@@ -197,7 +197,6 @@ msgstr "Количество"
 msgid "Approval required"
 msgstr "Требуется подтверждение"
 
-#: src/hooks/useDepositModal.ts
 #: src/hooks/useSwap.ts
 #: src/hooks/useTransactionReceipt.ts
 #: src/pages/Futures/Modal/ApproveNoticeModal.tsx
@@ -386,7 +385,6 @@ msgid "Deflationary economic model. The more users trade, the more $NEST will be
 msgstr "Дефляционная экономическая модель. Чем больше пользователи торгуют, тем больше $NEST будет сожжено."
 
 #: src/components/NormalInput/NESTInput.tsx
-#: src/hooks/useDepositModal.ts
 #: src/hooks/useDepositModal.ts
 #: src/pages/Overview/Overview.tsx
 #: src/pages/Personal/Personal.tsx
@@ -887,6 +885,10 @@ msgstr "Последние сделки"
 msgid "Referral"
 msgstr "Реферал"
 
+#: src/pages/Share/Modal/SignModal.tsx
+msgid "Remember me"
+msgstr "помни меня"
+
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 #: src/pages/Futures/Modal/ProtocolModal.tsx
 msgid "Risk Warning"
@@ -1300,6 +1302,7 @@ msgstr "Почему стоит выбрать NESTFi"
 msgid "Will not be displayed after closing"
 msgstr "Не будет отображаться после закрытия"
 
+#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 msgid "with 1 click"
 msgstr "в 1 клик"
