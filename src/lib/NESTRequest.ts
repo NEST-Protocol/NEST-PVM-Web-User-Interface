@@ -138,7 +138,7 @@ export function getNESTAmountForAll(
 
 export function serviceBaseURL(chainId: number) {
   if (chainId === 56) {
-    return "https://api.nestfi.net";
+    return "https://db.nestfi.net";
   } else {
     return "https://dev.nestfi.net";
   }
