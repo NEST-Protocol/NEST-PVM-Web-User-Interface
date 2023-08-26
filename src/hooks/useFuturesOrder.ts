@@ -48,7 +48,13 @@ function useFuturesOrder(data: FuturesOrderService, updateList: () => void) {
       });
     }
     setLoading(false);
-  }, [addTransactionNotice, chainsData.chainId, data.id, signature, updateList]);
+  }, [
+    addTransactionNotice,
+    chainsData.chainId,
+    data.id,
+    signature,
+    updateList,
+  ]);
   /**
    * main button
    */
@@ -87,7 +93,9 @@ function useFuturesOrder(data: FuturesOrderService, updateList: () => void) {
       orientation: data.direction ? `Long` : `Short`,
       actualRate: 0,
       index: parseInt(data.id.toString()),
-      openPrice: data.orderPrice,
+      openPrice:
+        parseFloat(data.orderPrice.floor(tokenName.getTokenPriceDecimals())) ??
+        0,
       tokenPair: `${tokenName}/USDT`,
       actualMargin: 0,
       initialMargin: parseFloat(data.balance.floor(2)),

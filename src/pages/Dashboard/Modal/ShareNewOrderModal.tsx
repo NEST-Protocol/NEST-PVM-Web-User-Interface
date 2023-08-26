@@ -135,7 +135,6 @@ const ShareNewOrderModal: FC<ShareNewOrderModalProps> = ({...props}) => {
 
   const shareLink = useMemo(() => {
     const order = props.value;
-
     const basePrice = parseUnits(order.openPrice.toString(), tokenName.getTokenPriceDecimals()).toString();
     const lever = order.leverage.split("X")[0];
     const orientation = order.orientation === "Long" ? "1" : "0";
