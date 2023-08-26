@@ -10,6 +10,7 @@ import CopyTablePosition from "./CopyTablePosition";
 import CopyListPosition from "./CopyListPosition";
 import NESTLine from "../../../components/NESTLine";
 import { MyCopiesList } from "../Hooks/useMyCopies";
+import useMyCopiesCurrent from "../Hooks/useMyCopiesCurrent";
 
 interface MyCopiesCurrentProps {
   list: MyCopiesList[];
@@ -17,9 +18,9 @@ interface MyCopiesCurrentProps {
 
 const MyCopiesCurrent: FC<MyCopiesCurrentProps> = ({ ...props }) => {
   const { isBigMobile } = useWindowWidth();
-
+  const { close } = useMyCopiesCurrent();
   const rows = props.list.map((item, index) => {
-    return <Row key={`MyCopiesCurrent + ${index}`} data={item} />;
+    return <Row key={`MyCopiesCurrent + ${index}`} data={item} close={close} />;
   });
 
   const noOrder = useMemo(() => {
@@ -41,6 +42,7 @@ const MyCopiesCurrent: FC<MyCopiesCurrentProps> = ({ ...props }) => {
 
       const openTime = new Date(item.timestamp * 1000);
       const openTimeString = `${openTime.toLocaleDateString()} ${openTime.toLocaleTimeString()}`;
+
       return (
         <Stack
           key={`MyCopiesCurrentMobile + ${index}`}
@@ -247,6 +249,9 @@ const MyCopiesCurrent: FC<MyCopiesCurrentProps> = ({ ...props }) => {
                 background: theme.normal.grey_hover,
                 width: "fit-content",
               })}
+              onClick={() => {
+                close(item.id);
+              }}
             >
               <Trans>Close</Trans>
             </Box>
@@ -259,7 +264,7 @@ const MyCopiesCurrent: FC<MyCopiesCurrentProps> = ({ ...props }) => {
         {items}
       </Stack>
     );
-  }, [props.list]);
+  }, [close, props.list]);
 
   const pc = useMemo(() => {
     return (
@@ -290,6 +295,7 @@ const tdNoPadding = {
 
 interface RowProps {
   data: MyCopiesList;
+  close: (id: number) => Promise<void>;
 }
 
 const Row: FC<RowProps> = ({ ...props }) => {
@@ -453,7 +459,14 @@ const Row: FC<RowProps> = ({ ...props }) => {
               borderRadius: "4px",
               background: theme.normal.grey,
               width: "fit-content",
+              "&:hover": {
+                cursor: "pointer",
+              },
             })}
+            component={"button"}
+            onClick={() => {
+              props.close(props.data.id);
+            }}
           >
             <Trans>Close</Trans>
           </Box>

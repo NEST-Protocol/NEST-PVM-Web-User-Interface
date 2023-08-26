@@ -48,8 +48,8 @@ const WALLET = (
 
 const MyCopies: FC = () => {
   const [tabsValue, setTabsValue] = useState(0);
-  const [openCopyModal, setOpenCopyModal] = useState(false);
-  const [openStopModal, setOpenStopModal] = useState(false);
+  const [openCopyModal, setOpenCopyModal] = useState<Array<string>>([]);
+  const [openStopModal, setOpenStopModal] = useState<string>();
 
   const {
     myTradeInfo,
@@ -95,8 +95,8 @@ const MyCopies: FC = () => {
     } else if (tabsValue === 2) {
       return (
         <MyCopiesMyTraders
-          copyCallBack={() => setOpenCopyModal(true)}
-          stopCallBack={() => setOpenStopModal(true)}
+          copyCallBack={(name:string, address:string) => setOpenCopyModal([name, address])}
+          stopCallBack={(address: string) => setOpenStopModal(address)}
           list={myCopiesMyTradersList}
         />
       );
@@ -139,14 +139,16 @@ const MyCopies: FC = () => {
       alignItems={"center"}
     >
       <CopySettingModal
-        open={openCopyModal}
-        name={"LYK"}
-        onClose={() => setOpenCopyModal(false)}
+        open={(openCopyModal.length !== 0)}
+        name={openCopyModal[0]}
+        address={openCopyModal[1]}
+        onClose={() => setOpenCopyModal([])}
         add
       />
       <CopyStopModal
-        open={openStopModal}
-        onClose={() => setOpenStopModal(false)}
+        open={!(openStopModal === undefined)}
+        onClose={() => setOpenStopModal(undefined)}
+        address={openStopModal}
       />
       <Stack maxWidth={"1200px"} spacing={"24px"} width={"100%"}>
         <CopyRoute title={t`My Copies`} link={"/#/copy"} />

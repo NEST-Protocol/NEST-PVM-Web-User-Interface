@@ -9,8 +9,8 @@ import Box from "@mui/material/Box";
 import { MyCopiesMyTradersList } from "../Hooks/useMyCopies";
 
 interface MyCopiesMyTradersProps {
-  copyCallBack: () => void;
-  stopCallBack: () => void;
+  copyCallBack: (name: string, address: string) => void;
+  stopCallBack: (address: string) => void;
   list: MyCopiesMyTradersList[];
 }
 
@@ -21,8 +21,12 @@ const MyCopiesMyTraders: FC<MyCopiesMyTradersProps> = ({ ...props }) => {
     return (
       <Row
         key={`MyCopiesMyTraders + ${index}`}
-        copyCallBack={props.copyCallBack}
-        stopCallBack={props.stopCallBack}
+        copyCallBack={() => {
+          props.copyCallBack(item.nickName, item.kolAddress);
+        }}
+        stopCallBack={() => {
+          props.stopCallBack(item.kolAddress);
+        }}
         data={item}
       />
     );
@@ -154,7 +158,9 @@ const MyCopiesMyTraders: FC<MyCopiesMyTradersProps> = ({ ...props }) => {
                   cursor: "pointer",
                 },
               })}
-              onClick={props.copyCallBack}
+              onClick={() => {
+                props.copyCallBack(item.nickName, item.kolAddress);
+              }}
             >
               <Trans>Settings</Trans>
             </Box>
@@ -173,7 +179,9 @@ const MyCopiesMyTraders: FC<MyCopiesMyTradersProps> = ({ ...props }) => {
                   cursor: "pointer",
                 },
               })}
-              onClick={props.stopCallBack}
+              onClick={() => {
+                props.stopCallBack(item.kolAddress);
+              }}
             >
               <Trans>Stop Copying</Trans>
             </Box>
@@ -186,7 +194,7 @@ const MyCopiesMyTraders: FC<MyCopiesMyTradersProps> = ({ ...props }) => {
         {items}
       </Stack>
     );
-  }, [props.copyCallBack, props.list, props.stopCallBack]);
+  }, [props]);
 
   const pc = useMemo(() => {
     return (
@@ -208,8 +216,8 @@ const tdNoPadding = {
 };
 
 interface RowProps {
-  copyCallBack: () => void;
-  stopCallBack: () => void;
+  copyCallBack: (name: string, address: string) => void;
+  stopCallBack: (address: string) => void;
   data: MyCopiesMyTradersList;
 }
 
@@ -303,7 +311,9 @@ const Row: FC<RowProps> = ({ ...props }) => {
                 cursor: "pointer",
               },
             })}
-            onClick={props.copyCallBack}
+            onClick={() => {
+              props.copyCallBack(nickName, kolAddress);
+            }}
           >
             <Trans>Settings</Trans>
           </Box>
@@ -321,7 +331,9 @@ const Row: FC<RowProps> = ({ ...props }) => {
                 cursor: "pointer",
               },
             })}
-            onClick={props.stopCallBack}
+            onClick={() => {
+              props.stopCallBack(kolAddress);
+            }}
           >
             <Trans>Stop Copying</Trans>
           </Box>

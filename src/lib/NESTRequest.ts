@@ -322,17 +322,31 @@ export function serviceHistory(
 /**
  * Copy
  */
-// export function copyFollow(
-//   id: string,
-//   chainId: number,
-//   header: RequestBodyInterface
-// ) {
-//   return baseRequestPOSTWithBody_return(
-//     `${serviceBaseURL(chainId)}/nestfi/op/future/close?id=${id}`,
-//     header,
-//     {}
-//   );
-// }
+export function copyFollow(
+  chainId: number,
+  header: RequestBodyInterface,
+  body: RequestBodyInterface
+) {
+  return baseRequestPOSTWithBody_return(
+    `${serviceBaseURL(chainId)}/nestfi/copy/follower/setting`,
+    header,
+    body
+  );
+}
+
+export function copyClose(
+  chainId: number,
+  address: string,
+  header: RequestBodyInterface
+) {
+  return baseRequestPOSTWithBody_return(
+    `${serviceBaseURL(
+      chainId
+    )}/nestfi/copy/follower/cancle?chainId=${chainId}&copyKolAddress=${address}`,
+    header,
+    {}
+  );
+}
 
 export function copyAllKOL(chainId: number, info: RequestBodyInterface) {
   return baseRequestGetWithHeader(
@@ -427,7 +441,10 @@ export function copyMyCopiesList(chainId: number, info: RequestBodyInterface) {
   );
 }
 
-export function copyMyCopiesHistoryList(chainId: number, info: RequestBodyInterface) {
+export function copyMyCopiesHistoryList(
+  chainId: number,
+  info: RequestBodyInterface
+) {
   return baseRequestGetWithHeader(
     `${serviceBaseURL(
       chainId
@@ -436,11 +453,27 @@ export function copyMyCopiesHistoryList(chainId: number, info: RequestBodyInterf
   );
 }
 
-export function copyMyCopiesMyTradersList(chainId: number, info: RequestBodyInterface) {
+export function copyMyCopiesMyTradersList(
+  chainId: number,
+  info: RequestBodyInterface
+) {
   return baseRequestGetWithHeader(
     `${serviceBaseURL(
       chainId
     )}/nestfi/copy/follower/kolList?chainId=${chainId}`,
+    info
+  );
+}
+
+export function copyCloseInfo(
+  chainId: number,
+  address: string,
+  info: RequestBodyInterface
+) {
+  return baseRequestGetWithHeader(
+    `${serviceBaseURL(
+      chainId
+    )}/nestfi/copy/follower/future/info?chainId=${chainId}&copyKolAddress=${address}`,
     info
   );
 }

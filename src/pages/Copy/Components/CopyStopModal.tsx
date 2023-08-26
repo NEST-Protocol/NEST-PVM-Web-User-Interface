@@ -9,12 +9,26 @@ import BaseModal from "../../Share/Modal/BaseModal";
 import NESTLine from "../../../components/NESTLine";
 import Stack from "@mui/material/Stack";
 import MainButton from "../../../components/MainButton/MainButton";
+import useCloseCopyModal from "../Hooks/useCloseCopyModal";
 
 interface CopyStopBaseModalProps {
   onClose: () => void;
+  address: string | undefined;
 }
 
 const CopyStopBaseModal: FC<CopyStopBaseModalProps> = ({ ...props }) => {
+  const { closeInfo, mainButtonLoading, mainButtonDis, mainButtonAction } =
+    useCloseCopyModal(props.address, props.onClose);
+  const totalCopyAmount = closeInfo
+    ? closeInfo.totalCopyAmount.floor(2)
+    : String().placeHolder;
+  const openInterest = closeInfo
+    ? closeInfo.openInterest.floor(2)
+    : String().placeHolder;
+  const totalProfit = closeInfo
+    ? closeInfo.totalProfit.floor(2)
+    : String().placeHolder;
+  const aum = closeInfo ? closeInfo.aum.floor(2) : String().placeHolder;
   const info = useCallback((title: string, value: string) => {
     return (
       <Stack
@@ -65,12 +79,12 @@ const CopyStopBaseModal: FC<CopyStopBaseModalProps> = ({ ...props }) => {
   return (
     <Stack spacing={"24px"} width={"100%"}>
       <Stack spacing={"8px"} width={"100%"}>
-        {info(t`Total Copy Amount`, "500NEST")}
-        {info(t`Open Interest`, "500NEST")}
-        {info(t`Total Profit`, "500NEST")}
+        {info(t`Total Copy Amount`, totalCopyAmount + "NEST")}
+        {info(t`Open Interest`, openInterest + "NEST")}
+        {info(t`Total Profit`, totalProfit + "NEST")}
       </Stack>
       <NESTLine />
-      {info(t`Estimated Realized Amount`, "500NEST")}
+      {info(t`Estimated Realized Amount`, aum + "NEST")}
 
       <Stack spacing={"12px"}>
         {information(
@@ -81,7 +95,12 @@ const CopyStopBaseModal: FC<CopyStopBaseModalProps> = ({ ...props }) => {
         )}
       </Stack>
 
-      <MainButton title={t`Confirm`} onClick={() => {}} />
+      <MainButton
+        title={t`Confirm`}
+        isLoading={mainButtonLoading}
+        disable={mainButtonDis}
+        onClick={mainButtonAction}
+      />
     </Stack>
   );
 };
@@ -89,6 +108,7 @@ const CopyStopBaseModal: FC<CopyStopBaseModalProps> = ({ ...props }) => {
 interface CopyStopModalProps {
   open: boolean;
   onClose: () => void;
+  address: string | undefined;
 }
 
 const CopyStopModal: FC<CopyStopModalProps> = ({ ...props }) => {
@@ -105,7 +125,7 @@ const CopyStopModal: FC<CopyStopModalProps> = ({ ...props }) => {
         keepMounted
       >
         <BaseDrawer title={t`Stop Copying`} onClose={props.onClose}>
-          <CopyStopBaseModal onClose={props.onClose} />
+          <CopyStopBaseModal onClose={props.onClose} address={props.address} />
         </BaseDrawer>
       </Drawer>
     ) : (
@@ -117,7 +137,10 @@ const CopyStopModal: FC<CopyStopModalProps> = ({ ...props }) => {
       >
         <Box>
           <BaseModal title={t`Stop Copying`} onClose={props.onClose}>
-            <CopyStopBaseModal onClose={props.onClose} />
+            <CopyStopBaseModal
+              onClose={props.onClose}
+              address={props.address}
+            />
           </BaseModal>
         </Box>
       </Modal>

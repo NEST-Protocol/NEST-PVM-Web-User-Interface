@@ -13,13 +13,25 @@ import { NESTTooltipFC } from "../../../components/NESTTooltip/NESTTooltip";
 import NESTLine from "../../../components/NESTLine";
 import MainButton from "../../../components/MainButton/MainButton";
 import Agree from "../../../components/Agree/Agree";
+import useCopySettingModal from "../Hooks/useCopySettingModal";
 
 interface CopySettingBaseModalProps {
   onClose: () => void;
   add?: boolean;
+  address: string | undefined;
 }
 
 const CopySettingBaseModal: FC<CopySettingBaseModalProps> = ({ ...props }) => {
+  const {
+    copyAccountBalance,
+    setCopyAccountBalance,
+    followingValue,
+    setFollowingValue,
+    mainButtonTitle,
+    mainButtonLoading,
+    mainButtonDis,
+    mainButtonAction,
+  } = useCopySettingModal(props.address, props.add ?? false, props.onClose);
   const [selectButton, setSelectButton] = useState(0);
   const inputNestAmount = useMemo(() => {
     return (
@@ -28,16 +40,16 @@ const CopySettingBaseModal: FC<CopySettingBaseModalProps> = ({ ...props }) => {
         showToSwap={false}
         showBalance={"666.66"}
         maxCallBack={() => {}}
-        nestAmount={"444.55"}
+        nestAmount={copyAccountBalance}
         hideSwapTitle={true}
         changeNestAmount={(value: string) => {
-          //   setTokenAmount(value.formatInputNum4());
+          setCopyAccountBalance(value.formatInputNum4());
           setSelectButton(0);
         }}
         otherCallBack={() => {}}
       />
     );
-  }, []);
+  }, [copyAccountBalance, setCopyAccountBalance]);
 
   return (
     <Stack spacing={"24px"} width={"100%"}>
@@ -151,6 +163,10 @@ const CopySettingBaseModal: FC<CopySettingBaseModalProps> = ({ ...props }) => {
                 width: "100%",
                 paddingRight: "8px",
               })}
+              value={followingValue}
+              onChange={(e) => {
+                setFollowingValue(e.target.value.formatInputNum4());
+              }}
             ></Box>
             <Box
               sx={(theme) => ({
@@ -231,9 +247,12 @@ const CopySettingBaseModal: FC<CopySettingBaseModalProps> = ({ ...props }) => {
               <Trans>Copy Trader Service Agreement</Trans>
             </Box>
           </Stack>
+
           <MainButton
-            title={props.add ? t`Save` : t`Copy Now`}
-            onClick={() => {}}
+            title={mainButtonTitle}
+            isLoading={mainButtonLoading}
+            disable={mainButtonDis}
+            onClick={mainButtonAction}
             style={{ height: "48px", fontSize: "16px" }}
           />
         </Stack>
@@ -246,6 +265,7 @@ interface CopySettingModalProps {
   open: boolean;
   name: string;
   onClose: () => void;
+  address: string | undefined;
   add?: boolean;
 }
 
@@ -263,7 +283,11 @@ const CopySettingModal: FC<CopySettingModalProps> = ({ ...props }) => {
         keepMounted
       >
         <BaseDrawer title={t`Copy` + " " + props.name} onClose={props.onClose}>
-          <CopySettingBaseModal onClose={props.onClose} add={props.add} />
+          <CopySettingBaseModal
+            onClose={props.onClose}
+            add={props.add}
+            address={props.address}
+          />
         </BaseDrawer>
       </Drawer>
     ) : (
@@ -275,7 +299,11 @@ const CopySettingModal: FC<CopySettingModalProps> = ({ ...props }) => {
       >
         <Box>
           <BaseModal title={t`Copy` + " " + props.name} onClose={props.onClose}>
-            <CopySettingBaseModal onClose={props.onClose} add={props.add} />
+            <CopySettingBaseModal
+              onClose={props.onClose}
+              add={props.add}
+              address={props.address}
+            />
           </BaseModal>
         </Box>
       </Modal>

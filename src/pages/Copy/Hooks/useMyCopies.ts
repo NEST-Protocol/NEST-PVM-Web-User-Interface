@@ -166,6 +166,8 @@ function useMyCopies() {
     }
   }, [chainsData.chainId, signature]);
 
+  
+
   useEffect(() => {
     getMyTradeInfo();
   }, [getMyTradeInfo]);

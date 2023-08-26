@@ -458,7 +458,8 @@ const KolInfo: FC<KolInfoProps> = ({ ...props }) => {
     <>
       <CopySettingModal
         open={openCopyModal}
-        name={"LYK"}
+        name={props.data ? props.data.nickName : ""}
+        address={props.data ? props.data.walletAddress : ""}
         onClose={() => setOpenCopyModal(false)}
       />
       {isBigMobile ? mobile : pc}
