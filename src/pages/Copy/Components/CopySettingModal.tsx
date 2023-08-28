@@ -41,6 +41,7 @@ const CopySettingBaseModal: FC<CopySettingBaseModalProps> = ({ ...props }) => {
     selectButtonCallBack,
     agree,
     setAgree,
+    current
   } = useCopySettingModal(props.address, props.add ?? false, props.onClose);
 
   const inputNestAmount = useMemo(() => {
@@ -116,7 +117,7 @@ const CopySettingBaseModal: FC<CopySettingBaseModalProps> = ({ ...props }) => {
                       color: theme.normal.text2,
                     })}
                   >
-                    <Trans>Current</Trans>
+                    <Trans>Current:</Trans>
                   </Box>
                   <Box
                     sx={(theme) => ({
@@ -126,7 +127,7 @@ const CopySettingBaseModal: FC<CopySettingBaseModalProps> = ({ ...props }) => {
                       color: theme.normal.text0,
                     })}
                   >
-                    2000 NEST
+                    {current ? current.floor(2) : String().placeHolder}NEST
                   </Box>
                 </>
               ) : (

@@ -477,3 +477,17 @@ export function copyCloseInfo(
     info
   );
 }
+
+export function copyAsset(
+  chainId: number,
+  kolAddress: string,
+  address: string,
+  info: RequestBodyInterface
+) {
+  return baseRequestGetWithHeader(
+    `${serviceBaseURL(
+      chainId
+    )}/nestfi/copy/follower/asset?chainId=${chainId}&copyKolAddress=${kolAddress}&walletAddress=${address}`,
+    info
+  );
+}

@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import useNEST from "../../../hooks/useNEST";
-import { copyFollow } from "../../../lib/NESTRequest";
+import { copyAsset, copyFollow } from "../../../lib/NESTRequest";
 import { t } from "@lingui/macro";
 import useService from "../../../contracts/useService";
 
@@ -9,13 +9,14 @@ function useCopySettingModal(
   add: boolean,
   onClose: () => void
 ) {
-  const { chainsData, signature } = useNEST();
+  const { chainsData, signature, account } = useNEST();
   const { service_balance } = useService();
   const [tokenBalance, setTokenBalance] = useState<number>();
   const [copyAccountBalance, setCopyAccountBalance] = useState<string>("");
   const [followingValue, setFollowingValue] = useState<string>("");
   const [selectButton, setSelectButton] = useState<number>();
   const [agree, setAgree] = useState<boolean>(false);
+  const [current, setCurrent] = useState<number>();
 
   const [isLoading, setIsLoading] = useState(false);
   const follow = useCallback(async () => {
@@ -62,6 +63,23 @@ function useCopySettingModal(
       setTokenBalance(result);
     });
   }, [service_balance]);
+
+  const getCurrent = useCallback(async () => {
+    if (chainsData.chainId && signature && address && account.address) {
+      const req = await copyAsset(
+        chainsData.chainId,
+        address,
+        account.address,
+        {
+          Authorization: signature.signature,
+        }
+      );
+      if (Number(req["errorCode"]) === 0) {
+        const value = req["value"];
+        setCurrent(value["copyAccountBalance"]);
+      }
+    }
+  }, [account.address, address, chainsData.chainId, signature]);
 
   const checkBalance = useMemo(() => {
     if (tokenBalance) {
@@ -129,13 +147,15 @@ function useCopySettingModal(
    */
   useEffect(() => {
     getBalance();
+    getCurrent();
     const time = setInterval(() => {
       getBalance();
-    }, 5 * 1000);
+      getCurrent();
+    }, 10 * 1000);
     return () => {
       clearInterval(time);
     };
-  }, [getBalance]);
+  }, [getBalance, getCurrent]);
 
   return {
     copyAccountBalance,
@@ -155,6 +175,7 @@ function useCopySettingModal(
     selectButtonCallBack,
     agree,
     setAgree,
+    current,
   };
 }
 

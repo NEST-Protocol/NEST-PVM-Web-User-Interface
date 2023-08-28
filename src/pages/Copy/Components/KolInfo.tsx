@@ -1,11 +1,14 @@
-import { FC, useCallback, useMemo, useState } from "react";
+import { FC, useCallback, useEffect, useMemo, useState } from "react";
 import useWindowWidth from "../../../hooks/useWindowWidth";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import MainButton from "../../../components/MainButton/MainButton";
-import { t } from "@lingui/macro";
+import { Trans, t } from "@lingui/macro";
 import CopySettingModal from "./CopySettingModal";
 import { AllKOLModel } from "../Hooks/useCopy";
+import useNEST from "../../../hooks/useNEST";
+import { copyAsset } from "../../../lib/NESTRequest";
+import CopyStopModal from "./CopyStopModal";
 
 const WALLET = (
   <svg
@@ -70,7 +73,10 @@ interface KolInfoProps {
 
 const KolInfo: FC<KolInfoProps> = ({ ...props }) => {
   const { isBigMobile } = useWindowWidth();
+  const { chainsData, signature, account } = useNEST();
   const [openCopyModal, setOpenCopyModal] = useState(false);
+  const [openStopModal, setOpenStopModal] = useState(false);
+  const [current, setCurrent] = useState<number>();
 
   const nickName = props.data ? props.data.nickName : String().placeHolder;
   const walletAddress = props.data
@@ -118,6 +124,65 @@ const KolInfo: FC<KolInfoProps> = ({ ...props }) => {
       </Stack>
     );
   }, []);
+
+  const getCurrent = useCallback(async () => {
+    if (chainsData.chainId && signature && props.data && account.address) {
+      const req = await copyAsset(
+        chainsData.chainId,
+        props.data.walletAddress,
+        account.address,
+        {
+          Authorization: signature.signature,
+        }
+      );
+      if (Number(req["errorCode"]) === 0) {
+        const value = req["value"];
+        setCurrent(value["copyAccountBalance"]);
+      }
+    }
+  }, [account.address, chainsData.chainId, props.data, signature]);
+
+  useEffect(() => {
+    getCurrent();
+  }, [getCurrent]);
+
+  const button = useMemo(() => {
+    if ((current ?? 0) > 0) {
+      return (
+        <Box
+          sx={(theme) => ({
+            background: theme.normal.grey_light_hover,
+            borderRadius: "8px",
+            padding: "10px 16px",
+            fontWeight: "700",
+            fontSize: "14px",
+            lineHeight: "20px",
+            color: theme.normal.text0,
+            "&:hover": {
+              cursor: "pointer",
+            },
+          })}
+          onClick={() => setOpenStopModal(true)}
+        >
+          <Trans>Stop Copying</Trans>
+        </Box>
+      );
+    } else {
+      return (
+        <MainButton
+          title={t`Copy Now`}
+          onClick={() => setOpenCopyModal(true)}
+          style={{
+            height: "40px",
+            paddingLeft: "16px",
+            paddingRight: "16px",
+            fontSize: "14px",
+            width: "fit-content",
+          }}
+        />
+      );
+    }
+  }, [current]);
 
   const mobile = useMemo(() => {
     return (
@@ -258,21 +323,12 @@ const KolInfo: FC<KolInfoProps> = ({ ...props }) => {
             {introduction}
           </Box>
 
-          <MainButton
-            title={t`Copy Now`}
-            onClick={() => setOpenCopyModal(true)}
-            style={{
-              height: "40px",
-              paddingLeft: "16px",
-              paddingRight: "16px",
-              fontSize: "14px",
-              width: "fit-content",
-            }}
-          />
+          {button}
         </Stack>
       </Stack>
     );
   }, [
+    button,
     currentFollowers,
     followersAssets,
     introduction,
@@ -418,16 +474,7 @@ const KolInfo: FC<KolInfoProps> = ({ ...props }) => {
               justifyContent={"flex-end"}
               alignItems={"center"}
             >
-              <MainButton
-                title={t`Copy Now`}
-                onClick={() => setOpenCopyModal(true)}
-                style={{
-                  height: "40px",
-                  paddingLeft: "16px",
-                  paddingRight: "16px",
-                  fontSize: "14px",
-                }}
-              />
+              {button}
             </Stack>
           </Stack>
           <Box
@@ -444,6 +491,7 @@ const KolInfo: FC<KolInfoProps> = ({ ...props }) => {
       </Stack>
     );
   }, [
+    button,
     currentFollowers,
     followersAssets,
     introduction,
@@ -461,6 +509,11 @@ const KolInfo: FC<KolInfoProps> = ({ ...props }) => {
         name={props.data ? props.data.nickName : ""}
         address={props.data ? props.data.walletAddress : ""}
         onClose={() => setOpenCopyModal(false)}
+      />
+      <CopyStopModal
+        open={openStopModal}
+        onClose={() => setOpenStopModal(false)}
+        address={props.data ? props.data.walletAddress : ""}
       />
       {isBigMobile ? mobile : pc}
     </>
