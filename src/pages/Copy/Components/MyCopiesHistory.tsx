@@ -19,7 +19,7 @@ const MyCopiesHistory: FC<MyCopiesHistoryProps> = ({ ...props }) => {
   const { isBigMobile } = useWindowWidth();
 
   const rows = props.list.map((item, index) => {
-    return <Row key={`MyCopiesHistory + ${index}`} data={item}/>;
+    return <Row key={`MyCopiesHistory + ${index}`} data={item} />;
   });
 
   const noOrder = useMemo(() => {
@@ -35,8 +35,12 @@ const MyCopiesHistory: FC<MyCopiesHistoryProps> = ({ ...props }) => {
       const kolAddress = item.kolAddress.showAddress();
       const balance = item.balance.floor(2);
       const profitLossRate = item.profitLossRate.floor(2) + "%";
-      const orderPrice = item.orderPrice.floor(2);
-      const marketPrice = item.marketPrice.floor(2);
+      const orderPrice = item.orderPrice.floor(
+        tokenName.getTokenPriceDecimals()
+      );
+      const marketPrice = item.marketPrice.floor(
+        tokenName.getTokenPriceDecimals()
+      );
 
       const openTime = new Date(item.timestamp * 1000);
       const openTimeString = `${openTime.toLocaleDateString()} ${openTime.toLocaleTimeString()}`;
@@ -116,7 +120,10 @@ const MyCopiesHistory: FC<MyCopiesHistoryProps> = ({ ...props }) => {
                       fontSize: "10px",
                       fontWeight: "400",
                       lineHeight: "14px",
-                      color: item.profitLossRate >= 0 ? theme.normal.success : theme.normal.danger,
+                      color:
+                        item.profitLossRate >= 0
+                          ? theme.normal.success
+                          : theme.normal.danger,
                     })}
                   >
                     {profitLossRate}
@@ -277,27 +284,35 @@ interface RowProps {
   data: MyCopiesList;
 }
 
-const Row: FC<RowProps> = ({...props}) => {
+const Row: FC<RowProps> = ({ ...props }) => {
   const tokenName = props.data.product.split("/")[0];
-      const isLong = props.data.direction;
-      const lever = props.data.leverage;
-      const nickName = props.data.nickName;
-      const kolAddress = props.data.kolAddress.showAddress();
-      const balance = props.data.balance.floor(2);
-      const profitLossRate = props.data.profitLossRate.floor(2) + "%";
-      const orderPrice = props.data.orderPrice.floor(2);
-      const marketPrice = props.data.marketPrice.floor(2);
+  const isLong = props.data.direction;
+  const lever = props.data.leverage;
+  const nickName = props.data.nickName;
+  const kolAddress = props.data.kolAddress.showAddress();
+  const balance = props.data.balance.floor(2);
+  const profitLossRate = props.data.profitLossRate.floor(2) + "%";
+  const orderPrice = props.data.orderPrice.floor(
+    tokenName.getTokenPriceDecimals()
+  );
+  const marketPrice = props.data.marketPrice.floor(
+    tokenName.getTokenPriceDecimals()
+  );
 
-      const openTime = new Date(props.data.timestamp * 1000);
-      const openTimeString = `${openTime.toLocaleDateString()} ${openTime.toLocaleTimeString()}`;
-      const closeTime = new Date(props.data.closeTime * 1000);
-      const closeTimeString = `${closeTime.toLocaleDateString()} ${closeTime.toLocaleTimeString()}`;
+  const openTime = new Date(props.data.timestamp * 1000);
+  const openTimeString = `${openTime.toLocaleDateString()} ${openTime.toLocaleTimeString()}`;
+  const closeTime = new Date(props.data.closeTime * 1000);
+  const closeTimeString = `${closeTime.toLocaleDateString()} ${closeTime.toLocaleTimeString()}`;
   return (
     <TableRow
       sx={(theme) => ({ "&: hover": { background: theme.normal.bg1 } })}
     >
       <TableCell>
-        <CopyTablePosition tokenName={tokenName} isLong={isLong} lever={lever} />
+        <CopyTablePosition
+          tokenName={tokenName}
+          isLong={isLong}
+          lever={lever}
+        />
       </TableCell>
       <TableCell sx={tdNoPadding}>
         <Stack direction={"row"} alignItems={"center"} spacing={"8px"}>
@@ -340,7 +355,10 @@ const Row: FC<RowProps> = ({...props}) => {
               fontWeight: "700",
               fontSize: "12px",
               lineHeight: "16px",
-              color: props.data.profitLossRate >= 0 ? theme.normal.success : theme.normal.danger,
+              color:
+                props.data.profitLossRate >= 0
+                  ? theme.normal.success
+                  : theme.normal.danger,
             })}
           >
             {balance}NEST
@@ -350,7 +368,10 @@ const Row: FC<RowProps> = ({...props}) => {
               fontWeight: "400",
               fontSize: "12px",
               lineHeight: "16px",
-              color: props.data.profitLossRate >= 0 ? theme.normal.success : theme.normal.danger,
+              color:
+                props.data.profitLossRate >= 0
+                  ? theme.normal.success
+                  : theme.normal.danger,
             })}
           >
             {profitLossRate}
@@ -377,7 +398,7 @@ const Row: FC<RowProps> = ({...props}) => {
               color: theme.normal.text2,
             })}
           >
-             {openTimeString}
+            {openTimeString}
           </Box>
         </Stack>
       </TableCell>

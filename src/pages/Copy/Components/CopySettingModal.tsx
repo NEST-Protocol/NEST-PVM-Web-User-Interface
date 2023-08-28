@@ -1,4 +1,4 @@
-import { FC, useMemo, useState } from "react";
+import { FC, useMemo } from "react";
 import useWindowWidth from "../../../hooks/useWindowWidth";
 import Drawer from "@mui/material/Drawer";
 import BaseDrawer from "../../Share/Modal/BaseDrawer";
@@ -14,6 +14,7 @@ import NESTLine from "../../../components/NESTLine";
 import MainButton from "../../../components/MainButton/MainButton";
 import Agree from "../../../components/Agree/Agree";
 import useCopySettingModal from "../Hooks/useCopySettingModal";
+import NESTa from "../../../components/MainButton/NESTa";
 
 interface CopySettingBaseModalProps {
   onClose: () => void;
@@ -31,15 +32,26 @@ const CopySettingBaseModal: FC<CopySettingBaseModalProps> = ({ ...props }) => {
     mainButtonLoading,
     mainButtonDis,
     mainButtonAction,
+    maxCallBack,
+    tokenBalance,
+    checkBalance,
+    checkLimit,
+    selectButton,
+    setSelectButton,
+    selectButtonCallBack,
+    agree,
+    setAgree,
   } = useCopySettingModal(props.address, props.add ?? false, props.onClose);
-  const [selectButton, setSelectButton] = useState(0);
+
   const inputNestAmount = useMemo(() => {
     return (
       <NESTInput
-        checkBalance={true}
+        checkBalance={checkBalance && checkLimit}
         showToSwap={false}
-        showBalance={"666.66"}
-        maxCallBack={() => {}}
+        showBalance={
+          tokenBalance ? tokenBalance.floor(2) : String().placeHolder
+        }
+        maxCallBack={maxCallBack}
         nestAmount={copyAccountBalance}
         hideSwapTitle={true}
         changeNestAmount={(value: string) => {
@@ -49,7 +61,15 @@ const CopySettingBaseModal: FC<CopySettingBaseModalProps> = ({ ...props }) => {
         otherCallBack={() => {}}
       />
     );
-  }, [copyAccountBalance, setCopyAccountBalance]);
+  }, [
+    checkBalance,
+    checkLimit,
+    copyAccountBalance,
+    maxCallBack,
+    setCopyAccountBalance,
+    setSelectButton,
+    tokenBalance,
+  ]);
 
   return (
     <Stack spacing={"24px"} width={"100%"}>
@@ -123,7 +143,7 @@ const CopySettingBaseModal: FC<CopySettingBaseModalProps> = ({ ...props }) => {
         )} */}
           <TokenAmountButtons
             nowValue={selectButton ?? 0}
-            callBack={() => {}}
+            callBack={selectButtonCallBack}
           />
         </Stack>
         <Stack spacing={"8px"} width={"100%"}>
@@ -193,6 +213,7 @@ const CopySettingBaseModal: FC<CopySettingBaseModalProps> = ({ ...props }) => {
                   cursor: "pointer",
                 },
               })}
+              onClick={() => setFollowingValue("500")}
             >
               500
             </Box>
@@ -209,6 +230,7 @@ const CopySettingBaseModal: FC<CopySettingBaseModalProps> = ({ ...props }) => {
                   cursor: "pointer",
                 },
               })}
+              onClick={() => setFollowingValue("1000")}
             >
               1000
             </Box>
@@ -225,6 +247,7 @@ const CopySettingBaseModal: FC<CopySettingBaseModalProps> = ({ ...props }) => {
                   cursor: "pointer",
                 },
               })}
+              onClick={() => setFollowingValue("2000")}
             >
               2000
             </Box>
@@ -234,7 +257,10 @@ const CopySettingBaseModal: FC<CopySettingBaseModalProps> = ({ ...props }) => {
 
         <Stack spacing={"8px"}>
           <Stack direction={"row"} spacing={"8px"} paddingY={"8px"}>
-            <Agree value={true} changeValue={() => {}} />
+            <Agree
+              value={agree}
+              changeValue={(value: boolean) => setAgree(value)}
+            />
             <Box
               sx={(theme) => ({
                 fontWeight: "400",
@@ -243,8 +269,10 @@ const CopySettingBaseModal: FC<CopySettingBaseModalProps> = ({ ...props }) => {
                 color: theme.normal.text0,
               })}
             >
-              <Trans>I have read and agreed to the</Trans>
-              <Trans>Copy Trader Service Agreement</Trans>
+              <Trans>I have read and agreed to the</Trans>{" "}
+              <NESTa href="https://www.baidu.com">
+                <Trans>Copy Trader Service Agreement</Trans>
+              </NESTa>
             </Box>
           </Stack>
 

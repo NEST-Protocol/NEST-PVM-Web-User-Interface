@@ -1,7 +1,7 @@
 import { Trans, t } from "@lingui/macro";
 import { Box } from "@mui/material";
 import Stack from "@mui/material/Stack";
-import { FC, useCallback, useState } from "react";
+import { FC, useCallback, useMemo, useState } from "react";
 import {
   LineChart,
   Line,
@@ -24,6 +24,7 @@ const COLORS = [
   "#EAAA00",
   "#3577FF",
   "#9F00EA",
+  "#EA0062",
   "#36C56E",
   "#EF8839",
   "#00B2EA",
@@ -69,6 +70,21 @@ const TraderChartView: FC<TraderChartViewProps> = ({ ...props }) => {
   const traderPnl = props.performanceData
     ? `${props.performanceData.traderPnl.floor(2)}`
     : String().placeHolder;
+
+  const percent = useMemo(() => {
+    if (props.performanceData) {
+      const all =
+        props.performanceData.winningTraders +
+        props.performanceData.losingTraders;
+      if (all > 0) {
+        return [
+          `${(props.performanceData.winningTraders / all*100).floor(2)}%`,
+          `${(props.performanceData.losingTraders / all*100).floor(2)}%`,
+        ];
+      }
+    }
+    return ["0%", "100%"];
+  }, [props.performanceData]);
 
   const performanceInfo = useCallback((title: string, info: string) => {
     return (
@@ -132,7 +148,7 @@ const TraderChartView: FC<TraderChartViewProps> = ({ ...props }) => {
               color: theme.normal.text0,
             })}
           >
-            {value}
+            {`${value}%`}
           </Box>
         </Stack>
       );
@@ -387,7 +403,7 @@ const TraderChartView: FC<TraderChartViewProps> = ({ ...props }) => {
                 alignItems={"center"}
               >
                 <Box
-                  width={"80%"}
+                  width={percent[0]}
                   sx={(theme) => ({
                     background: theme.normal.success,
                     borderTopLeftRadius: "4px",
@@ -396,7 +412,7 @@ const TraderChartView: FC<TraderChartViewProps> = ({ ...props }) => {
                   })}
                 ></Box>
                 <Box
-                  width={"20%"}
+                  width={percent[1]}
                   sx={(theme) => ({
                     background: theme.normal.bg3,
                     borderTopRightRadius: "4px",

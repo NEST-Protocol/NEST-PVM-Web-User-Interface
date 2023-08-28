@@ -31,8 +31,12 @@ const TraderCurrent: FC<TraderCurrentProps> = ({ ...props }) => {
       const tokenName = item.product.split("/")[0];
       const isLong = item.direction;
       const lever = item.leverage;
-      const openPrice = item.orderPrice?.floor(2);
-      const marketPrice = item.marketPrice?.floor(2);
+      const openPrice = item.orderPrice?.floor(
+        tokenName.getTokenPriceDecimals()
+      );
+      const marketPrice = item.marketPrice?.floor(
+        tokenName.getTokenPriceDecimals()
+      );
       const roi = item.profitLossRate?.floor(2) + "%";
 
       const openTime = new Date(item.timestamp * 1000);
@@ -124,7 +128,10 @@ const TraderCurrent: FC<TraderCurrentProps> = ({ ...props }) => {
                     fontSize: "14px",
                     fontWeight: "700",
                     lineHeight: "20px",
-                    color: item.profitLossRate >= 0 ? theme.normal.success : theme.normal.danger,
+                    color:
+                      item.profitLossRate >= 0
+                        ? theme.normal.success
+                        : theme.normal.danger,
                   })}
                 >
                   {roi}
@@ -221,8 +228,12 @@ const Row: FC<RowProps> = ({ ...props }) => {
   const tokenName = props.data.product.split("/")[0];
   const isLong = props.data.direction;
   const lever = props.data.leverage;
-  const openPrice = props.data.orderPrice?.floor(2);
-  const marketPrice = props.data.marketPrice?.floor(2);
+  const openPrice = props.data.orderPrice?.floor(
+    tokenName.getTokenPriceDecimals()
+  );
+  const marketPrice = props.data.marketPrice?.floor(
+    tokenName.getTokenPriceDecimals()
+  );
   const roi = props.data.profitLossRate?.floor(2) + "%";
 
   const openTime = new Date(props.data.timestamp * 1000);
@@ -298,7 +309,10 @@ const Row: FC<RowProps> = ({ ...props }) => {
             fontWeight: "700",
             fontSize: "12px",
             lineHeight: "16px",
-            color: props.data.profitLossRate >= 0 ? theme.normal.success : theme.normal.danger,
+            color:
+              props.data.profitLossRate >= 0
+                ? theme.normal.success
+                : theme.normal.danger,
             paddingRight: "20px",
           })}
         >

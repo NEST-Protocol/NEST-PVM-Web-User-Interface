@@ -36,9 +36,13 @@ const MyCopiesCurrent: FC<MyCopiesCurrentProps> = ({ ...props }) => {
       const kolAddress = item.kolAddress.showAddress();
       const balance = item.balance.floor(2);
       const profitLossRate = item.profitLossRate.floor(2) + "%";
-      const orderPrice = item.orderPrice.floor(2);
-      const marketPrice = item.marketPrice.floor(2);
-      const lipPrice = item.lipPrice.floor(2);
+      const orderPrice = item.orderPrice.floor(
+        tokenName.getTokenPriceDecimals()
+      );
+      const marketPrice = item.marketPrice.floor(
+        tokenName.getTokenPriceDecimals()
+      );
+      const lipPrice = item.lipPrice.floor(tokenName.getTokenPriceDecimals());
 
       const openTime = new Date(item.timestamp * 1000);
       const openTimeString = `${openTime.toLocaleDateString()} ${openTime.toLocaleTimeString()}`;
@@ -309,9 +313,13 @@ const Row: FC<RowProps> = ({ ...props }) => {
   const kolAddress = props.data.kolAddress.showAddress();
   const balance = props.data.balance.floor(2);
   const profitLossRate = props.data.profitLossRate.floor(2) + "%";
-  const orderPrice = props.data.orderPrice.floor(2);
-  const marketPrice = props.data.marketPrice.floor(2);
-  const lipPrice = props.data.lipPrice.floor(2);
+  const orderPrice = props.data.orderPrice.floor(
+    tokenName.getTokenPriceDecimals()
+  );
+  const marketPrice = props.data.marketPrice.floor(
+    tokenName.getTokenPriceDecimals()
+  );
+  const lipPrice = props.data.lipPrice.floor(tokenName.getTokenPriceDecimals());
 
   const openTime = new Date(props.data.timestamp * 1000);
   const openTimeString = `${openTime.toLocaleDateString()} ${openTime.toLocaleTimeString()}`;
