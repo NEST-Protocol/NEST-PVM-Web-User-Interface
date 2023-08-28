@@ -130,7 +130,10 @@ const TraderFollowers: FC<TraderFollowersProps> = ({ ...props }) => {
                   fontSize: "14px",
                   fontWeight: "700",
                   lineHeight: "20px",
-                  color: theme.normal.success,
+                  color:
+                    item.followerProfitLoss >= 0
+                      ? theme.normal.success
+                      : theme.normal.danger,
                   textAlign: "right",
                 })}
               >
@@ -193,7 +196,10 @@ const Row: FC<RowProps> = ({ ...props }) => {
             fontWeight: "700",
             fontSize: "12px",
             lineHeight: "16px",
-            color: theme.normal.success,
+            color:
+              props.data.followerProfitLoss >= 0
+                ? theme.normal.success
+                : theme.normal.danger,
             paddingRight: "20px",
           })}
         >

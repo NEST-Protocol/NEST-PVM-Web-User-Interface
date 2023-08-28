@@ -124,7 +124,7 @@ const TraderCurrent: FC<TraderCurrentProps> = ({ ...props }) => {
                     fontSize: "14px",
                     fontWeight: "700",
                     lineHeight: "20px",
-                    color: theme.normal.success,
+                    color: item.profitLossRate >= 0 ? theme.normal.success : theme.normal.danger,
                   })}
                 >
                   {roi}
@@ -298,7 +298,7 @@ const Row: FC<RowProps> = ({ ...props }) => {
             fontWeight: "700",
             fontSize: "12px",
             lineHeight: "16px",
-            color: theme.normal.success,
+            color: props.data.profitLossRate >= 0 ? theme.normal.success : theme.normal.danger,
             paddingRight: "20px",
           })}
         >

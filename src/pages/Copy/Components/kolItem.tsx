@@ -92,10 +92,10 @@ const NUM = (
 );
 
 interface KolItemProps {
-  data:AllKOLModel
+  data: AllKOLModel;
 }
 
-const KolItem: FC<KolItemProps> = ({...props}) => {
+const KolItem: FC<KolItemProps> = ({ ...props }) => {
   const { width } = useWindowWidth();
   const { nowTheme } = useTheme();
   const itemSize = useMemo(() => {
@@ -113,9 +113,58 @@ const KolItem: FC<KolItemProps> = ({...props}) => {
 
   const chartData = useMemo(() => {
     return props.data.roiList.map((item, index) => {
-      return {name: `${index}`, value: parseFloat(item.floor(2))}
-    })
-  }, [props.data.roiList])
+      return { name: `${index}`, value: parseFloat(item.floor(2)) };
+    });
+  }, [props.data.roiList]);
+
+  const stop = useMemo(() => {
+    return (
+      <ResponsiveContainer width="100%" height="100%">
+        <AreaChart data={chartData}>
+          <defs>
+            <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+              <stop
+                offset="5%"
+                stopColor={nowTheme.normal.success}
+                stopOpacity={0.5}
+              />
+              <stop
+                offset="95%"
+                stopColor={nowTheme.normal.success}
+                stopOpacity={0}
+              />
+            </linearGradient>
+            <linearGradient id="colorUv2" x1="0" y1="0" x2="0" y2="1">
+              <stop
+                offset="5%"
+                stopColor={nowTheme.normal.danger}
+                stopOpacity={0.5}
+              />
+              <stop
+                offset="95%"
+                stopColor={nowTheme.normal.danger}
+                stopOpacity={0}
+              />
+            </linearGradient>
+          </defs>
+          <Area
+            type="monotone"
+            dataKey="value"
+            stroke={props.data.kolProfitLossRate >= 0
+              ? nowTheme.normal.success
+              : nowTheme.normal.danger}
+            strokeWidth={"2px"}
+            fillOpacity={1}
+            fill={
+              props.data.kolProfitLossRate >= 0
+                ? "url(#colorUv)"
+                : "url(#colorUv2)"
+            }
+          />
+        </AreaChart>
+      </ResponsiveContainer>
+    );
+  }, [chartData, nowTheme.normal.danger, nowTheme.normal.success, props.data.kolProfitLossRate]);
   return (
     <Grid xs={itemSize} item>
       <Stack
@@ -256,7 +305,10 @@ const KolItem: FC<KolItemProps> = ({...props}) => {
                 fontSize: "24px",
                 fontWeight: "700",
                 lineHeight: "32px",
-                color: theme.normal.success,
+                color:
+                  props.data.kolProfitLossRate >= 0
+                    ? theme.normal.success
+                    : theme.normal.danger,
               })}
             >
               {`${parseFloat(props.data.kolProfitLossRate.floor(2))}%`}
@@ -273,32 +325,7 @@ const KolItem: FC<KolItemProps> = ({...props}) => {
             </Box>
           </Stack>
 
-          <ResponsiveContainer width="100%" height="100%">
-            <AreaChart data={chartData}>
-              <defs>
-                <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-                  <stop
-                    offset="5%"
-                    stopColor={nowTheme.normal.success}
-                    stopOpacity={0.5}
-                  />
-                  <stop
-                    offset="95%"
-                    stopColor={nowTheme.normal.success}
-                    stopOpacity={0}
-                  />
-                </linearGradient>
-              </defs>
-              <Area
-                type="monotone"
-                dataKey="value"
-                stroke={nowTheme.normal.success}
-                strokeWidth={"2px"}
-                fillOpacity={1}
-                fill="url(#colorUv)"
-              />
-            </AreaChart>
-          </ResponsiveContainer>
+          {stop}
         </Stack>
         <Stack
           direction={"row"}

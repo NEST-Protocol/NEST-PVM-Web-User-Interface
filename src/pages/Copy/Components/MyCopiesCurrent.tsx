@@ -118,7 +118,10 @@ const MyCopiesCurrent: FC<MyCopiesCurrentProps> = ({ ...props }) => {
                       fontSize: "10px",
                       fontWeight: "400",
                       lineHeight: "14px",
-                      color: theme.normal.success,
+                      color:
+                        item.profitLossRate >= 0
+                          ? theme.normal.success
+                          : theme.normal.danger,
                     })}
                   >
                     {profitLossRate}
@@ -364,7 +367,10 @@ const Row: FC<RowProps> = ({ ...props }) => {
               fontWeight: "700",
               fontSize: "12px",
               lineHeight: "16px",
-              color: theme.normal.success,
+              color:
+                props.data.profitLossRate >= 0
+                  ? theme.normal.success
+                  : theme.normal.danger,
             })}
           >
             {balance}NEST
@@ -374,7 +380,10 @@ const Row: FC<RowProps> = ({ ...props }) => {
               fontWeight: "400",
               fontSize: "12px",
               lineHeight: "16px",
-              color: theme.normal.success,
+              color:
+                props.data.profitLossRate >= 0
+                  ? theme.normal.success
+                  : theme.normal.danger,
             })}
           >
             {profitLossRate}
