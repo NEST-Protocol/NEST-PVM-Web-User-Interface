@@ -78,8 +78,8 @@ const TraderChartView: FC<TraderChartViewProps> = ({ ...props }) => {
         props.performanceData.losingTraders;
       if (all > 0) {
         return [
-          `${(props.performanceData.winningTraders / all*100).floor(2)}%`,
-          `${(props.performanceData.losingTraders / all*100).floor(2)}%`,
+          `${((props.performanceData.winningTraders / all) * 100).floor(2)}%`,
+          `${((props.performanceData.losingTraders / all) * 100).floor(2)}%`,
         ];
       }
     }
@@ -155,6 +155,14 @@ const TraderChartView: FC<TraderChartViewProps> = ({ ...props }) => {
     },
     [props.performanceSymbolData]
   );
+
+  const emptySymbol = useMemo(() => {
+    return props.performanceSymbolData
+      .map((item) => {
+        return item.value;
+      })
+      .every((e) => e === 0);
+  }, [props.performanceSymbolData]);
   return (
     <Stack spacing={"24px"} width={"100%"}>
       <Stack
@@ -470,87 +478,102 @@ const TraderChartView: FC<TraderChartViewProps> = ({ ...props }) => {
               selectCallBack={(num) => props.setTime3(num)}
             />
           </Stack>
-          <Stack
-            justifyContent={"space-between"}
+          {emptySymbol ? (
+            <Stack justifyContent={"center"}
             alignItems={"center"}
-            paddingTop={"10px"}
-            spacing={"20px"}
-          >
-            <PieChart width={180} height={180}>
-              <Pie
-                data={props.performanceSymbolData}
-                innerRadius={60}
-                outerRadius={80}
-                fill="#8884d8"
-                stroke="#8884d8"
-                paddingAngle={3}
-                dataKey="value"
-                activeIndex={activeIndex}
-                activeShape={(e) => {
-                  const props = {
-                    ...e,
-                    titleColor: nowTheme.normal.text2,
-                    valueColor: nowTheme.normal.text0,
-                  };
-                  return renderActiveShape(props);
-                }}
-                onMouseEnter={(_, index) => setActiveIndex(index)}
-              >
-                {props.performanceSymbolData.map((entry, index) => (
-                  <Cell
-                    key={`cell-${index}`}
-                    fill={COLORS[index % COLORS.length]}
-                    stroke={COLORS[index % COLORS.length]}
-                  />
-                ))}
-              </Pie>
-            </PieChart>
-
-            <Stack
-              direction={"row"}
-              justifyContent={"space-around"}
-              width={"100%"}
-            >
-              {props.performanceSymbolData.length > 0 ? (
-                <>
-                  <Stack spacing={"16px"}>
-                    {TokenPercent(
-                      0,
-                      props.performanceSymbolData[0].value.floor(2)
-                    )}
-                    {TokenPercent(
-                      1,
-                      props.performanceSymbolData[1].value.floor(2)
-                    )}
-                    {TokenPercent(
-                      2,
-                      props.performanceSymbolData[2].value.floor(2)
-                    )}
-                    {TokenPercent(
-                      3,
-                      props.performanceSymbolData[3].value.floor(2)
-                    )}
-                  </Stack>
-                  <Stack spacing={"16px"}>
-                    {TokenPercent(
-                      4,
-                      props.performanceSymbolData[4].value.floor(2)
-                    )}
-                    {TokenPercent(
-                      5,
-                      props.performanceSymbolData[5].value.floor(2)
-                    )}
-                    {TokenPercent(
-                      6,
-                      props.performanceSymbolData[6].value.floor(2)
-                    )}
-                  </Stack>
-                </>
-              ) : (
-                <></>
-              )}
+            sx={(theme) => ({
+              width:"100%",
+              height:"100%",
+              fontWeight: "400",
+              fontSize: "14px",
+              lineHeight: "20px",
+              color: theme.normal.text2
+            })}>
+              <Trans>No Records Found</Trans>
             </Stack>
-          </Stack>
+          ) : (
+            <Stack
+              justifyContent={"space-between"}
+              alignItems={"center"}
+              paddingTop={"10px"}
+              spacing={"20px"}
+            >
+              <PieChart width={180} height={180}>
+                <Pie
+                  data={props.performanceSymbolData}
+                  innerRadius={60}
+                  outerRadius={80}
+                  fill="#8884d8"
+                  stroke="#8884d8"
+                  paddingAngle={3}
+                  dataKey="value"
+                  activeIndex={activeIndex}
+                  activeShape={(e) => {
+                    const props = {
+                      ...e,
+                      titleColor: nowTheme.normal.text2,
+                      valueColor: nowTheme.normal.text0,
+                    };
+                    return renderActiveShape(props);
+                  }}
+                  onMouseEnter={(_, index) => setActiveIndex(index)}
+                >
+                  {props.performanceSymbolData.map((entry, index) => (
+                    <Cell
+                      key={`cell-${index}`}
+                      fill={COLORS[index % COLORS.length]}
+                      stroke={COLORS[index % COLORS.length]}
+                    />
+                  ))}
+                </Pie>
+              </PieChart>
+
+              <Stack
+                direction={"row"}
+                justifyContent={"space-around"}
+                width={"100%"}
+              >
+                {props.performanceSymbolData.length > 0 ? (
+                  <>
+                    <Stack spacing={"16px"}>
+                      {TokenPercent(
+                        0,
+                        props.performanceSymbolData[0].value.floor(2)
+                      )}
+                      {TokenPercent(
+                        1,
+                        props.performanceSymbolData[1].value.floor(2)
+                      )}
+                      {TokenPercent(
+                        2,
+                        props.performanceSymbolData[2].value.floor(2)
+                      )}
+                      {TokenPercent(
+                        3,
+                        props.performanceSymbolData[3].value.floor(2)
+                      )}
+                    </Stack>
+                    <Stack spacing={"16px"}>
+                      {TokenPercent(
+                        4,
+                        props.performanceSymbolData[4].value.floor(2)
+                      )}
+                      {TokenPercent(
+                        5,
+                        props.performanceSymbolData[5].value.floor(2)
+                      )}
+                      {TokenPercent(
+                        6,
+                        props.performanceSymbolData[6].value.floor(2)
+                      )}
+                    </Stack>
+                  </>
+                ) : (
+                  <></>
+                )}
+              </Stack>
+            </Stack>
+          )}
         </Stack>
       </Stack>
     </Stack>
