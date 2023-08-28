@@ -17,7 +17,7 @@ import useCopySettingModal from "../Hooks/useCopySettingModal";
 import NESTa from "../../../components/MainButton/NESTa";
 
 interface CopySettingBaseModalProps {
-  onClose: () => void;
+  onClose: (res?: boolean) => void;
   add?: boolean;
   address: string | undefined;
 }
@@ -41,7 +41,7 @@ const CopySettingBaseModal: FC<CopySettingBaseModalProps> = ({ ...props }) => {
     selectButtonCallBack,
     agree,
     setAgree,
-    current
+    current,
   } = useCopySettingModal(props.address, props.add ?? false, props.onClose);
 
   const inputNestAmount = useMemo(() => {
@@ -293,7 +293,7 @@ const CopySettingBaseModal: FC<CopySettingBaseModalProps> = ({ ...props }) => {
 interface CopySettingModalProps {
   open: boolean;
   name: string;
-  onClose: () => void;
+  onClose: (res?: boolean) => void;
   address: string | undefined;
   add?: boolean;
 }
@@ -305,13 +305,20 @@ const CopySettingModal: FC<CopySettingModalProps> = ({ ...props }) => {
       <Drawer
         anchor={"bottom"}
         open={props.open}
-        onClose={props.onClose}
+        onClose={() => {
+          props.onClose(undefined);
+        }}
         sx={{
           "& .MuiPaper-root": { background: "none", backgroundImage: "none" },
         }}
         keepMounted
       >
-        <BaseDrawer title={t`Copy` + " " + props.name} onClose={props.onClose}>
+        <BaseDrawer
+          title={t`Copy` + " " + props.name}
+          onClose={() => {
+            props.onClose(undefined);
+          }}
+        >
           <CopySettingBaseModal
             onClose={props.onClose}
             add={props.add}
@@ -322,12 +329,19 @@ const CopySettingModal: FC<CopySettingModalProps> = ({ ...props }) => {
     ) : (
       <Modal
         open={props.open}
-        onClose={() => props.onClose()}
+        onClose={() => {
+          props.onClose(undefined);
+        }}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
         <Box>
-          <BaseModal title={t`Copy` + " " + props.name} onClose={props.onClose}>
+          <BaseModal
+            title={t`Copy` + " " + props.name}
+            onClose={() => {
+              props.onClose(undefined);
+            }}
+          >
             <CopySettingBaseModal
               onClose={props.onClose}
               add={props.add}

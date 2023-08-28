@@ -7,9 +7,11 @@ import NormalSnackBar, {
 import useNEST from "./useNEST";
 import useWindowWidth from "./useWindowWidth";
 import { t } from "@lingui/macro";
-import { getTransactionTypeString } from "./useTransactionReceipt";
-
-
+import {
+  TransactionType,
+  getTransactionTypeString,
+} from "./useTransactionReceipt";
+import SnackBarWithButton from "../components/SnackBar/SnackBarWithButton";
 
 function useTransactionSnackBar() {
   const { isBigMobile } = useWindowWidth();
@@ -75,6 +77,7 @@ function useTransactionSnackBar() {
   };
 
   const transactionSnackBarService = (
+    transactionType: TransactionType,
     title: string,
     info: string,
     type: SnackBarType
@@ -85,16 +88,32 @@ function useTransactionSnackBar() {
         vertical: "top",
         horizontal: isBigMobile ? "center" : "right",
       },
-      content: (key, message) => (
-        <NormalSnackBar
-          id={key}
-          title={getTransactionTypeString(title)}
-          info={info}
-          type={type}
-          message={message}
-          closeSnackbar={closeSnackbar}
-        />
-      ),
+      content: (key, message) => {
+        if (transactionType === TransactionType.copy) {
+          return (
+            <SnackBarWithButton
+              id={key}
+              title={getTransactionTypeString(title)}
+              info={info}
+              type={type}
+              message={message}
+              closeSnackbar={closeSnackbar}
+              link={"/#/myCopies/?tab=2"}
+            />
+          );
+        } else {
+          return (
+            <NormalSnackBar
+              id={key}
+              title={getTransactionTypeString(title)}
+              info={info}
+              type={type}
+              message={message}
+              closeSnackbar={closeSnackbar}
+            />
+          );
+        }
+      },
     });
   };
 

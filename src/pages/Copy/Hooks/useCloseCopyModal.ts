@@ -9,7 +9,10 @@ export interface MyCopiesCloseModel {
   aum: number;
 }
 
-function useCloseCopyModal(address: string | undefined, onClose: () => void) {
+function useCloseCopyModal(
+  address: string | undefined,
+  onClose: (res?: boolean) => void
+) {
   const { chainsData, signature } = useNEST();
   const [closeInfo, setCloseInfo] = useState<MyCopiesCloseModel>();
   const [isLoading, setIsLoading] = useState(false);
@@ -38,10 +41,9 @@ function useCloseCopyModal(address: string | undefined, onClose: () => void) {
         Authorization: signature.signature,
       });
       if (Number(req["errorCode"]) === 0) {
-        onClose();
-      } else {
-        setIsLoading(false);
       }
+      setIsLoading(false);
+      onClose(Number(req["errorCode"]) === 0);
     }
   }, [address, chainsData.chainId, onClose, signature]);
 

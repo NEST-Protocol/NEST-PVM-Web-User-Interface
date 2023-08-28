@@ -12,7 +12,7 @@ import MainButton from "../../../components/MainButton/MainButton";
 import useCloseCopyModal from "../Hooks/useCloseCopyModal";
 
 interface CopyStopBaseModalProps {
-  onClose: () => void;
+  onClose: (res?: boolean) => void;
   address: string | undefined;
 }
 
@@ -107,7 +107,7 @@ const CopyStopBaseModal: FC<CopyStopBaseModalProps> = ({ ...props }) => {
 
 interface CopyStopModalProps {
   open: boolean;
-  onClose: () => void;
+  onClose: (res?: boolean) => void;
   address: string | undefined;
 }
 
@@ -118,25 +118,39 @@ const CopyStopModal: FC<CopyStopModalProps> = ({ ...props }) => {
       <Drawer
         anchor={"bottom"}
         open={props.open}
-        onClose={props.onClose}
+        onClose={() => {
+          props.onClose(undefined);
+        }}
         sx={{
           "& .MuiPaper-root": { background: "none", backgroundImage: "none" },
         }}
         keepMounted
       >
-        <BaseDrawer title={t`Stop Copying`} onClose={props.onClose}>
+        <BaseDrawer
+          title={t`Stop Copying`}
+          onClose={() => {
+            props.onClose(undefined);
+          }}
+        >
           <CopyStopBaseModal onClose={props.onClose} address={props.address} />
         </BaseDrawer>
       </Drawer>
     ) : (
       <Modal
         open={props.open}
-        onClose={() => props.onClose()}
+        onClose={() => {
+          props.onClose(undefined);
+        }}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
         <Box>
-          <BaseModal title={t`Stop Copying`} onClose={props.onClose}>
+          <BaseModal
+            title={t`Stop Copying`}
+            onClose={() => {
+              props.onClose(undefined);
+            }}
+          >
             <CopyStopBaseModal
               onClose={props.onClose}
               address={props.address}

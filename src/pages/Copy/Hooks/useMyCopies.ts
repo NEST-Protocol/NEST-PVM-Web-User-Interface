@@ -190,6 +190,7 @@ function useMyCopies() {
     myCopiesList,
     myCopiesHistoryList,
     myCopiesMyTradersList,
+    getMyCopiesMyTraderList
   };
 }
 

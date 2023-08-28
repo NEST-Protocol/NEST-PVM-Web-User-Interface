@@ -1,5 +1,5 @@
 import Stack from "@mui/material/Stack";
-import { FC, useCallback, useMemo, useState } from "react";
+import { FC, useCallback, useEffect, useMemo, useState } from "react";
 import CopyRoute from "./Components/CopyRoute";
 import Box from "@mui/material/Box";
 import { Trans, t } from "@lingui/macro";
@@ -10,6 +10,12 @@ import MyCopiesMyTraders from "./Components/MyCopiesMyTraders";
 import CopySettingModal from "./Components/CopySettingModal";
 import CopyStopModal from "./Components/CopyStopModal";
 import useMyCopies from "./Hooks/useMyCopies";
+import {
+  TransactionType,
+  usePendingTransactionsBase,
+} from "../../hooks/useTransactionReceipt";
+import { SnackBarType } from "../../components/SnackBar/NormalSnackBar";
+import { useSearchParams } from "react-router-dom";
 
 const WALLET = (
   <svg
@@ -50,12 +56,20 @@ const MyCopies: FC = () => {
   const [tabsValue, setTabsValue] = useState(0);
   const [openCopyModal, setOpenCopyModal] = useState<Array<string>>([]);
   const [openStopModal, setOpenStopModal] = useState<string>();
+  const { addTransactionNotice } = usePendingTransactionsBase();
+  const [searchParams] = useSearchParams()
+
+  useEffect(() => {
+    let tab = searchParams.get("tab"); 
+    setTabsValue(Number(tab ?? "0"));
+  }, [searchParams]);
 
   const {
     myTradeInfo,
     myCopiesList,
     myCopiesHistoryList,
     myCopiesMyTradersList,
+    getMyCopiesMyTraderList,
   } = useMyCopies();
   const profit = (myTradeInfo ? myTradeInfo.profit : 0).floor(2);
   const assets = (myTradeInfo ? myTradeInfo.assets : 0).floor(2);
@@ -95,7 +109,9 @@ const MyCopies: FC = () => {
     } else if (tabsValue === 2) {
       return (
         <MyCopiesMyTraders
-          copyCallBack={(name:string, address:string) => setOpenCopyModal([name, address])}
+          copyCallBack={(name: string, address: string) =>
+            setOpenCopyModal([name, address])
+          }
           stopCallBack={(address: string) => setOpenStopModal(address)}
           list={myCopiesMyTradersList}
         />
@@ -139,15 +155,35 @@ const MyCopies: FC = () => {
       alignItems={"center"}
     >
       <CopySettingModal
-        open={(openCopyModal.length !== 0)}
+        open={openCopyModal.length !== 0}
         name={openCopyModal[0]}
         address={openCopyModal[1]}
-        onClose={() => setOpenCopyModal([])}
+        onClose={(res?: boolean) => {
+          if (res !== undefined) {
+            addTransactionNotice({
+              type: TransactionType.editCopy,
+              info: "",
+              result: res ? SnackBarType.success : SnackBarType.fail,
+            });
+          }
+          getMyCopiesMyTraderList();
+          setOpenCopyModal([]);
+        }}
         add
       />
       <CopyStopModal
         open={!(openStopModal === undefined)}
-        onClose={() => setOpenStopModal(undefined)}
+        onClose={(res?: boolean) => {
+          if (res !== undefined) {
+            addTransactionNotice({
+              type: TransactionType.closeCopy,
+              info: "",
+              result: res ? SnackBarType.success : SnackBarType.fail,
+            });
+          }
+          getMyCopiesMyTraderList();
+          setOpenStopModal(undefined);
+        }}
         address={openStopModal}
       />
       <Stack maxWidth={"1200px"} spacing={"24px"} width={"100%"}>

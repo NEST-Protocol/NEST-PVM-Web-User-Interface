@@ -7,7 +7,7 @@ import useService from "../../../contracts/useService";
 function useCopySettingModal(
   address: string | undefined,
   add: boolean,
-  onClose: () => void
+  onClose: (res?: boolean) => void
 ) {
   const { chainsData, signature, account } = useNEST();
   const { service_balance } = useService();
@@ -42,10 +42,9 @@ function useCopySettingModal(
         }
       );
       if (Number(req["errorCode"]) === 0) {
-        onClose();
-      } else {
-        setIsLoading(false);
       }
+      setIsLoading(false);
+      onClose(Number(req["errorCode"]) === 0);
     }
   }, [
     address,

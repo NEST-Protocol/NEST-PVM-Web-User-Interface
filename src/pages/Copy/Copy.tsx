@@ -8,6 +8,7 @@ import KolItem from "./Components/kolItem";
 import Grid from "@mui/material/Grid";
 import useCopy from "./Hooks/useCopy";
 
+
 const MY_COPY_ICON = (
   <svg
     width="48"
@@ -606,6 +607,11 @@ const Copy: FC = () => {
           paddingY={["40px", "40px", "80px"]}
           justifyContent={"space-between"}
           alignItems={"center"}
+          sx={{
+            backgroundImage: `url('/images/CopyBG.svg')`,
+            backgroundPosition: "center center",
+            backgroundRepeat: "no-repeat"
+          }}
         >
           <Box
             sx={(theme) => ({

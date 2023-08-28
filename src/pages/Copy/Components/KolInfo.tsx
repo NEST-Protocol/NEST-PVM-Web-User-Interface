@@ -9,6 +9,11 @@ import { AllKOLModel } from "../Hooks/useCopy";
 import useNEST from "../../../hooks/useNEST";
 import { copyAsset } from "../../../lib/NESTRequest";
 import CopyStopModal from "./CopyStopModal";
+import {
+  TransactionType,
+  usePendingTransactionsBase,
+} from "../../../hooks/useTransactionReceipt";
+import { SnackBarType } from "../../../components/SnackBar/NormalSnackBar";
 
 const WALLET = (
   <svg
@@ -77,6 +82,7 @@ const KolInfo: FC<KolInfoProps> = ({ ...props }) => {
   const [openCopyModal, setOpenCopyModal] = useState(false);
   const [openStopModal, setOpenStopModal] = useState(false);
   const [current, setCurrent] = useState<number>();
+  const { addTransactionNotice } = usePendingTransactionsBase();
 
   const nickName = props.data ? props.data.nickName : String().placeHolder;
   const walletAddress = props.data
@@ -508,11 +514,31 @@ const KolInfo: FC<KolInfoProps> = ({ ...props }) => {
         open={openCopyModal}
         name={props.data ? props.data.nickName : ""}
         address={props.data ? props.data.walletAddress : ""}
-        onClose={() => setOpenCopyModal(false)}
+        onClose={(res?: boolean) => {
+          if (res !== undefined) {
+            addTransactionNotice({
+              type: TransactionType.copy,
+              info: res ? t`Click here to view copy trading details.` : "",
+              result: res ? SnackBarType.success : SnackBarType.fail,
+            });
+          }
+          getCurrent();
+          setOpenCopyModal(false);
+        }}
       />
       <CopyStopModal
         open={openStopModal}
-        onClose={() => setOpenStopModal(false)}
+        onClose={(res?: boolean) => {
+          if (res !== undefined) {
+            addTransactionNotice({
+              type: TransactionType.closeCopy,
+              info: "",
+              result: res ? SnackBarType.success : SnackBarType.fail,
+            });
+          }
+          getCurrent();
+          setOpenStopModal(false);
+        }}
         address={props.data ? props.data.walletAddress : ""}
       />
       {isBigMobile ? mobile : pc}
