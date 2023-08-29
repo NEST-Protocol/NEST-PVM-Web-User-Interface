@@ -186,13 +186,23 @@ function useDepositModal(onClose: () => void) {
       return String().placeHolder;
     }
   }, [selectToken, defaultInput, uniSwapAmountOut]);
-  const showGetNEST = useMemo(() => {
-    if (showPrice !== String().placeHolder && tokenAmount !== "") {
-      return (parseFloat(tokenAmount) * parseFloat(showPrice)).toFixed(2);
+  const price = useMemo(() => {
+    if (uniSwapAmountOut && selectToken !== "NEST") {
+      return parseEther("1")
+        .mul(uniSwapAmountOut[uniSwapAmountOut.length - 1])
+        .div(defaultInput)
+        .bigNumberToShowPrice(18, 9);
     } else {
       return String().placeHolder;
     }
-  }, [showPrice, tokenAmount]);
+  }, [selectToken, defaultInput, uniSwapAmountOut]);
+  const showGetNEST = useMemo(() => {
+    if (price !== String().placeHolder && tokenAmount !== "") {
+      return (parseFloat(tokenAmount) * parseFloat(price)).floor(2);
+    } else {
+      return String().placeHolder;
+    }
+  }, [price, tokenAmount]);
   /**
    * check
    */
