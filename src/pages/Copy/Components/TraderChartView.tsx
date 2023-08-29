@@ -10,6 +10,7 @@ import {
   CartesianGrid,
   Legend,
   ResponsiveContainer,
+  Tooltip,
 } from "recharts";
 import { PieChart, Pie, Sector, Cell } from "recharts";
 import useTheme from "../../../hooks/useTheme";
@@ -119,7 +120,12 @@ const TraderChartView: FC<TraderChartViewProps> = ({ ...props }) => {
   const TokenPercent = useCallback(
     (index: number, value: string) => {
       return (
-        <Stack direction={"row"} spacing={"12px"} alignItems={"center"}>
+        <Stack
+          direction={"row"}
+          spacing={"12px"}
+          justifyContent={"space-between"}
+          alignItems={"center"}
+        >
           <Stack direction={"row"} spacing={"8px"} alignItems={"center"}>
             <Box
               sx={(theme) => ({
@@ -233,7 +239,29 @@ const TraderChartView: FC<TraderChartViewProps> = ({ ...props }) => {
               width={40}
               tick={{ fontSize: "10px", strokeWidth: 1 }}
             />
-            {/* <Tooltip /> */}
+            <Tooltip
+              itemStyle={{
+                fontSize: "12px",
+                color: "#000",
+              }}
+              contentStyle={{
+                backgroundColor: "#fff",
+                color: "#000",
+                fontWeight: 700,
+                borderRadius: "12px",
+                border: `1px solid ${nowTheme.normal.border}`,
+              }}
+              labelStyle={{
+                fontSize: "12px",
+                fontWeight: 400,
+                color: "#000",
+              }}
+              formatter={(value: any) =>
+                Number(value).toLocaleString("en-US", {
+                  maximumFractionDigits: 2,
+                })
+              }
+            />
             <Legend />
             <Line
               yAxisId="left"
@@ -406,7 +434,7 @@ const TraderChartView: FC<TraderChartViewProps> = ({ ...props }) => {
               </Stack>
               <Stack
                 direction={"row"}
-                spacing={"2px"}
+                spacing={"3px"}
                 justifyContent={"space-between"}
                 alignItems={"center"}
               >
@@ -417,6 +445,7 @@ const TraderChartView: FC<TraderChartViewProps> = ({ ...props }) => {
                     borderTopLeftRadius: "4px",
                     borderBottomLeftRadius: "4px",
                     height: "12px",
+                    transform: "skew(-20deg)",
                   })}
                 ></Box>
                 <Box
@@ -426,6 +455,7 @@ const TraderChartView: FC<TraderChartViewProps> = ({ ...props }) => {
                     borderTopRightRadius: "4px",
                     borderBottomRightRadius: "4px",
                     height: "12px",
+                    transform: "skew(-20deg)",
                   })}
                 ></Box>
               </Stack>
@@ -479,16 +509,18 @@ const TraderChartView: FC<TraderChartViewProps> = ({ ...props }) => {
             />
           </Stack>
           {emptySymbol ? (
-            <Stack justifyContent={"center"}
-            alignItems={"center"}
-            sx={(theme) => ({
-              width:"100%",
-              height:"100%",
-              fontWeight: "400",
-              fontSize: "14px",
-              lineHeight: "20px",
-              color: theme.normal.text2
-            })}>
+            <Stack
+              justifyContent={"center"}
+              alignItems={"center"}
+              sx={(theme) => ({
+                width: "100%",
+                height: "100%",
+                fontWeight: "400",
+                fontSize: "14px",
+                lineHeight: "20px",
+                color: theme.normal.text2,
+              })}
+            >
               <Trans>No Records Found</Trans>
             </Stack>
           ) : (
