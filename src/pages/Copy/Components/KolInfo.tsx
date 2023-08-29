@@ -14,6 +14,7 @@ import {
   usePendingTransactionsBase,
 } from "../../../hooks/useTransactionReceipt";
 import { SnackBarType } from "../../../components/SnackBar/NormalSnackBar";
+import { DefaultKolIcon } from "../../../components/icons";
 
 const WALLET = (
   <svg
@@ -153,7 +154,9 @@ const KolInfo: FC<KolInfoProps> = ({ ...props }) => {
   }, [getCurrent]);
 
   const button = useMemo(() => {
-    if ((current ?? 0) > 0) {
+    if (!current) {
+      return <></>
+    } else if (current > 0) {
       return (
         <Box
           sx={(theme) => ({
@@ -190,9 +193,11 @@ const KolInfo: FC<KolInfoProps> = ({ ...props }) => {
     }
   }, [current]);
 
-  const mobile = useMemo(() => {
-    return (
-      <Stack spacing={"12px"} alignItems={"center"} paddingX={"20px"}>
+  const kolIcon = useMemo(() => {
+    if (props.data?.avatar !== "-") {
+      return <></>;
+    } else {
+      return (
         <Box
           sx={(theme) => ({
             width: "80px",
@@ -200,8 +205,23 @@ const KolInfo: FC<KolInfoProps> = ({ ...props }) => {
             height: "80px",
             borderRadius: "40px",
             background: theme.normal.primary,
+            "& svg": {
+              width: "80px",
+              height: "80px",
+              display: "block",
+            },
           })}
-        ></Box>
+        >
+          <DefaultKolIcon />
+        </Box>
+      );
+    }
+  }, [props.data?.avatar]);
+
+  const mobile = useMemo(() => {
+    return (
+      <Stack spacing={"12px"} alignItems={"center"} paddingX={"20px"}>
+        {kolIcon}
         <Stack spacing={"16px"} alignItems={"center"}>
           <Stack spacing={"8"} alignItems={"center"}>
             <Box
@@ -339,6 +359,7 @@ const KolInfo: FC<KolInfoProps> = ({ ...props }) => {
     followersAssets,
     introduction,
     kolBaseInfo,
+    kolIcon,
     kolProfitLossRate,
     nickName,
     props.data,
@@ -354,15 +375,7 @@ const KolInfo: FC<KolInfoProps> = ({ ...props }) => {
         justifyContent={"flex-start"}
         paddingX={["20px", "20px", "20px", "20px", "0"]}
       >
-        <Box
-          sx={(theme) => ({
-            width: "80px",
-            minWidth: "80px",
-            height: "80px",
-            borderRadius: "40px",
-            background: theme.normal.primary,
-          })}
-        ></Box>
+        {kolIcon}
         <Stack spacing={"24px"} width={"100%"}>
           <Stack
             direction={"row"}
@@ -502,6 +515,7 @@ const KolInfo: FC<KolInfoProps> = ({ ...props }) => {
     followersAssets,
     introduction,
     kolBaseInfo,
+    kolIcon,
     kolProfitLossRate,
     nickName,
     props.data,

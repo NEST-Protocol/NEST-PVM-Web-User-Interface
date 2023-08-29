@@ -7,6 +7,7 @@ import TableCell from "@mui/material/TableCell";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import { MyCopiesMyTradersList } from "../Hooks/useMyCopies";
+import { DefaultKolIcon } from "../../../components/icons";
 
 interface MyCopiesMyTradersProps {
   copyCallBack: (name: string, address: string) => void;
@@ -42,6 +43,30 @@ const MyCopiesMyTraders: FC<MyCopiesMyTradersProps> = ({ ...props }) => {
       const kolAddress = item.kolAddress.showAddress();
       const copyAccountBalance = item.copyAccountBalance.floor(2);
       const profit = item.profit.floor(2);
+
+      const kolIcon = () => {
+        if (item.avatar !== "-") {
+          return <></>;
+        } else {
+          return (
+            <Box
+              sx={(theme) => ({
+                width: "24px",
+                height: "24px",
+                borderRadius: "12px",
+                background: theme.normal.primary,
+                "& svg": {
+                  width: "24px",
+                  height: "24px",
+                  display: "block",
+                },
+              })}
+            >
+              <DefaultKolIcon />
+            </Box>
+          );
+        }
+      };
       return (
         <Stack
           key={`MyCopiesMyTradersMobile + ${index}`}
@@ -53,14 +78,7 @@ const MyCopiesMyTraders: FC<MyCopiesMyTradersProps> = ({ ...props }) => {
           })}
         >
           <Stack direction={"row"} alignItems={"center"} spacing={"8px"}>
-            <Box
-              sx={(theme) => ({
-                width: "24px",
-                height: "24px",
-                borderRadius: "12px",
-                background: theme.normal.primary,
-              })}
-            ></Box>
+            {kolIcon()}
             <Stack spacing={"4px"}>
               <Box
                 sx={(theme) => ({
@@ -226,20 +244,37 @@ const Row: FC<RowProps> = ({ ...props }) => {
   const kolAddress = props.data.kolAddress.showAddress();
   const copyAccountBalance = props.data.copyAccountBalance.floor(2);
   const profit = props.data.profit.floor(2);
+
+  const kolIcon = () => {
+    if (props.data.avatar !== "-") {
+      return <></>;
+    } else {
+      return (
+        <Box
+          sx={(theme) => ({
+            width: "24px",
+            height: "24px",
+            borderRadius: "12px",
+            background: theme.normal.primary,
+            "& svg": {
+              width: "24px",
+              height: "24px",
+              display: "block",
+            },
+          })}
+        >
+          <DefaultKolIcon />
+        </Box>
+      );
+    }
+  };
   return (
     <TableRow
       sx={(theme) => ({ "&: hover": { background: theme.normal.bg1 } })}
     >
       <TableCell>
         <Stack direction={"row"} alignItems={"center"} spacing={"8px"}>
-          <Box
-            sx={(theme) => ({
-              width: "24px",
-              height: "24px",
-              borderRadius: "12px",
-              background: theme.normal.primary,
-            })}
-          ></Box>
+          {kolIcon()}
           <Stack spacing={"4px"}>
             <Box
               sx={(theme) => ({

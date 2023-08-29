@@ -8,6 +8,7 @@ import MainButton from "../../../components/MainButton/MainButton";
 import { AreaChart, Area, ResponsiveContainer } from "recharts";
 import useTheme from "../../../hooks/useTheme";
 import { AllKOLModel } from "../Hooks/useCopy";
+import { DefaultKolIcon } from "../../../components/icons";
 
 const WALLET = (
   <svg
@@ -152,6 +153,26 @@ const KolItem: FC<KolItemProps> = ({ ...props }) => {
     });
   }, [props.data.roiList]);
 
+  // DefaultKolIcon
+  const kolIcon = useMemo(() => {
+    if (props.data.avatar !== "-") {
+      return <></>;
+    } else {
+      return (
+        <Box
+          width={"64px"}
+          height={"64px"}
+          sx={(theme) => ({
+            borderRadius: "32px",
+            background: theme.normal.bg3,
+          })}
+        >
+          <DefaultKolIcon />
+        </Box>
+      );
+    }
+  }, [props.data.avatar]);
+
   const stop = useMemo(() => {
     const data = chartData.map((item) => {
       return item.value;
@@ -169,7 +190,7 @@ const KolItem: FC<KolItemProps> = ({ ...props }) => {
           ? (maxNumber / (maxNumber - minNumber)) * 100
           : 100;
     }
-    
+
     return (
       <ResponsiveContainer width="100%" height="100%">
         <AreaChart data={chartData}>
@@ -231,14 +252,7 @@ const KolItem: FC<KolItemProps> = ({ ...props }) => {
           justifyContent={"flex-start"}
           alignItems={"center"}
         >
-          <Box
-            width={"64px"}
-            height={"64px"}
-            sx={(theme) => ({
-              borderRadius: "32px",
-              background: theme.normal.bg3,
-            })}
-          ></Box>
+          {kolIcon}
           <Stack spacing={"4px"}>
             <Box
               sx={(theme) => ({

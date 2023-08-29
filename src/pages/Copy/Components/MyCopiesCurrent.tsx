@@ -11,6 +11,7 @@ import CopyListPosition from "./CopyListPosition";
 import NESTLine from "../../../components/NESTLine";
 import { MyCopiesList } from "../Hooks/useMyCopies";
 import useMyCopiesCurrent from "../Hooks/useMyCopiesCurrent";
+import { DefaultKolIcon } from "../../../components/icons";
 
 interface MyCopiesCurrentProps {
   list: MyCopiesList[];
@@ -46,7 +47,29 @@ const MyCopiesCurrent: FC<MyCopiesCurrentProps> = ({ ...props }) => {
 
       const openTime = new Date(item.timestamp * 1000);
       const openTimeString = `${openTime.toLocaleDateString()} ${openTime.toLocaleTimeString()}`;
-
+      const kolIcon = () => {
+        if (item.avatar !== "-") {
+          return <></>;
+        } else {
+          return (
+            <Box
+              sx={(theme) => ({
+                width: "24px",
+                height: "24px",
+                borderRadius: "12px",
+                background: theme.normal.primary,
+                "& svg": {
+                  width: "24px",
+                  height: "24px",
+                  display: "block",
+                },
+              })}
+            >
+              <DefaultKolIcon />
+            </Box>
+          );
+        }
+      };
       return (
         <Stack
           key={`MyCopiesCurrentMobile + ${index}`}
@@ -214,14 +237,7 @@ const MyCopiesCurrent: FC<MyCopiesCurrentProps> = ({ ...props }) => {
             alignItems={"center"}
           >
             <Stack direction={"row"} alignItems={"center"} spacing={"8px"}>
-              <Box
-                sx={(theme) => ({
-                  width: "24px",
-                  height: "24px",
-                  borderRadius: "12px",
-                  background: theme.normal.primary,
-                })}
-              ></Box>
+              {kolIcon()}
               <Stack spacing={"4px"}>
                 <Box
                   sx={(theme) => ({
@@ -323,6 +339,29 @@ const Row: FC<RowProps> = ({ ...props }) => {
 
   const openTime = new Date(props.data.timestamp * 1000);
   const openTimeString = `${openTime.toLocaleDateString()} ${openTime.toLocaleTimeString()}`;
+  const kolIcon = () => {
+    if (props.data.avatar !== "-") {
+      return <></>;
+    } else {
+      return (
+        <Box
+          sx={(theme) => ({
+            width: "24px",
+            height: "24px",
+            borderRadius: "12px",
+            background: theme.normal.primary,
+            "& svg": {
+              width: "24px",
+              height: "24px",
+              display: "block",
+            },
+          })}
+        >
+          <DefaultKolIcon />
+        </Box>
+      );
+    }
+  };
   return (
     <TableRow
       sx={(theme) => ({ "&: hover": { background: theme.normal.bg1 } })}
@@ -336,14 +375,7 @@ const Row: FC<RowProps> = ({ ...props }) => {
       </TableCell>
       <TableCell sx={tdNoPadding}>
         <Stack direction={"row"} alignItems={"center"} spacing={"8px"}>
-          <Box
-            sx={(theme) => ({
-              width: "24px",
-              height: "24px",
-              borderRadius: "12px",
-              background: theme.normal.primary,
-            })}
-          ></Box>
+          {kolIcon()}
           <Stack spacing={"4px"}>
             <Box
               sx={(theme) => ({
