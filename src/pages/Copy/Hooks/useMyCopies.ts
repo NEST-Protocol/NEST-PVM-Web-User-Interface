@@ -166,8 +166,6 @@ function useMyCopies() {
     }
   }, [chainsData.chainId, signature]);
 
-  
-
   useEffect(() => {
     getMyTradeInfo();
   }, [getMyTradeInfo]);
@@ -185,12 +183,17 @@ function useMyCopies() {
       clearInterval(time);
     };
   }, [getMyCopiesHistoryList, getMyCopiesList, getMyCopiesMyTraderList]);
+
+  const updateCurrent = useCallback(() => {
+    getMyCopiesList();
+  }, [getMyCopiesList]);
   return {
     myTradeInfo,
     myCopiesList,
     myCopiesHistoryList,
     myCopiesMyTradersList,
-    getMyCopiesMyTraderList
+    getMyCopiesMyTraderList,
+    updateCurrent,
   };
 }
 

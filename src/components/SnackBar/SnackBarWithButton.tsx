@@ -6,12 +6,7 @@ import React, { useMemo } from "react";
 import { Close, Fail, Success } from "../icons";
 import MainButton from "../MainButton/MainButton";
 import { t } from "@lingui/macro";
-
-export enum SnackBarType {
-  success,
-  waiting,
-  fail,
-}
+import { SnackBarType } from "./NormalSnackBar";
 
 interface NormalSnackBarProps {
   id: SnackbarKey;

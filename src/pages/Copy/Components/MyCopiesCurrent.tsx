@@ -12,16 +12,25 @@ import NESTLine from "../../../components/NESTLine";
 import { MyCopiesList } from "../Hooks/useMyCopies";
 import useMyCopiesCurrent from "../Hooks/useMyCopiesCurrent";
 import { DefaultKolIcon } from "../../../components/icons";
+import CircularProgress from "@mui/material/CircularProgress";
 
 interface MyCopiesCurrentProps {
   list: MyCopiesList[];
+  updateList: () => void;
 }
 
 const MyCopiesCurrent: FC<MyCopiesCurrentProps> = ({ ...props }) => {
   const { isBigMobile } = useWindowWidth();
-  const { close } = useMyCopiesCurrent();
+  const { action, isLoading } = useMyCopiesCurrent(props.updateList);
   const rows = props.list.map((item, index) => {
-    return <Row key={`MyCopiesCurrent + ${index}`} data={item} close={close} />;
+    return (
+      <Row
+        key={`MyCopiesCurrent + ${index}`}
+        data={item}
+        action={action}
+        isLoading={isLoading}
+      />
+    );
   });
 
   const noOrder = useMemo(() => {
@@ -271,12 +280,19 @@ const MyCopiesCurrent: FC<MyCopiesCurrentProps> = ({ ...props }) => {
                 borderRadius: "8px",
                 background: theme.normal.grey_hover,
                 width: "fit-content",
+                "& .MuiCircularProgress-root": {
+                  color: theme.normal.text0,
+                },
               })}
               onClick={() => {
-                close(item.id);
+                action(item.id);
               }}
             >
-              <Trans>Close</Trans>
+              {isLoading === item.id ? (
+                <CircularProgress size={"12px"} />
+              ) : (
+                <Trans>Close</Trans>
+              )}
             </Box>
           </Stack>
         </Stack>
@@ -287,7 +303,7 @@ const MyCopiesCurrent: FC<MyCopiesCurrentProps> = ({ ...props }) => {
         {items}
       </Stack>
     );
-  }, [close, props.list]);
+  }, [action, isLoading, props.list]);
 
   const pc = useMemo(() => {
     return (
@@ -318,7 +334,8 @@ const tdNoPadding = {
 
 interface RowProps {
   data: MyCopiesList;
-  close: (id: number) => Promise<void>;
+  action: (id: number) => void;
+  isLoading: number;
 }
 
 const Row: FC<RowProps> = ({ ...props }) => {
@@ -511,13 +528,20 @@ const Row: FC<RowProps> = ({ ...props }) => {
               "&:hover": {
                 cursor: "pointer",
               },
+              "& .MuiCircularProgress-root": {
+                color: theme.normal.text0,
+              },
             })}
             component={"button"}
             onClick={() => {
-              props.close(props.data.id);
+              props.action(props.data.id);
             }}
           >
-            <Trans>Close</Trans>
+            {props.isLoading === props.data.id ? (
+              <CircularProgress size={"12px"} />
+            ) : (
+              <Trans>Close</Trans>
+            )}
           </Box>
         </Stack>
       </TableCell>

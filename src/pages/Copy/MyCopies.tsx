@@ -57,16 +57,16 @@ const MyCopies: FC = () => {
   const [openCopyModal, setOpenCopyModal] = useState<Array<string>>([]);
   const [openStopModal, setOpenStopModal] = useState<string>();
   const { addTransactionNotice } = usePendingTransactionsBase();
-  const [searchParams] = useSearchParams()
+  const [searchParams] = useSearchParams();
 
   useEffect(() => {
-    let tab = searchParams.get("tab"); 
+    let tab = searchParams.get("tab");
     setTabsValue(Number(tab ?? "0"));
   }, [searchParams]);
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" })
-  }, [])
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
 
   const {
     myTradeInfo,
@@ -74,6 +74,7 @@ const MyCopies: FC = () => {
     myCopiesHistoryList,
     myCopiesMyTradersList,
     getMyCopiesMyTraderList,
+    updateCurrent,
   } = useMyCopies();
   const profit = (myTradeInfo ? myTradeInfo.profit : 0).floor(2);
   const assets = (myTradeInfo ? myTradeInfo.assets : 0).floor(2);
@@ -107,7 +108,7 @@ const MyCopies: FC = () => {
 
   const tabsView = useMemo(() => {
     if (tabsValue === 0) {
-      return <MyCopiesCurrent list={myCopiesList} />;
+      return <MyCopiesCurrent list={myCopiesList} updateList={updateCurrent} />;
     } else if (tabsValue === 1) {
       return <MyCopiesHistory list={myCopiesHistoryList} />;
     } else if (tabsValue === 2) {
@@ -123,7 +124,13 @@ const MyCopies: FC = () => {
     } else {
       return <></>;
     }
-  }, [myCopiesHistoryList, myCopiesList, myCopiesMyTradersList, tabsValue]);
+  }, [
+    myCopiesHistoryList,
+    myCopiesList,
+    myCopiesMyTradersList,
+    tabsValue,
+    updateCurrent,
+  ]);
   const topInfo = useCallback((title: string, info: string) => {
     return (
       <Stack spacing={"4px"}>
