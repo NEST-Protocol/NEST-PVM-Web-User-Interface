@@ -1,5 +1,5 @@
 import Stack from "@mui/material/Stack";
-import { FC, useMemo } from "react";
+import { FC, useEffect, useMemo } from "react";
 import Box from "@mui/material/Box";
 import { Trans, t } from "@lingui/macro";
 import NESTTabs from "../../components/NESTTabs/NESTTabs";
@@ -30,6 +30,10 @@ const Trader: FC = () => {
     traderOrderHistoryList,
     traderFollowerList,
   } = useTrader(address ?? "");
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" })
+  }, [])
 
   const tabs = useMemo(() => {
     const data = [

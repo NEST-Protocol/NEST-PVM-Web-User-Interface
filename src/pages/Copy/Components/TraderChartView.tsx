@@ -45,7 +45,23 @@ interface TraderChartViewProps {
 
 const TraderChartView: FC<TraderChartViewProps> = ({ ...props }) => {
   const { nowTheme } = useTheme();
-  const [activeIndex, setActiveIndex] = useState(0);
+  const defaultActiveIndex = useMemo(() => {
+    const arr = props.performanceSymbolData.map((item) => {
+      return item.value;
+    });
+
+    var maxIndex = 0;
+    var maxValue = arr[0];
+
+    for (let i = 1; i < arr.length; i++) {
+      if (arr[i] > maxValue) {
+        maxValue = arr[i];
+        maxIndex = i;
+      }
+    }
+    return maxIndex
+  }, [props.performanceSymbolData]);
+  const [activeIndex, setActiveIndex] = useState(defaultActiveIndex);
 
   const pnlRatio = props.performanceData
     ? `${props.performanceData.pnlRatio.floor(2)}%`

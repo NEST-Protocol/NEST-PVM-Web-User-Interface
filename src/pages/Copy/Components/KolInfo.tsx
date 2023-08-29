@@ -82,7 +82,7 @@ const KolInfo: FC<KolInfoProps> = ({ ...props }) => {
   const { chainsData, signature, account } = useNEST();
   const [openCopyModal, setOpenCopyModal] = useState(false);
   const [openStopModal, setOpenStopModal] = useState(false);
-  const [current, setCurrent] = useState<number>();
+  const [current, setCurrent] = useState<number>(-666);
   const { addTransactionNotice } = usePendingTransactionsBase();
 
   const nickName = props.data ? props.data.nickName : String().placeHolder;
@@ -144,7 +144,7 @@ const KolInfo: FC<KolInfoProps> = ({ ...props }) => {
       );
       if (Number(req["errorCode"]) === 0) {
         const value = req["value"];
-        setCurrent(value["copyAccountBalance"]);
+        setCurrent(value ? value["copyAccountBalance"] : undefined);
       }
     }
   }, [account.address, chainsData.chainId, props.data, signature]);
@@ -154,20 +154,8 @@ const KolInfo: FC<KolInfoProps> = ({ ...props }) => {
   }, [getCurrent]);
 
   const button = useMemo(() => {
-    if (current === 0) {
-      return (
-        <MainButton
-          title={t`Copy Now`}
-          onClick={() => setOpenCopyModal(true)}
-          style={{
-            height: "40px",
-            paddingLeft: "16px",
-            paddingRight: "16px",
-            fontSize: "14px",
-            width: "fit-content",
-          }}
-        />
-      );
+    if (current === -666) {
+      return <></>;
     } else if (current && current > 0) {
       return (
         <Box
@@ -189,7 +177,19 @@ const KolInfo: FC<KolInfoProps> = ({ ...props }) => {
         </Box>
       );
     } else {
-      return <></>;
+      return (
+        <MainButton
+          title={t`Copy Now`}
+          onClick={() => setOpenCopyModal(true)}
+          style={{
+            height: "40px",
+            paddingLeft: "16px",
+            paddingRight: "16px",
+            fontSize: "14px",
+            width: "fit-content",
+          }}
+        />
+      );
     }
   }, [current]);
 

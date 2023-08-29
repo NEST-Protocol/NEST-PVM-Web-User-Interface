@@ -1,7 +1,7 @@
 import { Trans, t } from "@lingui/macro";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
-import { FC, useCallback, useMemo } from "react";
+import { FC, useCallback, useEffect, useMemo } from "react";
 import MainButton from "../../components/MainButton/MainButton";
 import useWindowWidth from "../../hooks/useWindowWidth";
 import KolItem from "./Components/kolItem";
@@ -182,6 +182,10 @@ const HOW_TO_USE_3 = (
 const Copy: FC = () => {
   const { isBigMobile } = useWindowWidth();
   const { kolList, myTradeInfo: myInfo } = useCopy();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" })
+  }, [])
   const myTradeInfo = useCallback((title: string, num: string) => {
     return (
       <Stack spacing={"4px"}>

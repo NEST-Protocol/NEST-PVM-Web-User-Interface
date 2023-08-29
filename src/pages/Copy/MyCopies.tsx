@@ -64,6 +64,10 @@ const MyCopies: FC = () => {
     setTabsValue(Number(tab ?? "0"));
   }, [searchParams]);
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" })
+  }, [])
+
   const {
     myTradeInfo,
     myCopiesList,
