@@ -92,40 +92,40 @@ const NUM = (
   </svg>
 );
 
-const testData = [
-  {
-    name: "1",
-    value: 1000,
-  },
-  {
-    name: "2",
-    value: -4000,
-  },
-  {
-    name: "3",
-    value: 2000,
-  },
-  {
-    name: "4",
-    value: -2000,
-  },
-  {
-    name: "5",
-    value: 1000,
-  },
-  {
-    name: "6",
-    value: 2000,
-  },
-  {
-    name: "7",
-    value: -1000,
-  },
-  {
-    name: "8",
-    value: -2000,
-  },
-];
+// const testData = [
+//   {
+//     name: "1",
+//     value: 1000,
+//   },
+//   {
+//     name: "2",
+//     value: -4000,
+//   },
+//   {
+//     name: "3",
+//     value: 2000,
+//   },
+//   {
+//     name: "4",
+//     value: -2000,
+//   },
+//   {
+//     name: "5",
+//     value: 1000,
+//   },
+//   {
+//     name: "6",
+//     value: 2000,
+//   },
+//   {
+//     name: "7",
+//     value: -1000,
+//   },
+//   {
+//     name: "8",
+//     value: -2000,
+//   },
+// ];
 
 interface KolItemProps {
   data: AllKOLModel;
@@ -174,47 +174,35 @@ const KolItem: FC<KolItemProps> = ({ ...props }) => {
   }, [props.data.avatar]);
 
   const stop = useMemo(() => {
-    const data = chartData.map((item) => {
-      return item.value;
-    });
-    const maxNumber = Math.max(...data);
-    const minNumber = Math.min(...data);
-    var percent = 0;
-    if (minNumber >= 0) {
-      percent = 100;
-    } else if (maxNumber < 0) {
-      percent = 0;
-    } else {
-      percent =
-        maxNumber - minNumber > 0
-          ? (maxNumber / (maxNumber - minNumber)) * 100
-          : 100;
-    }
-
+    const green = props.data.kolProfitLossRate >= 0;
     return (
-      <ResponsiveContainer width="100%" height="100%">
+      <ResponsiveContainer width="60%" height="100%">
         <AreaChart data={chartData}>
           <defs>
             <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
               <stop
-                offset="0%"
+                offset="5%"
                 stopColor={nowTheme.normal.success}
-                stopOpacity={0.7}
+                stopOpacity={0.5}
               />
               <stop
-                offset={`100%`}
+                offset={`95%`}
                 stopColor={nowTheme.normal.success}
-                stopOpacity={0.2}
+                stopOpacity={0}
+              />
+            </linearGradient>
+          </defs>
+          <defs>
+            <linearGradient id="colorUv2" x1="0" y1="0" x2="0" y2="1">
+              <stop
+                offset={`5%`}
+                stopColor={nowTheme.normal.danger}
+                stopOpacity={0}
               />
               <stop
-                offset={`100%`}
+                offset="95%"
                 stopColor={nowTheme.normal.danger}
-                stopOpacity={0.2}
-              />
-              <stop
-                offset="100%"
-                stopColor={nowTheme.normal.danger}
-                stopOpacity={0.7}
+                stopOpacity={0.5}
               />
             </linearGradient>
           </defs>
@@ -222,10 +210,10 @@ const KolItem: FC<KolItemProps> = ({ ...props }) => {
             type="monotone"
             dataKey="value"
             baseLine={0}
-            stroke={nowTheme.normal.primary}
-            strokeWidth={"2px"}
+            stroke={green ? nowTheme.normal.success : nowTheme.normal.danger}
+            strokeWidth={"1px"}
             fillOpacity={1}
-            fill={"url(#colorUv)"}
+            fill={green ? "url(#colorUv)" : "url(#colorUv2)"}
           />
         </AreaChart>
       </ResponsiveContainer>
@@ -233,8 +221,8 @@ const KolItem: FC<KolItemProps> = ({ ...props }) => {
   }, [
     chartData,
     nowTheme.normal.danger,
-    nowTheme.normal.primary,
     nowTheme.normal.success,
+    props.data.kolProfitLossRate,
   ]);
   return (
     <Grid xs={itemSize} item>
@@ -363,7 +351,7 @@ const KolItem: FC<KolItemProps> = ({ ...props }) => {
           width={"100%"}
           height={"48px"}
         >
-          <Stack spacing={"4px"}>
+          <Stack spacing={"4px"} width={"35%"}>
             <Box
               sx={(theme) => ({
                 fontSize: "24px",

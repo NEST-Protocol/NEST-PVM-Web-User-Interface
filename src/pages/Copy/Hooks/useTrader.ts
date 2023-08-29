@@ -75,8 +75,8 @@ function useTrader(address: string | undefined) {
 
   const [tabsValue, setTabsValue] = useState(0);
   const [earningsDay, setEarningsDay] = useState<number>(0);
-  const [performanceDay, setPerformanceDay] = useState<number>(0);
-  const [performanceSymbolDay, setPerformanceSymbolDay] = useState<number>(0);
+  const [performanceDay, setPerformanceDay] = useState<number>(1);
+  const [performanceSymbolDay, setPerformanceSymbolDay] = useState<number>(1);
 
   const getKOLInfo = useCallback(async () => {
     if (chainsData.chainId && signature && address) {
@@ -127,8 +127,8 @@ function useTrader(address: string | undefined) {
         const list: Array<EarningsListModel> = value.map((item: any) => {
           const one: EarningsListModel = {
             date: item["date"].split("-")[2],
-            roi: item["roi"],
-            pnl: item["pnl"],
+            roi: parseFloat(parseFloat(item["roi"] ?? 0).floor(2)),
+            pnl:  parseFloat(parseFloat(item["pnl"] ?? 0).floor(2)),
           };
           return one;
         });

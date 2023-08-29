@@ -230,7 +230,7 @@ const TraderChartView: FC<TraderChartViewProps> = ({ ...props }) => {
               orientation={"right"}
               axisLine={false}
               tickLine={false}
-              width={30}
+              width={40}
               tick={{ fontSize: "10px", strokeWidth: 1 }}
             />
             {/* <Tooltip /> */}
@@ -431,7 +431,7 @@ const TraderChartView: FC<TraderChartViewProps> = ({ ...props }) => {
               </Stack>
             </Stack>
 
-            <Stack spacing={"16px"}>
+            <Stack spacing={"16px"} paddingBottom={"12px"}>
               {performanceInfo(t`Number of Orders`, ordersNumber)}
               {performanceInfo(t`Cumulative Copy Traders`, cumulativeTraders)}
               {performanceInfo(t`Copy Traders’ PnL (NEST)`, traderPnl)}
@@ -442,7 +442,7 @@ const TraderChartView: FC<TraderChartViewProps> = ({ ...props }) => {
         <Stack
           spacing={"12px"}
           width={"100%"}
-          height={"448px"}
+          height={"460px"}
           sx={(theme) => ({
             borderRadius: "12px",
             border: [

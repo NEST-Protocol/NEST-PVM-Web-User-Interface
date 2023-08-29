@@ -8,7 +8,6 @@ import KolItem from "./Components/kolItem";
 import Grid from "@mui/material/Grid";
 import useCopy from "./Hooks/useCopy";
 
-
 const MY_COPY_ICON = (
   <svg
     width="48"
@@ -434,8 +433,8 @@ const Copy: FC = () => {
             <Box
               sx={(theme) => ({
                 fontWeight: "700",
-                fontSize: "20px",
-                lineHeight: "28px",
+                fontSize: ["16px", "16px", "20px"],
+                lineHeight: ["22px", "22px", "28px"],
                 color: theme.normal.text0,
               })}
             >
@@ -444,9 +443,8 @@ const Copy: FC = () => {
             <Box
               sx={(theme) => ({
                 fontWeight: "400",
-                fontSize: "16px",
-                lineHeight: "22px",
-                lineBreak: "0",
+                fontSize: ["14px", "14px", "16px"],
+                lineHeight: ["20px", "20px", "22px"],
                 color: theme.normal.text2,
               })}
             >
@@ -506,10 +504,9 @@ const Copy: FC = () => {
             paddingY={["80px", "80px", "60px"]}
             textAlign={["center", "center", "left"]}
             sx={(theme) => ({
-              fontSize: "48px",
+              fontSize: ["28px", "28px", "48px"],
               fontWeight: "700",
-              lineHeight: "60px",
-              lineBreak: 0,
+              lineHeight: ["40px", "40px", "60px"],
               color: theme.normal.text0,
             })}
           >
@@ -610,7 +607,7 @@ const Copy: FC = () => {
           sx={{
             backgroundImage: `url('/images/CopyBG.svg')`,
             backgroundPosition: "center center",
-            backgroundRepeat: "no-repeat"
+            backgroundRepeat: "no-repeat",
           }}
         >
           <Box
