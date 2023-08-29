@@ -44,6 +44,7 @@ function useFuturesOrderList() {
               stopLossPrice: item["stopLossPrice"],
               takeProfitPrice: item["takeProfitPrice"],
               status: item["status"],
+              
             };
           })
           .filter((item: any) => item.leverage.toString() !== "0");

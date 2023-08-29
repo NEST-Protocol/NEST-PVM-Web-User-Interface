@@ -13,6 +13,7 @@ import { TraderOrderList } from "../Hooks/useTrader";
 
 interface TraderCurrentProps {
   list: TraderOrderList[];
+  history?: boolean;
 }
 
 const TraderCurrent: FC<TraderCurrentProps> = ({ ...props }) => {
@@ -99,7 +100,11 @@ const TraderCurrent: FC<TraderCurrentProps> = ({ ...props }) => {
                     color: theme.normal.text2,
                   })}
                 >
-                  <Trans>Market Price</Trans>
+                  {props.history ? (
+                    <Trans>Close Price</Trans>
+                  ) : (
+                    <Trans>Market Price</Trans>
+                  )}
                 </Box>
                 <Box
                   sx={(theme) => ({
@@ -198,12 +203,17 @@ const TraderCurrent: FC<TraderCurrentProps> = ({ ...props }) => {
         {items}
       </Stack>
     );
-  }, [props.list]);
+  }, [props.history, props.list]);
 
   const pc = useMemo(() => {
     return (
       <FuturesTableTitle
-        dataArray={[t`Symbol`, t`Open Price`, t`Market Price`, t`ROI`]}
+        dataArray={[
+          t`Symbol`,
+          t`Open Price`,
+          props.history ? t`Close Price` : t`Market Price`,
+          t`ROI`,
+        ]}
         noOrder={noOrder}
         helps={[]}
         noNeedPadding
@@ -212,7 +222,7 @@ const TraderCurrent: FC<TraderCurrentProps> = ({ ...props }) => {
         {rows}
       </FuturesTableTitle>
     );
-  }, [noOrder, rows]);
+  }, [noOrder, props.history, rows]);
   return <>{isBigMobile ? mobile : pc}</>;
 };
 

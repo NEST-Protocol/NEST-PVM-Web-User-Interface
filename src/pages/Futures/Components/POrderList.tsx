@@ -148,26 +148,33 @@ const POrderList: FC<POrderListProps> = ({ ...props }) => {
         </Stack>
       </Stack>
       <Stack direction={"row"} spacing={"8px"}>
-        <MainButton
-          title={t`Add`}
-          onClick={() =>
-            props.buttonCallBack({
-              data: props.data,
-              type: FuturesModalType.add,
-            })
-          }
-          style={{ height: "40px", fontSize: 14 }}
-        />
-        <MainButton
-          title={showTriggerTitle}
-          onClick={() =>
-            props.buttonCallBack({
-              data: props.data,
-              type: FuturesModalType.trigger,
-            })
-          }
-          style={{ height: "40px", fontSize: 14 }}
-        />
+        {props.data.copy ? (
+          <></>
+        ) : (
+          <>
+            <MainButton
+              title={t`Add`}
+              onClick={() =>
+                props.buttonCallBack({
+                  data: props.data,
+                  type: FuturesModalType.add,
+                })
+              }
+              style={{ height: "40px", fontSize: 14 }}
+            />
+            <MainButton
+              title={showTriggerTitle}
+              onClick={() =>
+                props.buttonCallBack({
+                  data: props.data,
+                  type: FuturesModalType.trigger,
+                })
+              }
+              style={{ height: "40px", fontSize: 14 }}
+            />
+          </>
+        )}
+
         <MainButton
           title={t`Close`}
           onClick={() =>

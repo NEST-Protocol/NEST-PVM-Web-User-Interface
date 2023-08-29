@@ -199,42 +199,49 @@ const POrderTableRow: FC<POrderTableRowProps> = ({ ...props }) => {
       </TableCell>
       <TableCell>
         <Stack direction={"row"} justifyContent={"flex-end"} spacing={"8px"}>
-          <MainButton
-            title={t`Add`}
-            onClick={() =>
-              props.buttonCallBack({
-                data: props.data,
-                type: FuturesModalType.add,
-              })
-            }
-            style={{
-              width: "auto",
-              height: "36px",
-              minWidth: "65px",
-              fontSize: 12,
-              paddingLeft: `12px`,
-              paddingRight: `12px`,
-              borderRadius: `8px`,
-            }}
-          />
-          <MainButton
-            title={showTriggerTitle}
-            onClick={() =>
-              props.buttonCallBack({
-                data: props.data,
-                type: FuturesModalType.trigger,
-              })
-            }
-            style={{
-              width: "auto",
-              height: "36px",
-              minWidth: "65px",
-              fontSize: 12,
-              paddingLeft: `12px`,
-              paddingRight: `12px`,
-              borderRadius: `8px`,
-            }}
-          />
+          {props.data.copy ? (
+            <></>
+          ) : (
+            <>
+              <MainButton
+                title={t`Add`}
+                onClick={() =>
+                  props.buttonCallBack({
+                    data: props.data,
+                    type: FuturesModalType.add,
+                  })
+                }
+                style={{
+                  width: "auto",
+                  height: "36px",
+                  minWidth: "65px",
+                  fontSize: 12,
+                  paddingLeft: `12px`,
+                  paddingRight: `12px`,
+                  borderRadius: `8px`,
+                }}
+              />
+              <MainButton
+                title={showTriggerTitle}
+                onClick={() =>
+                  props.buttonCallBack({
+                    data: props.data,
+                    type: FuturesModalType.trigger,
+                  })
+                }
+                style={{
+                  width: "auto",
+                  height: "36px",
+                  minWidth: "65px",
+                  fontSize: 12,
+                  paddingLeft: `12px`,
+                  paddingRight: `12px`,
+                  borderRadius: `8px`,
+                }}
+              />
+            </>
+          )}
+
           <MainButton
             title={t`Close`}
             onClick={() =>

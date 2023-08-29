@@ -86,7 +86,7 @@ const Trader: FC = () => {
     } else if (tabsValue === 1) {
       return <TraderCurrent list={traderOrderList} />;
     } else if (tabsValue === 2) {
-      return <TraderCurrent list={traderOrderHistoryList} />;
+      return <TraderCurrent list={traderOrderHistoryList} history/>;
     } else if (tabsValue === 3) {
       return <TraderFollowers list={traderFollowerList} />;
     } else {

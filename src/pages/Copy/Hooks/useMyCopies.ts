@@ -168,13 +168,11 @@ function useMyCopies() {
 
   useEffect(() => {
     getMyTradeInfo();
-  }, [getMyTradeInfo]);
-
-  useEffect(() => {
     getMyCopiesList();
     getMyCopiesHistoryList();
     getMyCopiesMyTraderList();
     const time = setInterval(() => {
+      getMyTradeInfo();
       getMyCopiesList();
       getMyCopiesHistoryList();
       getMyCopiesMyTraderList();
@@ -182,11 +180,17 @@ function useMyCopies() {
     return () => {
       clearInterval(time);
     };
-  }, [getMyCopiesHistoryList, getMyCopiesList, getMyCopiesMyTraderList]);
+  }, [
+    getMyCopiesHistoryList,
+    getMyCopiesList,
+    getMyCopiesMyTraderList,
+    getMyTradeInfo,
+  ]);
 
   const updateCurrent = useCallback(() => {
     getMyCopiesList();
-  }, [getMyCopiesList]);
+    getMyTradeInfo();
+  }, [getMyCopiesList, getMyTradeInfo]);
   return {
     myTradeInfo,
     myCopiesList,
