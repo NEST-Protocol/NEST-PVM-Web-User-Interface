@@ -109,30 +109,40 @@ const Trader: FC = () => {
       justifyContent={"space-around"}
       alignItems={"center"}
     >
-      <Stack
-        maxWidth={"1200px"}
-        spacing={"24px"}
-        width={"100%"}
-        paddingBottom={"40px"}
-      >
-        <Stack spacing={"24px"}>
-          <CopyRoute title={t`Trader Profile`} link={"/#/copy"} />
-          <KolInfo data={kolInfo} />
-        </Stack>
-        <Stack spacing={"24px"}>
-          <Stack
-            direction={"row"}
-            justifyContent={"flex-start"}
-            alignItems={"center"}
-            paddingX={"20px"}
-            width={"100%"}
-            sx={(theme) => ({
-              borderBottom: `1px solid ${theme.normal.border}`,
-            })}
-          >
-            {tabs}
+      <Stack spacing={"24px"} width={"100%"} paddingBottom={"40px"}>
+        <Stack
+          direction={"row"}
+          justifyContent={"space-around"}
+          alignItems={"center"}
+          width={"100%"}
+          sx={(theme) => ({ background: theme.normal.bg1 })}
+        >
+          <Stack spacing={"24px"} maxWidth={"1200px"} width={"100%"}>
+            <CopyRoute title={t`Trader Profile`} link={"/#/copy"} />
+            <KolInfo data={kolInfo} />
           </Stack>
-          {tabsView}
+        </Stack>
+        <Stack
+          direction={"row"}
+          justifyContent={"space-around"}
+          alignItems={"center"}
+          width={"100%"}
+        >
+          <Stack spacing={"24px"} maxWidth={"1200px"} width={"100%"}>
+            <Stack
+              direction={"row"}
+              justifyContent={"flex-start"}
+              alignItems={"center"}
+              paddingX={"20px"}
+              width={"100%"}
+              sx={(theme) => ({
+                borderBottom: `1px solid ${theme.normal.border}`,
+              })}
+            >
+              {tabs}
+            </Stack>
+            {tabsView}
+          </Stack>
         </Stack>
       </Stack>
     </Stack>

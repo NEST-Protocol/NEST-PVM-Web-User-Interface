@@ -172,6 +172,9 @@ const CopySettingBaseModal: FC<CopySettingBaseModalProps> = ({ ...props }) => {
               borderRadius: "8px",
               border: `1px solid ${theme.normal.border}`,
               padding: "13px 12px",
+              "&:hover" : {
+                border: `1px solid ${theme.normal.primary}`,
+              }
             })}
           >
             <Box

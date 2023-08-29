@@ -50,7 +50,7 @@ const WALLET = (
     />
   </svg>
 );
-const PERSENT = (
+const PERCENT = (
   <svg
     width="48"
     height="48"
@@ -113,7 +113,7 @@ const KolInfo: FC<KolInfoProps> = ({ ...props }) => {
             fontWeight: "400",
             fontSize: "14px",
             lineHeight: "20px",
-            color: theme.normal.text1,
+            color: theme.normal.text2,
           })}
         >
           {title}
@@ -154,9 +154,21 @@ const KolInfo: FC<KolInfoProps> = ({ ...props }) => {
   }, [getCurrent]);
 
   const button = useMemo(() => {
-    if (!current) {
-      return <></>
-    } else if (current > 0) {
+    if (current === 0) {
+      return (
+        <MainButton
+          title={t`Copy Now`}
+          onClick={() => setOpenCopyModal(true)}
+          style={{
+            height: "40px",
+            paddingLeft: "16px",
+            paddingRight: "16px",
+            fontSize: "14px",
+            width: "fit-content",
+          }}
+        />
+      );
+    } else if (current && current > 0) {
       return (
         <Box
           sx={(theme) => ({
@@ -177,19 +189,7 @@ const KolInfo: FC<KolInfoProps> = ({ ...props }) => {
         </Box>
       );
     } else {
-      return (
-        <MainButton
-          title={t`Copy Now`}
-          onClick={() => setOpenCopyModal(true)}
-          style={{
-            height: "40px",
-            paddingLeft: "16px",
-            paddingRight: "16px",
-            fontSize: "14px",
-            width: "fit-content",
-          }}
-        />
-      );
+      return <></>;
     }
   }, [current]);
 
@@ -281,7 +281,7 @@ const KolInfo: FC<KolInfoProps> = ({ ...props }) => {
                     },
                   })}
                 >
-                  {PERSENT}
+                  {PERCENT}
                 </Box>
                 <Box
                   sx={(theme) => ({
@@ -291,6 +291,7 @@ const KolInfo: FC<KolInfoProps> = ({ ...props }) => {
                     color: theme.normal.text1,
                   })}
                 >
+                  <Trans>Profit Sharing:</Trans>
                   {rewardRatio}
                 </Box>
               </Stack>
@@ -467,7 +468,7 @@ const KolInfo: FC<KolInfoProps> = ({ ...props }) => {
                       },
                     })}
                   >
-                    {PERSENT}
+                    {PERCENT}
                   </Box>
                   <Box
                     sx={(theme) => ({
@@ -477,6 +478,7 @@ const KolInfo: FC<KolInfoProps> = ({ ...props }) => {
                       color: theme.normal.text1,
                     })}
                   >
+                    <Trans>Profit Sharing:</Trans>
                     {rewardRatio}
                   </Box>
                 </Stack>

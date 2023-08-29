@@ -99,11 +99,15 @@ const CopyRoute: FC<CopyRouteProps> = ({ ...props }) => {
       >
         <Box
           padding={"4px 8px"}
-          sx={{
+          sx={(theme) => ({
             "&:hover": {
               cursor: "pointer",
+              padding:"4px 8px",
+              color: theme.normal.text0,
+              borderRadius: "4px",
+              background: theme.normal.grey_hover
             },
-          }}
+          })}
           onClick={() => {
             window.location.href = props.link;
           }}
