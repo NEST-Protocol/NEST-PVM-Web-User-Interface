@@ -22,6 +22,7 @@ interface FuturesTableTitleProps {
   style?: React.CSSProperties;
   helps?: FuturesTableTitleHelp[];
   noNeedPadding?: boolean;
+  freeRight?: boolean;
 }
 
 const FuturesTableTitle: FC<FuturesTableTitleProps> = ({
@@ -43,7 +44,7 @@ const FuturesTableTitle: FC<FuturesTableTitleProps> = ({
     return (
       <TableCell
         key={`TableTitle + ${props.dataArray.length} + ${index}`}
-        align={index === props.dataArray.length - 1 ? "right" : "left"}
+        align={index === props.dataArray.length - 1 && !props.freeRight ? "right" : "left"}
         sx={
           index !== 0 && index !== props.dataArray.length - 1
             ? paddingConfig
@@ -103,7 +104,7 @@ const FuturesTableTitle: FC<FuturesTableTitleProps> = ({
                   lineHeight: "168px",
                 })}
               >
-                <Trans>No Order</Trans>
+                <Trans>No Orders</Trans>
               </TableCell>
             </TableRow>
           ) : (

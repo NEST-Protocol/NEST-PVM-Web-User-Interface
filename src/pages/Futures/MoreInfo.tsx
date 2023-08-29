@@ -5,6 +5,7 @@ import { FC } from "react";
 import { NEXT } from "../../components/icons";
 import NESTLine from "../../components/NESTLine";
 import { Trans } from "@lingui/macro";
+import useLanguageWithDoc from "../../hooks/useLanguageWithDoc";
 
 const InfoBox = styled(Box)(({ theme }) => ({
   fontWeight: 700,
@@ -28,6 +29,7 @@ const NextBox = styled(Box)(({ theme }) => ({
 }));
 
 const FuturesMoreInfo: FC = () => {
+  const { docLink } = useLanguageWithDoc();
   return (
     <Stack
       spacing={"16px"}
@@ -88,9 +90,7 @@ const FuturesMoreInfo: FC = () => {
           width={"100%"}
           component={"button"}
           onClick={() => {
-            window.open(
-              "https://finance.docs.nestprotocol.org/#connect-wallet"
-            );
+            window.open(docLink);
           }}
           sx={(theme) => ({
             paddingX: "20px",
@@ -99,7 +99,7 @@ const FuturesMoreInfo: FC = () => {
           })}
         >
           <InfoBox component={"p"}>
-            <Trans>How to Play</Trans>
+            <Trans>How to Trade</Trans>
           </InfoBox>
           <NextBox>
             <NEXT />

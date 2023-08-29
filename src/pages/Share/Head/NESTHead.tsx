@@ -1,7 +1,8 @@
-import { FC, useMemo, useEffect } from "react";
+import { FC, useMemo, useEffect, useState } from "react";
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
 import {
+  AccountIcon,
   Dark,
   Dashboard,
   FuturesIcon,
@@ -20,19 +21,32 @@ import { NavMenuV2, NavMenuV3 } from "./NavMenuV2Base";
 import useNEST from "../../../hooks/useNEST";
 import { Trans } from "@lingui/macro";
 import LanguageMenu from "./LanguageMenu";
+import SignModal from "../Modal/SignModal";
 
 export const NavItems = [
   {
     path: "/futures",
-    content: `Futures`,
+    content: `Future`,
     icon: FuturesIcon,
-    l: <Trans>Futures</Trans>,
+    l: <Trans>Future</Trans>,
   },
   {
     path: "/swap",
     content: `Swap`,
     icon: SwapExchangeSmall,
     l: <Trans>Swap</Trans>,
+  },
+  {
+    path: "/account",
+    content: `Account`,
+    icon: AccountIcon,
+    l: <Trans>Account</Trans>,
+  },
+  {
+    path: "/copy",
+    content: `Copy`,
+    icon: AccountIcon,
+    l: <Trans>Copy</Trans>,
   },
   {
     path: "/dashboard",
@@ -45,9 +59,9 @@ export const NavItems = [
 export const NavItemsForScroll = [
   {
     path: "/futures",
-    content: `Futures`,
+    content: `Future`,
     icon: FuturesIcon,
-    l: <Trans>Futures</Trans>,
+    l: <Trans>Future</Trans>,
   },
   {
     path: "/faucet",
@@ -67,8 +81,16 @@ const NESTHead: FC = () => {
   const location = useLocation();
   const { width: widthLv, headHeight, isBigMobile, isPC } = useWindowWidth();
   const { nowTheme, changeTheme } = useTheme();
-  const { account, chainsData, navItems } = useNEST();
-
+  const { account, chainsData, navItems, checkSigned } = useNEST();
+  
+  const [openSignModal, setOpenSignModal] = useState(false);
+  useEffect(() => {
+    if (account.address && !checkSigned) {
+      setOpenSignModal(true);
+    } else {
+      setOpenSignModal(false);
+    }
+  }, [account.address, checkSigned]);
   useEffect(() => {
     const chainIds = chainsData.chains.map((item) => item.id);
     if (
@@ -254,7 +276,7 @@ const NESTHead: FC = () => {
         },
       };
     });
-    const liList = navItems.slice(0, 2).map((item, index) => {
+    const liList = navItems.slice(0, navItems.length-1).map((item, index) => {
       return (
         <Link
           className={`nav${
@@ -300,6 +322,7 @@ const NESTHead: FC = () => {
       alignItems="center"
       spacing={0}
     >
+      <SignModal open={openSignModal} onClose={() => setOpenSignModal(false)} />
       <Stack
         direction="row"
         justifyContent="flex-start"
@@ -328,7 +351,7 @@ const NESTHead: FC = () => {
       >
         {!isBigMobile ? dashboard() : <></>}
         <NetMenu />
-        <ConnectButton />
+        <ConnectButton signCallBack={() => setOpenSignModal(true)} />
         <Stack
           direction={"row"}
           spacing={"16px"}

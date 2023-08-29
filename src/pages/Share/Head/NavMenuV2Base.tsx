@@ -16,6 +16,7 @@ import { Trans } from "@lingui/macro";
 import { i18n } from "@lingui/core";
 import { LanData } from "./LanguageMenu";
 import LanguageModal from "../Modal/LanguageModal";
+import useLanguageWithDoc from "../../../hooks/useLanguageWithDoc";
 
 const NavMenu = styled(Stack)(({ theme }) => {
   return {};
@@ -105,6 +106,7 @@ const NavMenuV2Base: FC<NavMenuV2BaseProps> = ({ ...props }) => {
   const [showLanModal, setShowLanModal] = useState(false);
   const { chainsData, navItems } = useNEST();
   const location = useLocation();
+  const { docLink } = useLanguageWithDoc();
   const navList = navItems.map((item, index) => {
     const Icon = item.icon;
     return (
@@ -263,9 +265,7 @@ const NavMenuV2Base: FC<NavMenuV2BaseProps> = ({ ...props }) => {
           })}
           component={"button"}
           onClick={() => {
-            window.open(
-              "https://finance.docs.nestprotocol.org/#connect-wallet"
-            );
+            window.open(docLink);
           }}
         >
           <p>

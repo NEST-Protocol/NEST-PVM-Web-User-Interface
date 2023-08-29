@@ -7,17 +7,17 @@ import MainButton from "../../../components/MainButton/MainButton";
 import NESTLine from "../../../components/NESTLine";
 import NormalInfo from "../../../components/NormalInfo/NormalInfo";
 import useFuturesClose from "../../../hooks/useFuturesClose";
-import { FuturesOrderV2 } from "../../../hooks/useFuturesOrderList";
 import useWindowWidth from "../../../hooks/useWindowWidth";
 import BaseDrawer from "../../Share/Modal/BaseDrawer";
 import BaseModal from "../../Share/Modal/BaseModal";
 import { FuturesPrice } from "../Futures";
 import { t } from "@lingui/macro";
+import { FuturesOrderService } from "../OrderList";
 
 interface CloseModalBaseProps {
-  data: FuturesOrderV2;
+  data: FuturesOrderService;
   price: FuturesPrice | undefined;
-  onClose: () => void;
+  onClose: (result?: boolean) => void;
 }
 
 const CloseModalBase: FC<CloseModalBaseProps> = ({ ...props }) => {
@@ -61,10 +61,10 @@ const CloseModalBase: FC<CloseModalBaseProps> = ({ ...props }) => {
 };
 
 interface CloseModalProps {
-  data: FuturesOrderV2;
+  data: FuturesOrderService;
   price: FuturesPrice | undefined;
   open: boolean;
-  onClose: () => void;
+  onClose: (result?: boolean) => void;
 }
 
 const CloseModal: FC<CloseModalProps> = ({ ...props }) => {
@@ -74,12 +74,19 @@ const CloseModal: FC<CloseModalProps> = ({ ...props }) => {
       <Drawer
         anchor={"bottom"}
         open={props.open}
-        onClose={props.onClose}
+        onClose={() => {
+          props.onClose(undefined);
+        }}
         sx={{
           "& .MuiPaper-root": { background: "none", backgroundImage: "none" },
         }}
       >
-        <BaseDrawer title={t`Close Position`} onClose={props.onClose}>
+        <BaseDrawer
+          title={t`Close Position`}
+          onClose={() => {
+            props.onClose(undefined);
+          }}
+        >
           <CloseModalBase
             data={props.data}
             price={props.price}
@@ -90,12 +97,19 @@ const CloseModal: FC<CloseModalProps> = ({ ...props }) => {
     ) : (
       <Modal
         open={props.open}
-        onClose={() => props.onClose()}
+        onClose={() => {
+          props.onClose(undefined);
+        }}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
         <Box>
-          <BaseModal title={t`Close Position`} onClose={props.onClose}>
+          <BaseModal
+            title={t`Close Position`}
+            onClose={() => {
+              props.onClose(undefined);
+            }}
+          >
             <CloseModalBase
               data={props.data}
               price={props.price}

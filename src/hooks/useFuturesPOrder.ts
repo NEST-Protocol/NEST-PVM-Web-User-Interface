@@ -1,132 +1,85 @@
 import { BigNumber } from "ethers";
-import { useEffect, useMemo, useState } from "react";
-import { useContract, useProvider } from "wagmi";
-import { FuturesV2Contract } from "../contracts/contractAddress";
-import { FuturesPrice, priceToken } from "../pages/Futures/Futures";
+import { useMemo, useState } from "react";
+
+import { FuturesPrice } from "../pages/Futures/Futures";
 import { lipPrice } from "./useFuturesNewOrder";
-import { FuturesOrderV2 } from "./useFuturesOrderList";
-import useNEST from "./useNEST";
-import FuturesV2ABI from "../contracts/ABI/FuturesV2.json";
+
 import { Order } from "../pages/Dashboard/Dashboard";
 import { t } from "@lingui/macro";
+import { FuturesOrderService } from "../pages/Futures/OrderList";
 
 function useFuturesPOrder(
-  data: FuturesOrderV2,
+  data: FuturesOrderService,
   price: FuturesPrice | undefined
 ) {
-  const { chainsData } = useNEST();
-  const provider = useProvider();
-  const [marginAssets, setMarginAssets] = useState<BigNumber>();
-  const tokenName = priceToken[parseInt(data.channelIndex.toString())];
-  const isLong = data.orientation;
-  const lever = parseInt(data.lever.toString());
+  const tokenName = data.product.split("/")[0];
+  const isLong = data.direction;
+  const lever = data.leverage;
   const [showShareOrderModal, setShowShareOrderModal] =
     useState<boolean>(false);
-  /**
-   * futures contract
-   */
-  const contractAddress = useMemo(() => {
-    if (chainsData.chainId) {
-      return FuturesV2Contract[chainsData.chainId];
-    }
-  }, [chainsData.chainId]);
-  const FuturesV2 = useContract({
-    address: contractAddress,
-    abi: FuturesV2ABI,
-    signerOrProvider: provider,
-  });
-  useEffect(() => {
-    (async () => {
-      try {
-        if (!price || !FuturesV2) {
-          return;
-        }
-        const priceNum = price[tokenName];
-        const value = await FuturesV2.balanceOf(data.index, priceNum);
-
-        setMarginAssets(value);
-      } catch (error) {
-        console.log(error);
-      }
-    })();
-  }, [data.index, FuturesV2, price, tokenName]);
-
-  const showBasePrice = BigNumber.from(
-    data.basePrice.toString()
-  ).bigNumberToShowPrice(18, tokenName.getTokenPriceDecimals());
+  const showBasePrice = data.orderPrice.toFixed(
+    tokenName.getTokenPriceDecimals()
+  );
   const showTriggerTitle = useMemo(() => {
-    const isEdit =
-      BigNumber.from("0").eq(data.stopProfitPrice) &&
-      BigNumber.from("0").eq(data.stopLossPrice);
+    const isEdit = data.takeProfitPrice === 0 && data.stopLossPrice === 0;
     return !isEdit ? t`Edit` : t`Trigger`;
-  }, [data.stopLossPrice, data.stopProfitPrice]);
+  }, [data.stopLossPrice, data.takeProfitPrice]);
   const tp = useMemo(() => {
-    const tpNum = data.stopProfitPrice;
-    return BigNumber.from("0").eq(tpNum)
+    return data.takeProfitPrice === 0
       ? String().placeHolder
-      : BigNumber.from(tpNum.toString()).bigNumberToShowPrice(
-          18,
-          tokenName.getTokenPriceDecimals()
-        );
-  }, [data.stopProfitPrice, tokenName]);
+      : data.takeProfitPrice.toFixed(tokenName.getTokenPriceDecimals());
+  }, [data.takeProfitPrice, tokenName]);
   const sl = useMemo(() => {
-    const slNum = data.stopLossPrice;
-    return BigNumber.from("0").eq(slNum)
+    return data.stopLossPrice === 0
       ? String().placeHolder
-      : BigNumber.from(slNum.toString()).bigNumberToShowPrice(
-          18,
-          tokenName.getTokenPriceDecimals()
-        );
+      : data.stopLossPrice.toFixed(tokenName.getTokenPriceDecimals());
   }, [data.stopLossPrice, tokenName]);
   const showLiqPrice = useMemo(() => {
-    const result = lipPrice(
-      data.balance,
-      data.appends,
-      data.lever,
-      price ? price[tokenName] : data.basePrice,
-      data.basePrice,
-      data.orientation
-    );
-    return result.bigNumberToShowPrice(18, tokenName.getTokenPriceDecimals());
+    if (price) {
+      const balance =
+        data.balance.toString().stringToBigNumber(18) ?? BigNumber.from("0");
+      const orderPrice =
+        data.orderPrice.toString().stringToBigNumber(18) ?? BigNumber.from("0");
+      const append =
+        data.append.toString().stringToBigNumber(18) ?? BigNumber.from("0");
+      const result = lipPrice(
+        balance,
+        append,
+        BigNumber.from(data.leverage.toString()),
+        price[tokenName],
+        orderPrice,
+        data.direction
+      );
+      return result.bigNumberToShowPrice(18, tokenName.getTokenPriceDecimals());
+    } else {
+      return String().placeHolder;
+    }
   }, [
-    data.appends,
     data.balance,
-    data.basePrice,
-    data.lever,
-    data.orientation,
+    data.direction,
+    data.leverage,
+    data.orderPrice,
+    data.append,
     price,
     tokenName,
   ]);
   const showMarginAssets = useMemo(() => {
-    const normalOrder = marginAssets
-      ? marginAssets.bigNumberToShowString(18, 2)
-      : String().placeHolder;
-    return normalOrder;
-  }, [marginAssets]);
+    return data.balance.toFixed(2);
+  }, [data.balance]);
 
   const showPercentNum = useMemo(() => {
-    if (marginAssets) {
-      const marginAssets_num = parseFloat(
-        marginAssets.bigNumberToShowString(18, 2)
+    const balance_num = data.margin + data.append;
+    const marginAssets_num = data.balance;
+    if (marginAssets_num >= balance_num) {
+      return parseFloat(
+        (((marginAssets_num - balance_num) * 100) / balance_num).toFixed(2)
       );
-      const balance_num = parseFloat(
-        BigNumber.from(data.balance.toString())
-          .add(data.appends)
-          .bigNumberToShowString(4, 2)
-      );
-      if (marginAssets_num >= balance_num) {
-        return parseFloat(
-          (((marginAssets_num - balance_num) * 100) / balance_num).toFixed(2)
-        );
-      } else {
-        return -parseFloat(
-          (((balance_num - marginAssets_num) * 100) / balance_num).toFixed(2)
-        );
-      }
     } else {
-      return 0;
+      return -parseFloat(
+        (((balance_num - marginAssets_num) * 100) / balance_num).toFixed(2)
+      );
     }
-  }, [data.appends, data.balance, marginAssets]);
+  }, [data.append, data.balance, data.margin]);
   const showPercent = useMemo(() => {
     if (showPercentNum > 0) {
       return `+${showPercentNum}`;
@@ -141,24 +94,17 @@ function useFuturesPOrder(
   }, [showPercent]);
   const shareOrder = useMemo(() => {
     const info: Order = {
-      owner: data.owner.toString(),
-      leverage: `${data.lever.toString()}X`,
-      orientation: data.orientation ? t`Long` : t`Short`,
+      owner: data.walletAddress.toString(),
+      leverage: `${data.leverage.toString()}X`,
+      orientation: data.direction ? `Long` : `Short`,
       actualRate: showPercentNum,
-      index: parseInt(data.index.toString()),
+      index: parseInt(data.id.toString()),
       openPrice: parseFloat(
-        data.basePrice.bigNumberToShowPrice(
-          18,
-          tokenName.getTokenPriceDecimals()
-        )
+        data.orderPrice.toFixed(tokenName.getTokenPriceDecimals())
       ),
       tokenPair: `${tokenName}/USDT`,
-      actualMargin: marginAssets
-        ? parseFloat(marginAssets.bigNumberToShowString(18, 2))
-        : 0,
-      initialMargin: parseFloat(
-        BigNumber.from(data.balance.toString()).bigNumberToShowString(4, 2)
-      ),
+      actualMargin: parseFloat(data.balance.toFixed(2)),
+      initialMargin: parseFloat(data.balance.toFixed(2)),
       lastPrice: parseFloat(
         price
           ? price[tokenName].bigNumberToShowPrice(
@@ -173,12 +119,11 @@ function useFuturesPOrder(
     return info;
   }, [
     data.balance,
-    data.basePrice,
-    data.index,
-    data.lever,
-    data.orientation,
-    data.owner,
-    marginAssets,
+    data.direction,
+    data.id,
+    data.leverage,
+    data.orderPrice,
+    data.walletAddress,
     price,
     showPercentNum,
     sl,

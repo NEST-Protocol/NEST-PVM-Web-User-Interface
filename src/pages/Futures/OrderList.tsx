@@ -1,36 +1,59 @@
 import Box from "@mui/material/Box";
-import Modal from "@mui/material/Modal";
 import Stack from "@mui/material/Stack";
 import { BigNumber } from "ethers";
+import { FC, useLayoutEffect, useMemo, useRef, useState } from "react";
 import {
-  FC,
-  useCallback,
-  useLayoutEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
-import { FuturesOrder, FuturesLimitOrder } from "../../components/icons";
+  FuturesOrder,
+  FuturesLimitOrder,
+  HistoryIcon,
+} from "../../components/icons";
 import NESTTabs from "../../components/NESTTabs/NESTTabs";
-import useFuturesOrderList, {
-  FuturesOrderV2,
-} from "../../hooks/useFuturesOrderList";
 import useWindowWidth from "../../hooks/useWindowWidth";
 import OrderList from "./Components/OrderList";
 import OrderTable from "./Components/OrderTable";
-import POrderList, { POrderCloseList } from "./Components/POrderList";
+import POrderList from "./Components/POrderList";
 import POrderTable from "./Components/POrderTable";
 import { FuturesPrice } from "./Futures";
 import AddModal from "./Modal/AddModal";
 import CloseModal from "./Modal/CloseModal";
-import CloseOrderNoticeModal from "./Modal/CloseOrderNoticeModal";
 import EditLimitModal from "./Modal/EditLimitModal";
 import EditPositionModal from "./Modal/EditPositionModal";
 import { styled } from "@mui/material/styles";
 import { Trans } from "@lingui/macro";
+import {
+  TransactionType,
+  usePendingTransactionsBase,
+} from "../../hooks/useTransactionReceipt";
+import { SnackBarType } from "../../components/SnackBar/NormalSnackBar";
+import HistoryTable from "./Components/HistoryTable";
+import { FuturesHistoryService } from "../../hooks/useFuturesHistory";
+import HistoryList from "./Components/HistoryList";
+
+export interface FuturesOrderService {
+  id: number;
+  timestamp: number;
+  walletAddress: string;
+  chainId: number;
+  product: string;
+  leverage: number;
+  orderPrice: number;
+  limitPrice: number;
+  direction: boolean;
+  margin: number;
+  append: number;
+  balance: number;
+  fees: number;
+  stopLossPrice: number;
+  takeProfitPrice: number;
+  status: number;
+}
 
 interface FuturesOrderListProps {
   price: FuturesPrice | undefined;
+  pOrderListV2: FuturesOrderService[];
+  limitOrderList: FuturesOrderService[];
+  historyList: FuturesHistoryService[];
+  updateList: () => void;
 }
 
 export enum FuturesModalType {
@@ -41,7 +64,7 @@ export enum FuturesModalType {
   closeLimit,
 }
 export interface FuturesModalInfo {
-  data: FuturesOrderV2;
+  data: FuturesOrderService;
   type: FuturesModalType;
 }
 
@@ -50,7 +73,7 @@ export interface FuturesHideOrderModalInfo {
   hash: string;
 }
 
-const NoOrderMobile = styled(Box)(({ theme }) => ({
+export const NoOrderMobile = styled(Box)(({ theme }) => ({
   borderRadius: "12px",
   width: "100%",
   height: "60px",
@@ -65,18 +88,11 @@ const NoOrderMobile = styled(Box)(({ theme }) => ({
 const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
   const { isBigMobile } = useWindowWidth();
   const [modalInfo, setModalInfo] = useState<FuturesModalInfo>();
-  const [hideOrderModalInfo, setHideOrderModalInfo] =
-    useState<FuturesHideOrderModalInfo>();
   const setModalInfoValue = (value: FuturesModalInfo) => {
     setModalInfo(value);
   };
   const [tabsValue, setTabsValue] = useState(0);
-  const {
-    pOrderList,
-    orderList: limitOrderList,
-    showClosedOrder,
-    hideOrder,
-  } = useFuturesOrderList();
+  const { addTransactionNotice } = usePendingTransactionsBase();
   /**
    * this width
    */
@@ -88,20 +104,12 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
     }
   }, []);
 
-  const showHideAlert = useCallback((orderIndex: BigNumber, hash: string) => {
-    setHideOrderModalInfo({
-      orderIndex: orderIndex,
-      hash: hash,
-    });
-  }, []);
-
   const orderList = useMemo(() => {
     if (tabsValue === 0 && width > 890) {
       return (
         <POrderTable
-          dataArray={pOrderList}
-          closeOrder={showClosedOrder}
-          hideOrder={showHideAlert}
+          dataArray={props.pOrderListV2}
+          closeOrder={[]}
           price={props.price}
           buttonCallBack={setModalInfoValue}
         />
@@ -109,12 +117,17 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
     } else if (tabsValue === 1 && width > 890) {
       return (
         <OrderTable
-          dataArray={limitOrderList}
+          dataArray={props.limitOrderList}
           buttonCallBack={setModalInfoValue}
+          updateList={props.updateList}
         />
       );
+    } else if (tabsValue === 2 && width > 890) {
+      return (
+        <HistoryTable dataArray={props.historyList} buttonCallBack={() => {}} />
+      );
     } else if (tabsValue === 0) {
-      const noOrder = pOrderList.length === 0 && showClosedOrder.length === 0;
+      const noOrder = props.pOrderListV2.length === 0;
       return (
         <Stack
           spacing={"16px"}
@@ -124,7 +137,7 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
             paddingBottom: "24px",
           }}
         >
-          {pOrderList.map((item, index) => {
+          {props.pOrderListV2.map((item, index) => {
             return (
               <POrderList
                 key={`POrderList + ${index}`}
@@ -134,19 +147,9 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
               />
             );
           })}
-          {showClosedOrder.map((item, index) => {
-            return (
-              <POrderCloseList
-                key={`POrderCloseList + ${index}`}
-                data={item}
-                price={props.price}
-                hideOrder={showHideAlert}
-              />
-            );
-          })}
           {noOrder ? (
             <NoOrderMobile>
-              <Trans>No Order</Trans>
+              <Trans>No Orders</Trans>
             </NoOrderMobile>
           ) : (
             <></>
@@ -154,7 +157,7 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
         </Stack>
       );
     } else if (tabsValue === 1) {
-      const noOrder = limitOrderList.length === 0;
+      const noOrder = props.limitOrderList.length === 0;
       return (
         <Stack
           spacing={"16px"}
@@ -164,10 +167,40 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
             paddingBottom: "24px",
           }}
         >
-          {limitOrderList.map((item, index) => {
+          {props.limitOrderList.map((item, index) => {
             return (
               <OrderList
                 key={`OrderList + ${index}`}
+                data={item}
+                buttonCallBack={setModalInfoValue}
+                updateList={props.updateList}
+              />
+            );
+          })}
+          {noOrder ? (
+            <NoOrderMobile>
+              <Trans>No Orders</Trans>
+            </NoOrderMobile>
+          ) : (
+            <></>
+          )}
+        </Stack>
+      );
+    } else if (tabsValue === 2) {
+      const noOrder = props.historyList.length === 0;
+      return (
+        <Stack
+          spacing={"16px"}
+          sx={{
+            marginTop: "16px",
+            paddingX: isBigMobile ? "20px" : "0px",
+            paddingBottom: "24px",
+          }}
+        >
+          {props.historyList.map((item, index) => {
+            return (
+              <HistoryList
+                key={`HistoryList + ${index}`}
                 data={item}
                 buttonCallBack={setModalInfoValue}
               />
@@ -175,7 +208,7 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
           })}
           {noOrder ? (
             <NoOrderMobile>
-              <Trans>No Order</Trans>
+              <Trans>No Orders</Trans>
             </NoOrderMobile>
           ) : (
             <></>
@@ -185,11 +218,11 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
     }
   }, [
     isBigMobile,
-    limitOrderList,
-    pOrderList,
+    props.historyList,
+    props.limitOrderList,
+    props.pOrderListV2,
     props.price,
-    showClosedOrder,
-    showHideAlert,
+    props.updateList,
     tabsValue,
     width,
   ]);
@@ -197,15 +230,21 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
   const tabs = useMemo(() => {
     const orderTabsData = [
       <Stack direction={"row"} alignItems={"center"} spacing={"4px"}>
-        <FuturesOrder />
+        {/* <FuturesOrder /> */}
         <p>
           <Trans>Positions</Trans>
         </p>
       </Stack>,
       <Stack direction={"row"} alignItems={"center"} spacing={"4px"}>
-        <FuturesLimitOrder />
+        {/* <FuturesLimitOrder /> */}
         <p>
-          <Trans>Order</Trans>
+          <Trans>Orders</Trans>
+        </p>
+      </Stack>,
+      <Stack direction={"row"} alignItems={"center"} spacing={"4px"}>
+        {/* <HistoryIcon /> */}
+        <p>
+          <Trans>History</Trans>
         </p>
       </Stack>,
     ];
@@ -217,20 +256,32 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
         height={44}
         space={24}
         selectCallBack={(value: number) => setTabsValue(value)}
-        isFull={isBigMobile}
+        isFull={false}
       />
     );
-  }, [isBigMobile, tabsValue]);
+  }, [tabsValue]);
 
   const addModal = useMemo(() => {
     if (modalInfo && modalInfo.type === FuturesModalType.close) {
       return (
-        <CloseModal
-          data={modalInfo.data}
-          price={props.price}
-          open={true}
-          onClose={() => setModalInfo(undefined)}
-        />
+        <>
+          <CloseModal
+            data={modalInfo.data}
+            price={props.price}
+            open={true}
+            onClose={(res?: boolean) => {
+              if (res !== undefined) {
+                addTransactionNotice({
+                  type: TransactionType.futures_sell,
+                  info: "",
+                  result: res ? SnackBarType.success : SnackBarType.fail,
+                });
+                props.updateList();
+              }
+              setModalInfo(undefined);
+            }}
+          />
+        </>
       );
     } else if (modalInfo && modalInfo.type === FuturesModalType.add) {
       return (
@@ -238,7 +289,17 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
           data={modalInfo.data}
           price={props.price}
           open={true}
-          onClose={() => setModalInfo(undefined)}
+          onClose={(res?: boolean) => {
+            if (res !== undefined) {
+              addTransactionNotice({
+                type: TransactionType.futures_add,
+                info: "",
+                result: res ? SnackBarType.success : SnackBarType.fail,
+              });
+              props.updateList();
+            }
+            setModalInfo(undefined);
+          }}
         />
       );
     } else if (modalInfo && modalInfo.type === FuturesModalType.editLimit) {
@@ -246,7 +307,17 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
         <EditLimitModal
           data={modalInfo.data}
           open={true}
-          onClose={() => setModalInfo(undefined)}
+          onClose={(res?: boolean) => {
+            if (res !== undefined) {
+              addTransactionNotice({
+                type: TransactionType.futures_editLimit,
+                info: "",
+                result: res ? SnackBarType.success : SnackBarType.fail,
+              });
+              props.updateList();
+            }
+            setModalInfo(undefined);
+          }}
         />
       );
     } else if (modalInfo && modalInfo.type === FuturesModalType.trigger) {
@@ -255,34 +326,30 @@ const FuturesOrderList: FC<FuturesOrderListProps> = ({ ...props }) => {
           data={modalInfo.data}
           price={props.price}
           open={true}
-          onClose={() => setModalInfo(undefined)}
+          onClose={(res?: boolean) => {
+            if (res !== undefined) {
+              addTransactionNotice({
+                type: TransactionType.futures_editPosition,
+                info: "",
+                result: res ? SnackBarType.success : SnackBarType.fail,
+              });
+              props.updateList();
+            }
+            setModalInfo(undefined);
+          }}
         />
       );
     } else {
       return <></>;
     }
-  }, [modalInfo, props.price]);
+  }, [addTransactionNotice, modalInfo, props]);
   return (
     <Stack spacing={"16px"} width={"100%"} ref={ref}>
       {addModal}
-      <Modal
-        open={hideOrderModalInfo !== undefined}
-        onClose={() => setHideOrderModalInfo(undefined)}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box>
-          <CloseOrderNoticeModal
-            hideOrder={hideOrder}
-            onClose={() => setHideOrderModalInfo(undefined)}
-            orderIndex={hideOrderModalInfo?.orderIndex}
-            hash={hideOrderModalInfo?.hash}
-          />
-        </Box>
-      </Modal>
       <Stack
         direction={"row"}
-        justifyContent={"flex-start"}
+        justifyContent={"space-between"}
+        alignItems={"center"}
         sx={(theme) => ({
           paddingX: "20px",
           height: "44px",

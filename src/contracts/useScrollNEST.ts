@@ -24,10 +24,9 @@ export function useScrollNESTfaucet() {
     args: [],
     enabled: true,
   });
-  const gasLimit = useAddGasLimit(config, 30);
+  // const gasLimit = useAddGasLimit(config, 30);
   const transaction = useContractWrite({
-    ...config,
-    request: { ...config.request, gasLimit: gasLimit },
+    ...config
   });
   useEffect(() => {
     if (transaction.data) {

@@ -4,11 +4,18 @@ import { FC, useCallback, useEffect, useMemo, useState } from "react";
 import useWindowWidth, { WidthType } from "../../hooks/useWindowWidth";
 import FuturesMoreInfo from "./MoreInfo";
 import FuturesNewOrder from "./NewOrder";
-import FuturesOrderList from "./OrderList";
+import FuturesOrderList, { FuturesOrderService } from "./OrderList";
 import ExchangeTVChart from "./ExchangeTVChart";
-import { getPriceFromNESTLocal } from "../../lib/NESTRequest";
+import {
+  futuresHistory,
+  getPriceList,
+  serviceList,
+} from "../../lib/NESTRequest";
 // import FuturesNotice from "./Components/FuturesNotice";
 import { getQueryVariable } from "../../lib/queryVaribale";
+import FuturesNotice from "./Components/FuturesNotice";
+import useNEST from "../../hooks/useNEST";
+import { FuturesHistoryService } from "../../hooks/useFuturesHistory";
 
 export interface FuturesPrice {
   [key: string]: BigNumber;
@@ -17,6 +24,7 @@ const UPDATE_PRICE = 15;
 export const priceToken = ["ETH", "BTC", "BNB", "MATIC", "ADA", "DOGE", "XRP"];
 const Futures: FC = () => {
   const { width, isBigMobile } = useWindowWidth();
+  const { account, chainsData, signature } = useNEST();
   const defaultTokenPair = useMemo(() => {
     let code = getQueryVariable("pt");
     if (code) {
@@ -32,51 +40,40 @@ const Futures: FC = () => {
   const [tokenPair, setTokenPair] = useState(defaultTokenPair);
   const [basePrice, setBasePrice] = useState<FuturesPrice>();
   const [orderPrice, setOrderPrice] = useState<FuturesPrice>();
-  // const showNoticeDefault = useMemo(() => {
-  //   const isShow = localStorage.getItem("FuturesNoticeV1");
-  //   return isShow !== "1";
-  // }, []);
-  // const [showNotice, setShowNotice] = useState<boolean>(showNoticeDefault);
+  const [pOrderListV2, setPOrderListV2] = useState<Array<FuturesOrderService>>(
+    []
+  );
+  const [limitOrderList, setLimitOrderList] = useState<
+    Array<FuturesOrderService>
+  >([]);
+  const [historyList, setHistoryList] = useState<Array<FuturesHistoryService>>(
+    []
+  );
+  const [showNotice, setShowNotice] = useState<boolean>(true);
+
   const getPrice = useCallback(async () => {
-    const ETHPriceBase: { [key: string]: string } = await getPriceFromNESTLocal(
-      "eth"
-    );
-    const BTCPriceBase: { [key: string]: string } = await getPriceFromNESTLocal(
-      "btc"
-    );
-    const BNBPriceBase: { [key: string]: string } = await getPriceFromNESTLocal(
-      "bnb"
-    );
-    const MATICPriceBase: { [key: string]: string } =
-      await getPriceFromNESTLocal("matic");
-    const ADAPriceBase: { [key: string]: string } = await getPriceFromNESTLocal(
-      "ada"
-    );
-    const DOGEPriceBase: { [key: string]: string } =
-      await getPriceFromNESTLocal("doge");
-    const XRPPriceBase: { [key: string]: string } = await getPriceFromNESTLocal(
-      "xrp"
-    );
-    const ETHPrice = ETHPriceBase
-      ? ETHPriceBase["value"].toString().stringToBigNumber(18)
+    const listPriceBase: { [key: string]: any } = await getPriceList();
+
+    const ETHPrice = listPriceBase
+      ? listPriceBase["value"]["ETHUSDT"].toString().stringToBigNumber(18)
       : undefined;
-    const BTCPrice = BTCPriceBase
-      ? BTCPriceBase["value"].toString().stringToBigNumber(18)
+    const BTCPrice = listPriceBase
+      ? listPriceBase["value"]["BTCUSDT"].toString().stringToBigNumber(18)
       : undefined;
-    const BNBPrice = BNBPriceBase
-      ? BNBPriceBase["value"].toString().stringToBigNumber(18)
+    const BNBPrice = listPriceBase
+      ? listPriceBase["value"]["BNBUSDT"].toString().stringToBigNumber(18)
       : undefined;
-    const MATICPrice = MATICPriceBase
-      ? MATICPriceBase["value"].toString().stringToBigNumber(18)
+    const MATICPrice = listPriceBase
+      ? listPriceBase["value"]["MATICUSDT"].toString().stringToBigNumber(18)
       : undefined;
-    const ADAPrice = ADAPriceBase
-      ? ADAPriceBase["value"].toString().stringToBigNumber(18)
+    const ADAPrice = listPriceBase
+      ? listPriceBase["value"]["ADAUSDT"].toString().stringToBigNumber(18)
       : undefined;
-    const DOGEPrice = DOGEPriceBase
-      ? DOGEPriceBase["value"].toString().stringToBigNumber(18)
+    const DOGEPrice = listPriceBase
+      ? listPriceBase["value"]["DOGEUSDT"].toString().stringToBigNumber(18)
       : undefined;
-    const XRPPrice = XRPPriceBase
-      ? XRPPriceBase["value"].toString().stringToBigNumber(18)
+    const XRPPrice = listPriceBase
+      ? listPriceBase["value"]["XRPUSDT"].toString().stringToBigNumber(18)
       : undefined;
 
     if (
@@ -102,19 +99,94 @@ const Futures: FC = () => {
       return undefined;
     }
   }, []);
-  // useEffect(() => {
-  //   let code = getQueryVariable("pt");
-  //   if (code) {
-  //     const num = priceToken.filter(
-  //       (item) => item.toLocaleLowerCase() === code!.toLocaleLowerCase()
-  //     );
-  //     if (num && num.length > 0) {
-  //       setTokenPair(code.toLocaleUpperCase());
-  //     } else {
-  //       setTokenPair('ETH');
-  //     }
-  //   }
-  // }, []);
+
+  const getList = useCallback(async () => {
+    try {
+      if (!chainsData.chainId || !account.address || !signature) {
+        return;
+      }
+      const baseList = await serviceList(chainsData.chainId, account.address, {
+        Authorization: signature.signature,
+      });
+      if (Number(baseList["errorCode"]) === 0) {
+        const list: Array<FuturesOrderService> = baseList["value"]
+          .map((item: { [x: string]: any }) => {
+            return {
+              id: item["id"],
+              timestamp: item["timestamp"],
+              walletAddress: item["walletAddress"],
+              chainId: item["chainId"],
+              product: item["product"],
+              leverage: item["leverage"],
+              orderPrice: item["orderPrice"],
+              limitPrice: item["limitPrice"],
+              direction: item["direction"],
+              margin: item["margin"],
+              append: item["append"],
+              balance: item["balance"],
+              fees: item["fees"],
+              stopLossPrice: item["stopLossPrice"],
+              takeProfitPrice: item["takeProfitPrice"],
+              status: item["status"],
+            };
+          })
+          .filter((item: any) => item.leverage.toString() !== "0");
+        const pOrderList = list.filter((item) => {
+          return item.status === 2;
+        });
+        const orderList = list.filter((item) => {
+          return item.status === 4;
+        });
+        setPOrderListV2(pOrderList);
+        setLimitOrderList(orderList);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }, [account.address, chainsData.chainId, signature]);
+  const getHistoryList = useCallback(async () => {
+    try {
+      if (!chainsData.chainId || !account.address || !signature) {
+        return;
+      }
+      const baseList = await futuresHistory(
+        account.address,
+        chainsData.chainId
+      );
+      console.log(baseList);
+      if (Number(baseList["errorCode"]) === 0) {
+        const list: Array<FuturesHistoryService> = baseList["value"].map(
+          (item: { [x: string]: any }) => {
+            return {
+              actualMargin: item["actualMargin"],
+              actualRate: item["actualRate"],
+              appendMargin: item["appendMargin"],
+              index: item["index"],
+              initialMargin: item["initialMargin"],
+              lastPrice: item["lastPrice"],
+              leverage: item["leverage"],
+              openPrice: item["openPrice"],
+              orderType: item["orderType"],
+              orientation: item["orientation"],
+              owner: item["owner"],
+              sl: item["sl"],
+              sp: item["sp"],
+              time: item["time"],
+              tokenPair: item["tokenPair"],
+            };
+          }
+        );
+        setHistoryList(list);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }, [account.address, chainsData.chainId, signature]);
+  const handleUpdateList = useCallback(() => {
+    getList();
+    getHistoryList();
+  }, [getHistoryList, getList]);
+
   // update base price 1s
   useEffect(() => {
     const time = setInterval(() => {
@@ -141,6 +213,18 @@ const Futures: FC = () => {
       clearInterval(time);
     };
   }, [getPrice]);
+  // update list
+  useEffect(() => {
+    getList();
+    getHistoryList();
+    const time = setInterval(() => {
+      getList();
+      getHistoryList();
+    }, 5 * 1000);
+    return () => {
+      clearInterval(time);
+    };
+  }, [getHistoryList, getList]);
 
   const paddingY = useMemo(() => {
     return isBigMobile ? 0 : 24;
@@ -160,25 +244,39 @@ const Futures: FC = () => {
   }, [tokenPair, basePrice]);
 
   const orderList = useCallback(() => {
-    return <FuturesOrderList price={orderPrice} />;
-  }, [orderPrice]);
+    return (
+      <FuturesOrderList
+        price={orderPrice}
+        pOrderListV2={pOrderListV2}
+        limitOrderList={limitOrderList}
+        historyList={historyList}
+        updateList={handleUpdateList}
+      />
+    );
+  }, [handleUpdateList, historyList, limitOrderList, orderPrice, pOrderListV2]);
   const newOrder = useCallback(() => {
-    return <FuturesNewOrder price={basePrice} tokenPair={tokenPair} />;
-  }, [basePrice, tokenPair]);
+    return (
+      <FuturesNewOrder
+        price={basePrice}
+        tokenPair={tokenPair}
+        updateList={handleUpdateList}
+      />
+    );
+  }, [basePrice, handleUpdateList, tokenPair]);
   const moreInfo = useCallback(() => {
     return <FuturesMoreInfo />;
   }, []);
-  // const notice = useMemo(() => {
-  //   return !showNotice ? (
-  //     <></>
-  //   ) : (
-  //     <FuturesNotice
-  //       onClose={() => {
-  //         setShowNotice(false);
-  //       }}
-  //     />
-  //   );
-  // }, [showNotice]);
+  const notice = useMemo(() => {
+    return !showNotice ? (
+      <></>
+    ) : (
+      <FuturesNotice
+        onClose={() => {
+          setShowNotice(false);
+        }}
+      />
+    );
+  }, [showNotice]);
 
   const mainView = useMemo(() => {
     switch (width) {
@@ -192,7 +290,7 @@ const Futures: FC = () => {
               maxWidth={"1600px"}
               paddingY={`${paddingY}px`}
             >
-              {/* {notice} */}
+              {notice}
               <Stack
                 direction={"row"}
                 spacing={"16px"}
@@ -219,7 +317,8 @@ const Futures: FC = () => {
             paddingX={`${paddingX}px`}
           >
             <Stack spacing={"16px"} width={"100%"} paddingY={`${paddingY}px`}>
-              {/* {notice} */}
+              {notice}
+
               {exchangeTvChart()}
               {newOrder()}
               {isBigMobile ? <></> : moreInfo()}
@@ -231,6 +330,7 @@ const Futures: FC = () => {
   }, [
     width,
     paddingY,
+    notice,
     exchangeTvChart,
     orderList,
     newOrder,
@@ -238,6 +338,7 @@ const Futures: FC = () => {
     paddingX,
     isBigMobile,
   ]);
+
   return <>{mainView}</>;
 };
 

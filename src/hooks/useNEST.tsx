@@ -7,7 +7,14 @@ import {
   useNetwork,
   useSwitchNetwork,
 } from "wagmi";
-import { NavItems, NavItemsForScroll } from "../pages/Share/Head/NESTHead";
+import { NavItems } from "../pages/Share/Head/NESTHead";
+
+export interface signatureData {
+  address: string;
+  chainId: number;
+  signature: string;
+  expirationTime: number;
+}
 
 function useMainReact() {
   const [showConnect, setShowConnect] = useState(false);
@@ -55,11 +62,11 @@ function useMainReact() {
    * user: connect wallet
    */
   useEffect(() => {
-    if (chainId !== 97 && account.address) {
+    if (account.address) {
       (async () => {
         try {
           await fetch(
-            `https://api.nestfi.net/api/users/users/setwallet?address=${account.address}`,
+            `https://api.nestfi.net/api/users/users/setwallet?address=${account.address}&chainId=${chainId}`,
             {
               method: "POST",
             }
@@ -71,19 +78,13 @@ function useMainReact() {
     }
   }, [account.address, chainId]);
   /**
-   * nav items from different chain
-   */
-  const navItems = useMemo(() => {
-    return chainId === 534353 ? NavItemsForScroll : NavItems;
-  }, [chainId]);
-  /**
    * add nest
    */
   const addNESTToWallet = useCallback(async () => {
     const token = "NEST".getToken();
     if (chainId && token && account.connector) {
       const imageURL =
-        "https://raw.githubusercontent.com/FORT-Protocol/Fort-Web-User-Interface/2e289cd29722576329fae529c2bfaa0a905f0148/src/components/Icon/svg/TokenNest.svg";
+        "https://bafybeidwmzhy6njm66meh5g5tyuva3sl6yaz7ncjfquv4or7xfctjj3ylq.ipfs.nftstorage.link/n.svg";
       await account.connector.watchAsset?.({
         address: token.address[chainId], // The address that the token is at.
         symbol: "NEST", // A ticker symbol or shorthand, up to 5 chars.
@@ -92,6 +93,61 @@ function useMainReact() {
       });
     }
   }, [account.connector, chainId]);
+  /**
+   * checkSigned
+   */
+  const defaultSignature = useMemo(() => {
+    if (!chainsData.chainId || !account.address) {
+      return;
+    }
+    var cache = localStorage.getItem("signature");
+    if (!cache) {
+      return;
+    }
+    const signsData = JSON.parse(cache);
+    const same: [signatureData] = signsData.filter(
+      (item: signatureData) =>
+        (item["address"] as string).toLocaleLowerCase() ===
+          account.address?.toLocaleLowerCase() &&
+        item["chainId"] === chainsData.chainId
+    );
+    if (same.length > 0) {
+      const timestamp = Date.now();
+      if (same[0].expirationTime > timestamp / 1000) {
+        return same[0];
+      } else {
+        return undefined;
+      }
+    }
+    return;
+  }, [account.address, chainsData.chainId]);
+  const [signature, setSignature] = useState<signatureData | undefined>(
+    defaultSignature
+  );
+
+  useEffect(() => {
+    setSignature(defaultSignature);
+  }, [defaultSignature, account.address]);
+  const checkSigned = useMemo(() => {
+    console.log(signature);
+    if (signature) {
+      return true;
+    } else {
+      return false;
+    }
+  }, [signature]);
+
+  /**
+   * nav items from different chain
+   */
+  const navItems = useMemo(() => {
+    if (account.address && checkSigned) {
+      return NavItems;
+    } else {
+      return NavItems.filter((item) => item.content !== "Account");
+    }
+  }, [account.address, checkSigned]);
+
   return {
     showConnect,
     setShowConnect,
@@ -100,7 +156,10 @@ function useMainReact() {
     chainsData,
     disconnect,
     navItems,
-    addNESTToWallet
+    addNESTToWallet,
+    checkSigned,
+    signature,
+    setSignature,
   };
 }
 const NEST = createContainer(useMainReact);

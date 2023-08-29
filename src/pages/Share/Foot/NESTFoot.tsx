@@ -2,7 +2,6 @@ import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
 import { FC } from "react";
 import {
-  DiscordIcon,
   TelegramIcon,
   TwitterIcon,
   GithubIcon,
@@ -13,7 +12,6 @@ import useNEST from "../../../hooks/useNEST";
 import useWindowWidth from "../../../hooks/useWindowWidth";
 
 export const FootArray = [
-  { icon: DiscordIcon, link: "https://discord.com/invite/nestprotocol" },
   { icon: TelegramIcon, link: "https://t.me/nest_chat" },
   { icon: TwitterIcon, link: "https://twitter.com/NEST_protocol" },
   { icon: GithubIcon, link: "https://github.com/NEST-Protocol" },

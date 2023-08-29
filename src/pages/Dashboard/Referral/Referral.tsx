@@ -8,18 +8,17 @@ import TableCell from "@mui/material/TableCell";
 import useWindowWidth from "../../../hooks/useWindowWidth";
 import {styled} from "@mui/material/styles";
 import {Copy, DownIcon, SearchIcon} from "../../../components/icons";
-import {useEffect, useMemo, useState} from "react";
+import {useMemo, useState} from "react";
 import TableContainer from "@mui/material/TableContainer";
 import Table from "@mui/material/Table";
 import TableHead from "@mui/material/TableHead";
 import TableBody from "@mui/material/TableBody";
 import Divider from "@mui/material/Divider";
 import useSWR from "swr";
-import {useAccount} from "wagmi";
 import {Trans, t} from "@lingui/macro";
-import {isAddress} from "ethers/lib/utils";
-import NetworkIcon from "../Components/NetworkIcon";
-import useNEST from "../../../hooks/useNEST";
+import NetworkIcon from "../../Dashboard/Components/NetworkIcon";
+import {useParams} from "react-router-dom";
+import {useAccount} from "wagmi";
 
 const Select1 = styled("select")(({theme}) => ({
   width: "100%",
@@ -168,7 +167,6 @@ const DownSort = () => {
 }
 
 const Referral = () => {
-  const {address} = useAccount();
   const {messageSnackBar} = useNESTSnackBar()
   const {isBigMobile} = useWindowWidth()
   const [currentPage, setCurrentPage] = useState(1)
@@ -178,7 +176,8 @@ const Referral = () => {
     sort: 'desc',
   })
   const [searchText, setSearchText] = useState('')
-  const [queryAddress, setQueryAddress] = useState('')
+  const {address} = useParams()
+  const {address: user} = useAccount()
   const pageWindow = useMemo(() => {
     if (totalPage <= 5) {
       return Array.from({length: totalPage}, (v, k) => k + 1)
@@ -192,9 +191,8 @@ const Referral = () => {
     return [currentPage - 2, currentPage - 1, currentPage, currentPage + 1, currentPage + 2]
   }, [currentPage, totalPage])
 
-  const {data: overview} = useSWR(queryAddress || address ? `https://api.nestfi.net/api/invite/overview/${queryAddress || address}` : undefined, (url) => fetch(url).then((res) => res.json()));
-  const {data: listData} = useSWR(queryAddress || address ? `https://api.nestfi.net/api/invite/list-invitee/${queryAddress || address}` : undefined, (url) => fetch(url).then((res) => res.json()));
-  const {chainsData} = useNEST()
+  const {data: overview} = useSWR((address || user) ? `https://api.nestfi.net/api/invite/overview/${address || user}` : undefined, (url) => fetch(url).then((res) => res.json()));
+  const {data: listData} = useSWR((address || user) ? `https://api.nestfi.net/api/invite/list-invitee/${address || user}` : undefined, (url) => fetch(url).then((res) => res.json()));
 
   const inviteeList = useMemo(() => {
     if (!listData) {
@@ -213,13 +211,6 @@ const Referral = () => {
       return b[sortItem.key] - a[sortItem.key]
     })
   }, [listData, sortItem, searchText])
-
-  useEffect(() => {
-    const code = window.location.href.split("?q=")[1];
-    if (isAddress(code)) {
-      setQueryAddress(code);
-    }
-  }, [])
 
   const PCOrderRow = (props: any) => {
     return (
@@ -450,8 +441,8 @@ const Referral = () => {
             }
           }
         })}>
-          <a href={'/#/dashboard'}>
-            <Trans>Dashboard</Trans>
+          <a href={`/#/account`}>
+            <Trans>Personal</Trans>
           </a>
         </Stack>
         <Stack sx={(theme) => ({
@@ -467,7 +458,7 @@ const Referral = () => {
             }
           }
         })}>
-          <a href={'/#/dashboard/referral'}>
+          <a href={`/#/referral`}>
             <Trans>Referral</Trans>
           </a>
         </Stack>
@@ -490,7 +481,7 @@ const Referral = () => {
                     fontSize: '16px',
                     lineHeight: '22px',
                   })}>
-                    <NetworkIcon chainId={chainsData.chainId} />
+                    <NetworkIcon chainId={56}/>
                     <div>
                       <Trans>Overview</Trans>
                     </div>
@@ -518,7 +509,7 @@ const Referral = () => {
                     fontSize: '14px',
                     lineHeight: '20px',
                   })}>
-                    <NetworkIcon chainId={chainsData.chainId} />
+                    <NetworkIcon chainId={56}/>
                     <div>
                       <Trans>Overview</Trans>
                     </div>
@@ -720,7 +711,7 @@ const Referral = () => {
                   lineHeight: '22px',
                   borderBottom: `1px solid ${theme.normal.border}`,
                 })}>
-                  <NetworkIcon chainId={chainsData.chainId} />
+                  <NetworkIcon chainId={56}/>
                   <div>
                     <Trans>
                       My commissions
@@ -829,7 +820,7 @@ const Referral = () => {
                          borderBottom: `1px solid ${theme.normal.border}`,
                        })}>
                   <Stack direction={'row'} spacing={'8px'} alignItems={"center"} justifyContent={"center"}>
-                    <NetworkIcon chainId={chainsData.chainId} />
+                    <NetworkIcon chainId={56}/>
                     <div>
                       <Trans>
                         My commissions

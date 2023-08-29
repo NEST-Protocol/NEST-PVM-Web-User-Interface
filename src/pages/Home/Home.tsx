@@ -405,13 +405,13 @@ const Home: FC = () => {
                     image: "/images/home_10.svg",
                     image2: "/images/home_6.svg",
                     title: t`How to make your first trade?`,
-                    description: t`Trade BTC, ETH and BNB with up to 1-50 leverage. Open a position with USDT or NEST.`,
-                    link: 'https://www.nestprotocol.org/blogs/How-to-make-your-first-trade-on-NESTFi'
+                    description: t`Trade BTC, ETH and BNB with up to 1-50 leverage. Open a position with NEST.`,
+                    link: 'https://www.nestprotocol.org/blogs/How-to-make-your-first-trade-on-NESTFi-with-Lightning-Trade-feature'
                   },
                   {
                     image: "/images/home_8.svg",
                     image2: "/images/home_5.svg",
-                    title: t`How to duplicate your own position?`,
+                    title: t`How to copy trading?`,
                     description: t`NESTFi's new features enable you to open a position with a single click.`,
                     link: 'https://www.nestprotocol.org/blogs/How-to-duplicate-your-own-position'
                   },

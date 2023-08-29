@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import useReadTokenBalance from "../../contracts/Read/useReadTokenContract";
 import useNEST from "../../hooks/useNEST";
-import { useProvider } from "wagmi";
+import { usePublicClient } from "wagmi";
 import { BigNumber } from "ethers/lib/ethers";
 import { t } from "@lingui/macro";
 import { useScrollNESTfaucet } from "../../contracts/useScrollNEST";
@@ -15,7 +15,7 @@ export function useDirectPoster() {
   const { isPendingType } = usePendingTransactions();
   const [ethBalance, setEthBalance] = useState<BigNumber>();
   const { account, chainsData, setShowConnect } = useNEST();
-  const provider = useProvider();
+  const provider = usePublicClient();
 
   const { balance: nestBalance, balanceOfRefetch: nestBalanceRefetch } =
     useReadTokenBalance(
@@ -27,8 +27,8 @@ export function useDirectPoster() {
 
   const getETHBalance = useCallback(async () => {
     if (account.address) {
-      const balance = await provider.getBalance(account.address);
-      setEthBalance(balance);
+      const balance = await provider.getBalance({ address: account.address });
+      setEthBalance(balance.toBigNumber());
     }
   }, [account.address, provider]);
 

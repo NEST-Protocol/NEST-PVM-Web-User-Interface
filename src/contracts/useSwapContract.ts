@@ -3,8 +3,7 @@ import { BigNumber } from "ethers";
 import { useContractWrite, usePrepareContractWrite } from "wagmi";
 import useNEST from "../hooks/useNEST";
 import UNISwapV2ABI from "./ABI/UNISwapV2.json";
-import NESTRedeemABI from "./ABI/NESTRedeem.json";
-import { NESTRedeemContract, SwapContract } from "./contractAddress";
+import { SwapContract } from "./contractAddress";
 import useAddGasLimit from "./useAddGasLimit";
 import {
   TransactionType,
@@ -15,7 +14,8 @@ function useSwapExactTokensForTokens(
   amountIn: BigNumber,
   amountOutMin: BigNumber,
   path: Array<string> | undefined,
-  to: string | undefined
+  to: string | undefined,
+  type?: TransactionType
 ) {
   const { chainsData } = useNEST();
   const { addPendingList } = usePendingTransactions();
@@ -25,72 +25,81 @@ function useSwapExactTokensForTokens(
       return SwapContract[chainsData.chainId] as `0x${string}`;
     }
   }, [amountIn, chainsData.chainId, path, to]);
-  const { config } = usePrepareContractWrite({
+  const { config, isLoading } = usePrepareContractWrite({
     address: address,
     abi: UNISwapV2ABI,
     functionName: "swapExactTokensForTokens",
     args: [
-      amountIn,
-      amountOutMin,
+      BigInt(amountIn.toString()),
+      BigInt(amountOutMin.toString()),
       path,
       to,
-      BigNumber.from(time.toFixed(0).toString()),
+      BigInt(time.toFixed(0)),
     ],
     enabled: true,
   });
   const gasLimit = useAddGasLimit(config, 30);
   const transaction = useContractWrite({
     ...config,
-    request: { ...config.request, gasLimit: gasLimit },
   });
   useEffect(() => {
     if (transaction.data) {
       addPendingList({
         hash: transaction.data.hash,
-        type: TransactionType.swap_uni,
+        type: type ?? TransactionType.swap_uni,
       });
       transaction.reset();
     }
-  }, [addPendingList, transaction, transaction.data]);
+  }, [addPendingList, transaction, transaction.data, type]);
 
   return {
     transaction,
+    isLoading,
   };
 }
 
-export default useSwapExactTokensForTokens;
-
-export function useSwapNHBTCToNEST(oldTokenAmount: BigNumber) {
+export function useSwapExactETHForTokens(
+  amountIn: BigNumber,
+  amountOutMin: BigNumber,
+  path: Array<string> | undefined,
+  to: string | undefined,
+  type?: TransactionType
+) {
   const { chainsData } = useNEST();
   const { addPendingList } = usePendingTransactions();
+  const time = new Date().getTime() / 1000 + 600;
   const address = useMemo(() => {
-    if (chainsData.chainId && !BigNumber.from("0").eq(oldTokenAmount)) {
-      return NESTRedeemContract[chainsData.chainId] as `0x${string}`;
+    if (chainsData.chainId && path && to && !BigNumber.from("0").eq(amountIn)) {
+      return SwapContract[chainsData.chainId] as `0x${string}`;
     }
-  }, [chainsData.chainId, oldTokenAmount]);
-  const { config } = usePrepareContractWrite({
+  }, [amountIn, chainsData.chainId, path, to]);
+  const { config, isLoading } = usePrepareContractWrite({
     address: address,
-    abi: NESTRedeemABI,
-    functionName: "redeem",
-    args: [oldTokenAmount],
+    abi: UNISwapV2ABI,
+    functionName: "swapExactETHForTokens",
+    args: [amountOutMin.toBigInt(), path, to, BigInt(time.toFixed(0))],
     enabled: true,
+    value: amountIn.toBigInt(),
   });
   const gasLimit = useAddGasLimit(config, 30);
   const transaction = useContractWrite({
     ...config,
-    request: { ...config.request, gasLimit: gasLimit },
   });
+
   useEffect(() => {
     if (transaction.data) {
       addPendingList({
         hash: transaction.data.hash,
-        type: TransactionType.swap_nhbtc,
+        type: type ?? TransactionType.swap_uni,
       });
       transaction.reset();
     }
-  }, [addPendingList, transaction, transaction.data]);
+  }, [addPendingList, transaction, transaction.data, type]);
 
   return {
     transaction,
+    isLoading,
   };
 }
+
+export default useSwapExactTokensForTokens;

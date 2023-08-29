@@ -1,19 +1,29 @@
 import { BigNumber } from "ethers";
 import { useMemo } from "react";
-import { useContractRead } from "wagmi";
+import { erc20ABI, useContractRead } from "wagmi";
 import ERC20ABI from "../ABI/ERC20.json";
 
 function useReadTokenBalance(tokenAddress: `0x${string}`, account: string) {
+  const token = useMemo(() => {
+    if (
+      tokenAddress.toLocaleLowerCase() ===
+      String().zeroAddress.toLocaleLowerCase()
+    ) {
+      return undefined;
+    } else {
+      return tokenAddress;
+    }
+  }, [tokenAddress]);
   const {
     data: balanceOfData,
     isRefetching: balanceOfIsRefetching,
     isSuccess: balanceOfIsSuccess,
     refetch: balanceOfRefetch,
   } = useContractRead({
-    address: tokenAddress,
-    abi: ERC20ABI,
+    address: token,
+    abi: erc20ABI,
     functionName: "balanceOf",
-    args: [account],
+    args: [account as `0x${string}`],
   });
 
   const balance: BigNumber | undefined = useMemo(() => {
@@ -21,7 +31,7 @@ function useReadTokenBalance(tokenAddress: `0x${string}`, account: string) {
       if (balanceOfData === undefined) {
         return undefined;
       }
-      return balanceOfData as BigNumber;
+      return BigNumber.from((balanceOfData as any).toString());
     } else {
       return undefined;
     }
@@ -57,7 +67,7 @@ export function useReadTokenAllowance(
       if (allowanceData === undefined) {
         return undefined;
       }
-      return allowanceData as BigNumber;
+      return BigNumber.from((allowanceData as any).toString());
     } else {
       return undefined;
     }

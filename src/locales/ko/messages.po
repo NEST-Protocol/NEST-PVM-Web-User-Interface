@@ -13,10 +13,20 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
+#: src/pages/Overview/Components/TransactionTable.tsx
+msgid "{0}"
+msgstr "{0}"
+
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "* Due to the complexity of financial data, there might be nuances and delay. Data displayed above is for reference only.We sincerely apologize for any inconvenience."
 msgstr "*금융 데이터의 복잡성으로 인해 미묘한 차이와 지연이 있을 수 있습니다. 위에 표시된 데이터는 참고용일 뿐이며, 불편을 드려 죄송합니다."
+
+#: src/pages/Share/Modal/DepositModal.tsx
+msgid "*NESTFi only supports NEST withdrawals."
+msgstr "*NESTFi는 NEST 인출만 지원합니다."
 
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useFuturesNewOrder.ts
@@ -48,7 +58,6 @@ msgstr "> 시장 가격"
 msgid "> OPEN PRICE"
 msgstr "> 개장 가격"
 
-#: src/components/NormalInput/NESTInput.tsx
 #: src/components/NormalInput/NESTInputSelect.tsx
 msgid ""
 "0 balance. Before trading, you can switch to \"Swap\" to exchange\n"
@@ -92,14 +101,11 @@ msgstr "24시간 저가"
 msgid "3. NEST Token price fluctuation risk: Both the margin and the final profit and loss use NEST Token, and NEST itself is also a highly volatile asset. In extreme cases, even if your perpetual contract position is profitable, However, due to the fluctuation of the NEST price itself, it may cause you to lose money in terms of fiat currency."
 msgstr "3. NEST 토큰 가격 변동 리스크: 마진과 최종 이익과 손실 모두 NEST 토큰을 사용하며, NEST 자체도 매우 불안정한 자산입니다. 극단적인 경우, 영구 계약 포지션이 이익을 낼 수 있더라도, NEST 자체의 가격 변동으로 인해, 당신은 법정 화폐로 손해를 볼 수 있습니다."
 
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Personal/Personal.tsx
+#: src/pages/Personal/Personal.tsx
 msgid "30 Days' PNL"
-msgstr "30 일 손익"
-
-#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
-msgid "30 Days\\' PNL"
 msgstr "30 일 손익"
 
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
@@ -112,30 +118,51 @@ msgstr "4. 외부 오라클 리스크: NEST 프로토콜의 영구 계약 가격
 msgid "5. Smart contract risk: There may be fatal unknown risks in the smart contract that may cause your principal to be damaged. Please evaluate the risk yourself before deciding whether to participate."
 msgstr "5. 스마트 계약 위험: 스마트 계약에 치명적인 알 수 없는 위험이 있을 수 있으며, 참여 여부를 결정하기 전에 위험을 스스로 평가하십시오."
 
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Personal/Personal.tsx
+#: src/pages/Personal/Personal.tsx
 msgid "7 Days' PNL"
 msgstr "7 일 손익"
 
-#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
-msgid "7 Days\\' PNL"
-msgstr "7 일 손익"
+#: src/pages/Copy/Components/kolItem.tsx
+msgid "7D Followers PnL"
+msgstr ""
+
+#: src/pages/Copy/Components/kolItem.tsx
+msgid "7D PnL"
+msgstr ""
 
 #: src/pages/Home/Home.tsx
 msgid "A beginner's guide to using NESTFi"
 msgstr "NEST Fi 사용 초보자 가이드"
 
+#: src/pages/Copy/Copy.tsx
+msgid "A professional trader's position will be automatically copied and executed for you."
+msgstr ""
+
 #: src/pages/Share/Modal/ConnectWalletModal.tsx
 msgid "about connecting wallets"
 msgstr "지갑 연결 정보"
 
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Overview/Overview.tsx
+#: src/pages/Overview/Overview.tsx
+#: src/pages/Share/Head/NESTHead.tsx
+msgid "Account"
+msgstr "계정"
+
+#: src/pages/Overview/Components/TransactionTable.tsx
+msgid "Action"
+msgstr "행동"
+
+#: src/pages/Copy/Components/MyCopiesCurrent.tsx
+#: src/pages/Copy/Components/MyCopiesCurrent.tsx
+#: src/pages/Copy/Components/MyCopiesHistory.tsx
+#: src/pages/Copy/Components/MyCopiesHistory.tsx
+#: src/pages/Futures/Components/HistoryList.tsx
+#: src/pages/Futures/Components/HistoryTable.tsx
 #: src/pages/Futures/Components/OrderList.tsx
 #: src/pages/Futures/Components/OrderTable.tsx
-#: src/pages/Futures/Components/POrderList.tsx
 #: src/pages/Futures/Components/POrderList.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 msgid "Actual Margin"
@@ -146,11 +173,21 @@ msgstr "실제 마진"
 msgid "Add"
 msgstr "추가"
 
+#: src/pages/Copy/Components/CopySettingModal.tsx
+msgid "Add Copy Trading Amount"
+msgstr ""
+
+#: src/pages/Futures/Components/FuturesNotice.tsx
+#: src/pages/Share/Modal/ChangeNewTokenModal.tsx
+msgid "Add NEST 2.0 to wallet"
+msgstr "지갑에 NEST 2.0 추가하기"
+
 #: src/pages/DirectPoster/DirectPoster.tsx
 #: src/pages/Swap/Swap.tsx
 msgid "Add NEST to wallet"
 msgstr "월렛에 NEST 추가"
 
+#: src/hooks/useTransactionReceipt.ts
 #: src/hooks/useTransactionReceipt.ts
 msgid "Add position"
 msgstr "포지션 추가"
@@ -160,7 +197,9 @@ msgstr "포지션 추가"
 msgid "Add Position"
 msgstr "포지션 추가"
 
+#: src/pages/Copy/Components/TraderFollowers.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Address"
 msgstr "주소"
 
@@ -169,32 +208,51 @@ msgstr "주소"
 msgid "After the limit order is executed, TP and SL price you set will trigger immediately."
 msgstr "지정가 주문이 실행된 후 설정한 TP 및 SL 가격이 즉시 트리거됩니다."
 
+#: src/pages/Copy/Copy.tsx
+msgid "Align With Traders"
+msgstr ""
+
+#: src/pages/Copy/Copy.tsx
+msgid "All Traders"
+msgstr ""
+
 #: src/components/NormalInput/NESTInput.tsx
 #: src/components/NormalInput/NESTInputSelect.tsx
+#: src/pages/Overview/Components/MoneyTable.tsx
 msgid "Amount"
 msgstr "수량"
+
+#: src/pages/Copy/Trader.tsx
+msgid "Analysis"
+msgstr ""
 
 #: src/pages/Futures/Modal/ApproveNoticeModal.tsx
 msgid "Approval required"
 msgstr "승인 필요함"
 
-#: src/hooks/useFuturesAdd.ts
-#: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useSwap.ts
 #: src/hooks/useTransactionReceipt.ts
 #: src/pages/Futures/Modal/ApproveNoticeModal.tsx
 msgid "Approve"
 msgstr "승인"
 
+#: src/pages/Copy/Components/TraderChartView.tsx
+msgid "AUM (NEST)"
+msgstr ""
+
+#: src/pages/Copy/Components/KolInfo.tsx
+#: src/pages/Copy/Components/KolInfo.tsx
+msgid "AUM(NEST)"
+msgstr ""
+
 #: src/hooks/useSwap.ts
+#: src/pages/Share/Modal/DepositModal.tsx
 msgid "balance"
 msgstr "잔고"
 
 #: src/components/NormalInput/NESTInput.tsx
 #: src/components/NormalInput/NESTInputSelect.tsx
 #: src/pages/DirectPoster/DirectPoster.tsx
-#: src/pages/Swap/Components/SwapInputItem.tsx
-#: src/pages/Swap/Components/SwapInputItem.tsx
 msgid "Balance:"
 msgstr "잔액:"
 
@@ -203,9 +261,21 @@ msgstr "잔액:"
 msgid "Become a Trading KOL"
 msgstr "트레이딩 인플루언서가 되기"
 
+#: src/pages/Copy/Copy.tsx
+msgid "Become Elite Traders >"
+msgstr ""
+
+#: src/pages/Copy/Copy.tsx
+msgid "Boost your earning and influence by becoming copy traders."
+msgstr ""
+
 #: src/pages/Home/Home.tsx
 msgid "Boost your earning and influence by joining the NESTFi affiliate program."
 msgstr "NESTFi 제휴 프로그램에 가입하여 수익과 영향력을 높이세요."
+
+#: src/pages/Dashboard/Dashboard.tsx
+msgid "Burned"
+msgstr "소각된"
 
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Channel link"
@@ -213,11 +283,14 @@ msgstr "채널 링크"
 
 #: src/components/NormalInput/NormalInputWithCloseButton.tsx
 #: src/hooks/useFuturesOrder.ts
+#: src/pages/Copy/Components/MyCopiesCurrent.tsx
+#: src/pages/Copy/Components/MyCopiesCurrent.tsx
 #: src/pages/Futures/Components/POrderList.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 msgid "Close"
 msgstr "매도"
 
+#: src/hooks/useTransactionReceipt.ts
 #: src/hooks/useTransactionReceipt.ts
 msgid "Close Limit Order"
 msgstr "지정가 주문 매도"
@@ -227,9 +300,11 @@ msgstr "지정가 주문 매도"
 msgid "Close Position"
 msgstr "포지션 매도"
 
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Copy/Components/MyCopiesHistory.tsx
+#: src/pages/Copy/Components/MyCopiesHistory.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
+#: src/pages/Futures/Components/HistoryList.tsx
+#: src/pages/Futures/Components/HistoryTable.tsx
 #: src/pages/Futures/Modal/CloseModal.tsx
 msgid "Close Price"
 msgstr "가격지정 매도"
@@ -238,8 +313,13 @@ msgstr "가격지정 매도"
 msgid "Close Risk"
 msgstr "위험 경고 닫기"
 
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Copy/Components/MyCopiesHistory.tsx
+#: src/pages/Copy/Components/TraderCurrent.tsx
+msgid "Close Time"
+msgstr ""
+
+#: src/pages/Futures/Components/HistoryList.tsx
+#: src/pages/Futures/Components/HistoryTable.tsx
 msgid "Closed"
 msgstr "닫힘"
 
@@ -247,17 +327,20 @@ msgstr "닫힘"
 #: src/hooks/useFuturesClose.ts
 #: src/hooks/useFuturesEditLimit.ts
 #: src/hooks/useFuturesEditPosition.ts
+#: src/pages/Copy/Components/CopyStopModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Home/Modal/ApplyModal.tsx
 #: src/pages/Swap/Components/SwapSlippageModal.tsx
 msgid "Confirm"
 msgstr "확인"
 
+#: src/pages/Share/Modal/SignModal.tsx
+msgid "Confirm you are the owner of this wallet"
+msgstr "이 지갑의 소유자임을 확인하십시오."
+
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useSwap.ts
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/DirectPoster/useDirectPoster.ts
 #: src/pages/DirectPoster/useDirectPoster.ts
 #: src/pages/Share/Head/ConnectButton.tsx
@@ -270,58 +353,139 @@ msgstr "지갑 연결"
 msgid "Contact info (Telegram handle)"
 msgstr "연락처 정보 (텔레그램 핸들)"
 
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Copy/Components/CopyRoute.tsx
+#: src/pages/Copy/Components/CopySettingModal.tsx
+#: src/pages/Copy/Components/CopySettingModal.tsx
+#: src/pages/Share/Head/NESTHead.tsx
+msgid "Copy"
+msgstr ""
+
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Copy Invitation Link"
 msgstr "초대 링크 복사"
 
-#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 msgid "Copy Link"
 msgstr "링크 복사"
 
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Copy/Components/CopySettingModal.tsx
+#: src/pages/Copy/Components/KolInfo.tsx
+#: src/pages/Copy/Components/KolInfo.tsx
+msgid "Copy Now"
+msgstr ""
+
+#: src/pages/Copy/Copy.tsx
+#: src/pages/Copy/MyCopies.tsx
+msgid "Copy Orders"
+msgstr ""
+
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Personal.tsx
+#: src/pages/Personal/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "Copy Successfully"
 msgstr "복사 완료"
 
+#: src/pages/Copy/Components/CopySettingModal.tsx
+msgid "Copy Trader Service Agreement"
+msgstr ""
+
+#: src/pages/Copy/Components/TraderChartView.tsx
+msgid "Copy Traders’ PnL (NEST)"
+msgstr ""
+
+#: src/pages/Copy/Components/CopyRoute.tsx
+msgid "Copy Trading"
+msgstr ""
+
+#: src/pages/Copy/Copy.tsx
+msgid "Copy Trading Assets (NEST)"
+msgstr ""
+
+#: src/pages/Copy/MyCopies.tsx
+msgid "Copy Trading Assets(NEST)"
+msgstr ""
+
+#: src/pages/Copy/Components/CopySettingModal.tsx
+msgid "Copy Trading Each Order"
+msgstr ""
+
+#: src/pages/Copy/Copy.tsx
+msgid "Copy Trading Effortlessly"
+msgstr ""
+
+#: src/pages/Copy/Components/CopySettingModal.tsx
+msgid "Copy Trading Total Amount"
+msgstr ""
+
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Cumulative Commission"
 msgstr "누적 수수료"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Cumulative Commissions"
 msgstr "누적 수수료"
 
+#: src/pages/Copy/Components/TraderChartView.tsx
+msgid "Cumulative Copy Traders"
+msgstr ""
+
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Cumulative Invitee Trading Volume"
 msgstr "누적 피추천인 거래량"
 
-#: src/pages/Dashboard/Dashboard.tsx
-msgid "Current Positions"
-msgstr "현재 포지션"
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Personal/Personal.tsx
+msgid "Cumulative Return"
+msgstr "누적 수익률"
+
+#: src/pages/Copy/Components/CopySettingModal.tsx
+#: src/pages/Copy/MyCopies.tsx
+#: src/pages/Copy/Trader.tsx
+msgid "Current"
+msgstr ""
+
+#: src/pages/Copy/Copy.tsx
+msgid "Custom Copy Trading"
+msgstr ""
+
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Personal/Personal.tsx
+msgid "Daily Return"
+msgstr "일일 수익률"
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "Dark mode"
 msgstr "다크 모드"
 
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Share/Head/NESTHead.tsx
 #: src/pages/Share/Head/NESTHead.tsx
 #: src/pages/Share/Head/NESTHead.tsx
 msgid "Dashboard"
 msgstr "대시보드"
+
+#: src/pages/Share/Modal/ChangeNewTokenModal.tsx
+msgid "Dear NESTFi Community,"
+msgstr "NESTFi 커뮤니티 여러분께,"
+
+#: src/pages/Share/Modal/StopTransactionModal.tsx
+msgid "Dear NESTfi Users,"
+msgstr "NESTfi 사용자 여러분께,"
 
 #: src/pages/Home/Home.tsx
 msgid "Decentralized"
@@ -332,6 +496,7 @@ msgid "Decentralized Perpetual Exchange"
 msgstr "분산형 영구 계약 거래소"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Default"
 msgstr "기본값"
 
@@ -343,6 +508,20 @@ msgstr "물가 하락형"
 msgid "Deflationary economic model. The more users trade, the more $NEST will be burned."
 msgstr "디플레이션 경제 모델. 더 많은 사용자가 거래할수록 더 많은 $NEST가 소각됩니다."
 
+#: src/components/NormalInput/NESTInput.tsx
+#: src/hooks/useDepositModal.ts
+#: src/pages/Overview/Overview.tsx
+#: src/pages/Personal/Personal.tsx
+#: src/pages/Share/Modal/DepositModal.tsx
+#: src/pages/Share/Modal/DepositModal.tsx
+msgid "Deposit"
+msgstr "입금"
+
+#: src/hooks/useTransactionReceipt.ts
+msgid "Deposit Request"
+msgstr "예금 요청"
+
+#: src/pages/Share/Head/ConnectButton.tsx
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "Disconnect"
 msgstr "연결 해제"
@@ -352,6 +531,14 @@ msgstr "연결 해제"
 msgid "Due to the market volatility, the actual liquidation price may be different from the theoretical liquidation price . Here is the theoretical liquidation price, for reference only."
 msgstr "시장 변동성으로 인해 실제 청산 가격은 이론적인 청산 가격과 다를 수 있습니다. 이곳에서는 참고용 이론적 청산 가격이 제시됩니다."
 
+#: src/pages/Share/Modal/StopTransactionModal.tsx
+msgid "During the airdrop period, NESTfi's trading services will be temporarily unavailable for approximately 1-2 hours. This suspension is necessary to ensure a smooth and successful airdrop of NEST 2.0 tokens to all eligible participants. We apologize for any inconvenience caused during this temporary interruption of services."
+msgstr "에어드롭 기간 동안 NESTfi의 거래 서비스는 약 1-2시간 동안 일시적으로 사용할 수 없습니다. 이러한 일시적인 중단은 모든 자격을 갖춘 참가자에게 NEST 2.0 토큰의 원활하고 성공적인 에어드롭을 보장하기 위해 필요합니다. 이러한 일시적인 서비스 중단으로 인한 불편을 사과드립니다."
+
+#: src/pages/Copy/Components/TraderChartView.tsx
+msgid "Earnings"
+msgstr ""
+
 #: src/hooks/useFuturesPOrder.ts
 #: src/pages/Futures/Components/OrderList.tsx
 #: src/pages/Futures/Components/OrderTable.tsx
@@ -359,13 +546,19 @@ msgid "Edit"
 msgstr "편집"
 
 #: src/hooks/useTransactionReceipt.ts
+#: src/hooks/useTransactionReceipt.ts
 msgid "Edit Limit Order"
 msgstr "지정가 주문 수정"
 
 #: src/hooks/useTransactionReceipt.ts
+#: src/hooks/useTransactionReceipt.ts
 #: src/pages/Futures/Modal/EditPositionModal.tsx
 msgid "Edit Position"
 msgstr "포지션 수정"
+
+#: src/pages/Copy/Components/CopyStopModal.tsx
+msgid "End copy will liquidate your position with market orders, and automatically return the assets to your Account after deducting the profits sharing."
+msgstr ""
 
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Enter Channel link"
@@ -378,6 +571,15 @@ msgstr "연락처 정보를 입력하세요"
 #: src/pages/Futures/NewOrder.tsx
 msgid "Entry Price"
 msgstr "진입 가격"
+
+#: src/pages/Copy/Components/CopyStopModal.tsx
+msgid "Estimated Realized Amount"
+msgstr ""
+
+#: src/pages/Overview/Components/MobileList.tsx
+#: src/pages/Overview/Components/MoneyTable.tsx
+msgid "Fail"
+msgstr "실패"
 
 #: src/hooks/useNESTSnackBar.tsx
 msgid "Fail Request"
@@ -399,9 +601,15 @@ msgstr ""
 "올바른 사람을 따라가면 돈 버는 것은 숨 쉬는 것만큼 쉽습니다.\n"
 "NESTFi에서 올바른 사람을 팔로우할 수 있습니다. 여기는 제 추천 링크입니다."
 
-#: src/pages/Futures/Components/FuturesNotice.tsx
-msgid "For the positions opened before April 6, 2023, please go to→"
-msgstr "2023년 4월 6일 이전에 열린 포지션은 여기로 이동하세요 →"
+#: src/pages/Copy/Copy.tsx
+msgid "Follow top trading strategies on NESTFi"
+msgstr ""
+
+#: src/pages/Copy/Components/KolInfo.tsx
+#: src/pages/Copy/Components/KolInfo.tsx
+#: src/pages/Copy/Trader.tsx
+msgid "Followers"
+msgstr ""
 
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 #: src/pages/Futures/Modal/ProtocolModal.tsx
@@ -414,25 +622,31 @@ msgstr "교환할 토큰"
 
 #: src/pages/Share/Head/NESTHead.tsx
 #: src/pages/Share/Head/NESTHead.tsx
-msgid "Futures"
-msgstr "선물"
+msgid "Future"
+msgstr "미래"
 
 #: src/pages/DirectPoster/DirectPoster.tsx
 #: src/pages/DirectPoster/useDirectPoster.ts
 msgid "GET"
 msgstr "얻다"
 
+#: src/pages/Share/Modal/DepositModal.tsx
+msgid "Get NEST"
+msgstr "얻다 NEST"
+
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "Github"
 msgstr "깃허브"
 
-#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Copy/MyCopies.tsx
+#: src/pages/Copy/Trader.tsx
+#: src/pages/Futures/OrderList.tsx
 msgid "History"
 msgstr "주문 내역"
 
 #: src/pages/Home/Home.tsx
-msgid "How to duplicate your own position?"
-msgstr "자신의 포지션을 복제하는 방법은 무엇인가요?"
+msgid "How to copy trading?"
+msgstr "복사 거래는 어떻게 하나요?"
 
 #: src/pages/Home/Home.tsx
 msgid "How to join affiliate program?"
@@ -442,18 +656,31 @@ msgstr "제휴 프로그램에 가입하는 방법은 무엇인가요?"
 msgid "How to make your first trade?"
 msgstr "첫 거래는 어떻게 하나요?"
 
-#: src/pages/Futures/MoreInfo.tsx
-msgid "How to Play"
-msgstr "플레이 방법"
-
 #: src/pages/Home/Home.tsx
 msgid "How to Start?"
 msgstr "어떻게 시작하나요?"
 
+#: src/pages/Futures/MoreInfo.tsx
+msgid "How to Trade"
+msgstr "거래 방법"
+
+#: src/pages/Copy/Components/CopySettingModal.tsx
+msgid "I have read and agreed to the"
+msgstr ""
+
 #: src/pages/Futures/Modal/CloseOrderNoticeModal.tsx
 #: src/pages/Home/Modal/ApplyModal.tsx
+#: src/pages/Share/Modal/StopTransactionModal.tsx
 msgid "I understand"
 msgstr "이해했습니다"
+
+#: src/pages/Share/Modal/SignModal.tsx
+msgid "If you are using a secure device that you own. Selecting this option can expose your keys and information to others if you are on a public or non-secured device."
+msgstr "당신이 소유한 안전한 장치를 사용하고 있다면, 이 옵션을 선택하는 것은 공공장치나 보안이 되지 않은 장치에서 키와 정보가 다른 사람들에게 노출될 수 있습니다."
+
+#: src/pages/Share/Modal/StopTransactionModal.tsx
+msgid "If you have any questions or require further assistance, please feel free to reach out to our support team. We are here to help and provide guidance throughout this process."
+msgstr "질문이 있거나 추가 도움이 필요한 경우 지원팀에 문의해주시기 바랍니다. 이 과정 전반에 걸쳐 도움과 안내를 제공하기 위해 준비되어 있습니다."
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
@@ -461,13 +688,26 @@ msgstr "이해했습니다"
 msgid "Image"
 msgstr "이미지"
 
+#: src/pages/Share/Modal/StopTransactionModal.tsx
+msgid "Important Announcement: Temporary Suspension of Trading Services on NESTfi"
+msgstr "중요 공지: NESTFi의 거래 서비스 일시 중단"
+
 #: src/pages/Home/Home.tsx
 msgid "Infinite Liquidity"
 msgstr "무한한 유동성"
 
 #: src/hooks/useSwap.ts
+#: src/pages/Share/Modal/DepositModal.tsx
 msgid "Insufficient"
 msgstr "불충분함"
+
+#: src/hooks/useWithDrawModal.ts
+msgid "Insufficient balance"
+msgstr "잔액 부족"
+
+#: src/components/NormalInput/NESTInput.tsx
+msgid "Insufficient balance. Please deposit to start the lightning trade."
+msgstr "잔액이 부족합니다. 번개 거래를 시작하려면 입금하세요."
 
 #: src/hooks/useFuturesAdd.ts
 #: src/hooks/useFuturesNewOrder.ts
@@ -475,6 +715,7 @@ msgid "Insufficient NEST balance"
 msgstr "NEST 잔액 부족"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Invitee Trading Volume"
 msgstr "피추천인의 거래량"
 
@@ -507,6 +748,22 @@ msgstr "언어"
 msgid "Last"
 msgstr "마지막"
 
+#: src/pages/Copy/Components/SelectTime.tsx
+msgid "Last 24 hours"
+msgstr ""
+
+#: src/pages/Copy/Components/SelectTime.tsx
+msgid "Last 3 weeks"
+msgstr ""
+
+#: src/pages/Copy/Components/SelectTime.tsx
+msgid "Last 7 days"
+msgstr ""
+
+#: src/pages/Copy/Components/SelectTime.tsx
+msgid "Last month"
+msgstr ""
+
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 msgid "Last Price"
 msgstr "최종 가격"
@@ -529,20 +786,19 @@ msgstr "레버리지"
 msgid "Limit"
 msgstr "지정가"
 
-#: src/hooks/useFuturesNewOrder.ts
-#: src/hooks/useFuturesNewOrder.ts
-msgid "Limit order fee = 15 NEST"
-msgstr "지정가 주문 수수료 = 15 NEST"
-
 #: src/pages/Futures/Modal/EditLimitModal.tsx
 #: src/pages/Futures/Modal/EditLimitModal.tsx
 #: src/pages/Futures/Modal/EditLimitModal.tsx
 msgid "Limit Price"
 msgstr "지정가 가격"
 
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Futures/Components/POrderList.tsx
+#: src/pages/Share/Modal/SignModal.tsx
+#: src/pages/Share/Modal/SignModal.tsx
+msgid "Link wallet"
+msgstr "링크 지갑"
+
+#: src/pages/Copy/Components/MyCopiesCurrent.tsx
+#: src/pages/Copy/Components/MyCopiesCurrent.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 #: src/pages/Futures/Modal/AddModal.tsx
 #: src/pages/Futures/Modal/EditPositionModal.tsx
@@ -550,13 +806,11 @@ msgstr "지정가 가격"
 msgid "Liq Price"
 msgstr "청산 가격"
 
-#: src/hooks/useFuturesPOrderClose.tsx
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Futures/Components/HistoryList.tsx
+#: src/pages/Futures/Components/HistoryTable.tsx
 msgid "Liquidated"
 msgstr "청산됨"
 
-#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 msgid "Loading..."
@@ -567,9 +821,8 @@ msgstr "로딩 중..."
 #: src/hooks/useFuturesClose.ts
 #: src/hooks/useFuturesEditPosition.ts
 #: src/hooks/useFuturesNewOrder.ts
-#: src/hooks/useFuturesOrder.ts
-#: src/hooks/useFuturesPOrder.ts
-#: src/hooks/useFuturesPOrderClose.tsx
+#: src/pages/Copy/Components/CopyListPosition.tsx
+#: src/pages/Copy/Components/CopyTablePosition.tsx
 #: src/pages/Dashboard/Components/MobileOrderTypePosition.tsx
 #: src/pages/Dashboard/Components/ShareOrderPosition.tsx
 #: src/pages/Futures/Components/OrderListPosition.tsx
@@ -577,9 +830,20 @@ msgstr "로딩 중..."
 msgid "Long"
 msgstr "롱"
 
+#: src/pages/Copy/Components/TraderChartView.tsx
+msgid "Losing Trades"
+msgstr ""
+
 #: src/pages/Futures/NewOrder.tsx
 msgid "Market"
 msgstr "시장가"
+
+#: src/pages/Copy/Components/MyCopiesCurrent.tsx
+#: src/pages/Copy/Components/MyCopiesCurrent.tsx
+#: src/pages/Copy/Components/TraderCurrent.tsx
+#: src/pages/Copy/Components/TraderCurrent.tsx
+msgid "Market Price"
+msgstr ""
 
 #: src/components/NormalInput/NESTInput.tsx
 #: src/components/NormalInput/NESTInputSelect.tsx
@@ -591,6 +855,7 @@ msgstr "최대"
 msgid "Minimum 50 NEST"
 msgstr "최소 50 NEST"
 
+#: src/pages/Copy/Copy.tsx
 #: src/pages/Home/Home.tsx
 #: src/pages/Share/Modal/ConnectWalletModal.tsx
 msgid "More"
@@ -600,27 +865,38 @@ msgstr "자세히 보기"
 msgid "More Info"
 msgstr "자세한 정보"
 
+#: src/pages/Personal/Personal.tsx
+msgid "My Balance"
+msgstr "내 잔고"
+
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "My commissions"
 msgstr "내 수수료"
 
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Copy/Copy.tsx
+#: src/pages/Copy/MyCopies.tsx
+msgid "My Copies"
+msgstr ""
+
+#: src/pages/Personal/Personal.tsx
 msgid "My Positions"
 msgstr "내 포지션"
 
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
-#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
-msgid "My Total Trading Volume"
-msgstr "내 총 거래량"
+#: src/pages/Copy/MyCopies.tsx
+msgid "My Traders"
+msgstr ""
 
-#: src/pages/Dashboard/Dashboard.tsx
-msgid "NEST Total Burned"
-msgstr "총 소각된 NEST"
+#: src/pages/Copy/Copy.tsx
+#: src/pages/Copy/MyCopies.tsx
+msgid "My Trades"
+msgstr ""
+
+#: src/pages/Futures/Components/FuturesNotice.tsx
+msgid "NEST 2.0 token has been airdropped to your wallet, please add NEST 2.0 token to your wallet."
+msgstr "NEST 2.0 토큰이 지갑에 에어드롭되었습니다. NEST 2.0 토큰을 지갑에 추가해주세요."
 
 #: src/pages/Futures/MoreInfo.tsx
 msgid "NEST White Paper"
@@ -644,6 +920,8 @@ msgstr "뉴스"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "No commissions yet"
 msgstr "아직 수수료 없음"
 
@@ -651,41 +929,57 @@ msgstr "아직 수수료 없음"
 msgid "No Market Makers"
 msgstr "시장 메이커 없음"
 
-#: src/pages/Futures/Components/TableTitle.tsx
-#: src/pages/Futures/OrderList.tsx
-#: src/pages/Futures/OrderList.tsx
+#: src/pages/Overview/Overview.tsx
 msgid "No Order"
 msgstr "주문 없음"
 
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
-msgid "No trades yet"
-msgstr "아직 거래 없음"
+#: src/pages/Futures/Components/TableTitle.tsx
+#: src/pages/Futures/OrderList.tsx
+#: src/pages/Futures/OrderList.tsx
+#: src/pages/Futures/OrderList.tsx
+msgid "No Orders"
+msgstr "주문 없음"
 
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "No Transactions yet"
 msgstr "아직 트랜잭션 없음"
 
+#: src/pages/Copy/Components/TraderChartView.tsx
+msgid "Number of Orders"
+msgstr ""
+
+#: src/pages/Share/Modal/StopTransactionModal.tsx
+msgid "Once the airdrop is completed, NESTfi will only support trading with NEST 2.0 tokens. The previous version of NEST tokens (NEST 1.0) will become obsolete and will no longer be accepted for trading or other activities on the platform."
+msgstr "에어드롭이 완료되면 NESTfi는 NEST 2.0 토큰과만 거래를 지원할 예정입니다. 이전 버전인 NEST 토큰(NEST 1.0)은 사용되지 않으며 플랫폼에서의 거래나 기타 활동에 사용할 수 없게 될 것입니다."
+
 #: src/hooks/useFuturesNewOrder.ts
 msgid "Open"
 msgstr "열기"
 
+#: src/pages/Copy/Components/CopyStopModal.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Dashboard.tsx
+msgid "Open Interest"
+msgstr "미결제약정"
+
+#: src/hooks/useTransactionReceipt.ts
+#: src/hooks/useTransactionReceipt.ts
 #: src/hooks/useTransactionReceipt.ts
 msgid "Open position"
 msgstr "포지션 열기"
 
-#: src/hooks/useTransactionReceipt.ts
-msgid "Open position request"
-msgstr "포지션 열기 요청"
-
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Copy/Components/MyCopiesCurrent.tsx
+#: src/pages/Copy/Components/MyCopiesCurrent.tsx
+#: src/pages/Copy/Components/MyCopiesHistory.tsx
+#: src/pages/Copy/Components/MyCopiesHistory.tsx
+#: src/pages/Copy/Components/TraderCurrent.tsx
+#: src/pages/Copy/Components/TraderCurrent.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
+#: src/pages/Futures/Components/HistoryList.tsx
+#: src/pages/Futures/Components/HistoryTable.tsx
 #: src/pages/Futures/Components/OrderList.tsx
 #: src/pages/Futures/Components/OrderTable.tsx
-#: src/pages/Futures/Components/POrderList.tsx
 #: src/pages/Futures/Components/POrderList.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 #: src/pages/Futures/Modal/AddModal.tsx
@@ -693,21 +987,47 @@ msgstr "포지션 열기 요청"
 msgid "Open Price"
 msgstr "오픈 가격"
 
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Copy/Components/MyCopiesCurrent.tsx
+#: src/pages/Copy/Components/MyCopiesHistory.tsx
+#: src/pages/Copy/Components/TraderCurrent.tsx
+msgid "Open Time"
+msgstr ""
+
+#: src/pages/Copy/Components/MyCopiesCurrent.tsx
+#: src/pages/Copy/Components/MyCopiesMyTraders.tsx
+#: src/pages/Futures/Components/HistoryTable.tsx
 #: src/pages/Futures/Components/OrderTable.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 msgid "Operate"
 msgstr "주문"
 
 #: src/pages/Futures/OrderList.tsx
-msgid "Order"
+msgid "Orders"
 msgstr "주문"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Overview/Overview.tsx
+#: src/pages/Personal/Personal.tsx
+#: src/pages/Personal/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Overview"
 msgstr "개요"
+
+#: src/pages/Overview/Components/MobileList.tsx
+#: src/pages/Overview/Components/MoneyTable.tsx
+msgid "Pending"
+msgstr "Pendente"
+
+#: src/pages/Copy/Components/TraderChartView.tsx
+msgid "Performance"
+msgstr ""
+
+#: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Personal.tsx
+#: src/pages/Personal/Referral/Referral.tsx
+msgid "Personal"
+msgstr "개인"
 
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Platform (Youtube, Telegram, Twitter, Instagram, Facebook, Tiktok, Others)"
@@ -717,6 +1037,10 @@ msgstr "플랫폼 (유튜브, 텔레그램, 트위터, 인스타그램, 페이�
 msgid "Please click Approve for authorization and then you can open the position, this process will consume some GAS."
 msgstr "인증을 위해 승인을 클릭하면 포지션을 열 수 있으며, 이 과정에서 일부 GAS가 소비됩니다."
 
+#: src/components/NormalInput/NESTInput.tsx
+msgid "Please complete your sign"
+msgstr "서명을 완료하세요."
+
 #: src/pages/DirectPoster/useDirectPoster.ts
 msgid "Please get ETH testnet token first"
 msgstr "먼저 이더리움 테스트넷 토큰을 받으세요"
@@ -725,8 +1049,18 @@ msgstr "먼저 이더리움 테스트넷 토큰을 받으세요"
 msgid "Please note that \"Limit order\" or \"Stop order\" is not guaranteed to be executed. This may include, but is not limited to, the following cases."
 msgstr "\"지정가 주문\" 또는 \"스탑 오더 주문\"은 실행이 보장되지 않을 수 있습니다. 다음과 같은 경우가 포함될 수 있습니다."
 
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Copy/Components/CopyStopModal.tsx
+msgid "Please note that due to price fluctuation during settlement, the PNL, profit shared and settled value may vary from displayed above."
+msgstr ""
+
+#: src/pages/Share/Modal/ChangeNewTokenModal.tsx
+msgid "Please note that NEST 1.0 tokens have been officially deprecated and will no longer be supported. To continue participating in the NESTFi ecosystem and enjoy its benefits, it is crucial that you add NEST 2.0 tokens to your wallet. We have provided a button below for your convenience to add NEST 2.0 tokens to your wallet effortlessly."
+msgstr "NEST 1.0 토큰은 공식적으로 지원이 중단되었으며, 더 이상 지원되지 않습니다. NESTFi 생태계에 계속 참여하고 혜택을 누리기 위해서는 반드시 지갑에 NEST 2.0 토큰을 추가해야 합니다. 편의를 위해 아래에 NEST 2.0 토큰을 간편하게 지갑에 추가할 수 있는 버튼을 제공하였습니다."
+
+#: src/pages/Copy/Components/TraderChartView.tsx
+msgid "PnL Ratio"
+msgstr ""
+
 #: src/pages/Futures/Modal/AddModal.tsx
 #: src/pages/Futures/Modal/CloseModal.tsx
 #: src/pages/Futures/Modal/EditPositionModal.tsx
@@ -740,10 +1074,6 @@ msgstr "포지션"
 msgid "Position fee = Position * 0.05%"
 msgstr "포지션 수수료 = 포지션 * 0.05%"
 
-#: src/hooks/useFuturesEditPosition.ts
-msgid "Position fee =Position*0.05%"
-msgstr "포지션 수수료 = 포지션 * 0.05%"
-
 #: src/hooks/useFuturesClose.ts
 msgid "Position*0.05%"
 msgstr "포지션 * 0.05%"
@@ -753,10 +1083,32 @@ msgstr "포지션 * 0.05%"
 msgid "Positions"
 msgstr "포지션"
 
+#: src/pages/Personal/Personal.tsx
+#: src/pages/Personal/Personal.tsx
+msgid "Positions Value"
+msgstr "포지션 가치"
+
 #: src/pages/Futures/NewOrder.tsx
+#: src/pages/Share/Modal/DepositModal.tsx
 #: src/pages/Swap/Swap.tsx
 msgid "Price"
 msgstr "가격"
+
+#: src/pages/Copy/Components/MyCopiesMyTraders.tsx
+#: src/pages/Copy/Components/MyCopiesMyTraders.tsx
+msgid "Profit"
+msgstr ""
+
+#: src/pages/Copy/Copy.tsx
+msgid "Profit (NEST)"
+msgstr ""
+
+#: src/pages/Copy/Components/TraderFollowers.tsx
+#: src/pages/Copy/Components/TraderFollowers.tsx
+#: src/pages/Copy/Copy.tsx
+#: src/pages/Copy/MyCopies.tsx
+msgid "Profit(NEST)"
+msgstr ""
 
 #: src/hooks/useTransactionReceipt.ts
 msgid "Received"
@@ -770,15 +1122,32 @@ msgstr "100NEST 테스트 토큰 수령"
 msgid "Recent transactions"
 msgstr "최근 트랜잭션"
 
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Personal.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Referral"
 msgstr "추천"
+
+#: src/pages/Copy/Components/MyCopiesMyTraders.tsx
+#: src/pages/Copy/Components/MyCopiesMyTraders.tsx
+msgid "Remaining Copy Amount"
+msgstr ""
 
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 #: src/pages/Futures/Modal/ProtocolModal.tsx
 msgid "Risk Warning"
 msgstr "위험 경고"
+
+#: src/pages/Copy/Components/KolInfo.tsx
+#: src/pages/Copy/Components/KolInfo.tsx
+#: src/pages/Copy/Components/TraderCurrent.tsx
+#: src/pages/Copy/Components/TraderCurrent.tsx
+msgid "ROI"
+msgstr ""
+
+#: src/pages/Copy/Components/CopySettingModal.tsx
+msgid "Save"
+msgstr ""
 
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
@@ -786,29 +1155,48 @@ msgid "Scan and copy the trade"
 msgstr "거래 스캔 및 복사"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Search"
 msgstr "검색"
 
+#: src/pages/Copy/Copy.tsx
+msgid "Select KOL"
+msgstr ""
+
+#: src/hooks/useTransactionReceipt.ts
 #: src/hooks/useTransactionReceipt.ts
 msgid "Sell position"
 msgstr "포지션 매도"
 
-#: src/hooks/useTransactionReceipt.ts
-msgid "Sell position request"
-msgstr "포지션 매도 요청"
+#: src/hooks/useSignModal.ts
+#: src/pages/Share/Head/ConnectButton.tsx
+msgid "Send request"
+msgstr "요청 보내기"
 
 #: src/pages/Futures/Modal/CloseModal.tsx
-#: src/pages/Futures/Modal/EditPositionModal.tsx
 #: src/pages/Futures/NewOrder.tsx
+#: src/pages/Share/Modal/WithdrawModal.tsx
 msgid "Service Fee"
 msgstr "서비스 수수료"
 
+#: src/pages/Copy/Copy.tsx
+msgid "Set the margin for each order as well as the overall copy trading amount."
+msgstr ""
+
+#: src/pages/Copy/Components/MyCopiesMyTraders.tsx
+#: src/pages/Copy/Components/MyCopiesMyTraders.tsx
+msgid "Settings"
+msgstr ""
+
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Settled"
 msgstr "해결됨"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Settled Commissions"
 msgstr "정산 수수료"
 
@@ -821,9 +1209,8 @@ msgstr "공유"
 #: src/hooks/useFuturesClose.ts
 #: src/hooks/useFuturesEditPosition.ts
 #: src/hooks/useFuturesNewOrder.ts
-#: src/hooks/useFuturesOrder.ts
-#: src/hooks/useFuturesPOrder.ts
-#: src/hooks/useFuturesPOrderClose.tsx
+#: src/pages/Copy/Components/CopyListPosition.tsx
+#: src/pages/Copy/Components/CopyTablePosition.tsx
 #: src/pages/Dashboard/Components/MobileOrderTypePosition.tsx
 #: src/pages/Dashboard/Components/ShareOrderPosition.tsx
 #: src/pages/Futures/Components/OrderListPosition.tsx
@@ -831,14 +1218,18 @@ msgstr "공유"
 msgid "Short"
 msgstr "숏"
 
+#: src/pages/Share/Modal/StopTransactionModal.tsx
+msgid "Sincerely,"
+msgstr "감사합니다,"
+
+#: src/pages/Futures/Components/HistoryTable.tsx
 #: src/pages/Futures/Components/OrderTable.tsx
-#: src/pages/Futures/Components/POrderTable.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 msgid "SL"
 msgstr "SL"
 
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Futures/Components/HistoryList.tsx
+#: src/pages/Futures/Components/HistoryTable.tsx
 msgid "SL Executed"
 msgstr "SL 실행됨"
 
@@ -854,27 +1245,31 @@ msgstr "슬리피지 허용 범위 설정"
 msgid "Start Trading"
 msgstr "거래 시작하기"
 
+#: src/pages/Overview/Components/MoneyTable.tsx
+msgid "Status"
+msgstr "상태"
+
+#: src/pages/Copy/Components/CopyStopModal.tsx
+#: src/pages/Copy/Components/CopyStopModal.tsx
+#: src/pages/Copy/Components/MyCopiesMyTraders.tsx
+#: src/pages/Copy/Components/MyCopiesMyTraders.tsx
+msgid "Stop Copying"
+msgstr ""
+
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
+#: src/pages/Futures/Components/HistoryList.tsx
 #: src/pages/Futures/Components/OrderList.tsx
-#: src/pages/Futures/Components/POrderList.tsx
 #: src/pages/Futures/Components/POrderList.tsx
 #: src/pages/Futures/Modal/EditPositionModal.tsx
 #: src/pages/Futures/NewOrder.tsx
 msgid "Stop Loss"
 msgstr "손절매"
 
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Futures/Components/HistoryTable.tsx
 #: src/pages/Futures/Components/OrderTable.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 msgid "Stop Order"
 msgstr "스탑 오더"
-
-#: src/hooks/useFuturesEditPosition.ts
-#: src/hooks/useFuturesNewOrder.ts
-#: src/hooks/useFuturesNewOrder.ts
-msgid "Stop order fee(after execution) = 15 NEST"
-msgstr "스탑 오더 주문 수수료 = 15 NEST"
 
 #: src/pages/Futures/NewOrder.tsx
 msgid "Stop-Limit"
@@ -884,7 +1279,11 @@ msgstr "예약 지정가"
 msgid "Submit successfully"
 msgstr "성공적으로 제출됨"
 
-#: src/components/NormalInput/NESTInput.tsx
+#: src/pages/Overview/Components/MobileList.tsx
+#: src/pages/Overview/Components/MoneyTable.tsx
+msgid "Success"
+msgstr "성공"
+
 #: src/components/NormalInput/NESTInputSelect.tsx
 #: src/hooks/useSwap.ts
 #: src/hooks/useTransactionReceipt.ts
@@ -897,14 +1296,22 @@ msgstr "스왑"
 msgid "Switch network successfully"
 msgstr "네트워크 변경 성공"
 
+#: src/pages/Copy/Components/MyCopiesCurrent.tsx
+#: src/pages/Copy/Components/MyCopiesHistory.tsx
+#: src/pages/Copy/Components/TraderCurrent.tsx
+#: src/pages/Futures/Components/HistoryTable.tsx
 #: src/pages/Futures/Components/OrderTable.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 msgid "Symbol"
 msgstr "심볼"
 
+#: src/pages/Copy/Components/TraderChartView.tsx
+msgid "Symbol Preference"
+msgstr ""
+
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
+#: src/pages/Futures/Components/HistoryList.tsx
 #: src/pages/Futures/Components/OrderList.tsx
-#: src/pages/Futures/Components/POrderList.tsx
 #: src/pages/Futures/Components/POrderList.tsx
 #: src/pages/Futures/Modal/EditPositionModal.tsx
 #: src/pages/Futures/NewOrder.tsx
@@ -925,6 +1332,26 @@ msgstr "테스트넷 토큰"
 msgid "The balance is 0. You can go to \"Faucet\" to get test token before trading."
 msgstr "잔액은 0입니다. 거래하기 전에 \"수도꼭지\"로 이동하여 테스트 토큰을 받을 수 있습니다."
 
+#: src/pages/Copy/Components/CopySettingModal.tsx
+msgid "The fixed amount you invested for each order when copy trading."
+msgstr ""
+
+#: src/pages/Share/Modal/DepositModal.tsx
+msgid "The maximum deposit amount is"
+msgstr "최대 예금 금액은"
+
+#: src/hooks/useWithDrawModal.ts
+msgid "The minimum withdrawal amount greater than 15NEST"
+msgstr "최소 인출 금액은 15NEST보다 큼"
+
+#: src/pages/Share/Modal/StopTransactionModal.tsx
+msgid "The NESTfi Team"
+msgstr "NESTfi 팀 드림"
+
+#: src/pages/Share/Modal/ChangeNewTokenModal.tsx
+msgid "The NESTFi Team"
+msgstr "NESTfi 팀 드림"
+
 #: src/pages/Home/Home.tsx
 msgid "The smart contract guarantees infinite liquidity through burning and issuing $NEST."
 msgstr "스마트 컨트랙트는 $NEST 소각 및 발행을 통해 무한한 유동성을 보장합니다."
@@ -933,44 +1360,45 @@ msgstr "스마트 컨트랙트는 $NEST 소각 및 발행을 통해 무한한 �
 msgid "The smart contract is the only seller of the system. No market marking costs and no liquidity debt."
 msgstr "스마트 컨트랙트는 시스템의 유일한 판매자입니다. 시장 표시 비용과 유동성 부채가 없습니다."
 
-#: src/components/NormalInput/NESTInputSelect.tsx
-msgid "The system will automatically convert USDT to NEST at market price for you to open your position, and you will also receive NEST at settlement."
-msgstr "시스템은 시장가에 따라 자동으로 USDT를 NEST로 변환하여 포지션을 진입할 수 있도록하며, 정산 시에는 NEST도 수령하게 됩니다."
+#: src/pages/Copy/Components/CopySettingModal.tsx
+msgid "The total amount you invested in copying this trader’s signals."
+msgstr ""
 
 #: src/hooks/useNESTSnackBar.tsx
 msgid "The transaction failed and the amount has been fully refunded. You can re-trade"
 msgstr "트랜잭션이 실패하고 모든 금액이 환불되었습니다. 재거래할 수 있습니다."
 
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Futures/Components/HistoryList.tsx
+#: src/pages/Futures/Components/HistoryTable.tsx
+#: src/pages/Overview/Components/MoneyTable.tsx
+#: src/pages/Overview/Components/TransactionTable.tsx
 msgid "Time"
 msgstr "시간"
-
-#: src/pages/Futures/Components/FuturesNotice.tsx
-msgid "to check and close."
-msgstr "확인 및 종료하십시오."
 
 #: src/pages/Swap/Components/SwapInputItem.tsx
 msgid "To(Estimated)"
 msgstr "받을 토큰(예상)"
 
-#: src/pages/Dashboard/Dashboard.tsx
-msgid "Today Burned"
-msgstr "오늘 소각량"
-
-#: src/pages/Dashboard/Dashboard.tsx
-msgid "Today Volume"
-msgstr "오늘 거래량"
-
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Personal/Personal.tsx
+#: src/pages/Personal/Personal.tsx
 msgid "Today's PNL"
 msgstr "오늘의 손익"
 
+#: src/pages/Share/Modal/WithdrawModal.tsx
+msgid "Total"
+msgstr "총액"
+
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
-msgid "Today\\'s PNL"
-msgstr "오늘의 손익"
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Personal/Personal.tsx
+msgid "Total Asset Value"
+msgstr "총 자산 가치"
+
+#: src/pages/Dashboard/Dashboard.tsx
+msgid "Total Burned"
+msgstr "총 소각된"
 
 #: src/pages/Home/Home.tsx
 #: src/pages/Home/Home.tsx
@@ -980,39 +1408,43 @@ msgstr "총 소각량(NEST)"
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Total Commissions"
 msgstr "총 수수료"
 
+#: src/pages/Copy/Components/CopyStopModal.tsx
+msgid "Total Copy Amount"
+msgstr ""
+
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Total Invitees"
 msgstr "총 피추천인"
-
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
-#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
-msgid "Total Number of Trades"
-msgstr "총 거래 횟수"
 
 #: src/pages/Futures/NewOrder.tsx
 msgid "Total Pay"
 msgstr "총 지불"
 
+#: src/pages/Copy/Components/CopyStopModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 msgid "Total Profit"
 msgstr "총 이익"
 
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Personal/Personal.tsx
+#: src/pages/Personal/Personal.tsx
 msgid "Total Profit & Loss"
 msgstr "총 수익과 손실"
 
-#: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Total Trading Volume"
 msgstr "총 거래량"
 
@@ -1021,8 +1453,16 @@ msgstr "총 거래량"
 msgid "Total Trading Volume (NEST)"
 msgstr "총 거래량(NEST)"
 
+#: src/pages/Dashboard/Dashboard.tsx
+msgid "Total User"
+msgstr "총 사용자"
+
+#: src/pages/Dashboard/Dashboard.tsx
+msgid "Total Volume"
+msgstr "총 거래량"
+
+#: src/pages/Futures/Components/HistoryTable.tsx
 #: src/pages/Futures/Components/OrderTable.tsx
-#: src/pages/Futures/Components/POrderTable.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 msgid "TP"
 msgstr "TP"
@@ -1031,14 +1471,14 @@ msgstr "TP"
 msgid "TP and SL price you set will trigger immediately."
 msgstr "설정한 TP 및 SL 가격이 즉시 트리거됩니다."
 
-#: src/pages/Dashboard/Dashboard.tsx
-#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Futures/Components/HistoryList.tsx
+#: src/pages/Futures/Components/HistoryTable.tsx
 msgid "TP Executed"
 msgstr "TP 실행됨"
 
 #: src/pages/Home/Home.tsx
-msgid "Trade BTC, ETH and BNB with up to 1-50 leverage. Open a position with USDT or NEST."
-msgstr "최대 1-50 레버리지로 BTC, ETH, BNB를 거래하세요. USDT 또는 NEST로 포지션을 개설하세요."
+msgid "Trade BTC, ETH and BNB with up to 1-50 leverage. Open a position with NEST."
+msgstr "NEST로 BTC, ETH 및 BNB를 1-50 레버리지로 거래하십시오. 포지션을 열어보십시오."
 
 #: src/pages/Home/Home.tsx
 msgid "Trade easily anytime and anywhere."
@@ -1058,24 +1498,33 @@ msgstr "NESTFi에서 함께 거래해요"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Traded Invitees"
 msgstr "트레이딩을 완료한 피추천인"
+
+#: src/pages/Copy/Components/MyCopiesCurrent.tsx
+#: src/pages/Copy/Components/MyCopiesHistory.tsx
+#: src/pages/Copy/Components/MyCopiesMyTraders.tsx
+msgid "Trader"
+msgstr ""
+
+#: src/pages/Copy/Trader.tsx
+msgid "Trader Profile"
+msgstr ""
 
 #: src/pages/Home/Home.tsx
 msgid "Trading only with smart contract.No third-party intervention."
 msgstr "스마트 컨트랙트로만 거래하며 제3자 개입이 없습니다."
 
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Trading Volume"
 msgstr "거래량"
 
 #: src/hooks/useFuturesPOrder.ts
 msgid "Trigger"
 msgstr "트리거"
-
-#: src/hooks/useFuturesPOrderClose.tsx
-msgid "Trigger executed"
-msgstr "트리거 실행됨"
 
 #: src/pages/Futures/Modal/EditPositionModal.tsx
 msgid "Trigger Position"
@@ -1087,27 +1536,74 @@ msgstr "트리거 포지션"
 msgid "Twitter"
 msgstr "트위터"
 
+#: src/pages/Copy/Copy.tsx
+msgid "Unrealized PnL (NEST)"
+msgstr ""
+
+#: src/pages/Copy/MyCopies.tsx
+msgid "Unrealized PnL(NEST)"
+msgstr ""
+
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Unsettled"
 msgstr "미정"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
+#: src/pages/Personal/Referral/Referral.tsx
 msgid "Unsettled Commissions"
 msgstr "미정산 수수료"
+
+#: src/pages/Share/Modal/ChangeNewTokenModal.tsx
+msgid "Update: NEST 2.0 Airdrop Completed - NESTFi Services Now Available"
+msgstr "업데이트: NEST 2.0 에어드롭 완료 - NESTFi 서비스 이용 가능"
+
+#: src/pages/Dashboard/Dashboard.tsx
+msgid "User"
+msgstr "사용자"
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "User Guide"
 msgstr "사용자 가이드"
 
+#: src/pages/Share/Modal/SignModal.tsx
+msgid "Verify ownership"
+msgstr "소유권 확인"
+
+#: src/pages/Share/Head/ConnectButton.tsx
+msgid "Verify ownership, Confirm you are the owner of this wallet."
+msgstr "이 지갑의 소유자임을 확인하십시오. 서명은 무료이며 거래를 보내지 않습니다."
+
 #: src/components/SnackBar/NormalSnackBar.tsx
-#: src/pages/Futures/Components/FuturesNotice.tsx
 msgid "View"
 msgstr "보기"
+
+#: src/pages/Dashboard/Dashboard.tsx
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
+#: src/pages/Personal/Personal.tsx
+msgid "Volume"
+msgstr "거래량"
 
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "Wallet"
 msgstr "지갑"
+
+#: src/pages/Share/Modal/DepositModal.tsx
+#: src/pages/Swap/Components/SwapInputItem.tsx
+#: src/pages/Swap/Components/SwapInputItem.tsx
+msgid "Wallet Balance"
+msgstr "지갑 잔고"
+
+#: src/pages/Share/Modal/ChangeNewTokenModal.tsx
+msgid "We are delighted to inform you that the NEST 2.0 token airdrop has been successfully completed. As a result, NESTFi services are now fully operational, and you can resume using the platform as usual."
+msgstr "NEST 2.0 토큰의 에어드롭이 성공적으로 완료되었음을 기쁘게 알려드립니다. 이에 따라 NESTFi 서비스가 정상적으로 운영 중이며, 플랫폼을 평소처럼 사용하실 수 있습니다."
+
+#: src/pages/Share/Modal/StopTransactionModal.tsx
+msgid "We would like to inform you about an upcoming event regarding the NEST token. We are currently conducting an airdrop of NEST 2.0 tokens, which will bring significant upgrades and improvements to the NEST protocol."
+msgstr "NEST 토큰에 관한 다가오는 이벤트에 대해 알려드리고자 합니다. 저희는 현재 NEST 2.0 토큰의 에어드롭을 진행 중이며, 이는 NEST 프로토콜에 상당한 업그레이드와 개선 사항을 가져올 것입니다."
 
 #: src/pages/Share/Head/NavMenuV2Base.tsx
 msgid "White Paper"
@@ -1121,10 +1617,31 @@ msgstr "NESTFi를 선택해야 하는 이유"
 msgid "Will not be displayed after closing"
 msgstr "닫은 후에는 표시되지 않습니다"
 
+#: src/pages/Copy/Components/TraderChartView.tsx
+msgid "Win Rate"
+msgstr ""
+
+#: src/pages/Copy/Components/TraderChartView.tsx
+msgid "Winning Trades"
+msgstr ""
+
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 msgid "with 1 click"
 msgstr "1 클릭으로"
 
+#: src/hooks/useTransactionReceipt.ts
+#: src/hooks/useWithDrawModal.ts
+#: src/pages/Overview/Overview.tsx
+#: src/pages/Personal/Personal.tsx
+#: src/pages/Share/Modal/WithdrawModal.tsx
+#: src/pages/Share/Modal/WithdrawModal.tsx
+msgid "Withdraw"
+msgstr "인출"
+
+#: src/pages/Copy/Copy.tsx
+msgid "You can freely choose the KOL that suits you in the leaderboards."
+msgstr ""
+
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Youtube"
-msgstr "유튜브"
+msgstr "Youtube"

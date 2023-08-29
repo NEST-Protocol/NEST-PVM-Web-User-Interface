@@ -1,197 +1,148 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { FuturesV2Contract } from "../contracts/contractAddress";
-import useReadTokenBalance, {
-  useReadTokenAllowance,
-} from "../contracts/Read/useReadTokenContract";
-import useTokenApprove from "../contracts/useTokenContract";
-import { FuturesOrderV2 } from "./useFuturesOrderList";
+
+import { FuturesOrderService } from "../pages/Futures/OrderList";
 import useNEST from "./useNEST";
-import { MaxUint256 } from "@ethersproject/constants";
 import { BigNumber } from "ethers";
 import { lipPrice } from "./useFuturesNewOrder";
-import { useFuturesAdd as useFuturesAddTransaction } from "../contracts/useFuturesBuyV2";
-import { FuturesPrice, priceToken } from "../pages/Futures/Futures";
-import {
-  TransactionType,
-  usePendingTransactions,
-} from "./useTransactionReceipt";
+import { FuturesPrice } from "../pages/Futures/Futures";
 import { t } from "@lingui/macro";
+import useService from "../contracts/useService";
+import { serviceAdd } from "../lib/NESTRequest";
 
 function useFuturesAdd(
-  data: FuturesOrderV2,
+  data: FuturesOrderService,
   price: FuturesPrice | undefined,
-  onClose: () => void
+  onClose: (res?: boolean) => void
 ) {
-  const { account, chainsData } = useNEST();
+  const { account, chainsData, signature } = useNEST();
   const [nestAmount, setNestAmount] = useState("");
-  const { isPendingOrder, isPendingType } = usePendingTransactions();
-  const [send, setSend] = useState(false);
-  const NESTToken = useMemo(() => {
-    const token = "NEST".getToken();
-    if (chainsData.chainId && token) {
-      return token.address[chainsData.chainId];
-    }
-  }, [chainsData.chainId]);
+  const { service_balance } = useService();
+  const [tokenBalance, setTokenBalance] = useState<BigNumber>();
+  const [loading, setLoading] = useState<boolean>(false);
   const tokenPair = useMemo(() => {
-    return priceToken[parseInt(data.channelIndex.toString())]
-  }, [data.channelIndex])
-  /**
-   * futures contract
-   */
-  const futureContract = useMemo(() => {
-    if (chainsData.chainId) {
-      return FuturesV2Contract[chainsData.chainId];
-    }
-  }, [chainsData.chainId]);
-  /**
-   * allowance
-   */
-  const { allowance: nestAllowance } = useReadTokenAllowance(
-    (NESTToken ?? String().zeroAddress) as `0x${string}`,
-    account.address ?? "",
-    futureContract
-  );
+    return data.product.split("/")[0];
+  }, [data.product]);
   /**
    * balance
    */
-  const { balance: nestBalance } = useReadTokenBalance(
-    (NESTToken ?? String().zeroAddress) as `0x${string}`,
-    account.address ?? ""
-  );
+  const getBalance = useCallback(async () => {
+    service_balance((result: number) => {
+      const balance_bigNumber = result.toString().stringToBigNumber(18);
+      setTokenBalance(balance_bigNumber ?? BigNumber.from("0"));
+    });
+  }, [service_balance]);
   /**
    * check
    */
-  const checkAllowance = useMemo(() => {
-    if (nestAllowance) {
-      const nestAmountNumber =
-        nestAmount === ""
-          ? BigNumber.from("0")
-          : nestAmount.stringToBigNumber(18)!;
-      return nestAmountNumber.lte(nestAllowance);
-    } else {
-      return true;
-    }
-  }, [nestAllowance, nestAmount]);
   const checkBalance = useMemo(() => {
-    if (nestBalance) {
+    if (tokenBalance) {
       const nestAmountNumber =
         nestAmount === ""
           ? BigNumber.from("0")
           : nestAmount.stringToBigNumber(18)!;
-      return nestAmountNumber.lte(nestBalance);
+      return nestAmountNumber.lte(tokenBalance);
     } else {
       return false;
     }
-  }, [nestAmount, nestBalance]);
+  }, [nestAmount, tokenBalance]);
   /**
    * action
    */
-  const inputAmountTransaction = useMemo(() => {
-    const amount = nestAmount.stringToBigNumber(4);
-    if (amount && checkAllowance && checkBalance) {
-      return amount;
-    } else {
-      return undefined;
+  const add = useCallback(async () => {
+    if (chainsData.chainId && signature) {
+      const addBase: { [key: string]: any } = await serviceAdd(
+        nestAmount,
+        chainsData.chainId,
+        data.id.toString(),
+        { Authorization: signature.signature }
+      );
+      if (Number(addBase["errorCode"]) === 0) {
+        getBalance();
+      }
+      onClose(Number(addBase["errorCode"]) === 0);
     }
-  }, [checkAllowance, checkBalance, nestAmount]);
-  const { transaction: tokenApprove } = useTokenApprove(
-    (NESTToken ?? String().zeroAddress) as `0x${string}`,
-    futureContract,
-    MaxUint256
-  );
-  const { transaction: add } = useFuturesAddTransaction(
-    data.index,
-    inputAmountTransaction
-  );
+    setLoading(false);
+  }, [chainsData.chainId, data.id, getBalance, nestAmount, onClose, signature]);
 
   const maxCallBack = useCallback(() => {
-    if (nestBalance) {
-      setNestAmount(nestBalance.bigNumberToShowString(18, 2));
+    if (tokenBalance) {
+      setNestAmount(tokenBalance.bigNumberToShowString(18, 2));
     }
-  }, [nestBalance]);
+  }, [tokenBalance]);
   /**
    * show
    */
   const showToSwap = useMemo(() => {
-    if (account.address && nestBalance) {
-      return BigNumber.from("0").eq(nestBalance) ? true : false;
+    if (account.address && tokenBalance) {
+      return BigNumber.from("0").eq(tokenBalance) ? true : false;
     } else {
       return false;
     }
-  }, [account.address, nestBalance]);
+  }, [account.address, tokenBalance]);
   const showBalance = useMemo(() => {
-    if (account.address && nestBalance) {
-      return nestBalance.bigNumberToShowString(18, 2);
+    if (account.address) {
+      if (tokenBalance) {
+        return tokenBalance.bigNumberToShowString(18, 2);
+      } else {
+        return "0";
+      }
     } else {
       return String().placeHolder;
     }
-  }, [account.address, nestBalance]);
+  }, [account.address, tokenBalance]);
   const showPosition = useMemo(() => {
-    const lever = data.lever.toString();
-    const longOrShort = data.orientation ? t`Long` : t`Short`;
-    const balance = BigNumber.from(
-      data.balance.toString()
-    ).bigNumberToShowString(4, 2);
+    const lever = data.leverage.toString();
+    const longOrShort = data.direction ? t`Long` : t`Short`;
+    const balance = data.balance.toFixed(2);
     return `${lever}X ${longOrShort} ${balance} NEST`;
-  }, [data.balance, data.lever, data.orientation]);
+  }, [data.balance, data.direction, data.leverage]);
 
   const showOpenPrice = useMemo(() => {
-    return `${BigNumber.from(data.basePrice.toString()).bigNumberToShowPrice(
-      18,
-      tokenPair.getTokenPriceDecimals()
-    )} USDT`;
-  }, [data.basePrice, tokenPair]);
+    return `${data.orderPrice.toFixed(tokenPair.getTokenPriceDecimals())} USDT`;
+  }, [data.orderPrice, tokenPair]);
 
   const showLiqPrice = useMemo(() => {
-    const result = lipPrice(
-      data.balance,
-      nestAmount === ""
-        ? BigNumber.from("0")
-        : nestAmount.stringToBigNumber(4)!,
-      data.lever,
-      price
-        ? price[tokenPair]
-        : data.basePrice,
-      data.basePrice,
-      data.orientation
-    );
-    return result.bigNumberToShowPrice(18, tokenPair.getTokenPriceDecimals());
-  }, [data.balance, data.basePrice, data.lever, data.orientation, nestAmount, price, tokenPair]);
+    if (price) {
+      const balance =
+        data.balance.toString().stringToBigNumber(18) ?? BigNumber.from("0");
+      const orderPrice =
+        data.orderPrice.toString().stringToBigNumber(18) ?? BigNumber.from("0");
+      const result = lipPrice(
+        balance,
+        nestAmount === ""
+          ? BigNumber.from("0")
+          : nestAmount.stringToBigNumber(4)!,
+        BigNumber.from(data.leverage.toString()),
+        price[tokenPair],
+        orderPrice,
+        data.direction
+      );
+      return result.bigNumberToShowPrice(18, tokenPair.getTokenPriceDecimals());
+    } else {
+      return String().placeHolder;
+    }
+  }, [
+    data.balance,
+    data.direction,
+    data.leverage,
+    data.orderPrice,
+    nestAmount,
+    price,
+    tokenPair,
+  ]);
   /**
    * main button
    */
-  const pending = useMemo(() => {
-    return isPendingOrder(
-      TransactionType.futures_add,
-      parseInt(data.index.toString())
-    );
-  }, [data.index, isPendingOrder]);
-  const approvePending = useMemo(() => {
-    return isPendingType(TransactionType.approve);
-  }, [isPendingType]);
-  useEffect(() => {
-    if (send && !pending) {
-      onClose();
-    } else if (!send && pending) {
-      setSend(true);
-    }
-  }, [onClose, pending, send]);
   const mainButtonTitle = useMemo(() => {
     if (!checkBalance) {
       return t`Insufficient NEST balance`;
-    } else if (checkAllowance) {
+    } else {
       return t`Confirm`;
-    } else {
-      return t`Approve`;
     }
-  }, [checkAllowance, checkBalance]);
+  }, [checkBalance]);
   const mainButtonLoading = useMemo(() => {
-    if (tokenApprove.isLoading || add.isLoading || pending || approvePending) {
-      return true;
-    } else {
-      return false;
-    }
-  }, [add.isLoading, pending, tokenApprove.isLoading, approvePending]);
+    return loading;
+  }, [loading]);
   const mainButtonDis = useMemo(() => {
     if (
       !account.address ||
@@ -204,14 +155,25 @@ function useFuturesAdd(
     return !checkBalance;
   }, [account.address, checkBalance, nestAmount]);
   const mainButtonAction = useCallback(() => {
-    if (mainButtonLoading || !checkBalance) {
+    if (mainButtonLoading || !checkBalance || mainButtonDis) {
       return;
-    } else if (!checkAllowance) {
-      tokenApprove.write?.();
     } else {
-      add.write?.();
+      setLoading(true);
+      add();
     }
-  }, [add, checkAllowance, checkBalance, mainButtonLoading, tokenApprove]);
+  }, [add, checkBalance, mainButtonDis, mainButtonLoading]);
+  /**
+   * update
+   */
+  useEffect(() => {
+    getBalance();
+    const time = setInterval(() => {
+      getBalance();
+    }, 5 * 1000);
+    return () => {
+      clearInterval(time);
+    };
+  }, [getBalance]);
   return {
     checkBalance,
     showToSwap,

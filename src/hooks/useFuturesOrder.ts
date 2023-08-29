@@ -1,54 +1,69 @@
-import { BigNumber } from "ethers";
 import { useCallback, useMemo, useState } from "react";
-import { useCancelBuyRequest } from "../contracts/useFuturesBuyV2";
 import { Order } from "../pages/Dashboard/Dashboard";
-import { priceToken } from "../pages/Futures/Futures";
-import { FuturesOrderV2 } from "./useFuturesOrderList";
+import { t } from "@lingui/macro";
+import useNEST from "./useNEST";
+import { serviceCancel } from "../lib/NESTRequest";
 import {
   TransactionType,
-  usePendingTransactions,
+  usePendingTransactionsBase,
 } from "./useTransactionReceipt";
-import { t } from "@lingui/macro";
+import { SnackBarType } from "../components/SnackBar/NormalSnackBar";
+import { FuturesOrderService } from "../pages/Futures/OrderList";
 
-function useFuturesOrder(data: FuturesOrderV2) {
-  const { isPendingOrder } = usePendingTransactions();
-  const tokenName = priceToken[parseInt(data.channelIndex.toString())];
-  const isLong = data.orientation;
-  const lever = parseInt(data.lever.toString());
+function useFuturesOrder(data: FuturesOrderService, updateList: () => void) {
+  const { chainsData, signature } = useNEST();
+  const [loading, setLoading] = useState<boolean>(false);
+  const tokenName = data.product.split("/")[0];
+  const isLong = data.direction;
+  const lever = data.leverage;
   const [showShareOrderModal, setShowShareOrderModal] =
     useState<boolean>(false);
   const showLimitPrice = useMemo(() => {
-    return BigNumber.from(data.basePrice.toString()).bigNumberToShowPrice(
-      18,
-      tokenName.getTokenPriceDecimals()
-    );
-  }, [data.basePrice, tokenName]);
+    return data.orderPrice.toFixed(tokenName.getTokenPriceDecimals());
+  }, [data.orderPrice, tokenName]);
   const showBalance = useMemo(() => {
-    return BigNumber.from(data.balance.toString()).bigNumberToShowString(4, 2);
-  }, [data.balance]);
+    return data.margin.toFixed(2);
+  }, [data.margin]);
+  const { addTransactionNotice } = usePendingTransactionsBase();
   /**
    * action
    */
-  const { transaction: closeLimit } = useCancelBuyRequest(data.index);
+  const close = useCallback(async () => {
+    if (chainsData.chainId && signature) {
+      const closeBase: { [key: string]: any } = await serviceCancel(
+        data.id.toString(),
+        chainsData.chainId,
+        { Authorization: signature.signature }
+      );
+      if (Number(closeBase["errorCode"]) === 0) {
+        updateList();
+      }
+      addTransactionNotice({
+        type: TransactionType.futures_closeLimit,
+        info: "",
+        result:
+          Number(closeBase["errorCode"]) === 0
+            ? SnackBarType.success
+            : SnackBarType.fail,
+      });
+    }
+    setLoading(false);
+  }, [
+    addTransactionNotice,
+    chainsData.chainId,
+    data.id,
+    signature,
+    updateList,
+  ]);
   /**
    * main button
    */
-  const pending = useMemo(() => {
-    return isPendingOrder(
-      TransactionType.futures_closeLimit,
-      parseInt(data.index.toString())
-    );
-  }, [data.index, isPendingOrder]);
   const mainButtonTitle = useMemo(() => {
     return t`Close`;
   }, []);
   const mainButtonLoading = useMemo(() => {
-    if (closeLimit.isLoading || pending) {
-      return true;
-    } else {
-      return false;
-    }
-  }, [closeLimit.isLoading, pending]);
+    return loading;
+  }, [loading]);
   const mainButtonDis = useMemo(() => {
     return false;
   }, []);
@@ -56,46 +71,34 @@ function useFuturesOrder(data: FuturesOrderV2) {
     if (mainButtonLoading) {
       return;
     } else {
-      closeLimit.write?.();
+      setLoading(true);
+      close();
     }
-  }, [closeLimit, mainButtonLoading]);
+  }, [close, mainButtonLoading]);
   const tp = useMemo(() => {
-    const tpNum = data.stopProfitPrice;
-    return BigNumber.from("0").eq(tpNum)
+    return data.takeProfitPrice === 0
       ? String().placeHolder
-      : BigNumber.from(tpNum.toString()).bigNumberToShowPrice(
-          18,
-          tokenName.getTokenPriceDecimals()
-        );
-  }, [data.stopProfitPrice, tokenName]);
+      : data.takeProfitPrice.floor(tokenName.getTokenPriceDecimals());
+  }, [data.takeProfitPrice, tokenName]);
   const sl = useMemo(() => {
-    const slNum = data.stopLossPrice;
-    return BigNumber.from("0").eq(slNum)
+    return data.stopLossPrice === 0
       ? String().placeHolder
-      : BigNumber.from(slNum.toString()).bigNumberToShowPrice(
-          18,
-          tokenName.getTokenPriceDecimals()
-        );
+      : data.stopLossPrice.floor(tokenName.getTokenPriceDecimals());
   }, [data.stopLossPrice, tokenName]);
 
   const shareOrder = useMemo(() => {
     const info: Order = {
-      owner: data.owner.toString(),
-      leverage: `${data.lever.toString()}X`,
-      orientation: data.orientation ? t`Long` : t`Short`,
+      owner: data.walletAddress.toString(),
+      leverage: `${data.leverage.toString()}X`,
+      orientation: data.direction ? `Long` : `Short`,
       actualRate: 0,
-      index: parseInt(data.index.toString()),
-      openPrice: parseFloat(
-        data.basePrice.bigNumberToShowPrice(
-          18,
-          tokenName.getTokenPriceDecimals()
-        )
-      ),
+      index: parseInt(data.id.toString()),
+      openPrice:
+        parseFloat(data.orderPrice.floor(tokenName.getTokenPriceDecimals())) ??
+        0,
       tokenPair: `${tokenName}/USDT`,
       actualMargin: 0,
-      initialMargin: parseFloat(
-        BigNumber.from(data.balance.toString()).bigNumberToShowString(4, 2)
-      ),
+      initialMargin: parseFloat(data.balance.floor(2)),
       lastPrice: 0,
       sp: parseFloat(tp === String().placeHolder ? "0" : tp),
       sl: parseFloat(sl === String().placeHolder ? "0" : sl),
@@ -103,11 +106,11 @@ function useFuturesOrder(data: FuturesOrderV2) {
     return info;
   }, [
     data.balance,
-    data.basePrice,
-    data.index,
-    data.lever,
-    data.orientation,
-    data.owner,
+    data.direction,
+    data.id,
+    data.leverage,
+    data.orderPrice,
+    data.walletAddress,
     sl,
     tokenName,
     tp,

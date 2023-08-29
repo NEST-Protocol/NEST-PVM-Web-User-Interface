@@ -1,62 +1,57 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
-import { FuturesOrderV2 } from "./useFuturesOrderList";
-import { useFuturesUpdateLimitPrice } from "../contracts/useFuturesBuyV2";
-import {
-  TransactionType,
-  usePendingTransactions,
-} from "./useTransactionReceipt";
-import { BigNumber } from "ethers";
+import { useCallback, useMemo, useState } from "react";
+import { FuturesOrderService } from "../pages/Futures/OrderList";
 import { t } from "@lingui/macro";
-import { priceToken } from "../pages/Futures/Futures";
+import useNEST from "./useNEST";
+import { serviceUpdateLimitPrice } from "../lib/NESTRequest";
 
-function useFuturesEditLimit(data: FuturesOrderV2, onClose: () => void) {
-  const { isPendingOrder } = usePendingTransactions();
-  const [send, setSend] = useState(false);
+function useFuturesEditLimit(
+  data: FuturesOrderService,
+  onClose: (res?: boolean) => void
+) {
+  const { chainsData, signature } = useNEST();
+  const [loading, setLoading] = useState<boolean>(false);
   const tokenPair = useMemo(() => {
-    return priceToken[parseInt(data.channelIndex.toString())];
-  }, [data.channelIndex]);
+    return data.product.split("/")[0];
+  }, [data.product]);
   const defaultLimitPrice = useMemo(() => {
-    return !BigNumber.from("0").eq(data.basePrice)
-      ? data.basePrice.bigNumberToShowString(
-          18,
-          tokenPair.getTokenPriceDecimals()
-        )
-      : "";
-  }, [data.basePrice, tokenPair]);
+    const orderPrice = data.orderPrice.toString().stringToBigNumber(18);
+    if (orderPrice) {
+      return data.orderPrice !== 0
+        ? data.orderPrice.floor(tokenPair.getTokenPriceDecimals())
+        : "";
+    } else {
+      return "";
+    }
+  }, [data.orderPrice, tokenPair]);
   const [limitPrice, setLimitPrice] = useState(defaultLimitPrice);
   /**
    * action
    */
-  const { transaction: edit } = useFuturesUpdateLimitPrice(
-    data.index,
-    limitPrice.stringToBigNumber(18) ?? BigNumber.from("0")
-  );
+  const update = useCallback(async () => {
+    if (chainsData.chainId && signature) {
+      const updateBase: { [key: string]: any } = await serviceUpdateLimitPrice(
+        data.id.toString(),
+        limitPrice,
+        chainsData.chainId,
+        { Authorization: signature.signature }
+      );
+      if (Number(updateBase["errorCode"]) === 0) {
+      }
+      onClose(Number(updateBase["errorCode"]) === 0);
+    }
+    setLoading(false);
+  }, [chainsData.chainId, data.id, limitPrice, onClose, signature]);
+
   /**
    * main button
    */
-  const pending = useMemo(() => {
-    return isPendingOrder(
-      TransactionType.futures_editLimit,
-      parseInt(data.index.toString())
-    );
-  }, [data.index, isPendingOrder]);
-  useEffect(() => {
-    if (send && !pending) {
-      onClose();
-    } else if (!send && pending) {
-      setSend(true);
-    }
-  }, [onClose, pending, send]);
+
   const mainButtonTitle = useMemo(() => {
     return t`Confirm`;
   }, []);
   const mainButtonLoading = useMemo(() => {
-    if (edit.isLoading || pending) {
-      return true;
-    } else {
-      return false;
-    }
-  }, [edit.isLoading, pending]);
+    return loading;
+  }, [loading]);
   const mainButtonDis = useMemo(() => {
     return false;
   }, []);
@@ -64,9 +59,10 @@ function useFuturesEditLimit(data: FuturesOrderV2, onClose: () => void) {
     if (mainButtonLoading) {
       return;
     } else {
-      edit.write?.();
+      setLoading(true);
+      update();
     }
-  }, [edit, mainButtonLoading]);
+  }, [mainButtonLoading, update]);
   return {
     limitPrice,
     setLimitPrice,

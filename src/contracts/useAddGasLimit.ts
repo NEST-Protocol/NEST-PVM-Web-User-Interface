@@ -5,8 +5,9 @@ import { usePrepareSendTransaction } from "wagmi";
 function useAddGasLimit(tranConfig: any, percent?: number) {
   const { config } = usePrepareSendTransaction(tranConfig);
   const gasLimit = useMemo(() => {
-    if (config && config.request) {
-      const basGasLimit = config.request.gasLimit as BigNumber;
+    if (config && config.gas) {
+      
+      const basGasLimit = config.gas.toBigNumber();
       return basGasLimit.add(basGasLimit.mul(percent ?? 10).div(100));
     } else {
       return BigNumber.from("0");
