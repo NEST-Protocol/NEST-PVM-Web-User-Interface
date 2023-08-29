@@ -305,7 +305,7 @@ You can follow the right person on NESTFi, here is my refer link`}: ${link}`;
                   <NESTLogo/>
                   <Stack>
                     <Caption7>{t`Scan and copy the trade`}</Caption7>
-                    <Caption7>{`with 1 click`}</Caption7>
+                    <Caption7>{t`with 1 click`}</Caption7>
                   </Stack>
                 </Stack>
                 <Box

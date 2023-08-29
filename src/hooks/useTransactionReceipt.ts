@@ -18,9 +18,6 @@ export enum TransactionType {
   faucet_scroll,
   deposit,
   withdraw,
-  editCopy,
-  closeCopy,
-  copy,
 }
 
 export type TransactionInfo = {
@@ -58,12 +55,6 @@ export const getTransactionTypeString = (text: string) => {
     return t`Deposit Request`;
   } else if (text === "Withdraw") {
     return t`Withdraw`;
-  } else if (text === "Edited") {
-    return t`Edited`;
-  } else if (text === "Stop Copying") {
-    return t`Stop Copying`;
-  } else if (text === "Copy Trading") {
-    return t`Copy Trading`;
   } else {
     return "";
   }
@@ -113,12 +104,6 @@ const getInfoTitle = (type: TransactionType) => {
       return `Deposit Request`;
     case TransactionType.withdraw:
       return `Withdraw`;
-    case TransactionType.editCopy:
-      return `Edited`;
-    case TransactionType.closeCopy:
-      return `Stop Copying`;
-    case TransactionType.copy:
-      return `Copy Trading`;
   }
 };
 
@@ -149,7 +134,6 @@ export const usePendingTransactionsBase = () => {
   useEffect(() => {
     if (transactionNotice) {
       transactionSnackBarService(
-        transactionNotice.type,
         getInfoTitle(transactionNotice.type),
         transactionNotice.info,
         transactionNotice.result

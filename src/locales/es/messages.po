@@ -125,21 +125,9 @@ msgstr "5. Riesgo de contrato inteligente: Puede haber riesgos desconocidos y fa
 msgid "7 Days' PNL"
 msgstr "7 Days' PNL"
 
-#: src/pages/Copy/Components/kolItem.tsx
-msgid "7D Followers PnL"
-msgstr ""
-
-#: src/pages/Copy/Components/kolItem.tsx
-msgid "7D PnL"
-msgstr ""
-
 #: src/pages/Home/Home.tsx
 msgid "A beginner's guide to using NESTFi"
 msgstr "Guía para principiantes sobre cómo usar NESTFi"
-
-#: src/pages/Copy/Copy.tsx
-msgid "A professional trader's position will be automatically copied and executed for you."
-msgstr ""
 
 #: src/pages/Share/Modal/ConnectWalletModal.tsx
 msgid "about connecting wallets"
@@ -155,10 +143,6 @@ msgstr "Cuenta"
 msgid "Action"
 msgstr "Acción"
 
-#: src/pages/Copy/Components/MyCopiesCurrent.tsx
-#: src/pages/Copy/Components/MyCopiesCurrent.tsx
-#: src/pages/Copy/Components/MyCopiesHistory.tsx
-#: src/pages/Copy/Components/MyCopiesHistory.tsx
 #: src/pages/Futures/Components/HistoryList.tsx
 #: src/pages/Futures/Components/HistoryTable.tsx
 #: src/pages/Futures/Components/OrderList.tsx
@@ -172,10 +156,6 @@ msgstr "Margen Actual"
 #: src/pages/Futures/Components/POrderTable.tsx
 msgid "Add"
 msgstr "Añadir"
-
-#: src/pages/Copy/Components/CopySettingModal.tsx
-msgid "Add Copy Trading Amount"
-msgstr ""
 
 #: src/pages/Futures/Components/FuturesNotice.tsx
 #: src/pages/Share/Modal/ChangeNewTokenModal.tsx
@@ -197,7 +177,6 @@ msgstr "Agregar posición"
 msgid "Add Position"
 msgstr "Agregar posición"
 
-#: src/pages/Copy/Components/TraderFollowers.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Personal/Referral/Referral.tsx
 msgid "Address"
@@ -208,23 +187,11 @@ msgstr "Dirección"
 msgid "After the limit order is executed, TP and SL price you set will trigger immediately."
 msgstr "Después de que la orden límite se ejecute, los precios de TP y SL que estableciste se activarán inmediatamente."
 
-#: src/pages/Copy/Copy.tsx
-msgid "Align With Traders"
-msgstr ""
-
-#: src/pages/Copy/Copy.tsx
-msgid "All Traders"
-msgstr ""
-
 #: src/components/NormalInput/NESTInput.tsx
 #: src/components/NormalInput/NESTInputSelect.tsx
 #: src/pages/Overview/Components/MoneyTable.tsx
 msgid "Amount"
 msgstr "Cantidad"
-
-#: src/pages/Copy/Trader.tsx
-msgid "Analysis"
-msgstr ""
 
 #: src/pages/Futures/Modal/ApproveNoticeModal.tsx
 msgid "Approval required"
@@ -235,15 +202,6 @@ msgstr "Aprobación requerida"
 #: src/pages/Futures/Modal/ApproveNoticeModal.tsx
 msgid "Approve"
 msgstr "Aprobar"
-
-#: src/pages/Copy/Components/TraderChartView.tsx
-msgid "AUM (NEST)"
-msgstr ""
-
-#: src/pages/Copy/Components/KolInfo.tsx
-#: src/pages/Copy/Components/KolInfo.tsx
-msgid "AUM(NEST)"
-msgstr ""
 
 #: src/hooks/useSwap.ts
 #: src/pages/Share/Modal/DepositModal.tsx
@@ -261,14 +219,6 @@ msgstr "Balance"
 msgid "Become a Trading KOL"
 msgstr "Conviértete en un Trading KOL"
 
-#: src/pages/Copy/Copy.tsx
-msgid "Become Elite Traders >"
-msgstr ""
-
-#: src/pages/Copy/Copy.tsx
-msgid "Boost your earning and influence by becoming copy traders."
-msgstr ""
-
 #: src/pages/Home/Home.tsx
 msgid "Boost your earning and influence by joining the NESTFi affiliate program."
 msgstr "Aumenta tus ganancias e influencia uniéndote al programa de afiliados de NESTFi."
@@ -283,8 +233,6 @@ msgstr "Enlace del canal"
 
 #: src/components/NormalInput/NormalInputWithCloseButton.tsx
 #: src/hooks/useFuturesOrder.ts
-#: src/pages/Copy/Components/MyCopiesCurrent.tsx
-#: src/pages/Copy/Components/MyCopiesCurrent.tsx
 #: src/pages/Futures/Components/POrderList.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 msgid "Close"
@@ -300,8 +248,6 @@ msgstr "Cerrar Orden Límite"
 msgid "Close Position"
 msgstr "Cerrar Posición"
 
-#: src/pages/Copy/Components/MyCopiesHistory.tsx
-#: src/pages/Copy/Components/MyCopiesHistory.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Futures/Components/HistoryList.tsx
 #: src/pages/Futures/Components/HistoryTable.tsx
@@ -313,11 +259,6 @@ msgstr "Precio de Cierre"
 msgid "Close Risk"
 msgstr "Riesgo de Cierre"
 
-#: src/pages/Copy/Components/MyCopiesHistory.tsx
-#: src/pages/Copy/Components/TraderCurrent.tsx
-msgid "Close Time"
-msgstr ""
-
 #: src/pages/Futures/Components/HistoryList.tsx
 #: src/pages/Futures/Components/HistoryTable.tsx
 msgid "Closed"
@@ -327,7 +268,6 @@ msgstr "Cerrado"
 #: src/hooks/useFuturesClose.ts
 #: src/hooks/useFuturesEditLimit.ts
 #: src/hooks/useFuturesEditPosition.ts
-#: src/pages/Copy/Components/CopyStopModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Home/Modal/ApplyModal.tsx
 #: src/pages/Swap/Components/SwapSlippageModal.tsx
@@ -353,13 +293,6 @@ msgstr "Conectar Billetera"
 msgid "Contact info (Telegram handle)"
 msgstr "Contact info (Telegram handle)"
 
-#: src/pages/Copy/Components/CopyRoute.tsx
-#: src/pages/Copy/Components/CopySettingModal.tsx
-#: src/pages/Copy/Components/CopySettingModal.tsx
-#: src/pages/Share/Head/NESTHead.tsx
-msgid "Copy"
-msgstr ""
-
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Personal/Referral/Referral.tsx
@@ -371,17 +304,6 @@ msgstr "Copiar Enlace de Invitación"
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 msgid "Copy Link"
 msgstr "Copiar Enlace"
-
-#: src/pages/Copy/Components/CopySettingModal.tsx
-#: src/pages/Copy/Components/KolInfo.tsx
-#: src/pages/Copy/Components/KolInfo.tsx
-msgid "Copy Now"
-msgstr ""
-
-#: src/pages/Copy/Copy.tsx
-#: src/pages/Copy/MyCopies.tsx
-msgid "Copy Orders"
-msgstr ""
 
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
@@ -396,38 +318,6 @@ msgstr ""
 msgid "Copy Successfully"
 msgstr "Copiado Exitosamente"
 
-#: src/pages/Copy/Components/CopySettingModal.tsx
-msgid "Copy Trader Service Agreement"
-msgstr ""
-
-#: src/pages/Copy/Components/TraderChartView.tsx
-msgid "Copy Traders’ PnL (NEST)"
-msgstr ""
-
-#: src/pages/Copy/Components/CopyRoute.tsx
-msgid "Copy Trading"
-msgstr ""
-
-#: src/pages/Copy/Copy.tsx
-msgid "Copy Trading Assets (NEST)"
-msgstr ""
-
-#: src/pages/Copy/MyCopies.tsx
-msgid "Copy Trading Assets(NEST)"
-msgstr ""
-
-#: src/pages/Copy/Components/CopySettingModal.tsx
-msgid "Copy Trading Each Order"
-msgstr ""
-
-#: src/pages/Copy/Copy.tsx
-msgid "Copy Trading Effortlessly"
-msgstr ""
-
-#: src/pages/Copy/Components/CopySettingModal.tsx
-msgid "Copy Trading Total Amount"
-msgstr ""
-
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Personal/Referral/Referral.tsx
 msgid "Cumulative Commission"
@@ -437,10 +327,6 @@ msgstr "Comisiones Acumuladas"
 #: src/pages/Personal/Referral/Referral.tsx
 msgid "Cumulative Commissions"
 msgstr "Comisión Acumuladas"
-
-#: src/pages/Copy/Components/TraderChartView.tsx
-msgid "Cumulative Copy Traders"
-msgstr ""
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Personal/Referral/Referral.tsx
@@ -452,16 +338,6 @@ msgstr "Volumen Total de Operaciones de Invitados Acumulado"
 #: src/pages/Personal/Personal.tsx
 msgid "Cumulative Return"
 msgstr "Retorno Acumulado"
-
-#: src/pages/Copy/Components/CopySettingModal.tsx
-#: src/pages/Copy/MyCopies.tsx
-#: src/pages/Copy/Trader.tsx
-msgid "Current"
-msgstr ""
-
-#: src/pages/Copy/Copy.tsx
-msgid "Custom Copy Trading"
-msgstr ""
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
@@ -535,10 +411,6 @@ msgstr "Debido a la volatilidad del mercado, el precio real de liquidación pued
 msgid "During the airdrop period, NESTfi's trading services will be temporarily unavailable for approximately 1-2 hours. This suspension is necessary to ensure a smooth and successful airdrop of NEST 2.0 tokens to all eligible participants. We apologize for any inconvenience caused during this temporary interruption of services."
 msgstr "Durante el período de distribución de tokens (airdrop), los servicios de trading de NESTfi estarán temporalmente no disponibles durante aproximadamente 1-2 horas. Esta suspensión es necesaria para garantizar una distribución exitosa y sin problemas de los tokens NEST 2.0 a todos los participantes elegibles. Pedimos disculpas por cualquier inconveniente causado durante esta interrupción temporal de los servicios."
 
-#: src/pages/Copy/Components/TraderChartView.tsx
-msgid "Earnings"
-msgstr ""
-
 #: src/hooks/useFuturesPOrder.ts
 #: src/pages/Futures/Components/OrderList.tsx
 #: src/pages/Futures/Components/OrderTable.tsx
@@ -556,10 +428,6 @@ msgstr "Editar Orden Límite"
 msgid "Edit Position"
 msgstr "Editar Posición"
 
-#: src/pages/Copy/Components/CopyStopModal.tsx
-msgid "End copy will liquidate your position with market orders, and automatically return the assets to your Account after deducting the profits sharing."
-msgstr ""
-
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Enter Channel link"
 msgstr "Ingresar enlace del canal"
@@ -571,10 +439,6 @@ msgstr "Ingresar información de contacto"
 #: src/pages/Futures/NewOrder.tsx
 msgid "Entry Price"
 msgstr "Precio de Entrada"
-
-#: src/pages/Copy/Components/CopyStopModal.tsx
-msgid "Estimated Realized Amount"
-msgstr ""
 
 #: src/pages/Overview/Components/MobileList.tsx
 #: src/pages/Overview/Components/MoneyTable.tsx
@@ -600,16 +464,6 @@ msgid ""
 msgstr ""
 "Sigue a la persona adecuada y ganar dinero será tan fácil como respirar.\n"
 "Puedes seguir a la persona adecuada en NESTFi, aquí está mi enlace de referencia."
-
-#: src/pages/Copy/Copy.tsx
-msgid "Follow top trading strategies on NESTFi"
-msgstr ""
-
-#: src/pages/Copy/Components/KolInfo.tsx
-#: src/pages/Copy/Components/KolInfo.tsx
-#: src/pages/Copy/Trader.tsx
-msgid "Followers"
-msgstr ""
 
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 #: src/pages/Futures/Modal/ProtocolModal.tsx
@@ -638,8 +492,6 @@ msgstr "Obtener NEST"
 msgid "Github"
 msgstr "Github"
 
-#: src/pages/Copy/MyCopies.tsx
-#: src/pages/Copy/Trader.tsx
 #: src/pages/Futures/OrderList.tsx
 msgid "History"
 msgstr "Historial"
@@ -663,10 +515,6 @@ msgstr "Cómo empezar?"
 #: src/pages/Futures/MoreInfo.tsx
 msgid "How to Trade"
 msgstr "Cómo Operar"
-
-#: src/pages/Copy/Components/CopySettingModal.tsx
-msgid "I have read and agreed to the"
-msgstr ""
 
 #: src/pages/Futures/Modal/CloseOrderNoticeModal.tsx
 #: src/pages/Home/Modal/ApplyModal.tsx
@@ -748,22 +596,6 @@ msgstr "Idioma"
 msgid "Last"
 msgstr "Último"
 
-#: src/pages/Copy/Components/SelectTime.tsx
-msgid "Last 24 hours"
-msgstr ""
-
-#: src/pages/Copy/Components/SelectTime.tsx
-msgid "Last 3 weeks"
-msgstr ""
-
-#: src/pages/Copy/Components/SelectTime.tsx
-msgid "Last 7 days"
-msgstr ""
-
-#: src/pages/Copy/Components/SelectTime.tsx
-msgid "Last month"
-msgstr ""
-
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 msgid "Last Price"
 msgstr "Último Precio"
@@ -799,8 +631,6 @@ msgstr "Precio Límite"
 msgid "Link wallet"
 msgstr "Enlazar billetera"
 
-#: src/pages/Copy/Components/MyCopiesCurrent.tsx
-#: src/pages/Copy/Components/MyCopiesCurrent.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 #: src/pages/Futures/Modal/AddModal.tsx
 #: src/pages/Futures/Modal/EditPositionModal.tsx
@@ -823,8 +653,6 @@ msgstr "Loading..."
 #: src/hooks/useFuturesClose.ts
 #: src/hooks/useFuturesEditPosition.ts
 #: src/hooks/useFuturesNewOrder.ts
-#: src/pages/Copy/Components/CopyListPosition.tsx
-#: src/pages/Copy/Components/CopyTablePosition.tsx
 #: src/pages/Dashboard/Components/MobileOrderTypePosition.tsx
 #: src/pages/Dashboard/Components/ShareOrderPosition.tsx
 #: src/pages/Futures/Components/OrderListPosition.tsx
@@ -832,20 +660,9 @@ msgstr "Loading..."
 msgid "Long"
 msgstr "Largo"
 
-#: src/pages/Copy/Components/TraderChartView.tsx
-msgid "Losing Trades"
-msgstr ""
-
 #: src/pages/Futures/NewOrder.tsx
 msgid "Market"
 msgstr "Mercado"
-
-#: src/pages/Copy/Components/MyCopiesCurrent.tsx
-#: src/pages/Copy/Components/MyCopiesCurrent.tsx
-#: src/pages/Copy/Components/TraderCurrent.tsx
-#: src/pages/Copy/Components/TraderCurrent.tsx
-msgid "Market Price"
-msgstr ""
 
 #: src/components/NormalInput/NESTInput.tsx
 #: src/components/NormalInput/NESTInputSelect.tsx
@@ -857,7 +674,6 @@ msgstr "MÁXIMO"
 msgid "Minimum 50 NEST"
 msgstr "Mínimo 50 NEST"
 
-#: src/pages/Copy/Copy.tsx
 #: src/pages/Home/Home.tsx
 #: src/pages/Share/Modal/ConnectWalletModal.tsx
 msgid "More"
@@ -878,23 +694,9 @@ msgstr "Mi Saldo"
 msgid "My commissions"
 msgstr "Mis comisiones"
 
-#: src/pages/Copy/Copy.tsx
-#: src/pages/Copy/MyCopies.tsx
-msgid "My Copies"
-msgstr ""
-
 #: src/pages/Personal/Personal.tsx
 msgid "My Positions"
 msgstr "Mis Posiciones"
-
-#: src/pages/Copy/MyCopies.tsx
-msgid "My Traders"
-msgstr ""
-
-#: src/pages/Copy/Copy.tsx
-#: src/pages/Copy/MyCopies.tsx
-msgid "My Trades"
-msgstr ""
 
 #: src/pages/Futures/Components/FuturesNotice.tsx
 msgid "NEST 2.0 token has been airdropped to your wallet, please add NEST 2.0 token to your wallet."
@@ -946,10 +748,6 @@ msgstr "Sin Órdenes"
 msgid "No Transactions yet"
 msgstr "Todavía no hay transacciones"
 
-#: src/pages/Copy/Components/TraderChartView.tsx
-msgid "Number of Orders"
-msgstr ""
-
 #: src/pages/Share/Modal/StopTransactionModal.tsx
 msgid "Once the airdrop is completed, NESTfi will only support trading with NEST 2.0 tokens. The previous version of NEST tokens (NEST 1.0) will become obsolete and will no longer be accepted for trading or other activities on the platform."
 msgstr "Una vez que se complete el airdrop, NESTfi solo admitirá el comercio con tokens NEST 2.0. La versión anterior de los tokens NEST (NEST 1.0) quedará obsoleta y ya no se aceptará para el comercio u otras actividades en la plataforma."
@@ -958,7 +756,6 @@ msgstr "Una vez que se complete el airdrop, NESTfi solo admitirá el comercio co
 msgid "Open"
 msgstr "Abrir"
 
-#: src/pages/Copy/Components/CopyStopModal.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "Open Interest"
@@ -970,12 +767,6 @@ msgstr "Interés Abierto"
 msgid "Open position"
 msgstr "Abrir posición"
 
-#: src/pages/Copy/Components/MyCopiesCurrent.tsx
-#: src/pages/Copy/Components/MyCopiesCurrent.tsx
-#: src/pages/Copy/Components/MyCopiesHistory.tsx
-#: src/pages/Copy/Components/MyCopiesHistory.tsx
-#: src/pages/Copy/Components/TraderCurrent.tsx
-#: src/pages/Copy/Components/TraderCurrent.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 #: src/pages/Futures/Components/HistoryList.tsx
@@ -989,14 +780,6 @@ msgstr "Abrir posición"
 msgid "Open Price"
 msgstr "Precio de Apertura"
 
-#: src/pages/Copy/Components/MyCopiesCurrent.tsx
-#: src/pages/Copy/Components/MyCopiesHistory.tsx
-#: src/pages/Copy/Components/TraderCurrent.tsx
-msgid "Open Time"
-msgstr ""
-
-#: src/pages/Copy/Components/MyCopiesCurrent.tsx
-#: src/pages/Copy/Components/MyCopiesMyTraders.tsx
 #: src/pages/Futures/Components/HistoryTable.tsx
 #: src/pages/Futures/Components/OrderTable.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
@@ -1020,10 +803,6 @@ msgstr "Resumen"
 #: src/pages/Overview/Components/MoneyTable.tsx
 msgid "Pending"
 msgstr "Pendiente"
-
-#: src/pages/Copy/Components/TraderChartView.tsx
-msgid "Performance"
-msgstr ""
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Personal/Personal.tsx
@@ -1051,17 +830,9 @@ msgstr "Por favor, obtén primero el token ETH de la red de prueba."
 msgid "Please note that \"Limit order\" or \"Stop order\" is not guaranteed to be executed. This may include, but is not limited to, the following cases."
 msgstr "Ten en cuenta que las órdenes de \"Límite\"\\ o \"Stop\"\\ no están garantizadas para ser ejecutadas. Esto puede incluir, pero no se limita a, los siguientes casos."
 
-#: src/pages/Copy/Components/CopyStopModal.tsx
-msgid "Please note that due to price fluctuation during settlement, the PNL, profit shared and settled value may vary from displayed above."
-msgstr ""
-
 #: src/pages/Share/Modal/ChangeNewTokenModal.tsx
 msgid "Please note that NEST 1.0 tokens have been officially deprecated and will no longer be supported. To continue participating in the NESTFi ecosystem and enjoy its benefits, it is crucial that you add NEST 2.0 tokens to your wallet. We have provided a button below for your convenience to add NEST 2.0 tokens to your wallet effortlessly."
 msgstr "Ten en cuenta que los tokens NEST 1.0 han sido oficialmente descontinuados y ya no recibirán soporte. Para continuar participando en el ecosistema de NESTFi y disfrutar de sus beneficios, es crucial que añadas los tokens NEST 2.0 a tu billetera. Hemos proporcionado un botón a continuación para que puedas agregar los tokens NEST 2.0 a tu billetera fácilmente."
-
-#: src/pages/Copy/Components/TraderChartView.tsx
-msgid "PnL Ratio"
-msgstr ""
 
 #: src/pages/Futures/Modal/AddModal.tsx
 #: src/pages/Futures/Modal/CloseModal.tsx
@@ -1096,22 +867,6 @@ msgstr "Valor de Posiciones"
 msgid "Price"
 msgstr "Precio"
 
-#: src/pages/Copy/Components/MyCopiesMyTraders.tsx
-#: src/pages/Copy/Components/MyCopiesMyTraders.tsx
-msgid "Profit"
-msgstr ""
-
-#: src/pages/Copy/Copy.tsx
-msgid "Profit (NEST)"
-msgstr ""
-
-#: src/pages/Copy/Components/TraderFollowers.tsx
-#: src/pages/Copy/Components/TraderFollowers.tsx
-#: src/pages/Copy/Copy.tsx
-#: src/pages/Copy/MyCopies.tsx
-msgid "Profit(NEST)"
-msgstr ""
-
 #: src/hooks/useTransactionReceipt.ts
 msgid "Received"
 msgstr "Recibido"
@@ -1130,26 +885,14 @@ msgstr "Transacciones recientes"
 msgid "Referral"
 msgstr "Referencia"
 
-#: src/pages/Copy/Components/MyCopiesMyTraders.tsx
-#: src/pages/Copy/Components/MyCopiesMyTraders.tsx
-msgid "Remaining Copy Amount"
-msgstr ""
+#: src/pages/Share/Modal/SignModal.tsx
+msgid "Remember me"
+msgstr "recuérdame"
 
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 #: src/pages/Futures/Modal/ProtocolModal.tsx
 msgid "Risk Warning"
 msgstr "Advertencia de Riesgo"
-
-#: src/pages/Copy/Components/KolInfo.tsx
-#: src/pages/Copy/Components/KolInfo.tsx
-#: src/pages/Copy/Components/TraderCurrent.tsx
-#: src/pages/Copy/Components/TraderCurrent.tsx
-msgid "ROI"
-msgstr ""
-
-#: src/pages/Copy/Components/CopySettingModal.tsx
-msgid "Save"
-msgstr ""
 
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
@@ -1160,10 +903,6 @@ msgstr "Escanear y copiar la operación"
 #: src/pages/Personal/Referral/Referral.tsx
 msgid "Search"
 msgstr "Buscar"
-
-#: src/pages/Copy/Copy.tsx
-msgid "Select KOL"
-msgstr ""
 
 #: src/hooks/useTransactionReceipt.ts
 #: src/hooks/useTransactionReceipt.ts
@@ -1180,15 +919,6 @@ msgstr "Enviar solicitud"
 #: src/pages/Share/Modal/WithdrawModal.tsx
 msgid "Service Fee"
 msgstr "Tarifa de servicio"
-
-#: src/pages/Copy/Copy.tsx
-msgid "Set the margin for each order as well as the overall copy trading amount."
-msgstr ""
-
-#: src/pages/Copy/Components/MyCopiesMyTraders.tsx
-#: src/pages/Copy/Components/MyCopiesMyTraders.tsx
-msgid "Settings"
-msgstr ""
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Personal/Referral/Referral.tsx
@@ -1211,8 +941,6 @@ msgstr "Compartir"
 #: src/hooks/useFuturesClose.ts
 #: src/hooks/useFuturesEditPosition.ts
 #: src/hooks/useFuturesNewOrder.ts
-#: src/pages/Copy/Components/CopyListPosition.tsx
-#: src/pages/Copy/Components/CopyTablePosition.tsx
 #: src/pages/Dashboard/Components/MobileOrderTypePosition.tsx
 #: src/pages/Dashboard/Components/ShareOrderPosition.tsx
 #: src/pages/Futures/Components/OrderListPosition.tsx
@@ -1250,13 +978,6 @@ msgstr "Comenzar a Operar"
 #: src/pages/Overview/Components/MoneyTable.tsx
 msgid "Status"
 msgstr "Estado"
-
-#: src/pages/Copy/Components/CopyStopModal.tsx
-#: src/pages/Copy/Components/CopyStopModal.tsx
-#: src/pages/Copy/Components/MyCopiesMyTraders.tsx
-#: src/pages/Copy/Components/MyCopiesMyTraders.tsx
-msgid "Stop Copying"
-msgstr ""
 
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 #: src/pages/Futures/Components/HistoryList.tsx
@@ -1298,18 +1019,11 @@ msgstr "Intercambiar"
 msgid "Switch network successfully"
 msgstr "Cambio de red exitoso"
 
-#: src/pages/Copy/Components/MyCopiesCurrent.tsx
-#: src/pages/Copy/Components/MyCopiesHistory.tsx
-#: src/pages/Copy/Components/TraderCurrent.tsx
 #: src/pages/Futures/Components/HistoryTable.tsx
 #: src/pages/Futures/Components/OrderTable.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 msgid "Symbol"
 msgstr "Símbolo"
-
-#: src/pages/Copy/Components/TraderChartView.tsx
-msgid "Symbol Preference"
-msgstr ""
 
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 #: src/pages/Futures/Components/HistoryList.tsx
@@ -1334,10 +1048,6 @@ msgstr "Token de Red de Prueba"
 msgid "The balance is 0. You can go to \"Faucet\" to get test token before trading."
 msgstr "El saldo es 0. Puedes ir a \"Grifo\" para obtener un token de prueba antes de operar."
 
-#: src/pages/Copy/Components/CopySettingModal.tsx
-msgid "The fixed amount you invested for each order when copy trading."
-msgstr ""
-
 #: src/pages/Share/Modal/DepositModal.tsx
 msgid "The maximum deposit amount is"
 msgstr "El monto máximo de depósito es"
@@ -1361,10 +1071,6 @@ msgstr "El contrato inteligente garantiza una liquidez infinita a través de la 
 #: src/pages/Home/Home.tsx
 msgid "The smart contract is the only seller of the system. No market marking costs and no liquidity debt."
 msgstr "El contrato inteligente es el único vendedor del sistema. Sin costos de creación de mercado y sin deuda de liquidez."
-
-#: src/pages/Copy/Components/CopySettingModal.tsx
-msgid "The total amount you invested in copying this trader’s signals."
-msgstr ""
 
 #: src/hooks/useNESTSnackBar.tsx
 msgid "The transaction failed and the amount has been fully refunded. You can re-trade"
@@ -1416,10 +1122,6 @@ msgstr "Total Quemado (NEST)"
 msgid "Total Commissions"
 msgstr "Comisiones Totales"
 
-#: src/pages/Copy/Components/CopyStopModal.tsx
-msgid "Total Copy Amount"
-msgstr ""
-
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Personal/Referral/Referral.tsx
@@ -1431,7 +1133,6 @@ msgstr "Invitados Totales"
 msgid "Total Pay"
 msgstr "Total Pagado"
 
-#: src/pages/Copy/Components/CopyStopModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 msgid "Total Profit"
 msgstr "Ganancia Total"
@@ -1505,16 +1206,6 @@ msgstr "Opera conmigo en NESTFi"
 msgid "Traded Invitees"
 msgstr "Invitados que Han Realizado Operaciones"
 
-#: src/pages/Copy/Components/MyCopiesCurrent.tsx
-#: src/pages/Copy/Components/MyCopiesHistory.tsx
-#: src/pages/Copy/Components/MyCopiesMyTraders.tsx
-msgid "Trader"
-msgstr ""
-
-#: src/pages/Copy/Trader.tsx
-msgid "Trader Profile"
-msgstr ""
-
 #: src/pages/Home/Home.tsx
 msgid "Trading only with smart contract.No third-party intervention."
 msgstr "Solo operaciones con contratos inteligentes. Sin intervención de terceros."
@@ -1537,14 +1228,6 @@ msgstr "Posición de Disparo"
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 msgid "Twitter"
 msgstr "Twitter"
-
-#: src/pages/Copy/Copy.tsx
-msgid "Unrealized PnL (NEST)"
-msgstr ""
-
-#: src/pages/Copy/MyCopies.tsx
-msgid "Unrealized PnL(NEST)"
-msgstr ""
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Personal/Referral/Referral.tsx
@@ -1619,14 +1302,7 @@ msgstr "Por Qué Deberías Elegir NESTFi"
 msgid "Will not be displayed after closing"
 msgstr "No se mostrará después de cerrar"
 
-#: src/pages/Copy/Components/TraderChartView.tsx
-msgid "Win Rate"
-msgstr ""
-
-#: src/pages/Copy/Components/TraderChartView.tsx
-msgid "Winning Trades"
-msgstr ""
-
+#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 msgid "with 1 click"
 msgstr "con 1 clic"
@@ -1639,10 +1315,6 @@ msgstr "con 1 clic"
 #: src/pages/Share/Modal/WithdrawModal.tsx
 msgid "Withdraw"
 msgstr "Retirar"
-
-#: src/pages/Copy/Copy.tsx
-msgid "You can freely choose the KOL that suits you in the leaderboards."
-msgstr ""
 
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Youtube"

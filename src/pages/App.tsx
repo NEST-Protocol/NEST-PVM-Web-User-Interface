@@ -3,11 +3,14 @@ import Stack from "@mui/material/Stack";
 import NESTHead from "./Share/Head/NESTHead";
 import NESTFoot from "./Share/Foot/NESTFoot";
 import { HashRouter, Navigate, Route, Routes } from "react-router-dom";
+import loadable from "@loadable/component";
 import { styled } from "@mui/material/styles";
 import useWindowWidth from "../hooks/useWindowWidth";
 import useNEST from "../hooks/useNEST";
 import { KOLClick, KOLWallet } from "../lib/NESTRequest";
+import Personal from "./Personal/Personal";
 
+// const HomePage = lazy(() => import("./Home/Home"));
 const HomePage = lazy(() => import("./Home/Home"));
 const FuturesPage = lazy(() => import("./Futures/Futures"));
 const OverviewPage = lazy(() => import("./Overview/Overview"));
@@ -16,9 +19,6 @@ const DashboardPage = lazy(() => import("./Dashboard/Dashboard"));
 const ReferralPage = lazy(() => import("./Personal/Referral/Referral"));
 const DirectPosterPage = lazy(() => import("./DirectPoster/DirectPoster"));
 const PersonalPage = lazy(() => import("./Personal/Personal"));
-const CopyPage = lazy(() => import("./Copy/Copy"));
-const TraderPage = lazy(() => import("./Copy/Trader"));
-const MyCopiesPage = lazy(() => import("./Copy/MyCopies"));
 const App: FC = () => {
   const { headHeight, isBigMobile } = useWindowWidth();
   const { account, chainsData } = useNEST();
@@ -110,30 +110,24 @@ const App: FC = () => {
         <NESTHead />
         <MainContent>
           <Suspense fallback={<></>}>
-            <Routes>
-              <Route path="home" element={<HomePage />} />
-              <Route path="futures" element={<FuturesPage />} />
-              {swapOrDirectPoster}
-              <Route path="dashboard" element={<DashboardPage />} />
-              <Route path="account">
-                <Route path=":address" element={<PersonalPage />} />
-                <Route path="" element={<PersonalPage />} />
-              </Route>
-              <Route path="overview" element={<OverviewPage />} />
-              <Route path="referral">
-                <Route path={":address"} element={<ReferralPage />} />
-                <Route path={""} element={<ReferralPage />} />
-              </Route>
-
-              <Route path="copy" element={<CopyPage />} />
-              <Route path="trader">
-                <Route path=":address" element={<TraderPage />} />
-              </Route>
-              <Route path="myCopies" element={<MyCopiesPage />} />
-              <Route path="*" element={<Navigate to="/home" />} />
-            </Routes>
+          <Routes>
+            <Route path="home" element={<HomePage />} />
+            <Route path="futures" element={<FuturesPage />} />
+            {swapOrDirectPoster}
+            <Route path="dashboard" element={<DashboardPage />} />
+            <Route path="account">
+              <Route path=":address" element={<PersonalPage />}/>
+              <Route path="" element={<PersonalPage />}/>
+            </Route>
+            <Route path="overview" element={<OverviewPage/>}/>
+            <Route path="referral">
+              <Route path={":address"} element={<ReferralPage />} />
+              <Route path={""} element={<ReferralPage />} />
+            </Route>
+            <Route path="*" element={<Navigate to="/home" />} />
+          </Routes>
           </Suspense>
-
+          
           {/* <TestTheme /> */}
         </MainContent>
         <NESTFoot />

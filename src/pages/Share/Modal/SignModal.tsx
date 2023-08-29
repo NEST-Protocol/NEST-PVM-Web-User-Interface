@@ -148,7 +148,7 @@ const SignModalBase: FC = () => {
             })}
             component={"p"}
           >
-            Remember me
+            <Trans>Remember me</Trans>
           </Box>
           <NESTTooltipFC
             title={t`If you are using a secure device that you own. Selecting this option can expose your keys and information to others if you are on a public or non-secured device.`}
