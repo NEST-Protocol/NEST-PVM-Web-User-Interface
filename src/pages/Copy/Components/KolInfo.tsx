@@ -194,8 +194,25 @@ const KolInfo: FC<KolInfoProps> = ({ ...props }) => {
   }, [current]);
 
   const kolIcon = useMemo(() => {
-    if (props.data?.avatar !== "-") {
-      return <></>;
+    if (props.data?.avatar !== "-" && props.data?.avatar !== "") {
+      return (
+        <Box
+          sx={(theme) => ({
+            width: "80px",
+            minWidth: "80px",
+            height: "80px",
+            borderRadius: "40px",
+            background: theme.normal.primary,
+            overflow: "hidden",
+            "& img": {
+              width: "80px",
+              height: "80px",
+            },
+          })}
+        >
+          <img src={props.data?.avatar} alt="kolIcon" />
+        </Box>
+      );
     } else {
       return (
         <Box

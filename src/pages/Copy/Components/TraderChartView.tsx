@@ -139,10 +139,9 @@ const TraderChartView: FC<TraderChartViewProps> = ({ ...props }) => {
         <Stack
           direction={"row"}
           spacing={"12px"}
-          justifyContent={"space-between"}
           alignItems={"center"}
         >
-          <Stack direction={"row"} spacing={"8px"} alignItems={"center"}>
+          <Stack direction={"row"} spacing={"8px"} alignItems={"center"} width={"80px"}>
             <Box
               sx={(theme) => ({
                 width: "12px",

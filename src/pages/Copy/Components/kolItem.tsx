@@ -155,8 +155,24 @@ const KolItem: FC<KolItemProps> = ({ ...props }) => {
 
   // DefaultKolIcon
   const kolIcon = useMemo(() => {
-    if (props.data.avatar !== "-") {
-      return <></>;
+    if (props.data.avatar !== "-" && props.data.avatar !== "") {
+      return (
+        <Box
+          width={"64px"}
+          height={"64px"}
+          sx={(theme) => ({
+            borderRadius: "32px",
+            background: theme.normal.bg3,
+            "& img": {
+              width: "64px",
+              height: "64px"
+            },
+            overflow: "hidden"
+          })}
+        >
+          <img src={props.data.avatar} alt="kolIcon" />
+        </Box>
+      );
     } else {
       return (
         <Box

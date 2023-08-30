@@ -49,8 +49,24 @@ const MyCopiesHistory: FC<MyCopiesHistoryProps> = ({ ...props }) => {
       const closeTimeString = `${closeTime.toLocaleDateString()} ${closeTime.toLocaleTimeString()}`;
 
       const kolIcon = () => {
-        if (item.avatar !== "-") {
-          return <></>;
+        if (item.avatar !== "-" && item.avatar !== "") {
+          return (
+            <Box
+              sx={(theme) => ({
+                width: "24px",
+                height: "24px",
+                borderRadius: "12px",
+                background: theme.normal.primary,
+                overflow: "hidden",
+                "& img": {
+                  width: "24px",
+                  height: "24px",
+                },
+              })}
+            >
+              <img src={item.avatar} alt="kolIcon" />
+            </Box>
+          );
         } else {
           return (
             <Box
@@ -323,8 +339,24 @@ const Row: FC<RowProps> = ({ ...props }) => {
   const closeTimeString = `${closeTime.toLocaleDateString()} ${closeTime.toLocaleTimeString()}`;
 
   const kolIcon = () => {
-    if (props.data.avatar !== "-") {
-      return <></>;
+    if (props.data.avatar !== "-" && props.data.avatar !== "") {
+      return (
+        <Box
+          sx={(theme) => ({
+            width: "24px",
+            height: "24px",
+            borderRadius: "12px",
+            background: theme.normal.primary,
+            overflow: "hidden",
+            "& img": {
+              width: "24px",
+              height: "24px",
+            },
+          })}
+        >
+          <img src={props.data.avatar} alt="kolIcon" />
+        </Box>
+      );
     } else {
       return (
         <Box
