@@ -6,6 +6,7 @@ declare module "ethers" {
   interface BigNumber {
     bigNumberToShowString(decimals: number, scale?: number): string;
     bigNumberToShowPrice(decimals: number, scale?: number): string;
+    toBigInt(): bigint;
   }
 }
 
@@ -24,4 +25,8 @@ BigNumber.prototype.bigNumberToShowPrice = function (
 ) {
   const number = scale ? scale : 2;
   return parseFloat(formatUnits(this, decimals)).floor(number);
+};
+
+BigNumber.prototype.toBigInt = function () {
+  return BigInt(this.toString());
 };

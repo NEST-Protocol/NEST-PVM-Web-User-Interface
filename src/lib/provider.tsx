@@ -9,6 +9,7 @@ import WalletProvider from "./client";
 import { I18nProvider } from "@lingui/react";
 import { i18n } from "@lingui/core";
 import { defaultLocale, dynamicActivate } from "../locales/i18n";
+import { useConnectModal } from "@rainbow-me/rainbowkit";
 
 export interface ProviderProps {
   children?: React.ReactNode;
@@ -37,6 +38,12 @@ const MainProvider: FC<ProviderProps> = ({ children }) => {
 
 const ConnectWallet: FC = () => {
   const { showConnect, setShowConnect } = useNEST();
+  // const { openConnectModal } = useConnectModal();
+  // useEffect(() => {
+  //   if (showConnect) {
+  //     openConnectModal?.();
+  //   }
+  // }, [openConnectModal, showConnect]);
   return (
     <ConnectWalletModal
       open={showConnect}
@@ -55,7 +62,7 @@ const LanguageProvider: FC<ProviderProps> = ({ children }) => {
     var cache = localStorage.getItem("Language");
     if (cache) {
       dynamicActivate(cache);
-      return
+      return;
     }
     dynamicActivate(defaultLocale);
   }, []);

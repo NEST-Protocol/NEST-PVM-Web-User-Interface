@@ -170,17 +170,6 @@ export const usePendingTransactionsBase = () => {
     }
   };
 
-  const isPendingOrder = useCallback(
-    (type: TransactionType, order: number) => {
-      return (
-        pendingList.filter(
-          (item) => item.type === type && item.info === order.toString()
-        ).length > 0
-      );
-    },
-    [pendingList]
-  );
-
   const isPendingType = useCallback(
     (type: TransactionType) => {
       return pendingList.filter((item) => item.type === type).length > 0;
@@ -191,7 +180,6 @@ export const usePendingTransactionsBase = () => {
   return {
     addPendingList,
     pendingList,
-    isPendingOrder,
     isPendingType,
     transactionNotice,
     setTransactionNotice,

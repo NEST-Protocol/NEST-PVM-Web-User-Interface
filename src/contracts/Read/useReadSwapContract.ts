@@ -7,7 +7,7 @@ import { SwapContract } from "../contractAddress";
 
 function useReadSwapAmountOut(
   amountIn: BigNumber | undefined,
-  path: Array<string>
+  path?: Array<string>
 ) {
   const { chainsData } = useNEST();
   const address = useMemo(() => {
@@ -23,13 +23,14 @@ function useReadSwapAmountOut(
   const {
     data: uniSwapAmountOutData,
     isRefetching: uniSwapAmountOutIsRefetching,
+    isLoading: uniSwapAmountOutIsLoading,
     isSuccess: uniSwapAmountOutIsSuccess,
     refetch: uniSwapAmountOutRefetch,
   } = useContractRead({
     address: address,
     abi: UNISwapABI,
     functionName: "getAmountsOut",
-    args: [amountIn, path],
+    args: [amountIn ? BigInt(amountIn.toString()) : BigInt(0), path],
   });
 
   const uniSwapAmountOut: BigNumber[] | undefined = useMemo(() => {
@@ -37,7 +38,9 @@ function useReadSwapAmountOut(
       if (uniSwapAmountOutData === undefined) {
         return undefined;
       }
-      return uniSwapAmountOutData as BigNumber[];
+      return (uniSwapAmountOutData as any[]).map((item) =>
+        BigNumber.from(item.toString())
+      );
     } else {
       return undefined;
     }
@@ -48,6 +51,7 @@ function useReadSwapAmountOut(
     uniSwapAmountOutIsRefetching,
     uniSwapAmountOutIsSuccess,
     uniSwapAmountOutRefetch,
+    uniSwapAmountOutIsLoading,
   };
 }
 

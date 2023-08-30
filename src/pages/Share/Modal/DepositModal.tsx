@@ -72,6 +72,7 @@ const DepositModalBase: FC<DepositModalBaseProps> = ({ ...props }) => {
       );
     }
   }, [MAX_Amount, checkBalance, checkMax, selectToken]);
+
   const otherInfo = useMemo(() => {
     if (selectToken !== "NEST") {
       return (
@@ -157,7 +158,17 @@ const DepositModalBase: FC<DepositModalBaseProps> = ({ ...props }) => {
     showBalance,
     tokenAmount,
   ]);
-
+  const button = useMemo(() => {
+    return (
+      <MainButton
+        title={mainButtonTitle}
+        disable={mainButtonDis}
+        isLoading={mainButtonLoading}
+        onClick={mainButtonAction}
+        style={{ height: "48px" }}
+      />
+    );
+  }, [mainButtonTitle, mainButtonDis, mainButtonLoading, mainButtonAction]);
   return (
     <Stack spacing={"24px"} width={"100%"}>
       <Stack spacing={"16px"}>
@@ -169,13 +180,7 @@ const DepositModalBase: FC<DepositModalBaseProps> = ({ ...props }) => {
         />
       </Stack>
       {otherInfo}
-      <MainButton
-        title={mainButtonTitle}
-        disable={mainButtonDis}
-        isLoading={mainButtonLoading}
-        onClick={mainButtonAction}
-        style={{ height: "48px" }}
-      />
+      {button}
     </Stack>
   );
 };

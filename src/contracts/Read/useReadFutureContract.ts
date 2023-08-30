@@ -26,7 +26,7 @@ function useReadFuturesPrice(channelIndex: number) {
       if (futuresPriceData === undefined) {
         return undefined;
       }
-      return (futuresPriceData as BigNumber[])[2];
+      return (futuresPriceData as BigInt[])[2].toBigNumber();
     } else {
       return undefined;
     }

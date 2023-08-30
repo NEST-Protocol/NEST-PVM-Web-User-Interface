@@ -80,7 +80,7 @@ function useTransactionSnackBar() {
     type: SnackBarType
   ) => {
     enqueueSnackbar("", {
-      preventDuplicate: true,
+      preventDuplicate: false,
       anchorOrigin: {
         vertical: "top",
         horizontal: isBigMobile ? "center" : "right",

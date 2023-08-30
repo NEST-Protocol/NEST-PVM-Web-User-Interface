@@ -15,10 +15,8 @@ export function useTransferValue(amount: BigNumber) {
   }, [amount, chainsData.chainId]);
   const { addPendingList } = usePendingTransactions();
   const { config } = usePrepareSendTransaction({
-    request: {
-      to: NESTServiceOther[chainsData.chainId ?? 97],
-      value: value,
-    },
+    to: NESTServiceOther[chainsData.chainId ?? 97],
+    value: value.toBigInt(),
   });
   const { data, isLoading, isSuccess, sendTransaction, reset } =
     useSendTransaction(config);

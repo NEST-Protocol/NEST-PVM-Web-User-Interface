@@ -1,7 +1,6 @@
 import { Connector, useConnect } from "wagmi";
 import { flatten } from "./flatten";
 import { indexBy } from "./indexBy";
-import { isNotNullish } from "./isNotNullish";
 import {
   useInitialChainId,
   useRainbowKitChains,
@@ -23,6 +22,8 @@ export interface WalletConnector extends WalletInstance {
   onConnecting?: (fn: () => void) => void;
   showWalletConnectModal?: () => void;
   recent: boolean;
+  mobileDownloadUrl?: string;
+  extensionDownloadUrl?: string;
 }
 
 export function useWalletConnectors(): WalletConnector[] {
@@ -58,32 +59,12 @@ export function useWalletConnectors(): WalletConnector[] {
     })
   ).sort((a, b) => a.index - b.index);
 
-  const walletInstanceById = indexBy(
-    walletInstances,
-    (walletInstance) => walletInstance.id
-  );
-
-  const MAX_RECENT_WALLETS = 3;
-  const recentWallets: WalletInstance[] = getRecentWalletIds()
-    .map((walletId) => walletInstanceById[walletId])
-    .filter(isNotNullish)
-    .slice(0, MAX_RECENT_WALLETS);
-
-  const groupedWallets: WalletInstance[] = [
-    ...recentWallets,
-    ...walletInstances.filter(
-      (walletInstance) => !recentWallets.includes(walletInstance)
-    ),
-  ];
-
   const walletConnectors: WalletConnector[] = [];
 
-  groupedWallets.forEach((wallet: WalletInstance) => {
+  walletInstances.forEach((wallet: WalletInstance) => {
     if (!wallet) {
       return;
     }
-
-    const recent = recentWallets.includes(wallet);
 
     walletConnectors.push({
       ...wallet,
@@ -94,7 +75,7 @@ export function useWalletConnectors(): WalletConnector[] {
           type === "connecting" ? fn() : undefined
         ),
       ready: (wallet.installed ?? true) && wallet.connector.ready,
-      recent,
+      recent: false,
       showWalletConnectModal: wallet.walletConnectModalConnector
         ? async () => {
             try {

@@ -5,20 +5,23 @@ import {
   lightTheme,
 } from "@rainbow-me/rainbowkit";
 import { FC } from "react";
-import { configureChains, createClient, mainnet, WagmiConfig } from "wagmi";
+import { configureChains, createConfig, mainnet, WagmiConfig } from "wagmi";
 import { bsc, bscTestnet } from "wagmi/chains";
 import { jsonRpcProvider } from "wagmi/providers/jsonRpc";
+import { publicProvider } from 'wagmi/providers/public'
 
 import {
   metaMaskWallet,
   coinbaseWallet,
   walletConnectWallet,
   trustWallet,
+  okxWallet,
 } from "@rainbow-me/rainbowkit/wallets";
+import { InjectedConnector } from 'wagmi/connectors/injected'
 
 import { infuraProvider } from "wagmi/providers/infura";
 import { ProviderProps } from "./provider";
-import { okxWallet } from "./okxWallet";
+
 import {
   MetaMask,
   CoinbaseWallet,
@@ -54,12 +57,12 @@ const scrollAlphaTestnet = {
   testnet: true,
 };
 
-const { chains, provider, webSocketProvider } = configureChains(
+const { chains, publicClient, webSocketPublicClient } = configureChains(
   // [bsc, scrollAlphaTestnet],
   // [bscTestnet],
   [bsc],
   [
-    infuraProvider({ apiKey: "be0a9832394640b090fceb2b2107993c" }),
+    publicProvider(),
     jsonRpcProvider({
       rpc: (chain) => {
         if (chain.id === 97) {
@@ -81,18 +84,21 @@ const { chains, provider, webSocketProvider } = configureChains(
         }
       },
     }),
-  ],
-  { targetQuorum: 1 }
+    infuraProvider({ apiKey: "be0a9832394640b090fceb2b2107993c" }),
+  ],{ retryCount: 5 }
 );
-
+const PROJECT_ID = "4ea5acecf1faa0887415ff933691f96f";
 export const Wallets = [
   {
-    wallet: metaMaskWallet({ chains }),
+    wallet: metaMaskWallet({ projectId: PROJECT_ID, chains: chains }),
     icon: MetaMask,
     name: "MetaMask",
   },
   {
-    wallet: walletConnectWallet({ chains }),
+    wallet: walletConnectWallet({
+      chains: chains,
+      projectId: PROJECT_ID,
+    }),
     icon: WalletConnect,
     name: "WalletConnect",
   },
@@ -101,26 +107,43 @@ export const Wallets = [
     icon: CoinbaseWallet,
     name: "coinbase Wallet",
   },
-  { wallet: trustWallet({ chains }), icon: TrustWallet, name: "Trust Wallet" },
-  { wallet: okxWallet({ chains }), icon: OKX, name: "OKX Wallet" },
+  {
+    wallet: trustWallet({ projectId: PROJECT_ID, chains: chains }),
+    icon: TrustWallet,
+    name: "Trust Wallet",
+  },
+  {
+    wallet: okxWallet({ projectId: PROJECT_ID, chains: chains }),
+    icon: OKX,
+    name: "OKX Wallet",
+  },
 ];
 
-const client = createClient({
+const connectors = connectorsForWallets([
+  {
+    groupName: "main",
+    wallets: Wallets.map((item) => item.wallet),
+  },
+])()
+
+const config = createConfig({
   autoConnect: true,
-  connectors: connectorsForWallets([
-    {
-      groupName: "main",
-      wallets: Wallets.map((item) => item.wallet),
+  connectors: [...connectors, new InjectedConnector({
+    chains,
+    options: {
+      name: 'Injected_Trust',
+      shimDisconnect: true,
     },
-  ]),
-  provider,
-  webSocketProvider,
+  })],
+  publicClient,
+  webSocketPublicClient
 });
 
 const WalletProvider: FC<ProviderProps> = ({ children }) => {
   const { nowTheme } = useTheme();
+  console.log(config.connectors)
   return (
-    <WagmiConfig client={client}>
+    <WagmiConfig config={config}>
       <RainbowKitProvider
         theme={nowTheme.isLight ? lightTheme() : darkTheme()}
         chains={chains}
