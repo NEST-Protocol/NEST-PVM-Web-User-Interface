@@ -184,8 +184,8 @@ const Copy: FC = () => {
   const { kolList, myTradeInfo: myInfo } = useCopy();
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" })
-  }, [])
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
   const myTradeInfo = useCallback((title: string, num: string) => {
     return (
       <Stack spacing={"4px"}>
@@ -323,6 +323,8 @@ const Copy: FC = () => {
     } else {
       return (
         <Stack
+          maxWidth={"1200px"}
+          width={"100%"}
           direction={"row"}
           justifyContent={"space-between"}
           alignItems={"center"}
@@ -419,11 +421,11 @@ const Copy: FC = () => {
         >
           <Box
             sx={(theme) => ({
-              width: "64px",
-              height: "64px",
+              width: ["48px", "48px", "64px"],
+              height: ["48px", "48px", "64px"],
               "& svg": {
-                width: "64px",
-                height: "64px",
+                width: ["48px", "48px", "64px"],
+                height: ["48px", "48px", "64px"],
                 display: "block",
                 "& path": {
                   fill: theme.normal.primary,
@@ -463,9 +465,9 @@ const Copy: FC = () => {
   const kols = useMemo(() => {
     return (
       <Stack
+        maxWidth={"1200px"}
         gap={["16px", "16px", "32px"]}
         marginTop={"40px"}
-        maxWidth={"1200px"}
       >
         <Box
           sx={(theme) => ({
@@ -492,117 +494,122 @@ const Copy: FC = () => {
       justifyContent={"space-around"}
       alignItems={"center"}
     >
-      <Stack
-        maxWidth={"1200px"}
-        width={"100%"}
-        paddingTop={["0", "0", "0", "80px"]}
-        paddingX={["20px", "20px", "20px", "20px", "0"]}
-      >
+      <Stack width={"100%"} alignItems={"center"}>
         <Stack
-          direction={"row"}
-          justifyContent={"space-between"}
+          width={"100%"}
           alignItems={"center"}
-          spacing={["0px", "0px", "40px"]}
-        >
-          <Box
-            paddingY={["80px", "80px", "60px"]}
-            textAlign={["center", "center", "left"]}
-            sx={(theme) => ({
-              fontSize: ["28px", "28px", "48px"],
-              fontWeight: "700",
-              lineHeight: ["40px", "40px", "60px"],
-              color: theme.normal.text0,
-            })}
-          >
-            <Trans>Follow top trading strategies on NESTFi</Trans>
-          </Box>
-          <Box
-            sx={{ width: "480px", height: "240px" }}
-            display={["none", "none", "block"]}
-          ></Box>
-        </Stack>
-
-        {myTrades}
-
-        {kols}
-
-        <Stack
-          spacing={["16px", "16px", "32px"]}
-          marginTop={["40px", "40px", "80px"]}
+          paddingTop={["0", "0", "0", "80px"]}
+          paddingX={["20px", "20px", "20px", "20px", "0"]}
         >
           <Stack
+            maxWidth={"1200px"}
             direction={"row"}
             justifyContent={"space-between"}
             alignItems={"center"}
+            spacing={["0px", "0px", "40px"]}
           >
             <Box
+              paddingY={["80px", "80px", "60px"]}
+              textAlign={["center", "center", "left"]}
               sx={(theme) => ({
+                fontSize: ["28px", "28px", "48px"],
                 fontWeight: "700",
-                fontSize: ["20px", "20px","32px"],
-                lineHeight: ["28px", "28px", "44px"],
+                lineHeight: ["40px", "40px", "60px"],
                 color: theme.normal.text0,
               })}
             >
-              <Trans>Copy Trading Effortlessly</Trans>
+              <Trans>Follow top trading strategies on NESTFi</Trans>
             </Box>
+            <Box
+              sx={{ width: "480px", height: "240px" }}
+              display={["none", "none", "block"]}
+            ></Box>
+          </Stack>
+
+          {myTrades}
+
+          {kols}
+
+          <Stack
+            maxWidth={"1200px"}
+            spacing={["16px", "16px", "32px"]}
+            marginTop={["40px", "40px", "80px"]}
+          >
             <Stack
               direction={"row"}
-              justifyContent={"flex-end"}
+              justifyContent={"space-between"}
               alignItems={"center"}
-              spacing={"4px"}
             >
               <Box
                 sx={(theme) => ({
-                  fontSize: "16px",
-                  fontWeight: "400",
-                  lineHeight: "22px",
-                  color: theme.normal.text2,
+                  fontWeight: "700",
+                  fontSize: ["20px", "20px", "32px"],
+                  lineHeight: ["28px", "28px", "44px"],
+                  color: theme.normal.text0,
                 })}
               >
-                <Trans>More</Trans>
+                <Trans>Copy Trading Effortlessly</Trans>
               </Box>
-              <Box
-                width={"16px"}
-                height={"16px"}
-                sx={(theme) => ({
-                  "& svg": {
-                    width: "16px",
-                    height: "16px",
-                    display: "block",
-                    "& path": {
-                      fill: theme.normal.text2,
+              <Stack
+                direction={"row"}
+                justifyContent={"flex-end"}
+                alignItems={"center"}
+                spacing={"4px"}
+              >
+                <Box
+                  sx={(theme) => ({
+                    fontSize: "16px",
+                    fontWeight: "400",
+                    lineHeight: "22px",
+                    color: theme.normal.text2,
+                  })}
+                >
+                  <Trans>More</Trans>
+                </Box>
+                <Box
+                  width={"16px"}
+                  height={"16px"}
+                  sx={(theme) => ({
+                    "& svg": {
+                      width: "16px",
+                      height: "16px",
+                      display: "block",
+                      "& path": {
+                        fill: theme.normal.text2,
+                      },
                     },
-                  },
-                })}
-              >
-                {NEXT}
-              </Box>
+                  })}
+                >
+                  {NEXT}
+                </Box>
+              </Stack>
             </Stack>
-          </Stack>
-          <Stack
-            direction={["column", "column", "row"]}
-            gap={"24px"}
-            justifyContent={"space-between"}
-            alignItems={"center"}
-          >
-            {howToUse(
-              t`Select KOL`,
-              t`You can freely choose the KOL that suits you in the leaderboards.`,
-              HOW_TO_USE_1
-            )}
-            {howToUse(
-              t`Custom Copy Trading`,
-              t`Set the margin for each order as well as the overall copy trading amount.`,
-              HOW_TO_USE_2
-            )}
-            {howToUse(
-              t`Align With Traders`,
-              t`A professional trader's position will be automatically copied and executed for you.`,
-              HOW_TO_USE_3
-            )}
+            <Stack
+              direction={["column", "column", "row"]}
+              gap={"24px"}
+              justifyContent={"space-between"}
+              alignItems={"center"}
+            >
+              {howToUse(
+                t`Select KOL`,
+                t`You can freely choose the KOL that suits you in the leaderboards.`,
+                HOW_TO_USE_1
+              )}
+              {howToUse(
+                t`Custom Copy Trading`,
+                t`Set the margin for each order as well as the overall copy trading amount.`,
+                HOW_TO_USE_2
+              )}
+              {howToUse(
+                t`Align With Traders`,
+                t`A professional trader's position will be automatically copied and executed for you.`,
+                HOW_TO_USE_3
+              )}
+            </Stack>
           </Stack>
         </Stack>
         <Stack
+          maxWidth={"100%"}
           marginTop={["24px", "24px", "102px"]}
           gap={["24px", "24px", "40px"]}
           paddingY={["40px", "40px", "80px"]}
@@ -621,6 +628,7 @@ const Copy: FC = () => {
               lineHeight: "44px",
               color: theme.normal.text0,
               textAlign: "center",
+              paddingX: "20px",
             })}
           >
             <Trans>

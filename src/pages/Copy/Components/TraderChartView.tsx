@@ -59,7 +59,7 @@ const TraderChartView: FC<TraderChartViewProps> = ({ ...props }) => {
         maxIndex = i;
       }
     }
-    return maxIndex
+    return maxIndex;
   }, [props.performanceSymbolData]);
   const [activeIndex, setActiveIndex] = useState(defaultActiveIndex);
 
@@ -461,7 +461,6 @@ const TraderChartView: FC<TraderChartViewProps> = ({ ...props }) => {
                     borderTopLeftRadius: "4px",
                     borderBottomLeftRadius: "4px",
                     height: "12px",
-                    transform: "skew(-20deg)",
                   })}
                 ></Box>
                 <Box
@@ -471,7 +470,6 @@ const TraderChartView: FC<TraderChartViewProps> = ({ ...props }) => {
                     borderTopRightRadius: "4px",
                     borderBottomRightRadius: "4px",
                     height: "12px",
-                    transform: "skew(-20deg)",
                   })}
                 ></Box>
               </Stack>

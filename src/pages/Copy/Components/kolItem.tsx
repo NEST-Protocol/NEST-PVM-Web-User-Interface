@@ -176,8 +176,12 @@ const KolItem: FC<KolItemProps> = ({ ...props }) => {
   const stop = useMemo(() => {
     const green = props.data.kolProfitLossRate >= 0;
     return (
-      <ResponsiveContainer width="60%" height="100%">
-        <AreaChart data={chartData}>
+      <ResponsiveContainer width="50%" height="100%">
+        <AreaChart
+          data={chartData}
+          style={{ borderBottom: `1px dashed ${nowTheme.normal.border}` }}
+          margin={{ top: 0, bottom: 0, left: 0, right: 0 }}
+        >
           <defs>
             <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
               <stop
@@ -220,6 +224,7 @@ const KolItem: FC<KolItemProps> = ({ ...props }) => {
     );
   }, [
     chartData,
+    nowTheme.normal.border,
     nowTheme.normal.danger,
     nowTheme.normal.success,
     props.data.kolProfitLossRate,
@@ -233,8 +238,8 @@ const KolItem: FC<KolItemProps> = ({ ...props }) => {
           borderRadius: "12px",
           background: theme.normal.bg1,
           "&:hover": {
-            cursor: "pointer"
-          }
+            cursor: "pointer",
+          },
         })}
         onClick={() => {
           window.location.href = `/#/trader/${props.data.walletAddress}`;

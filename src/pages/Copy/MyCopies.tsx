@@ -146,7 +146,7 @@ const MyCopies: FC = () => {
         </Box>
         <Box
           sx={(theme) => ({
-            fontWeight: "740",
+            fontWeight: "400",
             fontSize: "14px",
             lineHeight: "20px",
             color: theme.normal.text2,
