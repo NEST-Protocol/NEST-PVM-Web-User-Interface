@@ -281,6 +281,10 @@ msgstr "Burned"
 msgid "Channel link"
 msgstr "Channel link"
 
+#: src/pages/Copy/Components/KolInfo.tsx
+msgid "Click here to view copy trading details."
+msgstr "Click here to view copy trading details."
+
 #: src/components/NormalInput/NormalInputWithCloseButton.tsx
 #: src/hooks/useFuturesOrder.ts
 #: src/pages/Copy/Components/MyCopiesCurrent.tsx
@@ -302,6 +306,8 @@ msgstr "Close Position"
 
 #: src/pages/Copy/Components/MyCopiesHistory.tsx
 #: src/pages/Copy/Components/MyCopiesHistory.tsx
+#: src/pages/Copy/Components/TraderCurrent.tsx
+#: src/pages/Copy/Components/TraderCurrent.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Futures/Components/HistoryList.tsx
 #: src/pages/Futures/Components/HistoryTable.tsx
@@ -372,8 +378,6 @@ msgstr "Copy Invitation Link"
 msgid "Copy Link"
 msgstr "Copy Link"
 
-#: src/pages/Copy/Components/CopySettingModal.tsx
-#: src/pages/Copy/Components/KolInfo.tsx
 #: src/pages/Copy/Components/KolInfo.tsx
 msgid "Copy Now"
 msgstr "Copy Now"
@@ -404,6 +408,8 @@ msgstr "Copy Trader Service Agreement"
 msgid "Copy Traders’ PnL (NEST)"
 msgstr "Copy Traders’ PnL (NEST)"
 
+#: src/hooks/useAccount.ts
+#: src/hooks/useTransactionReceipt.ts
 #: src/pages/Copy/Components/CopyRoute.tsx
 msgid "Copy Trading"
 msgstr "Copy Trading"
@@ -423,10 +429,6 @@ msgstr "Copy Trading Each Order"
 #: src/pages/Copy/Copy.tsx
 msgid "Copy Trading Effortlessly"
 msgstr "Copy Trading Effortlessly"
-
-#: src/pages/Copy/Components/CopySettingModal.tsx
-msgid "Copy Trading Total Amount"
-msgstr "Copy Trading Total Amount"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Personal/Referral/Referral.tsx
@@ -453,11 +455,14 @@ msgstr "Cumulative Invitee Trading Volume"
 msgid "Cumulative Return"
 msgstr "Cumulative Return"
 
-#: src/pages/Copy/Components/CopySettingModal.tsx
 #: src/pages/Copy/MyCopies.tsx
 #: src/pages/Copy/Trader.tsx
 msgid "Current"
 msgstr "Current"
+
+#: src/pages/Copy/Components/CopySettingModal.tsx
+msgid "Current:"
+msgstr "Current:"
 
 #: src/pages/Copy/Copy.tsx
 msgid "Custom Copy Trading"
@@ -555,6 +560,10 @@ msgstr "Edit Limit Order"
 #: src/pages/Futures/Modal/EditPositionModal.tsx
 msgid "Edit Position"
 msgstr "Edit Position"
+
+#: src/hooks/useTransactionReceipt.ts
+msgid "Edited"
+msgstr "Edited"
 
 #: src/pages/Copy/Components/CopyStopModal.tsx
 msgid "End copy will liquidate your position with market orders, and automatically return the assets to your Account after deducting the profits sharing."
@@ -711,6 +720,7 @@ msgstr "Insufficient balance. Please deposit to start the lightning trade."
 
 #: src/hooks/useFuturesAdd.ts
 #: src/hooks/useFuturesNewOrder.ts
+#: src/pages/Copy/Hooks/useCopySettingModal.ts
 msgid "Insufficient NEST balance"
 msgstr "Insufficient NEST balance"
 
@@ -854,6 +864,7 @@ msgid "MAX"
 msgstr "MAX"
 
 #: src/hooks/useFuturesNewOrder.ts
+#: src/pages/Copy/Hooks/useCopySettingModal.ts
 msgid "Minimum 50 NEST"
 msgstr "Minimum 50 NEST"
 
@@ -941,6 +952,10 @@ msgstr "No Order"
 #: src/pages/Futures/OrderList.tsx
 msgid "No Orders"
 msgstr "No Orders"
+
+#: src/pages/Copy/Components/TraderChartView.tsx
+msgid "No Records Found"
+msgstr "No Records Found"
 
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "No Transactions yet"
@@ -1105,6 +1120,11 @@ msgstr "Profit"
 msgid "Profit (NEST)"
 msgstr "Profit (NEST)"
 
+#: src/pages/Copy/Components/KolInfo.tsx
+#: src/pages/Copy/Components/KolInfo.tsx
+msgid "Profit Sharing:"
+msgstr "Profit Sharing:"
+
 #: src/pages/Copy/Components/TraderFollowers.tsx
 #: src/pages/Copy/Components/TraderFollowers.tsx
 #: src/pages/Copy/Copy.tsx
@@ -1135,6 +1155,10 @@ msgstr "Referral"
 msgid "Remaining Copy Amount"
 msgstr "Remaining Copy Amount"
 
+#: src/pages/Share/Modal/SignModal.tsx
+msgid "Remember me"
+msgstr "Remember me"
+
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 #: src/pages/Futures/Modal/ProtocolModal.tsx
 msgid "Risk Warning"
@@ -1147,7 +1171,7 @@ msgstr "Risk Warning"
 msgid "ROI"
 msgstr "ROI"
 
-#: src/pages/Copy/Components/CopySettingModal.tsx
+#: src/pages/Copy/Hooks/useCopySettingModal.ts
 msgid "Save"
 msgstr "Save"
 
@@ -1251,8 +1275,10 @@ msgstr "Start Trading"
 msgid "Status"
 msgstr "Status"
 
+#: src/hooks/useTransactionReceipt.ts
 #: src/pages/Copy/Components/CopyStopModal.tsx
 #: src/pages/Copy/Components/CopyStopModal.tsx
+#: src/pages/Copy/Components/KolInfo.tsx
 #: src/pages/Copy/Components/MyCopiesMyTraders.tsx
 #: src/pages/Copy/Components/MyCopiesMyTraders.tsx
 msgid "Stop Copying"
@@ -1538,6 +1564,10 @@ msgstr "Trigger Position"
 msgid "Twitter"
 msgstr "Twitter"
 
+#: src/pages/Overview/Components/MoneyTable.tsx
+msgid "Type"
+msgstr "Type"
+
 #: src/pages/Copy/Copy.tsx
 msgid "Unrealized PnL (NEST)"
 msgstr "Unrealized PnL (NEST)"
@@ -1579,6 +1609,7 @@ msgid "Verify ownership, Confirm you are the owner of this wallet."
 msgstr "Verify ownership, Confirm you are the owner of this wallet."
 
 #: src/components/SnackBar/NormalSnackBar.tsx
+#: src/components/SnackBar/SnackBarWithButton.tsx
 msgid "View"
 msgstr "View"
 
@@ -1598,6 +1629,14 @@ msgstr "Wallet"
 #: src/pages/Swap/Components/SwapInputItem.tsx
 msgid "Wallet Balance"
 msgstr "Wallet Balance"
+
+#: src/hooks/useAccount.ts
+msgid "Wallet Deposit"
+msgstr "Wallet Deposit"
+
+#: src/hooks/useAccount.ts
+msgid "Wallet Withdraw"
+msgstr "Wallet Withdraw"
 
 #: src/pages/Share/Modal/ChangeNewTokenModal.tsx
 msgid "We are delighted to inform you that the NEST 2.0 token airdrop has been successfully completed. As a result, NESTFi services are now fully operational, and you can resume using the platform as usual."
@@ -1627,6 +1666,7 @@ msgstr "Win Rate"
 msgid "Winning Trades"
 msgstr "Winning Trades"
 
+#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 msgid "with 1 click"
 msgstr "with 1 click"

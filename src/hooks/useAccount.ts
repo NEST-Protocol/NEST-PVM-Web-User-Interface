@@ -3,11 +3,13 @@ import useService from "../contracts/useService";
 import useNEST from "./useNEST";
 import { serviceAccountList, serviceHistory } from "../lib/NESTRequest";
 import { serviceTypeToWebTypeString } from "./useTransactionReceipt";
+import { t } from "@lingui/macro";
 
 export interface AccountListData {
   text: string;
   time: number;
   status: number;
+  orderTypeString: string;
   applyTime?: number;
   chainId?: number;
   hash?: string;
@@ -36,6 +38,15 @@ function useAccount() {
       if (Number(assetsListBase["errorCode"]) === 0) {
         const value = assetsListBase["value"];
         const list: Array<AccountListData> = value.map((item: any) => {
+          const typeString = () => {
+            if (item["ordertype"] === "DEPOSIT") {
+              return t`Wallet Deposit`;
+            } else if (item["ordertype"] === "WITHDRAW") {
+              return t`Wallet Withdraw`;
+            } else {
+              return t`Copy Trading`;
+            }
+          };
           const one: AccountListData = {
             text: `${Number(item["amount"]).floor(2)} ${item["token"]}`,
             time: item["timestamp"],
@@ -44,6 +55,7 @@ function useAccount() {
             chainId: item["chainId"],
             hash: item["hash"],
             ordertype: item["ordertype"],
+            orderTypeString: typeString(),
           };
           return one;
         });
@@ -51,28 +63,28 @@ function useAccount() {
       }
     }
   }, [account.address, chainsData.chainId, signature]);
-  const getTransactionList = useCallback(async () => {
-    if (chainsData.chainId && account.address && signature) {
-      const transactionListBase = await serviceHistory(
-        chainsData.chainId,
-        account.address,
-        { Authorization: signature.signature }
-      );
-      if (Number(transactionListBase["errorCode"]) === 0) {
-        const value = transactionListBase["value"];
-        const list: Array<AccountListData> = value.map((item: any) => {
-          const one: AccountListData = {
-            text: serviceTypeToWebTypeString(item["orderType"]),
-            time: item["timestamp"],
-            status: item["status"],
-            ordertype: item["orderType"],
-          };
-          return one;
-        });
-        setHistoryList(list);
-      }
-    }
-  }, [account.address, chainsData.chainId, signature]);
+  // const getTransactionList = useCallback(async () => {
+  //   if (chainsData.chainId && account.address && signature) {
+  //     const transactionListBase = await serviceHistory(
+  //       chainsData.chainId,
+  //       account.address,
+  //       { Authorization: signature.signature }
+  //     );
+  //     if (Number(transactionListBase["errorCode"]) === 0) {
+  //       const value = transactionListBase["value"];
+  //       const list: Array<AccountListData> = value.map((item: any) => {
+  //         const one: AccountListData = {
+  //           text: serviceTypeToWebTypeString(item["orderType"]),
+  //           time: item["timestamp"],
+  //           status: item["status"],
+  //           ordertype: item["orderType"],
+  //         };
+  //         return one;
+  //       });
+  //       setHistoryList(list);
+  //     }
+  //   }
+  // }, [account.address, chainsData.chainId, signature]);
   /**
    * balance
    */

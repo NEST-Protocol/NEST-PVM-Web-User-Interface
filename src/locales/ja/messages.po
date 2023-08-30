@@ -279,6 +279,10 @@ msgstr ""
 msgid "Channel link"
 msgstr "チャンネルリンク"
 
+#: src/pages/Copy/Components/KolInfo.tsx
+msgid "Click here to view copy trading details."
+msgstr ""
+
 #: src/components/NormalInput/NormalInputWithCloseButton.tsx
 #: src/hooks/useFuturesOrder.ts
 #: src/pages/Copy/Components/MyCopiesCurrent.tsx
@@ -300,6 +304,8 @@ msgstr "ポジションを閉じる"
 
 #: src/pages/Copy/Components/MyCopiesHistory.tsx
 #: src/pages/Copy/Components/MyCopiesHistory.tsx
+#: src/pages/Copy/Components/TraderCurrent.tsx
+#: src/pages/Copy/Components/TraderCurrent.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Futures/Components/HistoryList.tsx
 #: src/pages/Futures/Components/HistoryTable.tsx
@@ -370,8 +376,6 @@ msgstr "招待リンクをコピー"
 msgid "Copy Link"
 msgstr "リンクをコピー"
 
-#: src/pages/Copy/Components/CopySettingModal.tsx
-#: src/pages/Copy/Components/KolInfo.tsx
 #: src/pages/Copy/Components/KolInfo.tsx
 msgid "Copy Now"
 msgstr ""
@@ -402,6 +406,8 @@ msgstr ""
 msgid "Copy Traders’ PnL (NEST)"
 msgstr ""
 
+#: src/hooks/useAccount.ts
+#: src/hooks/useTransactionReceipt.ts
 #: src/pages/Copy/Components/CopyRoute.tsx
 msgid "Copy Trading"
 msgstr ""
@@ -420,10 +426,6 @@ msgstr ""
 
 #: src/pages/Copy/Copy.tsx
 msgid "Copy Trading Effortlessly"
-msgstr ""
-
-#: src/pages/Copy/Components/CopySettingModal.tsx
-msgid "Copy Trading Total Amount"
 msgstr ""
 
 #: src/pages/Dashboard/Referral/Referral.tsx
@@ -451,10 +453,13 @@ msgstr ""
 msgid "Cumulative Return"
 msgstr ""
 
-#: src/pages/Copy/Components/CopySettingModal.tsx
 #: src/pages/Copy/MyCopies.tsx
 #: src/pages/Copy/Trader.tsx
 msgid "Current"
+msgstr ""
+
+#: src/pages/Copy/Components/CopySettingModal.tsx
+msgid "Current:"
 msgstr ""
 
 #: src/pages/Copy/Copy.tsx
@@ -553,6 +558,10 @@ msgstr "リミットオーダーを編集"
 #: src/pages/Futures/Modal/EditPositionModal.tsx
 msgid "Edit Position"
 msgstr "ポジションを編集"
+
+#: src/hooks/useTransactionReceipt.ts
+msgid "Edited"
+msgstr ""
 
 #: src/pages/Copy/Components/CopyStopModal.tsx
 msgid "End copy will liquidate your position with market orders, and automatically return the assets to your Account after deducting the profits sharing."
@@ -709,6 +718,7 @@ msgstr ""
 
 #: src/hooks/useFuturesAdd.ts
 #: src/hooks/useFuturesNewOrder.ts
+#: src/pages/Copy/Hooks/useCopySettingModal.ts
 msgid "Insufficient NEST balance"
 msgstr "NEST残高不足"
 
@@ -850,6 +860,7 @@ msgid "MAX"
 msgstr "最大"
 
 #: src/hooks/useFuturesNewOrder.ts
+#: src/pages/Copy/Hooks/useCopySettingModal.ts
 msgid "Minimum 50 NEST"
 msgstr "最小50 NEST"
 
@@ -936,6 +947,10 @@ msgstr "注文なし"
 #: src/pages/Futures/OrderList.tsx
 #: src/pages/Futures/OrderList.tsx
 msgid "No Orders"
+msgstr ""
+
+#: src/pages/Copy/Components/TraderChartView.tsx
+msgid "No Records Found"
 msgstr ""
 
 #: src/pages/Share/Modal/MyWalletModal.tsx
@@ -1101,6 +1116,11 @@ msgstr ""
 msgid "Profit (NEST)"
 msgstr ""
 
+#: src/pages/Copy/Components/KolInfo.tsx
+#: src/pages/Copy/Components/KolInfo.tsx
+msgid "Profit Sharing:"
+msgstr ""
+
 #: src/pages/Copy/Components/TraderFollowers.tsx
 #: src/pages/Copy/Components/TraderFollowers.tsx
 #: src/pages/Copy/Copy.tsx
@@ -1131,6 +1151,10 @@ msgstr ""
 msgid "Remaining Copy Amount"
 msgstr ""
 
+#: src/pages/Share/Modal/SignModal.tsx
+msgid "Remember me"
+msgstr ""
+
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 #: src/pages/Futures/Modal/ProtocolModal.tsx
 msgid "Risk Warning"
@@ -1143,7 +1167,7 @@ msgstr "リスク警告"
 msgid "ROI"
 msgstr ""
 
-#: src/pages/Copy/Components/CopySettingModal.tsx
+#: src/pages/Copy/Hooks/useCopySettingModal.ts
 msgid "Save"
 msgstr ""
 
@@ -1247,8 +1271,10 @@ msgstr "取引を開始"
 msgid "Status"
 msgstr ""
 
+#: src/hooks/useTransactionReceipt.ts
 #: src/pages/Copy/Components/CopyStopModal.tsx
 #: src/pages/Copy/Components/CopyStopModal.tsx
+#: src/pages/Copy/Components/KolInfo.tsx
 #: src/pages/Copy/Components/MyCopiesMyTraders.tsx
 #: src/pages/Copy/Components/MyCopiesMyTraders.tsx
 msgid "Stop Copying"
@@ -1534,6 +1560,10 @@ msgstr "トリガーポジション"
 msgid "Twitter"
 msgstr "Twitter"
 
+#: src/pages/Overview/Components/MoneyTable.tsx
+msgid "Type"
+msgstr ""
+
 #: src/pages/Copy/Copy.tsx
 msgid "Unrealized PnL (NEST)"
 msgstr ""
@@ -1575,6 +1605,7 @@ msgid "Verify ownership, Confirm you are the owner of this wallet."
 msgstr ""
 
 #: src/components/SnackBar/NormalSnackBar.tsx
+#: src/components/SnackBar/SnackBarWithButton.tsx
 msgid "View"
 msgstr "表示"
 
@@ -1593,6 +1624,14 @@ msgstr "ウォレット"
 #: src/pages/Swap/Components/SwapInputItem.tsx
 #: src/pages/Swap/Components/SwapInputItem.tsx
 msgid "Wallet Balance"
+msgstr ""
+
+#: src/hooks/useAccount.ts
+msgid "Wallet Deposit"
+msgstr ""
+
+#: src/hooks/useAccount.ts
+msgid "Wallet Withdraw"
 msgstr ""
 
 #: src/pages/Share/Modal/ChangeNewTokenModal.tsx
@@ -1623,6 +1662,7 @@ msgstr ""
 msgid "Winning Trades"
 msgstr ""
 
+#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 msgid "with 1 click"
 msgstr "1クリックで"

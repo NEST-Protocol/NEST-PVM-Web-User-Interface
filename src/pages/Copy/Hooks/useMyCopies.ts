@@ -33,6 +33,7 @@ export interface MyCopiesMyTradersList {
   avatar: string;
   copyAccountBalance: number;
   profit: number;
+  follow: boolean;
 }
 
 function useMyCopies() {
@@ -156,6 +157,7 @@ function useMyCopies() {
               kolAddress: item["walletAddress"],
               nickName: item["nickName"],
               avatar: item["avatar"],
+              follow: item["follow"] === "true",
             };
           }
         );

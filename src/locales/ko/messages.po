@@ -281,6 +281,10 @@ msgstr "소각된"
 msgid "Channel link"
 msgstr "채널 링크"
 
+#: src/pages/Copy/Components/KolInfo.tsx
+msgid "Click here to view copy trading details."
+msgstr ""
+
 #: src/components/NormalInput/NormalInputWithCloseButton.tsx
 #: src/hooks/useFuturesOrder.ts
 #: src/pages/Copy/Components/MyCopiesCurrent.tsx
@@ -302,6 +306,8 @@ msgstr "포지션 매도"
 
 #: src/pages/Copy/Components/MyCopiesHistory.tsx
 #: src/pages/Copy/Components/MyCopiesHistory.tsx
+#: src/pages/Copy/Components/TraderCurrent.tsx
+#: src/pages/Copy/Components/TraderCurrent.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Futures/Components/HistoryList.tsx
 #: src/pages/Futures/Components/HistoryTable.tsx
@@ -372,8 +378,6 @@ msgstr "초대 링크 복사"
 msgid "Copy Link"
 msgstr "링크 복사"
 
-#: src/pages/Copy/Components/CopySettingModal.tsx
-#: src/pages/Copy/Components/KolInfo.tsx
 #: src/pages/Copy/Components/KolInfo.tsx
 msgid "Copy Now"
 msgstr ""
@@ -404,6 +408,8 @@ msgstr ""
 msgid "Copy Traders’ PnL (NEST)"
 msgstr ""
 
+#: src/hooks/useAccount.ts
+#: src/hooks/useTransactionReceipt.ts
 #: src/pages/Copy/Components/CopyRoute.tsx
 msgid "Copy Trading"
 msgstr ""
@@ -422,10 +428,6 @@ msgstr ""
 
 #: src/pages/Copy/Copy.tsx
 msgid "Copy Trading Effortlessly"
-msgstr ""
-
-#: src/pages/Copy/Components/CopySettingModal.tsx
-msgid "Copy Trading Total Amount"
 msgstr ""
 
 #: src/pages/Dashboard/Referral/Referral.tsx
@@ -453,10 +455,13 @@ msgstr "누적 피추천인 거래량"
 msgid "Cumulative Return"
 msgstr "누적 수익률"
 
-#: src/pages/Copy/Components/CopySettingModal.tsx
 #: src/pages/Copy/MyCopies.tsx
 #: src/pages/Copy/Trader.tsx
 msgid "Current"
+msgstr ""
+
+#: src/pages/Copy/Components/CopySettingModal.tsx
+msgid "Current:"
 msgstr ""
 
 #: src/pages/Copy/Copy.tsx
@@ -555,6 +560,10 @@ msgstr "지정가 주문 수정"
 #: src/pages/Futures/Modal/EditPositionModal.tsx
 msgid "Edit Position"
 msgstr "포지션 수정"
+
+#: src/hooks/useTransactionReceipt.ts
+msgid "Edited"
+msgstr ""
 
 #: src/pages/Copy/Components/CopyStopModal.tsx
 msgid "End copy will liquidate your position with market orders, and automatically return the assets to your Account after deducting the profits sharing."
@@ -711,6 +720,7 @@ msgstr "잔액이 부족합니다. 번개 거래를 시작하려면 입금하세
 
 #: src/hooks/useFuturesAdd.ts
 #: src/hooks/useFuturesNewOrder.ts
+#: src/pages/Copy/Hooks/useCopySettingModal.ts
 msgid "Insufficient NEST balance"
 msgstr "NEST 잔액 부족"
 
@@ -852,6 +862,7 @@ msgid "MAX"
 msgstr "최대"
 
 #: src/hooks/useFuturesNewOrder.ts
+#: src/pages/Copy/Hooks/useCopySettingModal.ts
 msgid "Minimum 50 NEST"
 msgstr "최소 50 NEST"
 
@@ -939,6 +950,10 @@ msgstr "주문 없음"
 #: src/pages/Futures/OrderList.tsx
 msgid "No Orders"
 msgstr "주문 없음"
+
+#: src/pages/Copy/Components/TraderChartView.tsx
+msgid "No Records Found"
+msgstr ""
 
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "No Transactions yet"
@@ -1103,6 +1118,11 @@ msgstr ""
 msgid "Profit (NEST)"
 msgstr ""
 
+#: src/pages/Copy/Components/KolInfo.tsx
+#: src/pages/Copy/Components/KolInfo.tsx
+msgid "Profit Sharing:"
+msgstr ""
+
 #: src/pages/Copy/Components/TraderFollowers.tsx
 #: src/pages/Copy/Components/TraderFollowers.tsx
 #: src/pages/Copy/Copy.tsx
@@ -1133,6 +1153,10 @@ msgstr "추천"
 msgid "Remaining Copy Amount"
 msgstr ""
 
+#: src/pages/Share/Modal/SignModal.tsx
+msgid "Remember me"
+msgstr "나를 기억해주세요"
+
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 #: src/pages/Futures/Modal/ProtocolModal.tsx
 msgid "Risk Warning"
@@ -1145,7 +1169,7 @@ msgstr "위험 경고"
 msgid "ROI"
 msgstr ""
 
-#: src/pages/Copy/Components/CopySettingModal.tsx
+#: src/pages/Copy/Hooks/useCopySettingModal.ts
 msgid "Save"
 msgstr ""
 
@@ -1249,8 +1273,10 @@ msgstr "거래 시작하기"
 msgid "Status"
 msgstr "상태"
 
+#: src/hooks/useTransactionReceipt.ts
 #: src/pages/Copy/Components/CopyStopModal.tsx
 #: src/pages/Copy/Components/CopyStopModal.tsx
+#: src/pages/Copy/Components/KolInfo.tsx
 #: src/pages/Copy/Components/MyCopiesMyTraders.tsx
 #: src/pages/Copy/Components/MyCopiesMyTraders.tsx
 msgid "Stop Copying"
@@ -1536,6 +1562,10 @@ msgstr "트리거 포지션"
 msgid "Twitter"
 msgstr "트위터"
 
+#: src/pages/Overview/Components/MoneyTable.tsx
+msgid "Type"
+msgstr ""
+
 #: src/pages/Copy/Copy.tsx
 msgid "Unrealized PnL (NEST)"
 msgstr ""
@@ -1577,6 +1607,7 @@ msgid "Verify ownership, Confirm you are the owner of this wallet."
 msgstr "이 지갑의 소유자임을 확인하십시오. 서명은 무료이며 거래를 보내지 않습니다."
 
 #: src/components/SnackBar/NormalSnackBar.tsx
+#: src/components/SnackBar/SnackBarWithButton.tsx
 msgid "View"
 msgstr "보기"
 
@@ -1596,6 +1627,14 @@ msgstr "지갑"
 #: src/pages/Swap/Components/SwapInputItem.tsx
 msgid "Wallet Balance"
 msgstr "지갑 잔고"
+
+#: src/hooks/useAccount.ts
+msgid "Wallet Deposit"
+msgstr ""
+
+#: src/hooks/useAccount.ts
+msgid "Wallet Withdraw"
+msgstr ""
 
 #: src/pages/Share/Modal/ChangeNewTokenModal.tsx
 msgid "We are delighted to inform you that the NEST 2.0 token airdrop has been successfully completed. As a result, NESTFi services are now fully operational, and you can resume using the platform as usual."
@@ -1625,6 +1664,7 @@ msgstr ""
 msgid "Winning Trades"
 msgstr ""
 
+#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 msgid "with 1 click"
 msgstr "1 클릭으로"

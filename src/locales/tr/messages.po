@@ -279,6 +279,10 @@ msgstr "Yakıldı"
 msgid "Channel link"
 msgstr "Kanal bağlantısı"
 
+#: src/pages/Copy/Components/KolInfo.tsx
+msgid "Click here to view copy trading details."
+msgstr ""
+
 #: src/components/NormalInput/NormalInputWithCloseButton.tsx
 #: src/hooks/useFuturesOrder.ts
 #: src/pages/Copy/Components/MyCopiesCurrent.tsx
@@ -300,6 +304,8 @@ msgstr "Pozisyonu Kapat"
 
 #: src/pages/Copy/Components/MyCopiesHistory.tsx
 #: src/pages/Copy/Components/MyCopiesHistory.tsx
+#: src/pages/Copy/Components/TraderCurrent.tsx
+#: src/pages/Copy/Components/TraderCurrent.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Futures/Components/HistoryList.tsx
 #: src/pages/Futures/Components/HistoryTable.tsx
@@ -370,8 +376,6 @@ msgstr "Davet Bağlantısını Kopyala"
 msgid "Copy Link"
 msgstr "Bağlantıyı Kopyala"
 
-#: src/pages/Copy/Components/CopySettingModal.tsx
-#: src/pages/Copy/Components/KolInfo.tsx
 #: src/pages/Copy/Components/KolInfo.tsx
 msgid "Copy Now"
 msgstr ""
@@ -402,6 +406,8 @@ msgstr ""
 msgid "Copy Traders’ PnL (NEST)"
 msgstr ""
 
+#: src/hooks/useAccount.ts
+#: src/hooks/useTransactionReceipt.ts
 #: src/pages/Copy/Components/CopyRoute.tsx
 msgid "Copy Trading"
 msgstr ""
@@ -420,10 +426,6 @@ msgstr ""
 
 #: src/pages/Copy/Copy.tsx
 msgid "Copy Trading Effortlessly"
-msgstr ""
-
-#: src/pages/Copy/Components/CopySettingModal.tsx
-msgid "Copy Trading Total Amount"
 msgstr ""
 
 #: src/pages/Dashboard/Referral/Referral.tsx
@@ -451,10 +453,13 @@ msgstr "Toplam Davet Edilen Kullanıcıların İşlem Hacmi"
 msgid "Cumulative Return"
 msgstr "Birikmiş Getiri"
 
-#: src/pages/Copy/Components/CopySettingModal.tsx
 #: src/pages/Copy/MyCopies.tsx
 #: src/pages/Copy/Trader.tsx
 msgid "Current"
+msgstr ""
+
+#: src/pages/Copy/Components/CopySettingModal.tsx
+msgid "Current:"
 msgstr ""
 
 #: src/pages/Copy/Copy.tsx
@@ -553,6 +558,10 @@ msgstr "Limit Emrini Düzenle"
 #: src/pages/Futures/Modal/EditPositionModal.tsx
 msgid "Edit Position"
 msgstr "Pozisyonu Düzenle"
+
+#: src/hooks/useTransactionReceipt.ts
+msgid "Edited"
+msgstr ""
 
 #: src/pages/Copy/Components/CopyStopModal.tsx
 msgid "End copy will liquidate your position with market orders, and automatically return the assets to your Account after deducting the profits sharing."
@@ -709,6 +718,7 @@ msgstr "Yetersiz bakiye. Hızlı işlem yapmaya başlamak için lütfen para yat
 
 #: src/hooks/useFuturesAdd.ts
 #: src/hooks/useFuturesNewOrder.ts
+#: src/pages/Copy/Hooks/useCopySettingModal.ts
 msgid "Insufficient NEST balance"
 msgstr "Yetersiz NEST bakiyesi"
 
@@ -852,6 +862,7 @@ msgid "MAX"
 msgstr "MAKS"
 
 #: src/hooks/useFuturesNewOrder.ts
+#: src/pages/Copy/Hooks/useCopySettingModal.ts
 msgid "Minimum 50 NEST"
 msgstr "En az 50 NEST"
 
@@ -939,6 +950,10 @@ msgstr "Sipariş Yok"
 #: src/pages/Futures/OrderList.tsx
 msgid "No Orders"
 msgstr "Sipariş Yok"
+
+#: src/pages/Copy/Components/TraderChartView.tsx
+msgid "No Records Found"
+msgstr ""
 
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "No Transactions yet"
@@ -1105,6 +1120,11 @@ msgstr ""
 msgid "Profit (NEST)"
 msgstr ""
 
+#: src/pages/Copy/Components/KolInfo.tsx
+#: src/pages/Copy/Components/KolInfo.tsx
+msgid "Profit Sharing:"
+msgstr ""
+
 #: src/pages/Copy/Components/TraderFollowers.tsx
 #: src/pages/Copy/Components/TraderFollowers.tsx
 #: src/pages/Copy/Copy.tsx
@@ -1135,6 +1155,10 @@ msgstr "Yönlendirme"
 msgid "Remaining Copy Amount"
 msgstr ""
 
+#: src/pages/Share/Modal/SignModal.tsx
+msgid "Remember me"
+msgstr "beni hatırla"
+
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 #: src/pages/Futures/Modal/ProtocolModal.tsx
 msgid "Risk Warning"
@@ -1147,7 +1171,7 @@ msgstr "Risk Uyarısı"
 msgid "ROI"
 msgstr ""
 
-#: src/pages/Copy/Components/CopySettingModal.tsx
+#: src/pages/Copy/Hooks/useCopySettingModal.ts
 msgid "Save"
 msgstr ""
 
@@ -1251,8 +1275,10 @@ msgstr "Ticarete Başla"
 msgid "Status"
 msgstr "Durum"
 
+#: src/hooks/useTransactionReceipt.ts
 #: src/pages/Copy/Components/CopyStopModal.tsx
 #: src/pages/Copy/Components/CopyStopModal.tsx
+#: src/pages/Copy/Components/KolInfo.tsx
 #: src/pages/Copy/Components/MyCopiesMyTraders.tsx
 #: src/pages/Copy/Components/MyCopiesMyTraders.tsx
 msgid "Stop Copying"
@@ -1538,6 +1564,10 @@ msgstr "Pozisyonu Tetikle"
 msgid "Twitter"
 msgstr "Twitter"
 
+#: src/pages/Overview/Components/MoneyTable.tsx
+msgid "Type"
+msgstr ""
+
 #: src/pages/Copy/Copy.tsx
 msgid "Unrealized PnL (NEST)"
 msgstr ""
@@ -1579,6 +1609,7 @@ msgid "Verify ownership, Confirm you are the owner of this wallet."
 msgstr "Sahipliği doğrulayın, Bu cüzdanın sahibi olduğunuzu onaylayın."
 
 #: src/components/SnackBar/NormalSnackBar.tsx
+#: src/components/SnackBar/SnackBarWithButton.tsx
 msgid "View"
 msgstr "Görüntüle"
 
@@ -1598,6 +1629,14 @@ msgstr "Cüzdan"
 #: src/pages/Swap/Components/SwapInputItem.tsx
 msgid "Wallet Balance"
 msgstr "Cüzdan Bakiyesi"
+
+#: src/hooks/useAccount.ts
+msgid "Wallet Deposit"
+msgstr ""
+
+#: src/hooks/useAccount.ts
+msgid "Wallet Withdraw"
+msgstr ""
 
 #: src/pages/Share/Modal/ChangeNewTokenModal.tsx
 msgid "We are delighted to inform you that the NEST 2.0 token airdrop has been successfully completed. As a result, NESTFi services are now fully operational, and you can resume using the platform as usual."
@@ -1627,6 +1666,7 @@ msgstr ""
 msgid "Winning Trades"
 msgstr ""
 
+#: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 msgid "with 1 click"
 msgstr "1 tıklamayla"

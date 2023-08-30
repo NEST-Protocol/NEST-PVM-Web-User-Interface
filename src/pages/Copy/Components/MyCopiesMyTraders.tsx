@@ -182,27 +182,31 @@ const MyCopiesMyTraders: FC<MyCopiesMyTradersProps> = ({ ...props }) => {
             >
               <Trans>Settings</Trans>
             </Box>
-            <Box
-              sx={(theme) => ({
-                fontWeight: "700",
-                fontSize: "14px",
-                lineHeight: "20px",
-                color: theme.normal.text0,
-                padding: "10px 16px",
-                borderRadius: "8px",
-                background: theme.normal.grey_hover,
-                width: "100%",
-                textAlign: "center",
-                "&:hover": {
-                  cursor: "pointer",
-                },
-              })}
-              onClick={() => {
-                props.stopCallBack(item.kolAddress);
-              }}
-            >
-              <Trans>Stop Copying</Trans>
-            </Box>
+            {item.follow ? (
+              <Box
+                sx={(theme) => ({
+                  fontWeight: "700",
+                  fontSize: "14px",
+                  lineHeight: "20px",
+                  color: theme.normal.text0,
+                  padding: "10px 16px",
+                  borderRadius: "8px",
+                  background: theme.normal.grey_hover,
+                  width: "100%",
+                  textAlign: "center",
+                  "&:hover": {
+                    cursor: "pointer",
+                  },
+                })}
+                onClick={() => {
+                  props.stopCallBack(item.kolAddress);
+                }}
+              >
+                <Trans>Stop Copying</Trans>
+              </Box>
+            ) : (
+              <></>
+            )}
           </Stack>
         </Stack>
       );
@@ -352,26 +356,30 @@ const Row: FC<RowProps> = ({ ...props }) => {
           >
             <Trans>Settings</Trans>
           </Box>
-          <Box
-            sx={(theme) => ({
-              fontWeight: "700",
-              fontSize: "10px",
-              lineHeight: "14px",
-              color: theme.normal.text0,
-              padding: "5px 12px",
-              borderRadius: "4px",
-              background: theme.normal.grey,
-              width: "fit-content",
-              "&:hover": {
-                cursor: "pointer",
-              },
-            })}
-            onClick={() => {
-              props.stopCallBack(kolAddress);
-            }}
-          >
-            <Trans>Stop Copying</Trans>
-          </Box>
+          {props.data.follow ? (
+            <Box
+              sx={(theme) => ({
+                fontWeight: "700",
+                fontSize: "10px",
+                lineHeight: "14px",
+                color: theme.normal.text0,
+                padding: "5px 12px",
+                borderRadius: "4px",
+                background: theme.normal.grey,
+                width: "fit-content",
+                "&:hover": {
+                  cursor: "pointer",
+                },
+              })}
+              onClick={() => {
+                props.stopCallBack(kolAddress);
+              }}
+            >
+              <Trans>Stop Copying</Trans>
+            </Box>
+          ) : (
+            <></>
+          )}
         </Stack>
       </TableCell>
     </TableRow>
