@@ -232,7 +232,13 @@ const KolItem: FC<KolItemProps> = ({ ...props }) => {
           padding: "24px 20px",
           borderRadius: "12px",
           background: theme.normal.bg1,
+          "&:hover": {
+            cursor: "pointer"
+          }
         })}
+        onClick={() => {
+          window.location.href = `/#/trader/${props.data.walletAddress}`;
+        }}
       >
         <Stack
           direction={"row"}

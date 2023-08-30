@@ -18,7 +18,6 @@ import NESTa from "../../../components/MainButton/NESTa";
 
 interface CopySettingBaseModalProps {
   onClose: (res?: boolean) => void;
-  add?: boolean;
   address: string | undefined;
 }
 
@@ -42,7 +41,7 @@ const CopySettingBaseModal: FC<CopySettingBaseModalProps> = ({ ...props }) => {
     agree,
     setAgree,
     current,
-  } = useCopySettingModal(props.address, props.add ?? false, props.onClose);
+  } = useCopySettingModal(props.address, props.onClose);
 
   const inputNestAmount = useMemo(() => {
     return (
@@ -90,11 +89,7 @@ const CopySettingBaseModal: FC<CopySettingBaseModalProps> = ({ ...props }) => {
                   color: theme.normal.text1,
                 })}
               >
-                {props.add ? (
-                  <Trans>Add Copy Trading Amount</Trans>
-                ) : (
-                  <Trans>Copy Trading Total Amount</Trans>
-                )}
+                <Trans>Add Copy Trading Amount</Trans>
               </Box>
 
               <NESTTooltipFC
@@ -107,9 +102,7 @@ const CopySettingBaseModal: FC<CopySettingBaseModalProps> = ({ ...props }) => {
               alignItems={"center"}
               spacing={"4px"}
             >
-              {props.add ? (
-                <>
-                  <Box
+              <Box
                     sx={(theme) => ({
                       fontWeight: "400",
                       fontSize: "12px",
@@ -129,10 +122,6 @@ const CopySettingBaseModal: FC<CopySettingBaseModalProps> = ({ ...props }) => {
                   >
                     {current ? current.floor(2) : String().placeHolder}NEST
                   </Box>
-                </>
-              ) : (
-                <></>
-              )}
             </Stack>
           </Stack>
 
@@ -298,7 +287,6 @@ interface CopySettingModalProps {
   name: string;
   onClose: (res?: boolean) => void;
   address: string | undefined;
-  add?: boolean;
 }
 
 const CopySettingModal: FC<CopySettingModalProps> = ({ ...props }) => {
@@ -324,7 +312,6 @@ const CopySettingModal: FC<CopySettingModalProps> = ({ ...props }) => {
         >
           <CopySettingBaseModal
             onClose={props.onClose}
-            add={props.add}
             address={props.address}
           />
         </BaseDrawer>
@@ -347,7 +334,6 @@ const CopySettingModal: FC<CopySettingModalProps> = ({ ...props }) => {
           >
             <CopySettingBaseModal
               onClose={props.onClose}
-              add={props.add}
               address={props.address}
             />
           </BaseModal>

@@ -34,11 +34,11 @@ function useCopy() {
   
   const getAllKOL = useCallback(async () => {
     if (chainsData.chainId && signature) {
-      const req = await copyAllKOL(chainsData.chainId, {
+      const req = await copyAllKOL(chainsData.chainId, 1, 30, {
         Authorization: signature.signature,
       });
       if (Number(req["errorCode"]) === 0) {
-        const value = req["value"];
+        const value = req["value"]["records"];
         const list: Array<AllKOLModel> = value.map((item: any) => {
           const one: AllKOLModel = {
             id: item["id"],

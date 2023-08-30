@@ -180,7 +180,6 @@ const MyCopies: FC = () => {
           getMyCopiesMyTraderList();
           setOpenCopyModal([]);
         }}
-        add
       />
       <CopyStopModal
         open={!(openStopModal === undefined)}

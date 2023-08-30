@@ -6,7 +6,6 @@ import useService from "../../../contracts/useService";
 
 function useCopySettingModal(
   address: string | undefined,
-  add: boolean,
   onClose: (res?: boolean) => void
 ) {
   const { chainsData, signature, account } = useNEST();
@@ -104,9 +103,9 @@ function useCopySettingModal(
     } else if (!checkLimit) {
       return t`Minimum 50 NEST`;
     } else {
-      return add ? t`Save` : t`Copy Now`;
+      return t`Save`;
     }
-  }, [add, checkBalance, checkLimit]);
+  }, [checkBalance, checkLimit]);
 
   const mainButtonLoading = useMemo(() => {
     return isLoading;

@@ -409,7 +409,7 @@ const Copy: FC = () => {
       return (
         <Stack
           spacing={"24px"}
-          paddingY={"40px"}
+          paddingY={["20px", "20px", "40px"]}
           paddingX={"20px"}
           width={"100%"}
           sx={(theme) => ({
@@ -470,8 +470,8 @@ const Copy: FC = () => {
         <Box
           sx={(theme) => ({
             fontWeight: "700",
-            fontSize: "32px",
-            lineHeight: "44px",
+            fontSize: ["24px", "24px", "32px"],
+            lineHeight: ["32px", "32px", "44px"],
             color: theme.normal.text0,
           })}
         >
@@ -538,8 +538,8 @@ const Copy: FC = () => {
             <Box
               sx={(theme) => ({
                 fontWeight: "700",
-                fontSize: "32px",
-                lineHeight: "44px",
+                fontSize: ["20px", "20px","32px"],
+                lineHeight: ["28px", "28px", "44px"],
                 color: theme.normal.text0,
               })}
             >

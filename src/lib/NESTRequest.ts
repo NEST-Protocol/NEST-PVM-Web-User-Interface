@@ -348,9 +348,16 @@ export function copyClose(
   );
 }
 
-export function copyAllKOL(chainId: number, info: RequestBodyInterface) {
+export function copyAllKOL(
+  chainId: number,
+  pageNum: number,
+  pageSize: number,
+  info: RequestBodyInterface
+) {
   return baseRequestGetWithHeader(
-    `${serviceBaseURL(chainId)}/nestfi/copy/kol/list?chainId=${chainId}`,
+    `${serviceBaseURL(
+      chainId
+    )}/nestfi/copy/kol/list?chainId=${chainId}&pageNumber=${pageNum}&pageSize=${pageSize}`,
     info
   );
 }
