@@ -182,7 +182,13 @@ const HOW_TO_USE_3 = (
 
 const Copy: FC = () => {
   const { isBigMobile } = useWindowWidth();
-  const { kolList, myTradeInfo: myInfo, setPage, allPage } = useCopy();
+  const {
+    kolList,
+    myTradeInfo: myInfo,
+    setPage,
+    allPage,
+    hideMyTrade,
+  } = useCopy();
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -491,8 +497,7 @@ const Copy: FC = () => {
         <Stack
           spacing={"10px"}
           direction={"row"}
-          
-          justifyContent={["center","center","flex-end"]}
+          justifyContent={["center", "center", "flex-end"]}
           alignItems={"center"}
           width={"100%"}
           sx={(theme) => ({
@@ -583,7 +588,7 @@ const Copy: FC = () => {
             ></Box>
           </Stack>
 
-          {myTrades}
+          {hideMyTrade ? <></> : myTrades}
 
           {kols}
 

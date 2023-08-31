@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { copyAllKOL, copyMyTradeInfo } from "../../../lib/NESTRequest";
 import useNEST from "../../../hooks/useNEST";
 
@@ -35,9 +35,9 @@ function useCopy() {
   const [allPage, setAllPage] = useState<number>(1);
 
   const getAllKOL = useCallback(async () => {
-    if (chainsData.chainId && signature) {
+    if (chainsData.chainId) {
       const req = await copyAllKOL(chainsData.chainId, page, 12, {
-        Authorization: signature.signature,
+        Authorization: "",
       });
       if (Number(req["errorCode"]) === 0) {
         const value = req["value"]["records"];
@@ -66,7 +66,7 @@ function useCopy() {
         setKolList(list);
       }
     }
-  }, [chainsData.chainId, page, signature]);
+  }, [chainsData.chainId, page]);
 
   const getMyTradeInfo = useCallback(async () => {
     if (chainsData.chainId && signature) {
@@ -86,11 +86,15 @@ function useCopy() {
     }
   }, [chainsData.chainId, signature]);
 
+  const hideMyTrade = useMemo(() => {
+    return !signature;
+  }, [signature]);
+
   useEffect(() => {
     getAllKOL();
     getMyTradeInfo();
   }, [getAllKOL, getMyTradeInfo]);
-  return { kolList, myTradeInfo, setPage, allPage };
+  return { kolList, myTradeInfo, setPage, allPage, hideMyTrade };
 }
 
 export default useCopy;

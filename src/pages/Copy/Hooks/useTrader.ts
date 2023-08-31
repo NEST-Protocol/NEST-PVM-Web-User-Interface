@@ -79,9 +79,9 @@ function useTrader(address: string | undefined) {
   const [performanceSymbolDay, setPerformanceSymbolDay] = useState<number>(1);
 
   const getKOLInfo = useCallback(async () => {
-    if (chainsData.chainId && signature && address) {
+    if (chainsData.chainId && address) {
       const req = await copyKOLInfo(chainsData.chainId, address, {
-        Authorization: signature.signature,
+        Authorization: "",
       });
       if (Number(req["errorCode"]) === 0) {
         const value = req["value"];
@@ -106,7 +106,7 @@ function useTrader(address: string | undefined) {
         setKolInfo(info);
       }
     }
-  }, [address, chainsData.chainId, signature]);
+  }, [address, chainsData.chainId]);
 
   const getEarnings = useCallback(async () => {
     const days = () => {
@@ -118,9 +118,9 @@ function useTrader(address: string | undefined) {
         return 30;
       }
     };
-    if (chainsData.chainId && signature && address) {
+    if (chainsData.chainId && address) {
       const req = await copyEarningsList(chainsData.chainId, address, days(), {
-        Authorization: signature.signature,
+        Authorization: "",
       });
       if (Number(req["errorCode"]) === 0) {
         const value = req["value"];
@@ -136,7 +136,7 @@ function useTrader(address: string | undefined) {
         setEarningsData(list);
       }
     }
-  }, [address, chainsData.chainId, earningsDay, signature]);
+  }, [address, chainsData.chainId, earningsDay]);
 
   const getPerformance = useCallback(async () => {
     const days = () => {
@@ -150,9 +150,9 @@ function useTrader(address: string | undefined) {
         return 30;
       }
     };
-    if (chainsData.chainId && signature && address) {
+    if (chainsData.chainId && address) {
       const req = await copyPerformance(chainsData.chainId, address, days(), {
-        Authorization: signature.signature,
+        Authorization: "",
       });
 
       if (Number(req["errorCode"]) === 0) {
@@ -171,7 +171,7 @@ function useTrader(address: string | undefined) {
         setPerformanceData(info);
       }
     }
-  }, [address, chainsData.chainId, performanceDay, signature]);
+  }, [address, chainsData.chainId, performanceDay]);
 
   const getPerformanceSymbol = useCallback(async () => {
     const days = () => {
@@ -185,13 +185,13 @@ function useTrader(address: string | undefined) {
         return 30;
       }
     };
-    if (chainsData.chainId && signature && address) {
+    if (chainsData.chainId && address) {
       const req = await copyPerformanceSymbol(
         chainsData.chainId,
         address,
         days(),
         {
-          Authorization: signature.signature,
+          Authorization: "",
         }
       );
       if (Number(req["errorCode"]) === 0) {
@@ -206,15 +206,15 @@ function useTrader(address: string | undefined) {
         setPerformanceSymbolData(list);
       }
     }
-  }, [address, chainsData.chainId, performanceSymbolDay, signature]);
+  }, [address, chainsData.chainId, performanceSymbolDay]);
 
   const getList = useCallback(async () => {
     try {
-      if (!chainsData.chainId || !address || !signature) {
+      if (!chainsData.chainId || !address) {
         return;
       }
       const baseList = await serviceList(chainsData.chainId, address, {
-        Authorization: signature.signature,
+        Authorization: "",
       });
       if (Number(baseList["errorCode"]) === 0) {
         const list: Array<TraderOrderList> = baseList["value"]
@@ -242,15 +242,15 @@ function useTrader(address: string | undefined) {
     } catch (error) {
       console.log(error);
     }
-  }, [address, chainsData.chainId, signature]);
+  }, [address, chainsData.chainId]);
 
   const getHistoryList = useCallback(async () => {
     try {
-      if (!chainsData.chainId || !address || !signature) {
+      if (!chainsData.chainId || !address) {
         return;
       }
       const baseList = await serviceHistory(chainsData.chainId, address, {
-        Authorization: signature.signature,
+        Authorization: "",
       });
       if (Number(baseList["errorCode"]) === 0) {
         const list: Array<TraderOrderList> = baseList["value"]
@@ -276,15 +276,15 @@ function useTrader(address: string | undefined) {
     } catch (error) {
       console.log(error);
     }
-  }, [address, chainsData.chainId, signature]);
+  }, [address, chainsData.chainId]);
 
   const getFollowerList = useCallback(async () => {
     try {
-      if (!chainsData.chainId || !address || !signature) {
+      if (!chainsData.chainId || !address) {
         return;
       }
       const baseList = await copyTraderFollowers(chainsData.chainId, address, {
-        Authorization: signature.signature,
+        Authorization: "",
       });
       if (Number(baseList["errorCode"]) === 0) {
         const list: Array<TraderFollowerList> = baseList["value"].map(
@@ -301,7 +301,7 @@ function useTrader(address: string | undefined) {
     } catch (error) {
       console.log(error);
     }
-  }, [address, chainsData.chainId, signature]);
+  }, [address, chainsData.chainId]);
 
   useEffect(() => {
     getEarnings();
