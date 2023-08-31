@@ -85,7 +85,7 @@ const TraderCurrent: FC<TraderCurrentProps> = ({ ...props }) => {
                     fontSize: "14px",
                     fontWeight: "700",
                     lineHeight: "20px",
-                    color: theme.normal.text0,
+                    color: props.history ? theme.normal.text2 : theme.normal.text0,
                   })}
                 >
                   {openPrice}USDT
@@ -111,7 +111,7 @@ const TraderCurrent: FC<TraderCurrentProps> = ({ ...props }) => {
                     fontSize: "14px",
                     fontWeight: "700",
                     lineHeight: "20px",
-                    color: theme.normal.text0,
+                    color: props.history ? theme.normal.text2 : theme.normal.text0,
                   })}
                 >
                   {marketPrice}USDT
@@ -166,7 +166,7 @@ const TraderCurrent: FC<TraderCurrentProps> = ({ ...props }) => {
                     fontSize: "12px",
                     fontWeight: "400",
                     lineHeight: "16px",
-                    color: theme.normal.text0,
+                    color: props.history ? theme.normal.text2 : theme.normal.text0,
                   })}
                 >
                   {openTimeString}
@@ -188,7 +188,7 @@ const TraderCurrent: FC<TraderCurrentProps> = ({ ...props }) => {
                     fontSize: "12px",
                     fontWeight: "400",
                     lineHeight: "16px",
-                    color: theme.normal.text0,
+                    color: props.history ? theme.normal.text2 : theme.normal.text0,
                   })}
                 >
                   {closeTimeString}

@@ -135,8 +135,11 @@ const KolItem: FC<KolItemProps> = ({ ...props }) => {
   const { width } = useWindowWidth();
   const { nowTheme } = useTheme();
   const itemSize = useMemo(() => {
+    console.log(width);
     switch (width) {
-      case WidthType.ssm | WidthType.sm:
+      case WidthType.ssm:
+        return 12;
+      case WidthType.sm:
         return 12;
       case WidthType.md:
         return 6;
@@ -165,9 +168,9 @@ const KolItem: FC<KolItemProps> = ({ ...props }) => {
             background: theme.normal.bg3,
             "& img": {
               width: "64px",
-              height: "64px"
+              height: "64px",
             },
-            overflow: "hidden"
+            overflow: "hidden",
           })}
         >
           <img src={props.data.avatar} alt="kolIcon" />
