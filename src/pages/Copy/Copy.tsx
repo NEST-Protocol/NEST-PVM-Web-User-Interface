@@ -182,7 +182,7 @@ const HOW_TO_USE_3 = (
 
 const Copy: FC = () => {
   const { isBigMobile } = useWindowWidth();
-  const { kolList, myTradeInfo: myInfo } = useCopy();
+  const { kolList, myTradeInfo: myInfo, setPage, allPage } = useCopy();
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -491,7 +491,8 @@ const Copy: FC = () => {
         <Stack
           spacing={"10px"}
           direction={"row"}
-          justifyContent={"flex-end"}
+          
+          justifyContent={["center","center","flex-end"]}
           alignItems={"center"}
           width={"100%"}
           sx={(theme) => ({
@@ -511,22 +512,20 @@ const Copy: FC = () => {
                     color: theme.normal.bg1,
                     "&:hover": {
                       background: theme.normal.primary,
-                    color: theme.normal.bg1,
-                    }
-                  }
-                }
+                      color: theme.normal.bg1,
+                    },
+                  },
+                },
               },
               "& li:first-child": {
-                "& button": {
-                },
+                "& button": {},
 
                 "& button svg path": {
                   fill: theme.normal.text2,
                 },
               },
               "& li:last-child": {
-                "& button": {
-                },
+                "& button": {},
                 "& button svg path": {
                   fill: theme.normal.text2,
                 },
@@ -534,11 +533,18 @@ const Copy: FC = () => {
             },
           })}
         >
-          <Pagination count={10} variant="outlined" shape="rounded" />
+          <Pagination
+            count={allPage}
+            variant="outlined"
+            shape="rounded"
+            onChange={(event: React.ChangeEvent<unknown>, value: number) => {
+              setPage(value);
+            }}
+          />
         </Stack>
       </Stack>
     );
-  }, [kolList]);
+  }, [allPage, kolList, setPage]);
   return (
     <Stack
       direction={"row"}

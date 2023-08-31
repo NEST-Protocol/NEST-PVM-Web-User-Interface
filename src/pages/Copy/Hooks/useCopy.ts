@@ -31,14 +31,18 @@ function useCopy() {
   const { chainsData, signature } = useNEST();
   const [kolList, setKolList] = useState<Array<AllKOLModel>>([]);
   const [myTradeInfo, setMyTradeInfo] = useState<MyTradeInfoModel>();
-  
+  const [page, setPage] = useState<number>(1);
+  const [allPage, setAllPage] = useState<number>(1);
+
   const getAllKOL = useCallback(async () => {
     if (chainsData.chainId && signature) {
-      const req = await copyAllKOL(chainsData.chainId, 1, 30, {
+      const req = await copyAllKOL(chainsData.chainId, page, 12, {
         Authorization: signature.signature,
       });
       if (Number(req["errorCode"]) === 0) {
         const value = req["value"]["records"];
+        const allItem = req["value"]["total"];
+        setAllPage(Math.ceil(allItem / 12));
         const list: Array<AllKOLModel> = value.map((item: any) => {
           const one: AllKOLModel = {
             id: item["id"],
@@ -62,7 +66,7 @@ function useCopy() {
         setKolList(list);
       }
     }
-  }, [chainsData.chainId, signature]);
+  }, [chainsData.chainId, page, signature]);
 
   const getMyTradeInfo = useCallback(async () => {
     if (chainsData.chainId && signature) {
@@ -86,7 +90,7 @@ function useCopy() {
     getAllKOL();
     getMyTradeInfo();
   }, [getAllKOL, getMyTradeInfo]);
-  return { kolList, myTradeInfo };
+  return { kolList, myTradeInfo, setPage, allPage };
 }
 
 export default useCopy;
