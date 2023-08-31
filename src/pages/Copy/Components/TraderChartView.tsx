@@ -153,7 +153,7 @@ const TraderChartView: FC<TraderChartViewProps> = ({ ...props }) => {
             <Box
               sx={(theme) => ({
                 fontWeight: "400px",
-                fontHeight: "14px",
+                fontSize: "14px",
                 lineHeight: "20px",
                 color: theme.normal.text2,
               })}
@@ -164,7 +164,7 @@ const TraderChartView: FC<TraderChartViewProps> = ({ ...props }) => {
           <Box
             sx={(theme) => ({
               fontWeight: "400px",
-              fontHeight: "14px",
+              fontSize: "14px",
               lineHeight: "20px",
               color: theme.normal.text0,
             })}

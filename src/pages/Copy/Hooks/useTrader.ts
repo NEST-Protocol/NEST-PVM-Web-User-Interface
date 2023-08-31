@@ -348,7 +348,7 @@ function useTrader(address: string | undefined) {
     performanceSymbolData,
     traderOrderList,
     traderOrderHistoryList,
-    traderFollowerList,
+    traderFollowerList
   };
 }
 

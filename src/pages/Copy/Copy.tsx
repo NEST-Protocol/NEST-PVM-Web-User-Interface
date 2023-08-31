@@ -7,6 +7,7 @@ import useWindowWidth from "../../hooks/useWindowWidth";
 import KolItem from "./Components/kolItem";
 import Grid from "@mui/material/Grid";
 import useCopy from "./Hooks/useCopy";
+import Pagination from "@mui/material/Pagination";
 
 const MY_COPY_ICON = (
   <svg
@@ -468,6 +469,7 @@ const Copy: FC = () => {
         maxWidth={"1200px"}
         gap={["16px", "16px", "32px"]}
         marginTop={"40px"}
+        width={"100%"}
       >
         <Box
           sx={(theme) => ({
@@ -485,6 +487,55 @@ const Copy: FC = () => {
             return <KolItem data={item} />;
           })}
         </Grid>
+
+        <Stack
+          spacing={"10px"}
+          direction={"row"}
+          justifyContent={"flex-end"}
+          alignItems={"center"}
+          width={"100%"}
+          sx={(theme) => ({
+            "& ul": {
+              "& li": {
+                "& .MuiPaginationItem-ellipsis": {
+                  color: theme.normal.text2,
+                },
+                "& button": {
+                  background: theme.normal.bg1,
+                  borderRadius: "8px",
+                  opacity: 1,
+                  border: 0,
+                  color: theme.normal.text2,
+                  "&.Mui-selected": {
+                    background: theme.normal.primary,
+                    color: theme.normal.bg1,
+                    "&:hover": {
+                      background: theme.normal.primary,
+                    color: theme.normal.bg1,
+                    }
+                  }
+                }
+              },
+              "& li:first-child": {
+                "& button": {
+                },
+
+                "& button svg path": {
+                  fill: theme.normal.text2,
+                },
+              },
+              "& li:last-child": {
+                "& button": {
+                },
+                "& button svg path": {
+                  fill: theme.normal.text2,
+                },
+              },
+            },
+          })}
+        >
+          <Pagination count={10} variant="outlined" shape="rounded" />
+        </Stack>
       </Stack>
     );
   }, [kolList]);
