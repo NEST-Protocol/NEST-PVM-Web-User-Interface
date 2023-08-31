@@ -861,6 +861,10 @@ msgstr ""
 msgid "MAX"
 msgstr "MAKS"
 
+#: src/pages/Copy/Hooks/useCopySettingModal.ts
+msgid "Minimum 200 NEST"
+msgstr ""
+
 #: src/hooks/useFuturesNewOrder.ts
 #: src/pages/Copy/Hooks/useCopySettingModal.ts
 msgid "Minimum 50 NEST"

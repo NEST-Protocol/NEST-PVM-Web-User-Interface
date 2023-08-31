@@ -863,6 +863,10 @@ msgstr "Market Price"
 msgid "MAX"
 msgstr "MAX"
 
+#: src/pages/Copy/Hooks/useCopySettingModal.ts
+msgid "Minimum 200 NEST"
+msgstr "Minimum 200 NEST"
+
 #: src/hooks/useFuturesNewOrder.ts
 #: src/pages/Copy/Hooks/useCopySettingModal.ts
 msgid "Minimum 50 NEST"
