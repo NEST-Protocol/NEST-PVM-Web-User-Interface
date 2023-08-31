@@ -7,7 +7,7 @@ import { Trans, t } from "@lingui/macro";
 import CopySettingModal from "./CopySettingModal";
 import { AllKOLModel } from "../Hooks/useCopy";
 import useNEST from "../../../hooks/useNEST";
-import { copyAsset } from "../../../lib/NESTRequest";
+import { copyMyCopiesMyTradersList } from "../../../lib/NESTRequest";
 import CopyStopModal from "./CopyStopModal";
 import {
   TransactionType,
@@ -15,6 +15,7 @@ import {
 } from "../../../hooks/useTransactionReceipt";
 import { SnackBarType } from "../../../components/SnackBar/NormalSnackBar";
 import { DefaultKolIcon } from "../../../components/icons";
+import { MyCopiesMyTradersList } from "../Hooks/useMyCopies";
 
 const WALLET = (
   <svg
@@ -79,11 +80,13 @@ interface KolInfoProps {
 
 const KolInfo: FC<KolInfoProps> = ({ ...props }) => {
   const { isBigMobile } = useWindowWidth();
-  const { chainsData, signature, account } = useNEST();
+  const { chainsData, signature } = useNEST();
   const [openCopyModal, setOpenCopyModal] = useState(false);
   const [openStopModal, setOpenStopModal] = useState(false);
-  const [current, setCurrent] = useState<number>(-666);
   const { addTransactionNotice } = usePendingTransactionsBase();
+  const [myCopiesMyTradersList, setMyCopiesMyTradersList] = useState<
+    Array<MyCopiesMyTradersList>
+  >();
 
   const nickName = props.data ? props.data.nickName : String().placeHolder;
   const walletAddress = props.data
@@ -132,31 +135,50 @@ const KolInfo: FC<KolInfoProps> = ({ ...props }) => {
     );
   }, []);
 
-  const getCurrent = useCallback(async () => {
-    if (chainsData.chainId && signature && props.data && account.address) {
-      const req = await copyAsset(
-        chainsData.chainId,
-        props.data.walletAddress,
-        account.address,
-        {
-          Authorization: signature.signature,
-        }
-      );
-      if (Number(req["errorCode"]) === 0) {
-        const value = req["value"];
-        setCurrent(value ? value["copyAccountBalance"] : undefined);
+  const getMyCopiesMyTraderList = useCallback(async () => {
+    try {
+      if (!chainsData.chainId || !signature) {
+        return;
       }
+      const baseList = await copyMyCopiesMyTradersList(chainsData.chainId, {
+        Authorization: signature.signature,
+      });
+      if (Number(baseList["errorCode"]) === 0) {
+        const list: Array<MyCopiesMyTradersList> = baseList["value"].map(
+          (item: { [x: string]: any }) => {
+            return {
+              kolAddress: item["walletAddress"],
+              follow: item["follow"] === "true",
+            };
+          }
+        );
+        setMyCopiesMyTradersList(list);
+      }
+    } catch (error) {
+      console.log(error);
     }
-  }, [account.address, chainsData.chainId, props.data, signature]);
+  }, [chainsData.chainId, signature]);
+
+  const isFollow = useMemo(() => {
+    if (props.data && myCopiesMyTradersList) {
+      const f = myCopiesMyTradersList.filter(
+        (item) =>
+          item.follow === true &&
+          item.kolAddress.toLocaleLowerCase() === props.data?.walletAddress.toLocaleLowerCase()
+      );
+      return f.length > 0;
+    }
+    return undefined;
+  }, [myCopiesMyTradersList, props.data]);
 
   useEffect(() => {
-    getCurrent();
-  }, [getCurrent]);
+    getMyCopiesMyTraderList();
+  }, [getMyCopiesMyTraderList]);
 
   const button = useMemo(() => {
-    if (current === -666) {
+    if (isFollow === undefined) {
       return <></>;
-    } else if (current && current > 0) {
+    } else if (isFollow) {
       return (
         <Box
           sx={(theme) => ({
@@ -191,7 +213,7 @@ const KolInfo: FC<KolInfoProps> = ({ ...props }) => {
         />
       );
     }
-  }, [current]);
+  }, [isFollow]);
 
   const kolIcon = useMemo(() => {
     if (props.data?.avatar !== "-" && props.data?.avatar !== "") {
@@ -555,7 +577,7 @@ const KolInfo: FC<KolInfoProps> = ({ ...props }) => {
               result: res ? SnackBarType.success : SnackBarType.fail,
             });
           }
-          getCurrent();
+          getMyCopiesMyTraderList()
           setOpenCopyModal(false);
         }}
       />
@@ -569,7 +591,7 @@ const KolInfo: FC<KolInfoProps> = ({ ...props }) => {
               result: res ? SnackBarType.success : SnackBarType.fail,
             });
           }
-          getCurrent();
+          getMyCopiesMyTraderList()
           setOpenStopModal(false);
         }}
         address={props.data ? props.data.walletAddress : ""}

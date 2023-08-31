@@ -128,7 +128,7 @@ function useTrader(address: string | undefined) {
           const one: EarningsListModel = {
             date: item["date"].split("-")[2],
             roi: parseFloat(parseFloat(item["roi"] ?? 0).floor(2)),
-            pnl:  parseFloat(parseFloat(item["pnl"] ?? 0).floor(2)),
+            pnl: parseFloat(parseFloat(item["pnl"] ?? 0).floor(2)),
           };
           return one;
         });
@@ -304,21 +304,26 @@ function useTrader(address: string | undefined) {
   }, [address, chainsData.chainId, signature]);
 
   useEffect(() => {
-    getKOLInfo();
     getEarnings();
     getPerformance();
     getPerformanceSymbol();
+  }, [getEarnings, getPerformance, getPerformanceSymbol]);
+
+  useEffect(() => {
+    getKOLInfo();
     getFollowerList();
-  }, [
-    getKOLInfo,
-    getEarnings,
-    getPerformance,
-    getPerformanceSymbol,
-    getFollowerList,
-  ]);
+    const time = setInterval(() => {
+      getKOLInfo();
+      getFollowerList();
+    }, 30 * 1000);
+    return () => {
+      clearInterval(time);
+    };
+  }, [getKOLInfo, getFollowerList]);
 
   useEffect(() => {
     getList();
+    getHistoryList();
     const time = setInterval(() => {
       getList();
       getHistoryList();
@@ -343,7 +348,7 @@ function useTrader(address: string | undefined) {
     performanceSymbolData,
     traderOrderList,
     traderOrderHistoryList,
-    traderFollowerList
+    traderFollowerList,
   };
 }
 

@@ -15,6 +15,7 @@ import MainButton from "../../../components/MainButton/MainButton";
 import Agree from "../../../components/Agree/Agree";
 import useCopySettingModal from "../Hooks/useCopySettingModal";
 import NESTa from "../../../components/MainButton/NESTa";
+import ErrorLabel from "../../../components/ErrorLabel/ErrorLabel";
 
 interface CopySettingBaseModalProps {
   onClose: (res?: boolean) => void;
@@ -33,20 +34,20 @@ const CopySettingBaseModal: FC<CopySettingBaseModalProps> = ({ ...props }) => {
     mainButtonAction,
     maxCallBack,
     tokenBalance,
-    checkBalance,
-    checkLimit,
     selectButton,
     setSelectButton,
     selectButtonCallBack,
     agree,
     setAgree,
     current,
+    errorLabel1,
+    errorLabel2,
   } = useCopySettingModal(props.address, props.onClose);
 
   const inputNestAmount = useMemo(() => {
     return (
       <NESTInput
-        checkBalance={checkBalance && checkLimit}
+        checkBalance={errorLabel1 === undefined}
         showToSwap={false}
         showBalance={
           tokenBalance ? tokenBalance.floor(2) : String().placeHolder
@@ -61,15 +62,7 @@ const CopySettingBaseModal: FC<CopySettingBaseModalProps> = ({ ...props }) => {
         otherCallBack={() => {}}
       />
     );
-  }, [
-    checkBalance,
-    checkLimit,
-    copyAccountBalance,
-    maxCallBack,
-    setCopyAccountBalance,
-    setSelectButton,
-    tokenBalance,
-  ]);
+  }, [copyAccountBalance, errorLabel1, maxCallBack, setCopyAccountBalance, setSelectButton, tokenBalance]);
 
   return (
     <Stack spacing={"24px"} width={"100%"}>
@@ -103,34 +96,30 @@ const CopySettingBaseModal: FC<CopySettingBaseModalProps> = ({ ...props }) => {
               spacing={"4px"}
             >
               <Box
-                    sx={(theme) => ({
-                      fontWeight: "400",
-                      fontSize: "12px",
-                      lineHeight: "16px",
-                      color: theme.normal.text2,
-                    })}
-                  >
-                    <Trans>Current:</Trans>
-                  </Box>
-                  <Box
-                    sx={(theme) => ({
-                      fontWeight: "400",
-                      fontSize: "12px",
-                      lineHeight: "16px",
-                      color: theme.normal.text0,
-                    })}
-                  >
-                    {current ? current.floor(2) : String().placeHolder}NEST
-                  </Box>
+                sx={(theme) => ({
+                  fontWeight: "400",
+                  fontSize: "12px",
+                  lineHeight: "16px",
+                  color: theme.normal.text2,
+                })}
+              >
+                <Trans>Current:</Trans>
+              </Box>
+              <Box
+                sx={(theme) => ({
+                  fontWeight: "400",
+                  fontSize: "12px",
+                  lineHeight: "16px",
+                  color: theme.normal.text0,
+                })}
+              >
+                {current ? current.floor(2) : String().placeHolder}NEST
+              </Box>
             </Stack>
           </Stack>
 
           {inputNestAmount}
-          {/* {isError ? (
-          <ErrorLabel title={errorLabel} />
-        ) : (
-          <></>
-        )} */}
+          {errorLabel1 ? <ErrorLabel title={errorLabel1} /> : <></>}
           <TokenAmountButtons
             nowValue={selectButton ?? 0}
             callBack={selectButtonCallBack}
@@ -159,11 +148,15 @@ const CopySettingBaseModal: FC<CopySettingBaseModalProps> = ({ ...props }) => {
             alignItems={"center"}
             sx={(theme) => ({
               borderRadius: "8px",
-              border: `1px solid ${theme.normal.border}`,
+              border: `1px solid ${
+                errorLabel2 ? theme.normal.danger : theme.normal.border
+              }`,
               padding: "13px 12px",
-              "&:hover" : {
-                border: `1px solid ${theme.normal.primary}`,
-              }
+              "&:hover": {
+                border: `1px solid ${
+                  errorLabel2 ? theme.normal.danger : theme.normal.border
+                }`,
+              },
             })}
           >
             <Box
@@ -192,6 +185,7 @@ const CopySettingBaseModal: FC<CopySettingBaseModalProps> = ({ ...props }) => {
               NEST
             </Box>
           </Stack>
+          {errorLabel2 ? <ErrorLabel title={errorLabel2} /> : <></>}
           <Stack direction={"row"} spacing={"8px"} alignItems={"center"}>
             <Box
               sx={(theme) => ({

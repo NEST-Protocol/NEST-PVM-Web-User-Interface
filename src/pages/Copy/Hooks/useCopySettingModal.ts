@@ -75,9 +75,13 @@ function useCopySettingModal(
       if (Number(req["errorCode"]) === 0) {
         const value = req["value"];
         setCurrent(value["copyAccountBalance"]);
+        const follow: number = value["followingValue"];
+        if (followingValue === "" && follow > 0) {
+          setFollowingValue(follow.floor(2));
+        }
       }
     }
-  }, [account.address, address, chainsData.chainId, signature]);
+  }, [account.address, address, chainsData.chainId, followingValue, signature]);
 
   const checkBalance = useMemo(() => {
     if (tokenBalance) {
@@ -91,28 +95,31 @@ function useCopySettingModal(
   const checkLimit = useMemo(() => {
     const copyAccountBalanceNumber =
       copyAccountBalance === "" ? 0 : parseFloat(copyAccountBalance);
-    if (copyAccountBalanceNumber >= 50) {
+    if (copyAccountBalanceNumber >= 200) {
       return true;
     }
     return false;
   }, [copyAccountBalance]);
 
-  const mainButtonTitle = useMemo(() => {
-    if (!checkBalance) {
-      return t`Insufficient NEST balance`;
-    } else if (!checkLimit) {
-      return t`Minimum 50 NEST`;
-    } else {
-      return t`Save`;
+  const checkLimit2 = useMemo(() => {
+    const followingValueNumber =
+      followingValue === "" ? 0 : parseFloat(followingValue);
+    if (followingValueNumber >= 50) {
+      return true;
     }
-  }, [checkBalance, checkLimit]);
+    return false;
+  }, [followingValue]);
+
+  const mainButtonTitle = useMemo(() => {
+    return t`Save`;
+  }, []);
 
   const mainButtonLoading = useMemo(() => {
     return isLoading;
   }, [isLoading]);
   const mainButtonDis = useMemo(() => {
-    return !checkBalance || !checkLimit || !agree;
-  }, [agree, checkBalance, checkLimit]);
+    return !checkBalance || !checkLimit || !agree || !checkLimit2;
+  }, [agree, checkBalance, checkLimit, checkLimit2]);
 
   const mainButtonAction = useCallback(() => {
     if (!mainButtonDis && !mainButtonLoading) {
@@ -140,6 +147,20 @@ function useCopySettingModal(
     [tokenBalance]
   );
 
+  const errorLabel1 = useMemo(() => {
+    if (!checkBalance && copyAccountBalance !== "") {
+      return t`Insufficient NEST balance`;
+    } else if (!checkLimit && copyAccountBalance !== "") {
+      return t`Minimum 200 NEST`;
+    }
+  }, [checkBalance, checkLimit, copyAccountBalance]);
+
+  const errorLabel2 = useMemo(() => {
+    if (!checkLimit2 && followingValue !== "") {
+      return t`Minimum 50 NEST`;
+    }
+  }, [checkLimit2, followingValue]);
+
   /**
    * update
    */
@@ -166,14 +187,14 @@ function useCopySettingModal(
     mainButtonAction,
     maxCallBack,
     tokenBalance,
-    checkBalance,
-    checkLimit,
     selectButton,
     setSelectButton,
     selectButtonCallBack,
     agree,
     setAgree,
     current,
+    errorLabel1,
+    errorLabel2,
   };
 }
 
