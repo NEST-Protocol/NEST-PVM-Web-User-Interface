@@ -54,7 +54,7 @@ export interface TraderFollowerList {
 }
 
 function useTrader(address: string | undefined) {
-  const { chainsData, signature } = useNEST();
+  const { chainsData } = useNEST();
   const [kolInfo, setKolInfo] = useState<AllKOLModel>();
   const [earningsData, setEarningsData] = useState<Array<EarningsListModel>>(
     []

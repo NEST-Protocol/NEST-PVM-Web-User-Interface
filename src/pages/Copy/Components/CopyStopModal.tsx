@@ -40,7 +40,7 @@ const CopyStopBaseModal: FC<CopyStopBaseModalProps> = ({ ...props }) => {
           sx={(theme) => ({
             fontWeight: "400",
             fontSize: "14px",
-            lineHeight: "14px",
+            lineHeight: "20px",
             color: theme.normal.text2,
           })}
         >
@@ -50,7 +50,7 @@ const CopyStopBaseModal: FC<CopyStopBaseModalProps> = ({ ...props }) => {
           sx={(theme) => ({
             fontWeight: "400",
             fontSize: "14px",
-            lineHeight: "14px",
+            lineHeight: "20px",
             color: theme.normal.text0,
           })}
         >

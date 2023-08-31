@@ -199,7 +199,7 @@ const MyCopiesHistory: FC<MyCopiesHistoryProps> = ({ ...props }) => {
                 </Stack>
               </Stack>
 
-              <Stack direction={"row"}>
+              <Stack spacing={"8px"}>
                 <Stack direction={"row"} spacing={"4px"} width={"100%"}>
                   <Box
                     sx={(theme) => ({

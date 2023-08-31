@@ -266,6 +266,7 @@ const Copy: FC = () => {
       return (
         <Stack
           direction={"row"}
+          width={"100%"}
           justifyContent={"space-between"}
           alignItems={"center"}
           paddingY={"24px"}

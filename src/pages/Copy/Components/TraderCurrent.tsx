@@ -124,6 +124,7 @@ const TraderCurrent: FC<TraderCurrentProps> = ({ ...props }) => {
                     fontWeight: "400",
                     lineHeight: "16px",
                     color: theme.normal.text2,
+                    textAlign: "right"
                   })}
                 >
                   <Trans>ROI</Trans>
@@ -133,6 +134,7 @@ const TraderCurrent: FC<TraderCurrentProps> = ({ ...props }) => {
                     fontSize: "14px",
                     fontWeight: "700",
                     lineHeight: "20px",
+                    textAlign: "right",
                     color:
                       item.profitLossRate >= 0
                         ? theme.normal.success
@@ -145,8 +147,7 @@ const TraderCurrent: FC<TraderCurrentProps> = ({ ...props }) => {
             </Stack>
             <NESTLine />
             <Stack
-              direction={"row"}
-              justifyContent={"space-between"}
+              spacing={"8px"}
               alignItems={"center"}
             >
               <Stack direction={"row"} spacing={"4px"} width={"100%"}>
