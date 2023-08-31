@@ -10,6 +10,7 @@ import {
   serviceList,
 } from "../../../lib/NESTRequest";
 import { AllKOLModel } from "./useCopy";
+import { DEFAULT_CHAIN_ID } from "../../../lib/client";
 
 export interface EarningsListModel {
   date: string;
@@ -79,8 +80,9 @@ function useTrader(address: string | undefined) {
   const [performanceSymbolDay, setPerformanceSymbolDay] = useState<number>(1);
 
   const getKOLInfo = useCallback(async () => {
-    if (chainsData.chainId && address) {
-      const req = await copyKOLInfo(chainsData.chainId, address, {
+    if (address) {
+      const chainId = chainsData.chainId ?? DEFAULT_CHAIN_ID;
+      const req = await copyKOLInfo(chainId, address, {
         Authorization: "",
       });
       if (Number(req["errorCode"]) === 0) {
@@ -118,15 +120,16 @@ function useTrader(address: string | undefined) {
         return 30;
       }
     };
-    if (chainsData.chainId && address) {
-      const req = await copyEarningsList(chainsData.chainId, address, days(), {
+    if (address) {
+      const chainId = chainsData.chainId ?? DEFAULT_CHAIN_ID;
+      const req = await copyEarningsList(chainId, address, days(), {
         Authorization: "",
       });
       if (Number(req["errorCode"]) === 0) {
         const value = req["value"];
         const list: Array<EarningsListModel> = value.map((item: any) => {
           const one: EarningsListModel = {
-            date: item["date"].split("-")[2],
+            date: item["date"],
             roi: parseFloat(parseFloat(item["roi"] ?? 0).floor(2)),
             pnl: parseFloat(parseFloat(item["pnl"] ?? 0).floor(2)),
           };
@@ -150,8 +153,9 @@ function useTrader(address: string | undefined) {
         return 30;
       }
     };
-    if (chainsData.chainId && address) {
-      const req = await copyPerformance(chainsData.chainId, address, days(), {
+    if (address) {
+      const chainId = chainsData.chainId ?? DEFAULT_CHAIN_ID;
+      const req = await copyPerformance(chainId, address, days(), {
         Authorization: "",
       });
 
@@ -185,15 +189,11 @@ function useTrader(address: string | undefined) {
         return 30;
       }
     };
-    if (chainsData.chainId && address) {
-      const req = await copyPerformanceSymbol(
-        chainsData.chainId,
-        address,
-        days(),
-        {
-          Authorization: "",
-        }
-      );
+    if (address) {
+      const chainId = chainsData.chainId ?? DEFAULT_CHAIN_ID;
+      const req = await copyPerformanceSymbol(chainId, address, days(), {
+        Authorization: "",
+      });
       if (Number(req["errorCode"]) === 0) {
         const value = req["value"];
         const list: Array<PerformanceSymbolModel> = value.map((item: any) => {
@@ -210,10 +210,11 @@ function useTrader(address: string | undefined) {
 
   const getList = useCallback(async () => {
     try {
-      if (!chainsData.chainId || !address) {
+      if (!address) {
         return;
       }
-      const baseList = await serviceList(chainsData.chainId, address, {
+      const chainId = chainsData.chainId ?? DEFAULT_CHAIN_ID;
+      const baseList = await serviceList(chainId, address, {
         Authorization: "",
       });
       if (Number(baseList["errorCode"]) === 0) {
@@ -246,10 +247,11 @@ function useTrader(address: string | undefined) {
 
   const getHistoryList = useCallback(async () => {
     try {
-      if (!chainsData.chainId || !address) {
+      if (!address) {
         return;
       }
-      const baseList = await serviceHistory(chainsData.chainId, address, {
+      const chainId = chainsData.chainId ?? DEFAULT_CHAIN_ID;
+      const baseList = await serviceHistory(chainId, address, {
         Authorization: "",
       });
       if (Number(baseList["errorCode"]) === 0) {
@@ -280,10 +282,11 @@ function useTrader(address: string | undefined) {
 
   const getFollowerList = useCallback(async () => {
     try {
-      if (!chainsData.chainId || !address) {
+      if (!address) {
         return;
       }
-      const baseList = await copyTraderFollowers(chainsData.chainId, address, {
+      const chainId = chainsData.chainId ?? DEFAULT_CHAIN_ID;
+      const baseList = await copyTraderFollowers(chainId, address, {
         Authorization: "",
       });
       if (Number(baseList["errorCode"]) === 0) {
@@ -348,7 +351,7 @@ function useTrader(address: string | undefined) {
     performanceSymbolData,
     traderOrderList,
     traderOrderHistoryList,
-    traderFollowerList
+    traderFollowerList,
   };
 }
 
