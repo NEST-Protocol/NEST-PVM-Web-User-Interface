@@ -13,6 +13,7 @@ function useCopySettingModal(
   const [tokenBalance, setTokenBalance] = useState<number>();
   const [copyAccountBalance, setCopyAccountBalance] = useState<string>("");
   const [followingValue, setFollowingValue] = useState<string>("");
+  const [oldFollowingValue, setOldFollowingValue] = useState<string>("");
   const [selectButton, setSelectButton] = useState<number>();
   const [agree, setAgree] = useState<boolean>(false);
   const [current, setCurrent] = useState<number>();
@@ -76,12 +77,12 @@ function useCopySettingModal(
         const value = req["value"];
         setCurrent(value["copyAccountBalance"]);
         const follow: number = value["followingValue"];
-        if (followingValue === "" && follow > 0) {
-          setFollowingValue(follow.floor(2));
+        if (oldFollowingValue === "" && follow > 0) {
+          setOldFollowingValue(follow.floor(2));
         }
       }
     }
-  }, [account.address, address, chainsData.chainId, followingValue, signature]);
+  }, [account.address, address, chainsData.chainId, oldFollowingValue, signature]);
 
   const checkBalance = useMemo(() => {
     if (tokenBalance) {
@@ -95,11 +96,12 @@ function useCopySettingModal(
   const checkLimit = useMemo(() => {
     const copyAccountBalanceNumber =
       copyAccountBalance === "" ? 0 : parseFloat(copyAccountBalance);
-    if (copyAccountBalanceNumber >= 200) {
+    const currentNumber = current ?? 0
+    if ((currentNumber + copyAccountBalanceNumber) >= 200) {
       return true;
     }
     return false;
-  }, [copyAccountBalance]);
+  }, [copyAccountBalance, current]);
 
   const checkLimit2 = useMemo(() => {
     const followingValueNumber =
@@ -175,6 +177,12 @@ function useCopySettingModal(
       clearInterval(time);
     };
   }, [getBalance, getCurrent]);
+
+  useEffect(() => {
+    if (oldFollowingValue !== "") {
+      setFollowingValue(oldFollowingValue)
+    }
+  }, [oldFollowingValue])
 
   return {
     copyAccountBalance,
