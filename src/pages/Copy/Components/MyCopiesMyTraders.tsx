@@ -8,6 +8,7 @@ import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import { MyCopiesMyTradersList } from "../Hooks/useMyCopies";
 import { DefaultKolIcon } from "../../../components/icons";
+import GreyButton from "../../../components/MainButton/GreyButton";
 
 interface MyCopiesMyTradersProps {
   copyCallBack: (name: string, address: string) => void;
@@ -177,49 +178,35 @@ const MyCopiesMyTraders: FC<MyCopiesMyTradersProps> = ({ ...props }) => {
             justifyContent={"space-between"}
             alignItems={"center"}
           >
-            <Box
-              sx={(theme) => ({
-                fontWeight: "700",
-                fontSize: "14px",
-                lineHeight: "20px",
-                color: theme.normal.text0,
-                padding: "10px 16px",
-                borderRadius: "8px",
-                background: theme.normal.grey_hover,
-                width: "100%",
-                textAlign: "center",
-                "&:hover": {
-                  cursor: "pointer",
-                },
-              })}
+            <GreyButton
+              title={t`Settings`}
               onClick={() => {
-                props.copyCallBack(item.nickName, item.kolAddress);
+                props.copyCallBack(nickName, kolAddress);
               }}
-            >
-              <Trans>Settings</Trans>
-            </Box>
+              style={{
+                fontSize: "10px",
+                lineHeight: "14px",
+                borderRadius: "4px",
+                padding: "5px 12px",
+                height: "24px",
+                width: "fit-content",
+              }}
+            />
             {item.follow ? (
-              <Box
-                sx={(theme) => ({
-                  fontWeight: "700",
-                  fontSize: "14px",
-                  lineHeight: "20px",
-                  color: theme.normal.text0,
-                  padding: "10px 16px",
-                  borderRadius: "8px",
-                  background: theme.normal.grey_hover,
-                  width: "100%",
-                  textAlign: "center",
-                  "&:hover": {
-                    cursor: "pointer",
-                  },
-                })}
+              <GreyButton
+                title={t`Stop Copying`}
                 onClick={() => {
                   props.stopCallBack(item.kolAddress);
                 }}
-              >
-                <Trans>Stop Copying</Trans>
-              </Box>
+                style={{
+                  fontSize: "10px",
+                  lineHeight: "14px",
+                  borderRadius: "4px",
+                  padding: "5px 12px",
+                  height: "24px",
+                  width: "fit-content",
+                }}
+              />
             ) : (
               <></>
             )}
@@ -368,47 +355,36 @@ const Row: FC<RowProps> = ({ ...props }) => {
           alignItems={"center"}
           spacing={"8px"}
         >
-          <Box
-            sx={(theme) => ({
-              fontWeight: "700",
-              fontSize: "10px",
-              lineHeight: "14px",
-              color: theme.normal.text0,
-              padding: "5px 12px",
-              borderRadius: "4px",
-              background: theme.normal.grey,
-              width: "fit-content",
-              "&:hover": {
-                cursor: "pointer",
-              },
-            })}
+          <GreyButton
+            title={t`Settings`}
             onClick={() => {
               props.copyCallBack(nickName, kolAddress);
             }}
-          >
-            <Trans>Settings</Trans>
-          </Box>
+            style={{
+              fontSize: "10px",
+              lineHeight: "14px",
+              borderRadius: "4px",
+              padding: "5px 12px",
+              height: "24px",
+              width: "fit-content",
+            }}
+          />
+
           {props.data.follow ? (
-            <Box
-              sx={(theme) => ({
-                fontWeight: "700",
-                fontSize: "10px",
-                lineHeight: "14px",
-                color: theme.normal.text0,
-                padding: "5px 12px",
-                borderRadius: "4px",
-                background: theme.normal.grey,
-                width: "fit-content",
-                "&:hover": {
-                  cursor: "pointer",
-                },
-              })}
+            <GreyButton
+              title={t`Stop Copying`}
               onClick={() => {
                 props.stopCallBack(kolAddress);
               }}
-            >
-              <Trans>Stop Copying</Trans>
-            </Box>
+              style={{
+                fontSize: "10px",
+                lineHeight: "14px",
+                borderRadius: "4px",
+                padding: "5px 12px",
+                height: "24px",
+                width: "fit-content",
+              }}
+            />
           ) : (
             <></>
           )}

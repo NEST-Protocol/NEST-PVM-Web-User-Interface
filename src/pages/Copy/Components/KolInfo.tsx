@@ -414,6 +414,7 @@ const KolInfo: FC<KolInfoProps> = ({ ...props }) => {
         spacing={"32px"}
         justifyContent={"flex-start"}
         paddingX={["20px", "20px", "20px", "20px", "0"]}
+        paddingBottom={"48px"}
       >
         {kolIcon}
         <Stack spacing={"24px"} width={"100%"}>

@@ -16,7 +16,7 @@ function useCopySettingModal(
   const [oldFollowingValue, setOldFollowingValue] = useState<string>("");
   const [oldTotalValue, setOldTotalValue] = useState<number>();
   const [selectButton, setSelectButton] = useState<number>();
-  const [agree, setAgree] = useState<boolean>(false);
+  const [agree, setAgree] = useState<boolean>(true);
   const [current, setCurrent] = useState<number>();
 
   const [isLoading, setIsLoading] = useState(false);

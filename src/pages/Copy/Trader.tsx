@@ -10,9 +10,11 @@ import TraderChartView from "./Components/TraderChartView";
 import KolInfo from "./Components/KolInfo";
 import useTrader from "./Hooks/useTrader";
 import { useParams } from "react-router-dom";
+import useTheme from "../../hooks/useTheme";
 
 const Trader: FC = () => {
   const { address } = useParams();
+  const {nowTheme} = useTheme()
   const {
     kolInfo,
     earningsDay,
@@ -119,7 +121,14 @@ const Trader: FC = () => {
           justifyContent={"space-around"}
           alignItems={"center"}
           width={"100%"}
-          sx={(theme) => ({ background: theme.normal.bg1 })}
+          sx={() => {
+            const backgroundImage = nowTheme.isLight ? `url('/images/CopyBG2.svg')` : `url('/images/CopyBG3.svg')`
+            return {
+              backgroundImage: ["", "", backgroundImage],
+              backgroundPosition: "center center",
+              backgroundRepeat: "no-repeat",
+            }
+          }}
         >
           <Stack spacing={"24px"} maxWidth={"1200px"} width={"100%"}>
             <CopyRoute title={t`Trader Profile`} link={"/#/copy"} />

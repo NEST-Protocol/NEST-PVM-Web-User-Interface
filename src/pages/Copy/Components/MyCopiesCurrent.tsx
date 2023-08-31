@@ -13,6 +13,7 @@ import { MyCopiesList } from "../Hooks/useMyCopies";
 import useMyCopiesCurrent from "../Hooks/useMyCopiesCurrent";
 import { DefaultKolIcon } from "../../../components/icons";
 import CircularProgress from "@mui/material/CircularProgress";
+import GreyButton from "../../../components/MainButton/GreyButton";
 
 interface MyCopiesCurrentProps {
   list: MyCopiesList[];
@@ -547,34 +548,21 @@ const Row: FC<RowProps> = ({ ...props }) => {
           alignItems={"center"}
           paddingRight={"20px"}
         >
-          <Box
-            sx={(theme) => ({
-              fontWeight: "700",
-              fontSize: "10px",
-              lineHeight: "14px",
-              color: theme.normal.text0,
-              padding: "5px 12px",
-              borderRadius: "4px",
-              background: theme.normal.grey,
-              width: "fit-content",
-              "&:hover": {
-                cursor: "pointer",
-              },
-              "& .MuiCircularProgress-root": {
-                color: theme.normal.text0,
-              },
-            })}
-            component={"button"}
+          <GreyButton
+            title={t`Close`}
             onClick={() => {
               props.action(props.data.id);
             }}
-          >
-            {props.isLoading === props.data.id ? (
-              <CircularProgress size={"12px"} />
-            ) : (
-              <Trans>Close</Trans>
-            )}
-          </Box>
+            style={{
+              fontSize: "10px",
+              lineHeight: "14px",
+              borderRadius: "4px",
+              padding: "5px 12px",
+              height: "24px",
+              width: "fit-content",
+            }}
+            isLoading={props.isLoading === props.data.id}
+          />
         </Stack>
       </TableCell>
     </TableRow>
