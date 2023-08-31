@@ -15,7 +15,7 @@ const GreyButtonBox = styled("button")(({ theme }) => {
     height: 40,
     borderRadius: 12,
     background: theme.normal.grey,
-    color: theme.normal.highDark,
+    color: theme.normal.text0,
     fontWeight: 700,
     fontSize: 16,
     "&:hover": {
@@ -37,7 +37,7 @@ const GreyButtonBox = styled("button")(({ theme }) => {
 const GreyButton: FC<GreyButtonProps> = ({ ...props }) => {
   const main = useMemo(() => {
     return props.isLoading ? (
-      <CircularProgress size={20} />
+      <CircularProgress size={12} />
     ) : (
       <>{props.title}</>
     );

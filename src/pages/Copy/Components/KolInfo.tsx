@@ -16,6 +16,7 @@ import {
 import { SnackBarType } from "../../../components/SnackBar/NormalSnackBar";
 import { DefaultKolIcon } from "../../../components/icons";
 import { MyCopiesMyTradersList } from "../Hooks/useMyCopies";
+import GreyButton from "../../../components/MainButton/GreyButton";
 
 const WALLET = (
   <svg
@@ -84,9 +85,8 @@ const KolInfo: FC<KolInfoProps> = ({ ...props }) => {
   const [openCopyModal, setOpenCopyModal] = useState(false);
   const [openStopModal, setOpenStopModal] = useState(false);
   const { addTransactionNotice } = usePendingTransactionsBase();
-  const [myCopiesMyTradersList, setMyCopiesMyTradersList] = useState<
-    Array<MyCopiesMyTradersList>
-  >();
+  const [myCopiesMyTradersList, setMyCopiesMyTradersList] =
+    useState<Array<MyCopiesMyTradersList>>();
 
   const nickName = props.data ? props.data.nickName : String().placeHolder;
   const walletAddress = props.data
@@ -164,7 +164,8 @@ const KolInfo: FC<KolInfoProps> = ({ ...props }) => {
       const f = myCopiesMyTradersList.filter(
         (item) =>
           item.follow === true &&
-          item.kolAddress.toLocaleLowerCase() === props.data?.walletAddress.toLocaleLowerCase()
+          item.kolAddress.toLocaleLowerCase() ===
+            props.data?.walletAddress.toLocaleLowerCase()
       );
       return f.length > 0;
     }
@@ -180,23 +181,18 @@ const KolInfo: FC<KolInfoProps> = ({ ...props }) => {
       return <></>;
     } else if (isFollow) {
       return (
-        <Box
-          sx={(theme) => ({
-            background: theme.normal.grey_light_hover,
-            borderRadius: "8px",
-            padding: "10px 16px",
-            fontWeight: "700",
-            fontSize: "14px",
-            lineHeight: "20px",
-            color: theme.normal.text0,
-            "&:hover": {
-              cursor: "pointer",
-            },
-          })}
-          onClick={() => setOpenStopModal(true)}
-        >
-          <Trans>Stop Copying</Trans>
-        </Box>
+        <GreyButton
+                title={t`Stop Copy`}
+                onClick={() => setOpenStopModal(true)}
+                style={{
+                  fontSize: "14px",
+                  lineHeight: "20px",
+                  borderRadius: "8px",
+                  padding: "10px 16px",
+                  width: "fit-content",
+                }}
+              />
+        
       );
     } else {
       return (
@@ -578,7 +574,7 @@ const KolInfo: FC<KolInfoProps> = ({ ...props }) => {
               result: res ? SnackBarType.success : SnackBarType.fail,
             });
           }
-          getMyCopiesMyTraderList()
+          getMyCopiesMyTraderList();
           setOpenCopyModal(false);
         }}
       />
@@ -592,7 +588,7 @@ const KolInfo: FC<KolInfoProps> = ({ ...props }) => {
               result: res ? SnackBarType.success : SnackBarType.fail,
             });
           }
-          getMyCopiesMyTraderList()
+          getMyCopiesMyTraderList();
           setOpenStopModal(false);
         }}
         address={props.data ? props.data.walletAddress : ""}

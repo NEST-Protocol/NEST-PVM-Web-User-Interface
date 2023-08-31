@@ -369,6 +369,7 @@ const Copy: FC = () => {
               )}
             </Stack>
           </Stack>
+          
           <Stack
             direction={"row"}
             spacing={"12px"}
@@ -377,10 +378,14 @@ const Copy: FC = () => {
             padding={"13px 24px"}
             borderRadius={"12px"}
             sx={(theme) => ({
-              background: theme.normal.bg3,
+              background: theme.normal.grey_active,
               color: theme.normal.text1,
               "&:hover": {
                 cursor: "pointer",
+                background: theme.normal.grey_hover,
+              },
+              "&:active": {
+                background: theme.normal.grey_active,
               },
               "& svg path": {
                 fill: theme.normal.text1,
