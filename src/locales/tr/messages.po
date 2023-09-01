@@ -608,6 +608,10 @@ msgstr ""
 "Takip ettiğiniz doğru kişi, para kazanmak nefes almak kadar kolay olacaktır.\n"
 "NESTFi'de doğru kişiyi takip edebilirsiniz, işte benim referans bağlantım"
 
+#: src/pages/Copy/Copy.tsx
+msgid "Follow top trading strategies on NESTFi"
+msgstr ""
+
 #: src/pages/Copy/Components/KolInfo.tsx
 #: src/pages/Copy/Components/KolInfo.tsx
 #: src/pages/Copy/Trader.tsx

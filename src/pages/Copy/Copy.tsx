@@ -8,6 +8,8 @@ import KolItem from "./Components/kolItem";
 import Grid from "@mui/material/Grid";
 import useCopy from "./Hooks/useCopy";
 import Pagination from "@mui/material/Pagination";
+import useTheme from "../../hooks/useTheme";
+import { LJ1, LJ2 } from "../../components/icons";
 
 const MY_COPY_ICON = (
   <svg
@@ -182,6 +184,7 @@ const HOW_TO_USE_3 = (
 
 const Copy: FC = () => {
   const { isBigMobile } = useWindowWidth();
+  const { nowTheme } = useTheme();
   const {
     kolList,
     myTradeInfo: myInfo,
@@ -369,7 +372,7 @@ const Copy: FC = () => {
               )}
             </Stack>
           </Stack>
-          
+
           <Stack
             direction={"row"}
             spacing={"12px"}
@@ -565,16 +568,26 @@ const Copy: FC = () => {
       <Stack width={"100%"} alignItems={"center"}>
         <Stack
           width={"100%"}
-          alignItems={"center"}
-          paddingTop={["0", "0", "0", "0px"]}
-          paddingX={["20px", "20px", "20px", "20px", "0"]}
+          direction={"row"}
+          justifyContent={"space-around"}
+          height={["fit-content","fit-content", "448px"]}
+          paddingBottom={["0","0","80px"]}
+          sx={{
+            backgroundImage: ["","",nowTheme.isLight
+            ? `url('/images/LJBG1.svg')`
+            : `url('/images/LJBG2.svg')`],
+            backgroundPosition: "center center",
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "cover",
+          }}
         >
-          {/* <Stack
+          <Stack
             maxWidth={"1200px"}
             direction={"row"}
             justifyContent={"space-between"}
             alignItems={"center"}
             spacing={["0px", "0px", "40px"]}
+            paddingX={["20px", "20px", "20px", "20px", "0"]}
           >
             <Box
               paddingY={["80px", "80px", "60px"]}
@@ -589,11 +602,27 @@ const Copy: FC = () => {
               <Trans>Follow top trading strategies on NESTFi</Trans>
             </Box>
             <Box
-              sx={{ width: "480px", height: "240px" }}
+              sx={{
+                width: "392px",
+                height: "169px",
+                "& svg": {
+                  width: "392px",
+                  height: "169px",
+                  display: "block",
+                },
+              }}
               display={["none", "none", "block"]}
-            ></Box>
-          </Stack> */}
-
+            >
+              {nowTheme.isLight ? <LJ1 /> : <LJ2 />}
+            </Box>
+          </Stack>
+        </Stack>
+        <Stack
+          width={"100%"}
+          alignItems={"center"}
+          paddingX={["20px", "20px", "20px", "20px", "0"]}
+          marginTop={["0", "0", "-122px"]}
+        >
           {hideMyTrade ? <></> : myTrades}
 
           {kols}
@@ -687,6 +716,7 @@ const Copy: FC = () => {
             backgroundImage: `url('/images/CopyBG.svg')`,
             backgroundPosition: "center center",
             backgroundRepeat: "no-repeat",
+            backgroundSize: "cover",
           }}
         >
           <Box

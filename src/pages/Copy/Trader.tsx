@@ -127,6 +127,7 @@ const Trader: FC = () => {
               backgroundImage: ["", "", backgroundImage],
               backgroundPosition: "center center",
               backgroundRepeat: "no-repeat",
+              backgroundSize: "cover",
             }
           }}
         >

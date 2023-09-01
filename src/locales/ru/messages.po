@@ -610,6 +610,10 @@ msgstr ""
 "Следите за правильным человеком, зарабатывать деньги так же легко, как дышать.\n"
 "Вы можете следить за правильным человеком на NESTFi, вот моя ссылка-приглашение"
 
+#: src/pages/Copy/Copy.tsx
+msgid "Follow top trading strategies on NESTFi"
+msgstr ""
+
 #: src/pages/Copy/Components/KolInfo.tsx
 #: src/pages/Copy/Components/KolInfo.tsx
 #: src/pages/Copy/Trader.tsx
