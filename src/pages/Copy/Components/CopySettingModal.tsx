@@ -62,7 +62,14 @@ const CopySettingBaseModal: FC<CopySettingBaseModalProps> = ({ ...props }) => {
         otherCallBack={() => {}}
       />
     );
-  }, [copyAccountBalance, errorLabel1, maxCallBack, setCopyAccountBalance, setSelectButton, tokenBalance]);
+  }, [
+    copyAccountBalance,
+    errorLabel1,
+    maxCallBack,
+    setCopyAccountBalance,
+    setSelectButton,
+    tokenBalance,
+  ]);
 
   return (
     <Stack spacing={"24px"} width={"100%"}>
@@ -257,7 +264,7 @@ const CopySettingBaseModal: FC<CopySettingBaseModalProps> = ({ ...props }) => {
               })}
             >
               <Trans>I have read and agreed to the</Trans>{" "}
-              <NESTa href="https://www.baidu.com">
+              <NESTa href="https://www.nestprotocol.org/blogs/NESTFi-Copy-Trading-Terms--Conditions">
                 <Trans>Copy Trader Service Agreement</Trans>
               </NESTa>
             </Box>

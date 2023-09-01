@@ -571,11 +571,11 @@ const Copy: FC = () => {
           direction={"row"}
           justifyContent={"space-around"}
           height={["fit-content","fit-content", "448px"]}
-          paddingBottom={["0","0","80px"]}
+          paddingBottom={["60px","60px","80px"]}
           sx={{
-            backgroundImage: ["","",nowTheme.isLight
+            backgroundImage: nowTheme.isLight
             ? `url('/images/LJBG1.svg')`
-            : `url('/images/LJBG2.svg')`],
+            : `url('/images/LJBG2.svg')`,
             backgroundPosition: "center center",
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
@@ -621,7 +621,7 @@ const Copy: FC = () => {
           width={"100%"}
           alignItems={"center"}
           paddingX={["20px", "20px", "20px", "20px", "0"]}
-          marginTop={["0", "0", "-122px"]}
+          marginTop={["-50px", "-50px", "-122px"]}
         >
           {hideMyTrade ? <></> : myTrades}
 
