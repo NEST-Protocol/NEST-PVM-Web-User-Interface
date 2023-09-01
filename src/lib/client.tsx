@@ -56,11 +56,13 @@ const scrollAlphaTestnet = {
   },
   testnet: true,
 };
-export const DEFAULT_CHAIN_ID = 97;
+
+export const DEFAULT_CHAIN_ID = 56;
+
 const { chains, publicClient, webSocketPublicClient } = configureChains(
   // [bsc, scrollAlphaTestnet],
-  [bscTestnet],
-  // [bsc],
+  // [bscTestnet],
+  [bsc],
   [
     publicProvider(),
     jsonRpcProvider({
