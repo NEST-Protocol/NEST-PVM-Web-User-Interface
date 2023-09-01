@@ -182,17 +182,16 @@ const KolInfo: FC<KolInfoProps> = ({ ...props }) => {
     } else if (isFollow) {
       return (
         <GreyButton
-                title={t`Stop Copy`}
-                onClick={() => setOpenStopModal(true)}
-                style={{
-                  fontSize: "14px",
-                  lineHeight: "20px",
-                  borderRadius: "8px",
-                  padding: "10px 16px",
-                  width: "fit-content",
-                }}
-              />
-        
+          title={t`Stop Copying`}
+          onClick={() => setOpenStopModal(true)}
+          style={{
+            fontSize: "14px",
+            lineHeight: "20px",
+            borderRadius: "8px",
+            padding: "10px 16px",
+            width: "fit-content",
+          }}
+        />
       );
     } else {
       return (

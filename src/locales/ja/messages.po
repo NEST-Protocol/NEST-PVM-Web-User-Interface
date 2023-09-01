@@ -608,10 +608,6 @@ msgstr ""
 "正しい人をフォローすれば、お金を稼ぐことは息をするのと同じくらい簡単です。\n"
 "あなたはNESTFiの正しい人をフォローすることができます。以下は私の紹介リンクです"
 
-#: src/pages/Copy/Copy.tsx
-msgid "Follow top trading strategies on NESTFi"
-msgstr ""
-
 #: src/pages/Copy/Components/KolInfo.tsx
 #: src/pages/Copy/Components/KolInfo.tsx
 #: src/pages/Copy/Trader.tsx

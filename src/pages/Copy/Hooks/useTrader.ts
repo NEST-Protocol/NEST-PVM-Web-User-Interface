@@ -87,13 +87,19 @@ function useTrader(address: string | undefined) {
       });
       if (Number(req["errorCode"]) === 0) {
         const value = req["value"];
-
+        const tags = () => {
+          if (!value["tags"] || value["tags"] === "-") {
+            return [];
+          } else {
+            return value["tags"].slice(1, -1).split(",");
+          }
+        };
         const info: AllKOLModel = {
           id: value["id"],
           walletAddress: value["walletAddress"],
           nickName: value["nickName"],
           avatar: value["avatar"],
-          tags: value["tags"].slice(1, -1).split(","),
+          tags: tags(),
           introduction: value["introduction"],
           maxFollowers: value["maxFollowers"],
           maxPositionSize: value["maxPositionSize"],

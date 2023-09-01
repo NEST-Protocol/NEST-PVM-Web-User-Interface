@@ -610,10 +610,6 @@ msgstr ""
 "Sigue a la persona adecuada y ganar dinero será tan fácil como respirar.\n"
 "Puedes seguir a la persona adecuada en NESTFi, aquí está mi enlace de referencia."
 
-#: src/pages/Copy/Copy.tsx
-msgid "Follow top trading strategies on NESTFi"
-msgstr ""
-
 #: src/pages/Copy/Components/KolInfo.tsx
 #: src/pages/Copy/Components/KolInfo.tsx
 #: src/pages/Copy/Trader.tsx
