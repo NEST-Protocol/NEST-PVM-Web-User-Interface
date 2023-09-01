@@ -566,10 +566,10 @@ const Copy: FC = () => {
         <Stack
           width={"100%"}
           alignItems={"center"}
-          paddingTop={["0", "0", "0", "80px"]}
+          paddingTop={["0", "0", "0", "0px"]}
           paddingX={["20px", "20px", "20px", "20px", "0"]}
         >
-          <Stack
+          {/* <Stack
             maxWidth={"1200px"}
             direction={"row"}
             justifyContent={"space-between"}
@@ -592,7 +592,7 @@ const Copy: FC = () => {
               sx={{ width: "480px", height: "240px" }}
               display={["none", "none", "block"]}
             ></Box>
-          </Stack>
+          </Stack> */}
 
           {hideMyTrade ? <></> : myTrades}
 
