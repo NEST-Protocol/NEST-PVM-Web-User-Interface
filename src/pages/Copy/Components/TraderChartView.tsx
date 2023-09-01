@@ -286,6 +286,7 @@ const TraderChartView: FC<TraderChartViewProps> = ({ ...props }) => {
               stroke={nowTheme.normal.success}
               dot={false}
               strokeWidth={"2"}
+              unit={' %'}
             />
             <Line
               yAxisId="right"
@@ -294,6 +295,7 @@ const TraderChartView: FC<TraderChartViewProps> = ({ ...props }) => {
               stroke={nowTheme.normal.primary}
               dot={false}
               strokeWidth={"2"}
+              unit={' NEST'}
             />
           </LineChart>
         </ResponsiveContainer>
