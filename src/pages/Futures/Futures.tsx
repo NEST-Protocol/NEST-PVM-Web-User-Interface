@@ -128,6 +128,7 @@ const Futures: FC = () => {
               stopLossPrice: item["stopLossPrice"],
               takeProfitPrice: item["takeProfitPrice"],
               status: item["status"],
+              copy: item["copy"]
             };
           })
           .filter((item: any) => item.leverage.toString() !== "0");

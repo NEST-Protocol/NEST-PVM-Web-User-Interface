@@ -26,7 +26,7 @@ msgstr "Do sự phức tạp của dữ liệu tài chính, do đó có thể b�
 
 #: src/pages/Share/Modal/DepositModal.tsx
 msgid "*NESTFi only supports NEST withdrawals."
-msgstr "NESTFi는 NEST 인출만 지원합니다."
+msgstr "*NESTFi chỉ hỗ trợ rút NEST."
 
 #: src/hooks/useFuturesNewOrder.ts
 #: src/hooks/useFuturesNewOrder.ts
@@ -125,9 +125,21 @@ msgstr "5. Rủi ro từ hợp đồng thông minh (smart contract): Có thể c
 msgid "7 Days' PNL"
 msgstr "PNL 7 Ngày"
 
+#: src/pages/Copy/Components/kolItem.tsx
+msgid "7D Followers PnL"
+msgstr "Lợi nhuận Followers 7 ngày"
+
+#: src/pages/Copy/Components/kolItem.tsx
+msgid "7D PnL"
+msgstr "Lợi nhuận 7 ngày"
+
 #: src/pages/Home/Home.tsx
 msgid "A beginner's guide to using NESTFi"
 msgstr "Hướng dẫn sử dụng NESTFi cho người mới"
+
+#: src/pages/Copy/Copy.tsx
+msgid "A professional trader's position will be automatically copied and executed for you."
+msgstr "Vị trí của một nhà giao dịch chuyên nghiệp sẽ được tự động sao chép và thực hiện cho bạn."
 
 #: src/pages/Share/Modal/ConnectWalletModal.tsx
 msgid "about connecting wallets"
@@ -143,6 +155,10 @@ msgstr "tài khoản"
 msgid "Action"
 msgstr "hành động"
 
+#: src/pages/Copy/Components/MyCopiesCurrent.tsx
+#: src/pages/Copy/Components/MyCopiesCurrent.tsx
+#: src/pages/Copy/Components/MyCopiesHistory.tsx
+#: src/pages/Copy/Components/MyCopiesHistory.tsx
 #: src/pages/Futures/Components/HistoryList.tsx
 #: src/pages/Futures/Components/HistoryTable.tsx
 #: src/pages/Futures/Components/OrderList.tsx
@@ -156,6 +172,10 @@ msgstr "Tiền Ký quỹ thực có"
 #: src/pages/Futures/Components/POrderTable.tsx
 msgid "Add"
 msgstr "Thêm"
+
+#: src/pages/Copy/Components/CopySettingModal.tsx
+msgid "Add Copy Trading Amount"
+msgstr "Thêm số tiền giao dịch sao chép"
 
 #: src/pages/Futures/Components/FuturesNotice.tsx
 #: src/pages/Share/Modal/ChangeNewTokenModal.tsx
@@ -177,6 +197,7 @@ msgstr "Thêm vị thế"
 msgid "Add Position"
 msgstr "Thêm vị thế"
 
+#: src/pages/Copy/Components/TraderFollowers.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Personal/Referral/Referral.tsx
 msgid "Address"
@@ -187,21 +208,43 @@ msgstr "Địa chỉ"
 msgid "After the limit order is executed, TP and SL price you set will trigger immediately."
 msgstr "Sau khi lệnh giới hạn được thực hiện, giá TP (Take Profit) và giá SL (Stop Loss) mà bạn đã đặt sẽ kích hoạt ngay lập tức."
 
+#: src/pages/Copy/Copy.tsx
+msgid "Align With Traders"
+msgstr "Căn chỉnh với các nhà giao dịch\""
+
+#: src/pages/Copy/Copy.tsx
+msgid "All Traders"
+msgstr "Tất cả các nhà giao dịch"
+
 #: src/components/NormalInput/NESTInput.tsx
 #: src/components/NormalInput/NESTInputSelect.tsx
 #: src/pages/Overview/Components/MoneyTable.tsx
 msgid "Amount"
 msgstr "Số lượng"
 
+#: src/pages/Copy/Trader.tsx
+msgid "Analysis"
+msgstr "Phân tích"
+
 #: src/pages/Futures/Modal/ApproveNoticeModal.tsx
 msgid "Approval required"
 msgstr "Yêu cầu phê duyệt"
 
+#: src/hooks/useDepositModal.ts
 #: src/hooks/useSwap.ts
 #: src/hooks/useTransactionReceipt.ts
 #: src/pages/Futures/Modal/ApproveNoticeModal.tsx
 msgid "Approve"
 msgstr "Phê duyệt"
+
+#: src/pages/Copy/Components/TraderChartView.tsx
+msgid "AUM (NEST)"
+msgstr "AUM (NEST)"
+
+#: src/pages/Copy/Components/KolInfo.tsx
+#: src/pages/Copy/Components/KolInfo.tsx
+msgid "AUM(NEST)"
+msgstr "AUM(NEST)"
 
 #: src/hooks/useSwap.ts
 #: src/pages/Share/Modal/DepositModal.tsx
@@ -219,6 +262,14 @@ msgstr "Số dư:"
 msgid "Become a Trading KOL"
 msgstr "Trở thành một Trading KOL"
 
+#: src/pages/Copy/Copy.tsx
+msgid "Become Elite Traders >"
+msgstr "Trở thành các nhà giao dịch ưu tú >"
+
+#: src/pages/Copy/Copy.tsx
+msgid "Boost your earning and influence by becoming copy traders."
+msgstr "Tăng thu nhập và sự ảnh hưởng của bạn bằng cách trở thành các nhà giao dịch sao chép."
+
 #: src/pages/Home/Home.tsx
 msgid "Boost your earning and influence by joining the NESTFi affiliate program."
 msgstr "Tăng thu nhập và ảnh hưởng của bạn bằng cách tham gia chương trình liên kết NESTFi."
@@ -231,8 +282,14 @@ msgstr "Đã đốt cháy"
 msgid "Channel link"
 msgstr "Liên kết kênh"
 
+#: src/pages/Copy/Components/KolInfo.tsx
+msgid "Click here to view copy trading details."
+msgstr "Nhấn vào đây để xem chi tiết giao dịch sao chép."
+
 #: src/components/NormalInput/NormalInputWithCloseButton.tsx
 #: src/hooks/useFuturesOrder.ts
+#: src/pages/Copy/Components/MyCopiesCurrent.tsx
+#: src/pages/Copy/Components/MyCopiesCurrent.tsx
 #: src/pages/Futures/Components/POrderList.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 msgid "Close"
@@ -248,6 +305,10 @@ msgstr "Đóng lệnh giới hạn"
 msgid "Close Position"
 msgstr "Đóng vị thế"
 
+#: src/pages/Copy/Components/MyCopiesHistory.tsx
+#: src/pages/Copy/Components/MyCopiesHistory.tsx
+#: src/pages/Copy/Components/TraderCurrent.tsx
+#: src/pages/Copy/Components/TraderCurrent.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Futures/Components/HistoryList.tsx
 #: src/pages/Futures/Components/HistoryTable.tsx
@@ -259,6 +320,11 @@ msgstr "Giá đóng cửa"
 msgid "Close Risk"
 msgstr "Đóng rủi ro"
 
+#: src/pages/Copy/Components/MyCopiesHistory.tsx
+#: src/pages/Copy/Components/TraderCurrent.tsx
+msgid "Close Time"
+msgstr "Thời gian đóng cửa"
+
 #: src/pages/Futures/Components/HistoryList.tsx
 #: src/pages/Futures/Components/HistoryTable.tsx
 msgid "Closed"
@@ -268,6 +334,7 @@ msgstr "Closed"
 #: src/hooks/useFuturesClose.ts
 #: src/hooks/useFuturesEditLimit.ts
 #: src/hooks/useFuturesEditPosition.ts
+#: src/pages/Copy/Components/CopyStopModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Home/Modal/ApplyModal.tsx
 #: src/pages/Swap/Components/SwapSlippageModal.tsx
@@ -293,6 +360,13 @@ msgstr "Kết nối ví"
 msgid "Contact info (Telegram handle)"
 msgstr "Thông tin liên hệ (Tên tài khoản Telegram)"
 
+#: src/pages/Copy/Components/CopyRoute.tsx
+#: src/pages/Copy/Components/CopySettingModal.tsx
+#: src/pages/Copy/Components/CopySettingModal.tsx
+#: src/pages/Share/Head/NESTHead.tsx
+msgid "Copy"
+msgstr "sao chép"
+
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Personal/Referral/Referral.tsx
@@ -304,6 +378,15 @@ msgstr "Sao chép liên kết mời"
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 msgid "Copy Link"
 msgstr "Sao chép liên kết"
+
+#: src/pages/Copy/Components/KolInfo.tsx
+msgid "Copy Now"
+msgstr "Sao chép ngay"
+
+#: src/pages/Copy/Copy.tsx
+#: src/pages/Copy/MyCopies.tsx
+msgid "Copy Orders"
+msgstr "Sao chép các đơn hàng"
 
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
@@ -318,6 +401,36 @@ msgstr "Sao chép liên kết"
 msgid "Copy Successfully"
 msgstr "Sao chép thành công"
 
+#: src/pages/Copy/Components/CopySettingModal.tsx
+msgid "Copy Trader Service Agreement"
+msgstr "Thỏa thuận Dịch vụ Sao chép Trader"
+
+#: src/pages/Copy/Components/TraderChartView.tsx
+msgid "Copy Traders’ PnL (NEST)"
+msgstr "Lợi nhuận và Lỗ của Sao chép Trader (NEST)"
+
+#: src/hooks/useAccount.ts
+#: src/hooks/useTransactionReceipt.ts
+#: src/pages/Copy/Components/CopyRoute.tsx
+msgid "Copy Trading"
+msgstr "Sao chép giao dịch"
+
+#: src/pages/Copy/Copy.tsx
+msgid "Copy Trading Assets (NEST)"
+msgstr "Tài sản sao chép giao dịch（NEST）"
+
+#: src/pages/Copy/MyCopies.tsx
+msgid "Copy Trading Assets(NEST)"
+msgstr "Tài sản sao chép giao dịch（NEST）"
+
+#: src/pages/Copy/Components/CopySettingModal.tsx
+msgid "Copy Trading Each Order"
+msgstr "Sao chép giao dịch mỗi lệnh"
+
+#: src/pages/Copy/Copy.tsx
+msgid "Copy Trading Effortlessly"
+msgstr "Sao chép giao dịch một cách dễ dàng"
+
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Personal/Referral/Referral.tsx
 msgid "Cumulative Commission"
@@ -327,6 +440,10 @@ msgstr "Hoa hồng tích lũy"
 #: src/pages/Personal/Referral/Referral.tsx
 msgid "Cumulative Commissions"
 msgstr "Hoa hồng tích lũy"
+
+#: src/pages/Copy/Components/TraderChartView.tsx
+msgid "Cumulative Copy Traders"
+msgstr "Nhà giao dịch sao chép tích luỹ"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Personal/Referral/Referral.tsx
@@ -338,6 +455,19 @@ msgstr "Tổng khối lượng giao dịch của người được mời tích l
 #: src/pages/Personal/Personal.tsx
 msgid "Cumulative Return"
 msgstr "Lợi nhuận tích lũy"
+
+#: src/pages/Copy/MyCopies.tsx
+#: src/pages/Copy/Trader.tsx
+msgid "Current"
+msgstr "Hiện tại"
+
+#: src/pages/Copy/Components/CopySettingModal.tsx
+msgid "Current:"
+msgstr "Hiện tại:"
+
+#: src/pages/Copy/Copy.tsx
+msgid "Custom Copy Trading"
+msgstr "Sao chép giao dịch tùy chỉnh"
 
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyDealModal.tsx
@@ -386,6 +516,7 @@ msgstr "Mô hình kinh tế giảm phát. Khi càng nhiều người dùng giao 
 
 #: src/components/NormalInput/NESTInput.tsx
 #: src/hooks/useDepositModal.ts
+#: src/hooks/useDepositModal.ts
 #: src/pages/Overview/Overview.tsx
 #: src/pages/Personal/Personal.tsx
 #: src/pages/Share/Modal/DepositModal.tsx
@@ -411,6 +542,10 @@ msgstr "Do sự biến động của thị trường, giá thanh lý thực tế
 msgid "During the airdrop period, NESTfi's trading services will be temporarily unavailable for approximately 1-2 hours. This suspension is necessary to ensure a smooth and successful airdrop of NEST 2.0 tokens to all eligible participants. We apologize for any inconvenience caused during this temporary interruption of services."
 msgstr "Trong thời gian diễn ra airdrop, dịch vụ giao dịch của NESTfi sẽ tạm thời không khả dụng trong khoảng 1-2 giờ. Việc tạm ngừng này là cần thiết để đảm bảo một airdrop suôn sẻ và thành công của token NEST 2.0 cho tất cả các người tham gia đủ điều kiện. Chúng tôi xin lỗi vì bất kỳ bất tiện nào trong thời gian tạm ngừng dịch vụ này."
 
+#: src/pages/Copy/Components/TraderChartView.tsx
+msgid "Earnings"
+msgstr "Lợi nhuận"
+
 #: src/hooks/useFuturesPOrder.ts
 #: src/pages/Futures/Components/OrderList.tsx
 #: src/pages/Futures/Components/OrderTable.tsx
@@ -428,6 +563,14 @@ msgstr "Chỉnh sửa lệnh giới hạn"
 msgid "Edit Position"
 msgstr "Chỉnh sửa vị thế"
 
+#: src/hooks/useTransactionReceipt.ts
+msgid "Edited"
+msgstr "Đã chỉnh sửa"
+
+#: src/pages/Copy/Components/CopyStopModal.tsx
+msgid "End copy will liquidate your position with market orders, and automatically return the assets to your Account after deducting the profits sharing."
+msgstr "Kết thúc sao chép sẽ thanh lý vị trí của bạn bằng các lệnh thị trường và tự động trả lại tài sản vào tài khoản của bạn sau khi trừ đi lợi nhuận chia sẻ."
+
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Enter Channel link"
 msgstr "Nhập liên kết kênh"
@@ -439,6 +582,10 @@ msgstr "Nhập thông tin liên hệ của bạn"
 #: src/pages/Futures/NewOrder.tsx
 msgid "Entry Price"
 msgstr "Giá vào lệnh "
+
+#: src/pages/Copy/Components/CopyStopModal.tsx
+msgid "Estimated Realized Amount"
+msgstr "Số tiền thực tế ước tính"
 
 #: src/pages/Overview/Components/MobileList.tsx
 #: src/pages/Overview/Components/MoneyTable.tsx
@@ -464,6 +611,16 @@ msgid ""
 msgstr ""
 "“Chỉ cần theo dõi đúng người, việc kiếm tiền dễ như là thở.\n"
 "”Bạn có thể theo dõi người có năng lực tốt trên NESTFi, đây là liên kết giới thiệu của tôi."
+
+#: src/pages/Copy/Copy.tsx
+msgid "Follow top trading strategies on NESTFi"
+msgstr "Theo các chiến lược giao dịch hàng đầu trên NESTFi"
+
+#: src/pages/Copy/Components/KolInfo.tsx
+#: src/pages/Copy/Components/KolInfo.tsx
+#: src/pages/Copy/Trader.tsx
+msgid "Followers"
+msgstr "Người theo dõi"
 
 #: src/pages/Futures/Modal/LimitAndPriceModal.tsx
 #: src/pages/Futures/Modal/ProtocolModal.tsx
@@ -492,6 +649,8 @@ msgstr "NHẬN NEST"
 msgid "Github"
 msgstr "Github"
 
+#: src/pages/Copy/MyCopies.tsx
+#: src/pages/Copy/Trader.tsx
 #: src/pages/Futures/OrderList.tsx
 msgid "History"
 msgstr "Lịch sử"
@@ -515,6 +674,10 @@ msgstr "Làm cách nào để bắt đầu?"
 #: src/pages/Futures/MoreInfo.tsx
 msgid "How to Trade"
 msgstr "Cách giao dịch"
+
+#: src/pages/Copy/Components/CopySettingModal.tsx
+msgid "I have read and agreed to the"
+msgstr "Tôi đã đọc và đồng ý với"
 
 #: src/pages/Futures/Modal/CloseOrderNoticeModal.tsx
 #: src/pages/Home/Modal/ApplyModal.tsx
@@ -559,6 +722,7 @@ msgstr "Số dư không đủ. Vui lòng nạp tiền để bắt đầu giao d�
 
 #: src/hooks/useFuturesAdd.ts
 #: src/hooks/useFuturesNewOrder.ts
+#: src/pages/Copy/Hooks/useCopySettingModal.ts
 msgid "Insufficient NEST balance"
 msgstr "Số dư NEST không đủ"
 
@@ -596,6 +760,22 @@ msgstr "Ngôn ngữ"
 msgid "Last"
 msgstr "Cuối cùng"
 
+#: src/pages/Copy/Components/SelectTime.tsx
+msgid "Last 24 hours"
+msgstr "24 giờ qua"
+
+#: src/pages/Copy/Components/SelectTime.tsx
+msgid "Last 3 weeks"
+msgstr "3 tuần qua"
+
+#: src/pages/Copy/Components/SelectTime.tsx
+msgid "Last 7 days"
+msgstr "7 ngày qua"
+
+#: src/pages/Copy/Components/SelectTime.tsx
+msgid "Last month"
+msgstr "Tháng trước"
+
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 msgid "Last Price"
 msgstr "Giá cuối cùng"
@@ -631,6 +811,8 @@ msgstr "Giá giới hạn"
 msgid "Link wallet"
 msgstr "Ví Link"
 
+#: src/pages/Copy/Components/MyCopiesCurrent.tsx
+#: src/pages/Copy/Components/MyCopiesCurrent.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 #: src/pages/Futures/Modal/AddModal.tsx
 #: src/pages/Futures/Modal/EditPositionModal.tsx
@@ -653,6 +835,8 @@ msgstr "Đang tải..."
 #: src/hooks/useFuturesClose.ts
 #: src/hooks/useFuturesEditPosition.ts
 #: src/hooks/useFuturesNewOrder.ts
+#: src/pages/Copy/Components/CopyListPosition.tsx
+#: src/pages/Copy/Components/CopyTablePosition.tsx
 #: src/pages/Dashboard/Components/MobileOrderTypePosition.tsx
 #: src/pages/Dashboard/Components/ShareOrderPosition.tsx
 #: src/pages/Futures/Components/OrderListPosition.tsx
@@ -660,9 +844,20 @@ msgstr "Đang tải..."
 msgid "Long"
 msgstr "Mua"
 
+#: src/pages/Copy/Components/TraderChartView.tsx
+msgid "Losing Trades"
+msgstr "Các giao dịch thua lỗ"
+
 #: src/pages/Futures/NewOrder.tsx
 msgid "Market"
 msgstr "Thị trường"
+
+#: src/pages/Copy/Components/MyCopiesCurrent.tsx
+#: src/pages/Copy/Components/MyCopiesCurrent.tsx
+#: src/pages/Copy/Components/TraderCurrent.tsx
+#: src/pages/Copy/Components/TraderCurrent.tsx
+msgid "Market Price"
+msgstr "Giá thị trường"
 
 #: src/components/NormalInput/NESTInput.tsx
 #: src/components/NormalInput/NESTInputSelect.tsx
@@ -670,10 +865,16 @@ msgstr "Thị trường"
 msgid "MAX"
 msgstr "Tối đa"
 
+#: src/pages/Copy/Hooks/useCopySettingModal.ts
+msgid "Minimum 200 NEST"
+msgstr "Tối thiểu 200 NEST"
+
 #: src/hooks/useFuturesNewOrder.ts
+#: src/pages/Copy/Hooks/useCopySettingModal.ts
 msgid "Minimum 50 NEST"
 msgstr "Tối thiểu 50 NEST"
 
+#: src/pages/Copy/Copy.tsx
 #: src/pages/Home/Home.tsx
 #: src/pages/Share/Modal/ConnectWalletModal.tsx
 msgid "More"
@@ -694,9 +895,23 @@ msgstr "Số dư của tôi"
 msgid "My commissions"
 msgstr "Hoa hồng của tôi"
 
+#: src/pages/Copy/Copy.tsx
+#: src/pages/Copy/MyCopies.tsx
+msgid "My Copies"
+msgstr "Các bản sao của tôi"
+
 #: src/pages/Personal/Personal.tsx
 msgid "My Positions"
 msgstr "Vị thế của tôi"
+
+#: src/pages/Copy/MyCopies.tsx
+msgid "My Traders"
+msgstr "Các nhà giao dịch của tôi"
+
+#: src/pages/Copy/Copy.tsx
+#: src/pages/Copy/MyCopies.tsx
+msgid "My Trades"
+msgstr "Các giao dịch của tôi"
 
 #: src/pages/Futures/Components/FuturesNotice.tsx
 msgid "NEST 2.0 token has been airdropped to your wallet, please add NEST 2.0 token to your wallet."
@@ -744,9 +959,17 @@ msgstr "Không có lệnh nào"
 msgid "No Orders"
 msgstr "Không có đơn hàng"
 
+#: src/pages/Copy/Components/TraderChartView.tsx
+msgid "No Records Found"
+msgstr "Không tìm thấy hồ sơ nào"
+
 #: src/pages/Share/Modal/MyWalletModal.tsx
 msgid "No Transactions yet"
 msgstr "Chưa có lệnh giao dịch nào"
+
+#: src/pages/Copy/Components/TraderChartView.tsx
+msgid "Number of Orders"
+msgstr "Số lượng đơn hàng"
 
 #: src/pages/Share/Modal/StopTransactionModal.tsx
 msgid "Once the airdrop is completed, NESTfi will only support trading with NEST 2.0 tokens. The previous version of NEST tokens (NEST 1.0) will become obsolete and will no longer be accepted for trading or other activities on the platform."
@@ -756,6 +979,7 @@ msgstr "Sau khi hoàn thành airdrop, NESTfi sẽ chỉ hỗ trợ giao dịch v
 msgid "Open"
 msgstr "Mở"
 
+#: src/pages/Copy/Components/CopyStopModal.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 #: src/pages/Dashboard/Dashboard.tsx
 msgid "Open Interest"
@@ -767,6 +991,12 @@ msgstr "Lãi suất mở cửa"
 msgid "Open position"
 msgstr "Vị thế mở"
 
+#: src/pages/Copy/Components/MyCopiesCurrent.tsx
+#: src/pages/Copy/Components/MyCopiesCurrent.tsx
+#: src/pages/Copy/Components/MyCopiesHistory.tsx
+#: src/pages/Copy/Components/MyCopiesHistory.tsx
+#: src/pages/Copy/Components/TraderCurrent.tsx
+#: src/pages/Copy/Components/TraderCurrent.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 #: src/pages/Futures/Components/HistoryList.tsx
@@ -780,6 +1010,14 @@ msgstr "Vị thế mở"
 msgid "Open Price"
 msgstr "Giá mở vị thế"
 
+#: src/pages/Copy/Components/MyCopiesCurrent.tsx
+#: src/pages/Copy/Components/MyCopiesHistory.tsx
+#: src/pages/Copy/Components/TraderCurrent.tsx
+msgid "Open Time"
+msgstr "Thời gian mở cửa"
+
+#: src/pages/Copy/Components/MyCopiesCurrent.tsx
+#: src/pages/Copy/Components/MyCopiesMyTraders.tsx
 #: src/pages/Futures/Components/HistoryTable.tsx
 #: src/pages/Futures/Components/OrderTable.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
@@ -803,6 +1041,10 @@ msgstr "Tổng quan"
 #: src/pages/Overview/Components/MoneyTable.tsx
 msgid "Pending"
 msgstr "Đang chờ"
+
+#: src/pages/Copy/Components/TraderChartView.tsx
+msgid "Performance"
+msgstr "Hiệu suất"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Personal/Personal.tsx
@@ -830,9 +1072,17 @@ msgstr "Vui lòng nhận token thử nghiệm ETH trước."
 msgid "Please note that \"Limit order\" or \"Stop order\" is not guaranteed to be executed. This may include, but is not limited to, the following cases."
 msgstr "Vui lòng lưu ý rằng \"Lệnh giới hạn\"\\ hoặc \"Lệnh dừng\"\\ không được đảm bảo sẽ được thực hiện. Điều này có thể bao gồm, nhưng không giới hạn, các trường hợp sau đây."
 
+#: src/pages/Copy/Components/CopyStopModal.tsx
+msgid "Please note that due to price fluctuation during settlement, the PNL, profit shared and settled value may vary from displayed above."
+msgstr "Xin lưu ý rằng do biến động giá trong quá trình thanh toán, giá trị PNL, lợi nhuận chia sẻ và giá trị đã thanh toán có thể khác so với thông báo ở trên."
+
 #: src/pages/Share/Modal/ChangeNewTokenModal.tsx
 msgid "Please note that NEST 1.0 tokens have been officially deprecated and will no longer be supported. To continue participating in the NESTFi ecosystem and enjoy its benefits, it is crucial that you add NEST 2.0 tokens to your wallet. We have provided a button below for your convenience to add NEST 2.0 tokens to your wallet effortlessly."
 msgstr "Xin lưu ý rằng token NEST 1.0 đã chính thức bị loại bỏ và sẽ không được hỗ trợ nữa. Để tiếp tục tham gia vào hệ sinh thái của NESTFi và tận hưởng các lợi ích của nó, việc bạn thêm token NEST 2.0 vào ví là rất quan trọng. Dưới đây là một nút bấm để bạn dễ dàng thêm token NEST 2.0 vào ví của mình."
+
+#: src/pages/Copy/Components/TraderChartView.tsx
+msgid "PnL Ratio"
+msgstr "Tỷ lệ Lãi/Lỗ (PnL)"
 
 #: src/pages/Futures/Modal/AddModal.tsx
 #: src/pages/Futures/Modal/CloseModal.tsx
@@ -867,6 +1117,27 @@ msgstr "Giá trị vị thế"
 msgid "Price"
 msgstr "Giá"
 
+#: src/pages/Copy/Components/MyCopiesMyTraders.tsx
+#: src/pages/Copy/Components/MyCopiesMyTraders.tsx
+msgid "Profit"
+msgstr "Lãi"
+
+#: src/pages/Copy/Copy.tsx
+msgid "Profit (NEST)"
+msgstr "Lãi（NEST）"
+
+#: src/pages/Copy/Components/KolInfo.tsx
+#: src/pages/Copy/Components/KolInfo.tsx
+msgid "Profit Sharing:"
+msgstr "Chia sẻ lợi nhuận:"
+
+#: src/pages/Copy/Components/TraderFollowers.tsx
+#: src/pages/Copy/Components/TraderFollowers.tsx
+#: src/pages/Copy/Copy.tsx
+#: src/pages/Copy/MyCopies.tsx
+msgid "Profit(NEST)"
+msgstr "Lãi（NEST）"
+
 #: src/hooks/useTransactionReceipt.ts
 msgid "Received"
 msgstr "Đã nhận"
@@ -885,6 +1156,11 @@ msgstr "Các lệnh giao dịch gần đây"
 msgid "Referral"
 msgstr "Giới thiệu"
 
+#: src/pages/Copy/Components/MyCopiesMyTraders.tsx
+#: src/pages/Copy/Components/MyCopiesMyTraders.tsx
+msgid "Remaining Copy Amount"
+msgstr "Số tiền sao chép còn lại"
+
 #: src/pages/Share/Modal/SignModal.tsx
 msgid "Remember me"
 msgstr "nhớ tôi"
@@ -893,6 +1169,17 @@ msgstr "nhớ tôi"
 #: src/pages/Futures/Modal/ProtocolModal.tsx
 msgid "Risk Warning"
 msgstr "Cảnh báo rủi ro"
+
+#: src/pages/Copy/Components/KolInfo.tsx
+#: src/pages/Copy/Components/KolInfo.tsx
+#: src/pages/Copy/Components/TraderCurrent.tsx
+#: src/pages/Copy/Components/TraderCurrent.tsx
+msgid "ROI"
+msgstr "ROI"
+
+#: src/pages/Copy/Hooks/useCopySettingModal.ts
+msgid "Save"
+msgstr "Lưu"
 
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
@@ -903,6 +1190,10 @@ msgstr "Quét và sao chép giao dịch"
 #: src/pages/Personal/Referral/Referral.tsx
 msgid "Search"
 msgstr "Tìm kiếm"
+
+#: src/pages/Copy/Copy.tsx
+msgid "Select KOL"
+msgstr "Chọn KOL"
 
 #: src/hooks/useTransactionReceipt.ts
 #: src/hooks/useTransactionReceipt.ts
@@ -919,6 +1210,15 @@ msgstr "Gửi yêu cầu"
 #: src/pages/Share/Modal/WithdrawModal.tsx
 msgid "Service Fee"
 msgstr "Phí dịch vụ"
+
+#: src/pages/Copy/Copy.tsx
+msgid "Set the margin for each order as well as the overall copy trading amount."
+msgstr "Đặt biên độ cho mỗi lệnh cũng như tổng số tiền giao dịch sao chép."
+
+#: src/pages/Copy/Components/MyCopiesMyTraders.tsx
+#: src/pages/Copy/Components/MyCopiesMyTraders.tsx
+msgid "Settings"
+msgstr "Cài đặt"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Personal/Referral/Referral.tsx
@@ -941,6 +1241,8 @@ msgstr "Chia sẻ"
 #: src/hooks/useFuturesClose.ts
 #: src/hooks/useFuturesEditPosition.ts
 #: src/hooks/useFuturesNewOrder.ts
+#: src/pages/Copy/Components/CopyListPosition.tsx
+#: src/pages/Copy/Components/CopyTablePosition.tsx
 #: src/pages/Dashboard/Components/MobileOrderTypePosition.tsx
 #: src/pages/Dashboard/Components/ShareOrderPosition.tsx
 #: src/pages/Futures/Components/OrderListPosition.tsx
@@ -978,6 +1280,15 @@ msgstr "Bắt đầu giao dịch"
 #: src/pages/Overview/Components/MoneyTable.tsx
 msgid "Status"
 msgstr "Trạng thái"
+
+#: src/hooks/useTransactionReceipt.ts
+#: src/pages/Copy/Components/CopyStopModal.tsx
+#: src/pages/Copy/Components/CopyStopModal.tsx
+#: src/pages/Copy/Components/KolInfo.tsx
+#: src/pages/Copy/Components/MyCopiesMyTraders.tsx
+#: src/pages/Copy/Components/MyCopiesMyTraders.tsx
+msgid "Stop Copying"
+msgstr "Dừng Sao chép"
 
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 #: src/pages/Futures/Components/HistoryList.tsx
@@ -1019,11 +1330,18 @@ msgstr "Đổi"
 msgid "Switch network successfully"
 msgstr "Chuyển mạng thành công"
 
+#: src/pages/Copy/Components/MyCopiesCurrent.tsx
+#: src/pages/Copy/Components/MyCopiesHistory.tsx
+#: src/pages/Copy/Components/TraderCurrent.tsx
 #: src/pages/Futures/Components/HistoryTable.tsx
 #: src/pages/Futures/Components/OrderTable.tsx
 #: src/pages/Futures/Components/POrderTable.tsx
 msgid "Symbol"
 msgstr "Biểu tượng"
+
+#: src/pages/Copy/Components/TraderChartView.tsx
+msgid "Symbol Preference"
+msgstr "Ưu tiên biểu tượng"
 
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 #: src/pages/Futures/Components/HistoryList.tsx
@@ -1048,6 +1366,10 @@ msgstr "Token mạng thử nghiệm"
 msgid "The balance is 0. You can go to \"Faucet\" to get test token before trading."
 msgstr "Số dư là 0. Bạn có thể đến \"Faucet\" để nhận token thử nghiệm trước khi giao dịch."
 
+#: src/pages/Copy/Components/CopySettingModal.tsx
+msgid "The fixed amount you invested for each order when copy trading."
+msgstr "Số tiền cố định bạn đã đầu tư cho mỗi lệnh khi giao dịch sao chép."
+
 #: src/pages/Share/Modal/DepositModal.tsx
 msgid "The maximum deposit amount is"
 msgstr "Số tiền nạp tối đa là"
@@ -1071,6 +1393,10 @@ msgstr "Hợp đồng thông minh đảm bảo tính thanh khoản vô hạn th�
 #: src/pages/Home/Home.tsx
 msgid "The smart contract is the only seller of the system. No market marking costs and no liquidity debt."
 msgstr "Hợp đồng thông minh là người bán duy nhất của hệ thống. Không có chi phí đánh dấu thị trường và không có nợ thanh khoản."
+
+#: src/pages/Copy/Components/CopySettingModal.tsx
+msgid "The total amount you invested in copying this trader’s signals."
+msgstr "Tổng số tiền bạn đã đầu tư để sao chép các tín hiệu của người giao dịch này."
 
 #: src/hooks/useNESTSnackBar.tsx
 msgid "The transaction failed and the amount has been fully refunded. You can re-trade"
@@ -1122,6 +1448,10 @@ msgstr "Tổng số NEST đã đốt"
 msgid "Total Commissions"
 msgstr "Tổng hoa hồng"
 
+#: src/pages/Copy/Components/CopyStopModal.tsx
+msgid "Total Copy Amount"
+msgstr "Tổng số tiền sao chép"
+
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Personal/Referral/Referral.tsx
@@ -1133,6 +1463,7 @@ msgstr "Tổng số người mời được"
 msgid "Total Pay"
 msgstr "Tổng số tiền thanh toán"
 
+#: src/pages/Copy/Components/CopyStopModal.tsx
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 msgid "Total Profit"
 msgstr "Tổng lợi nhuận"
@@ -1206,6 +1537,16 @@ msgstr "Giao dịch với tôi trên NESTFi"
 msgid "Traded Invitees"
 msgstr "Người được mời đã giao dịch"
 
+#: src/pages/Copy/Components/MyCopiesCurrent.tsx
+#: src/pages/Copy/Components/MyCopiesHistory.tsx
+#: src/pages/Copy/Components/MyCopiesMyTraders.tsx
+msgid "Trader"
+msgstr "Người giao dịch"
+
+#: src/pages/Copy/Trader.tsx
+msgid "Trader Profile"
+msgstr "Trader Profile"
+
 #: src/pages/Home/Home.tsx
 msgid "Trading only with smart contract.No third-party intervention."
 msgstr "Chỉ giao dịch với hợp đồng thông minh. Không có sự can thiệp của bên thứ ba."
@@ -1228,6 +1569,18 @@ msgstr "Kích hoạt vị thế"
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 msgid "Twitter"
 msgstr "Twitter"
+
+#: src/pages/Overview/Components/MoneyTable.tsx
+msgid "Type"
+msgstr "Loại"
+
+#: src/pages/Copy/Copy.tsx
+msgid "Unrealized PnL (NEST)"
+msgstr "Chưa thực hiện PnL (NEST)"
+
+#: src/pages/Copy/MyCopies.tsx
+msgid "Unrealized PnL(NEST)"
+msgstr "Chưa thực hiện PnL (NEST)"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Personal/Referral/Referral.tsx
@@ -1262,6 +1615,7 @@ msgid "Verify ownership, Confirm you are the owner of this wallet."
 msgstr "Xác nhận bạn là chủ sở hữu của ví này. Việc ký là miễn phí và sẽ không gửi giao dịch."
 
 #: src/components/SnackBar/NormalSnackBar.tsx
+#: src/components/SnackBar/SnackBarWithButton.tsx
 msgid "View"
 msgstr "Xem"
 
@@ -1281,6 +1635,14 @@ msgstr "Ví"
 #: src/pages/Swap/Components/SwapInputItem.tsx
 msgid "Wallet Balance"
 msgstr "Số dư ví"
+
+#: src/hooks/useAccount.ts
+msgid "Wallet Deposit"
+msgstr "Nạp tiền vào ví"
+
+#: src/hooks/useAccount.ts
+msgid "Wallet Withdraw"
+msgstr "Rút tiền từ ví"
 
 #: src/pages/Share/Modal/ChangeNewTokenModal.tsx
 msgid "We are delighted to inform you that the NEST 2.0 token airdrop has been successfully completed. As a result, NESTFi services are now fully operational, and you can resume using the platform as usual."
@@ -1302,6 +1664,14 @@ msgstr "Tại sao bạn nên chọn NESTFi."
 msgid "Will not be displayed after closing"
 msgstr "Sẽ không được hiển thị sau khi đóng"
 
+#: src/pages/Copy/Components/TraderChartView.tsx
+msgid "Win Rate"
+msgstr "Tỷ lệ chiến thắng"
+
+#: src/pages/Copy/Components/TraderChartView.tsx
+msgid "Winning Trades"
+msgstr "Các giao dịch chiến thắng"
+
 #: src/pages/Dashboard/Modal/ShareMyOrderModal.tsx
 #: src/pages/Dashboard/Modal/ShareNewOrderModal.tsx
 msgid "with 1 click"
@@ -1315,6 +1685,10 @@ msgstr "chỉ với 1 cú nhấp chuột"
 #: src/pages/Share/Modal/WithdrawModal.tsx
 msgid "Withdraw"
 msgstr "Rút tiền"
+
+#: src/pages/Copy/Copy.tsx
+msgid "You can freely choose the KOL that suits you in the leaderboards."
+msgstr "Bạn có thể tự do chọn KOL phù hợp với bạn trong bảng xếp hạng."
 
 #: src/pages/Home/Modal/ApplyModal.tsx
 msgid "Youtube"

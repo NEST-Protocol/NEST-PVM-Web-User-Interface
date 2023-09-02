@@ -318,3 +318,196 @@ export function serviceHistory(
     info
   );
 }
+
+/**
+ * Copy
+ */
+export function copyFollow(
+  chainId: number,
+  header: RequestBodyInterface,
+  body: RequestBodyInterface
+) {
+  return baseRequestPOSTWithBody_return(
+    `${serviceBaseURL(chainId)}/nestfi/copy/follower/setting`,
+    header,
+    body
+  );
+}
+
+export function copyClose(
+  chainId: number,
+  address: string,
+  header: RequestBodyInterface
+) {
+  return baseRequestPOSTWithBody_return(
+    `${serviceBaseURL(
+      chainId
+    )}/nestfi/copy/follower/cancle?chainId=${chainId}&copyKolAddress=${address}`,
+    header,
+    {}
+  );
+}
+
+export function copyAllKOL(
+  chainId: number,
+  pageNum: number,
+  pageSize: number,
+  info: RequestBodyInterface
+) {
+  return baseRequestGetWithHeader(
+    `${serviceBaseURL(
+      chainId
+    )}/nestfi/copy/kol/list?chainId=${chainId}&pageNumber=${pageNum}&pageSize=${pageSize}`,
+    info
+  );
+}
+
+export function copyMyTradeInfo(chainId: number, info: RequestBodyInterface) {
+  return baseRequestGetWithHeader(
+    `${serviceBaseURL(
+      chainId
+    )}/nestfi/copy/follower/position/info?chainId=${chainId}`,
+    info
+  );
+}
+
+export function copyKOLInfo(
+  chainId: number,
+  address: string,
+  info: RequestBodyInterface
+) {
+  return baseRequestGetWithHeader(
+    `${serviceBaseURL(
+      chainId
+    )}/nestfi/copy/kol/info?chainId=${chainId}&walletAddress=${address}`,
+    info
+  );
+}
+
+export function copyEarningsList(
+  chainId: number,
+  address: string,
+  days: number,
+  info: RequestBodyInterface
+) {
+  return baseRequestGetWithHeader(
+    `${serviceBaseURL(
+      chainId
+    )}/nestfi/copy/kol/earnings/list?chainId=${chainId}&copyKolAddress=${address}&days=${days}`,
+    info
+  );
+}
+
+export function copyPerformance(
+  chainId: number,
+  address: string,
+  days: number,
+  info: RequestBodyInterface
+) {
+  return baseRequestGetWithHeader(
+    `${serviceBaseURL(
+      chainId
+    )}/nestfi/copy/kol/performance/info?chainId=${chainId}&copyKolAddress=${address}&days=${days}`,
+    info
+  );
+}
+
+export function copyPerformanceSymbol(
+  chainId: number,
+  address: string,
+  days: number,
+  info: RequestBodyInterface
+) {
+  return baseRequestGetWithHeader(
+    `${serviceBaseURL(
+      chainId
+    )}/nestfi/copy/kol/performance/symbol?chainId=${chainId}&copyKolAddress=${address}&days=${days}`,
+    info
+  );
+}
+
+export function copyTraderFollowers(
+  chainId: number,
+  address: string,
+  info: RequestBodyInterface
+) {
+  return baseRequestGetWithHeader(
+    `${serviceBaseURL(
+      chainId
+    )}/nestfi/copy/kol/follower/list?chainId=${chainId}&copyKolAddress=${address}`,
+    info
+  );
+}
+
+export function copyMyCopiesList(chainId: number, info: RequestBodyInterface) {
+  return baseRequestGetWithHeader(
+    `${serviceBaseURL(
+      chainId
+    )}/nestfi/copy/follower/future/list?chainId=${chainId}`,
+    info
+  );
+}
+
+export function copyMyCopiesHistoryList(
+  chainId: number,
+  info: RequestBodyInterface
+) {
+  return baseRequestGetWithHeader(
+    `${serviceBaseURL(
+      chainId
+    )}/nestfi/copy/follower/future/history?chainId=${chainId}`,
+    info
+  );
+}
+
+export function copyMyCopiesMyTradersList(
+  chainId: number,
+  info: RequestBodyInterface
+) {
+  return baseRequestGetWithHeader(
+    `${serviceBaseURL(
+      chainId
+    )}/nestfi/copy/follower/kolList?chainId=${chainId}`,
+    info
+  );
+}
+
+export function copyTraderHistory(
+  chainId: number,
+  address: string,
+  info: RequestBodyInterface
+) {
+  return baseRequestGetWithHeader(
+    `${serviceBaseURL(
+      chainId
+    )}/nestfi/copy/kol/future/history?chainId=${chainId}&walletAddress=${address}`,
+    info
+  );
+}
+
+export function copyCloseInfo(
+  chainId: number,
+  address: string,
+  info: RequestBodyInterface
+) {
+  return baseRequestGetWithHeader(
+    `${serviceBaseURL(
+      chainId
+    )}/nestfi/copy/follower/future/info?chainId=${chainId}&copyKolAddress=${address}`,
+    info
+  );
+}
+
+export function copyAsset(
+  chainId: number,
+  kolAddress: string,
+  address: string,
+  info: RequestBodyInterface
+) {
+  return baseRequestGetWithHeader(
+    `${serviceBaseURL(
+      chainId
+    )}/nestfi/copy/follower/asset?chainId=${chainId}&copyKolAddress=${kolAddress}&walletAddress=${address}`,
+    info
+  );
+}

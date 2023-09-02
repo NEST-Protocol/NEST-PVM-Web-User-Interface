@@ -75,3 +75,6 @@ export { ReactComponent as AccountDashboard } from "./svg/AccountDashboard.svg";
 export { ReactComponent as AccountOut } from "./svg/AccountOut.svg";
 export { ReactComponent as Warning } from "./svg/Warning.svg";
 export { ReactComponent as HistoryIcon } from "./svg/HistoryIcon.svg";
+export { ReactComponent as DefaultKolIcon } from "./svg/DefaultKolIcon.svg";
+export { ReactComponent as LJ1 } from "./svg/LJ1.svg";
+export { ReactComponent as LJ2 } from "./svg/LJ2.svg";

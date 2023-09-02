@@ -46,6 +46,7 @@ export interface FuturesOrderService {
   stopLossPrice: number;
   takeProfitPrice: number;
   status: number;
+  copy: boolean;
 }
 
 interface FuturesOrderListProps {

@@ -8,7 +8,7 @@ import { FC } from "react";
 import { configureChains, createConfig, mainnet, WagmiConfig } from "wagmi";
 import { bsc, bscTestnet } from "wagmi/chains";
 import { jsonRpcProvider } from "wagmi/providers/jsonRpc";
-import { publicProvider } from 'wagmi/providers/public'
+import { publicProvider } from "wagmi/providers/public";
 
 import {
   metaMaskWallet,
@@ -17,7 +17,7 @@ import {
   trustWallet,
   okxWallet,
 } from "@rainbow-me/rainbowkit/wallets";
-import { InjectedConnector } from 'wagmi/connectors/injected'
+import { InjectedConnector } from "wagmi/connectors/injected";
 
 import { infuraProvider } from "wagmi/providers/infura";
 import { ProviderProps } from "./provider";
@@ -57,6 +57,8 @@ const scrollAlphaTestnet = {
   testnet: true,
 };
 
+export const DEFAULT_CHAIN_ID = 56;
+
 const { chains, publicClient, webSocketPublicClient } = configureChains(
   // [bsc, scrollAlphaTestnet],
   // [bscTestnet],
@@ -85,9 +87,11 @@ const { chains, publicClient, webSocketPublicClient } = configureChains(
       },
     }),
     infuraProvider({ apiKey: "be0a9832394640b090fceb2b2107993c" }),
-  ],{ retryCount: 5 }
+  ],
+  { retryCount: 5 }
 );
 const PROJECT_ID = "4ea5acecf1faa0887415ff933691f96f";
+
 export const Wallets = [
   {
     wallet: metaMaskWallet({ projectId: PROJECT_ID, chains: chains }),
@@ -124,24 +128,27 @@ const connectors = connectorsForWallets([
     groupName: "main",
     wallets: Wallets.map((item) => item.wallet),
   },
-])()
+])();
 
 const config = createConfig({
   autoConnect: true,
-  connectors: [...connectors, new InjectedConnector({
-    chains,
-    options: {
-      name: 'Injected_Trust',
-      shimDisconnect: true,
-    },
-  })],
+  connectors: [
+    ...connectors,
+    new InjectedConnector({
+      chains,
+      options: {
+        name: "Injected_Trust",
+        shimDisconnect: true,
+      },
+    }),
+  ],
   publicClient,
-  webSocketPublicClient
+  webSocketPublicClient,
 });
 
 const WalletProvider: FC<ProviderProps> = ({ children }) => {
   const { nowTheme } = useTheme();
-  console.log(config.connectors)
+  console.log(config.connectors);
   return (
     <WagmiConfig config={config}>
       <RainbowKitProvider
