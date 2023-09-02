@@ -48,9 +48,9 @@ const Trader: FC = () => {
       <Box>
         <Trans>History</Trans>
       </Box>,
-      <Box>
-        <Trans>Followers</Trans>
-      </Box>,
+      // <Box>
+      //   <Trans>Followers</Trans>
+      // </Box>,
     ];
     return (
       <NESTTabs
@@ -90,25 +90,12 @@ const Trader: FC = () => {
     } else if (tabsValue === 2) {
       return <TraderCurrent list={traderOrderHistoryList} history/>;
     } else if (tabsValue === 3) {
-      return <TraderFollowers list={traderFollowerList} />;
+      // return <TraderFollowers list={traderFollowerList} />;
+      return <></>
     } else {
       return <></>;
     }
-  }, [
-    earningsData,
-    earningsDay,
-    performanceData,
-    performanceDay,
-    performanceSymbolData,
-    performanceSymbolDay,
-    setEarningsDay,
-    setPerformanceDay,
-    setPerformanceSymbolDay,
-    tabsValue,
-    traderFollowerList,
-    traderOrderHistoryList,
-    traderOrderList,
-  ]);
+  }, [earningsData, earningsDay, performanceData, performanceDay, performanceSymbolData, performanceSymbolDay, setEarningsDay, setPerformanceDay, setPerformanceSymbolDay, tabsValue, traderOrderHistoryList, traderOrderList]);
   return (
     <Stack
       direction={"row"}
