@@ -238,9 +238,10 @@ function useTrader(address: string | undefined) {
               marketPrice: item["marketPrice"],
               profitLossRate: item["profitLossRate"],
               status: item["status"],
+              copy: item["copy"],
             };
           })
-          .filter((item: any) => item.leverage.toString() !== "0");
+          .filter((item: any) => item.leverage.toString() !== "0" && !item.copy);
         const pOrderList = list.filter((item) => {
           return item.status === 2;
         });

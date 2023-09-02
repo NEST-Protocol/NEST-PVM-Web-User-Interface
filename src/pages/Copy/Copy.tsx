@@ -570,12 +570,12 @@ const Copy: FC = () => {
           width={"100%"}
           direction={"row"}
           justifyContent={"space-around"}
-          height={["fit-content","fit-content", "448px"]}
-          paddingBottom={["60px","60px","80px"]}
+          height={["fit-content", "fit-content", "448px"]}
+          paddingBottom={["60px", "60px", "80px"]}
           sx={{
             backgroundImage: nowTheme.isLight
-            ? `url('/images/LJBG1.svg')`
-            : `url('/images/LJBG2.svg')`,
+              ? `url('/images/LJBG1.svg')`
+              : `url('/images/LJBG2.svg')`,
             backgroundPosition: "center center",
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
@@ -652,6 +652,16 @@ const Copy: FC = () => {
                 justifyContent={"flex-end"}
                 alignItems={"center"}
                 spacing={"4px"}
+                onClick={() => {
+                  window.open(
+                    "https://www.nestprotocol.org/blogs/guide-on-copy-trading-service"
+                  );
+                }}
+                sx={{
+                  "&:hover": {
+                    cursor: "pointer",
+                  },
+                }}
               >
                 <Box
                   sx={(theme) => ({
@@ -735,7 +745,9 @@ const Copy: FC = () => {
           </Box>
           <MainButton
             title={t`Become Elite Traders >`}
-            onClick={() => {}}
+            onClick={() => {
+              window.open("https://t.me/Sally_NEST");
+            }}
             style={{
               fontWeight: "700",
               fontSize: "16px",
