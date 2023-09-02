@@ -472,6 +472,19 @@ export function copyMyCopiesMyTradersList(
   );
 }
 
+export function copyTraderHistory(
+  chainId: number,
+  address: string,
+  info: RequestBodyInterface
+) {
+  return baseRequestGetWithHeader(
+    `${serviceBaseURL(
+      chainId
+    )}/nestfi/copy/kol/future/history?chainId=${chainId}&walletAddress=${address}`,
+    info
+  );
+}
+
 export function copyCloseInfo(
   chainId: number,
   address: string,

@@ -220,7 +220,7 @@ const TraderChartView: FC<TraderChartViewProps> = ({ ...props }) => {
           <SelectTime
             nowValue={props.time1}
             dataStart={1}
-            dataRange={4}
+            dataRange={2}
             selectCallBack={props.setTime1}
           />
         </Stack>
@@ -340,7 +340,7 @@ const TraderChartView: FC<TraderChartViewProps> = ({ ...props }) => {
             <SelectTime
               nowValue={props.time2}
               dataStart={0}
-              dataRange={4}
+              dataRange={2}
               selectCallBack={(num) => props.setTime2(num)}
             />
           </Stack>
@@ -520,7 +520,7 @@ const TraderChartView: FC<TraderChartViewProps> = ({ ...props }) => {
             <SelectTime
               nowValue={props.time3}
               dataStart={0}
-              dataRange={4}
+              dataRange={2}
               selectCallBack={(num) => props.setTime3(num)}
             />
           </Stack>

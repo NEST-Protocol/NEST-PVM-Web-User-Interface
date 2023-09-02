@@ -228,6 +228,7 @@ msgstr ""
 msgid "Approval required"
 msgstr "承認が必要です"
 
+#: src/hooks/useDepositModal.ts
 #: src/hooks/useSwap.ts
 #: src/hooks/useTransactionReceipt.ts
 #: src/pages/Futures/Modal/ApproveNoticeModal.tsx
@@ -512,6 +513,7 @@ msgid "Deflationary economic model. The more users trade, the more $NEST will be
 msgstr ""
 
 #: src/components/NormalInput/NESTInput.tsx
+#: src/hooks/useDepositModal.ts
 #: src/hooks/useDepositModal.ts
 #: src/pages/Overview/Overview.tsx
 #: src/pages/Personal/Personal.tsx

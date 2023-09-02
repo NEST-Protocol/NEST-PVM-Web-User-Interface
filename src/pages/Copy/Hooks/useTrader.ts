@@ -6,7 +6,7 @@ import {
   copyPerformance,
   copyPerformanceSymbol,
   copyTraderFollowers,
-  serviceHistory,
+  copyTraderHistory,
   serviceList,
 } from "../../../lib/NESTRequest";
 import { AllKOLModel } from "./useCopy";
@@ -257,7 +257,7 @@ function useTrader(address: string | undefined) {
         return;
       }
       const chainId = chainsData.chainId ?? DEFAULT_CHAIN_ID;
-      const baseList = await serviceHistory(chainId, address, {
+      const baseList = await copyTraderHistory(chainId, address, {
         Authorization: "",
       });
       if (Number(baseList["errorCode"]) === 0) {
