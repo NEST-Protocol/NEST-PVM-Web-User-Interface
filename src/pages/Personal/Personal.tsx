@@ -27,7 +27,7 @@ import useWalletIcon from "../../hooks/uswWalletIcon";
 import copy from "copy-to-clipboard";
 import useNESTSnackBar from "../../hooks/useNESTSnackBar";
 import { useLocalStorage } from "react-use";
-import useTransactionSnackBar from "../../hooks/useNESTSnackBar";
+import {NESTTooltipFC} from "../../components/NESTTooltip/NESTTooltip";
 
 const Personal = () => {
   const { address } = useParams();
@@ -44,13 +44,13 @@ const Personal = () => {
   const [showrdr, setShowrdr] = useState(false);
   const { nowTheme } = useTheme();
   const { addTransactionNotice } = usePendingTransactionsBase();
-  const { transactionSnackBarService } = useTransactionSnackBar();
   const {
     showDeposit,
     setShowDeposit,
     showWithdraw,
     setShowWithdraw,
     showBalance,
+    showBlockBalance,
     getAssetsList,
     moneyList,
   } = useAccount();
@@ -347,11 +347,12 @@ const Personal = () => {
                   <Trans>My Balance</Trans>
                 </Box>
                 <Stack
-                  direction={"row"}
-                  spacing={"8px"}
+                  direction={["column","column", "row"]}
+                  gap={["12px", "12px", "8px"]}
                   justifyContent={"start"}
                   alignItems={"center"}
-                  sx={(theme) => ({
+                >
+                  <Stack direction={'row'} spacing={'8px'} alignItems={"center"} sx={(theme) => ({
                     color: theme.normal.text0,
                     fontSize: "28px",
                     fontWeight: 700,
@@ -360,12 +361,43 @@ const Personal = () => {
                       width: "28px",
                       height: "28px",
                     },
-                  })}
-                >
-                  <NESTIcon />
-                  <Box>
-                    {Number(showBalance ?? "0").toLocaleString("en-US")}
-                  </Box>
+                  })}>
+                    <NESTIcon />
+                    <Box>
+                      {showBalance}
+                    </Box>
+                  </Stack>
+                  {
+                    showBlockBalance !== "0" && (
+                      <Stack direction={'row'} spacing={'8px'} alignItems={"center"}>
+                        <Box sx={(theme) => ({
+                          color: theme.normal.text1,
+                          fontSize: '12px',
+                          fontWeight: 400,
+                          lineHeight: '16px',
+                        })}>
+                          +
+                        </Box>
+                        <Stack direction={'row'} spacing={'4px'} px={'12px'} borderRadius={'8px'} height={'30px'} alignItems={'center'} sx={(theme) => ({
+                          backgroundColor: theme.normal.bg3,
+                        })}>
+                          <Box sx={(theme) => ({
+                            color: theme.normal.text1,
+                            fontSize: '10px',
+                            lineHeight: '10px',
+                            fontWeight: 400,
+                          })}>Freeze Accounts</Box>
+                          <Box sx={(theme) => ({
+                            color: theme.normal.text0,
+                            fontSize: '10px',
+                            lineHeight: '10px',
+                            fontWeight: 700,
+                          })}>{showBlockBalance}</Box>
+                          <NESTTooltipFC title={"The frozen amount is currently unavailable for withdrawal. If you have any inquiries, please feel free to reach out to contact admin support."}/>
+                        </Stack>
+                      </Stack>
+                    )
+                  }
                 </Stack>
               </Stack>
               <Stack
