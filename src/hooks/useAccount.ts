@@ -15,11 +15,12 @@ export interface AccountListData {
 }
 
 function useAccount() {
-  const { service_balance } = useService();
+  const { service_balance, block_balance } = useService();
   const { account, chainsData, signature } = useNEST();
   const [showDeposit, setShowDeposit] = useState(false);
   const [showWithdraw, setShowWithdraw] = useState(false);
   const [tokenBalance, setTokenBalance] = useState<number>();
+  const [tokenBlockBalance, setTokenBlockBalance] = useState<number>();
   const [moneyList, setMoneyList] = useState<Array<AccountListData>>([]);
   const [historyList, setHistoryList] = useState<Array<AccountListData>>([]);
 
@@ -82,6 +83,12 @@ function useAccount() {
     });
   }, [service_balance]);
 
+  const getBlockBalance = useCallback(async () => {
+    block_balance((result: number) => {
+      setTokenBlockBalance(result);
+    });
+  }, [block_balance]);
+
   const showBalance = useMemo(() => {
     if (account.address) {
       if (tokenBalance) {
@@ -93,6 +100,18 @@ function useAccount() {
       return String().placeHolder;
     }
   }, [account.address, tokenBalance]);
+
+  const showBlockBalance = useMemo(() => {
+    if (account.address) {
+      if (tokenBlockBalance) {
+        return tokenBlockBalance.floor(2);
+      } else {
+        return "0";
+      }
+    } else {
+      return String().placeHolder;
+    }
+  }, [account.address, tokenBlockBalance]);
 
   /**
    * update
@@ -106,6 +125,16 @@ function useAccount() {
       clearInterval(time);
     };
   }, [getBalance]);
+
+  useEffect(() => {
+    getBlockBalance();
+    const time = setInterval(() => {
+      getBlockBalance();
+    }, 10 * 1000);
+    return () => {
+      clearInterval(time);
+    };
+  }, [getBlockBalance]);
 
   useEffect(() => {
     getAssetsList();
@@ -125,6 +154,7 @@ function useAccount() {
     showWithdraw,
     setShowWithdraw,
     showBalance,
+    showBlockBalance,
     moneyList,
     historyList,
     getAssetsList,
