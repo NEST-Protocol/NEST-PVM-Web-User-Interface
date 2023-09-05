@@ -1643,14 +1643,6 @@ msgstr "Wallet"
 msgid "Wallet Balance"
 msgstr "Wallet Balance"
 
-#: src/hooks/useAccount.ts
-#~ msgid "Wallet Deposit"
-#~ msgstr "Wallet Deposit"
-
-#: src/hooks/useAccount.ts
-#~ msgid "Wallet Withdraw"
-#~ msgstr "Wallet Withdraw"
-
 #: src/pages/Share/Modal/ChangeNewTokenModal.tsx
 msgid "We are delighted to inform you that the NEST 2.0 token airdrop has been successfully completed. As a result, NESTFi services are now fully operational, and you can resume using the platform as usual."
 msgstr "We are delighted to inform you that the NEST 2.0 token airdrop has been successfully completed. As a result, NESTFi services are now fully operational, and you can resume using the platform as usual."

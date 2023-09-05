@@ -1641,14 +1641,6 @@ msgstr "Carteira"
 msgid "Wallet Balance"
 msgstr "Saldo da Carteira"
 
-#: src/hooks/useAccount.ts
-#~ msgid "Wallet Deposit"
-#~ msgstr "Depósito na Carteira"
-
-#: src/hooks/useAccount.ts
-#~ msgid "Wallet Withdraw"
-#~ msgstr "Retirada da Carteira"
-
 #: src/pages/Share/Modal/ChangeNewTokenModal.tsx
 msgid "We are delighted to inform you that the NEST 2.0 token airdrop has been successfully completed. As a result, NESTFi services are now fully operational, and you can resume using the platform as usual."
 msgstr "É com grande prazer que informamos que o airdrop do token NEST 2.0 foi concluído com sucesso. Como resultado, os serviços da NESTFi estão totalmente operacionais e você pode retomar o uso da plataforma normalmente."
