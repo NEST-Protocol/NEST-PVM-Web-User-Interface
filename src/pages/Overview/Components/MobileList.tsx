@@ -112,15 +112,9 @@ const MobileList: FC<MobileListProps> = ({ ...props }) => {
     ? props.data.hash.hashToChainScan(props.data.chainId)
     : "";
   const showLink = useMemo(() => {
-    if (
-      props.data.ordertype === "DEPOSIT" ||
-      props.data.ordertype === "WITHDRAW"
-    ) {
-      return true;
-    } else {
-      return false;
-    }
-  }, [props.data.ordertype]);
+    return (props.data.ordertype === "DEPOSIT" ||
+      props.data.ordertype === "WITHDRAW") && !props.data.hash?.includes('-')
+  }, [props.data.ordertype, props.data.hash]);
   return (
     <Stack
       direction={"row"}
