@@ -1641,14 +1641,6 @@ msgstr "지갑"
 msgid "Wallet Balance"
 msgstr "지갑 잔고"
 
-#: src/hooks/useAccount.ts
-#~ msgid "Wallet Deposit"
-#~ msgstr "지갑 입금"
-
-#: src/hooks/useAccount.ts
-#~ msgid "Wallet Withdraw"
-#~ msgstr "지갑 출금"
-
 #: src/pages/Share/Modal/ChangeNewTokenModal.tsx
 msgid "We are delighted to inform you that the NEST 2.0 token airdrop has been successfully completed. As a result, NESTFi services are now fully operational, and you can resume using the platform as usual."
 msgstr "NEST 2.0 토큰의 에어드롭이 성공적으로 완료되었음을 기쁘게 알려드립니다. 이에 따라 NESTFi 서비스가 정상적으로 운영 중이며, 플랫폼을 평소처럼 사용하실 수 있습니다."
