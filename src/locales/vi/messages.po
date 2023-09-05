@@ -409,7 +409,6 @@ msgstr "Thỏa thuận Dịch vụ Sao chép Trader"
 msgid "Copy Traders’ PnL (NEST)"
 msgstr "Lợi nhuận và Lỗ của Sao chép Trader (NEST)"
 
-#: src/hooks/useAccount.ts
 #: src/hooks/useTransactionReceipt.ts
 #: src/pages/Copy/Components/CopyRoute.tsx
 msgid "Copy Trading"
@@ -626,6 +625,10 @@ msgstr "Người theo dõi"
 #: src/pages/Futures/Modal/ProtocolModal.tsx
 msgid "For users/smart contracts using NEST Protocol perpetual contracts, please understand its rules and the differences of similar products in the market when performing positions, settlement, liquidation and other related operations. After fully understanding the following possible risks and can bear Participate in the risk situation:"
 msgstr "Đối với người dùng/ các hợp đồng thông minh sử dụng hợp đồng vô thời hạn của Giao thức NEST, hãy hiểu rõ các quy tắc và sự khác biệt so với các sản phẩm tương tự trên thị trường khi thực hiện các vị thế, thanh lý, thanh lý vị thế và các hoạt động liên quan khác. Sau khi hiểu đầy đủ các nguy cơ có thể xảy ra dưới đây và có thể chấp nhận tham gia vào tình huống rủi ro:"
+
+#: src/pages/Personal/Personal.tsx
+msgid "Freeze Accounts"
+msgstr "Đóng băng tài khoản"
 
 #: src/pages/Swap/Components/SwapInputItem.tsx
 msgid "From"
@@ -1370,6 +1373,10 @@ msgstr "Số dư là 0. Bạn có thể đến \"Faucet\" để nhận token th�
 msgid "The fixed amount you invested for each order when copy trading."
 msgstr "Số tiền cố định bạn đã đầu tư cho mỗi lệnh khi giao dịch sao chép."
 
+#: src/pages/Personal/Personal.tsx
+msgid "The frozen amount is currently unavailable for withdrawal. If you have any inquiries, please feel free to reach out to contact admin support."
+msgstr "Số tiền bị đóng băng hiện không thể rút. Nếu bạn có bất kỳ câu hỏi nào, vui lòng liên hệ với bộ phận hỗ trợ quản trị."
+
 #: src/pages/Share/Modal/DepositModal.tsx
 msgid "The maximum deposit amount is"
 msgstr "Số tiền nạp tối đa là"
@@ -1637,12 +1644,12 @@ msgid "Wallet Balance"
 msgstr "Số dư ví"
 
 #: src/hooks/useAccount.ts
-msgid "Wallet Deposit"
-msgstr "Nạp tiền vào ví"
+#~ msgid "Wallet Deposit"
+#~ msgstr "Nạp tiền vào ví"
 
 #: src/hooks/useAccount.ts
-msgid "Wallet Withdraw"
-msgstr "Rút tiền từ ví"
+#~ msgid "Wallet Withdraw"
+#~ msgstr "Rút tiền từ ví"
 
 #: src/pages/Share/Modal/ChangeNewTokenModal.tsx
 msgid "We are delighted to inform you that the NEST 2.0 token airdrop has been successfully completed. As a result, NESTFi services are now fully operational, and you can resume using the platform as usual."

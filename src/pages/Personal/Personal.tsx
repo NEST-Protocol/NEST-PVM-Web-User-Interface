@@ -386,14 +386,16 @@ const Personal = () => {
                             fontSize: '10px',
                             lineHeight: '10px',
                             fontWeight: 400,
-                          })}>Freeze Accounts</Box>
+                          })}>
+                            <Trans>Freeze Accounts</Trans>
+                          </Box>
                           <Box sx={(theme) => ({
                             color: theme.normal.text0,
                             fontSize: '10px',
                             lineHeight: '10px',
                             fontWeight: 700,
                           })}>{showBlockBalance}</Box>
-                          <NESTTooltipFC title={"The frozen amount is currently unavailable for withdrawal. If you have any inquiries, please feel free to reach out to contact admin support."}/>
+                          <NESTTooltipFC title={t`The frozen amount is currently unavailable for withdrawal. If you have any inquiries, please feel free to reach out to contact admin support.`}/>
                         </Stack>
                       </Stack>
                     )
