@@ -409,7 +409,6 @@ msgstr "Acuerdo de Servicio de Copia de Trader"
 msgid "Copy Traders’ PnL (NEST)"
 msgstr "Ganancias y Pérdidas de Copia de Traders (NEST)"
 
-#: src/hooks/useAccount.ts
 #: src/hooks/useTransactionReceipt.ts
 #: src/pages/Copy/Components/CopyRoute.tsx
 msgid "Copy Trading"
@@ -626,6 +625,10 @@ msgstr "Seguidores"
 #: src/pages/Futures/Modal/ProtocolModal.tsx
 msgid "For users/smart contracts using NEST Protocol perpetual contracts, please understand its rules and the differences of similar products in the market when performing positions, settlement, liquidation and other related operations. After fully understanding the following possible risks and can bear Participate in the risk situation:"
 msgstr "Para los usuarios/contratos inteligentes que utilizan contratos perpetuos del Protocolo NEST, por favor, comprendan sus reglas y las diferencias con productos similares en el mercado al realizar posiciones, liquidaciones y otras operaciones relacionadas. Después de comprender completamente los siguientes posibles riesgos y estar dispuestos a asumir la situación de riesgo, pueden participar:"
+
+#: src/pages/Personal/Personal.tsx
+msgid "Freeze Accounts"
+msgstr "Cuentas congeladas"
 
 #: src/pages/Swap/Components/SwapInputItem.tsx
 msgid "From"
@@ -1370,6 +1373,10 @@ msgstr "El saldo es 0. Puedes ir a \"Grifo\" para obtener un token de prueba ant
 msgid "The fixed amount you invested for each order when copy trading."
 msgstr "La cantidad fija que invertiste para cada orden al copiar trading."
 
+#: src/pages/Personal/Personal.tsx
+msgid "The frozen amount is currently unavailable for withdrawal. If you have any inquiries, please feel free to reach out to contact admin support."
+msgstr "La cantidad congelada no está disponible actualmente para su retiro. Si tiene alguna pregunta, no dude en ponerse en contacto con el soporte administrativo."
+
 #: src/pages/Share/Modal/DepositModal.tsx
 msgid "The maximum deposit amount is"
 msgstr "El monto máximo de depósito es"
@@ -1637,12 +1644,12 @@ msgid "Wallet Balance"
 msgstr "Saldo de la Billetera"
 
 #: src/hooks/useAccount.ts
-msgid "Wallet Deposit"
-msgstr "Depósito en la billetera"
+#~ msgid "Wallet Deposit"
+#~ msgstr "Depósito en la billetera"
 
 #: src/hooks/useAccount.ts
-msgid "Wallet Withdraw"
-msgstr "Retiro de la billetera"
+#~ msgid "Wallet Withdraw"
+#~ msgstr "Retiro de la billetera"
 
 #: src/pages/Share/Modal/ChangeNewTokenModal.tsx
 msgid "We are delighted to inform you that the NEST 2.0 token airdrop has been successfully completed. As a result, NESTFi services are now fully operational, and you can resume using the platform as usual."

@@ -409,7 +409,6 @@ msgstr "트레이더 복사 서비스 계약"
 msgid "Copy Traders’ PnL (NEST)"
 msgstr "복사 트레이더 수익/손실（NEST）"
 
-#: src/hooks/useAccount.ts
 #: src/hooks/useTransactionReceipt.ts
 #: src/pages/Copy/Components/CopyRoute.tsx
 msgid "Copy Trading"
@@ -626,6 +625,10 @@ msgstr "팔로워"
 #: src/pages/Futures/Modal/ProtocolModal.tsx
 msgid "For users/smart contracts using NEST Protocol perpetual contracts, please understand its rules and the differences of similar products in the market when performing positions, settlement, liquidation and other related operations. After fully understanding the following possible risks and can bear Participate in the risk situation:"
 msgstr "NEST 프로토콜 영구 계약을 사용하는 사용자/스마트 계약의 경우, 포지션, 결제, 청산 및 기타 관련 작업 수행 시 해당 규칙 및 시장에서 유사한 제품과의 차이점을 이해해야 합니다. 다음과 같은 위험 가능성을 완전히 이해하고 수용할 수 있는 경우 위험 상황에 참여할 수 있습니다:"
+
+#: src/pages/Personal/Personal.tsx
+msgid "Freeze Accounts"
+msgstr "계정 동결"
 
 #: src/pages/Swap/Components/SwapInputItem.tsx
 msgid "From"
@@ -1368,6 +1371,10 @@ msgstr "잔액은 0입니다. 거래하기 전에 \"수도꼭지\"로 이동하�
 msgid "The fixed amount you invested for each order when copy trading."
 msgstr "복사 거래 시 각 주문에 투자한 고정 금액."
 
+#: src/pages/Personal/Personal.tsx
+msgid "The frozen amount is currently unavailable for withdrawal. If you have any inquiries, please feel free to reach out to contact admin support."
+msgstr "현재 얼어붙은 금액은 인출할 수 없습니다. 문의 사항이 있으면 관리자 지원에 연락하십시오."
+
 #: src/pages/Share/Modal/DepositModal.tsx
 msgid "The maximum deposit amount is"
 msgstr "최대 예금 금액은"
@@ -1635,12 +1642,12 @@ msgid "Wallet Balance"
 msgstr "지갑 잔고"
 
 #: src/hooks/useAccount.ts
-msgid "Wallet Deposit"
-msgstr "지갑 입금"
+#~ msgid "Wallet Deposit"
+#~ msgstr "지갑 입금"
 
 #: src/hooks/useAccount.ts
-msgid "Wallet Withdraw"
-msgstr "지갑 출금"
+#~ msgid "Wallet Withdraw"
+#~ msgstr "지갑 출금"
 
 #: src/pages/Share/Modal/ChangeNewTokenModal.tsx
 msgid "We are delighted to inform you that the NEST 2.0 token airdrop has been successfully completed. As a result, NESTFi services are now fully operational, and you can resume using the platform as usual."

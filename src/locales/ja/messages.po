@@ -407,7 +407,6 @@ msgstr ""
 msgid "Copy Traders’ PnL (NEST)"
 msgstr ""
 
-#: src/hooks/useAccount.ts
 #: src/hooks/useTransactionReceipt.ts
 #: src/pages/Copy/Components/CopyRoute.tsx
 msgid "Copy Trading"
@@ -624,6 +623,10 @@ msgstr ""
 #: src/pages/Futures/Modal/ProtocolModal.tsx
 msgid "For users/smart contracts using NEST Protocol perpetual contracts, please understand its rules and the differences of similar products in the market when performing positions, settlement, liquidation and other related operations. After fully understanding the following possible risks and can bear Participate in the risk situation:"
 msgstr "NESTプロトコル永続契約を使用するユーザー/スマートコントラクトの方は、ポジション、決済、清算など関連する操作を実行する際に、そのルールと市場における類似製品の違いを理解してください。以下の可能なリスクを完全に理解し、そのリスク状況に耐えることができる場合に参加してください:"
+
+#: src/pages/Personal/Personal.tsx
+msgid "Freeze Accounts"
+msgstr ""
 
 #: src/pages/Swap/Components/SwapInputItem.tsx
 msgid "From"
@@ -1366,6 +1369,10 @@ msgstr ""
 msgid "The fixed amount you invested for each order when copy trading."
 msgstr ""
 
+#: src/pages/Personal/Personal.tsx
+msgid "The frozen amount is currently unavailable for withdrawal. If you have any inquiries, please feel free to reach out to contact admin support."
+msgstr ""
+
 #: src/pages/Share/Modal/DepositModal.tsx
 msgid "The maximum deposit amount is"
 msgstr ""
@@ -1633,12 +1640,12 @@ msgid "Wallet Balance"
 msgstr ""
 
 #: src/hooks/useAccount.ts
-msgid "Wallet Deposit"
-msgstr ""
+#~ msgid "Wallet Deposit"
+#~ msgstr ""
 
 #: src/hooks/useAccount.ts
-msgid "Wallet Withdraw"
-msgstr ""
+#~ msgid "Wallet Withdraw"
+#~ msgstr ""
 
 #: src/pages/Share/Modal/ChangeNewTokenModal.tsx
 msgid "We are delighted to inform you that the NEST 2.0 token airdrop has been successfully completed. As a result, NESTFi services are now fully operational, and you can resume using the platform as usual."

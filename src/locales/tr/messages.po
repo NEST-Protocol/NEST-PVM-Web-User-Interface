@@ -407,7 +407,6 @@ msgstr "Kopya Tüccar Hizmet Sözleşmesi"
 msgid "Copy Traders’ PnL (NEST)"
 msgstr "Kopya Tüccarların Kâr ve Zararı(NEST)"
 
-#: src/hooks/useAccount.ts
 #: src/hooks/useTransactionReceipt.ts
 #: src/pages/Copy/Components/CopyRoute.tsx
 msgid "Copy Trading"
@@ -624,6 +623,10 @@ msgstr "Takipçiler"
 #: src/pages/Futures/Modal/ProtocolModal.tsx
 msgid "For users/smart contracts using NEST Protocol perpetual contracts, please understand its rules and the differences of similar products in the market when performing positions, settlement, liquidation and other related operations. After fully understanding the following possible risks and can bear Participate in the risk situation:"
 msgstr "NEST Protokol sürekli kontratlarını kullanan kullanıcılar/akıllı sözleşmeler, pozisyon, düzenleme, likidasyon ve diğer ilgili işlemleri gerçekleştirirken, lütfen kurallarını ve piyasada benzer ürünlerin farklarını anlayın. Aşağıdaki olası riskleri tamamen anladıktan sonra ve risk durumunda katlanabilecek durumda olan kullanıcılar katılabilir:"
+
+#: src/pages/Personal/Personal.tsx
+msgid "Freeze Accounts"
+msgstr "Hesapları dondurmak"
 
 #: src/pages/Swap/Components/SwapInputItem.tsx
 msgid "From"
@@ -1370,6 +1373,10 @@ msgstr "The balance is 0. You can go to \"Faucet\" to get test token before trad
 msgid "The fixed amount you invested for each order when copy trading."
 msgstr "Kopya ticaret yaparken her bir işlem için yatırdığınız sabit miktar."
 
+#: src/pages/Personal/Personal.tsx
+msgid "The frozen amount is currently unavailable for withdrawal. If you have any inquiries, please feel free to reach out to contact admin support."
+msgstr "Donmuş miktar şu anda çekilemez durumda. Herhangi bir sorunuz varsa lütfen yönetici destek ile iletişime geçmekten çekinmeyin."
+
 #: src/pages/Share/Modal/DepositModal.tsx
 msgid "The maximum deposit amount is"
 msgstr "Maksimum depozito tutarı"
@@ -1637,12 +1644,12 @@ msgid "Wallet Balance"
 msgstr "Cüzdan Bakiyesi"
 
 #: src/hooks/useAccount.ts
-msgid "Wallet Deposit"
-msgstr "Cüzdan Yatırma"
+#~ msgid "Wallet Deposit"
+#~ msgstr "Cüzdan Yatırma"
 
 #: src/hooks/useAccount.ts
-msgid "Wallet Withdraw"
-msgstr "Cüzdandan Çekme"
+#~ msgid "Wallet Withdraw"
+#~ msgstr "Cüzdandan Çekme"
 
 #: src/pages/Share/Modal/ChangeNewTokenModal.tsx
 msgid "We are delighted to inform you that the NEST 2.0 token airdrop has been successfully completed. As a result, NESTFi services are now fully operational, and you can resume using the platform as usual."
