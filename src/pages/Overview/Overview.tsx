@@ -95,7 +95,6 @@ const Overview: FC = () => {
     }
   }, [tabsValue]);
   const list = useMemo(() => {
-    console.log(moneyList)
     const filterList = moneyList
       .filter((item) => tabsValue === 0 ? DEPOSIT_TYPES.includes(item.ordertype!) : WITHDRAW_TYPES.includes(item.ordertype!));
 
