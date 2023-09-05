@@ -39,15 +39,6 @@ function useAccount() {
       if (Number(assetsListBase["errorCode"]) === 0) {
         const value = assetsListBase["value"];
         const list: Array<AccountListData> = value.map((item: any) => {
-          const typeString = () => {
-            if (item["ordertype"] === "DEPOSIT") {
-              return t`Wallet Deposit`;
-            } else if (item["ordertype"] === "WITHDRAW") {
-              return t`Wallet Withdraw`;
-            } else {
-              return t`Copy Trading`;
-            }
-          };
           const one: AccountListData = {
             text: `${Number(item["amount"]).floor(2)} ${item["token"]}`,
             time: item["timestamp"],
@@ -56,7 +47,7 @@ function useAccount() {
             chainId: item["chainId"],
             hash: item["hash"],
             ordertype: item["ordertype"],
-            orderTypeString: typeString(),
+            orderTypeString: item["type"],
           };
           return one;
         });
