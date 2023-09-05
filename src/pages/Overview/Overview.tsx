@@ -92,12 +92,12 @@ const Overview: FC = () => {
     }
   }, [tabsValue]);
   const list = useMemo(() => {
-    const ordertype = tabsValue === 0 ? "DEPOSIT" : "WITHDRAW";
-    const orderType2 =
-      tabsValue === 0 ? "AVAILABLE_TO_COPY" : "COPY_TO_AVAILABLE";
-    const filterList = moneyList.filter(
-      (item) => item.ordertype === ordertype || item.ordertype === orderType2
-    );
+    const depositTypes = ['DEPOSIT', 'COPY_TO_AVAILABLE', 'BLOCK_TO_AVAILABLE']
+    const withdrawTypes = ['WITHDRAW', 'AVAILABLE_TO_COPY']
+
+    const filterList = moneyList
+      .filter((item) => tabsValue === 0 ? depositTypes.includes(item.ordertype!) : withdrawTypes.includes(item.ordertype!));
+
     if (isBigMobile) {
       if (filterList.length === 0) {
         return (
