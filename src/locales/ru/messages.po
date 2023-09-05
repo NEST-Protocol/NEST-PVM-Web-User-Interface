@@ -177,7 +177,6 @@ msgstr "Добавить"
 msgid "Add Copy Trading Amount"
 msgstr "Добавить сумму для копирования сделок"
 
-#: src/pages/Futures/Components/FuturesNotice.tsx
 #: src/pages/Share/Modal/ChangeNewTokenModal.tsx
 msgid "Add NEST 2.0 to wallet"
 msgstr "Добавление NEST 2.0 в кошелек"
@@ -414,10 +413,6 @@ msgstr "Прибыль и убытки трейдеров по копирова�
 msgid "Copy Trading"
 msgstr "Копирование сделок"
 
-#: src/pages/Copy/Copy.tsx
-msgid "Copy Trading Assets (NEST)"
-msgstr "Активы для копирования сделок (NEST)"
-
 #: src/pages/Copy/MyCopies.tsx
 msgid "Copy Trading Assets(NEST)"
 msgstr "Активы для копирования сделок(NEST)"
@@ -429,6 +424,10 @@ msgstr "Копировать каждый ордер"
 #: src/pages/Copy/Copy.tsx
 msgid "Copy Trading Effortlessly"
 msgstr "Копирование сделок без усилий"
+
+#: src/pages/Copy/Copy.tsx
+msgid "Copy Trading Total Amount (NEST)"
+msgstr "Общая сумма копирования (NEST)"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Personal/Referral/Referral.tsx
@@ -915,10 +914,6 @@ msgstr "Мои трейдеры"
 #: src/pages/Copy/MyCopies.tsx
 msgid "My Trades"
 msgstr "Мои сделки"
-
-#: src/pages/Futures/Components/FuturesNotice.tsx
-msgid "NEST 2.0 token has been airdropped to your wallet, please add NEST 2.0 token to your wallet."
-msgstr "Токен NEST 2.0 был отправлен на ваш кошелек, пожалуйста, добавьте токен NEST 2.0 в свой кошелек."
 
 #: src/pages/Futures/MoreInfo.tsx
 msgid "NEST White Paper"

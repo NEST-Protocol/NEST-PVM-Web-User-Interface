@@ -177,7 +177,6 @@ msgstr "Add"
 msgid "Add Copy Trading Amount"
 msgstr "Add Copy Trading Amount"
 
-#: src/pages/Futures/Components/FuturesNotice.tsx
 #: src/pages/Share/Modal/ChangeNewTokenModal.tsx
 msgid "Add NEST 2.0 to wallet"
 msgstr "Add NEST 2.0 to wallet"
@@ -414,10 +413,6 @@ msgstr "Copy Traders’ PnL (NEST)"
 msgid "Copy Trading"
 msgstr "Copy Trading"
 
-#: src/pages/Copy/Copy.tsx
-msgid "Copy Trading Assets (NEST)"
-msgstr "Copy Trading Assets (NEST)"
-
 #: src/pages/Copy/MyCopies.tsx
 msgid "Copy Trading Assets(NEST)"
 msgstr "Copy Trading Assets(NEST)"
@@ -429,6 +424,10 @@ msgstr "Copy Trading Each Order"
 #: src/pages/Copy/Copy.tsx
 msgid "Copy Trading Effortlessly"
 msgstr "Copy Trading Effortlessly"
+
+#: src/pages/Copy/Copy.tsx
+msgid "Copy Trading Total Amount (NEST)"
+msgstr "Copy Trading Total Amount (NEST)"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Personal/Referral/Referral.tsx
@@ -915,10 +914,6 @@ msgstr "My Traders"
 #: src/pages/Copy/MyCopies.tsx
 msgid "My Trades"
 msgstr "My Trades"
-
-#: src/pages/Futures/Components/FuturesNotice.tsx
-msgid "NEST 2.0 token has been airdropped to your wallet, please add NEST 2.0 token to your wallet."
-msgstr "NEST 2.0 token has been airdropped to your wallet, please add NEST 2.0 token to your wallet."
 
 #: src/pages/Futures/MoreInfo.tsx
 msgid "NEST White Paper"

@@ -177,7 +177,6 @@ msgstr "Thêm"
 msgid "Add Copy Trading Amount"
 msgstr "Thêm số tiền giao dịch sao chép"
 
-#: src/pages/Futures/Components/FuturesNotice.tsx
 #: src/pages/Share/Modal/ChangeNewTokenModal.tsx
 msgid "Add NEST 2.0 to wallet"
 msgstr "Thêm NEST 2.0 vào ví"
@@ -414,10 +413,6 @@ msgstr "Lợi nhuận và Lỗ của Sao chép Trader (NEST)"
 msgid "Copy Trading"
 msgstr "Sao chép giao dịch"
 
-#: src/pages/Copy/Copy.tsx
-msgid "Copy Trading Assets (NEST)"
-msgstr "Tài sản sao chép giao dịch（NEST）"
-
 #: src/pages/Copy/MyCopies.tsx
 msgid "Copy Trading Assets(NEST)"
 msgstr "Tài sản sao chép giao dịch（NEST）"
@@ -429,6 +424,10 @@ msgstr "Sao chép giao dịch mỗi lệnh"
 #: src/pages/Copy/Copy.tsx
 msgid "Copy Trading Effortlessly"
 msgstr "Sao chép giao dịch một cách dễ dàng"
+
+#: src/pages/Copy/Copy.tsx
+msgid "Copy Trading Total Amount (NEST)"
+msgstr "Tổng số tiền giao dịch sao chép (NEST)"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Personal/Referral/Referral.tsx
@@ -915,10 +914,6 @@ msgstr "Các nhà giao dịch của tôi"
 #: src/pages/Copy/MyCopies.tsx
 msgid "My Trades"
 msgstr "Các giao dịch của tôi"
-
-#: src/pages/Futures/Components/FuturesNotice.tsx
-msgid "NEST 2.0 token has been airdropped to your wallet, please add NEST 2.0 token to your wallet."
-msgstr "Token NEST 2.0 đã được airdrop vào ví của bạn, vui lòng thêm token NEST 2.0 vào ví của bạn."
 
 #: src/pages/Futures/MoreInfo.tsx
 msgid "NEST White Paper"

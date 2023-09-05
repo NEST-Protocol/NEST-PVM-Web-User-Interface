@@ -177,7 +177,6 @@ msgstr "추가"
 msgid "Add Copy Trading Amount"
 msgstr "복사 거래 금액 추가"
 
-#: src/pages/Futures/Components/FuturesNotice.tsx
 #: src/pages/Share/Modal/ChangeNewTokenModal.tsx
 msgid "Add NEST 2.0 to wallet"
 msgstr "지갑에 NEST 2.0 추가하기"
@@ -414,10 +413,6 @@ msgstr "복사 트레이더 수익/손실（NEST）"
 msgid "Copy Trading"
 msgstr "복사 거래"
 
-#: src/pages/Copy/Copy.tsx
-msgid "Copy Trading Assets (NEST)"
-msgstr "복사 거래 자산（NEST）"
-
 #: src/pages/Copy/MyCopies.tsx
 msgid "Copy Trading Assets(NEST)"
 msgstr "복사 거래 자산（NEST）"
@@ -429,6 +424,10 @@ msgstr "각 주문 복사 거래"
 #: src/pages/Copy/Copy.tsx
 msgid "Copy Trading Effortlessly"
 msgstr "편안하게 복사 거래"
+
+#: src/pages/Copy/Copy.tsx
+msgid "Copy Trading Total Amount (NEST)"
+msgstr "복사 거래 총 금액 (NEST)"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Personal/Referral/Referral.tsx
@@ -913,10 +912,6 @@ msgstr "내 트레이더"
 #: src/pages/Copy/MyCopies.tsx
 msgid "My Trades"
 msgstr "내 거래"
-
-#: src/pages/Futures/Components/FuturesNotice.tsx
-msgid "NEST 2.0 token has been airdropped to your wallet, please add NEST 2.0 token to your wallet."
-msgstr "NEST 2.0 토큰이 지갑에 에어드롭되었습니다. NEST 2.0 토큰을 지갑에 추가해주세요."
 
 #: src/pages/Futures/MoreInfo.tsx
 msgid "NEST White Paper"
