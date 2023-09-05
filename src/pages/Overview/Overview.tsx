@@ -12,6 +12,9 @@ import useNEST from "../../hooks/useNEST";
 import { useLocalStorage } from "react-use";
 import { useSearchParams } from "react-router-dom";
 
+const DEPOSIT_TYPES = ['DEPOSIT', 'COPY_TO_AVAILABLE', 'BLOCK_TO_AVAILABLE', "Freeze Deposit"]
+const WITHDRAW_TYPES = ['WITHDRAW', 'AVAILABLE_TO_COPY']
+
 const Overview: FC = () => {
   const { isBigMobile } = useWindowWidth();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -25,10 +28,10 @@ const Overview: FC = () => {
   const updateMessages = useCallback(() => {
     if (moneyList.length > 0) {
       const depositLength = moneyList.filter(
-        (item) => item.ordertype === "DEPOSIT"
+        (item) => DEPOSIT_TYPES.includes(item.ordertype!)
       ).length;
       const withdrawLength = moneyList.filter(
-        (item) => item.ordertype === "WITHDRAW"
+        (item) => WITHDRAW_TYPES.includes(item.ordertype!)
       ).length;
       const messages = JSON.parse(messagesStr ?? "{}");
       setMessagesStr(
@@ -92,11 +95,9 @@ const Overview: FC = () => {
     }
   }, [tabsValue]);
   const list = useMemo(() => {
-    const depositTypes = ['DEPOSIT', 'COPY_TO_AVAILABLE', 'BLOCK_TO_AVAILABLE']
-    const withdrawTypes = ['WITHDRAW', 'AVAILABLE_TO_COPY']
-
+    console.log(moneyList)
     const filterList = moneyList
-      .filter((item) => tabsValue === 0 ? depositTypes.includes(item.ordertype!) : withdrawTypes.includes(item.ordertype!));
+      .filter((item) => tabsValue === 0 ? DEPOSIT_TYPES.includes(item.ordertype!) : WITHDRAW_TYPES.includes(item.ordertype!));
 
     if (isBigMobile) {
       if (filterList.length === 0) {
