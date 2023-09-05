@@ -22,14 +22,8 @@ const MoneyTable: FC<MoneyTableProps> = ({ ...props }) => {
         ? new Date((item.applyTime ?? 0) * 1000)
         : new Date(item.time * 1000);
         const showLink = () => {
-    if (
-      item.ordertype === "DEPOSIT" ||
-      item.ordertype === "WITHDRAW"
-    ) {
-      return true;
-    } else {
-      return false;
-    }
+    return (item.ordertype === "DEPOSIT" ||
+      item.ordertype === "WITHDRAW") && !item.hash?.includes('-')
   };
     return (
       <MoneyTableRow
