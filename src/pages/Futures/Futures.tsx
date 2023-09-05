@@ -11,9 +11,7 @@ import {
   getPriceList,
   serviceList,
 } from "../../lib/NESTRequest";
-// import FuturesNotice from "./Components/FuturesNotice";
 import { getQueryVariable } from "../../lib/queryVaribale";
-import FuturesNotice from "./Components/FuturesNotice";
 import useNEST from "../../hooks/useNEST";
 import { FuturesHistoryService } from "../../hooks/useFuturesHistory";
 
@@ -267,17 +265,6 @@ const Futures: FC = () => {
   const moreInfo = useCallback(() => {
     return <FuturesMoreInfo />;
   }, []);
-  const notice = useMemo(() => {
-    return !showNotice ? (
-      <></>
-    ) : (
-      <FuturesNotice
-        onClose={() => {
-          setShowNotice(false);
-        }}
-      />
-    );
-  }, [showNotice]);
 
   const mainView = useMemo(() => {
     switch (width) {
@@ -291,7 +278,6 @@ const Futures: FC = () => {
               maxWidth={"1600px"}
               paddingY={`${paddingY}px`}
             >
-              {notice}
               <Stack
                 direction={"row"}
                 spacing={"16px"}
@@ -318,8 +304,6 @@ const Futures: FC = () => {
             paddingX={`${paddingX}px`}
           >
             <Stack spacing={"16px"} width={"100%"} paddingY={`${paddingY}px`}>
-              {notice}
-
               {exchangeTvChart()}
               {newOrder()}
               {isBigMobile ? <></> : moreInfo()}
@@ -331,7 +315,6 @@ const Futures: FC = () => {
   }, [
     width,
     paddingY,
-    notice,
     exchangeTvChart,
     orderList,
     newOrder,
