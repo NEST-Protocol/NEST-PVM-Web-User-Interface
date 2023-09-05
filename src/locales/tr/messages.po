@@ -175,7 +175,6 @@ msgstr "Ekle"
 msgid "Add Copy Trading Amount"
 msgstr "Kopya Ticaret Miktarı Ekleyin"
 
-#: src/pages/Futures/Components/FuturesNotice.tsx
 #: src/pages/Share/Modal/ChangeNewTokenModal.tsx
 msgid "Add NEST 2.0 to wallet"
 msgstr "NEST 2.0'ı cüzdana ekle"
@@ -412,10 +411,6 @@ msgstr "Kopya Tüccarların Kâr ve Zararı(NEST)"
 msgid "Copy Trading"
 msgstr "Kopya İşlem"
 
-#: src/pages/Copy/Copy.tsx
-msgid "Copy Trading Assets (NEST)"
-msgstr "Kopya İşlem Varlıkları(NEST)"
-
 #: src/pages/Copy/MyCopies.tsx
 msgid "Copy Trading Assets(NEST)"
 msgstr "Kopya İşlem Varlıkları(NEST)"
@@ -427,6 +422,10 @@ msgstr "Her Emri Kopya İşlem"
 #: src/pages/Copy/Copy.tsx
 msgid "Copy Trading Effortlessly"
 msgstr "Zahmetsizce Kopya İşlem"
+
+#: src/pages/Copy/Copy.tsx
+msgid "Copy Trading Total Amount (NEST)"
+msgstr "Kopya Ticaret Toplam Tutarı (NEST)"
 
 #: src/pages/Dashboard/Referral/Referral.tsx
 #: src/pages/Personal/Referral/Referral.tsx
@@ -913,10 +912,6 @@ msgstr "Tüccarlarım"
 #: src/pages/Copy/MyCopies.tsx
 msgid "My Trades"
 msgstr "Tüccarlarım"
-
-#: src/pages/Futures/Components/FuturesNotice.tsx
-msgid "NEST 2.0 token has been airdropped to your wallet, please add NEST 2.0 token to your wallet."
-msgstr "NEST 2.0 jetonu cüzdanınıza dağıtıldı, lütfen NEST 2.0 jetonunu cüzdanınıza ekleyin."
 
 #: src/pages/Futures/MoreInfo.tsx
 msgid "NEST White Paper"

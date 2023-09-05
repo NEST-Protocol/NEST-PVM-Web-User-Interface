@@ -355,7 +355,7 @@ const Copy: FC = () => {
               spacing={"64px"}
             >
               {myTradeInfo(
-                t`Copy Trading Assets (NEST)`,
+                t`Copy Trading Total Amount (NEST)`,
                 (myInfo ? myInfo.assets : 0).floor(2)
               )}
               {myTradeInfo(
