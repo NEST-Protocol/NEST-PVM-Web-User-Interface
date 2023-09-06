@@ -408,6 +408,7 @@ msgstr "트레이더 복사 서비스 계약"
 msgid "Copy Traders’ PnL (NEST)"
 msgstr "복사 트레이더 수익/손실（NEST）"
 
+#: src/hooks/useAccount.ts
 #: src/hooks/useTransactionReceipt.ts
 #: src/pages/Copy/Components/CopyRoute.tsx
 msgid "Copy Trading"
@@ -628,6 +629,14 @@ msgstr "NEST 프로토콜 영구 계약을 사용하는 사용자/스마트 계�
 #: src/pages/Personal/Personal.tsx
 msgid "Freeze Accounts"
 msgstr "계정 동결"
+
+#: src/hooks/useAccount.ts
+msgid "Freeze Deposit"
+msgstr "입금 얼리기"
+
+#: src/hooks/useAccount.ts
+msgid "Freeze to Deposit"
+msgstr "입금을 얼리다"
 
 #: src/pages/Swap/Components/SwapInputItem.tsx
 msgid "From"
@@ -1635,6 +1644,14 @@ msgstr "지갑"
 #: src/pages/Swap/Components/SwapInputItem.tsx
 msgid "Wallet Balance"
 msgstr "지갑 잔고"
+
+#: src/hooks/useAccount.ts
+msgid "Wallet Deposit"
+msgstr "지갑 입금"
+
+#: src/hooks/useAccount.ts
+msgid "Wallet Withdraw"
+msgstr "지갑 출금"
 
 #: src/pages/Share/Modal/ChangeNewTokenModal.tsx
 msgid "We are delighted to inform you that the NEST 2.0 token airdrop has been successfully completed. As a result, NESTFi services are now fully operational, and you can resume using the platform as usual."

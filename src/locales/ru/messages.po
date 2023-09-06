@@ -408,6 +408,7 @@ msgstr "Соглашение об услуге копирования трейд
 msgid "Copy Traders’ PnL (NEST)"
 msgstr "Прибыль и убытки трейдеров по копированию (NEST)"
 
+#: src/hooks/useAccount.ts
 #: src/hooks/useTransactionReceipt.ts
 #: src/pages/Copy/Components/CopyRoute.tsx
 msgid "Copy Trading"
@@ -628,6 +629,14 @@ msgstr "Для пользователей/смарт-контрактов, ис�
 #: src/pages/Personal/Personal.tsx
 msgid "Freeze Accounts"
 msgstr "Замораживать аккаунты"
+
+#: src/hooks/useAccount.ts
+msgid "Freeze Deposit"
+msgstr "Замораживание депозита"
+
+#: src/hooks/useAccount.ts
+msgid "Freeze to Deposit"
+msgstr "Замораживать для депозита"
 
 #: src/pages/Swap/Components/SwapInputItem.tsx
 msgid "From"
@@ -1637,6 +1646,14 @@ msgstr "Кошелек"
 #: src/pages/Swap/Components/SwapInputItem.tsx
 msgid "Wallet Balance"
 msgstr "Баланс кошелька"
+
+#: src/hooks/useAccount.ts
+msgid "Wallet Deposit"
+msgstr "Пополнение кошелька"
+
+#: src/hooks/useAccount.ts
+msgid "Wallet Withdraw"
+msgstr "Вывод средств из кошелька"
 
 #: src/pages/Share/Modal/ChangeNewTokenModal.tsx
 msgid "We are delighted to inform you that the NEST 2.0 token airdrop has been successfully completed. As a result, NESTFi services are now fully operational, and you can resume using the platform as usual."

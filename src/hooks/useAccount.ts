@@ -1,9 +1,8 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import {useCallback, useEffect, useMemo, useState} from "react";
 import useService from "../contracts/useService";
 import useNEST from "./useNEST";
-import { serviceAccountList, serviceHistory } from "../lib/NESTRequest";
-import { serviceTypeToWebTypeString } from "./useTransactionReceipt";
-import { t } from "@lingui/macro";
+import {serviceAccountList} from "../lib/NESTRequest";
+import {t} from "@lingui/macro";
 
 export interface AccountListData {
   text: string;
@@ -17,14 +16,31 @@ export interface AccountListData {
 }
 
 function useAccount() {
-  const { service_balance, block_balance } = useService();
-  const { account, chainsData, signature } = useNEST();
+  const {service_balance, block_balance} = useService();
+  const {account, chainsData, signature} = useNEST();
   const [showDeposit, setShowDeposit] = useState(false);
   const [showWithdraw, setShowWithdraw] = useState(false);
   const [tokenBalance, setTokenBalance] = useState<number>();
   const [tokenBlockBalance, setTokenBlockBalance] = useState<number>();
   const [moneyList, setMoneyList] = useState<Array<AccountListData>>([]);
   const [historyList, setHistoryList] = useState<Array<AccountListData>>([]);
+
+  const localeOrderType = (orderType: string) => {
+    switch (orderType) {
+      case 'Wallet Deposit':
+        return t`Wallet Deposit`;
+      case 'Wallet Withdraw':
+        return t`Wallet Withdraw`;
+      case 'Copy Trading':
+        return t`Copy Trading`;
+      case 'Freeze Deposit':
+        return t`Freeze Deposit`;
+      case 'Freeze to Deposit':
+        return t`Freeze to Deposit`;
+      default:
+        return orderType;
+    }
+  }
 
   /**
    * List
@@ -34,7 +50,7 @@ function useAccount() {
       const assetsListBase = await serviceAccountList(
         chainsData.chainId,
         account.address,
-        { Authorization: signature.signature }
+        {Authorization: signature.signature}
       );
       if (Number(assetsListBase["errorCode"]) === 0) {
         const value = assetsListBase["value"];
@@ -47,7 +63,7 @@ function useAccount() {
             chainId: item["chainId"],
             hash: item["hash"],
             ordertype: item["ordertype"],
-            orderTypeString: item["type"],
+            orderTypeString: localeOrderType(item["type"]),
           };
           return one;
         });
