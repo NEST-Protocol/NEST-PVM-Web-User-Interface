@@ -406,6 +406,7 @@ msgstr "Kopya Tüccar Hizmet Sözleşmesi"
 msgid "Copy Traders’ PnL (NEST)"
 msgstr "Kopya Tüccarların Kâr ve Zararı(NEST)"
 
+#: src/hooks/useAccount.ts
 #: src/hooks/useTransactionReceipt.ts
 #: src/pages/Copy/Components/CopyRoute.tsx
 msgid "Copy Trading"
@@ -626,6 +627,14 @@ msgstr "NEST Protokol sürekli kontratlarını kullanan kullanıcılar/akıllı 
 #: src/pages/Personal/Personal.tsx
 msgid "Freeze Accounts"
 msgstr "Hesapları dondurmak"
+
+#: src/hooks/useAccount.ts
+msgid "Freeze Deposit"
+msgstr "Depozitoyu dondurmak"
+
+#: src/hooks/useAccount.ts
+msgid "Freeze to Deposit"
+msgstr "Depozit yapmak için dondurmak"
 
 #: src/pages/Swap/Components/SwapInputItem.tsx
 msgid "From"
@@ -1637,6 +1646,14 @@ msgstr "Cüzdan"
 #: src/pages/Swap/Components/SwapInputItem.tsx
 msgid "Wallet Balance"
 msgstr "Cüzdan Bakiyesi"
+
+#: src/hooks/useAccount.ts
+msgid "Wallet Deposit"
+msgstr "Cüzdan Yatırımı"
+
+#: src/hooks/useAccount.ts
+msgid "Wallet Withdraw"
+msgstr "Cüzdan Çekme"
 
 #: src/pages/Share/Modal/ChangeNewTokenModal.tsx
 msgid "We are delighted to inform you that the NEST 2.0 token airdrop has been successfully completed. As a result, NESTFi services are now fully operational, and you can resume using the platform as usual."

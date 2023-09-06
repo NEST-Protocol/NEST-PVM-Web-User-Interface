@@ -406,6 +406,7 @@ msgstr ""
 msgid "Copy Traders’ PnL (NEST)"
 msgstr ""
 
+#: src/hooks/useAccount.ts
 #: src/hooks/useTransactionReceipt.ts
 #: src/pages/Copy/Components/CopyRoute.tsx
 msgid "Copy Trading"
@@ -625,6 +626,14 @@ msgstr "NESTプロトコル永続契約を使用するユーザー/スマート�
 
 #: src/pages/Personal/Personal.tsx
 msgid "Freeze Accounts"
+msgstr ""
+
+#: src/hooks/useAccount.ts
+msgid "Freeze Deposit"
+msgstr ""
+
+#: src/hooks/useAccount.ts
+msgid "Freeze to Deposit"
 msgstr ""
 
 #: src/pages/Swap/Components/SwapInputItem.tsx
@@ -1632,6 +1641,14 @@ msgstr "ウォレット"
 #: src/pages/Swap/Components/SwapInputItem.tsx
 #: src/pages/Swap/Components/SwapInputItem.tsx
 msgid "Wallet Balance"
+msgstr ""
+
+#: src/hooks/useAccount.ts
+msgid "Wallet Deposit"
+msgstr ""
+
+#: src/hooks/useAccount.ts
+msgid "Wallet Withdraw"
 msgstr ""
 
 #: src/pages/Share/Modal/ChangeNewTokenModal.tsx
