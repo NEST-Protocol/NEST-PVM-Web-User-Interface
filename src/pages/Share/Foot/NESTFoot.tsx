@@ -59,7 +59,7 @@ const NESTFoot: FC = () => {
         alignItems="center"
         spacing={"24px"}
       >
-        {chainsData.chainId === 97 ? FootAList : FootAList.slice(0, 5)}
+        {chainsData.chainId === 97 ? FootAList : FootAList.slice(0, 4)}
       </NESTFootStack>
     );
   };
