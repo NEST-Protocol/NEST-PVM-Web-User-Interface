@@ -123,7 +123,7 @@ function useFuturesEditPosition(
   const showLiqPrice = useMemo(() => {
     if (price) {
       const balance =
-        data.balance.toString().stringToBigNumber(18) ?? BigNumber.from("0");
+        data.margin.toString().stringToBigNumber(18) ?? BigNumber.from("0");
       const orderPrice =
         data.orderPrice.toString().stringToBigNumber(18) ?? BigNumber.from("0");
       const append =
@@ -142,7 +142,7 @@ function useFuturesEditPosition(
     }
   }, [
     data.append,
-    data.balance,
+    data.margin,
     data.direction,
     data.leverage,
     data.orderPrice,
