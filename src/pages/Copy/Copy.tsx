@@ -746,7 +746,7 @@ const Copy: FC = () => {
           <MainButton
             title={t`Become Elite Traders >`}
             onClick={() => {
-              window.open("https://t.me/Sally_NEST");
+              window.open("https://t.me/OoSallyoO");
             }}
             style={{
               fontWeight: "700",
