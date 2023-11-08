@@ -43,12 +43,6 @@ export const NavItems = [
     l: <Trans>Account</Trans>,
   },
   {
-    path: "/copy",
-    content: `Copy`,
-    icon: AccountIcon,
-    l: <Trans>Copy</Trans>,
-  },
-  {
     path: "/dashboard",
     content: `Dashboard`,
     icon: Dashboard,
