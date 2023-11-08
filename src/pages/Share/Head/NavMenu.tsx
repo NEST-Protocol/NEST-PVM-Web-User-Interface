@@ -92,7 +92,7 @@ const NavMenu: FC = () => {
       },
     },
   }));
-  const liList = navItems.slice(0, 2).map((item, index) => {
+  const liList = navItems.slice(0, 3).map((item, index) => {
     const Icon = item.icon
     return (
       <MenuItem
