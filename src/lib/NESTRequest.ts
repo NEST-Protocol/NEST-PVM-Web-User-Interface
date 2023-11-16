@@ -116,11 +116,11 @@ export function hideFuturesOrder(
 }
 
 export function getPriceFromNESTLocal(token: string): Promise<any> {
-  return baseRequestGet(`https://api.nestfi.net/api/oracle/price/${token}usdt`);
+  return baseRequestGet(`https://cms.nestfi.net/api/oracle/price/${token}usdt`);
 }
 
 export function getPriceList(): Promise<any> {
-  return baseRequestGet(`https://api.nestfi.net/api/oracle/price/list`);
+  return baseRequestGet(`https://cms.nestfi.net/api/oracle/price/list`);
 }
 
 export function getNESTAmountForAll(
@@ -128,7 +128,7 @@ export function getNESTAmountForAll(
   chainId: number
 ): Promise<any> {
   return baseRequestGet(
-    `https://api.nestfi.net/api/oracle/whitelist?address=${address}&chainId=${chainId}`
+    `https://cms.nestfi.net/api/oracle/whitelist?address=${address}&chainId=${chainId}`
   );
 }
 
